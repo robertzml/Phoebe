@@ -30,26 +30,26 @@
         {
             this.mainMenu = new System.Windows.Forms.MenuStrip();
             this.menuCustomer = new System.Windows.Forms.ToolStripMenuItem();
-            this.客户列表ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuGroupCustomer = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuScatterCustomer = new System.Windows.Forms.ToolStripMenuItem();
             this.menuWarehouse = new System.Windows.Forms.ToolStripMenuItem();
+            this.仓库信息ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.库存管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.历史库存ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuCargo = new System.Windows.Forms.ToolStripMenuItem();
+            this.托盘管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.类目管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.货品查询ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuLease = new System.Windows.Forms.ToolStripMenuItem();
             this.menuVehicle = new System.Windows.Forms.ToolStripMenuItem();
             this.menuFinance = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStatistic = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSystem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mainStatus = new System.Windows.Forms.StatusStrip();
-            this.零散客户ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.仓库信息ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.库存管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.历史库存ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.修改密码ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.退出ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.托盘管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.类目管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.货品查询ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mainStatus = new System.Windows.Forms.StatusStrip();
             this.mainMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -66,24 +66,31 @@
             this.menuSystem});
             this.mainMenu.Location = new System.Drawing.Point(0, 0);
             this.mainMenu.Name = "mainMenu";
-            this.mainMenu.Size = new System.Drawing.Size(942, 25);
+            this.mainMenu.Size = new System.Drawing.Size(975, 25);
             this.mainMenu.TabIndex = 1;
             this.mainMenu.Text = "menuStrip1";
             // 
             // menuCustomer
             // 
             this.menuCustomer.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.客户列表ToolStripMenuItem,
-            this.零散客户ToolStripMenuItem});
+            this.menuGroupCustomer,
+            this.menuScatterCustomer});
             this.menuCustomer.Name = "menuCustomer";
             this.menuCustomer.Size = new System.Drawing.Size(68, 21);
             this.menuCustomer.Text = "客户管理";
             // 
-            // 客户列表ToolStripMenuItem
+            // menuGroupCustomer
             // 
-            this.客户列表ToolStripMenuItem.Name = "客户列表ToolStripMenuItem";
-            this.客户列表ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.客户列表ToolStripMenuItem.Text = "团体客户";
+            this.menuGroupCustomer.Name = "menuGroupCustomer";
+            this.menuGroupCustomer.Size = new System.Drawing.Size(152, 22);
+            this.menuGroupCustomer.Text = "团体客户";
+            this.menuGroupCustomer.Click += new System.EventHandler(this.menuGroupCustomer_Click);
+            // 
+            // menuScatterCustomer
+            // 
+            this.menuScatterCustomer.Name = "menuScatterCustomer";
+            this.menuScatterCustomer.Size = new System.Drawing.Size(152, 22);
+            this.menuScatterCustomer.Text = "零散客户";
             // 
             // menuWarehouse
             // 
@@ -95,6 +102,24 @@
             this.menuWarehouse.Size = new System.Drawing.Size(68, 21);
             this.menuWarehouse.Text = "仓库管理";
             // 
+            // 仓库信息ToolStripMenuItem
+            // 
+            this.仓库信息ToolStripMenuItem.Name = "仓库信息ToolStripMenuItem";
+            this.仓库信息ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.仓库信息ToolStripMenuItem.Text = "仓库信息";
+            // 
+            // 库存管理ToolStripMenuItem
+            // 
+            this.库存管理ToolStripMenuItem.Name = "库存管理ToolStripMenuItem";
+            this.库存管理ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.库存管理ToolStripMenuItem.Text = "库存管理";
+            // 
+            // 历史库存ToolStripMenuItem
+            // 
+            this.历史库存ToolStripMenuItem.Name = "历史库存ToolStripMenuItem";
+            this.历史库存ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.历史库存ToolStripMenuItem.Text = "历史库存";
+            // 
             // menuCargo
             // 
             this.menuCargo.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -105,6 +130,29 @@
             this.menuCargo.Name = "menuCargo";
             this.menuCargo.Size = new System.Drawing.Size(68, 21);
             this.menuCargo.Text = "货品管理";
+            // 
+            // 托盘管理ToolStripMenuItem
+            // 
+            this.托盘管理ToolStripMenuItem.Name = "托盘管理ToolStripMenuItem";
+            this.托盘管理ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.托盘管理ToolStripMenuItem.Text = "托盘管理";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
+            // 
+            // 类目管理ToolStripMenuItem
+            // 
+            this.类目管理ToolStripMenuItem.Name = "类目管理ToolStripMenuItem";
+            this.类目管理ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.类目管理ToolStripMenuItem.Text = "类目管理";
+            // 
+            // 货品查询ToolStripMenuItem
+            // 
+            this.货品查询ToolStripMenuItem.Name = "货品查询ToolStripMenuItem";
+            this.货品查询ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.货品查询ToolStripMenuItem.Text = "货品查询";
             // 
             // menuLease
             // 
@@ -140,38 +188,6 @@
             this.menuSystem.Size = new System.Drawing.Size(68, 21);
             this.menuSystem.Text = "系统维护";
             // 
-            // mainStatus
-            // 
-            this.mainStatus.Location = new System.Drawing.Point(0, 520);
-            this.mainStatus.Name = "mainStatus";
-            this.mainStatus.Size = new System.Drawing.Size(942, 22);
-            this.mainStatus.TabIndex = 2;
-            this.mainStatus.Text = "statusStrip1";
-            // 
-            // 零散客户ToolStripMenuItem
-            // 
-            this.零散客户ToolStripMenuItem.Name = "零散客户ToolStripMenuItem";
-            this.零散客户ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.零散客户ToolStripMenuItem.Text = "零散客户";
-            // 
-            // 仓库信息ToolStripMenuItem
-            // 
-            this.仓库信息ToolStripMenuItem.Name = "仓库信息ToolStripMenuItem";
-            this.仓库信息ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.仓库信息ToolStripMenuItem.Text = "仓库信息";
-            // 
-            // 库存管理ToolStripMenuItem
-            // 
-            this.库存管理ToolStripMenuItem.Name = "库存管理ToolStripMenuItem";
-            this.库存管理ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.库存管理ToolStripMenuItem.Text = "库存管理";
-            // 
-            // 历史库存ToolStripMenuItem
-            // 
-            this.历史库存ToolStripMenuItem.Name = "历史库存ToolStripMenuItem";
-            this.历史库存ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.历史库存ToolStripMenuItem.Text = "历史库存";
-            // 
             // 修改密码ToolStripMenuItem
             // 
             this.修改密码ToolStripMenuItem.Name = "修改密码ToolStripMenuItem";
@@ -189,40 +205,26 @@
             this.退出ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.退出ToolStripMenuItem.Text = "退出";
             // 
-            // 托盘管理ToolStripMenuItem
+            // mainStatus
             // 
-            this.托盘管理ToolStripMenuItem.Name = "托盘管理ToolStripMenuItem";
-            this.托盘管理ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.托盘管理ToolStripMenuItem.Text = "托盘管理";
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
-            // 
-            // 类目管理ToolStripMenuItem
-            // 
-            this.类目管理ToolStripMenuItem.Name = "类目管理ToolStripMenuItem";
-            this.类目管理ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.类目管理ToolStripMenuItem.Text = "类目管理";
-            // 
-            // 货品查询ToolStripMenuItem
-            // 
-            this.货品查询ToolStripMenuItem.Name = "货品查询ToolStripMenuItem";
-            this.货品查询ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.货品查询ToolStripMenuItem.Text = "货品查询";
+            this.mainStatus.Location = new System.Drawing.Point(0, 560);
+            this.mainStatus.Name = "mainStatus";
+            this.mainStatus.Size = new System.Drawing.Size(975, 22);
+            this.mainStatus.TabIndex = 2;
+            this.mainStatus.Text = "statusStrip1";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(942, 542);
+            this.ClientSize = new System.Drawing.Size(975, 582);
             this.Controls.Add(this.mainStatus);
             this.Controls.Add(this.mainMenu);
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.mainMenu;
             this.Name = "MainForm";
             this.Text = "华润冷库管理系统";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.mainMenu.ResumeLayout(false);
             this.mainMenu.PerformLayout();
             this.ResumeLayout(false);
@@ -242,8 +244,8 @@
         private System.Windows.Forms.ToolStripMenuItem menuFinance;
         private System.Windows.Forms.ToolStripMenuItem menuStatistic;
         private System.Windows.Forms.ToolStripMenuItem menuSystem;
-        private System.Windows.Forms.ToolStripMenuItem 客户列表ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 零散客户ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem menuGroupCustomer;
+        private System.Windows.Forms.ToolStripMenuItem menuScatterCustomer;
         private System.Windows.Forms.ToolStripMenuItem 仓库信息ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 库存管理ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 历史库存ToolStripMenuItem;

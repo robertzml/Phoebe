@@ -44,6 +44,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GroupCustomerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GroupCustomerForm.Designer.cs">
+      <DependentUpon>GroupCustomerForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormConstant.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -53,6 +59,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="GroupCustomerForm.resx">
+      <DependentUpon>GroupCustomerForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>

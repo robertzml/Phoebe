@@ -10,11 +10,38 @@ using System.Windows.Forms;
 
 namespace Phoebe.FormUI
 {
+    /// <summary>
+    /// 主窗体
+    /// </summary>
     public partial class MainForm : Form
     {
+        #region Constructor
         public MainForm()
         {
             InitializeComponent();
         }
+        #endregion //Constructor
+
+        #region Event
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+
+        }
+     
+        #region Menu Event
+        /// <summary>
+        /// 客户管理 - 团体客户
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void menuGroupCustomer_Click(object sender, EventArgs e)
+        {
+            GroupCustomerForm form = new GroupCustomerForm();
+            form.MdiParent = this;
+            form.WindowState = FormWindowState.Maximized;
+            form.Show();
+        }
+        #endregion //Menu Event
+        #endregion //Event
     }
 }
