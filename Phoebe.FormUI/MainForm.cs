@@ -41,7 +41,20 @@ namespace Phoebe.FormUI
             form.WindowState = FormWindowState.Maximized;
             form.Show();
         }
-        #endregion //Menu Event
+
+        /// <summary>
+        /// 客户管理 - 零散客户
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void menuScatterCustomer_Click(object sender, EventArgs e)
+        {
+            ScatterCustomerForm form = new ScatterCustomerForm();
+            form.MdiParent = this;
+            form.WindowState = FormWindowState.Maximized;
+            form.Show();
+        }
+        #endregion //Menu Event       
         #endregion //Event
     }
 }

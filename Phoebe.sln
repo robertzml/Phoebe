@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Phoebe.FormUI", "Phoebe.FormUI\Phoebe.FormUI.csproj", "{962E8F1C-36B5-40D2-BC1E-CF99A86F3F05}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Phoebe.Model", "Phoebe.Model\Phoebe.Model.csproj", "{3FB663B1-F9C2-4476-A8E7-5DE7B134394B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{962E8F1C-36B5-40D2-BC1E-CF99A86F3F05}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{962E8F1C-36B5-40D2-BC1E-CF99A86F3F05}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{962E8F1C-36B5-40D2-BC1E-CF99A86F3F05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3FB663B1-F9C2-4476-A8E7-5DE7B134394B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FB663B1-F9C2-4476-A8E7-5DE7B134394B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FB663B1-F9C2-4476-A8E7-5DE7B134394B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FB663B1-F9C2-4476-A8E7-5DE7B134394B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

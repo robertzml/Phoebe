@@ -91,6 +91,7 @@
             this.menuScatterCustomer.Name = "menuScatterCustomer";
             this.menuScatterCustomer.Size = new System.Drawing.Size(152, 22);
             this.menuScatterCustomer.Text = "零散客户";
+            this.menuScatterCustomer.Click += new System.EventHandler(this.menuScatterCustomer_Click);
             // 
             // menuWarehouse
             // 
@@ -134,24 +135,24 @@
             // 托盘管理ToolStripMenuItem
             // 
             this.托盘管理ToolStripMenuItem.Name = "托盘管理ToolStripMenuItem";
-            this.托盘管理ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.托盘管理ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.托盘管理ToolStripMenuItem.Text = "托盘管理";
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(121, 6);
             // 
             // 类目管理ToolStripMenuItem
             // 
             this.类目管理ToolStripMenuItem.Name = "类目管理ToolStripMenuItem";
-            this.类目管理ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.类目管理ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.类目管理ToolStripMenuItem.Text = "类目管理";
             // 
             // 货品查询ToolStripMenuItem
             // 
             this.货品查询ToolStripMenuItem.Name = "货品查询ToolStripMenuItem";
-            this.货品查询ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.货品查询ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.货品查询ToolStripMenuItem.Text = "货品查询";
             // 
             // menuLease
@@ -191,18 +192,18 @@
             // 修改密码ToolStripMenuItem
             // 
             this.修改密码ToolStripMenuItem.Name = "修改密码ToolStripMenuItem";
-            this.修改密码ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.修改密码ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.修改密码ToolStripMenuItem.Text = "修改密码";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(121, 6);
             // 
             // 退出ToolStripMenuItem
             // 
             this.退出ToolStripMenuItem.Name = "退出ToolStripMenuItem";
-            this.退出ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.退出ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.退出ToolStripMenuItem.Text = "退出";
             // 
             // mainStatus

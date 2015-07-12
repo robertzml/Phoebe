@@ -44,13 +44,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GroupCustomerForm.cs">
+    <Compile Include="Customer\GroupCustomerForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GroupCustomerForm.Designer.cs">
+    <Compile Include="Customer\GroupCustomerForm.Designer.cs">
       <DependentUpon>GroupCustomerForm.cs</DependentUpon>
     </Compile>
     <Compile Include="FormConstant.cs" />
+    <Compile Include="Customer\GroupCustomerAddForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Customer\GroupCustomerAddForm.Designer.cs">
+      <DependentUpon>GroupCustomerAddForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -59,8 +65,20 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="GroupCustomerForm.resx">
+    <Compile Include="Customer\ScatterCustomerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Customer\ScatterCustomerForm.Designer.cs">
+      <DependentUpon>ScatterCustomerForm.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Customer\GroupCustomerAddForm.resx">
+      <DependentUpon>GroupCustomerAddForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Customer\GroupCustomerForm.resx">
       <DependentUpon>GroupCustomerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Customer\ScatterCustomerForm.resx">
+      <DependentUpon>ScatterCustomerForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
