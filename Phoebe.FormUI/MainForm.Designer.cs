@@ -33,7 +33,7 @@
             this.menuGroupCustomer = new System.Windows.Forms.ToolStripMenuItem();
             this.menuScatterCustomer = new System.Windows.Forms.ToolStripMenuItem();
             this.menuWarehouse = new System.Windows.Forms.ToolStripMenuItem();
-            this.仓库信息ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuWarehouseInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.库存管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.历史库存ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuCargo = new System.Windows.Forms.ToolStripMenuItem();
@@ -82,43 +82,44 @@
             // menuGroupCustomer
             // 
             this.menuGroupCustomer.Name = "menuGroupCustomer";
-            this.menuGroupCustomer.Size = new System.Drawing.Size(152, 22);
+            this.menuGroupCustomer.Size = new System.Drawing.Size(124, 22);
             this.menuGroupCustomer.Text = "团体客户";
             this.menuGroupCustomer.Click += new System.EventHandler(this.menuGroupCustomer_Click);
             // 
             // menuScatterCustomer
             // 
             this.menuScatterCustomer.Name = "menuScatterCustomer";
-            this.menuScatterCustomer.Size = new System.Drawing.Size(152, 22);
+            this.menuScatterCustomer.Size = new System.Drawing.Size(124, 22);
             this.menuScatterCustomer.Text = "零散客户";
             this.menuScatterCustomer.Click += new System.EventHandler(this.menuScatterCustomer_Click);
             // 
             // menuWarehouse
             // 
             this.menuWarehouse.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.仓库信息ToolStripMenuItem,
+            this.menuWarehouseInfo,
             this.库存管理ToolStripMenuItem,
             this.历史库存ToolStripMenuItem});
             this.menuWarehouse.Name = "menuWarehouse";
             this.menuWarehouse.Size = new System.Drawing.Size(68, 21);
             this.menuWarehouse.Text = "仓库管理";
             // 
-            // 仓库信息ToolStripMenuItem
+            // menuWarehouseInfo
             // 
-            this.仓库信息ToolStripMenuItem.Name = "仓库信息ToolStripMenuItem";
-            this.仓库信息ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.仓库信息ToolStripMenuItem.Text = "仓库信息";
+            this.menuWarehouseInfo.Name = "menuWarehouseInfo";
+            this.menuWarehouseInfo.Size = new System.Drawing.Size(152, 22);
+            this.menuWarehouseInfo.Text = "仓库信息";
+            this.menuWarehouseInfo.Click += new System.EventHandler(this.menuWarehouseInfo_Click);
             // 
             // 库存管理ToolStripMenuItem
             // 
             this.库存管理ToolStripMenuItem.Name = "库存管理ToolStripMenuItem";
-            this.库存管理ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.库存管理ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.库存管理ToolStripMenuItem.Text = "库存管理";
             // 
             // 历史库存ToolStripMenuItem
             // 
             this.历史库存ToolStripMenuItem.Name = "历史库存ToolStripMenuItem";
-            this.历史库存ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.历史库存ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.历史库存ToolStripMenuItem.Text = "历史库存";
             // 
             // menuCargo
@@ -247,7 +248,7 @@
         private System.Windows.Forms.ToolStripMenuItem menuSystem;
         private System.Windows.Forms.ToolStripMenuItem menuGroupCustomer;
         private System.Windows.Forms.ToolStripMenuItem menuScatterCustomer;
-        private System.Windows.Forms.ToolStripMenuItem 仓库信息ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem menuWarehouseInfo;
         private System.Windows.Forms.ToolStripMenuItem 库存管理ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 历史库存ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 修改密码ToolStripMenuItem;

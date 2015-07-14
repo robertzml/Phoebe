@@ -54,7 +54,22 @@ namespace Phoebe.FormUI
             form.WindowState = FormWindowState.Maximized;
             form.Show();
         }
+
+        /// <summary>
+        /// 仓库管理 - 仓库信息
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void menuWarehouseInfo_Click(object sender, EventArgs e)
+        {
+            WarehouseForm form = new WarehouseForm();
+            form.MdiParent = this;
+            form.WindowState = FormWindowState.Maximized;
+            form.Show();
+        }
         #endregion //Menu Event       
+
+      
         #endregion //Event
     }
 }

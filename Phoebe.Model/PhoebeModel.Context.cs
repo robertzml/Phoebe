@@ -26,5 +26,7 @@ namespace Phoebe.Model
         }
     
         public virtual DbSet<GroupCustomer> GroupCustomers { get; set; }
+        public virtual DbSet<ScatterCustomer> ScatterCustomers { get; set; }
+        public virtual DbSet<Warehouse> Warehouses { get; set; }
     }
 }

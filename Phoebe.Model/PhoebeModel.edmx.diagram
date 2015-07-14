@@ -6,6 +6,9 @@
     <edmx:Diagrams>
       <Diagram DiagramId="c4706f0008254665995c7a4ec4259038" Name="Diagram1">
         <EntityTypeShape EntityType="PhoebeModel.GroupCustomer" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PhoebeModel.ScatterCustomer" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="PhoebeModel.Warehouse" Width="1.5" PointX="3.375" PointY="0.75" />
+        <AssociationConnector Association="PhoebeModel.FK_Warehouse_Warehouse" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

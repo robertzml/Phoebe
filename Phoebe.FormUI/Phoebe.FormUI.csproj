@@ -79,6 +79,18 @@
     <Compile Include="Customer\ScatterCustomerForm.Designer.cs">
       <DependentUpon>ScatterCustomerForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Warehouse\WarehouseAddForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Warehouse\WarehouseAddForm.Designer.cs">
+      <DependentUpon>WarehouseAddForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Warehouse\WarehouseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Warehouse\WarehouseForm.Designer.cs">
+      <DependentUpon>WarehouseForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Customer\GroupCustomerAddForm.resx">
       <DependentUpon>GroupCustomerAddForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -100,6 +112,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Warehouse\WarehouseAddForm.resx">
+      <DependentUpon>WarehouseAddForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Warehouse\WarehouseForm.resx">
+      <DependentUpon>WarehouseForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\Phoebe.Model.GroupCustomer.datasource" />
     <None Include="Properties\Settings.settings">
