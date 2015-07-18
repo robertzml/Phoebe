@@ -33,20 +33,42 @@ namespace Phoebe.FormUI
         #region Function
         private void LoadWarehouse()
         {
-            var data = this.warehouseBusiness.Get();
-
             //add top node
+            var topWarehouse = this.warehouseBusiness.GetTop();
             TreeNode top = new TreeNode();
-            top.Name = data.Where(r => r.Hierarchy == 1).First().ID.ToString();
-            top.Text = data.Where(r => r.Hierarchy == 1).First().Name;
+            top.Name = topWarehouse.ID.ToString();
+            top.Text = topWarehouse.Name;
             this.treeWarehouse.Nodes.Add(top);
+
+            foreach (var item in topWarehouse.ChildrenWarehouse)
+            {
+                TreeNode child = new TreeNode();
+                child.Name = item.ID.ToString();
+                child.Text = item.Name;
+
+                top.Nodes.Add(child);
+            }
+        }
+
+        /// <summary>
+        /// 更新树形菜单
+        /// </summary>
+        private void UpdateTreeView()
+        {
+            this.treeWarehouse.BeginUpdate();
+
+            this.treeWarehouse.Nodes.Clear();
+            LoadWarehouse();
+
+            this.treeWarehouse.ExpandAll();
+            this.treeWarehouse.EndUpdate();
         }
         #endregion //Function
 
         #region Event
         private void WarehouseForm_Load(object sender, EventArgs e)
         {
-            LoadWarehouse();
+            UpdateTreeView();            
         }
 
         /// <summary>
@@ -56,7 +78,10 @@ namespace Phoebe.FormUI
         /// <param name="e"></param>
         private void buttonAdd_Click(object sender, EventArgs e)
         {
+            WarehouseAddForm form = new WarehouseAddForm();
+            form.ShowDialog();
 
+            UpdateTreeView();
         }
         #endregion //Event
     }

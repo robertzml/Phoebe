@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ErrorCode.cs" />
     <Compile Include="GroupCustomer.cs">
       <DependentUpon>PhoebeModel.tt</DependentUpon>
     </Compile>

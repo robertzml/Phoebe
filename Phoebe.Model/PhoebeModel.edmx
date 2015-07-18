@@ -113,7 +113,12 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ParentId" Type="Int32" />
-          <Property Name="Hierarchy" Type="Int32" Nullable="false" />
+          <Property Name="Hierarchy" Type="Int32" Nullable="false" >
+            <Documentation>
+              <Summary>层级2</Summary>
+              <LongDescription>层级1</LongDescription>
+            </Documentation>
+          </Property>
           <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" Nullable="false" />
           <NavigationProperty Name="ChildrenWarehouse" Relationship="PhoebeModel.FK_Warehouse_Warehouse" FromRole="Warehouse" ToRole="Warehouse1" />

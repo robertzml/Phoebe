@@ -138,6 +138,10 @@
       <Project>{6a434bcc-ba22-4b2b-b81a-570c682d143d}</Project>
       <Name>Phoebe.Business</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Phoebe.Common\Phoebe.Common.csproj">
+      <Project>{de10d4df-97ea-443a-9c4f-89685e3e51c8}</Project>
+      <Name>Phoebe.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Phoebe.Model\Phoebe.Model.csproj">
       <Project>{cadce068-c64b-4a42-adf8-d3a92bf77051}</Project>
       <Name>Phoebe.Model</Name>
