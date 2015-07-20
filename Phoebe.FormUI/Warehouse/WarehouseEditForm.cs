@@ -1,7 +1,4 @@
-﻿using Phoebe.Business;
-using Phoebe.Common;
-using Phoebe.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,22 +7,35 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Phoebe.Business;
+using Phoebe.Common;
+using Phoebe.Model;
 
 namespace Phoebe.FormUI
 {
-    public partial class WarehouseAddForm : Form
+    /// <summary>
+    /// 仓库编辑窗体
+    /// </summary>
+    public partial class WarehouseEditForm : Form
     {
         #region Field
         /// <summary>
         /// 仓库业务对象
         /// </summary>
-        WarehouseBusiness warehouseBusiness = new WarehouseBusiness();
+        private WarehouseBusiness warehouseBusiness = new WarehouseBusiness();
+
+        /// <summary>
+        /// 当前仓库
+        /// </summary>
+        private Warehouse warehouse;
         #endregion //Field
 
         #region Constructor
-        public WarehouseAddForm()
+        public WarehouseEditForm(int warehouseId)
         {
             InitializeComponent();
+
+            this.warehouse = this.warehouseBusiness.Get(warehouseId);
         }
         #endregion //Constructor
 
@@ -39,11 +49,15 @@ namespace Phoebe.FormUI
             this.comboBoxWarehouse.DataSource = warehouses.ToList();
             this.comboBoxWarehouse.ValueMember = "ID";
             this.comboBoxWarehouse.DisplayMember = "Name";
+
+            this.comboBoxWarehouse.SelectedValue = this.warehouse.ParentId;
+            this.textBoxName.Text = this.warehouse.Name;
+            this.textBoxRemark.Text = this.warehouse.Remark;
         }
         #endregion //Function
 
         #region Event
-        private void WarehouseAddForm_Load(object sender, EventArgs e)
+        private void WarehouseEditForm_Load(object sender, EventArgs e)
         {
             InitControls();
         }
@@ -61,31 +75,29 @@ namespace Phoebe.FormUI
                 return;
             }
 
-            Warehouse warehouse = new Warehouse();
-            warehouse.Name = this.textBoxName.Text.Trim();
-
             int parentId = Convert.ToInt32(this.comboBoxWarehouse.SelectedValue);
-
             Warehouse parent = this.warehouseBusiness.Get(parentId);
 
+            this.warehouse.Name = this.textBoxName.Text.Trim();
             warehouse.ParentId = parentId;
             warehouse.Hierarchy = parent.Hierarchy + 1;
-            warehouse.Remark = this.textBoxRemark.Text.Trim();
-            warehouse.Status = 0;
+            this.warehouse.Remark = this.textBoxRemark.Text.Trim();
 
-            ErrorCode result = this.warehouseBusiness.Create(warehouse);
+            ErrorCode result = this.warehouseBusiness.Save();
 
             if (result == ErrorCode.Success)
             {
-                MessageBox.Show("添加冷库成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("编辑冷库成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
-                MessageBox.Show("添加冷库失败。\r\n" + result.DisplayName(), FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("编辑冷库成功。\r\n" + result.DisplayName(), FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
             this.Close();
         }
         #endregion //Event
+
+        
     }
 }

@@ -79,6 +79,12 @@
     <Compile Include="Customer\ScatterCustomerForm.Designer.cs">
       <DependentUpon>ScatterCustomerForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Warehouse\WarehouseEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Warehouse\WarehouseEditForm.Designer.cs">
+      <DependentUpon>WarehouseEditForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Warehouse\WarehouseAddForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -114,6 +120,9 @@
     </Compile>
     <EmbeddedResource Include="Warehouse\WarehouseAddForm.resx">
       <DependentUpon>WarehouseAddForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Warehouse\WarehouseEditForm.resx">
+      <DependentUpon>WarehouseEditForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Warehouse\WarehouseForm.resx">
       <DependentUpon>WarehouseForm.cs</DependentUpon>

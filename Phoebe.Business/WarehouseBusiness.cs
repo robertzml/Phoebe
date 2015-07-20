@@ -71,7 +71,24 @@ namespace Phoebe.Business
 
             return ErrorCode.Success;
         }
-        #endregion //Method
 
+        /// <summary>
+        /// 保存更新
+        /// </summary>
+        /// <returns></returns>
+        public ErrorCode Save()
+        {
+            try
+            {
+                this.context.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+
+            return ErrorCode.Success;
+        }
+        #endregion //Method
     }
 }
