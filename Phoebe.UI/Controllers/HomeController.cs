@@ -13,16 +13,19 @@ namespace Phoebe.UI.Controllers
             return View();
         }
 
-        public ActionResult About()
+        /// <summary>
+        /// 菜单
+        /// </summary>
+        /// <returns></returns>
+        [ChildActionOnly]
+        public ActionResult Menu()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult About()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Your application description page.";
 
             return View();
         }

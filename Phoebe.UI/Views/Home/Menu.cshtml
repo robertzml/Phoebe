@@ -1,0 +1,481 @@
+﻿@{ 
+    Layout = null;
+}
+
+<!-- BEGIN SIDEBAR -->
+<div class="page-sidebar-wrapper">
+    <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+    <!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+    <div class="page-sidebar navbar-collapse collapse">
+        <!-- BEGIN SIDEBAR MENU -->
+        <!-- DOC: Apply "page-sidebar-menu-light" class right after "page-sidebar-menu" to enable light sidebar menu style(without borders) -->
+        <!-- DOC: Apply "page-sidebar-menu-hover-submenu" class right after "page-sidebar-menu" to enable hoverable(hover vs accordion) sub menu mode -->
+        <!-- DOC: Apply "page-sidebar-menu-closed" class right after "page-sidebar-menu" to collapse("page-sidebar-closed" class must be applied to the body element) the sidebar sub menu mode -->
+        <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+        <!-- DOC: Set data-keep-expand="true" to keep the submenues expanded -->
+        <!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+        <ul class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+            <!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
+            <li class="sidebar-toggler-wrapper">
+                <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+                <div class="sidebar-toggler">
+                </div>
+                <!-- END SIDEBAR TOGGLER BUTTON -->
+            </li>
+            <li class="start ">
+                <a href="javascript:;">
+                    <i class="icon-home"></i>
+                    <span class="title">Dashboard</span>
+                    <span class="arrow "></span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="index.html">
+                            <i class="icon-bar-chart"></i>
+                            Default Dashboard
+                        </a>
+                    </li>
+                    <li>
+                        <a href="index_2.html">
+                            <i class="icon-bulb"></i>
+                            New Dashboard #1
+                        </a>
+                    </li>
+                    <li>
+                        <a href="index_3.html">
+                            <i class="icon-graph"></i>
+                            New Dashboard #2
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="fa fa-bank"></i>
+                    <span class="title">仓库管理</span>
+                    <span class="arrow "></span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="ecommerce_index.html">
+                            <i class="icon-home"></i>
+                            仓库信息
+                        </a>
+                    </li>
+                    <li>
+                        <a href="ecommerce_orders.html">
+                            <i class="icon-basket"></i>
+                            库存管理
+                        </a>
+                    </li>
+                    <li>
+                        <a href="ecommerce_orders_view.html">
+                            <i class="icon-tag"></i>
+                            Order View
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="active open">
+                <a href="javascript:;">
+                    <i class="icon-rocket"></i>
+                    <span class="title">Page Layouts</span>
+                    <span class="selected"></span>
+                    <span class="arrow open"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="layout_horizontal_sidebar_menu.html">
+                            Horizontal & Sidebar Menu
+                        </a>
+                    </li>
+                    <li>
+                        <a href="index_horizontal_menu.html">
+                            Dashboard & Mega Menu
+                        </a>
+                    </li>
+                    <li>
+                        <a href="layout_horizontal_menu1.html">
+                            Horizontal Mega Menu 1
+                        </a>
+                    </li>
+                    <li>
+                        <a href="layout_sidebar_search_option2.html">
+                            Sidebar Search Option 2
+                        </a>
+                    </li>
+                    <li>
+                        <a href="layout_disabled_menu.html">
+                            Disabled Menu Links
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="layout_blank_page.html">
+                            Blank Page
+                        </a>
+                    </li>
+                    <li>
+                        <a href="layout_boxed_page.html">
+                            Boxed Page
+                        </a>
+                    </li>
+                    <li>
+                        <a href="layout_language_bar.html">
+                            Language Switch Bar
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="icon-puzzle"></i>
+                    <span class="title">UI Components</span>
+                    <span class="arrow "></span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="components_pickers.html">
+                            Date & Time Pickers
+                        </a>
+                    </li>
+                    <li>
+                        <a href="components_context_menu.html">
+                            Context Menu
+                        </a>
+                    </li>
+                    <li>
+                        <a href="components_dropdowns.html">
+                            Custom Dropdowns
+                        </a>
+                    </li>
+                    <li>
+                        <a href="components_jqueryui_sliders.html">
+                            jQuery UI Sliders
+                        </a>
+                    </li>
+                    <li>
+                        <a href="components_knob_dials.html">
+                            Knob Circle Dials
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="heading">
+                <h3 class="uppercase">Features</h3>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="icon-settings"></i>
+                    <span class="title">Form Stuff</span>
+                    <span class="arrow "></span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="form_controls_md.html">
+                            <span class="badge badge-roundless badge-danger">new</span>Material Design<br>
+                            Form Controls
+                        </a>
+                    </li>
+                    <li>
+                        <a href="form_controls.html">
+                            Bootstrap<br>
+                            Form Controls
+                        </a>
+                    </li>
+                    <li>
+                        <a href="form_icheck.html">
+                            iCheck Controls
+                        </a>
+                    </li>
+                    <li>
+                        <a href="form_layouts.html">
+                            Form Layouts
+                        </a>
+                    </li>
+                    <li>
+                        <a href="form_image_crop.html">
+                            <span class="badge badge-roundless badge-danger">new</span>Image Cropping
+                        </a>
+                    </li>
+                    <li>
+                        <a href="form_fileupload.html">
+                            Multiple File Upload
+                        </a>
+                    </li>
+                    <li>
+                        <a href="form_dropzone.html">
+                            Dropzone File Upload
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="icon-briefcase"></i>
+                    <span class="title">Data Tables</span>
+                    <span class="arrow "></span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="table_basic.html">
+                            Basic Datatables
+                        </a>
+                    </li>
+                    <li>
+                        <a href="table_tree.html">
+                            Tree Datatables
+                        </a>
+                    </li>
+                    <li>
+                        <a href="table_responsive.html">
+                            Responsive Datatables
+                        </a>
+                    </li>
+                    <li>
+                        <a href="table_advanced.html">
+                            Advanced Datatables
+                        </a>
+                    </li>
+                    <li>
+                        <a href="table_ajax.html">
+                            Ajax Datatables
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="icon-wallet"></i>
+                    <span class="title">Portlets</span>
+                    <span class="arrow "></span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="portlet_general.html">
+                            General Portlets
+                        </a>
+                    </li>
+                    <li>
+                        <a href="portlet_general2.html">
+                            <span class="badge badge-roundless badge-danger">new</span>New Portlets #1
+                        </a>
+                    </li>
+                    <li>
+                        <a href="portlet_general3.html">
+                            <span class="badge badge-roundless badge-danger">new</span>New Portlets #2
+                        </a>
+                    </li>
+                    <li>
+                        <a href="portlet_ajax.html">
+                            Ajax Portlets
+                        </a>
+                    </li>
+                    <li>
+                        <a href="portlet_draggable.html">
+                            Draggable Portlets
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="icon-docs"></i>
+                    <span class="title">Pages</span>
+                    <span class="arrow "></span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="page_timeline.html">
+                            <i class="icon-paper-plane"></i>
+                            <span class="badge badge-warning">2</span>New Timeline
+                        </a>
+                    </li>
+                    <li>
+                        <a href="extra_profile.html">
+                            <i class="icon-user-following"></i>
+                            <span class="badge badge-success badge-roundless">new</span>New User Profile
+                        </a>
+                    </li>
+                    <li>
+                        <a href="page_todo.html">
+                            <i class="icon-check"></i>
+                            Todo
+                        </a>
+                    </li>
+                    <li>
+                        <a href="inbox.html">
+                            <i class="icon-envelope"></i>
+                            <span class="badge badge-danger">4</span>Inbox
+                        </a>
+                    </li>
+                    <li>
+                        <a href="extra_faq.html">
+                            <i class="icon-question"></i>
+                            FAQ
+                        </a>
+                    </li>
+                    <li>
+                        <a href="page_news_item.html">
+                            <i class="icon-bell"></i>
+                            News View
+                        </a>
+                    </li>
+                    <li>
+                        <a href="page_timeline_old.html">
+                            <i class="icon-paper-plane"></i>
+                            <span class="badge badge-warning">2</span>Old Timeline
+                        </a>
+                    </li>
+                    <li>
+                        <a href="extra_profile_old.html">
+                            <i class="icon-user"></i>
+                            Old User Profile
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="icon-folder"></i>
+                    <span class="title">Multi Level Menu</span>
+                    <span class="arrow "></span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="javascript:;">
+                            <i class="icon-settings"></i> Item 1 <span class="arrow"></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a href="javascript:;">
+                                    <i class="icon-user"></i>
+                                    Sample Link 1 <span class="arrow"></span>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li>
+                                        <a href="#"><i class="icon-power"></i> Sample Link 1</a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="icon-paper-plane"></i> Sample Link 1</a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="icon-star"></i> Sample Link 1</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#"><i class="icon-camera"></i> Sample Link 1</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="icon-link"></i> Sample Link 2</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="icon-pointer"></i> Sample Link 3</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;">
+                            <i class="icon-globe"></i> Item 2 <span class="arrow"></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a href="#"><i class="icon-tag"></i> Sample Link 1</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="icon-pencil"></i> Sample Link 1</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="icon-graph"></i> Sample Link 1</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="icon-bar-chart"></i>
+                            Item 3
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="icon-user"></i>
+                    <span class="title">Login Options</span>
+                    <span class="arrow "></span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="login.html">
+                            Login Form 1
+                        </a>
+                    </li>
+                    <li>
+                        <a href="login_2.html">
+                            Login Form 2
+                        </a>
+                    </li>
+                    <li>
+                        <a href="extra_lock2.html">
+                            Lock Screen 2
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="heading">
+                <h3 class="uppercase">More</h3>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="icon-logout"></i>
+                    <span class="title">Quick Sidebar</span>
+                    <span class="arrow "></span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="quick_sidebar_push_content.html">
+                            Push Content
+                        </a>
+                    </li>
+                    <li>
+                        <a href="quick_sidebar_over_content.html">
+                            Over Content
+                        </a>
+                    </li>
+                    <li>
+                        <a href="quick_sidebar_over_content_transparent.html">
+                            Over Content & Transparent
+                        </a>
+                    </li>
+                    <li>
+                        <a href="quick_sidebar_on_boxed_layout.html">
+                            Boxed Layout
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="last ">
+                <a href="javascript:;">
+                    <i class="icon-pointer"></i>
+                    <span class="title">Maps</span>
+                    <span class="arrow "></span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="maps_google.html">
+                            Google Maps
+                        </a>
+                    </li>
+                    <li>
+                        <a href="maps_vector.html">
+                            Vector Maps
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <!-- END SIDEBAR MENU -->
+    </div>
+</div>
+<!-- END SIDEBAR -->
