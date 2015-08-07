@@ -1,9 +1,16 @@
 ﻿@model IEnumerable<Phoebe.Model.Warehouse>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "仓库信息";
 }
 
 <h2>Index</h2>
 
 
+@section scripts {
+    <script type="text/javascript">
+        $(function () {
+            phoebe.leftNavActive($('#menu-warehouse-index'));
+        });
+    </script>    
+}

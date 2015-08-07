@@ -9,13 +9,12 @@ namespace Phoebe.UI
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/assets/global/plugins/jquery.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
 
-            bundles.Add(new ScriptBundle("~/bundles/core").Include(
-                        "~/assets/global/plugins/jquery.min.js",
+            bundles.Add(new ScriptBundle("~/bundles/core").Include(                       
                         "~/assets/global/plugins/jquery-migrate.min.js",
                         "~/assets/global/plugins/jquery-ui/jquery-ui.min.js",
                         "~/assets/global/plugins/bootstrap/js/bootstrap.min.js",

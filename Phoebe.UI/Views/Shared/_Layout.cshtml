@@ -7,7 +7,7 @@
 <!-- BEGIN HEAD -->
 <head>
     <meta charset="utf-8" />
-    <title>Metronic | Page Layouts - Blank Page</title>
+    <title>华润冷库管理系统 - @ViewBag.Title</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
@@ -44,10 +44,10 @@
         <div class="page-header-inner">
             <!-- BEGIN LOGO -->
             <div class="page-logo">
-                <a href="index.html">
+                <a href="/">
                     <img src="/assets/admin/layout/img/logo.png" alt="logo" class="logo-default" />
                 </a>
-                <div class="menu-toggler sidebar-toggler hide">
+                <div class="menu-toggler sidebar-toggler">
                     <!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
                 </div>
             </div>
@@ -321,10 +321,12 @@
     <script src="/assets/global/plugins/respond.min.js"></script>
     <script src="/assets/global/plugins/excanvas.min.js"></script>
     <![endif]-->
+    @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/core")
     <!-- END CORE PLUGINS -->
     <script src="/assets/global/scripts/metronic.js" type="text/javascript"></script>
     <script src="/assets/admin/layout/scripts/layout.js" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/phoebe.js")" type="text/javascript"></script>
     <script type="text/javascript">
         jQuery(document).ready(function() {
             Metronic.init(); // init metronic core components
