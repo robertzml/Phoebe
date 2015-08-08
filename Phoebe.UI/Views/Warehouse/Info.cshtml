@@ -25,13 +25,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-3" })
                     <div class="col-md-9">
-                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-md-3">级别</label>
-                    <div class="col-md-9">
-                        @Html.EditorFor(model => model.Hierarchy, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                     </div>
                 </div>
                 <div class="form-group">
@@ -39,7 +33,7 @@
                     <div class="col-md-9">
                         @if (Model.ParentWarehouse != null)
                         {
-                            @Html.EditorFor(model => model.ParentWarehouse.Name, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.ParentWarehouse.Name, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                         }
                         else
                         {
@@ -48,22 +42,22 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-md-3">备注</label>
+                    <label class="control-label col-md-3">级别</label>
                     <div class="col-md-9">
-                        @Html.EditorFor(model => model.Remark, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.Hierarchy, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                     </div>
                 </div>
-                <div class="form-group last">
-                    <label class="control-label col-md-3">Country</label>
+                <div class="form-group">
+                    <label class="control-label col-md-3">备注</label>
                     <div class="col-md-9">
-                        <select class="form-control"></select>
+                        @Html.EditorFor(model => model.Remark, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                     </div>
                 </div>
             </div>
             <div class="form-actions">
                 <div class="row">
                     <div class="col-md-offset-3 col-md-9">
-                        <button type="submit" class="btn green"><i class="fa fa-check"></i> Submit</button>
+                        <a href="@Url.Action("Edit", new { controller = "Warehouse", id = Model.ID})" class="btn btn-warning"><i class="fa fa-edit"></i>&nbsp;编辑</a>
                         <button type="button" class="btn default">Cancel</button>
                     </div>
                 </div>

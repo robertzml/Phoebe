@@ -54,6 +54,24 @@ namespace Phoebe.Business
         {
             return this.context.Warehouses.FirstOrDefault(r => r.Hierarchy == 1);
         }
+
+        /// <summary>
+        /// 保存更新
+        /// </summary>
+        /// <returns></returns>
+        public ErrorCode Save()
+        {
+            try
+            {
+                this.context.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+
+            return ErrorCode.Success;
+        }
         #endregion //Method
     }
 }

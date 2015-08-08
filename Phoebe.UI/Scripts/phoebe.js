@@ -13,10 +13,33 @@ var phoebe = function() {
 		li.find('.arrow').addClass('open');
 	}
 	
+	var handleTostarMessage = function(message) {
+		
+		toastr.options = {
+			"closeButton": true,			
+			"progressBar": true,
+			"positionClass": "toast-top-center",
+			"onclick": null,
+			"showDuration": "300",
+			"hideDuration": "1000",
+			"timeOut": "5000",
+			"extendedTimeOut": "1000",
+			"showEasing": "swing",
+			"hideEasing": "linear",
+			"showMethod": "fadeIn",
+			"hideMethod": "fadeOut"
+		};
+		toastr['info'](message);
+	}
+	
 	return {
 		
 		leftNavActive: function($dom) {
 			handleLeftNavActive($dom);
+		},
+		
+		showMessage: function(message) {
+			handleTostarMessage(message);
 		}
 	}
 }();

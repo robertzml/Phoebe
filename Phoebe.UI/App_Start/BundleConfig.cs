@@ -12,7 +12,7 @@ namespace Phoebe.UI
                         "~/assets/global/plugins/jquery.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                        "~/Scripts/jquery.validate*"));
+                        "~/assets/global/plugins/jquery-validation/js/jquery.validate.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/core").Include(                       
                         "~/assets/global/plugins/jquery-migrate.min.js",
