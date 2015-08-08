@@ -66,6 +66,7 @@ namespace Phoebe.Model
         /// <summary>
         /// 备注
         /// </summary>
+        [DataType(DataType.MultilineText)]
         [Display(Name = "备注")]
         public string Remark { get; set; }
 

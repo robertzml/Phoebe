@@ -722,6 +722,7 @@
     <Content Include="Views\Shared\EditorTemplates\ParentWarehouseList.cshtml" />
     <Content Include="Views\Warehouse\Create.cshtml" />
     <Content Include="Views\GroupCustomer\Index.cshtml" />
+    <Content Include="Views\GroupCustomer\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

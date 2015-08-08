@@ -32,6 +32,16 @@ namespace Phoebe.Business
         {
             return this.context.GroupCustomers.ToList();
         }
+
+        /// <summary>
+        /// 获取团体客户
+        /// </summary>
+        /// <param name="id">客户ID</param>
+        /// <returns></returns>
+        public GroupCustomer GetGroupCustomer(int id)
+        {
+            return this.context.GroupCustomers.SingleOrDefault(r => r.ID == id);
+        }
         #endregion //Method
     }
 }

@@ -38,6 +38,20 @@ namespace Phoebe.UI.Controllers
             var data = this.customerBusiness.GetGroupCustomer();
             return View(data);
         }
+
+        /// <summary>
+        /// 团体客户信息
+        /// </summary>
+        /// <param name="id">客户ID</param>
+        /// <returns></returns>
+        public ActionResult Details(int id)
+        {
+            var data = this.customerBusiness.GetGroupCustomer(id);
+            if (data == null)
+                return HttpNotFound();
+
+            return View(data);
+        }
         #endregion //Action
     }
 }
