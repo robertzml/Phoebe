@@ -1,7 +1,7 @@
 ﻿@model int?
 
 <select class="form-control" id="ParentId" name="ParentId">
-    <option value="200000">-- 无 --</option>
+    <option value="0">-- 无 --</option>
     @{
         WarehouseBusiness warehouseBusiness = new WarehouseBusiness();
         var warehouses = warehouseBusiness.Get().Where(r => r.Hierarchy <= 2).OrderBy(s => s.Hierarchy);

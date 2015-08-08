@@ -719,6 +719,7 @@
     <Content Include="Views\Warehouse\Info.cshtml" />
     <Content Include="Views\Warehouse\Edit.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\ParentWarehouseList.cshtml" />
+    <Content Include="Views\Warehouse\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

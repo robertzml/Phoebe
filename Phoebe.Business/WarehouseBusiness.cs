@@ -56,6 +56,26 @@ namespace Phoebe.Business
         }
 
         /// <summary>
+        /// 添加仓库
+        /// </summary>
+        /// <param name="data">仓库数据</param>
+        /// <returns></returns>
+        public ErrorCode Create(Warehouse data)
+        {
+            try
+            {
+                this.context.Warehouses.Add(data);
+                this.context.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+
+            return ErrorCode.Success;
+        }
+
+        /// <summary>
         /// 保存更新
         /// </summary>
         /// <returns></returns>

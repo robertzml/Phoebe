@@ -51,6 +51,53 @@ namespace Phoebe.UI.Controllers
         }
 
         /// <summary>
+        /// 添加仓库
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 添加仓库
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult Create(Warehouse model)
+        {
+            if (ModelState.IsValid)
+            {
+                if (model.ParentId == 0)
+                    model.Hierarchy = 1;
+                else
+                {
+                    var parent = this.warehouseBusiness.Get((int)model.ParentId);
+                    model.Hierarchy = parent.Hierarchy + 1;
+                }
+
+                model.Status = 0;
+
+                ErrorCode result = this.warehouseBusiness.Create(model);
+                if (result == ErrorCode.Success)
+                {
+                    TempData["Message"] = "添加仓库成功";
+                    return RedirectToAction("Index", "Warehouse");
+                }
+                else
+                {
+                    TempData["Message"] = "添加仓库失败";
+                    ModelState.AddModelError("", "添加仓库失败: " + result.DisplayName());
+                }
+            }
+
+            return View(model);
+        }
+
+        /// <summary>
         /// 编辑仓库
         /// </summary>
         /// <param name="id">ID</param>
@@ -78,6 +125,14 @@ namespace Phoebe.UI.Controllers
             {
                 var data = this.warehouseBusiness.Get(model.ID);
 
+                if (model.ParentId == 0)
+                    data.Hierarchy = 1;
+                else
+                {
+                    var parent = this.warehouseBusiness.Get((int)model.ParentId);
+                    data.Hierarchy = parent.Hierarchy + 1;
+                }
+
                 data.Remark = model.Remark;
                 ErrorCode result = this.warehouseBusiness.Save();
 
@@ -89,7 +144,7 @@ namespace Phoebe.UI.Controllers
                 else
                 {
                     TempData["Message"] = "编辑仓库失败";
-                    ModelState.AddModelError("", "添加部门失败: " + result.DisplayName());
+                    ModelState.AddModelError("", "编辑仓库失败: " + result.DisplayName());
                 }
             }
 

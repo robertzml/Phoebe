@@ -1,9 +1,8 @@
 ﻿@model Phoebe.Model.Warehouse
 
 @{
-    ViewBag.Title = "仓库编辑";
+    ViewBag.Title = "仓库添加";
 }
-
 
 <!-- BEGIN PAGE HEADER-->
 <h3 class="page-title">
@@ -17,7 +16,7 @@
             <i class="fa fa-angle-right"></i>
         </li>
         <li>
-            <a href="#">仓库信息</a>
+            <a href="#">仓库管理</a>
             <i class="fa fa-angle-right"></i>
         </li>
         <li>
@@ -32,7 +31,7 @@
         <div class="portlet box blue">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="fa fa-edit"></i>仓库信息
+                    <i class="fa fa-plus"></i>仓库信息
                 </div>
                 <div class="tools">
                     <a href="javascript:;" class="collapse">
@@ -44,14 +43,12 @@
                 </div>
             </div>
             <div class="portlet-body form">
-                @using (Html.BeginForm("Edit", "Warehouse", FormMethod.Post, new { @class = "form-horizontal form-bordered form-row-stripped" }))
+                @using (Html.BeginForm("Create", "Warehouse", FormMethod.Post, new { @class = "form-horizontal form-bordered form-row-stripped" }))
                 {
                     @Html.AntiForgeryToken()
 
                     <div class="form-body">
-                        
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                        @Html.HiddenFor(model => model.ID)
 
                         <div class="form-group">
                             @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-3" })
@@ -85,6 +82,7 @@
                                 </div>
                             </div>
                         </div>
+                      
                     </div>
                 }
             </div>
@@ -92,7 +90,6 @@
     </div>
 </div>
 <!-- END PAGE CONTENT-->
-
 
 @section Scripts {
     <script type="text/javascript">
