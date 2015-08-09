@@ -209,10 +209,6 @@
     <Content Include="assets\global\plugins\backstretch\jquery.backstretch.js" />
     <Content Include="assets\global\plugins\backstretch\jquery.backstretch.min.js" />
     <Content Include="assets\global\plugins\bootbox\bootbox.min.js" />
-    <Content Include="assets\global\plugins\bootstrap-confirmation\bootstrap-confirmation.js" />
-    <Content Include="assets\global\plugins\bootstrap-confirmation\bootstrap-confirmation.min.js" />
-    <Content Include="assets\global\plugins\bootstrap-confirmation\demo.html" />
-    <Content Include="assets\global\plugins\bootstrap-contextmenu\bootstrap-contextmenu.js" />
     <Content Include="assets\global\plugins\bootstrap-datepicker\css\bootstrap-datepicker.css" />
     <Content Include="assets\global\plugins\bootstrap-datepicker\css\bootstrap-datepicker.min.css" />
     <Content Include="assets\global\plugins\bootstrap-datepicker\css\bootstrap-datepicker.standalone.css" />
@@ -241,8 +237,6 @@
     <Content Include="assets\global\plugins\bootstrap-modal\css\bootstrap-modal.css" />
     <Content Include="assets\global\plugins\bootstrap-modal\js\bootstrap-modal.js" />
     <Content Include="assets\global\plugins\bootstrap-modal\js\bootstrap-modalmanager.js" />
-    <Content Include="assets\global\plugins\bootstrap-selectsplitter\bootstrap-selectsplitter.js" />
-    <Content Include="assets\global\plugins\bootstrap-selectsplitter\bootstrap-selectsplitter.min.js" />
     <Content Include="assets\global\plugins\bootstrap-select\bootstrap-select.css" />
     <Content Include="assets\global\plugins\bootstrap-select\bootstrap-select.js" />
     <Content Include="assets\global\plugins\bootstrap-select\bootstrap-select.min.css" />
@@ -610,8 +604,6 @@
     <Content Include="assets\global\plugins\backstretch\README.md" />
     <Content Include="assets\global\plugins\bootbox\LICENSE.md" />
     <Content Include="assets\global\plugins\bootbox\README.md" />
-    <Content Include="assets\global\plugins\bootstrap-confirmation\README.md" />
-    <Content Include="assets\global\plugins\bootstrap-contextmenu\README.md" />
     <Content Include="assets\global\plugins\bootstrap-datepicker\LICENSE" />
     <Content Include="assets\global\plugins\bootstrap-datepicker\README.md" />
     <Content Include="assets\global\plugins\bootstrap-daterangepicker\README.md" />
@@ -622,9 +614,6 @@
     <Content Include="assets\global\plugins\bootstrap-hover-dropdown\README.md" />
     <Content Include="assets\global\plugins\bootstrap-modal\LICENSE" />
     <Content Include="assets\global\plugins\bootstrap-modal\README.md" />
-    <Content Include="assets\global\plugins\bootstrap-selectsplitter\bower.json" />
-    <Content Include="assets\global\plugins\bootstrap-selectsplitter\LICENSE" />
-    <Content Include="assets\global\plugins\bootstrap-selectsplitter\README.md" />
     <Content Include="assets\global\plugins\bootstrap-select\bootstrap-select.css.map" />
     <Content Include="assets\global\plugins\bootstrap-select\bootstrap-select.js.map" />
     <Content Include="assets\global\plugins\bootstrap-select\LICENSE" />
@@ -693,6 +682,8 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -723,6 +714,8 @@
     <Content Include="Views\Warehouse\Create.cshtml" />
     <Content Include="Views\GroupCustomer\Index.cshtml" />
     <Content Include="Views\GroupCustomer\Details.cshtml" />
+    <Content Include="Views\GroupCustomer\Create.cshtml" />
+    <Content Include="Views\GroupCustomer\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

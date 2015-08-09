@@ -52,6 +52,85 @@ namespace Phoebe.UI.Controllers
 
             return View(data);
         }
+
+        /// <summary>
+        /// 添加团体客户
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 添加团体客户
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult Create(GroupCustomer model)
+        {
+            if (ModelState.IsValid)
+            {
+                model.Status = 0;
+                ErrorCode result = this.customerBusiness.CreateGroupCustomer(model);
+                if (result == ErrorCode.Success)
+                {
+                    TempData["Message"] = "添加团体客户成功";
+                    return RedirectToAction("Index", "GroupCustomer");
+                }
+                else
+                {
+                    TempData["Message"] = "添加团体客户失败";
+                    ModelState.AddModelError("", "添加团体客户失败: " + result.DisplayName());
+                }
+            }
+
+            return View(model);
+        }
+
+        /// <summary>
+        /// 编辑团体客户
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            var data = this.customerBusiness.GetGroupCustomer(id);
+            if (data == null)
+                return HttpNotFound();
+
+            return View(data);
+        }
+
+        /// <summary>
+        /// 编辑团体客户
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult Edit(GroupCustomer model)
+        {
+            if (ModelState.IsValid)
+            {
+                ErrorCode result = this.customerBusiness.EditGroupCustomer(model);
+                if (result == ErrorCode.Success)
+                {
+                    TempData["Message"] = "编辑团体客户成功";
+                    return RedirectToAction("Details", new { controller = "GroupCustomer", id = model.ID });
+                }
+                else
+                {
+                    TempData["Message"] = "编辑团体客户失败";
+                    ModelState.AddModelError("", "编辑团体客户失败: " + result.DisplayName());
+                }
+            }
+
+            return View(model);
+        }
         #endregion //Action
     }
 }

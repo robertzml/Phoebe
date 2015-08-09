@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -41,6 +42,64 @@ namespace Phoebe.Business
         public GroupCustomer GetGroupCustomer(int id)
         {
             return this.context.GroupCustomers.SingleOrDefault(r => r.ID == id);
+        }
+
+        /// <summary>
+        /// 添加仓库
+        /// </summary>
+        /// <param name="data">团体客户数据</param>
+        /// <returns></returns>
+        public ErrorCode CreateGroupCustomer(GroupCustomer data)
+        {
+            try
+            {
+                this.context.GroupCustomers.Add(data);
+                this.context.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+
+            return ErrorCode.Success;
+        }
+
+        /// <summary>
+        /// 编辑团体客户
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public ErrorCode EditGroupCustomer(GroupCustomer data)
+        {
+            try
+            {
+                this.context.Entry(data).State = EntityState.Modified;
+                this.context.SaveChanges();
+            }
+            catch(Exception)
+            {
+                return ErrorCode.Exception;
+            }
+
+            return ErrorCode.Success;
+        }
+
+        /// <summary>
+        /// 保存更新
+        /// </summary>
+        /// <returns></returns>
+        public ErrorCode Save()
+        {
+            try
+            {
+                this.context.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+
+            return ErrorCode.Success;
         }
         #endregion //Method
     }

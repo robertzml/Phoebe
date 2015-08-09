@@ -18,18 +18,21 @@ namespace Phoebe.Model
         /// <summary>
         /// 公司名称
         /// </summary>
+        [Required]
         [Display(Name = "公司名称")]
         public string CompanyName { get; set; }
 
         /// <summary>
         /// 地址
         /// </summary>
+        [Required]
         [Display(Name = "地址")]
         public string Address { get; set; }
 
         /// <summary>
         /// 组织机构代码
         /// </summary>
+        [Required]
         [Display(Name = "组织机构代码")]
         public string Code { get; set; }
 
@@ -42,6 +45,7 @@ namespace Phoebe.Model
         /// <summary>
         /// 负责人
         /// </summary>
+        [Required]
         [Display(Name = "负责人")]
         public string Captain { get; set; }
 
