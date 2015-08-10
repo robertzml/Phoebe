@@ -25,6 +25,7 @@ namespace Phoebe.Business
         #endregion //Constructor
 
         #region Method
+        #region GroupCustomer
         /// <summary>
         /// 获取所有团体客户
         /// </summary>
@@ -45,7 +46,7 @@ namespace Phoebe.Business
         }
 
         /// <summary>
-        /// 添加仓库
+        /// 添加团体客户
         /// </summary>
         /// <param name="data">团体客户数据</param>
         /// <returns></returns>
@@ -83,6 +84,49 @@ namespace Phoebe.Business
 
             return ErrorCode.Success;
         }
+        #endregion //GroupCustomer
+
+
+        #region ScatterCustomer
+        /// <summary>
+        /// 获取所有零散客户
+        /// </summary>
+        /// <returns></returns>
+        public List<ScatterCustomer> GetScatterCustomer()
+        {
+            return this.context.ScatterCustomers.ToList();
+        }
+
+        /// <summary>
+        /// 获取零散客户
+        /// </summary>
+        /// <param name="id">客户ID</param>
+        /// <returns></returns>
+        public ScatterCustomer GetScatterCustomer(int id)
+        {
+            return this.context.ScatterCustomers.SingleOrDefault(r => r.ID == id);
+        }
+
+        /// <summary>
+        /// 添加零散客户
+        /// </summary>
+        /// <param name="data">零散客户数据</param>
+        /// <returns></returns>
+        public ErrorCode CreateScatterCustomer(ScatterCustomer data)
+        {
+            try
+            {
+                this.context.ScatterCustomers.Add(data);
+                this.context.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+
+            return ErrorCode.Success;
+        }
+        #endregion //ScatterCustomer
 
         /// <summary>
         /// 保存更新

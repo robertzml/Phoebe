@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\GroupCustomer.cs" />
+    <Compile Include="Entities\ScatterCustomer.cs" />
     <Compile Include="Entities\Warehouse.cs" />
     <Compile Include="ErrorCode.cs" />
     <Compile Include="GroupCustomer.cs">

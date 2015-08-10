@@ -18,7 +18,7 @@ namespace Phoebe.Model
         public string Name { get; set; }
         public string IdentityCard { get; set; }
         public string Address { get; set; }
-        public string Telephoe { get; set; }
+        public string Telephone { get; set; }
         public string Remark { get; set; }
         public int Status { get; set; }
     }

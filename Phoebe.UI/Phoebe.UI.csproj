@@ -130,6 +130,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\GroupCustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ScatterCustomerController.cs" />
     <Compile Include="Controllers\WarehouseController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -716,6 +717,8 @@
     <Content Include="Views\GroupCustomer\Details.cshtml" />
     <Content Include="Views\GroupCustomer\Create.cshtml" />
     <Content Include="Views\GroupCustomer\Edit.cshtml" />
+    <Content Include="Views\ScatterCustomer\Index.cshtml" />
+    <Content Include="Views\ScatterCustomer\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -68,6 +68,7 @@ namespace Phoebe.UI.Controllers
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
+        [ValidateAntiForgeryToken]
         [HttpPost]
         public ActionResult Create(GroupCustomer model)
         {
