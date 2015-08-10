@@ -37,6 +37,20 @@ namespace Phoebe.UI.Controllers
         }
 
         /// <summary>
+        /// 零散客户信息
+        /// </summary>
+        /// <param name="id">ID</param>
+        /// <returns></returns>
+        public ActionResult Details(int id)
+        {
+            var data = this.customerBusiness.GetScatterCustomer(id);
+            if (data == null)
+                return HttpNotFound();
+
+            return View(data);
+        }
+
+        /// <summary>
         /// 添加零散客户
         /// </summary>
         /// <returns></returns>

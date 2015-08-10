@@ -206,7 +206,6 @@
     <Content Include="assets\global\img\remove-icon-small.png" />
     <Content Include="assets\global\img\syncfusion-icons-white.png" />
     <Content Include="assets\global\img\syncfusion-icons.png" />
-    <Content Include="assets\global\plugins\autosize\autosize.min.js" />
     <Content Include="assets\global\plugins\backstretch\jquery.backstretch.js" />
     <Content Include="assets\global\plugins\backstretch\jquery.backstretch.min.js" />
     <Content Include="assets\global\plugins\bootbox\bootbox.min.js" />
@@ -437,8 +436,6 @@
     <Content Include="assets\global\plugins\jquery-multi-select\img\switch_original.png" />
     <Content Include="assets\global\plugins\jquery-multi-select\js\jquery.multi-select.js" />
     <Content Include="assets\global\plugins\jquery-multi-select\LICENSE.txt" />
-    <Content Include="assets\global\plugins\jquery-nestable\jquery.nestable.css" />
-    <Content Include="assets\global\plugins\jquery-nestable\jquery.nestable.js" />
     <Content Include="assets\global\plugins\jquery-slimscroll\jquery.slimscroll.js" />
     <Content Include="assets\global\plugins\jquery-slimscroll\jquery.slimscroll.min.js" />
     <Content Include="assets\global\plugins\jquery-tags-input\jquery.tagsinput.css" />
@@ -597,10 +594,8 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="assets\global\plugins\autosize\readme.md" />
     <Content Include="assets\global\plugins\backstretch\LICENSE-MIT" />
     <Content Include="assets\global\plugins\backstretch\README.md" />
     <Content Include="assets\global\plugins\bootbox\LICENSE.md" />
@@ -647,14 +642,12 @@
     <Content Include="assets\global\plugins\jquery-bootpag\README.md" />
     <Content Include="assets\global\plugins\jquery-file-upload\README.md" />
     <Content Include="assets\global\plugins\jquery-idle-timeout\README.markdown" />
-    <Content Include="assets\global\plugins\jquery-knob\knob.jquery.json" />
     <Content Include="assets\global\plugins\jquery-knob\LICENSE" />
     <Content Include="assets\global\plugins\jquery-knob\README.md" />
     <Content Include="assets\global\plugins\jquery-mixitup\bower.json" />
     <Content Include="assets\global\plugins\jquery-mixitup\mixitup.jquery.json" />
     <Content Include="assets\global\plugins\jquery-mixitup\README.md" />
     <Content Include="assets\global\plugins\jquery-multi-select\README.markdown" />
-    <Content Include="assets\global\plugins\jquery-nestable\README.md" />
     <Content Include="assets\global\plugins\jquery-slimscroll\README.md" />
     <Content Include="assets\global\plugins\jquery-slimscroll\slimScroll.jquery.json" />
     <Content Include="assets\global\plugins\jquery-tags-input\README.md" />
@@ -666,8 +659,6 @@
     <Content Include="assets\global\plugins\jstree\README.md" />
     <Content Include="assets\global\plugins\rateit\src\jquery.rateit.min.js.map" />
     <Content Include="assets\global\plugins\select2\bower.json" />
-    <Content Include="assets\global\plugins\select2\component.json" />
-    <Content Include="assets\global\plugins\select2\composer.json" />
     <Content Include="assets\global\plugins\select2\LICENSE" />
     <Content Include="assets\global\plugins\select2\README.md" />
     <Content Include="assets\global\plugins\select2\select2.jquery.json" />
@@ -719,6 +710,7 @@
     <Content Include="Views\GroupCustomer\Edit.cshtml" />
     <Content Include="Views\ScatterCustomer\Index.cshtml" />
     <Content Include="Views\ScatterCustomer\Create.cshtml" />
+    <Content Include="Views\ScatterCustomer\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
