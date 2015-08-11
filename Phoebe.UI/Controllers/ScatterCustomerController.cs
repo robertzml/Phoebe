@@ -87,6 +87,48 @@ namespace Phoebe.UI.Controllers
 
             return View(model);
         }
+
+        /// <summary>
+        /// 编辑零散客户
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            var data = this.customerBusiness.GetScatterCustomer(id);
+            if (data == null)
+                return HttpNotFound();
+
+            return View(data);
+        }
+
+        /// <summary>
+        /// 编辑零散客户
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult Edit(ScatterCustomer model)
+        {
+            if (ModelState.IsValid)
+            {
+                ErrorCode result = this.customerBusiness.EditScatterCustomer(model);
+                if (result == ErrorCode.Success)
+                {
+                    TempData["Message"] = "编辑零散客户成功";
+                    return RedirectToAction("Details", new { controller = "ScatterCustomer", id = model.ID });
+                }
+                else
+                {
+                    TempData["Message"] = "编辑零散客户失败";
+                    ModelState.AddModelError("", "编辑零散客户失败: " + result.DisplayName());
+                }
+            }
+
+            return View(model);
+        }
         #endregion //Action
     }
 }

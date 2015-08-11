@@ -126,6 +126,26 @@ namespace Phoebe.Business
 
             return ErrorCode.Success;
         }
+
+        /// <summary>
+        /// 编辑零散客户
+        /// </summary>
+        /// <param name="data">零散客户数据</param>
+        /// <returns></returns>
+        public ErrorCode EditScatterCustomer(ScatterCustomer data)
+        {
+            try
+            {
+                this.context.Entry(data).State = EntityState.Modified;
+                this.context.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+
+            return ErrorCode.Success;
+        }
         #endregion //ScatterCustomer
 
         /// <summary>
