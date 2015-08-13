@@ -27,6 +27,9 @@ namespace Phoebe.UI
                         "~/assets/global/plugins/jquery.cokie.min.js",
                         "~/assets/global/plugins/uniform/jquery.uniform.min.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/datepicker").Include(
+                        "~/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js",
+                        "~/assets/global/plugins/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min.js"));
 
 
             // 使用要用于开发和学习的 Modernizr 的开发版本。然后，当你做好
@@ -41,6 +44,9 @@ namespace Phoebe.UI
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new StyleBundle("~/Content/datepicker").Include(
+                        "~/assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css"));
         }
     }
 }

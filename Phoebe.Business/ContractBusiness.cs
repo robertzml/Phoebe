@@ -34,6 +34,16 @@ namespace Phoebe.Business
         }
 
         /// <summary>
+        /// 获取合同
+        /// </summary>
+        /// <param name="id">合同ID</param>
+        /// <returns></returns>
+        public Contract Get(int id)
+        {
+            return this.context.Contracts.SingleOrDefault(r => r.ID == id);
+        }
+
+        /// <summary>
         /// 添加合同
         /// </summary>
         /// <param name="data">合同数据</param>
