@@ -128,6 +128,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ContractController.cs" />
     <Compile Include="Controllers\GroupCustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ScatterCustomerController.cs" />
@@ -431,11 +432,6 @@
     <Content Include="assets\global\plugins\jquery-knob\js\jquery.knob.js" />
     <Content Include="assets\global\plugins\jquery-migrate.min.js" />
     <Content Include="assets\global\plugins\jquery-mixitup\jquery.mixitup.min.js" />
-    <Content Include="assets\global\plugins\jquery-multi-select\css\multi-select.css" />
-    <Content Include="assets\global\plugins\jquery-multi-select\img\switch.png" />
-    <Content Include="assets\global\plugins\jquery-multi-select\img\switch_original.png" />
-    <Content Include="assets\global\plugins\jquery-multi-select\js\jquery.multi-select.js" />
-    <Content Include="assets\global\plugins\jquery-multi-select\LICENSE.txt" />
     <Content Include="assets\global\plugins\jquery-slimscroll\jquery.slimscroll.js" />
     <Content Include="assets\global\plugins\jquery-slimscroll\jquery.slimscroll.min.js" />
     <Content Include="assets\global\plugins\jquery-tags-input\jquery.tagsinput.css" />
@@ -647,7 +643,6 @@
     <Content Include="assets\global\plugins\jquery-mixitup\bower.json" />
     <Content Include="assets\global\plugins\jquery-mixitup\mixitup.jquery.json" />
     <Content Include="assets\global\plugins\jquery-mixitup\README.md" />
-    <Content Include="assets\global\plugins\jquery-multi-select\README.markdown" />
     <Content Include="assets\global\plugins\jquery-slimscroll\README.md" />
     <Content Include="assets\global\plugins\jquery-slimscroll\slimScroll.jquery.json" />
     <Content Include="assets\global\plugins\jquery-tags-input\README.md" />
@@ -712,6 +707,7 @@
     <Content Include="Views\ScatterCustomer\Create.cshtml" />
     <Content Include="Views\ScatterCustomer\Details.cshtml" />
     <Content Include="Views\ScatterCustomer\Edit.cshtml" />
+    <Content Include="Views\Contract\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

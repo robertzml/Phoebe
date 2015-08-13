@@ -9,6 +9,7 @@
         <EntityTypeShape EntityType="PhoebeModel.Warehouse" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="PhoebeModel.FK_Warehouse_Warehouse" ManuallyRouted="false" />
         <EntityTypeShape EntityType="PhoebeModel.ScatterCustomer" Width="1.5" PointX="4.875" PointY="0.75" />
+        <EntityTypeShape EntityType="PhoebeModel.Contract" Width="1.5" PointX="0.75" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
