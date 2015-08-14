@@ -26,6 +26,7 @@ namespace Phoebe.Model
         /// 合同类型
         /// </summary>
         [Required]
+        [UIHint("ContractType")]
         [Display(Name = "合同类型")]
         public int Type { get; set; }
 

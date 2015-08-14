@@ -75,6 +75,37 @@
                             </th>
                         </tr>
                     </thead>
+                    <tfoot>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Number)
+                            </th>
+                            <th data-filter="true">
+                                @Html.DisplayNameFor(model => model.Type)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.CustomerType)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.CustomerID)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.SignDate)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.StartDate)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.EndDate)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.CertificateNumber)
+                            </th>
+                            <th>
+                                操作
+                            </th>
+                        </tr>
+                    </tfoot>
                     <tbody>
                         @foreach (var item in Model)
                         {
@@ -83,7 +114,10 @@
                                     @Html.DisplayFor(modelItem => item.Number)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Type)
+                                    @{
+                                        var type1 = (ContractType)item.Type;
+                                        @type1.DisplayName();
+                                    }
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.CustomerType)
@@ -104,9 +138,7 @@
                                     @Html.DisplayFor(modelItem => item.CertificateNumber)
                                 </td>
                                 <td>
-                                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                                    <a href="@Url.Action("Details", new { controller = "Contract", id = item.ID })" class="btn btn-info btn-sm" role="button"><i class="fa fa-check-circle"></i>&nbsp;查看</a>
                                 </td>
                             </tr>
                         }
