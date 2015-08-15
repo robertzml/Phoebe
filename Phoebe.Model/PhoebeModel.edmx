@@ -9,7 +9,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Number" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Type" Type="int" Nullable="false" />
           <Property Name="CustomerType" Type="int" Nullable="false" />
@@ -18,6 +18,15 @@
           <Property Name="StartDate" Type="date" Nullable="false" />
           <Property Name="EndDate" Type="date" Nullable="false" />
           <Property Name="CertificateNumber" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="500" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FirstCategory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Remark" Type="nvarchar" MaxLength="500" />
           <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
@@ -49,6 +58,16 @@
           <Property Name="Remark" Type="nvarchar" MaxLength="500" />
           <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="SecondCategory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FirstID" Type="int" Nullable="false" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="500" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Warehouse">
           <Key>
             <PropertyRef Name="ID" />
@@ -60,6 +79,18 @@
           <Property Name="Remark" Type="nvarchar" MaxLength="500" />
           <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="FK_SecondCategory_FirstCategory">
+          <End Role="FirstCategory" Type="Self.FirstCategory" Multiplicity="1" />
+          <End Role="SecondCategory" Type="Self.SecondCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FirstCategory">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SecondCategory">
+              <PropertyRef Name="FirstID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Warehouse_Warehouse">
           <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="0..1" />
           <End Role="Warehouse1" Type="Self.Warehouse" Multiplicity="*" />
@@ -74,9 +105,15 @@
         </Association>
         <EntityContainer Name="PhoebeModelStoreContainer">
           <EntitySet Name="Contract" EntityType="Self.Contract" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FirstCategory" EntityType="Self.FirstCategory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GroupCustomer" EntityType="Self.GroupCustomer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ScatterCustomer" EntityType="Self.ScatterCustomer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SecondCategory" EntityType="Self.SecondCategory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Warehouse" EntityType="Self.Warehouse" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_SecondCategory_FirstCategory" Association="Self.FK_SecondCategory_FirstCategory">
+            <End Role="FirstCategory" EntitySet="FirstCategory" />
+            <End Role="SecondCategory" EntitySet="SecondCategory" />
+          </AssociationSet>
           <AssociationSet Name="FK_Warehouse_Warehouse" Association="Self.FK_Warehouse_Warehouse">
             <End Role="Warehouse" EntitySet="Warehouse" />
             <End Role="Warehouse1" EntitySet="Warehouse" />
@@ -140,6 +177,12 @@
           </AssociationSet>
           <EntitySet Name="ScatterCustomers" EntityType="PhoebeModel.ScatterCustomer" />
           <EntitySet Name="Contracts" EntityType="PhoebeModel.Contract" />
+          <EntitySet Name="FirstCategories" EntityType="PhoebeModel.FirstCategory" />
+          <EntitySet Name="SecondCategories" EntityType="PhoebeModel.SecondCategory" />
+          <AssociationSet Name="FK_SecondCategory_FirstCategory" Association="PhoebeModel.FK_SecondCategory_FirstCategory">
+            <End Role="FirstCategory" EntitySet="FirstCategories" />
+            <End Role="SecondCategory" EntitySet="SecondCategories" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="ScatterCustomer">
           <Key>
@@ -169,6 +212,39 @@
           <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" Nullable="false" />
         </EntityType>
+        <EntityType Name="FirstCategory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SecondCategories" Relationship="PhoebeModel.FK_SecondCategory_FirstCategory" FromRole="FirstCategory" ToRole="SecondCategory" />
+        </EntityType>
+        <EntityType Name="SecondCategory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FirstID" Type="Int32" Nullable="false" />
+          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="FirstCategory" Relationship="PhoebeModel.FK_SecondCategory_FirstCategory" FromRole="SecondCategory" ToRole="FirstCategory" />
+        </EntityType>
+        <Association Name="FK_SecondCategory_FirstCategory">
+          <End Type="PhoebeModel.FirstCategory" Role="FirstCategory" Multiplicity="1" />
+          <End Type="PhoebeModel.SecondCategory" Role="SecondCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FirstCategory">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SecondCategory">
+              <PropertyRef Name="FirstID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -230,6 +306,27 @@
                 <ScalarProperty Name="CustomerType" ColumnName="CustomerType" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FirstCategories">
+            <EntityTypeMapping TypeName="PhoebeModel.FirstCategory">
+              <MappingFragment StoreEntitySet="FirstCategory">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SecondCategories">
+            <EntityTypeMapping TypeName="PhoebeModel.SecondCategory">
+              <MappingFragment StoreEntitySet="SecondCategory">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="FirstID" ColumnName="FirstID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
