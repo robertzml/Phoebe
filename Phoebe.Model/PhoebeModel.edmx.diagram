@@ -10,9 +10,13 @@
         <AssociationConnector Association="PhoebeModel.FK_Warehouse_Warehouse" ManuallyRouted="false" />
         <EntityTypeShape EntityType="PhoebeModel.ScatterCustomer" Width="1.5" PointX="4.875" PointY="0.75" />
         <EntityTypeShape EntityType="PhoebeModel.Contract" Width="1.5" PointX="0.75" PointY="4.75" />
-        <EntityTypeShape EntityType="PhoebeModel.FirstCategory" Width="1.5" PointX="3.375" PointY="5" />
-        <EntityTypeShape EntityType="PhoebeModel.SecondCategory" Width="1.5" PointX="5.625" PointY="4.875" />
+        <EntityTypeShape EntityType="PhoebeModel.FirstCategory" Width="1.5" PointX="8.875" PointY="2.5" />
+        <EntityTypeShape EntityType="PhoebeModel.SecondCategory" Width="1.5" PointX="8.875" PointY="5.625" />
         <AssociationConnector Association="PhoebeModel.FK_SecondCategory_FirstCategory" />
+        <EntityTypeShape EntityType="PhoebeModel.Cargo" Width="1.5" PointX="4.125" PointY="4.75" />
+        <AssociationConnector Association="PhoebeModel.FK_Cargo_Contract" />
+        <AssociationConnector Association="PhoebeModel.FK_Cargo_FirstCategory" />
+        <AssociationConnector Association="PhoebeModel.FK_Cargo_SecondCategory" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

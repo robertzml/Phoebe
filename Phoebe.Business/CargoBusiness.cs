@@ -8,16 +8,16 @@ using Phoebe.Model;
 namespace Phoebe.Business
 {
     /// <summary>
-    /// 合同业务类
+    /// 货品业务类
     /// </summary>
-    public class ContractBusiness
+    public class CargoBusiness
     {
         #region Field
         private PhoebeContext context;
         #endregion //Field
 
         #region Constructor
-        public ContractBusiness()
+        public CargoBusiness()
         {
             this.context = new PhoebeContext();
         }
@@ -25,43 +25,42 @@ namespace Phoebe.Business
 
         #region Method
         /// <summary>
-        /// 获取所有合同
+        /// 获取所有货品
         /// </summary>
         /// <returns></returns>
-        public List<Contract> Get()
+        public List<Cargo> Get()
         {
-            return this.context.Contracts.OrderByDescending(r => r.SignDate).ToList();
+            return this.context.Cargoes.ToList();
         }
 
         /// <summary>
-        /// 获取合同
+        /// 获取货品
         /// </summary>
-        /// <param name="id">合同ID</param>
+        /// <param name="id">ID</param>
         /// <returns></returns>
-        public Contract Get(int id)
+        public Cargo Get(string id)
         {
-            return this.context.Contracts.SingleOrDefault(r => r.ID == id);
+            Guid gid;
+            if (!Guid.TryParse(id, out gid))
+                return null;
+
+            return this.context.Cargoes.SingleOrDefault(r => r.ID == gid);
         }
 
         /// <summary>
-        /// 获取当前正常合同
+        /// 添加货品
         /// </summary>
+        /// <param name="data">货品数据</param>
         /// <returns></returns>
-        public List<Contract> GetNormal()
-        {
-            return this.context.Contracts.Where(r => r.Status == 0).OrderByDescending(r => r.SignDate).ToList();
-        }
-
-        /// <summary>
-        /// 添加合同
-        /// </summary>
-        /// <param name="data">合同数据</param>
-        /// <returns></returns>
-        public ErrorCode Create(Contract data)
+        public ErrorCode Create(Cargo data)
         {
             try
             {
-                this.context.Contracts.Add(data);
+                data.ID = Guid.NewGuid();
+                data.RegisterTime = DateTime.Now;
+                data.Status = 0;
+
+                this.context.Cargoes.Add(data);
                 this.context.SaveChanges();
             }
             catch (Exception)

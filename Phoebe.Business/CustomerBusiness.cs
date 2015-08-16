@@ -9,7 +9,7 @@ using Phoebe.Model;
 namespace Phoebe.Business
 {
     /// <summary>
-    /// 客户类
+    /// 客户业务类
     /// </summary>
     public class CustomerBusiness
     {

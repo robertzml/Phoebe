@@ -128,6 +128,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CargoController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\ContractController.cs" />
     <Compile Include="Controllers\GroupCustomerController.cs" />
@@ -225,7 +226,6 @@
     <Content Include="assets\global\plugins\bootstrap-daterangepicker\daterangepicker-bs2.css" />
     <Content Include="assets\global\plugins\bootstrap-daterangepicker\daterangepicker-bs3.css" />
     <Content Include="assets\global\plugins\bootstrap-daterangepicker\daterangepicker.js" />
-    <Content Include="assets\global\plugins\bootstrap-daterangepicker\moment.min.js" />
     <Content Include="assets\global\plugins\bootstrap-datetimepicker\css\bootstrap-datetimepicker.css" />
     <Content Include="assets\global\plugins\bootstrap-datetimepicker\css\bootstrap-datetimepicker.min.css" />
     <Content Include="assets\global\plugins\bootstrap-datetimepicker\js\bootstrap-datetimepicker.js" />
@@ -460,7 +460,6 @@
     <Content Include="assets\global\plugins\jquery.blockui.min.js" />
     <Content Include="assets\global\plugins\jquery.cokie.min.js" />
     <Content Include="assets\global\plugins\jquery.easing.js" />
-    <Content Include="assets\global\plugins\jquery.mockjax.js" />
     <Content Include="assets\global\plugins\jquery.parallax.js" />
     <Content Include="assets\global\plugins\jquery.scrollTo.min.js" />
     <Content Include="assets\global\plugins\jstree\dist\jstree.js" />
@@ -600,7 +599,6 @@
     <Content Include="assets\global\plugins\bootstrap-select\LICENSE" />
     <Content Include="assets\global\plugins\bootstrap-select\README.md" />
     <Content Include="assets\global\plugins\bootstrap-sessiontimeout\LICENSE.md" />
-    <Content Include="assets\global\plugins\bootstrap-sessiontimeout\package.json" />
     <Content Include="assets\global\plugins\bootstrap-sessiontimeout\README.md" />
     <Content Include="assets\global\plugins\bootstrap-switch\LICENSE" />
     <Content Include="assets\global\plugins\bootstrap-switch\README.md" />
@@ -702,6 +700,8 @@
     <Content Include="Views\Category\CreateSecondCategory.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\FirstCategoryList.cshtml" />
     <Content Include="Views\Category\CreateFirstCategory.cshtml" />
+    <Content Include="Views\Cargo\Create.cshtml" />
+    <Content Include="Views\Cargo\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

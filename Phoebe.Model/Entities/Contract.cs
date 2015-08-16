@@ -23,6 +23,13 @@ namespace Phoebe.Model
         public string Number { get; set; }
 
         /// <summary>
+        /// 合同名称
+        /// </summary>
+        [Required]
+        [Display(Name = "合同名称")]
+        public string Name { get; set; }
+
+        /// <summary>
         /// 合同类型
         /// </summary>
         [Required]

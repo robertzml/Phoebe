@@ -71,6 +71,7 @@ namespace Phoebe.Business
         {
             try
             {
+                data.Status = 0;
                 this.context.FirstCategories.Add(data);
                 this.context.SaveChanges();
             }
@@ -91,10 +92,11 @@ namespace Phoebe.Business
         {
             try
             {
+                data.Status = 0;
                 this.context.SecondCategories.Add(data);
                 this.context.SaveChanges();
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return ErrorCode.Exception;
             }

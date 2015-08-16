@@ -60,8 +60,6 @@ namespace Phoebe.UI.Controllers
         {
             if (ModelState.IsValid)
             {
-                model.Status = 0;
-
                 ErrorCode result = this.categoryBusiness.CreateFirstCategory(model);
                 if (result == ErrorCode.Success)
                 {
@@ -99,8 +97,6 @@ namespace Phoebe.UI.Controllers
         {
             if (ModelState.IsValid)
             {
-                model.Status = 0;
-
                 ErrorCode result = this.categoryBusiness.CreateSecondCategory(model);
                 if (result == ErrorCode.Success)
                 {

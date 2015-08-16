@@ -12,22 +12,21 @@ namespace Phoebe.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class SecondCategory
+    public partial class Cargo
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public SecondCategory()
-        {
-            this.Cargoes = new HashSet<Cargo>();
-        }
-    
-        public int ID { get; set; }
+        public System.Guid ID { get; set; }
         public string Name { get; set; }
         public int FirstCategoryID { get; set; }
+        public int SecondCategoryID { get; set; }
+        public Nullable<double> Weight { get; set; }
+        public Nullable<double> Volume { get; set; }
+        public int ContractID { get; set; }
+        public System.DateTime RegisterTime { get; set; }
         public string Remark { get; set; }
         public int Status { get; set; }
     
+        public virtual Contract Contract { get; set; }
         public virtual FirstCategory FirstCategory { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Cargo> Cargoes { get; set; }
+        public virtual SecondCategory SecondCategory { get; set; }
     }
 }

@@ -1,7 +1,7 @@
-﻿@model Phoebe.Model.Contract
+﻿@model Phoebe.Model.Cargo
 
 @{
-    ViewBag.Title = "合同信息";
+    ViewBag.Title = "货品信息";
 }
 
 <!-- BEGIN PAGE HEADER-->
@@ -16,7 +16,7 @@
             <i class="fa fa-angle-right"></i>
         </li>
         <li>
-            <a href="#">合同管理</a>
+            <a href="#">货品管理</a>
             <i class="fa fa-angle-right"></i>
         </li>
         <li>
@@ -31,7 +31,7 @@
         <div class="portlet box blue">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="fa fa-info-circle"></i>&nbsp;合同信息
+                    <i class="fa fa-info-circle"></i>&nbsp;货品信息
                 </div>
                 <div class="tools">
                     <a href="javascript:;" class="collapse">
@@ -57,10 +57,10 @@
                     <tbody>
                         <tr>
                             <td>
-                                @Html.DisplayNameFor(model => model.Number)
+                                @Html.DisplayNameFor(model => model.ID)
                             </td>
                             <td>
-                                @Html.DisplayFor(model => model.Number)
+                                @Html.DisplayFor(model => model.ID)
                             </td>
                         </tr>
                         <tr>
@@ -73,58 +73,50 @@
                         </tr>
                         <tr>
                             <td>
-                                @Html.DisplayNameFor(model => model.Type)
+                                @Html.DisplayNameFor(model => model.FirstCategoryID)
                             </td>
                             <td>
-                                @Html.DisplayFor(model => model.Type)
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                @Html.DisplayNameFor(model => model.CustomerType)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(model => model.CustomerType)
+                                @Html.DisplayFor(model => model.FirstCategoryID)
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                @Html.DisplayNameFor(model => model.CustomerID)
+                                @Html.DisplayNameFor(model => model.SecondCategoryID)
                             </td>
                             <td>
-                                @Html.DisplayFor(model => model.CustomerID)
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                @Html.DisplayNameFor(model => model.SignDate)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(model => model.SignDate)
+                                @Html.DisplayFor(model => model.SecondCategoryID)
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                @Html.DisplayNameFor(model => model.StartDate)
+                                @Html.DisplayNameFor(model => model.Weight)
                             </td>
                             <td>
-                                @Html.DisplayFor(model => model.StartDate)
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                @Html.DisplayNameFor(model => model.EndDate)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(model => model.EndDate)
+                                @Html.DisplayFor(model => model.Weight)
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                @Html.DisplayNameFor(model => model.CertificateNumber)
+                                @Html.DisplayNameFor(model => model.Volume)
                             </td>
                             <td>
-                                @Html.DisplayFor(model => model.CertificateNumber)
+                                @Html.DisplayFor(model => model.Volume)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.ContractID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.ContractID)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.RegisterTime)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.RegisterTime)
                             </td>
                         </tr>
                         <tr>
@@ -145,22 +137,16 @@
                         </tr>
                     </tbody>
                 </table>
-
-                <hr />
-                <p>
-                    <a href="@Url.Action("Index", new { controller = "Contract" })" class="btn btn-info"><i class="fa fa-list"></i>&nbsp;回到列表</a>
-                </p>
             </div>
         </div>
     </div>
 </div>
 <!-- END PAGE CONTENT-->
 
-
 @section Scripts {
     <script type="text/javascript">
         $(function () {
-            phoebe.leftNavActive($('#menu-contract-index'));
+            phoebe.leftNavActive($('#menu-cargo-create'));
         });
     </script>
 }

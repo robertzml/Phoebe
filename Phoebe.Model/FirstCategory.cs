@@ -18,6 +18,7 @@ namespace Phoebe.Model
         public FirstCategory()
         {
             this.SecondCategories = new HashSet<SecondCategory>();
+            this.Cargoes = new HashSet<Cargo>();
         }
     
         public int ID { get; set; }
@@ -27,5 +28,7 @@ namespace Phoebe.Model
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SecondCategory> SecondCategories { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Cargo> Cargoes { get; set; }
     }
 }

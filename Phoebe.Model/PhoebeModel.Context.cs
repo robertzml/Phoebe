@@ -31,5 +31,6 @@ namespace Phoebe.Model
         public virtual DbSet<Contract> Contracts { get; set; }
         public virtual DbSet<FirstCategory> FirstCategories { get; set; }
         public virtual DbSet<SecondCategory> SecondCategories { get; set; }
+        public virtual DbSet<Cargo> Cargoes { get; set; }
     }
 }
