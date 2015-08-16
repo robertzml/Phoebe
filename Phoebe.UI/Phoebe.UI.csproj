@@ -460,7 +460,6 @@
     <Content Include="assets\global\plugins\jquery.blockui.min.js" />
     <Content Include="assets\global\plugins\jquery.cokie.min.js" />
     <Content Include="assets\global\plugins\jquery.easing.js" />
-    <Content Include="assets\global\plugins\jquery.min.js" />
     <Content Include="assets\global\plugins\jquery.mockjax.js" />
     <Content Include="assets\global\plugins\jquery.parallax.js" />
     <Content Include="assets\global\plugins\jquery.scrollTo.min.js" />
@@ -579,14 +578,9 @@
     <Content Include="assets\global\plugins\zoom\jquery.zoom.min.js" />
     <Content Include="assets\global\scripts\datatable.js" />
     <Content Include="assets\global\scripts\metronic.js" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\phoebe.css" />
     <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="assets\global\plugins\backstretch\LICENSE-MIT" />
     <Content Include="assets\global\plugins\backstretch\README.md" />
     <Content Include="assets\global\plugins\bootbox\LICENSE.md" />
@@ -642,7 +636,6 @@
     <Content Include="assets\global\plugins\jquery-tags-input\README.md" />
     <Content Include="assets\global\plugins\jquery-ui-touch-punch\README.md" />
     <Content Include="assets\global\plugins\jquery-validation\README.md" />
-    <Content Include="assets\global\plugins\jquery.min.map" />
     <Content Include="assets\global\plugins\jstree\jstree.jquery.json" />
     <Content Include="assets\global\plugins\jstree\LICENSE-MIT" />
     <Content Include="assets\global\plugins\jstree\README.md" />
@@ -708,15 +701,13 @@
     <Content Include="Views\Category\Index.cshtml" />
     <Content Include="Views\Category\CreateSecondCategory.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\FirstCategoryList.cshtml" />
+    <Content Include="Views\Category\CreateFirstCategory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
   </ItemGroup>

@@ -1,7 +1,7 @@
-﻿@model Phoebe.Model.SecondCategory
+﻿@model Phoebe.Model.FirstCategory
 
 @{
-    ViewBag.Title = "添加二级分类";
+    ViewBag.Title = "添加一级分类";
 }
 
 <!-- BEGIN PAGE HEADER-->
@@ -31,7 +31,7 @@
         <div class="portlet box blue">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="fa fa-plus"></i>二级分类信息
+                    <i class="fa fa-plus"></i>一级分类信息
                 </div>
                 <div class="tools">
                     <a href="javascript:;" class="collapse">
@@ -43,7 +43,7 @@
                 </div>
             </div>
             <div class="portlet-body form">
-                @using (Html.BeginForm("CreateSecondCategory", "Category", FormMethod.Post, new { @class = "form-horizontal form-bordered form-row-stripped" }))
+                @using (Html.BeginForm("CreateFirstCategory", "Category", FormMethod.Post, new { @class = "form-horizontal form-bordered form-row-stripped" }))
                 {
                     @Html.AntiForgeryToken()
 
@@ -54,17 +54,6 @@
                             <div class="col-md-8">
                                 @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="col-md-1">
-                                <span class="required">*</span>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.FirstCategoryID, htmlAttributes: new { @class = "control-label col-md-3" })
-                            <div class="col-md-8">
-                                @Html.EditorFor(model => model.FirstCategoryID, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.FirstCategoryID, "", new { @class = "text-danger" })
                             </div>
                             <div class="col-md-1">
                                 <span class="required">*</span>
@@ -94,6 +83,7 @@
     </div>
 </div>
 <!-- END PAGE CONTENT-->
+
 
 @section Scripts {
     <script type="text/javascript">

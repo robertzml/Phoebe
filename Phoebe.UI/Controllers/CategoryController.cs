@@ -60,7 +60,19 @@ namespace Phoebe.UI.Controllers
         {
             if (ModelState.IsValid)
             {
+                model.Status = 0;
 
+                ErrorCode result = this.categoryBusiness.CreateFirstCategory(model);
+                if (result == ErrorCode.Success)
+                {
+                    TempData["Message"] = "添加一级分类成功";
+                    return RedirectToAction("Index", new { controller = "Category" });
+                }
+                else
+                {
+                    TempData["Message"] = "添加一级分类失败";
+                    ModelState.AddModelError("", "添加一级分类失败: " + result.DisplayName());
+                }
             }
 
             return View(model);
