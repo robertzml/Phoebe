@@ -24,10 +24,21 @@ namespace Phoebe.Model
         [Display(Name = "已删除")]
         Deleted = 1,
 
+        #region Contract
         /// <summary>
         /// 合同已关闭
         /// </summary>
         [Display(Name = "已关闭")]
-        ContractClosed = 11
+        ContractClosed = 11,
+        #endregion //Contract
+
+        #region Cargo
+        /// <summary>
+        /// 货品未入库
+        /// </summary>
+        [Display(Name = "未入库")]
+        CargoNotEntry = 31
+        #endregion //Cargo
+
     }
 }

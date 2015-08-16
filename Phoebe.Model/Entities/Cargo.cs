@@ -52,6 +52,7 @@ namespace Phoebe.Model
         /// 所属合同
         /// </summary>
         [Required]
+        [UIHint("ContractList")]
         [Display(Name = "所属合同")]
         public int ContractID { get; set; }
 

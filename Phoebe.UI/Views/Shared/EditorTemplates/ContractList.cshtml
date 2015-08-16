@@ -1,0 +1,16 @@
+﻿@model int?
+
+<select class="form-control" id="ContractID" name="ContractID">
+    <option value="">-- 请选择 --</option>
+    @{
+        ContractBusiness contractBusiness = new ContractBusiness();
+        var data = contractBusiness.GetNormal();
+
+        foreach (var item in data)
+        {
+            <option value="@item.ID" @(Model == item.ID ? "selected='selected'" : "")>
+                @item.Name
+            </option>
+        }
+    }
+</select>
