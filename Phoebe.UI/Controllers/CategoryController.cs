@@ -38,6 +38,72 @@ namespace Phoebe.UI.Controllers
             var data = this.categoryBusiness.GetFirstCategory();
             return View(data);
         }
+
+        /// <summary>
+        /// 添加一级分类
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult CreateFirstCategory()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 添加一级分类
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult CreateFirstCategory(FirstCategory model)
+        {
+            if (ModelState.IsValid)
+            {
+
+            }
+
+            return View(model);
+        }
+
+        /// <summary>
+        /// 添加二级分类
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult CreateSecondCategory()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 添加二级分类
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult CreateSecondCategory(SecondCategory model)
+        {
+            if (ModelState.IsValid)
+            {
+                model.Status = 0;
+
+                ErrorCode result = this.categoryBusiness.CreateSecondCategory(model);
+                if (result == ErrorCode.Success)
+                {
+                    TempData["Message"] = "添加二级分类成功";
+                    return RedirectToAction("Index", new { controller = "Category" });
+                }
+                else
+                {
+                    TempData["Message"] = "添加二级分类失败";
+                    ModelState.AddModelError("", "添加二级分类失败: " + result.DisplayName());
+                }
+            }
+
+            return View(model);
+        }
         #endregion //Action
     }
 }

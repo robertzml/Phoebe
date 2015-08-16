@@ -49,19 +49,27 @@
             <div class="portlet-body">
                 <div id="tree-category">
                     <ul>
-                        <li data-jstree='{ "opened" : true }'>
-                            分类
-                            <ul>
-                                @foreach (var item in Model)
-                                {
-                                    <li data-id="@item.ID">
-                                        @item.Name
-                                    </li>
-                                }
-                            </ul>
-                        </li>
+                        @foreach(var first in Model)
+                        {
+                            <li data-level="1" data-id="@first.ID">
+                                @first.Name
+                                <ul>
+                                    @foreach(var second in first.SecondCategories)
+                                    {
+                                        <li data-level="2" data-id="@second.ID">
+                                            @second.Name
+                                        </li>
+                                    }
+                                </ul>
+                            </li>
+                        }
                     </ul>
                 </div>
+
+                <hr />
+                <p>
+                    <a href="@Url.Action("CreateSecondCategory", "Category")" class="btn btn-primary"><i class="fa fa-plus"></i>&nbsp;添加二级分类</a>
+                </p>
             </div>
         </div>
     </div>

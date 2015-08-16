@@ -61,6 +61,46 @@ namespace Phoebe.Business
         {
             return this.context.SecondCategories.SingleOrDefault(r => r.ID == id);
         }
+
+        /// <summary>
+        /// 添加一级分类
+        /// </summary>
+        /// <param name="data">一级分类数据</param>
+        /// <returns></returns>
+        public ErrorCode CreateFirstCategory(FirstCategory data)
+        {
+            try
+            {
+                this.context.FirstCategories.Add(data);
+                this.context.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+
+            return ErrorCode.Success;
+        }
+
+        /// <summary>
+        /// 添加二级分类
+        /// </summary>
+        /// <param name="data">二级分类数据</param>
+        /// <returns></returns>
+        public ErrorCode CreateSecondCategory(SecondCategory data)
+        {
+            try
+            {
+                this.context.SecondCategories.Add(data);
+                this.context.SaveChanges();
+            }
+            catch(Exception)
+            {
+                return ErrorCode.Exception;
+            }
+
+            return ErrorCode.Success;
+        }
         #endregion //Method
     }
 }

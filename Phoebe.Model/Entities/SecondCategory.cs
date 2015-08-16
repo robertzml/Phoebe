@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Phoebe.Model.Entities
+namespace Phoebe.Model
 {
     public class SecondCategoryMetadata
     {
@@ -26,8 +26,9 @@ namespace Phoebe.Model.Entities
         /// 一级分类ID
         /// </summary>
         [Required]
-        [Display(Name = "一级分类ID")]
-        public int FirstID { get; set; }
+        [UIHint("FirstCategoryList")]
+        [Display(Name = "一级分类")]
+        public int FirstCategoryID { get; set; }
 
         /// <summary>
         /// 备注

@@ -251,8 +251,6 @@
     <Content Include="assets\global\plugins\bootstrap-switch\css\bootstrap-switch.min.css" />
     <Content Include="assets\global\plugins\bootstrap-switch\js\bootstrap-switch.js" />
     <Content Include="assets\global\plugins\bootstrap-switch\js\bootstrap-switch.min.js" />
-    <Content Include="assets\global\plugins\bootstrap-tabdrop\css\tabdrop.css" />
-    <Content Include="assets\global\plugins\bootstrap-tabdrop\js\bootstrap-tabdrop.js" />
     <Content Include="assets\global\plugins\bootstrap-toastr\toastr.css" />
     <Content Include="assets\global\plugins\bootstrap-toastr\toastr.js" />
     <Content Include="assets\global\plugins\bootstrap-toastr\toastr.min.css" />
@@ -428,8 +426,6 @@
     <Content Include="assets\global\plugins\jquery-file-upload\js\vendor\jquery.ui.widget.js" />
     <Content Include="assets\global\plugins\jquery-file-upload\js\vendor\load-image.min.js" />
     <Content Include="assets\global\plugins\jquery-file-upload\js\vendor\tmpl.min.js" />
-    <Content Include="assets\global\plugins\jquery-idle-timeout\jquery.idletimeout.js" />
-    <Content Include="assets\global\plugins\jquery-idle-timeout\jquery.idletimer.js" />
     <Content Include="assets\global\plugins\jquery-knob\js\jquery.knob.js" />
     <Content Include="assets\global\plugins\jquery-migrate.min.js" />
     <Content Include="assets\global\plugins\jquery-mixitup\jquery.mixitup.min.js" />
@@ -567,8 +563,6 @@
     <Content Include="assets\global\plugins\slider-layer-slider\skins\v5\skin.css" />
     <Content Include="assets\global\plugins\slider-layer-slider\skins\v5\skin.png" />
     <Content Include="assets\global\plugins\smooth-scroll\smooth-scroll.js" />
-    <Content Include="assets\global\plugins\tabdrop\css\tabdrop.css" />
-    <Content Include="assets\global\plugins\tabdrop\js\bootstrap-tabdrop.js" />
     <Content Include="assets\global\plugins\typeahead\handlebars.min.js" />
     <Content Include="assets\global\plugins\typeahead\typeahead.bundle.js" />
     <Content Include="assets\global\plugins\typeahead\typeahead.bundle.min.js" />
@@ -638,7 +632,6 @@
     <Content Include="assets\global\plugins\ion.rangeslider\js\.DS_Store" />
     <Content Include="assets\global\plugins\jquery-bootpag\README.md" />
     <Content Include="assets\global\plugins\jquery-file-upload\README.md" />
-    <Content Include="assets\global\plugins\jquery-idle-timeout\README.markdown" />
     <Content Include="assets\global\plugins\jquery-knob\LICENSE" />
     <Content Include="assets\global\plugins\jquery-knob\README.md" />
     <Content Include="assets\global\plugins\jquery-mixitup\bower.json" />
@@ -661,7 +654,6 @@
     <Content Include="assets\global\plugins\simple-line-icons\fonts\Simple-Line-Icons.eot" />
     <Content Include="assets\global\plugins\simple-line-icons\fonts\Simple-Line-Icons.ttf" />
     <Content Include="assets\global\plugins\simple-line-icons\fonts\Simple-Line-Icons.woff" />
-    <Content Include="assets\global\plugins\tabdrop\less\tabdrop.less" />
     <Content Include="assets\global\plugins\typeahead\LICENSE" />
     <Content Include="assets\global\plugins\typeahead\README.md" />
     <Content Include="assets\global\plugins\uniform\css\uniform.default.scss" />
@@ -713,6 +705,8 @@
     <Content Include="Views\Contract\Details.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\ContractType.cshtml" />
     <Content Include="Views\Category\Index.cshtml" />
+    <Content Include="Views\Category\CreateSecondCategory.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\FirstCategoryList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

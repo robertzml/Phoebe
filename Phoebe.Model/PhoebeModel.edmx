@@ -64,7 +64,7 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="FirstID" Type="int" Nullable="false" />
+          <Property Name="FirstCategoryID" Type="int" Nullable="false" />
           <Property Name="Remark" Type="nvarchar" MaxLength="500" />
           <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
@@ -87,7 +87,7 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="SecondCategory">
-              <PropertyRef Name="FirstID" />
+              <PropertyRef Name="FirstCategoryID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -228,7 +228,7 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="FirstID" Type="Int32" Nullable="false" />
+          <Property Name="FirstCategoryID" Type="Int32" Nullable="false" />
           <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" Nullable="false" />
           <NavigationProperty Name="FirstCategory" Relationship="PhoebeModel.FK_SecondCategory_FirstCategory" FromRole="SecondCategory" ToRole="FirstCategory" />
@@ -241,7 +241,7 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="SecondCategory">
-              <PropertyRef Name="FirstID" />
+              <PropertyRef Name="FirstCategoryID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -325,13 +325,13 @@
               <MappingFragment StoreEntitySet="SecondCategory">
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Remark" ColumnName="Remark" />
-                <ScalarProperty Name="FirstID" ColumnName="FirstID" />
+                <ScalarProperty Name="FirstCategoryID" ColumnName="FirstCategoryID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

@@ -16,7 +16,7 @@ namespace Phoebe.Model
     {
         public int ID { get; set; }
         public string Name { get; set; }
-        public int FirstID { get; set; }
+        public int FirstCategoryID { get; set; }
         public string Remark { get; set; }
         public int Status { get; set; }
     
