@@ -33,5 +33,7 @@ namespace Phoebe.Model
         public virtual DbSet<SecondCategory> SecondCategories { get; set; }
         public virtual DbSet<Cargo> Cargoes { get; set; }
         public virtual DbSet<Tray> Trays { get; set; }
+        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<UserGroup> UserGroups { get; set; }
     }
 }
