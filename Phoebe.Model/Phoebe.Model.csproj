@@ -63,6 +63,7 @@
     <Compile Include="Entities\GroupCustomer.cs" />
     <Compile Include="Entities\ScatterCustomer.cs" />
     <Compile Include="Entities\SecondCategory.cs" />
+    <Compile Include="Entities\Tray.cs" />
     <Compile Include="Entities\Warehouse.cs" />
     <Compile Include="EntityStatus.cs" />
     <Compile Include="ErrorCode.cs" />
@@ -93,6 +94,9 @@
       <DependentUpon>PhoebeModel.tt</DependentUpon>
     </Compile>
     <Compile Include="SecondCategory.cs">
+      <DependentUpon>PhoebeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Tray.cs">
       <DependentUpon>PhoebeModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Warehouse.cs">

@@ -84,6 +84,16 @@
           <Property Name="Remark" Type="nvarchar" MaxLength="500" />
           <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Tray">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Length" Type="float" />
+          <Property Name="Width" Type="float" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="500" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Warehouse">
           <Key>
             <PropertyRef Name="ID" />
@@ -162,6 +172,7 @@
           <EntitySet Name="GroupCustomer" EntityType="Self.GroupCustomer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ScatterCustomer" EntityType="Self.ScatterCustomer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SecondCategory" EntityType="Self.SecondCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tray" EntityType="Self.Tray" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Warehouse" EntityType="Self.Warehouse" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Cargo_Contract" Association="Self.FK_Cargo_Contract">
             <End Role="Contract" EntitySet="Contract" />
@@ -261,6 +272,7 @@
             <End Role="SecondCategory" EntitySet="SecondCategories" />
             <End Role="Cargo" EntitySet="Cargoes" />
           </AssociationSet>
+          <EntitySet Name="Trays" EntityType="PhoebeModel.Tray" />
         </EntityContainer>
         <EntityType Name="ScatterCustomer">
           <Key>
@@ -381,6 +393,16 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Tray">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Length" Type="Double" />
+          <Property Name="Width" Type="Double" />
+          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -480,6 +502,17 @@
                 <ScalarProperty Name="SecondCategoryID" ColumnName="SecondCategoryID" />
                 <ScalarProperty Name="FirstCategoryID" ColumnName="FirstCategoryID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Trays">
+            <EntityTypeMapping TypeName="PhoebeModel.Tray">
+              <MappingFragment StoreEntitySet="Tray">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="Width" ColumnName="Width" />
+                <ScalarProperty Name="Length" ColumnName="Length" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

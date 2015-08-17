@@ -32,12 +32,38 @@ namespace Phoebe.Model
         ContractClosed = 11,
         #endregion //Contract
 
+        #region Warehouse
+
+        #endregion //Warehouse
+
+
+        #region Tray
+        /// <summary>
+        /// 托盘未使用
+        /// </summary>
+        [Display(Name = "未使用")]
+        TrayUnused = 31,
+
+        /// <summary>
+        /// 托盘使用中
+        /// </summary>
+        [Display(Name = "使用中")]
+        TrayInuse = 32,
+
+        /// <summary>
+        /// 托盘废弃
+        /// </summary>
+        [Display(Name = "废弃")]
+        TrayAbandon = 33,
+        #endregion //Tray
+
+
         #region Cargo
         /// <summary>
         /// 货品未入库
         /// </summary>
         [Display(Name = "未入库")]
-        CargoNotIn = 31
+        CargoNotIn = 41
         #endregion //Cargo
 
     }
