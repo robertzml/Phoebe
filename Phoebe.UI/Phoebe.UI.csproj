@@ -703,6 +703,7 @@
     <Content Include="Views\Cargo\Create.cshtml" />
     <Content Include="Views\Cargo\Details.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\ContractList.cshtml" />
+    <Content Include="Views\Cargo\ListByNotIn.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

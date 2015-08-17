@@ -39,6 +39,16 @@ namespace Phoebe.UI.Controllers
         }
 
         /// <summary>
+        /// 未入库货品
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult ListByNotIn()
+        {
+            var data = this.cargoBusiness.Get(EntityStatus.CargoNotIn);
+            return View(data);
+        }
+
+        /// <summary>
         /// 货品信息
         /// </summary>
         /// <param name="id">ID</param>

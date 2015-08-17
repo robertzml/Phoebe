@@ -1,0 +1,121 @@
+﻿@model IEnumerable<Phoebe.Model.Cargo>
+
+@{
+    ViewBag.Title = "未入库货品";
+}
+
+<!-- BEGIN PAGE HEADER-->
+<h3 class="page-title">
+    @ViewBag.Title
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index", "Home")">主页</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#">货品管理</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+    </ul>
+</div>
+<!-- END PAGE HEADER-->
+<!-- BEGIN PAGE CONTENT-->
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet box blue">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-list"></i>&nbsp;客户列表
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse">
+                    </a>
+                    <a href="javascript:;" class="reload">
+                    </a>
+                    <a href="javascript:;" class="remove">
+                    </a>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <table class="table table-striped table-bordered table-hover" id="cargo-table">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Name)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.FirstCategoryID)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.SecondCategoryID)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Weight)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Volume)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ContractID)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.RegisterTime)
+                            </th>
+                            <th>
+                                操作
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.FirstCategoryID)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SecondCategoryID)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Weight)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Volume)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ContractID)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.RegisterTime)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END PAGE CONTENT-->
+
+@section Scripts {
+    <script type="text/javascript">
+        $(function () {
+            phoebe.leftNavActive($('#menu-cargo-notin'));
+            phoebe.initDatatable($('#cargo-table'));
+        });
+    </script>
+}

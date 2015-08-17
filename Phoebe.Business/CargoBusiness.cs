@@ -34,6 +34,16 @@ namespace Phoebe.Business
         }
 
         /// <summary>
+        /// 获取相关货品
+        /// </summary>
+        /// <param name="status">货品状态</param>
+        /// <returns></returns>
+        public List<Cargo> Get(EntityStatus status)
+        {
+            return this.context.Cargoes.Where(r => r.Status == (int)status).ToList();
+        }
+
+        /// <summary>
         /// 获取货品
         /// </summary>
         /// <param name="id">ID</param>
@@ -58,7 +68,7 @@ namespace Phoebe.Business
             {
                 data.ID = Guid.NewGuid();
                 data.RegisterTime = DateTime.Now;
-                data.Status = (int)EntityStatus.CargoNotEntry;
+                data.Status = (int)EntityStatus.CargoNotIn;
 
                 this.context.Cargoes.Add(data);
                 this.context.SaveChanges();

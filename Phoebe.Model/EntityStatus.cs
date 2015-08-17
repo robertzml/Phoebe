@@ -37,7 +37,7 @@ namespace Phoebe.Model
         /// 货品未入库
         /// </summary>
         [Display(Name = "未入库")]
-        CargoNotEntry = 31
+        CargoNotIn = 31
         #endregion //Cargo
 
     }
