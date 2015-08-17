@@ -17,7 +17,7 @@
         <AssociationConnector Association="PhoebeModel.FK_Cargo_Contract" />
         <AssociationConnector Association="PhoebeModel.FK_Cargo_FirstCategory" />
         <AssociationConnector Association="PhoebeModel.FK_Cargo_SecondCategory" />
-        <EntityTypeShape EntityType="PhoebeModel.Tray" Width="1.5" PointX="0.75" PointY="9.125" />
+        <EntityTypeShape EntityType="PhoebeModel.Tray" Width="1.5" PointX="0.75" PointY="9.5" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

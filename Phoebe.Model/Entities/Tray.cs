@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Phoebe.Model.Entities
+namespace Phoebe.Model
 {
     public class TrayMetadata
     {
@@ -26,6 +26,12 @@ namespace Phoebe.Model.Entities
         /// </summary>
         [Display(Name = "宽度")]
         public Nullable<double> Width { get; set; }
+
+        /// <summary>
+        /// 添加时间
+        /// </summary>
+        [Display(Name = "添加时间")]
+        public DateTime CreateTime { get; set; }
 
         /// <summary>
         /// 备注

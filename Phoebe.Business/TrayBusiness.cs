@@ -52,6 +52,7 @@ namespace Phoebe.Business
         {
             try
             {
+                data.CreateTime = DateTime.Now;
                 data.Status = (int)EntityStatus.TrayUnused;
 
                 this.context.Trays.Add(data);
@@ -64,7 +65,6 @@ namespace Phoebe.Business
 
             return ErrorCode.Success;
         }
-
         #endregion //Method
     }
 }

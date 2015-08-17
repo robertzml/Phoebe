@@ -28,6 +28,25 @@
             </li>
             <li class="left-nav-first">
                 <a href="javascript:;">
+                    <i class="fa fa-users"></i>
+                    <span class="title">客户管理</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="@Url.Action("Index", "GroupCustomer")" id="menu-group-customer-index">
+                            团体客户
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index", "ScatterCustomer")" id="menu-scatter-customer-index">
+                            零散客户
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="left-nav-first">
+                <a href="javascript:;">
                     <i class="fa fa-bank"></i>
                     <span class="title">仓库管理</span>
                     <span class="arrow "></span>
@@ -52,19 +71,19 @@
             </li>
             <li class="left-nav-first">
                 <a href="javascript:;">
-                    <i class="fa fa-users"></i>
-                    <span class="title">客户管理</span>
-                    <span class="arrow"></span>
+                    <i class="fa fa-hdd-o"></i>
+                    <span class="title">托盘管理</span>
+                    <span class="arrow "></span>
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a href="@Url.Action("Index", "GroupCustomer")" id="menu-group-customer-index">
-                            团体客户
+                        <a href="@Url.Action("Index", "Tray")" id="menu-tray-index">
+                            托盘管理
                         </a>
                     </li>
                     <li>
-                        <a href="@Url.Action("Index", "ScatterCustomer")" id="menu-scatter-customer-index">
-                            零散客户
+                        <a href="#">
+                            废弃托盘
                         </a>
                     </li>
                 </ul>
@@ -76,11 +95,6 @@
                     <span class="arrow "></span>
                 </a>
                 <ul class="sub-menu">
-                    <li>
-                        <a href="#">
-                            托盘管理
-                        </a>
-                    </li>
                     <li>
                         <a href="@Url.Action("Index", "Category")" id="menu-category-index">
                             类别管理

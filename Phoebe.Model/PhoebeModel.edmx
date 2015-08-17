@@ -91,6 +91,7 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Length" Type="float" />
           <Property Name="Width" Type="float" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
           <Property Name="Remark" Type="nvarchar" MaxLength="500" />
           <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
@@ -400,6 +401,7 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Length" Type="Double" />
           <Property Name="Width" Type="Double" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" Nullable="false" />
         </EntityType>
@@ -511,6 +513,7 @@
               <MappingFragment StoreEntitySet="Tray">
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
                 <ScalarProperty Name="Width" ColumnName="Width" />
                 <ScalarProperty Name="Length" ColumnName="Length" />
                 <ScalarProperty Name="ID" ColumnName="ID" />

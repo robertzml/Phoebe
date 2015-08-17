@@ -134,6 +134,7 @@
     <Compile Include="Controllers\GroupCustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ScatterCustomerController.cs" />
+    <Compile Include="Controllers\TrayController.cs" />
     <Compile Include="Controllers\WarehouseController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -704,6 +705,9 @@
     <Content Include="Views\Cargo\Details.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\ContractList.cshtml" />
     <Content Include="Views\Cargo\ListByNotIn.cshtml" />
+    <Content Include="Views\Tray\Index.cshtml" />
+    <Content Include="Views\Tray\Create.cshtml" />
+    <Content Include="Views\Tray\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
