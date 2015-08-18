@@ -8,6 +8,7 @@ using Phoebe.Business;
 using Phoebe.Common;
 using Phoebe.Model;
 using Phoebe.UI.Models;
+using Phoebe.UI.Filters;
 using Phoebe.UI.Services;
 
 namespace Phoebe.UI.Controllers
@@ -120,6 +121,56 @@ namespace Phoebe.UI.Controllers
             HttpContext.Session.Clear();
 
             return RedirectToAction("Login", "Account");
+        }
+
+        /// <summary>
+        /// 个人信息
+        /// </summary>
+        /// <returns></returns>
+        [EnhancedAuthorize]
+        public ActionResult Index()
+        {
+            var user = PageService.GetCurrentUser(User.Identity.Name);
+            return View(user);
+        }
+
+        /// <summary>
+        /// 修改密码
+        /// </summary>
+        /// <returns></returns>
+        [EnhancedAuthorize]
+        [HttpGet]
+        public ActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 修改密码
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [EnhancedAuthorize]
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult ChangePassword(ChangePasswordModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                ErrorCode result = this.userBusiness.ChangePassword(User.Identity.Name, model.OldPassword, model.NewPassword);
+                if (result == ErrorCode.Success)
+                {
+                    TempData["Message"] = "修改密码成功";
+                    return RedirectToAction("Index", new { controller = "Account" });
+                }
+                else
+                {
+                    TempData["Message"] = "修改密码失败";
+                    ModelState.AddModelError("", "修改密码失败: " + result.DisplayName());
+                }
+            }
+
+            return View(model);
         }
         #endregion //Action
     }

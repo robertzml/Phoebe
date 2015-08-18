@@ -213,13 +213,36 @@ namespace Phoebe.Business
             if (user == null)
                 return ErrorCode.UserNotExist;
 
-            if (Hasher.SHA1Encrypt(password) != user.Password)           
+            if (Hasher.SHA1Encrypt(password) != user.Password)
                 return ErrorCode.WrongPassword;
 
             if (user.Status == (int)EntityStatus.UserDisable)
                 return ErrorCode.UserDisabled;
 
             UpdateLoginTime(user, user.CurrentLoginTime, DateTime.Now);
+
+            return ErrorCode.Success;
+        }
+
+        /// <summary>
+        /// 修改密码
+        /// </summary>
+        /// <param name="username">用户名</param>
+        /// <param name="oldPassword">原密码</param>
+        /// <param name="newPassword">新密码</param>
+        /// <returns></returns>
+        public ErrorCode ChangePassword(string username, string oldPassword, string newPassword)
+        {
+            var user = this.context.Users.SingleOrDefault(r => r.Username == username);
+            if (user == null)
+                return ErrorCode.UserNotExist;
+
+            if (user.Password != Hasher.SHA1Encrypt(oldPassword))
+                return ErrorCode.WrongPassword;
+
+            user.Password = Hasher.SHA1Encrypt(newPassword);
+
+            this.context.SaveChanges();
 
             return ErrorCode.Success;
         }

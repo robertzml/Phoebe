@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Phoebe.Business;
 using Phoebe.Common;
 using Phoebe.Model;
+using Phoebe.UI.Filters;
 
 namespace Phoebe.UI.Controllers
 {
@@ -57,6 +58,7 @@ namespace Phoebe.UI.Controllers
         /// 添加用户组
         /// </summary>
         /// <returns></returns>
+        [EnhancedAuthorize(Roles = "Root")]
         [HttpGet]
         public ActionResult Create()
         {
@@ -68,6 +70,7 @@ namespace Phoebe.UI.Controllers
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
+        [EnhancedAuthorize(Roles = "Root")]
         [ValidateAntiForgeryToken]
         [HttpPost]
         public ActionResult Create(UserGroup model)

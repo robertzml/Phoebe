@@ -81,4 +81,35 @@ namespace Phoebe.UI.Models
         [Display(Name = "记住我?")]
         public bool RememberMe { get; set; }
     }
+
+    /// <summary>
+    /// 修改密码模型 
+    /// </summary>
+    public class ChangePasswordModel
+    {
+        /// <summary>
+        /// 原密码
+        /// </summary>
+        [Required(ErrorMessage = "请输入原密码")]
+        [DataType(DataType.Password)]
+        [Display(Name = "原密码")]
+        public string OldPassword { get; set; }
+
+        /// <summary>
+        /// 新密码
+        /// </summary>
+        [Required(ErrorMessage = "请输入新密码")]
+        [MinLength(3, ErrorMessage = "密码长度不能小于3位")]
+        [DataType(DataType.Password)]
+        [Display(Name = "新密码")]
+        public string NewPassword { get; set; }
+
+        /// <summary>
+        /// 密码确认
+        /// </summary>
+        [Compare("NewPassword", ErrorMessage = "两次输入密码不一致")]
+        [DataType(DataType.Password)]
+        [Display(Name = "密码确认")]
+        public string ConfirmPassword { get; set; }
+    }
 }

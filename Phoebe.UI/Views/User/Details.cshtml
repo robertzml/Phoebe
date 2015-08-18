@@ -108,7 +108,7 @@
                                 @Html.DisplayNameFor(model => model.Status)
                             </td>
                             <td>
-                                @Html.DisplayFor(model => model.Status)
+                                @(((EntityStatus)Model.Status).DisplayName())
                             </td>
                         </tr>
                     </tbody>

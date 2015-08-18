@@ -181,16 +181,6 @@
                         </a>
                     </li>
                     <li>
-                        <a href="portlet_general2.html">
-                            <span class="badge badge-roundless badge-danger">new</span>New Portlets #1
-                        </a>
-                    </li>
-                    <li>
-                        <a href="portlet_general3.html">
-                            <span class="badge badge-roundless badge-danger">new</span>New Portlets #2
-                        </a>
-                    </li>
-                    <li>
                         <a href="portlet_ajax.html">
                             Ajax Portlets
                         </a>
@@ -235,30 +225,6 @@
                     </li>
                 </ul>
             </li>
-            <li>
-                <a href="javascript:;">
-                    <i class="icon-user"></i>
-                    <span class="title">Login Options</span>
-                    <span class="arrow "></span>
-                </a>
-                <ul class="sub-menu">
-                    <li>
-                        <a href="login.html">
-                            Login Form 1
-                        </a>
-                    </li>
-                    <li>
-                        <a href="login_2.html">
-                            Login Form 2
-                        </a>
-                    </li>
-                    <li>
-                        <a href="extra_lock2.html">
-                            Lock Screen 2
-                        </a>
-                    </li>
-                </ul>
-            </li>
             <li class="heading">
                 <h3 class="uppercase">系统维护</h3>
             </li>
@@ -286,8 +252,7 @@
                     </li>
                 </ul>
             </li>
-
-            <li class="last ">
+            <li>
                 <a href="javascript:;">
                     <i class="icon-pointer"></i>
                     <span class="title">Maps</span>
@@ -302,6 +267,28 @@
                     <li>
                         <a href="maps_vector.html">
                             Vector Maps
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="heading">
+                <h3 class="uppercase">我的账户</h3>
+            </li>
+            <li class="last left-nav-first">
+                <a href="javascript:;">
+                    <i class="fa fa-smile-o"></i>
+                    <span class="title">个人管理</span>
+                    <span class="arrow "></span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="@Url.Action("Index", "Account")" id="menu-account-index">
+                            个人信息
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ChangePassword", "Account")" id="menu-change-password">
+                            修改密码
                         </a>
                     </li>
                 </ul>

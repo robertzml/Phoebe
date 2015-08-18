@@ -89,7 +89,10 @@
 
                 <hr />
                 <p>
+                    @if (User.IsInRole2("Root"))
+                    {
                     <a href="@Url.Action("Create", "UserGroup")" class="btn btn-primary"><i class="fa fa-plus"></i>&nbsp;添加用户组</a>
+                    }
                 </p>
             </div>
         </div>
