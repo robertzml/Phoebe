@@ -65,6 +65,9 @@
                                 @Html.DisplayNameFor(model => model.RegisterTime)
                             </th>
                             <th>
+                                @Html.DisplayNameFor(model => model.UserID)
+                            </th>
+                            <th>
                                 操作
                             </th>
                         </tr>
@@ -93,16 +96,16 @@
                                     @Html.DisplayFor(modelItem => item.ContractID)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.RegisterTime)
+                                    @item.RegisterTime.ToDateTimeString()
                                 </td>
                                 <td>
-                                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                                    @item.User.Name
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("Details", new { controller = "Cargo", id = item.ID.ToString() })" class="btn btn-info btn-sm" role="button"><i class="fa fa-check-circle"></i>&nbsp;查看</a>
                                 </td>
                             </tr>
                         }
-
                     </tbody>
                 </table>
             </div>

@@ -64,6 +64,8 @@ namespace Phoebe.Business
         {
             try
             {
+                data.Status = 0;
+
                 this.context.Warehouses.Add(data);
                 this.context.SaveChanges();
             }

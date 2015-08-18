@@ -54,7 +54,7 @@ namespace Phoebe.Business
             if (!Guid.TryParse(id, out gid))
                 return null;
 
-            return this.context.Cargoes.SingleOrDefault(r => r.ID == gid);
+            return this.context.Cargoes.Find(gid);
         }
 
         /// <summary>

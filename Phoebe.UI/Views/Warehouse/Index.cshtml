@@ -58,19 +58,16 @@
                                 {
                                     <li data-id="@item.ID">
                                         @item.Name
+                                        <ul>
+                                            @foreach (var third in item.ChildrenWarehouse)
+                                            {
+                                                <li data-id="@third.ID">
+                                                    @third.Name
+                                                </li>
+                                            }
+                                        </ul>
                                     </li>
                                 }
-                                <li>
-                                    initially open
-                                    <ul>
-                                        <li data-jstree='{ "disabled" : true }'>
-                                            Disabled Node
-                                        </li>
-                                        <li data-jstree='{ "type" : "file" }'>
-                                            Another node
-                                        </li>
-                                    </ul>
-                                </li>
                             </ul>
                         </li>
                     </ul>

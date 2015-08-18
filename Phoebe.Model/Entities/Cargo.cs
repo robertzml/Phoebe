@@ -26,6 +26,7 @@ namespace Phoebe.Model
         /// 一级分类
         /// </summary>
         [Required]
+        [UIHint("FirstCategoryList")]
         [Display(Name = "一级分类")]
         public int FirstCategoryID { get; set; }
 
@@ -62,6 +63,12 @@ namespace Phoebe.Model
         [Required]
         [Display(Name = "登记时间")]
         public System.DateTime RegisterTime { get; set; }
+
+        /// <summary>
+        /// 登记人ID
+        /// </summary>
+        [Display(Name = "登记人")]
+        public int UserID { get; set; }
 
         /// <summary>
         /// 备注

@@ -6,12 +6,15 @@ using System.Web.Mvc;
 using Phoebe.Business;
 using Phoebe.Common;
 using Phoebe.Model;
+using Phoebe.UI.Filters;
+using Phoebe.UI.Services;
 
 namespace Phoebe.UI.Controllers
 {
     /// <summary>
     /// 货品控制器
     /// </summary>
+    [EnhancedAuthorize]
     public class CargoController : Controller
     {
         #region Field
@@ -83,6 +86,10 @@ namespace Phoebe.UI.Controllers
         {
             if (ModelState.IsValid)
             {
+                var user = PageService.GetCurrentUser(User.Identity.Name);
+
+                model.UserID = user.ID;
+
                 ErrorCode result = this.cargoBusiness.Create(model);
                 if (result == ErrorCode.Success)
                 {

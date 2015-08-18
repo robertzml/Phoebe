@@ -79,8 +79,6 @@ namespace Phoebe.UI.Controllers
                     model.Hierarchy = parent.Hierarchy + 1;
                 }
 
-                model.Status = 0;
-
                 ErrorCode result = this.warehouseBusiness.Create(model);
                 if (result == ErrorCode.Success)
                 {

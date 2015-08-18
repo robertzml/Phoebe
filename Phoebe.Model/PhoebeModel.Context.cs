@@ -35,5 +35,7 @@ namespace Phoebe.Model
         public virtual DbSet<Tray> Trays { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserGroup> UserGroups { get; set; }
+        public virtual DbSet<StockIn> StockIns { get; set; }
+        public virtual DbSet<StockInDetail> StockInDetails { get; set; }
     }
 }

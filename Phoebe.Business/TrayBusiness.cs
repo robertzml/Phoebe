@@ -44,6 +44,15 @@ namespace Phoebe.Business
         }
 
         /// <summary>
+        /// 获取未用托盘
+        /// </summary>
+        /// <returns></returns>
+        public List<Tray> GetUnused()
+        {
+            return this.context.Trays.Where(r => r.Status == (int)EntityStatus.TrayUnused).ToList();
+        }
+
+        /// <summary>
         /// 添加托盘
         /// </summary>
         /// <param name="data">托盘数据</param>

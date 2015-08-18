@@ -135,6 +135,7 @@
     <Compile Include="Controllers\GroupCustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ScatterCustomerController.cs" />
+    <Compile Include="Controllers\StockInController.cs" />
     <Compile Include="Controllers\TrayController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\UserGroupController.cs" />
@@ -712,6 +713,9 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\ChangePassword.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\StockIn\Create.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\WarehouseCascadeList.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\FreeTrayList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
