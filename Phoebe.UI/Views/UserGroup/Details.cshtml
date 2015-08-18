@@ -1,7 +1,7 @@
-﻿@model Phoebe.Model.User
+﻿@model Phoebe.Model.UserGroup
 
 @{
-    ViewBag.Title = "用户信息";
+    ViewBag.Title = "用户组信息";
 }
 
 <!-- BEGIN PAGE HEADER-->
@@ -31,7 +31,7 @@
         <div class="portlet box blue">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="fa fa-info-circle"></i>&nbsp;用户信息
+                    <i class="fa fa-info-circle"></i>&nbsp;用户组信息
                 </div>
                 <div class="tools">
                     <a href="javascript:;" class="collapse">
@@ -57,22 +57,6 @@
                     <tbody>
                         <tr>
                             <td>
-                                @Html.DisplayNameFor(model => model.Username)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(model => model.Username)
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                @Html.DisplayNameFor(model => model.UserGroupID)
-                            </td>
-                            <td>
-                                @Model.UserGroup.Title
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
                                 @Html.DisplayNameFor(model => model.Name)
                             </td>
                             <td>
@@ -81,18 +65,18 @@
                         </tr>
                         <tr>
                             <td>
-                                @Html.DisplayNameFor(model => model.LastLoginTime)
+                                @Html.DisplayNameFor(model => model.Title)
                             </td>
                             <td>
-                                @Html.DisplayFor(model => model.LastLoginTime)
+                                @Html.DisplayFor(model => model.Title)
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                @Html.DisplayNameFor(model => model.CurrentLoginTime)
+                                @Html.DisplayNameFor(model => model.Rank)
                             </td>
                             <td>
-                                @Html.DisplayFor(model => model.CurrentLoginTime)
+                                @Html.DisplayFor(model => model.Rank)
                             </td>
                         </tr>
                         <tr>
@@ -108,7 +92,7 @@
                                 @Html.DisplayNameFor(model => model.Status)
                             </td>
                             <td>
-                                @Html.DisplayFor(model => model.Status)
+                                @(((EntityStatus)Model.Status).DisplayName())
                             </td>
                         </tr>
                     </tbody>
@@ -116,7 +100,8 @@
 
                 <hr />
                 <p>
-                    <a href="@Url.Action("Index", new { controller = "User" })" class="btn btn-info"><i class="fa fa-list"></i>&nbsp;回到列表</a>
+                    <a href="@Url.Action("Index", new { controller = "UserGroup" })" class="btn btn-info"><i class="fa fa-list"></i>&nbsp;回到列表</a>
+                    <a href="@Url.Action("Edit", new { controller = "UserGroup", id = Model.ID })" class="btn btn-warning"><i class="fa fa-edit"></i>&nbsp;编辑</a>
                 </p>
             </div>
         </div>
@@ -127,7 +112,7 @@
 @section Scripts {
     <script type="text/javascript">
         $(function () {
-            phoebe.leftNavActive($('#menu-user-index'));
+            phoebe.leftNavActive($('#menu-user-group-index'));
         });
     </script>
 }

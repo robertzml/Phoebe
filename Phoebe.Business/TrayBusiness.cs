@@ -40,7 +40,7 @@ namespace Phoebe.Business
         /// <returns></returns>
         public Tray Get(int id)
         {
-            return this.context.Trays.SingleOrDefault(r => r.ID == id);
+            return this.context.Trays.Find(id);
         }
 
         /// <summary>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -59,7 +60,7 @@ namespace Phoebe.Business
             if (id == 1 && !isRoot)
                 return null;
             else
-                return this.context.Users.SingleOrDefault(r => r.ID == id);
+                return this.context.Users.Find(id);
         }
 
         /// <summary>
@@ -125,9 +126,69 @@ namespace Phoebe.Business
             if (id == 1 && !isRoot)
                 return null;
             else
-                return this.context.UserGroups.SingleOrDefault(r => r.ID == id);
+                return this.context.UserGroups.Find(id);
+        }
+
+        /// <summary>
+        /// 添加用户组
+        /// </summary>
+        /// <param name="data">用户组数据</param>
+        /// <returns></returns>
+        public ErrorCode CreateUserGroup(UserGroup data)
+        {
+            try
+            {
+                data.Status = 0;
+
+                this.context.UserGroups.Add(data);
+                this.context.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+
+            return ErrorCode.Success;
+        }
+
+        /// <summary>
+        /// 编辑用户组
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public ErrorCode EditUserGroup(UserGroup data)
+        {
+            try
+            {
+                this.context.Entry(data).State = EntityState.Modified;
+                this.context.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+
+            return ErrorCode.Success;
         }
         #endregion //UserGroup Method
+
+        /// <summary>
+        /// 保存更新
+        /// </summary>
+        /// <returns></returns>
+        public ErrorCode Save()
+        {
+            try
+            {
+                this.context.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+
+            return ErrorCode.Success;
+        }
         #endregion //Method
     }
 }

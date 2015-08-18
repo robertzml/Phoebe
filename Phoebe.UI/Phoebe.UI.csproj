@@ -271,15 +271,6 @@
     <Content Include="assets\global\plugins\bootstrap\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="assets\global\plugins\bootstrap\js\bootstrap.js" />
     <Content Include="assets\global\plugins\bootstrap\js\bootstrap.min.js" />
-    <Content Include="assets\global\plugins\countdown\jquery.countdown.js" />
-    <Content Include="assets\global\plugins\countdown\jquery.countdown.min.js" />
-    <Content Include="assets\global\plugins\countdown\plugin\countdownBasic.html" />
-    <Content Include="assets\global\plugins\countdown\plugin\countdownGlowing.gif" />
-    <Content Include="assets\global\plugins\countdown\plugin\countdownLED.png" />
-    <Content Include="assets\global\plugins\countdown\plugin\jquery.countdown-zh-CN.js" />
-    <Content Include="assets\global\plugins\countdown\plugin\jquery.countdown.css" />
-    <Content Include="assets\global\plugins\countdown\plugin\jquery.countdown.js" />
-    <Content Include="assets\global\plugins\countdown\plugin\jquery.countdown.min.js" />
     <Content Include="assets\global\plugins\datatables\all.min.js" />
     <Content Include="assets\global\plugins\datatables\extensions\AutoFill\css\dataTables.autoFill.css" />
     <Content Include="assets\global\plugins\datatables\extensions\AutoFill\css\dataTables.autoFill.min.css" />
@@ -710,6 +701,9 @@
     <Content Include="Views\User\Details.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\UserGroupList.cshtml" />
     <Content Include="Views\UserGroup\Index.cshtml" />
+    <Content Include="Views\UserGroup\Create.cshtml" />
+    <Content Include="Views\UserGroup\Details.cshtml" />
+    <Content Include="Views\UserGroup\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

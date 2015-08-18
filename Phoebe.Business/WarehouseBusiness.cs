@@ -43,7 +43,7 @@ namespace Phoebe.Business
         /// <returns></returns>
         public Warehouse Get(int id)
         {
-            return this.context.Warehouses.SingleOrDefault(r => r.ID == id);
+            return this.context.Warehouses.Find(id);
         }
 
         /// <summary>
