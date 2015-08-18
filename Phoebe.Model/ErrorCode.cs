@@ -12,6 +12,7 @@ namespace Phoebe.Model
     /// </summary>
     public enum ErrorCode
     {
+        #region System
         /// <summary>
         /// 成功
         /// </summary>
@@ -53,6 +54,13 @@ namespace Phoebe.Model
         /// </summary>
         [Display(Name = "数据库写入失败")]
         DatabaseWriteError = 6,
+
+        /// <summary>
+        /// 权限不够
+        /// </summary>
+        [Display(Name = "权限不够")]
+        NoPrivilege = 7,
+        #endregion //System
 
         /// <summary>
         /// 用户名称重复

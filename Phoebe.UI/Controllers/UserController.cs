@@ -41,6 +41,20 @@ namespace Phoebe.UI.Controllers
         }
 
         /// <summary>
+        /// 用户信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult Details(int id)
+        {
+            var data = this.userBusiness.GetUser(id, true);
+            if (data == null)
+                return HttpNotFound();
+
+            return View(data);
+        }
+
+        /// <summary>
         /// 添加用户
         /// </summary>
         /// <returns></returns>

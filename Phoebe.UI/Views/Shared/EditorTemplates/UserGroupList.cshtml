@@ -1,0 +1,16 @@
+﻿@model int?
+
+<select class="form-control" id="UserGroupID" name="UserGroupID">
+    <option value="">-- 请选择 --</option>
+    @{
+        UserBusiness userBusiness = new UserBusiness();
+        var data = userBusiness.GetUserGroup(false);
+
+        foreach (var item in data)
+        {
+            <option value="@item.ID" @(Model == item.ID ? "selected='selected'" : "")>
+                @item.Name
+            </option>
+        }
+    }
+</select>

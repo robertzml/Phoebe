@@ -136,6 +136,7 @@
     <Compile Include="Controllers\ScatterCustomerController.cs" />
     <Compile Include="Controllers\TrayController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\UserGroupController.cs" />
     <Compile Include="Controllers\WarehouseController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -706,6 +707,9 @@
     <Content Include="Views\Tray\Details.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\User\Create.cshtml" />
+    <Content Include="Views\User\Details.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\UserGroupList.cshtml" />
+    <Content Include="Views\UserGroup\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

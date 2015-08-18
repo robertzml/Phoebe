@@ -49,6 +49,20 @@ namespace Phoebe.Business
         }
 
         /// <summary>
+        /// 获取用户
+        /// </summary>
+        /// <param name="id">用户ID</param>
+        /// <param name="isRoot">是否Root</param>
+        /// <returns></returns>
+        public User GetUser(int id, bool isRoot)
+        {
+            if (id == 1 && !isRoot)
+                return null;
+            else
+                return this.context.Users.SingleOrDefault(r => r.ID == id);
+        }
+
+        /// <summary>
         /// 添加用户
         /// </summary>
         /// <param name="data">用户数据</param>
@@ -61,6 +75,9 @@ namespace Phoebe.Business
                 data.LastLoginTime = initialTime;
                 data.CurrentLoginTime = initialTime;
                 data.Status = 0;
+
+                if (data.UserGroupID == 1)
+                    return ErrorCode.NoPrivilege;
 
                 int count = this.context.Users.Count(r => r.Username == data.Username);
                 if (count > 0)

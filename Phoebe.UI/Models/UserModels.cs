@@ -36,6 +36,7 @@ namespace Phoebe.UI.Models
         /// 用户组ID
         /// </summary>
         [Required]
+        [UIHint("UserGroupList")]
         [Display(Name = "用户组")]
         public int UserGroupID { get; set; }
 
