@@ -30,6 +30,24 @@ namespace Phoebe.Business
         }
         #endregion //Constructor
 
+        #region Function
+        /// <summary>
+        /// 更新登录时间
+        /// </summary>
+        /// <param name="_id">用户系统ID</param>
+        /// <param name="last">上次登录时间</param>
+        /// <param name="current">本次登录时间</param>
+        private void UpdateLoginTime(User user, DateTime last, DateTime current)
+        {
+            user.LastLoginTime = last;
+            user.CurrentLoginTime = current;
+
+            this.context.SaveChanges();
+
+            return;
+        }
+        #endregion //Function
+
         #region Method
         #region User Method
         /// <summary>
@@ -61,6 +79,17 @@ namespace Phoebe.Business
                 return null;
             else
                 return this.context.Users.Find(id);
+        }
+
+        /// <summary>
+        /// 获取用户
+        /// </summary>
+        /// <param name="username">登录名</param>
+        /// <returns></returns>
+        public User GetUser(string username)
+        {
+            var data = this.context.Users.SingleOrDefault(r => r.Username == username);
+            return data;
         }
 
         /// <summary>
@@ -171,6 +200,29 @@ namespace Phoebe.Business
             return ErrorCode.Success;
         }
         #endregion //UserGroup Method
+
+        /// <summary>
+        /// 用户登录
+        /// </summary>
+        /// <param name="username">用户名</param>
+        /// <param name="password">密码</param>
+        /// <returns></returns>
+        public ErrorCode Login(string username, string password)
+        {
+            User user = this.context.Users.SingleOrDefault(r => r.Username == username);
+            if (user == null)
+                return ErrorCode.UserNotExist;
+
+            if (Hasher.SHA1Encrypt(password) != user.Password)           
+                return ErrorCode.WrongPassword;
+
+            if (user.Status == (int)EntityStatus.UserDisable)
+                return ErrorCode.UserDisabled;
+
+            UpdateLoginTime(user, user.CurrentLoginTime, DateTime.Now);
+
+            return ErrorCode.Success;
+        }
 
         /// <summary>
         /// 保存更新

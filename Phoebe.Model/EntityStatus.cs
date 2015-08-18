@@ -12,6 +12,7 @@ namespace Phoebe.Model
     /// </summary>
     public enum EntityStatus
     {
+        #region System
         /// <summary>
         /// 0:正常
         /// </summary>
@@ -23,13 +24,22 @@ namespace Phoebe.Model
         /// </summary>
         [Display(Name = "已删除")]
         Deleted = 1,
+        #endregion //System
+
+        #region User
+        /// <summary>
+        /// 11:用户已禁用
+        /// </summary>
+        [Display(Name = "已禁用")]
+        UserDisable = 11,
+        #endregion //User
 
         #region Contract
         /// <summary>
-        /// 合同已关闭
+        /// 21:合同已关闭
         /// </summary>
         [Display(Name = "已关闭")]
-        ContractClosed = 11,
+        ContractClosed = 21,
         #endregion //Contract
 
         #region Warehouse
@@ -39,31 +49,31 @@ namespace Phoebe.Model
 
         #region Tray
         /// <summary>
-        /// 托盘未使用
+        /// 41:托盘未使用
         /// </summary>
         [Display(Name = "未使用")]
-        TrayUnused = 31,
+        TrayUnused = 41,
 
         /// <summary>
-        /// 托盘使用中
+        /// 42:托盘使用中
         /// </summary>
         [Display(Name = "使用中")]
-        TrayInuse = 32,
+        TrayInuse = 42,
 
         /// <summary>
-        /// 托盘废弃
+        /// 43:托盘废弃
         /// </summary>
         [Display(Name = "废弃")]
-        TrayAbandon = 33,
+        TrayAbandon = 43,
         #endregion //Tray
 
 
         #region Cargo
         /// <summary>
-        /// 货品未入库
+        /// 51:货品未入库
         /// </summary>
         [Display(Name = "未入库")]
-        CargoNotIn = 41
+        CargoNotIn = 51
         #endregion //Cargo
 
     }

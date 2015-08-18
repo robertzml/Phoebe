@@ -128,6 +128,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CargoController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\ContractController.cs" />
@@ -138,11 +139,15 @@
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\UserGroupController.cs" />
     <Compile Include="Controllers\WarehouseController.cs" />
+    <Compile Include="Filters\EnhancedAuthorizeAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\UserModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\FormsAuthenticationService.cs" />
+    <Compile Include="Services\IFormsAuthenticationService.cs" />
+    <Compile Include="Services\PageService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\admin\layout\css\layout.css" />
@@ -163,9 +168,6 @@
     <Content Include="assets\admin\layout\img\loading-spinner-default.gif" />
     <Content Include="assets\admin\layout\img\loading-spinner-grey.gif" />
     <Content Include="assets\admin\layout\img\loading.gif" />
-    <Content Include="assets\admin\layout\img\logo-big-white.png" />
-    <Content Include="assets\admin\layout\img\logo-big.png" />
-    <Content Include="assets\admin\layout\img\logo-invert.png" />
     <Content Include="assets\admin\layout\img\logo.png" />
     <Content Include="assets\admin\layout\img\menu-toggler.png" />
     <Content Include="assets\admin\layout\img\remove-icon-small.png" />
@@ -568,6 +570,7 @@
     <Content Include="assets\global\plugins\zoom\jquery.zoom.min.js" />
     <Content Include="assets\global\scripts\datatable.js" />
     <Content Include="assets\global\scripts\metronic.js" />
+    <Content Include="Content\login.css" />
     <Content Include="Content\phoebe.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -639,6 +642,7 @@
     <Content Include="assets\global\plugins\uniform\css\uniform.default.scss" />
     <Content Include="assets\global\plugins\uniform\README.md" />
     <None Include="Scripts\jquery-1.11.2.intellisense.js" />
+    <Content Include="Images\phoebe-logo.png" />
     <Content Include="Scripts\jquery-1.11.2.js" />
     <Content Include="Scripts\jquery-1.11.2.min.js" />
     <Content Include="Scripts\jquery-1.11.2.min.map" />
@@ -704,6 +708,7 @@
     <Content Include="Views\UserGroup\Create.cshtml" />
     <Content Include="Views\UserGroup\Details.cshtml" />
     <Content Include="Views\UserGroup\Edit.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

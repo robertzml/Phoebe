@@ -62,6 +62,7 @@ namespace Phoebe.Model
         NoPrivilege = 7,
         #endregion //System
 
+        #region User
         /// <summary>
         /// 用户名称重复
         /// </summary>
@@ -85,5 +86,6 @@ namespace Phoebe.Model
         /// </summary>
         [Display(Name = "用户已禁用")]
         UserDisabled = 14,
+        #endregion //User
     }
 }

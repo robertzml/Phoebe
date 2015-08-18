@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Phoebe.UI.Filters;
 
 namespace Phoebe.UI.Controllers
 {
+    [EnhancedAuthorize]
     public class HomeController : Controller
     {
         public ActionResult Index()

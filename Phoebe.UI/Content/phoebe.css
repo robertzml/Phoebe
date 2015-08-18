@@ -16,3 +16,13 @@ body, h1, h2, h3, h4, h5, h6, .dropdown-menu {
 	display: block;
 	padding-top: 8px;
 }
+
+.validation-summary-errors {
+    color: #e80c4d;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.validation-summary-valid {
+    display: none;
+}
