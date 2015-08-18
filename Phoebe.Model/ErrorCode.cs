@@ -53,5 +53,29 @@ namespace Phoebe.Model
         /// </summary>
         [Display(Name = "数据库写入失败")]
         DatabaseWriteError = 6,
+
+        /// <summary>
+        /// 用户名称重复
+        /// </summary>
+        [Display(Name = "用户名称重复")]
+        DuplicateUserName = 11,
+
+        /// <summary>
+        /// 密码错误
+        /// </summary>
+        [Display(Name = "密码错误")]
+        WrongPassword = 12,
+
+        /// <summary>
+        /// 用户不存在
+        /// </summary>
+        [Display(Name = "用户不存在")]
+        UserNotExist = 13,
+
+        /// <summary>
+        /// 用户已禁用
+        /// </summary>
+        [Display(Name = "用户已禁用")]
+        UserDisabled = 14,
     }
 }

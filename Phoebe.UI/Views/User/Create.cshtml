@@ -1,7 +1,7 @@
-﻿@model Phoebe.Model.SecondCategory
+﻿@model Phoebe.UI.Models.CreateUserModel
 
 @{
-    ViewBag.Title = "添加二级分类";
+    ViewBag.Title = "添加用户";
 }
 
 <!-- BEGIN PAGE HEADER-->
@@ -16,7 +16,7 @@
             <i class="fa fa-angle-right"></i>
         </li>
         <li>
-            <a href="#">货品管理</a>
+            <a href="#">用户管理</a>
             <i class="fa fa-angle-right"></i>
         </li>
         <li>
@@ -31,7 +31,7 @@
         <div class="portlet box blue">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="fa fa-plus"></i>二级分类信息
+                    <i class="fa fa-plus"></i>用户信息
                 </div>
                 <div class="tools">
                     <a href="javascript:;" class="collapse">
@@ -43,31 +43,49 @@
                 </div>
             </div>
             <div class="portlet-body form">
-                @using (Html.BeginForm("CreateSecondCategory", "Category", FormMethod.Post, new { @class = "form-horizontal form-bordered form-row-stripped" }))
+                @using (Html.BeginForm("Create", "User", FormMethod.Post, new { @class = "form-horizontal form-bordered form-row-stripped" }))
                 {
                     @Html.AntiForgeryToken()
 
                     <div class="form-body">
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                         <div class="form-group">
-                            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-3" })
+                            @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-3" })
                             <div class="col-md-8">
-                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="col-md-1">
-                                <span class="required">*</span>
+                                @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
                             </div>
                         </div>
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.FirstCategoryID, htmlAttributes: new { @class = "control-label col-md-3" })
+                            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-3" })
                             <div class="col-md-8">
-                                @Html.EditorFor(model => model.FirstCategoryID, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.FirstCategoryID, "", new { @class = "text-danger" })
+                                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
                             </div>
-                            <div class="col-md-1">
-                                <span class="required">*</span>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.UserGroupID, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.UserGroupID, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.UserGroupID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
                             </div>
                         </div>
 
@@ -83,7 +101,7 @@
                             <div class="row">
                                 <div class="col-md-offset-3 col-md-9">
                                     <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> 保存</button>
-                                    <a href="@Url.Action("Index", new { controller = "Category"})" class="btn btn-default">&nbsp;取消</a>
+                                    <a href="@Url.Action("Index", new { controller = "User"})" class="btn btn-default">&nbsp;取消</a>
                                 </div>
                             </div>
                         </div>
@@ -98,7 +116,7 @@
 @section Scripts {
     <script type="text/javascript">
         $(function () {
-            phoebe.leftNavActive($('#menu-category-index'));
+            phoebe.leftNavActive($('#menu-user-create'));
         });
     </script>
 }

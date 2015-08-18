@@ -262,26 +262,26 @@
             <li class="heading">
                 <h3 class="uppercase">系统维护</h3>
             </li>
-            <li>
+            <li class="left-nav-first">
                 <a href="javascript:;">
-                    <i class="icon-logout"></i>
-                    <span class="title">Quick Sidebar</span>
+                    <i class="fa fa-user"></i>
+                    <span class="title">用户管理</span>
                     <span class="arrow "></span>
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a href="quick_sidebar_push_content.html">
-                            Push Content
+                        <a href="@Url.Action("Index", "User")" id="menu-user-index">
+                            用户列表
                         </a>
                     </li>
                     <li>
                         <a href="quick_sidebar_over_content.html">
-                            Over Content
+                            用户组列表
                         </a>
                     </li>
                     <li>
-                        <a href="quick_sidebar_over_content_transparent.html">
-                            Over Content & Transparent
+                        <a href="@Url.Action("Create", "User")" id="menu-user-create">
+                            添加用户
                         </a>
                     </li>
                     <li>
