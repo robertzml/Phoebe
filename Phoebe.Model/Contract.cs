@@ -30,10 +30,12 @@ namespace Phoebe.Model
         public System.DateTime StartDate { get; set; }
         public System.DateTime EndDate { get; set; }
         public string CertificateNumber { get; set; }
+        public int UserID { get; set; }
         public string Remark { get; set; }
         public int Status { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cargo> Cargoes { get; set; }
+        public virtual User User { get; set; }
     }
 }

@@ -81,6 +81,12 @@ namespace Phoebe.Model
         public string CertificateNumber { get; set; }
 
         /// <summary>
+        /// 登记人
+        /// </summary>
+        [Display(Name = "登记人")]
+        public int UserID { get; set; }
+
+        /// <summary>
         /// 备注
         /// </summary>
         [DataType(DataType.MultilineText)]

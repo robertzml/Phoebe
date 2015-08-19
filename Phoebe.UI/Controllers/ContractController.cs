@@ -6,12 +6,15 @@ using System.Web.Mvc;
 using Phoebe.Business;
 using Phoebe.Common;
 using Phoebe.Model;
+using Phoebe.UI.Filters;
+using Phoebe.UI.Services;
 
 namespace Phoebe.UI.Controllers
 {
     /// <summary>
     /// 合同控制器
     /// </summary>
+    [EnhancedAuthorize]
     public class ContractController : Controller
     {
         #region Field
@@ -96,6 +99,9 @@ namespace Phoebe.UI.Controllers
                     }
                 }
 
+                var user = PageService.GetCurrentUser(User.Identity.Name);
+                model.UserID = user.ID;
+
                 ErrorCode result = this.contractBusiness.Create(model);
                 if (result == ErrorCode.Success)
                 {
@@ -110,6 +116,17 @@ namespace Phoebe.UI.Controllers
             }
 
             return View(model);
+        }
+
+        /// <summary>
+        /// 关闭合同
+        /// </summary>
+        /// <param name="id">合同ID</param>
+        /// <returns></returns>
+        public ActionResult Close(int id)
+        {
+            this.contractBusiness.Close(id);
+            return RedirectToAction("Details", new { controller = "Contract", id = id });
         }
         #endregion //Action
 

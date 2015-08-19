@@ -32,11 +32,11 @@ namespace Phoebe.Model
         public int Status { get; set; }
         public int UserID { get; set; }
     
-        public virtual Contract Contract { get; set; }
         public virtual FirstCategory FirstCategory { get; set; }
         public virtual SecondCategory SecondCategory { get; set; }
         public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StockInDetail> StockInDetails { get; set; }
+        public virtual Contract Contract { get; set; }
     }
 }

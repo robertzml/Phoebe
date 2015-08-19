@@ -8,12 +8,10 @@
         <EntityTypeShape EntityType="PhoebeModel.Warehouse" Width="1.5" PointX="0.75" PointY="14.125" IsExpanded="true" />
         <AssociationConnector Association="PhoebeModel.FK_Warehouse_Warehouse" ManuallyRouted="false" />
         <EntityTypeShape EntityType="PhoebeModel.ScatterCustomer" Width="1.5" PointX="2.875" PointY="0.625" />
-        <EntityTypeShape EntityType="PhoebeModel.Contract" Width="1.5" PointX="0.75" PointY="4.75" />
         <EntityTypeShape EntityType="PhoebeModel.FirstCategory" Width="1.5" PointX="7.5" PointY="0.625" />
         <EntityTypeShape EntityType="PhoebeModel.SecondCategory" Width="1.5" PointX="5.375" PointY="0.625" />
         <AssociationConnector Association="PhoebeModel.FK_SecondCategory_FirstCategory" />
         <EntityTypeShape EntityType="PhoebeModel.Cargo" Width="1.5" PointX="4.125" PointY="4.75" />
-        <AssociationConnector Association="PhoebeModel.FK_Cargo_Contract" />
         <AssociationConnector Association="PhoebeModel.FK_Cargo_FirstCategory" />
         <AssociationConnector Association="PhoebeModel.FK_Cargo_SecondCategory" />
         <EntityTypeShape EntityType="PhoebeModel.Tray" Width="1.5" PointX="0.75" PointY="9.5" />
@@ -29,6 +27,9 @@
         <AssociationConnector Association="PhoebeModel.FK_StockInDetails_Cargo" />
         <AssociationConnector Association="PhoebeModel.FK_StockInDetails_StockIn" />
         <EntityTypeShape EntityType="PhoebeModel.GroupCustomer" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="PhoebeModel.Contract" Width="1.5" PointX="0.75" PointY="4.75" />
+        <AssociationConnector Association="PhoebeModel.FK_Cargo_Contract" />
+        <AssociationConnector Association="PhoebeModel.FK_Contract_User" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

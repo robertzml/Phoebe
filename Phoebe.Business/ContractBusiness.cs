@@ -77,6 +77,30 @@ namespace Phoebe.Business
 
             return ErrorCode.Success;
         }
+
+        /// <summary>
+        /// 关闭合同
+        /// </summary>
+        /// <param name="id">合同ID</param>
+        /// <returns></returns>
+        public ErrorCode Close(int id)
+        {
+            try
+            {
+                var data = this.context.Contracts.Find(id);
+                if (data == null)
+                    return ErrorCode.ObjectNotFound;
+
+                data.Status = (int)EntityStatus.ContractClosed;
+                this.context.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+
+            return ErrorCode.Success;
+        }
         #endregion //Method
     }
 }
