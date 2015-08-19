@@ -87,5 +87,13 @@ namespace Phoebe.Model
         [Display(Name = "用户已禁用")]
         UserDisabled = 14,
         #endregion //User
+
+        #region Contract
+        /// <summary>
+        /// 合同编号重复
+        /// </summary>
+        [Display(Name = "编号重复")]
+        ContractDuplicateNumber = 21,
+        #endregion //Contract
     }
 }

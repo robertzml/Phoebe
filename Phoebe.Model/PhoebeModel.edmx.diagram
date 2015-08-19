@@ -5,7 +5,6 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="fea8aa1d5a594b8b811afd6a99555dfd" Name="Diagram1">
-        <EntityTypeShape EntityType="PhoebeModel.GroupCustomer" Width="1.5" PointX="0.75" PointY="0.625" IsExpanded="true" />
         <EntityTypeShape EntityType="PhoebeModel.Warehouse" Width="1.5" PointX="0.75" PointY="14.125" IsExpanded="true" />
         <AssociationConnector Association="PhoebeModel.FK_Warehouse_Warehouse" ManuallyRouted="false" />
         <EntityTypeShape EntityType="PhoebeModel.ScatterCustomer" Width="1.5" PointX="2.875" PointY="0.625" />
@@ -29,6 +28,7 @@
         <EntityTypeShape EntityType="PhoebeModel.StockInDetail" Width="1.5" PointX="7.125" PointY="11.125" />
         <AssociationConnector Association="PhoebeModel.FK_StockInDetails_Cargo" />
         <AssociationConnector Association="PhoebeModel.FK_StockInDetails_StockIn" />
+        <EntityTypeShape EntityType="PhoebeModel.GroupCustomer" Width="1.5" PointX="0.75" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

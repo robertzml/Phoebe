@@ -1,9 +1,8 @@
 ﻿@model int?
-@using Phoebe.Model
 
-<select id="Type" name="Type" class="form-control">
+<select id="CustomerType" name="CustomerType" class="form-control">
     <option value="">-- 请选择 --</option>
-    @foreach (ContractType o in Enum.GetValues(typeof(ContractType)))
+    @foreach (CustomerType o in Enum.GetValues(typeof(CustomerType)))
     {
         <option value="@Convert.ToInt32(o)" @(Model == (int)o ? "selected='selected'" : "")>@o.DisplayName()</option>
     }

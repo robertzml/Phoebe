@@ -73,7 +73,19 @@ namespace Phoebe.Model
         /// 51:货品未入库
         /// </summary>
         [Display(Name = "未入库")]
-        CargoNotIn = 51
+        CargoNotIn = 51,
+
+        /// <summary>
+        /// 52:货品准备入库
+        /// </summary>
+        [Display(Name = "准备入库")]
+        CargoStockInReady = 52,
+
+        /// <summary>
+        /// 53:货品入库
+        /// </summary>
+        [Display(Name = "入库")]
+        CargoStockIn = 53
         #endregion //Cargo
 
     }

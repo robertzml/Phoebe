@@ -40,7 +40,7 @@ namespace Phoebe.Business
         /// <returns></returns>
         public Contract Get(int id)
         {
-            return this.context.Contracts.SingleOrDefault(r => r.ID == id);
+            return this.context.Contracts.Find(id);
         }
 
         /// <summary>
@@ -61,6 +61,12 @@ namespace Phoebe.Business
         {
             try
             {
+                data.Status = 0;
+
+                int count = this.context.Contracts.Count(r => r.Number == data.Number);
+                if (count > 0)
+                    return ErrorCode.ContractDuplicateNumber;
+
                 this.context.Contracts.Add(data);
                 this.context.SaveChanges();
             }

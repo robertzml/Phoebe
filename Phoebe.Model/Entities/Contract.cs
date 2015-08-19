@@ -41,6 +41,7 @@ namespace Phoebe.Model
         /// 客户类型
         /// </summary>
         [Required]
+        [UIHint("CustomerType")]
         [Display(Name = "客户类型")]
         public int CustomerType { get; set; }
 
@@ -48,7 +49,7 @@ namespace Phoebe.Model
         /// 客户ID
         /// </summary>
         [Required]
-        [Display(Name = "客户ID")]
+        [Display(Name = "客户")]
         public int CustomerID { get; set; }
 
         /// <summary>

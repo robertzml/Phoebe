@@ -58,6 +58,31 @@ namespace Phoebe.Business
         }
 
         /// <summary>
+        /// 获取未入库货品相关合同
+        /// </summary>
+        /// <returns></returns>
+        public List<Contract> GetWithUnStockIn()
+        {
+            //var data1 = this.context.Cargoes.Where(r => r.Status == (int)EntityStatus.CargoNotIn).GroupBy(r => r.ContractID);
+            var data = from r in this.context.Cargoes
+                       where r.Status == (int)EntityStatus.CargoNotIn
+                       group r by r.ContractID into g
+                       select new
+                       {
+                           g.Key
+                       };
+
+            var contracts = from r in this.context.Contracts
+                            where (from s in this.context.Cargoes
+                                   where s.Status == (int)EntityStatus.CargoNotIn
+                                   group s by s.ContractID into g
+                                   select g.Key).Contains(r.ID)
+                            select r;
+
+            return contracts.ToList();
+        }
+
+        /// <summary>
         /// 添加货品
         /// </summary>
         /// <param name="data">货品数据</param>

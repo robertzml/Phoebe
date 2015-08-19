@@ -74,8 +74,6 @@ namespace Phoebe.UI.Controllers
         {
             if (ModelState.IsValid)
             {
-                model.Status = 0;
-
                 CustomerBusiness customerBusiness = new CustomerBusiness();
                 if (model.CustomerType == 1)
                 {
@@ -114,5 +112,27 @@ namespace Phoebe.UI.Controllers
             return View(model);
         }
         #endregion //Action
+
+        #region Json
+        /// <summary>
+        /// 获取客户
+        /// </summary>
+        /// <param name="type">客户类型</param>
+        /// <returns></returns>
+        public JsonResult GetCustomers(int type)
+        {
+            CustomerBusiness customerBusiness = new CustomerBusiness();
+            if (type == 1)
+            {
+                var data = customerBusiness.GetGroupCustomer();
+                return Json(data, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                var data = customerBusiness.GetScatterCustomer();
+                return Json(data, JsonRequestBehavior.AllowGet);
+            }
+        }
+        #endregion //Json
     }
 }

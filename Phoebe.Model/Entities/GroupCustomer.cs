@@ -20,7 +20,7 @@ namespace Phoebe.Model
         /// </summary>
         [Required]
         [Display(Name = "公司名称")]
-        public string CompanyName { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// 地址

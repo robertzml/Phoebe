@@ -275,7 +275,6 @@
     <Content Include="assets\global\plugins\bootstrap\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="assets\global\plugins\bootstrap\js\bootstrap.js" />
     <Content Include="assets\global\plugins\bootstrap\js\bootstrap.min.js" />
-    <Content Include="assets\global\plugins\datatables\all.min.js" />
     <Content Include="assets\global\plugins\datatables\extensions\AutoFill\css\dataTables.autoFill.css" />
     <Content Include="assets\global\plugins\datatables\extensions\AutoFill\css\dataTables.autoFill.min.css" />
     <Content Include="assets\global\plugins\datatables\extensions\AutoFill\images\filler.png" />
@@ -310,8 +309,10 @@
     <Content Include="assets\global\plugins\datatables\extensions\KeyTable\js\dataTables.keyTable.min.js" />
     <Content Include="assets\global\plugins\datatables\extensions\KeyTable\Readme.txt" />
     <Content Include="assets\global\plugins\datatables\extensions\Responsive\css\dataTables.responsive.css" />
+    <Content Include="assets\global\plugins\datatables\extensions\Responsive\css\dataTables.responsive.scss" />
     <Content Include="assets\global\plugins\datatables\extensions\Responsive\js\dataTables.responsive.js" />
     <Content Include="assets\global\plugins\datatables\extensions\Responsive\js\dataTables.responsive.min.js" />
+    <Content Include="assets\global\plugins\datatables\extensions\Responsive\Readme.md" />
     <Content Include="assets\global\plugins\datatables\extensions\Scroller\css\dataTables.scroller.css" />
     <Content Include="assets\global\plugins\datatables\extensions\Scroller\css\dataTables.scroller.min.css" />
     <Content Include="assets\global\plugins\datatables\extensions\Scroller\images\loading-background.png" />
@@ -338,11 +339,9 @@
     <Content Include="assets\global\plugins\datatables\extensions\TableTools\Readme.txt" />
     <Content Include="assets\global\plugins\datatables\extensions\TableTools\swf\copy_csv_xls.swf" />
     <Content Include="assets\global\plugins\datatables\extensions\TableTools\swf\copy_csv_xls_pdf.swf" />
-    <Content Include="assets\global\plugins\datatables\license.txt" />
     <Content Include="assets\global\plugins\datatables\media\css\jquery.dataTables.css" />
     <Content Include="assets\global\plugins\datatables\media\css\jquery.dataTables.min.css" />
     <Content Include="assets\global\plugins\datatables\media\css\jquery.dataTables_themeroller.css" />
-    <Content Include="assets\global\plugins\datatables\media\css\jquery.dataTables_themeroller.min.css" />
     <Content Include="assets\global\plugins\datatables\media\images\back_disabled.png" />
     <Content Include="assets\global\plugins\datatables\media\images\back_enabled.png" />
     <Content Include="assets\global\plugins\datatables\media\images\back_enabled_hover.png" />
@@ -359,6 +358,7 @@
     <Content Include="assets\global\plugins\datatables\media\js\jquery.dataTables.min.js" />
     <Content Include="assets\global\plugins\datatables\plugins\bootstrap\dataTables.bootstrap.css" />
     <Content Include="assets\global\plugins\datatables\plugins\bootstrap\dataTables.bootstrap.js" />
+    <Content Include="assets\global\plugins\datatables\Readme.md" />
     <Content Include="assets\global\plugins\excanvas.min.js" />
     <Content Include="assets\global\plugins\fancybox\lib\jquery.mousewheel-3.0.6.pack.js" />
     <Content Include="assets\global\plugins\fancybox\README.txt" />
@@ -608,9 +608,6 @@
     <Content Include="assets\global\plugins\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="assets\global\plugins\bootstrap\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="assets\global\plugins\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="assets\global\plugins\datatables\extensions\Responsive\css\dataTables.responsive.scss" />
-    <Content Include="assets\global\plugins\datatables\extensions\Responsive\Readme.md" />
-    <Content Include="assets\global\plugins\datatables\Readme.md" />
     <Content Include="assets\global\plugins\fancybox\README.md" />
     <Content Include="assets\global\plugins\font-awesome\fonts\fontawesome-webfont.eot" />
     <Content Include="assets\global\plugins\font-awesome\fonts\fontawesome-webfont.ttf" />
@@ -716,6 +713,7 @@
     <Content Include="Views\StockIn\Create.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\WarehouseCascadeList.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\FreeTrayList.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\CustomerType.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

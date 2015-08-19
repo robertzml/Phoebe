@@ -101,7 +101,7 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.CustomerID, htmlAttributes: new { @class = "control-label col-md-3" })
                             <div class="col-md-8">
-                                @Html.EditorFor(model => model.CustomerID, new { htmlAttributes = new { @class = "form-control" } })
+                                <select id="CustomerID" name="CustomerID" class="form-control"></select>
                                 @Html.ValidationMessageFor(model => model.CustomerID, "", new { @class = "text-danger" })
                             </div>
                             <div class="col-md-1">
@@ -185,6 +185,20 @@
             phoebe.initDatePicker($('#SignDate'), true);
             phoebe.initDatePicker($('#StartDate'), true);
             phoebe.initDatePicker($('#EndDate'));
+
+            $('#CustomerType').change(function () {
+                var type = $(this).val();
+                
+                $('#CustomerID').empty();
+                if (type == '')
+                    return;
+
+                $.getJSON('/Contract/GetCustomers', { type: type }, function (response) {
+                    $.each(response, function (i, item) {
+                        $('#CustomerID').append("<option value='" + item.ID + "'>" + item.Name + "</option>");
+                    });
+                });
+            });
         });
     </script>
 }

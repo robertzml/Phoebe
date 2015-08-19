@@ -76,7 +76,10 @@
                                 @Html.DisplayNameFor(model => model.Type)
                             </td>
                             <td>
-                                @Html.DisplayFor(model => model.Type)
+                                @{
+                                    var type1 = (ContractType)Model.Type;
+                                    @type1.DisplayName();
+                                }
                             </td>
                         </tr>
                         <tr>
@@ -84,7 +87,10 @@
                                 @Html.DisplayNameFor(model => model.CustomerType)
                             </td>
                             <td>
-                                @Html.DisplayFor(model => model.CustomerType)
+                                @{
+                                    var type2 = (CustomerType)Model.CustomerType;
+                                    @type2.DisplayName();
+                                }
                             </td>
                         </tr>
                         <tr>
@@ -92,7 +98,7 @@
                                 @Html.DisplayNameFor(model => model.CustomerID)
                             </td>
                             <td>
-                                @Html.DisplayFor(model => model.CustomerID)
+                                @Model.CustomerName()
                             </td>
                         </tr>
                         <tr>
@@ -100,7 +106,7 @@
                                 @Html.DisplayNameFor(model => model.SignDate)
                             </td>
                             <td>
-                                @Html.DisplayFor(model => model.SignDate)
+                                @Model.SignDate.ToDateString()
                             </td>
                         </tr>
                         <tr>
@@ -108,7 +114,7 @@
                                 @Html.DisplayNameFor(model => model.StartDate)
                             </td>
                             <td>
-                                @Html.DisplayFor(model => model.StartDate)
+                                @Model.StartDate.ToDateString()
                             </td>
                         </tr>
                         <tr>
@@ -116,7 +122,7 @@
                                 @Html.DisplayNameFor(model => model.EndDate)
                             </td>
                             <td>
-                                @Html.DisplayFor(model => model.EndDate)
+                                @Model.EndDate.ToDateString()
                             </td>
                         </tr>
                         <tr>
@@ -140,7 +146,7 @@
                                 @Html.DisplayNameFor(model => model.Status)
                             </td>
                             <td>
-                                @Html.DisplayFor(model => model.Status)
+                                @(((EntityStatus)Model.Status).DisplayName())
                             </td>
                         </tr>
                     </tbody>

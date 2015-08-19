@@ -62,5 +62,18 @@ namespace Phoebe.UI.Controllers
             return View(model);
         }
         #endregion //Action
+
+        #region Json
+        public JsonResult GetContracts(int type)
+        {
+            CargoBusiness cargoBusiness = new CargoBusiness();
+            var contracts = cargoBusiness.GetWithUnStockIn();
+
+            var data = from r in contracts
+                       select new { r.ID, r.Name, r.Number };
+
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+        #endregion //Json
     }
 }
