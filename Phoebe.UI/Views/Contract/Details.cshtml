@@ -127,6 +127,14 @@
                         </tr>
                         <tr>
                             <td>
+                                @Html.DisplayNameFor(model => model.CloseDate)
+                            </td>
+                            <td>
+                                @Model.CloseDate.ToDateString()
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
                                 @Html.DisplayNameFor(model => model.CertificateNumber)
                             </td>
                             <td>

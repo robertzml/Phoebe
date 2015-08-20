@@ -53,6 +53,16 @@ namespace Phoebe.Business
         }
 
         /// <summary>
+        /// 根据类型获取合同
+        /// </summary>
+        /// <param name="status"></param>
+        /// <returns></returns>
+        public List<Contract> GetByType(EntityStatus status)
+        {
+            return this.context.Contracts.Where(r => r.Status == (int)status).OrderByDescending(r => r.SignDate).ToList();
+        }
+
+        /// <summary>
         /// 添加合同
         /// </summary>
         /// <param name="data">合同数据</param>
@@ -91,6 +101,7 @@ namespace Phoebe.Business
                 if (data == null)
                     return ErrorCode.ObjectNotFound;
 
+                data.CloseDate = DateTime.Now;
                 data.Status = (int)EntityStatus.ContractClosed;
                 this.context.SaveChanges();
             }

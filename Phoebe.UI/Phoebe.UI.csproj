@@ -714,6 +714,7 @@
     <Content Include="Views\Shared\EditorTemplates\WarehouseCascadeList.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\FreeTrayList.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\CustomerType.cshtml" />
+    <Content Include="Views\Contract\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

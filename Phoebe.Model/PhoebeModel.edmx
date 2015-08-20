@@ -31,9 +31,10 @@
           <Property Name="Type" Type="int" Nullable="false" />
           <Property Name="CustomerType" Type="int" Nullable="false" />
           <Property Name="CustomerID" Type="int" Nullable="false" />
-          <Property Name="SignDate" Type="date" Nullable="false" />
-          <Property Name="StartDate" Type="date" Nullable="false" />
-          <Property Name="EndDate" Type="date" Nullable="false" />
+          <Property Name="SignDate" Type="datetime" Nullable="false" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="EndDate" Type="datetime" Nullable="false" />
+          <Property Name="CloseDate" Type="datetime" />
           <Property Name="CertificateNumber" Type="nchar" MaxLength="10" Nullable="false" />
           <Property Name="UserID" Type="int" Nullable="false" />
           <Property Name="Remark" Type="nvarchar" MaxLength="500" />
@@ -477,7 +478,7 @@
             <End Role="User" EntitySet="Users" />
             <End Role="Contract" EntitySet="Contracts" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="ScatterCustomer">
           <Key>
             <PropertyRef Name="ID" />
@@ -751,9 +752,10 @@
           <Property Name="Type" Type="Int32" Nullable="false" />
           <Property Name="CustomerType" Type="Int32" Nullable="false" />
           <Property Name="CustomerID" Type="Int32" Nullable="false" />
-          <Property Name="SignDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="SignDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CloseDate" Type="DateTime" Precision="3" />
           <Property Name="CertificateNumber" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="UserID" Type="Int32" Nullable="false" />
           <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
@@ -785,7 +787,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -941,6 +943,7 @@
                 <ScalarProperty Name="Remark" ColumnName="Remark" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="CertificateNumber" ColumnName="CertificateNumber" />
+                <ScalarProperty Name="CloseDate" ColumnName="CloseDate" />
                 <ScalarProperty Name="EndDate" ColumnName="EndDate" />
                 <ScalarProperty Name="StartDate" ColumnName="StartDate" />
                 <ScalarProperty Name="SignDate" ColumnName="SignDate" />

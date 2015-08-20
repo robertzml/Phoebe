@@ -1,8 +1,5 @@
 ﻿@model IEnumerable<Phoebe.Model.Contract>
 
-@{
-    ViewBag.Title = "合同列表";
-}
 
 <!-- BEGIN PAGE HEADER-->
 <h3 class="page-title">
@@ -99,7 +96,7 @@
                                 @Html.DisplayNameFor(model => model.EndDate)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.CertificateNumber)
+                                @Html.DisplayNameFor(model => model.CloseDate)
                             </th>
                             <th>
                                 操作
@@ -138,14 +135,13 @@
                                     @item.EndDate.ToDateString()
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.CertificateNumber)
+                                    @Html.DisplayFor(modelItem => item.CloseDate)
                                 </td>
                                 <td>
                                     <a href="@Url.Action("Details", new { controller = "Contract", id = item.ID })" class="btn btn-info btn-sm" role="button"><i class="fa fa-check-circle"></i>&nbsp;查看</a>
                                 </td>
                             </tr>
                         }
-
                     </tbody>
                 </table>
             </div>
@@ -157,7 +153,7 @@
 @section Scripts {
     <script type="text/javascript">
         $(function () {
-            phoebe.leftNavActive($('#menu-contract-index'));
+            phoebe.leftNavActive($('#menu-contract-closed'));
             phoebe.initDatatable($('#contract-table'));
         });
     </script>

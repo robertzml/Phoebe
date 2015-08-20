@@ -38,7 +38,7 @@ namespace Phoebe.UI.Controllers
         /// <returns></returns>
         public ActionResult Index()
         {
-            var data = this.contractBusiness.Get();
+            var data = this.contractBusiness.GetNormal();
             return View(data);
         }
 
@@ -127,6 +127,25 @@ namespace Phoebe.UI.Controllers
         {
             this.contractBusiness.Close(id);
             return RedirectToAction("Details", new { controller = "Contract", id = id });
+        }
+
+        /// <summary>
+        /// 合同列表
+        /// </summary>
+        /// <param name="type">类型</param>
+        /// <returns></returns>
+        public ActionResult List(int type)
+        {
+            if (type == 2) // closed contract
+            {
+                ViewBag.Title = "已关闭合同";
+                var data = this.contractBusiness.GetByType(EntityStatus.ContractClosed);
+                return View(data);
+            }
+            else
+            {
+                return HttpNotFound();
+            }
         }
         #endregion //Action
 

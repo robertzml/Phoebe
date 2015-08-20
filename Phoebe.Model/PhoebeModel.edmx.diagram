@@ -27,10 +27,10 @@
         <AssociationConnector Association="PhoebeModel.FK_StockInDetails_Cargo" />
         <AssociationConnector Association="PhoebeModel.FK_StockInDetails_StockIn" />
         <EntityTypeShape EntityType="PhoebeModel.GroupCustomer" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="PhoebeModel.Contract" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="PhoebeModel.Contract" Width="1.5" PointX="0.75" PointY="4.25" />
         <AssociationConnector Association="PhoebeModel.FK_Cargo_Contract" />
         <AssociationConnector Association="PhoebeModel.FK_Contract_User" />
-      </Diagram>
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

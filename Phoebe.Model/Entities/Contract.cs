@@ -74,6 +74,12 @@ namespace Phoebe.Model
         public System.DateTime EndDate { get; set; }
 
         /// <summary>
+        /// 关闭日期
+        /// </summary>
+        [Display(Name = "关闭日期")]
+        public Nullable<System.DateTime> CloseDate { get; set; }
+
+        /// <summary>
         /// 凭证编号
         /// </summary>
         [Required]
