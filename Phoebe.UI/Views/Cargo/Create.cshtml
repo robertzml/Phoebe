@@ -55,6 +55,9 @@
                                 @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
                             </div>
+                            <div class="col-md-1">
+                                <span class="required">*</span>
+                            </div>
                         </div>
 
                         <div class="form-group">
@@ -63,13 +66,19 @@
                                 @Html.EditorFor(model => model.FirstCategoryID, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.FirstCategoryID, "", new { @class = "text-danger" })
                             </div>
+                            <div class="col-md-1">
+                                <span class="required">*</span>
+                            </div>
                         </div>
 
                         <div class="form-group">
                             @Html.LabelFor(model => model.SecondCategoryID, htmlAttributes: new { @class = "control-label col-md-3" })
                             <div class="col-md-8">
-                                @Html.EditorFor(model => model.SecondCategoryID, new { htmlAttributes = new { @class = "form-control" } })
+                                <select id="SecondCategoryID" name="SecondCategoryID" class="form-control"></select>
                                 @Html.ValidationMessageFor(model => model.SecondCategoryID, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-1">
+                                <span class="required">*</span>
                             </div>
                         </div>
 
@@ -90,10 +99,32 @@
                         </div>
 
                         <div class="form-group">
+                            @Html.LabelFor(model => model.OriginPlace, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.OriginPlace, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.OriginPlace, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="ShelfLife" class="control-label col-md-3">保质期 (月)</label>
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.ShelfLife, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.ShelfLife, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-1">
+                                <span class="required">*</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             @Html.LabelFor(model => model.ContractID, htmlAttributes: new { @class = "control-label col-md-3" })
                             <div class="col-md-8">
                                 @Html.EditorFor(model => model.ContractID, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.ContractID, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-1">
+                                <span class="required">*</span>
                             </div>
                         </div>
 
@@ -126,6 +157,20 @@
     <script type="text/javascript">
         $(function () {
             phoebe.leftNavActive($('#menu-cargo-create'));
+
+            $('#FirstCategoryID').change(function () {
+                var first = $(this).val();
+
+                $('#SecondCategoryID').empty();
+                if (first == '')
+                    return;
+
+                $.getJSON('/Cargo/GetSecondCategory', { firstId: first }, function (response) {
+                    $.each(response, function (i, item) {
+                        $('#SecondCategoryID').append("<option value='" + item.ID + "'>" + item.Name + "</option>");
+                    });
+                });
+            });
         });
     </script>
 }

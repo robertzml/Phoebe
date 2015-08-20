@@ -26,11 +26,13 @@ namespace Phoebe.Model
         public int SecondCategoryID { get; set; }
         public Nullable<double> Weight { get; set; }
         public Nullable<double> Volume { get; set; }
+        public string OriginPlace { get; set; }
+        public int ShelfLife { get; set; }
         public int ContractID { get; set; }
         public System.DateTime RegisterTime { get; set; }
+        public int UserID { get; set; }
         public string Remark { get; set; }
         public int Status { get; set; }
-        public int UserID { get; set; }
     
         public virtual FirstCategory FirstCategory { get; set; }
         public virtual SecondCategory SecondCategory { get; set; }

@@ -40,7 +40,7 @@ namespace Phoebe.Business
         /// <returns></returns>
         public FirstCategory GetFirstCategory(int id)
         {
-            return this.context.FirstCategories.SingleOrDefault(r => r.ID == id);
+            return this.context.FirstCategories.Find(id);
         }
 
         /// <summary>
@@ -53,14 +53,24 @@ namespace Phoebe.Business
         }
 
         /// <summary>
+        /// 获取一级分类下二级分类
+        /// </summary>
+        /// <param name="firstId">一级分类ID</param>
+        /// <returns></returns>
+        public List<SecondCategory> GetSecondCategoryByFirst(int firstId)
+        {
+            return this.context.SecondCategories.Where(r => r.FirstCategoryID == firstId).ToList();
+        }
+
+        /// <summary>
         /// 获取二级分类
         /// </summary>
         /// <param name="id">二级分类ID</param>
         /// <returns></returns>
         public SecondCategory GetSecondCategory(int id)
         {
-            return this.context.SecondCategories.SingleOrDefault(r => r.ID == id);
-        }
+            return this.context.SecondCategories.Find(id);
+        }        
 
         /// <summary>
         /// 添加一级分类

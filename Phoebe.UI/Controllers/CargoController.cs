@@ -107,5 +107,23 @@ namespace Phoebe.UI.Controllers
             return View(model);
         }
         #endregion //Action
+
+        #region JSON
+        /// <summary>
+        /// 获取二级分类
+        /// </summary>
+        /// <param name="firstId">一级分类ID</param>
+        /// <returns></returns>
+        public JsonResult GetSecondCategory(int firstId)
+        {
+            CategoryBusiness categoryBusiness = new CategoryBusiness();
+            var category = categoryBusiness.GetSecondCategoryByFirst(firstId);
+
+            var data = from r in category
+                       select new { r.ID, r.Name };
+
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+        #endregion //JSON
     }
 }

@@ -50,6 +50,18 @@ namespace Phoebe.Model
         public Nullable<double> Volume { get; set; }
 
         /// <summary>
+        /// 产地
+        /// </summary>
+        [Display(Name = "产地")]
+        public string OriginPlace { get; set; }
+
+        /// <summary>
+        /// 保质期
+        /// </summary>
+        [Display(Name = "保质期")]
+        public int ShelfLife { get; set; }
+
+        /// <summary>
         /// 所属合同
         /// </summary>
         [Required]

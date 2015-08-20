@@ -28,7 +28,7 @@
         <div class="portlet box blue">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="fa fa-list"></i>&nbsp;客户列表
+                    <i class="fa fa-list"></i>&nbsp;货品列表
                 </div>
                 <div class="tools">
                     <a href="javascript:;" class="collapse">
@@ -72,6 +72,37 @@
                             </th>
                         </tr>
                     </thead>
+                    <tfoot>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Name)
+                            </th>
+                            <th data-filter="true">
+                                @Html.DisplayNameFor(model => model.FirstCategoryID)
+                            </th>
+                            <th data-filter="true">
+                                @Html.DisplayNameFor(model => model.SecondCategoryID)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Weight)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Volume)
+                            </th>
+                            <th data-filter="true">
+                                @Html.DisplayNameFor(model => model.ContractID)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.RegisterTime)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.UserID)
+                            </th>
+                            <th>
+                                操作
+                            </th>
+                        </tr>
+                    </tfoot>
                     <tbody>
 
                         @foreach (var item in Model)
@@ -81,10 +112,10 @@
                                     @Html.DisplayFor(modelItem => item.Name)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.FirstCategoryID)
+                                    @item.FirstCategory.Name
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.SecondCategoryID)
+                                    @item.SecondCategory.Name
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Weight)
@@ -93,7 +124,7 @@
                                     @Html.DisplayFor(modelItem => item.Volume)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.ContractID)
+                                    @item.Contract.Name
                                 </td>
                                 <td>
                                     @item.RegisterTime.ToDateTimeString()

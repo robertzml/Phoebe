@@ -15,6 +15,8 @@
           <Property Name="SecondCategoryID" Type="int" Nullable="false" />
           <Property Name="Weight" Type="float" />
           <Property Name="Volume" Type="float" />
+          <Property Name="OriginPlace" Type="nvarchar" MaxLength="100" />
+          <Property Name="ShelfLife" Type="int" Nullable="false" />
           <Property Name="ContractID" Type="int" Nullable="false" />
           <Property Name="RegisterTime" Type="datetime" Nullable="false" />
           <Property Name="UserID" Type="int" Nullable="false" />
@@ -536,13 +538,15 @@
           <Property Name="SecondCategoryID" Type="Int32" Nullable="false" />
           <Property Name="Weight" Type="Double" />
           <Property Name="Volume" Type="Double" />
+          <Property Name="OriginPlace" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ShelfLife" Type="Int32" Nullable="false" />
           <Property Name="ContractID" Type="Int32" Nullable="false" />
           <Property Name="RegisterTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
           <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" Nullable="false" />
           <NavigationProperty Name="FirstCategory" Relationship="PhoebeModel.FK_Cargo_FirstCategory" FromRole="Cargo" ToRole="FirstCategory" />
           <NavigationProperty Name="SecondCategory" Relationship="PhoebeModel.FK_Cargo_SecondCategory" FromRole="Cargo" ToRole="SecondCategory" />
-          <Property Name="UserID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="User" Relationship="PhoebeModel.FK_Cargo_User" FromRole="Cargo" ToRole="User" />
           <NavigationProperty Name="StockInDetails" Relationship="PhoebeModel.FK_StockInDetails_Cargo" FromRole="Cargo" ToRole="StockInDetail" />
           <NavigationProperty Name="Contract" Relationship="PhoebeModel.FK_Cargo_Contract" FromRole="Cargo" ToRole="Contract" />
@@ -842,6 +846,8 @@
           <EntitySetMapping Name="Cargoes">
             <EntityTypeMapping TypeName="PhoebeModel.Cargo">
               <MappingFragment StoreEntitySet="Cargo">
+                <ScalarProperty Name="ShelfLife" ColumnName="ShelfLife" />
+                <ScalarProperty Name="OriginPlace" ColumnName="OriginPlace" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Remark" ColumnName="Remark" />
