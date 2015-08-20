@@ -38,7 +38,8 @@ namespace Phoebe.UI.Controllers
         /// <returns></returns>
         public ActionResult Index()
         {
-            return View();
+            var data = this.cargoBusiness.Get();
+            return View(data);
         }
 
         /// <summary>
@@ -123,6 +124,30 @@ namespace Phoebe.UI.Controllers
                        select new { r.ID, r.Name };
 
             return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+
+        /// <summary>
+        /// 获取货品
+        /// </summary>
+        /// <param name="type">类型</param>
+        /// <param name="contractID">所属合同</param>
+        /// <returns></returns>
+        public JsonResult GetCargos(int type, int contractID)
+        {
+            if (type == 1)  // not stock in
+            {
+                var cargos = this.cargoBusiness.Get(EntityStatus.CargoNotIn).Where(r => r.ContractID == contractID);
+
+                var data = from r in cargos
+                           select new { r.ID, r.Name, FirstCategoryName = r.FirstCategory.Name };
+
+                return Json(data, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return null;
+            }
         }
         #endregion //JSON
     }

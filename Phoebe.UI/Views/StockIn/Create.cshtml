@@ -6,6 +6,7 @@
 
 @section styles {    
     <link rel="stylesheet" type="text/css" href="/assets/global/plugins/bootstrap-select/bootstrap-select.min.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/global/plugins/jquery-multi-select/css/multi-select.css" />
 }
 
 <!-- BEGIN PAGE HEADER-->
@@ -59,18 +60,24 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     @Html.LabelFor(model => model.WarehouseID, htmlAttributes: new { @class = "control-label col-md-2" })
-                                    <div class="col-md-10">
+                                    <div class="col-md-9">
                                         @Html.EditorFor(model => model.WarehouseID, new { htmlAttributes = new { @class = "form-control" } })
                                         @Html.ValidationMessageFor(model => model.WarehouseID, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-1">
+                                        <span class="required">*</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     @Html.LabelFor(model => model.TrayID, htmlAttributes: new { @class = "control-label col-md-2" })
-                                    <div class="col-md-10">
+                                    <div class="col-md-9">
                                         @Html.EditorFor(model => model.TrayID, new { htmlAttributes = new { @class = "form-control" } })
                                         @Html.ValidationMessageFor(model => model.TrayID, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-1">
+                                        <span class="required">*</span>
                                     </div>
                                 </div>
                             </div>
@@ -79,10 +86,29 @@
                         <h3 class="form-section">货品选择</h3>
                         <div class="row">
                             <div class="col-md-6">
-                                <label class="control-label col-md-3">Last Name</label>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2">合同选择</label>
+                                    <div class="col-md-9">
+                                        <select id="ContractID" name="ContractID" class="form-control">
+                                            <option value="">-- 请选择 --</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <span class="required">*</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-2">货品选择</label>
+                                    <div class="col-md-9" id="cargo-container">
+                                        
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
+                        <h3 class="form-section">附加信息</h3>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
@@ -119,6 +145,7 @@
 
 @section Scripts {
     <script type="text/javascript" src="/assets/global/plugins/bootstrap-select/bootstrap-select.min.js"></script>
+    <script type="text/javascript" src="/assets/global/plugins/jquery-multi-select/js/jquery.multi-select.js"></script>
     <script type="text/javascript">
         $(function () {
             phoebe.leftNavActive($('#menu-stock-in-create'));
@@ -129,7 +156,33 @@
             });
 
             $.getJSON('/StockIn/GetContracts', { type: 0 }, function (response) {
+                $.each(response, function (i, item) {
+                    $('#ContractID').append("<option value='" + item.ID + "'>" + item.Name + "</option>");
+                });
 
+                $('#ContractID').change(function () {
+                    var contractId = $(this).val();
+
+                    $('#cargo-container').empty();
+                    if (contractId == '')
+                        return;
+
+                    $.getJSON('/Cargo/GetCargos', { type: 1, contractID: contractId }, function (response) {
+
+                        var cargoList = $("<select multiple='multiple' class='multi-select' id='CargoList' name='CargoList[]'></select>");
+
+                        $.each(response, function (i, item) {
+                            cargoList.append("<option value='" + item.ID + "'>" + item.Name + "</option>");
+                        });
+
+                        cargoList.appendTo($('#cargo-container'));
+
+                        $('#CargoList').multiSelect({
+                            selectableOptgroup: false
+                        });
+                    });
+                });
+                
             });
 
         });

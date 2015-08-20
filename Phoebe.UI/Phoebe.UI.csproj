@@ -217,8 +217,6 @@
     <Content Include="assets\global\img\remove-icon-small.png" />
     <Content Include="assets\global\img\syncfusion-icons-white.png" />
     <Content Include="assets\global\img\syncfusion-icons.png" />
-    <Content Include="assets\global\plugins\backstretch\jquery.backstretch.js" />
-    <Content Include="assets\global\plugins\backstretch\jquery.backstretch.min.js" />
     <Content Include="assets\global\plugins\bootbox\bootbox.min.js" />
     <Content Include="assets\global\plugins\bootstrap-datepicker\css\bootstrap-datepicker.css" />
     <Content Include="assets\global\plugins\bootstrap-datepicker\css\bootstrap-datepicker.min.css" />
@@ -426,6 +424,11 @@
     <Content Include="assets\global\plugins\jquery-knob\js\jquery.knob.js" />
     <Content Include="assets\global\plugins\jquery-migrate.min.js" />
     <Content Include="assets\global\plugins\jquery-mixitup\jquery.mixitup.min.js" />
+    <Content Include="assets\global\plugins\jquery-multi-select\css\multi-select.css" />
+    <Content Include="assets\global\plugins\jquery-multi-select\img\switch.png" />
+    <Content Include="assets\global\plugins\jquery-multi-select\img\switch_original.png" />
+    <Content Include="assets\global\plugins\jquery-multi-select\js\jquery.multi-select.js" />
+    <Content Include="assets\global\plugins\jquery-multi-select\LICENSE.txt" />
     <Content Include="assets\global\plugins\jquery-slimscroll\jquery.slimscroll.js" />
     <Content Include="assets\global\plugins\jquery-slimscroll\jquery.slimscroll.min.js" />
     <Content Include="assets\global\plugins\jquery-tags-input\jquery.tagsinput.css" />
@@ -576,8 +579,6 @@
     <Content Include="Content\phoebe.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="assets\global\plugins\backstretch\LICENSE-MIT" />
-    <Content Include="assets\global\plugins\backstretch\README.md" />
     <Content Include="assets\global\plugins\bootbox\LICENSE.md" />
     <Content Include="assets\global\plugins\bootbox\README.md" />
     <Content Include="assets\global\plugins\bootstrap-datepicker\LICENSE" />
@@ -640,6 +641,7 @@
     <Content Include="assets\global\plugins\typeahead\README.md" />
     <Content Include="assets\global\plugins\uniform\css\uniform.default.scss" />
     <Content Include="assets\global\plugins\uniform\README.md" />
+    <Content Include="assets\global\plugins\jquery-multi-select\README.markdown" />
     <None Include="Scripts\jquery-1.11.2.intellisense.js" />
     <Content Include="Images\phoebe-logo.png" />
     <Content Include="Scripts\jquery-1.11.2.js" />
@@ -715,6 +717,7 @@
     <Content Include="Views\Shared\EditorTemplates\FreeTrayList.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\CustomerType.cshtml" />
     <Content Include="Views\Contract\List.cshtml" />
+    <Content Include="Views\Cargo\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

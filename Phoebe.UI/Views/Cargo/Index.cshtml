@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Phoebe.Model.Cargo>
 
 @{
-    ViewBag.Title = "未入库货品";
+    ViewBag.Title = "货品列表";
 }
 
 <!-- BEGIN PAGE HEADER-->
@@ -18,6 +18,9 @@
         <li>
             <a href="#">货品管理</a>
             <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#">@ViewBag.Title</a>
         </li>
     </ul>
 </div>
@@ -68,6 +71,9 @@
                                 @Html.DisplayNameFor(model => model.UserID)
                             </th>
                             <th>
+                                @Html.DisplayNameFor(model => model.Status)
+                            </th>
+                            <th>
                                 操作
                             </th>
                         </tr>
@@ -97,6 +103,9 @@
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.UserID)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Status)
                             </th>
                             <th>
                                 操作
@@ -132,6 +141,9 @@
                                     @item.User.Name
                                 </td>
                                 <td>
+                                    @(((EntityStatus)item.Status).DisplayName())
+                                </td>
+                                <td>
                                     <a href="@Url.Action("Details", new { controller = "Cargo", id = item.ID.ToString() })" class="btn btn-info btn-sm" role="button"><i class="fa fa-check-circle"></i>&nbsp;查看</a>
                                 </td>
                             </tr>
@@ -147,8 +159,12 @@
 @section Scripts {
     <script type="text/javascript">
         $(function () {
-            phoebe.leftNavActive($('#menu-cargo-notin'));
+            phoebe.leftNavActive($('#menu-cargo-index'));
             phoebe.initDatatable($('#cargo-table'));
         });
     </script>
 }
+
+
+
+
