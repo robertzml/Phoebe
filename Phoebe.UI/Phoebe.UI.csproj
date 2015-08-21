@@ -136,6 +136,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ScatterCustomerController.cs" />
     <Compile Include="Controllers\StockInController.cs" />
+    <Compile Include="Controllers\StockOutController.cs" />
     <Compile Include="Controllers\TrayController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\UserGroupController.cs" />
@@ -720,6 +721,7 @@
     <Content Include="Views\Cargo\Index.cshtml" />
     <Content Include="Views\StockIn\Confirm.cshtml" />
     <Content Include="Views\StockIn\Audit.cshtml" />
+    <Content Include="Views\StockOut\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

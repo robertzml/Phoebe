@@ -112,6 +112,19 @@
           <Property Name="Remark" Type="nvarchar" MaxLength="500" />
           <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="StockOut">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="OutTime" Type="datetime" Nullable="false" />
+          <Property Name="ConfirmTime" Type="datetime" />
+          <Property Name="WarehouseID" Type="int" Nullable="false" />
+          <Property Name="TrayID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="500" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Tray">
           <Key>
             <PropertyRef Name="ID" />
@@ -291,6 +304,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_StockOut_Tray">
+          <End Role="Tray" Type="Self.Tray" Multiplicity="1" />
+          <End Role="StockOut" Type="Self.StockOut" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tray">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="StockOut">
+              <PropertyRef Name="TrayID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockOut_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="StockOut" Type="Self.StockOut" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="StockOut">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockOut_Warehouse">
+          <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="1" />
+          <End Role="StockOut" Type="Self.StockOut" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouse">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="StockOut">
+              <PropertyRef Name="WarehouseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_User_UserGroup">
           <End Role="UserGroup" Type="Self.UserGroup" Multiplicity="1" />
           <End Role="User" Type="Self.User" Multiplicity="*" />
@@ -324,6 +373,7 @@
           <EntitySet Name="SecondCategory" EntityType="Self.SecondCategory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StockIn" EntityType="Self.StockIn" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StockInDetails" EntityType="Self.StockInDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StockOut" EntityType="Self.StockOut" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tray" EntityType="Self.Tray" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserGroup" EntityType="Self.UserGroup" Schema="dbo" store:Type="Tables" />
@@ -372,6 +422,18 @@
             <End Role="StockIn" EntitySet="StockIn" />
             <End Role="StockInDetails" EntitySet="StockInDetails" />
           </AssociationSet>
+          <AssociationSet Name="FK_StockOut_Tray" Association="Self.FK_StockOut_Tray">
+            <End Role="Tray" EntitySet="Tray" />
+            <End Role="StockOut" EntitySet="StockOut" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockOut_User" Association="Self.FK_StockOut_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="StockOut" EntitySet="StockOut" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockOut_Warehouse" Association="Self.FK_StockOut_Warehouse">
+            <End Role="Warehouse" EntitySet="Warehouse" />
+            <End Role="StockOut" EntitySet="StockOut" />
+          </AssociationSet>
           <AssociationSet Name="FK_User_UserGroup" Association="Self.FK_User_UserGroup">
             <End Role="UserGroup" EntitySet="UserGroup" />
             <End Role="User" EntitySet="User" />
@@ -402,6 +464,7 @@
           <NavigationProperty Name="ChildrenWarehouse" Relationship="Self.FK_Warehouse_Warehouse" FromRole="Warehouse" ToRole="Warehouse1" />
           <NavigationProperty Name="ParentWarehouse" Relationship="Self.FK_Warehouse_Warehouse" FromRole="Warehouse1" ToRole="Warehouse" />
           <NavigationProperty Name="StockIns" Relationship="PhoebeModel.FK_StockIn_Warehouse" FromRole="Warehouse" ToRole="StockIn" />
+          <NavigationProperty Name="StockOuts" Relationship="PhoebeModel.FK_StockOut_Warehouse" FromRole="Warehouse" ToRole="StockOut" />
         </EntityType>
         <Association Name="FK_Warehouse_Warehouse">
           <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="0..1" />
@@ -479,6 +542,19 @@
           <AssociationSet Name="FK_Contract_User" Association="PhoebeModel.FK_Contract_User">
             <End Role="User" EntitySet="Users" />
             <End Role="Contract" EntitySet="Contracts" />
+          </AssociationSet>
+          <EntitySet Name="StockOuts" EntityType="PhoebeModel.StockOut" />
+          <AssociationSet Name="FK_StockOut_Tray" Association="PhoebeModel.FK_StockOut_Tray">
+            <End Role="Tray" EntitySet="Trays" />
+            <End Role="StockOut" EntitySet="StockOuts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockOut_User" Association="PhoebeModel.FK_StockOut_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="StockOut" EntitySet="StockOuts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockOut_Warehouse" Association="PhoebeModel.FK_StockOut_Warehouse">
+            <End Role="Warehouse" EntitySet="Warehouses" />
+            <End Role="StockOut" EntitySet="StockOuts" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="ScatterCustomer">
@@ -586,6 +662,7 @@
           <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" Nullable="false" />
           <NavigationProperty Name="StockIns" Relationship="PhoebeModel.FK_StockIn_Tray" FromRole="Tray" ToRole="StockIn" />
+          <NavigationProperty Name="StockOuts" Relationship="PhoebeModel.FK_StockOut_Tray" FromRole="Tray" ToRole="StockOut" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -604,6 +681,7 @@
           <NavigationProperty Name="Cargoes" Relationship="PhoebeModel.FK_Cargo_User" FromRole="User" ToRole="Cargo" />
           <NavigationProperty Name="StockIns" Relationship="PhoebeModel.FK_StockIn_User" FromRole="User" ToRole="StockIn" />
           <NavigationProperty Name="Contracts" Relationship="PhoebeModel.FK_Contract_User" FromRole="User" ToRole="Contract" />
+          <NavigationProperty Name="StockOuts" Relationship="PhoebeModel.FK_StockOut_User" FromRole="User" ToRole="StockOut" />
         </EntityType>
         <EntityType Name="UserGroup">
           <Key>
@@ -791,6 +869,58 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="StockOut">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="OutTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ConfirmTime" Type="DateTime" Precision="3" />
+          <Property Name="WarehouseID" Type="Int32" Nullable="false" />
+          <Property Name="TrayID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Tray" Relationship="PhoebeModel.FK_StockOut_Tray" FromRole="StockOut" ToRole="Tray" />
+          <NavigationProperty Name="User" Relationship="PhoebeModel.FK_StockOut_User" FromRole="StockOut" ToRole="User" />
+          <NavigationProperty Name="Warehouse" Relationship="PhoebeModel.FK_StockOut_Warehouse" FromRole="StockOut" ToRole="Warehouse" />
+        </EntityType>
+        <Association Name="FK_StockOut_Tray">
+          <End Type="PhoebeModel.Tray" Role="Tray" Multiplicity="1" />
+          <End Type="PhoebeModel.StockOut" Role="StockOut" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tray">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="StockOut">
+              <PropertyRef Name="TrayID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockOut_User">
+          <End Type="PhoebeModel.User" Role="User" Multiplicity="1" />
+          <End Type="PhoebeModel.StockOut" Role="StockOut" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="StockOut">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockOut_Warehouse">
+          <End Type="PhoebeModel.Warehouse" Role="Warehouse" Multiplicity="1" />
+          <End Type="PhoebeModel.StockOut" Role="StockOut" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouse">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="StockOut">
+              <PropertyRef Name="WarehouseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -958,6 +1088,20 @@
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StockOuts">
+            <EntityTypeMapping TypeName="PhoebeModel.StockOut">
+              <MappingFragment StoreEntitySet="StockOut">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="TrayID" ColumnName="TrayID" />
+                <ScalarProperty Name="WarehouseID" ColumnName="WarehouseID" />
+                <ScalarProperty Name="ConfirmTime" ColumnName="ConfirmTime" />
+                <ScalarProperty Name="OutTime" ColumnName="OutTime" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

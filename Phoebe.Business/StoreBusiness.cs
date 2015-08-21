@@ -127,6 +127,7 @@ namespace Phoebe.Business
                 if (si == null)
                     return ErrorCode.ObjectNotFound;
 
+                si.ConfirmTime = DateTime.Now;
                 si.Remark = remark;
                 si.Status = (int)status;
 
