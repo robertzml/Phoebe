@@ -96,10 +96,16 @@ namespace Phoebe.Model
         StockInReady = 61,
 
         /// <summary>
-        /// 62:已入库
+        /// 62:入库取消
+        /// </summary>
+        [Display(Name = "入库取消")]
+        StockInCancel = 62,
+
+        /// <summary>
+        /// 63:已入库
         /// </summary>
         [Display(Name = "已入库")]
-        StockIn = 62
+        StockIn = 63
         #endregion //Store
 
     }

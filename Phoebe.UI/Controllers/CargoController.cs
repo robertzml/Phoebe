@@ -38,7 +38,7 @@ namespace Phoebe.UI.Controllers
         /// <returns></returns>
         public ActionResult Index()
         {
-            var data = this.cargoBusiness.Get();
+            var data = this.cargoBusiness.Get(EntityStatus.CargoStockIn);
             return View(data);
         }
 
@@ -48,7 +48,9 @@ namespace Phoebe.UI.Controllers
         /// <returns></returns>
         public ActionResult ListByNotIn()
         {
-            var data = this.cargoBusiness.Get(EntityStatus.CargoNotIn);
+            var data1 = this.cargoBusiness.Get(EntityStatus.CargoNotIn);
+            var data2 = this.cargoBusiness.Get(EntityStatus.CargoStockInReady);
+            var data = data1.Union(data2);
             return View(data);
         }
 

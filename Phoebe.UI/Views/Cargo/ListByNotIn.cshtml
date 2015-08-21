@@ -68,6 +68,9 @@
                                 @Html.DisplayNameFor(model => model.UserID)
                             </th>
                             <th>
+                                @Html.DisplayNameFor(model => model.Status)
+                            </th>
+                            <th>
                                 操作
                             </th>
                         </tr>
@@ -97,6 +100,9 @@
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.UserID)
+                            </th>
+                            <th data-filter="true">
+                                @Html.DisplayNameFor(model => model.Status)
                             </th>
                             <th>
                                 操作
@@ -130,6 +136,9 @@
                                 </td>
                                 <td>
                                     @item.User.Name
+                                </td>
+                                <td>
+                                    @(((EntityStatus)item.Status).DisplayName())
                                 </td>
                                 <td>
                                     <a href="@Url.Action("Details", new { controller = "Cargo", id = item.ID.ToString() })" class="btn btn-info btn-sm" role="button"><i class="fa fa-check-circle"></i>&nbsp;查看</a>

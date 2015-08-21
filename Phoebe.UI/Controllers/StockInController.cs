@@ -87,6 +87,50 @@ namespace Phoebe.UI.Controllers
 
             return View(model);
         }
+
+        /// <summary>
+        /// 入库审核
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Audit()
+        {
+            var data = this.storeBusiness.GetStockInByStatus(EntityStatus.StockInReady);
+            return View(data);
+        }
+
+        /// <summary>
+        /// 入库确认
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult Confirm(string id)
+        {
+            var data = this.storeBusiness.GetStockIn(id);
+
+            if (data == null || data.Status != (int)EntityStatus.StockInReady)
+                return HttpNotFound();
+
+            return View(data);
+        }
+
+        /// <summary>
+        /// 入库确认
+        /// </summary>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult Confirm()
+        {
+            string id = Request.Form["ID"];
+            string remark = Request.Form["Remark"];
+            EntityStatus status = Request.Form["auditResult"] == "1" ? EntityStatus.StockIn : EntityStatus.StockInCancel;
+
+            this.storeBusiness.StockInAudit(id, remark, status);
+
+            TempData["Message"] = "入库审核完毕";
+            return RedirectToAction("Audit", "StockIn");
+        }
         #endregion //Action
 
         #region Json

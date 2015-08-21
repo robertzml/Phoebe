@@ -44,6 +44,17 @@ namespace Phoebe.Business
         }
 
         /// <summary>
+        /// 获取相关货品
+        /// </summary>
+        /// <param name="status"></param>
+        /// <returns></returns>
+        public List<Cargo> Get(EntityStatus[] status)
+        {
+            int[] s = status.Cast<int>().ToArray();
+            return this.context.Cargoes.Where(r => s.Contains(r.Status)).ToList();
+        }
+
+        /// <summary>
         /// 获取货品
         /// </summary>
         /// <param name="id">ID</param>

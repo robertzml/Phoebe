@@ -24,6 +24,7 @@ namespace Phoebe.Business
         #endregion //Constructor
 
         #region Method
+        #region Stock In
         /// <summary>
         /// 货品入库
         /// </summary>
@@ -72,6 +73,81 @@ namespace Phoebe.Business
 
             return ErrorCode.Success;
         }
+
+        /// <summary>
+        /// 获取所有入库记录
+        /// </summary>
+        /// <returns></returns>
+        public List<StockIn> GetStockIn()
+        {
+            var data = this.context.StockIns.ToList();
+            return data;
+        }
+
+        /// <summary>
+        /// 获取入库记录
+        /// </summary>
+        /// <param name="id">ID</param>
+        /// <returns></returns>
+        public StockIn GetStockIn(string id)
+        {
+            Guid gid;
+            if (!Guid.TryParse(id, out gid))
+                return null;
+
+            return this.context.StockIns.Find(gid);
+        }
+
+        /// <summary>
+        /// 获取入库记录
+        /// </summary>
+        /// <param name="status">状态</param>
+        /// <returns></returns>
+        public List<StockIn> GetStockInByStatus(EntityStatus status)
+        {
+            return this.context.StockIns.Where(r => r.Status == (int)status).ToList();
+        }
+
+        /// <summary>
+        /// 入库审核
+        /// </summary>
+        /// <param name="id">ID</param>
+        /// <param name="remark">备注</param>
+        /// <param name="status">状态</param>
+        /// <returns></returns>
+        public ErrorCode StockInAudit(string id, string remark, EntityStatus status)
+        {
+            try
+            {
+                Guid gid;
+                if (!Guid.TryParse(id, out gid))
+                    return ErrorCode.ObjectNotFound;
+
+                StockIn si = this.context.StockIns.Find(gid);
+                if (si == null)
+                    return ErrorCode.ObjectNotFound;
+
+                si.Remark = remark;
+                si.Status = (int)status;
+
+                foreach (var item in si.StockInDetails)
+                {
+                    if (status == EntityStatus.StockIn)
+                        item.Cargo.Status = (int)EntityStatus.CargoStockIn;
+                    else
+                        item.Cargo.Status = (int)EntityStatus.CargoNotIn;
+                }
+
+                this.context.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+
+            return ErrorCode.Success;
+        }
+        #endregion //Stock In
         #endregion //Method
     }
 }
