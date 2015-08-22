@@ -28,6 +28,12 @@ namespace Phoebe.Model
         public Nullable<double> Width { get; set; }
 
         /// <summary>
+        /// 所在仓库
+        /// </summary>
+        [Display(Name = "所在仓库")]
+        public Nullable<int> WarehouseID { get; set; }
+
+        /// <summary>
         /// 添加时间
         /// </summary>
         [Display(Name = "添加时间")]

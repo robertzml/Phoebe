@@ -107,6 +107,5 @@ namespace Phoebe.Model
         [Display(Name = "已入库")]
         StockIn = 63
         #endregion //Store
-
     }
 }

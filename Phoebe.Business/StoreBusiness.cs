@@ -41,6 +41,7 @@ namespace Phoebe.Business
 
                 this.context.StockIns.Add(data);
 
+                // add stock in detail
                 for (int i = 0; i < cargos.Length; i++)
                 {
                     StockInDetail detail = new StockInDetail
@@ -138,6 +139,10 @@ namespace Phoebe.Business
                     else
                         item.Cargo.Status = (int)EntityStatus.CargoNotIn;
                 }
+
+                // change tray position
+                if (status == EntityStatus.StockIn)
+                    si.Tray.WarehouseID = si.WarehouseID;
 
                 this.context.SaveChanges();
             }

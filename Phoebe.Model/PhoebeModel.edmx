@@ -132,6 +132,7 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Length" Type="float" />
           <Property Name="Width" Type="float" />
+          <Property Name="WarehouseID" Type="int" />
           <Property Name="CreateTime" Type="datetime" Nullable="false" />
           <Property Name="Remark" Type="nvarchar" MaxLength="500" />
           <Property Name="Status" Type="int" Nullable="false" />
@@ -340,6 +341,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Tray_Warehouse">
+          <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="0..1" />
+          <End Role="Tray" Type="Self.Tray" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouse">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tray">
+              <PropertyRef Name="WarehouseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_User_UserGroup">
           <End Role="UserGroup" Type="Self.UserGroup" Multiplicity="1" />
           <End Role="User" Type="Self.User" Multiplicity="*" />
@@ -434,6 +447,10 @@
             <End Role="Warehouse" EntitySet="Warehouse" />
             <End Role="StockOut" EntitySet="StockOut" />
           </AssociationSet>
+          <AssociationSet Name="FK_Tray_Warehouse" Association="Self.FK_Tray_Warehouse">
+            <End Role="Warehouse" EntitySet="Warehouse" />
+            <End Role="Tray" EntitySet="Tray" />
+          </AssociationSet>
           <AssociationSet Name="FK_User_UserGroup" Association="Self.FK_User_UserGroup">
             <End Role="UserGroup" EntitySet="UserGroup" />
             <End Role="User" EntitySet="User" />
@@ -465,6 +482,7 @@
           <NavigationProperty Name="ParentWarehouse" Relationship="Self.FK_Warehouse_Warehouse" FromRole="Warehouse1" ToRole="Warehouse" />
           <NavigationProperty Name="StockIns" Relationship="PhoebeModel.FK_StockIn_Warehouse" FromRole="Warehouse" ToRole="StockIn" />
           <NavigationProperty Name="StockOuts" Relationship="PhoebeModel.FK_StockOut_Warehouse" FromRole="Warehouse" ToRole="StockOut" />
+          <NavigationProperty Name="Trays" Relationship="PhoebeModel.FK_Tray_Warehouse" FromRole="Warehouse" ToRole="Tray" />
         </EntityType>
         <Association Name="FK_Warehouse_Warehouse">
           <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="0..1" />
@@ -500,7 +518,6 @@
             <End Role="SecondCategory" EntitySet="SecondCategories" />
             <End Role="Cargo" EntitySet="Cargoes" />
           </AssociationSet>
-          <EntitySet Name="Trays" EntityType="PhoebeModel.Tray" />
           <EntitySet Name="Users" EntityType="PhoebeModel.User" />
           <EntitySet Name="UserGroups" EntityType="PhoebeModel.UserGroup" />
           <AssociationSet Name="FK_User_UserGroup" Association="PhoebeModel.FK_User_UserGroup">
@@ -512,10 +529,6 @@
             <End Role="Cargo" EntitySet="Cargoes" />
           </AssociationSet>
           <EntitySet Name="StockIns" EntityType="PhoebeModel.StockIn" />
-          <AssociationSet Name="FK_StockIn_Tray" Association="PhoebeModel.FK_StockIn_Tray">
-            <End Role="Tray" EntitySet="Trays" />
-            <End Role="StockIn" EntitySet="StockIns" />
-          </AssociationSet>
           <AssociationSet Name="FK_StockIn_User" Association="PhoebeModel.FK_StockIn_User">
             <End Role="User" EntitySet="Users" />
             <End Role="StockIn" EntitySet="StockIns" />
@@ -544,10 +557,6 @@
             <End Role="Contract" EntitySet="Contracts" />
           </AssociationSet>
           <EntitySet Name="StockOuts" EntityType="PhoebeModel.StockOut" />
-          <AssociationSet Name="FK_StockOut_Tray" Association="PhoebeModel.FK_StockOut_Tray">
-            <End Role="Tray" EntitySet="Trays" />
-            <End Role="StockOut" EntitySet="StockOuts" />
-          </AssociationSet>
           <AssociationSet Name="FK_StockOut_User" Association="PhoebeModel.FK_StockOut_User">
             <End Role="User" EntitySet="Users" />
             <End Role="StockOut" EntitySet="StockOuts" />
@@ -555,6 +564,19 @@
           <AssociationSet Name="FK_StockOut_Warehouse" Association="PhoebeModel.FK_StockOut_Warehouse">
             <End Role="Warehouse" EntitySet="Warehouses" />
             <End Role="StockOut" EntitySet="StockOuts" />
+          </AssociationSet>
+          <EntitySet Name="Trays" EntityType="PhoebeModel.Tray" />
+          <AssociationSet Name="FK_StockIn_Tray" Association="PhoebeModel.FK_StockIn_Tray">
+            <End Role="Tray" EntitySet="Trays" />
+            <End Role="StockIn" EntitySet="StockIns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockOut_Tray" Association="PhoebeModel.FK_StockOut_Tray">
+            <End Role="Tray" EntitySet="Trays" />
+            <End Role="StockOut" EntitySet="StockOuts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tray_Warehouse" Association="PhoebeModel.FK_Tray_Warehouse">
+            <End Role="Warehouse" EntitySet="Warehouses" />
+            <End Role="Tray" EntitySet="Trays" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="ScatterCustomer">
@@ -651,19 +673,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Tray">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Length" Type="Double" />
-          <Property Name="Width" Type="Double" />
-          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="StockIns" Relationship="PhoebeModel.FK_StockIn_Tray" FromRole="Tray" ToRole="StockIn" />
-          <NavigationProperty Name="StockOuts" Relationship="PhoebeModel.FK_StockOut_Tray" FromRole="Tray" ToRole="StockOut" />
-        </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="ID" />
@@ -731,23 +740,11 @@
           <Property Name="UserID" Type="Int32" Nullable="false" />
           <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Tray" Relationship="PhoebeModel.FK_StockIn_Tray" FromRole="StockIn" ToRole="Tray" />
           <NavigationProperty Name="User" Relationship="PhoebeModel.FK_StockIn_User" FromRole="StockIn" ToRole="User" />
           <NavigationProperty Name="Warehouse" Relationship="PhoebeModel.FK_StockIn_Warehouse" FromRole="StockIn" ToRole="Warehouse" />
           <NavigationProperty Name="StockInDetails" Relationship="PhoebeModel.FK_StockInDetails_StockIn" FromRole="StockIn" ToRole="StockInDetail" />
+          <NavigationProperty Name="Tray" Relationship="PhoebeModel.FK_StockIn_Tray" FromRole="StockIn" ToRole="Tray" />
         </EntityType>
-        <Association Name="FK_StockIn_Tray">
-          <End Type="PhoebeModel.Tray" Role="Tray" Multiplicity="1" />
-          <End Type="PhoebeModel.StockIn" Role="StockIn" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tray">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="StockIn">
-              <PropertyRef Name="TrayID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_StockIn_User">
           <End Type="PhoebeModel.User" Role="User" Multiplicity="1" />
           <End Type="PhoebeModel.StockIn" Role="StockIn" Multiplicity="*" />
@@ -881,22 +878,10 @@
           <Property Name="UserID" Type="Int32" Nullable="false" />
           <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Tray" Relationship="PhoebeModel.FK_StockOut_Tray" FromRole="StockOut" ToRole="Tray" />
           <NavigationProperty Name="User" Relationship="PhoebeModel.FK_StockOut_User" FromRole="StockOut" ToRole="User" />
           <NavigationProperty Name="Warehouse" Relationship="PhoebeModel.FK_StockOut_Warehouse" FromRole="StockOut" ToRole="Warehouse" />
+          <NavigationProperty Name="Tray" Relationship="PhoebeModel.FK_StockOut_Tray" FromRole="StockOut" ToRole="Tray" />
         </EntityType>
-        <Association Name="FK_StockOut_Tray">
-          <End Type="PhoebeModel.Tray" Role="Tray" Multiplicity="1" />
-          <End Type="PhoebeModel.StockOut" Role="StockOut" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tray">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="StockOut">
-              <PropertyRef Name="TrayID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_StockOut_User">
           <End Type="PhoebeModel.User" Role="User" Multiplicity="1" />
           <End Type="PhoebeModel.StockOut" Role="StockOut" Multiplicity="*" />
@@ -917,6 +902,57 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="StockOut">
+              <PropertyRef Name="WarehouseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Tray">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Length" Type="Double" />
+          <Property Name="Width" Type="Double" />
+          <Property Name="WarehouseID" Type="Int32" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="StockIns" Relationship="PhoebeModel.FK_StockIn_Tray" FromRole="Tray" ToRole="StockIn" />
+          <NavigationProperty Name="StockOuts" Relationship="PhoebeModel.FK_StockOut_Tray" FromRole="Tray" ToRole="StockOut" />
+          <NavigationProperty Name="Warehouse" Relationship="PhoebeModel.FK_Tray_Warehouse" FromRole="Tray" ToRole="Warehouse" />
+        </EntityType>
+        <Association Name="FK_StockIn_Tray">
+          <End Type="PhoebeModel.Tray" Role="Tray" Multiplicity="1" />
+          <End Type="PhoebeModel.StockIn" Role="StockIn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tray">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="StockIn">
+              <PropertyRef Name="TrayID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockOut_Tray">
+          <End Type="PhoebeModel.Tray" Role="Tray" Multiplicity="1" />
+          <End Type="PhoebeModel.StockOut" Role="StockOut" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tray">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="StockOut">
+              <PropertyRef Name="TrayID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tray_Warehouse">
+          <End Type="PhoebeModel.Warehouse" Role="Warehouse" Multiplicity="0..1" />
+          <End Type="PhoebeModel.Tray" Role="Tray" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouse">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tray">
               <PropertyRef Name="WarehouseID" />
             </Dependent>
           </ReferentialConstraint>
@@ -988,18 +1024,6 @@
                 <ScalarProperty Name="SecondCategoryID" ColumnName="SecondCategoryID" />
                 <ScalarProperty Name="FirstCategoryID" ColumnName="FirstCategoryID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Trays">
-            <EntityTypeMapping TypeName="PhoebeModel.Tray">
-              <MappingFragment StoreEntitySet="Tray">
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Remark" ColumnName="Remark" />
-                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
-                <ScalarProperty Name="Width" ColumnName="Width" />
-                <ScalarProperty Name="Length" ColumnName="Length" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1102,6 +1126,19 @@
                 <ScalarProperty Name="WarehouseID" ColumnName="WarehouseID" />
                 <ScalarProperty Name="ConfirmTime" ColumnName="ConfirmTime" />
                 <ScalarProperty Name="OutTime" ColumnName="OutTime" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Trays">
+            <EntityTypeMapping TypeName="PhoebeModel.Tray">
+              <MappingFragment StoreEntitySet="Tray">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="WarehouseID" ColumnName="WarehouseID" />
+                <ScalarProperty Name="Width" ColumnName="Width" />
+                <ScalarProperty Name="Length" ColumnName="Length" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

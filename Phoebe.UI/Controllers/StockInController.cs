@@ -33,10 +33,28 @@ namespace Phoebe.UI.Controllers
         #endregion //Constructor
 
         #region Action
-        // GET: StockIn
+        /// <summary>
+        /// 入库记录
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
-            return View();
+            var data = this.storeBusiness.GetStockIn();
+            return View(data);
+        }
+
+        /// <summary>
+        /// 入库信息
+        /// </summary>
+        /// <param name="id">ID</param>
+        /// <returns></returns>
+        public ActionResult Details(string id)
+        {
+            var data = this.storeBusiness.GetStockIn(id);
+            if (data == null)
+                return HttpNotFound();
+
+            return View(data);
         }
 
         /// <summary>

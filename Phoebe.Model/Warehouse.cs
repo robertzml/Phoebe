@@ -20,6 +20,7 @@ namespace Phoebe.Model
             this.ChildrenWarehouse = new HashSet<Warehouse>();
             this.StockIns = new HashSet<StockIn>();
             this.StockOuts = new HashSet<StockOut>();
+            this.Trays = new HashSet<Tray>();
         }
     
         public int ID { get; set; }
@@ -36,5 +37,7 @@ namespace Phoebe.Model
         public virtual ICollection<StockIn> StockIns { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StockOut> StockOuts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Tray> Trays { get; set; }
     }
 }
