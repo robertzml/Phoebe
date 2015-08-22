@@ -473,11 +473,6 @@
     <Content Include="assets\global\plugins\jstree\dist\themes\default\style.min.css" />
     <Content Include="assets\global\plugins\jstree\dist\themes\default\throbber.gif" />
     <Content Include="assets\global\plugins\moment.min.js" />
-    <Content Include="assets\global\plugins\rateit\src\delete.gif" />
-    <Content Include="assets\global\plugins\rateit\src\jquery.rateit.js" />
-    <Content Include="assets\global\plugins\rateit\src\jquery.rateit.min.js" />
-    <Content Include="assets\global\plugins\rateit\src\rateit.css" />
-    <Content Include="assets\global\plugins\rateit\src\star.gif" />
     <Content Include="assets\global\plugins\respond.min.js" />
     <Content Include="assets\global\plugins\select2\select2-bootstrap.css" />
     <Content Include="assets\global\plugins\select2\select2-spinner.gif" />
@@ -632,7 +627,6 @@
     <Content Include="assets\global\plugins\jstree\jstree.jquery.json" />
     <Content Include="assets\global\plugins\jstree\LICENSE-MIT" />
     <Content Include="assets\global\plugins\jstree\README.md" />
-    <Content Include="assets\global\plugins\rateit\src\jquery.rateit.min.js.map" />
     <Content Include="assets\global\plugins\select2\LICENSE" />
     <Content Include="assets\global\plugins\select2\README.md" />
     <Content Include="assets\global\plugins\select2\select2.jquery.json" />
@@ -726,6 +720,7 @@
     <Content Include="Views\StockIn\Index.cshtml" />
     <Content Include="Views\StockIn\Details.cshtml" />
     <Content Include="Views\Stock\Index.cshtml" />
+    <Content Include="Views\StockOut\Audit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

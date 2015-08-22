@@ -41,5 +41,12 @@ namespace Phoebe.UI.Controllers
             return View(data);
         }
         #endregion //Action
+
+        #region Json
+        public JsonResult GetStockCargo(int trayId)
+        {
+            return null;
+        }
+        #endregion //Json
     }
 }

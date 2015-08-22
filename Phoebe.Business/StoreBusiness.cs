@@ -33,6 +33,16 @@ namespace Phoebe.Business
         {
             return this.context.Stocks.ToList();
         }
+
+        /// <summary>
+        /// 获取当前库存
+        /// </summary>
+        /// <param name="trayID">托盘ID</param>
+        /// <returns></returns>
+        public List<Stock> GetInTray(int trayID)
+        {
+            return this.context.Stocks.Where(r => r.Status == (int)EntityStatus.StoreIn && r.TrayID == trayID).ToList();
+        }
         #endregion //Stock
 
         #region Stock In
@@ -96,11 +106,8 @@ namespace Phoebe.Business
                         Status = (int)EntityStatus.StockInReady
                     };
                     this.context.StockInDetails.Add(detail);
-                }
 
-                // change cargo status
-                for (int i = 0; i < cargos.Length; i++)
-                {
+                    // change cargo status
                     Guid gid = new Guid(cargos[i]);
                     Cargo cargo = this.context.Cargoes.Find(gid);
                     cargo.Status = (int)EntityStatus.CargoStockInReady;
@@ -151,6 +158,7 @@ namespace Phoebe.Business
                     // add stock information
                     foreach (var item in si.StockInDetails)
                     {
+                        // change stock in details and cargo status
                         item.Status = (int)EntityStatus.StockIn;
                         item.Cargo.Status = (int)EntityStatus.CargoStockIn;
 
@@ -172,6 +180,7 @@ namespace Phoebe.Business
                     // change tray status
                     si.Tray.Status = (int)EntityStatus.TrayUnused;
 
+                    // change stock in details and cargo status
                     foreach (var item in si.StockInDetails)
                     {
                         item.Status = (int)EntityStatus.StockInCancel;
@@ -189,6 +198,65 @@ namespace Phoebe.Business
             return ErrorCode.Success;
         }
         #endregion //Stock In
+
+        #region Stock Out
+        /// <summary>
+        /// 获取出库记录
+        /// </summary>
+        /// <param name="status">状态</param>
+        /// <returns></returns>
+        public List<StockOut> GetStockOutByStatus(EntityStatus status)
+        {
+            return this.context.StockOuts.Where(r => r.Status == (int)status).ToList();
+        }
+
+        /// <summary>
+        /// 货品出库
+        /// </summary>
+        /// <param name="data">出库数据</param>
+        /// <returns></returns>
+        public ErrorCode StockOut(StockOut data)
+        {
+            try
+            {
+                // find store first
+                var stocks = this.context.Stocks.Where(r => r.Status == (int)EntityStatus.StoreIn && r.TrayID == data.TrayID);
+                if (stocks.Count() == 0)
+                    return ErrorCode.StockNotFound;
+
+                // add stock out
+                data.ID = Guid.NewGuid();
+                data.WarehouseID = stocks.First().WarehouseID;
+                data.OutTime = DateTime.Now;
+                data.Status = (int)EntityStatus.StockOutReady;
+
+                this.context.StockOuts.Add(data);
+
+                // add stock out detail
+                foreach (var item in stocks)
+                {
+                    StockOutDetail detail = new StockOutDetail
+                    {
+                        StockOutID = data.ID,
+                        CargoID = item.CargoID,
+                        Status = (int)EntityStatus.StockOutReady
+                    };
+                    this.context.StockOutDetails.Add(detail);
+
+                    // change cargos status
+                    item.Cargo.Status = (int)EntityStatus.CargoStockOutReady;
+                }
+
+                this.context.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+
+            return ErrorCode.Success;
+        }
+        #endregion //Stock Out
         #endregion //Method
     }
 }

@@ -86,6 +86,18 @@ namespace Phoebe.Model
         /// </summary>
         [Display(Name = "入库")]
         CargoStockIn = 53,
+
+        /// <summary>
+        /// 54:货品准备出库
+        /// </summary>
+        [Display(Name = "准备出库")]
+        CargoStockOutReady = 54,
+
+        /// <summary>
+        /// 55:货品出库
+        /// </summary>
+        [Display(Name = "出库")]
+        CargoStockOut = 55,
         #endregion //Cargo
 
         #region Store
@@ -117,7 +129,25 @@ namespace Phoebe.Model
         /// 73:已入库
         /// </summary>
         [Display(Name = "已入库")]
-        StockIn = 73
+        StockIn = 73,
+
+        /// <summary>
+        /// 81:准备出库
+        /// </summary>
+        [Display(Name = "准备出库")]
+        StockOutReady = 81,
+
+        /// <summary>
+        /// 82:出库取消
+        /// </summary>
+        [Display(Name = "出库取消")]
+        StockOutCancel = 82,
+
+        /// <summary>
+        /// 83:已出库
+        /// </summary>
+        [Display(Name = "已出库")]
+        StockOut = 83
         #endregion //Store
     }
 }

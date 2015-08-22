@@ -113,6 +113,9 @@
     <Compile Include="StockOut.cs">
       <DependentUpon>PhoebeModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="StockOutDetail.cs">
+      <DependentUpon>PhoebeModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Tray.cs">
       <DependentUpon>PhoebeModel.tt</DependentUpon>
     </Compile>

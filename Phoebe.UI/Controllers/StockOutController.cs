@@ -41,6 +41,46 @@ namespace Phoebe.UI.Controllers
         {
             return View();
         }
+
+        /// <summary>
+        /// 货品出库
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult Create(StockOut model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = PageService.GetCurrentUser(User.Identity.Name);
+                model.UserID = user.ID;
+
+                ErrorCode result = this.storeBusiness.StockOut(model);
+                if (result == ErrorCode.Success)
+                {
+                    TempData["Message"] = "货品出库成功";
+                    return RedirectToAction("Audit", new { controller = "StockOut" });
+                }
+                else
+                {
+                    TempData["Message"] = "货品出库失败";
+                    ModelState.AddModelError("", "货品出库失败: " + result.DisplayName());
+                }
+            }
+
+            return View(model);
+        }
+
+        /// <summary>
+        /// 出库审核
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Audit()
+        {
+            var data = this.storeBusiness.GetStockOutByStatus(EntityStatus.StockOutReady);
+            return View(data);
+        }
         #endregion //Action
     }
 }

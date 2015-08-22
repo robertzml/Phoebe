@@ -151,6 +151,24 @@ namespace Phoebe.UI.Controllers
                 return null;
             }
         }
+
+        /// <summary>
+        /// 获取当前托盘货品
+        /// </summary>
+        /// <param name="trayID">托盘ID</param>
+        /// <returns></returns>
+        /// <remarks>
+        /// 调用：
+        /// /StoreOut/Create
+        /// </remarks>
+        public JsonResult GetCargoInTray(int trayID)
+        {
+            var cargos = this.cargoBusiness.GetInTray(trayID);
+            var data = from r in cargos
+                       select new { r.ID, r.Name, FirstCategoryName = r.FirstCategory.Name };
+
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
         #endregion //JSON
     }
 }

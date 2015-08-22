@@ -95,5 +95,13 @@ namespace Phoebe.Model
         [Display(Name = "编号重复")]
         ContractDuplicateNumber = 21,
         #endregion //Contract
+
+        #region Stock
+        /// <summary>
+        /// 库存未找到
+        /// </summary>
+        [Display(Name = "库存未找到")]
+        StockNotFound = 50
+        #endregion //Stock
     }
 }

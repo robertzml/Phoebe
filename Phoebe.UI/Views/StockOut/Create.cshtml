@@ -47,7 +47,7 @@
                 </div>
             </div>
             <div class="portlet-body form">
-                @using (Html.BeginForm("Create", "StockIn", FormMethod.Post, new { @class = "form-horizontal" }))
+                @using (Html.BeginForm("Create", "StockOut", FormMethod.Post, new { @class = "form-horizontal" }))
                 {
                     @Html.AntiForgeryToken()
                     <div class="form-body">
@@ -80,6 +80,47 @@
                                 </div>
                             </div>
                         </div>
+
+                        <h3 class="form-section">货品</h3>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-2">货品</label>
+                                    <div class="col-md-9">
+                                        <select id="CargoList" name="CargoList" class="form-control" size="10">
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3 class="form-section">附加信息</h3>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Remark, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.Remark, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Remark, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-offset-3 col-md-9">
+                                            <button type="submit" class="btn btn-success"><i class="fa fa-check"></i>&nbsp;确定</button>
+                                            <a href="@Url.Action("Index", new { controller = "Home"})" class="btn btn-default">&nbsp;取消</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 }
             </div>
@@ -101,12 +142,29 @@
                 var warehouseId = $(this).val();
 
                 $('#TrayID').empty();
+                $('#CargoList').empty();
+
                 if (warehouseId == '')
                     return;
 
+                $('#TrayID').append("<option value=''>-- 请选择 --</option>");
                 $.getJSON('/Tray/GetInWarehouse', { WarehouseID: warehouseId }, function (response) {
                     $.each(response, function (i, item) {
                         $('#TrayID').append("<option value='" + item.ID + "'>" + item.Name + "</option>");
+                    });
+                });
+            });
+
+            $('#TrayID').change(function () {
+                var trayId = $(this).val();
+
+                $('#CargoList').empty();
+                if (trayId == '')
+                    return;
+
+                $.getJSON('/Cargo/GetCargoInTray', { trayID: trayId }, function (response) {
+                    $.each(response, function (i, item) {
+                        $('#CargoList').append("<option value='" + item.ID + "'>" + item.Name + "</option>");
                     });
                 });
             });
