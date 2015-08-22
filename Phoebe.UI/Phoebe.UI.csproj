@@ -135,6 +135,7 @@
     <Compile Include="Controllers\GroupCustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ScatterCustomerController.cs" />
+    <Compile Include="Controllers\StockController.cs" />
     <Compile Include="Controllers\StockInController.cs" />
     <Compile Include="Controllers\StockOutController.cs" />
     <Compile Include="Controllers\TrayController.cs" />
@@ -724,6 +725,7 @@
     <Content Include="Views\StockOut\Create.cshtml" />
     <Content Include="Views\StockIn\Index.cshtml" />
     <Content Include="Views\StockIn\Details.cshtml" />
+    <Content Include="Views\Stock\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -90,5 +90,21 @@ namespace Phoebe.UI.Controllers
             return View(model);
         }
         #endregion //Action
+
+        #region Json
+        /// <summary>
+        /// 获取仓库内托盘
+        /// </summary>
+        /// <param name="warehouseID">仓库ID</param>
+        /// <returns></returns>
+        public JsonResult GetInWarehouse(int warehouseID)
+        {
+            var trays = this.trayBusiness.GetInWarehouse(warehouseID);
+            var data = from r in trays
+                       select new { r.ID, Name = r.ID.ToString().PadLeft(6, '0'), r.Status };
+
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+        #endregion //Json
     }
 }

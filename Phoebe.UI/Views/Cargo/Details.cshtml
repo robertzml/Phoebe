@@ -89,7 +89,7 @@
                         </tr>
                         <tr>
                             <td>
-                                @Html.DisplayNameFor(model => model.Weight)
+                                重量 (Kg)
                             </td>
                             <td>
                                 @Html.DisplayFor(model => model.Weight)
@@ -97,7 +97,7 @@
                         </tr>
                         <tr>
                             <td>
-                                @Html.DisplayNameFor(model => model.Volume)
+                                体积 (m<sup>3</sup>)
                             </td>
                             <td>
                                 @Html.DisplayFor(model => model.Volume)
@@ -148,7 +148,7 @@
 
                 <hr />
                 <p>
-                  
+                    <a href="@Url.Action("Index", new { controller = "Cargo" })" class="btn btn-info"><i class="fa fa-list"></i>&nbsp;回到列表</a>
                 </p>
             </div>
         </div>

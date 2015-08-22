@@ -53,6 +53,16 @@ namespace Phoebe.Business
         }
 
         /// <summary>
+        /// 获取仓库内托盘
+        /// </summary>
+        /// <param name="warehouseID">仓库ID</param>
+        /// <returns></returns>
+        public List<Tray> GetInWarehouse(int warehouseID)
+        {
+            return this.context.Trays.Where(r => r.WarehouseID == warehouseID).ToList();
+        }
+
+        /// <summary>
         /// 添加托盘
         /// </summary>
         /// <param name="data">托盘数据</param>

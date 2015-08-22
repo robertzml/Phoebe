@@ -18,6 +18,7 @@ namespace Phoebe.Model
         public Cargo()
         {
             this.StockInDetails = new HashSet<StockInDetail>();
+            this.Stocks = new HashSet<Stock>();
         }
     
         public System.Guid ID { get; set; }
@@ -40,5 +41,7 @@ namespace Phoebe.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StockInDetail> StockInDetails { get; set; }
         public virtual Contract Contract { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Stock> Stocks { get; set; }
     }
 }

@@ -24,57 +24,18 @@ namespace Phoebe.Business
         #endregion //Constructor
 
         #region Method
-        #region Stock In
+        #region Stock
         /// <summary>
-        /// 货品入库
+        /// 获取所有库存记录
         /// </summary>
-        /// <param name="data">入库数据</param>
-        /// <param name="cargos">货品数据</param>
         /// <returns></returns>
-        public ErrorCode StockIn(StockIn data, string[] cargos)
+        public List<Stock> GetStock()
         {
-            try
-            {
-                data.ID = Guid.NewGuid();
-                data.InTime = DateTime.Now;
-                data.Status = (int)EntityStatus.StockInReady;
-
-                this.context.StockIns.Add(data);
-
-                // add stock in detail
-                for (int i = 0; i < cargos.Length; i++)
-                {
-                    StockInDetail detail = new StockInDetail
-                    {
-                        StockInID = data.ID,
-                        CargoID = new Guid(cargos[i]),
-                        Status = 0
-                    };
-                    this.context.StockInDetails.Add(detail);
-                }
-
-                // change cargo status
-                for (int i = 0; i < cargos.Length; i++)
-                {
-                    Guid gid = new Guid(cargos[i]);
-                    Cargo cargo = this.context.Cargoes.Find(gid);
-                    cargo.Status = (int)EntityStatus.CargoStockInReady;
-                }
-
-                // change tray status
-                Tray tray = this.context.Trays.Find(data.TrayID);
-                tray.Status = (int)EntityStatus.TrayInuse;
-
-                this.context.SaveChanges();
-            }
-            catch (Exception)
-            {
-                return ErrorCode.Exception;
-            }
-
-            return ErrorCode.Success;
+            return this.context.Stocks.ToList();
         }
+        #endregion //Stock
 
+        #region Stock In
         /// <summary>
         /// 获取所有入库记录
         /// </summary>
@@ -110,9 +71,59 @@ namespace Phoebe.Business
         }
 
         /// <summary>
+        /// 货品入库
+        /// </summary>
+        /// <param name="data">入库数据</param>
+        /// <param name="cargos">货品数据</param>
+        /// <returns></returns>
+        public ErrorCode StockIn(StockIn data, string[] cargos)
+        {
+            try
+            {
+                data.ID = Guid.NewGuid();
+                data.InTime = DateTime.Now;
+                data.Status = (int)EntityStatus.StockInReady;
+
+                this.context.StockIns.Add(data);
+
+                // add stock in detail
+                for (int i = 0; i < cargos.Length; i++)
+                {
+                    StockInDetail detail = new StockInDetail
+                    {
+                        StockInID = data.ID,
+                        CargoID = new Guid(cargos[i]),
+                        Status = (int)EntityStatus.StockInReady
+                    };
+                    this.context.StockInDetails.Add(detail);
+                }
+
+                // change cargo status
+                for (int i = 0; i < cargos.Length; i++)
+                {
+                    Guid gid = new Guid(cargos[i]);
+                    Cargo cargo = this.context.Cargoes.Find(gid);
+                    cargo.Status = (int)EntityStatus.CargoStockInReady;
+                }
+
+                // change tray status
+                Tray tray = this.context.Trays.Find(data.TrayID);
+                tray.Status = (int)EntityStatus.TrayInuse;
+
+                this.context.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+
+            return ErrorCode.Success;
+        }
+
+        /// <summary>
         /// 入库审核
         /// </summary>
-        /// <param name="id">ID</param>
+        /// <param name="id">入库ID</param>
         /// <param name="remark">备注</param>
         /// <param name="status">状态</param>
         /// <returns></returns>
@@ -132,17 +143,41 @@ namespace Phoebe.Business
                 si.Remark = remark;
                 si.Status = (int)status;
 
-                foreach (var item in si.StockInDetails)
-                {
-                    if (status == EntityStatus.StockIn)
-                        item.Cargo.Status = (int)EntityStatus.CargoStockIn;
-                    else
-                        item.Cargo.Status = (int)EntityStatus.CargoNotIn;
-                }
-
                 // change tray position
                 if (status == EntityStatus.StockIn)
+                {
                     si.Tray.WarehouseID = si.WarehouseID;
+
+                    // add stock information
+                    foreach (var item in si.StockInDetails)
+                    {
+                        item.Status = (int)EntityStatus.StockIn;
+                        item.Cargo.Status = (int)EntityStatus.CargoStockIn;
+
+                        Stock stock = new Stock();
+                        stock.ID = Guid.NewGuid();
+                        stock.WarehouseID = si.WarehouseID;
+                        stock.TrayID = si.TrayID;
+                        stock.CargoID = item.CargoID;
+                        stock.InTime = Convert.ToDateTime(si.ConfirmTime);
+                        stock.Source = 0;
+                        stock.StockInID = si.ID;
+                        stock.Status = (int)EntityStatus.StoreIn;
+
+                        this.context.Stocks.Add(stock);
+                    }
+                }
+                else
+                {
+                    // change tray status
+                    si.Tray.Status = (int)EntityStatus.TrayUnused;
+
+                    foreach (var item in si.StockInDetails)
+                    {
+                        item.Status = (int)EntityStatus.StockInCancel;
+                        item.Cargo.Status = (int)EntityStatus.CargoNotIn;
+                    }
+                }
 
                 this.context.SaveChanges();
             }

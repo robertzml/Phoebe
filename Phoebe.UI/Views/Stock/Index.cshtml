@@ -1,0 +1,133 @@
+﻿@model IEnumerable<Phoebe.Model.Stock>
+
+@{
+    ViewBag.Title = "库存记录";
+}
+
+<!-- BEGIN PAGE HEADER-->
+<h3 class="page-title">
+    @ViewBag.Title
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index", "Home")">主页</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#">统计报表</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#">@ViewBag.Title</a>
+        </li>
+    </ul>
+</div>
+<!-- END PAGE HEADER-->
+<!-- BEGIN PAGE CONTENT-->
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet box blue">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-list"></i>&nbsp;记录列表
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse">
+                    </a>
+                    <a href="javascript:;" class="reload">
+                    </a>
+                    <a href="javascript:;" class="remove">
+                    </a>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <table class="table table-striped table-bordered table-hover" id="stock-table">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.WarehouseID)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.TrayID)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.CargoID)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.InTime)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.OutTime)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Source)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Destination)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Remark)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Status)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @item.Warehouse.Name
+                                </td>
+                                <td>
+                                    @item.TrayID.ToString().PadLeft(6, '0')
+                                </td>
+                                <td>
+                                    @item.Cargo.Name
+                                </td>
+                                <td>
+                                    @item.InTime.ToDateTimeString()
+                                </td>
+                                <td>
+                                    @item.OutTime.ToDateTimeString()
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Source)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Destination)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Remark)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Status)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END PAGE CONTENT-->
+
+@section Scripts {
+    <script type="text/javascript">
+        $(function () {
+            phoebe.leftNavActive($('#menu-stock-index'));
+            phoebe.initDatatable($('#stock-table'));
+        });
+    </script>
+}

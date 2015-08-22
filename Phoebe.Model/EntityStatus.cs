@@ -90,22 +90,34 @@ namespace Phoebe.Model
 
         #region Store
         /// <summary>
-        /// 61:准备入库
+        /// 61:在库
+        /// </summary>
+        [Display(Name = "在库")]
+        StoreIn = 61,
+
+        /// <summary>
+        /// 62:出库
+        /// </summary>
+        [Display(Name = "出库")]
+        StoreOut = 62,
+
+        /// <summary>
+        /// 71:准备入库
         /// </summary>
         [Display(Name = "准备入库")]
-        StockInReady = 61,
+        StockInReady = 71,
 
         /// <summary>
-        /// 62:入库取消
+        /// 72:入库取消
         /// </summary>
         [Display(Name = "入库取消")]
-        StockInCancel = 62,
+        StockInCancel = 72,
 
         /// <summary>
-        /// 63:已入库
+        /// 73:已入库
         /// </summary>
         [Display(Name = "已入库")]
-        StockIn = 63
+        StockIn = 73
         #endregion //Store
     }
 }

@@ -5,6 +5,7 @@
     WarehouseBusiness warehouseBusiness = new WarehouseBusiness();
     var top = warehouseBusiness.GetTop();
 
+    <option value="">-- 请选择 --</option>
     <optgroup label="@top.Name">
         @foreach (var second in top.ChildrenWarehouse)
         {

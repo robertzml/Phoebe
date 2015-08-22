@@ -4,37 +4,43 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="fea8aa1d5a594b8b811afd6a99555dfd" Name="Diagram1">
-        <EntityTypeShape EntityType="PhoebeModel.Warehouse" Width="1.5" PointX="0.75" PointY="14.125" IsExpanded="true" />
+      <Diagram DiagramId="fea8aa1d5a594b8b811afd6a99555dfd" Name="Diagram1" ShowGrid="true">
+        <EntityTypeShape EntityType="PhoebeModel.Warehouse" Width="1.5" PointX="10.5" PointY="10.75" IsExpanded="true" />
         <AssociationConnector Association="PhoebeModel.FK_Warehouse_Warehouse" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="PhoebeModel.ScatterCustomer" Width="1.5" PointX="2.875" PointY="0.625" />
-        <EntityTypeShape EntityType="PhoebeModel.FirstCategory" Width="1.5" PointX="7.5" PointY="0.625" />
-        <EntityTypeShape EntityType="PhoebeModel.SecondCategory" Width="1.5" PointX="5.375" PointY="0.625" />
+        <EntityTypeShape EntityType="PhoebeModel.ScatterCustomer" Width="1.5" PointX="9" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PhoebeModel.FirstCategory" Width="1.5" PointX="1" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PhoebeModel.SecondCategory" Width="1.5" PointX="3.375" PointY="1.75" IsExpanded="true" />
         <AssociationConnector Association="PhoebeModel.FK_SecondCategory_FirstCategory" />
-        <EntityTypeShape EntityType="PhoebeModel.Cargo" Width="1.5" PointX="4.125" PointY="4.75" />
+        <EntityTypeShape EntityType="PhoebeModel.Cargo" Width="1.5" PointX="6.125" PointY="1.75" IsExpanded="true" />
         <AssociationConnector Association="PhoebeModel.FK_Cargo_FirstCategory" />
         <AssociationConnector Association="PhoebeModel.FK_Cargo_SecondCategory" />
-        <EntityTypeShape EntityType="PhoebeModel.User" Width="1.5" PointX="10" PointY="7.5" />
-        <EntityTypeShape EntityType="PhoebeModel.UserGroup" Width="1.5" PointX="11.875" PointY="7.375" />
+        <EntityTypeShape EntityType="PhoebeModel.User" Width="1.5" PointX="0.75" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PhoebeModel.UserGroup" Width="1.5" PointX="0.75" PointY="15.125" IsExpanded="true" />
         <AssociationConnector Association="PhoebeModel.FK_User_UserGroup" />
         <AssociationConnector Association="PhoebeModel.FK_Cargo_User" />
-        <EntityTypeShape EntityType="PhoebeModel.StockIn" Width="1.5" PointX="5" PointY="11.25" />
+        <EntityTypeShape EntityType="PhoebeModel.StockIn" Width="1.5" PointX="3.875" PointY="14.375" IsExpanded="true" />
         <AssociationConnector Association="PhoebeModel.FK_StockIn_User" />
         <AssociationConnector Association="PhoebeModel.FK_StockIn_Warehouse" />
-        <EntityTypeShape EntityType="PhoebeModel.StockInDetail" Width="1.5" PointX="3.125" PointY="11.875" />
+        <EntityTypeShape EntityType="PhoebeModel.StockInDetail" Width="1.5" PointX="4.125" PointY="17.875" IsExpanded="true" />
         <AssociationConnector Association="PhoebeModel.FK_StockInDetails_Cargo" />
         <AssociationConnector Association="PhoebeModel.FK_StockInDetails_StockIn" />
-        <EntityTypeShape EntityType="PhoebeModel.GroupCustomer" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="PhoebeModel.Contract" Width="1.5" PointX="0.75" PointY="4.25" />
+        <EntityTypeShape EntityType="PhoebeModel.GroupCustomer" Width="1.5" PointX="10.875" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PhoebeModel.Contract" Width="1.5" PointX="0.75" PointY="6.25" IsExpanded="true" />
         <AssociationConnector Association="PhoebeModel.FK_Cargo_Contract" />
         <AssociationConnector Association="PhoebeModel.FK_Contract_User" />
-        <EntityTypeShape EntityType="PhoebeModel.StockOut" Width="1.5" PointX="7.75" PointY="11.375" />
+        <EntityTypeShape EntityType="PhoebeModel.StockOut" Width="1.5" PointX="6.875" PointY="14.375" IsExpanded="true" />
         <AssociationConnector Association="PhoebeModel.FK_StockOut_User" />
         <AssociationConnector Association="PhoebeModel.FK_StockOut_Warehouse" />
-        <EntityTypeShape EntityType="PhoebeModel.Tray" Width="1.5" PointX="0.875" PointY="9.75" />
+        <EntityTypeShape EntityType="PhoebeModel.Tray" Width="1.5" PointX="10.5" PointY="6.25" IsExpanded="true" />
         <AssociationConnector Association="PhoebeModel.FK_StockIn_Tray" />
         <AssociationConnector Association="PhoebeModel.FK_StockOut_Tray" />
         <AssociationConnector Association="PhoebeModel.FK_Tray_Warehouse" />
+        <EntityTypeShape EntityType="PhoebeModel.Stock" Width="1.5" PointX="6.125" PointY="8.625" IsExpanded="true" />
+        <AssociationConnector Association="PhoebeModel.FK_Stock_Cargo" />
+        <AssociationConnector Association="PhoebeModel.FK_Stock_StockIn" />
+        <AssociationConnector Association="PhoebeModel.FK_Stock_StockOut" />
+        <AssociationConnector Association="PhoebeModel.FK_Stock_Tray" />
+        <AssociationConnector Association="PhoebeModel.FK_Stock_Warehouse" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

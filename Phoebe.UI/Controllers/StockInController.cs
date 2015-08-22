@@ -93,7 +93,7 @@ namespace Phoebe.UI.Controllers
                 if (result == ErrorCode.Success)
                 {
                     TempData["Message"] = "货品入库成功";
-                    return RedirectToAction("Index", new { controller = "Cargo" });
+                    return RedirectToAction("Audit", new { controller = "StockIn" });
                 }
                 else
                 {

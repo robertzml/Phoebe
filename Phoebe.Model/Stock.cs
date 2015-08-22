@@ -12,27 +12,26 @@ namespace Phoebe.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class StockOut
+    public partial class Stock
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public StockOut()
-        {
-            this.Stocks = new HashSet<Stock>();
-        }
-    
         public System.Guid ID { get; set; }
-        public System.DateTime OutTime { get; set; }
-        public Nullable<System.DateTime> ConfirmTime { get; set; }
         public int WarehouseID { get; set; }
         public int TrayID { get; set; }
-        public int UserID { get; set; }
+        public System.Guid CargoID { get; set; }
+        public System.DateTime InTime { get; set; }
+        public Nullable<System.DateTime> OutTime { get; set; }
+        public int Source { get; set; }
+        public Nullable<int> Destination { get; set; }
+        public Nullable<System.Guid> StockInID { get; set; }
+        public Nullable<System.Guid> StockOutID { get; set; }
+        public Nullable<System.Guid> StockMoveID { get; set; }
         public string Remark { get; set; }
         public int Status { get; set; }
     
-        public virtual User User { get; set; }
-        public virtual Warehouse Warehouse { get; set; }
+        public virtual Cargo Cargo { get; set; }
+        public virtual StockIn StockIn { get; set; }
+        public virtual StockOut StockOut { get; set; }
         public virtual Tray Tray { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Stock> Stocks { get; set; }
+        public virtual Warehouse Warehouse { get; set; }
     }
 }

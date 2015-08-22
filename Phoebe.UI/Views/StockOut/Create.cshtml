@@ -4,6 +4,10 @@
     ViewBag.Title = "货品出库";
 }
 
+@section styles {
+    <link rel="stylesheet" type="text/css" href="/assets/global/plugins/bootstrap-select/bootstrap-select.min.css" />
+}
+
 <!-- BEGIN PAGE HEADER-->
 <h3 class="page-title">
     @ViewBag.Title
@@ -67,7 +71,7 @@
                                 <div class="form-group">
                                     @Html.LabelFor(model => model.TrayID, htmlAttributes: new { @class = "control-label col-md-2" })
                                     <div class="col-md-9">
-                                        @Html.EditorFor(model => model.TrayID, new { htmlAttributes = new { @class = "form-control" } })
+                                        <select id="TrayID" name="TrayID" class="form-control"></select>
                                         @Html.ValidationMessageFor(model => model.TrayID, "", new { @class = "text-danger" })
                                     </div>
                                     <div class="col-md-1">
@@ -86,9 +90,26 @@
 
 
 @section Scripts {
+    <script type="text/javascript" src="/assets/global/plugins/bootstrap-select/bootstrap-select.min.js"></script>
     <script type="text/javascript">
         $(function () {
             phoebe.leftNavActive($('#menu-stock-out-create'));
+
+            $('#WarehouseID').selectpicker({});
+
+            $('#WarehouseID').change(function () {
+                var warehouseId = $(this).val();
+
+                $('#TrayID').empty();
+                if (warehouseId == '')
+                    return;
+
+                $.getJSON('/Tray/GetInWarehouse', { WarehouseID: warehouseId }, function (response) {
+                    $.each(response, function (i, item) {
+                        $('#TrayID').append("<option value='" + item.ID + "'>" + item.Name + "</option>");
+                    });
+                });
+            });
         });
     </script>
 }
