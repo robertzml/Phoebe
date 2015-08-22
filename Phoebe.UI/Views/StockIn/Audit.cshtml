@@ -71,7 +71,7 @@
                         {
                             <tr>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.InTime)
+                                    @item.InTime.ToDateTimeString()
                                 </td>
                                 <td>
                                     @item.Warehouse.Name

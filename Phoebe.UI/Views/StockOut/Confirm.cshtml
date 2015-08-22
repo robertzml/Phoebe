@@ -1,7 +1,7 @@
-﻿@model Phoebe.Model.StockIn
+﻿@model Phoebe.Model.StockOut
 
 @{
-    ViewBag.Title = "入库确认";
+    ViewBag.Title = "出库确认";
 }
 
 <!-- BEGIN PAGE HEADER-->
@@ -31,7 +31,7 @@
         <div class="portlet box blue">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="fa fa-plus"></i>入库信息
+                    <i class="fa fa-plus"></i>出库信息
                 </div>
                 <div class="tools">
                     <a href="javascript:;" class="collapse">
@@ -57,7 +57,7 @@
                     <tbody>
                         <tr>
                             <td>
-                                目的仓库
+                                来源仓库
                             </td>
                             <td>
                                 @Html.DisplayFor(model => model.Warehouse.Name)
@@ -73,10 +73,10 @@
                         </tr>
                         <tr>
                             <td>
-                                @Html.DisplayNameFor(model => model.InTime)
+                                @Html.DisplayNameFor(model => model.OutTime)
                             </td>
                             <td>
-                                @Html.DisplayFor(model => model.InTime)
+                                @Html.DisplayFor(model => model.OutTime)
                             </td>
                         </tr>
                         <tr>
@@ -114,7 +114,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach(var item in Model.StockInDetails)
+                        @foreach (var item in Model.StockOutDetails)
                         {
                             <tr>
                                 <td>
@@ -139,7 +139,7 @@
 
                 <hr />
                 <div class="form">
-                    @using (Html.BeginForm("Confirm", "StockIn", FormMethod.Post, new { @class = "form-horizontal" }))
+                    @using (Html.BeginForm("Confirm", "StockOut", FormMethod.Post, new { @class = "form-horizontal" }))
                     {
                         @Html.AntiForgeryToken()
                         <div class="form-body">
@@ -190,7 +190,7 @@
 @section Scripts {
     <script type="text/javascript">
         $(function () {
-            phoebe.leftNavActive($('#menu-stock-in-audit'));
+            phoebe.leftNavActive($('#menu-stock-out-audit'));
         });
     </script>
 }

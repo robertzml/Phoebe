@@ -203,6 +203,20 @@ namespace Phoebe.Business
         /// <summary>
         /// 获取出库记录
         /// </summary>
+        /// <param name="id">ID</param>
+        /// <returns></returns>
+        public StockOut GetStockOut(string id)
+        {
+            Guid gid;
+            if (!Guid.TryParse(id, out gid))
+                return null;
+
+            return this.context.StockOuts.Find(gid);
+        }
+
+        /// <summary>
+        /// 获取出库记录
+        /// </summary>
         /// <param name="status">状态</param>
         /// <returns></returns>
         public List<StockOut> GetStockOutByStatus(EntityStatus status)

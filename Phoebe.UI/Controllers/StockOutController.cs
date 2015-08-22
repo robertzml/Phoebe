@@ -81,6 +81,38 @@ namespace Phoebe.UI.Controllers
             var data = this.storeBusiness.GetStockOutByStatus(EntityStatus.StockOutReady);
             return View(data);
         }
+
+        /// <summary>
+        /// 出库确认
+        /// </summary>
+        /// <param name="id">出库ID</param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult Confirm(string id)
+        {
+            var data = this.storeBusiness.GetStockOut(id);
+            if (data == null)
+                return HttpNotFound();
+
+            return View(data);
+        }
+
+        /// <summary>
+        /// 出库确认
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult Confirm(StockOut model)
+        {
+            if (ModelState.IsValid)
+            {
+
+            }
+
+            return View(model);
+        }
         #endregion //Action
     }
 }

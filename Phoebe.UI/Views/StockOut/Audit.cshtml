@@ -72,16 +72,16 @@
                         {
                             <tr>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.OutTime)
+                                    @item.OutTime.ToDateTimeString()
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.WarehouseID)
+                                    @item.Warehouse.Name
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.TrayID)
+                                    @item.Tray.ID.ToString().PadLeft(6, '0')
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.UserID)
+                                    @item.User.Name
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Remark)

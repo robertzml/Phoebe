@@ -721,6 +721,7 @@
     <Content Include="Views\StockIn\Details.cshtml" />
     <Content Include="Views\Stock\Index.cshtml" />
     <Content Include="Views\StockOut\Audit.cshtml" />
+    <Content Include="Views\StockOut\Confirm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
