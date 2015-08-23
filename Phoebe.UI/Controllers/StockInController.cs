@@ -135,19 +135,32 @@ namespace Phoebe.UI.Controllers
         /// <summary>
         /// 入库确认
         /// </summary>
+        /// <param name="model"></param>
         /// <returns></returns>
         [ValidateAntiForgeryToken]
         [HttpPost]
-        public ActionResult Confirm()
+        public ActionResult Confirm(StockIn model)
         {
-            string id = Request.Form["ID"];
-            string remark = Request.Form["Remark"];
-            EntityStatus status = Request.Form["auditResult"] == "1" ? EntityStatus.StockIn : EntityStatus.StockInCancel;
+            if (ModelState.IsValid)
+            {
+                string id = Request.Form["ID"];
+                string remark = Request.Form["Remark"];
+                EntityStatus status = Request.Form["auditResult"] == "1" ? EntityStatus.StockIn : EntityStatus.StockInCancel;
 
-            this.storeBusiness.StockInAudit(id, remark, status);
+                ErrorCode result = this.storeBusiness.StockInAudit(id, remark, status);
+                if (result == ErrorCode.Success)
+                {
+                    TempData["Message"] = "入库审核完毕";
+                    return RedirectToAction("Audit", "StockIn");
+                }
+                else
+                {
+                    TempData["Message"] = "入库审核失败";
+                    ModelState.AddModelError("", "入库审核失败: " + result.DisplayName());
+                }
+            }
 
-            TempData["Message"] = "入库审核完毕";
-            return RedirectToAction("Audit", "StockIn");
+            return View(model);
         }
         #endregion //Action
 

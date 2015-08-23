@@ -33,6 +33,27 @@ namespace Phoebe.UI.Controllers
 
         #region Action
         /// <summary>
+        /// 出库记录
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Index()
+        {
+            var data = this.storeBusiness.GetStockOut();
+            return View(data);
+        }
+
+        /// <summary>
+        /// 出库信息
+        /// </summary>
+        /// <param name="id">出库ID</param>
+        /// <returns></returns>
+        public ActionResult Details(string id)
+        {
+            var data = this.storeBusiness.GetStockOut(id);
+            return View(data);
+        }
+
+        /// <summary>
         /// 货品出库
         /// </summary>
         /// <returns></returns>
@@ -108,7 +129,21 @@ namespace Phoebe.UI.Controllers
         {
             if (ModelState.IsValid)
             {
+                string id = Request.Form["ID"];
+                string remark = Request.Form["Remark"];
+                EntityStatus status = Request.Form["auditResult"] == "1" ? EntityStatus.StockOut : EntityStatus.StockOutCancel;
 
+                ErrorCode result = this.storeBusiness.StockOutAudit(id, remark, status);
+                if (result == ErrorCode.Success)
+                {
+                    TempData["Message"] = "出库审核完毕";
+                    return RedirectToAction("Audit", "StockOut");
+                }
+                else
+                {
+                    TempData["Message"] = "出库审核失败";
+                    ModelState.AddModelError("", "出库审核失败: " + result.DisplayName());
+                }
             }
 
             return View(model);

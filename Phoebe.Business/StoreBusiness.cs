@@ -150,9 +150,9 @@ namespace Phoebe.Business
                 si.Remark = remark;
                 si.Status = (int)status;
 
-                // change tray position
                 if (status == EntityStatus.StockIn)
                 {
+                    // change tray position
                     si.Tray.WarehouseID = si.WarehouseID;
 
                     // add stock information
@@ -200,6 +200,15 @@ namespace Phoebe.Business
         #endregion //Stock In
 
         #region Stock Out
+        /// <summary>
+        /// 获取出库记录
+        /// </summary>
+        /// <returns></returns>
+        public List<StockOut> GetStockOut()
+        {
+            return this.context.StockOuts.OrderByDescending(r => r.ConfirmTime).ToList();
+        }
+
         /// <summary>
         /// 获取出库记录
         /// </summary>
@@ -259,6 +268,76 @@ namespace Phoebe.Business
 
                     // change cargos status
                     item.Cargo.Status = (int)EntityStatus.CargoStockOutReady;
+                }
+
+                this.context.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+
+            return ErrorCode.Success;
+        }
+
+        /// <summary>
+        /// 出库审核
+        /// </summary>
+        /// <param name="id">出库ID</param>
+        /// <param name="remark">备注</param>
+        /// <param name="status">状态</param>
+        /// <returns></returns>
+        public ErrorCode StockOutAudit(string id, string remark, EntityStatus status)
+        {
+            try
+            {
+                Guid gid;
+                if (!Guid.TryParse(id, out gid))
+                    return ErrorCode.ObjectNotFound;
+
+                StockOut so = this.context.StockOuts.Find(gid);
+                if (so == null)
+                    return ErrorCode.ObjectNotFound;
+
+                so.ConfirmTime = DateTime.Now;
+                so.Remark = remark;
+                so.Status = (int)status;
+
+                if (status == EntityStatus.StockOut)
+                {
+                    // find store
+                    var stocks = this.context.Stocks.Where(r => r.Status == (int)EntityStatus.StoreIn && r.TrayID == so.TrayID);
+                    if (stocks.Count() == 0)
+                        return ErrorCode.StockNotFound;
+
+                    //edit stock information
+                    foreach (var item in stocks)
+                    {
+                        item.OutTime = so.ConfirmTime;
+                        item.Destination = 0;
+                        item.StockOutID = so.ID;
+                        item.Status = (int)EntityStatus.StoreOut;
+                    }
+
+                    //change stock out details and cargo status
+                    foreach (var item in so.StockOutDetails)
+                    {
+                        item.Status = (int)EntityStatus.StockOut;
+                        item.Cargo.Status = (int)EntityStatus.CargoStockOut;
+                    }
+
+                    //change tray status and position
+                    so.Tray.WarehouseID = null;
+                    so.Tray.Status = (int)EntityStatus.TrayUnused;
+                }
+                else
+                {
+                    //change stock out details and cargo status
+                    foreach (var item in so.StockOutDetails)
+                    {
+                        item.Status = (int)EntityStatus.StockOutCancel;
+                        item.Cargo.Status = (int)EntityStatus.CargoStockIn;
+                    }
                 }
 
                 this.context.SaveChanges();
