@@ -40,13 +40,24 @@ namespace Phoebe.UI.Controllers
             var data = this.storeBusiness.GetStock();
             return View(data);
         }
+
+        /// <summary>
+        /// 库存信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult Details(string id)
+        {
+            var data = this.storeBusiness.GetStock(id);
+            if (data == null)
+                return HttpNotFound();
+
+            return View(data);
+        }
         #endregion //Action
 
         #region Json
-        public JsonResult GetStockCargo(int trayId)
-        {
-            return null;
-        }
+
         #endregion //Json
     }
 }

@@ -35,6 +35,20 @@ namespace Phoebe.Business
         }
 
         /// <summary>
+        /// 获取库存记录
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public Stock GetStock(string id)
+        {
+            Guid gid;
+            if (!Guid.TryParse(id, out gid))
+                return null;
+
+            return this.context.Stocks.Find(gid);
+        }
+
+        /// <summary>
         /// 获取当前库存
         /// </summary>
         /// <param name="trayID">托盘ID</param>

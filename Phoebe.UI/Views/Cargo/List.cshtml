@@ -1,7 +1,7 @@
-﻿@model IEnumerable<Phoebe.Model.Stock>
+﻿@model IEnumerable<Phoebe.Model.Cargo>
 
 @{
-    ViewBag.Title = "库存记录";
+    ViewBag.Title = "已出库货品";
 }
 
 <!-- BEGIN PAGE HEADER-->
@@ -16,11 +16,8 @@
             <i class="fa fa-angle-right"></i>
         </li>
         <li>
-            <a href="#">统计报表</a>
+            <a href="#">货品管理</a>
             <i class="fa fa-angle-right"></i>
-        </li>
-        <li>
-            <a href="#">@ViewBag.Title</a>
         </li>
     </ul>
 </div>
@@ -31,7 +28,7 @@
         <div class="portlet box blue">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="fa fa-list"></i>&nbsp;记录列表
+                    <i class="fa fa-list"></i>&nbsp;货品列表
                 </div>
                 <div class="tools">
                     <a href="javascript:;" class="collapse">
@@ -43,32 +40,32 @@
                 </div>
             </div>
             <div class="portlet-body">
-                <table class="table table-striped table-bordered table-hover" id="stock-table">
+                <table class="table table-striped table-bordered table-hover" id="cargo-table">
                     <thead>
                         <tr>
                             <th>
-                                @Html.DisplayNameFor(model => model.WarehouseID)
+                                @Html.DisplayNameFor(model => model.Name)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.TrayID)
+                                @Html.DisplayNameFor(model => model.FirstCategoryID)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.CargoID)
+                                @Html.DisplayNameFor(model => model.SecondCategoryID)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.InTime)
+                                重量 (Kg)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.OutTime)
+                                体积 (m<sup>3</sup>)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Source)
+                                @Html.DisplayNameFor(model => model.ContractID)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Destination)
+                                @Html.DisplayNameFor(model => model.RegisterTime)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Remark)
+                                @Html.DisplayNameFor(model => model.UserID)
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.Status)
@@ -81,28 +78,28 @@
                     <tfoot>
                         <tr>
                             <th>
-                                @Html.DisplayNameFor(model => model.WarehouseID)
+                                @Html.DisplayNameFor(model => model.Name)
+                            </th>
+                            <th data-filter="true">
+                                @Html.DisplayNameFor(model => model.FirstCategoryID)
+                            </th>
+                            <th data-filter="true">
+                                @Html.DisplayNameFor(model => model.SecondCategoryID)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.TrayID)
+                                重量 (Kg)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.CargoID)
+                                体积 (m<sup>3</sup>)
+                            </th>
+                            <th data-filter="true">
+                                @Html.DisplayNameFor(model => model.ContractID)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.InTime)
+                                @Html.DisplayNameFor(model => model.RegisterTime)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.OutTime)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Source)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Destination)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Remark)
+                                @Html.DisplayNameFor(model => model.UserID)
                             </th>
                             <th data-filter="true">
                                 @Html.DisplayNameFor(model => model.Status)
@@ -113,39 +110,38 @@
                         </tr>
                     </tfoot>
                     <tbody>
-
                         @foreach (var item in Model)
                         {
                             <tr>
                                 <td>
-                                    @item.Warehouse.Name
+                                    @Html.DisplayFor(modelItem => item.Name)
                                 </td>
                                 <td>
-                                    @item.TrayID.ToString().PadLeft(6, '0')
+                                    @item.FirstCategory.Name
                                 </td>
                                 <td>
-                                    @item.Cargo.Name
+                                    @item.SecondCategory.Name
                                 </td>
                                 <td>
-                                    @item.InTime.ToDateTimeString()
+                                    @Html.DisplayFor(modelItem => item.Weight)
                                 </td>
                                 <td>
-                                    @item.OutTime.ToDateTimeString()
+                                    @Html.DisplayFor(modelItem => item.Volume)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Source)
+                                    @item.Contract.Name
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Destination)
+                                    @item.RegisterTime.ToDateTimeString()
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Remark)
+                                    @item.User.Name
                                 </td>
                                 <td>
                                     @(((EntityStatus)item.Status).DisplayName())
                                 </td>
                                 <td>
-                                    <a href="@Url.Action("Details", new { controller = "Stock", id = item.ID })" class="btn btn-info btn-sm" role="button"><i class="fa fa-check-circle"></i>&nbsp;查看</a>
+                                    <a href="@Url.Action("Details", new { controller = "Cargo", id = item.ID.ToString() })" class="btn btn-info btn-sm" role="button"><i class="fa fa-check-circle"></i>&nbsp;查看</a>
                                 </td>
                             </tr>
                         }
@@ -160,8 +156,8 @@
 @section Scripts {
     <script type="text/javascript">
         $(function () {
-            phoebe.leftNavActive($('#menu-stock-index'));
-            phoebe.initDatatable($('#stock-table'));
+            phoebe.leftNavActive($('#menu-cargo-out'));
+            phoebe.initDatatable($('#cargo-table'));
         });
     </script>
 }

@@ -97,6 +97,10 @@ namespace Phoebe.UI.Controllers
         /// </summary>
         /// <param name="warehouseID">仓库ID</param>
         /// <returns></returns>
+        /// <remarks>
+        /// 调用：
+        /// /StockOut/Create
+        /// </remarks>
         public JsonResult GetInWarehouse(int warehouseID)
         {
             var trays = this.trayBusiness.GetInWarehouse(warehouseID);
