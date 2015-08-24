@@ -51,6 +51,28 @@ namespace Phoebe.UI.Controllers
         }
 
         /// <summary>
+        /// 仓库库存
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Store()
+        {
+            var data = this.warehouseBusiness.GetTop();
+            return View(data);
+        }
+
+        /// <summary>
+        /// 仓库库存
+        /// </summary>
+        /// <param name="warehouseID">仓库ID</param>
+        /// <returns></returns>
+        public ActionResult StoreInWarehouse(int warehouseID)
+        {
+            StoreBusiness storeBusiness = new StoreBusiness();
+            var data = storeBusiness.GetInWarehouse(warehouseID);
+            return View(data);
+        }
+
+        /// <summary>
         /// 添加仓库
         /// </summary>
         /// <returns></returns>

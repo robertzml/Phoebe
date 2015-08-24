@@ -44,9 +44,23 @@ namespace Phoebe.UI.Controllers
         /// <summary>
         /// 库存信息
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">库存ID</param>
         /// <returns></returns>
         public ActionResult Details(string id)
+        {
+            var data = this.storeBusiness.GetStock(id);
+            if (data == null)
+                return HttpNotFound();
+
+            return View(data);
+        }
+
+        /// <summary>
+        /// 库存信息
+        /// </summary>
+        /// <param name="id">库存ID</param>
+        /// <returns></returns>
+        public ActionResult DetailsModal(string id)
         {
             var data = this.storeBusiness.GetStock(id);
             if (data == null)

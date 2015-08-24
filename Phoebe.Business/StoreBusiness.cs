@@ -37,7 +37,7 @@ namespace Phoebe.Business
         /// <summary>
         /// 获取库存记录
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">库存ID</param>
         /// <returns></returns>
         public Stock GetStock(string id)
         {
@@ -46,6 +46,39 @@ namespace Phoebe.Business
                 return null;
 
             return this.context.Stocks.Find(gid);
+        }
+
+        /// <summary>
+        /// 获取库存记录
+        /// </summary>
+        /// <param name="warehouseID">仓库ID</param>
+        /// <returns></returns>
+        public List<Stock> GetInWarehouse(int warehouseID)
+        {
+            List<Stock> data = new List<Stock>();
+
+            Warehouse warehouse = this.context.Warehouses.Find(warehouseID);
+            if (warehouse == null)
+                return data;
+
+            if (warehouse.Hierarchy == 1)
+                return data;
+
+            if (warehouse.ChildrenWarehouse.Count() == 0)
+            {
+                data = this.context.Stocks.Where(r => r.Status == (int)EntityStatus.StoreIn && r.WarehouseID == warehouseID).ToList();
+            }
+            else
+            {
+                var d = from r in this.context.Stocks
+                        where r.Status == (int)EntityStatus.StoreIn && (r.WarehouseID == warehouseID ||
+                         (from s in this.context.Warehouses
+                          where s.ParentId == warehouseID
+                          select s.ID).Contains(r.WarehouseID))
+                        select r;
+                data = d.ToList();
+            }
+            return data;
         }
 
         /// <summary>
