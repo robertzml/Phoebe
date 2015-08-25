@@ -147,7 +147,25 @@ namespace Phoebe.Model
         /// 83:已出库
         /// </summary>
         [Display(Name = "已出库")]
-        StockOut = 83
+        StockOut = 83,
+
+        /// <summary>
+        /// 91:准备移库
+        /// </summary>
+        [Display(Name = "准备移库")]
+        StockMoveReady = 91,
+
+        /// <summary>
+        /// 92:移库取消
+        /// </summary>
+        [Display(Name = "移库取消")]
+        StockMoveCancel = 92,
+
+        /// <summary>
+        /// 93:已移库
+        /// </summary>
+        [Display(Name = "已移库")]
+        StockMove = 93
         #endregion //Store
     }
 }

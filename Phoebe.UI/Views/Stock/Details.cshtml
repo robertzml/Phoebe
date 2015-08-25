@@ -116,7 +116,7 @@
                                 @Html.DisplayNameFor(model => model.StockInID)
                             </td>
                             <td>
-                                @Html.DisplayFor(model => model.StockInID)
+                                <a href="@Url.Action("Details", new { controller = "StockIn", id = Model.StockInID })" class="btn btn-sm btn-primary"><i class="fa fa-search-plus"></i>&nbsp;查看</a>
                             </td>
                         </tr>
                         <tr>

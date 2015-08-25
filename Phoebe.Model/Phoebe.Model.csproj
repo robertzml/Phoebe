@@ -65,6 +65,7 @@
     <Compile Include="Entities\SecondCategory.cs" />
     <Compile Include="Entities\Stock.cs" />
     <Compile Include="Entities\StockIn.cs" />
+    <Compile Include="Entities\StockMove.cs" />
     <Compile Include="Entities\StockOut.cs" />
     <Compile Include="Entities\Tray.cs" />
     <Compile Include="Entities\User.cs" />
@@ -108,6 +109,12 @@
       <DependentUpon>PhoebeModel.tt</DependentUpon>
     </Compile>
     <Compile Include="StockInDetail.cs">
+      <DependentUpon>PhoebeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StockMove.cs">
+      <DependentUpon>PhoebeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StockMoveDetail.cs">
       <DependentUpon>PhoebeModel.tt</DependentUpon>
     </Compile>
     <Compile Include="StockOut.cs">

@@ -21,6 +21,7 @@ namespace Phoebe.Model
             this.StockIns = new HashSet<StockIn>();
             this.Contracts = new HashSet<Contract>();
             this.StockOuts = new HashSet<StockOut>();
+            this.StockMoves = new HashSet<StockMove>();
         }
     
         public int ID { get; set; }
@@ -42,5 +43,7 @@ namespace Phoebe.Model
         public virtual ICollection<Contract> Contracts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StockOut> StockOuts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StockMove> StockMoves { get; set; }
     }
 }
