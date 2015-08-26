@@ -11,6 +11,9 @@ using Phoebe.UI.Services;
 
 namespace Phoebe.UI.Controllers
 {
+    /// <summary>
+    /// 移库控制器
+    /// </summary>
     [EnhancedAuthorize]
     public class StockMoveController : Controller
     {
@@ -28,10 +31,56 @@ namespace Phoebe.UI.Controllers
         }
         #endregion //Constructor
 
-        // GET: StockMove
-        public ActionResult Index()
+        #region Action
+        /// <summary>
+        /// 货品移库
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult Create()
         {
             return View();
         }
+
+        /// <summary>
+        /// 货品移库
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult Create(StockMove model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = PageService.GetCurrentUser(User.Identity.Name);
+                model.UserID = user.ID;
+
+                ErrorCode result = this.storeBusiness.StockMove(model);
+                if (result == ErrorCode.Success)
+                {
+                    TempData["Message"] = "货品移库成功";
+                    return RedirectToAction("Audit", new { controller = "StockMove" });
+                }
+                else
+                {
+                    TempData["Message"] = "货品移库失败";
+                    ModelState.AddModelError("", "货品移库失败: " + result.DisplayName());
+                }
+            }
+
+            return View(model);
+        }
+
+        /// <summary>
+        /// 移库审核
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Audit()
+        {
+            var data = this.storeBusiness.GetStockMoveByStatus(EntityStatus.StockMoveReady);
+            return View(data);
+        }
+        #endregion //Action
     }
 }

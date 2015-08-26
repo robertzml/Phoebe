@@ -171,5 +171,24 @@ namespace Phoebe.UI.Controllers
             return View(model);
         }
         #endregion //Action
+
+        #region Json
+        /// <summary>
+        /// 获取仓库列表
+        /// </summary>
+        /// <returns></returns>
+        /// <remarks>
+        /// 调用:
+        /// 
+        /// </remarks>
+        public JsonResult GetWarehouseList()
+        {
+            var warehouses = this.warehouseBusiness.Get();
+            var data = from r in warehouses
+                       select new { r.ID, r.Name, r.Hierarchy, r.ParentId };
+
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+        #endregion //Json
     }
 }

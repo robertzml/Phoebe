@@ -722,10 +722,13 @@
     <Content Include="Views\Warehouse\Store.cshtml" />
     <Content Include="Views\Warehouse\StoreInWarehouse.cshtml" />
     <Content Include="Views\Stock\DetailsModal.cshtml" />
+    <Content Include="Views\StockMove\Create.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\SourceWarehouseList.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DetinationWarehouseList.cshtml" />
+    <Content Include="Views\StockMove\Audit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\StockMove\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

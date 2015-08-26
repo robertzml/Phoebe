@@ -1,0 +1,179 @@
+﻿@model Phoebe.Model.StockMove
+
+@{
+    ViewBag.Title = "货品移库";
+}
+
+<!-- BEGIN PAGE HEADER-->
+<h3 class="page-title">
+    @ViewBag.Title
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index", "Home")">主页</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#">冷库租赁</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#">@ViewBag.Title</a>
+        </li>
+    </ul>
+</div>
+<!-- END PAGE HEADER-->
+<!-- BEGIN PAGE CONTENT-->
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet box blue">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-plus"></i>移库信息
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse">
+                    </a>
+                    <a href="javascript:;" class="reload">
+                    </a>
+                    <a href="javascript:;" class="remove">
+                    </a>
+                </div>
+            </div>
+            <div class="portlet-body form">
+                @using (Html.BeginForm("Create", "StockMove", FormMethod.Post, new { @class = "form-horizontal" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-body">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <h3 class="form-section">来源</h3>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.SourceWarehouseID, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-9">
+                                        @Html.EditorFor(model => model.SourceWarehouseID, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.SourceWarehouseID, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-1">
+                                        <span class="required">*</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.TrayID, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-9">
+                                        <select id="TrayID" name="TrayID" class="form-control"></select>
+                                        @Html.ValidationMessageFor(model => model.TrayID, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-1">
+                                        <span class="required">*</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-2">货品</label>
+                                    <div class="col-md-9">
+                                        <select id="CargoList" name="CargoList" class="form-control" size="10"></select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3 class="form-section">目的地</h3>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.DetinationWarehouseID, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-9">
+                                        @Html.EditorFor(model => model.DetinationWarehouseID, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.DetinationWarehouseID, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-1">
+                                        <span class="required">*</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3 class="form-section">附加信息</h3>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Remark, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.Remark, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Remark, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-offset-3 col-md-9">
+                                            <button type="submit" class="btn btn-success"><i class="fa fa-check"></i>&nbsp;确定</button>
+                                            <a href="@Url.Action("Index", new { controller = "Home"})" class="btn btn-default">&nbsp;取消</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END PAGE CONTENT-->
+
+@section Scripts {
+    <script type="text/javascript">
+        $(function () {
+            phoebe.leftNavActive($('#menu-stock-move-create'));
+
+            $('#SourceWarehouseID').change(function () {
+                var warehouseId = $(this).val();
+
+                $('#TrayID').empty();
+                $('#CargoList').empty();
+
+                if (warehouseId == '')
+                    return;
+
+                $('#TrayID').append("<option value=''>-- 请选择 --</option>");
+                $.getJSON('/Tray/GetInWarehouse', { WarehouseID: warehouseId }, function (response) {
+                    $.each(response, function (i, item) {
+                        $('#TrayID').append("<option value='" + item.ID + "'>" + item.Name + "</option>");
+                    });
+                });
+            });
+
+            $('#TrayID').change(function () {
+                var trayId = $(this).val();
+
+                $('#CargoList').empty();
+                if (trayId == '')
+                    return;
+
+                $.getJSON('/Cargo/GetCargoInTray', { trayID: trayId }, function (response) {
+                    $.each(response, function (i, item) {
+                        $('#CargoList').append("<option value='" + item.ID + "'>" + item.Name + "</option>");
+                    });
+                });
+            });
+        });
+    </script>
+}

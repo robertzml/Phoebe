@@ -100,6 +100,7 @@ namespace Phoebe.UI.Controllers
         /// <remarks>
         /// 调用：
         /// /StockOut/Create
+        /// /StockMove/Create
         /// </remarks>
         public JsonResult GetInWarehouse(int warehouseID)
         {

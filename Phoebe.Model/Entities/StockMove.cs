@@ -30,6 +30,8 @@ namespace Phoebe.Model
         /// <summary>
         /// 原仓库
         /// </summary>
+        [Required]
+        [UIHint("SourceWarehouseList")]
         [Display(Name = "原仓库")]
         public int SourceWarehouseID { get; set; }
 
@@ -37,7 +39,7 @@ namespace Phoebe.Model
         /// 目的仓库
         /// </summary>
         [Required]
-        [UIHint("WarehouseCascadeList")]
+        [UIHint("DetinationWarehouseList")]
         [Display(Name = "目的仓库")]
         public int DetinationWarehouseID { get; set; }
 
@@ -45,7 +47,6 @@ namespace Phoebe.Model
         /// 托盘
         /// </summary>
         [Required]
-        [UIHint("FreeTrayList")]
         [Display(Name = "托盘")]
         public int TrayID { get; set; }
 

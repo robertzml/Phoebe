@@ -1,0 +1,24 @@
+﻿@model int?
+
+<select class="form-control" id="SourceWarehouseID" name="SourceWarehouseID">
+    @{
+        WarehouseBusiness warehouseBusiness = new WarehouseBusiness();
+        var top = warehouseBusiness.GetTop();
+
+        <option value="">-- 请选择 --</option>
+        <optgroup label="@top.Name">
+            @foreach (var second in top.ChildrenWarehouse)
+            {
+                <option value="@second.ID" @(Model == second.ID ? "selected='selected'" : "")>
+                    @second.Name
+                </option>
+                foreach (var third in second.ChildrenWarehouse)
+                {
+                    <option value="@third.ID" @(Model == third.ID ? "selected='selected'" : "")>
+                        --- @third.Name
+                    </option>
+                }
+            }
+        </optgroup>
+    }
+</select>
