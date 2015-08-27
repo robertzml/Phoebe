@@ -1,7 +1,7 @@
-﻿@model Phoebe.Model.StockOut
+﻿@model Phoebe.Model.StockMove
 
 @{
-    ViewBag.Title = "出库确认";
+    ViewBag.Title = "移库信息";
 }
 
 <!-- BEGIN PAGE HEADER-->
@@ -16,7 +16,7 @@
             <i class="fa fa-angle-right"></i>
         </li>
         <li>
-            <a href="#">业务审核</a>
+            <a href="#">冷库租赁</a>
             <i class="fa fa-angle-right"></i>
         </li>
         <li>
@@ -31,7 +31,7 @@
         <div class="portlet box blue">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="fa fa-plus"></i>出库信息
+                    <i class="fa fa-info-circle"></i>&nbsp;移库信息
                 </div>
                 <div class="tools">
                     <a href="javascript:;" class="collapse">
@@ -57,15 +57,39 @@
                     <tbody>
                         <tr>
                             <td>
-                                来源仓库
+                                @Html.DisplayNameFor(model => model.MoveTime)
                             </td>
                             <td>
-                                @Html.DisplayFor(model => model.Warehouse.Name)
+                                @Model.MoveTime.ToDateString()
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                托盘编号
+                                @Html.DisplayNameFor(model => model.ConfirmTime)
+                            </td>
+                            <td>
+                                @Model.ConfirmTime.ToDateString()
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.SourceWarehouseID)
+                            </td>
+                            <td>
+                                @Model.SourceWarehouse.Name
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.DestinationWarehouseID)
+                            </td>
+                            <td>
+                                @Model.DestinationWarehouse.Name
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.TrayID)
                             </td>
                             <td>
                                 @Model.Tray.ID.ToString().PadLeft(6, '0')
@@ -73,10 +97,10 @@
                         </tr>
                         <tr>
                             <td>
-                                @Html.DisplayNameFor(model => model.OutTime)
+                                @Html.DisplayNameFor(model => model.UserID)
                             </td>
                             <td>
-                                @Html.DisplayFor(model => model.OutTime)
+                                @Model.User.Name
                             </td>
                         </tr>
                         <tr>
@@ -87,12 +111,43 @@
                                 @Html.DisplayFor(model => model.Remark)
                             </td>
                         </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.Status)
+                            </td>
+                            <td>
+                                @(((EntityStatus)Model.Status).DisplayName())
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
 
                 <hr />
+                <p>
+                    <a href="@Url.Action("Index", new { controller = "StockOut" })" class="btn btn-info"><i class="fa fa-list"></i>&nbsp;回到列表</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
 
-                <h3>相关货品</h3>
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet box green">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-info-circle"></i>&nbsp;相关货品
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse">
+                    </a>
+                    <a href="javascript:;" class="reload">
+                    </a>
+                    <a href="javascript:;" class="remove">
+                    </a>
+                </div>
+            </div>
+            <div class="portlet-body">
                 <table class="table table-striped table-bordered table-hover">
                     <thead>
                         <tr>
@@ -114,7 +169,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var item in Model.StockOutDetails)
+                        @foreach (var item in Model.StockMoveDetails)
                         {
                             <tr>
                                 <td>
@@ -136,51 +191,6 @@
                         }
                     </tbody>
                 </table>
-
-                <hr />
-                <div class="form">
-                    @using (Html.BeginForm("Confirm", "StockOut", FormMethod.Post, new { @class = "form-horizontal" }))
-                    {
-                        @Html.AntiForgeryToken()
-                        <div class="form-body">
-                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                            @Html.HiddenFor(model => model.ID)
-                            <div class="form-group">
-                                <label class="col-md-3 control-label">审核</label>
-                                <div class="col-md-8">
-                                    <div class="radio-list">
-                                        <label class="radio-inline">
-                                            <input type="radio" name="auditResult" value="1" checked> 通过
-                                        </label>
-                                        <label class="radio-inline">
-                                            <input type="radio" name="auditResult" value="2"> 不通过
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-1">
-                                    <span class="required">*</span>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.Remark, htmlAttributes: new { @class = "control-label col-md-3" })
-                                <div class="col-md-8">
-                                    @Html.EditorFor(model => model.Remark, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.Remark, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-
-                            <div class="form-actions">
-                                <div class="row">
-                                    <div class="col-md-offset-3 col-md-9">
-                                        <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> 保存</button>
-                                        <a href="@Url.Action("Audit", new { controller = "StockOut"})" class="btn btn-default">&nbsp;取消</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    }
-                </div>
             </div>
         </div>
     </div>
@@ -190,7 +200,7 @@
 @section Scripts {
     <script type="text/javascript">
         $(function () {
-            phoebe.leftNavActive($('#menu-stock-out-audit'));
+            phoebe.leftNavActive($('#menu-stock-move-index'));
         });
     </script>
 }

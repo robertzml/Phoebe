@@ -724,8 +724,11 @@
     <Content Include="Views\Stock\DetailsModal.cshtml" />
     <Content Include="Views\StockMove\Create.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\SourceWarehouseList.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\DetinationWarehouseList.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DestinationWarehouseList.cshtml" />
     <Content Include="Views\StockMove\Audit.cshtml" />
+    <Content Include="Views\StockMove\Confirm.cshtml" />
+    <Content Include="Views\StockMove\Index.cshtml" />
+    <Content Include="Views\StockMove\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -39,9 +39,9 @@ namespace Phoebe.Model
         /// 目的仓库
         /// </summary>
         [Required]
-        [UIHint("DetinationWarehouseList")]
+        [UIHint("DestinationWarehouseList")]
         [Display(Name = "目的仓库")]
-        public int DetinationWarehouseID { get; set; }
+        public int DestinationWarehouseID { get; set; }
 
         /// <summary>
         /// 托盘

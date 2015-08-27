@@ -33,6 +33,30 @@ namespace Phoebe.UI.Controllers
 
         #region Action
         /// <summary>
+        /// 移库记录
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Index()
+        {
+            var data = this.storeBusiness.GetStockMove();
+            return View(data);
+        }
+
+        /// <summary>
+        /// 移库信息
+        /// </summary>
+        /// <param name="id">移库ID</param>
+        /// <returns></returns>
+        public ActionResult Details(string id)
+        {
+            var data = this.storeBusiness.GetStockMove(id);
+            if (data == null)
+                return HttpNotFound();
+
+            return View(data);
+        }
+
+        /// <summary>
         /// 货品移库
         /// </summary>
         /// <returns></returns>
@@ -80,6 +104,53 @@ namespace Phoebe.UI.Controllers
         {
             var data = this.storeBusiness.GetStockMoveByStatus(EntityStatus.StockMoveReady);
             return View(data);
+        }
+
+        /// <summary>
+        /// 移库确认
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult Confirm(string id)
+        {
+            var data = this.storeBusiness.GetStockMove(id);
+
+            if (data == null || data.Status != (int)EntityStatus.StockMoveReady)
+                return HttpNotFound();
+
+            return View(data);
+        }
+
+        /// <summary>
+        /// 移库确认
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult Confirm(StockMove model)
+        {
+            if (ModelState.IsValid)
+            {
+                string id = Request.Form["ID"];
+                string remark = Request.Form["Remark"];
+                EntityStatus status = Request.Form["auditResult"] == "1" ? EntityStatus.StockMove : EntityStatus.StockMoveCancel;
+
+                ErrorCode result = this.storeBusiness.StockMoveAudit(id, remark, status);
+                if (result == ErrorCode.Success)
+                {
+                    TempData["Message"] = "移库审核完毕";
+                    return RedirectToAction("Audit", "StockMove");
+                }
+                else
+                {
+                    TempData["Message"] = "移库审核失败";
+                    ModelState.AddModelError("", "移库审核失败: " + result.DisplayName());
+                }
+            }
+
+            return View(model);
         }
         #endregion //Action
     }

@@ -50,6 +50,9 @@ namespace Phoebe.UI.Controllers
         public ActionResult Details(string id)
         {
             var data = this.storeBusiness.GetStockOut(id);
+            if (data == null)
+                return HttpNotFound();
+
             return View(data);
         }
 
@@ -112,7 +115,7 @@ namespace Phoebe.UI.Controllers
         public ActionResult Confirm(string id)
         {
             var data = this.storeBusiness.GetStockOut(id);
-            if (data == null)
+            if (data == null || data.Status != (int)EntityStatus.StockOutReady)
                 return HttpNotFound();
 
             return View(data);

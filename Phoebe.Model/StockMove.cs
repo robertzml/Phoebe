@@ -24,16 +24,16 @@ namespace Phoebe.Model
         public System.DateTime MoveTime { get; set; }
         public Nullable<System.DateTime> ConfirmTime { get; set; }
         public int SourceWarehouseID { get; set; }
-        public int DetinationWarehouseID { get; set; }
+        public int DestinationWarehouseID { get; set; }
         public int TrayID { get; set; }
         public int UserID { get; set; }
         public string Remark { get; set; }
         public int Status { get; set; }
     
+        public virtual Warehouse DestinationWarehouse { get; set; }
+        public virtual Warehouse SourceWarehouse { get; set; }
         public virtual Tray Tray { get; set; }
         public virtual User User { get; set; }
-        public virtual Warehouse Warehouse { get; set; }
-        public virtual Warehouse Warehouse1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StockMoveDetail> StockMoveDetails { get; set; }
     }

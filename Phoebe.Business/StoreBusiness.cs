@@ -99,7 +99,7 @@ namespace Phoebe.Business
         /// <returns></returns>
         public List<StockIn> GetStockIn()
         {
-            var data = this.context.StockIns.ToList();
+            var data = this.context.StockIns.OrderByDescending(r => r.ConfirmTime).ToList();
             return data;
         }
 
@@ -411,6 +411,20 @@ namespace Phoebe.Business
         /// <summary>
         /// 获取移库记录
         /// </summary>
+        /// <param name="id">移库ID</param>
+        /// <returns></returns>
+        public StockMove GetStockMove(string id)
+        {
+            Guid gid;
+            if (!Guid.TryParse(id, out gid))
+                return null;
+
+            return this.context.StockMoves.Find(gid);
+        }
+
+        /// <summary>
+        /// 获取移库记录
+        /// </summary>
         /// <param name="status">状态</param>
         /// <returns></returns>
         public List<StockMove> GetStockMoveByStatus(EntityStatus status)
@@ -435,7 +449,6 @@ namespace Phoebe.Business
                 // add stock move
                 data.ID = Guid.NewGuid();
                 data.SourceWarehouseID = stocks.First().WarehouseID;
-                data.DetinationWarehouseID = data.DetinationWarehouseID;
                 data.MoveTime = DateTime.Now;
                 data.Status = (int)EntityStatus.StockMoveReady;
 
@@ -500,7 +513,7 @@ namespace Phoebe.Business
                     foreach (var item in stocks)
                     {
                         item.OutTime = sm.ConfirmTime;
-                        item.Destination = sm.DetinationWarehouseID;
+                        item.Destination = sm.DestinationWarehouseID;
                         item.StockMoveID = sm.ID;
                         item.Status = (int)EntityStatus.StoreOut;
                     }
@@ -510,7 +523,7 @@ namespace Phoebe.Business
                     {
                         Stock stock = new Stock();
                         stock.ID = Guid.NewGuid();
-                        stock.WarehouseID = sm.DetinationWarehouseID;
+                        stock.WarehouseID = sm.DestinationWarehouseID;
                         stock.TrayID = sm.TrayID;
                         stock.CargoID = item.CargoID;
                         stock.InTime = Convert.ToDateTime(sm.ConfirmTime);
@@ -525,7 +538,7 @@ namespace Phoebe.Business
                     }
 
                     //change tray status and position
-                    sm.Tray.WarehouseID = sm.DetinationWarehouseID;
+                    sm.Tray.WarehouseID = sm.DestinationWarehouseID;
                 }
                 else
                 {

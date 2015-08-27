@@ -44,13 +44,13 @@
         <EntityTypeShape EntityType="PhoebeModel.StockOutDetail" Width="1.5" PointX="8.875" PointY="18.375" />
         <AssociationConnector Association="PhoebeModel.FK_StockOutDetails_Cargo" />
         <AssociationConnector Association="PhoebeModel.FK_StockOutDetails_StockOut" />
-        <EntityTypeShape EntityType="PhoebeModel.StockMove" Width="1.5" PointX="11.375" PointY="14.25" />
         <EntityTypeShape EntityType="PhoebeModel.StockMoveDetail" Width="1.5" PointX="12.75" PointY="18.25" />
         <AssociationConnector Association="PhoebeModel.FK_StockMoveDetails_Cargo" />
+        <EntityTypeShape EntityType="PhoebeModel.StockMove" Width="1.5" PointX="11.5" PointY="14.25" />
+        <AssociationConnector Association="PhoebeModel.FK_StockMove_DestinationWarehouse" />
+        <AssociationConnector Association="PhoebeModel.FK_StockMove_SourceWarehouse" />
         <AssociationConnector Association="PhoebeModel.FK_StockMove_Tray" />
         <AssociationConnector Association="PhoebeModel.FK_StockMove_User" />
-        <AssociationConnector Association="PhoebeModel.FK_StockMove_Warehouse" />
-        <AssociationConnector Association="PhoebeModel.FK_StockMove_Warehouse1" />
         <AssociationConnector Association="PhoebeModel.FK_StockMoveDetails_StockMove" />
         </Diagram>
     </edmx:Diagrams>
