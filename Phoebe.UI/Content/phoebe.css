@@ -8,6 +8,16 @@ body, h1, h2, h3, h4, h5, h6, .dropdown-menu {
     vertical-align: middle;
 }
 
+.page-header.navbar .page-logo {
+	padding: 0 10px;
+	width: 300px;
+}
+
+.page-header.navbar .page-logo .logo-default {
+	margin: 2px 0;
+	padding: 0;
+}
+
 .form span.required {
 	color: #e02222;
 	font-size: 14px;

@@ -7,6 +7,7 @@ using Phoebe.Business;
 using Phoebe.Common;
 using Phoebe.Model;
 using Phoebe.UI.Models;
+using Phoebe.UI.Services;
 
 namespace Phoebe.UI.Controllers
 {
@@ -36,7 +37,9 @@ namespace Phoebe.UI.Controllers
         /// <returns></returns>
         public ActionResult Index()
         {
-            var data = this.userBusiness.GetUser(true);
+            var user = PageService.GetCurrentUser(User.Identity.Name);
+
+            var data = this.userBusiness.GetUser(user.IsRoot());
             return View(data);
         }
 
@@ -47,7 +50,9 @@ namespace Phoebe.UI.Controllers
         /// <returns></returns>
         public ActionResult Details(int id)
         {
-            var data = this.userBusiness.GetUser(id, true);
+            var user = PageService.GetCurrentUser(User.Identity.Name);
+
+            var data = this.userBusiness.GetUser(id, user.IsRoot());
             if (data == null)
                 return HttpNotFound();
 
@@ -92,6 +97,66 @@ namespace Phoebe.UI.Controllers
                 {
                     TempData["Message"] = "添加用户失败";
                     ModelState.AddModelError("", "添加用户失败: " + result.DisplayName());
+                }
+            }
+
+            return View(model);
+        }
+
+        /// <summary>
+        /// 编辑用户
+        /// </summary>
+        /// <param name="id">用户ID</param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            var data = this.userBusiness.GetUser(id, false);
+            if (data == null || id == 1)
+                return HttpNotFound();
+
+            EditUserModel model = new EditUserModel
+            {
+                ID = data.ID,
+                Username = data.Username,
+                UserGroupID = data.UserGroupID,
+                Name = data.Name,
+                Remark = data.Remark
+            };
+
+            return View(model);
+        }
+
+        /// <summary>
+        /// 编辑用户
+        /// </summary>
+        /// <param name="model">用户模型</param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult Edit(EditUserModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                User user = new Model.User
+                {
+                    ID = model.ID,
+                    UserGroupID = model.UserGroupID,
+                    Password = model.Password,
+                    Name = model.Name,
+                    Remark = model.Remark
+                };
+
+                ErrorCode result = this.userBusiness.EditUser(user);
+                if (result == ErrorCode.Success)
+                {
+                    TempData["Message"] = "编辑用户成功";
+                    return RedirectToAction("Details", new { controller = "User", id = model.ID });
+                }
+                else
+                {
+                    TempData["Message"] = "编辑用户失败";
+                    ModelState.AddModelError("", "编辑用户失败: " + result.DisplayName());
                 }
             }
 

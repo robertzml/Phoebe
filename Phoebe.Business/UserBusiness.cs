@@ -123,6 +123,38 @@ namespace Phoebe.Business
 
             return ErrorCode.Success;
         }
+
+        /// <summary>
+        /// 编辑用户
+        /// </summary>
+        /// <param name="data">用户数据</param>
+        /// <returns></returns>
+        public ErrorCode EditUser(User data)
+        {
+            try
+            {
+                var user = this.context.Users.Find(data.ID);
+                if (user == null || data.ID == 1)
+                    return ErrorCode.ObjectNotFound;
+
+                user.UserGroupID = data.UserGroupID;
+                user.Name = data.Name;
+                user.Remark = data.Remark;
+
+                if (!string.IsNullOrEmpty(data.Password))
+                {
+                    user.Password = Hasher.SHA1Encrypt(data.Password);
+                }
+
+                this.context.SaveChanges();
+            }
+            catch(Exception)
+            {
+                return ErrorCode.Exception;
+            }
+
+            return ErrorCode.Success;
+        }
         #endregion //User Method
 
 
@@ -156,6 +188,17 @@ namespace Phoebe.Business
                 return null;
             else
                 return this.context.UserGroups.Find(id);
+        }
+
+        /// <summary>
+        /// 获取用户组
+        /// </summary>
+        /// <param name="name">用户组名称</param>
+        /// <returns></returns>
+        public UserGroup GetUserGroup(string name)
+        {
+            var data = this.context.UserGroups.SingleOrDefault(r => r.Name == name);
+            return data;
         }
 
         /// <summary>

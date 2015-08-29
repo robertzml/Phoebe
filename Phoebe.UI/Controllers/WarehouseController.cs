@@ -6,12 +6,14 @@ using System.Web.Mvc;
 using Phoebe.Business;
 using Phoebe.Common;
 using Phoebe.Model;
+using Phoebe.UI.Filters;
 
 namespace Phoebe.UI.Controllers
 {
     /// <summary>
     /// 仓库控制器
-    /// </summary>
+    /// </summary>    
+    [EnhancedAuthorize]
     public class WarehouseController : Controller
     {
         #region Field

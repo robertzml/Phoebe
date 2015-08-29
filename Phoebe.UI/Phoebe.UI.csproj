@@ -173,7 +173,6 @@
     <Content Include="assets\admin\layout\img\loading-spinner-default.gif" />
     <Content Include="assets\admin\layout\img\loading-spinner-grey.gif" />
     <Content Include="assets\admin\layout\img\loading.gif" />
-    <Content Include="assets\admin\layout\img\logo.png" />
     <Content Include="assets\admin\layout\img\menu-toggler.png" />
     <Content Include="assets\admin\layout\img\remove-icon-small.png" />
     <Content Include="assets\admin\layout\img\search_icon_light.png" />
@@ -254,8 +253,6 @@
     <Content Include="assets\global\plugins\bootstrap-select\bootstrap-select.min.js" />
     <Content Include="assets\global\plugins\bootstrap-select\i18n\defaults-zh_CN.js" />
     <Content Include="assets\global\plugins\bootstrap-select\i18n\defaults-zh_CN.min.js" />
-    <Content Include="assets\global\plugins\bootstrap-sessiontimeout\jquery.sessionTimeout.js" />
-    <Content Include="assets\global\plugins\bootstrap-sessiontimeout\jquery.sessionTimeout.min.js" />
     <Content Include="assets\global\plugins\bootstrap-switch\css\bootstrap-switch.css" />
     <Content Include="assets\global\plugins\bootstrap-switch\css\bootstrap-switch.min.css" />
     <Content Include="assets\global\plugins\bootstrap-switch\js\bootstrap-switch.js" />
@@ -589,8 +586,6 @@
     <Content Include="assets\global\plugins\bootstrap-select\bootstrap-select.js.map" />
     <Content Include="assets\global\plugins\bootstrap-select\LICENSE" />
     <Content Include="assets\global\plugins\bootstrap-select\README.md" />
-    <Content Include="assets\global\plugins\bootstrap-sessiontimeout\LICENSE.md" />
-    <Content Include="assets\global\plugins\bootstrap-sessiontimeout\README.md" />
     <Content Include="assets\global\plugins\bootstrap-switch\LICENSE" />
     <Content Include="assets\global\plugins\bootstrap-switch\README.md" />
     <Content Include="assets\global\plugins\bootstrap-toastr\README.md" />
@@ -633,6 +628,7 @@
     <Content Include="assets\global\plugins\uniform\README.md" />
     <Content Include="assets\global\plugins\jquery-multi-select\README.markdown" />
     <None Include="Scripts\jquery-1.11.2.intellisense.js" />
+    <Content Include="Images\logo.png" />
     <Content Include="Images\phoebe-logo.png" />
     <Content Include="Scripts\jquery-1.11.2.js" />
     <Content Include="Scripts\jquery-1.11.2.min.js" />
@@ -729,6 +725,7 @@
     <Content Include="Views\StockMove\Confirm.cshtml" />
     <Content Include="Views\StockMove\Index.cshtml" />
     <Content Include="Views\StockMove\Details.cshtml" />
+    <Content Include="Views\User\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

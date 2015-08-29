@@ -9,6 +9,19 @@ namespace Phoebe.Business
 {
     public static class ModelExtension
     {
+        #region User
+        /// <summary>
+        /// 判断用户是否Root
+        /// </summary>
+        /// <param name="user">用户对象</param>
+        /// <returns></returns>
+        public static bool IsRoot(this User user)
+        {
+            return user.ID == 1;
+        }
+        #endregion //User
+
+        #region Contract
         /// <summary>
         /// 合同相关客户名称
         /// </summary>
@@ -37,5 +50,6 @@ namespace Phoebe.Business
             else
                 return "";
         }
+        #endregion //Contract
     }
 }

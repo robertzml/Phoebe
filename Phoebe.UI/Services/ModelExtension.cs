@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Principal;
 using System.Web;
 using System.Web.Security;
+using Phoebe.Business;
 
 namespace Phoebe.UI.Services
 {
@@ -28,6 +29,52 @@ namespace Phoebe.UI.Services
             }
             else
                 return false;
+        }
+
+        /// <summary>
+        /// 得到用户级别
+        /// </summary>
+        /// <param name="user">登录用户</param>
+        /// <returns></returns>
+        public static int GetRank(this IPrincipal user)
+        {
+            if (user != null && user.Identity.IsAuthenticated)
+            {
+                FormsIdentity fi = (FormsIdentity)user.Identity;
+                string userRole = fi.Ticket.UserData;
+
+                UserBusiness business = new UserBusiness();
+                var group = business.GetUserGroup(userRole);
+                if (group == null)
+                    return 0;
+                else
+                    return group.Rank;
+            }
+            else
+                return 0;
+        }
+
+        /// <summary>
+        /// 得到用户组名称
+        /// </summary>
+        /// <param name="user">登录用户</param>
+        /// <returns></returns>
+        public static string GetRole(this IPrincipal user)
+        {
+            if (user != null && user.Identity.IsAuthenticated)
+            {
+                FormsIdentity fi = (FormsIdentity)user.Identity;
+                string userRole = fi.Ticket.UserData;
+
+                UserBusiness business = new UserBusiness();
+                var group = business.GetUserGroup(userRole);
+                if (group == null)
+                    return "";
+                else
+                    return group.Name;
+            }
+            else
+                return "";
         }
     }
 }
