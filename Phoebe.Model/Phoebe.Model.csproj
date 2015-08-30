@@ -63,6 +63,7 @@
     <Compile Include="Entities\GroupCustomer.cs" />
     <Compile Include="Entities\ScatterCustomer.cs" />
     <Compile Include="Entities\SecondCategory.cs" />
+    <Compile Include="Entities\Settlement.cs" />
     <Compile Include="Entities\Stock.cs" />
     <Compile Include="Entities\StockIn.cs" />
     <Compile Include="Entities\StockMove.cs" />
@@ -100,6 +101,9 @@
       <DependentUpon>PhoebeModel.tt</DependentUpon>
     </Compile>
     <Compile Include="SecondCategory.cs">
+      <DependentUpon>PhoebeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Settlement.cs">
       <DependentUpon>PhoebeModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Stock.cs">

@@ -108,8 +108,14 @@ namespace Phoebe.Model
         /// <summary>
         /// 56:货品已结算
         /// </summary>
-        [Display(Name = "货品已结算")]
+        [Display(Name = "已结算")]
         CargoSettled = 57,
+
+        /// <summary>
+        /// 56:货品已付款
+        /// </summary>
+        [Display(Name = "已付款")]
+        CargoPaid = 58,
         #endregion //Cargo
 
         #region Store
@@ -177,7 +183,21 @@ namespace Phoebe.Model
         /// 93:已移库
         /// </summary>
         [Display(Name = "已移库")]
-        StockMove = 93
+        StockMove = 93,
         #endregion //Store
+
+        #region Settlement
+        /// <summary>
+        /// 101:未付款
+        /// </summary>
+        [Display(Name = "未付款")]
+        SettleUnpaid = 101,
+
+        /// <summary>
+        /// 102:已付款
+        /// </summary>
+        [Display(Name = "已付款")]
+        SettlePaid = 102
+        #endregion //Settlement
     }
 }

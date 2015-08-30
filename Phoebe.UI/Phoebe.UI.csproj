@@ -135,6 +135,7 @@
     <Compile Include="Controllers\GroupCustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ScatterCustomerController.cs" />
+    <Compile Include="Controllers\SettleController.cs" />
     <Compile Include="Controllers\StockController.cs" />
     <Compile Include="Controllers\StockInController.cs" />
     <Compile Include="Controllers\StockMoveController.cs" />
@@ -727,6 +728,8 @@
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Cargo\ListByOut.cshtml" />
+    <Content Include="Views\Settle\Index.cshtml" />
+    <Content Include="Views\Settle\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

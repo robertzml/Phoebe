@@ -54,6 +54,7 @@
     <Compile Include="ContractBusiness.cs" />
     <Compile Include="CustomerBusiness.cs" />
     <Compile Include="ModelExtension.cs" />
+    <Compile Include="SettleBusiness.cs" />
     <Compile Include="StoreBusiness.cs" />
     <Compile Include="TrayBusiness.cs" />
     <Compile Include="UserBusiness.cs" />

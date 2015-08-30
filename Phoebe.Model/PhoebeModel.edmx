@@ -91,6 +91,29 @@
           <Property Name="Remark" Type="nvarchar" MaxLength="500" />
           <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Settlement">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Number" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CargoID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Weight" Type="decimal" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="WeightUnitPrice" Type="decimal" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="WeightTotalPrice" Type="decimal" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="Volume" Type="decimal" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="VolumeUnitPrice" Type="decimal" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="VolumeTotalPrice" Type="decimal" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="Discount" Type="int" Nullable="false" />
+          <Property Name="Remission" Type="decimal" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="TotalPrice" Type="decimal" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="PaidPrice" Type="decimal" Precision="18" Scale="3" />
+          <Property Name="SettleTime" Type="datetime" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="ConfirmTime" Type="datetime" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="500" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Stock">
           <Key>
             <PropertyRef Name="ID" />
@@ -296,6 +319,30 @@
             </Principal>
             <Dependent Role="SecondCategory">
               <PropertyRef Name="FirstCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Settlement_Cargo">
+          <End Role="Cargo" Type="Self.Cargo" Multiplicity="1" />
+          <End Role="Settlement" Type="Self.Settlement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cargo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Settlement">
+              <PropertyRef Name="CargoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Settlement_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Settlement" Type="Self.Settlement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Settlement">
+              <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -594,6 +641,7 @@
           <EntitySet Name="GroupCustomer" EntityType="Self.GroupCustomer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ScatterCustomer" EntityType="Self.ScatterCustomer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SecondCategory" EntityType="Self.SecondCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Settlement" EntityType="Self.Settlement" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Stock" EntityType="Self.Stock" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StockIn" EntityType="Self.StockIn" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StockInDetails" EntityType="Self.StockInDetails" Schema="dbo" store:Type="Tables" />
@@ -628,6 +676,14 @@
           <AssociationSet Name="FK_SecondCategory_FirstCategory" Association="Self.FK_SecondCategory_FirstCategory">
             <End Role="FirstCategory" EntitySet="FirstCategory" />
             <End Role="SecondCategory" EntitySet="SecondCategory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Settlement_Cargo" Association="Self.FK_Settlement_Cargo">
+            <End Role="Cargo" EntitySet="Cargo" />
+            <End Role="Settlement" EntitySet="Settlement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Settlement_User" Association="Self.FK_Settlement_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Settlement" EntitySet="Settlement" />
           </AssociationSet>
           <AssociationSet Name="FK_Stock_Cargo" Association="Self.FK_Stock_Cargo">
             <End Role="Cargo" EntitySet="Cargo" />
@@ -903,6 +959,15 @@
             <End Role="StockMove" EntitySet="StockMoves" />
             <End Role="StockMoveDetail" EntitySet="StockMoveDetails" />
           </AssociationSet>
+          <EntitySet Name="Settlements" EntityType="PhoebeModel.Settlement" />
+          <AssociationSet Name="FK_Settlement_Cargo" Association="PhoebeModel.FK_Settlement_Cargo">
+            <End Role="Cargo" EntitySet="Cargoes" />
+            <End Role="Settlement" EntitySet="Settlements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Settlement_User" Association="PhoebeModel.FK_Settlement_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Settlement" EntitySet="Settlements" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="ScatterCustomer">
           <Key>
@@ -978,6 +1043,7 @@
           <NavigationProperty Name="Stocks" Relationship="PhoebeModel.FK_Stock_Cargo" FromRole="Cargo" ToRole="Stock" />
           <NavigationProperty Name="StockOutDetails" Relationship="PhoebeModel.FK_StockOutDetails_Cargo" FromRole="Cargo" ToRole="StockOutDetail" />
           <NavigationProperty Name="StockMoveDetails" Relationship="PhoebeModel.FK_StockMoveDetails_Cargo" FromRole="Cargo" ToRole="StockMoveDetail" />
+          <NavigationProperty Name="Settlements" Relationship="PhoebeModel.FK_Settlement_Cargo" FromRole="Cargo" ToRole="Settlement" />
         </EntityType>
         <Association Name="FK_Cargo_FirstCategory">
           <End Type="PhoebeModel.FirstCategory" Role="FirstCategory" Multiplicity="1" />
@@ -1022,6 +1088,7 @@
           <NavigationProperty Name="Contracts" Relationship="PhoebeModel.FK_Contract_User" FromRole="User" ToRole="Contract" />
           <NavigationProperty Name="StockOuts" Relationship="PhoebeModel.FK_StockOut_User" FromRole="User" ToRole="StockOut" />
           <NavigationProperty Name="StockMoves" Relationship="PhoebeModel.FK_StockMove_User" FromRole="User" ToRole="StockMove" />
+          <NavigationProperty Name="Settlements" Relationship="PhoebeModel.FK_Settlement_User" FromRole="User" ToRole="Settlement" />
         </EntityType>
         <EntityType Name="UserGroup">
           <Key>
@@ -1515,6 +1582,55 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Settlement">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="Number" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CargoID" Type="Guid" Nullable="false" />
+          <Property Name="Weight" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
+          <Property Name="WeightUnitPrice" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
+          <Property Name="WeightTotalPrice" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
+          <Property Name="Volume" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
+          <Property Name="VolumeUnitPrice" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
+          <Property Name="VolumeTotalPrice" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
+          <Property Name="Discount" Type="Int32" Nullable="false" />
+          <Property Name="Remission" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
+          <Property Name="TotalPrice" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
+          <Property Name="PaidPrice" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="SettleTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="ConfirmTime" Type="DateTime" Precision="3" />
+          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cargo" Relationship="PhoebeModel.FK_Settlement_Cargo" FromRole="Settlement" ToRole="Cargo" />
+          <NavigationProperty Name="User" Relationship="PhoebeModel.FK_Settlement_User" FromRole="Settlement" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_Settlement_Cargo">
+          <End Type="PhoebeModel.Cargo" Role="Cargo" Multiplicity="1" />
+          <End Type="PhoebeModel.Settlement" Role="Settlement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cargo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Settlement">
+              <PropertyRef Name="CargoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Settlement_User">
+          <End Type="PhoebeModel.User" Role="User" Multiplicity="1" />
+          <End Type="PhoebeModel.Settlement" Role="Settlement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Settlement">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1753,6 +1869,30 @@
                 <ScalarProperty Name="SourceWarehouseID" ColumnName="SourceWarehouseID" />
                 <ScalarProperty Name="ConfirmTime" ColumnName="ConfirmTime" />
                 <ScalarProperty Name="MoveTime" ColumnName="MoveTime" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Settlements">
+            <EntityTypeMapping TypeName="PhoebeModel.Settlement">
+              <MappingFragment StoreEntitySet="Settlement">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="ConfirmTime" ColumnName="ConfirmTime" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="SettleTime" ColumnName="SettleTime" />
+                <ScalarProperty Name="PaidPrice" ColumnName="PaidPrice" />
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="Remission" ColumnName="Remission" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="VolumeTotalPrice" ColumnName="VolumeTotalPrice" />
+                <ScalarProperty Name="VolumeUnitPrice" ColumnName="VolumeUnitPrice" />
+                <ScalarProperty Name="Volume" ColumnName="Volume" />
+                <ScalarProperty Name="WeightTotalPrice" ColumnName="WeightTotalPrice" />
+                <ScalarProperty Name="WeightUnitPrice" ColumnName="WeightUnitPrice" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="CargoID" ColumnName="CargoID" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
