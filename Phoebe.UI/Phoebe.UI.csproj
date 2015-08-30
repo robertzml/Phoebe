@@ -696,7 +696,6 @@
     <Content Include="Views\UserGroup\Edit.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\ChangePassword.cshtml" />
-    <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\StockIn\Create.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\WarehouseCascadeList.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\FreeTrayList.cshtml" />
@@ -714,7 +713,7 @@
     <Content Include="Views\StockOut\Index.cshtml" />
     <Content Include="Views\StockOut\Details.cshtml" />
     <Content Include="Views\Stock\Details.cshtml" />
-    <Content Include="Views\Cargo\List.cshtml" />
+    <Content Include="Views\Cargo\ListByNotIn.cshtml" />
     <Content Include="Views\Warehouse\Store.cshtml" />
     <Content Include="Views\Warehouse\StoreInWarehouse.cshtml" />
     <Content Include="Views\Stock\DetailsModal.cshtml" />
@@ -726,6 +725,8 @@
     <Content Include="Views\StockMove\Index.cshtml" />
     <Content Include="Views\StockMove\Details.cshtml" />
     <Content Include="Views\User\Edit.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Cargo\ListByOut.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

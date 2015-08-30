@@ -34,6 +34,8 @@ namespace Phoebe.Model
         public int ContractID { get; set; }
         public System.DateTime RegisterTime { get; set; }
         public int UserID { get; set; }
+        public Nullable<System.DateTime> InTime { get; set; }
+        public Nullable<System.DateTime> OutTime { get; set; }
         public string Remark { get; set; }
         public int Status { get; set; }
     

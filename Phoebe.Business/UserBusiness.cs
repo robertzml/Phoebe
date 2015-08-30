@@ -148,12 +148,54 @@ namespace Phoebe.Business
 
                 this.context.SaveChanges();
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return ErrorCode.Exception;
             }
 
             return ErrorCode.Success;
+        }
+
+        /// <summary>
+        /// 启用用户
+        /// </summary>
+        /// <param name="id">用户ID</param>
+        public void Enable(int id)
+        {
+            try
+            {
+                var user = this.context.Users.Find(id);
+                if (user == null || id == 1)
+                    return;
+
+                user.Status = (int)EntityStatus.Normal;
+                this.context.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return;
+            }
+        }
+
+        /// <summary>
+        /// 禁用用户
+        /// </summary>
+        /// <param name="id">用户ID</param>
+        public void Disable(int id)
+        {
+            try
+            {
+                var user = this.context.Users.Find(id);
+                if (user == null || id == 1)
+                    return;
+
+                user.Status = (int)EntityStatus.UserDisable;
+                this.context.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return;
+            }
         }
         #endregion //User Method
 

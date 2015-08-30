@@ -207,6 +207,7 @@ namespace Phoebe.Business
                     {
                         // change stock in details and cargo status
                         item.Status = (int)EntityStatus.StockIn;
+                        item.Cargo.InTime = si.ConfirmTime;
                         item.Cargo.Status = (int)EntityStatus.CargoStockIn;
 
                         Stock stock = new Stock();
@@ -370,6 +371,7 @@ namespace Phoebe.Business
                     foreach (var item in so.StockOutDetails)
                     {
                         item.Status = (int)EntityStatus.StockOut;
+                        item.Cargo.OutTime = so.ConfirmTime;
                         item.Cargo.Status = (int)EntityStatus.CargoStockOut;
                     }
 

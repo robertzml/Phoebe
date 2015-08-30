@@ -51,8 +51,8 @@ namespace Phoebe.UI.Controllers
             var data1 = this.cargoBusiness.Get(EntityStatus.CargoNotIn);
             var data2 = this.cargoBusiness.Get(EntityStatus.CargoStockInReady);
             var data = data1.Union(data2);
-            ViewBag.Tiltle = "未入库货品";
-            return View("List", data);
+          
+            return View(data);
         }
 
         /// <summary>
@@ -62,8 +62,7 @@ namespace Phoebe.UI.Controllers
         public ActionResult ListByOut()
         {
             var data = this.cargoBusiness.Get(EntityStatus.CargoStockOut);
-            ViewBag.Tiltle = "已出库货品";
-            return View("List", data);
+            return View(data);
         }
 
         /// <summary>

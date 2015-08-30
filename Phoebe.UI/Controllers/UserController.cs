@@ -7,6 +7,7 @@ using Phoebe.Business;
 using Phoebe.Common;
 using Phoebe.Model;
 using Phoebe.UI.Models;
+using Phoebe.UI.Filters;
 using Phoebe.UI.Services;
 
 namespace Phoebe.UI.Controllers
@@ -14,6 +15,7 @@ namespace Phoebe.UI.Controllers
     /// <summary>
     /// 用户控制器
     /// </summary>
+    [EnhancedAuthorize(Roles = "Root,Administrator")]
     public class UserController : Controller
     {
         #region Field
@@ -161,6 +163,30 @@ namespace Phoebe.UI.Controllers
             }
 
             return View(model);
+        }
+
+        /// <summary>
+        /// 启用用户
+        /// </summary>
+        /// <param name="id">用户ID</param>
+        /// <returns></returns>
+        public ActionResult Enable(int id)
+        {
+            this.userBusiness.Enable(id);
+            TempData["Message"] = "用户已启用";
+            return RedirectToAction("Details", "User", new { id = id });
+        }
+
+        /// <summary>
+        /// 禁用用户
+        /// </summary>
+        /// <param name="id">用户ID</param>
+        /// <returns></returns>
+        public ActionResult Disable(int id)
+        {
+            this.userBusiness.Disable(id);
+            TempData["Message"] = "用户已禁用";
+            return RedirectToAction("Details", "User", new { id = id });
         }
         #endregion //Action
     }

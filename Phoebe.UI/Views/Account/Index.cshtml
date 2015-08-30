@@ -4,6 +4,14 @@
     ViewBag.Title = "个人信息";
 }
 
+@section styles {
+    <style type="text/css">
+        dd {
+            margin-bottom: 10px;
+        }
+    </style>    
+}
+
 <!-- BEGIN PAGE HEADER-->
 <h3 class="page-title">
     @ViewBag.Title
@@ -43,7 +51,63 @@
                 </div>
             </div>
             <div class="portlet-body">
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Username)
+                    </dt>
 
+                    <dd>
+                        @Html.DisplayFor(model => model.Username)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.UserGroupID)
+                    </dt>
+
+                    <dd>
+                        @Model.UserGroup.Title
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Name)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.LastLoginTime)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.LastLoginTime)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CurrentLoginTime)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.CurrentLoginTime)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Remark)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Remark)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Status)
+                    </dt>
+
+                    <dd>
+                        @(((EntityStatus)Model.Status).DisplayName())
+                    </dd>
+                </dl>
             </div>
         </div>
     </div>

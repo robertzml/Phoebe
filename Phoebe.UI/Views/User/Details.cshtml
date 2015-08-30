@@ -118,6 +118,14 @@
                 <p>
                     <a href="@Url.Action("Index", new { controller = "User" })" class="btn btn-info"><i class="fa fa-list"></i>&nbsp;回到列表</a>
                     <a href="@Url.Action("Edit", new { controller = "User", id = Model.ID })" class="btn btn-warning"><i class="fa fa-edit"></i>&nbsp;编辑</a>
+                    @if (Model.Status == 0)
+                    {
+                        <a href="@Url.Action("Disable", new { controller = "User", id = Model.ID })" class="btn btn-danger" role="button"><i class="fa fa-ban"></i>&nbsp;禁用</a>
+                    }
+                    else if (Model.Status == (int)EntityStatus.UserDisable)
+                    {
+                        <a href="@Url.Action("Enable", new { controller = "User", id = Model.ID })" class="btn btn-danger" role="button"><i class="fa fa-check-circle-o"></i>&nbsp;启用</a>
+                    }
                 </p>
             </div>
         </div>

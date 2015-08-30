@@ -104,6 +104,12 @@ namespace Phoebe.Model
         /// </summary>
         [Display(Name = "准备移库")]
         CargoStockMoveReady = 56,
+
+        /// <summary>
+        /// 56:货品已结算
+        /// </summary>
+        [Display(Name = "货品已结算")]
+        CargoSettled = 57,
         #endregion //Cargo
 
         #region Store

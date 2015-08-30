@@ -143,7 +143,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="@Url.Action("List",  new { controller = "Contract", type = 2 })" id="menu-contract-closed">
+                        <a href="@Url.Action("List", new { controller = "Contract", type = 2 })" id="menu-contract-closed">
                             已关闭合同
                         </a>
                     </li>
@@ -276,6 +276,8 @@
             <li class="heading">
                 <h3 class="uppercase">系统维护</h3>
             </li>
+            @if (rank >= 900)
+            {
             <li class="left-nav-first">
                 <a href="javascript:;">
                     <i class="fa fa-user"></i>
@@ -300,6 +302,7 @@
                     </li>
                 </ul>
             </li>
+            }
             <li>
                 <a href="javascript:;">
                     <i class="icon-pointer"></i>

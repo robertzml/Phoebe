@@ -83,6 +83,18 @@ namespace Phoebe.Model
         public int UserID { get; set; }
 
         /// <summary>
+        /// 入库时间
+        /// </summary>
+        [Display(Name = "入库时间")]
+        public Nullable<System.DateTime> InTime { get; set; }
+
+        /// <summary>
+        /// 出库时间
+        /// </summary>
+        [Display(Name = "出库时间")]
+        public Nullable<System.DateTime> OutTime { get; set; }
+
+        /// <summary>
         /// 备注
         /// </summary>
         [DataType(DataType.MultilineText)]
