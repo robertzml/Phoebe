@@ -18,13 +18,15 @@ namespace Phoebe.Model
         /// <summary>
         /// 结算单编号
         /// </summary>
+        [Required]
         [Display(Name = "结算单编号")]
         public string Number { get; set; }
 
         /// <summary>
         /// 货品ID
         /// </summary>
-        [Display(Name = "货品ID")]
+        [Required]
+        [Display(Name = "货品名称")]
         public System.Guid CargoID { get; set; }
 
         /// <summary>
@@ -36,13 +38,13 @@ namespace Phoebe.Model
         /// <summary>
         /// 重量单价
         /// </summary>
-        [Display(Name = "重量单价")]
+        [Display(Name = "重量单价(元/kg)")]
         public decimal WeightUnitPrice { get; set; }
 
         /// <summary>
         /// 重量总价
         /// </summary>
-        [Display(Name = "重量总价")]
+        [Display(Name = "重量总价(元)")]
         public decimal WeightTotalPrice { get; set; }
 
         /// <summary>
@@ -60,30 +62,33 @@ namespace Phoebe.Model
         /// <summary>
         /// 体积总价
         /// </summary>
-        [Display(Name = "体积总价")]
+        [Display(Name = "体积总价(元)")]
         public decimal VolumeTotalPrice { get; set; }
 
         /// <summary>
         /// 折扣率
         /// </summary>
-        [Display(Name = "折扣率")]
+        [Range(0, 100)]
+        [Display(Name = "折扣率%")]
         public int Discount { get; set; }
 
         /// <summary>
         /// 减免费用
         /// </summary>
-        [Display(Name = "减免费用")]
+        [Display(Name = "减免费用(元)")]
         public decimal Remission { get; set; }
 
         /// <summary>
         /// 总价
         /// </summary>
-        [Display(Name = "总价")]
+        [Required]
+        [Display(Name = "总价(元)")]
         public decimal TotalPrice { get; set; }
 
         /// <summary>
         /// 付款
         /// </summary>
+        [Required]
         [Display(Name = "付款")]
         public Nullable<decimal> PaidPrice { get; set; }
 

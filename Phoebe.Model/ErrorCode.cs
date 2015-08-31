@@ -60,6 +60,12 @@ namespace Phoebe.Model
         /// </summary>
         [Display(Name = "权限不够")]
         NoPrivilege = 7,
+
+        /// <summary>
+        /// 编号重复
+        /// </summary>
+        [Display(Name = "编号重复")]
+        DuplicateNumber = 8,
         #endregion //System
 
         #region User
@@ -95,6 +101,20 @@ namespace Phoebe.Model
         [Display(Name = "编号重复")]
         ContractDuplicateNumber = 21,
         #endregion //Contract
+
+        #region Cargo
+        /// <summary>
+        /// 货品未找到
+        /// </summary>
+        [Display(Name = "货品未找到")]
+        CargoNotFound = 40,
+
+        /// <summary>
+        /// 货品无法结算
+        /// </summary>
+        [Display(Name = "货品无法结算")]
+        CargoCannotSettled = 41,
+        #endregion //Cargo
 
         #region Stock
         /// <summary>

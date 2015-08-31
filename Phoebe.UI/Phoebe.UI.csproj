@@ -730,6 +730,8 @@
     <Content Include="Views\Cargo\ListByOut.cshtml" />
     <Content Include="Views\Settle\Index.cshtml" />
     <Content Include="Views\Settle\Create.cshtml" />
+    <Content Include="Views\Settle\Audit.cshtml" />
+    <Content Include="Views\Settle\Confirm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
