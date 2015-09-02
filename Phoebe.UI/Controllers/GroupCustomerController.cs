@@ -50,6 +50,12 @@ namespace Phoebe.UI.Controllers
             if (data == null)
                 return HttpNotFound();
 
+            ContractBusiness contractBusiness = new ContractBusiness();
+            ViewBag.Contracts = contractBusiness.GetByCustomer(id, (int)CustomerType.Group);
+
+            CargoBusiness cargoBusiness = new CargoBusiness();
+            ViewBag.Cargos = cargoBusiness.GetByCustomer(id, (int)CustomerType.Group);
+
             return View(data);
         }
 

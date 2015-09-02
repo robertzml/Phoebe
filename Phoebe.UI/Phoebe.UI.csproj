@@ -736,6 +736,8 @@
     <Content Include="Views\Settle\Details.cshtml" />
     <Content Include="Views\Tray\Abandon.cshtml" />
     <Content Include="Views\Tray\ListByAbandon.cshtml" />
+    <Content Include="Views\Contract\DetailsModal.cshtml" />
+    <Content Include="Views\Cargo\DetailsModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -105,6 +105,22 @@
                         </tr>
                         <tr>
                             <td>
+                                @Html.DisplayNameFor(model => model.OriginPlace)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.OriginPlace)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                保质期(月)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.ShelfLife)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
                                 @Html.DisplayNameFor(model => model.ContractID)
                             </td>
                             <td>
@@ -125,6 +141,22 @@
                             </td>
                             <td>
                                 @Model.User.Name
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.InTime)
+                            </td>
+                            <td>
+                                @Model.InTime.ToDateTimeString()
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.OutTime)
+                            </td>
+                            <td>
+                                @Model.OutTime.ToDateTimeString()
                             </td>
                         </tr>
                         <tr>

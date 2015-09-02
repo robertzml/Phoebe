@@ -46,6 +46,23 @@ namespace Phoebe.Business
         /// <summary>
         /// 获取相关货品
         /// </summary>
+        /// <param name="customerID">客户ID</param>
+        /// <param name="customerType">客户类型</param>
+        /// <returns></returns>
+        public List<Cargo> GetByCustomer(int customerID, int customerType)
+        {
+            var data = from r in this.context.Cargoes
+                       where (from s in this.context.Contracts
+                              where s.CustomerID == customerID && s.CustomerType == customerType
+                              select s.ID).Contains(r.ContractID)
+                       select r;
+
+            return data.ToList();
+        }
+
+        /// <summary>
+        /// 获取相关货品
+        /// </summary>
         /// <param name="status"></param>
         /// <returns></returns>
         public List<Cargo> Get(EntityStatus[] status)

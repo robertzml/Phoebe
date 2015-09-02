@@ -63,6 +63,17 @@ namespace Phoebe.Business
         }
 
         /// <summary>
+        /// 获取相关合同
+        /// </summary>
+        /// <param name="customerID">客户ID</param>
+        /// <param name="customerType">客户类型</param>
+        /// <returns></returns>
+        public List<Contract> GetByCustomer(int customerID, int customerType)
+        {
+            return this.context.Contracts.Where(r => r.CustomerID == customerID && r.CustomerType == customerType).ToList();
+        }
+
+        /// <summary>
         /// 添加合同
         /// </summary>
         /// <param name="data">合同数据</param>

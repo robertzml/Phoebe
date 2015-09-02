@@ -2,6 +2,8 @@
 
 @{
     ViewBag.Title = "团体客户信息";
+    List<Contract> contracts = ViewBag.Contracts;
+    List<Cargo> cargos = ViewBag.Cargos;
 }
 
 <!-- BEGIN PAGE HEADER-->
@@ -28,21 +30,25 @@
 <!-- BEGIN PAGE CONTENT-->
 <div class="row">
     <div class="col-md-12">
-        <div class="portlet box blue">
-            <div class="portlet-title">
-                <div class="caption">
-                    <i class="fa fa-info-circle"></i>&nbsp;团体客户信息
-                </div>
-                <div class="tools">
-                    <a href="javascript:;" class="collapse">
-                    </a>
-                    <a href="javascript:;" class="reload">
-                    </a>
-                    <a href="javascript:;" class="remove">
-                    </a>
-                </div>
-            </div>
-            <div class="portlet-body">
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a href="#tab_info" data-toggle="tab">
+                    团体客户信息
+                </a>
+            </li>
+            <li>
+                <a href="#tab_contract" data-toggle="tab">
+                    相关合同
+                </a>
+            </li>
+            <li>
+                <a href="#tab_cargo" data-toggle="tab">
+                    相关货品
+                </a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane fade active in" id="tab_info">
                 <table class="table table-striped table-bordered table-hover">
                     <thead>
                         <tr>
@@ -136,7 +142,210 @@
                     <a href="@Url.Action("Edit", new { controller = "GroupCustomer", id = Model.ID })" class="btn btn-warning"><i class="fa fa-edit"></i>&nbsp;编辑</a>
                 </p>
             </div>
+            <div class="tab-pane fade" id="tab_contract">
+                <table class="table table-striped table-bordered table-hover" id="contract-table">
+                    <thead>
+                        <tr>
+                            <th>
+                                合同编号
+                            </th>
+                            <th>
+                                合同名称
+                            </th>
+                            <th>
+                                合同类型
+                            </th>
+                            <th>
+                                签订日期
+                            </th>
+                            <th>
+                                开始日期
+                            </th>
+                            <th>
+                                结束日期
+                            </th>
+                            <th>
+                                操作
+                            </th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>
+                                合同编号
+                            </th>
+                            <th>
+                                合同名称
+                            </th>
+                            <th data-filter="true">
+                                合同类型
+                            </th>
+                            <th>
+                                签订日期
+                            </th>
+                            <th>
+                                开始日期
+                            </th>
+                            <th>
+                                结束日期
+                            </th>
+                            <th>
+                                操作
+                            </th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @foreach (var item in contracts)
+                        {
+                            <tr>
+                                <td>
+                                    @item.Number
+                                </td>
+                                <td>
+                                    @item.Name
+                                </td>
+                                <td>
+                                    @{
+                                        var type1 = (ContractType)item.Type;
+                                        @type1.DisplayName();
+                                    }
+                                </td>
+                                <td>
+                                    @item.SignDate.ToDateString()
+                                </td>
+                                <td>
+                                    @item.StartDate.ToDateString()
+                                </td>
+                                <td>
+                                    @item.EndDate.ToDateString()
+                                </td>
+                                <td>
+                                    <a class="btn btn-sm btn-info" href="/Contract/DetailsModal/@item.ID" data-target="#contract-modal" data-toggle="modal"><i class="fa fa-check-circle"></i>&nbsp;查看</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+                <div class="modal fade" id="contract-modal" role="basic" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <img src="/assets/global/img/loading-spinner-grey.gif" alt="" class="loading">
+                                <span>
+                                    &nbsp;&nbsp;Loading...
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="tab_cargo">
+                <table class="table table-striped table-bordered table-hover" id="cargo-table">
+                    <thead>
+                        <tr>
+                            <th>
+                                货品名称
+                            </th>
+                            <th>
+                                一级分类
+                            </th>
+                            <th>
+                                二级分类
+                            </th>
+                            <th>
+                                重量 (Kg)
+                            </th>
+                            <th>
+                                体积 (m<sup>3</sup>)
+                            </th>
+                            <th>
+                                登记时间
+                            </th>
+                            <th>
+                                状态
+                            </th>
+                            <th>
+                                操作
+                            </th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>
+                                货品名称
+                            </th>
+                            <th data-filter="true">
+                                一级分类
+                            </th>
+                            <th data-filter="true">
+                                二级分类
+                            </th>
+                            <th>
+                                重量 (Kg)
+                            </th>
+                            <th>
+                                体积 (m<sup>3</sup>)
+                            </th>
+                            <th>
+                                登记时间
+                            </th>
+                            <th data-filter="true">
+                                状态
+                            </th>
+                            <th>
+                                操作
+                            </th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @foreach (var item in cargos)
+                        {
+                            <tr>
+                                <td>
+                                    @item.Name
+                                </td>
+                                <td>
+                                    @item.FirstCategory.Name
+                                </td>
+                                <td>
+                                    @item.SecondCategory.Name
+                                </td>
+                                <td>
+                                    @item.Weight
+                                </td>
+                                <td>
+                                    @item.Volume
+                                </td>
+                                <td>
+                                    @item.RegisterTime.ToDateTimeString()
+                                </td>
+                                <td>
+                                    @(((EntityStatus)item.Status).DisplayName())
+                                </td>
+                                <td>
+                                    <a class="btn btn-sm btn-info" href="/Cargo/DetailsModal/@item.ID.ToString()" data-target="#cargo-modal" data-toggle="modal"><i class="fa fa-check-circle"></i>&nbsp;查看</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+                <div class="modal fade" id="cargo-modal" role="basic" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <img src="/assets/global/img/loading-spinner-grey.gif" alt="" class="loading">
+                                <span>
+                                    &nbsp;&nbsp;Loading...
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+        
     </div>
 </div>
 <!-- END PAGE CONTENT-->
@@ -146,6 +355,8 @@
     <script type="text/javascript">
         $(function () {
             phoebe.leftNavActive($('#menu-group-customer-index'));
+            phoebe.initDatatable($('#contract-table'));
+            phoebe.initDatatable($('#cargo-table'));
         });
     </script>
 }

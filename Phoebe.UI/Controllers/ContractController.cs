@@ -57,6 +57,20 @@ namespace Phoebe.UI.Controllers
         }
 
         /// <summary>
+        /// 合同信息
+        /// </summary>
+        /// <param name="id">合同ID</param>
+        /// <returns></returns>
+        public ActionResult DetailsModal(int id)
+        {
+            var data = this.contractBusiness.Get(id);
+            if (data == null)
+                return HttpNotFound();
+
+            return View(data);
+        }
+
+        /// <summary>
         /// 添加合同
         /// </summary>
         /// <returns></returns>

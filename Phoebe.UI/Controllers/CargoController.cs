@@ -80,6 +80,20 @@ namespace Phoebe.UI.Controllers
         }
 
         /// <summary>
+        /// 货品信息
+        /// </summary>
+        /// <param name="id">ID</param>
+        /// <returns></returns>
+        public ActionResult DetailsModal(string id)
+        {
+            var data = this.cargoBusiness.Get(id);
+            if (data == null)
+                return HttpNotFound();
+
+            return View(data);
+        }
+
+        /// <summary>
         /// 货品登记
         /// </summary>
         /// <returns></returns>
