@@ -54,6 +54,16 @@ namespace Phoebe.UI.Controllers
         }
 
         /// <summary>
+        /// 废弃托盘列表
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult ListByAbandon()
+        {
+            var data = this.trayBusiness.Get(EntityStatus.TrayAbandon);
+            return View(data);
+        }
+
+        /// <summary>
         /// 添加托盘
         /// </summary>
         /// <returns></returns>
@@ -74,7 +84,13 @@ namespace Phoebe.UI.Controllers
         {
             if (ModelState.IsValid)
             {
-                ErrorCode result = this.trayBusiness.Create(model);
+                int count = 1;
+                if (string.IsNullOrEmpty(Request.Form["count"]))
+                    count = 1;
+                else
+                    count = Convert.ToInt32(Request.Form["count"]);
+
+                ErrorCode result = this.trayBusiness.Create(model, count);
                 if (result == ErrorCode.Success)
                 {
                     TempData["Message"] = "添加托盘成功";
@@ -88,6 +104,43 @@ namespace Phoebe.UI.Controllers
             }
 
             return View(model);
+        }
+
+        /// <summary>
+        /// 废弃托盘
+        /// </summary>
+        /// <param name="id">托盘ID</param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult Abandon(int id)
+        {
+            var data = this.trayBusiness.Get(id);
+            if (data == null)
+                return HttpNotFound();
+
+            return View(data);
+        }
+
+        /// <summary>
+        /// 废弃托盘
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult Abandon(Tray model)
+        {
+            ErrorCode result = this.trayBusiness.Abandon(model.ID);
+            if (result == ErrorCode.Success)
+            {
+                TempData["Message"] = "废弃托盘成功";
+                return RedirectToAction("Details", new { controller = "Tray", id = model.ID });
+            }
+            else
+            {
+                TempData["Message"] = "废弃托盘失败" + result.DisplayName();
+                return RedirectToAction("Abandon", model.ID);
+            }
         }
         #endregion //Action
 

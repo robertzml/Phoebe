@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Phoebe.Model.Tray>
 
 @{
-    ViewBag.Title = "托盘列表";
+    ViewBag.Title = "废弃托盘";
 }
 
 <!-- BEGIN PAGE HEADER-->
@@ -20,7 +20,7 @@
             <i class="fa fa-angle-right"></i>
         </li>
         <li>
-            <a href="#">@ViewBag.Titlee</a>
+            <a href="#">@ViewBag.Title</a>
         </li>
     </ul>
 </div>
@@ -56,10 +56,10 @@
                                 @Html.DisplayNameFor(model => model.Width)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.WarehouseID)
+                                @Html.DisplayNameFor(model => model.CreateTime)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.CreateTime)
+                                @Html.DisplayNameFor(model => model.AbandonTime)
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.Remark)
@@ -83,11 +83,11 @@
                             <th>
                                 @Html.DisplayNameFor(model => model.Width)
                             </th>
-                            <th data-filter="true">
-                                @Html.DisplayNameFor(model => model.WarehouseID)
-                            </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.CreateTime)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.AbandonTime)
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.Remark)
@@ -113,14 +113,11 @@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Width)
                                 </td>
-                                <th>
-                                    @if (item.WarehouseID != null)
-                                    {
-                                        @item.Warehouse.Name
-                                    }
-                                </th>
                                 <td>
                                     @item.CreateTime.ToDateString()
+                                </td>
+                                <td>
+                                    @item.AbandonTime.ToDateString()
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Remark)
@@ -135,11 +132,6 @@
                         }
                     </tbody>
                 </table>
-
-                <hr />
-                <p>
-                    <a href="@Url.Action("Create", "Tray")" class="btn btn-primary"><i class="fa fa-plus"></i>&nbsp;添加托盘</a>
-                </p>
             </div>
         </div>
     </div>
@@ -149,7 +141,7 @@
 @section Scripts {
     <script type="text/javascript">
         $(function () {
-            phoebe.leftNavActive($('#menu-tray-index'));
+            phoebe.leftNavActive($('#menu-tray-abandon'));
             phoebe.initDatatable($('#tray-table'));
         });
     </script>

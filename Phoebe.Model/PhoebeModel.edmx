@@ -211,6 +211,7 @@
           <Property Name="Width" Type="float" />
           <Property Name="WarehouseID" Type="int" />
           <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="AbandonTime" Type="datetime" />
           <Property Name="Remark" Type="nvarchar" MaxLength="500" />
           <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
@@ -1316,6 +1317,7 @@
           <Property Name="Width" Type="Double" />
           <Property Name="WarehouseID" Type="Int32" />
           <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="AbandonTime" Type="DateTime" Precision="3" />
           <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" Nullable="false" />
           <NavigationProperty Name="StockIns" Relationship="PhoebeModel.FK_StockIn_Tray" FromRole="Tray" ToRole="StockIn" />
@@ -1809,6 +1811,7 @@
           <EntitySetMapping Name="Trays">
             <EntityTypeMapping TypeName="PhoebeModel.Tray">
               <MappingFragment StoreEntitySet="Tray">
+                <ScalarProperty Name="AbandonTime" ColumnName="AbandonTime" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Remark" ColumnName="Remark" />
                 <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />

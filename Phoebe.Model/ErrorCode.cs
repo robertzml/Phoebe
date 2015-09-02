@@ -102,6 +102,14 @@ namespace Phoebe.Model
         ContractDuplicateNumber = 21,
         #endregion //Contract
 
+        #region Warehosue & Tray
+        /// <summary>
+        /// 托盘使用中
+        /// </summary>
+        [Display(Name = "托盘使用中")]
+        TrayInUse = 35,
+        #endregion//Warehouse & Tray
+
         #region Cargo
         /// <summary>
         /// 货品未找到

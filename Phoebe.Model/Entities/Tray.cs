@@ -40,6 +40,12 @@ namespace Phoebe.Model
         public DateTime CreateTime { get; set; }
 
         /// <summary>
+        /// 废弃时间
+        /// </summary>
+        [Display(Name = "废弃时间")]
+        public Nullable<System.DateTime> AbandonTime { get; set; }
+
+        /// <summary>
         /// 备注
         /// </summary>
         [DataType(DataType.MultilineText)]

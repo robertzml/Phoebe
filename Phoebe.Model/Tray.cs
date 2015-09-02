@@ -28,6 +28,7 @@ namespace Phoebe.Model
         public Nullable<double> Width { get; set; }
         public Nullable<int> WarehouseID { get; set; }
         public System.DateTime CreateTime { get; set; }
+        public Nullable<System.DateTime> AbandonTime { get; set; }
         public string Remark { get; set; }
         public int Status { get; set; }
     
