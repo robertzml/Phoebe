@@ -1,7 +1,7 @@
 ﻿@model Phoebe.Model.Settlement
 
 @{
-    ViewBag.Title = "付款确认";
+    ViewBag.Title = "结算信息";
 }
 
 <!-- BEGIN PAGE HEADER-->
@@ -31,7 +31,7 @@
         <div class="portlet box blue">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="fa fa-plus"></i>结算信息
+                    <i class="fa fa-info-circle"></i>&nbsp;结算信息
                 </div>
                 <div class="tools">
                     <a href="javascript:;" class="collapse">
@@ -97,7 +97,7 @@
                         </tr>
                         <tr>
                             <td>
-                                @Html.DisplayNameFor(model => model.Volume)
+                                体积(m<sup>3</sup>)
                             </td>
                             <td>
                                 @Html.DisplayFor(model => model.Volume)
@@ -105,7 +105,7 @@
                         </tr>
                         <tr>
                             <td>
-                                @Html.DisplayNameFor(model => model.VolumeUnitPrice)
+                                体积单价(元/m<sup>3</sup>)
                             </td>
                             <td>
                                 @Html.DisplayFor(model => model.VolumeUnitPrice)
@@ -145,6 +145,14 @@
                         </tr>
                         <tr>
                             <td>
+                                @Html.DisplayNameFor(model => model.PaidPrice)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.PaidPrice)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
                                 @Html.DisplayNameFor(model => model.SettleTime)
                             </td>
                             <td>
@@ -161,56 +169,35 @@
                         </tr>
                         <tr>
                             <td>
+                                @Html.DisplayNameFor(model => model.ConfirmTime)
+                            </td>
+                            <td>
+                                @Model.ConfirmTime.ToDateTimeString()
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
                                 @Html.DisplayNameFor(model => model.Remark)
                             </td>
                             <td>
                                 @Html.DisplayFor(model => model.Remark)
                             </td>
                         </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.Status)
+                            </td>
+                            <td>
+                                @(((EntityStatus)Model.Status).DisplayName())
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
 
                 <hr />
-                <div class="form">
-                    @using (Html.BeginForm("Confirm", "Settle", FormMethod.Post, new { @class = "form-horizontal" }))
-                    {
-                        @Html.AntiForgeryToken()
-
-                        <div class="form-body">
-                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                            @Html.HiddenFor(model => model.ID)
-                            @Html.HiddenFor(model => model.Number)
-
-                            <div class="form-group">
-                                <label class="control-label col-md-3">付款金额(元)</label>
-                                <div class="col-md-8">
-                                    @Html.EditorFor(model => model.PaidPrice, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.PaidPrice, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="col-md-1">
-                                    <span class="required">*</span>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.Remark, htmlAttributes: new { @class = "control-label col-md-3" })
-                                <div class="col-md-8">
-                                    @Html.EditorFor(model => model.Remark, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.Remark, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-
-                            <div class="form-actions">
-                                <div class="row">
-                                    <div class="col-md-offset-3 col-md-9">
-                                        <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> 保存</button>
-                                        <a href="@Url.Action("Audit", new { controller = "Settle"})" class="btn btn-default">&nbsp;取消</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    }
-                </div>
+                <p>
+                    <a href="@Url.Action("ListByPaid", new { controller = "Settle" })" class="btn btn-info"><i class="fa fa-list"></i>&nbsp;回到列表</a>
+                </p>
             </div>
         </div>
     </div>
@@ -220,7 +207,7 @@
 @section Scripts {
     <script type="text/javascript">
         $(function () {
-            phoebe.leftNavActive($('#menu-settle-audit'));
+            phoebe.leftNavActive($('#menu-settle-list'));
         });
     </script>
 }

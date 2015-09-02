@@ -43,6 +43,30 @@ namespace Phoebe.UI.Controllers
         }
 
         /// <summary>
+        /// 已付款结算单
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult ListByPaid()
+        {
+            var data = this.settleBusiness.Get(EntityStatus.SettlePaid);
+            return View(data);
+        }
+
+        /// <summary>
+        /// 结算信息
+        /// </summary>
+        /// <param name="id">结算ID</param>
+        /// <returns></returns>
+        public ActionResult Details(string id)
+        {
+            var data = this.settleBusiness.Get(id);
+            if (data == null)
+                return HttpNotFound();
+
+            return View(data);
+        }
+
+        /// <summary>
         /// 货品结算
         /// </summary>
         /// <param name="id"></param>
