@@ -60,20 +60,6 @@ namespace Phoebe.Model
         public System.DateTime SignDate { get; set; }
 
         /// <summary>
-        /// 开始日期
-        /// </summary>
-        [Required]
-        [Display(Name = "开始日期")]
-        public System.DateTime StartDate { get; set; }
-
-        /// <summary>
-        /// 结束日期
-        /// </summary>
-        [Required]
-        [Display(Name = "结束日期")]
-        public System.DateTime EndDate { get; set; }
-
-        /// <summary>
         /// 关闭日期
         /// </summary>
         [Display(Name = "关闭日期")]

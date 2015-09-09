@@ -14,12 +14,18 @@ namespace Phoebe.Model
     
     public partial class StockMoveDetail
     {
+        public System.Guid ID { get; set; }
         public System.Guid StockMoveID { get; set; }
+        public int SourceWarehouseID { get; set; }
+        public int DestinationWarehouseID { get; set; }
         public System.Guid CargoID { get; set; }
+        public int Count { get; set; }
         public string Remark { get; set; }
         public int Status { get; set; }
     
         public virtual Cargo Cargo { get; set; }
         public virtual StockMove StockMove { get; set; }
+        public virtual Warehouse SourceWarehouse { get; set; }
+        public virtual Warehouse DestinationWarehouse { get; set; }
     }
 }

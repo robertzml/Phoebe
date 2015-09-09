@@ -32,7 +32,6 @@ namespace Phoebe.Model
         /// <summary>
         /// 组织机构代码
         /// </summary>
-        [Required]
         [Display(Name = "组织机构代码")]
         public string Code { get; set; }
 

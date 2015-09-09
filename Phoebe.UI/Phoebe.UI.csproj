@@ -140,7 +140,6 @@
     <Compile Include="Controllers\StockInController.cs" />
     <Compile Include="Controllers\StockMoveController.cs" />
     <Compile Include="Controllers\StockOutController.cs" />
-    <Compile Include="Controllers\TrayController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\UserGroupController.cs" />
     <Compile Include="Controllers\WarehouseController.cs" />
@@ -684,9 +683,6 @@
     <Content Include="Views\Cargo\Create.cshtml" />
     <Content Include="Views\Cargo\Details.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\ContractList.cshtml" />
-    <Content Include="Views\Tray\Index.cshtml" />
-    <Content Include="Views\Tray\Create.cshtml" />
-    <Content Include="Views\Tray\Details.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\User\Create.cshtml" />
     <Content Include="Views\User\Details.cshtml" />
@@ -734,8 +730,6 @@
     <Content Include="Views\Settle\Confirm.cshtml" />
     <Content Include="Views\Settle\ListByPaid.cshtml" />
     <Content Include="Views\Settle\Details.cshtml" />
-    <Content Include="Views\Tray\Abandon.cshtml" />
-    <Content Include="Views\Tray\ListByAbandon.cshtml" />
     <Content Include="Views\Contract\DetailsModal.cshtml" />
     <Content Include="Views\Cargo\DetailsModal.cshtml" />
   </ItemGroup>

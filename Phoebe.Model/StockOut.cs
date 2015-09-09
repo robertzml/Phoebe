@@ -22,19 +22,17 @@ namespace Phoebe.Model
         }
     
         public System.Guid ID { get; set; }
+        public System.Guid CargoID { get; set; }
         public System.DateTime OutTime { get; set; }
         public Nullable<System.DateTime> ConfirmTime { get; set; }
-        public int WarehouseID { get; set; }
-        public int TrayID { get; set; }
         public int UserID { get; set; }
         public string Remark { get; set; }
         public int Status { get; set; }
     
-        public virtual User User { get; set; }
-        public virtual Warehouse Warehouse { get; set; }
-        public virtual Tray Tray { get; set; }
+        public virtual Cargo Cargo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Stock> Stocks { get; set; }
+        public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StockOutDetail> StockOutDetails { get; set; }
     }

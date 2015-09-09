@@ -17,9 +17,12 @@ namespace Phoebe.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Cargo()
         {
-            this.StockInDetails = new HashSet<StockInDetail>();
             this.Stocks = new HashSet<Stock>();
+            this.StockIns = new HashSet<StockIn>();
+            this.StockInDetails = new HashSet<StockInDetail>();
+            this.StockOuts = new HashSet<StockOut>();
             this.StockOutDetails = new HashSet<StockOutDetail>();
+            this.StockMoves = new HashSet<StockMove>();
             this.StockMoveDetails = new HashSet<StockMoveDetail>();
             this.Settlements = new HashSet<Settlement>();
         }
@@ -28,8 +31,12 @@ namespace Phoebe.Model
         public string Name { get; set; }
         public int FirstCategoryID { get; set; }
         public int SecondCategoryID { get; set; }
-        public Nullable<double> Weight { get; set; }
-        public Nullable<double> Volume { get; set; }
+        public Nullable<int> ThirdCategoryID { get; set; }
+        public int Count { get; set; }
+        public Nullable<double> UnitWeight { get; set; }
+        public Nullable<double> TotalWeight { get; set; }
+        public Nullable<double> UnitVolume { get; set; }
+        public Nullable<double> TotalVolume { get; set; }
         public string OriginPlace { get; set; }
         public int ShelfLife { get; set; }
         public int ContractID { get; set; }
@@ -40,16 +47,22 @@ namespace Phoebe.Model
         public string Remark { get; set; }
         public int Status { get; set; }
     
+        public virtual Contract Contract { get; set; }
         public virtual FirstCategory FirstCategory { get; set; }
         public virtual SecondCategory SecondCategory { get; set; }
         public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<StockInDetail> StockInDetails { get; set; }
-        public virtual Contract Contract { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Stock> Stocks { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StockIn> StockIns { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StockInDetail> StockInDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StockOut> StockOuts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StockOutDetail> StockOutDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StockMove> StockMoves { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StockMoveDetail> StockMoveDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

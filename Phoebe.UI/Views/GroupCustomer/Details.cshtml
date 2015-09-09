@@ -159,12 +159,6 @@
                                 签订日期
                             </th>
                             <th>
-                                开始日期
-                            </th>
-                            <th>
-                                结束日期
-                            </th>
-                            <th>
                                 操作
                             </th>
                         </tr>
@@ -182,12 +176,6 @@
                             </th>
                             <th>
                                 签订日期
-                            </th>
-                            <th>
-                                开始日期
-                            </th>
-                            <th>
-                                结束日期
                             </th>
                             <th>
                                 操作
@@ -212,12 +200,6 @@
                                 </td>
                                 <td>
                                     @item.SignDate.ToDateString()
-                                </td>
-                                <td>
-                                    @item.StartDate.ToDateString()
-                                </td>
-                                <td>
-                                    @item.EndDate.ToDateString()
                                 </td>
                                 <td>
                                     <a class="btn btn-sm btn-info" href="/Contract/DetailsModal/@item.ID" data-target="#contract-modal" data-toggle="modal"><i class="fa fa-check-circle"></i>&nbsp;查看</a>
@@ -312,10 +294,10 @@
                                     @item.SecondCategory.Name
                                 </td>
                                 <td>
-                                    @item.Weight
+                                    &nbsp;
                                 </td>
                                 <td>
-                                    @item.Volume
+                                    &nbsp;
                                 </td>
                                 <td>
                                     @item.RegisterTime.ToDateTimeString()

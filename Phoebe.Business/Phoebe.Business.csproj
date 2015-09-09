@@ -56,7 +56,6 @@
     <Compile Include="ModelExtension.cs" />
     <Compile Include="SettleBusiness.cs" />
     <Compile Include="StoreBusiness.cs" />
-    <Compile Include="TrayBusiness.cs" />
     <Compile Include="UserBusiness.cs" />
     <Compile Include="WarehouseBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

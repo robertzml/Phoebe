@@ -188,11 +188,12 @@ namespace Phoebe.UI.Controllers
         /// </remarks>
         public JsonResult GetCargoInTray(int trayID)
         {
-            var cargos = this.cargoBusiness.GetInTray(trayID);
-            var data = from r in cargos
-                       select new { r.ID, r.Name, FirstCategoryName = r.FirstCategory.Name };
+            //var cargos = this.cargoBusiness.GetInTray(trayID);
+            //var data = from r in cargos
+            //           select new { r.ID, r.Name, FirstCategoryName = r.FirstCategory.Name };
 
-            return Json(data, JsonRequestBehavior.AllowGet);
+            //return Json(data, JsonRequestBehavior.AllowGet);
+            return null;
         }
         #endregion //JSON
     }

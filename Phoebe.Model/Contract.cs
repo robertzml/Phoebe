@@ -27,16 +27,14 @@ namespace Phoebe.Model
         public int CustomerType { get; set; }
         public int CustomerID { get; set; }
         public System.DateTime SignDate { get; set; }
-        public System.DateTime StartDate { get; set; }
-        public System.DateTime EndDate { get; set; }
         public Nullable<System.DateTime> CloseDate { get; set; }
         public string CertificateNumber { get; set; }
         public int UserID { get; set; }
         public string Remark { get; set; }
         public int Status { get; set; }
     
+        public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cargo> Cargoes { get; set; }
-        public virtual User User { get; set; }
     }
 }

@@ -12,18 +12,14 @@ namespace Phoebe.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class StockOutDetail
+    public partial class ThirdCategory
     {
-        public System.Guid ID { get; set; }
-        public System.Guid StockOutID { get; set; }
-        public int WarehouseID { get; set; }
-        public System.Guid CargoID { get; set; }
-        public int Count { get; set; }
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public int SecondCategoryID { get; set; }
         public string Remark { get; set; }
         public int Status { get; set; }
     
-        public virtual Cargo Cargo { get; set; }
-        public virtual StockOut StockOut { get; set; }
-        public virtual Warehouse Warehouse { get; set; }
+        public virtual SecondCategory SecondCategory { get; set; }
     }
 }

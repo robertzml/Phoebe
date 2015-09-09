@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "零散客户信息";
+    List<Contract> contracts = ViewBag.Contracts;
 }
 
 <!-- BEGIN PAGE HEADER-->
@@ -28,21 +29,25 @@
 <!-- BEGIN PAGE CONTENT-->
 <div class="row">
     <div class="col-md-12">
-        <div class="portlet box blue">
-            <div class="portlet-title">
-                <div class="caption">
-                    <i class="fa fa-info-circle"></i>&nbsp;零散客户信息
-                </div>
-                <div class="tools">
-                    <a href="javascript:;" class="collapse">
-                    </a>
-                    <a href="javascript:;" class="reload">
-                    </a>
-                    <a href="javascript:;" class="remove">
-                    </a>
-                </div>
-            </div>
-            <div class="portlet-body">
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a href="#tab_info" data-toggle="tab">
+                    零散客户信息
+                </a>
+            </li>
+            <li>
+                <a href="#tab_contract" data-toggle="tab">
+                    相关合同
+                </a>
+            </li>
+            <li>
+                <a href="#tab_cargo" data-toggle="tab">
+                    相关货品
+                </a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane fade active in" id="tab_info">
                 <table class="table table-striped table-bordered table-hover">
                     <thead>
                         <tr>
@@ -104,7 +109,91 @@
                     <a href="@Url.Action("Edit", new { controller = "ScatterCustomer", id = Model.ID })" class="btn btn-warning"><i class="fa fa-edit"></i>&nbsp;编辑</a>
                 </p>
             </div>
+            <div class="tab-pane fade" id="tab_contract">
+                <table class="table table-striped table-bordered table-hover" id="contract-table">
+                    <thead>
+                        <tr>
+                            <th>
+                                合同编号
+                            </th>
+                            <th>
+                                合同名称
+                            </th>
+                            <th>
+                                合同类型
+                            </th>
+                            <th>
+                                签订日期
+                            </th>
+                            <th>
+                                操作
+                            </th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>
+                                合同编号
+                            </th>
+                            <th>
+                                合同名称
+                            </th>
+                            <th data-filter="true">
+                                合同类型
+                            </th>
+                            <th>
+                                签订日期
+                            </th>
+                            <th>
+                                操作
+                            </th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @foreach (var item in contracts)
+                        {
+                            <tr>
+                                <td>
+                                    @item.Number
+                                </td>
+                                <td>
+                                    @item.Name
+                                </td>
+                                <td>
+                                    @{
+                                        var type1 = (ContractType)item.Type;
+                                        @type1.DisplayName();
+                                    }
+                                </td>
+                                <td>
+                                    @item.SignDate.ToDateString()
+                                </td>
+                                <td>
+                                    <a class="btn btn-sm btn-info" href="/Contract/DetailsModal/@item.ID" data-target="#contract-modal" data-toggle="modal"><i class="fa fa-check-circle"></i>&nbsp;查看</a>
+                                </td>
+                            </tr>
+                         }
+                    </tbody>
+                </table>
+
+                <div class="modal fade" id="contract-modal" role="basic" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <img src="/assets/global/img/loading-spinner-grey.gif" alt="" class="loading">
+                                <span>
+                                    &nbsp;&nbsp;Loading...
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="tab_cargo">
+
+            </div>
         </div>
+       
     </div>
 </div>
 <!-- END PAGE CONTENT-->
@@ -113,7 +202,7 @@
 @section Scripts {
     <script type="text/javascript">
         $(function () {
-            phoebe.leftNavActive($('#menu-group-customer-index'));
+            phoebe.leftNavActive($('#menu-scatter-customer-index'));
         });
     </script>
 }

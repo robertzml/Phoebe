@@ -47,6 +47,9 @@ namespace Phoebe.UI.Controllers
             if (data == null)
                 return HttpNotFound();
 
+            ContractBusiness contractBusiness = new ContractBusiness();
+            ViewBag.Contracts = contractBusiness.GetByCustomer(id, (int)CustomerType.Scatter);
+
             return View(data);
         }
 

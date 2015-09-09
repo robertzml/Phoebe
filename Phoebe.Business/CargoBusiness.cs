@@ -86,22 +86,6 @@ namespace Phoebe.Business
         }
 
         /// <summary>
-        /// 获取当前货品
-        /// </summary>
-        /// <param name="trayID">托盘ID</param>
-        /// <returns></returns>
-        public List<Cargo> GetInTray(int trayID)
-        {
-            var data = from r in this.context.Cargoes
-                       where (from s in this.context.Stocks
-                              where s.Status == (int)EntityStatus.StoreIn && s.TrayID == trayID
-                              select s.CargoID).Contains(r.ID)
-                       select r;
-
-            return data.ToList();
-        }
-
-        /// <summary>
         /// 获取未入库货品相关合同
         /// </summary>
         /// <returns></returns>
