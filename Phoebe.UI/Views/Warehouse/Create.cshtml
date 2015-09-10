@@ -46,6 +46,7 @@
                 @using (Html.BeginForm("Create", "Warehouse", FormMethod.Post, new { @class = "form-horizontal form-bordered form-row-stripped" }))
                 {
                     @Html.AntiForgeryToken()
+                    @Html.Hidden("ParentId", Model.ParentId)
 
                     <div class="form-body">
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -62,10 +63,31 @@
                         </div>
 
                         <div class="form-group">
+                            @Html.LabelFor(model => model.Number, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.Number, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Number, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-1">
+                                <span class="required">*</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Hierarchy, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.Hierarchy, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                @Html.ValidationMessageFor(model => model.Hierarchy, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-1">
+                                <span class="required">*</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             @Html.LabelFor(model => model.ParentId, htmlAttributes: new { @class = "control-label col-md-3" })
                             <div class="col-md-8">
-                                @Html.EditorFor(model => model.ParentId, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.ParentId, "", new { @class = "text-danger" })
+                                <input type="text" name="ParentName" id="ParentName" class="form-control" value="@ViewBag.ParentName" readonly="readonly" />
                             </div>
                             <div class="col-md-1">
                                 <span class="required">*</span>

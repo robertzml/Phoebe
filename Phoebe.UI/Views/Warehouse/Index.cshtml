@@ -54,15 +54,39 @@
                         <li data-id="@top.ID" data-jstree='{ "opened" : true }'>
                             @top.Name
                             <ul>
-                                @foreach (var item in top.ChildrenWarehouse)
+                                @foreach (var second in top.ChildrenWarehouse)
                                 {
-                                    <li data-id="@item.ID">
-                                        @item.Name
+                                    <li data-id="@second.ID">
+                                        @second.Name
                                         <ul>
-                                            @foreach (var third in item.ChildrenWarehouse)
+                                            @foreach (var third in second.ChildrenWarehouse)
                                             {
                                                 <li data-id="@third.ID">
                                                     @third.Name
+                                                    <ul>
+                                                        @foreach (var fourth in third.ChildrenWarehouse)
+                                                        {
+                                                            <li data-id="@fourth.ID">
+                                                                @fourth.Name
+                                                                <ul>
+                                                                    @foreach (var fifth in fourth.ChildrenWarehouse)
+                                                                    {
+                                                                        <li data-id="@fifth.ID">
+                                                                            @fifth.Name
+                                                                            <ul>
+                                                                                @foreach(var sixth in fifth.ChildrenWarehouse)
+                                                                                {
+                                                                                    <li data-id="@sixth.ID">
+                                                                                        @sixth.Name
+                                                                                    </li>
+                                                                                }
+                                                                            </ul>
+                                                                        </li>
+                                                                    }
+                                                                </ul>
+                                                            </li>
+                                                        }
+                                                    </ul>
                                                 </li>
                                             }
                                         </ul>
@@ -72,11 +96,6 @@
                         </li>
                     </ul>
                 </div>
-
-                <hr />
-                <p>
-                    <a href="@Url.Action("Create", "Warehouse")" class="btn btn-primary"><i class="fa fa-plus"></i>&nbsp;添加仓库</a>
-                </p>
             </div>
         </div>
     </div>

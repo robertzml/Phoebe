@@ -29,6 +29,18 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    @Html.LabelFor(model => model.Number, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.Number, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3">级别</label>
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.Hierarchy, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    </div>
+                </div>
+                <div class="form-group">
                     <label class="control-label col-md-3">上级仓库</label>
                     <div class="col-md-9">
                         @if (Model.ParentWarehouse != null)
@@ -42,12 +54,6 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-md-3">级别</label>
-                    <div class="col-md-9">
-                        @Html.EditorFor(model => model.Hierarchy, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                    </div>
-                </div>
-                <div class="form-group">
                     <label class="control-label col-md-3">备注</label>
                     <div class="col-md-9">
                         @Html.EditorFor(model => model.Remark, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
@@ -57,6 +63,7 @@
             <div class="form-actions">
                 <div class="row">
                     <div class="col-md-offset-3 col-md-9">
+                        <a href="@Url.Action("Create", new { controller = "Warehouse", parentId = Model.ID})" class="btn btn-danger"><i class="fa fa-plus"></i>&nbsp;添加子仓库</a>
                         <a href="@Url.Action("Edit", new { controller = "Warehouse", id = Model.ID})" class="btn btn-warning"><i class="fa fa-edit"></i>&nbsp;编辑</a>
                     </div>
                 </div>

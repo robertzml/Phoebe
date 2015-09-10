@@ -27,6 +27,7 @@ namespace Phoebe.Model
     
         public int ID { get; set; }
         public string Name { get; set; }
+        public string Number { get; set; }
         public Nullable<int> ParentId { get; set; }
         public int Hierarchy { get; set; }
         public string Remark { get; set; }

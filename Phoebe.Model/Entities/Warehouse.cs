@@ -23,9 +23,15 @@ namespace Phoebe.Model
         public string Name { get; set; }
 
         /// <summary>
+        /// 编号
+        /// </summary>
+        [Required]
+        [Display(Name = "编号")]
+        public string Number { get; set; }
+
+        /// <summary>
         /// 上级ID
         /// </summary>
-        [UIHint("ParentWarehouseList")]
         [Display(Name = "上级仓库")]
         public Nullable<int> ParentId { get; set; }
 

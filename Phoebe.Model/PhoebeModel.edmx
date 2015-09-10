@@ -247,6 +247,7 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Number" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="ParentId" Type="int" />
           <Property Name="Hierarchy" Type="int" Nullable="false" />
           <Property Name="Remark" Type="nvarchar" MaxLength="500" />
@@ -804,6 +805,7 @@
               <Summary>名称</Summary>
             </Documentation>
           </Property>
+          <Property Name="Number" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ParentId" Type="Int32" />
           <Property Name="Hierarchy" Type="Int32" Nullable="false" />
           <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
@@ -1656,6 +1658,7 @@
           <EntitySetMapping Name="Warehouses">
             <EntityTypeMapping TypeName="PhoebeModel.Warehouse">
               <MappingFragment StoreEntitySet="Warehouse">
+                <ScalarProperty Name="Number" ColumnName="Number" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ParentId" ColumnName="ParentId" />

@@ -79,9 +79,20 @@ namespace Phoebe.UI.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult Create()
+        public ActionResult Create(int parentId)
         {
-            return View();
+            var parent = this.warehouseBusiness.Get(parentId);
+            if (parent == null)
+                return HttpNotFound();
+
+            Warehouse data = new Warehouse();
+            data.ParentId = parentId;
+            data.ParentWarehouse = parent;
+            data.Hierarchy = parent.Hierarchy + 1;
+
+            ViewBag.ParentName = parent.Name;
+
+            return View(data);
         }
 
         /// <summary>
@@ -93,15 +104,12 @@ namespace Phoebe.UI.Controllers
         [HttpPost]
         public ActionResult Create(Warehouse model)
         {
+            ViewBag.ParentName = Request.Form["ParentName"];
+
             if (ModelState.IsValid)
             {
-                if (model.ParentId == 0)
-                    model.Hierarchy = 1;
-                else
-                {
-                    var parent = this.warehouseBusiness.Get((int)model.ParentId);
-                    model.Hierarchy = parent.Hierarchy + 1;
-                }
+                var parent = this.warehouseBusiness.Get((int)model.ParentId);
+                model.Hierarchy = parent.Hierarchy + 1;
 
                 ErrorCode result = this.warehouseBusiness.Create(model);
                 if (result == ErrorCode.Success)
@@ -145,18 +153,7 @@ namespace Phoebe.UI.Controllers
         {
             if (ModelState.IsValid)
             {
-                var data = this.warehouseBusiness.Get(model.ID);
-
-                if (model.ParentId == 0)
-                    data.Hierarchy = 1;
-                else
-                {
-                    var parent = this.warehouseBusiness.Get((int)model.ParentId);
-                    data.Hierarchy = parent.Hierarchy + 1;
-                }
-
-                data.Remark = model.Remark;
-                ErrorCode result = this.warehouseBusiness.Save();
+                ErrorCode result = this.warehouseBusiness.Edit(model);
 
                 if (result == ErrorCode.Success)
                 {

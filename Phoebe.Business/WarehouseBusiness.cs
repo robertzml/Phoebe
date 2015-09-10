@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,11 @@ namespace Phoebe.Business
     {
         #region Field
         private PhoebeContext context;
+
+        /// <summary>
+        /// 最大层级
+        /// </summary>
+        private int maxLevel = 6;
         #endregion //Field
 
         #region Constructor
@@ -70,6 +76,26 @@ namespace Phoebe.Business
                 this.context.SaveChanges();
             }
             catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+
+            return ErrorCode.Success;
+        }
+
+        /// <summary>
+        /// 编辑仓库
+        /// </summary>
+        /// <param name="data">仓库数据</param>
+        /// <returns></returns>
+        public ErrorCode Edit(Warehouse data)
+        {
+            try
+            {
+                this.context.Entry(data).State = EntityState.Modified;
+                this.context.SaveChanges();
+            }
+            catch(Exception)
             {
                 return ErrorCode.Exception;
             }
