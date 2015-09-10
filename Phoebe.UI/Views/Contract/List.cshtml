@@ -47,9 +47,6 @@
                                 @Html.DisplayNameFor(model => model.Number)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Type)
-                            </th>
-                            <th>
                                 @Html.DisplayNameFor(model => model.CustomerType)
                             </th>
                             <th>
@@ -57,12 +54,6 @@
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.SignDate)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.StartDate)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.EndDate)
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.CertificateNumber)
@@ -78,9 +69,6 @@
                                 @Html.DisplayNameFor(model => model.Number)
                             </th>
                             <th data-filter="true">
-                                @Html.DisplayNameFor(model => model.Type)
-                            </th>
-                            <th data-filter="true">
                                 @Html.DisplayNameFor(model => model.CustomerType)
                             </th>
                             <th>
@@ -88,12 +76,6 @@
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.SignDate)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.StartDate)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.EndDate)
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.CloseDate)
@@ -112,12 +94,6 @@
                                 </td>
                                 <td>
                                     @{
-                                        var type1 = (ContractType)item.Type;
-                                        @type1.DisplayName();
-                                    }
-                                </td>
-                                <td>
-                                    @{
                                         var type2 = (CustomerType)item.CustomerType;
                                         @type2.DisplayName();
                                     }
@@ -127,12 +103,6 @@
                                 </td>
                                 <td>
                                     @item.SignDate.ToDateString()
-                                </td>
-                                <td>
-                                    @item.StartDate.ToDateString()
-                                </td>
-                                <td>
-                                    @item.EndDate.ToDateString()
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.CloseDate)

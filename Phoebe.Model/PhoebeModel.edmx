@@ -36,7 +36,6 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Number" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="Type" Type="int" Nullable="false" />
           <Property Name="CustomerType" Type="int" Nullable="false" />
           <Property Name="CustomerID" Type="int" Nullable="false" />
           <Property Name="SignDate" Type="datetime" Nullable="false" />
@@ -841,13 +840,8 @@
             <End Role="UserGroup" EntitySet="UserGroups" />
             <End Role="User" EntitySet="Users" />
           </AssociationSet>
-          <EntitySet Name="Contracts" EntityType="PhoebeModel.Contract" />
           <EntitySet Name="GroupCustomers" EntityType="PhoebeModel.GroupCustomer" />
           <EntitySet Name="ScatterCustomers" EntityType="PhoebeModel.ScatterCustomer" />
-          <AssociationSet Name="FK_Contract_User" Association="PhoebeModel.FK_Contract_User">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Contract" EntitySet="Contracts" />
-          </AssociationSet>
           <EntitySet Name="FirstCategories" EntityType="PhoebeModel.FirstCategory" />
           <EntitySet Name="SecondCategories" EntityType="PhoebeModel.SecondCategory" />
           <EntitySet Name="ThirdCategories" EntityType="PhoebeModel.ThirdCategory" />
@@ -860,10 +854,6 @@
             <End Role="ThirdCategory" EntitySet="ThirdCategories" />
           </AssociationSet>
           <EntitySet Name="Cargoes" EntityType="PhoebeModel.Cargo" />
-          <AssociationSet Name="FK_Cargo_Contract" Association="PhoebeModel.FK_Cargo_Contract">
-            <End Role="Contract" EntitySet="Contracts" />
-            <End Role="Cargo" EntitySet="Cargoes" />
-          </AssociationSet>
           <AssociationSet Name="FK_Cargo_FirstCategory" Association="PhoebeModel.FK_Cargo_FirstCategory">
             <End Role="FirstCategory" EntitySet="FirstCategories" />
             <End Role="Cargo" EntitySet="Cargoes" />
@@ -976,6 +966,15 @@
             <End Role="User" EntitySet="Users" />
             <End Role="Settlement" EntitySet="Settlements" />
           </AssociationSet>
+          <EntitySet Name="Contracts" EntityType="PhoebeModel.Contract" />
+          <AssociationSet Name="FK_Cargo_Contract" Association="PhoebeModel.FK_Cargo_Contract">
+            <End Role="Contract" EntitySet="Contracts" />
+            <End Role="Cargo" EntitySet="Cargoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contract_User" Association="PhoebeModel.FK_Contract_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Contract" EntitySet="Contracts" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="User">
           <Key>
@@ -991,12 +990,12 @@
           <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" Nullable="false" />
           <NavigationProperty Name="UserGroup" Relationship="PhoebeModel.FK_User_UserGroup" FromRole="User" ToRole="UserGroup" />
-          <NavigationProperty Name="Contracts" Relationship="PhoebeModel.FK_Contract_User" FromRole="User" ToRole="Contract" />
           <NavigationProperty Name="Cargoes" Relationship="PhoebeModel.FK_Cargo_User" FromRole="User" ToRole="Cargo" />
           <NavigationProperty Name="StockIns" Relationship="PhoebeModel.FK_StockIn_User" FromRole="User" ToRole="StockIn" />
           <NavigationProperty Name="StockOuts" Relationship="PhoebeModel.FK_StockOut_User" FromRole="User" ToRole="StockOut" />
           <NavigationProperty Name="StockMoves" Relationship="PhoebeModel.FK_StockMove_User" FromRole="User" ToRole="StockMove" />
           <NavigationProperty Name="Settlements" Relationship="PhoebeModel.FK_Settlement_User" FromRole="User" ToRole="Settlement" />
+          <NavigationProperty Name="Contracts" Relationship="PhoebeModel.FK_Contract_User" FromRole="User" ToRole="Contract" />
         </EntityType>
         <EntityType Name="UserGroup">
           <Key>
@@ -1022,25 +1021,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Contract">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Number" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Type" Type="Int32" Nullable="false" />
-          <Property Name="CustomerType" Type="Int32" Nullable="false" />
-          <Property Name="CustomerID" Type="Int32" Nullable="false" />
-          <Property Name="SignDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CloseDate" Type="DateTime" Precision="3" />
-          <Property Name="CertificateNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="UserID" Type="Int32" Nullable="false" />
-          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="User" Relationship="PhoebeModel.FK_Contract_User" FromRole="Contract" ToRole="User" />
-          <NavigationProperty Name="Cargoes" Relationship="PhoebeModel.FK_Cargo_Contract" FromRole="Contract" ToRole="Cargo" />
-        </EntityType>
         <EntityType Name="GroupCustomer">
           <Key>
             <PropertyRef Name="ID" />
@@ -1069,18 +1049,6 @@
           <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" Nullable="false" />
         </EntityType>
-        <Association Name="FK_Contract_User">
-          <End Type="PhoebeModel.User" Role="User" Multiplicity="1" />
-          <End Type="PhoebeModel.Contract" Role="Contract" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Contract">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="FirstCategory">
           <Key>
             <PropertyRef Name="ID" />
@@ -1163,7 +1131,6 @@
           <Property Name="OutTime" Type="DateTime" Precision="3" />
           <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Contract" Relationship="PhoebeModel.FK_Cargo_Contract" FromRole="Cargo" ToRole="Contract" />
           <NavigationProperty Name="FirstCategory" Relationship="PhoebeModel.FK_Cargo_FirstCategory" FromRole="Cargo" ToRole="FirstCategory" />
           <NavigationProperty Name="SecondCategory" Relationship="PhoebeModel.FK_Cargo_SecondCategory" FromRole="Cargo" ToRole="SecondCategory" />
           <NavigationProperty Name="User" Relationship="PhoebeModel.FK_Cargo_User" FromRole="Cargo" ToRole="User" />
@@ -1175,19 +1142,8 @@
           <NavigationProperty Name="StockMoves" Relationship="PhoebeModel.FK_StockMove_Cargo" FromRole="Cargo" ToRole="StockMove" />
           <NavigationProperty Name="StockMoveDetails" Relationship="PhoebeModel.FK_StockMoveDetails_Cargo" FromRole="Cargo" ToRole="StockMoveDetail" />
           <NavigationProperty Name="Settlements" Relationship="PhoebeModel.FK_Settlement_Cargo" FromRole="Cargo" ToRole="Settlement" />
+          <NavigationProperty Name="Contract" Relationship="PhoebeModel.FK_Cargo_Contract" FromRole="Cargo" ToRole="Contract" />
         </EntityType>
-        <Association Name="FK_Cargo_Contract">
-          <End Type="PhoebeModel.Contract" Role="Contract" Multiplicity="1" />
-          <End Type="PhoebeModel.Cargo" Role="Cargo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Contract">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Cargo">
-              <PropertyRef Name="ContractID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Cargo_FirstCategory">
           <End Type="PhoebeModel.FirstCategory" Role="FirstCategory" Multiplicity="1" />
           <End Type="PhoebeModel.Cargo" Role="Cargo" Multiplicity="*" />
@@ -1649,6 +1605,48 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Contract">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Number" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerType" Type="Int32" Nullable="false" />
+          <Property Name="CustomerID" Type="Int32" Nullable="false" />
+          <Property Name="SignDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CloseDate" Type="DateTime" Precision="3" />
+          <Property Name="CertificateNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cargoes" Relationship="PhoebeModel.FK_Cargo_Contract" FromRole="Contract" ToRole="Cargo" />
+          <NavigationProperty Name="User" Relationship="PhoebeModel.FK_Contract_User" FromRole="Contract" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_Cargo_Contract">
+          <End Type="PhoebeModel.Contract" Role="Contract" Multiplicity="1" />
+          <End Type="PhoebeModel.Cargo" Role="Cargo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contract">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Cargo">
+              <PropertyRef Name="ContractID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contract_User">
+          <End Type="PhoebeModel.User" Role="User" Multiplicity="1" />
+          <End Type="PhoebeModel.Contract" Role="Contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Contract">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1690,24 +1688,6 @@
                 <ScalarProperty Name="Rank" ColumnName="Rank" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Contracts">
-            <EntityTypeMapping TypeName="PhoebeModel.Contract">
-              <MappingFragment StoreEntitySet="Contract">
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Remark" ColumnName="Remark" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="CertificateNumber" ColumnName="CertificateNumber" />
-                <ScalarProperty Name="CloseDate" ColumnName="CloseDate" />
-                <ScalarProperty Name="SignDate" ColumnName="SignDate" />
-                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
-                <ScalarProperty Name="CustomerType" ColumnName="CustomerType" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Number" ColumnName="Number" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1916,6 +1896,23 @@
                 <ScalarProperty Name="WeightUnitPrice" ColumnName="WeightUnitPrice" />
                 <ScalarProperty Name="Weight" ColumnName="Weight" />
                 <ScalarProperty Name="CargoID" ColumnName="CargoID" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contracts">
+            <EntityTypeMapping TypeName="PhoebeModel.Contract">
+              <MappingFragment StoreEntitySet="Contract">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="CertificateNumber" ColumnName="CertificateNumber" />
+                <ScalarProperty Name="CloseDate" ColumnName="CloseDate" />
+                <ScalarProperty Name="SignDate" ColumnName="SignDate" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="CustomerType" ColumnName="CustomerType" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Number" ColumnName="Number" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>

@@ -47,7 +47,6 @@ namespace Phoebe.Model
         public string Remark { get; set; }
         public int Status { get; set; }
     
-        public virtual Contract Contract { get; set; }
         public virtual FirstCategory FirstCategory { get; set; }
         public virtual SecondCategory SecondCategory { get; set; }
         public virtual User User { get; set; }
@@ -67,5 +66,6 @@ namespace Phoebe.Model
         public virtual ICollection<StockMoveDetail> StockMoveDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Settlement> Settlements { get; set; }
+        public virtual Contract Contract { get; set; }
     }
 }

@@ -30,14 +30,6 @@ namespace Phoebe.Model
         public string Name { get; set; }
 
         /// <summary>
-        /// 合同类型
-        /// </summary>
-        [Required]
-        [UIHint("ContractType")]
-        [Display(Name = "合同类型")]
-        public int Type { get; set; }
-
-        /// <summary>
         /// 客户类型
         /// </summary>
         [Required]
@@ -68,7 +60,6 @@ namespace Phoebe.Model
         /// <summary>
         /// 凭证编号
         /// </summary>
-        [Required]
         [Display(Name = "凭证编号")]
         public string CertificateNumber { get; set; }
 

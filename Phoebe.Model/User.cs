@@ -17,12 +17,12 @@ namespace Phoebe.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public User()
         {
-            this.Contracts = new HashSet<Contract>();
             this.Cargoes = new HashSet<Cargo>();
             this.StockIns = new HashSet<StockIn>();
             this.StockOuts = new HashSet<StockOut>();
             this.StockMoves = new HashSet<StockMove>();
             this.Settlements = new HashSet<Settlement>();
+            this.Contracts = new HashSet<Contract>();
         }
     
         public int ID { get; set; }
@@ -37,8 +37,6 @@ namespace Phoebe.Model
     
         public virtual UserGroup UserGroup { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Contract> Contracts { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cargo> Cargoes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StockIn> StockIns { get; set; }
@@ -48,5 +46,7 @@ namespace Phoebe.Model
         public virtual ICollection<StockMove> StockMoves { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Settlement> Settlements { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Contract> Contracts { get; set; }
     }
 }
