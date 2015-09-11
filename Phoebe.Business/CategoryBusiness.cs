@@ -70,7 +70,7 @@ namespace Phoebe.Business
         public SecondCategory GetSecondCategory(int id)
         {
             return this.context.SecondCategories.Find(id);
-        }        
+        }
 
         /// <summary>
         /// 添加一级分类
@@ -104,6 +104,27 @@ namespace Phoebe.Business
             {
                 data.Status = 0;
                 this.context.SecondCategories.Add(data);
+                this.context.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+
+            return ErrorCode.Success;
+        }
+
+        /// <summary>
+        /// 添加三级分类
+        /// </summary>
+        /// <param name="data">三级分类数据</param>
+        /// <returns></returns>
+        public ErrorCode CreateThirdCategory(ThirdCategory data)
+        {
+            try
+            {
+                data.Status = 0;
+                this.context.ThirdCategories.Add(data);
                 this.context.SaveChanges();
             }
             catch (Exception)

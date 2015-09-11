@@ -58,6 +58,14 @@
                                     {
                                         <li data-level="2" data-id="@second.ID">
                                             @second.Name
+                                            <ul>
+                                                @foreach(var third in second.ThirdCategories)
+                                                {
+                                                    <li data-level="3" data-id="@third.ID">
+                                                        @third.Name
+                                                    </li>
+                                                }
+                                            </ul>
                                         </li>
                                     }
                                 </ul>
@@ -69,7 +77,8 @@
                 <hr />
                 <p>
                     <a href="@Url.Action("CreateFirstCategory", "Category")" class="btn btn-primary"><i class="fa fa-plus"></i>&nbsp;添加一级分类</a> <br /><br />
-                    <a href="@Url.Action("CreateSecondCategory", "Category")" class="btn btn-primary"><i class="fa fa-plus"></i>&nbsp;添加二级分类</a>
+                    <a href="@Url.Action("CreateSecondCategory", "Category")" class="btn btn-primary"><i class="fa fa-plus"></i>&nbsp;添加二级分类</a> <br /><br />
+                    <a href="@Url.Action("CreateThirdCategory", "Category")" class="btn btn-primary"><i class="fa fa-plus"></i>&nbsp;添加三级分类</a>
                 </p>
             </div>
         </div>

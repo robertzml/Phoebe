@@ -68,6 +68,7 @@
     <Compile Include="Entities\StockIn.cs" />
     <Compile Include="Entities\StockMove.cs" />
     <Compile Include="Entities\StockOut.cs" />
+    <Compile Include="Entities\ThirdCategory.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\UserGroup.cs" />
     <Compile Include="Entities\Warehouse.cs" />
