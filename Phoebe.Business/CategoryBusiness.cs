@@ -73,6 +73,16 @@ namespace Phoebe.Business
         }
 
         /// <summary>
+        /// 获取二级分类下三级分离
+        /// </summary>
+        /// <param name="secondId">二级分类ID</param>
+        /// <returns></returns>
+        public List<ThirdCategory> GetThirdCategoryBySecond(int secondId)
+        {
+            return this.context.ThirdCategories.Where(r => r.SecondCategoryID == secondId).ToList();
+        }
+
+        /// <summary>
         /// 添加一级分类
         /// </summary>
         /// <param name="data">一级分类数据</param>

@@ -70,6 +70,9 @@ namespace Phoebe.Business
         {
             try
             {
+                if (data.Hierarchy > this.maxLevel)
+                    return ErrorCode.WarehouseLevelOverflow;
+
                 data.Status = 0;
 
                 this.context.Warehouses.Add(data);

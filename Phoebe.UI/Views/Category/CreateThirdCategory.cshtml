@@ -127,7 +127,7 @@
                     if (firstId == '')
                         return;
 
-                    $.getJSON('/Category/GetSecondCategory', { first: firstId }, function (response) {
+                    $.getJSON('/Category/GetSecondCategory', { firstId: firstId }, function (response) {
                         $.each(response, function (i, item) {
                             $('#SecondCategoryID').append("<option value='" + item.ID + "'>" + item.Name + "</option>");
                         });

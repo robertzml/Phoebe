@@ -38,16 +38,41 @@ namespace Phoebe.Model
         public int SecondCategoryID { get; set; }
 
         /// <summary>
-        /// 重量
+        /// 三级分类
         /// </summary>
-        [Display(Name = "重量")]
-        public Nullable<double> Weight { get; set; }
+        [Display(Name = "三级分类")]
+        public Nullable<int> ThirdCategoryID { get; set; }
 
         /// <summary>
-        /// 体积
+        /// 数量
         /// </summary>
-        [Display(Name = "体积")]
-        public Nullable<double> Volume { get; set; }
+        [Required]
+        [Display(Name = "数量")]
+        public int Count { get; set; }
+
+        /// <summary>
+        /// 单位重量
+        /// </summary>
+        [Display(Name = "单位重量")]
+        public Nullable<double> UnitWeight { get; set; }
+
+        /// <summary>
+        /// 总重量
+        /// </summary>
+        [Display(Name = "总重量")]
+        public Nullable<double> TotalWeight { get; set; }
+
+        /// <summary>
+        /// 单位体积
+        /// </summary>
+        [Display(Name = "单位体积")]
+        public Nullable<double> UnitVolume { get; set; }
+
+        /// <summary>
+        /// 总体积
+        /// </summary>
+        [Display(Name = "总体积")]
+        public Nullable<double> TotalVolume { get; set; }      
 
         /// <summary>
         /// 产地
@@ -58,6 +83,7 @@ namespace Phoebe.Model
         /// <summary>
         /// 保质期
         /// </summary>
+        [Range(1, int.MaxValue, ErrorMessage = "保质期必须为大于0的整数")]
         [Display(Name = "保质期")]
         public int ShelfLife { get; set; }
 

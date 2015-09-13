@@ -49,6 +49,7 @@ namespace Phoebe.Model
     
         public virtual FirstCategory FirstCategory { get; set; }
         public virtual SecondCategory SecondCategory { get; set; }
+        public virtual ThirdCategory ThirdCategory { get; set; }
         public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Stock> Stocks { get; set; }

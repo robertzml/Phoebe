@@ -172,16 +172,35 @@ namespace Phoebe.UI.Controllers
         /// <summary>
         /// 获取二级分类
         /// </summary>
-        /// <param name="first">一级分类ID</param>
+        /// <param name="firstId">一级分类ID</param>
         /// <remarks>
         /// 调用：
         /// /Category/CreateThirdCategory
+        /// /Cargo/Create
         /// </remarks>
         /// <returns></returns>
-        public JsonResult GetSecondCategory(int first)
+        public JsonResult GetSecondCategory(int firstId)
         {
-            var second = this.categoryBusiness.GetSecondCategoryByFirst(first);
+            var second = this.categoryBusiness.GetSecondCategoryByFirst(firstId);
             var data = from r in second
+                       select new { r.ID, r.Name };
+
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// 获取三级分类
+        /// </summary>
+        /// <param name="secondId">二级分类ID</param>
+        /// <remarks>
+        /// 调用：
+        /// /Cargo/Create
+        /// </remarks>
+        /// <returns></returns>
+        public JsonResult GetThirdCategory(int secondId)
+        {
+            var third = this.categoryBusiness.GetThirdCategoryBySecond(secondId);
+            var data = from r in third
                        select new { r.ID, r.Name };
 
             return Json(data, JsonRequestBehavior.AllowGet);

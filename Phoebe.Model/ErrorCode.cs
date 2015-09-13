@@ -104,6 +104,12 @@ namespace Phoebe.Model
 
         #region Warehosue & Tray
         /// <summary>
+        /// 仓库级别超出
+        /// </summary>
+        [Display(Name = "仓库级别超出")]
+        WarehouseLevelOverflow = 30,
+
+        /// <summary>
         /// 托盘使用中
         /// </summary>
         [Display(Name = "托盘使用中")]

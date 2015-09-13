@@ -100,7 +100,12 @@ namespace Phoebe.UI.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            return View();
+            var data = new Cargo();
+            data.Count = 0;
+            data.UnitWeight = 0.0;
+            data.UnitVolume = 0.0;
+
+            return View(data);
         }
 
         /// <summary>
@@ -115,6 +120,9 @@ namespace Phoebe.UI.Controllers
             if (ModelState.IsValid)
             {
                 var user = PageService.GetCurrentUser(User.Identity.Name);
+
+                model.TotalWeight = Math.Round(Convert.ToDouble(model.Count * model.UnitWeight / 1000), 3);
+                model.TotalVolume = Math.Round(Convert.ToDouble(model.Count * model.UnitVolume), 3);
 
                 model.UserID = user.ID;
 
@@ -137,23 +145,6 @@ namespace Phoebe.UI.Controllers
         #endregion //Action
 
         #region JSON
-        /// <summary>
-        /// 获取二级分类
-        /// </summary>
-        /// <param name="firstId">一级分类ID</param>
-        /// <returns></returns>
-        public JsonResult GetSecondCategory(int firstId)
-        {
-            CategoryBusiness categoryBusiness = new CategoryBusiness();
-            var category = categoryBusiness.GetSecondCategoryByFirst(firstId);
-
-            var data = from r in category
-                       select new { r.ID, r.Name };
-
-            return Json(data, JsonRequestBehavior.AllowGet);
-        }
-
-
         /// <summary>
         /// 获取货品
         /// </summary>

@@ -89,18 +89,53 @@
                         </tr>
                         <tr>
                             <td>
-                                重量 (Kg)
+                                @Html.DisplayNameFor(model => model.ThirdCategoryID)
                             </td>
                             <td>
-                                @Html.DisplayFor(model => model.Weight)
+                                @if (Model.ThirdCategory != null)
+                                {
+                                    @Model.ThirdCategory.Name
+                                }
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                体积 (m<sup>3</sup>)
+                                @Html.DisplayNameFor(model => model.Count)
                             </td>
                             <td>
-                                @Html.DisplayFor(model => model.Volume)
+                                @Html.DisplayFor(model => model.Count)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                单位重量 (Kg)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.UnitWeight)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                总重量 (t)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.TotalWeight)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                单位体积 (m<sup>3</sup>)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.UnitVolume)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                总体积 (m<sup>3</sup>)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.TotalVolume)
                             </td>
                         </tr>
                         <tr>

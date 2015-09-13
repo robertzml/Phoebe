@@ -83,18 +83,53 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="Weight" class="control-label col-md-3">重量 (Kg)</label>
+                            @Html.LabelFor(model => model.ThirdCategoryID, htmlAttributes: new { @class = "control-label col-md-3" })
                             <div class="col-md-8">
-                                @Html.EditorFor(model => model.Weight, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Weight, "", new { @class = "text-danger" })
+                                <select id="ThirdCategoryID" name="ThirdCategoryID" class="form-control"></select>
+                                @Html.ValidationMessageFor(model => model.ThirdCategoryID, "", new { @class = "text-danger" })
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="Volume" class="control-label col-md-3">体积 (m<sup>3</sup>)</label>
+                            @Html.LabelFor(model => model.Count, htmlAttributes: new { @class = "control-label col-md-3" })
                             <div class="col-md-8">
-                                @Html.EditorFor(model => model.Volume, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Volume, "", new { @class = "text-danger" })
+                                @Html.EditorFor(model => model.Count, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Count, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-1">
+                                <span class="required">*</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="Weight" class="control-label col-md-3">单位重量 (Kg)</label>
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.UnitWeight, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.UnitWeight, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="Weight" class="control-label col-md-3">总重量 (t)</label>
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.TotalWeight, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                @Html.ValidationMessageFor(model => model.TotalWeight, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="Volume" class="control-label col-md-3">单位体积 (m<sup>3</sup>)</label>
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.UnitVolume, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.UnitVolume, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="Volume" class="control-label col-md-3">总体积 (m<sup>3</sup>)</label>
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.TotalVolume, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                @Html.ValidationMessageFor(model => model.TotalVolume, "", new { @class = "text-danger" })
                             </div>
                         </div>
 
@@ -158,18 +193,74 @@
         $(function () {
             phoebe.leftNavActive($('#menu-cargo-create'));
 
-            $('#FirstCategoryID').change(function () {
-                var first = $(this).val();
-
-                $('#SecondCategoryID').empty();
-                if (first == '')
-                    return;
-
-                $.getJSON('/Cargo/GetSecondCategory', { firstId: first }, function (response) {
+            function loadSecondCategory(firstId) {
+                $('#SecondCategoryID').append(" <option value=''>-- 请选择 --</option>");
+                $.getJSON('/Category/GetSecondCategory', { firstId: firstId }, function (response) {
                     $.each(response, function (i, item) {
                         $('#SecondCategoryID').append("<option value='" + item.ID + "'>" + item.Name + "</option>");
                     });
                 });
+            }
+
+            function loadThirdCategory(secondId) {
+                $('#ThirdCategoryID').append(" <option value=''>-- 请选择 --</option>");
+                $.getJSON('/Category/GetThirdCategory', { secondId: secondId }, function (response) {
+                    $.each(response, function (i, item) {
+                        $('#ThirdCategoryID').append("<option value='" + item.ID + "'>" + item.Name + "</option>");
+                    });
+                });
+            }
+
+            $('#FirstCategoryID').change(function () {
+                var first = $(this).val();
+
+                $('#SecondCategoryID').empty();
+                $('#ThirdCategoryID').empty();
+                if (first == '')
+                    return;
+
+                loadSecondCategory(first);
+            });
+
+            $('#SecondCategoryID').change(function () {
+                var second = $(this).val();
+
+                $('#ThirdCategoryID').empty();
+                if (second == '')
+                    return;
+
+                loadThirdCategory(second);
+            });
+
+            function calcWeight() {
+                var count = parseInt($('#Count').val());
+                var unitWeight = parseFloat($('#UnitWeight').val());
+
+                var total = count * unitWeight / 1000;
+
+                $('#TotalWeight').val(total.toFixed(2));
+            }
+
+            function calcVolume() {
+                var count = parseInt($('#Count').val());
+                var unitVolume = parseFloat($('#UnitVolume').val());
+
+                var total = count * unitVolume;
+
+                $('#TotalVolume').val(total.toFixed(2));
+            }
+
+            $('#UnitWeight').bind("input", function () {
+                calcWeight();
+            });
+
+            $('#UnitVolume').bind("input", function () {
+                calcVolume();
+            });
+
+            $('#Count').bind("input", function () {
+                calcWeight();
+                calcVolume();
             });
         });
     </script>
