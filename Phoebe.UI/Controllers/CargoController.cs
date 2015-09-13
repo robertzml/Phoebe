@@ -94,6 +94,23 @@ namespace Phoebe.UI.Controllers
         }
 
         /// <summary>
+        /// 货品信息
+        /// </summary>
+        /// <param name="id">ID</param>
+        /// <remarks>
+        /// 信息小panel
+        /// </remarks>
+        /// <returns></returns>
+        public ActionResult Info(string id)
+        {
+            var data = this.cargoBusiness.Get(id);
+            if (data == null)
+                return HttpNotFound();
+
+            return View(data);
+        }
+
+        /// <summary>
         /// 货品登记
         /// </summary>
         /// <returns></returns>
@@ -150,6 +167,10 @@ namespace Phoebe.UI.Controllers
         /// </summary>
         /// <param name="type">类型</param>
         /// <param name="contractID">所属合同</param>
+        /// <remarks>
+        /// 调用：
+        /// /StockIn/Create
+        /// </remarks>
         /// <returns></returns>
         public JsonResult GetCargos(int type, int contractID)
         {

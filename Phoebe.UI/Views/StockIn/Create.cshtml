@@ -6,7 +6,6 @@
 
 @section styles {
     <link rel="stylesheet" type="text/css" href="/assets/global/plugins/bootstrap-select/bootstrap-select.min.css" />
-    <link rel="stylesheet" type="text/css" href="/assets/global/plugins/jquery-multi-select/css/multi-select.css" />
 }
 
 <!-- BEGIN PAGE HEADER-->
@@ -55,34 +54,6 @@
                     <div class="form-body">
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-                        <h3 class="form-section">目的地</h3>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    @Html.LabelFor(model => model.WarehouseID, htmlAttributes: new { @class = "control-label col-md-2" })
-                                    <div class="col-md-9">
-                                        @Html.EditorFor(model => model.WarehouseID, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.WarehouseID, "", new { @class = "text-danger" })
-                                    </div>
-                                    <div class="col-md-1">
-                                        <span class="required">*</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    @Html.LabelFor(model => model.TrayID, htmlAttributes: new { @class = "control-label col-md-2" })
-                                    <div class="col-md-9">
-                                        @Html.EditorFor(model => model.TrayID, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.TrayID, "", new { @class = "text-danger" })
-                                    </div>
-                                    <div class="col-md-1">
-                                        <span class="required">*</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                         <h3 class="form-section">货品选择</h3>
                         <div class="row">
                             <div class="col-md-6">
@@ -101,10 +72,45 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="control-label col-md-2">货品选择</label>
-                                    <div class="col-md-9" id="cargo-container">
-                                        
+                                    <div class="col-md-9">
+                                        <select id="CargoID" name="CargoID" class="form-control">
+                                            <option value="">-- 请选择 --</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <span class="required">*</span>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div id="cargo-panel"></div>
+                            </div>
+                        </div>
+
+                        <h3 class="form-section">入库信息</h3>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table class="table table-striped table-hover table-bordered" id="store-in-table">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                库位
+                                            </th>
+                                            <th>
+                                                数量
+                                            </th>
+                                            <th>
+                                                操作
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                                <p>
+                                    <a href="#" id="store-in-details-add" class="btn btn-primary"><i class="fa fa-plus"></i>&nbsp;添加</a>
+                                </p>
                             </div>
                         </div>
 
@@ -145,44 +151,69 @@
 
 @section Scripts {
     <script type="text/javascript" src="/assets/global/plugins/bootstrap-select/bootstrap-select.min.js"></script>
-    <script type="text/javascript" src="/assets/global/plugins/jquery-multi-select/js/jquery.multi-select.js"></script>
     <script type="text/javascript">
         $(function () {
             phoebe.leftNavActive($('#menu-stock-in-create'));
+            
+            function loadCargo(id) {
+                $('#cargo-panel').empty();
 
-            $('#WarehouseID').selectpicker({
-                iconBase: 'fa',
-                tickIcon: 'fa-check'
-            });
+                if (id == null || id == '')
+                    return;
+
+                $('#cargo-panel').load('/Cargo/Info', { id: id });
+            }
 
             $.getJSON('/StockIn/GetContracts', { type: 0 }, function (response) {
                 $.each(response, function (i, item) {
                     $('#ContractID').append("<option value='" + item.ID + "'>" + item.Name + "</option>");
                 });
 
+                $('#ContractID').selectpicker({
+                    iconBase: 'fa',
+                    tickIcon: 'fa-check'
+                });
+
                 $('#ContractID').change(function () {
                     var contractId = $(this).val();
 
-                    $('#cargo-container').empty();
+                    $('#CargoID').empty();
                     if (contractId == '')
                         return;
+                    $('#CargoID').append(" <option value=''>-- 请选择 --</option>");
 
                     $.getJSON('/Cargo/GetCargos', { type: 1, contractID: contractId }, function (response) {
-
-                        var cargoList = $("<select multiple='multiple' class='multi-select' id='CargoList' name='CargoList[]'></select>");
-
                         $.each(response, function (i, item) {
-                            cargoList.append("<option value='" + item.ID + "'>" + item.Name + "</option>");
+                            $('#CargoID').append("<option value='" + item.ID + "'>" + item.Name + "</option>");
                         });
 
-                        cargoList.appendTo($('#cargo-container'));
+                        $('#CargoID').change(function () {
+                            var cargoId = $(this).val();
 
-                        $('#CargoList').multiSelect({
-                            selectableOptgroup: false
+                            loadCargo(cargoId);
                         });
                     });
                 });
-                
+            });
+
+            var table = $('#store-in-table');
+            var tbody = $('#store-in-table tbody');
+
+            $('#store-in-details-add').click(function (e) {
+                e.preventDefault();
+
+                var line = '<tr><td><input type="text" class="form-control"></td>' +
+                    '<td><input type="text" class="form-control input-small"></td>' + 
+                    '<td><a class="delete-row" href="#">删除</a></td></tr>';
+
+                tbody.append(line);
+
+                return;
+            });
+
+            table.on('click', '.delete-row', function (e) {
+                e.preventDefault();
+                $(this).closest('tr').remove();
             });
 
         });

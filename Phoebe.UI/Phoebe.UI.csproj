@@ -665,6 +665,7 @@
     <Content Include="Views\Contract\DetailsModal.cshtml" />
     <Content Include="Views\Cargo\DetailsModal.cshtml" />
     <Content Include="Views\Category\CreateThirdCategory.cshtml" />
+    <Content Include="Views\Cargo\Info.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
