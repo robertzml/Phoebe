@@ -188,6 +188,24 @@ namespace Phoebe.UI.Controllers
 
             return Json(data, JsonRequestBehavior.AllowGet);
         }
+
+        /// <summary>
+        /// 获取空闲仓位
+        /// </summary>
+        /// <remarks>
+        /// 调用:
+        /// /StockIn/Create
+        /// </remarks>
+        /// <returns></returns>
+        public JsonResult GetEmpty()
+        {
+            var warehouses = this.warehouseBusiness.GetLeaves().Where(r => r.Status == (int)EntityStatus.WarehouseFree);
+
+            var data = from r in warehouses
+                       select new { r.ID, r.Name, r.Number, r.ParentId };
+
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
         #endregion //Json
     }
 }

@@ -155,6 +155,9 @@
         $(function () {
             phoebe.leftNavActive($('#menu-stock-in-create'));
             
+            var warehouses;
+            var warehouseList;
+
             function loadCargo(id) {
                 $('#cargo-panel').empty();
 
@@ -167,11 +170,6 @@
             $.getJSON('/StockIn/GetContracts', { type: 0 }, function (response) {
                 $.each(response, function (i, item) {
                     $('#ContractID').append("<option value='" + item.ID + "'>" + item.Name + "</option>");
-                });
-
-                $('#ContractID').selectpicker({
-                    iconBase: 'fa',
-                    tickIcon: 'fa-check'
                 });
 
                 $('#ContractID').change(function () {
@@ -196,15 +194,27 @@
                 });
             });
 
+            $.getJSON('/Warehouse/GetEmpty', function (response) {
+                warehouses = response;
+                warehouseList = $('<select />')
+                    .attr('class', 'form-control')
+                    .attr('name', 'warehouse[]');
+                $.each(warehouses, function (i, item) {
+                    warehouseList.append("<option value='" + item.ID + "'>" + item.Number + "</option>");
+                });
+            });
+
             var table = $('#store-in-table');
             var tbody = $('#store-in-table tbody');
 
             $('#store-in-details-add').click(function (e) {
                 e.preventDefault();
-
-                var line = '<tr><td><input type="text" class="form-control"></td>' +
-                    '<td><input type="text" class="form-control input-small"></td>' + 
-                    '<td><a class="delete-row" href="#">删除</a></td></tr>';
+                
+                var ts = $('<td />').append(warehouseList.clone());
+                var line = $('<tr/>')
+                    .append(ts)
+                    .append('<td><input type="number" class="form-control input-medium" name="count[]"></td>')
+                    .append('<td><a class="delete-row" href="#">删除</a></td>');
 
                 tbody.append(line);
 

@@ -62,6 +62,16 @@ namespace Phoebe.Business
         }
 
         /// <summary>
+        /// 获取最末级库位
+        /// </summary>
+        /// <returns></returns>
+        public List<Warehouse> GetLeaves()
+        {
+            int hierarchy = this.maxLevel;
+            return this.context.Warehouses.Where(r => r.Hierarchy == hierarchy).OrderBy(r => r.Number).ToList();
+        }
+
+        /// <summary>
         /// 添加仓库
         /// </summary>
         /// <param name="data">仓库数据</param>
@@ -73,7 +83,13 @@ namespace Phoebe.Business
                 if (data.Hierarchy > this.maxLevel)
                     return ErrorCode.WarehouseLevelOverflow;
 
-                data.Status = 0;
+                if (this.context.Warehouses.Any(r => r.Number == data.Number))
+                    return ErrorCode.DuplicateNumber;
+
+                if (data.Hierarchy == this.maxLevel)
+                    data.Status = (int)EntityStatus.WarehouseFree;
+                else
+                    data.Status = 0;
 
                 this.context.Warehouses.Add(data);
                 this.context.SaveChanges();

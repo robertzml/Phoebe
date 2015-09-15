@@ -22,16 +22,16 @@ namespace Phoebe.Model
         public int WarehouseID { get; set; }
 
         /// <summary>
-        /// 托盘ID
-        /// </summary>
-        [Display(Name = "托盘")]
-        public int TrayID { get; set; }
-
-        /// <summary>
         /// 货品ID
         /// </summary>
         [Display(Name = "货品")]
         public System.Guid CargoID { get; set; }
+
+        /// <summary>
+        /// 数量
+        /// </summary>
+        [Display(Name = "数量")]
+        public int Count { get; set; }
 
         /// <summary>
         /// 入库时间

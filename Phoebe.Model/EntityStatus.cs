@@ -43,7 +43,23 @@ namespace Phoebe.Model
         #endregion //Contract
 
         #region Warehouse
+        /// <summary>
+        /// 31:仓位空闲
+        /// </summary>
+        [Display(Name = "空闲")]
+        WarehouseFree = 31,
 
+        /// <summary>
+        /// 32:仓位预定
+        /// </summary>
+        [Display(Name = "预定")]
+        WarehouseReserve = 32,
+
+        /// <summary>
+        /// 33:仓位占用
+        /// </summary>
+        [Display(Name = "占用")]
+        WarehouseOccupy = 33,
         #endregion //Warehouse
 
 

@@ -50,9 +50,6 @@
                                 @Html.DisplayNameFor(model => model.WarehouseID)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.TrayID)
-                            </th>
-                            <th>
                                 @Html.DisplayNameFor(model => model.CargoID)
                             </th>
                             <th>
@@ -82,9 +79,6 @@
                         <tr>
                             <th>
                                 @Html.DisplayNameFor(model => model.WarehouseID)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.TrayID)
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.CargoID)
@@ -118,10 +112,7 @@
                         {
                             <tr>
                                 <td>
-                                    @item.Warehouse.Name
-                                </td>
-                                <td>
-                                    @item.TrayID.ToString().PadLeft(6, '0')
+                                    @item.Warehouse.Number
                                 </td>
                                 <td>
                                     @item.Cargo.Name

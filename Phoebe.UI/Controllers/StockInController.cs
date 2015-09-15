@@ -81,15 +81,59 @@ namespace Phoebe.UI.Controllers
                 var user = PageService.GetCurrentUser(User.Identity.Name);
                 model.UserID = user.ID;
 
-                string[] cargos = Regex.Split(Request.Form["CargoList[]"], ",");
-                if (cargos.Length == 0)
+                string[] warehouses = Regex.Split(Request.Form["warehouse[]"], ",");
+                string[] counts = Regex.Split(Request.Form["count[]"], ",");
+
+                List<StockInDetail> details = new List<StockInDetail>();
+                for (int i = 0; i < warehouses.Length; i++)
+                {
+                    bool flag = true;
+                    int warehouseId, count;
+                    if (!Int32.TryParse(warehouses[i], out warehouseId))
+                        flag = false;
+
+                    if (!Int32.TryParse(counts[i], out count))
+                    {
+                        flag = false;
+                    }
+                    else
+                    {
+                        if (count <= 0)
+                            flag = false;
+                    }
+
+                    if (!flag)
+                    {
+                        TempData["Message"] = "货品入库失败";
+                        ModelState.AddModelError("", "货品入库失败: 输入数据格式有误。");
+
+                        return View(model);
+                    }
+
+                    StockInDetail detail = new StockInDetail();
+                    detail.WarehouseID = warehouseId;
+                    detail.Count = count;
+
+                    if (details.Any(r => r.WarehouseID == warehouseId))
+                    {
+                        TempData["Message"] = "货品入库失败";
+                        ModelState.AddModelError("", "货品入库失败: 仓库选择重复。");
+                        return View(model);
+                    }
+
+                    details.Add(detail);
+                }
+
+                CargoBusiness cargoBusiness = new CargoBusiness();
+                var cargo = cargoBusiness.Get(model.CargoID.ToString());
+                if (details.Sum(r => r.Count) != cargo.Count)
                 {
                     TempData["Message"] = "货品入库失败";
-                    ModelState.AddModelError("", "货品入库失败: 未选择货品");
+                    ModelState.AddModelError("", "货品入库失败: 入库数量与总数不等。");
                     return View(model);
                 }
 
-                ErrorCode result = this.storeBusiness.StockIn(model, cargos);
+                ErrorCode result = this.storeBusiness.StockIn(model, details);
                 if (result == ErrorCode.Success)
                 {
                     TempData["Message"] = "货品入库成功";
@@ -165,28 +209,7 @@ namespace Phoebe.UI.Controllers
         #endregion //Action
 
         #region Json
-        /// <summary>
-        /// 获取相关合同
-        /// </summary>
-        /// <param name="type"></param>
-        /// <returns></returns>
-        public JsonResult GetContracts(int type)
-        {
-            CargoBusiness cargoBusiness = new CargoBusiness();
-
-            if (type == 0)
-            {
-                var contracts = cargoBusiness.GetWithUnStockIn();
-                var data = from r in contracts
-                           select new { r.ID, r.Name, r.Number };
-
-                return Json(data, JsonRequestBehavior.AllowGet);
-            }
-            else
-            {
-                return null;
-            }
-        }
+        
         #endregion //Json
     }
 }

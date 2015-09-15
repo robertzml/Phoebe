@@ -47,16 +47,13 @@
                     <thead>
                         <tr>
                             <th>
+                                @Html.DisplayNameFor(model => model.CargoID)
+                            </th>
+                            <th>
                                 @Html.DisplayNameFor(model => model.InTime)
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.ConfirmTime)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.WarehouseID)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.TrayID)
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.UserID)
@@ -75,16 +72,13 @@
                     <tfoot>
                         <tr>
                             <th>
+                                @Html.DisplayNameFor(model => model.CargoID)
+                            </th>
+                            <th>
                                 @Html.DisplayNameFor(model => model.InTime)
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.ConfirmTime)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.WarehouseID)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.TrayID)
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.UserID)
@@ -105,16 +99,13 @@
                         {
                             <tr>
                                 <td>
+                                    @item.Cargo.Name
+                                </td>
+                                <td>
                                     @item.InTime.ToDateTimeString()
                                 </td>
                                 <td>
                                     @item.ConfirmTime.ToDateTimeString()
-                                </td>
-                                <td>
-                                    @item.Warehouse.Name
-                                </td>
-                                <td>
-                                    @item.Tray.ID.ToString().PadLeft(6, '0')
                                 </td>
                                 <td>
                                     @item.User.Name

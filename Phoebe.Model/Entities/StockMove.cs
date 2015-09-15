@@ -16,6 +16,12 @@ namespace Phoebe.Model
         public System.Guid ID { get; set; }
 
         /// <summary>
+        /// 货品ID
+        /// </summary>
+        [Display(Name = "货品")]
+        public System.Guid CargoID { get; set; }
+
+        /// <summary>
         /// 移库时间
         /// </summary>
         [Display(Name = "移库时间")]
@@ -26,29 +32,6 @@ namespace Phoebe.Model
         /// </summary>
         [Display(Name = "确认时间")]
         public Nullable<System.DateTime> ConfirmTime { get; set; }
-
-        /// <summary>
-        /// 原仓库
-        /// </summary>
-        [Required]
-        [UIHint("SourceWarehouseList")]
-        [Display(Name = "原仓库")]
-        public int SourceWarehouseID { get; set; }
-
-        /// <summary>
-        /// 目的仓库
-        /// </summary>
-        [Required]
-        [UIHint("DestinationWarehouseList")]
-        [Display(Name = "目的仓库")]
-        public int DestinationWarehouseID { get; set; }
-
-        /// <summary>
-        /// 托盘
-        /// </summary>
-        [Required]
-        [Display(Name = "托盘")]
-        public int TrayID { get; set; }
 
         /// <summary>
         /// 操作人

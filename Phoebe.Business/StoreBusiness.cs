@@ -121,9 +121,9 @@ namespace Phoebe.Business
         /// 货品入库
         /// </summary>
         /// <param name="data">入库数据</param>
-        /// <param name="cargos">货品数据</param>
+        /// <param name="details">入库详细信息</param>
         /// <returns></returns>
-        public ErrorCode StockIn(StockIn data, string[] cargos)
+        public ErrorCode StockIn(StockIn data, List<StockInDetail> details)
         {
             try
             {
@@ -134,22 +134,24 @@ namespace Phoebe.Business
                 this.context.StockIns.Add(data);
 
                 // add stock in detail
-                for (int i = 0; i < cargos.Length; i++)
+                foreach (var item in details)
                 {
-                    StockInDetail detail = new StockInDetail
-                    {
-                        StockInID = data.ID,
-                        CargoID = new Guid(cargos[i]),
-                        Status = (int)EntityStatus.StockInReady
-                    };
-                    this.context.StockInDetails.Add(detail);
+                    item.ID = Guid.NewGuid();
+                    item.StockInID = data.ID;
+                    item.CargoID = data.CargoID;
+                    item.Status = (int)EntityStatus.StockInReady;
 
-                    // change cargo status
-                    Guid gid = new Guid(cargos[i]);
-                    Cargo cargo = this.context.Cargoes.Find(gid);
-                    cargo.Status = (int)EntityStatus.CargoStockInReady;
+                    this.context.StockInDetails.Add(item);
+
+                    // edit warehouse status
+                    Warehouse warehosue = this.context.Warehouses.Find(item.WarehouseID);
+                    warehosue.Status = (int)EntityStatus.WarehouseReserve;
                 }
 
+                // change cargo status
+                var cargo = this.context.Cargoes.Find(data.CargoID);
+                cargo.Status = (int)EntityStatus.CargoStockInReady;
+               
                 this.context.SaveChanges();
             }
             catch (Exception)
@@ -171,55 +173,54 @@ namespace Phoebe.Business
         {
             try
             {
-                //Guid gid;
-                //if (!Guid.TryParse(id, out gid))
-                //    return ErrorCode.ObjectNotFound;
+                Guid gid;
+                if (!Guid.TryParse(id, out gid))
+                    return ErrorCode.ObjectNotFound;
 
-                //StockIn si = this.context.StockIns.Find(gid);
-                //if (si == null)
-                //    return ErrorCode.ObjectNotFound;
+                StockIn si = this.context.StockIns.Find(gid);
+                if (si == null)
+                    return ErrorCode.ObjectNotFound;
 
-                //si.ConfirmTime = DateTime.Now;
-                //si.Remark = remark;
-                //si.Status = (int)status;
+                si.ConfirmTime = DateTime.Now;
+                si.Remark = remark;
+                si.Status = (int)status;
 
-                //if (status == EntityStatus.StockIn)
-                //{
-                //    // add stock information
-                //    foreach (var item in si.StockInDetails)
-                //    {
-                //        // change stock in details and cargo status
-                //        item.Status = (int)EntityStatus.StockIn;
-                //        item.Cargo.InTime = si.ConfirmTime;
-                //        item.Cargo.Status = (int)EntityStatus.CargoStockIn;
+                if (status == EntityStatus.StockIn)
+                {
+                    // add stock information
+                    foreach (var item in si.StockInDetails)
+                    {
+                        // change stock in details, cargo and warehouse status
+                        item.Status = (int)EntityStatus.StockIn;
+                        item.Cargo.InTime = si.ConfirmTime;
+                        item.Cargo.Status = (int)EntityStatus.CargoStockIn;
+                        item.Warehouse.Status = (int)EntityStatus.WarehouseOccupy;
 
-                //        Stock stock = new Stock();
-                //        stock.ID = Guid.NewGuid();
-                //        stock.WarehouseID = si.WarehouseID;
-                //        stock.TrayID = si.TrayID;
-                //        stock.CargoID = item.CargoID;
-                //        stock.InTime = Convert.ToDateTime(si.ConfirmTime);
-                //        stock.Source = 0;
-                //        stock.StockInID = si.ID;
-                //        stock.Status = (int)EntityStatus.StoreIn;
+                        Stock stock = new Stock();
+                        stock.ID = Guid.NewGuid();
+                        stock.WarehouseID = item.WarehouseID;
+                        stock.Count = item.Count;
+                        stock.CargoID = item.CargoID;
+                        stock.InTime = Convert.ToDateTime(si.ConfirmTime);
+                        stock.Source = 0;
+                        stock.StockInID = si.ID;
+                        stock.Status = (int)EntityStatus.StoreIn;
 
-                //        this.context.Stocks.Add(stock);
-                //    }
-                //}
-                //else
-                //{
-                //    // change tray status
-                //    si.Tray.Status = (int)EntityStatus.TrayUnused;
+                        this.context.Stocks.Add(stock);
+                    }
+                }
+                else
+                {
+                    // change stock in details, cargo and warehouse status
+                    foreach (var item in si.StockInDetails)
+                    {
+                        item.Status = (int)EntityStatus.StockInCancel;
+                        item.Cargo.Status = (int)EntityStatus.CargoNotIn;
+                        item.Warehouse.Status = (int)EntityStatus.WarehouseFree;
+                    }
+                }
 
-                //    // change stock in details and cargo status
-                //    foreach (var item in si.StockInDetails)
-                //    {
-                //        item.Status = (int)EntityStatus.StockInCancel;
-                //        item.Cargo.Status = (int)EntityStatus.CargoNotIn;
-                //    }
-                //}
-
-                //this.context.SaveChanges();
+                this.context.SaveChanges();
             }
             catch (Exception)
             {
