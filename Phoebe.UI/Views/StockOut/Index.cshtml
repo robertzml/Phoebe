@@ -53,10 +53,7 @@
                                 @Html.DisplayNameFor(model => model.ConfirmTime)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.WarehouseID)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.TrayID)
+                                @Html.DisplayNameFor(model => model.CargoID)
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.UserID)
@@ -81,10 +78,7 @@
                                 @Html.DisplayNameFor(model => model.ConfirmTime)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.WarehouseID)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.TrayID)
+                                @Html.DisplayNameFor(model => model.CargoID)
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.UserID)
@@ -111,10 +105,7 @@
                                     @item.ConfirmTime.ToDateTimeString()
                                 </td>
                                 <td>
-                                    @item.Warehouse.Name
-                                </td>
-                                <td>
-                                    @item.Tray.ID.ToString().PadLeft(6, '0')
+                                    @item.Cargo.Name
                                 </td>
                                 <td>
                                     @item.User.Name

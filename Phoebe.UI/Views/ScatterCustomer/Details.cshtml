@@ -120,9 +120,6 @@
                                 合同名称
                             </th>
                             <th>
-                                合同类型
-                            </th>
-                            <th>
                                 签订日期
                             </th>
                             <th>
@@ -137,9 +134,6 @@
                             </th>
                             <th>
                                 合同名称
-                            </th>
-                            <th data-filter="true">
-                                合同类型
                             </th>
                             <th>
                                 签订日期
@@ -158,12 +152,6 @@
                                 </td>
                                 <td>
                                     @item.Name
-                                </td>
-                                <td>
-                                    @{
-                                        var type1 = (ContractType)item.Type;
-                                        @type1.DisplayName();
-                                    }
                                 </td>
                                 <td>
                                     @item.SignDate.ToDateString()

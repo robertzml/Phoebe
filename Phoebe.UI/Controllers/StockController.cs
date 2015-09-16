@@ -71,7 +71,24 @@ namespace Phoebe.UI.Controllers
         #endregion //Action
 
         #region Json
+        /// <summary>
+        /// 根据货品获取库存
+        /// </summary>
+        /// <param name="cargoID">货品ID</param>
+        /// <remarks>
+        /// 调用：
+        /// /StockOut/Create
+        /// </remarks>
+        /// <returns></returns>
+        public JsonResult GetWithCargo(string cargoID)
+        {
+            var stock = this.storeBusiness.GetWithCargo(cargoID);
+            var data = from r in stock
+                       orderby r.Warehouse.Number
+                       select new { r.WarehouseID, r.Warehouse.Number, r.Count };
 
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
         #endregion //Json
     }
 }

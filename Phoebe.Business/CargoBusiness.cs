@@ -102,6 +102,22 @@ namespace Phoebe.Business
         }
 
         /// <summary>
+        /// 获取有库存合同
+        /// </summary>
+        /// <returns></returns>
+        public List<Contract> GetWithHasStock()
+        {
+            var contracts = from r in this.context.Contracts
+                            where (from s in this.context.Cargoes
+                                   where s.Status == (int)EntityStatus.CargoStockIn
+                                   group s by s.ContractID into g
+                                   select g.Key).Contains(r.ID)
+                            select r;
+
+            return contracts.ToList();
+        }
+
+        /// <summary>
         /// 添加货品
         /// </summary>
         /// <param name="data">货品数据</param>

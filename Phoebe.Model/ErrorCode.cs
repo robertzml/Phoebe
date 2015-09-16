@@ -135,7 +135,13 @@ namespace Phoebe.Model
         /// 库存未找到
         /// </summary>
         [Display(Name = "库存未找到")]
-        StockNotFound = 50
+        StockNotFound = 50,
+
+        /// <summary>
+        /// 出库数量超出
+        /// </summary>
+        [Display(Name = "出库数量超出")]
+        StockOutCountOverflow = 51,
         #endregion //Stock
     }
 }

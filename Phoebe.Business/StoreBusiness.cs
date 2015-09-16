@@ -49,6 +49,20 @@ namespace Phoebe.Business
         }
 
         /// <summary>
+        /// 根据货品获取库存
+        /// </summary>
+        /// <param name="cargoID">货品ID</param>
+        /// <returns></returns>
+        public List<Stock> GetWithCargo(string cargoID)
+        {
+            Guid gid;
+            if (!Guid.TryParse(cargoID, out gid))
+                return null;
+
+            return this.context.Stocks.Where(r => r.CargoID == gid && r.Status == (int)EntityStatus.StoreIn).ToList();
+        }
+
+        /// <summary>
         /// 获取库存记录
         /// </summary>
         /// <param name="warehouseID">仓库ID</param>
@@ -269,42 +283,53 @@ namespace Phoebe.Business
         /// 货品出库
         /// </summary>
         /// <param name="data">出库数据</param>
+        /// <param name="details">出库详细信息</param>
         /// <returns></returns>
-        public ErrorCode StockOut(StockOut data)
+        public ErrorCode StockOut(StockOut data, List<StockOutDetail> details)
         {
             try
             {
-                //// find store first
-                //var stocks = this.context.Stocks.Where(r => r.Status == (int)EntityStatus.StoreIn && r.TrayID == data.TrayID);
-                //if (stocks.Count() == 0)
-                //    return ErrorCode.StockNotFound;
+                // find store first
+                var stocks = this.context.Stocks.Where(r => r.CargoID == data.CargoID && r.Status == (int)EntityStatus.StoreIn);
+                if (stocks.Count() == 0)
+                    return ErrorCode.StockNotFound;
 
-                //// add stock out
-                //data.ID = Guid.NewGuid();
-                //data.WarehouseID = stocks.First().WarehouseID;
-                //data.OutTime = DateTime.Now;
-                //data.Status = (int)EntityStatus.StockOutReady;
+                // check stock out count
+                foreach (var item in details)
+                {
+                    var s = stocks.SingleOrDefault(r => r.WarehouseID == item.WarehouseID);
+                    if (s == null)
+                        return ErrorCode.StockNotFound;
 
-                //this.context.StockOuts.Add(data);
+                    int c = s.Count;
+                    if (c < item.Count)
+                        return ErrorCode.StockOutCountOverflow;
+                }
 
-                //// add stock out detail
-                //foreach (var item in stocks)
-                //{
-                //    StockOutDetail detail = new StockOutDetail
-                //    {
-                //        StockOutID = data.ID,
-                //        CargoID = item.CargoID,
-                //        Status = (int)EntityStatus.StockOutReady
-                //    };
-                //    this.context.StockOutDetails.Add(detail);
+                // add stock out
+                data.ID = Guid.NewGuid();
+                data.OutTime = DateTime.Now;
+                data.Status = (int)EntityStatus.StockOutReady;
 
-                //    // change cargos status
-                //    item.Cargo.Status = (int)EntityStatus.CargoStockOutReady;
-                //}
+                this.context.StockOuts.Add(data);
 
-                //this.context.SaveChanges();
+                // add stock out detail
+                foreach (var item in details)
+                {
+                    item.ID = Guid.NewGuid();
+                    item.StockOutID = data.ID;
+                    item.CargoID = data.CargoID;
+                    item.Status = (int)EntityStatus.StockOutReady;
+
+                    this.context.StockOutDetails.Add(item);
+
+                    // change cargos status
+                    //item.Cargo.Status = (int)EntityStatus.CargoStockOutReady;
+                }
+
+                this.context.SaveChanges();
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return ErrorCode.Exception;
             }

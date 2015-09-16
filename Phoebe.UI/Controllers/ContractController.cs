@@ -168,6 +168,10 @@ namespace Phoebe.UI.Controllers
         /// 获取客户
         /// </summary>
         /// <param name="type">客户类型</param>
+        /// <remarks>
+        /// 调用：
+        /// /Contract/Create
+        /// </remarks>
         /// <returns></returns>
         public JsonResult GetCustomers(int type)
         {
@@ -181,6 +185,42 @@ namespace Phoebe.UI.Controllers
             {
                 var data = customerBusiness.GetScatterCustomer();
                 return Json(data, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        /// <summary>
+        /// 获取相关合同
+        /// </summary>
+        /// <param name="type">相关类型</param>
+        /// <remarks>
+        /// 调用：
+        /// /StockIn/Create
+        /// /StockOut/Create
+        /// </remarks>
+        /// <returns></returns>
+        public JsonResult GetContracts(int type)
+        {
+            CargoBusiness cargoBusiness = new CargoBusiness();
+
+            if (type == 0)
+            {
+                var contracts = cargoBusiness.GetWithUnStockIn();
+                var data = from r in contracts
+                           select new { r.ID, r.Name, r.Number };
+
+                return Json(data, JsonRequestBehavior.AllowGet);
+            }
+            else if (type == 1)
+            {
+                var contracts = cargoBusiness.GetWithHasStock();
+                var data = from r in contracts
+                           select new { r.ID, r.Name, r.Number };
+
+                return Json(data, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return null;
             }
         }
         #endregion //Json

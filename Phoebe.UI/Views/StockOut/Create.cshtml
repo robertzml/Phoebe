@@ -53,14 +53,15 @@
                     <div class="form-body">
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-                        <h3 class="form-section">来源</h3>
+                        <h3 class="form-section">货品</h3>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    @Html.LabelFor(model => model.WarehouseID, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <label class="control-label col-md-2">合同选择</label>
                                     <div class="col-md-9">
-                                        @Html.EditorFor(model => model.WarehouseID, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.WarehouseID, "", new { @class = "text-danger" })
+                                        <select id="ContractID" name="ContractID" class="form-control">
+                                            <option value="">-- 请选择 --</option>
+                                        </select>
                                     </div>
                                     <div class="col-md-1">
                                         <span class="required">*</span>
@@ -69,10 +70,11 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    @Html.LabelFor(model => model.TrayID, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <label class="control-label col-md-2">货品选择</label>
                                     <div class="col-md-9">
-                                        <select id="TrayID" name="TrayID" class="form-control"></select>
-                                        @Html.ValidationMessageFor(model => model.TrayID, "", new { @class = "text-danger" })
+                                        <select id="CargoID" name="CargoID" class="form-control">
+                                            <option value="">-- 请选择 --</option>
+                                        </select>
                                     </div>
                                     <div class="col-md-1">
                                         <span class="required">*</span>
@@ -81,16 +83,25 @@
                             </div>
                         </div>
 
-                        <h3 class="form-section">货品</h3>
+                        <h3 class="form-section">库存</h3>
                         <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label col-md-2">货品</label>
-                                    <div class="col-md-9">
-                                        <select id="CargoList" name="CargoList" class="form-control" size="10">
-                                        </select>
-                                    </div>
-                                </div>
+                            <div class="col-md-12">
+                                <table class="table table-striped table-hover table-bordered" id="store-table">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                库位
+                                            </th>
+                                            <th>
+                                                现有数量
+                                            </th>
+                                            <th>
+                                                出库数量
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
                             </div>
                         </div>
 
@@ -136,38 +147,51 @@
         $(function () {
             phoebe.leftNavActive($('#menu-stock-out-create'));
 
-            $('#WarehouseID').selectpicker({});
+            var tbody = $('#store-table tbody');
 
-            $('#WarehouseID').change(function () {
-                var warehouseId = $(this).val();
-
-                $('#TrayID').empty();
-                $('#CargoList').empty();
-
-                if (warehouseId == '')
-                    return;
-
-                $('#TrayID').append("<option value=''>-- 请选择 --</option>");
-                $.getJSON('/Tray/GetInWarehouse', { WarehouseID: warehouseId }, function (response) {
+            function loadCargo(cargoId) {
+                $.getJSON('/Stock/GetWithCargo', { cargoID: cargoId }, function (response) {
                     $.each(response, function (i, item) {
-                        $('#TrayID').append("<option value='" + item.ID + "'>" + item.Name + "</option>");
+                        var line = $('<tr/>')
+                            .append('<td>' + item.Number + '<input type="hidden" name="warehouseID[]" value="' + item.WarehouseID + '" /></td>')
+                            .append('<td>' + item.Count + '</td>')
+                            .append('<td><input type="number" class="form-control input-medium" name="count[]" value="0"></td>');
+
+                        tbody.append(line);
+                    });
+                });
+            }
+
+            $.getJSON('/Contract/GetContracts', { type: 1 }, function (response) {
+                $.each(response, function (i, item) {
+                    $('#ContractID').append("<option value='" + item.ID + "'>" + item.Name + "</option>");
+                });
+
+                $('#ContractID').change(function () {
+                    var contractId = $(this).val();
+
+                    $('#CargoID').empty();
+                    if (contractId == '')
+                        return;
+                    $('#CargoID').append(" <option value=''>-- 请选择 --</option>");
+
+                    $.getJSON('/Cargo/GetCargos', { type: 2, contractID: contractId }, function (response) {
+                        $.each(response, function (i, item) {
+                            $('#CargoID').append("<option value='" + item.ID + "'>" + item.Name + "</option>");
+                        });
+
+                        $('#CargoID').change(function () {
+                            var cargoId = $(this).val();
+                            tbody.empty();
+                            if (cargoId == '')
+                                return;
+
+                            loadCargo(cargoId);
+                        });
                     });
                 });
             });
-
-            $('#TrayID').change(function () {
-                var trayId = $(this).val();
-
-                $('#CargoList').empty();
-                if (trayId == '')
-                    return;
-
-                $.getJSON('/Cargo/GetCargoInTray', { trayID: trayId }, function (response) {
-                    $.each(response, function (i, item) {
-                        $('#CargoList').append("<option value='" + item.ID + "'>" + item.Name + "</option>");
-                    });
-                });
-            });
+            
         });
     </script>
 }

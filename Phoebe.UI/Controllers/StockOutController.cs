@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using Phoebe.Business;
@@ -80,7 +81,44 @@ namespace Phoebe.UI.Controllers
                 var user = PageService.GetCurrentUser(User.Identity.Name);
                 model.UserID = user.ID;
 
-                ErrorCode result = this.storeBusiness.StockOut(model);
+                string[] warehouses = Regex.Split(Request.Form["warehouseID[]"], ",");
+                string[] counts = Regex.Split(Request.Form["count[]"], ",");
+
+                List<StockOutDetail> details = new List<StockOutDetail>();
+                for (int i = 0; i < warehouses.Length; i++)
+                {
+                    bool flag = true;
+                    int warehouseId = Convert.ToInt32(warehouses[i]);
+
+                    int count;
+                    if (!Int32.TryParse(counts[i], out count))
+                    {
+                        flag = false;
+                    }
+                    else
+                    {
+                        if (count < 0)
+                            flag = false;
+                        else if (count == 0)
+                            continue;
+                    }
+
+                    if (!flag)
+                    {
+                        TempData["Message"] = "货品出库失败";
+                        ModelState.AddModelError("", "货品出库失败: 输入数据格式有误。");
+
+                        return View(model);
+                    }
+
+                    StockOutDetail detail = new StockOutDetail();
+                    detail.WarehouseID = warehouseId;
+                    detail.Count = count;
+
+                    details.Add(detail);
+                }
+
+                ErrorCode result = this.storeBusiness.StockOut(model, details);
                 if (result == ErrorCode.Success)
                 {
                     TempData["Message"] = "货品出库成功";

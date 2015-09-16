@@ -167,7 +167,7 @@
                 $('#cargo-panel').load('/Cargo/Info', { id: id });
             }
 
-            $.getJSON('/StockIn/GetContracts', { type: 0 }, function (response) {
+            $.getJSON('/Contract/GetContracts', { type: 0 }, function (response) {
                 $.each(response, function (i, item) {
                     $('#ContractID').append("<option value='" + item.ID + "'>" + item.Name + "</option>");
                 });
