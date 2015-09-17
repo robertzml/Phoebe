@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Phoebe.Model
 {
-    public class StockMetadata
+    public class StockInDetailMetadata
     {
         /// <summary>
         /// ID
@@ -16,9 +16,15 @@ namespace Phoebe.Model
         public System.Guid ID { get; set; }
 
         /// <summary>
+        /// 入库ID
+        /// </summary>
+        [Display(Name = "入库记录")]
+        public System.Guid StockInID { get; set; }
+
+        /// <summary>
         /// 仓库ID
         /// </summary>
-        [Display(Name = "仓库")]
+        [Display(Name = "库位")]
         public int WarehouseID { get; set; }
 
         /// <summary>
@@ -34,22 +40,10 @@ namespace Phoebe.Model
         public int Count { get; set; }
 
         /// <summary>
-        /// 入库时间
+        /// 库存ID
         /// </summary>
-        [Display(Name = "入库时间")]
-        public System.DateTime InTime { get; set; }
-
-        /// <summary>
-        /// 出库时间
-        /// </summary>
-        [Display(Name = "出库时间")]
-        public Nullable<System.DateTime> OutTime { get; set; }
-
-        /// <summary>
-        /// 来源
-        /// </summary>
-        [Display(Name = "来源")]
-        public int Source { get; set; }
+        [Display(Name = "库存")]
+        public Nullable<System.Guid> StockID { get; set; }
 
         /// <summary>
         /// 备注
@@ -65,8 +59,8 @@ namespace Phoebe.Model
         public int Status { get; set; }
     }
 
-    [MetadataType(typeof(StockMetadata))]
-    public partial class Stock
+    [MetadataType(typeof(StockInDetailMetadata))]
+    public partial class StockInDetail
     {
     }
 }

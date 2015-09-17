@@ -217,10 +217,12 @@ namespace Phoebe.Business
                         stock.CargoID = item.CargoID;
                         stock.InTime = Convert.ToDateTime(si.ConfirmTime);
                         stock.Source = 0;
-                        stock.StockInID = si.ID;
+                      
                         stock.Status = (int)EntityStatus.StoreIn;
 
                         this.context.Stocks.Add(stock);
+
+                        item.StockID = stock.ID;
                     }
                 }
                 else
@@ -348,57 +350,72 @@ namespace Phoebe.Business
         {
             try
             {
-                //Guid gid;
-                //if (!Guid.TryParse(id, out gid))
-                //    return ErrorCode.ObjectNotFound;
+                Guid gid;
+                if (!Guid.TryParse(id, out gid))
+                    return ErrorCode.ObjectNotFound;
 
-                //StockOut so = this.context.StockOuts.Find(gid);
-                //if (so == null)
-                //    return ErrorCode.ObjectNotFound;
+                StockOut so = this.context.StockOuts.Find(gid);
+                if (so == null)
+                    return ErrorCode.ObjectNotFound;
 
-                //so.ConfirmTime = DateTime.Now;
-                //so.Remark = remark;
-                //so.Status = (int)status;
+                so.ConfirmTime = DateTime.Now;
+                so.Remark = remark;
+                so.Status = (int)status;
 
-                //if (status == EntityStatus.StockOut)
-                //{
-                //    // find store
-                //    var stocks = this.context.Stocks.Where(r => r.Status == (int)EntityStatus.StoreIn && r.TrayID == so.TrayID);
-                //    if (stocks.Count() == 0)
-                //        return ErrorCode.StockNotFound;
+                if (status == EntityStatus.StockOut)
+                {
+                    //// find store
+                    //var stocks = this.context.Stocks.Where(r => r.CargoID == so.CargoID && r.Status == (int)EntityStatus.StoreIn);
+                    //if (stocks.Count() == 0)
+                    //    return ErrorCode.StockNotFound;
 
-                //    //edit stock information
-                //    foreach (var item in stocks)
-                //    {
-                //        item.OutTime = so.ConfirmTime;
-                //        item.Destination = 0;
-                //        item.StockOutID = so.ID;
-                //        item.Status = (int)EntityStatus.StoreOut;
-                //    }
+                    ////change stock out details status
+                    //foreach (var item in so.StockOutDetails)
+                    //{
+                    //    item.Status = (int)EntityStatus.StockOut;
 
-                //    //change stock out details and cargo status
-                //    foreach (var item in so.StockOutDetails)
-                //    {
-                //        item.Status = (int)EntityStatus.StockOut;
-                //        item.Cargo.OutTime = so.ConfirmTime;
-                //        item.Cargo.Status = (int)EntityStatus.CargoStockOut;
-                //    }
+                    //    var stock = stocks.First(r => r.WarehouseID == item.WarehouseID);
+                    //    if (stock.Count == item.Count)  // all stock out
+                    //    {
+                    //        item.Warehouse.Status = (int)EntityStatus.WarehouseFree;
+                    //        stock.Status = (int)EntityStatus.StoreOut;
+                    //        stock.OutTime = so.ConfirmTime;
+                    //    }
+                    //    else
+                    //    {
 
-                //    //change tray status and position
-                //    so.Tray.WarehouseID = null;
-                //    so.Tray.Status = (int)EntityStatus.TrayUnused;
-                //}
-                //else
-                //{
-                //    //change stock out details and cargo status
-                //    foreach (var item in so.StockOutDetails)
-                //    {
-                //        item.Status = (int)EntityStatus.StockOutCancel;
-                //        item.Cargo.Status = (int)EntityStatus.CargoStockIn;
-                //    }
-                //}
+                    //    }
 
-                //this.context.SaveChanges();
+                    //}
+
+                    ////edit stock information
+                    //foreach (var item in stocks)
+                    //{
+                    //    item.OutTime = so.ConfirmTime;
+                        
+                    //    //item.StockOutID = so.ID;
+                    //    item.Status = (int)EntityStatus.StoreOut;
+                    //}
+
+                    ////change stock out details and cargo status
+                    //foreach (var item in so.StockOutDetails)
+                    //{
+                    //    item.Status = (int)EntityStatus.StockOut;
+                    //    item.Cargo.OutTime = so.ConfirmTime;
+                    //    item.Cargo.Status = (int)EntityStatus.CargoStockOut;
+                    //}                   
+                }
+                else
+                {
+                    //change stock out details and cargo status
+                    foreach (var item in so.StockOutDetails)
+                    {
+                        item.Status = (int)EntityStatus.StockOutCancel;
+                        //item.Cargo.Status = (int)EntityStatus.CargoStockIn;
+                    }
+                }
+
+                this.context.SaveChanges();
             }
             catch (Exception)
             {

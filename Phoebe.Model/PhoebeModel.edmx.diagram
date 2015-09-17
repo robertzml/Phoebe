@@ -19,30 +19,16 @@
         <AssociationConnector Association="PhoebeModel.FK_Cargo_FirstCategory" />
         <AssociationConnector Association="PhoebeModel.FK_Cargo_SecondCategory" />
         <AssociationConnector Association="PhoebeModel.FK_Cargo_User" />
-        <EntityTypeShape EntityType="PhoebeModel.Stock" Width="1.5" PointX="11.875" PointY="11.125" />
-        <AssociationConnector Association="PhoebeModel.FK_Stock_Cargo" />
-        <AssociationConnector Association="PhoebeModel.FK_Stock_Warehouse" />
         <EntityTypeShape EntityType="PhoebeModel.StockIn" Width="1.5" PointX="6.625" PointY="18.5" />
-        <EntityTypeShape EntityType="PhoebeModel.StockInDetail" Width="1.5" PointX="4.75" PointY="23.375" />
         <AssociationConnector Association="PhoebeModel.FK_StockIn_Cargo" />
-        <AssociationConnector Association="PhoebeModel.FK_StockInDetails_Cargo" />
-        <AssociationConnector Association="PhoebeModel.FK_Stock_StockIn" />
         <AssociationConnector Association="PhoebeModel.FK_StockIn_User" />
-        <AssociationConnector Association="PhoebeModel.FK_StockInDetails_StockIn" />
-        <AssociationConnector Association="PhoebeModel.FK_StockInDetails_Warehouse" />
         <EntityTypeShape EntityType="PhoebeModel.StockOut" Width="1.5" PointX="11.875" PointY="18.5" />
-        <EntityTypeShape EntityType="PhoebeModel.StockOutDetail" Width="1.5" PointX="10.375" PointY="23.25" />
         <AssociationConnector Association="PhoebeModel.FK_StockOut_Cargo" />
-        <AssociationConnector Association="PhoebeModel.FK_StockOutDetails_Cargo" />
-        <AssociationConnector Association="PhoebeModel.FK_Stock_StockOut" />
         <AssociationConnector Association="PhoebeModel.FK_StockOut_User" />
-        <AssociationConnector Association="PhoebeModel.FK_StockOutDetails_StockOut" />
-        <AssociationConnector Association="PhoebeModel.FK_StockOutDetails_Warehouse" />
         <EntityTypeShape EntityType="PhoebeModel.StockMove" Width="1.5" PointX="16.75" PointY="18.375" />
         <EntityTypeShape EntityType="PhoebeModel.StockMoveDetail" Width="1.5" PointX="15" PointY="23.25" />
         <AssociationConnector Association="PhoebeModel.FK_StockMove_Cargo" />
         <AssociationConnector Association="PhoebeModel.FK_StockMoveDetails_Cargo" />
-        <AssociationConnector Association="PhoebeModel.FK_Stock_StockMove" />
         <AssociationConnector Association="PhoebeModel.FK_StockMove_User" />
         <AssociationConnector Association="PhoebeModel.FK_StockMoveDetails_StockMove" />
         <AssociationConnector Association="PhoebeModel.FK_StockMoveDetails_Warehouse" />
@@ -56,6 +42,19 @@
         <EntityTypeShape EntityType="PhoebeModel.ThirdCategory" Width="1.5" PointX="6.5" PointY="1.125" />
         <AssociationConnector Association="PhoebeModel.FK_Cargo_ThirdCategory" />
         <AssociationConnector Association="PhoebeModel.FK_ThirdCategory_SecondCategory" />
+        <EntityTypeShape EntityType="PhoebeModel.Stock" Width="1.5" PointX="11" PointY="13.125" />
+        <EntityTypeShape EntityType="PhoebeModel.StockInDetail" Width="1.5" PointX="4.125" PointY="23.5" />
+        <EntityTypeShape EntityType="PhoebeModel.StockOutDetail" Width="1.5" PointX="9.5" PointY="23.375" />
+        <AssociationConnector Association="PhoebeModel.FK_Stock_Cargo" />
+        <AssociationConnector Association="PhoebeModel.FK_StockInDetails_Cargo" />
+        <AssociationConnector Association="PhoebeModel.FK_StockOutDetails_Cargo" />
+        <AssociationConnector Association="PhoebeModel.FK_Stock_Warehouse" />
+        <AssociationConnector Association="PhoebeModel.FK_StockInDetails_Stock" />
+        <AssociationConnector Association="PhoebeModel.FK_StockOutDetails_Stock" />
+        <AssociationConnector Association="PhoebeModel.FK_StockInDetails_StockIn" />
+        <AssociationConnector Association="PhoebeModel.FK_StockInDetails_Warehouse" />
+        <AssociationConnector Association="PhoebeModel.FK_StockOutDetails_StockOut" />
+        <AssociationConnector Association="PhoebeModel.FK_StockOutDetails_Warehouse" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
