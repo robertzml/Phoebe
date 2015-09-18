@@ -26,13 +26,8 @@
         <AssociationConnector Association="PhoebeModel.FK_StockOut_Cargo" />
         <AssociationConnector Association="PhoebeModel.FK_StockOut_User" />
         <EntityTypeShape EntityType="PhoebeModel.StockMove" Width="1.5" PointX="16.75" PointY="18.375" />
-        <EntityTypeShape EntityType="PhoebeModel.StockMoveDetail" Width="1.5" PointX="15" PointY="23.25" />
         <AssociationConnector Association="PhoebeModel.FK_StockMove_Cargo" />
-        <AssociationConnector Association="PhoebeModel.FK_StockMoveDetails_Cargo" />
         <AssociationConnector Association="PhoebeModel.FK_StockMove_User" />
-        <AssociationConnector Association="PhoebeModel.FK_StockMoveDetails_StockMove" />
-        <AssociationConnector Association="PhoebeModel.FK_StockMoveDetails_Warehouse" />
-        <AssociationConnector Association="PhoebeModel.FK_StockMoveDetails_Warehouse1" />
         <EntityTypeShape EntityType="PhoebeModel.Settlement" Width="1.5" PointX="20.25" PointY="12.625" />
         <AssociationConnector Association="PhoebeModel.FK_Settlement_Cargo" />
         <AssociationConnector Association="PhoebeModel.FK_Settlement_User" />
@@ -55,6 +50,13 @@
         <AssociationConnector Association="PhoebeModel.FK_StockInDetails_Warehouse" />
         <AssociationConnector Association="PhoebeModel.FK_StockOutDetails_StockOut" />
         <AssociationConnector Association="PhoebeModel.FK_StockOutDetails_Warehouse" />
+        <EntityTypeShape EntityType="PhoebeModel.StockMoveDetail" Width="1.5" PointX="15" PointY="23.375" />
+        <AssociationConnector Association="PhoebeModel.FK_StockMoveDetails_Cargo" />
+        <AssociationConnector Association="PhoebeModel.FK_StockMoveDetails_Stock" />
+        <AssociationConnector Association="PhoebeModel.FK_StockMoveDetails_Stock1" />
+        <AssociationConnector Association="PhoebeModel.FK_StockMoveDetails_StockMove" />
+        <AssociationConnector Association="PhoebeModel.FK_StockMoveDetails_Warehouse" />
+        <AssociationConnector Association="PhoebeModel.FK_StockMoveDetails_Warehouse1" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

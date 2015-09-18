@@ -195,6 +195,7 @@ namespace Phoebe.UI.Controllers
         /// <remarks>
         /// 调用:
         /// /StockIn/Create
+        /// /StockMove/Create
         /// </remarks>
         /// <returns></returns>
         public JsonResult GetEmpty()

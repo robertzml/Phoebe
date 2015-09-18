@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Phoebe.Model
 {
-    public class StockInDetailMetadata
+    public class StockMoveDetailMetadata
     {
         /// <summary>
         /// ID
@@ -16,16 +16,22 @@ namespace Phoebe.Model
         public System.Guid ID { get; set; }
 
         /// <summary>
-        /// 入库ID
+        /// 移库ID
         /// </summary>
-        [Display(Name = "入库记录")]
-        public System.Guid StockInID { get; set; }
+        [Display(Name = "移库记录")]
+        public System.Guid StockMoveID { get; set; }
 
         /// <summary>
-        /// 仓库ID
+        /// 源仓库ID
         /// </summary>
-        [Display(Name = "库位")]
-        public int WarehouseID { get; set; }
+        [Display(Name = "源库位")]
+        public int SourceWarehouseID { get; set; }
+
+        /// <summary>
+        /// 目的仓库ID
+        /// </summary>
+        [Display(Name = "目的库位")]
+        public int DestinationWarehouseID { get; set; }
 
         /// <summary>
         /// 货品ID
@@ -34,16 +40,22 @@ namespace Phoebe.Model
         public System.Guid CargoID { get; set; }
 
         /// <summary>
-        /// 入库数量
+        /// 移库数量
         /// </summary>
-        [Display(Name = "入库数量")]
+        [Display(Name = "移库数量")]
         public int Count { get; set; }
 
         /// <summary>
-        /// 库存ID
+        /// 源库存ID
         /// </summary>
-        [Display(Name = "库存记录")]
-        public Nullable<System.Guid> StockID { get; set; }
+        [Display(Name = "源库存记录")]
+        public System.Guid SourceStockID { get; set; }
+
+        /// <summary>
+        /// 目的库存ID
+        /// </summary>
+        [Display(Name = "目的库存记录")]
+        public Nullable<System.Guid> DestinationStockID { get; set; }
 
         /// <summary>
         /// 备注
@@ -59,8 +71,8 @@ namespace Phoebe.Model
         public int Status { get; set; }
     }
 
-    [MetadataType(typeof(StockInDetailMetadata))]
-    public partial class StockInDetail
+    [MetadataType(typeof(StockMoveDetailMetadata))]
+    public partial class StockMoveDetail
     {
     }
 }

@@ -80,6 +80,18 @@ namespace Phoebe.UI.Controllers
                 var user = PageService.GetCurrentUser(User.Identity.Name);
                 model.UserID = user.ID;
 
+                string swId = Request.Form["SourceWarehouseID"];
+                string dwId = Request.Form["DestinationWarehouseID"];
+                if (string.IsNullOrEmpty(swId) || string.IsNullOrEmpty(dwId))
+                {
+                    TempData["Message"] = "货品移库失败";
+                    ModelState.AddModelError("", "货品移库失败: 请选择库位。");
+
+                    return View(model);
+                }
+
+
+
                 ErrorCode result = this.storeBusiness.StockMove(model);
                 if (result == ErrorCode.Success)
                 {

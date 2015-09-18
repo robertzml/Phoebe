@@ -196,6 +196,7 @@ namespace Phoebe.UI.Controllers
         /// 调用：
         /// /StockIn/Create
         /// /StockOut/Create
+        /// /StockMove/Create
         /// </remarks>
         /// <returns></returns>
         public JsonResult GetContracts(int type)

@@ -149,7 +149,7 @@
 
             var tbody = $('#store-table tbody');
 
-            function loadCargo(cargoId) {
+            function loadCargoStock(cargoId) {
                 $.getJSON('/Stock/GetWithCargo', { cargoID: cargoId }, function (response) {
                     $.each(response, function (i, item) {
                         var line = $('<tr/>')
@@ -186,7 +186,7 @@
                             if (cargoId == '')
                                 return;
 
-                            loadCargo(cargoId);
+                            loadCargoStock(cargoId);
                         });
                     });
                 });
