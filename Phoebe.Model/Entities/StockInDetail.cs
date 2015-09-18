@@ -42,7 +42,7 @@ namespace Phoebe.Model
         /// <summary>
         /// 库存ID
         /// </summary>
-        [Display(Name = "库存")]
+        [Display(Name = "库存记录")]
         public Nullable<System.Guid> StockID { get; set; }
 
         /// <summary>

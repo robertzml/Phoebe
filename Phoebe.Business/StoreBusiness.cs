@@ -296,18 +296,6 @@ namespace Phoebe.Business
                 if (stocks.Count() == 0)
                     return ErrorCode.StockNotFound;
 
-                // check stock out count
-                foreach (var item in details)
-                {
-                    var s = stocks.SingleOrDefault(r => r.WarehouseID == item.WarehouseID);
-                    if (s == null)
-                        return ErrorCode.StockNotFound;
-
-                    int c = s.Count;
-                    if (c < item.Count)
-                        return ErrorCode.StockOutCountOverflow;
-                }
-
                 // add stock out
                 data.ID = Guid.NewGuid();
                 data.OutTime = DateTime.Now;
@@ -318,20 +306,28 @@ namespace Phoebe.Business
                 // add stock out detail
                 foreach (var item in details)
                 {
+                    // get store
+                    var s = stocks.SingleOrDefault(r => r.WarehouseID == item.WarehouseID);
+                    if (s == null)
+                        return ErrorCode.StockNotFound;
+
+                    // check stock out count
+                    if (s.Count < item.Count)
+                        return ErrorCode.StockOutCountOverflow;
+
                     item.ID = Guid.NewGuid();
                     item.StockOutID = data.ID;
+                    item.StoreCount = s.Count;
                     item.CargoID = data.CargoID;
                     item.Status = (int)EntityStatus.StockOutReady;
+                    item.StockID = s.ID;
 
                     this.context.StockOutDetails.Add(item);
-
-                    // change cargos status
-                    //item.Cargo.Status = (int)EntityStatus.CargoStockOutReady;
                 }
 
                 this.context.SaveChanges();
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return ErrorCode.Exception;
             }
@@ -364,54 +360,43 @@ namespace Phoebe.Business
 
                 if (status == EntityStatus.StockOut)
                 {
-                    //// find store
-                    //var stocks = this.context.Stocks.Where(r => r.CargoID == so.CargoID && r.Status == (int)EntityStatus.StoreIn);
-                    //if (stocks.Count() == 0)
-                    //    return ErrorCode.StockNotFound;
+                    //change stock out details status
+                    foreach (var item in so.StockOutDetails)
+                    {
+                        item.Status = (int)EntityStatus.StockOut;
 
-                    ////change stock out details status
-                    //foreach (var item in so.StockOutDetails)
-                    //{
-                    //    item.Status = (int)EntityStatus.StockOut;
+                        var stock = item.Stock;
+                        if (stock == null)
+                            return ErrorCode.StockNotFound;
 
-                    //    var stock = stocks.First(r => r.WarehouseID == item.WarehouseID);
-                    //    if (stock.Count == item.Count)  // all stock out
-                    //    {
-                    //        item.Warehouse.Status = (int)EntityStatus.WarehouseFree;
-                    //        stock.Status = (int)EntityStatus.StoreOut;
-                    //        stock.OutTime = so.ConfirmTime;
-                    //    }
-                    //    else
-                    //    {
+                        if (stock.Count == item.Count)  // all stock out
+                        {
+                            item.Warehouse.Status = (int)EntityStatus.WarehouseFree;
+                                                        
+                            stock.Count = 0;
+                            stock.OutTime = so.ConfirmTime;
+                            stock.Status = (int)EntityStatus.StoreOut;
+                        }
+                        else
+                        {
+                            stock.Count -= item.Count;
+                        }
+                    }
 
-                    //    }
-
-                    //}
-
-                    ////edit stock information
-                    //foreach (var item in stocks)
-                    //{
-                    //    item.OutTime = so.ConfirmTime;
-                        
-                    //    //item.StockOutID = so.ID;
-                    //    item.Status = (int)EntityStatus.StoreOut;
-                    //}
-
-                    ////change stock out details and cargo status
-                    //foreach (var item in so.StockOutDetails)
-                    //{
-                    //    item.Status = (int)EntityStatus.StockOut;
-                    //    item.Cargo.OutTime = so.ConfirmTime;
-                    //    item.Cargo.Status = (int)EntityStatus.CargoStockOut;
-                    //}                   
+                    // check cargo
+                    var cargo = so.Cargo;
+                    if (cargo.Stocks.Sum(r => r.Count) == 0)
+                    {
+                        cargo.Status = (int)EntityStatus.CargoStockOut;
+                        cargo.OutTime = so.ConfirmTime;
+                    }                    
                 }
                 else
                 {
-                    //change stock out details and cargo status
+                    //change stock out details status
                     foreach (var item in so.StockOutDetails)
                     {
                         item.Status = (int)EntityStatus.StockOutCancel;
-                        //item.Cargo.Status = (int)EntityStatus.CargoStockIn;
                     }
                 }
 

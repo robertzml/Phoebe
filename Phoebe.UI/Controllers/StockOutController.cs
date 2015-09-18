@@ -83,14 +83,12 @@ namespace Phoebe.UI.Controllers
 
                 string[] warehouses = Regex.Split(Request.Form["warehouseID[]"], ",");
                 string[] counts = Regex.Split(Request.Form["count[]"], ",");
-                string[] storeCounts = Regex.Split(Request.Form["storeCount[]"], ",");
 
                 List<StockOutDetail> details = new List<StockOutDetail>();
                 for (int i = 0; i < warehouses.Length; i++)
                 {
                     bool flag = true;
                     int warehouseId = Convert.ToInt32(warehouses[i]);
-                    int storeCount = Convert.ToInt32(storeCounts[i]);
 
                     int count;
                     if (!Int32.TryParse(counts[i], out count))
@@ -115,7 +113,6 @@ namespace Phoebe.UI.Controllers
 
                     StockOutDetail detail = new StockOutDetail();
                     detail.WarehouseID = warehouseId;
-                    detail.StoreCount = storeCount;
                     detail.Count = count;
 
                     details.Add(detail);

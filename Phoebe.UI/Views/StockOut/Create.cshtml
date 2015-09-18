@@ -154,7 +154,7 @@
                     $.each(response, function (i, item) {
                         var line = $('<tr/>')
                             .append('<td>' + item.Number + '<input type="hidden" name="warehouseID[]" value="' + item.WarehouseID + '" /></td>')
-                            .append('<td>' + item.Count + '<input type="hidden" name="storeCount[]" value="' + item.Count + '</td>')
+                            .append('<td>' + item.Count + '</td>')
                             .append('<td><input type="number" class="form-control input-medium" name="count[]" value="0"></td>');
 
                         tbody.append(line);
