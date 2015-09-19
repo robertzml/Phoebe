@@ -50,13 +50,7 @@
                                 @Html.DisplayNameFor(model => model.MoveTime)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.SourceWarehouseID)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.DestinationWarehouseID)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.TrayID)
+                                @Html.DisplayNameFor(model => model.CargoID)
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.UserID)
@@ -78,13 +72,7 @@
                                     @item.MoveTime.ToDateTimeString()
                                 </td>
                                 <td>
-                                    @item.SourceWarehouse.Name
-                                </td>
-                                <td>
-                                    @item.DestinationWarehouse.Name
-                                </td>
-                                <td>
-                                    @item.Tray.ID.ToString().PadLeft(6, '0')
+                                    @item.Cargo.Name
                                 </td>
                                 <td>
                                     @item.User.Name

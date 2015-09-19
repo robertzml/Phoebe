@@ -90,9 +90,16 @@ namespace Phoebe.UI.Controllers
                     return View(model);
                 }
 
+                // ready to add multiple stock moves
+                List<StockMoveDetail> details = new List<StockMoveDetail>();
+                                
+                StockMoveDetail detail = new StockMoveDetail();
+                detail.SourceWarehouseID = Convert.ToInt32(swId);
+                detail.DestinationWarehouseID = Convert.ToInt32(dwId);
 
+                details.Add(detail);
 
-                ErrorCode result = this.storeBusiness.StockMove(model);
+                ErrorCode result = this.storeBusiness.StockMove(model, details);
                 if (result == ErrorCode.Success)
                 {
                     TempData["Message"] = "货品移库成功";

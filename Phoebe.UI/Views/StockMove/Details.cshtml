@@ -57,6 +57,14 @@
                     <tbody>
                         <tr>
                             <td>
+                                @Html.DisplayNameFor(model => model.CargoID)
+                            </td>
+                            <td>
+                                @Model.Cargo.Name
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
                                 @Html.DisplayNameFor(model => model.MoveTime)
                             </td>
                             <td>
@@ -69,30 +77,6 @@
                             </td>
                             <td>
                                 @Model.ConfirmTime.ToDateString()
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                @Html.DisplayNameFor(model => model.SourceWarehouseID)
-                            </td>
-                            <td>
-                                @Model.SourceWarehouse.Name
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                @Html.DisplayNameFor(model => model.DestinationWarehouseID)
-                            </td>
-                            <td>
-                                @Model.DestinationWarehouse.Name
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                @Html.DisplayNameFor(model => model.TrayID)
-                            </td>
-                            <td>
-                                @Model.Tray.ID.ToString().PadLeft(6, '0')
                             </td>
                         </tr>
                         <tr>
@@ -160,12 +144,6 @@
                             <th>
                                 二级分类
                             </th>
-                            <th>
-                                重量
-                            </th>
-                            <th>
-                                体积
-                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -180,12 +158,6 @@
                                 </td>
                                 <td>
                                     @item.Cargo.SecondCategory.Name
-                                </td>
-                                <td>
-                                    @item.Cargo.Weight
-                                </td>
-                                <td>
-                                    @item.Cargo.Volume
                                 </td>
                             </tr>
                         }
