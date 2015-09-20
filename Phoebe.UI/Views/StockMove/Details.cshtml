@@ -65,6 +65,33 @@
                         </tr>
                         <tr>
                             <td>
+                                一级分类
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.Cargo.FirstCategory.Name)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                二级分类
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.Cargo.SecondCategory.Name)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                三级分类
+                            </td>
+                            <td>
+                                @if (Model.Cargo.ThirdCategory != null)
+                                {
+                                    @Model.Cargo.ThirdCategory.Name
+                                }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
                                 @Html.DisplayNameFor(model => model.MoveTime)
                             </td>
                             <td>
@@ -136,13 +163,13 @@
                     <thead>
                         <tr>
                             <th>
-                                货品名称
+                                源库位
                             </th>
                             <th>
-                                一级分类
+                                目的库位
                             </th>
                             <th>
-                                二级分类
+                                移库数量
                             </th>
                         </tr>
                     </thead>
@@ -151,13 +178,13 @@
                         {
                             <tr>
                                 <td>
-                                    @item.Cargo.Name
+                                    @item.SourceWarehouse.Number
                                 </td>
                                 <td>
-                                    @item.Cargo.FirstCategory.Name
+                                    @item.DestinationWarehouse.Number
                                 </td>
                                 <td>
-                                    @item.Cargo.SecondCategory.Name
+                                    @item.Count
                                 </td>
                             </tr>
                         }

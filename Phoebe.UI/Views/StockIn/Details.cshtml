@@ -31,7 +31,7 @@
         <div class="portlet box blue">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="fa fa-info-circle"></i>&nbsp;入库信息
+                    <i class="fa fa-info-circle"></i>&nbsp;货品信息
                 </div>
                 <div class="tools">
                     <a href="javascript:;" class="collapse">
@@ -61,6 +61,33 @@
                             </td>
                             <td>
                                 @Html.DisplayFor(model => model.Cargo.Name)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                一级分类
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.Cargo.FirstCategory.Name)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                二级分类
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.Cargo.SecondCategory.Name)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                三级分类
+                            </td>
+                            <td>
+                                @if (Model.Cargo.ThirdCategory != null)
+                                {
+                                    @Model.Cargo.ThirdCategory.Name
+                                }
                             </td>
                         </tr>
                         <tr>
@@ -120,7 +147,7 @@
         <div class="portlet box green">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="fa fa-info-circle"></i>&nbsp;相关货品
+                    <i class="fa fa-info-circle"></i>&nbsp;入库信息
                 </div>
                 <div class="tools">
                     <a href="javascript:;" class="collapse">

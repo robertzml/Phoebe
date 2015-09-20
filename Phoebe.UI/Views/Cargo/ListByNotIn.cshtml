@@ -53,10 +53,13 @@
                                 @Html.DisplayNameFor(model => model.SecondCategoryID)
                             </th>
                             <th>
-                                重量 (t)
+                                @Html.DisplayNameFor(model => model.Count)
                             </th>
                             <th>
-                                体积 (m<sup>3</sup>)
+                                总重量 (t)
+                            </th>
+                            <th>
+                                总体积 (m<sup>3</sup>)
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.ContractID)
@@ -84,10 +87,13 @@
                                 @Html.DisplayNameFor(model => model.SecondCategoryID)
                             </th>
                             <th>
-                                重量 (t)
+                                @Html.DisplayNameFor(model => model.Count)
                             </th>
                             <th>
-                                体积 (m<sup>3</sup>)
+                                总重量 (t)
+                            </th>
+                            <th>
+                                总体积 (m<sup>3</sup>)
                             </th>
                             <th data-filter="true">
                                 @Html.DisplayNameFor(model => model.ContractID)
@@ -115,6 +121,9 @@
                                 </td>
                                 <td>
                                     @item.SecondCategory.Name
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Count)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.TotalWeight)

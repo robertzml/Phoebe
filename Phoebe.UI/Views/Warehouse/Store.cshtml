@@ -49,18 +49,42 @@
             <div class="portlet-body">
                 <div id="tree_warehouse">
                     <ul>
-                        <li data-id="@Model.ID" data-level="1" data-jstree='{ "opened" : true }'>
+                        <li data-id="@Model.ID" data-jstree='{ "opened" : true }'>
                             @Model.Name
                             <ul>
-                                @foreach (var seconde in Model.ChildrenWarehouse)
+                                @foreach (var second in Model.ChildrenWarehouse)
                                 {
-                                    <li data-id="@seconde.ID" data-level="2">
-                                        @seconde.Name
+                                    <li data-id="@second.ID">
+                                        @second.Name
                                         <ul>
-                                            @foreach (var third in seconde.ChildrenWarehouse)
+                                            @foreach (var third in second.ChildrenWarehouse)
                                             {
-                                                <li data-id="@third.ID" data-level="3">
+                                                <li data-id="@third.ID">
                                                     @third.Name
+                                                    <ul>
+                                                        @foreach (var fourth in third.ChildrenWarehouse)
+                                                        {
+                                                            <li data-id="@fourth.ID">
+                                                                @fourth.Name
+                                                                <ul>
+                                                                    @foreach (var fifth in fourth.ChildrenWarehouse)
+                                                                    {
+                                                                        <li data-id="@fifth.ID">
+                                                                            @fifth.Name
+                                                                            <ul>
+                                                                                @foreach (var sixth in fifth.ChildrenWarehouse)
+                                                                                {
+                                                                                    <li data-id="@sixth.ID">
+                                                                                        @sixth.Name
+                                                                                    </li>
+                                                                                }
+                                                                            </ul>
+                                                                        </li>
+                                                                    }
+                                                                </ul>
+                                                            </li>
+                                                        }
+                                                    </ul>
                                                 </li>
                                             }
                                         </ul>

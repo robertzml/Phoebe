@@ -56,6 +56,9 @@
                                 @Html.DisplayNameFor(model => model.SecondCategoryID)
                             </th>
                             <th>
+                                @Html.DisplayNameFor(model => model.Count)
+                            </th>
+                            <th>
                                 总重量 (t)
                             </th>
                             <th>
@@ -88,6 +91,9 @@
                             </th>
                             <th data-filter="true">
                                 @Html.DisplayNameFor(model => model.SecondCategoryID)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Count)
                             </th>
                             <th>
                                 总重量 (t)
@@ -124,6 +130,9 @@
                                 </td>
                                 <td>
                                     @item.SecondCategory.Name
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Count)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.TotalWeight)
