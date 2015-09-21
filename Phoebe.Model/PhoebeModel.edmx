@@ -251,6 +251,7 @@
           <Property Name="Number" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="ParentId" Type="int" />
           <Property Name="Hierarchy" Type="int" Nullable="false" />
+          <Property Name="IsStorage" Type="bit" Nullable="false" />
           <Property Name="Remark" Type="nvarchar" MaxLength="500" />
           <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
@@ -841,6 +842,7 @@
           <Property Name="Number" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ParentId" Type="Int32" />
           <Property Name="Hierarchy" Type="Int32" Nullable="false" />
+          <Property Name="IsStorage" Type="Boolean" Nullable="false" />
           <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" Nullable="false" />
           <NavigationProperty Name="ChildrenWarehouse" Relationship="Self.FK_Warehouse_Warehouse" FromRole="Warehouse" ToRole="Warehouse1" />
@@ -1728,6 +1730,7 @@
           <EntitySetMapping Name="Warehouses">
             <EntityTypeMapping TypeName="PhoebeModel.Warehouse">
               <MappingFragment StoreEntitySet="Warehouse">
+                <ScalarProperty Name="IsStorage" ColumnName="IsStorage" />
                 <ScalarProperty Name="Number" ColumnName="Number" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />

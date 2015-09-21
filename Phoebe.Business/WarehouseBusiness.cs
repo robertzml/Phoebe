@@ -67,8 +67,7 @@ namespace Phoebe.Business
         /// <returns></returns>
         public List<Warehouse> GetLeaves()
         {
-            int hierarchy = this.maxLevel;
-            return this.context.Warehouses.Where(r => r.Hierarchy == hierarchy).OrderBy(r => r.Number).ToList();
+            return this.context.Warehouses.Where(r => r.IsStorage == true).OrderBy(r => r.Number).ToList();
         }
 
         /// <summary>

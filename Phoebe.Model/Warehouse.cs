@@ -30,6 +30,7 @@ namespace Phoebe.Model
         public string Number { get; set; }
         public Nullable<int> ParentId { get; set; }
         public int Hierarchy { get; set; }
+        public bool IsStorage { get; set; }
         public string Remark { get; set; }
         public int Status { get; set; }
     

@@ -95,6 +95,17 @@
                         </div>
 
                         <div class="form-group">
+                            @Html.LabelFor(model => model.IsStorage, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.IsStorage, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                @Html.ValidationMessageFor(model => model.IsStorage, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-1">
+                                <span class="required">*</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             @Html.LabelFor(model => model.Remark, htmlAttributes: new { @class = "control-label col-md-3" })
                             <div class="col-md-8">
                                 @Html.EditorFor(model => model.Remark, new { htmlAttributes = new { @class = "form-control" } })
