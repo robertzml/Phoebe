@@ -20,6 +20,11 @@ namespace Phoebe.Business
         /// 最大层级
         /// </summary>
         private int maxLevel = 6;
+
+        /// <summary>
+        /// 库位列表
+        /// </summary>
+        private List<Warehouse> storageList = new List<Warehouse>();
         #endregion //Field
 
         #region Constructor
@@ -31,6 +36,27 @@ namespace Phoebe.Business
             this.context = new PhoebeContext();
         }
         #endregion //Constructor
+
+        #region Function
+        /// <summary>
+        /// 递归获取仓库下的库位
+        /// </summary>
+        /// <param name="warehouse">仓库</param>
+        private void GetStorageRecursive(Warehouse warehouse)
+        {
+            if (warehouse.ChildrenWarehouse != null && !warehouse.IsStorage)
+            {
+                foreach(var item in warehouse.ChildrenWarehouse)
+                {
+                    GetStorageRecursive(item);
+                }
+            }
+            else if (warehouse.IsStorage)
+            {
+                storageList.Add(warehouse);
+            }
+        }
+        #endregion //Function
 
         #region Method
         /// <summary>
@@ -71,6 +97,19 @@ namespace Phoebe.Business
         }
 
         /// <summary>
+        /// 获取仓库下库位
+        /// </summary>
+        /// <param name="warehouse">仓库</param>
+        /// <returns></returns>
+        public List<Warehouse> GetStorage(Warehouse warehouse)
+        {
+            this.storageList.Clear();
+            GetStorageRecursive(warehouse);
+
+            return this.storageList;
+        }
+
+        /// <summary>
         /// 添加仓库
         /// </summary>
         /// <param name="data">仓库数据</param>
@@ -85,7 +124,7 @@ namespace Phoebe.Business
                 if (this.context.Warehouses.Any(r => r.Number == data.Number))
                     return ErrorCode.DuplicateNumber;
 
-                if (data.Hierarchy == this.maxLevel)
+                if (data.IsStorage)
                     data.Status = (int)EntityStatus.WarehouseFree;
                 else
                     data.Status = 0;

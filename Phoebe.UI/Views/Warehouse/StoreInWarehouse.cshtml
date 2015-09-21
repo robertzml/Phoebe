@@ -29,6 +29,9 @@
                         @Html.DisplayNameFor(model => model.CargoID)
                     </th>
                     <th>
+                        @Html.DisplayNameFor(model => model.Count)
+                    </th>
+                    <th>
                         @Html.DisplayNameFor(model => model.InTime)
                     </th>
                     <th>
@@ -47,10 +50,13 @@
                 {
                     <tr>
                         <td>
-                            @item.Warehouse.Name
+                            @item.Warehouse.Number
                         </td>
                         <td>
                             @item.Cargo.Name
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Count)
                         </td>
                         <td>
                             @item.InTime.ToDateTimeString()

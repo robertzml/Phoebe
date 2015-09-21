@@ -33,18 +33,18 @@
                     </tr>
                     <tr>
                         <td>
-                            @Html.DisplayNameFor(model => model.TrayID)
-                        </td>
-                        <td>
-                            @Model.TrayID.ToString().PadLeft(6, '0')
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
                             @Html.DisplayNameFor(model => model.CargoID)
                         </td>
                         <td>
                             @Model.Cargo.Name
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(model => model.Count)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.Count)
                         </td>
                     </tr>
                     <tr>
@@ -69,38 +69,6 @@
                         </td>
                         <td>
                             @Html.DisplayFor(model => model.Source)
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            @Html.DisplayNameFor(model => model.Destination)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(model => model.Destination)
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            @Html.DisplayNameFor(model => model.StockInID)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(model => model.StockInID)
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            @Html.DisplayNameFor(model => model.StockOutID)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(model => model.StockOutID)
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            @Html.DisplayNameFor(model => model.StockMoveID)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(model => model.StockMoveID)
                         </td>
                     </tr>
                     <tr>

@@ -53,6 +53,9 @@
                                 @Html.DisplayNameFor(model => model.CargoID)
                             </th>
                             <th>
+                                @Html.DisplayNameFor(model => model.Count)
+                            </th>
+                            <th>
                                 @Html.DisplayNameFor(model => model.InTime)
                             </th>
                             <th>
@@ -60,9 +63,6 @@
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.Source)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Destination)
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.Remark)
@@ -84,6 +84,9 @@
                                 @Html.DisplayNameFor(model => model.CargoID)
                             </th>
                             <th>
+                                @Html.DisplayNameFor(model => model.Count)
+                            </th>
+                            <th>
                                 @Html.DisplayNameFor(model => model.InTime)
                             </th>
                             <th>
@@ -91,9 +94,6 @@
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.Source)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Destination)
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.Remark)
@@ -107,7 +107,6 @@
                         </tr>
                     </tfoot>
                     <tbody>
-
                         @foreach (var item in Model)
                         {
                             <tr>
@@ -118,16 +117,23 @@
                                     @item.Cargo.Name
                                 </td>
                                 <td>
+                                    @Html.DisplayFor(modelItem => item.Count)
+                                </td>
+                                <td>
                                     @item.InTime.ToDateTimeString()
                                 </td>
                                 <td>
                                     @item.OutTime.ToDateTimeString()
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Source)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Destination)
+                                    @if (item.Source == 0)
+                                    {
+                                        <span>入库</span>
+                                    }
+                                    else
+                                    {
+                                        <span>移库</span>
+                                    }
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Remark)

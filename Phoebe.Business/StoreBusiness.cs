@@ -23,6 +23,10 @@ namespace Phoebe.Business
         }
         #endregion //Constructor
 
+        #region Function
+
+        #endregion //Function
+
         #region Method
         #region Stock
         /// <summary>
@@ -78,17 +82,18 @@ namespace Phoebe.Business
             if (warehouse.Hierarchy == 1)
                 return data;
 
-            if (warehouse.ChildrenWarehouse.Count() == 0)
+            if (warehouse.IsStorage)
             {
                 data = this.context.Stocks.Where(r => r.Status == (int)EntityStatus.StoreIn && r.WarehouseID == warehouseID).ToList();
             }
             else
             {
+                WarehouseBusiness warehouseBusiness = new WarehouseBusiness();
+                var storages = warehouseBusiness.GetStorage(warehouse);
+                var sIds = storages.Select(r => r.ID);
+
                 var d = from r in this.context.Stocks
-                        where r.Status == (int)EntityStatus.StoreIn && (r.WarehouseID == warehouseID ||
-                         (from s in this.context.Warehouses
-                          where s.ParentId == warehouseID
-                          select s.ID).Contains(r.WarehouseID))
+                        where r.Status == (int)EntityStatus.StoreIn && sIds.Contains(r.WarehouseID)
                         select r;
                 data = d.ToList();
             }

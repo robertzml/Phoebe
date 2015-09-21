@@ -111,6 +111,13 @@ namespace Phoebe.UI.Controllers
                 var parent = this.warehouseBusiness.Get((int)model.ParentId);
                 model.Hierarchy = parent.Hierarchy + 1;
 
+                if (parent.IsStorage)
+                {
+                    TempData["Message"] = "添加仓库失败";
+                    ModelState.AddModelError("", "添加仓库失败: 库位下不能继续添加仓库");
+                    return View(model);
+                }
+
                 ErrorCode result = this.warehouseBusiness.Create(model);
                 if (result == ErrorCode.Success)
                 {
