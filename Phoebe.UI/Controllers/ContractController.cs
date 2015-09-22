@@ -53,6 +53,9 @@ namespace Phoebe.UI.Controllers
             if (data == null)
                 return HttpNotFound();
 
+            StoreBusiness storeBusiness = new StoreBusiness();
+            ViewBag.Stocks = storeBusiness.GetWithContract(id);
+
             return View(data);
         }
 

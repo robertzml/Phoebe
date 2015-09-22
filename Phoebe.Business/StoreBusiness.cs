@@ -67,6 +67,23 @@ namespace Phoebe.Business
         }
 
         /// <summary>
+        /// 获取合同下在库库存
+        /// </summary>
+        /// <param name="contractID">合同ID</param>
+        /// <returns></returns>
+        public List<Stock> GetWithContract(int contractID)
+        {
+            var data = from r in this.context.Stocks
+                       where r.Status == (int)EntityStatus.StoreIn &&
+                            (from s in this.context.Cargoes
+                             where s.ContractID == contractID
+                             select s.ID).Contains(r.CargoID)
+                       select r;
+
+            return data.ToList();
+        }
+
+        /// <summary>
         /// 获取库存记录
         /// </summary>
         /// <param name="warehouseID">仓库ID</param>
