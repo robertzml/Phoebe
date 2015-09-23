@@ -75,6 +75,15 @@ namespace Phoebe.UI.Controllers
         }
 
         /// <summary>
+        /// 库位列表
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult List()
+        {
+            return View();
+        }
+
+        /// <summary>
         /// 添加仓库
         /// </summary>
         /// <returns></returns>

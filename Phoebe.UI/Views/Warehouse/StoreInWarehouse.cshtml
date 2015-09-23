@@ -62,7 +62,14 @@
                             @item.InTime.ToDateTimeString()
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Source)
+                            @if (item.Source == 0)
+                            {
+                                <span>入库</span>
+                            }
+                            else
+                            {
+                                <span>移库</span>
+                            }
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Remark)

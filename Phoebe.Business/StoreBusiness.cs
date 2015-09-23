@@ -106,7 +106,7 @@ namespace Phoebe.Business
             else
             {
                 WarehouseBusiness warehouseBusiness = new WarehouseBusiness();
-                var storages = warehouseBusiness.GetStorage(warehouse);
+                var storages = warehouseBusiness.GetLeaves(warehouse);
                 var sIds = storages.Select(r => r.ID);
 
                 var d = from r in this.context.Stocks

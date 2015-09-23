@@ -171,6 +171,7 @@
                     var contractId = $(this).val();
 
                     $('#CargoID').empty();
+                    tbody.empty();
                     if (contractId == '')
                         return;
                     $('#CargoID').append(" <option value=''>-- 请选择 --</option>");
@@ -178,17 +179,17 @@
                     $.getJSON('/Cargo/GetCargos', { type: 2, contractID: contractId }, function (response) {
                         $.each(response, function (i, item) {
                             $('#CargoID').append("<option value='" + item.ID + "'>" + item.Name + "</option>");
-                        });
-
-                        $('#CargoID').change(function () {
-                            var cargoId = $(this).val();
-                            tbody.empty();
-                            if (cargoId == '')
-                                return;
-
-                            loadCargoStock(cargoId);
-                        });
+                        });                        
                     });
+                });
+
+                $('#CargoID').change(function () {
+                    var cargoId = $(this).val();
+                    tbody.empty();
+                    if (cargoId == '')
+                        return;
+
+                    loadCargoStock(cargoId);
                 });
             });
             

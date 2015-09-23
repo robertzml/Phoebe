@@ -191,6 +191,9 @@
                     var contractId = $(this).val();
 
                     $('#CargoID').empty();
+                    tbody.empty();
+                    $('#SourceWarehouseID').empty();
+
                     if (contractId == '')
                         return;
                     $('#CargoID').append(" <option value=''>-- 请选择 --</option>");
@@ -199,17 +202,17 @@
                         $.each(response, function (i, item) {
                             $('#CargoID').append("<option value='" + item.ID + "'>" + item.Name + "</option>");
                         });
-
-                        $('#CargoID').change(function () {
-                            var cargoId = $(this).val();
-                            tbody.empty();
-                            $('#SourceWarehouseID').empty();
-                            if (cargoId == '')
-                                return;
-
-                            loadCargoStock(cargoId);
-                        });
                     });
+                });
+
+                $('#CargoID').change(function () {
+                    var cargoId = $(this).val();
+                    tbody.empty();
+                    $('#SourceWarehouseID').empty();
+                    if (cargoId == '')
+                        return;
+
+                    loadCargoStock(cargoId);
                 });
             });
 

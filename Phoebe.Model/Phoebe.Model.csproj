@@ -130,6 +130,7 @@
     <Compile Include="StockOutDetail.cs">
       <DependentUpon>PhoebeModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Storage.cs" />
     <Compile Include="ThirdCategory.cs">
       <DependentUpon>PhoebeModel.tt</DependentUpon>
     </Compile>
