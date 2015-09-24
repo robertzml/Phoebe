@@ -110,34 +110,6 @@ namespace Phoebe.Business
         }
 
         /// <summary>
-        /// 获取库位库存信息
-        /// </summary>
-        /// <returns></returns>
-        public List<Storage> GetStorage()
-        {
-            var data = from r in this.context.Warehouses
-                       where r.IsStorage == true
-                       join t in this.context.Stocks on r.ID equals t.WarehouseID
-                       where t.Status == (int)EntityStatus.StoreIn
-                       select new { r.Number, t.WarehouseID, t.ID, t.CargoID, t.Count };
-
-            List<Storage> list = new List<Storage>();
-            foreach(var item in data)
-            {
-                Storage storage = new Storage();
-                storage.WarehouseID = item.WarehouseID;
-                storage.Number = item.Number;
-                storage.StockID = item.ID;
-                storage.CargoID = item.CargoID;
-                storage.Count = item.Count;
-
-                list.Add(storage);
-            }
-
-            return list;
-        }
-
-        /// <summary>
         /// 添加仓库
         /// </summary>
         /// <param name="data">仓库数据</param>

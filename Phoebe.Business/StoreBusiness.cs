@@ -116,6 +116,46 @@ namespace Phoebe.Business
             }
             return data;
         }
+
+        /// <summary>
+        /// 获取库位库存信息
+        /// </summary>
+        /// <returns></returns>
+        public List<Storage> GetStorage()
+        {
+            var warehouses = this.context.Warehouses.Where(r => r.IsStorage == true).OrderBy(r => r.Number);
+            var stocks = this.context.Stocks.Where(r => r.Status == (int)EntityStatus.StoreIn);
+
+         
+
+            List<Storage> list = new List<Storage>();
+            foreach (var item in warehouses)
+            {
+                Storage storage = new Storage();
+                storage.WarehouseID = item.ID;
+                storage.Number = item.Number;
+
+                var stock = stocks.SingleOrDefault(r => r.WarehouseID == item.ID);
+                if (stock != null)
+                {
+                    storage.StockID = stock.ID;
+                    storage.CargoID = stock.CargoID;
+                    storage.Count = stock.Count;
+                    storage.InTime = stock.InTime;
+                    storage.Source = stock.Source;
+
+                    storage.CargoName = stock.Cargo.Name;
+                    storage.ContractID = stock.Cargo.ContractID;
+                    storage.ContractName = stock.Cargo.Contract.Name;
+                    storage.FirstCategoryName = stock.Cargo.FirstCategory.Name;
+                    storage.SecondCategoryName = stock.Cargo.SecondCategory.Name;
+                }
+
+                list.Add(storage);
+            }
+
+            return list;
+        }
         #endregion //Stock
 
         #region Stock In

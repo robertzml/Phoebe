@@ -21,7 +21,6 @@ namespace Phoebe.Model
         /// <summary>
         /// 库位编号
         /// </summary>
-        [Required]
         [Display(Name = "库位编号")]
         public string Number { get; set; }
 
@@ -34,13 +33,49 @@ namespace Phoebe.Model
         /// <summary>
         /// 货品ID
         /// </summary>
-        [Display(Name = "货品")]
+        [Display(Name = "货品ID")]
         public System.Guid CargoID { get; set; }
 
         /// <summary>
-        /// 数量
+        /// 合同ID
         /// </summary>
-        [Display(Name = "数量")]
+        [Display(Name = "合同ID")]
+        public int ContractID { get; set; }
+
+        /// <summary>
+        /// 货品名称
+        /// </summary>
+        [Display(Name = "货品名称")]
+        public string CargoName { get; set; }
+
+        /// <summary>
+        /// 所属合同
+        /// </summary>
+        [Display(Name = "所属合同")]
+        public string ContractName { get; set; }
+
+        /// <summary>
+        /// 一级分类
+        /// </summary>
+        [Display(Name = "一级分类")]
+        public string FirstCategoryName { get; set; }
+
+        /// <summary>
+        /// 二级分类
+        /// </summary>
+        [Display(Name = "二级分类")]
+        public string SecondCategoryName { get; set; }
+
+        /// <summary>
+        /// 三级分类
+        /// </summary>
+        [Display(Name = "三级分类")]
+        public string ThirdCategoryName { get; set; }
+
+        /// <summary>
+        /// 在库数量
+        /// </summary>
+        [Display(Name = "在库数量")]
         public int Count { get; set; }
 
         /// <summary>

@@ -68,6 +68,16 @@ namespace Phoebe.UI.Controllers
 
             return View(data);
         }
+
+        /// <summary>
+        /// 库位存储列表
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult List()
+        {
+            var data = this.storeBusiness.GetStorage();
+            return View(data);
+        }
         #endregion //Action
 
         #region Json
