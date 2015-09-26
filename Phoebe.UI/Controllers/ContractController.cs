@@ -174,6 +174,7 @@ namespace Phoebe.UI.Controllers
         /// <remarks>
         /// 调用：
         /// /Contract/Create
+        /// /Settle/Index
         /// </remarks>
         /// <returns></returns>
         public JsonResult GetCustomers(int type)
@@ -189,6 +190,27 @@ namespace Phoebe.UI.Controllers
                 var data = customerBusiness.GetScatterCustomer();
                 return Json(data, JsonRequestBehavior.AllowGet);
             }
+        }
+
+        /// <summary>
+        /// 根据客户获取合同
+        /// </summary>
+        /// <param name="customerType">客户类型</param>
+        /// <param name="customerId">客户ID</param>
+        /// <returns>
+        /// 当前可用合同
+        /// </returns>
+        /// <remarks>
+        /// 调用：
+        /// /Settle/Index
+        /// </remarks>
+        public JsonResult GetByCustomer(int customerType, int customerId)
+        {
+            var contracts = this.contractBusiness.GetByCustomer(customerId, customerType).Where(r => r.Status == (int)EntityStatus.Normal);
+            var data = from r in contracts
+                       select new { r.ID, r.Name, r.Number };
+
+            return Json(data, JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>

@@ -37,9 +37,7 @@ namespace Phoebe.UI.Controllers
         /// <returns></returns>
         public ActionResult Index()
         {
-            CargoBusiness cargoBusiness = new CargoBusiness();
-            var data = cargoBusiness.Get(EntityStatus.CargoStockOut);
-            return View(data);
+            return View();
         }
 
         /// <summary>

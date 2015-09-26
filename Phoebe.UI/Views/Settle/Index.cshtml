@@ -31,7 +31,7 @@
         <div class="portlet box blue">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="fa fa-list"></i>&nbsp;待结算货品列表
+                    <i class="fa fa-list"></i>&nbsp;信息选择
                 </div>
                 <div class="tools">
                     <a href="javascript:;" class="collapse">
@@ -43,104 +43,46 @@
                 </div>
             </div>
             <div class="portlet-body">
-                <table class="table table-striped table-bordered table-hover" id="cargo-table">
-                    <thead>
-                        <tr>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Name)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.FirstCategoryID)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.SecondCategoryID)
-                            </th>
-                            <th>
-                                重量 (Kg)
-                            </th>
-                            <th>
-                                体积 (m<sup>3</sup>)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.ContractID)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.OutTime)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.UserID)
-                            </th>
-                            <th>
-                                操作
-                            </th>
-                        </tr>
-                    </thead>
-                    <tfoot>
-                        <tr>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Name)
-                            </th>
-                            <th data-filter="true">
-                                @Html.DisplayNameFor(model => model.FirstCategoryID)
-                            </th>
-                            <th data-filter="true">
-                                @Html.DisplayNameFor(model => model.SecondCategoryID)
-                            </th>
-                            <th>
-                                重量 (Kg)
-                            </th>
-                            <th>
-                                体积 (m<sup>3</sup>)
-                            </th>
-                            <th data-filter="true">
-                                @Html.DisplayNameFor(model => model.ContractID)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.OutTime)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.UserID)
-                            </th>
-                            <th>
-                                操作
-                            </th>
-                        </tr>
-                    </tfoot>
-                    <tbody>
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Name)
-                                </td>
-                                <td>
-                                    @item.FirstCategory.Name
-                                </td>
-                                <td>
-                                    @item.SecondCategory.Name
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Weight)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Volume)
-                                </td>
-                                <td>
-                                    @item.Contract.Name
-                                </td>
-                                <td>
-                                    @item.OutTime.ToDateTimeString()
-                                </td>
-                                <td>
-                                    @item.User.Name
-                                </td>
-                                <td>
-                                    <a href="@Url.Action("Create", new { controller = "Settle", id = item.ID.ToString() })" class="btn btn-info btn-sm" role="button"><i class="fa fa-check-circle"></i>&nbsp;结算</a>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
+                <form class="form-horizontal" role="form">
+                    <div class="form-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">客户类型</label>
+                                    <div class="col-md-8">
+                                        <select id="CustomerType" name="CustomerType" class="form-control">
+                                            <option value="">-- 请选择 --</option>
+                                            <option value="1">团体客户</option>
+                                            <option value="2">零散客户</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">客户选择</label>
+                                    <div class="col-md-8">
+                                        <select id="CustomerID" name="CustomerID" class="form-control"></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">合同选择</label>
+                                    <div class="col-md-8">
+                                        <select id="ContractID" name="ContractID" class="form-control"></select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -151,7 +93,39 @@
     <script type="text/javascript">
         $(function () {
             phoebe.leftNavActive($('#menu-settle-index'));
-            phoebe.initDatatable($('#cargo-table'));
+            var customerType = 0;
+            var customerID = 0;
+
+            $('#CustomerType').change(function () {
+                customerType = $(this).val();
+
+                $('#CustomerID').empty();
+                $('#ContractID').empty();
+                if (customerType == '')
+                    return;
+
+                $.getJSON('/Contract/GetCustomers', { type: customerType }, function (response) {
+                    $('#CustomerID').append(" <option value=''>-- 请选择 --</option>");
+                    $.each(response, function (i, item) {
+                        $('#CustomerID').append("<option value='" + item.ID + "'>" + item.Name + "</option>");
+                    });
+                });
+            });
+
+            $('#CustomerID').change(function () {
+                customerID = $(this).val();
+
+                $('#ContractID').empty();
+                if (customerID == '')
+                    return;
+
+                $.getJSON('/Contract/GetByCustomer', { customerType: customerType, customerId: customerID }, function (response) {
+                    $('#ContractID').append(" <option value=''>-- 请选择 --</option>");
+                    $.each(response, function (i, item) {
+                        $('#ContractID').append("<option value='" + item.ID + "'>" + item.Name + "</option>");
+                    });
+                });
+            });
         });
     </script>
 }
