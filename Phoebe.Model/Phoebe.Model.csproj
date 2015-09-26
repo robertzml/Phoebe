@@ -54,6 +54,7 @@
     <Compile Include="Cargo.cs">
       <DependentUpon>PhoebeModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ChargeRecord.cs" />
     <Compile Include="Contract.cs">
       <DependentUpon>PhoebeModel.tt</DependentUpon>
     </Compile>

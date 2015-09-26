@@ -2,6 +2,18 @@
 
 @{
     ViewBag.Title = "待结算货品";
+
+    AjaxOptions ajaxOpts = new AjaxOptions
+    {
+        UpdateTargetId = "process-result",
+        Url = Url.Action("Process", "Settle"),
+        HttpMethod = "POST",
+        OnSuccess = "phoebe.showMessage('提交成功')"
+    };
+}
+
+@section styles {
+    @Styles.Render("~/Content/datepicker")
 }
 
 <!-- BEGIN PAGE HEADER-->
@@ -43,7 +55,8 @@
                 </div>
             </div>
             <div class="portlet-body">
-                <form class="form-horizontal" role="form">
+                @using (Ajax.BeginForm("Edit", new { controller = "ResideRecord" }, ajaxOpts, new { @class = "form-horizontal" }))
+                {
                     <div class="form-body">
                         <div class="row">
                             <div class="col-md-4">
@@ -78,23 +91,46 @@
 
                         <div class="row">
                             <div class="col-md-6">
-
+                                <div class="form-group">
+                                    <label class="control-label col-md-2">日期选择</label>
+                                    <div class="col-md-10">
+                                        <div class="input-group input-medium date-picker input-daterange" id="date-range-picker">
+                                            <input type="text" class="form-control" name="date-from">
+                                            <span class="input-group-addon">
+                                                至
+                                            </span>
+                                            <input type="text" class="form-control" name="date-to">
+                                        </div>
+                                        <!-- /input-group -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-offset-4 col-md-2">
+                                <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> 确定</button>
                             </div>
                         </div>
                     </div>
-                </form>
+                }
             </div>
         </div>
     </div>
 </div>
+
+<div id="process-result">
+
+</div>
 <!-- END PAGE CONTENT-->
 
 @section Scripts {
+    @Scripts.Render("~/bundles/datepicker")
     <script type="text/javascript">
         $(function () {
             phoebe.leftNavActive($('#menu-settle-index'));
+            phoebe.initDatePicker($('#date-range-picker'), false);;
+
             var customerType = 0;
             var customerID = 0;
+
 
             $('#CustomerType').change(function () {
                 customerType = $(this).val();

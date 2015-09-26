@@ -120,6 +120,41 @@ namespace Phoebe.Business
 
             return ErrorCode.Success;
         }
+
+        /// <summary>
+        /// 冷藏费计算
+        /// </summary>
+        /// <param name="contractID">合同ID</param>
+        /// <param name="start">开始日期</param>
+        /// <param name="end">结束日期</param>
+        public List<ChargeRecord> Process(int contractID, DateTime start, DateTime end)
+        {
+            var cargos = this.context.Cargoes.Where(r => r.ContractID == contractID && r.RegisterTime >= start && r.RegisterTime <= end);
+
+            var stockIns = from r in this.context.StockIns
+                           where r.Status == (int)EntityStatus.StockIn && cargos.Select(s => s.ID).Contains(r.CargoID)                           
+                           select r;
+
+
+            List<ChargeRecord> records = new List<ChargeRecord>();
+            foreach(var item in stockIns)
+            {
+                ChargeRecord record = new ChargeRecord();
+
+                var c = cargos.Single(r => r.ID == item.CargoID);
+
+                record.RecordDate = (DateTime)c.InTime;
+                record.CargoName = c.Name;
+                record.UnitWeight = c.UnitWeight.Value;
+                record.Count = c.Count;
+                record.TotalWeight = c.TotalWeight.Value;
+
+                records.Add(record);
+            }
+
+            records = records.OrderBy(r => r.RecordDate).ToList();
+            return records;
+        }
         #endregion //Method
     }
 }

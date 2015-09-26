@@ -65,60 +65,80 @@ namespace Phoebe.UI.Controllers
         }
 
         /// <summary>
-        /// 货品结算
+        /// 冷藏费计算
         /// </summary>
-        /// <param name="id"></param>
         /// <returns></returns>
-        [HttpGet]
-        public ActionResult Create(string id)
+        [HttpPost]
+        public ActionResult Process()
         {
-            CargoBusiness cargoBusiness = new CargoBusiness();
-            var cargo = cargoBusiness.Get(id);
-            if (cargo == null)
-                return HttpNotFound();
+            int contractID = Convert.ToInt32(Request.Form["ContractID"]);
+            string from = Request.Form["date-from"];
+            string to = Request.Form["date-to"];
 
-            ViewBag.Cargo = cargo;
+            DateTime start = Convert.ToDateTime(from);
+            DateTime end = Convert.ToDateTime(to);
 
-            Settlement data = new Settlement();
-            data.CargoID = cargo.ID;
-            data.Discount = 100;
+            var data = this.settleBusiness.Process(contractID, start, end);
 
             return View(data);
         }
 
-        /// <summary>
-        /// 货品结算
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
-        [ValidateAntiForgeryToken]
-        [HttpPost]
-        public ActionResult Create(Settlement model)
-        {
-            CargoBusiness cargoBusiness = new CargoBusiness();
-            var cargo = cargoBusiness.Get(model.CargoID.ToString());
-            ViewBag.Cargo = cargo;
 
-            if (ModelState.IsValid)
-            {
-                var user = PageService.GetCurrentUser(User.Identity.Name);
-                model.UserID = user.ID;
+        ///// <summary>
+        ///// 货品结算
+        ///// </summary>
+        ///// <param name="id"></param>
+        ///// <returns></returns>
+        //[HttpGet]
+        //public ActionResult Create(string id)
+        //{
+        //    CargoBusiness cargoBusiness = new CargoBusiness();
+        //    var cargo = cargoBusiness.Get(id);
+        //    if (cargo == null)
+        //        return HttpNotFound();
 
-                ErrorCode result = this.settleBusiness.Create(model);
-                if (result == ErrorCode.Success)
-                {
-                    TempData["Message"] = "货品结算成功";
-                    return RedirectToAction("Audit", new { controller = "Settle" });
-                }
-                else
-                {
-                    TempData["Message"] = "货品结算失败";
-                    ModelState.AddModelError("", "货品结算失败: " + result.DisplayName());
-                }
-            }
+        //    ViewBag.Cargo = cargo;
 
-            return View(model);
-        }
+        //    Settlement data = new Settlement();
+        //    data.CargoID = cargo.ID;
+        //    data.Discount = 100;
+
+        //    return View(data);
+        //}
+
+        ///// <summary>
+        ///// 货品结算
+        ///// </summary>
+        ///// <param name="model"></param>
+        ///// <returns></returns>
+        //[ValidateAntiForgeryToken]
+        //[HttpPost]
+        //public ActionResult Create(Settlement model)
+        //{
+        //    CargoBusiness cargoBusiness = new CargoBusiness();
+        //    var cargo = cargoBusiness.Get(model.CargoID.ToString());
+        //    ViewBag.Cargo = cargo;
+
+        //    if (ModelState.IsValid)
+        //    {
+        //        var user = PageService.GetCurrentUser(User.Identity.Name);
+        //        model.UserID = user.ID;
+
+        //        ErrorCode result = this.settleBusiness.Create(model);
+        //        if (result == ErrorCode.Success)
+        //        {
+        //            TempData["Message"] = "货品结算成功";
+        //            return RedirectToAction("Audit", new { controller = "Settle" });
+        //        }
+        //        else
+        //        {
+        //            TempData["Message"] = "货品结算失败";
+        //            ModelState.AddModelError("", "货品结算失败: " + result.DisplayName());
+        //        }
+        //    }
+
+        //    return View(model);
+        //}
 
         /// <summary>
         /// 付款审核

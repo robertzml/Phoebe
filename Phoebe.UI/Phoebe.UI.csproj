@@ -668,6 +668,7 @@
     <Content Include="Views\Cargo\Info.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Boolean.cshtml" />
     <Content Include="Views\Stock\List.cshtml" />
+    <Content Include="Views\Settle\Process.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
