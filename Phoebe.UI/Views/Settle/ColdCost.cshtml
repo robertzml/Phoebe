@@ -1,7 +1,7 @@
-﻿@model IEnumerable<Phoebe.Model.Cargo>
+﻿@model Phoebe.UI.Models.ColdCost
 
 @{
-    ViewBag.Title = "待结算货品";
+    ViewBag.Title = "冷藏费计算";
 
     AjaxOptions ajaxOpts = new AjaxOptions
     {
@@ -55,9 +55,19 @@
                 </div>
             </div>
             <div class="portlet-body">
-                @using (Ajax.BeginForm("Edit", new { controller = "ResideRecord" }, ajaxOpts, new { @class = "form-horizontal" }))
+                @using (Ajax.BeginForm("Process", new { controller = "Settle" }, ajaxOpts, new { @class = "form-horizontal" }))
                 {
+                    @Html.AntiForgeryToken()
+
                     <div class="form-body">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="row">
+                            <div class="col-md-12">
+                                @Html.ValidationMessageFor(model => model.ContractID, "", new { @class = "text-danger" })
+                                @Html.ValidationMessageFor(model => model.DailyFee, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
@@ -83,7 +93,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-3">合同选择</label>
                                     <div class="col-md-8">
-                                        <select id="ContractID" name="ContractID" class="form-control"></select>
+                                        <select id="ContractID" name="ContractID" class="form-control" data-val="true" data-val-required="请选择合同"></select>
                                     </div>
                                 </div>
                             </div>
@@ -95,11 +105,11 @@
                                     <label class="control-label col-md-3">日期选择</label>
                                     <div class="col-md-9">
                                         <div class="input-group input-medium date-picker input-daterange" id="date-range-picker">
-                                            <input type="text" class="form-control" name="date-from">
+                                            <input type="text" class="form-control" name="DateFrom" data-val="true" data-val-required="请选择开始日期">
                                             <span class="input-group-addon">
                                                 至
                                             </span>
-                                            <input type="text" class="form-control" name="date-to">
+                                            <input type="text" class="form-control" name="DateTo" data-val="true" data-val-required="请选择结束日期">
                                         </div>
                                         <!-- /input-group -->
                                     </div>
@@ -109,7 +119,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-4">日冷藏费(元/吨/天)</label>
                                     <div class="col-md-7">
-                                        <input type="number" id="daily-fee" name="daily-fee" class="form-control" /> 
+                                        @Html.EditorFor(model => model.DailyFee, new { htmlAttributes = new { @class = "form-control" } })
                                     </div>
                                 </div>
                             </div>

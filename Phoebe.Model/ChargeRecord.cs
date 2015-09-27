@@ -34,8 +34,18 @@ namespace Phoebe.Model
         public int Count { get; set; }
 
         /// <summary>
-        ///  总重量(t)
+        ///  重量累计(t)
         /// </summary>
-        public double TotalWeight { get; set; }
+        public decimal TotalWeight { get; set; }
+
+        /// <summary>
+        /// 日冷藏费(元)
+        /// </summary>
+        public decimal DailyFee { get; set; }
+
+        /// <summary>
+        /// 冷藏费累计(元)
+        /// </summary>
+        public decimal TotalFee { get; set; }
     }
 }

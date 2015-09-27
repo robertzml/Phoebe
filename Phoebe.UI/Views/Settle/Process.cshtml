@@ -35,10 +35,16 @@
                                 箱重(kg)
                             </th>
                             <th>
-                                数量
+                                数量(箱)
                             </th>
                             <th>
-                                总重量(t)
+                                重量累计(t)
+                            </th>
+                            <th>
+                                日冷藏费(元)
+                            </th>
+                            <th>
+                                冷藏费累计(元)
                             </th>
                         </tr>
                     </thead>
@@ -60,6 +66,12 @@
                                 </td>
                                 <td>
                                     @item.TotalWeight
+                                </td>
+                                <td>
+                                    @item.DailyFee
+                                </td>
+                                <td>
+                                    @item.TotalFee
                                 </td>
                             </tr>
                         }

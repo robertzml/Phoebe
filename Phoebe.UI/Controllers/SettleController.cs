@@ -7,6 +7,7 @@ using Phoebe.Business;
 using Phoebe.Common;
 using Phoebe.Model;
 using Phoebe.UI.Filters;
+using Phoebe.UI.Models;
 using Phoebe.UI.Services;
 
 namespace Phoebe.UI.Controllers
@@ -41,6 +42,15 @@ namespace Phoebe.UI.Controllers
         }
 
         /// <summary>
+        /// 冷藏费计算
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult ColdCost()
+        {
+            return View();
+        }
+
+        /// <summary>
         /// 已付款结算单
         /// </summary>
         /// <returns></returns>
@@ -68,19 +78,20 @@ namespace Phoebe.UI.Controllers
         /// 冷藏费计算
         /// </summary>
         /// <returns></returns>
+        [ValidateAntiForgeryToken]
         [HttpPost]
-        public ActionResult Process()
+        public ActionResult Process(ColdCost model)
         {
-            int contractID = Convert.ToInt32(Request.Form["ContractID"]);
-            string from = Request.Form["date-from"];
-            string to = Request.Form["date-to"];
+            if (ModelState.IsValid)
+            {
+                var data = this.settleBusiness.Process(model.ContractID, model.DateFrom, model.DateTo, model.DailyFee);
 
-            DateTime start = Convert.ToDateTime(from);
-            DateTime end = Convert.ToDateTime(to);
-
-            var data = this.settleBusiness.Process(contractID, start, end);
-
-            return View(data);
+                return View(data);
+            }
+            else
+            {
+                return View("ColdCost", model);
+            }
         }
 
 

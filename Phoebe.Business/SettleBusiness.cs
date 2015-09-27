@@ -127,32 +127,91 @@ namespace Phoebe.Business
         /// <param name="contractID">合同ID</param>
         /// <param name="start">开始日期</param>
         /// <param name="end">结束日期</param>
-        public List<ChargeRecord> Process(int contractID, DateTime start, DateTime end)
+        /// <param name="dailyFee">冷藏费单价</param>
+        /// <returns></returns>
+        public List<ChargeRecord> Process(int contractID, DateTime start, DateTime end, double dailyFee)
         {
-            var cargos = this.context.Cargoes.Where(r => r.ContractID == contractID && r.RegisterTime >= start && r.RegisterTime <= end);
+            //var cargos = this.context.Cargoes.Where(r => r.ContractID == contractID && (r.OutTime == null || (r.OutTime >= start && r.OutTime <= end)));
+            var cargos = this.context.Cargoes.Where(r => r.ContractID == contractID);
 
             var stockIns = from r in this.context.StockIns
-                           where r.Status == (int)EntityStatus.StockIn && cargos.Select(s => s.ID).Contains(r.CargoID)                           
+                           where r.Status == (int)EntityStatus.StockIn && r.ConfirmTime >= start && r.ConfirmTime <= end &&
+                                cargos.Select(s => s.ID).Contains(r.CargoID)
                            select r;
 
+            var stockOuts = from r in this.context.StockOuts
+                            where r.Status == (int)EntityStatus.StockOut && r.ConfirmTime >= start && r.ConfirmTime <= end &&
+                                cargos.Select(s => s.ID).Contains(r.CargoID)
+                            select r;
+
+            decimal totalWeight = 0;
+            decimal totalFee = 0;
 
             List<ChargeRecord> records = new List<ChargeRecord>();
-            foreach(var item in stockIns)
+            for (DateTime step = start.Date; step <= end; step = step.AddDays(1))
             {
-                ChargeRecord record = new ChargeRecord();
+                var nextDay = step.AddDays(1);
+                bool empty = true;
 
-                var c = cargos.Single(r => r.ID == item.CargoID);
+                //find stocks in day
+                var ins = stockIns.Where(r => r.ConfirmTime >= step && r.ConfirmTime < nextDay);
+                if (ins.Count() != 0)
+                {
+                    foreach (var item in ins)
+                    {
+                        ChargeRecord record = new ChargeRecord();
+                        record.RecordDate = step;
 
-                record.RecordDate = (DateTime)c.InTime;
-                record.CargoName = c.Name;
-                record.UnitWeight = c.UnitWeight.Value;
-                record.Count = c.Count;
-                record.TotalWeight = c.TotalWeight.Value;
+                        var c = cargos.Single(r => r.ID == item.CargoID);
 
-                records.Add(record);
+                        record.RecordDate = (DateTime)c.InTime;
+                        record.CargoName = c.Name;
+                        record.UnitWeight = c.UnitWeight.Value;
+                        record.Count = c.Count;
+                        totalWeight += Convert.ToDecimal(c.TotalWeight.Value);
+                        record.TotalWeight = totalWeight;
+                        record.DailyFee = record.TotalWeight * (decimal)dailyFee;
+
+                        records.Add(record);
+                    }
+
+                    empty = false;
+                }
+
+                var outs = stockOuts.Where(r => r.ConfirmTime >= step && r.ConfirmTime < nextDay);
+                if (outs.Count() != 0)
+                {
+                    foreach (var item in outs)
+                    {
+                        ChargeRecord record = new ChargeRecord();
+                        record.RecordDate = step;
+
+                        var c = cargos.Single(r => r.ID == item.CargoID);
+
+                        record.RecordDate = (DateTime)c.InTime;
+                        record.CargoName = c.Name;
+                        record.UnitWeight = c.UnitWeight.Value;
+
+                        record.Count = -item.StockOutDetails.Sum(r => r.Count);
+                        totalWeight -= Convert.ToDecimal(-record.UnitWeight * record.Count / 1000);
+
+                        record.TotalWeight = totalWeight;
+                        record.DailyFee = record.TotalWeight * (decimal)dailyFee;
+
+                        records.Add(record);
+                    }
+
+                    empty = false;
+                }
+
+                if (empty)
+                {
+                    ChargeRecord record = new ChargeRecord();
+                    record.RecordDate = step;
+                    records.Add(record);
+                }
             }
 
-            records = records.OrderBy(r => r.RecordDate).ToList();
             return records;
         }
         #endregion //Method
