@@ -151,10 +151,11 @@ namespace Phoebe.Business
             for (DateTime step = start.Date; step <= end; step = step.AddDays(1))
             {
                 var nextDay = step.AddDays(1);
-                bool empty = true;
+                int todayCount = 0;
 
                 //find stocks in day
                 var ins = stockIns.Where(r => r.ConfirmTime >= step && r.ConfirmTime < nextDay);
+
                 if (ins.Count() != 0)
                 {
                     foreach (var item in ins)
@@ -164,23 +165,35 @@ namespace Phoebe.Business
 
                         var c = cargos.Single(r => r.ID == item.CargoID);
 
-                        record.RecordDate = (DateTime)c.InTime;
+                        record.RecordDate = step;
                         record.CargoName = c.Name;
                         record.UnitWeight = c.UnitWeight.Value;
                         record.Count = c.Count;
-                        totalWeight += Convert.ToDecimal(c.TotalWeight.Value);
+                        record.StoreWeight = Convert.ToDecimal(c.TotalWeight.Value);
+                        totalWeight += record.StoreWeight;
                         record.TotalWeight = totalWeight;
-                        record.DailyFee = record.TotalWeight * (decimal)dailyFee;
 
                         records.Add(record);
+                        todayCount++;
                     }
 
-                    empty = false;
+                    var last = records.Last();
+                    last.DailyFee = last.TotalWeight * (decimal)dailyFee;
+                    totalFee += last.DailyFee;
+                    last.TotalFee = totalFee;
                 }
 
                 var outs = stockOuts.Where(r => r.ConfirmTime >= step && r.ConfirmTime < nextDay);
                 if (outs.Count() != 0)
                 {
+                    if (todayCount > 0)
+                    {
+                        var lastIn = records.Last();
+                        totalFee -= lastIn.DailyFee;
+                        lastIn.DailyFee = 0;
+                        lastIn.TotalFee = 0;
+                    }
+
                     foreach (var item in outs)
                     {
                         ChargeRecord record = new ChargeRecord();
@@ -188,26 +201,34 @@ namespace Phoebe.Business
 
                         var c = cargos.Single(r => r.ID == item.CargoID);
 
-                        record.RecordDate = (DateTime)c.InTime;
+                        record.RecordDate = step;
                         record.CargoName = c.Name;
                         record.UnitWeight = c.UnitWeight.Value;
 
                         record.Count = -item.StockOutDetails.Sum(r => r.Count);
-                        totalWeight -= Convert.ToDecimal(-record.UnitWeight * record.Count / 1000);
-
+                        record.StoreWeight = Convert.ToDecimal(record.UnitWeight * record.Count / 1000);
+                        totalWeight += record.StoreWeight;
                         record.TotalWeight = totalWeight;
-                        record.DailyFee = record.TotalWeight * (decimal)dailyFee;
 
                         records.Add(record);
+                        todayCount++;
                     }
 
-                    empty = false;
+                    var last = records.Last();
+                    last.DailyFee = last.TotalWeight * (decimal)dailyFee;
+                    totalFee += last.DailyFee;
+                    last.TotalFee = totalFee;
                 }
 
-                if (empty)
+                if (todayCount == 0)
                 {
                     ChargeRecord record = new ChargeRecord();
                     record.RecordDate = step;
+                    record.TotalWeight = totalWeight;
+                    record.DailyFee = record.TotalWeight * (decimal)dailyFee;
+                    totalFee += record.DailyFee;
+                    record.TotalFee = totalFee;
+
                     records.Add(record);
                 }
             }

@@ -118,6 +118,21 @@ var phoebe = function() {
 		}
 	}
 	
+	function handlePrint(obj) {
+		//打开一个新窗口newWindow
+		var newWindow = window.open("打印窗口", "_blank");
+		//要打印的div的内容
+		var docStr = obj.innerHTML;
+		//打印内容写入newWindow文档
+		newWindow.document.write(docStr);
+		//关闭文档
+		newWindow.document.close();
+		//调用打印机
+		//newWindow.print();
+		//关闭newWindow页面
+		//newWindow.close();
+	}
+	
 	return {
 		
 		leftNavActive: function($dom) {
@@ -134,6 +149,10 @@ var phoebe = function() {
 		
 		initDatePicker: function($dom, today) {
 			handleInitDatePicker($dom, today);
+		},
+		
+		initPrint: function($dom) {
+			handlePrint($dom);
 		}
 	}
 }();
