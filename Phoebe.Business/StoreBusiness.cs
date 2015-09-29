@@ -53,6 +53,28 @@ namespace Phoebe.Business
         }
 
         /// <summary>
+        /// 根据客户获取在库库存
+        /// </summary>
+        /// <param name="customerID">客户ID</param>
+        /// <param name="customerType">客户类型</param>
+        /// <returns></returns>
+        public List<Stock> GetWithCustomer(int customerID, int customerType)
+        {
+            var cargos = from r in this.context.Cargoes
+                         where (from s in this.context.Contracts
+                                where s.CustomerID == customerID && s.CustomerType == customerType
+                                select s.ID).Contains(r.ContractID)
+                         select r;
+
+            var stocks = from r in this.context.Stocks
+                         where r.Status == (int)EntityStatus.StoreIn && cargos.Select(s => s.ID).Contains(r.CargoID)
+                         orderby r.Warehouse.Number
+                         select r;
+
+            return stocks.ToList();
+        }
+
+        /// <summary>
         /// 根据货品获取库存
         /// </summary>
         /// <param name="cargoID">货品ID</param>
@@ -124,9 +146,7 @@ namespace Phoebe.Business
         public List<Storage> GetStorage()
         {
             var warehouses = this.context.Warehouses.Where(r => r.IsStorage == true).OrderBy(r => r.Number);
-            var stocks = this.context.Stocks.Where(r => r.Status == (int)EntityStatus.StoreIn);
-
-         
+            var stocks = this.context.Stocks.Where(r => r.Status == (int)EntityStatus.StoreIn);            
 
             List<Storage> list = new List<Storage>();
             foreach (var item in warehouses)
@@ -422,6 +442,9 @@ namespace Phoebe.Business
 
                 if (status == EntityStatus.StockOut)
                 {
+                    var cargo = so.Cargo;
+                    int remainCount = cargo.StoreCount;
+
                     //change stock out details status
                     foreach (var item in so.StockOutDetails)
                     {
@@ -434,7 +457,8 @@ namespace Phoebe.Business
                         if (stock.Count == item.Count)  // all stock out
                         {
                             item.Warehouse.Status = (int)EntityStatus.WarehouseFree;
-                                                        
+
+                            remainCount -= item.Count;            
                             stock.Count = 0;
                             stock.OutTime = so.ConfirmTime;
                             stock.Status = (int)EntityStatus.StoreOut;
@@ -442,12 +466,13 @@ namespace Phoebe.Business
                         else
                         {
                             stock.Count -= item.Count;
+                            remainCount -= item.Count;
                         }
                     }
 
                     // check cargo
-                    var cargo = so.Cargo;
-                    if (cargo.Stocks.Sum(r => r.Count) == 0)
+                    cargo.StoreCount = remainCount;
+                    if (cargo.StoreCount == 0)
                     {
                         cargo.Status = (int)EntityStatus.CargoStockOut;
                         cargo.OutTime = so.ConfirmTime;

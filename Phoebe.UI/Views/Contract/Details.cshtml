@@ -167,28 +167,31 @@
                                 二级分类
                             </th>
                             <th>
-                                三级分类
-                            </th>
-                            <th>
                                 数量
                             </th>
                             <th>
-                                总重量(t)
+                                总重量 (t)
                             </th>
                             <th>
-                                总体积(m<sup>3</sup>)
+                                总体积 (m<sup>3</sup>)
                             </th>
                             <th>
-                                保质期(月)
+                                在库数量
+                            </th>
+                            <th>
+                                保质期 (月)
                             </th>
                             <th>
                                 登记时间
                             </th>
                             <th>
-                                操作人
+                                登记人
                             </th>
                             <th>
                                 状态
+                            </th>
+                            <th>
+                                查看
                             </th>
                         </tr>
                     </thead>
@@ -197,40 +200,43 @@
                             <th>
                                 货品名称
                             </th>
-                            <th>
+                            <th data-filter="true">
                                 一级分类
                             </th>
-                            <th>
+                            <th data-filter="true">
                                 二级分类
-                            </th>
-                            <th>
-                                三级分类
                             </th>
                             <th>
                                 数量
                             </th>
                             <th>
-                                总重量(t)
+                                总重量 (t)
                             </th>
                             <th>
-                                总体积(m<sup>3</sup>)
+                                总体积 (m<sup>3</sup>)
                             </th>
                             <th>
-                                保质期(月)
+                                在库数量
+                            </th>
+                            <th>
+                                保质期 (月)
                             </th>
                             <th>
                                 登记时间
                             </th>
                             <th>
-                                操作人
+                                登记人
+                            </th>
+                            <th data-filter="true">
+                                状态
                             </th>
                             <th>
-                                状态
+                                查看
                             </th>
                         </tr>
                     </tfoot>
                     <tbody>
-                        @foreach(var item in Model.Cargoes)
+                        @foreach(var item in Model.Cargoes.OrderBy(r => r.RegisterTime))
                         {
                             <tr>
                                 <td>
@@ -243,12 +249,6 @@
                                     @item.SecondCategory.Name
                                 </td>
                                 <td>
-                                    @if (item.ThirdCategory != null)
-                                    {
-                                        @item.ThirdCategory.Name
-                                    }
-                                </td>
-                                <td>
                                     @item.Count
                                 </td>
                                 <td>
@@ -258,10 +258,13 @@
                                     @item.TotalVolume
                                 </td>
                                 <td>
+                                    @item.StoreCount
+                                </td>
+                                <td>
                                     @item.ShelfLife
                                 </td>
                                 <td>
-                                    @item.RegisterTime.ToDateTimeString()
+                                    @item.RegisterTime.ToDateString()
                                 </td>
                                 <td>
                                     @item.User.Name
@@ -269,10 +272,26 @@
                                 <td>
                                     @(((EntityStatus)item.Status).DisplayName())
                                 </td>
+                                <td>
+                                    <a class="btn btn-sm btn-info" href="/Cargo/DetailsModal/@item.ID.ToString()" data-target="#cargo-modal" data-toggle="modal"><i class="fa fa-check-circle"></i>&nbsp;查看</a>
+                                </td>
                             </tr>
                         }
                     </tbody>
                 </table>
+
+                <div class="modal fade" id="cargo-modal" role="basic" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <img src="/assets/global/img/loading-spinner-grey.gif" alt="" class="loading">
+                                <span>
+                                    &nbsp;&nbsp;Loading...
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="tab-pane fade" id="tab_stock">
@@ -283,16 +302,16 @@
                                 仓位
                             </th>
                             <th>
+                                货品名称
+                            </th>
+                            <th>
                                 数量
                             </th>
                             <th>
                                 入库时间
                             </th>
                             <th>
-                                来源
-                            </th>
-                            <th>
-                                备注
+                                操作
                             </th>
                         </tr>
                     </thead>
@@ -302,16 +321,16 @@
                                 仓位
                             </th>
                             <th>
+                                货品名称
+                            </th>
+                            <th>
                                 数量
                             </th>
                             <th>
                                 入库时间
                             </th>
                             <th>
-                                来源
-                            </th>
-                            <th>
-                                备注
+                                操作
                             </th>
                         </tr>
                     </tfoot>
@@ -323,28 +342,34 @@
                                     @item.Warehouse.Number
                                 </td>
                                 <td>
+                                    @item.Cargo.Name
+                                </td>
+                                <td>
                                     @item.Count
                                 </td>
                                 <td>
                                     @item.InTime.ToDateTimeString()
                                 </td>
                                 <td>
-                                    @if (item.Source == 0)
-                                    {
-                                        <span>入库</span>
-                                    }
-                                    else
-                                    {
-                                        <span>移库</span>
-                                    }
-                                </td>
-                                <td>
-                                    @item.Remark
+                                    <a class="btn btn-sm btn-info" href="/Stock/DetailsModal/@item.ID.ToString()" data-target="#stock-modal" data-toggle="modal"><i class="fa fa-check-circle"></i>&nbsp;查看</a>
                                 </td>
                             </tr>
                         }
                     </tbody>
                 </table>
+
+                <div class="modal fade" id="stock-modal" role="basic" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <img src="/assets/global/img/loading-spinner-grey.gif" alt="" class="loading">
+                                <span>
+                                    &nbsp;&nbsp;Loading...
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

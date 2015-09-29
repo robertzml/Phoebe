@@ -39,7 +39,7 @@ namespace Phoebe.UI.Controllers
         /// <summary>
         /// 零散客户信息
         /// </summary>
-        /// <param name="id">ID</param>
+        /// <param name="id">客户ID</param>
         /// <returns></returns>
         public ActionResult Details(int id)
         {
@@ -52,6 +52,9 @@ namespace Phoebe.UI.Controllers
 
             CargoBusiness cargoBusiness = new CargoBusiness();
             ViewBag.Cargos = cargoBusiness.GetByCustomer(id, (int)CustomerType.Scatter);
+
+            StoreBusiness storeBusiness = new StoreBusiness();
+            ViewBag.Stocks = storeBusiness.GetWithCustomer(id, (int)CustomerType.Scatter);
 
             return View(data);
         }

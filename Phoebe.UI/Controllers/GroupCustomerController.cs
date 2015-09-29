@@ -56,6 +56,9 @@ namespace Phoebe.UI.Controllers
             CargoBusiness cargoBusiness = new CargoBusiness();
             ViewBag.Cargos = cargoBusiness.GetByCustomer(id, (int)CustomerType.Group);
 
+            StoreBusiness storeBusiness = new StoreBusiness();
+            ViewBag.Stocks = storeBusiness.GetWithCustomer(id, (int)CustomerType.Group);
+
             return View(data);
         }
 

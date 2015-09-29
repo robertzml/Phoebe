@@ -28,7 +28,7 @@
                             @Html.DisplayNameFor(model => model.WarehouseID)
                         </td>
                         <td>
-                            @Model.Warehouse.Name
+                            @Model.Warehouse.Number
                         </td>
                     </tr>
                     <tr>
@@ -37,6 +37,33 @@
                         </td>
                         <td>
                             @Model.Cargo.Name
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            一级分类
+                        </td>
+                        <td>
+                            @Model.Cargo.FirstCategory.Name
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            二级分类
+                        </td>
+                        <td>
+                            @Model.Cargo.SecondCategory.Name
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            三级分类
+                        </td>
+                        <td>
+                            @if (Model.Cargo.ThirdCategory != null)
+                            {
+                                @Model.Cargo.ThirdCategory.Name
+                            }
                         </td>
                     </tr>
                     <tr>
@@ -68,7 +95,14 @@
                             @Html.DisplayNameFor(model => model.Source)
                         </td>
                         <td>
-                            @Html.DisplayFor(model => model.Source)
+                            @if (Model.Source == 0)
+                            {
+                                <span>入库</span>
+                            }
+                            else
+                            {
+                                <span>移库</span>
+                            }
                         </td>
                     </tr>
                     <tr>
