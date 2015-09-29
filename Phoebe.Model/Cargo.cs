@@ -37,7 +37,9 @@ namespace Phoebe.Model
         public Nullable<double> TotalWeight { get; set; }
         public Nullable<double> UnitVolume { get; set; }
         public Nullable<double> TotalVolume { get; set; }
+        public int StoreCount { get; set; }
         public string OriginPlace { get; set; }
+        public string Specification { get; set; }
         public int ShelfLife { get; set; }
         public int ContractID { get; set; }
         public System.DateTime RegisterTime { get; set; }

@@ -19,8 +19,10 @@
           <Property Name="TotalWeight" Type="float" />
           <Property Name="UnitVolume" Type="float" />
           <Property Name="TotalVolume" Type="float" />
+          <Property Name="StoreCount" Type="int" Nullable="false" />
           <Property Name="OriginPlace" Type="nvarchar" MaxLength="100" />
           <Property Name="ShelfLife" Type="int" Nullable="false" />
+          <Property Name="Specification" Type="nvarchar" MaxLength="100" />
           <Property Name="ContractID" Type="int" Nullable="false" />
           <Property Name="RegisterTime" Type="datetime" Nullable="false" />
           <Property Name="UserID" Type="int" Nullable="false" />
@@ -1144,7 +1146,9 @@
           <Property Name="TotalWeight" Type="Double" />
           <Property Name="UnitVolume" Type="Double" />
           <Property Name="TotalVolume" Type="Double" />
+          <Property Name="StoreCount" Type="Int32" Nullable="false" />
           <Property Name="OriginPlace" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Specification" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="ShelfLife" Type="Int32" Nullable="false" />
           <Property Name="ContractID" Type="Int32" Nullable="false" />
           <Property Name="RegisterTime" Type="DateTime" Nullable="false" Precision="3" />
@@ -1822,6 +1826,8 @@
           <EntitySetMapping Name="Cargoes">
             <EntityTypeMapping TypeName="PhoebeModel.Cargo">
               <MappingFragment StoreEntitySet="Cargo">
+                <ScalarProperty Name="Specification" ColumnName="Specification" />
+                <ScalarProperty Name="StoreCount" ColumnName="StoreCount" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Remark" ColumnName="Remark" />
                 <ScalarProperty Name="OutTime" ColumnName="OutTime" />

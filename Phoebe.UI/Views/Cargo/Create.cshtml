@@ -142,6 +142,14 @@
                         </div>
 
                         <div class="form-group">
+                            @Html.LabelFor(model => model.Specification, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.Specification, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Specification, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             <label for="ShelfLife" class="control-label col-md-3">保质期 (月)</label>
                             <div class="col-md-8">
                                 @Html.EditorFor(model => model.ShelfLife, new { htmlAttributes = new { @class = "form-control" } })

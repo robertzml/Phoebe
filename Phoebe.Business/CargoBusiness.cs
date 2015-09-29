@@ -40,7 +40,7 @@ namespace Phoebe.Business
         /// <returns></returns>
         public List<Cargo> Get(EntityStatus status)
         {
-            return this.context.Cargoes.Where(r => r.Status == (int)status).ToList();
+            return this.context.Cargoes.Where(r => r.Status == (int)status).OrderBy(r => r.RegisterTime).ToList();
         }
 
         /// <summary>
@@ -55,6 +55,7 @@ namespace Phoebe.Business
                        where (from s in this.context.Contracts
                               where s.CustomerID == customerID && s.CustomerType == customerType
                               select s.ID).Contains(r.ContractID)
+                       orderby r.RegisterTime
                        select r;
 
             return data.ToList();

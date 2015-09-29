@@ -140,6 +140,7 @@ namespace Phoebe.UI.Controllers
 
                 model.TotalWeight = Math.Round(Convert.ToDouble(model.Count * model.UnitWeight / 1000), 3);
                 model.TotalVolume = Math.Round(Convert.ToDouble(model.Count * model.UnitVolume), 3);
+                model.StoreCount = model.Count;
 
                 model.UserID = user.ID;
 

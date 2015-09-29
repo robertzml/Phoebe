@@ -65,6 +65,9 @@
                                 总体积 (m<sup>3</sup>)
                             </th>
                             <th>
+                                @Html.DisplayNameFor(model => model.StoreCount)
+                            </th>
+                            <th>
                                 @Html.DisplayNameFor(model => model.ContractID)
                             </th>
                             <th>
@@ -100,6 +103,9 @@
                             </th>
                             <th>
                                 总体积 (m<sup>3</sup>)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.StoreCount)
                             </th>
                             <th data-filter="true">
                                 @Html.DisplayNameFor(model => model.ContractID)
@@ -139,6 +145,9 @@
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.TotalVolume)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.StoreCount)
                                 </td>
                                 <td>
                                     @item.Contract.Name

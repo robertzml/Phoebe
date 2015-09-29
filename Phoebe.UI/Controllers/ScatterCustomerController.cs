@@ -50,6 +50,9 @@ namespace Phoebe.UI.Controllers
             ContractBusiness contractBusiness = new ContractBusiness();
             ViewBag.Contracts = contractBusiness.GetByCustomer(id, (int)CustomerType.Scatter);
 
+            CargoBusiness cargoBusiness = new CargoBusiness();
+            ViewBag.Cargos = cargoBusiness.GetByCustomer(id, (int)CustomerType.Scatter);
+
             return View(data);
         }
 

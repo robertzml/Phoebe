@@ -72,13 +72,25 @@ namespace Phoebe.Model
         /// 总体积
         /// </summary>
         [Display(Name = "总体积")]
-        public Nullable<double> TotalVolume { get; set; }      
+        public Nullable<double> TotalVolume { get; set; }
+
+        /// <summary>
+        /// 在库数量
+        /// </summary>
+        [Display(Name = "在库数量")]
+        public int StoreCount { get; set; }
 
         /// <summary>
         /// 产地
         /// </summary>
         [Display(Name = "产地")]
         public string OriginPlace { get; set; }
+
+        /// <summary>
+        /// 规格
+        /// </summary>
+        [Display(Name = "规格")]
+        public string Specification { get; set; }
 
         /// <summary>
         /// 保质期

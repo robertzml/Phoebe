@@ -370,7 +370,7 @@
                         </tr>
                     </tfoot>
                     <tbody>
-                        @foreach(var item in Model.StockInDetails)
+                        @foreach(var item in Model.StockInDetails.OrderBy(r => r.StockIn.ConfirmTime))
                         {
                             <tr>
                                 <td>
@@ -450,7 +450,7 @@
                         </tr>
                     </tfoot>
                     <tbody>
-                        @foreach (var item in Model.StockOutDetails)
+                        @foreach (var item in Model.StockOutDetails.OrderBy(r => r.StockOut.ConfirmTime))
                         {
                             <tr>
                                 <td>
@@ -533,7 +533,7 @@
                         </tr>
                     </tfoot>
                     <tbody>
-                        @foreach (var item in Model.StockMoveDetails)
+                        @foreach (var item in Model.StockMoveDetails.OrderBy(r => r.StockMove.ConfirmTime))
                         {
                             <tr>
                                 <td>
