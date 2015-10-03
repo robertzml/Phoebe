@@ -657,12 +657,6 @@
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Cargo\ListByOut.cshtml" />
-    <Content Include="Views\Settle\Index.cshtml" />
-    <Content Include="Views\Settle\Create.cshtml" />
-    <Content Include="Views\Settle\Audit.cshtml" />
-    <Content Include="Views\Settle\Confirm.cshtml" />
-    <Content Include="Views\Settle\ListByPaid.cshtml" />
-    <Content Include="Views\Settle\Details.cshtml" />
     <Content Include="Views\Contract\DetailsModal.cshtml" />
     <Content Include="Views\Cargo\DetailsModal.cshtml" />
     <Content Include="Views\Category\CreateThirdCategory.cshtml" />

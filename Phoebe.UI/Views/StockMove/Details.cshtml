@@ -60,7 +60,7 @@
                                 @Html.DisplayNameFor(model => model.CargoID)
                             </td>
                             <td>
-                                @Model.Cargo.Name
+                                <a href="@Url.Action("Details", new { controller = "Cargo", ID = Model.CargoID.ToString() })">@Model.Cargo.Name</a>
                             </td>
                         </tr>
                         <tr>
