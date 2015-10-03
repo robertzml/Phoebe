@@ -31,7 +31,7 @@
 <!-- END PAGE HEADER-->
 <!-- BEGIN PAGE CONTENT-->
 <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-4">
         <div class="portlet">
             <div class="portlet-title">
                 <div class="caption">
@@ -51,7 +51,7 @@
                     <ul>
                         @foreach(var first in Model)
                         {
-                            <li data-level="1" data-id="@first.ID">
+                            <li data-level="1" data-id="@first.ID" data-jstree='{ "opened" : true }'>
                                 @first.Name
                                 <ul>
                                     @foreach(var second in first.SecondCategories)
@@ -83,6 +83,9 @@
             </div>
         </div>
     </div>
+    <div class="col-md-8" id="category-info-panel">
+
+    </div>
 </div>
 <!-- END PAGE CONTENT-->
 
@@ -107,6 +110,16 @@
                     }
                 },
                 "plugins": ["types"]
+            });
+
+            // handle link clicks in tree nodes(support target="_blank" as well)
+            $('#tree-category').on('select_node.jstree', function (e, data) {
+                var id = $('#' + data.selected).attr('data-id');
+                var level = $('#' + data.selected).attr('data-level');
+
+                if (id != null) {
+                    $('#category-info-panel').load('/Category/Info', { id: id, level: level });
+                }
             });
         });
     </script>

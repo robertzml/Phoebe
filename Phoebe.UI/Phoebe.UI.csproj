@@ -147,6 +147,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CategoryInfoModel.cs" />
     <Compile Include="Models\ColdCost.cs" />
     <Compile Include="Models\UserModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -665,6 +666,8 @@
     <Content Include="Views\Stock\List.cshtml" />
     <Content Include="Views\Settle\Process.cshtml" />
     <Content Include="Views\Settle\ColdCost.cshtml" />
+    <Content Include="Views\Category\Info.cshtml" />
+    <Content Include="Views\Category\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

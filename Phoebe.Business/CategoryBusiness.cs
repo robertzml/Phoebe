@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -83,6 +84,16 @@ namespace Phoebe.Business
         }
 
         /// <summary>
+        /// 获取三级分类
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ThirdCategory GetThirdCategory(int id)
+        {
+            return this.context.ThirdCategories.Find(id);
+        }
+
+        /// <summary>
         /// 添加一级分类
         /// </summary>
         /// <param name="data">一级分类数据</param>
@@ -135,6 +146,66 @@ namespace Phoebe.Business
             {
                 data.Status = 0;
                 this.context.ThirdCategories.Add(data);
+                this.context.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+
+            return ErrorCode.Success;
+        }
+
+        /// <summary>
+        /// 编辑一级分类
+        /// </summary>
+        /// <param name="data">一级分类数据</param>
+        /// <returns></returns>
+        public ErrorCode EditFirstCategory(FirstCategory data)
+        {
+            try
+            {
+                this.context.Entry(data).State = EntityState.Modified;
+                this.context.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+
+            return ErrorCode.Success;
+        }
+
+        /// <summary>
+        /// 编辑二级分类
+        /// </summary>
+        /// <param name="data">二级分类数据</param>
+        /// <returns></returns>
+        public ErrorCode EditSecondCategory(SecondCategory data)
+        {
+            try
+            {
+                this.context.Entry(data).State = EntityState.Modified;
+                this.context.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+
+            return ErrorCode.Success;
+        }
+
+        /// <summary>
+        /// 编辑三级分类
+        /// </summary>
+        /// <param name="data">三级分类数据</param>
+        /// <returns></returns>
+        public ErrorCode EditThirdCategory(ThirdCategory data)
+        {
+            try
+            {
+                this.context.Entry(data).State = EntityState.Modified;
                 this.context.SaveChanges();
             }
             catch (Exception)

@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Phoebe.Business;
 using Phoebe.Common;
 using Phoebe.Model;
+using Phoebe.UI.Models;
 
 namespace Phoebe.UI.Controllers
 {
@@ -37,6 +38,47 @@ namespace Phoebe.UI.Controllers
         {
             var data = this.categoryBusiness.GetFirstCategory();
             return View(data);
+        }
+
+        /// <summary>
+        /// 分类信息
+        /// </summary>
+        /// <param name="id">ID</param>
+        /// <param name="level">级别</param>
+        /// <returns></returns>
+        public ActionResult Info(int id, int level)
+        {
+            CategoryInfoModel model = new CategoryInfoModel();
+            if (level == 1)
+            {
+                var data = this.categoryBusiness.GetFirstCategory(id);
+                model.ID = id;
+                model.Name = data.Name;
+                model.Level = 1;
+                model.Remark = data.Remark;
+            }
+            else if (level == 2)
+            {
+                var data = this.categoryBusiness.GetSecondCategory(id);
+                model.ID = id;
+                model.Name = data.Name;
+                model.Level = 2;
+                model.Remark = data.Remark;
+            }
+            else if (level == 3)
+            {
+                var data = this.categoryBusiness.GetThirdCategory(id);
+                model.ID = id;
+                model.Name = data.Name;
+                model.Level = 3;
+                model.Remark = data.Remark;
+            }
+            else
+            {
+                return HttpNotFound();
+            }
+
+            return View(model);
         }
 
         /// <summary>
@@ -144,6 +186,99 @@ namespace Phoebe.UI.Controllers
                 {
                     TempData["Message"] = "添加三级分类失败";
                     ModelState.AddModelError("", "添加三级分类失败: " + result.DisplayName());
+                }
+            }
+
+            return View(model);
+        }
+
+        /// <summary>
+        /// 编辑分类
+        /// </summary>
+        /// <param name="id">ID</param>
+        /// <param name="level">级别</param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult Edit(int id, int level)
+        {
+            CategoryInfoModel model = new CategoryInfoModel();
+            if (level == 1)
+            {
+                var data = this.categoryBusiness.GetFirstCategory(id);
+                model.ID = id;
+                model.Name = data.Name;
+                model.Level = 1;
+                model.Remark = data.Remark;
+            }
+            else if (level == 2)
+            {
+                var data = this.categoryBusiness.GetSecondCategory(id);
+                model.ID = id;
+                model.Name = data.Name;
+                model.Level = 2;
+                model.Remark = data.Remark;
+            }
+            else if (level == 3)
+            {
+                var data = this.categoryBusiness.GetThirdCategory(id);
+                model.ID = id;
+                model.Name = data.Name;
+                model.Level = 3;
+                model.Remark = data.Remark;
+            }
+            else
+            {
+                return HttpNotFound();
+            }
+
+            return View(model);
+        }
+
+        /// <summary>
+        /// 编辑分类
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult Edit(CategoryInfoModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                ErrorCode result;
+
+                if (model.Level == 1)
+                {
+                    var data = this.categoryBusiness.GetFirstCategory(model.ID);
+                    data.Name = model.Name;
+                    data.Remark = model.Remark;
+                    result = this.categoryBusiness.EditFirstCategory(data);
+                }
+                else if (model.Level == 2)
+                {
+                    var data = this.categoryBusiness.GetSecondCategory(model.ID);
+                    data.Name = model.Name;
+                    data.Remark = model.Remark;
+                    result = this.categoryBusiness.EditSecondCategory(data);
+                }
+                else
+                {
+                    var data = this.categoryBusiness.GetThirdCategory(model.ID);
+                    data.Name = model.Name;
+                    data.Remark = model.Remark;
+                    result = this.categoryBusiness.EditThirdCategory(data);
+                }
+
+
+                if (result == ErrorCode.Success)
+                {
+                    TempData["Message"] = "编辑类别成功";
+                    return RedirectToAction("Index", new { controller = "Category" });
+                }
+                else
+                {
+                    TempData["Message"] = "编辑类别失败";
+                    ModelState.AddModelError("", "编辑类别失败: " + result.DisplayName());
                 }
             }
 

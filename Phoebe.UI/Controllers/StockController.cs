@@ -32,7 +32,7 @@ namespace Phoebe.UI.Controllers
 
         #region Action
         /// <summary>
-        /// 库存记录
+        /// 库存历史
         /// </summary>
         /// <returns></returns>
         public ActionResult Index()

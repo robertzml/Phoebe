@@ -65,6 +65,14 @@
                         </tr>
                         <tr>
                             <td>
+                                所属合同
+                            </td>
+                            <td>
+                                @Model.Cargo.Contract.Name ( @Model.Cargo.Contract.Number )
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
                                 一级分类
                             </td>
                             <td>
@@ -95,7 +103,7 @@
                                 @Html.DisplayNameFor(model => model.OutTime)
                             </td>
                             <td>
-                                @Model.OutTime.ToDateString()
+                                @Model.OutTime.ToDateTimeString()
                             </td>
                         </tr>
                         <tr>
@@ -103,7 +111,7 @@
                                 @Html.DisplayNameFor(model => model.ConfirmTime)
                             </td>
                             <td>
-                                @Model.ConfirmTime.ToDateString()
+                                @Model.ConfirmTime.ToDateTimeString()
                             </td>
                         </tr>
                         <tr>
