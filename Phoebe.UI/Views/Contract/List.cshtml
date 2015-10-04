@@ -56,7 +56,7 @@
                                 @Html.DisplayNameFor(model => model.SignDate)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.CertificateNumber)
+                                @Html.DisplayNameFor(model => model.CloseDate)
                             </th>
                             <th>
                                 操作
@@ -105,7 +105,7 @@
                                     @item.SignDate.ToDateString()
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.CloseDate)
+                                    @item.CloseDate.ToDateString()
                                 </td>
                                 <td>
                                     <a href="@Url.Action("Details", new { controller = "Contract", id = item.ID })" class="btn btn-info btn-sm" role="button"><i class="fa fa-check-circle"></i>&nbsp;查看</a>

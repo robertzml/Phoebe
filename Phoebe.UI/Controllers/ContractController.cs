@@ -140,10 +140,36 @@ namespace Phoebe.UI.Controllers
         /// </summary>
         /// <param name="id">合同ID</param>
         /// <returns></returns>
+        [HttpGet]
         public ActionResult Close(int id)
         {
-            this.contractBusiness.Close(id);
-            return RedirectToAction("Details", new { controller = "Contract", id = id });
+            var data = this.contractBusiness.Get(id);
+            if (data == null)
+                return HttpNotFound();
+
+            return View(data);
+        }
+
+        /// <summary>
+        /// 关闭合同
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult CloseConfirm(int id)
+        {
+            ErrorCode result = this.contractBusiness.Close(id);
+            if (result == ErrorCode.Success)
+            {
+                TempData["Message"] = "关闭合同成功";
+                return RedirectToAction("Details", new { controller = "Contract", id = id });
+            }
+            else
+            {
+                TempData["Message"] = "关闭合同失败, " + result.DisplayName();
+                return RedirectToAction("Details", new { controller = "Contract", id = id });
+            }
         }
 
         /// <summary>

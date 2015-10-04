@@ -100,6 +100,12 @@ namespace Phoebe.Model
         /// </summary>
         [Display(Name = "编号重复")]
         ContractDuplicateNumber = 21,
+
+        /// <summary>
+        /// 合同有货品未出库
+        /// </summary>
+        [Display(Name = "有货品未出库")]
+        ContractHasCargo = 22,
         #endregion //Contract
 
         #region Warehosue & Tray
