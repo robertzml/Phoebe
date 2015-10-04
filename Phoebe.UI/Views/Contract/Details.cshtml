@@ -149,7 +149,10 @@
                 <hr />
                 <p>
                     <a href="@Url.Action("Index", new { controller = "Contract" })" class="btn btn-info"><i class="fa fa-list"></i>&nbsp;回到列表</a>
-                    <a class="btn btn-warning" href="#"><i class="fa fa-close"></i>&nbsp;关闭合同</a>
+                    @if (Model.Cargoes.All(r => r.Status == (int)EntityStatus.CargoStockOut))
+                    {
+                    <a href="@Url.Action("Close", new { controller = "Contract", id = Model.ID })" class="btn btn-warning"><i class="fa fa-close"></i>&nbsp;关闭合同</a>
+                    }
                 </p>
             </div>
             
@@ -375,7 +378,6 @@
     </div>
 </div>
 <!-- END PAGE CONTENT-->
-
 
 @section Scripts {
     <script type="text/javascript">

@@ -112,6 +112,11 @@ namespace Phoebe.Business
                 if (data == null)
                     return ErrorCode.ObjectNotFound;
 
+                if (data.Cargoes.Any(r => r.Status != (int)EntityStatus.CargoStockOut))
+                {
+                    return ErrorCode.ContractHasCargo;
+                }
+
                 data.CloseDate = DateTime.Now;
                 data.Status = (int)EntityStatus.ContractClosed;
                 this.context.SaveChanges();
