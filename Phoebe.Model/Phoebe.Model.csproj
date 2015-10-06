@@ -73,6 +73,8 @@
     <Compile Include="Entities\StockOut.cs" />
     <Compile Include="Entities\StockOutDetail.cs" />
     <Compile Include="Entities\ThirdCategory.cs" />
+    <Compile Include="Entities\Transfer.cs" />
+    <Compile Include="Entities\TransferDetails.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\UserGroup.cs" />
     <Compile Include="Entities\Warehouse.cs" />
@@ -133,6 +135,12 @@
     </Compile>
     <Compile Include="Storage.cs" />
     <Compile Include="ThirdCategory.cs">
+      <DependentUpon>PhoebeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Transfer.cs">
+      <DependentUpon>PhoebeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TransferDetail.cs">
       <DependentUpon>PhoebeModel.tt</DependentUpon>
     </Compile>
     <Compile Include="User.cs">

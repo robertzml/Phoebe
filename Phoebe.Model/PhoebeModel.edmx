@@ -219,6 +219,29 @@
           <Property Name="Remark" Type="nvarchar" MaxLength="500" />
           <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Transfer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="OldCargoID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="NewCargoID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TransferTime" Type="datetime" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="500" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TransferDetails">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TransferID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="WarehouseID" Type="int" Nullable="false" />
+          <Property Name="Count" Type="int" Nullable="false" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="500" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="ID" />
@@ -647,6 +670,54 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Transfer_Cargo">
+          <End Role="Cargo" Type="Self.Cargo" Multiplicity="1" />
+          <End Role="Transfer" Type="Self.Transfer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cargo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Transfer">
+              <PropertyRef Name="OldCargoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transfer_Cargo1">
+          <End Role="Cargo" Type="Self.Cargo" Multiplicity="1" />
+          <End Role="Transfer" Type="Self.Transfer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cargo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Transfer">
+              <PropertyRef Name="NewCargoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransferDetails_Transfer">
+          <End Role="Transfer" Type="Self.Transfer" Multiplicity="1" />
+          <End Role="TransferDetails" Type="Self.TransferDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Transfer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TransferDetails">
+              <PropertyRef Name="TransferID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransferDetails_Warehouse">
+          <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="1" />
+          <End Role="TransferDetails" Type="Self.TransferDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouse">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TransferDetails">
+              <PropertyRef Name="WarehouseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_User_UserGroup">
           <End Role="UserGroup" Type="Self.UserGroup" Multiplicity="1" />
           <End Role="User" Type="Self.User" Multiplicity="*" />
@@ -687,6 +758,8 @@
           <EntitySet Name="StockOut" EntityType="Self.StockOut" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StockOutDetails" EntityType="Self.StockOutDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ThirdCategory" EntityType="Self.ThirdCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Transfer" EntityType="Self.Transfer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TransferDetails" EntityType="Self.TransferDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserGroup" EntityType="Self.UserGroup" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Warehouse" EntityType="Self.Warehouse" Schema="dbo" store:Type="Tables" />
@@ -818,6 +891,22 @@
             <End Role="SecondCategory" EntitySet="SecondCategory" />
             <End Role="ThirdCategory" EntitySet="ThirdCategory" />
           </AssociationSet>
+          <AssociationSet Name="FK_Transfer_Cargo" Association="Self.FK_Transfer_Cargo">
+            <End Role="Cargo" EntitySet="Cargo" />
+            <End Role="Transfer" EntitySet="Transfer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transfer_Cargo1" Association="Self.FK_Transfer_Cargo1">
+            <End Role="Cargo" EntitySet="Cargo" />
+            <End Role="Transfer" EntitySet="Transfer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransferDetails_Transfer" Association="Self.FK_TransferDetails_Transfer">
+            <End Role="Transfer" EntitySet="Transfer" />
+            <End Role="TransferDetails" EntitySet="TransferDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransferDetails_Warehouse" Association="Self.FK_TransferDetails_Warehouse">
+            <End Role="Warehouse" EntitySet="Warehouse" />
+            <End Role="TransferDetails" EntitySet="TransferDetails" />
+          </AssociationSet>
           <AssociationSet Name="FK_User_UserGroup" Association="Self.FK_User_UserGroup">
             <End Role="UserGroup" EntitySet="UserGroup" />
             <End Role="User" EntitySet="User" />
@@ -854,6 +943,7 @@
           <NavigationProperty Name="StockOutDetails" Relationship="PhoebeModel.FK_StockOutDetails_Warehouse" FromRole="Warehouse" ToRole="StockOutDetail" />
           <NavigationProperty Name="StockMoveDetails" Relationship="PhoebeModel.FK_StockMoveDetails_Warehouse" FromRole="Warehouse" ToRole="StockMoveDetail" />
           <NavigationProperty Name="StockMoveDetails1" Relationship="PhoebeModel.FK_StockMoveDetails_Warehouse1" FromRole="Warehouse" ToRole="StockMoveDetail" />
+          <NavigationProperty Name="TransferDetails" Relationship="PhoebeModel.FK_TransferDetails_Warehouse" FromRole="Warehouse" ToRole="TransferDetail" />
           </EntityType>
         <Association Name="FK_Warehouse_Warehouse">
           <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="0..1" />
@@ -1022,6 +1112,24 @@
             <End Role="Warehouse" EntitySet="Warehouses" />
             <End Role="StockMoveDetail" EntitySet="StockMoveDetails" />
           </AssociationSet>
+          <EntitySet Name="Transfers" EntityType="PhoebeModel.Transfer" />
+          <EntitySet Name="TransferDetails" EntityType="PhoebeModel.TransferDetail" />
+          <AssociationSet Name="FK_Transfer_Cargo" Association="PhoebeModel.FK_Transfer_Cargo">
+            <End Role="Cargo" EntitySet="Cargoes" />
+            <End Role="Transfer" EntitySet="Transfers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transfer_Cargo1" Association="PhoebeModel.FK_Transfer_Cargo1">
+            <End Role="Cargo" EntitySet="Cargoes" />
+            <End Role="Transfer" EntitySet="Transfers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransferDetails_Transfer" Association="PhoebeModel.FK_TransferDetails_Transfer">
+            <End Role="Transfer" EntitySet="Transfers" />
+            <End Role="TransferDetail" EntitySet="TransferDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransferDetails_Warehouse" Association="PhoebeModel.FK_TransferDetails_Warehouse">
+            <End Role="Warehouse" EntitySet="Warehouses" />
+            <End Role="TransferDetail" EntitySet="TransferDetails" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="User">
           <Key>
@@ -1170,6 +1278,8 @@
           <NavigationProperty Name="StockInDetails" Relationship="PhoebeModel.FK_StockInDetails_Cargo" FromRole="Cargo" ToRole="StockInDetail" />
           <NavigationProperty Name="StockOutDetails" Relationship="PhoebeModel.FK_StockOutDetails_Cargo" FromRole="Cargo" ToRole="StockOutDetail" />
           <NavigationProperty Name="StockMoveDetails" Relationship="PhoebeModel.FK_StockMoveDetails_Cargo" FromRole="Cargo" ToRole="StockMoveDetail" />
+          <NavigationProperty Name="Transfers" Relationship="PhoebeModel.FK_Transfer_Cargo" FromRole="Cargo" ToRole="Transfer" />
+          <NavigationProperty Name="Transfers1" Relationship="PhoebeModel.FK_Transfer_Cargo1" FromRole="Cargo" ToRole="Transfer" />
         </EntityType>
         <Association Name="FK_Cargo_FirstCategory">
           <End Type="PhoebeModel.FirstCategory" Role="FirstCategory" Multiplicity="1" />
@@ -1725,6 +1835,82 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Transfer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="OldCargoID" Type="Guid" Nullable="false" />
+          <Property Name="NewCargoID" Type="Guid" Nullable="false" />
+          <Property Name="TransferTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="OldCargo" Relationship="PhoebeModel.FK_Transfer_Cargo" FromRole="Transfer" ToRole="Cargo" />
+          <NavigationProperty Name="NewCargo" Relationship="PhoebeModel.FK_Transfer_Cargo1" FromRole="Transfer" ToRole="Cargo" />
+          <NavigationProperty Name="TransferDetails" Relationship="PhoebeModel.FK_TransferDetails_Transfer" FromRole="Transfer" ToRole="TransferDetail" />
+        </EntityType>
+        <EntityType Name="TransferDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="TransferID" Type="Guid" Nullable="false" />
+          <Property Name="WarehouseID" Type="Int32" Nullable="false" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
+          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Transfer" Relationship="PhoebeModel.FK_TransferDetails_Transfer" FromRole="TransferDetail" ToRole="Transfer" />
+          <NavigationProperty Name="Warehouse" Relationship="PhoebeModel.FK_TransferDetails_Warehouse" FromRole="TransferDetail" ToRole="Warehouse" />
+        </EntityType>
+        <Association Name="FK_Transfer_Cargo">
+          <End Type="PhoebeModel.Cargo" Role="Cargo" Multiplicity="1" />
+          <End Type="PhoebeModel.Transfer" Role="Transfer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cargo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Transfer">
+              <PropertyRef Name="OldCargoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transfer_Cargo1">
+          <End Type="PhoebeModel.Cargo" Role="Cargo" Multiplicity="1" />
+          <End Type="PhoebeModel.Transfer" Role="Transfer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cargo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Transfer">
+              <PropertyRef Name="NewCargoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransferDetails_Transfer">
+          <End Type="PhoebeModel.Transfer" Role="Transfer" Multiplicity="1" />
+          <End Type="PhoebeModel.TransferDetail" Role="TransferDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Transfer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TransferDetail">
+              <PropertyRef Name="TransferID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransferDetails_Warehouse">
+          <End Type="PhoebeModel.Warehouse" Role="Warehouse" Multiplicity="1" />
+          <End Type="PhoebeModel.TransferDetail" Role="TransferDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouse">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TransferDetail">
+              <PropertyRef Name="WarehouseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1997,6 +2183,31 @@
                 <ScalarProperty Name="DestinationWarehouseID" ColumnName="DestinationWarehouseID" />
                 <ScalarProperty Name="SourceWarehouseID" ColumnName="SourceWarehouseID" />
                 <ScalarProperty Name="StockMoveID" ColumnName="StockMoveID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Transfers">
+            <EntityTypeMapping TypeName="PhoebeModel.Transfer">
+              <MappingFragment StoreEntitySet="Transfer">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="TransferTime" ColumnName="TransferTime" />
+                <ScalarProperty Name="NewCargoID" ColumnName="NewCargoID" />
+                <ScalarProperty Name="OldCargoID" ColumnName="OldCargoID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TransferDetails">
+            <EntityTypeMapping TypeName="PhoebeModel.TransferDetail">
+              <MappingFragment StoreEntitySet="TransferDetails">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="WarehouseID" ColumnName="WarehouseID" />
+                <ScalarProperty Name="TransferID" ColumnName="TransferID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

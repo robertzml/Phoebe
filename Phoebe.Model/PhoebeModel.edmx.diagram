@@ -57,6 +57,12 @@
         <AssociationConnector Association="PhoebeModel.FK_StockMoveDetails_StockMove" />
         <AssociationConnector Association="PhoebeModel.FK_StockMoveDetails_Warehouse" />
         <AssociationConnector Association="PhoebeModel.FK_StockMoveDetails_Warehouse1" />
+        <EntityTypeShape EntityType="PhoebeModel.Transfer" Width="1.5" PointX="18.625" PointY="4.75" />
+        <EntityTypeShape EntityType="PhoebeModel.TransferDetail" Width="1.5" PointX="21.5" PointY="4.875" />
+        <AssociationConnector Association="PhoebeModel.FK_Transfer_Cargo" />
+        <AssociationConnector Association="PhoebeModel.FK_Transfer_Cargo1" />
+        <AssociationConnector Association="PhoebeModel.FK_TransferDetails_Transfer" />
+        <AssociationConnector Association="PhoebeModel.FK_TransferDetails_Warehouse" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
