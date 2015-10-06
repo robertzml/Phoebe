@@ -187,11 +187,17 @@ namespace Phoebe.UI.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (model.ConfirmTime == null)
+                {
+                    TempData["Message"] = "入库审核失败，请输入选择确认时间";
+                    return RedirectToAction("Confirm", new { controller = "StockIn", id = model.ID.ToString() });
+                }
+
                 string id = Request.Form["ID"];
                 string remark = Request.Form["Remark"];
                 EntityStatus status = Request.Form["auditResult"] == "1" ? EntityStatus.StockIn : EntityStatus.StockInCancel;
 
-                ErrorCode result = this.storeBusiness.StockInAudit(id, remark, status);
+                ErrorCode result = this.storeBusiness.StockInAudit(id, model.ConfirmTime.Value, remark, status);
                 if (result == ErrorCode.Success)
                 {
                     TempData["Message"] = "入库审核完毕";
@@ -209,7 +215,7 @@ namespace Phoebe.UI.Controllers
         #endregion //Action
 
         #region Json
-        
+
         #endregion //Json
     }
 }

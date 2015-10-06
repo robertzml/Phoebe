@@ -111,6 +111,8 @@ namespace Phoebe.Model
         /// 登记时间
         /// </summary>
         [Required]
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, ConvertEmptyStringToNull = true, DataFormatString = "{0:yyyy-MM-dd}")]
         [Display(Name = "登记时间")]
         public System.DateTime RegisterTime { get; set; }
 

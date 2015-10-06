@@ -81,6 +81,8 @@ namespace Phoebe.Model
         /// <summary>
         /// 入库时间
         /// </summary>
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, ConvertEmptyStringToNull = true, DataFormatString = "{0:yyyy-MM-dd}")]
         [Display(Name = "入库时间")]
         public System.DateTime InTime { get; set; }
 

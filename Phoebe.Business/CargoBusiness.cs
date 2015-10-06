@@ -128,7 +128,6 @@ namespace Phoebe.Business
             try
             {
                 data.ID = Guid.NewGuid();
-                data.RegisterTime = DateTime.Now;
                 data.Status = (int)EntityStatus.CargoNotIn;
 
                 this.context.Cargoes.Add(data);

@@ -4,6 +4,10 @@
     ViewBag.Title = "货品登记";
 }
 
+@section styles {
+    @Styles.Render("~/Content/datepicker")
+}
+
 <!-- BEGIN PAGE HEADER-->
 <h3 class="page-title">
     @ViewBag.Title
@@ -54,6 +58,17 @@
                             <div class="col-md-8">
                                 @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-1">
+                                <span class="required">*</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ContractID, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.ContractID, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.ContractID, "", new { @class = "text-danger" })
                             </div>
                             <div class="col-md-1">
                                 <span class="required">*</span>
@@ -161,10 +176,10 @@
                         </div>
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.ContractID, htmlAttributes: new { @class = "control-label col-md-3" })
+                            @Html.LabelFor(model => model.RegisterTime, htmlAttributes: new { @class = "control-label col-md-3" })
                             <div class="col-md-8">
-                                @Html.EditorFor(model => model.ContractID, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.ContractID, "", new { @class = "text-danger" })
+                                @Html.EditorFor(model => model.RegisterTime, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.RegisterTime, "", new { @class = "text-danger" })
                             </div>
                             <div class="col-md-1">
                                 <span class="required">*</span>
@@ -197,9 +212,11 @@
 
 
 @section Scripts {
+    @Scripts.Render("~/bundles/datepicker")
     <script type="text/javascript">
         $(function () {
             phoebe.leftNavActive($('#menu-cargo-create'));
+            phoebe.initDatePicker($('#RegisterTime'), true);
 
             function loadSecondCategory(firstId) {
                 $('#SecondCategoryID').append(" <option value=''>-- 请选择 --</option>");

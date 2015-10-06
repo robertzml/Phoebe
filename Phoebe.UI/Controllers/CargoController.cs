@@ -121,6 +121,7 @@ namespace Phoebe.UI.Controllers
             data.Count = 0;
             data.UnitWeight = 0.0;
             data.UnitVolume = 0.0;
+            data.RegisterTime = DateTime.Now;
 
             return View(data);
         }

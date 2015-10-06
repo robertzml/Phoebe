@@ -224,7 +224,6 @@ namespace Phoebe.Business
             try
             {
                 data.ID = Guid.NewGuid();
-                data.InTime = DateTime.Now;
                 data.Status = (int)EntityStatus.StockInReady;
 
                 this.context.StockIns.Add(data);
@@ -262,10 +261,11 @@ namespace Phoebe.Business
         /// 入库审核
         /// </summary>
         /// <param name="id">入库ID</param>
+        /// <param name="confirmTime">确认时间</param>
         /// <param name="remark">备注</param>
         /// <param name="status">状态</param>
         /// <returns></returns>
-        public ErrorCode StockInAudit(string id, string remark, EntityStatus status)
+        public ErrorCode StockInAudit(string id, DateTime confirmTime, string remark, EntityStatus status)
         {
             try
             {
@@ -277,7 +277,7 @@ namespace Phoebe.Business
                 if (si == null)
                     return ErrorCode.ObjectNotFound;
 
-                si.ConfirmTime = DateTime.Now;
+                si.ConfirmTime = confirmTime;
                 si.Remark = remark;
                 si.Status = (int)status;
 
