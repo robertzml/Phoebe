@@ -118,6 +118,13 @@ var phoebe = function() {
 		}
 	}
 	
+	var handleInitSelect2 = function($dom) {
+		$dom.select2({
+            placeholder: "请选择",
+            allowClear: true
+        });
+	}
+	
 	function handlePrint(obj) {
 		//打开一个新窗口newWindow
 		var newWindow = window.open("打印窗口", "_blank");
@@ -149,6 +156,10 @@ var phoebe = function() {
 		
 		initDatePicker: function($dom, today) {
 			handleInitDatePicker($dom, today);
+		},
+		
+		initSelect2: function($dom) {
+			handleInitSelect2($dom);
 		},
 		
 		initPrint: function($dom) {

@@ -152,11 +152,18 @@ namespace Phoebe.UI.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (model.ConfirmTime == null)
+                {
+                    TempData["Message"] = "移库审核失败，请输入选择确认时间";
+                    return RedirectToAction("Confirm", new { controller = "StockMove", id = model.ID.ToString() });
+                }
+
+
                 string id = Request.Form["ID"];
                 string remark = Request.Form["Remark"];
                 EntityStatus status = Request.Form["auditResult"] == "1" ? EntityStatus.StockMove : EntityStatus.StockMoveCancel;
 
-                ErrorCode result = this.storeBusiness.StockMoveAudit(id, remark, status);
+                ErrorCode result = this.storeBusiness.StockMoveAudit(id, model.ConfirmTime.Value, remark, status);
                 if (result == ErrorCode.Success)
                 {
                     TempData["Message"] = "移库审核完毕";

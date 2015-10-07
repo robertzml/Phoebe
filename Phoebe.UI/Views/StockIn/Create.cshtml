@@ -6,7 +6,6 @@
 
 @section styles {
     @Styles.Render("~/Content/datepicker")
-    <link rel="stylesheet" type="text/css" href="/assets/global/plugins/bootstrap-select/bootstrap-select.min.css" />
 }
 
 <!-- BEGIN PAGE HEADER-->
@@ -167,7 +166,6 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/datepicker")
-    <script type="text/javascript" src="/assets/global/plugins/bootstrap-select/bootstrap-select.min.js"></script>
     <script type="text/javascript">
         $(function () {
             phoebe.leftNavActive($('#menu-stock-in-create'));
@@ -216,7 +214,7 @@
             $.getJSON('/Warehouse/GetEmpty', function (response) {
                 warehouses = response;
                 warehouseList = $('<select />')
-                    .attr('class', 'form-control')
+                    .attr('class', 'form-control select2')
                     .attr('name', 'warehouse[]');
                 $.each(warehouses, function (i, item) {
                     warehouseList.append("<option value='" + item.ID + "'>" + item.Number + "</option>");
@@ -236,6 +234,11 @@
                     .append('<td><a class="delete-row" href="#">删除</a></td>');
 
                 tbody.append(line);
+
+                line.find('select.select2').select2({
+                    placeholder: "Select an option",
+                    allowClear: true
+                });
 
                 return;
             });

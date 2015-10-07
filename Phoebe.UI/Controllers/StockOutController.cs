@@ -170,11 +170,17 @@ namespace Phoebe.UI.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (model.ConfirmTime == null)
+                {
+                    TempData["Message"] = "出库审核失败，请输入选择确认时间";
+                    return RedirectToAction("Confirm", new { controller = "StockOut", id = model.ID.ToString() });
+                }
+
                 string id = Request.Form["ID"];
                 string remark = Request.Form["Remark"];
                 EntityStatus status = Request.Form["auditResult"] == "1" ? EntityStatus.StockOut : EntityStatus.StockOutCancel;
 
-                ErrorCode result = this.storeBusiness.StockOutAudit(id, remark, status);
+                ErrorCode result = this.storeBusiness.StockOutAudit(id, model.ConfirmTime.Value, remark, status);
                 if (result == ErrorCode.Success)
                 {
                     TempData["Message"] = "出库审核完毕";

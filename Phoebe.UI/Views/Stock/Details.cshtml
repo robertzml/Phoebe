@@ -73,6 +73,12 @@
                         </tr>
                         <tr>
                             <td>
+                                所属合同
+                            </td>
+                            <td>@Model.Cargo.Contract.Name ( @Model.Cargo.Contract.Number )</td>
+                        </tr>
+                        <tr>
+                            <td>
                                 @Html.DisplayNameFor(model => model.Count)
                             </td>
                             <td>
@@ -84,7 +90,7 @@
                                 @Html.DisplayNameFor(model => model.InTime)
                             </td>
                             <td>
-                                @Model.InTime.ToDateTimeString()
+                                @Model.InTime.ToDateString()
                             </td>
                         </tr>
                         <tr>
@@ -92,7 +98,7 @@
                                 @Html.DisplayNameFor(model => model.OutTime)
                             </td>
                             <td>
-                                @Model.OutTime.ToDateTimeString()
+                                @Model.OutTime.ToDateString()
                             </td>
                         </tr>
                         <tr>
@@ -100,7 +106,14 @@
                                 @Html.DisplayNameFor(model => model.Source)
                             </td>
                             <td>
-                                @Html.DisplayFor(model => model.Source)
+                                @if (Model.Source == 0)
+                                {
+                                    <span>入库</span>
+                                }
+                                else
+                                {
+                                    <span>移库</span>
+                                }
                             </td>
                         </tr>
                         <tr>

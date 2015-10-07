@@ -380,7 +380,6 @@ namespace Phoebe.Business
 
                 // add stock out
                 data.ID = Guid.NewGuid();
-                data.OutTime = DateTime.Now;
                 data.Status = (int)EntityStatus.StockOutReady;
 
                 this.context.StockOuts.Add(data);
@@ -421,10 +420,11 @@ namespace Phoebe.Business
         /// 出库审核
         /// </summary>
         /// <param name="id">出库ID</param>
+        /// <param name="confirmTime">确认时间</param>
         /// <param name="remark">备注</param>
         /// <param name="status">状态</param>
         /// <returns></returns>
-        public ErrorCode StockOutAudit(string id, string remark, EntityStatus status)
+        public ErrorCode StockOutAudit(string id, DateTime confirmTime, string remark, EntityStatus status)
         {
             try
             {
@@ -436,7 +436,7 @@ namespace Phoebe.Business
                 if (so == null)
                     return ErrorCode.ObjectNotFound;
 
-                so.ConfirmTime = DateTime.Now;
+                so.ConfirmTime = confirmTime;
                 so.Remark = remark;
                 so.Status = (int)status;
 
@@ -549,7 +549,6 @@ namespace Phoebe.Business
 
                 // add stock move
                 data.ID = Guid.NewGuid();
-                data.MoveTime = DateTime.Now;
                 data.Status = (int)EntityStatus.StockMoveReady;
 
                 this.context.StockMoves.Add(data);
@@ -590,10 +589,11 @@ namespace Phoebe.Business
         /// 移库审核
         /// </summary>
         /// <param name="id">移库ID</param>
+        /// <param name="confirmTime">确认时间</param>
         /// <param name="remark">备注</param>
         /// <param name="status">状态</param>
         /// <returns></returns>
-        public ErrorCode StockMoveAudit(string id, string remark, EntityStatus status)
+        public ErrorCode StockMoveAudit(string id, DateTime confirmTime, string remark, EntityStatus status)
         {
             try
             {
@@ -605,7 +605,7 @@ namespace Phoebe.Business
                 if (sm == null)
                     return ErrorCode.ObjectNotFound;
 
-                sm.ConfirmTime = DateTime.Now;
+                sm.ConfirmTime = confirmTime;
                 sm.Remark = remark;
                 sm.Status = (int)status;
 

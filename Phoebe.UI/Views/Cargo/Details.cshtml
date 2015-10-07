@@ -197,7 +197,7 @@
                                 @Html.DisplayNameFor(model => model.RegisterTime)
                             </td>
                             <td>
-                                @Model.RegisterTime.ToDateTimeString()
+                                @Model.RegisterTime.ToDateString()
                             </td>
                         </tr>
                         <tr>
@@ -213,7 +213,7 @@
                                 @Html.DisplayNameFor(model => model.InTime)
                             </td>
                             <td>
-                                @Model.InTime.ToDateTimeString()
+                                @Model.InTime.ToDateString()
                             </td>
                         </tr>
                         <tr>
@@ -221,7 +221,7 @@
                                 @Html.DisplayNameFor(model => model.OutTime)
                             </td>
                             <td>
-                                @Model.OutTime.ToDateTimeString()
+                                @Model.OutTime.ToDateString()
                             </td>
                         </tr>
                         <tr>
@@ -312,10 +312,10 @@
                                     @Html.DisplayFor(modelItem => item.Count)
                                 </td>
                                 <td>
-                                    @item.InTime.ToDateTimeString()
+                                    @item.InTime.ToDateString()
                                 </td>
                                 <td>
-                                    @item.OutTime.ToDateTimeString()
+                                    @item.OutTime.ToDateString()
                                 </td>
                                 <td>
                                     @if (item.Source == 0)
@@ -390,10 +390,10 @@
                         {
                             <tr>
                                 <td>
-                                    @item.StockIn.InTime.ToDateTimeString()
+                                    @item.StockIn.InTime.ToDateString()
                                 </td>
                                 <td>
-                                    @item.StockIn.ConfirmTime.ToDateTimeString()
+                                    @item.StockIn.ConfirmTime.ToDateString()
                                 </td>
                                 <td>
                                     @item.Warehouse.Number
@@ -470,10 +470,10 @@
                         {
                             <tr>
                                 <td>
-                                    @item.StockOut.OutTime.ToDateTimeString()
+                                    @item.StockOut.OutTime.ToDateString()
                                 </td>
                                 <td>
-                                    @item.StockOut.ConfirmTime.ToDateTimeString()
+                                    @item.StockOut.ConfirmTime.ToDateString()
                                 </td>
                                 <td>
                                     @item.Warehouse.Number
@@ -553,10 +553,10 @@
                         {
                             <tr>
                                 <td>
-                                    @item.StockMove.MoveTime.ToDateTimeString()
+                                    @item.StockMove.MoveTime.ToDateString()
                                 </td>
                                 <td>
-                                    @item.StockMove.ConfirmTime.ToDateTimeString()
+                                    @item.StockMove.ConfirmTime.ToDateString()
                                 </td>
                                 <td>
                                     @item.SourceWarehouse.Number

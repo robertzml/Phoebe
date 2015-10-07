@@ -5,7 +5,7 @@
 }
 
 @section styles {
-    <link rel="stylesheet" type="text/css" href="/assets/global/plugins/bootstrap-select/bootstrap-select.min.css" />
+    @Styles.Render("~/Content/datepicker")
 }
 
 <!-- BEGIN PAGE HEADER-->
@@ -109,6 +109,21 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
+                                    @Html.LabelFor(model => model.OutTime, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.OutTime, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.OutTime, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-1">
+                                        <span class="required">*</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
                                     @Html.LabelFor(model => model.Remark, htmlAttributes: new { @class = "control-label col-md-2" })
                                     <div class="col-md-8">
                                         @Html.EditorFor(model => model.Remark, new { htmlAttributes = new { @class = "form-control" } })
@@ -142,10 +157,11 @@
 
 
 @section Scripts {
-    <script type="text/javascript" src="/assets/global/plugins/bootstrap-select/bootstrap-select.min.js"></script>
+    @Scripts.Render("~/bundles/datepicker")
     <script type="text/javascript">
         $(function () {
             phoebe.leftNavActive($('#menu-stock-out-create'));
+            phoebe.initDatePicker($('#OutTime'), true);
 
             var tbody = $('#store-table tbody');
 

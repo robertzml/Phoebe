@@ -4,6 +4,10 @@
     ViewBag.Title = "货品移库";
 }
 
+@section styles {
+    @Styles.Render("~/Content/datepicker")
+}
+
 <!-- BEGIN PAGE HEADER-->
 <h3 class="page-title">
     @ViewBag.Title
@@ -130,6 +134,21 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
+                                    @Html.LabelFor(model => model.MoveTime, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.MoveTime, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.MoveTime, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-1">
+                                        <span class="required">*</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
                                     @Html.LabelFor(model => model.Remark, htmlAttributes: new { @class = "control-label col-md-2" })
                                     <div class="col-md-8">
                                         @Html.EditorFor(model => model.Remark, new { htmlAttributes = new { @class = "form-control" } })
@@ -162,9 +181,11 @@
 <!-- END PAGE CONTENT-->
 
 @section Scripts {
+    @Scripts.Render("~/bundles/datepicker")
     <script type="text/javascript">
         $(function () {
             phoebe.leftNavActive($('#menu-stock-move-create'));
+            phoebe.initDatePicker($('#MoveTime'), true);
 
             var tbody = $('#store-table tbody');
 
@@ -220,6 +241,8 @@
                 $.each(response, function (i, item) {
                     $('#DestinationWarehouseID').append("<option value='" + item.ID + "'>" + item.Number + "</option>");
                 });
+
+                phoebe.initSelect2($('#DestinationWarehouseID'));
             });
         });
     </script>
