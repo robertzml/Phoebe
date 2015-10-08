@@ -18,6 +18,7 @@ namespace Phoebe.Model
         /// <summary>
         /// 原货品ID
         /// </summary>
+        [Required]
         [Display(Name = "原货品")]
         public System.Guid OldCargoID { get; set; }
 
@@ -30,8 +31,15 @@ namespace Phoebe.Model
         /// <summary>
         /// 转户时间
         /// </summary>
+        [Required]
         [Display(Name = "转户时间")]
         public System.DateTime TransferTime { get; set; }
+
+        /// <summary>
+        /// 确认时间
+        /// </summary>
+        [Display(Name = "确认时间")]
+        public Nullable<System.DateTime> ConfirmTime { get; set; }
 
         /// <summary>
         /// 操作人

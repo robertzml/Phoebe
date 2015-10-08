@@ -74,6 +74,38 @@ namespace Phoebe.Business
         }
 
         /// <summary>
+        /// 获取未入库货品相关合同
+        /// </summary>
+        /// <returns></returns>
+        public List<Contract> GetWithUnStockIn()
+        {
+            var contracts = from r in this.context.Contracts
+                            where (from s in this.context.Cargoes
+                                   where s.Status == (int)EntityStatus.CargoNotIn
+                                   group s by s.ContractID into g
+                                   select g.Key).Contains(r.ID)
+                            select r;
+
+            return contracts.ToList();
+        }
+
+        /// <summary>
+        /// 获取有库存合同
+        /// </summary>
+        /// <returns></returns>
+        public List<Contract> GetWithHasStock()
+        {
+            var contracts = from r in this.context.Contracts
+                            where (from s in this.context.Cargoes
+                                   where s.Status == (int)EntityStatus.CargoStockIn
+                                   group s by s.ContractID into g
+                                   select g.Key).Contains(r.ID)
+                            select r;
+
+            return contracts.ToList();
+        }
+
+        /// <summary>
         /// 添加合同
         /// </summary>
         /// <param name="data">合同数据</param>

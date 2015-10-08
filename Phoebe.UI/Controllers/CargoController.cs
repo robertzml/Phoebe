@@ -172,6 +172,9 @@ namespace Phoebe.UI.Controllers
         /// <remarks>
         /// 调用：
         /// /StockIn/Create
+        /// /StockMove/Creat
+        /// /StockOut/Create
+        /// /Transfer/Create
         /// </remarks>
         /// <returns></returns>
         public JsonResult GetCargos(int type, int contractID)

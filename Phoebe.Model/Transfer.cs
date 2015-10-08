@@ -24,12 +24,14 @@ namespace Phoebe.Model
         public System.Guid OldCargoID { get; set; }
         public System.Guid NewCargoID { get; set; }
         public System.DateTime TransferTime { get; set; }
+        public Nullable<System.DateTime> ConfirmTime { get; set; }
         public int UserID { get; set; }
         public string Remark { get; set; }
         public int Status { get; set; }
     
         public virtual Cargo OldCargo { get; set; }
         public virtual Cargo NewCargo { get; set; }
+        public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TransferDetail> TransferDetails { get; set; }
     }

@@ -18,9 +18,11 @@ namespace Phoebe.Model
         public System.Guid TransferID { get; set; }
         public int WarehouseID { get; set; }
         public int Count { get; set; }
+        public System.Guid StockID { get; set; }
         public string Remark { get; set; }
         public int Status { get; set; }
     
+        public virtual Stock Stock { get; set; }
         public virtual Transfer Transfer { get; set; }
         public virtual Warehouse Warehouse { get; set; }
     }

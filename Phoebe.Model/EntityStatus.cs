@@ -122,16 +122,16 @@ namespace Phoebe.Model
         CargoStockMoveReady = 56,
 
         /// <summary>
-        /// 56:货品已结算
+        /// 57:货品准备转户
         /// </summary>
-        [Display(Name = "已结算")]
-        CargoSettled = 57,
+        [Display(Name = "准备转户")]
+        CargoTransferReady = 57,
 
         /// <summary>
-        /// 56:货品已付款
+        /// 58:货品转户取消
         /// </summary>
-        [Display(Name = "已付款")]
-        CargoPaid = 58,
+        [Display(Name = "转户取消")]
+        CargoTransferCancel = 58,
         #endregion //Cargo
 
         #region Store
@@ -202,18 +202,38 @@ namespace Phoebe.Model
         StockMove = 93,
         #endregion //Store
 
-        #region Settlement
+        #region Transfer
         /// <summary>
-        /// 101:未付款
+        /// 101:准备转户
         /// </summary>
-        [Display(Name = "未付款")]
-        SettleUnpaid = 101,
+        [Display(Name = "准备转户")]
+        TransferReady = 101,
 
         /// <summary>
-        /// 102:已付款
+        /// 102:转户取消
         /// </summary>
-        [Display(Name = "已付款")]
-        SettlePaid = 102
-        #endregion //Settlement
+        [Display(Name = "转户取消")]
+        TransferCancel = 102,
+
+        /// <summary>
+        /// 103:已转户
+        /// </summary>
+        [Display(Name = "已转户")]
+        Transfer = 103,
+        #endregion //Transfer
+
+        //#region Settlement
+        ///// <summary>
+        ///// 101:未付款
+        ///// </summary>
+        //[Display(Name = "未付款")]
+        //SettleUnpaid = 101,
+
+        ///// <summary>
+        ///// 102:已付款
+        ///// </summary>
+        //[Display(Name = "已付款")]
+        //SettlePaid = 102
+        //#endregion //Settlement
     }
 }

@@ -629,8 +629,6 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\ChangePassword.cshtml" />
     <Content Include="Views\StockIn\Create.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\WarehouseCascadeList.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\FreeTrayList.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\CustomerType.cshtml" />
     <Content Include="Views\Contract\List.cshtml" />
     <Content Include="Views\Cargo\Index.cshtml" />
@@ -650,8 +648,6 @@
     <Content Include="Views\Warehouse\StoreInWarehouse.cshtml" />
     <Content Include="Views\Stock\DetailsModal.cshtml" />
     <Content Include="Views\StockMove\Create.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\SourceWarehouseList.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\DestinationWarehouseList.cshtml" />
     <Content Include="Views\StockMove\Audit.cshtml" />
     <Content Include="Views\StockMove\Confirm.cshtml" />
     <Content Include="Views\StockMove\Index.cshtml" />
@@ -671,6 +667,8 @@
     <Content Include="Views\Category\Edit.cshtml" />
     <Content Include="Views\Contract\Close.cshtml" />
     <Content Include="Views\Transfer\Create.cshtml" />
+    <Content Include="Views\Transfer\Audit.cshtml" />
+    <Content Include="Views\Transfer\Confirm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

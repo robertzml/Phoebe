@@ -195,7 +195,7 @@
                     $.getJSON('/Cargo/GetCargos', { type: 2, contractID: contractId }, function (response) {
                         $.each(response, function (i, item) {
                             $('#CargoID').append("<option value='" + item.ID + "'>" + item.Name + "</option>");
-                        });                        
+                        });
                     });
                 });
 

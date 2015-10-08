@@ -248,23 +248,30 @@ namespace Phoebe.UI.Controllers
         /// /StockIn/Create
         /// /StockOut/Create
         /// /StockMove/Create
+        /// /Transfer/Create
         /// </remarks>
         /// <returns></returns>
         public JsonResult GetContracts(int type)
         {
-            CargoBusiness cargoBusiness = new CargoBusiness();
-
-            if (type == 0)
+            if (type == 0) //has un stock in
             {
-                var contracts = cargoBusiness.GetWithUnStockIn();
+                var contracts = this.contractBusiness.GetWithUnStockIn();
                 var data = from r in contracts
                            select new { r.ID, r.Name, r.Number };
 
                 return Json(data, JsonRequestBehavior.AllowGet);
             }
-            else if (type == 1)
+            else if (type == 1) // has stock
             {
-                var contracts = cargoBusiness.GetWithHasStock();
+                var contracts = this.contractBusiness.GetWithHasStock();
+                var data = from r in contracts
+                           select new { r.ID, r.Name, r.Number };
+
+                return Json(data, JsonRequestBehavior.AllowGet);
+            }
+            else if (type == 2) // all normal
+            {
+                var contracts = this.contractBusiness.GetNormal();
                 var data = from r in contracts
                            select new { r.ID, r.Name, r.Number };
 

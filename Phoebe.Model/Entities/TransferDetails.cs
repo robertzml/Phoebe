@@ -34,6 +34,12 @@ namespace Phoebe.Model
         public int Count { get; set; }
 
         /// <summary>
+        /// 库存ID
+        /// </summary>
+        [Display(Name = "库存记录")]
+        public System.Guid StockID { get; set; }
+
+        /// <summary>
         /// 备注
         /// </summary>
         [DataType(DataType.MultilineText)]
