@@ -4,6 +4,10 @@
     ViewBag.Title = "转户确认";
 }
 
+@section styles {
+    @Styles.Render("~/Content/datepicker")
+}
+
 <!-- BEGIN PAGE HEADER-->
 <h3 class="page-title">
     @ViewBag.Title
@@ -147,3 +151,13 @@
     </div>
 </div>
 
+
+@section Scripts {
+    @Scripts.Render("~/bundles/datepicker")
+    <script type="text/javascript">
+        $(function () {
+            phoebe.leftNavActive($('#menu-transfer-audit'));
+            phoebe.initDatePicker($('#ConfirmTime'), true);
+        });
+    </script>
+}

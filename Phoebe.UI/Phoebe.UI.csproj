@@ -669,6 +669,7 @@
     <Content Include="Views\Transfer\Create.cshtml" />
     <Content Include="Views\Transfer\Audit.cshtml" />
     <Content Include="Views\Transfer\Confirm.cshtml" />
+    <Content Include="Views\Transfer\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

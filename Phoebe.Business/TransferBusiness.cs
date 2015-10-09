@@ -27,6 +27,15 @@ namespace Phoebe.Business
         /// <summary>
         /// 获取转户记录
         /// </summary>
+        /// <returns></returns>
+        public List<Transfer> Get()
+        {
+            return this.context.Transfers.OrderByDescending(r => r.ConfirmTime).ToList();
+        }
+
+        /// <summary>
+        /// 获取转户记录
+        /// </summary>
         /// <param name="id">转户ID</param>
         /// <returns></returns>
         public Transfer Get(string id)
@@ -136,16 +145,68 @@ namespace Phoebe.Business
             return ErrorCode.Success;
         }
 
-        public ErrorCode Audit(string id, DateTime confirmTime)
+
+        public ErrorCode Audit(string id, DateTime confirmTime, string remark, EntityStatus status)
         {
             try
             {
-                // change stock
-                //foreach (var item in details)
-                //{
-                //    var store = stocks.Single(r => r.WarehouseID == item.WarehouseID);
-                //    store.CargoID = newCargo.ID;
-                //}
+                Guid gid;
+                if (!Guid.TryParse(id, out gid))
+                    return ErrorCode.ObjectNotFound;
+
+                Transfer trans = this.context.Transfers.Find(gid);
+                if (trans == null)
+                    return ErrorCode.ObjectNotFound;
+
+                trans.ConfirmTime = confirmTime;
+                trans.Remark = remark;
+                trans.Status = (int)status;
+
+                if (status == EntityStatus.Transfer)
+                {
+                    Cargo oldCargo = trans.OldCargo;
+                    
+                    foreach (var item in trans.TransferDetails)
+                    {
+                        // change transfer details
+                        item.Status = (int)EntityStatus.Transfer;
+
+                        // change stock
+                        var stock = item.Stock;
+                        if (stock == null)
+                            return ErrorCode.StockNotFound;
+
+                        stock.CargoID = trans.NewCargoID;
+                    }
+
+                    // change new cargo
+                    trans.NewCargo.Status = (int)EntityStatus.CargoStockIn;
+
+                    // check old cargo
+                    int transCount = trans.TransferDetails.Sum(r => r.Count);
+                    oldCargo.StoreCount -= transCount;
+                    if (oldCargo.StoreCount == 0)
+                    {
+                        oldCargo.Status = (int)EntityStatus.CargoHasTransfer;
+                        oldCargo.OutTime = trans.ConfirmTime;
+                    }
+
+                }
+                else
+                {
+                    //change transfer details status
+                    foreach (var item in trans.TransferDetails)
+                    {
+                        item.Status = (int)EntityStatus.TransferCancel;
+                    }
+
+                    // change new cargo status
+                    trans.NewCargo.Status = (int)EntityStatus.TransferCancel;
+                }
+
+                this.context.SaveChanges();
+
+               
             }
             catch (Exception)
             {

@@ -132,6 +132,12 @@ namespace Phoebe.Model
         /// </summary>
         [Display(Name = "转户取消")]
         CargoTransferCancel = 58,
+
+        /// <summary>
+        /// 58:货品已转户
+        /// </summary>
+        [Display(Name = "已转户")]
+        CargoHasTransfer = 59,
         #endregion //Cargo
 
         #region Store

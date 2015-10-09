@@ -458,7 +458,7 @@ namespace Phoebe.Business
                         {
                             item.Warehouse.Status = (int)EntityStatus.WarehouseFree;
 
-                            remainCount -= item.Count;            
+                            remainCount -= item.Count;
                             stock.Count = 0;
                             stock.OutTime = so.ConfirmTime;
                             stock.Status = (int)EntityStatus.StoreOut;
@@ -476,7 +476,7 @@ namespace Phoebe.Business
                     {
                         cargo.Status = (int)EntityStatus.CargoStockOut;
                         cargo.OutTime = so.ConfirmTime;
-                    }                    
+                    }
                 }
                 else
                 {

@@ -34,6 +34,16 @@ namespace Phoebe.UI.Controllers
 
         #region Action
         /// <summary>
+        /// 转户记录
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Index()
+        {
+            var data = this.transferBusiness.Get();
+            return View(data);
+        }
+
+        /// <summary>
         /// 货品转户
         /// </summary>
         /// <returns></returns>
@@ -52,10 +62,10 @@ namespace Phoebe.UI.Controllers
         [HttpPost]
         public ActionResult Create(Transfer model)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var user = PageService.GetCurrentUser(User.Identity.Name);
-                model.UserID = user.ID;               
+                model.UserID = user.ID;
 
                 string oldContractID = Request.Form["OldContractID"];
                 string newContractID = Request.Form["NewContractID"];
@@ -127,6 +137,43 @@ namespace Phoebe.UI.Controllers
                 return HttpNotFound();
 
             return View(data);
+        }
+
+        /// <summary>
+        /// 转户确认
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult Confirm(Transfer model)
+        {
+            if (ModelState.IsValid)
+            {
+                if (model.ConfirmTime == null)
+                {
+                    TempData["Message"] = "转户审核失败，请输入选择确认时间";
+                    return RedirectToAction("Confirm", new { controller = "Transfer", id = model.ID.ToString() });
+                }
+
+                string id = Request.Form["ID"];
+                string remark = Request.Form["Remark"];
+                EntityStatus status = Request.Form["auditResult"] == "1" ? EntityStatus.Transfer : EntityStatus.TransferCancel;
+
+                ErrorCode result = this.transferBusiness.Audit(id, model.ConfirmTime.Value, remark, status);
+                if (result == ErrorCode.Success)
+                {
+                    TempData["Message"] = "转户审核完毕";
+                    return RedirectToAction("Audit", "Transfer");
+                }
+                else
+                {
+                    TempData["Message"] = "转户审核失败";
+                    ModelState.AddModelError("", "转户审核失败: " + result.DisplayName());
+                }
+            }
+
+            return View(model);
         }
         #endregion //Action
     }
