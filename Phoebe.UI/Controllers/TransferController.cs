@@ -44,6 +44,20 @@ namespace Phoebe.UI.Controllers
         }
 
         /// <summary>
+        /// 转户信息
+        /// </summary>
+        /// <param name="id">转户ID</param>
+        /// <returns></returns>
+        public ActionResult Details(string id)
+        {
+            var data = this.transferBusiness.Get(id);
+            if (data == null)
+                return HttpNotFound();
+
+            return View(data);
+        }
+
+        /// <summary>
         /// 货品转户
         /// </summary>
         /// <returns></returns>

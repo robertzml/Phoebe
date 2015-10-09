@@ -58,6 +58,24 @@ namespace Phoebe.Business
         }
 
         /// <summary>
+        /// 获取转户详细信息
+        /// </summary>
+        /// <param name="cargoID">货品ID</param>
+        /// <returns></returns>
+        public List<TransferDetail> GetDetailsByCargo(string cargoID)
+        {
+            Guid gid;
+            if (!Guid.TryParse(cargoID, out gid))
+                return null;
+
+            var data = from r in this.context.TransferDetails
+                       where this.context.Transfers.Where(s => s.OldCargoID == gid).Select(s => s.ID).Contains(r.TransferID)
+                       select r;
+
+            return data.ToList();
+        }
+
+        /// <summary>
         /// 货品转户
         /// </summary>
         /// <param name="data">转户数据</param>

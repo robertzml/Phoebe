@@ -46,6 +46,16 @@ namespace Phoebe.Business
                                 cargos.Select(s => s.ID).Contains(r.CargoID)
                             select r;
 
+            var transferIns = from r in this.context.Transfers
+                              where r.Status == (int)EntityStatus.Transfer && r.ConfirmTime >= start && r.ConfirmTime <= end &&
+                                cargos.Select(s => s.ID).Contains(r.NewCargoID)
+                              select r;
+
+            var transferOuts = from r in this.context.Transfers
+                               where r.Status == (int)EntityStatus.Transfer && r.ConfirmTime >= start && r.ConfirmTime <= end &&
+                                cargos.Select(s => s.ID).Contains(r.OldCargoID)
+                               select r;
+
             decimal totalWeight = 0;
             decimal totalFee = 0;
 
@@ -57,7 +67,6 @@ namespace Phoebe.Business
 
                 //find stocks in day
                 var ins = stockIns.Where(r => r.ConfirmTime >= step && r.ConfirmTime < nextDay);
-
                 if (ins.Count() != 0)
                 {
                     foreach (var item in ins)
@@ -66,6 +75,42 @@ namespace Phoebe.Business
                         record.RecordDate = step;
 
                         var c = cargos.Single(r => r.ID == item.CargoID);
+
+                        record.RecordDate = step;
+                        record.CargoName = c.Name;
+                        record.UnitWeight = c.UnitWeight.Value;
+                        record.Count = c.Count;
+                        record.StoreWeight = Convert.ToDecimal(c.TotalWeight.Value);
+                        totalWeight += record.StoreWeight;
+                        record.TotalWeight = totalWeight;
+
+                        records.Add(record);
+                        todayCount++;
+                    }
+
+                    var last = records.Last();
+                    last.DailyFee = last.TotalWeight * (decimal)dailyFee;
+                    totalFee += last.DailyFee;
+                    last.TotalFee = totalFee;
+                }
+
+                var tins = transferIns.Where(r => r.ConfirmTime >= step && r.ConfirmTime < nextDay);
+                if (tins.Count() != 0)
+                {
+                    if (todayCount > 0)
+                    {
+                        var lastIn = records.Last();
+                        totalFee -= lastIn.DailyFee;
+                        lastIn.DailyFee = 0;
+                        lastIn.TotalFee = 0;
+                    }
+
+                    foreach (var item in tins)
+                    {
+                        ChargeRecord record = new ChargeRecord();
+                        record.RecordDate = step;
+
+                        var c = cargos.Single(r => r.ID == item.NewCargoID);
 
                         record.RecordDate = step;
                         record.CargoName = c.Name;
@@ -108,6 +153,43 @@ namespace Phoebe.Business
                         record.UnitWeight = c.UnitWeight.Value;
 
                         record.Count = -item.StockOutDetails.Sum(r => r.Count);
+                        record.StoreWeight = Convert.ToDecimal(record.UnitWeight * record.Count / 1000);
+                        totalWeight += record.StoreWeight;
+                        record.TotalWeight = totalWeight;
+
+                        records.Add(record);
+                        todayCount++;
+                    }
+
+                    var last = records.Last();
+                    last.DailyFee = last.TotalWeight * (decimal)dailyFee;
+                    totalFee += last.DailyFee;
+                    last.TotalFee = totalFee;
+                }
+
+                var touts = transferOuts.Where(r => r.ConfirmTime >= step && r.ConfirmTime < nextDay);
+                if (touts.Count() != 0)
+                {
+                    if (todayCount > 0)
+                    {
+                        var lastIn = records.Last();
+                        totalFee -= lastIn.DailyFee;
+                        lastIn.DailyFee = 0;
+                        lastIn.TotalFee = 0;
+                    }
+
+                    foreach (var item in touts)
+                    {
+                        ChargeRecord record = new ChargeRecord();
+                        record.RecordDate = step;
+
+                        var c = cargos.Single(r => r.ID == item.OldCargoID);
+
+                        record.RecordDate = step;
+                        record.CargoName = c.Name;
+                        record.UnitWeight = c.UnitWeight.Value;
+
+                        record.Count = -item.TransferDetails.Sum(r => r.Count);
                         record.StoreWeight = Convert.ToDecimal(record.UnitWeight * record.Count / 1000);
                         totalWeight += record.StoreWeight;
                         record.TotalWeight = totalWeight;
