@@ -237,11 +237,6 @@
     <Content Include="assets\global\plugins\bootstrap-daterangepicker\daterangepicker-bs2.css" />
     <Content Include="assets\global\plugins\bootstrap-daterangepicker\daterangepicker-bs3.css" />
     <Content Include="assets\global\plugins\bootstrap-daterangepicker\daterangepicker.js" />
-    <Content Include="assets\global\plugins\bootstrap-datetimepicker\css\bootstrap-datetimepicker.css" />
-    <Content Include="assets\global\plugins\bootstrap-datetimepicker\css\bootstrap-datetimepicker.min.css" />
-    <Content Include="assets\global\plugins\bootstrap-datetimepicker\js\bootstrap-datetimepicker.js" />
-    <Content Include="assets\global\plugins\bootstrap-datetimepicker\js\bootstrap-datetimepicker.min.js" />
-    <Content Include="assets\global\plugins\bootstrap-datetimepicker\js\locales\bootstrap-datetimepicker.zh-CN.js" />
     <Content Include="assets\global\plugins\bootstrap-fileinput\bootstrap-fileinput.css" />
     <Content Include="assets\global\plugins\bootstrap-fileinput\bootstrap-fileinput.js" />
     <Content Include="assets\global\plugins\bootstrap-hover-dropdown\bootstrap-hover-dropdown.js" />
@@ -512,9 +507,6 @@
     <Content Include="assets\global\plugins\bootstrap-datepicker\LICENSE" />
     <Content Include="assets\global\plugins\bootstrap-datepicker\README.md" />
     <Content Include="assets\global\plugins\bootstrap-daterangepicker\README.md" />
-    <Content Include="assets\global\plugins\bootstrap-datetimepicker\less\datetimepicker.less" />
-    <Content Include="assets\global\plugins\bootstrap-datetimepicker\LICENSE" />
-    <Content Include="assets\global\plugins\bootstrap-datetimepicker\README.md" />
     <Content Include="assets\global\plugins\bootstrap-hover-dropdown\LICENSE" />
     <Content Include="assets\global\plugins\bootstrap-hover-dropdown\README.md" />
     <Content Include="assets\global\plugins\bootstrap-modal\LICENSE" />
