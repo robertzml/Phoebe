@@ -52,6 +52,13 @@ namespace Phoebe.UI.Controllers
             if (data == null)
                 return HttpNotFound();
 
+            TransferBusiness transferBusiness = new TransferBusiness();
+
+            ViewBag.StockIn = this.storeBusiness.GetStockInByStore(id);
+            ViewBag.StockOut = this.storeBusiness.GetStockOutByStore(id);
+            ViewBag.StockMove = this.storeBusiness.GetStockMoveByStore(id);
+            ViewBag.Transfer = transferBusiness.GetByStore(id);
+
             return View(data);
         }
 

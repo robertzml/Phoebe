@@ -76,6 +76,20 @@ namespace Phoebe.Business
         }
 
         /// <summary>
+        /// 根据库存获取转户记录
+        /// </summary>
+        /// <param name="stockID">库存ID</param>
+        /// <returns></returns>
+        public List<TransferDetail> GetByStore(string stockID)
+        {
+            Guid gid;
+            if (!Guid.TryParse(stockID, out gid))
+                return null;
+
+            return this.context.TransferDetails.Where(r => r.StockID == gid).ToList();
+        }
+
+        /// <summary>
         /// 货品转户
         /// </summary>
         /// <param name="data">转户数据</param>

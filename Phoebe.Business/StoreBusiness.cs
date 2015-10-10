@@ -214,6 +214,20 @@ namespace Phoebe.Business
         }
 
         /// <summary>
+        /// 根据库存获取入库记录
+        /// </summary>
+        /// <param name="stockID">库存ID</param>
+        /// <returns></returns>
+        public StockInDetail GetStockInByStore(string stockID)
+        {
+            Guid gid;
+            if (!Guid.TryParse(stockID, out gid))
+                return null;
+
+            return this.context.StockInDetails.SingleOrDefault(r => r.StockID == gid);
+        }
+
+        /// <summary>
         /// 货品入库
         /// </summary>
         /// <param name="data">入库数据</param>
@@ -361,6 +375,20 @@ namespace Phoebe.Business
         public List<StockOut> GetStockOutByStatus(EntityStatus status)
         {
             return this.context.StockOuts.Where(r => r.Status == (int)status).ToList();
+        }
+
+        /// <summary>
+        /// 根据库存获取出库记录
+        /// </summary>
+        /// <param name="stockID">库存ID</param>
+        /// <returns></returns>
+        public List<StockOutDetail> GetStockOutByStore(string stockID)
+        {
+            Guid gid;
+            if (!Guid.TryParse(stockID, out gid))
+                return null;
+
+            return this.context.StockOutDetails.Where(r => r.StockID == gid).ToList();
         }
 
         /// <summary>
@@ -530,6 +558,20 @@ namespace Phoebe.Business
         public List<StockMove> GetStockMoveByStatus(EntityStatus status)
         {
             return this.context.StockMoves.Where(r => r.Status == (int)status).ToList();
+        }
+
+        /// <summary>
+        /// 根据库存获取移库记录
+        /// </summary>
+        /// <param name="stockID">库存ID</param>
+        /// <returns></returns>
+        public List<StockMoveDetail> GetStockMoveByStore(string stockID)
+        {
+            Guid gid;
+            if (!Guid.TryParse(stockID, out gid))
+                return null;
+
+            return this.context.StockMoveDetails.Where(r => r.DestinationStockID == gid || r.SourceStockID == gid).ToList();
         }
 
         /// <summary>
