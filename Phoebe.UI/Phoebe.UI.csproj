@@ -663,6 +663,7 @@
     <Content Include="Views\Transfer\Confirm.cshtml" />
     <Content Include="Views\Transfer\Index.cshtml" />
     <Content Include="Views\Transfer\Details.cshtml" />
+    <Content Include="Views\Contract\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

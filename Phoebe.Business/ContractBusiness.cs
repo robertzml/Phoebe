@@ -160,6 +160,35 @@ namespace Phoebe.Business
 
             return ErrorCode.Success;
         }
+
+        /// <summary>
+        /// 删除合同
+        /// </summary>
+        /// <param name="id">合同ID</param>
+        /// <returns></returns>
+        public ErrorCode Delete(int id)
+        {
+            try
+            {
+                var data = this.context.Contracts.Find(id);
+                if (data == null)
+                    return ErrorCode.ObjectNotFound;
+
+                if (data.Cargoes.Any(r => r.Status != (int)EntityStatus.CargoStockOut))
+                {
+                    return ErrorCode.ContractHasCargo;
+                }
+
+                this.context.Contracts.Remove(data);
+                this.context.SaveChanges();
+            }
+            catch(Exception)
+            {
+                return ErrorCode.Exception;
+            }
+
+            return ErrorCode.Success;
+        }
         #endregion //Method
     }
 }

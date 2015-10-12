@@ -74,6 +74,25 @@ namespace Phoebe.UI.Controllers
         }
 
         /// <summary>
+        /// 合同列表
+        /// </summary>
+        /// <param name="type">类型</param>
+        /// <returns></returns>
+        public ActionResult List(int type)
+        {
+            if (type == 2) // closed contract
+            {
+                ViewBag.Title = "已关闭合同";
+                var data = this.contractBusiness.GetByType(EntityStatus.ContractClosed);
+                return View(data);
+            }
+            else
+            {
+                return HttpNotFound();
+            }
+        }
+
+        /// <summary>
         /// 添加合同
         /// </summary>
         /// <returns></returns>
@@ -173,21 +192,39 @@ namespace Phoebe.UI.Controllers
         }
 
         /// <summary>
-        /// 合同列表
+        /// 删除合同
         /// </summary>
-        /// <param name="type">类型</param>
+        /// <param name="id">合同ID</param>
         /// <returns></returns>
-        public ActionResult List(int type)
+        [HttpGet]
+        public ActionResult Delete(int id)
         {
-            if (type == 2) // closed contract
+            var data = this.contractBusiness.Get(id);
+            if (data == null)
+                return HttpNotFound();
+
+            return View(data);
+        }
+
+        /// <summary>
+        /// 删除合同
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult DeleteConfirm(int id)
+        {
+            ErrorCode result = this.contractBusiness.Delete(id);
+            if (result == ErrorCode.Success)
             {
-                ViewBag.Title = "已关闭合同";
-                var data = this.contractBusiness.GetByType(EntityStatus.ContractClosed);
-                return View(data);
+                TempData["Message"] = "删除合同成功";
+                return RedirectToAction("Index", new { controller = "Contract" });
             }
             else
             {
-                return HttpNotFound();
+                TempData["Message"] = "删除合同失败, " + result.DisplayName();
+                return RedirectToAction("Details", new { controller = "Contract", id = id });
             }
         }
         #endregion //Action
