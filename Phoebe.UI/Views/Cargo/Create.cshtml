@@ -47,150 +47,312 @@
                 </div>
             </div>
             <div class="portlet-body form">
-                @using (Html.BeginForm("Create", "Cargo", FormMethod.Post, new { @class = "form-horizontal form-bordered form-row-stripped" }))
+                @using (Html.BeginForm("Create", "Cargo", FormMethod.Post, new { @class = "form-horizontal" }))
                 {
                     @Html.AntiForgeryToken()
 
                     <div class="form-body">
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-3" })
-                            <div class="col-md-8">
-                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+
+                        <h3 class="form-section">货品信息</h3>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-1">
+                                        <span class="required">*</span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-md-1">
-                                <span class="required">*</span>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.ContractID, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.ContractID, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.ContractID, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-1">
+                                        <span class="required">*</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.FirstCategoryID, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.FirstCategoryID, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.FirstCategoryID, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-1">
+                                        <span class="required">*</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.SecondCategoryID, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        <select id="SecondCategoryID" name="SecondCategoryID" class="form-control"></select>
+                                        @Html.ValidationMessageFor(model => model.SecondCategoryID, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-1">
+                                        <span class="required">*</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.ThirdCategoryID, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        <select id="ThirdCategoryID" name="ThirdCategoryID" class="form-control"></select>
+                                        @Html.ValidationMessageFor(model => model.ThirdCategoryID, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Count, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.Count, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Count, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-1">
+                                        <span class="required">*</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="Weight" class="control-label col-md-3">单位重量 (Kg)</label>
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.UnitWeight, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.UnitWeight, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="Weight" class="control-label col-md-3">总重量 (t)</label>
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.TotalWeight, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                        @Html.ValidationMessageFor(model => model.TotalWeight, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.ContractID, htmlAttributes: new { @class = "control-label col-md-3" })
-                            <div class="col-md-8">
-                                @Html.EditorFor(model => model.ContractID, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.ContractID, "", new { @class = "text-danger" })
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="Volume" class="control-label col-md-3">单位体积 (m<sup>3</sup>)</label>
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.UnitVolume, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.UnitVolume, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-md-1">
-                                <span class="required">*</span>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.FirstCategoryID, htmlAttributes: new { @class = "control-label col-md-3" })
-                            <div class="col-md-8">
-                                @Html.EditorFor(model => model.FirstCategoryID, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.FirstCategoryID, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="col-md-1">
-                                <span class="required">*</span>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.SecondCategoryID, htmlAttributes: new { @class = "control-label col-md-3" })
-                            <div class="col-md-8">
-                                <select id="SecondCategoryID" name="SecondCategoryID" class="form-control"></select>
-                                @Html.ValidationMessageFor(model => model.SecondCategoryID, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="col-md-1">
-                                <span class="required">*</span>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="Volume" class="control-label col-md-3">总体积 (m<sup>3</sup>)</label>
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.TotalVolume, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                        @Html.ValidationMessageFor(model => model.TotalVolume, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.ThirdCategoryID, htmlAttributes: new { @class = "control-label col-md-3" })
-                            <div class="col-md-8">
-                                <select id="ThirdCategoryID" name="ThirdCategoryID" class="form-control"></select>
-                                @Html.ValidationMessageFor(model => model.ThirdCategoryID, "", new { @class = "text-danger" })
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.OriginPlace, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.OriginPlace, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.OriginPlace, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Specification, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.Specification, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Specification, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.Count, htmlAttributes: new { @class = "control-label col-md-3" })
-                            <div class="col-md-8">
-                                @Html.EditorFor(model => model.Count, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Count, "", new { @class = "text-danger" })
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="ShelfLife" class="control-label col-md-3">保质期 (月)</label>
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.ShelfLife, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.ShelfLife, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-1">
+                                        <span class="required">*</span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-md-1">
-                                <span class="required">*</span>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="Weight" class="control-label col-md-3">单位重量 (Kg)</label>
-                            <div class="col-md-8">
-                                @Html.EditorFor(model => model.UnitWeight, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.UnitWeight, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="Weight" class="control-label col-md-3">总重量 (t)</label>
-                            <div class="col-md-8">
-                                @Html.EditorFor(model => model.TotalWeight, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                                @Html.ValidationMessageFor(model => model.TotalWeight, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="Volume" class="control-label col-md-3">单位体积 (m<sup>3</sup>)</label>
-                            <div class="col-md-8">
-                                @Html.EditorFor(model => model.UnitVolume, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.UnitVolume, "", new { @class = "text-danger" })
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.RegisterTime, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.RegisterTime, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.RegisterTime, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-1">
+                                        <span class="required">*</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="Volume" class="control-label col-md-3">总体积 (m<sup>3</sup>)</label>
-                            <div class="col-md-8">
-                                @Html.EditorFor(model => model.TotalVolume, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                                @Html.ValidationMessageFor(model => model.TotalVolume, "", new { @class = "text-danger" })
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Remark, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.Remark, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Remark, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.OriginPlace, htmlAttributes: new { @class = "control-label col-md-3" })
-                            <div class="col-md-8">
-                                @Html.EditorFor(model => model.OriginPlace, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.OriginPlace, "", new { @class = "text-danger" })
+                        <h3 class="form-section">计费信息</h3>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Billing.BillingType, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.Billing.BillingType, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Billing.BillingType, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-1">
+                                        <span class="required">*</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Billing.UnitPrice, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.Billing.UnitPrice, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Billing.UnitPrice, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-1">
+                                        <span class="required">*</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Billing.IsTiming, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.Billing.IsTiming, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Billing.IsTiming, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-1">
+                                        <span class="required">*</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Billing.HandlingPrice, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.Billing.HandlingPrice, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Billing.HandlingPrice, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-1">
+                                        <span class="required">*</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Billing.FreezePrice, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.Billing.FreezePrice, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Billing.FreezePrice, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-1">
+                                        <span class="required">*</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Billing.DisposePrice, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.Billing.DisposePrice, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Billing.DisposePrice, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-1">
+                                        <span class="required">*</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.Specification, htmlAttributes: new { @class = "control-label col-md-3" })
-                            <div class="col-md-8">
-                                @Html.EditorFor(model => model.Specification, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Specification, "", new { @class = "text-danger" })
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Billing.RentPrice, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.Billing.RentPrice, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Billing.RentPrice, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-1">
+                                        <span class="required">*</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Billing.OtherPrice, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.Billing.OtherPrice, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Billing.OtherPrice, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-1">
+                                        <span class="required">*</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-
-                        <div class="form-group">
-                            <label for="ShelfLife" class="control-label col-md-3">保质期 (月)</label>
-                            <div class="col-md-8">
-                                @Html.EditorFor(model => model.ShelfLife, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.ShelfLife, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="col-md-1">
-                                <span class="required">*</span>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.RegisterTime, htmlAttributes: new { @class = "control-label col-md-3" })
-                            <div class="col-md-8">
-                                @Html.EditorFor(model => model.RegisterTime, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.RegisterTime, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="col-md-1">
-                                <span class="required">*</span>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.Remark, htmlAttributes: new { @class = "control-label col-md-3" })
-                            <div class="col-md-8">
-                                @Html.EditorFor(model => model.Remark, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Remark, "", new { @class = "text-danger" })
+                       
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Billing.Remark, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.Billing.Remark, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Billing.Remark, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -217,6 +379,7 @@
         $(function () {
             phoebe.leftNavActive($('#menu-cargo-create'));
             phoebe.initDatePicker($('#RegisterTime'), true);
+            phoebe.initSelect2($('#ContractID'));
 
             function loadSecondCategory(firstId) {
                 $('#SecondCategoryID').append(" <option value=''>-- 请选择 --</option>");

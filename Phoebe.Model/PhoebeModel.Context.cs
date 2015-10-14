@@ -45,5 +45,6 @@ namespace Phoebe.Model
         public virtual DbSet<StockMoveDetail> StockMoveDetails { get; set; }
         public virtual DbSet<Transfer> Transfers { get; set; }
         public virtual DbSet<TransferDetail> TransferDetails { get; set; }
+        public virtual DbSet<Billing> Billings { get; set; }
     }
 }

@@ -9,7 +9,7 @@
         foreach (var item in data)
         {
             <option value="@item.ID" @(Model == item.ID ? "selected='selected'" : "")>
-                @item.Name
+                @item.Number - @item.Name
             </option>
         }
     }

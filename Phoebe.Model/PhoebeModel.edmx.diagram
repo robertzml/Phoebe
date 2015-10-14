@@ -65,6 +65,8 @@
         <AssociationConnector Association="PhoebeModel.FK_TransferDetails_Stock" />
         <AssociationConnector Association="PhoebeModel.FK_TransferDetails_Transfer" />
         <AssociationConnector Association="PhoebeModel.FK_TransferDetails_Warehouse" />
+        <EntityTypeShape EntityType="PhoebeModel.Billing" Width="1.5" PointX="6.25" PointY="4.625" />
+        <AssociationConnector Association="PhoebeModel.FK_Billing_Cargo" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

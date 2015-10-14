@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BillingBusiness.cs" />
     <Compile Include="CargoBusiness.cs" />
     <Compile Include="CategoryBusiness.cs" />
     <Compile Include="ContractBusiness.cs" />

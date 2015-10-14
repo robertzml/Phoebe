@@ -76,5 +76,6 @@ namespace Phoebe.Model
         public virtual ICollection<Transfer> Transfers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Transfer> Transfers1 { get; set; }
+        public virtual Billing Billing { get; set; }
     }
 }
