@@ -18,6 +18,7 @@ namespace Phoebe.Model
         /// <summary>
         /// 计费方式
         /// </summary>
+        [Required]
         [UIHint("BillingType")]
         [Display(Name = "计费方式")]
         public int BillingType { get; set; }
@@ -25,7 +26,8 @@ namespace Phoebe.Model
         /// <summary>
         /// 单价
         /// </summary>
-        [Display(Name = "单价")]
+        [Required]
+        [Display(Name = "单价(元)")]
         public decimal UnitPrice { get; set; }
 
         /// <summary>
@@ -37,31 +39,36 @@ namespace Phoebe.Model
         /// <summary>
         /// 装卸费
         /// </summary>
-        [Display(Name = "装卸费")]
+        [Required]
+        [Display(Name = "装卸费(元)")]
         public decimal HandlingPrice { get; set; }
 
         /// <summary>
         /// 结冻费
         /// </summary>
-        [Display(Name = "结冻费")]
+        [Required]
+        [Display(Name = "结冻费(元)")]
         public decimal FreezePrice { get; set; }
 
         /// <summary>
-        /// 结冻费
+        /// 处置费
         /// </summary>
-        [Display(Name = "结冻费")]
+        [Required]
+        [Display(Name = "处置费(元)")]
         public decimal DisposePrice { get; set; }
 
         /// <summary>
         /// 租赁费
         /// </summary>
-        [Display(Name = "租赁费")]
+        [Required]
+        [Display(Name = "租赁费(元)")]
         public decimal RentPrice { get; set; }
 
         /// <summary>
         /// 其它费用
         /// </summary>
-        [Display(Name = "其它费用")]
+        [Required]
+        [Display(Name = "其它费用(元)")]
         public decimal OtherPrice { get; set; }
 
         /// <summary>

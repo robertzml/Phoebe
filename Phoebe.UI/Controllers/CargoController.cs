@@ -126,6 +126,14 @@ namespace Phoebe.UI.Controllers
             data.UnitVolume = 0.0;
             data.RegisterTime = DateTime.Now;
 
+            data.Billing = new Billing();
+            data.Billing.IsTiming = true;
+            data.Billing.HandlingPrice = 0;
+            data.Billing.FreezePrice = 0;
+            data.Billing.DisposePrice = 0;
+            data.Billing.RentPrice = 0;
+            data.Billing.OtherPrice = 0;
+
             return View(data);
         }
 
@@ -145,8 +153,35 @@ namespace Phoebe.UI.Controllers
                 model.TotalWeight = Math.Round(Convert.ToDouble(model.Count * model.UnitWeight / 1000), 3);
                 model.TotalVolume = Math.Round(Convert.ToDouble(model.Count * model.UnitVolume), 3);
                 model.StoreCount = model.Count;
-
                 model.UserID = user.ID;
+                if (string.IsNullOrEmpty(Request.Form["BillingType"]))
+                {
+                    TempData["Message"] = "货品登记失败";
+                    ModelState.AddModelError("", "货品登记失败: 请选择计费方式");
+                    return View(model);
+                }
+                model.Billing.BillingType = Convert.ToInt32(Request.Form["BillingType"]);
+
+                if (model.Billing.BillingType == (int)BillingType.UnitWeight)
+                {
+                    if (model.UnitWeight == null || model.UnitWeight == 0)
+                    {
+                        TempData["Message"] = "货品登记失败";
+                        ModelState.AddModelError("", "货品登记失败: 请输入单位重量");
+                        return View(model);
+                    }
+                }
+                else if (model.Billing.BillingType == (int)BillingType.UnitVolume)
+                {
+                    if (model.UnitVolume == null || model.UnitVolume == 0)
+                    {
+                        TempData["Message"] = "货品登记失败";
+                        ModelState.AddModelError("", "货品登记失败: 请输入单位体积");
+                        return View(model);
+                    }
+                }
+
+                model.Billing.Status = 0;
 
                 ErrorCode result = this.cargoBusiness.Create(model);
                 if (result == ErrorCode.Success)

@@ -173,8 +173,28 @@
 
             var warehouses;
             var warehouseList;
+            var table = $('#store-in-table');
+            var tbody = $('#store-in-table tbody');
 
-            function loadCargo(id) {
+            function loadContract($dom, type) {
+                $.getJSON('/Contract/GetContracts', { type: type }, function (response) {
+                    $.each(response, function (i, item) {
+                        $dom.append("<option value='" + item.ID + "'>" + item.Number + " - " + item.Name + "</option>");
+                    });
+                });
+            }
+
+            function loadCargo($dom, contractId) {
+                $dom.append("<option value=''>-- 请选择 --</option>");
+
+                $.getJSON('/Cargo/GetCargos', { type: 1, contractID: contractId }, function (response) {
+                    $.each(response, function (i, item) {
+                        $dom.append("<option value='" + item.ID + "'>" + item.Name + "</option>");
+                    });
+                });
+            }
+
+            function loadCargoInfo(id) {
                 $('#cargo-panel').empty();
 
                 if (id == null || id == '')
@@ -183,33 +203,24 @@
                 $('#cargo-panel').load('/Cargo/Info', { id: id });
             }
 
-            $.getJSON('/Contract/GetContracts', { type: 0 }, function (response) {
-                $.each(response, function (i, item) {
-                    $('#ContractID').append("<option value='" + item.ID + "'>" + item.Name + "</option>");
-                });
+            $('#ContractID').change(function () {
+                var contractId = $(this).val();
 
-                $('#ContractID').change(function () {
-                    var contractId = $(this).val();
+                $('#CargoID').empty();
+                $('#cargo-panel').empty();
+                if (contractId == '')
+                    return;
 
-                    $('#CargoID').empty();
-                    $('#cargo-panel').empty();
-                    if (contractId == '')
-                        return;
-                    $('#CargoID').append(" <option value=''>-- 请选择 --</option>");
-
-                    $.getJSON('/Cargo/GetCargos', { type: 1, contractID: contractId }, function (response) {
-                        $.each(response, function (i, item) {
-                            $('#CargoID').append("<option value='" + item.ID + "'>" + item.Name + "</option>");
-                        });
-                    });
-                });
-
-                $('#CargoID').change(function () {
-                    var cargoId = $(this).val();
-
-                    loadCargo(cargoId);
-                });
+                loadCargo($('#CargoID'), contractId);
             });
+
+            $('#CargoID').change(function () {
+                var cargoId = $(this).val();
+
+                loadCargoInfo(cargoId);
+            });
+
+            loadContract($('#ContractID'), 0);
 
             $.getJSON('/Warehouse/GetEmpty', function (response) {
                 warehouses = response;
@@ -220,9 +231,6 @@
                     warehouseList.append("<option value='" + item.ID + "'>" + item.Number + "</option>");
                 });
             });
-
-            var table = $('#store-in-table');
-            var tbody = $('#store-in-table tbody');
 
             $('#store-in-details-add').click(function (e) {
                 e.preventDefault();

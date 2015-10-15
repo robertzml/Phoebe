@@ -36,6 +36,11 @@
                 </a>
             </li>
             <li>
+                <a href="#tab_billing" data-toggle="tab">
+                    计费信息
+                </a>
+            </li>
+            <li>
                 <a href="#tab_store" data-toggle="tab">
                     库存记录
                 </a>
@@ -253,6 +258,101 @@
                 <p>
                     <a href="@Url.Action("Index", new { controller = "Cargo" })" class="btn btn-info"><i class="fa fa-list"></i>&nbsp;回到列表</a>
                 </p>
+            </div>
+
+            <div class="tab-pane fade" id="tab_billing">
+                <table class="table table-striped table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th style="width: 20%;">
+                                属性
+                            </th>
+                            <th>
+                                说明
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.Billing.BillingType)
+                            </td>
+                            <td>
+                                @{
+                                    if (Model.Billing != null)
+                                    {
+                                        var type = Model.Billing.BillingType;
+                                        @(((BillingType)type).DisplayName())
+                                    }
+                                }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.Billing.UnitPrice)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.Billing.UnitPrice)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.Billing.IsTiming)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.Billing.IsTiming)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.Billing.HandlingPrice)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.Billing.HandlingPrice)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.Billing.FreezePrice)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.Billing.FreezePrice)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.Billing.DisposePrice)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.Billing.DisposePrice)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.Billing.RentPrice)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.Billing.RentPrice)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.Billing.OtherPrice)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.Billing.OtherPrice)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.Billing.Remark)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.Billing.Remark)
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
 
             <div class="tab-pane fade" id="tab_store">
