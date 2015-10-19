@@ -131,6 +131,7 @@ namespace Phoebe.UI.Controllers
             data.Billing.HandlingPrice = 0;
             data.Billing.FreezePrice = 0;
             data.Billing.DisposePrice = 0;
+            data.Billing.PackingPrice = 0;
             data.Billing.RentPrice = 0;
             data.Billing.OtherPrice = 0;
 
@@ -213,6 +214,7 @@ namespace Phoebe.UI.Controllers
         /// /StockMove/Creat
         /// /StockOut/Create
         /// /Transfer/Create
+        /// /Settle/ColdPrice
         /// </remarks>
         /// <returns></returns>
         public JsonResult GetCargos(int type, int contractID)
@@ -229,6 +231,15 @@ namespace Phoebe.UI.Controllers
             else if (type == 2) // stock in
             {
                 var cargos = this.cargoBusiness.Get(EntityStatus.CargoStockIn).Where(r => r.ContractID == contractID);
+
+                var data = from r in cargos
+                           select new { r.ID, r.Name, FirstCategoryName = r.FirstCategory.Name };
+
+                return Json(data, JsonRequestBehavior.AllowGet);
+            }
+            else if (type == 3) // all but not stock in
+            {
+                var cargos = this.cargoBusiness.GetByContract(contractID).Where(r => r.Status != (int)EntityStatus.CargoNotIn && r.Status != (int)EntityStatus.CargoStockInReady);
 
                 var data = from r in cargos
                            select new { r.ID, r.Name, FirstCategoryName = r.FirstCategory.Name };

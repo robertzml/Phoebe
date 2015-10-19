@@ -21,6 +21,7 @@ namespace Phoebe.Model
         public decimal HandlingPrice { get; set; }
         public decimal FreezePrice { get; set; }
         public decimal DisposePrice { get; set; }
+        public decimal PackingPrice { get; set; }
         public decimal RentPrice { get; set; }
         public decimal OtherPrice { get; set; }
         public string Remark { get; set; }

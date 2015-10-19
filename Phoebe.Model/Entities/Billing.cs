@@ -58,6 +58,13 @@ namespace Phoebe.Model
         public decimal DisposePrice { get; set; }
 
         /// <summary>
+        /// 包装费
+        /// </summary>
+        [Required]
+        [Display(Name = "包装费(元)")]
+        public decimal PackingPrice { get; set; }
+
+        /// <summary>
         /// 租赁费
         /// </summary>
         [Required]

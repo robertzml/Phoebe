@@ -50,10 +50,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BillingBusiness.cs" />
+    <Compile Include="BillingUnitWeight.cs" />
     <Compile Include="CargoBusiness.cs" />
     <Compile Include="CategoryBusiness.cs" />
     <Compile Include="ContractBusiness.cs" />
     <Compile Include="CustomerBusiness.cs" />
+    <Compile Include="IBillingProcess.cs" />
     <Compile Include="ModelExtension.cs" />
     <Compile Include="SettleBusiness.cs" />
     <Compile Include="StoreBusiness.cs" />

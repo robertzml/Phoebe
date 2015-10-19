@@ -16,6 +16,7 @@
           <Property Name="HandlingPrice" Type="decimal" Precision="18" Scale="3" Nullable="false" />
           <Property Name="FreezePrice" Type="decimal" Precision="18" Scale="3" Nullable="false" />
           <Property Name="DisposePrice" Type="decimal" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="PackingPrice" Type="decimal" Precision="18" Scale="3" Nullable="false" />
           <Property Name="RentPrice" Type="decimal" Precision="18" Scale="3" Nullable="false" />
           <Property Name="OtherPrice" Type="decimal" Precision="18" Scale="3" Nullable="false" />
           <Property Name="Remark" Type="nvarchar" MaxLength="500" />
@@ -2041,6 +2042,7 @@
           <Property Name="HandlingPrice" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
           <Property Name="FreezePrice" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
           <Property Name="DisposePrice" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
+          <Property Name="PackingPrice" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
           <Property Name="RentPrice" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
           <Property Name="OtherPrice" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
           <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
@@ -2367,6 +2369,7 @@
           <EntitySetMapping Name="Billings">
             <EntityTypeMapping TypeName="PhoebeModel.Billing">
               <MappingFragment StoreEntitySet="Billing">
+                <ScalarProperty Name="PackingPrice" ColumnName="PackingPrice" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Remark" ColumnName="Remark" />
                 <ScalarProperty Name="OtherPrice" ColumnName="OtherPrice" />

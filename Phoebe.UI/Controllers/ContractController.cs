@@ -238,6 +238,7 @@ namespace Phoebe.UI.Controllers
         /// 调用：
         /// /Contract/Create
         /// /Settle/Index
+        /// /Settle/ColdPrice
         /// </remarks>
         /// <returns></returns>
         public JsonResult GetCustomers(int type)
@@ -266,6 +267,7 @@ namespace Phoebe.UI.Controllers
         /// <remarks>
         /// 调用：
         /// /Settle/Index
+        /// /Settle/ColdPrice
         /// </remarks>
         public JsonResult GetByCustomer(int customerType, int customerId)
         {

@@ -62,6 +62,17 @@ namespace Phoebe.Business
         }
 
         /// <summary>
+        /// 根据合同获取货品
+        /// </summary>
+        /// <param name="contractID">合同ID</param>
+        /// <returns></returns>
+        public List<Cargo> GetByContract(int contractID)
+        {
+            var data = this.context.Cargoes.Where(r => r.ContractID == contractID).ToList();
+            return data;
+        }
+
+        /// <summary>
         /// 获取相关货品
         /// </summary>
         /// <param name="status"></param>

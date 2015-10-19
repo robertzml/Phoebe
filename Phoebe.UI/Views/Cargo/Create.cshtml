@@ -320,6 +320,18 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
+                                    @Html.LabelFor(model => model.Billing.PackingPrice, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.Billing.PackingPrice, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Billing.PackingPrice, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-1">
+                                        <span class="required">*</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
                                     @Html.LabelFor(model => model.Billing.RentPrice, htmlAttributes: new { @class = "control-label col-md-3" })
                                     <div class="col-md-8">
                                         @Html.EditorFor(model => model.Billing.RentPrice, new { htmlAttributes = new { @class = "form-control" } })
@@ -330,6 +342,9 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                       
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     @Html.LabelFor(model => model.Billing.OtherPrice, htmlAttributes: new { @class = "control-label col-md-3" })
@@ -342,9 +357,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                       
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     @Html.LabelFor(model => model.Billing.Remark, htmlAttributes: new { @class = "control-label col-md-3" })

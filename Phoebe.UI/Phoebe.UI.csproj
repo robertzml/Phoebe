@@ -665,6 +665,8 @@
     <Content Include="Views\Transfer\Details.cshtml" />
     <Content Include="Views\Contract\Delete.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\BillingType.cshtml" />
+    <Content Include="Views\Settle\ColdPrice.cshtml" />
+    <Content Include="Views\Settle\ColdPriceProcess.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

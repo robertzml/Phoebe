@@ -36,6 +36,41 @@ namespace Phoebe.UI.Controllers
         /// 冷藏费计算
         /// </summary>
         /// <returns></returns>
+        public ActionResult ColdPrice()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 冷藏费计算
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult ColdPriceProcess(ColdPrice model)
+        {
+            if (ModelState.IsValid)
+            {
+                IBillingProcess billingProcess = new BillingUnitWeight();
+                var total = billingProcess.CalculateColdPrice(model.CargoID, model.DateFrom, model.DateTo);
+
+                ViewBag.TotalFee = total;
+
+                return View();
+            }
+            else
+            {
+                return View("ColdPrice", model);
+            }
+        }
+
+
+
+        /// <summary>
+        /// 冷藏费计算
+        /// </summary>
+        /// <returns></returns>
         public ActionResult ColdCost()
         {
             return View();
@@ -60,7 +95,6 @@ namespace Phoebe.UI.Controllers
                 return View("ColdCost", model);
             }
         }
-
         #endregion //Action
     }
 }

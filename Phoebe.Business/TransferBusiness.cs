@@ -233,7 +233,7 @@ namespace Phoebe.Business
                     }
 
                     // change new cargo status
-                    trans.NewCargo.Status = (int)EntityStatus.TransferCancel;
+                    trans.NewCargo.Status = (int)EntityStatus.CargoTransferCancel;
                 }
 
                 this.context.SaveChanges();
