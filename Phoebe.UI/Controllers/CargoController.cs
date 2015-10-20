@@ -77,7 +77,8 @@ namespace Phoebe.UI.Controllers
                 return HttpNotFound();
 
             TransferBusiness transferBusiness = new TransferBusiness();
-            ViewBag.Transfer = transferBusiness.GetDetailsByCargo(id);
+            ViewBag.TransferOut = transferBusiness.GetDetailsByCargo(id, true);
+            ViewBag.TransferIn = transferBusiness.GetDetailsByCargo(id, false);
 
             return View(data);
         }

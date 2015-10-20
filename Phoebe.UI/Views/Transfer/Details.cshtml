@@ -73,10 +73,18 @@
                         </tr>
                         <tr>
                             <td>
-                                货品名称
+                                原货品
                             </td>
                             <td>
                                 <a href="@Url.Action("Details", new { controller = "Cargo", ID = Model.OldCargoID.ToString() })">@Model.OldCargo.Name</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                新货品
+                            </td>
+                            <td>
+                                <a href="@Url.Action("Details", new { controller = "Cargo", ID = Model.NewCargoID.ToString() })">@Model.NewCargo.Name</a>
                             </td>
                         </tr>
                         <tr>

@@ -61,18 +61,30 @@ namespace Phoebe.Business
         /// 获取转户详细信息
         /// </summary>
         /// <param name="cargoID">货品ID</param>
+        /// <param name="transOut">转出或转入</param>
         /// <returns></returns>
-        public List<TransferDetail> GetDetailsByCargo(string cargoID)
+        public List<TransferDetail> GetDetailsByCargo(string cargoID, bool transOut)
         {
             Guid gid;
             if (!Guid.TryParse(cargoID, out gid))
                 return null;
 
-            var data = from r in this.context.TransferDetails
-                       where this.context.Transfers.Where(s => s.OldCargoID == gid).Select(s => s.ID).Contains(r.TransferID)
-                       select r;
+            if (transOut)
+            {
+                var data = from r in this.context.TransferDetails
+                           where this.context.Transfers.Where(s => s.OldCargoID == gid).Select(s => s.ID).Contains(r.TransferID)
+                           select r;
 
-            return data.ToList();
+                return data.ToList();
+            }
+            else
+            {
+                var data = from r in this.context.TransferDetails
+                           where this.context.Transfers.Where(s => s.NewCargoID == gid).Select(s => s.ID).Contains(r.TransferID)
+                           select r;
+
+                return data.ToList();
+            }
         }
 
         /// <summary>
@@ -177,7 +189,14 @@ namespace Phoebe.Business
             return ErrorCode.Success;
         }
 
-
+        /// <summary>
+        /// 转户审核
+        /// </summary>
+        /// <param name="id">转户ID</param>
+        /// <param name="confirmTime">确认时间</param>
+        /// <param name="remark">备注</param>
+        /// <param name="status">状态</param>
+        /// <returns></returns>
         public ErrorCode Audit(string id, DateTime confirmTime, string remark, EntityStatus status)
         {
             try
@@ -197,7 +216,7 @@ namespace Phoebe.Business
                 if (status == EntityStatus.Transfer)
                 {
                     Cargo oldCargo = trans.OldCargo;
-                    
+
                     foreach (var item in trans.TransferDetails)
                     {
                         // change transfer details
@@ -212,7 +231,23 @@ namespace Phoebe.Business
                     }
 
                     // change new cargo
-                    trans.NewCargo.Status = (int)EntityStatus.CargoStockIn;
+                    Cargo newCargo = trans.NewCargo;
+                    newCargo.Status = (int)EntityStatus.CargoStockIn;
+
+                    // add new cargo billing
+                    newCargo.Billing = new Billing();
+                    newCargo.Billing.CargoID = newCargo.ID;
+                    newCargo.Billing.BillingType = oldCargo.Billing.BillingType;
+                    newCargo.Billing.UnitPrice = oldCargo.Billing.UnitPrice;
+                    newCargo.Billing.IsTiming = oldCargo.Billing.IsTiming;
+                    newCargo.Billing.HandlingPrice = oldCargo.Billing.HandlingPrice;
+                    newCargo.Billing.FreezePrice = oldCargo.Billing.FreezePrice;
+                    newCargo.Billing.DisposePrice = oldCargo.Billing.DisposePrice;
+                    newCargo.Billing.PackingPrice = oldCargo.Billing.PackingPrice;
+                    newCargo.Billing.RentPrice = oldCargo.Billing.RentPrice;
+                    newCargo.Billing.OtherPrice = oldCargo.Billing.OtherPrice;
+                    newCargo.Billing.Remark = oldCargo.Billing.Remark;
+                    newCargo.Billing.Status = oldCargo.Billing.Status;
 
                     // check old cargo
                     int transCount = trans.TransferDetails.Sum(r => r.Count);
@@ -222,7 +257,6 @@ namespace Phoebe.Business
                         oldCargo.Status = (int)EntityStatus.CargoHasTransfer;
                         oldCargo.OutTime = trans.ConfirmTime;
                     }
-
                 }
                 else
                 {
@@ -238,7 +272,6 @@ namespace Phoebe.Business
 
                 this.context.SaveChanges();
 
-               
             }
             catch (Exception)
             {

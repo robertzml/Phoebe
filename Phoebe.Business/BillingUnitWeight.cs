@@ -37,37 +37,49 @@ namespace Phoebe.Business
                 return 0;
 
             var cargo = this.context.Cargoes.Find(gid);
-            if (cargo == null)
+            if (cargo == null || cargo.Billing == null)
                 return 0;
 
             if (cargo.Status == (int)EntityStatus.CargoNotIn || cargo.Status == (int)EntityStatus.CargoStockInReady)
                 return 0;
 
-            decimal totalFee = 0;
-
-            if (cargo.OutTime <= start)
+            if (cargo.InTime > end || cargo.OutTime <= start)
                 return 0;
 
-            var stockIns = cargo.StockIns.Where(r => r.Status == (int)EntityStatus.StockIn && r.ConfirmTime >= start && r.ConfirmTime <= end);
-            var stockOuts = cargo.StockOuts.Where(r => r.Status == (int)EntityStatus.StockOut && r.ConfirmTime >= start && r.ConfirmTime <= end);
+            decimal totalFee = 0;
 
-            var transferIns = from r in this.context.Transfers
-                              where r.NewCargoID == cargo.ID && r.Status == (int)EntityStatus.Transfer && r.ConfirmTime >= start && r.ConfirmTime <= end
-                              select r;
-
-            var transferOuts = from r in this.context.Transfers
-                               where r.OldCargoID == cargo.ID && r.Status == (int)EntityStatus.Transfer && r.ConfirmTime >= start && r.ConfirmTime <= end
-                               select r;
+            var stockOuts = from r in this.context.StockOuts
+                            where r.CargoID == cargo.ID && r.Status == (int)EntityStatus.StockOut && r.ConfirmTime >= start && r.ConfirmTime <= end
+                            select r;
 
             if (cargo.Billing.IsTiming)
             {
+                DateTime inTime = cargo.InTime.Value;
+
+                // check is transfer
+                bool isTransfer = this.context.Transfers.Any(r => r.NewCargoID == cargo.ID && r.Status == (int)EntityStatus.Transfer);
+                if (isTransfer)
+                {
+                    inTime = this.context.Transfers.Single(r => r.NewCargoID == cargo.ID).ConfirmTime.Value;
+                }
+                
                 int days = 0;
-                if (cargo.InTime < start)
-                    days = end.Subtract(start).Days;
+                if (inTime < start)
+                    days = end.Subtract(start).Days + 1;
                 else
-                    days = end.Subtract(cargo.InTime.Value).Days;
+                    days = end.Subtract(inTime).Days + 1;
 
                 totalFee = days * cargo.Billing.UnitPrice * Convert.ToDecimal(cargo.TotalWeight.Value);
+
+                // get store out
+                foreach (var item in stockOuts)
+                {
+                    if (item.ConfirmTime > end)
+                        continue;
+
+                    decimal dailyFee = cargo.Billing.UnitPrice * Convert.ToDecimal(cargo.UnitWeight.Value) * item.StockOutDetails.Sum(r => r.Count) / 1000;
+                    totalFee -= (end.Subtract(item.ConfirmTime.Value).Days + 1) * dailyFee;
+                }
 
             }
             else

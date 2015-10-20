@@ -186,7 +186,7 @@
             function loadContract($dom, type) {
                 $.getJSON('/Contract/GetContracts', { type: type }, function (response) {
                     $.each(response, function (i, item) {
-                        $dom.append("<option value='" + item.ID + "'>" + item.Name + "</option>");
+                        $dom.append("<option value='" + item.ID + "'>" + item.Number + " - " + item.Name + "</option>");
                     });
                 });
             }
@@ -235,6 +235,8 @@
 
             loadContract($('#OldContractID'), 1);
             loadContract($('#NewContractID'), 2);
+            phoebe.initSelect2($('#OldContractID'));
+            phoebe.initSelect2($('#NewContractID'));
 
         });
     </script>

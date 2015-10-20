@@ -61,6 +61,22 @@
                     <tbody>
                         <tr>
                             <td>
+                                原合同
+                            </td>
+                            <td>
+                                @Model.OldCargo.Contract.Name ( @Model.OldCargo.Contract.Number )
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                新合同
+                            </td>
+                            <td>
+                                @Model.NewCargo.Contract.Name ( @Model.NewCargo.Contract.Number )
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
                                 货品名称
                             </td>
                             <td>
@@ -83,6 +99,35 @@
                                 @Html.DisplayFor(model => model.Remark)
                             </td>
                         </tr>
+                    </tbody>
+                </table>
+
+                <hr />
+
+                <h3>转户信息</h3>
+                <table class="table table-striped table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>
+                                仓库编号
+                            </th>
+                            <th>
+                                转户数量
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.TransferDetails)
+                        {
+                            <tr>
+                                <td>
+                                    @item.Warehouse.Number
+                                </td>
+                                <td>
+                                    @item.Count
+                                </td>
+                            </tr>
+                        }
                     </tbody>
                 </table>
 
