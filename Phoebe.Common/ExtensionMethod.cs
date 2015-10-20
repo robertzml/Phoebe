@@ -36,6 +36,31 @@ namespace Phoebe.Common
         }
 
         /// <summary>
+        /// 显示Display说明
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static string DisplayDescription(this Enum value)
+        {
+            Type enumType = value.GetType();
+            var enumValue = Enum.GetName(enumType, value);
+            MemberInfo member = enumType.GetMember(enumValue)[0];
+
+            var attrs = member.GetCustomAttributes(typeof(DisplayAttribute), false);
+            if (attrs == null || attrs.Length == 0)
+                return value.ToString();
+
+            var outString = ((DisplayAttribute)attrs[0]).Description;
+
+            if (((DisplayAttribute)attrs[0]).ResourceType != null)
+            {
+                outString = ((DisplayAttribute)attrs[0]).GetName();
+            }
+
+            return outString;
+        }
+
+        /// <summary>
         /// 显示DateTime? 
         /// </summary>
         /// <param name="value"></param>

@@ -15,19 +15,19 @@ namespace Phoebe.Model
         /// <summary>
         /// 件重
         /// </summary>
-        [Display(Name = "件重")]
+        [Display(Name = "件重", Description = "单价:元/吨")]
         UnitWeight = 1,
 
         /// <summary>
         /// 件体积
         /// </summary>
-        [Display(Name = "件体积")]
+        [Display(Name = "件体积", Description = "单价:元/立方")]
         UnitVolume = 2,
 
         /// <summary>
         /// 计数
         /// </summary>
-        [Display(Name = "计数")]
+        [Display(Name = "计数", Description = "单价:元/件")]
         Count = 3
     }
 }

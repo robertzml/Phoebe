@@ -52,8 +52,8 @@ namespace Phoebe.UI.Controllers
         {
             if (ModelState.IsValid)
             {
-                IBillingProcess billingProcess = new BillingUnitWeight();
-                var total = billingProcess.CalculateColdPrice(model.CargoID, model.DateFrom, model.DateTo);
+                BillingBusiness billingBusiness = new BillingBusiness();
+                var total = billingBusiness.GetColdPrice(model.CargoID, model.DateFrom, model.DateTo);
 
                 ViewBag.TotalFee = total;
 

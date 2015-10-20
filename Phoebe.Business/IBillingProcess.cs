@@ -19,6 +19,6 @@ namespace Phoebe.Business
         /// <param name="start">开始日期</param>
         /// <param name="end">结束日期</param>
         /// <returns></returns>
-        decimal CalculateColdPrice(string cargoID, DateTime start, DateTime end);
+        decimal CalculateColdPrice(Guid cargoID, DateTime start, DateTime end);
     }
 }

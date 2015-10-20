@@ -80,6 +80,10 @@ namespace Phoebe.UI.Controllers
             ViewBag.TransferOut = transferBusiness.GetDetailsByCargo(id, true);
             ViewBag.TransferIn = transferBusiness.GetDetailsByCargo(id, false);
 
+            BillingBusiness billingBusiness = new BillingBusiness();
+            ViewBag.TotalPrice = billingBusiness.GetTotalPrice(id);
+            ViewBag.ColdPrice = billingBusiness.GetColdPrice(id);
+
             return View(data);
         }
 

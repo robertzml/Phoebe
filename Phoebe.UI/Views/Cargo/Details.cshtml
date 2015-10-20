@@ -282,8 +282,8 @@
                                 @{
                                     if (Model.Billing != null)
                                     {
-                                        var type = Model.Billing.BillingType;
-                                        @(((BillingType)type).DisplayName())
+                                        BillingType type = (BillingType)Model.Billing.BillingType;
+                                        @(type.DisplayName() + " (" + type.DisplayDescription() + ")")
                                     }
                                 }
                             </td>
@@ -358,6 +358,44 @@
                             </td>
                             <td>
                                 @Html.DisplayFor(model => model.Billing.Remark)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                费用合计 (元)
+                            </td>
+                            <td>
+                                @ViewBag.TotalPrice
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>冷藏费用</h3>
+                <table class="table table-striped table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>
+                                开始日期
+                            </th>
+                            <td>
+                                结束日期
+                            </td>
+                            <td>
+                                冷藏费(元)
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                @Model.InTime.ToDateString()
+                            </td>
+                            <td>
+                                @DateTime.Now.ToDateString()
+                            </td>
+                            <td>
+                                @ViewBag.ColdPrice
                             </td>
                         </tr>
                     </tbody>
