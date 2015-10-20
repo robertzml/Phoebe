@@ -205,6 +205,67 @@ namespace Phoebe.UI.Controllers
 
             return View(model);
         }
+
+        /// <summary>
+        /// 编辑货品
+        /// </summary>
+        /// <param name="id">货品ID</param>
+        /// <returns></returns>
+        [EnhancedAuthorize(Roles = "Root,Administrator")]
+        [HttpGet]
+        public ActionResult Edit(string id)
+        {
+            var data = this.cargoBusiness.Get(id);
+            if (data == null)
+                return HttpNotFound();
+
+            return View(data);
+        }
+
+        /// <summary>
+        /// 编辑货品
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [EnhancedAuthorize(Roles = "Root,Administrator")]
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult Edit(Cargo model)
+        {
+            if (ModelState.IsValid)
+            {
+                var cargo = this.cargoBusiness.Get(model.ID.ToString());
+
+                cargo.Name = model.Name;
+                cargo.FirstCategoryID = model.FirstCategoryID;
+                cargo.SecondCategoryID = model.SecondCategoryID;
+                cargo.ThirdCategoryID = model.ThirdCategoryID;
+                cargo.Count = model.Count;
+                cargo.UnitWeight = model.UnitWeight;
+                cargo.UnitVolume = model.UnitVolume;
+                cargo.TotalWeight = Math.Round(Convert.ToDouble(model.Count * model.UnitWeight / 1000), 3);
+                cargo.TotalVolume = Math.Round(Convert.ToDouble(model.Count * model.UnitVolume), 3);
+                cargo.OriginPlace = model.OriginPlace;
+                cargo.Specification = model.Specification;
+                cargo.ShelfLife = model.ShelfLife;
+                cargo.RegisterTime = model.RegisterTime;
+                cargo.Remark = model.Remark;
+
+                ErrorCode result = this.cargoBusiness.Edit(cargo);
+                if (result == ErrorCode.Success)
+                {
+                    TempData["Message"] = "编辑货品成功";
+                    return RedirectToAction("Details", new { controller = "Cargo", id = cargo.ID.ToString() });
+                }
+                else
+                {
+                    TempData["Message"] = "编辑货品失败";
+                    ModelState.AddModelError("", "编辑货品失败: " + result.DisplayName());
+                }
+            }
+
+            return View(model);
+        }
         #endregion //Action
 
         #region JSON

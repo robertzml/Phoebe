@@ -155,6 +155,50 @@ namespace Phoebe.UI.Controllers
         }
 
         /// <summary>
+        /// 编辑合同
+        /// </summary>
+        /// <param name="id">合同ID</param>
+        /// <returns></returns>
+        [EnhancedAuthorize(Roles = "Root,Administrator")]
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            var data = this.contractBusiness.Get(id);
+            if (data == null)
+                return HttpNotFound();
+
+            return View(data);
+        }
+
+        /// <summary>
+        /// 编辑合同
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [EnhancedAuthorize(Roles = "Root,Administrator")]
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult Edit(Contract model)
+        {
+            if (ModelState.IsValid)
+            {
+                ErrorCode result = this.contractBusiness.Edit(model);
+                if (result == ErrorCode.Success)
+                {
+                    TempData["Message"] = "编辑合同成功";
+                    return RedirectToAction("Details", new { controller = "Contract", id = model.ID });
+                }
+                else
+                {
+                    TempData["Message"] = "编辑合同失败";
+                    ModelState.AddModelError("", "编辑合同失败: " + result.DisplayName());
+                }
+            }
+
+            return View(model);
+        }
+
+        /// <summary>
         /// 关闭合同
         /// </summary>
         /// <param name="id">合同ID</param>

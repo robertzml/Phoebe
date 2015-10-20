@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -132,6 +133,26 @@ namespace Phoebe.Business
         }
 
         /// <summary>
+        /// 编辑合同
+        /// </summary>
+        /// <param name="data">合同数据</param>
+        /// <returns></returns>
+        public ErrorCode Edit(Contract data)
+        {
+            try
+            {
+                this.context.Entry(data).State = EntityState.Modified;
+                this.context.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+
+            return ErrorCode.Success;
+        }
+
+        /// <summary>
         /// 关闭合同
         /// </summary>
         /// <param name="id">合同ID</param>
@@ -182,7 +203,7 @@ namespace Phoebe.Business
                 this.context.Contracts.Remove(data);
                 this.context.SaveChanges();
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return ErrorCode.Exception;
             }

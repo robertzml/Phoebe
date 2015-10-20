@@ -1,7 +1,7 @@
 ﻿@model Phoebe.Model.Contract
 
 @{
-    ViewBag.Title = "签订合同";
+    ViewBag.Title = "编辑合同";
 }
 
 @section styles {
@@ -32,10 +32,10 @@
 <!-- BEGIN PAGE CONTENT-->
 <div class="row">
     <div class="col-md-12">
-        <div class="portlet box blue">
+        <div class="portlet box purple">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="fa fa-plus"></i>合同信息
+                    <i class="fa fa-edit"></i>合同信息
                 </div>
                 <div class="tools">
                     <a href="javascript:;" class="collapse">
@@ -47,13 +47,19 @@
                 </div>
             </div>
             <div class="portlet-body form">
-
-                @using (Html.BeginForm("Create", "Contract", FormMethod.Post, new { @class = "form-horizontal form-bordered form-row-stripped" }))
+                @using (Html.BeginForm("Edit", "Contract", FormMethod.Post, new { @class = "form-horizontal form-bordered form-row-stripped" }))
                 {
                     @Html.AntiForgeryToken()
 
                     <div class="form-body">
+                       
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.ID)
+                        @Html.HiddenFor(model => model.CustomerType)
+                        @Html.HiddenFor(model => model.CustomerID)
+                        @Html.HiddenFor(model => model.UserID)
+                        @Html.HiddenFor(model => model.Status)
+
                         <div class="form-group">
                             @Html.LabelFor(model => model.Number, htmlAttributes: new { @class = "control-label col-md-3" })
                             <div class="col-md-8">
@@ -77,20 +83,9 @@
                         </div>
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.CustomerType, htmlAttributes: new { @class = "control-label col-md-3" })
-                            <div class="col-md-8">
-                                @Html.EditorFor(model => model.CustomerType, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.CustomerType, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="col-md-1">
-                                <span class="required">*</span>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
                             @Html.LabelFor(model => model.CustomerID, htmlAttributes: new { @class = "control-label col-md-3" })
                             <div class="col-md-8">
-                                <select id="CustomerID" name="CustomerID" class="form-control"></select>
+                                <input type="text" value="@Model.CustomerName()" class = "form-control" readonly="readonly" />
                                 @Html.ValidationMessageFor(model => model.CustomerID, "", new { @class = "text-danger" })
                             </div>
                             <div class="col-md-1">
@@ -104,8 +99,13 @@
                                 @Html.EditorFor(model => model.SignDate, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.SignDate, "", new { @class = "text-danger" })
                             </div>
-                            <div class="col-md-1">
-                                <span class="required">*</span>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.CloseDate, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.CloseDate, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                @Html.ValidationMessageFor(model => model.CloseDate, "", new { @class = "text-danger" })
                             </div>
                         </div>
 
@@ -129,7 +129,7 @@
                             <div class="row">
                                 <div class="col-md-offset-3 col-md-9">
                                     <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> 保存</button>
-                                    <a href="@Url.Action("Index", new { controller = "Contract" })" class="btn btn-default">&nbsp;取消</a>
+                                    <a href="@Url.Action("Details", new { controller = "Contract", id = Model.ID })" class="btn btn-default">&nbsp;取消</a>
                                 </div>
                             </div>
                         </div>
@@ -145,22 +145,8 @@
     @Scripts.Render("~/bundles/datepicker")
     <script type="text/javascript">
         $(function () {
-            phoebe.leftNavActive($('#menu-contract-create'));
+            phoebe.leftNavActive($('#menu-contract-index'));
             phoebe.initDatePicker($('#SignDate'), true);
-
-            $('#CustomerType').change(function () {
-                var type = $(this).val();
-                
-                $('#CustomerID').empty();
-                if (type == '')
-                    return;
-
-                $.getJSON('/Contract/GetCustomers', { type: type }, function (response) {
-                    $.each(response, function (i, item) {
-                        $('#CustomerID').append("<option value='" + item.ID + "'>" + item.Name + "</option>");
-                    });
-                });
-            });
         });
     </script>
 }

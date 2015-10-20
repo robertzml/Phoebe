@@ -1,0 +1,345 @@
+﻿@model Phoebe.Model.Cargo
+
+@{
+    ViewBag.Title = "编辑货品";
+}
+
+@section styles {
+    @Styles.Render("~/Content/datepicker")
+}
+
+<!-- BEGIN PAGE HEADER-->
+<h3 class="page-title">
+    @ViewBag.Title
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index", "Home")">主页</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#">货品管理</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#">@ViewBag.Title</a>
+        </li>
+    </ul>
+</div>
+<!-- END PAGE HEADER-->
+<!-- BEGIN PAGE CONTENT-->
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet box purple">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-plus"></i>货品信息
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse">
+                    </a>
+                    <a href="javascript:;" class="reload">
+                    </a>
+                    <a href="javascript:;" class="remove">
+                    </a>
+                </div>
+            </div>
+            <div class="portlet-body form">
+                @using (Html.BeginForm("Edit", "Cargo", FormMethod.Post, new { @class = "form-horizontal" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-body">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.ID)
+                        @Html.HiddenFor(model => model.ContractID)
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-1">
+                                        <span class="required">*</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.ContractID, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        <input type="text" value="@Model.ContractName()" class="form-control" readonly="readonly" />
+                                        @Html.ValidationMessageFor(model => model.ContractID, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-1">
+                                        <span class="required">*</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.FirstCategoryID, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.FirstCategoryID, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.FirstCategoryID, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-1">
+                                        <span class="required">*</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.SecondCategoryID, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        <select id="SecondCategoryID" name="SecondCategoryID" class="form-control"></select>
+                                        @Html.ValidationMessageFor(model => model.SecondCategoryID, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-1">
+                                        <span class="required">*</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.ThirdCategoryID, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        <select id="ThirdCategoryID" name="ThirdCategoryID" class="form-control"></select>
+                                        @Html.ValidationMessageFor(model => model.ThirdCategoryID, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Count, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.Count, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Count, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-1">
+                                        <span class="required">*</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.UnitWeight, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.UnitWeight, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.UnitWeight, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.TotalWeight, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.TotalWeight, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                        @Html.ValidationMessageFor(model => model.TotalWeight, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.UnitVolume, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.UnitVolume, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.UnitVolume, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.TotalVolume, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.TotalVolume, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                        @Html.ValidationMessageFor(model => model.TotalVolume, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.OriginPlace, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.OriginPlace, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.OriginPlace, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Specification, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.Specification, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Specification, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.ShelfLife, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.ShelfLife, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.ShelfLife, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-1">
+                                        <span class="required">*</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.RegisterTime, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.RegisterTime, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.RegisterTime, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-1">
+                                        <span class="required">*</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Remark, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.Remark, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Remark, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <div class="row">
+                                <div class="col-md-offset-3 col-md-9">
+                                    <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> 保存</button>
+                                    <a href="@Url.Action("Details", new { controller = "Cargo", id = Model.ID.ToString() })" class="btn btn-default">&nbsp;取消</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END PAGE CONTENT-->
+
+@section Scripts {
+    @Scripts.Render("~/bundles/datepicker")
+    <script type="text/javascript">
+        $(function () {
+            phoebe.leftNavActive($('#menu-cargo-index'));
+            phoebe.initDatePicker($('#RegisterTime'), true);
+
+            function loadSecondCategory(firstId, secondId) {
+                $('#SecondCategoryID').append(" <option value=''>-- 请选择 --</option>");
+                $.getJSON('/Category/GetSecondCategory', { firstId: firstId }, function (response) {
+                    $.each(response, function (i, item) {
+                        $('#SecondCategoryID').append("<option value='" + item.ID + "'>" + item.Name + "</option>");
+                    });
+
+                    if (secondId != null) {
+                        $('#SecondCategoryID option[value=' + secondId + ']').attr("selected", "selected");
+                    }
+                });
+            }
+
+            function loadThirdCategory(secondId, thirdId) {
+                $('#ThirdCategoryID').append(" <option value=''>-- 请选择 --</option>");
+                $.getJSON('/Category/GetThirdCategory', { secondId: secondId }, function (response) {
+                    $.each(response, function (i, item) {
+                        $('#ThirdCategoryID').append("<option value='" + item.ID + "'>" + item.Name + "</option>");
+                    });
+
+                    if (thirdId != null) {
+                        $('#ThirdCategoryID option[value=' + thirdId + ']').attr("selected", "selected");
+                    }
+                });
+            }
+
+            loadSecondCategory('@Model.FirstCategoryID', '@Model.SecondCategoryID');
+            loadThirdCategory('@Model.SecondCategoryID', '@Model.ThirdCategoryID');
+
+            $('#FirstCategoryID').change(function () {
+                var first = $(this).val();
+
+                $('#SecondCategoryID').empty();
+                $('#ThirdCategoryID').empty();
+                if (first == '')
+                    return;
+
+                loadSecondCategory(first);
+            });
+
+            $('#SecondCategoryID').change(function () {
+                var second = $(this).val();
+
+                $('#ThirdCategoryID').empty();
+                if (second == '')
+                    return;
+
+                loadThirdCategory(second);
+            });
+
+            function calcWeight() {
+                var count = parseInt($('#Count').val());
+                var unitWeight = parseFloat($('#UnitWeight').val());
+
+                var total = count * unitWeight / 1000;
+
+                $('#TotalWeight').val(total.toFixed(2));
+            }
+
+            function calcVolume() {
+                var count = parseInt($('#Count').val());
+                var unitVolume = parseFloat($('#UnitVolume').val());
+
+                var total = count * unitVolume;
+
+                $('#TotalVolume').val(total.toFixed(2));
+            }
+
+            $('#UnitWeight').bind("input", function () {
+                calcWeight();
+            });
+
+            $('#UnitVolume').bind("input", function () {
+                calcVolume();
+            });
+
+            $('#Count').bind("input", function () {
+                calcWeight();
+                calcVolume();
+            });
+        });
+    </script>
+}

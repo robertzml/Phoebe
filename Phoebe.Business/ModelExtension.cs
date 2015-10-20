@@ -51,5 +51,23 @@ namespace Phoebe.Business
                 return "";
         }
         #endregion //Contract
+
+        #region Cargo
+        /// <summary>
+        /// 货品相关合同名称
+        /// </summary>
+        /// <param name="cargo">货品对象</param>
+        /// <returns></returns>
+        public static string ContractName(this Cargo cargo)
+        {
+            ContractBusiness contractBusiness = new ContractBusiness();
+            var data = contractBusiness.Get(cargo.ContractID);
+
+            if (data == null)
+                return "";
+            else
+                return data.Number + " - " + data.Name;
+        }
+        #endregion //Cargo
     }
 }

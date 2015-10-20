@@ -88,6 +88,8 @@ namespace Phoebe.Business
                 case BillingType.UnitWeight:
                     billingProcess = new BillingUnitWeight();
                     break;
+                default:
+                    return 0;
             }
 
             return billingProcess.CalculateColdPrice(cargo.ID, cargo.InTime.Value, DateTime.Now);
@@ -112,6 +114,8 @@ namespace Phoebe.Business
                 case BillingType.UnitWeight:
                     billingProcess = new BillingUnitWeight();
                     break;
+                default:
+                    return 0;
             }
 
             return billingProcess.CalculateColdPrice(cargo.ID, start, end);

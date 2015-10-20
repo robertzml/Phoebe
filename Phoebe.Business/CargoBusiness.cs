@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -110,6 +111,26 @@ namespace Phoebe.Business
                 data.Status = (int)EntityStatus.CargoNotIn;
 
                 this.context.Cargoes.Add(data);
+                this.context.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+
+            return ErrorCode.Success;
+        }
+
+        /// <summary>
+        /// 编辑货品
+        /// </summary>
+        /// <param name="data">货品数据</param>
+        /// <returns></returns>
+        public ErrorCode Edit(Cargo data)
+        {
+            try
+            {
+                this.context.Entry(data).State = EntityState.Modified;
                 this.context.SaveChanges();
             }
             catch (Exception)
