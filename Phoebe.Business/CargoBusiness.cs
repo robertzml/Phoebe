@@ -74,6 +74,17 @@ namespace Phoebe.Business
         }
 
         /// <summary>
+        /// 根据基本计费获取货品
+        /// </summary>
+        /// <param name="status">计费状态</param>
+        /// <returns></returns>
+        public List<Cargo> GetByBilling(EntityStatus status)
+        {
+            var data = this.context.Cargoes.Where(r => r.Billing.Status == (int)status);
+            return data.ToList();
+        }
+
+        /// <summary>
         /// 获取相关货品
         /// </summary>
         /// <param name="status"></param>

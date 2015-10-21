@@ -12,17 +12,12 @@ namespace Phoebe.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Settlement
+    public partial class BaseSettlement
     {
         public System.Guid ID { get; set; }
         public string Number { get; set; }
         public System.Guid CargoID { get; set; }
-        public decimal Weight { get; set; }
-        public decimal WeightUnitPrice { get; set; }
-        public decimal WeightTotalPrice { get; set; }
-        public decimal Volume { get; set; }
-        public decimal VolumeUnitPrice { get; set; }
-        public decimal VolumeTotalPrice { get; set; }
+        public decimal SumPrice { get; set; }
         public int Discount { get; set; }
         public decimal Remission { get; set; }
         public decimal TotalPrice { get; set; }

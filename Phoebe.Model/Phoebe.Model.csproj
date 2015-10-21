@@ -51,6 +51,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseSettlement.cs">
+      <DependentUpon>PhoebeModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Billing.cs">
       <DependentUpon>PhoebeModel.tt</DependentUpon>
     </Compile>
@@ -62,6 +65,7 @@
     <Compile Include="Contract.cs">
       <DependentUpon>PhoebeModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\BaseSettlement.cs" />
     <Compile Include="Entities\Billing.cs" />
     <Compile Include="Entities\Cargo.cs" />
     <Compile Include="Entities\Contract.cs" />
@@ -69,7 +73,6 @@
     <Compile Include="Entities\GroupCustomer.cs" />
     <Compile Include="Entities\ScatterCustomer.cs" />
     <Compile Include="Entities\SecondCategory.cs" />
-    <Compile Include="Entities\Settlement.cs" />
     <Compile Include="Entities\Stock.cs" />
     <Compile Include="Entities\StockIn.cs" />
     <Compile Include="Entities\StockInDetail.cs" />
@@ -112,9 +115,6 @@
       <DependentUpon>PhoebeModel.tt</DependentUpon>
     </Compile>
     <Compile Include="SecondCategory.cs">
-      <DependentUpon>PhoebeModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Settlement.cs">
       <DependentUpon>PhoebeModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Stock.cs">

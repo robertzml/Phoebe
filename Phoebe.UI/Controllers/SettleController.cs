@@ -33,6 +33,76 @@ namespace Phoebe.UI.Controllers
 
         #region Action
         /// <summary>
+        /// 基本费用结算
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Base()
+        {
+            CargoBusiness cargoBusiness = new CargoBusiness();
+            var data = cargoBusiness.GetByBilling(EntityStatus.BillingUnsettle);
+
+            return View(data);
+        }
+
+        /// <summary>
+        /// 基本费用结算
+        /// </summary>
+        /// <param name="id">货品ID</param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult BaseProcess(string id)
+        {
+            CargoBusiness cargoBusiness = new CargoBusiness();
+            var cargo = cargoBusiness.Get(id);
+            ViewBag.Cargo = cargo;
+
+            BillingBusiness billingBusiness = new BillingBusiness();
+        
+            BaseSettlement data = new BaseSettlement();
+            data.CargoID = cargo.ID;
+            data.SumPrice = billingBusiness.GetTotalPrice(id);
+            data.Discount = 100;
+            data.SettleTime = DateTime.Now;
+            data.TotalPrice = data.SumPrice;
+
+            return View(data);
+        }
+
+        /// <summary>
+        /// 基本费用结算
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult BaseProcess(BaseSettlement model)
+        {
+            CargoBusiness cargoBusiness = new CargoBusiness();
+            var cargo = cargoBusiness.Get(model.CargoID.ToString());
+            ViewBag.Cargo = cargo;
+
+            if (ModelState.IsValid)
+            {
+                var user = PageService.GetCurrentUser(User.Identity.Name);
+                model.UserID = user.ID;
+
+                ErrorCode result = this.settleBusiness.CreateBase(model);
+                if (result == ErrorCode.Success)
+                {
+                    TempData["Message"] = "基本费用结算成功";
+                    return RedirectToAction("Base", new { controller = "Settle" });
+                }
+                else
+                {
+                    TempData["Message"] = "基本费用结算失败";
+                    ModelState.AddModelError("", "基本费用结算失败: " + result.DisplayName());
+                }
+            }
+
+            return View(model);
+        }
+
+        /// <summary>
         /// 冷藏费计算
         /// </summary>
         /// <returns></returns>

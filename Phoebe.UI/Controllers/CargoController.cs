@@ -51,7 +51,7 @@ namespace Phoebe.UI.Controllers
             var data1 = this.cargoBusiness.Get(EntityStatus.CargoNotIn);
             var data2 = this.cargoBusiness.Get(EntityStatus.CargoStockInReady);
             var data = data1.Union(data2);
-          
+
             return View(data);
         }
 
@@ -187,7 +187,7 @@ namespace Phoebe.UI.Controllers
                     }
                 }
 
-                model.Billing.Status = 0;
+                model.Billing.Status = (int)EntityStatus.BillingUnsettle;
 
                 ErrorCode result = this.cargoBusiness.Create(model);
                 if (result == ErrorCode.Success)
@@ -266,6 +266,53 @@ namespace Phoebe.UI.Controllers
 
             return View(model);
         }
+
+        /// <summary>
+        /// 编辑计费信息
+        /// </summary>
+        /// <param name="id">货品ID</param>
+        /// <returns></returns>
+        [EnhancedAuthorize(Roles = "Root,Administrator")]
+        [HttpGet]
+        public ActionResult EditBilling(string id)
+        {
+            BillingBusiness billingBusiness = new BillingBusiness();
+            var data = billingBusiness.Get(id);
+            if (data == null)
+                return HttpNotFound();
+
+            return View(data);
+        }
+
+        /// <summary>
+        /// 编辑计费信息
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [EnhancedAuthorize(Roles = "Root,Administrator")]
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult EditBilling(Billing model)
+        {
+            if (ModelState.IsValid)
+            {
+                BillingBusiness billingBusiness = new BillingBusiness();
+
+                ErrorCode result = billingBusiness.Edit(model);
+                if (result == ErrorCode.Success)
+                {
+                    TempData["Message"] = "编辑计费信息成功";
+                    return RedirectToAction("Details", new { controller = "Cargo", id = model.CargoID.ToString() });
+                }
+                else
+                {
+                    TempData["Message"] = "编辑计费信息失败";
+                    ModelState.AddModelError("", "编辑计费信息失败: " + result.DisplayName());
+                }
+            }
+
+            return View(model);
+        }
         #endregion //Action
 
         #region JSON
@@ -280,42 +327,38 @@ namespace Phoebe.UI.Controllers
         /// /StockMove/Creat
         /// /StockOut/Create
         /// /Transfer/Create
+        /// /Settle/Base
         /// /Settle/ColdPrice
         /// </remarks>
         /// <returns></returns>
         public JsonResult GetCargos(int type, int contractID)
         {
+            IEnumerable<Cargo> cargos;
             if (type == 1)  // not stock in
             {
-                var cargos = this.cargoBusiness.Get(EntityStatus.CargoNotIn).Where(r => r.ContractID == contractID);
-
-                var data = from r in cargos
-                           select new { r.ID, r.Name, FirstCategoryName = r.FirstCategory.Name };
-
-                return Json(data, JsonRequestBehavior.AllowGet);
+                cargos = this.cargoBusiness.Get(EntityStatus.CargoNotIn).Where(r => r.ContractID == contractID);                
             }
             else if (type == 2) // stock in
             {
-                var cargos = this.cargoBusiness.Get(EntityStatus.CargoStockIn).Where(r => r.ContractID == contractID);
-
-                var data = from r in cargos
-                           select new { r.ID, r.Name, FirstCategoryName = r.FirstCategory.Name };
-
-                return Json(data, JsonRequestBehavior.AllowGet);
+                cargos = this.cargoBusiness.Get(EntityStatus.CargoStockIn).Where(r => r.ContractID == contractID);
             }
-            else if (type == 3) // all but not stock in
+            else if (type == 3) // all with out not in
             {
-                var cargos = this.cargoBusiness.GetByContract(contractID).Where(r => r.Status != (int)EntityStatus.CargoNotIn && r.Status != (int)EntityStatus.CargoStockInReady);
-
-                var data = from r in cargos
-                           select new { r.ID, r.Name, FirstCategoryName = r.FirstCategory.Name };
-
-                return Json(data, JsonRequestBehavior.AllowGet);
+                cargos = this.cargoBusiness.GetByContract(contractID).Where(r => r.Status != (int)EntityStatus.CargoNotIn && r.Status != (int)EntityStatus.CargoStockInReady);
+            }
+            else if (type == 4) // get billing unsettle
+            {
+                cargos = this.cargoBusiness.GetByContract(contractID).Where(r => r.Billing.Status == (int)EntityStatus.BillingUnsettle);
             }
             else
             {
                 return null;
             }
+
+            var data = from r in cargos
+                       select new { r.ID, r.Name };
+
+            return Json(data, JsonRequestBehavior.AllowGet);
         }
         #endregion //JSON
     }

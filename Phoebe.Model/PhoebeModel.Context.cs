@@ -36,7 +36,6 @@ namespace Phoebe.Model
         public virtual DbSet<StockIn> StockIns { get; set; }
         public virtual DbSet<StockOut> StockOuts { get; set; }
         public virtual DbSet<StockMove> StockMoves { get; set; }
-        public virtual DbSet<Settlement> Settlements { get; set; }
         public virtual DbSet<Contract> Contracts { get; set; }
         public virtual DbSet<ThirdCategory> ThirdCategories { get; set; }
         public virtual DbSet<Stock> Stocks { get; set; }
@@ -46,5 +45,6 @@ namespace Phoebe.Model
         public virtual DbSet<Transfer> Transfers { get; set; }
         public virtual DbSet<TransferDetail> TransferDetails { get; set; }
         public virtual DbSet<Billing> Billings { get; set; }
+        public virtual DbSet<BaseSettlement> BaseSettlements { get; set; }
     }
 }

@@ -149,7 +149,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CategoryInfoModel.cs" />
-    <Compile Include="Models\ColdCost.cs" />
+    <Compile Include="Models\SettleModels.cs" />
     <Compile Include="Models\UserModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\FormsAuthenticationService.cs" />
@@ -669,6 +669,9 @@
     <Content Include="Views\Settle\ColdPriceProcess.cshtml" />
     <Content Include="Views\Contract\Edit.cshtml" />
     <Content Include="Views\Cargo\Edit.cshtml" />
+    <Content Include="Views\Cargo\EditBilling.cshtml" />
+    <Content Include="Views\Settle\Base.cshtml" />
+    <Content Include="Views\Settle\BaseProcess.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

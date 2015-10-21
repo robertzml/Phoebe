@@ -25,6 +25,36 @@ namespace Phoebe.Business
 
         #region Method
         /// <summary>
+        /// 添加基本结算信息
+        /// </summary>
+        /// <param name="data">基本结算数据</param>
+        /// <returns></returns>
+        public ErrorCode CreateBase(BaseSettlement data)
+        {
+            try
+            {
+                //edit cargo billing
+                var billing = this.context.Billings.Find(data.CargoID);
+                if (billing.Status != (int)EntityStatus.BillingUnsettle)
+                {
+                    return ErrorCode.CargoCannotSettled;
+                }
+
+                billing.Status = (int)EntityStatus.BillingSettle;
+                data.Status = (int)EntityStatus.SettleUnpaid;
+
+                this.context.BaseSettlements.Add(data);
+                this.context.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+
+            return ErrorCode.Success;
+        }
+
+        /// <summary>
         /// 冷藏费计算
         /// </summary>
         /// <param name="contractID">合同ID</param>

@@ -281,6 +281,7 @@ namespace Phoebe.UI.Controllers
         /// <remarks>
         /// 调用：
         /// /Contract/Create
+        /// /Settle/Base
         /// /Settle/Index
         /// /Settle/ColdPrice
         /// </remarks>
@@ -310,6 +311,7 @@ namespace Phoebe.UI.Controllers
         /// </returns>
         /// <remarks>
         /// 调用：
+        /// /Settle/Base
         /// /Settle/Index
         /// /Settle/ColdPrice
         /// </remarks>

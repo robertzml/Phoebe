@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Phoebe.Model
 {
-    public class SettlementMetadata
+    public class BaseSettlementMetadata
     {
         /// <summary>
         /// ID
@@ -30,40 +30,11 @@ namespace Phoebe.Model
         public System.Guid CargoID { get; set; }
 
         /// <summary>
-        /// 重量
+        /// 费用合计
         /// </summary>
-        [Display(Name = "重量")]
-        public decimal Weight { get; set; }
-
-        /// <summary>
-        /// 重量单价
-        /// </summary>
-        [Display(Name = "重量单价(元/kg)")]
-        public decimal WeightUnitPrice { get; set; }
-
-        /// <summary>
-        /// 重量总价
-        /// </summary>
-        [Display(Name = "重量总价(元)")]
-        public decimal WeightTotalPrice { get; set; }
-
-        /// <summary>
-        /// 体积
-        /// </summary>
-        [Display(Name = "体积")]
-        public decimal Volume { get; set; }
-
-        /// <summary>
-        /// 体积单价
-        /// </summary>
-        [Display(Name = "体积单价")]
-        public decimal VolumeUnitPrice { get; set; }
-
-        /// <summary>
-        /// 体积总价
-        /// </summary>
-        [Display(Name = "体积总价(元)")]
-        public decimal VolumeTotalPrice { get; set; }
+        [Required]
+        [Display(Name = "费用合计")]
+        public decimal SumPrice { get; set; }
 
         /// <summary>
         /// 折扣率
@@ -88,13 +59,13 @@ namespace Phoebe.Model
         /// <summary>
         /// 付款
         /// </summary>
-        [Required]
         [Display(Name = "付款")]
         public Nullable<decimal> PaidPrice { get; set; }
 
         /// <summary>
         /// 结算时间
         /// </summary>
+        [DataType(DataType.Date)]
         [Display(Name = "结算时间")]
         public System.DateTime SettleTime { get; set; }
 
@@ -124,8 +95,8 @@ namespace Phoebe.Model
         public int Status { get; set; }
     }
 
-    [MetadataType(typeof(SettlementMetadata))]
-    public partial class Settlement
+    [MetadataType(typeof(BaseSettlementMetadata))]
+    public partial class BaseSettlement
     {
     }
 }

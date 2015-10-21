@@ -228,18 +228,38 @@ namespace Phoebe.Model
         Transfer = 103,
         #endregion //Transfer
 
-        //#region Settlement
-        ///// <summary>
-        ///// 101:未付款
-        ///// </summary>
-        //[Display(Name = "未付款")]
-        //SettleUnpaid = 101,
+        #region Settlement
+        /// <summary>
+        /// 111:结算单未付款
+        /// </summary>
+        [Display(Name = "未付款")]
+        SettleUnpaid = 111,
 
-        ///// <summary>
-        ///// 102:已付款
-        ///// </summary>
-        //[Display(Name = "已付款")]
-        //SettlePaid = 102
-        //#endregion //Settlement
+        /// <summary>
+        /// 112:结算单已付款
+        /// </summary>
+        [Display(Name = "已付款")]
+        SettlePaid = 112,
+        #endregion //Settlement
+
+        #region Billing
+        /// <summary>
+        /// 120:基本费用未结算
+        /// </summary>
+        [Display(Name = "未结算")]
+        BillingUnsettle = 120,
+
+        /// <summary>
+        /// 121:基本费用已结算
+        /// </summary>
+        [Display(Name = "已结算")]
+        BillingSettle = 121,
+
+        /// <summary>
+        /// 122:基本费用已付款
+        /// </summary>
+        [Display(Name = "已付款")]
+        BillingPaid = 122
+        #endregion //Billing
     }
 }

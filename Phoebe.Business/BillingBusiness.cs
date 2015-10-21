@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -47,6 +48,41 @@ namespace Phoebe.Business
         #endregion //Function
 
         #region Method
+        /// <summary>
+        /// 获取计费
+        /// </summary>
+        /// <param name="cargoID">货品ID</param>
+        /// <returns></returns>
+        public Billing Get(string cargoID)
+        {
+            Guid gid;
+            if (!Guid.TryParse(cargoID, out gid))
+                return null;
+
+            return this.context.Billings.Find(gid);
+        }
+
+        /// <summary>
+        /// 编辑计费
+        /// </summary>
+        /// <param name="data">计费数据</param>
+        /// <returns></returns>
+        public ErrorCode Edit(Billing data)
+        {
+            try
+            {
+                this.context.Entry(data).State = EntityState.Modified;
+                this.context.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+
+            return ErrorCode.Success;
+        }
+
+
         /// <summary>
         /// 获取所有费用
         /// </summary>
