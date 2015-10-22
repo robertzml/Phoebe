@@ -240,6 +240,12 @@ namespace Phoebe.Model
         /// </summary>
         [Display(Name = "已付款")]
         SettlePaid = 112,
+
+        /// <summary>
+        /// 113:结算单已退回
+        /// </summary>
+        [Display(Name = "已退回")]
+        SettleCancel = 113,
         #endregion //Settlement
 
         #region Billing

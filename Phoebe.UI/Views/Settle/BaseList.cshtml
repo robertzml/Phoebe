@@ -1,7 +1,7 @@
-﻿@model IEnumerable<Phoebe.Model.Cargo>
+﻿@model IEnumerable<Phoebe.Model.BaseSettlement>
 
 @{
-    ViewBag.Title = "未入库货品";
+    ViewBag.Title = "基本费用结算记录";
 }
 
 <!-- BEGIN PAGE HEADER-->
@@ -16,8 +16,11 @@
             <i class="fa fa-angle-right"></i>
         </li>
         <li>
-            <a href="#">货品管理</a>
+            <a href="#">财务结算</a>
             <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#">@ViewBag.Title</a>
         </li>
     </ul>
 </div>
@@ -28,7 +31,7 @@
         <div class="portlet box blue">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="fa fa-list"></i>&nbsp;货品列表
+                    <i class="fa fa-list"></i>&nbsp;基本费用结算列表
                 </div>
                 <div class="tools">
                     <a href="javascript:;" class="collapse">
@@ -40,35 +43,41 @@
                 </div>
             </div>
             <div class="portlet-body">
-                <table class="table table-striped table-bordered table-hover" id="cargo-table">
+                <table class="table table-striped table-bordered table-hover" id="base-settle-table">
                     <thead>
                         <tr>
                             <th>
-                                @Html.DisplayNameFor(model => model.Name)
+                                @Html.DisplayNameFor(model => model.Number)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.FirstCategoryID)
+                                @Html.DisplayNameFor(model => model.CargoID)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.SecondCategoryID)
+                                @Html.DisplayNameFor(model => model.SumPrice)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Count)
+                                @Html.DisplayNameFor(model => model.Discount)
                             </th>
                             <th>
-                                总重量 (t)
+                                @Html.DisplayNameFor(model => model.Remission)
                             </th>
                             <th>
-                                总体积 (m<sup>3</sup>)
+                                @Html.DisplayNameFor(model => model.TotalPrice)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.ContractID)
+                                @Html.DisplayNameFor(model => model.PaidPrice)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.RegisterTime)
+                                @Html.DisplayNameFor(model => model.SettleTime)
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.UserID)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ConfirmTime)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Status)
                             </th>
                             <th>
                                 操作
@@ -78,31 +87,37 @@
                     <tfoot>
                         <tr>
                             <th>
-                                @Html.DisplayNameFor(model => model.Name)
-                            </th>
-                            <th data-filter="true">
-                                @Html.DisplayNameFor(model => model.FirstCategoryID)
-                            </th>
-                            <th data-filter="true">
-                                @Html.DisplayNameFor(model => model.SecondCategoryID)
+                                @Html.DisplayNameFor(model => model.Number)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Count)
+                                @Html.DisplayNameFor(model => model.CargoID)
                             </th>
                             <th>
-                                总重量 (t)
+                                @Html.DisplayNameFor(model => model.SumPrice)
                             </th>
                             <th>
-                                总体积 (m<sup>3</sup>)
-                            </th>
-                            <th data-filter="true">
-                                @Html.DisplayNameFor(model => model.ContractID)
+                                @Html.DisplayNameFor(model => model.Discount)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.RegisterTime)
+                                @Html.DisplayNameFor(model => model.Remission)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.TotalPrice)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.PaidPrice)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.SettleTime)
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.UserID)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ConfirmTime)
+                            </th>
+                            <th data-filter="true">
+                                @Html.DisplayNameFor(model => model.Status)
                             </th>
                             <th>
                                 操作
@@ -114,34 +129,40 @@
                         {
                             <tr>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Name)
+                                    @Html.DisplayFor(modelItem => item.Number)
                                 </td>
                                 <td>
-                                    @item.FirstCategory.Name
+                                    @item.Cargo.Name
                                 </td>
                                 <td>
-                                    @item.SecondCategory.Name
+                                    @Html.DisplayFor(modelItem => item.SumPrice)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Count)
+                                    @Html.DisplayFor(modelItem => item.Discount)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.TotalWeight)
+                                    @Html.DisplayFor(modelItem => item.Remission)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.TotalVolume)
+                                    @Html.DisplayFor(modelItem => item.TotalPrice)
                                 </td>
                                 <td>
-                                    @item.Contract.Name
+                                    @Html.DisplayFor(modelItem => item.PaidPrice)
                                 </td>
                                 <td>
-                                    @item.RegisterTime.ToDateString()
+                                    @item.SettleTime.ToDateString()
                                 </td>
                                 <td>
                                     @item.User.Name
                                 </td>
                                 <td>
-                                    <a href="@Url.Action("Details", new { controller = "Cargo", id = item.ID.ToString() })" class="btn btn-info btn-sm" role="button"><i class="fa fa-check-circle"></i>&nbsp;查看</a>
+                                    @item.ConfirmTime.ToDateString()
+                                </td>
+                                <td>
+                                    @(((EntityStatus)item.Status).DisplayName())
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("BaseDetails", new { controller = "Settle", id = item.ID.ToString() })" class="btn btn-info btn-sm" role="button"><i class="fa fa-check-circle"></i>&nbsp;查看</a>
                                 </td>
                             </tr>
                         }
@@ -156,8 +177,8 @@
 @section Scripts {
     <script type="text/javascript">
         $(function () {
-            phoebe.leftNavActive($('#menu-cargo-notin'));
-            phoebe.initDatatable($('#cargo-table'));
+            phoebe.leftNavActive($('#menu-base-settle-list'));
+            phoebe.initDatatable($('#base-settle-table'));
         });
     </script>
 }

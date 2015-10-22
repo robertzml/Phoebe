@@ -33,7 +33,7 @@ namespace Phoebe.Model
         /// 费用合计
         /// </summary>
         [Required]
-        [Display(Name = "费用合计")]
+        [Display(Name = "费用合计(元)")]
         public decimal SumPrice { get; set; }
 
         /// <summary>
@@ -50,16 +50,16 @@ namespace Phoebe.Model
         public decimal Remission { get; set; }
 
         /// <summary>
-        /// 总价
+        /// 应付款
         /// </summary>
         [Required]
-        [Display(Name = "总价(元)")]
+        [Display(Name = "应付款(元)")]
         public decimal TotalPrice { get; set; }
 
         /// <summary>
-        /// 付款
+        /// 实付款
         /// </summary>
-        [Display(Name = "付款")]
+        [Display(Name = "实付款(元)")]
         public Nullable<decimal> PaidPrice { get; set; }
 
         /// <summary>

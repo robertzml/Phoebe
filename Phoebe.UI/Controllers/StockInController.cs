@@ -189,7 +189,7 @@ namespace Phoebe.UI.Controllers
             {
                 if (model.ConfirmTime == null)
                 {
-                    TempData["Message"] = "入库审核失败，请输入选择确认时间";
+                    TempData["Message"] = "入库审核失败，请选择确认时间";
                     return RedirectToAction("Confirm", new { controller = "StockIn", id = model.ID.ToString() });
                 }
 

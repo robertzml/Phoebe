@@ -672,6 +672,10 @@
     <Content Include="Views\Cargo\EditBilling.cshtml" />
     <Content Include="Views\Settle\Base.cshtml" />
     <Content Include="Views\Settle\BaseProcess.cshtml" />
+    <Content Include="Views\Settle\BaseAudit.cshtml" />
+    <Content Include="Views\Settle\BaseConfirm.cshtml" />
+    <Content Include="Views\Settle\BaseList.cshtml" />
+    <Content Include="Views\Settle\BaseDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

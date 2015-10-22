@@ -369,6 +369,14 @@
                                 @ViewBag.TotalPrice
                             </td>
                         </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.Billing.Status)
+                            </td>
+                            <td>
+                                @(((EntityStatus)Model.Billing.Status).DisplayName())
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
 

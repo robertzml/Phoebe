@@ -33,6 +33,30 @@ namespace Phoebe.UI.Controllers
 
         #region Action
         /// <summary>
+        /// 基本费用结算记录
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult BaseList()
+        {
+            var data = this.settleBusiness.GetBase();
+            return View(data);
+        }
+
+        /// <summary>
+        /// 基本费用结算信息
+        /// </summary>
+        /// <param name="id">结算ID</param>
+        /// <returns></returns>
+        public ActionResult BaseDetails(string id)
+        {
+            var data = this.settleBusiness.GetBase(id);
+            if (data == null)
+                return HttpNotFound();
+
+            return View(data);
+        }
+
+        /// <summary>
         /// 基本费用结算
         /// </summary>
         /// <returns></returns>
@@ -57,7 +81,7 @@ namespace Phoebe.UI.Controllers
             ViewBag.Cargo = cargo;
 
             BillingBusiness billingBusiness = new BillingBusiness();
-        
+
             BaseSettlement data = new BaseSettlement();
             data.CargoID = cargo.ID;
             data.SumPrice = billingBusiness.GetTotalPrice(id);
@@ -86,7 +110,7 @@ namespace Phoebe.UI.Controllers
                 var user = PageService.GetCurrentUser(User.Identity.Name);
                 model.UserID = user.ID;
 
-                ErrorCode result = this.settleBusiness.CreateBase(model);
+                ErrorCode result = this.settleBusiness.BaseCreate(model);
                 if (result == ErrorCode.Success)
                 {
                     TempData["Message"] = "基本费用结算成功";
@@ -101,6 +125,76 @@ namespace Phoebe.UI.Controllers
 
             return View(model);
         }
+
+        /// <summary>
+        /// 基本费用审核
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult BaseAudit()
+        {
+            var data = this.settleBusiness.GetBase(EntityStatus.SettleUnpaid);
+            return View(data);
+        }
+
+        /// <summary>
+        /// 基本费用审核
+        /// </summary>
+        /// <param name="id">结算单ID</param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult BaseConfirm(string id)
+        {
+            var data = this.settleBusiness.GetBase(id);
+
+            if (data == null || data.Status != (int)EntityStatus.SettleUnpaid)
+                return HttpNotFound();
+
+            return View(data);
+        }
+
+        /// <summary>
+        /// 基本费用审核
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult BaseConfirm(BaseSettlement model)
+        {
+            if (ModelState.IsValid)
+            {
+                if (model.ConfirmTime == null)
+                {
+                    TempData["Message"] = "审核失败，请选择确认时间";
+                    return RedirectToAction("BaseConfirm", new { controller = "Settle", id = model.ID.ToString() });
+                }
+
+                if (model.PaidPrice == null)
+                {
+                    TempData["Message"] = "审核失败，请输入付款金额";
+                    return RedirectToAction("BaseConfirm", new { controller = "Settle", id = model.ID.ToString() });
+                }
+
+                string id = Request.Form["ID"];
+                string remark = Request.Form["Remark"];
+                EntityStatus status = Request.Form["auditResult"] == "1" ? EntityStatus.SettlePaid : EntityStatus.SettleCancel;
+
+                ErrorCode result = this.settleBusiness.BaseAudit(id, model.PaidPrice.Value, model.ConfirmTime.Value, remark, status);
+                if (result == ErrorCode.Success)
+                {
+                    TempData["Message"] = "基本费用审核完毕";
+                    return RedirectToAction("BaseAudit", "Settle");
+                }
+                else
+                {
+                    TempData["Message"] = "基本费用审核失败";
+                    ModelState.AddModelError("", "基本费用审核失败: " + result.DisplayName());
+                }
+            }
+
+            return View(model);
+        }
+
 
         /// <summary>
         /// 冷藏费计算
