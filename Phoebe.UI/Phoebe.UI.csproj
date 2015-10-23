@@ -150,6 +150,7 @@
     </Compile>
     <Compile Include="Models\CategoryInfoModel.cs" />
     <Compile Include="Models\SettleModels.cs" />
+    <Compile Include="Models\StoreModels.cs" />
     <Compile Include="Models\UserModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\FormsAuthenticationService.cs" />
@@ -676,6 +677,10 @@
     <Content Include="Views\Settle\BaseConfirm.cshtml" />
     <Content Include="Views\Settle\BaseList.cshtml" />
     <Content Include="Views\Settle\BaseDetails.cshtml" />
+    <Content Include="Views\Settle\Cold.cshtml" />
+    <Content Include="Views\Settle\ColdProcess.cshtml" />
+    <Content Include="Views\Stock\Snapshoot.cshtml" />
+    <Content Include="Views\Stock\SnapshootProcess.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

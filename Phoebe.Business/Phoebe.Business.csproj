@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BillingBusiness.cs" />
+    <Compile Include="BillingUnitVolume.cs" />
     <Compile Include="BillingUnitWeight.cs" />
     <Compile Include="CargoBusiness.cs" />
     <Compile Include="CategoryBusiness.cs" />

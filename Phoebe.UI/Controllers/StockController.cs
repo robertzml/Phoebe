@@ -7,6 +7,7 @@ using Phoebe.Business;
 using Phoebe.Common;
 using Phoebe.Model;
 using Phoebe.UI.Filters;
+using Phoebe.UI.Models;
 using Phoebe.UI.Services;
 
 namespace Phoebe.UI.Controllers
@@ -85,6 +86,36 @@ namespace Phoebe.UI.Controllers
             var data = this.storeBusiness.GetStorage();
             return View(data);
         }
+
+        /// <summary>
+        /// 库存快照
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult Snapshoot()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 库存快照
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult SnapshootProcess(StoreSnapshootInput model)
+        {
+            if (ModelState.IsValid)
+            {
+                var data = this.storeBusiness.GetInDay(model.ContractID, model.Date);
+                return View(data);
+            }
+            else
+            {
+                return View("Snapshoot", model);
+            }
+        }
         #endregion //Action
 
         #region Json
@@ -95,6 +126,7 @@ namespace Phoebe.UI.Controllers
         /// <remarks>
         /// 调用：
         /// /StockOut/Create
+        /// /Transfer/Create
         /// </remarks>
         /// <returns></returns>
         public JsonResult GetWithCargo(string cargoID)

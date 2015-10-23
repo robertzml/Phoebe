@@ -112,7 +112,7 @@ namespace Phoebe.Business
         /// </summary>
         /// <param name="cargoID">货品ID</param>
         /// <returns></returns>
-        public decimal GetColdPrice(string cargoID)
+        public decimal CalculateColdPrice(string cargoID)
         {
             Cargo cargo = checkCargo(cargoID);
             if (cargo == null)
@@ -123,6 +123,9 @@ namespace Phoebe.Business
             {
                 case BillingType.UnitWeight:
                     billingProcess = new BillingUnitWeight();
+                    break;
+                case BillingType.UnitVolume:
+                    billingProcess = new BillingUnitVolume();
                     break;
                 default:
                     return 0;
@@ -138,7 +141,7 @@ namespace Phoebe.Business
         /// <param name="start">开始日期</param>
         /// <param name="end">结束日期</param>
         /// <returns></returns>
-        public decimal GetColdPrice(string cargoID, DateTime start, DateTime end)
+        public decimal CalculateColdPrice(string cargoID, DateTime start, DateTime end)
         {
             Cargo cargo = checkCargo(cargoID);
             if (cargo == null)
@@ -149,6 +152,9 @@ namespace Phoebe.Business
             {
                 case BillingType.UnitWeight:
                     billingProcess = new BillingUnitWeight();
+                    break;
+                case BillingType.UnitVolume:
+                    billingProcess = new BillingUnitVolume();
                     break;
                 default:
                     return 0;

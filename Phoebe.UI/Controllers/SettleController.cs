@@ -195,6 +195,36 @@ namespace Phoebe.UI.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// 冷藏费结算
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Cold()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 冷藏费结算
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult ColdProcess(ColdInput model)
+        {
+            if (ModelState.IsValid)
+            {
+                var data = this.settleBusiness.ProcessDailyCold(model.ContractID, model.DateFrom, model.DateTo);
+
+                return View(data);
+            }
+            else
+            {
+                return View("Cold", model);
+            }
+        }
+
 
         /// <summary>
         /// 冷藏费计算
@@ -217,7 +247,7 @@ namespace Phoebe.UI.Controllers
             if (ModelState.IsValid)
             {
                 BillingBusiness billingBusiness = new BillingBusiness();
-                var total = billingBusiness.GetColdPrice(model.CargoID, model.DateFrom, model.DateTo);
+                var total = billingBusiness.CalculateColdPrice(model.CargoID, model.DateFrom, model.DateTo);
 
                 ViewBag.TotalFee = total;
 

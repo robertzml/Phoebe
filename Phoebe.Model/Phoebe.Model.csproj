@@ -65,6 +65,7 @@
     <Compile Include="Contract.cs">
       <DependentUpon>PhoebeModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DailyColdRecord.cs" />
     <Compile Include="Entities\BaseSettlement.cs" />
     <Compile Include="Entities\Billing.cs" />
     <Compile Include="Entities\Cargo.cs" />

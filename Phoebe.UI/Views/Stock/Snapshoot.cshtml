@@ -1,0 +1,125 @@
+﻿@model Phoebe.UI.Models.StoreSnapshootInput
+
+@{
+    ViewBag.Title = "库存快照";
+
+    AjaxOptions ajaxOpts = new AjaxOptions
+    {
+        UpdateTargetId = "process-result",
+        Url = Url.Action("SnapshootProcess", "Stock"),
+        HttpMethod = "POST",
+        OnSuccess = "phoebe.showMessage('提交成功')"
+    };
+}
+
+@section styles {
+    @Styles.Render("~/Content/datepicker")
+}
+
+<!-- BEGIN PAGE HEADER-->
+<h3 class="page-title">
+    @ViewBag.Title
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index", "Home")">主页</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#">财务结算</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#">@ViewBag.Title</a>
+        </li>
+    </ul>
+</div>
+<!-- END PAGE HEADER-->
+<!-- BEGIN PAGE CONTENT-->
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet box blue">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-sliders"></i>&nbsp;信息选择
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse">
+                    </a>
+                    <a href="javascript:;" class="reload">
+                    </a>
+                    <a href="javascript:;" class="remove">
+                    </a>
+                </div>
+            </div>
+            <div class="portlet-body">
+                @using (Ajax.BeginForm("SnapshootProcess", new { controller = "Stock" }, ajaxOpts, new { @class = "form-horizontal" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-body">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="row">
+                            <div class="col-md-12">
+                                @Html.ValidationMessageFor(model => model.ContractID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">合同选择</label>
+                                    <div class="col-md-8">
+                                        <select id="ContractID" name="ContractID" class="form-control" data-val="true" data-val-required="请选择合同"></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> 确定</button>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="process-result">
+
+</div>
+<!-- END PAGE CONTENT-->
+
+@section Scripts {
+    @Scripts.Render("~/bundles/datepicker")
+    <script type="text/javascript">
+        $(function () {
+            phoebe.leftNavActive($('#menu-stock-snapshoot'));
+            phoebe.initDatePicker($('#Date'));
+
+            function loadContracts($dom) {
+
+                $.getJSON('/Contract/GetContracts', { type: 2 }, function (response) {
+                    $dom.append(" <option value=''>-- 请选择 --</option>");
+                    $.each(response, function (i, item) {
+                        $dom.append("<option value='" + item.ID + "'>" + item.Name + "</option>");
+                    });
+                });
+            }
+       
+            loadContracts($('#ContractID'));
+            phoebe.initSelect2($('#ContractID'));
+        });
+    </script>
+}

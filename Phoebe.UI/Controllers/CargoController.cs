@@ -82,7 +82,7 @@ namespace Phoebe.UI.Controllers
 
             BillingBusiness billingBusiness = new BillingBusiness();
             ViewBag.TotalPrice = billingBusiness.GetTotalPrice(id);
-            ViewBag.ColdPrice = billingBusiness.GetColdPrice(id);
+            ViewBag.ColdPrice = billingBusiness.CalculateColdPrice(id);
 
             return View(data);
         }

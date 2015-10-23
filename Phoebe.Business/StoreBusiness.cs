@@ -176,6 +176,91 @@ namespace Phoebe.Business
 
             return list;
         }
+
+        /// <summary>
+        /// 获取指定日库存
+        /// </summary>
+        /// <param name="contractID">合同ID</param>
+        /// <param name="date">日期</param>
+        /// <returns></returns>
+        public List<Storage> GetInDay(int contractID, DateTime date)
+        {
+            List<Storage> data = new List<Storage>();
+
+            var cargos = this.context.Cargoes.Where(r => r.ContractID == contractID && r.InTime <= date && (r.OutTime == null || r.OutTime > date));
+
+            foreach (var cargo in cargos)
+            {
+                //find stock in
+                var stockInDetails = cargo.StockInDetails.Where(r => r.Status == (int)EntityStatus.StockIn);
+                foreach (var item in stockInDetails)
+                {
+                    Storage storage = new Storage();
+                    storage.WarehouseID = item.WarehouseID;
+                    storage.Number = item.Warehouse.Number;
+                    storage.StockID = item.StockID.Value;
+                    storage.CargoID = cargo.ID;
+                    storage.ContractID = contractID;
+                    storage.CargoName = cargo.Name;
+                    storage.Count = item.Count;
+                    storage.InTime = item.StockIn.ConfirmTime.Value;
+
+                    data.Add(storage);
+                }
+
+                // find transfer in
+                var transferIn = this.context.Transfers.SingleOrDefault(r => r.NewCargoID == cargo.ID && r.Status == (int)EntityStatus.Transfer);
+                if (transferIn != null && transferIn.ConfirmTime <= date)
+                {
+                    foreach (var item in transferIn.TransferDetails)
+                    {
+                        Storage storage = new Storage();
+                        storage.WarehouseID = item.WarehouseID;
+                        storage.Number = item.Warehouse.Number;
+                        storage.StockID = item.StockID;
+                        storage.CargoID = cargo.ID;
+                        storage.ContractID = contractID;
+                        storage.CargoName = cargo.Name;
+                        storage.Count = item.Count;
+                        storage.InTime = transferIn.ConfirmTime.Value;
+
+                        data.Add(storage);
+                    }
+                }
+
+                //find stock out
+                var stockOutDetails = cargo.StockOutDetails.Where(r => r.Status == (int)EntityStatus.StockOut && r.StockOut.ConfirmTime <= date);
+                foreach (var item in stockOutDetails)
+                {
+                    var s = data.SingleOrDefault(r => r.StockID == item.StockID);
+                    if (s != null)
+                    {
+                        s.Count -= item.Count;
+                        if (s.Count == 0)
+                            data.Remove(s);
+                    }
+                }
+
+                //find transfer out
+                var transferOuts = this.context.Transfers.Where(r => r.OldCargoID == cargo.ID && r.Status == (int)EntityStatus.Transfer && r.ConfirmTime <= date);
+                foreach (var tout in transferOuts)
+                {
+                    foreach (var item in tout.TransferDetails)
+                    {
+                        var s = data.SingleOrDefault(r => r.StockID == item.StockID);
+                        if (s != null)
+                        {
+                            s.Count -= item.Count;
+                            if (s.Count == 0)
+                                data.Remove(s);
+                        }
+                    }
+                }
+            }
+
+
+            return data;
+        }
         #endregion //Stock
 
         #region Stock In
