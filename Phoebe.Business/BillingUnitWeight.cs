@@ -25,7 +25,7 @@ namespace Phoebe.Business
 
         #region Method
         /// <summary>
-        /// 冷藏费计算
+        /// 货品冷藏费计算
         /// </summary>
         /// <param name="cargoID">货品ID</param>
         /// <param name="start">开始日期</param>
@@ -93,6 +93,29 @@ namespace Phoebe.Business
 
             return totalFee;
         }
+
+        /// <summary>
+        /// 计算货品总重量
+        /// </summary>
+        /// <param name="unitMeter">单位重量(kg)</param>
+        /// <param name="count">数量</param>
+        /// <returns>总重量(t)</returns>
+        public decimal CalculateTotalMeter(decimal unitMeter, decimal count)
+        {
+            return unitMeter * count / 1000;
+        }
+
+        /// <summary>
+        /// 计算货品日冷藏费
+        /// </summary>
+        /// <param name="totalMeter">总重量(t)</param>
+        /// <param name="unitPrice">单价(元/t)</param>
+        /// <returns></returns>
+        public decimal CalculateDailyFee(decimal totalMeter, decimal unitPrice)
+        {
+            return totalMeter * unitPrice;
+        }
+
         #endregion //Method
     }
 }

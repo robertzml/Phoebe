@@ -162,6 +162,39 @@ namespace Phoebe.Business
 
             return billingProcess.CalculateColdPrice(cargo.ID, start, end);
         }
+
+        public DailyColdRecord GetDailyColdRecord(int contractID, DateTime date)
+        {
+            StoreBusiness storeBusiness = new StoreBusiness();
+            var stores = storeBusiness.GetInDay(contractID, date);
+
+            DailyColdRecord record = new DailyColdRecord();
+            record.RecordDate = date;
+            record.TotalMeter = 0;
+            record.DailyFee = 0;
+
+            IBillingProcess billingProcess = null;
+
+            foreach (var item in stores)
+            {
+                decimal totalMeter = 0;
+                var cargo = this.context.Cargoes.Find(item.CargoID);
+
+                switch ((BillingType)cargo.Billing.BillingType)
+                {
+                    case BillingType.UnitWeight:
+                        billingProcess = new BillingUnitWeight();
+                        totalMeter = billingProcess.CalculateTotalMeter(Convert.ToDecimal(cargo.UnitWeight.Value), item.Count);
+
+                        record.TotalMeter += totalMeter;
+                        record.DailyFee += billingProcess.CalculateDailyFee(totalMeter, cargo.Billing.UnitPrice);
+                        break;
+                }
+
+            }
+
+            return record;
+        }
         #endregion //Method
     }
 }

@@ -109,6 +109,8 @@ namespace Phoebe.UI.Controllers
             if (ModelState.IsValid)
             {
                 var data = this.storeBusiness.GetInDay(model.ContractID, model.Date);
+                ViewBag.StockFlow = this.storeBusiness.GetDaysFlow(model.ContractID, model.Date);
+
                 return View(data);
             }
             else

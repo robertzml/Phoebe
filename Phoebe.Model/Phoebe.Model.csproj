@@ -121,6 +121,7 @@
     <Compile Include="Stock.cs">
       <DependentUpon>PhoebeModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="StockFlow.cs" />
     <Compile Include="StockIn.cs">
       <DependentUpon>PhoebeModel.tt</DependentUpon>
     </Compile>

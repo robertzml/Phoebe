@@ -93,6 +93,16 @@ namespace Phoebe.Business
 
             return totalFee;
         }
+
+        public decimal CalculateDailyFee(decimal totalMeter, decimal unitPrice)
+        {
+            throw new NotImplementedException();
+        }
+
+        public decimal CalculateTotalMeter(decimal unitMeter, decimal count)
+        {
+            throw new NotImplementedException();
+        }
         #endregion //Method
     }
 }

@@ -146,7 +146,7 @@ namespace Phoebe.Business
         public List<Storage> GetStorage()
         {
             var warehouses = this.context.Warehouses.Where(r => r.IsStorage == true).OrderBy(r => r.Number);
-            var stocks = this.context.Stocks.Where(r => r.Status == (int)EntityStatus.StoreIn);            
+            var stocks = this.context.Stocks.Where(r => r.Status == (int)EntityStatus.StoreIn);
 
             List<Storage> list = new List<Storage>();
             foreach (var item in warehouses)
@@ -258,6 +258,84 @@ namespace Phoebe.Business
                 }
             }
 
+            return data;
+        }
+
+        /// <summary>
+        /// 获取日流水
+        /// </summary>
+        /// <param name="contractID">合同ID</param>
+        /// <param name="date">日期</param>
+        /// <returns></returns>
+        public List<StockFlow> GetDaysFlow(int contractID, DateTime date)
+        {
+            List<StockFlow> data = new List<StockFlow>();
+
+            var cargos = this.context.Cargoes.Where(r => r.ContractID == contractID && r.InTime <= date && (r.OutTime == null || r.OutTime >= date));
+            foreach(var cargo in cargos)
+            {
+                //find stock in
+                var stockIns = cargo.StockIns.Where(r => r.ConfirmTime == date && r.Status == (int)EntityStatus.StockIn);
+                foreach(var item in stockIns)
+                {
+                    StockFlow stockFlow = new StockFlow();
+                    stockFlow.CargoID = cargo.ID;
+                    stockFlow.ContractID = contractID;
+                    stockFlow.CargoName = cargo.Name;
+                    stockFlow.Count = item.StockInDetails.Sum(r => r.Count);
+                    stockFlow.FlowDate = item.ConfirmTime.Value;
+                    stockFlow.Type = StockFlowType.StockIn;
+
+                    data.Add(stockFlow);
+                }
+
+                //find transfer in
+                var transferIns = this.context.Transfers.Where(r => r.NewCargoID == cargo.ID && r.ConfirmTime == date && r.Status == (int)EntityStatus.Transfer);
+                foreach(var item in transferIns)
+                {
+                    StockFlow stockFlow = new StockFlow();
+                    stockFlow.CargoID = cargo.ID;
+                    stockFlow.ContractID = contractID;
+                    stockFlow.CargoName = cargo.Name;
+                    stockFlow.Count = item.TransferDetails.Sum(r => r.Count);
+                    stockFlow.FlowDate = item.ConfirmTime.Value;
+                    stockFlow.Type = StockFlowType.TransferIn;
+
+                    data.Add(stockFlow);
+                }
+
+                //find stock out
+                var stockOuts = cargo.StockOuts.Where(r => r.ConfirmTime == date && r.Status == (int)EntityStatus.StockOut);
+                foreach(var item in stockOuts)
+                {
+                    StockFlow stockFlow = new StockFlow();
+                    stockFlow.CargoID = cargo.ID;
+                    stockFlow.ContractID = contractID;
+                    stockFlow.CargoName = cargo.Name;
+                    stockFlow.Count = -item.StockOutDetails.Sum(r => r.Count);
+                    stockFlow.FlowDate = item.ConfirmTime.Value;
+                    stockFlow.Type = StockFlowType.StockOut;
+
+                    data.Add(stockFlow);
+                }
+
+                //find transfer out
+                var transferOuts = this.context.Transfers.Where(r => r.OldCargoID == cargo.ID && r.ConfirmTime == date && r.Status == (int)EntityStatus.Transfer);
+                foreach(var item in transferOuts)
+                {
+                    StockFlow stockFlow = new StockFlow();
+                    stockFlow.CargoID = cargo.ID;
+                    stockFlow.ContractID = contractID;
+                    stockFlow.CargoName = cargo.Name;
+                    stockFlow.Count = -item.TransferDetails.Sum(r => r.Count);
+                    stockFlow.FlowDate = item.ConfirmTime.Value;
+                    stockFlow.Type = StockFlowType.TransferOut;
+
+                    data.Add(stockFlow);
+                }
+
+            }
+
 
             return data;
         }
@@ -345,7 +423,7 @@ namespace Phoebe.Business
                 // change cargo status
                 var cargo = this.context.Cargoes.Find(data.CargoID);
                 cargo.Status = (int)EntityStatus.CargoStockInReady;
-               
+
                 this.context.SaveChanges();
             }
             catch (Exception)
@@ -398,7 +476,6 @@ namespace Phoebe.Business
                         stock.CargoID = item.CargoID;
                         stock.InTime = Convert.ToDateTime(si.ConfirmTime);
                         stock.Source = 0;
-                      
                         stock.Status = (int)EntityStatus.StoreIn;
 
                         this.context.Stocks.Add(stock);
@@ -738,7 +815,7 @@ namespace Phoebe.Business
 
                 if (status == EntityStatus.StockMove)
                 {
-                    foreach(var item in sm.StockMoveDetails)
+                    foreach (var item in sm.StockMoveDetails)
                     {
                         item.Status = (int)EntityStatus.StockMove;
 
@@ -763,7 +840,7 @@ namespace Phoebe.Business
 
                         item.DestinationStockID = stock.ID;
                         item.DestinationWarehouse.Status = (int)EntityStatus.WarehouseOccupy;
-                    }                   
+                    }
                 }
                 else
                 {
