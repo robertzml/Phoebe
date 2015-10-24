@@ -1,7 +1,7 @@
-﻿@model Phoebe.Model.BaseSettlement
+﻿@model Phoebe.Model.ColdSettlement
 
 @{
-    ViewBag.Title = "基本费用结算信息";
+    ViewBag.Title = "冷藏费用结算信息";
 }
 
 <!-- BEGIN PAGE HEADER-->
@@ -31,7 +31,7 @@
         <div class="portlet box blue">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="fa fa-info-circle"></i>&nbsp;基本费用结算信息
+                    <i class="fa fa-info-circle"></i>&nbsp;冷藏费用结算信息
                 </div>
                 <div class="tools">
                     <a href="javascript:;" class="collapse">
@@ -65,10 +65,26 @@
                         </tr>
                         <tr>
                             <td>
-                                @Html.DisplayNameFor(model => model.CargoID)
+                                @Html.DisplayNameFor(model => model.ContractID)
                             </td>
                             <td>
-                                <a href="@Url.Action("Details", new { controller = "Cargo", ID = Model.CargoID.ToString() })">@Model.Cargo.Name</a>
+                                <a href="@Url.Action("Details", new { controller = "Contract", ID = Model.ContractID })">@Model.Contract.Name (@Model.Contract.Number)</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.StartTime)
+                            </td>
+                            <td>
+                                @Model.StartTime.ToDateString()
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.EndTime)
+                            </td>
+                            <td>
+                                @Model.EndTime.ToDateString()
                             </td>
                         </tr>
                         <tr>
@@ -156,7 +172,7 @@
 
                 <hr />
                 <p>
-                    <a href="@Url.Action("BaseList", new { controller = "Settle" })" class="btn btn-info"><i class="fa fa-list"></i>&nbsp;回到列表</a>
+                    <a href="@Url.Action("ColdList", new { controller = "Settle" })" class="btn btn-info"><i class="fa fa-list"></i>&nbsp;回到列表</a>
                 </p>
             </div>
         </div>
@@ -167,7 +183,7 @@
 @section Scripts {
     <script type="text/javascript">
         $(function () {
-            phoebe.leftNavActive($('#menu-base-settle-list'));
+            phoebe.leftNavActive($('#menu-cold-settle-list'));
         });
     </script>
 }

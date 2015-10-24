@@ -206,6 +206,20 @@ namespace Phoebe.UI.Controllers
         }
 
         /// <summary>
+        /// 冷藏费用结算信息
+        /// </summary>
+        /// <param name="id">结算ID</param>
+        /// <returns></returns>
+        public ActionResult ColdDetails(string id)
+        {
+            var data = this.settleBusiness.GetCold(id);
+            if (data == null)
+                return HttpNotFound();
+
+            return View(data);
+        }
+
+        /// <summary>
         /// 冷藏费结算
         /// </summary>
         /// <returns></returns>
@@ -292,22 +306,91 @@ namespace Phoebe.UI.Controllers
         }
 
         /// <summary>
-        /// 冷藏费计算
+        /// 冷藏费用审核
         /// </summary>
         /// <returns></returns>
-        public ActionResult ColdPrice()
+        public ActionResult ColdAudit()
         {
-            return View();
+            var data = this.settleBusiness.GetCold(EntityStatus.SettleUnpaid);
+            return View(data);
         }
 
         /// <summary>
-        /// 冷藏费计算
+        /// 冷藏费用确认
+        /// </summary>
+        /// <param name="id">结算单ID</param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult ColdConfirm(string id)
+        {
+            var data = this.settleBusiness.GetCold(id);
+
+            if (data == null || data.Status != (int)EntityStatus.SettleUnpaid)
+                return HttpNotFound();
+
+            return View(data);
+        }
+
+        /// <summary>
+        /// 冷藏费用确认
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
         [ValidateAntiForgeryToken]
         [HttpPost]
-        public ActionResult ColdPriceProcess(ColdPrice model)
+        public ActionResult ColdConfirm(ColdSettlement model)
+        {
+            if (ModelState.IsValid)
+            {
+                if (model.ConfirmTime == null)
+                {
+                    TempData["Message"] = "审核失败，请选择确认时间";
+                    return RedirectToAction("ColdConfirm", new { controller = "Settle", id = model.ID.ToString() });
+                }
+
+                if (model.PaidPrice == null)
+                {
+                    TempData["Message"] = "审核失败，请输入付款金额";
+                    return RedirectToAction("ColdConfirm", new { controller = "Settle", id = model.ID.ToString() });
+                }
+
+                string id = Request.Form["ID"];
+                string remark = Request.Form["Remark"];
+                EntityStatus status = Request.Form["auditResult"] == "1" ? EntityStatus.SettlePaid : EntityStatus.SettleCancel;
+
+                ErrorCode result = this.settleBusiness.ColdAudit(id, model.PaidPrice.Value, model.ConfirmTime.Value, remark, status);
+                if (result == ErrorCode.Success)
+                {
+                    TempData["Message"] = "冷藏费用审核完毕";
+                    return RedirectToAction("ColdAudit", "Settle");
+                }
+                else
+                {
+                    TempData["Message"] = "冷藏费用审核失败";
+                    ModelState.AddModelError("", "冷藏费用审核失败: " + result.DisplayName());
+                }
+            }
+
+            return View(model);
+        }
+
+        /// <summary>
+        /// 货品冷藏费计算
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult CargoColdPrice()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 货品冷藏费计算
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult CargoColdResult(ColdPrice model)
         {
             if (ModelState.IsValid)
             {

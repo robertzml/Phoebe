@@ -8,7 +8,7 @@
         <div class="portlet box green">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="fa fa-list"></i>&nbsp;冷藏费表单
+                    <i class="fa fa-list"></i>&nbsp;冷藏费结果
                 </div>
                 <div class="tools">
                     <a href="javascript:;" class="collapse">
@@ -18,14 +18,10 @@
                     <a href="javascript:;" class="remove">
                     </a>
                 </div>
-                <div class="actions">
-                    <!--<a href="javascript:;" class="btn btn-default btn-sm btn-print">
-                        <i class="fa fa-print"></i>&nbsp;打印
-                    </a>-->
-                </div>
             </div>
             <div class="portlet-body">
-                @ViewBag.TotalFee
+                <h4>累计冷藏费用：</h4>
+                <p>@ViewBag.TotalFee  元</p>
             </div>
         </div>
     </div>

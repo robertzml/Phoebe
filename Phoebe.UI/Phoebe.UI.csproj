@@ -664,8 +664,8 @@
     <Content Include="Views\Transfer\Details.cshtml" />
     <Content Include="Views\Contract\Delete.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\BillingType.cshtml" />
-    <Content Include="Views\Settle\ColdPrice.cshtml" />
-    <Content Include="Views\Settle\ColdPriceProcess.cshtml" />
+    <Content Include="Views\Settle\CargoColdPrice.cshtml" />
+    <Content Include="Views\Settle\CargoColdResult.cshtml" />
     <Content Include="Views\Contract\Edit.cshtml" />
     <Content Include="Views\Cargo\Edit.cshtml" />
     <Content Include="Views\Cargo\EditBilling.cshtml" />
@@ -681,6 +681,9 @@
     <Content Include="Views\Stock\SnapshootProcess.cshtml" />
     <Content Include="Views\Settle\ColdStart.cshtml" />
     <Content Include="Views\Settle\ColdList.cshtml" />
+    <Content Include="Views\Settle\ColdAudit.cshtml" />
+    <Content Include="Views\Settle\ColdConfirm.cshtml" />
+    <Content Include="Views\Settle\ColdDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

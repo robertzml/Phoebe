@@ -6,7 +6,7 @@
     AjaxOptions ajaxOpts = new AjaxOptions
     {
         UpdateTargetId = "process-result",
-        Url = Url.Action("ColdPriceProcess", "Settle"),
+        Url = Url.Action("CargoColdResult", "Settle"),
         HttpMethod = "POST",
         OnSuccess = "phoebe.showMessage('提交成功')"
     };
@@ -55,7 +55,7 @@
                 </div>
             </div>
             <div class="portlet-body">
-                @using (Ajax.BeginForm("ColdPriceProcess", new { controller = "Settle" }, ajaxOpts, new { @class = "form-horizontal" }))
+                @using (Ajax.BeginForm("CargoColdResult", new { controller = "Settle" }, ajaxOpts, new { @class = "form-horizontal" }))
                 {
                     @Html.AntiForgeryToken()
 

@@ -166,6 +166,20 @@ namespace Phoebe.Business
         }
 
         /// <summary>
+        /// 获取冷藏费用结算
+        /// </summary>
+        /// <param name="id">结算ID</param>
+        /// <returns></returns>
+        public ColdSettlement GetCold(string id)
+        {
+            Guid gid;
+            if (!Guid.TryParse(id, out gid))
+                return null;
+
+            return this.context.ColdSettlements.Find(gid);
+        }
+
+        /// <summary>
         /// 处理日冷藏费
         /// </summary>
         /// <param name="contractID">合同ID</param>
@@ -207,6 +221,43 @@ namespace Phoebe.Business
                 data.Status = (int)EntityStatus.SettleUnpaid;
                 this.context.ColdSettlements.Add(data);
                 this.context.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+
+            return ErrorCode.Success;
+        }
+
+        /// <summary>
+        /// 冷藏费用审核
+        /// </summary>
+        /// <param name="id">结算ID</param>
+        /// <param name="paidPrice">付款</param>
+        /// <param name="confirmTime">确认时间</param>
+        /// <param name="remark">备注</param>
+        /// <param name="status">状态</param>
+        /// <returns></returns>
+        public ErrorCode ColdAudit(string id, decimal paidPrice, DateTime confirmTime, string remark, EntityStatus status)
+        {
+            try
+            {
+                Guid gid;
+                if (!Guid.TryParse(id, out gid))
+                    return ErrorCode.ObjectNotFound;
+
+                ColdSettlement coldSettle = this.context.ColdSettlements.Find(gid);
+                if (coldSettle == null)
+                    return ErrorCode.ObjectNotFound;
+
+                coldSettle.PaidPrice = paidPrice;
+                coldSettle.ConfirmTime = confirmTime;
+                coldSettle.Remark = remark;
+                coldSettle.Status = (int)status;
+
+                this.context.SaveChanges();
+
             }
             catch (Exception)
             {
