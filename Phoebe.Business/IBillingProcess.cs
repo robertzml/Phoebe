@@ -22,13 +22,26 @@ namespace Phoebe.Business
         decimal CalculateColdPrice(Guid cargoID, DateTime start, DateTime end);
 
         /// <summary>
+        /// 获取单位计量
+        /// </summary>
+        /// <param name="cargo">货品</param>
+        /// <returns></returns>
+        decimal GetUnitMeter(Cargo cargo);
+
+        /// <summary>
         /// 计算货品总计量
         /// </summary>
         /// <param name="unitMeter">单位计量</param>
         /// <param name="count">数量</param>
         /// <returns></returns>
-        decimal CalculateTotalMeter(decimal unitMeter, decimal count);
+        decimal CalculateTotalMeter(decimal unitMeter, int count);
 
+        /// <summary>
+        /// 计算货品日冷藏费
+        /// </summary>
+        /// <param name="totalMeter">日总计量</param>
+        /// <param name="unitPrice">单价</param>
+        /// <returns></returns>
         decimal CalculateDailyFee(decimal totalMeter, decimal unitPrice);
     }
 }

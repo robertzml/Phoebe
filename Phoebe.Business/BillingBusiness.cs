@@ -163,20 +163,47 @@ namespace Phoebe.Business
             return billingProcess.CalculateColdPrice(cargo.ID, start, end);
         }
 
-        public DailyColdRecord GetDailyColdRecord(int contractID, DateTime date)
+        public List<DailyColdRecord> GetDailyColdRecord(int contractID, DateTime date)
         {
+            List<DailyColdRecord> records = new List<DailyColdRecord>();
             StoreBusiness storeBusiness = new StoreBusiness();
             var stores = storeBusiness.GetInDay(contractID, date);
+            var flows = storeBusiness.GetDaysFlow(contractID, date);
 
-            DailyColdRecord record = new DailyColdRecord();
-            record.RecordDate = date;
-            record.TotalMeter = 0;
-            record.DailyFee = 0;
+            foreach (var flow in flows)
+            {
+                DailyColdRecord frecord = new DailyColdRecord();
+                frecord.RecordDate = date;
 
-            IBillingProcess billingProcess = null;
+                frecord.CargoName = flow.CargoName;
+                frecord.Count = flow.Count;
+
+                IBillingProcess billingProcess = null;
+                var cargo = this.context.Cargoes.Find(flow.CargoID);
+                switch ((BillingType)cargo.Billing.BillingType)
+                {
+                    case BillingType.UnitWeight:
+                        billingProcess = new BillingUnitWeight();
+                        frecord.UnitMeter = billingProcess.GetUnitMeter(cargo);
+                        frecord.StoreMeter = billingProcess.CalculateTotalMeter(frecord.UnitMeter, flow.Count);
+                        break;
+                }
+
+                records.Add(frecord);
+            }
+
+            DailyColdRecord record;
+            if (flows.Count != 0)
+                record = records.Last();
+            else
+            {
+                record = new DailyColdRecord();
+                record.RecordDate = date;
+            }
 
             foreach (var item in stores)
             {
+                IBillingProcess billingProcess = null;
                 decimal totalMeter = 0;
                 var cargo = this.context.Cargoes.Find(item.CargoID);
 
@@ -190,10 +217,12 @@ namespace Phoebe.Business
                         record.DailyFee += billingProcess.CalculateDailyFee(totalMeter, cargo.Billing.UnitPrice);
                         break;
                 }
-
             }
 
-            return record;
+            if (flows.Count == 0)
+                records.Add(record);
+
+            return records;
         }
         #endregion //Method
     }

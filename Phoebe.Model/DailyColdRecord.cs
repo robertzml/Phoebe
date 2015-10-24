@@ -36,7 +36,7 @@ namespace Phoebe.Model
         /// 单位计量
         /// </summary>
         [Display(Name = "单位计量")]
-        public double UnitMeter { get; set; }
+        public decimal UnitMeter { get; set; }
 
         /// <summary>
         /// 出入库计量
@@ -45,9 +45,9 @@ namespace Phoebe.Model
         public decimal StoreMeter { get; set; }
 
         /// <summary>
-        ///  计量累计
+        ///  在库总计量
         /// </summary>
-        [Display(Name = "计量累计")]
+        [Display(Name = "在库总计量")]
         public decimal TotalMeter { get; set; }
 
         /// <summary>

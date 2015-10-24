@@ -93,13 +93,17 @@ namespace Phoebe.Business
 
             return totalFee;
         }
+        public decimal GetUnitMeter(Cargo cargo)
+        {
+            throw new NotImplementedException();
+        }
 
         public decimal CalculateDailyFee(decimal totalMeter, decimal unitPrice)
         {
             throw new NotImplementedException();
         }
 
-        public decimal CalculateTotalMeter(decimal unitMeter, decimal count)
+        public decimal CalculateTotalMeter(decimal unitMeter, int count)
         {
             throw new NotImplementedException();
         }

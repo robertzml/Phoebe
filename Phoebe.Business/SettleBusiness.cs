@@ -144,6 +144,13 @@ namespace Phoebe.Business
         #endregion //BaseSettlement
 
         #region ColdSettlement
+        /// <summary>
+        /// 处理日冷藏费
+        /// </summary>
+        /// <param name="contractID">合同ID</param>
+        /// <param name="start">开始日期</param>
+        /// <param name="end">结束日期</param>
+        /// <returns></returns>
         public List<DailyColdRecord> ProcessDailyCold(int contractID, DateTime start, DateTime end)
         {
             List<DailyColdRecord> records = new List<DailyColdRecord>();
@@ -154,26 +161,14 @@ namespace Phoebe.Business
             {
                 var nextDay = step.AddDays(1);
 
-                DailyColdRecord record = billingBusiness.GetDailyColdRecord(contractID, step);
-                totalFee += record.DailyFee;
-                record.TotalFee = totalFee;
+                var record = billingBusiness.GetDailyColdRecord(contractID, step);
+                var last = record.Last();
 
-                records.Add(record);
+                totalFee += last.DailyFee;
+                last.TotalFee = totalFee;
 
-                //if (todayCount == 0)
-                //{
-                //    DailyColdRecord record = new DailyColdRecord();
-                //    record.RecordDate = step;
-                //    //record.TotalWeight = totalWeight;
-                //    //record.DailyFee = record.TotalWeight * (decimal)dailyFee;
-                //    //totalFee += record.DailyFee;
-                //    record.TotalFee = totalFee;
-
-                //    records.Add(record);
-                //}
-
+                records.AddRange(record);
             }
-
 
             return records;
         }

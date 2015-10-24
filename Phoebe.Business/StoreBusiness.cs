@@ -333,9 +333,7 @@ namespace Phoebe.Business
 
                     data.Add(stockFlow);
                 }
-
             }
-
 
             return data;
         }

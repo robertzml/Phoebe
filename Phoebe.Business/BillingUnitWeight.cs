@@ -95,12 +95,22 @@ namespace Phoebe.Business
         }
 
         /// <summary>
+        /// 获取单位重量
+        /// </summary>
+        /// <param name="cargo">货品</param>
+        /// <returns></returns>
+        public decimal GetUnitMeter(Cargo cargo)
+        {
+            return Convert.ToDecimal(cargo.UnitWeight.Value);
+        }
+
+        /// <summary>
         /// 计算货品总重量
         /// </summary>
         /// <param name="unitMeter">单位重量(kg)</param>
         /// <param name="count">数量</param>
         /// <returns>总重量(t)</returns>
-        public decimal CalculateTotalMeter(decimal unitMeter, decimal count)
+        public decimal CalculateTotalMeter(decimal unitMeter, int count)
         {
             return unitMeter * count / 1000;
         }
@@ -115,7 +125,6 @@ namespace Phoebe.Business
         {
             return totalMeter * unitPrice;
         }
-
         #endregion //Method
     }
 }
