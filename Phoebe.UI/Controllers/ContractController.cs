@@ -45,7 +45,7 @@ namespace Phoebe.UI.Controllers
         /// <summary>
         /// 合同信息
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">合同ID</param>
         /// <returns></returns>
         public ActionResult Details(int id)
         {
@@ -55,6 +55,9 @@ namespace Phoebe.UI.Controllers
 
             StoreBusiness storeBusiness = new StoreBusiness();
             ViewBag.Stocks = storeBusiness.GetWithContract(id);
+
+            SettleBusiness settleBusiness = new SettleBusiness();
+            ViewBag.ColdSettles = settleBusiness.GetColdByContract(id);
 
             return View(data);
         }
@@ -282,8 +285,8 @@ namespace Phoebe.UI.Controllers
         /// 调用：
         /// /Contract/Create
         /// /Settle/Base
-        /// /Settle/Index
-        /// /Settle/ColdPrice
+        /// /Settle/Cold
+        /// /Settle/CargoColdPrice
         /// </remarks>
         /// <returns></returns>
         public JsonResult GetCustomers(int type)
@@ -312,8 +315,8 @@ namespace Phoebe.UI.Controllers
         /// <remarks>
         /// 调用：
         /// /Settle/Base
-        /// /Settle/Index
-        /// /Settle/ColdPrice
+        /// /Settle/Cold
+        /// /Settle/CargoColdPrice
         /// </remarks>
         public JsonResult GetByCustomer(int customerType, int customerId)
         {

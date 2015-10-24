@@ -180,6 +180,18 @@ namespace Phoebe.Business
         }
 
         /// <summary>
+        /// 根据合同获取冷藏费结算
+        /// </summary>
+        /// <param name="contractID">合同ID</param>
+        /// <returns></returns>
+        public List<ColdSettlement> GetColdByContract(int contractID)
+        {
+            var data = this.context.ColdSettlements.Where(r => r.ContractID == contractID).OrderBy(r => r.StartTime);
+            return data.ToList();
+        }
+
+
+        /// <summary>
         /// 处理日冷藏费
         /// </summary>
         /// <param name="contractID">合同ID</param>

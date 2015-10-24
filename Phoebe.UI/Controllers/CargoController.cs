@@ -328,7 +328,7 @@ namespace Phoebe.UI.Controllers
         /// /StockOut/Create
         /// /Transfer/Create
         /// /Settle/Base
-        /// /Settle/ColdPrice
+        /// /Settle/CargoColdPrice
         /// </remarks>
         /// <returns></returns>
         public JsonResult GetCargos(int type, int contractID)
@@ -336,7 +336,7 @@ namespace Phoebe.UI.Controllers
             IEnumerable<Cargo> cargos;
             if (type == 1)  // not stock in
             {
-                cargos = this.cargoBusiness.Get(EntityStatus.CargoNotIn).Where(r => r.ContractID == contractID);                
+                cargos = this.cargoBusiness.Get(EntityStatus.CargoNotIn).Where(r => r.ContractID == contractID);
             }
             else if (type == 2) // stock in
             {

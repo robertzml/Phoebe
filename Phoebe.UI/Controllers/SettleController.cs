@@ -390,7 +390,7 @@ namespace Phoebe.UI.Controllers
         /// <returns></returns>
         [ValidateAntiForgeryToken]
         [HttpPost]
-        public ActionResult CargoColdResult(ColdPrice model)
+        public ActionResult CargoColdResult(CargoColdPrice model)
         {
             if (ModelState.IsValid)
             {

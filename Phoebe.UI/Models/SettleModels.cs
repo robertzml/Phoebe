@@ -38,7 +38,7 @@ namespace Phoebe.UI.Models
     /// <summary>
     /// 冷藏费计算模型
     /// </summary>
-    public class ColdPrice
+    public class CargoColdPrice
     {
         /// <summary>
         /// 合同
