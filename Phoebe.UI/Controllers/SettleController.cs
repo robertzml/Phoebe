@@ -196,6 +196,16 @@ namespace Phoebe.UI.Controllers
         }
 
         /// <summary>
+        /// 冷藏费用结算记录
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult ColdList()
+        {
+            var data = this.settleBusiness.GetCold();
+            return View(data);
+        }
+
+        /// <summary>
         /// 冷藏费结算
         /// </summary>
         /// <returns></returns>
@@ -215,9 +225,15 @@ namespace Phoebe.UI.Controllers
         {
             if (ModelState.IsValid)
             {
-                var data = this.settleBusiness.ProcessDailyCold(model.ContractID, model.DateFrom, model.DateTo);
+                var records = this.settleBusiness.ProcessDailyCold(model.ContractID, model.DateFrom, model.DateTo);
 
-                return View(data);
+                ViewBag.ContractID = model.ContractID;
+                ViewBag.StartTime = model.DateFrom;
+                ViewBag.EndTime = model.DateTo;
+                if (records.Count != 0)
+                    ViewBag.SumPrice = records.Last().TotalFee;
+
+                return View(records);
             }
             else
             {
@@ -225,6 +241,55 @@ namespace Phoebe.UI.Controllers
             }
         }
 
+        /// <summary>
+        /// 冷藏费结算
+        /// </summary>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult ColdStart()
+        {
+            ColdSettlement data = new ColdSettlement();
+            data.ContractID = Convert.ToInt32(Request.Form["ContractID"]);
+            data.StartTime = Convert.ToDateTime(Request.Form["StartTime"]);
+            data.EndTime = Convert.ToDateTime(Request.Form["EndTime"]);
+            data.SumPrice = Convert.ToDecimal(Request.Form["SumPrice"]);
+
+            data.Discount = 100;
+            data.TotalPrice = data.SumPrice;
+            data.SettleTime = DateTime.Now.Date;
+            return View(data);
+        }
+
+        /// <summary>
+        /// 冷藏费结算
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult ColdCreate(ColdSettlement model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = PageService.GetCurrentUser(User.Identity.Name);
+                model.UserID = user.ID;
+
+                ErrorCode result = this.settleBusiness.ColdCreate(model);
+                if (result == ErrorCode.Success)
+                {
+                    TempData["Message"] = "冷藏费用结算成功";
+                    return RedirectToAction("Cold", new { controller = "Settle" });
+                }
+                else
+                {
+                    TempData["Message"] = "冷藏费用结算失败";
+                    ModelState.AddModelError("", "冷藏费用结算失败: " + result.DisplayName());
+                }
+            }
+
+            return RedirectToAction("Cold", new { controller = "Settle" });
+        }
 
         /// <summary>
         /// 冷藏费计算

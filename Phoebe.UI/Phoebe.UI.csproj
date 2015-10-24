@@ -679,6 +679,8 @@
     <Content Include="Views\Settle\ColdProcess.cshtml" />
     <Content Include="Views\Stock\Snapshoot.cshtml" />
     <Content Include="Views\Stock\SnapshootProcess.cshtml" />
+    <Content Include="Views\Settle\ColdStart.cshtml" />
+    <Content Include="Views\Settle\ColdList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Phoebe.Model.Entities
+namespace Phoebe.Model
 {
-    class ColdSettlementMetadata
+    public class ColdSettlementMetadata
     {
         /// <summary>
         /// ID

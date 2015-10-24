@@ -3,6 +3,13 @@
 @{
     Layout = null;
     ViewBag.Title = "ColdProcess";
+
+    AjaxOptions ajaxOpts2 = new AjaxOptions
+    {
+        UpdateTargetId = "cold-settle",
+        Url = Url.Action("ColdStart", "Settle"),
+        HttpMethod = "POST"
+    };
 }
 
 <div class="row" id="process-container">
@@ -88,8 +95,30 @@
                         }
                     </tbody>
                 </table>
+
+                @if (Model.Count() != 0)
+                {
+                    <hr />
+                    <p>
+                        @using (Ajax.BeginForm("ColdStart", new { controller = "Settle" }, ajaxOpts2, new { @class = "form-horizontal" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" id="ContractID" name="ContractID" value="@ViewBag.ContractID" />
+                            <input type="hidden" id="StartTime" name="StartTime" value="@ViewBag.StartTime" />
+                            <input type="hidden" id="EndTime" name="EndTime" value="@ViewBag.EndTime" />
+                            <input type="hidden" id="SumPrice" name="SumPrice" value="@ViewBag.SumPrice" />
+
+                            <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> 进行结算</button>
+                        }
+                    </p>
+                }
             </div>
         </div>
     </div>
 </div>
 
+<script type="text/javascript">
+    $(function () {
+        $('div#cold-settle').empty();
+    });
+</script>

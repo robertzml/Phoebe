@@ -145,6 +145,27 @@ namespace Phoebe.Business
 
         #region ColdSettlement
         /// <summary>
+        /// 获取冷藏费用结算
+        /// </summary>
+        /// <returns></returns>
+        public List<ColdSettlement> GetCold()
+        {
+            var data = this.context.ColdSettlements.OrderByDescending(r => r.ConfirmTime);
+            return data.ToList();
+        }
+
+        /// <summary>
+        /// 获取冷藏费用结算
+        /// </summary>
+        /// <param name="status">状态</param>
+        /// <returns></returns>
+        public List<ColdSettlement> GetCold(EntityStatus status)
+        {
+            var data = this.context.ColdSettlements.Where(r => r.Status == (int)status);
+            return data.ToList();
+        }
+
+        /// <summary>
         /// 处理日冷藏费
         /// </summary>
         /// <param name="contractID">合同ID</param>
@@ -171,6 +192,28 @@ namespace Phoebe.Business
             }
 
             return records;
+        }
+
+        /// <summary>
+        /// 添加冷藏费结算
+        /// </summary>
+        /// <param name="data">冷藏费数据</param>
+        /// <returns></returns>
+        public ErrorCode ColdCreate(ColdSettlement data)
+        {
+            try
+            {
+                data.ID = Guid.NewGuid();
+                data.Status = (int)EntityStatus.SettleUnpaid;
+                this.context.ColdSettlements.Add(data);
+                this.context.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+
+            return ErrorCode.Success;
         }
         #endregion //ColdSettlement
         #endregion //Method
