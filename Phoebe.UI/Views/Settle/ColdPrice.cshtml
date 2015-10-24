@@ -147,6 +147,10 @@
             phoebe.leftNavActive($('#menu-cold-price'));
             phoebe.initDatePicker($('#date-range-picker'), false);;
 
+            $('a.btn-print').click(function () {
+                phoebe.initPrint($('div#process-container')[0]);
+            });
+
             var customerType = 0;
             var customerId = 0;
             var contractId = 0;

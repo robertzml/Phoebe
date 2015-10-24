@@ -67,6 +67,9 @@
         <EntityTypeShape EntityType="PhoebeModel.BaseSettlement" Width="1.5" PointX="21.125" PointY="11.25" />
         <AssociationConnector Association="PhoebeModel.FK_BaseSettlement_Cargo" />
         <AssociationConnector Association="PhoebeModel.FK_BaseSettlement_User" />
+        <EntityTypeShape EntityType="PhoebeModel.ColdSettlement" Width="1.5" PointX="0.875" PointY="5.75" />
+        <AssociationConnector Association="PhoebeModel.FK_ColdSettlement_Contract" />
+        <AssociationConnector Association="PhoebeModel.FK_ColdSettlement_User" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

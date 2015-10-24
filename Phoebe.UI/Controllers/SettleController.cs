@@ -258,37 +258,6 @@ namespace Phoebe.UI.Controllers
                 return View("ColdPrice", model);
             }
         }
-
-
-
-        /// <summary>
-        /// 冷藏费计算
-        /// </summary>
-        /// <returns></returns>
-        public ActionResult ColdCost()
-        {
-            return View();
-        }
-
-        /// <summary>
-        /// 冷藏费计算
-        /// </summary>
-        /// <returns></returns>
-        [ValidateAntiForgeryToken]
-        [HttpPost]
-        public ActionResult Process(ColdCost model)
-        {
-            if (ModelState.IsValid)
-            {
-                var data = this.settleBusiness.Process(model.ContractID, model.DateFrom, model.DateTo, model.DailyFee);
-
-                return View(data);
-            }
-            else
-            {
-                return View("ColdCost", model);
-            }
-        }
         #endregion //Action
     }
 }

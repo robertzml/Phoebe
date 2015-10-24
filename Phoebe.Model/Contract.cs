@@ -18,6 +18,7 @@ namespace Phoebe.Model
         public Contract()
         {
             this.Cargoes = new HashSet<Cargo>();
+            this.ColdSettlements = new HashSet<ColdSettlement>();
         }
     
         public int ID { get; set; }
@@ -35,5 +36,7 @@ namespace Phoebe.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cargo> Cargoes { get; set; }
         public virtual User User { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ColdSettlement> ColdSettlements { get; set; }
     }
 }

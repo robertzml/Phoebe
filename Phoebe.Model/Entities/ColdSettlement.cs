@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Phoebe.Model
+namespace Phoebe.Model.Entities
 {
-    public class BaseSettlementMetadata
+    class ColdSettlementMetadata
     {
         /// <summary>
         /// ID
@@ -23,11 +23,23 @@ namespace Phoebe.Model
         public string Number { get; set; }
 
         /// <summary>
-        /// 货品ID
+        /// 合同ID
         /// </summary>
         [Required]
-        [Display(Name = "货品名称")]
-        public System.Guid CargoID { get; set; }
+        [Display(Name = "合同名称")]
+        public int ContractID { get; set; }
+
+        /// <summary>
+        /// 开始日期
+        /// </summary>
+        [Display(Name = "开始日期")]
+        public System.DateTime StartTime { get; set; }
+
+        /// <summary>
+        /// 结束日期
+        /// </summary>
+        [Display(Name = "结束日期")]
+        public System.DateTime EndTime { get; set; }
 
         /// <summary>
         /// 费用合计
@@ -96,8 +108,8 @@ namespace Phoebe.Model
         public int Status { get; set; }
     }
 
-    [MetadataType(typeof(BaseSettlementMetadata))]
-    public partial class BaseSettlement
+    [MetadataType(typeof(ColdSettlementMetadata))]
+    public partial class ColdSettlement
     {
     }
 }
