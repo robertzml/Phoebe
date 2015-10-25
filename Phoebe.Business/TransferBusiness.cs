@@ -237,9 +237,7 @@ namespace Phoebe.Business
                     // add new cargo billing
                     newCargo.Billing = new Billing();
                     newCargo.Billing.CargoID = newCargo.ID;
-                    newCargo.Billing.BillingType = oldCargo.Billing.BillingType;
                     newCargo.Billing.UnitPrice = oldCargo.Billing.UnitPrice;
-                    newCargo.Billing.IsTiming = oldCargo.Billing.IsTiming;
                     newCargo.Billing.HandlingPrice = oldCargo.Billing.HandlingPrice;
                     newCargo.Billing.FreezePrice = oldCargo.Billing.FreezePrice;
                     newCargo.Billing.DisposePrice = oldCargo.Billing.DisposePrice;

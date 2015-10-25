@@ -47,7 +47,7 @@ namespace Phoebe.Business
                                where r.OldCargoID == cargo.ID && r.Status == (int)EntityStatus.Transfer && r.ConfirmTime >= start && r.ConfirmTime <= end
                                select r;
 
-            if (cargo.Billing.IsTiming)
+            if (cargo.Contract.IsTiming)
             {
                 DateTime inTime = cargo.InTime.Value;
 

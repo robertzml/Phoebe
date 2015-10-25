@@ -48,12 +48,14 @@ namespace Phoebe.Model
         /// 签订日期
         /// </summary>
         [Required]
+        [DataType(DataType.Date)]
         [Display(Name = "签订日期")]
         public System.DateTime SignDate { get; set; }
 
         /// <summary>
         /// 关闭日期
         /// </summary>
+        [DataType(DataType.Date)]
         [Display(Name = "关闭日期")]
         public Nullable<System.DateTime> CloseDate { get; set; }
 
@@ -64,6 +66,12 @@ namespace Phoebe.Model
         [UIHint("BillingType")]
         [Display(Name = "计费方式")]
         public int BillingType { get; set; }
+
+        /// <summary>
+        /// 是否计时
+        /// </summary>
+        [Display(Name = "是否计时")]
+        public bool IsTiming { get; set; }
 
         /// <summary>
         /// 凭证编号

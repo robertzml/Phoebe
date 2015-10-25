@@ -15,15 +15,14 @@ namespace Phoebe.Model
     public partial class Billing
     {
         public System.Guid CargoID { get; set; }
-        public int BillingType { get; set; }
         public decimal UnitPrice { get; set; }
-        public bool IsTiming { get; set; }
         public decimal HandlingPrice { get; set; }
         public decimal FreezePrice { get; set; }
         public decimal DisposePrice { get; set; }
         public decimal PackingPrice { get; set; }
         public decimal RentPrice { get; set; }
         public decimal OtherPrice { get; set; }
+        public decimal TotalPrice { get; set; }
         public string Remark { get; set; }
         public int Status { get; set; }
     

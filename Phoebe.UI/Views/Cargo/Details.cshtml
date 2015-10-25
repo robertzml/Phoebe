@@ -99,6 +99,25 @@
                         </tr>
                         <tr>
                             <td>
+                                @Html.DisplayNameFor(model => model.Contract.BillingType)
+                            </td>
+                            <td>
+                                @{
+                                    BillingType type = (BillingType)Model.Contract.BillingType;
+                                    @(type.DisplayName() + " (" + type.DisplayDescription() + ")")
+                                }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.Contract.IsTiming)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.Contract.IsTiming)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
                                 @Html.DisplayNameFor(model => model.FirstCategoryID)
                             </td>
                             <td>
@@ -275,34 +294,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>
-                                @Html.DisplayNameFor(model => model.Billing.BillingType)
-                            </td>
-                            <td>
-                                @{
-                                    if (Model.Billing != null)
-                                    {
-                                        BillingType type = (BillingType)Model.Billing.BillingType;
-                                        @(type.DisplayName() + " (" + type.DisplayDescription() + ")")
-                                    }
-                                }
-                            </td>
-                        </tr>
+                       
                         <tr>
                             <td>
                                 @Html.DisplayNameFor(model => model.Billing.UnitPrice)
                             </td>
                             <td>
                                 @Html.DisplayFor(model => model.Billing.UnitPrice)
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                @Html.DisplayNameFor(model => model.Billing.IsTiming)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(model => model.Billing.IsTiming)
                             </td>
                         </tr>
                         <tr>
@@ -366,7 +364,7 @@
                                 费用合计 (元)
                             </td>
                             <td>
-                                @ViewBag.TotalPrice
+                                @Html.DisplayFor(model => model.Billing.TotalPrice)
                             </td>
                         </tr>
                         <tr>

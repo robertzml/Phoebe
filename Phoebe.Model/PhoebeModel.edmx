@@ -28,15 +28,14 @@
             <PropertyRef Name="CargoID" />
           </Key>
           <Property Name="CargoID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="BillingType" Type="int" Nullable="false" />
           <Property Name="UnitPrice" Type="decimal" Precision="18" Scale="3" Nullable="false" />
-          <Property Name="IsTiming" Type="bit" Nullable="false" />
           <Property Name="HandlingPrice" Type="decimal" Precision="18" Scale="3" Nullable="false" />
           <Property Name="FreezePrice" Type="decimal" Precision="18" Scale="3" Nullable="false" />
           <Property Name="DisposePrice" Type="decimal" Precision="18" Scale="3" Nullable="false" />
           <Property Name="PackingPrice" Type="decimal" Precision="18" Scale="3" Nullable="false" />
           <Property Name="RentPrice" Type="decimal" Precision="18" Scale="3" Nullable="false" />
           <Property Name="OtherPrice" Type="decimal" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="TotalPrice" Type="decimal" Precision="18" Scale="3" Nullable="false" />
           <Property Name="Remark" Type="nvarchar" MaxLength="500" />
           <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
@@ -50,10 +49,10 @@
           <Property Name="SecondCategoryID" Type="int" Nullable="false" />
           <Property Name="ThirdCategoryID" Type="int" />
           <Property Name="Count" Type="int" Nullable="false" />
-          <Property Name="UnitWeight" Type="float" />
-          <Property Name="TotalWeight" Type="float" />
-          <Property Name="UnitVolume" Type="float" />
-          <Property Name="TotalVolume" Type="float" />
+          <Property Name="UnitWeight" Type="float" Nullable="false" />
+          <Property Name="TotalWeight" Type="float" Nullable="false" />
+          <Property Name="UnitVolume" Type="float" Nullable="false" />
+          <Property Name="TotalVolume" Type="float" Nullable="false" />
           <Property Name="StoreCount" Type="int" Nullable="false" />
           <Property Name="OriginPlace" Type="nvarchar" MaxLength="100" />
           <Property Name="ShelfLife" Type="int" Nullable="false" />
@@ -98,6 +97,7 @@
           <Property Name="SignDate" Type="datetime" Nullable="false" />
           <Property Name="CloseDate" Type="datetime" />
           <Property Name="BillingType" Type="int" Nullable="false" />
+          <Property Name="IsTiming" Type="bit" Nullable="false" />
           <Property Name="CertificateNumber" Type="nchar" MaxLength="10" />
           <Property Name="UserID" Type="int" Nullable="false" />
           <Property Name="Remark" Type="nvarchar" MaxLength="500" />
@@ -1252,11 +1252,6 @@
             <End Role="Warehouse" EntitySet="Warehouses" />
             <End Role="TransferDetail" EntitySet="TransferDetails" />
           </AssociationSet>
-          <EntitySet Name="Billings" EntityType="PhoebeModel.Billing" />
-          <AssociationSet Name="FK_Billing_Cargo" Association="PhoebeModel.FK_Billing_Cargo">
-            <End Role="Cargo" EntitySet="Cargoes" />
-            <End Role="Billing" EntitySet="Billings" />
-          </AssociationSet>
           <EntitySet Name="BaseSettlements" EntityType="PhoebeModel.BaseSettlement" />
           <AssociationSet Name="FK_BaseSettlement_Cargo" Association="PhoebeModel.FK_BaseSettlement_Cargo">
             <End Role="Cargo" EntitySet="Cargoes" />
@@ -1274,6 +1269,11 @@
           <AssociationSet Name="FK_ColdSettlement_User" Association="PhoebeModel.FK_ColdSettlement_User">
             <End Role="User" EntitySet="Users" />
             <End Role="ColdSettlement" EntitySet="ColdSettlements" />
+          </AssociationSet>
+          <EntitySet Name="Billings" EntityType="PhoebeModel.Billing" />
+          <AssociationSet Name="FK_Billing_Cargo" Association="PhoebeModel.FK_Billing_Cargo">
+            <End Role="Cargo" EntitySet="Cargoes" />
+            <End Role="Billing" EntitySet="Billings" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="User">
@@ -1397,10 +1397,10 @@
           <Property Name="SecondCategoryID" Type="Int32" Nullable="false" />
           <Property Name="ThirdCategoryID" Type="Int32" />
           <Property Name="Count" Type="Int32" Nullable="false" />
-          <Property Name="UnitWeight" Type="Double" />
-          <Property Name="TotalWeight" Type="Double" />
-          <Property Name="UnitVolume" Type="Double" />
-          <Property Name="TotalVolume" Type="Double" />
+          <Property Name="UnitWeight" Type="Double" Nullable="false" />
+          <Property Name="TotalWeight" Type="Double" Nullable="false" />
+          <Property Name="UnitVolume" Type="Double" Nullable="false" />
+          <Property Name="TotalVolume" Type="Double" Nullable="false" />
           <Property Name="StoreCount" Type="Int32" Nullable="false" />
           <Property Name="OriginPlace" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Specification" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
@@ -1426,8 +1426,8 @@
           <NavigationProperty Name="StockMoveDetails" Relationship="PhoebeModel.FK_StockMoveDetails_Cargo" FromRole="Cargo" ToRole="StockMoveDetail" />
           <NavigationProperty Name="Transfers" Relationship="PhoebeModel.FK_Transfer_Cargo" FromRole="Cargo" ToRole="Transfer" />
           <NavigationProperty Name="Transfers1" Relationship="PhoebeModel.FK_Transfer_Cargo1" FromRole="Cargo" ToRole="Transfer" />
-          <NavigationProperty Name="Billing" Relationship="PhoebeModel.FK_Billing_Cargo" FromRole="Cargo" ToRole="Billing" />
           <NavigationProperty Name="BaseSettlements" Relationship="PhoebeModel.FK_BaseSettlement_Cargo" FromRole="Cargo" ToRole="BaseSettlement" />
+          <NavigationProperty Name="Billing" Relationship="PhoebeModel.FK_Billing_Cargo" FromRole="Cargo" ToRole="Billing" />
           </EntityType>
         <Association Name="FK_Cargo_FirstCategory">
           <End Type="PhoebeModel.FirstCategory" Role="FirstCategory" Multiplicity="1" />
@@ -1594,6 +1594,7 @@
           <Property Name="SignDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CloseDate" Type="DateTime" Precision="3" />
           <Property Name="BillingType" Type="Int32" Nullable="false" />
+          <Property Name="IsTiming" Type="Boolean" Nullable="false" />
           <Property Name="CertificateNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="UserID" Type="Int32" Nullable="false" />
           <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
@@ -2043,38 +2044,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Billing">
-          <Key>
-            <PropertyRef Name="CargoID" />
-          </Key>
-          <Property Name="CargoID" Type="Guid" Nullable="false" />
-          <Property Name="BillingType" Type="Int32" Nullable="false" />
-          <Property Name="UnitPrice" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
-          <Property Name="IsTiming" Type="Boolean" Nullable="false" />
-          <Property Name="HandlingPrice" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
-          <Property Name="FreezePrice" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
-          <Property Name="DisposePrice" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
-          <Property Name="PackingPrice" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
-          <Property Name="RentPrice" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
-          <Property Name="OtherPrice" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
-          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Cargo" Relationship="PhoebeModel.FK_Billing_Cargo" FromRole="Billing" ToRole="Cargo" />
-        </EntityType>
-        <Association Name="FK_Billing_Cargo">
-          <End Type="PhoebeModel.Cargo" Role="Cargo" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="PhoebeModel.Billing" Role="Billing" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Cargo">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Billing">
-              <PropertyRef Name="CargoID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="BaseSettlement">
           <Key>
             <PropertyRef Name="ID" />
@@ -2162,6 +2131,37 @@
             </Principal>
             <Dependent Role="ColdSettlement">
               <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Billing">
+          <Key>
+            <PropertyRef Name="CargoID" />
+          </Key>
+          <Property Name="CargoID" Type="Guid" Nullable="false" />
+          <Property Name="UnitPrice" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
+          <Property Name="HandlingPrice" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
+          <Property Name="FreezePrice" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
+          <Property Name="DisposePrice" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
+          <Property Name="PackingPrice" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
+          <Property Name="RentPrice" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
+          <Property Name="OtherPrice" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
+          <Property Name="TotalPrice" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
+          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cargo" Relationship="PhoebeModel.FK_Billing_Cargo" FromRole="Billing" ToRole="Cargo" />
+        </EntityType>
+        <Association Name="FK_Billing_Cargo">
+          <End Type="PhoebeModel.Cargo" Role="Cargo" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="PhoebeModel.Billing" Role="Billing" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Cargo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Billing">
+              <PropertyRef Name="CargoID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2332,6 +2332,7 @@
           <EntitySetMapping Name="Contracts">
             <EntityTypeMapping TypeName="PhoebeModel.Contract">
               <MappingFragment StoreEntitySet="Contract">
+                <ScalarProperty Name="IsTiming" ColumnName="IsTiming" />
                 <ScalarProperty Name="BillingType" ColumnName="BillingType" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Remark" ColumnName="Remark" />
@@ -2445,24 +2446,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Billings">
-            <EntityTypeMapping TypeName="PhoebeModel.Billing">
-              <MappingFragment StoreEntitySet="Billing">
-                <ScalarProperty Name="PackingPrice" ColumnName="PackingPrice" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Remark" ColumnName="Remark" />
-                <ScalarProperty Name="OtherPrice" ColumnName="OtherPrice" />
-                <ScalarProperty Name="RentPrice" ColumnName="RentPrice" />
-                <ScalarProperty Name="DisposePrice" ColumnName="DisposePrice" />
-                <ScalarProperty Name="FreezePrice" ColumnName="FreezePrice" />
-                <ScalarProperty Name="HandlingPrice" ColumnName="HandlingPrice" />
-                <ScalarProperty Name="IsTiming" ColumnName="IsTiming" />
-                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
-                <ScalarProperty Name="BillingType" ColumnName="BillingType" />
-                <ScalarProperty Name="CargoID" ColumnName="CargoID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="BaseSettlements">
             <EntityTypeMapping TypeName="PhoebeModel.BaseSettlement">
               <MappingFragment StoreEntitySet="BaseSettlement">
@@ -2500,6 +2483,23 @@
                 <ScalarProperty Name="ContractID" ColumnName="ContractID" />
                 <ScalarProperty Name="Number" ColumnName="Number" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Billings">
+            <EntityTypeMapping TypeName="PhoebeModel.Billing">
+              <MappingFragment StoreEntitySet="Billing">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="OtherPrice" ColumnName="OtherPrice" />
+                <ScalarProperty Name="RentPrice" ColumnName="RentPrice" />
+                <ScalarProperty Name="PackingPrice" ColumnName="PackingPrice" />
+                <ScalarProperty Name="DisposePrice" ColumnName="DisposePrice" />
+                <ScalarProperty Name="FreezePrice" ColumnName="FreezePrice" />
+                <ScalarProperty Name="HandlingPrice" ColumnName="HandlingPrice" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="CargoID" ColumnName="CargoID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

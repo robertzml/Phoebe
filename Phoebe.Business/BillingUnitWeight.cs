@@ -47,7 +47,7 @@ namespace Phoebe.Business
                                where r.OldCargoID == cargo.ID && r.Status == (int)EntityStatus.Transfer && r.ConfirmTime >= start && r.ConfirmTime <= end
                                select r;
 
-            if (cargo.Billing.IsTiming)
+            if (cargo.Contract.IsTiming)
             {
                 DateTime inTime = cargo.InTime.Value;
 
@@ -64,7 +64,7 @@ namespace Phoebe.Business
                 else
                     days = end.Subtract(inTime).Days + 1;
 
-                totalFee = days * cargo.Billing.UnitPrice * Convert.ToDecimal(cargo.TotalWeight.Value);
+                totalFee = days * cargo.Billing.UnitPrice * Convert.ToDecimal(cargo.TotalWeight);
 
                 // get store out
                 foreach (var item in stockOuts)
@@ -72,7 +72,7 @@ namespace Phoebe.Business
                     if (item.ConfirmTime > end)
                         continue;
 
-                    decimal dailyFee = cargo.Billing.UnitPrice * Convert.ToDecimal(cargo.UnitWeight.Value) * item.StockOutDetails.Sum(r => r.Count) / 1000;
+                    decimal dailyFee = cargo.Billing.UnitPrice * Convert.ToDecimal(cargo.UnitWeight) * item.StockOutDetails.Sum(r => r.Count) / 1000;
                     totalFee -= (end.Subtract(item.ConfirmTime.Value).Days + 1) * dailyFee;
                 }
 
@@ -82,7 +82,7 @@ namespace Phoebe.Business
                     if (item.ConfirmTime > end)
                         continue;
 
-                    decimal dailyFee = cargo.Billing.UnitPrice * Convert.ToDecimal(cargo.UnitWeight.Value) * item.TransferDetails.Sum(r => r.Count) / 1000;
+                    decimal dailyFee = cargo.Billing.UnitPrice * Convert.ToDecimal(cargo.UnitWeight) * item.TransferDetails.Sum(r => r.Count) / 1000;
                     totalFee -= (end.Subtract(item.ConfirmTime.Value).Days + 1) * dailyFee;
                 }
             }
@@ -101,7 +101,7 @@ namespace Phoebe.Business
         /// <returns></returns>
         public decimal GetUnitMeter(Cargo cargo)
         {
-            return Convert.ToDecimal(cargo.UnitWeight.Value);
+            return Convert.ToDecimal(cargo.UnitWeight);
         }
 
         /// <summary>

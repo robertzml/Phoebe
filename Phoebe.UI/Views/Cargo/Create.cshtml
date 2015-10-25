@@ -239,37 +239,10 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    @Html.LabelFor(model => model.Billing.BillingType, htmlAttributes: new { @class = "control-label col-md-3" })
-                                    <div class="col-md-8">
-                                        @Html.EditorFor(model => model.Billing.BillingType, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.Billing.BillingType, "", new { @class = "text-danger" })
-                                    </div>
-                                    <div class="col-md-1">
-                                        <span class="required">*</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
                                     @Html.LabelFor(model => model.Billing.UnitPrice, htmlAttributes: new { @class = "control-label col-md-3" })
                                     <div class="col-md-8">
                                         @Html.EditorFor(model => model.Billing.UnitPrice, new { htmlAttributes = new { @class = "form-control" } })
                                         @Html.ValidationMessageFor(model => model.Billing.UnitPrice, "", new { @class = "text-danger" })
-                                    </div>
-                                    <div class="col-md-1">
-                                        <span class="required">*</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    @Html.LabelFor(model => model.Billing.IsTiming, htmlAttributes: new { @class = "control-label col-md-3" })
-                                    <div class="col-md-8">
-                                        @Html.EditorFor(model => model.Billing.IsTiming, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.Billing.IsTiming, "", new { @class = "text-danger" })
                                     </div>
                                     <div class="col-md-1">
                                         <span class="required">*</span>
@@ -289,7 +262,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">

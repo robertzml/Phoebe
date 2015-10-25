@@ -58,6 +58,12 @@
                             <th>
                                 @Html.DisplayNameFor(model => model.CloseDate)
                             </th>
+                            <th data-filter="true">
+                                @Html.DisplayNameFor(model => model.BillingType)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.IsTiming)
+                            </th>
                             <th>
                                 操作
                             </th>
@@ -79,6 +85,12 @@
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.CloseDate)
+                            </th>
+                            <th data-filter="true">
+                                @Html.DisplayNameFor(model => model.BillingType)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.IsTiming)
                             </th>
                             <th>
                                 操作
@@ -106,6 +118,15 @@
                                 </td>
                                 <td>
                                     @item.CloseDate.ToDateString()
+                                </td>
+                                <td>
+                                    @{
+                                        BillingType type3 = (BillingType)item.BillingType;
+                                        @type3.DisplayName()
+                                    }
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.IsTiming)
                                 </td>
                                 <td>
                                     <a href="@Url.Action("Details", new { controller = "Contract", id = item.ID })" class="btn btn-info btn-sm" role="button"><i class="fa fa-check-circle"></i>&nbsp;查看</a>

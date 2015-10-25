@@ -16,25 +16,11 @@ namespace Phoebe.Model
         public System.Guid CargoID { get; set; }
 
         /// <summary>
-        /// 计费方式
-        /// </summary>
-        [Required]
-        [UIHint("BillingType")]
-        [Display(Name = "计费方式")]
-        public int BillingType { get; set; }
-
-        /// <summary>
         /// 单价
         /// </summary>
         [Required]
         [Display(Name = "单价(元)")]
         public decimal UnitPrice { get; set; }
-
-        /// <summary>
-        /// 是否计时
-        /// </summary>
-        [Display(Name = "是否计时")]
-        public bool IsTiming { get; set; }
 
         /// <summary>
         /// 装卸费

@@ -54,25 +54,25 @@ namespace Phoebe.Model
         /// 单位重量
         /// </summary>
         [Display(Name = "单位重量")]
-        public Nullable<double> UnitWeight { get; set; }
+        public double UnitWeight { get; set; }
 
         /// <summary>
         /// 总重量
         /// </summary>
         [Display(Name = "总重量")]
-        public Nullable<double> TotalWeight { get; set; }
+        public double TotalWeight { get; set; }
 
         /// <summary>
         /// 单位体积
         /// </summary>
         [Display(Name = "单位体积")]
-        public Nullable<double> UnitVolume { get; set; }
+        public double UnitVolume { get; set; }
 
         /// <summary>
         /// 总体积
         /// </summary>
         [Display(Name = "总体积")]
-        public Nullable<double> TotalVolume { get; set; }
+        public double TotalVolume { get; set; }
 
         /// <summary>
         /// 在库数量

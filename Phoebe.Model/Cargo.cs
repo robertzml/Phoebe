@@ -35,10 +35,10 @@ namespace Phoebe.Model
         public int SecondCategoryID { get; set; }
         public Nullable<int> ThirdCategoryID { get; set; }
         public int Count { get; set; }
-        public Nullable<double> UnitWeight { get; set; }
-        public Nullable<double> TotalWeight { get; set; }
-        public Nullable<double> UnitVolume { get; set; }
-        public Nullable<double> TotalVolume { get; set; }
+        public double UnitWeight { get; set; }
+        public double TotalWeight { get; set; }
+        public double UnitVolume { get; set; }
+        public double TotalVolume { get; set; }
         public int StoreCount { get; set; }
         public string OriginPlace { get; set; }
         public string Specification { get; set; }
@@ -74,8 +74,8 @@ namespace Phoebe.Model
         public virtual ICollection<Transfer> Transfers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Transfer> Transfers1 { get; set; }
-        public virtual Billing Billing { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BaseSettlement> BaseSettlements { get; set; }
+        public virtual Billing Billing { get; set; }
     }
 }

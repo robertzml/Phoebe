@@ -118,7 +118,7 @@ namespace Phoebe.Business
                 return 0;
 
             IBillingProcess billingProcess = null;
-            switch ((BillingType)cargo.Billing.BillingType)
+            switch ((BillingType)cargo.Contract.BillingType)
             {
                 case BillingType.UnitWeight:
                     billingProcess = new BillingUnitWeight();
@@ -150,7 +150,7 @@ namespace Phoebe.Business
                 return 0;
 
             IBillingProcess billingProcess = null;
-            switch ((BillingType)cargo.Billing.BillingType)
+            switch ((BillingType)cargo.Contract.BillingType)
             {
                 case BillingType.UnitWeight:
                     billingProcess = new BillingUnitWeight();
@@ -193,9 +193,9 @@ namespace Phoebe.Business
                 IBillingProcess billingProcess = null;
 
                 var cargo = this.context.Cargoes.Find(flow.CargoID);
-                if (!cargo.Billing.IsTiming)
+                if (!cargo.Contract.IsTiming)
                     continue;
-                switch ((BillingType)cargo.Billing.BillingType)
+                switch ((BillingType)cargo.Contract.BillingType)
                 {
                     case BillingType.UnitWeight:
                         billingProcess = new BillingUnitWeight();
@@ -229,9 +229,9 @@ namespace Phoebe.Business
                 decimal totalMeter = 0;
                 var cargo = this.context.Cargoes.Find(item.CargoID);
 
-                if (!cargo.Billing.IsTiming)
+                if (!cargo.Contract.IsTiming)
                     continue;
-                switch ((BillingType)cargo.Billing.BillingType)
+                switch ((BillingType)cargo.Contract.BillingType)
                 {
                     case BillingType.UnitWeight:
                         billingProcess = new BillingUnitWeight();

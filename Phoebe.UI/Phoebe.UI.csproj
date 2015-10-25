@@ -684,6 +684,7 @@
     <Content Include="Views\Settle\ColdAudit.cshtml" />
     <Content Include="Views\Settle\ColdConfirm.cshtml" />
     <Content Include="Views\Settle\ColdDetails.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Boolean.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

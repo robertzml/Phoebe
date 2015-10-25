@@ -131,6 +131,14 @@
                         </tr>
                         <tr>
                             <td>
+                                @Html.DisplayNameFor(model => model.IsTiming)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.IsTiming)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
                                 @Html.DisplayNameFor(model => model.CertificateNumber)
                             </td>
                             <td>
@@ -407,12 +415,6 @@
                                 货品名称
                             </th>
                             <th>
-                                计费方式
-                            </th>
-                            <th>
-                                是否计时
-                            </th>
-                            <th>
                                 单价(元)
                             </th>
                             <th>
@@ -450,15 +452,6 @@
                             <tr>
                                 <td>
                                     @item.Name
-                                </td>
-                                <td>
-                                    @{
-                                        BillingType type = (BillingType)item.Billing.BillingType;
-                                        @type.DisplayName()
-                                    }
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(model => item.Billing.IsTiming)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(model => item.Billing.UnitPrice)
