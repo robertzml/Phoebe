@@ -28,6 +28,7 @@ namespace Phoebe.Model
         public int CustomerID { get; set; }
         public System.DateTime SignDate { get; set; }
         public Nullable<System.DateTime> CloseDate { get; set; }
+        public int BillingType { get; set; }
         public string CertificateNumber { get; set; }
         public int UserID { get; set; }
         public string Remark { get; set; }

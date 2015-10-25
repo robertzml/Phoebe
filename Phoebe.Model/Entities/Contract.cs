@@ -58,6 +58,14 @@ namespace Phoebe.Model
         public Nullable<System.DateTime> CloseDate { get; set; }
 
         /// <summary>
+        /// 计费方式
+        /// </summary>
+        [Required]
+        [UIHint("BillingType")]
+        [Display(Name = "计费方式")]
+        public int BillingType { get; set; }
+
+        /// <summary>
         /// 凭证编号
         /// </summary>
         [Display(Name = "凭证编号")]

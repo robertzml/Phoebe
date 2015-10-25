@@ -77,6 +77,17 @@
                     </tr>
                     <tr>
                         <td>
+                            @Html.DisplayNameFor(model => model.BillingType)
+                        </td>
+                        <td>
+                            @{
+                                BillingType type3 = (BillingType)Model.BillingType;
+                                @(type3.DisplayName() + " (" + type3.DisplayDescription() + ")")
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
                             @Html.DisplayNameFor(model => model.CertificateNumber)
                         </td>
                         <td>

@@ -8,16 +8,16 @@ using Phoebe.Model;
 namespace Phoebe.Business
 {
     /// <summary>
-    /// 件体积计费
+    /// 计数计费
     /// </summary>
-    public class BillingUnitVolume : IBillingProcess
+    public class BillingCount : IBillingProcess
     {
         #region Field
         private PhoebeContext context;
         #endregion //Field
 
         #region Constructor
-        public BillingUnitVolume()
+        public BillingCount()
         {
             this.context = new PhoebeContext();
         }
@@ -25,7 +25,7 @@ namespace Phoebe.Business
 
         #region Method
         /// <summary>
-        /// 冷藏费计算
+        /// 货品冷藏费计算
         /// </summary>
         /// <param name="cargoID">货品ID</param>
         /// <param name="start">开始日期</param>
@@ -64,7 +64,7 @@ namespace Phoebe.Business
                 else
                     days = end.Subtract(inTime).Days + 1;
 
-                totalFee = days * cargo.Billing.UnitPrice * Convert.ToDecimal(cargo.TotalVolume.Value);
+                totalFee = days * cargo.Billing.UnitPrice * cargo.Count;
 
                 // get store out
                 foreach (var item in stockOuts)
@@ -72,7 +72,7 @@ namespace Phoebe.Business
                     if (item.ConfirmTime > end)
                         continue;
 
-                    decimal dailyFee = cargo.Billing.UnitPrice * Convert.ToDecimal(cargo.UnitVolume.Value) * item.StockOutDetails.Sum(r => r.Count);
+                    decimal dailyFee = cargo.Billing.UnitPrice * item.StockOutDetails.Sum(r => r.Count);
                     totalFee -= (end.Subtract(item.ConfirmTime.Value).Days + 1) * dailyFee;
                 }
 
@@ -82,44 +82,44 @@ namespace Phoebe.Business
                     if (item.ConfirmTime > end)
                         continue;
 
-                    decimal dailyFee = cargo.Billing.UnitPrice * Convert.ToDecimal(cargo.UnitVolume.Value) * item.TransferDetails.Sum(r => r.Count);
+                    decimal dailyFee = cargo.Billing.UnitPrice * item.TransferDetails.Sum(r => r.Count);
                     totalFee -= (end.Subtract(item.ConfirmTime.Value).Days + 1) * dailyFee;
                 }
             }
             else
             {
-                totalFee = 0; // cargo.Billing.UnitPrice * Convert.ToDecimal(cargo.TotalVolume.Value);
+                totalFee = 0;
             }
 
             return totalFee;
         }
 
         /// <summary>
-        /// 获取单位体积
+        /// 获取单位
         /// </summary>
         /// <param name="cargo">货品</param>
         /// <returns></returns>
         public decimal GetUnitMeter(Cargo cargo)
         {
-            return Convert.ToDecimal(cargo.UnitVolume.Value);
+            return 1;
         }
 
         /// <summary>
-        /// 计算货品总体积
+        /// 计算货品总数
         /// </summary>
-        /// <param name="unitMeter">单位体积(m3)</param>
+        /// <param name="unitMeter">单位</param>
         /// <param name="count">数量</param>
-        /// <returns>总体积(m3)</returns>
+        /// <returns>总件数</returns>
         public decimal CalculateTotalMeter(decimal unitMeter, int count)
         {
-            return unitMeter * count;
+            return count;
         }
 
         /// <summary>
         /// 计算货品日冷藏费
         /// </summary>
-        /// <param name="totalMeter">总体积(m3)</param>
-        /// <param name="unitPrice">单价(元/m3)</param>
+        /// <param name="totalMeter">总件数</param>
+        /// <param name="unitPrice">单价(元/件)</param>
         /// <returns></returns>
         public decimal CalculateDailyFee(decimal totalMeter, decimal unitPrice)
         {

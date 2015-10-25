@@ -126,6 +126,9 @@ namespace Phoebe.Business
                 case BillingType.UnitVolume:
                     billingProcess = new BillingUnitVolume();
                     break;
+                case BillingType.Count:
+                    billingProcess = new BillingCount();
+                    break;
                 default:
                     return 0;
             }
@@ -154,6 +157,9 @@ namespace Phoebe.Business
                     break;
                 case BillingType.UnitVolume:
                     billingProcess = new BillingUnitVolume();
+                    break;
+                case BillingType.Count:
+                    billingProcess = new BillingCount();
                     break;
                 default:
                     return 0;
@@ -193,15 +199,16 @@ namespace Phoebe.Business
                 {
                     case BillingType.UnitWeight:
                         billingProcess = new BillingUnitWeight();
-                        frecord.UnitMeter = billingProcess.GetUnitMeter(cargo);
-                        frecord.StoreMeter = billingProcess.CalculateTotalMeter(frecord.UnitMeter, flow.Count);
                         break;
                     case BillingType.UnitVolume:
                         billingProcess = new BillingUnitVolume();
-                        frecord.UnitMeter = billingProcess.GetUnitMeter(cargo);
-                        frecord.StoreMeter = billingProcess.CalculateTotalMeter(frecord.UnitMeter, flow.Count);
+                        break;
+                    case BillingType.Count:
+                        billingProcess = new BillingCount();
                         break;
                 }
+                frecord.UnitMeter = billingProcess.GetUnitMeter(cargo);
+                frecord.StoreMeter = billingProcess.CalculateTotalMeter(frecord.UnitMeter, flow.Count);
 
                 hasFlow = true;
                 records.Add(frecord);
@@ -228,19 +235,20 @@ namespace Phoebe.Business
                 {
                     case BillingType.UnitWeight:
                         billingProcess = new BillingUnitWeight();
-                        totalMeter = billingProcess.CalculateTotalMeter(Convert.ToDecimal(cargo.UnitWeight.Value), item.Count);
-
-                        record.TotalMeter += totalMeter;
-                        record.DailyFee += billingProcess.CalculateDailyFee(totalMeter, cargo.Billing.UnitPrice);
                         break;
                     case BillingType.UnitVolume:
                         billingProcess = new BillingUnitVolume();
-                        totalMeter = billingProcess.CalculateTotalMeter(Convert.ToDecimal(cargo.UnitVolume.Value), item.Count);
-
-                        record.TotalMeter += totalMeter;
-                        record.DailyFee += billingProcess.CalculateDailyFee(totalMeter, cargo.Billing.UnitPrice);
+                        break;
+                    case BillingType.Count:
+                        billingProcess = new BillingCount();
                         break;
                 }
+
+                decimal unitMeter = billingProcess.GetUnitMeter(cargo);
+                totalMeter = billingProcess.CalculateTotalMeter(unitMeter, item.Count);
+
+                record.TotalMeter += totalMeter;
+                record.DailyFee += billingProcess.CalculateDailyFee(totalMeter, cargo.Billing.UnitPrice);
             }
 
             if (!hasFlow)

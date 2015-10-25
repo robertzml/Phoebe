@@ -97,6 +97,7 @@
           <Property Name="CustomerID" Type="int" Nullable="false" />
           <Property Name="SignDate" Type="datetime" Nullable="false" />
           <Property Name="CloseDate" Type="datetime" />
+          <Property Name="BillingType" Type="int" Nullable="false" />
           <Property Name="CertificateNumber" Type="nchar" MaxLength="10" />
           <Property Name="UserID" Type="int" Nullable="false" />
           <Property Name="Remark" Type="nvarchar" MaxLength="500" />
@@ -1592,6 +1593,7 @@
           <Property Name="CustomerID" Type="Int32" Nullable="false" />
           <Property Name="SignDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CloseDate" Type="DateTime" Precision="3" />
+          <Property Name="BillingType" Type="Int32" Nullable="false" />
           <Property Name="CertificateNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="UserID" Type="Int32" Nullable="false" />
           <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
@@ -2330,6 +2332,7 @@
           <EntitySetMapping Name="Contracts">
             <EntityTypeMapping TypeName="PhoebeModel.Contract">
               <MappingFragment StoreEntitySet="Contract">
+                <ScalarProperty Name="BillingType" ColumnName="BillingType" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Remark" ColumnName="Remark" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
