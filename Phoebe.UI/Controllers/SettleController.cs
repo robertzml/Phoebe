@@ -84,7 +84,7 @@ namespace Phoebe.UI.Controllers
 
             BaseSettlement data = new BaseSettlement();
             data.CargoID = cargo.ID;
-            data.SumPrice = billingBusiness.GetTotalPrice(id);
+            data.SumPrice = billingBusiness.GetTotalBasePrice(id);
             data.Discount = 100;
             data.SettleTime = DateTime.Now;
             data.TotalPrice = data.SumPrice;

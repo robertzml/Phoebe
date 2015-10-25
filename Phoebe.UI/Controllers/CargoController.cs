@@ -81,7 +81,7 @@ namespace Phoebe.UI.Controllers
             ViewBag.TransferIn = transferBusiness.GetDetailsByCargo(id, false);
 
             BillingBusiness billingBusiness = new BillingBusiness();
-            ViewBag.TotalPrice = billingBusiness.GetTotalPrice(id);
+            ViewBag.TotalPrice = billingBusiness.GetTotalBasePrice(id);
             ViewBag.ColdPrice = billingBusiness.CalculateColdPrice(id);
 
             return View(data);

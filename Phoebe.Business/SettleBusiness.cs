@@ -61,6 +61,22 @@ namespace Phoebe.Business
         }
 
         /// <summary>
+        /// 获取合同基本费用结算
+        /// </summary>
+        /// <param name="ContractID">合同ID</param>
+        /// <returns></returns>
+        public List<BaseSettlement> GetBaseByContract(int ContractID)
+        {
+            var data = from r in this.context.BaseSettlements
+                       where (from s in this.context.Cargoes
+                              where s.ContractID == ContractID && s.Status != (int)EntityStatus.CargoNotIn
+                              select s.ID).Contains(r.CargoID)
+                       select r;
+
+            return data.ToList();
+        }
+
+        /// <summary>
         /// 添加基本结算信息
         /// </summary>
         /// <param name="data">基本结算数据</param>

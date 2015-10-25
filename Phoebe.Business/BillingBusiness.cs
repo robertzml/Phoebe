@@ -82,16 +82,15 @@ namespace Phoebe.Business
             return ErrorCode.Success;
         }
 
-
         /// <summary>
-        /// 获取所有费用
+        /// 获取所有基本费用
         /// </summary>
         /// <param name="cargoID">货品ID</param>
         /// <returns></returns>
         /// <remarks>
         /// 除冷藏费外所有费用
         /// </remarks>
-        public decimal GetTotalPrice(string cargoID)
+        public decimal GetTotalBasePrice(string cargoID)
         {
             Guid gid;
             if (!Guid.TryParse(cargoID, out gid))
@@ -163,6 +162,12 @@ namespace Phoebe.Business
             return billingProcess.CalculateColdPrice(cargo.ID, start, end);
         }
 
+        /// <summary>
+        /// 获取日冷藏费记录
+        /// </summary>
+        /// <param name="contractID">合同ID</param>
+        /// <param name="date">日期</param>
+        /// <returns></returns>
         public List<DailyColdRecord> GetDailyColdRecord(int contractID, DateTime date)
         {
             List<DailyColdRecord> records = new List<DailyColdRecord>();
@@ -170,6 +175,7 @@ namespace Phoebe.Business
             var stores = storeBusiness.GetInDay(contractID, date);
             var flows = storeBusiness.GetDaysFlow(contractID, date);
 
+            bool hasFlow = false;
             foreach (var flow in flows)
             {
                 DailyColdRecord frecord = new DailyColdRecord();
@@ -179,7 +185,10 @@ namespace Phoebe.Business
                 frecord.Count = flow.Count;
 
                 IBillingProcess billingProcess = null;
+
                 var cargo = this.context.Cargoes.Find(flow.CargoID);
+                if (!cargo.Billing.IsTiming)
+                    continue;
                 switch ((BillingType)cargo.Billing.BillingType)
                 {
                     case BillingType.UnitWeight:
@@ -187,13 +196,19 @@ namespace Phoebe.Business
                         frecord.UnitMeter = billingProcess.GetUnitMeter(cargo);
                         frecord.StoreMeter = billingProcess.CalculateTotalMeter(frecord.UnitMeter, flow.Count);
                         break;
+                    case BillingType.UnitVolume:
+                        billingProcess = new BillingUnitVolume();
+                        frecord.UnitMeter = billingProcess.GetUnitMeter(cargo);
+                        frecord.StoreMeter = billingProcess.CalculateTotalMeter(frecord.UnitMeter, flow.Count);
+                        break;
                 }
 
+                hasFlow = true;
                 records.Add(frecord);
             }
 
             DailyColdRecord record;
-            if (flows.Count != 0)
+            if (hasFlow)
                 record = records.Last();
             else
             {
@@ -207,6 +222,8 @@ namespace Phoebe.Business
                 decimal totalMeter = 0;
                 var cargo = this.context.Cargoes.Find(item.CargoID);
 
+                if (!cargo.Billing.IsTiming)
+                    continue;
                 switch ((BillingType)cargo.Billing.BillingType)
                 {
                     case BillingType.UnitWeight:
@@ -216,10 +233,17 @@ namespace Phoebe.Business
                         record.TotalMeter += totalMeter;
                         record.DailyFee += billingProcess.CalculateDailyFee(totalMeter, cargo.Billing.UnitPrice);
                         break;
+                    case BillingType.UnitVolume:
+                        billingProcess = new BillingUnitVolume();
+                        totalMeter = billingProcess.CalculateTotalMeter(Convert.ToDecimal(cargo.UnitVolume.Value), item.Count);
+
+                        record.TotalMeter += totalMeter;
+                        record.DailyFee += billingProcess.CalculateDailyFee(totalMeter, cargo.Billing.UnitPrice);
+                        break;
                 }
             }
 
-            if (flows.Count == 0)
+            if (!hasFlow)
                 records.Add(record);
 
             return records;
