@@ -219,11 +219,14 @@ namespace Phoebe.Business
             List<DailyColdRecord> records = new List<DailyColdRecord>();
             BillingBusiness billingBusiness = new BillingBusiness();
 
+            ContractBusiness contractBusiness = new ContractBusiness();
+            var contract = contractBusiness.Get(contractID);
+            if (contract == null || !contract.IsTiming)
+                return records;
+
             decimal totalFee = 0;
             for (DateTime step = start.Date; step <= end; step = step.AddDays(1))
             {
-                var nextDay = step.AddDays(1);
-
                 var record = billingBusiness.GetDailyColdRecord(contractID, step);
                 var last = record.Last();
 
@@ -285,7 +288,6 @@ namespace Phoebe.Business
                 coldSettle.Status = (int)status;
 
                 this.context.SaveChanges();
-
             }
             catch (Exception)
             {

@@ -181,7 +181,6 @@ namespace Phoebe.Business
             var stores = storeBusiness.GetInDay(contractID, date);
             var flows = storeBusiness.GetDaysFlow(contractID, date);
 
-            bool hasFlow = false;
             foreach (var flow in flows)
             {
                 DailyColdRecord frecord = new DailyColdRecord();
@@ -193,8 +192,6 @@ namespace Phoebe.Business
                 IBillingProcess billingProcess = null;
 
                 var cargo = this.context.Cargoes.Find(flow.CargoID);
-                if (!cargo.Contract.IsTiming)
-                    continue;
                 switch ((BillingType)cargo.Contract.BillingType)
                 {
                     case BillingType.UnitWeight:
@@ -210,12 +207,11 @@ namespace Phoebe.Business
                 frecord.UnitMeter = billingProcess.GetUnitMeter(cargo);
                 frecord.StoreMeter = billingProcess.CalculateTotalMeter(frecord.UnitMeter, flow.Count);
 
-                hasFlow = true;
                 records.Add(frecord);
             }
 
             DailyColdRecord record;
-            if (hasFlow)
+            if (flows.Count != 0)
                 record = records.Last();
             else
             {
@@ -229,8 +225,6 @@ namespace Phoebe.Business
                 decimal totalMeter = 0;
                 var cargo = this.context.Cargoes.Find(item.CargoID);
 
-                if (!cargo.Contract.IsTiming)
-                    continue;
                 switch ((BillingType)cargo.Contract.BillingType)
                 {
                     case BillingType.UnitWeight:
@@ -251,7 +245,7 @@ namespace Phoebe.Business
                 record.DailyFee += billingProcess.CalculateDailyFee(totalMeter, cargo.Billing.UnitPrice);
             }
 
-            if (!hasFlow)
+            if (flows.Count == 0)
                 records.Add(record);
 
             return records;

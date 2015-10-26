@@ -82,6 +82,11 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div id="cargo-panel"></div>
+                            </div>
+                        </div>
 
                         <h3 class="form-section">库存</h3>
                         <div class="row">
@@ -195,10 +200,20 @@
                 });
             }
 
+            function loadCargoInfo(id) {
+                $('#cargo-panel').empty();
+
+                if (id == null || id == '')
+                    return;
+
+                $('#cargo-panel').load('/Cargo/Info', { id: id });
+            }
+
             $('#ContractID').change(function () {
                 var contractId = $(this).val();
 
                 $('#CargoID').empty();
+                $('#cargo-panel').empty();
                 tbody.empty();
 
                 if (contractId == '')
@@ -213,6 +228,7 @@
                 if (cargoId == '')
                     return;
 
+                loadCargoInfo(cargoId);
                 loadCargoStock(cargoId);
             });
 

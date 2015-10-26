@@ -273,6 +273,9 @@ namespace Phoebe.UI.Controllers
             {
                 BillingBusiness billingBusiness = new BillingBusiness();
 
+                model.TotalPrice = model.HandlingPrice + +model.FreezePrice + model.DisposePrice +
+                    model.PackingPrice + model.RentPrice + model.OtherPrice;
+
                 ErrorCode result = billingBusiness.Edit(model);
                 if (result == ErrorCode.Success)
                 {

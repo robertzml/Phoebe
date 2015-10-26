@@ -53,28 +53,10 @@
                         @Html.HiddenFor(model => model.Status)
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.BillingType, htmlAttributes: new { @class = "control-label col-md-3" })
-                            <div class="col-md-8">
-                                @Html.EditorFor(model => model.BillingType, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.BillingType, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
                             @Html.LabelFor(model => model.UnitPrice, htmlAttributes: new { @class = "control-label col-md-3" })
                             <div class="col-md-8">
                                 @Html.EditorFor(model => model.UnitPrice, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.UnitPrice, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.IsTiming, htmlAttributes: new { @class = "control-label col-md-3" })
-                            <div class="col-md-8">
-                                <div class="checkbox">
-                                    @Html.EditorFor(model => model.IsTiming)
-                                    @Html.ValidationMessageFor(model => model.IsTiming, "", new { @class = "text-danger" })
-                                </div>
                             </div>
                         </div>
 

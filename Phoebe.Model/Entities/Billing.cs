@@ -19,7 +19,7 @@ namespace Phoebe.Model
         /// 单价
         /// </summary>
         [Required]
-        [Display(Name = "单价(元)")]
+        [Display(Name = "冷藏费单价(元)")]
         public decimal UnitPrice { get; set; }
 
         /// <summary>

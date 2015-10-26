@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Phoebe.Model;
-
+using System.Diagnostics.Contracts;
 namespace Phoebe.Business
 {
     /// <summary>
@@ -39,16 +39,16 @@ namespace Phoebe.Business
 
             decimal totalFee = 0;
 
-            var stockOuts = from r in this.context.StockOuts
-                            where r.CargoID == cargo.ID && r.Status == (int)EntityStatus.StockOut && r.ConfirmTime >= start && r.ConfirmTime <= end
-                            select r;
-
-            var transferOuts = from r in this.context.Transfers
-                               where r.OldCargoID == cargo.ID && r.Status == (int)EntityStatus.Transfer && r.ConfirmTime >= start && r.ConfirmTime <= end
-                               select r;
-
             if (cargo.Contract.IsTiming)
             {
+                var stockOuts = from r in this.context.StockOuts
+                                where r.CargoID == cargo.ID && r.Status == (int)EntityStatus.StockOut && r.ConfirmTime >= start && r.ConfirmTime <= end
+                                select r;
+
+                var transferOuts = from r in this.context.Transfers
+                                   where r.OldCargoID == cargo.ID && r.Status == (int)EntityStatus.Transfer && r.ConfirmTime >= start && r.ConfirmTime <= end
+                                   select r;
+
                 DateTime inTime = cargo.InTime.Value;
 
                 // check is transfer
@@ -88,7 +88,7 @@ namespace Phoebe.Business
             }
             else
             {
-                totalFee = 0;//cargo.Billing.UnitPrice * Convert.ToDecimal(cargo.TotalWeight.Value);
+                totalFee = 0;
             }
 
             return totalFee;

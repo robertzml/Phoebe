@@ -88,7 +88,7 @@ namespace Phoebe.Business
             }
             else
             {
-                totalFee = 0; // cargo.Billing.UnitPrice * Convert.ToDecimal(cargo.TotalVolume.Value);
+                totalFee = 0;
             }
 
             return totalFee;
