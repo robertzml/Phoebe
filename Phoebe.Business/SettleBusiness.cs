@@ -206,13 +206,54 @@ namespace Phoebe.Business
             return data.ToList();
         }
 
+        /// <summary>
+        /// 处理货品日冷藏费
+        /// </summary>
+        /// <param name="cargoID">货品ID</param>
+        /// <param name="start">开始日期</param>
+        /// <param name="end">结束日期</param>
+        /// <remarks>
+        /// 非计时货品无冷藏费
+        /// </remarks>
+        /// <returns></returns>
+        public List<DailyColdRecord> ProcessDailyCold(string cargoID, DateTime start, DateTime end)
+        {
+            List<DailyColdRecord> records = new List<DailyColdRecord>();
+
+            Guid cid;
+            if (!Guid.TryParse(cargoID, out cid))
+                return null;
+
+            var cargo = this.context.Cargoes.Find(cid);
+            if (!cargo.Contract.IsTiming)
+                return records;
+
+            BillingBusiness billingBusiness = new BillingBusiness();
+
+            decimal totalFee = 0;
+            for (DateTime step = start.Date; step <= end; step = step.AddDays(1))
+            {
+                var record = billingBusiness.GetDailyColdRecord(cid, step);
+                var last = record.Last();
+
+                totalFee += last.DailyFee;
+                last.TotalFee = totalFee;
+
+                records.AddRange(record);
+            }
+
+            return records;
+        }
 
         /// <summary>
-        /// 处理日冷藏费
+        /// 处理合同日冷藏费
         /// </summary>
         /// <param name="contractID">合同ID</param>
         /// <param name="start">开始日期</param>
         /// <param name="end">结束日期</param>
+        /// <remarks>
+        /// 非计时合同无冷藏费
+        /// </remarks>
         /// <returns></returns>
         public List<DailyColdRecord> ProcessDailyCold(int contractID, DateTime start, DateTime end)
         {

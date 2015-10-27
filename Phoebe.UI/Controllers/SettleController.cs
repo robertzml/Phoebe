@@ -394,12 +394,8 @@ namespace Phoebe.UI.Controllers
         {
             if (ModelState.IsValid)
             {
-                BillingBusiness billingBusiness = new BillingBusiness();
-                var total = billingBusiness.CalculateColdPrice(model.CargoID, model.DateFrom, model.DateTo);
-
-                ViewBag.TotalFee = total;
-
-                return View();
+                var records = this.settleBusiness.ProcessDailyCold(model.CargoID, model.DateFrom, model.DateTo);
+                return View(records);
             }
             else
             {

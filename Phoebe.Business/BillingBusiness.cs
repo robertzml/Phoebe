@@ -169,18 +169,35 @@ namespace Phoebe.Business
         }
 
         /// <summary>
-        /// 获取日冷藏费记录
+        /// 获取货品日冷藏记录
         /// </summary>
-        /// <param name="contractID">合同ID</param>
+        /// <param name="cargoID">货品ID</param>
         /// <param name="date">日期</param>
         /// <returns></returns>
-        public List<DailyColdRecord> GetDailyColdRecord(int contractID, DateTime date)
+        public List<DailyColdRecord> GetDailyColdRecord(Guid cargoID, DateTime date)
         {
             List<DailyColdRecord> records = new List<DailyColdRecord>();
-            StoreBusiness storeBusiness = new StoreBusiness();
-            var stores = storeBusiness.GetInDay(contractID, date);
-            var flows = storeBusiness.GetDaysFlow(contractID, date);
 
+            StoreBusiness storeBusiness = new StoreBusiness();
+            var stores = storeBusiness.GetInDay(cargoID, date);
+            var flows = storeBusiness.GetDaysFlow(cargoID, date);
+
+            var cargo = this.context.Cargoes.Find(cargoID);
+            IBillingProcess billingProcess = null;
+            switch ((BillingType)cargo.Contract.BillingType)
+            {
+                case BillingType.UnitWeight:
+                    billingProcess = new BillingUnitWeight();
+                    break;
+                case BillingType.UnitVolume:
+                    billingProcess = new BillingUnitVolume();
+                    break;
+                case BillingType.Count:
+                    billingProcess = new BillingCount();
+                    break;
+            }
+
+            // set daily flow
             foreach (var flow in flows)
             {
                 DailyColdRecord frecord = new DailyColdRecord();
@@ -188,22 +205,6 @@ namespace Phoebe.Business
 
                 frecord.CargoName = flow.CargoName;
                 frecord.Count = flow.Count;
-
-                IBillingProcess billingProcess = null;
-
-                var cargo = this.context.Cargoes.Find(flow.CargoID);
-                switch ((BillingType)cargo.Contract.BillingType)
-                {
-                    case BillingType.UnitWeight:
-                        billingProcess = new BillingUnitWeight();
-                        break;
-                    case BillingType.UnitVolume:
-                        billingProcess = new BillingUnitVolume();
-                        break;
-                    case BillingType.Count:
-                        billingProcess = new BillingCount();
-                        break;
-                }
                 frecord.UnitMeter = billingProcess.GetUnitMeter(cargo);
                 frecord.StoreMeter = billingProcess.CalculateTotalMeter(frecord.UnitMeter, flow.Count);
 
@@ -221,22 +222,76 @@ namespace Phoebe.Business
 
             foreach (var item in stores)
             {
-                IBillingProcess billingProcess = null;
+                decimal unitMeter = billingProcess.GetUnitMeter(cargo);
+                decimal totalMeter = billingProcess.CalculateTotalMeter(unitMeter, item.Count);
+
+                record.TotalMeter += totalMeter;
+                record.DailyFee += billingProcess.CalculateDailyFee(totalMeter, cargo.Billing.UnitPrice);
+            }
+
+            if (flows.Count == 0)
+                records.Add(record);
+
+            return records;
+        }
+
+        /// <summary>
+        /// 获取日冷藏费记录
+        /// </summary>
+        /// <param name="contractID">合同ID</param>
+        /// <param name="date">日期</param>
+        /// <returns></returns>
+        public List<DailyColdRecord> GetDailyColdRecord(int contractID, DateTime date)
+        {
+            List<DailyColdRecord> records = new List<DailyColdRecord>();
+            var contract = this.context.Contracts.Find(contractID);
+
+            StoreBusiness storeBusiness = new StoreBusiness();
+            var stores = storeBusiness.GetInDay(contractID, date);
+            var flows = storeBusiness.GetDaysFlow(contractID, date);
+
+            IBillingProcess billingProcess = null;
+            switch ((BillingType)contract.BillingType)
+            {
+                case BillingType.UnitWeight:
+                    billingProcess = new BillingUnitWeight();
+                    break;
+                case BillingType.UnitVolume:
+                    billingProcess = new BillingUnitVolume();
+                    break;
+                case BillingType.Count:
+                    billingProcess = new BillingCount();
+                    break;
+            }
+
+            foreach (var flow in flows)
+            {
+                DailyColdRecord frecord = new DailyColdRecord();
+                frecord.RecordDate = date;
+                frecord.CargoName = flow.CargoName;
+                frecord.Count = flow.Count;
+
+                var cargo = this.context.Cargoes.Find(flow.CargoID);
+
+                frecord.UnitMeter = billingProcess.GetUnitMeter(cargo);
+                frecord.StoreMeter = billingProcess.CalculateTotalMeter(frecord.UnitMeter, flow.Count);
+
+                records.Add(frecord);
+            }
+
+            DailyColdRecord record;
+            if (flows.Count != 0)
+                record = records.Last();
+            else
+            {
+                record = new DailyColdRecord();
+                record.RecordDate = date;
+            }
+
+            foreach (var item in stores)
+            {
                 decimal totalMeter = 0;
                 var cargo = this.context.Cargoes.Find(item.CargoID);
-
-                switch ((BillingType)cargo.Contract.BillingType)
-                {
-                    case BillingType.UnitWeight:
-                        billingProcess = new BillingUnitWeight();
-                        break;
-                    case BillingType.UnitVolume:
-                        billingProcess = new BillingUnitVolume();
-                        break;
-                    case BillingType.Count:
-                        billingProcess = new BillingCount();
-                        break;
-                }
 
                 decimal unitMeter = billingProcess.GetUnitMeter(cargo);
                 totalMeter = billingProcess.CalculateTotalMeter(unitMeter, item.Count);
