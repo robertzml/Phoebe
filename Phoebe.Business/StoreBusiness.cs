@@ -261,7 +261,7 @@ namespace Phoebe.Business
         }
 
         /// <summary>
-        /// 获取指定日库存
+        /// 获取合同指定日库存
         /// </summary>
         /// <param name="contractID">合同ID</param>
         /// <param name="date">日期</param>
@@ -423,7 +423,7 @@ namespace Phoebe.Business
         }
 
         /// <summary>
-        /// 获取日流水
+        /// 获取合同日流水
         /// </summary>
         /// <param name="contractID">合同ID</param>
         /// <param name="date">日期</param>

@@ -80,8 +80,11 @@ namespace Phoebe.UI.Controllers
             ViewBag.TransferOut = transferBusiness.GetDetailsByCargo(id, true);
             ViewBag.TransferIn = transferBusiness.GetDetailsByCargo(id, false);
 
+            DateTime start, end;
             BillingBusiness billingBusiness = new BillingBusiness();
-            ViewBag.ColdPrice = billingBusiness.CalculateColdPrice(id);
+            ViewBag.ColdPrice = Math.Round(billingBusiness.CalculateColdPrice(id, out start, out end), 2);
+            ViewBag.StartTime = start.ToDateString();
+            ViewBag.EndTime = end.ToDateString();
 
             return View(data);
         }

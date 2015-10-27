@@ -294,7 +294,6 @@
                         </tr>
                     </thead>
                     <tbody>
-                       
                         <tr>
                             <td>
                                 @Html.DisplayNameFor(model => model.Billing.UnitPrice)
@@ -396,10 +395,10 @@
                     <tbody>
                         <tr>
                             <td>
-                                @Model.InTime.ToDateString()
+                                @ViewBag.StartTime
                             </td>
                             <td>
-                                @DateTime.Now.ToDateString()
+                                @ViewBag.EndTime
                             </td>
                             <td>
                                 @ViewBag.ColdPrice

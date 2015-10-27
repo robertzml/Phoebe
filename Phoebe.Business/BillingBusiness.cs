@@ -107,13 +107,16 @@ namespace Phoebe.Business
         }
 
         /// <summary>
-        /// 计算冷藏费
+        /// 计算货品冷藏费
         /// </summary>
         /// <param name="cargoID">货品ID</param>
+        /// <param name="start">开始日期</param>
+        /// <param name="end">结束日期</param>
         /// <returns></returns>
-        public decimal CalculateColdPrice(string cargoID)
+        public decimal CalculateColdPrice(string cargoID, out DateTime start, out DateTime end)
         {
             Cargo cargo = checkCargo(cargoID);
+            start = end = DateTime.Now.Date;
             if (cargo == null)
                 return 0;
 
@@ -133,11 +136,23 @@ namespace Phoebe.Business
                     return 0;
             }
 
-            return billingProcess.CalculateColdPrice(cargo.ID, cargo.InTime.Value, DateTime.Now);
+            // check cargo is trans in
+            var trans = this.context.Transfers.SingleOrDefault(r => r.NewCargoID == cargo.ID && r.Status == (int)EntityStatus.Transfer);
+            if (trans == null)
+                start = cargo.InTime.Value;
+            else
+                start = trans.ConfirmTime.Value;
+
+            if (cargo.OutTime == null)
+                end = DateTime.Now.Date;
+            else
+                end = cargo.OutTime.Value;
+
+            return billingProcess.CalculateColdPrice(cargo.ID, start, end);
         }
 
         /// <summary>
-        /// 计算冷藏费
+        /// 计算货品冷藏费
         /// </summary>
         /// <param name="cargoID">货品ID</param>
         /// <param name="start">开始日期</param>
@@ -236,7 +251,7 @@ namespace Phoebe.Business
         }
 
         /// <summary>
-        /// 获取日冷藏费记录
+        /// 获取合同日冷藏费记录
         /// </summary>
         /// <param name="contractID">合同ID</param>
         /// <param name="date">日期</param>
