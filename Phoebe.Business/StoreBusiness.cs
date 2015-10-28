@@ -283,7 +283,11 @@ namespace Phoebe.Business
                     storage.Number = item.Warehouse.Number;
                     storage.StockID = item.StockID.Value;
                     storage.CargoID = cargo.ID;
+                    storage.FirstCategoryName = cargo.FirstCategory.Name;
+                    storage.SecondCategoryName = cargo.SecondCategory.Name;
+                    storage.ThirdCategoryName = cargo.ThirdCategory == null ? "" : cargo.ThirdCategory.Name;
                     storage.ContractID = contractID;
+                    storage.ContractName = cargo.Contract.Name;
                     storage.CargoName = cargo.Name;
                     storage.Count = item.Count;
                     storage.InTime = item.StockIn.ConfirmTime.Value;
@@ -302,7 +306,11 @@ namespace Phoebe.Business
                         storage.Number = item.Warehouse.Number;
                         storage.StockID = item.StockID;
                         storage.CargoID = cargo.ID;
+                        storage.FirstCategoryName = cargo.FirstCategory.Name;
+                        storage.SecondCategoryName = cargo.SecondCategory.Name;
+                        storage.ThirdCategoryName = cargo.ThirdCategory == null ? "" : cargo.ThirdCategory.Name;
                         storage.ContractID = contractID;
+                        storage.ContractName = cargo.Contract.Name;
                         storage.CargoName = cargo.Name;
                         storage.Count = item.Count;
                         storage.InTime = transferIn.ConfirmTime.Value;
@@ -443,6 +451,8 @@ namespace Phoebe.Business
                     stockFlow.CargoID = cargo.ID;
                     stockFlow.ContractID = contractID;
                     stockFlow.CargoName = cargo.Name;
+                    stockFlow.FirstCategoryName = cargo.FirstCategory.Name;
+                    stockFlow.SecondCategoryName = cargo.SecondCategory.Name;
                     stockFlow.Count = item.StockInDetails.Sum(r => r.Count);
                     stockFlow.FlowDate = item.ConfirmTime.Value;
                     stockFlow.Type = StockFlowType.StockIn;
@@ -458,6 +468,8 @@ namespace Phoebe.Business
                     stockFlow.CargoID = cargo.ID;
                     stockFlow.ContractID = contractID;
                     stockFlow.CargoName = cargo.Name;
+                    stockFlow.FirstCategoryName = cargo.FirstCategory.Name;
+                    stockFlow.SecondCategoryName = cargo.SecondCategory.Name;
                     stockFlow.Count = item.TransferDetails.Sum(r => r.Count);
                     stockFlow.FlowDate = item.ConfirmTime.Value;
                     stockFlow.Type = StockFlowType.TransferIn;
@@ -473,6 +485,8 @@ namespace Phoebe.Business
                     stockFlow.CargoID = cargo.ID;
                     stockFlow.ContractID = contractID;
                     stockFlow.CargoName = cargo.Name;
+                    stockFlow.FirstCategoryName = cargo.FirstCategory.Name;
+                    stockFlow.SecondCategoryName = cargo.SecondCategory.Name;
                     stockFlow.Count = -item.StockOutDetails.Sum(r => r.Count);
                     stockFlow.FlowDate = item.ConfirmTime.Value;
                     stockFlow.Type = StockFlowType.StockOut;
@@ -488,6 +502,8 @@ namespace Phoebe.Business
                     stockFlow.CargoID = cargo.ID;
                     stockFlow.ContractID = contractID;
                     stockFlow.CargoName = cargo.Name;
+                    stockFlow.FirstCategoryName = cargo.FirstCategory.Name;
+                    stockFlow.SecondCategoryName = cargo.SecondCategory.Name;
                     stockFlow.Count = -item.TransferDetails.Sum(r => r.Count);
                     stockFlow.FlowDate = item.ConfirmTime.Value;
                     stockFlow.Type = StockFlowType.TransferOut;

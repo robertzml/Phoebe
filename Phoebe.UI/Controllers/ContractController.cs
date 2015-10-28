@@ -339,6 +339,7 @@ namespace Phoebe.UI.Controllers
         /// /StockMove/Create
         /// /Transfer/Create
         /// /Store/Snapshoot
+        /// /Statistic/ContractFlow
         /// </remarks>
         /// <returns></returns>
         public JsonResult GetContracts(int type)

@@ -136,6 +136,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ScatterCustomerController.cs" />
     <Compile Include="Controllers\SettleController.cs" />
+    <Compile Include="Controllers\StatisticController.cs" />
     <Compile Include="Controllers\StockController.cs" />
     <Compile Include="Controllers\StockInController.cs" />
     <Compile Include="Controllers\StockMoveController.cs" />
@@ -150,6 +151,7 @@
     </Compile>
     <Compile Include="Models\CategoryInfoModel.cs" />
     <Compile Include="Models\SettleModels.cs" />
+    <Compile Include="Models\StatisticModels.cs" />
     <Compile Include="Models\StoreModels.cs" />
     <Compile Include="Models\UserModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -685,6 +687,12 @@
     <Content Include="Views\Settle\ColdConfirm.cshtml" />
     <Content Include="Views\Settle\ColdDetails.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Boolean.cshtml" />
+    <Content Include="Views\Statistic\ContractFlow.cshtml" />
+    <Content Include="Views\Statistic\ContractFlowResult.cshtml" />
+    <Content Include="Views\Statistic\ContractStore.cshtml" />
+    <Content Include="Views\Statistic\ContractStoreProcess.cshtml" />
+    <Content Include="Views\Statistic\StoreSummary.cshtml" />
+    <Content Include="Views\Statistic\StoreSummaryProcess.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

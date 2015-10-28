@@ -1,0 +1,107 @@
+﻿@model IEnumerable<Phoebe.Model.StockFlow>
+
+@{ 
+    Layout = null;
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet box blue">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-list"></i>&nbsp;合同日流水
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse">
+                    </a>
+                    <a href="javascript:;" class="reload">
+                    </a>
+                    <a href="javascript:;" class="remove">
+                    </a>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <table class="table table-striped table-bordered table-hover" id="flow-table">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.FlowDate)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.CargoName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.FirstCategoryName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.SecondCategoryName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Type)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Count)
+                            </th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.FlowDate)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.CargoName)
+                            </th>
+                            <th data-filter="true">
+                                @Html.DisplayNameFor(model => model.FirstCategoryName)
+                            </th>
+                            <th data-filter="true">
+                                @Html.DisplayNameFor(model => model.SecondCategoryName)
+                            </th>
+                            <th data-filter="true">
+                                @Html.DisplayNameFor(model => model.Type)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Count)
+                            </th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.FlowDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CargoName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.FirstCategoryName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SecondCategoryName)
+                                </td>
+                                <td>
+                                    @{
+                                        StockFlowType type = (StockFlowType)item.Type;
+                                        @type.DisplayName()
+                                    }
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Count)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        phoebe.initDatatable($('#flow-table'));
+    });
+</script>

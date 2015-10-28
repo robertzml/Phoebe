@@ -15,6 +15,7 @@ namespace Phoebe.UI.Controllers
     /// <summary>
     /// 结算控制器
     /// </summary>
+    [EnhancedAuthorize]
     public class SettleController : Controller
     {
         #region Field
