@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Phoebe.Model
 {
-    public class BaseSettlementMetadata
+    public class SettlementMetadata
     {
         /// <summary>
         /// ID
@@ -23,11 +23,37 @@ namespace Phoebe.Model
         public string Number { get; set; }
 
         /// <summary>
-        /// 货品ID
+        /// 客户类型
         /// </summary>
         [Required]
-        [Display(Name = "货品名称")]
-        public System.Guid CargoID { get; set; }
+        [Display(Name = "客户类型")]
+        public int CustomerType { get; set; }
+
+        /// <summary>
+        /// 客户ID
+        /// </summary>
+        [Required]
+        [Display(Name = "客户")]
+        public int CustomerID { get; set; }
+
+        /// <summary>
+        /// 开始日期
+        /// </summary>
+        [Display(Name = "开始日期")]
+        public System.DateTime StartTime { get; set; }
+
+        /// <summary>
+        /// 结束日期
+        /// </summary>
+        [Display(Name = "结束日期")]
+        public System.DateTime EndTime { get; set; }
+
+        /// <summary>
+        /// 往期费用
+        /// </summary>
+        [Required]
+        [Display(Name = "往期费用(元)")]
+        public decimal PastPrice { get; set; }
 
         /// <summary>
         /// 费用合计
@@ -96,8 +122,8 @@ namespace Phoebe.Model
         public int Status { get; set; }
     }
 
-    [MetadataType(typeof(BaseSettlementMetadata))]
-    public partial class BaseSettlement
+    [MetadataType(typeof(SettlementMetadata))]
+    public partial class Settlement
     {
     }
 }

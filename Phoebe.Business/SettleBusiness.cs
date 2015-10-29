@@ -25,186 +25,186 @@ namespace Phoebe.Business
 
         #region Method
         #region Base Settlement
-        /// <summary>
-        /// 获取基本费用结算
-        /// </summary>
-        /// <returns></returns>
-        public List<BaseSettlement> GetBase()
-        {
-            var data = this.context.BaseSettlements.OrderByDescending(r => r.ConfirmTime);
-            return data.ToList();
-        }
+        ///// <summary>
+        ///// 获取基本费用结算
+        ///// </summary>
+        ///// <returns></returns>
+        //public List<BaseSettlement> GetBase()
+        //{
+        //    var data = this.context.BaseSettlements.OrderByDescending(r => r.ConfirmTime);
+        //    return data.ToList();
+        //}
 
-        /// <summary>
-        /// 获取基本费用结算
-        /// </summary>
-        /// <param name="status">状态</param>
-        /// <returns></returns>
-        public List<BaseSettlement> GetBase(EntityStatus status)
-        {
-            var data = this.context.BaseSettlements.Where(r => r.Status == (int)status);
-            return data.ToList();
-        }
+        ///// <summary>
+        ///// 获取基本费用结算
+        ///// </summary>
+        ///// <param name="status">状态</param>
+        ///// <returns></returns>
+        //public List<BaseSettlement> GetBase(EntityStatus status)
+        //{
+        //    var data = this.context.BaseSettlements.Where(r => r.Status == (int)status);
+        //    return data.ToList();
+        //}
 
-        /// <summary>
-        /// 获取基本费用结算
-        /// </summary>
-        /// <param name="id">结算ID</param>
-        /// <returns></returns>
-        public BaseSettlement GetBase(string id)
-        {
-            Guid gid;
-            if (!Guid.TryParse(id, out gid))
-                return null;
+        ///// <summary>
+        ///// 获取基本费用结算
+        ///// </summary>
+        ///// <param name="id">结算ID</param>
+        ///// <returns></returns>
+        //public BaseSettlement GetBase(string id)
+        //{
+        //    Guid gid;
+        //    if (!Guid.TryParse(id, out gid))
+        //        return null;
 
-            return this.context.BaseSettlements.Find(gid);
-        }
+        //    return this.context.BaseSettlements.Find(gid);
+        //}
 
-        /// <summary>
-        /// 获取合同基本费用结算
-        /// </summary>
-        /// <param name="ContractID">合同ID</param>
-        /// <returns></returns>
-        public List<BaseSettlement> GetBaseByContract(int ContractID)
-        {
-            var data = from r in this.context.BaseSettlements
-                       where (from s in this.context.Cargoes
-                              where s.ContractID == ContractID && s.Status != (int)EntityStatus.CargoNotIn
-                              select s.ID).Contains(r.CargoID)
-                       select r;
+        ///// <summary>
+        ///// 获取合同基本费用结算
+        ///// </summary>
+        ///// <param name="ContractID">合同ID</param>
+        ///// <returns></returns>
+        //public List<BaseSettlement> GetBaseByContract(int ContractID)
+        //{
+        //    var data = from r in this.context.BaseSettlements
+        //               where (from s in this.context.Cargoes
+        //                      where s.ContractID == ContractID && s.Status != (int)EntityStatus.CargoNotIn
+        //                      select s.ID).Contains(r.CargoID)
+        //               select r;
 
-            return data.ToList();
-        }
+        //    return data.ToList();
+        //}
 
-        /// <summary>
-        /// 添加基本结算信息
-        /// </summary>
-        /// <param name="data">基本结算数据</param>
-        /// <returns></returns>
-        public ErrorCode BaseCreate(BaseSettlement data)
-        {
-            try
-            {
-                data.ID = Guid.NewGuid();
-                data.Status = (int)EntityStatus.SettleUnpaid;
+        ///// <summary>
+        ///// 添加基本结算信息
+        ///// </summary>
+        ///// <param name="data">基本结算数据</param>
+        ///// <returns></returns>
+        //public ErrorCode BaseCreate(BaseSettlement data)
+        //{
+        //    try
+        //    {
+        //        data.ID = Guid.NewGuid();
+        //        data.Status = (int)EntityStatus.SettleUnpaid;
 
-                this.context.BaseSettlements.Add(data);
+        //        this.context.BaseSettlements.Add(data);
 
-                //edit cargo billing
-                var billing = this.context.Billings.Find(data.CargoID);
-                if (billing.Status != (int)EntityStatus.BillingUnsettle)
-                {
-                    return ErrorCode.CargoCannotSettled;
-                }
+        //        //edit cargo billing
+        //        var billing = this.context.Billings.Find(data.CargoID);
+        //        if (billing.Status != (int)EntityStatus.BillingUnsettle)
+        //        {
+        //            return ErrorCode.CargoCannotSettled;
+        //        }
 
-                billing.Status = (int)EntityStatus.BillingSettle;
+        //        billing.Status = (int)EntityStatus.BillingSettle;
 
-                this.context.SaveChanges();
-            }
-            catch (Exception)
-            {
-                return ErrorCode.Exception;
-            }
+        //        this.context.SaveChanges();
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return ErrorCode.Exception;
+        //    }
 
-            return ErrorCode.Success;
-        }
+        //    return ErrorCode.Success;
+        //}
 
-        /// <summary>
-        /// 基本结算审核
-        /// </summary>
-        /// <param name="id">结算ID</param>
-        /// <param name="paidPrice">付款</param>
-        /// <param name="confirmTime">确认时间</param>
-        /// <param name="remark">备注</param>
-        /// <param name="status">状态</param>
-        /// <returns></returns>
-        public ErrorCode BaseAudit(string id, decimal paidPrice, DateTime confirmTime, string remark, EntityStatus status)
-        {
-            try
-            {
-                Guid gid;
-                if (!Guid.TryParse(id, out gid))
-                    return ErrorCode.ObjectNotFound;
+        ///// <summary>
+        ///// 基本结算审核
+        ///// </summary>
+        ///// <param name="id">结算ID</param>
+        ///// <param name="paidPrice">付款</param>
+        ///// <param name="confirmTime">确认时间</param>
+        ///// <param name="remark">备注</param>
+        ///// <param name="status">状态</param>
+        ///// <returns></returns>
+        //public ErrorCode BaseAudit(string id, decimal paidPrice, DateTime confirmTime, string remark, EntityStatus status)
+        //{
+        //    try
+        //    {
+        //        Guid gid;
+        //        if (!Guid.TryParse(id, out gid))
+        //            return ErrorCode.ObjectNotFound;
 
-                BaseSettlement baseSettle = this.context.BaseSettlements.Find(gid);
-                if (baseSettle == null)
-                    return ErrorCode.ObjectNotFound;
+        //        BaseSettlement baseSettle = this.context.BaseSettlements.Find(gid);
+        //        if (baseSettle == null)
+        //            return ErrorCode.ObjectNotFound;
 
-                baseSettle.PaidPrice = paidPrice;
-                baseSettle.ConfirmTime = confirmTime;
-                baseSettle.Remark = remark;
-                baseSettle.Status = (int)status;
+        //        baseSettle.PaidPrice = paidPrice;
+        //        baseSettle.ConfirmTime = confirmTime;
+        //        baseSettle.Remark = remark;
+        //        baseSettle.Status = (int)status;
 
-                BillingBusiness billingBusiness = new BillingBusiness();
-                var billing = this.context.Billings.Find(baseSettle.CargoID);
+        //        BillingBusiness billingBusiness = new BillingBusiness();
+        //        var billing = this.context.Billings.Find(baseSettle.CargoID);
 
-                if (status == EntityStatus.SettlePaid)
-                {
-                    billing.Status = (int)EntityStatus.BillingPaid;
-                }
-                else
-                {
-                    baseSettle.PaidPrice = null;
-                    billing.Status = (int)EntityStatus.BillingUnsettle;
-                }
+        //        if (status == EntityStatus.SettlePaid)
+        //        {
+        //            billing.Status = (int)EntityStatus.BillingPaid;
+        //        }
+        //        else
+        //        {
+        //            baseSettle.PaidPrice = null;
+        //            billing.Status = (int)EntityStatus.BillingUnsettle;
+        //        }
 
-                this.context.SaveChanges();
-            }
-            catch (Exception)
-            {
-                return ErrorCode.Exception;
-            }
+        //        this.context.SaveChanges();
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return ErrorCode.Exception;
+        //    }
 
-            return ErrorCode.Success;
-        }
+        //    return ErrorCode.Success;
+        //}
         #endregion //BaseSettlement
 
         #region ColdSettlement
-        /// <summary>
-        /// 获取冷藏费用结算
-        /// </summary>
-        /// <returns></returns>
-        public List<ColdSettlement> GetCold()
-        {
-            var data = this.context.ColdSettlements.OrderByDescending(r => r.ConfirmTime);
-            return data.ToList();
-        }
+        ///// <summary>
+        ///// 获取冷藏费用结算
+        ///// </summary>
+        ///// <returns></returns>
+        //public List<ColdSettlement> GetCold()
+        //{
+        //    var data = this.context.ColdSettlements.OrderByDescending(r => r.ConfirmTime);
+        //    return data.ToList();
+        //}
 
-        /// <summary>
-        /// 获取冷藏费用结算
-        /// </summary>
-        /// <param name="status">状态</param>
-        /// <returns></returns>
-        public List<ColdSettlement> GetCold(EntityStatus status)
-        {
-            var data = this.context.ColdSettlements.Where(r => r.Status == (int)status);
-            return data.ToList();
-        }
+        ///// <summary>
+        ///// 获取冷藏费用结算
+        ///// </summary>
+        ///// <param name="status">状态</param>
+        ///// <returns></returns>
+        //public List<ColdSettlement> GetCold(EntityStatus status)
+        //{
+        //    var data = this.context.ColdSettlements.Where(r => r.Status == (int)status);
+        //    return data.ToList();
+        //}
 
-        /// <summary>
-        /// 获取冷藏费用结算
-        /// </summary>
-        /// <param name="id">结算ID</param>
-        /// <returns></returns>
-        public ColdSettlement GetCold(string id)
-        {
-            Guid gid;
-            if (!Guid.TryParse(id, out gid))
-                return null;
+        ///// <summary>
+        ///// 获取冷藏费用结算
+        ///// </summary>
+        ///// <param name="id">结算ID</param>
+        ///// <returns></returns>
+        //public ColdSettlement GetCold(string id)
+        //{
+        //    Guid gid;
+        //    if (!Guid.TryParse(id, out gid))
+        //        return null;
 
-            return this.context.ColdSettlements.Find(gid);
-        }
+        //    return this.context.ColdSettlements.Find(gid);
+        //}
 
-        /// <summary>
-        /// 根据合同获取冷藏费结算
-        /// </summary>
-        /// <param name="contractID">合同ID</param>
-        /// <returns></returns>
-        public List<ColdSettlement> GetColdByContract(int contractID)
-        {
-            var data = this.context.ColdSettlements.Where(r => r.ContractID == contractID).OrderBy(r => r.StartTime);
-            return data.ToList();
-        }
+        ///// <summary>
+        ///// 根据合同获取冷藏费结算
+        ///// </summary>
+        ///// <param name="contractID">合同ID</param>
+        ///// <returns></returns>
+        //public List<ColdSettlement> GetColdByContract(int contractID)
+        //{
+        //    var data = this.context.ColdSettlements.Where(r => r.ContractID == contractID).OrderBy(r => r.StartTime);
+        //    return data.ToList();
+        //}
 
         /// <summary>
         /// 处理货品日冷藏费
@@ -246,63 +246,63 @@ namespace Phoebe.Business
             return records;
         }
 
-        /// <summary>
-        /// 添加冷藏费结算
-        /// </summary>
-        /// <param name="data">冷藏费数据</param>
-        /// <returns></returns>
-        public ErrorCode ColdCreate(ColdSettlement data)
-        {
-            try
-            {
-                data.ID = Guid.NewGuid();
-                data.Status = (int)EntityStatus.SettleUnpaid;
-                this.context.ColdSettlements.Add(data);
-                this.context.SaveChanges();
-            }
-            catch (Exception)
-            {
-                return ErrorCode.Exception;
-            }
+        ///// <summary>
+        ///// 添加冷藏费结算
+        ///// </summary>
+        ///// <param name="data">冷藏费数据</param>
+        ///// <returns></returns>
+        //public ErrorCode ColdCreate(ColdSettlement data)
+        //{
+        //    try
+        //    {
+        //        data.ID = Guid.NewGuid();
+        //        data.Status = (int)EntityStatus.SettleUnpaid;
+        //        this.context.ColdSettlements.Add(data);
+        //        this.context.SaveChanges();
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return ErrorCode.Exception;
+        //    }
 
-            return ErrorCode.Success;
-        }
+        //    return ErrorCode.Success;
+        //}
 
-        /// <summary>
-        /// 冷藏费用审核
-        /// </summary>
-        /// <param name="id">结算ID</param>
-        /// <param name="paidPrice">付款</param>
-        /// <param name="confirmTime">确认时间</param>
-        /// <param name="remark">备注</param>
-        /// <param name="status">状态</param>
-        /// <returns></returns>
-        public ErrorCode ColdAudit(string id, decimal paidPrice, DateTime confirmTime, string remark, EntityStatus status)
-        {
-            try
-            {
-                Guid gid;
-                if (!Guid.TryParse(id, out gid))
-                    return ErrorCode.ObjectNotFound;
+        ///// <summary>
+        ///// 冷藏费用审核
+        ///// </summary>
+        ///// <param name="id">结算ID</param>
+        ///// <param name="paidPrice">付款</param>
+        ///// <param name="confirmTime">确认时间</param>
+        ///// <param name="remark">备注</param>
+        ///// <param name="status">状态</param>
+        ///// <returns></returns>
+        //public ErrorCode ColdAudit(string id, decimal paidPrice, DateTime confirmTime, string remark, EntityStatus status)
+        //{
+        //    try
+        //    {
+        //        Guid gid;
+        //        if (!Guid.TryParse(id, out gid))
+        //            return ErrorCode.ObjectNotFound;
 
-                ColdSettlement coldSettle = this.context.ColdSettlements.Find(gid);
-                if (coldSettle == null)
-                    return ErrorCode.ObjectNotFound;
+        //        ColdSettlement coldSettle = this.context.ColdSettlements.Find(gid);
+        //        if (coldSettle == null)
+        //            return ErrorCode.ObjectNotFound;
 
-                coldSettle.PaidPrice = paidPrice;
-                coldSettle.ConfirmTime = confirmTime;
-                coldSettle.Remark = remark;
-                coldSettle.Status = (int)status;
+        //        coldSettle.PaidPrice = paidPrice;
+        //        coldSettle.ConfirmTime = confirmTime;
+        //        coldSettle.Remark = remark;
+        //        coldSettle.Status = (int)status;
 
-                this.context.SaveChanges();
-            }
-            catch (Exception)
-            {
-                return ErrorCode.Exception;
-            }
+        //        this.context.SaveChanges();
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return ErrorCode.Exception;
+        //    }
 
-            return ErrorCode.Success;
-        }
+        //    return ErrorCode.Success;
+        //}
         #endregion //ColdSettlement
         #endregion //Method
     }

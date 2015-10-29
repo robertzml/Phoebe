@@ -12,13 +12,21 @@ namespace Phoebe.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class ColdSettlement
+    public partial class Settlement
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Settlement()
+        {
+            this.SettlementDetails = new HashSet<SettlementDetail>();
+        }
+    
         public System.Guid ID { get; set; }
         public string Number { get; set; }
-        public int ContractID { get; set; }
+        public int CustomerType { get; set; }
+        public int CustomerID { get; set; }
         public System.DateTime StartTime { get; set; }
         public System.DateTime EndTime { get; set; }
+        public decimal PastPrice { get; set; }
         public decimal SumPrice { get; set; }
         public int Discount { get; set; }
         public decimal Remission { get; set; }
@@ -30,7 +38,8 @@ namespace Phoebe.Model
         public string Remark { get; set; }
         public int Status { get; set; }
     
-        public virtual Contract Contract { get; set; }
         public virtual User User { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SettlementDetail> SettlementDetails { get; set; }
     }
 }
