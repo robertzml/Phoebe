@@ -1,13 +1,15 @@
 ﻿@model Phoebe.UI.Models.CargoColdPrice
 
 @{
-    ViewBag.Title = "冷藏费计算";
+    ViewBag.Title = "货品冷藏费表单";
 
     AjaxOptions ajaxOpts = new AjaxOptions
     {
         UpdateTargetId = "process-result",
         Url = Url.Action("CargoColdResult", "Settle"),
         HttpMethod = "POST",
+        OnBegin = "phoebe.showLoading()",
+        OnComplete = "phoebe.hideLoading()",
         OnSuccess = "phoebe.showMessage('提交成功')"
     };
 }
@@ -132,6 +134,10 @@
             </div>
         </div>
     </div>
+</div>
+
+<div id="ajax-load" style="display: none;">
+    <img src="~/assets/global/img/ajax-loading.gif" alt="load" />
 </div>
 
 <div id="process-result">

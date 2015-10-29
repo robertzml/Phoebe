@@ -81,11 +81,9 @@ namespace Phoebe.UI.Controllers
             var cargo = cargoBusiness.Get(id);
             ViewBag.Cargo = cargo;
 
-            BillingBusiness billingBusiness = new BillingBusiness();
-
             BaseSettlement data = new BaseSettlement();
             data.CargoID = cargo.ID;
-            data.SumPrice = billingBusiness.GetTotalBasePrice(id);
+            data.SumPrice = cargo.Billing.TotalPrice;
             data.Discount = 100;
             data.SettleTime = DateTime.Now;
             data.TotalPrice = data.SumPrice;
@@ -376,7 +374,7 @@ namespace Phoebe.UI.Controllers
         }
 
         /// <summary>
-        /// 货品冷藏费计算
+        /// 货品冷藏费表单
         /// </summary>
         /// <returns></returns>
         public ActionResult CargoColdPrice()
@@ -385,7 +383,7 @@ namespace Phoebe.UI.Controllers
         }
 
         /// <summary>
-        /// 货品冷藏费计算
+        /// 货品冷藏费表单
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>

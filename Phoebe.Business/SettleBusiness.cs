@@ -218,29 +218,12 @@ namespace Phoebe.Business
         /// <returns></returns>
         public List<DailyColdRecord> ProcessDailyCold(string cargoID, DateTime start, DateTime end)
         {
-            List<DailyColdRecord> records = new List<DailyColdRecord>();
-
             Guid cid;
             if (!Guid.TryParse(cargoID, out cid))
                 return null;
 
-            var cargo = this.context.Cargoes.Find(cid);
-            if (!cargo.Contract.IsTiming)
-                return records;
-
             BillingBusiness billingBusiness = new BillingBusiness();
-
-            decimal totalFee = 0;
-            for (DateTime step = start.Date; step <= end; step = step.AddDays(1))
-            {
-                var record = billingBusiness.GetDailyColdRecord(cid, step);
-                var last = record.Last();
-
-                totalFee += last.DailyFee;
-                last.TotalFee = totalFee;
-
-                records.AddRange(record);
-            }
+            var records = billingBusiness.GetCargoColdRecord(cid, start, end);
 
             return records;
         }
@@ -268,7 +251,7 @@ namespace Phoebe.Business
             decimal totalFee = 0;
             for (DateTime step = start.Date; step <= end; step = step.AddDays(1))
             {
-                var record = billingBusiness.GetDailyColdRecord(contractID, step);
+                var record = billingBusiness.GetContractColdRecord(contractID, step);
                 var last = record.Last();
 
                 totalFee += last.DailyFee;

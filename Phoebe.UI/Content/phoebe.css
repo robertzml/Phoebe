@@ -36,3 +36,14 @@ body, h1, h2, h3, h4, h5, h6, .dropdown-menu {
 .validation-summary-valid {
     display: none;
 }
+
+div#ajax-load {
+	display: block;
+	width: 100%;
+}
+
+div#ajax-load img {
+	display: block;
+	width: 45px;
+	margin: 0px auto;
+}

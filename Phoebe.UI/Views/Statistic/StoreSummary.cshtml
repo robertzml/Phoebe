@@ -8,6 +8,8 @@
         UpdateTargetId = "process-result",
         Url = Url.Action("StoreSummaryProcess", "Statistic"),
         HttpMethod = "POST",
+        OnBegin = "phoebe.showLoading()",
+        OnComplete = "phoebe.hideLoading()",
         OnSuccess = "phoebe.showMessage('提交成功')"
     };
 }
@@ -82,6 +84,10 @@
             </div>
         </div>
     </div>
+</div>
+
+<div id="ajax-load" style="display: none;">
+    <img src="~/assets/global/img/ajax-loading.gif" alt="load" />
 </div>
 
 <div id="process-result">

@@ -189,7 +189,7 @@ namespace Phoebe.Business
 
             var cargo = this.context.Cargoes.Find(cargoID);
             if (cargo.InTime > date || (cargo.OutTime < date))
-                return null;
+                return data;
 
             //find stock in
             var stockInDetails = cargo.StockInDetails.Where(r => r.Status == (int)EntityStatus.StockIn);
@@ -364,7 +364,7 @@ namespace Phoebe.Business
 
             var cargo = this.context.Cargoes.Find(cargoID);
             if (cargo.InTime > date || cargo.OutTime < date)
-                return null;
+                return data;
 
             //find stock in
             var stockIns = cargo.StockIns.Where(r => r.ConfirmTime == date && r.Status == (int)EntityStatus.StockIn);

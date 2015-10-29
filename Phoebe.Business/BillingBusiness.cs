@@ -45,6 +45,58 @@ namespace Phoebe.Business
 
             return cargo;
         }
+
+        /// <summary>
+        /// 获取货品单日冷藏记录
+        /// </summary>
+        /// <param name="cargoID">货品ID</param>
+        /// <param name="date">日期</param>
+        /// <returns></returns>
+        private List<DailyColdRecord> GetDailyColdRecord(Cargo cargo, DateTime date, IBillingProcess billingProcess)
+        {
+            List<DailyColdRecord> records = new List<DailyColdRecord>();
+
+            StoreBusiness storeBusiness = new StoreBusiness();
+            var stores = storeBusiness.GetInDay(cargo.ID, date);
+            var flows = storeBusiness.GetDaysFlow(cargo.ID, date);
+
+            // set daily flow
+            foreach (var flow in flows)
+            {
+                DailyColdRecord frecord = new DailyColdRecord();
+                frecord.RecordDate = date;
+
+                frecord.CargoName = flow.CargoName;
+                frecord.Count = flow.Count;
+                frecord.UnitMeter = billingProcess.GetUnitMeter(cargo);
+                frecord.StoreMeter = billingProcess.CalculateTotalMeter(frecord.UnitMeter, flow.Count);
+
+                records.Add(frecord);
+            }
+
+            DailyColdRecord record;
+            if (flows.Count != 0)
+                record = records.Last();
+            else
+            {
+                record = new DailyColdRecord();
+                record.RecordDate = date;
+            }
+
+            foreach (var item in stores)
+            {
+                decimal unitMeter = billingProcess.GetUnitMeter(cargo);
+                decimal totalMeter = billingProcess.CalculateTotalMeter(unitMeter, item.Count);
+
+                record.TotalMeter += totalMeter;
+                record.DailyFee += billingProcess.CalculateDailyFee(totalMeter, cargo.Billing.UnitPrice);
+            }
+
+            if (flows.Count == 0)
+                records.Add(record);
+
+            return records;
+        }
         #endregion //Function
 
         #region Method
@@ -81,31 +133,7 @@ namespace Phoebe.Business
 
             return ErrorCode.Success;
         }
-
-        /// <summary>
-        /// 获取所有基本费用
-        /// </summary>
-        /// <param name="cargoID">货品ID</param>
-        /// <returns></returns>
-        /// <remarks>
-        /// 除冷藏费外所有费用
-        /// </remarks>
-        public decimal GetTotalBasePrice(string cargoID)
-        {
-            Guid gid;
-            if (!Guid.TryParse(cargoID, out gid))
-                return 0;
-
-            var billing = this.context.Billings.Find(gid);
-            if (billing == null)
-                return 0;
-
-            decimal total = billing.HandlingPrice + billing.FreezePrice + billing.DisposePrice +
-                billing.PackingPrice + billing.RentPrice + billing.OtherPrice;
-
-            return total;
-        }
-
+   
         /// <summary>
         /// 计算货品冷藏费
         /// </summary>
@@ -187,17 +215,17 @@ namespace Phoebe.Business
         /// 获取货品日冷藏记录
         /// </summary>
         /// <param name="cargoID">货品ID</param>
-        /// <param name="date">日期</param>
+        /// <param name="start">开始日期</param>
+        /// <param name="end">结束日期</param>
         /// <returns></returns>
-        public List<DailyColdRecord> GetDailyColdRecord(Guid cargoID, DateTime date)
+        public List<DailyColdRecord> GetCargoColdRecord(Guid cargoID, DateTime start, DateTime end)
         {
             List<DailyColdRecord> records = new List<DailyColdRecord>();
 
-            StoreBusiness storeBusiness = new StoreBusiness();
-            var stores = storeBusiness.GetInDay(cargoID, date);
-            var flows = storeBusiness.GetDaysFlow(cargoID, date);
-
             var cargo = this.context.Cargoes.Find(cargoID);
+            if (!cargo.Contract.IsTiming)
+                return records;
+
             IBillingProcess billingProcess = null;
             switch ((BillingType)cargo.Contract.BillingType)
             {
@@ -212,40 +240,17 @@ namespace Phoebe.Business
                     break;
             }
 
-            // set daily flow
-            foreach (var flow in flows)
+            decimal totalFee = 0;
+            for (DateTime step = start.Date; step <= end; step = step.AddDays(1))
             {
-                DailyColdRecord frecord = new DailyColdRecord();
-                frecord.RecordDate = date;
+                var record = GetDailyColdRecord(cargo, step, billingProcess);
+                var last = record.Last();
 
-                frecord.CargoName = flow.CargoName;
-                frecord.Count = flow.Count;
-                frecord.UnitMeter = billingProcess.GetUnitMeter(cargo);
-                frecord.StoreMeter = billingProcess.CalculateTotalMeter(frecord.UnitMeter, flow.Count);
+                totalFee += last.DailyFee;
+                last.TotalFee = totalFee;
 
-                records.Add(frecord);
+                records.AddRange(record);
             }
-
-            DailyColdRecord record;
-            if (flows.Count != 0)
-                record = records.Last();
-            else
-            {
-                record = new DailyColdRecord();
-                record.RecordDate = date;
-            }
-
-            foreach (var item in stores)
-            {
-                decimal unitMeter = billingProcess.GetUnitMeter(cargo);
-                decimal totalMeter = billingProcess.CalculateTotalMeter(unitMeter, item.Count);
-
-                record.TotalMeter += totalMeter;
-                record.DailyFee += billingProcess.CalculateDailyFee(totalMeter, cargo.Billing.UnitPrice);
-            }
-
-            if (flows.Count == 0)
-                records.Add(record);
 
             return records;
         }
@@ -256,7 +261,7 @@ namespace Phoebe.Business
         /// <param name="contractID">合同ID</param>
         /// <param name="date">日期</param>
         /// <returns></returns>
-        public List<DailyColdRecord> GetDailyColdRecord(int contractID, DateTime date)
+        public List<DailyColdRecord> GetContractColdRecord(int contractID, DateTime date)
         {
             List<DailyColdRecord> records = new List<DailyColdRecord>();
             var contract = this.context.Contracts.Find(contractID);

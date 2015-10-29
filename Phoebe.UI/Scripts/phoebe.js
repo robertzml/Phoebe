@@ -164,6 +164,14 @@ var phoebe = function() {
 		
 		initPrint: function($dom) {
 			handlePrint($dom);
+		},
+		
+		showLoading: function() {
+			$('div#ajax-load').show();
+		},
+		
+		hideLoading: function() {
+			$('div#ajax-load').hide();
 		}
 	}
 }();
