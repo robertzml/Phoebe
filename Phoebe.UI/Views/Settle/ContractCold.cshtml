@@ -1,12 +1,12 @@
-﻿@model Phoebe.UI.Models.CargoColdPrice
+﻿@model Phoebe.UI.Models.ContractColdInput
 
 @{
-    ViewBag.Title = "货品冷藏费表单";
+    ViewBag.Title = "合同冷藏费表单";
 
     AjaxOptions ajaxOpts = new AjaxOptions
     {
         UpdateTargetId = "process-result",
-        Url = Url.Action("CargoColdResult", "Settle"),
+        Url = Url.Action("ContractColdResult", "Settle"),
         HttpMethod = "POST",
         OnBegin = "phoebe.showLoading()",
         OnComplete = "phoebe.hideLoading()",
@@ -57,7 +57,7 @@
                 </div>
             </div>
             <div class="portlet-body">
-                @using (Ajax.BeginForm("CargoColdResult", new { controller = "Settle" }, ajaxOpts, new { @class = "form-horizontal" }))
+                @using (Ajax.BeginForm("ContractColdResult", new { controller = "Settle" }, ajaxOpts, new { @class = "form-horizontal" }))
                 {
                     @Html.AntiForgeryToken()
 
@@ -66,7 +66,6 @@
                         <div class="row">
                             <div class="col-md-12">
                                 @Html.ValidationMessageFor(model => model.ContractID, "", new { @class = "text-danger" })
-                                @Html.ValidationMessageFor(model => model.CargoID, "", new { @class = "text-danger" })
                             </div>
                         </div>
 
@@ -104,14 +103,6 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label class="control-label col-md-3">货品选择</label>
-                                    <div class="col-md-8">
-                                        <select id="CargoID" name="CargoID" class="form-control" data-val="true" data-val-required="请选择货品"></select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
                                     <label class="control-label col-md-3">日期选择</label>
                                     <div class="col-md-9">
                                         <div class="input-group input-medium date-picker input-daterange" id="date-range-picker">
@@ -125,7 +116,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-offset-2 col-md-2">
+                            <div class="col-md-offset-6 col-md-2">
                                 <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> 确定</button>
                             </div>
                         </div>
@@ -150,16 +141,11 @@
     @Scripts.Render("~/bundles/datepicker")
     <script type="text/javascript">
         $(function () {
-            phoebe.leftNavActive($('#menu-cold-price'));
+            phoebe.leftNavActive($('#menu-contract-cold'));
             phoebe.initDatePicker($('#date-range-picker'), false);;
-
-            $('a.btn-print').click(function () {
-                phoebe.initPrint($('div#process-container')[0]);
-            });
 
             var customerType = 0;
             var customerId = 0;
-            var contractId = 0;
 
             function loadCustomers($dom, type) {
 
@@ -174,16 +160,6 @@
             function loadContracts($dom, customerType, customerId) {
 
                 $.getJSON('/Contract/GetByCustomer', { customerType: customerType, customerId: customerId }, function (response) {
-                    $dom.append(" <option value=''>-- 请选择 --</option>");
-                    $.each(response, function (i, item) {
-                        $dom.append("<option value='" + item.ID + "'>" + item.Name + "</option>");
-                    });
-                });
-            }
-
-            function loadCargos($dom, contractId) {
-
-                $.getJSON('/Cargo/GetCargos', { type: 3, contractID: contractId }, function (response) {
                     $dom.append(" <option value=''>-- 请选择 --</option>");
                     $.each(response, function (i, item) {
                         $dom.append("<option value='" + item.ID + "'>" + item.Name + "</option>");
@@ -213,17 +189,6 @@
 
                 loadContracts($('#ContractID'), customerType, customerId);
             });
-
-            $('#ContractID').change(function () {
-                contractId = $(this).val();
-
-                $('#CargoID').empty();
-                if (contractId == '')
-                    return;
-
-                loadCargos($('#CargoID'), contractId);
-            });
-
         });
     </script>
 }

@@ -234,7 +234,7 @@ namespace Phoebe.UI.Controllers
         /// <returns></returns>
         [ValidateAntiForgeryToken]
         [HttpPost]
-        public ActionResult ColdProcess(ColdInput model)
+        public ActionResult ColdProcess(ContractColdInput model)
         {
             if (ModelState.IsValid)
             {
@@ -373,11 +373,41 @@ namespace Phoebe.UI.Controllers
             return View(model);
         }
 
+
+        /// <summary>
+        /// 合同冷藏费表单
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult ContractCold()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 合同冷藏费表单
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult ContractColdResult(ContractColdInput model)
+        {
+            if (ModelState.IsValid)
+            {
+                var records = this.settleBusiness.ProcessDailyCold(model.ContractID, model.DateFrom, model.DateTo);
+                return View(records);
+            }
+            else
+            {
+                return View("ContractCold", model);
+            }
+        }
+
         /// <summary>
         /// 货品冷藏费表单
         /// </summary>
         /// <returns></returns>
-        public ActionResult CargoColdPrice()
+        public ActionResult CargoCold()
         {
             return View();
         }
@@ -389,7 +419,7 @@ namespace Phoebe.UI.Controllers
         /// <returns></returns>
         [ValidateAntiForgeryToken]
         [HttpPost]
-        public ActionResult CargoColdResult(CargoColdPrice model)
+        public ActionResult CargoColdResult(CargoColdInput model)
         {
             if (ModelState.IsValid)
             {

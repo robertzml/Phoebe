@@ -7,9 +7,9 @@ using System.Web;
 namespace Phoebe.UI.Models
 {
     /// <summary>
-    /// 冷藏费结算输入模型
+    /// 合同冷藏费输入模型
     /// </summary>
-    public class ColdInput
+    public class ContractColdInput
     {
         /// <summary>
         /// 合同
@@ -36,9 +36,9 @@ namespace Phoebe.UI.Models
     }
 
     /// <summary>
-    /// 冷藏费计算模型
+    /// 货品冷藏费输入模型
     /// </summary>
-    public class CargoColdPrice
+    public class CargoColdInput
     {
         /// <summary>
         /// 合同

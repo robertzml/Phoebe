@@ -240,25 +240,8 @@ namespace Phoebe.Business
         /// <returns></returns>
         public List<DailyColdRecord> ProcessDailyCold(int contractID, DateTime start, DateTime end)
         {
-            List<DailyColdRecord> records = new List<DailyColdRecord>();
             BillingBusiness billingBusiness = new BillingBusiness();
-
-            ContractBusiness contractBusiness = new ContractBusiness();
-            var contract = contractBusiness.Get(contractID);
-            if (contract == null || !contract.IsTiming)
-                return records;
-
-            decimal totalFee = 0;
-            for (DateTime step = start.Date; step <= end; step = step.AddDays(1))
-            {
-                var record = billingBusiness.GetContractColdRecord(contractID, step);
-                var last = record.Last();
-
-                totalFee += last.DailyFee;
-                last.TotalFee = totalFee;
-
-                records.AddRange(record);
-            }
+            var records = billingBusiness.GetContractColdRecord(contractID, start, end);
 
             return records;
         }

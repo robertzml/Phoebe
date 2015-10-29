@@ -666,7 +666,7 @@
     <Content Include="Views\Transfer\Details.cshtml" />
     <Content Include="Views\Contract\Delete.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\BillingType.cshtml" />
-    <Content Include="Views\Settle\CargoColdPrice.cshtml" />
+    <Content Include="Views\Settle\CargoCold.cshtml" />
     <Content Include="Views\Settle\CargoColdResult.cshtml" />
     <Content Include="Views\Contract\Edit.cshtml" />
     <Content Include="Views\Cargo\Edit.cshtml" />
@@ -677,8 +677,8 @@
     <Content Include="Views\Settle\BaseConfirm.cshtml" />
     <Content Include="Views\Settle\BaseList.cshtml" />
     <Content Include="Views\Settle\BaseDetails.cshtml" />
-    <Content Include="Views\Settle\Cold.cshtml" />
-    <Content Include="Views\Settle\ColdProcess.cshtml" />
+    <Content Include="Views\Settle\ContractCold.cshtml" />
+    <Content Include="Views\Settle\ContractColdResult.cshtml" />
     <Content Include="Views\Stock\Snapshoot.cshtml" />
     <Content Include="Views\Stock\SnapshootProcess.cshtml" />
     <Content Include="Views\Settle\ColdStart.cshtml" />
