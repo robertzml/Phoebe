@@ -1,7 +1,7 @@
-﻿@model Phoebe.Model.StockIn
+﻿@model Phoebe.Model.Settlement
 
 @{
-    ViewBag.Title = "入库信息";
+    ViewBag.Title = "结算信息";
 }
 
 <!-- BEGIN PAGE HEADER-->
@@ -16,7 +16,7 @@
             <i class="fa fa-angle-right"></i>
         </li>
         <li>
-            <a href="#">冷库租赁</a>
+            <a href="#">财务结算</a>
             <i class="fa fa-angle-right"></i>
         </li>
         <li>
@@ -31,7 +31,7 @@
         <div class="portlet box blue">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="fa fa-info-circle"></i>&nbsp;货品信息
+                    <i class="fa fa-info-circle"></i>&nbsp;结算信息
                 </div>
                 <div class="tools">
                     <a href="javascript:;" class="collapse">
@@ -57,53 +57,101 @@
                     <tbody>
                         <tr>
                             <td>
-                                @Html.DisplayNameFor(model => model.CargoID)
+                                @Html.DisplayNameFor(model => model.Number)
                             </td>
                             <td>
-                                <a href="@Url.Action("Details", new { controller = "Cargo", ID = Model.CargoID.ToString() })">@Model.Cargo.Name</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                所属合同
-                            </td>
-                            <td>
-                                @Model.Cargo.Contract.Name ( @Model.Cargo.Contract.Number )
+                                @Html.DisplayFor(model => model.Number)
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                一级分类
+                                @Html.DisplayNameFor(model => model.CustomerType)
                             </td>
                             <td>
-                                @Html.DisplayFor(model => model.Cargo.FirstCategory.Name)
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                二级分类
-                            </td>
-                            <td>
-                                @Html.DisplayFor(model => model.Cargo.SecondCategory.Name)
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                三级分类
-                            </td>
-                            <td>
-                                @if (Model.Cargo.ThirdCategory != null)
-                                {
-                                    @Model.Cargo.ThirdCategory.Name
+                                @{
+                                    CustomerType type1 = (CustomerType)Model.CustomerType;
+                                    @type1.DisplayName();
                                 }
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                @Html.DisplayNameFor(model => model.InTime)
+                                @Html.DisplayNameFor(model => model.CustomerID)
                             </td>
                             <td>
-                                @Model.InTime.ToDateString()
+                                @Model.CustomerName()
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.StartTime)
+                            </td>
+                            <td>
+                                @Model.StartTime.ToDateString()
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.EndTime)
+                            </td>
+                            <td>
+                                @Model.EndTime.ToDateString()
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.PastPrice)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.PastPrice)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.SumPrice)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.SumPrice)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.Discount)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.Discount)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.Remission)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.Remission)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.TotalPrice)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.TotalPrice)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.PaidPrice)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.PaidPrice)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.SettleTime)
+                            </td>
+                            <td>
+                                @Model.SettleTime.ToDateString()
                             </td>
                         </tr>
                         <tr>
@@ -140,22 +188,18 @@
                         </tr>
                     </tbody>
                 </table>
-
-                <hr />
-                <p>
-                    <a href="@Url.Action("Index", new { controller = "StockIn" })" class="btn btn-info"><i class="fa fa-list"></i>&nbsp;回到列表</a>
-                </p>
             </div>
         </div>
     </div>
 </div>
+
 
 <div class="row">
     <div class="col-md-12">
         <div class="portlet box green">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="fa fa-info-circle"></i>&nbsp;入库信息
+                    <i class="fa fa-info-circle"></i>&nbsp;相关费用
                 </div>
                 <div class="tools">
                     <a href="javascript:;" class="collapse">
@@ -170,23 +214,48 @@
                 <table class="table table-striped table-bordered table-hover">
                     <thead>
                         <tr>
-                            <th>
-                                仓库编号
+                            <th style="width: 40%;">
+                                货品名称
                             </th>
                             <th>
-                                货品数量
+                                基本费用(元)
                             </th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var item in Model.StockInDetails)
+                        @foreach (var item in Model.SettlementDetails.Where(r => r.ExpenseType == (int)ExpenseType.Base))
                         {
                             <tr>
                                 <td>
-                                    @item.Warehouse.Number
+                                    @item.Cargo.Name
                                 </td>
                                 <td>
-                                    @item.Count
+                                    @Html.DisplayFor(model => item.SumPrice)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <table class="table table-striped table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th style="width: 40%;">
+                                合同名称
+                            </th>
+                            <th>
+                                冷藏费用(元)
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.SettlementDetails.Where(r => r.ExpenseType == (int)ExpenseType.Cold))
+                        {
+                            <tr>
+                                <td>
+                                    @item.Contract.Name (@item.Contract.Number)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(model => item.SumPrice)
                                 </td>
                             </tr>
                         }
@@ -201,7 +270,7 @@
 @section Scripts {
     <script type="text/javascript">
         $(function () {
-            phoebe.leftNavActive($('#menu-stock-in-index'));
+            phoebe.leftNavActive($('#menu-settle-list'));
         });
     </script>
 }

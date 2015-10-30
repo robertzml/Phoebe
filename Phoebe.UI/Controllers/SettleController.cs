@@ -53,6 +53,20 @@ namespace Phoebe.UI.Controllers
         }
 
         /// <summary>
+        /// 结算信息
+        /// </summary>
+        /// <param name="id">ID</param>
+        /// <returns></returns>
+        public ActionResult Details(string id)
+        {
+            var data = this.settleBusiness.Get(id);
+            if (data == null)
+                return HttpNotFound();
+
+            return View(data);
+        }
+
+        /// <summary>
         /// 处理结算信息
         /// </summary>
         /// <returns></returns>
@@ -143,6 +157,75 @@ namespace Phoebe.UI.Controllers
                     TempData["Message"] = "结算失败";
                     ModelState.AddModelError("", "结算失败: " + result.DisplayName());
                     return RedirectToAction("Index");
+                }
+            }
+
+            return View(model);
+        }
+
+        /// <summary>
+        /// 结算审核
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Audit()
+        {
+            var data = this.settleBusiness.GetByStatus(EntityStatus.SettleUnpaid);
+            return View(data);
+        }
+
+        /// <summary>
+        /// 结算确认
+        /// </summary>
+        /// <param name="id">结算ID</param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult Confirm(string id)
+        {
+            var data = this.settleBusiness.Get(id);
+
+            if (data == null || data.Status != (int)EntityStatus.SettleUnpaid)
+                return HttpNotFound();
+
+            return View(data);
+        }
+
+        /// <summary>
+        /// 结算确认
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult Confirm(Settlement model)
+        {
+            if (ModelState.IsValid)
+            {
+                if (model.ConfirmTime == null)
+                {
+                    TempData["Message"] = "审核失败，请选择确认时间";
+                    return RedirectToAction("Confirm", new { controller = "Settle", id = model.ID.ToString() });
+                }
+
+                if (model.PaidPrice == null)
+                {
+                    TempData["Message"] = "审核失败，请输入付款金额";
+                    return RedirectToAction("Confirm", new { controller = "Settle", id = model.ID.ToString() });
+                }
+
+                string id = Request.Form["ID"];
+                string remark = Request.Form["Remark"];
+                EntityStatus status = Request.Form["auditResult"] == "1" ? EntityStatus.SettlePaid : EntityStatus.SettleCancel;
+
+                ErrorCode result = this.settleBusiness.Audit(id, model.PaidPrice.Value, model.ConfirmTime.Value, remark, status);
+                if (result == ErrorCode.Success)
+                {
+                    TempData["Message"] = "基本费用审核完毕";
+                    return RedirectToAction("Audit", "Settle");
+                }
+                else
+                {
+                    TempData["Message"] = "基本费用审核失败";
+                    ModelState.AddModelError("", "基本费用审核失败: " + result.DisplayName());
                 }
             }
 

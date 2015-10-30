@@ -69,5 +69,36 @@ namespace Phoebe.Business
                 return data.Number + " - " + data.Name;
         }
         #endregion //Cargo
+
+        #region Settlement
+        /// <summary>
+        /// 结算相关客户名称
+        /// </summary>
+        /// <param name="settlement">结算对象</param>
+        /// <returns></returns>
+        public static string CustomerName(this Settlement settlement)
+        {
+            CustomerBusiness customerBusiness = new CustomerBusiness();
+
+            if (settlement.CustomerType == (int)CustomerType.Group)
+            {
+                var data = customerBusiness.GetGroupCustomer(settlement.CustomerID);
+                if (data == null)
+                    return "";
+                else
+                    return data.Name;
+            }
+            else if (settlement.CustomerType == (int)CustomerType.Scatter)
+            {
+                var data = customerBusiness.GetScatterCustomer(settlement.CustomerID);
+                if (data == null)
+                    return "";
+                else
+                    return data.Name;
+            }
+            else
+                return "";
+        }
+        #endregion //Settlement
     }
 }
