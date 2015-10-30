@@ -59,6 +59,9 @@ namespace Phoebe.UI.Controllers
             StoreBusiness storeBusiness = new StoreBusiness();
             ViewBag.Stocks = storeBusiness.GetWithCustomer(id, (int)CustomerType.Group);
 
+            SettleBusiness settleBusiness = new SettleBusiness();
+            ViewBag.Settles = settleBusiness.Get((int)CustomerType.Group, id);
+
             return View(data);
         }
 

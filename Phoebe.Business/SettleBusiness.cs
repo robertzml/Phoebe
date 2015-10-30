@@ -46,6 +46,17 @@ namespace Phoebe.Business
         }
 
         /// <summary>
+        /// 按客户获取结算
+        /// </summary>
+        /// <param name="customerType">客户类型</param>
+        /// <param name="customerID">客户ID</param>
+        /// <returns></returns>
+        public List<Settlement> Get(int customerType, int customerID)
+        {
+            return this.context.Settlements.Where(r => r.CustomerType == customerType && r.CustomerID == customerID).ToList();
+        }
+
+        /// <summary>
         /// 获取费用结算
         /// </summary>
         /// <param name="id">ID</param>
