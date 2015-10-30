@@ -167,7 +167,6 @@ namespace Phoebe.UI.Controllers
                     model.Billing.PackingPrice + model.Billing.RentPrice + model.Billing.OtherPrice;
                 model.Billing.Status = (int)EntityStatus.BillingUnsettle;
 
-
                 ErrorCode result = this.cargoBusiness.Create(model);
                 if (result == ErrorCode.Success)
                 {

@@ -22,10 +22,16 @@ namespace Phoebe.Model
         public System.Guid SettlementID { get; set; }
 
         /// <summary>
+        /// 货品ID
+        /// </summary>
+        [Display(Name = "相关货品")]
+        public Nullable<System.Guid> CargoID { get; set; }
+
+        /// <summary>
         /// 合同ID
         /// </summary>
         [Display(Name = "相关合同")]
-        public int ContractID { get; set; }
+        public Nullable<int> ContractID { get; set; }
 
         /// <summary>
         /// 费用类型

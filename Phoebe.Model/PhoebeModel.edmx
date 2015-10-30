@@ -140,7 +140,8 @@
           </Key>
           <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="SettlementID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="ContractID" Type="int" Nullable="false" />
+          <Property Name="CargoID" Type="uniqueidentifier" />
+          <Property Name="ContractID" Type="int" />
           <Property Name="ExpenseType" Type="int" Nullable="false" />
           <Property Name="SumPrice" Type="decimal" Precision="18" Scale="3" Nullable="false" />
           <Property Name="Remark" Type="nvarchar" MaxLength="500" />
@@ -421,8 +422,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_SettlementDetails_Cargo">
+          <End Role="Cargo" Type="Self.Cargo" Multiplicity="0..1" />
+          <End Role="SettlementDetails" Type="Self.SettlementDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cargo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SettlementDetails">
+              <PropertyRef Name="CargoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_SettlementDetails_Contract">
-          <End Role="Contract" Type="Self.Contract" Multiplicity="1" />
+          <End Role="Contract" Type="Self.Contract" Multiplicity="0..1" />
           <End Role="SettlementDetails" Type="Self.SettlementDetails" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Contract">
@@ -886,6 +899,10 @@
             <End Role="User" EntitySet="User" />
             <End Role="Settlement" EntitySet="Settlement" />
           </AssociationSet>
+          <AssociationSet Name="FK_SettlementDetails_Cargo" Association="Self.FK_SettlementDetails_Cargo">
+            <End Role="Cargo" EntitySet="Cargo" />
+            <End Role="SettlementDetails" EntitySet="SettlementDetails" />
+          </AssociationSet>
           <AssociationSet Name="FK_SettlementDetails_Contract" Association="Self.FK_SettlementDetails_Contract">
             <End Role="Contract" EntitySet="Contract" />
             <End Role="SettlementDetails" EntitySet="SettlementDetails" />
@@ -1243,6 +1260,10 @@
             <End Role="Settlement" EntitySet="Settlements" />
           </AssociationSet>
           <EntitySet Name="SettlementDetails" EntityType="PhoebeModel.SettlementDetail" />
+          <AssociationSet Name="FK_SettlementDetails_Cargo" Association="PhoebeModel.FK_SettlementDetails_Cargo">
+            <End Role="Cargo" EntitySet="Cargoes" />
+            <End Role="SettlementDetail" EntitySet="SettlementDetails" />
+          </AssociationSet>
           <AssociationSet Name="FK_SettlementDetails_Contract" Association="PhoebeModel.FK_SettlementDetails_Contract">
             <End Role="Contract" EntitySet="Contracts" />
             <End Role="SettlementDetail" EntitySet="SettlementDetails" />
@@ -1402,6 +1423,7 @@
           <NavigationProperty Name="Transfers" Relationship="PhoebeModel.FK_Transfer_Cargo" FromRole="Cargo" ToRole="Transfer" />
           <NavigationProperty Name="Transfers1" Relationship="PhoebeModel.FK_Transfer_Cargo1" FromRole="Cargo" ToRole="Transfer" />
           <NavigationProperty Name="Billing" Relationship="PhoebeModel.FK_Billing_Cargo" FromRole="Cargo" ToRole="Billing" />
+          <NavigationProperty Name="SettlementDetails" Relationship="PhoebeModel.FK_SettlementDetails_Cargo" FromRole="Cargo" ToRole="SettlementDetail" />
           </EntityType>
         <Association Name="FK_Cargo_FirstCategory">
           <End Type="PhoebeModel.FirstCategory" Role="FirstCategory" Multiplicity="1" />
@@ -2091,16 +2113,30 @@
           </Key>
           <Property Name="ID" Type="Guid" Nullable="false" />
           <Property Name="SettlementID" Type="Guid" Nullable="false" />
-          <Property Name="ContractID" Type="Int32" Nullable="false" />
+          <Property Name="CargoID" Type="Guid" />
+          <Property Name="ContractID" Type="Int32" />
           <Property Name="ExpenseType" Type="Int32" Nullable="false" />
           <Property Name="SumPrice" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
           <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cargo" Relationship="PhoebeModel.FK_SettlementDetails_Cargo" FromRole="SettlementDetail" ToRole="Cargo" />
           <NavigationProperty Name="Contract" Relationship="PhoebeModel.FK_SettlementDetails_Contract" FromRole="SettlementDetail" ToRole="Contract" />
           <NavigationProperty Name="Settlement" Relationship="PhoebeModel.FK_SettlementDetails_Settlement" FromRole="SettlementDetail" ToRole="Settlement" />
         </EntityType>
+        <Association Name="FK_SettlementDetails_Cargo">
+          <End Type="PhoebeModel.Cargo" Role="Cargo" Multiplicity="0..1" />
+          <End Type="PhoebeModel.SettlementDetail" Role="SettlementDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cargo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SettlementDetail">
+              <PropertyRef Name="CargoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_SettlementDetails_Contract">
-          <End Type="PhoebeModel.Contract" Role="Contract" Multiplicity="1" />
+          <End Type="PhoebeModel.Contract" Role="Contract" Multiplicity="0..1" />
           <End Type="PhoebeModel.SettlementDetail" Role="SettlementDetail" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Contract">
@@ -2452,6 +2488,7 @@
                 <ScalarProperty Name="SumPrice" ColumnName="SumPrice" />
                 <ScalarProperty Name="ExpenseType" ColumnName="ExpenseType" />
                 <ScalarProperty Name="ContractID" ColumnName="ContractID" />
+                <ScalarProperty Name="CargoID" ColumnName="CargoID" />
                 <ScalarProperty Name="SettlementID" ColumnName="SettlementID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>

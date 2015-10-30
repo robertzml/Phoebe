@@ -27,13 +27,11 @@ namespace Phoebe.Business
         /// <summary>
         /// 货品冷藏费计算
         /// </summary>
-        /// <param name="cargoID">货品ID</param>
+        /// <param name="cargo">货品对象</param>
         /// <param name="start">开始日期</param>
         /// <param name="end">结束日期</param>
-        public decimal CalculateColdPrice(Guid cargoID, DateTime start, DateTime end)
+        public decimal CalculateColdPrice(Cargo cargo, DateTime start, DateTime end)
         {
-            var cargo = this.context.Cargoes.Find(cargoID);
-
             if (cargo.InTime > end || cargo.OutTime <= start)
                 return 0;
 
@@ -89,6 +87,28 @@ namespace Phoebe.Business
             else
             {
                 totalFee = 0;
+            }
+
+            return totalFee;
+        }
+
+        /// <summary>
+        /// 合同冷藏费计算
+        /// </summary>
+        /// <param name="contract">合同对象</param>
+        /// <param name="start">开始日期</param>
+        /// <param name="end">结束日期</param>
+        /// <returns></returns>
+        public decimal CalculateContractColdPrice(Contract contract, DateTime start, DateTime end)
+        {
+            var cargos = contract.Cargoes.Where(r => r.Status != (int)EntityStatus.CargoNotIn && r.Status != (int)EntityStatus.CargoStockInReady);
+
+            decimal totalFee = 0;
+
+            foreach (var cargo in cargos)
+            {
+                decimal fee = CalculateColdPrice(cargo, start, end);
+                totalFee += fee;
             }
 
             return totalFee;

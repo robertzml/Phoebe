@@ -33,7 +33,7 @@ namespace Phoebe.Model
         /// 客户ID
         /// </summary>
         [Required]
-        [Display(Name = "客户")]
+        [Display(Name = "客户名称")]
         public int CustomerID { get; set; }
 
         /// <summary>

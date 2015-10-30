@@ -68,18 +68,6 @@ namespace Phoebe.Business
             else
                 return data.Number + " - " + data.Name;
         }
-
-        /// <summary>
-        /// 货品基本费用合计
-        /// </summary>
-        /// <param name="billing">货品计费对象</param>
-        /// <returns></returns>
-        public static decimal TotalBasePrice(this Billing billing)
-        {
-            decimal total = billing.HandlingPrice + billing.FreezePrice + billing.DisposePrice +
-               billing.PackingPrice + billing.RentPrice + billing.OtherPrice;
-            return total;
-        }
         #endregion //Cargo
     }
 }

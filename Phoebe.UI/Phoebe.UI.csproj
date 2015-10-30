@@ -682,6 +682,9 @@
     <Content Include="Views\Statistic\ContractStoreProcess.cshtml" />
     <Content Include="Views\Statistic\StoreSummary.cshtml" />
     <Content Include="Views\Statistic\StoreSummaryProcess.cshtml" />
+    <Content Include="Views\Settle\List.cshtml" />
+    <Content Include="Views\Settle\Index.cshtml" />
+    <Content Include="Views\Settle\ProcessInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,291 @@
+﻿@model Phoebe.Model.Settlement
+
+@{ 
+    Layout = null;
+    SettleProcess settleProcess = ViewBag.SettleProcess;
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet box green">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-list"></i>&nbsp;费用记录
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse">
+                    </a>
+                    <a href="javascript:;" class="reload">
+                    </a>
+                    <a href="javascript:;" class="remove">
+                    </a>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <h3>基本费用</h3>
+                <table class="table table-striped table-bordered table-hover" id="base-table">
+                    <thead>
+                        <tr>
+                            <th>
+                                货品名称
+                            </th>
+                            <th>
+                                冷藏费单价(元)
+                            </th>
+                            <th>
+                                装卸费(元)
+                            </th>
+                            <th>
+                                结冻费(元)
+                            </th>
+                            <th>
+                                处置费(元)
+                            </th>
+                            <th>
+                                包装费(元)
+                            </th>
+                            <th>
+                                租赁费(元)
+                            </th>
+                            <th>
+                                其它费用(元)
+                            </th>
+                            <th>
+                                备注
+                            </th>
+                            <th>
+                                合计(元)
+                            </th>
+                            <th>
+                                状态
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in settleProcess.Billings)
+                        {
+                            <tr>
+                                <td>
+                                    @item.Cargo.Name
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(model => item.UnitPrice)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(model => item.HandlingPrice)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(model => item.FreezePrice)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(model => item.DisposePrice)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(model => item.PackingPrice)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(model => item.RentPrice)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(model => item.OtherPrice)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(model => item.Remark)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(model => item.TotalPrice)
+                                </td>
+                                <td>
+                                    @(((EntityStatus)item.Status).DisplayName())
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+                <h3>冷藏费用</h3>
+                <table class="table table-striped table-bordered table-hover" id="base-table">
+                    <thead>
+                        <tr>
+                            <th>
+                                合同名称
+                            </th>
+                            <th>
+                                开始日期
+                            </th>
+                            <th>
+                                结束日期
+                            </th>
+                            <th>
+                                冷藏费用
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in settleProcess.ColdSettles)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(model => item.ContractName)
+                                </td>
+                                <td>
+                                    @item.StartTime.ToDateString()
+                                </td>
+                                <td>
+                                    @item.EndTime.ToDateString()
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(model => item.ColdPrice)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet box purple">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-list"></i>&nbsp;费用结算
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse">
+                    </a>
+                    <a href="javascript:;" class="reload">
+                    </a>
+                    <a href="javascript:;" class="remove">
+                    </a>
+                </div>
+            </div>
+            <div class="portlet-body body">
+                @using (Html.BeginForm("Create", "Settle", FormMethod.Post, new { @class = "form-horizontal form-bordered form-row-stripped" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-body">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.CustomerType)
+                        @Html.HiddenFor(model => model.CustomerID)
+                        @Html.HiddenFor(model => model.StartTime)
+                        @Html.HiddenFor(model => model.EndTime)
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Number, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.Number, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Number, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-1">
+                                <span class="required">*</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.PastPrice, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.PastPrice, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.PastPrice, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.SumPrice, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.SumPrice, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                @Html.ValidationMessageFor(model => model.SumPrice, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Discount, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.Discount, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Discount, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Remission, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.Remission, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Remission, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.TotalPrice, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.TotalPrice, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                @Html.ValidationMessageFor(model => model.TotalPrice, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.SettleTime, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.SettleTime, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.SettleTime, "", new { @class = "text-danger" })
+                            </div>
+                        </div>                    
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Remark, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.Remark, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Remark, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <div class="row">
+                                <div class="col-md-offset-3 col-md-9">
+                                    <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> 保存</button>
+                                    <a href="@Url.Action("List", new { controller = "Settle" })" class="btn btn-default">&nbsp;取消</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+    
+<script type="text/javascript">
+    $(function () {
+        phoebe.initDatePicker($('#SettleTime'), true);
+
+        $('form').removeData('validator');
+        $('form').removeData('unobtrusiveValidation');
+        $.validator.unobtrusive.parse('form');
+
+        var sum = parseFloat('@Model.SumPrice');
+
+        function calc() {
+            var discount = parseFloat($('#Discount').val());
+            var remission = parseFloat($('#Remission').val());
+            var past = parseFloat($('#PastPrice').val());
+
+            var total = (past + sum) * discount / 100 - remission;
+
+            $('#TotalPrice').val(total.toFixed(2));
+        }
+
+        $('#PastPrice').bind('input', function () {
+            calc();
+        });
+
+        $('#Discount').bind('input', function () {
+            calc();
+        });
+
+        $('#Remission').bind('input', function () {
+            calc();
+        });
+    });
+</script>

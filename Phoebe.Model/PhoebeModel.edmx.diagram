@@ -66,7 +66,8 @@
         <AssociationConnector Association="PhoebeModel.FK_Billing_Cargo" />
         <EntityTypeShape EntityType="PhoebeModel.Settlement" Width="1.5" PointX="0.75" PointY="5.375" />
         <AssociationConnector Association="PhoebeModel.FK_Settlement_User" />
-        <EntityTypeShape EntityType="PhoebeModel.SettlementDetail" Width="1.5" PointX="2.875" PointY="6.625" />
+        <EntityTypeShape EntityType="PhoebeModel.SettlementDetail" Width="1.5" PointX="3.25" PointY="5.5" />
+        <AssociationConnector Association="PhoebeModel.FK_SettlementDetails_Cargo" />
         <AssociationConnector Association="PhoebeModel.FK_SettlementDetails_Contract" />
         <AssociationConnector Association="PhoebeModel.FK_SettlementDetails_Settlement" />
         </Diagram>

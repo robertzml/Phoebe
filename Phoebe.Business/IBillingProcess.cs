@@ -15,11 +15,20 @@ namespace Phoebe.Business
         /// <summary>
         /// 货品冷藏费计算
         /// </summary>
-        /// <param name="cargoID">货品ID</param>
+        /// <param name="cargo">货品对象</param>
         /// <param name="start">开始日期</param>
         /// <param name="end">结束日期</param>
         /// <returns></returns>
-        decimal CalculateColdPrice(Guid cargoID, DateTime start, DateTime end);
+        decimal CalculateColdPrice(Cargo cargo, DateTime start, DateTime end);
+
+        /// <summary>
+        /// 合同冷藏费计算
+        /// </summary>
+        /// <param name="contract">合同对象</param>
+        /// <param name="start">开始日期</param>
+        /// <param name="end">结束日期</param>
+        /// <returns></returns>
+        decimal CalculateContractColdPrice(Contract contract, DateTime start, DateTime end);
 
         /// <summary>
         /// 获取单位计量

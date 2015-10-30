@@ -24,6 +24,112 @@ namespace Phoebe.Business
         #endregion //Constructor
 
         #region Method
+        #region Settlement
+        /// <summary>
+        /// 获取费用结算
+        /// </summary>
+        /// <returns></returns>
+        public List<Settlement> Get()
+        {
+            var data = this.context.Settlements.OrderByDescending(r => r.StartTime);
+            return data.ToList();
+        }
+
+        /// <summary>
+        /// 获取基本费用结算
+        /// </summary>
+        /// <param name="customerType">客户类型</param>
+        /// <param name="customerID">客户ID</param>
+        /// <param name="start">开始日期</param>
+        /// <param name="end">结束日期</param>
+        /// <returns></returns>
+        public List<Billing> BaseProcess(int customerType, int customerID, DateTime start, DateTime end)
+        {
+            var contracts = this.context.Contracts.Where(r => r.CustomerID == customerID && r.CustomerType == customerType && r.SignDate <= end);
+
+            var cargos = from r in this.context.Cargoes
+                         where r.Status != (int)EntityStatus.CargoNotIn && r.Status != (int)EntityStatus.CargoStockInReady &&
+                            contracts.Select(s => s.ID).Contains(r.ContractID)
+                         select r;
+
+            var billings = from r in this.context.Billings
+                           where r.Status != (int)EntityStatus.BillingPaid && cargos.Select(s => s.ID).Contains(r.CargoID)
+                           select r;
+
+            return billings.ToList();
+        }
+
+        /// <summary>
+        /// 获取冷藏费用结算
+        /// </summary>
+        /// <param name="customerType">客户类型</param>
+        /// <param name="customerID">客户ID</param>
+        /// <param name="start">开始日期</param>
+        /// <param name="end">结束日期</param>
+        /// <returns></returns>
+        public List<ColdSettlement> ColdProcess(int customerType, int customerID, DateTime start, DateTime end)
+        {
+            List<ColdSettlement> data = new List<ColdSettlement>();
+
+            var contracts = this.context.Contracts.Where(r => r.CustomerID == customerID && r.CustomerType == customerType && r.SignDate <= end);
+
+            BillingBusiness billingBusiness = new BillingBusiness();
+
+            foreach (var contract in contracts)
+            {
+                ColdSettlement settle = new ColdSettlement();
+                settle.StartTime = start;
+                settle.EndTime = end;
+                settle.ContractID = contract.ID;
+                settle.ContractName = contract.Name;
+                settle.ColdPrice = billingBusiness.CalculateContractColdPrice(contract.ID, start, end);
+
+                data.Add(settle);
+            }
+
+            return data;
+        }
+
+        /// <summary>
+        /// 添加结算
+        /// </summary>
+        /// <param name="data">结算数据</param>
+        /// <param name="details">详细数据</param>
+        /// <returns></returns>
+        public ErrorCode Create(Settlement data, List<SettlementDetail> details)
+        {
+            try
+            {
+                data.ID = Guid.NewGuid();
+                data.Status = (int)EntityStatus.SettleUnpaid;
+
+                this.context.Settlements.Add(data);
+
+                foreach (var item in details)
+                {
+                    item.SettlementID = data.ID;
+                    item.Status = (int)EntityStatus.SettleUnpaid;
+
+                    if (item.CargoID != null)
+                    {
+                        var billing = this.context.Billings.Find(item.CargoID);
+                        billing.Status = (int)EntityStatus.BillingSettle;
+                    }
+
+                    this.context.SettlementDetails.Add(item);
+                }
+
+                this.context.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+
+            return ErrorCode.Success;
+        }
+        #endregion //Settlement
+
         #region Base Settlement
         ///// <summary>
         ///// 获取基本费用结算
@@ -160,52 +266,6 @@ namespace Phoebe.Business
         #endregion //BaseSettlement
 
         #region ColdSettlement
-        ///// <summary>
-        ///// 获取冷藏费用结算
-        ///// </summary>
-        ///// <returns></returns>
-        //public List<ColdSettlement> GetCold()
-        //{
-        //    var data = this.context.ColdSettlements.OrderByDescending(r => r.ConfirmTime);
-        //    return data.ToList();
-        //}
-
-        ///// <summary>
-        ///// 获取冷藏费用结算
-        ///// </summary>
-        ///// <param name="status">状态</param>
-        ///// <returns></returns>
-        //public List<ColdSettlement> GetCold(EntityStatus status)
-        //{
-        //    var data = this.context.ColdSettlements.Where(r => r.Status == (int)status);
-        //    return data.ToList();
-        //}
-
-        ///// <summary>
-        ///// 获取冷藏费用结算
-        ///// </summary>
-        ///// <param name="id">结算ID</param>
-        ///// <returns></returns>
-        //public ColdSettlement GetCold(string id)
-        //{
-        //    Guid gid;
-        //    if (!Guid.TryParse(id, out gid))
-        //        return null;
-
-        //    return this.context.ColdSettlements.Find(gid);
-        //}
-
-        ///// <summary>
-        ///// 根据合同获取冷藏费结算
-        ///// </summary>
-        ///// <param name="contractID">合同ID</param>
-        ///// <returns></returns>
-        //public List<ColdSettlement> GetColdByContract(int contractID)
-        //{
-        //    var data = this.context.ColdSettlements.Where(r => r.ContractID == contractID).OrderBy(r => r.StartTime);
-        //    return data.ToList();
-        //}
-
         /// <summary>
         /// 处理货品日冷藏费
         /// </summary>
@@ -245,64 +305,6 @@ namespace Phoebe.Business
 
             return records;
         }
-
-        ///// <summary>
-        ///// 添加冷藏费结算
-        ///// </summary>
-        ///// <param name="data">冷藏费数据</param>
-        ///// <returns></returns>
-        //public ErrorCode ColdCreate(ColdSettlement data)
-        //{
-        //    try
-        //    {
-        //        data.ID = Guid.NewGuid();
-        //        data.Status = (int)EntityStatus.SettleUnpaid;
-        //        this.context.ColdSettlements.Add(data);
-        //        this.context.SaveChanges();
-        //    }
-        //    catch (Exception)
-        //    {
-        //        return ErrorCode.Exception;
-        //    }
-
-        //    return ErrorCode.Success;
-        //}
-
-        ///// <summary>
-        ///// 冷藏费用审核
-        ///// </summary>
-        ///// <param name="id">结算ID</param>
-        ///// <param name="paidPrice">付款</param>
-        ///// <param name="confirmTime">确认时间</param>
-        ///// <param name="remark">备注</param>
-        ///// <param name="status">状态</param>
-        ///// <returns></returns>
-        //public ErrorCode ColdAudit(string id, decimal paidPrice, DateTime confirmTime, string remark, EntityStatus status)
-        //{
-        //    try
-        //    {
-        //        Guid gid;
-        //        if (!Guid.TryParse(id, out gid))
-        //            return ErrorCode.ObjectNotFound;
-
-        //        ColdSettlement coldSettle = this.context.ColdSettlements.Find(gid);
-        //        if (coldSettle == null)
-        //            return ErrorCode.ObjectNotFound;
-
-        //        coldSettle.PaidPrice = paidPrice;
-        //        coldSettle.ConfirmTime = confirmTime;
-        //        coldSettle.Remark = remark;
-        //        coldSettle.Status = (int)status;
-
-        //        this.context.SaveChanges();
-        //    }
-        //    catch (Exception)
-        //    {
-        //        return ErrorCode.Exception;
-        //    }
-
-        //    return ErrorCode.Success;
-        //}
         #endregion //ColdSettlement
         #endregion //Method
     }
