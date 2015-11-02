@@ -688,6 +688,7 @@
     <Content Include="Views\Settle\Audit.cshtml" />
     <Content Include="Views\Settle\Confirm.cshtml" />
     <Content Include="Views\Settle\Details.cshtml" />
+    <Content Include="Views\Statistic\GetClassifyStoreByCustomer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -126,6 +126,20 @@ namespace Phoebe.UI.Controllers
                 return View("StoreSummary", model);
             }
         }
+
+        /// <summary>
+        /// 按客户获取分类库存
+        /// </summary>
+        /// <param name="customerType">客户类型</param>
+        /// <param name="customerID">客户ID</param>
+        /// <returns></returns>
+        public ActionResult GetClassifyStoreByCustomer(int customerType, int customerID)
+        {
+            StatisticBusiness statisticBusienss = new StatisticBusiness();
+            var data = statisticBusienss.GetClassifyStoreByCustomer(customerType, customerID);
+
+            return View(data);
+        }
         #endregion //Action
     }
 }

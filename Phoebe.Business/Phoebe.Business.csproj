@@ -60,6 +60,7 @@
     <Compile Include="IBillingProcess.cs" />
     <Compile Include="ModelExtension.cs" />
     <Compile Include="SettleBusiness.cs" />
+    <Compile Include="StatisticBusiness.cs" />
     <Compile Include="StoreBusiness.cs" />
     <Compile Include="TransferBusiness.cs" />
     <Compile Include="UserBusiness.cs" />
