@@ -25,6 +25,32 @@ namespace Phoebe.Business
 
         #region Method
         /// <summary>
+        /// 按客户获取流水
+        /// </summary>
+        /// <param name="customerType">客户类型</param>
+        /// <param name="customerID">客户ID</param>
+        /// <param name="start">开始日期</param>
+        /// <param name="end">结束日期</param>
+        /// <returns></returns>
+        public List<StockFlow> GetFlowByCustomer(int customerType, int customerID, DateTime start, DateTime end)
+        {
+            List<StockFlow> data = new List<StockFlow>();
+            var contracts = this.context.Contracts.Where(r => r.CustomerType == customerType && r.CustomerID == customerID);
+
+            StoreBusiness storeBusiness = new StoreBusiness();
+            foreach (var contract in contracts)
+            {
+                for (DateTime step = start; step <= end; step = step.AddDays(1))
+                {
+                    var flows = storeBusiness.GetDaysFlow(contract.ID, step);
+                    data.AddRange(flows);
+                }
+            }
+
+            return data;
+        }
+
+        /// <summary>
         /// 按客户获取分类库存
         /// </summary>
         /// <param name="customerType">客户类型</param>
@@ -107,6 +133,18 @@ namespace Phoebe.Business
 
             data.StoreCount = data.FirstStore.Sum(r => r.StoreCount);
             return data;
+        }
+
+        /// <summary>
+        /// 按客户获取付款信息
+        /// </summary>
+        /// <param name="customerType">客户类型</param>
+        /// <param name="customerID">客户ID</param>
+        /// <returns></returns>
+        public List<Settlement> GetPaidSettleByCustomer(int customerType, int customerID)
+        {
+            var data = this.context.Settlements.Where(r => r.CustomerType == customerType && r.CustomerID == customerID && r.Status == (int)EntityStatus.SettlePaid);
+            return data.ToList();
         }
         #endregion //Method
     }

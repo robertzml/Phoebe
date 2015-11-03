@@ -4,9 +4,45 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-
 namespace Phoebe.UI.Models
 {
+    /// <summary>
+    /// 客户流水输入模型
+    /// </summary>
+    public class CustomerFlowInput
+    {
+        /// <summary>
+        /// 客户类型
+        /// </summary>
+        [Required]
+        [UIHint("CustomerType")]
+        [Display(Name = "客户类型")]
+        public int CustomerType { get; set; }
+
+        /// <summary>
+        /// 客户ID
+        /// </summary>
+        [Required]
+        [Display(Name = "客户选择")]
+        public int CustomerID { get; set; }
+
+        /// <summary>
+        /// 开始日期
+        /// </summary>
+        [Required]
+        [DataType(DataType.Date)]
+        [Display(Name = "开始日期")]
+        public DateTime DateFrom { get; set; }
+
+        /// <summary>
+        /// 结束日期
+        /// </summary>
+        [Required]
+        [DataType(DataType.Date)]
+        [Display(Name = "结束日期")]
+        public DateTime DateTo { get; set; }
+    }
+
     /// <summary>
     /// 合同流水输入模型
     /// </summary>

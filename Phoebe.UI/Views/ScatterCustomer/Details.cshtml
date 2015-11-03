@@ -516,7 +516,7 @@
                             </a>
                         </li>
                         <li>
-                            <a data-toggle="tab" href="#tab_2-2">
+                            <a data-toggle="tab" href="#tab_statistic_2">
                                 <i class="fa fa-rmb"></i> 收款汇总
                             </a>
                         </li>
@@ -525,13 +525,10 @@
                 <div class="col-md-10">
                     <div class="tab-content">
                         <div id="tab_statistic_1" class="tab-pane active">
-                            @Html.Action("GetClassifyStoreByCustomer", new { controller = "Statistic", customerType = 2, customerID = Model.ID })
+                            @Html.Action("GetClassifyStoreByCustomer", new { controller = "Statistic", customerType = (int)CustomerType.Scatter, customerID = Model.ID })
                         </div>
-                        <div id="tab_2-2" class="tab-pane">
-                            <p>
-                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
-                            </p>
-                           
+                        <div id="tab_statistic_2" class="tab-pane">
+                            @Html.Action("GetPaidSettleByCustomer", new { controller = "Statistic", customerType = (int)CustomerType.Scatter, customerID = Model.ID })
                         </div>
                     </div>
                 </div>

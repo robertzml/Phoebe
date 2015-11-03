@@ -19,6 +19,37 @@ namespace Phoebe.UI.Controllers
     {
         #region Action
         /// <summary>
+        /// 客户流水统计
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult CustomerFlow()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 客户流水统计
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult CustomerFlowResult(CustomerFlowInput model)
+        {
+            if (ModelState.IsValid)
+            {
+                StatisticBusiness statisticBusienss = new StatisticBusiness();
+                var data = statisticBusienss.GetFlowByCustomer(model.CustomerType, model.CustomerID, model.DateFrom.Date, model.DateTo.Date);
+
+                return View(data);
+            }
+            else
+            {
+                return View("CustomerFlow", model);
+            }
+        }
+
+        /// <summary>
         /// 合同流水统计
         /// </summary>
         /// <returns></returns>
@@ -137,6 +168,20 @@ namespace Phoebe.UI.Controllers
         {
             StatisticBusiness statisticBusienss = new StatisticBusiness();
             var data = statisticBusienss.GetClassifyStoreByCustomer(customerType, customerID);
+
+            return View(data);
+        }
+
+        /// <summary>
+        /// 按客户获取付款统计
+        /// </summary>
+        /// <param name="customerType">客户类型</param>
+        /// <param name="customerID">客户ID</param>
+        /// <returns></returns>
+        public ActionResult GetPaidSettleByCustomer(int customerType, int customerID)
+        {
+            StatisticBusiness statisticBusienss = new StatisticBusiness();
+            var data = statisticBusienss.GetPaidSettleByCustomer(customerType, customerID);
 
             return View(data);
         }

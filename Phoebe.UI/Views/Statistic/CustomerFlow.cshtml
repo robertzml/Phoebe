@@ -1,17 +1,19 @@
-﻿@model Phoebe.UI.Models.SettleInput
+﻿@model Phoebe.UI.Models.CustomerFlowInput
 
 @{
-    ViewBag.Title = "费用结算";
+    ViewBag.Title = "客户流水统计";
     AjaxOptions ajaxOpts = new AjaxOptions
     {
         UpdateTargetId = "process-result",
-        Url = Url.Action("ProcessInfo", "Settle"),
+        Url = Url.Action("CustomerFlowResult", "Statistic"),
         HttpMethod = "POST",
         OnBegin = "phoebe.showLoading()",
         OnComplete = "phoebe.hideLoading()",
         OnSuccess = "phoebe.showMessage('提交成功')"
     };
 }
+
+
 
 @section styles {
     @Styles.Render("~/Content/datepicker")
@@ -56,27 +58,32 @@
                 </div>
             </div>
             <div class="portlet-body">
-                @using (Ajax.BeginForm("ProcessInfo", new { controller = "Settle" }, ajaxOpts, new { @class = "form-horizontal" }))
+                @using (Ajax.BeginForm("CustomerFlowResult", new { controller = "Statistic" }, ajaxOpts, new { @class = "form-horizontal" }))
                 {
                     @Html.AntiForgeryToken()
 
                     <div class="form-body">
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="row">
+                            <div class="col-md-12">
+                                @Html.ValidationMessageFor(model => model.CustomerID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label class="control-label col-md-3">客户类型</label>
                                     <div class="col-md-8">
-                                       @Html.EditorFor(model => model.CustomerType, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.EditorFor(model => model.CustomerType, new { htmlAttributes = new { @class = "form-control" } })
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label class="control-label col-md-3">客户选择</label>
                                     <div class="col-md-8">
-                                        <select id="CustomerID" name="CustomerID" class="form-control"></select>
+                                        <select id="CustomerID" name="CustomerID" class="form-control" data-val="true" data-val-required="请选择客户"></select>
                                     </div>
                                 </div>
                             </div>
@@ -95,10 +102,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-offset-8 col-md-2">
+                            <div class="col-md-2">
                                 <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> 确定</button>
                             </div>
                         </div>
@@ -118,16 +122,12 @@
 </div>
 <!-- END PAGE CONTENT-->
 
-
 @section Scripts {
     @Scripts.Render("~/bundles/datepicker")
     <script type="text/javascript">
         $(function () {
-            phoebe.leftNavActive($('#menu-settle-index'));
+            phoebe.leftNavActive($('#menu-customer-flow-statistic'));
             phoebe.initDatePicker($('#date-range-picker'), false);;
-
-            var customerType = 0;
-            var customerId = 0;
 
             function loadCustomers($dom, type) {
 
@@ -140,7 +140,7 @@
             }
 
             $('#CustomerType').change(function () {
-                customerType = $(this).val();
+                var  customerType = $(this).val();
 
                 $('#CustomerID').empty();
                 if (customerType == '')

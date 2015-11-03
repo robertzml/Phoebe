@@ -244,6 +244,7 @@ namespace Phoebe.Business
                     newCargo.Billing.PackingPrice = oldCargo.Billing.PackingPrice;
                     newCargo.Billing.RentPrice = oldCargo.Billing.RentPrice;
                     newCargo.Billing.OtherPrice = oldCargo.Billing.OtherPrice;
+                    newCargo.Billing.TotalPrice = oldCargo.Billing.TotalPrice;
                     newCargo.Billing.Remark = oldCargo.Billing.Remark;
                     newCargo.Billing.Status = oldCargo.Billing.Status;
 

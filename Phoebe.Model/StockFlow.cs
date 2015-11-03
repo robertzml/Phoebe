@@ -43,6 +43,12 @@ namespace Phoebe.Model
         public string SecondCategoryName { get; set; }
 
         /// <summary>
+        /// 三级分类
+        /// </summary>
+        [Display(Name = "三级分类")]
+        public string ThirdCategoryName { get; set; }
+
+        /// <summary>
         /// 所属合同
         /// </summary>
         [Display(Name = "所属合同")]

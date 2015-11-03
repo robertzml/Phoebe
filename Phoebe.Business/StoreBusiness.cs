@@ -453,6 +453,7 @@ namespace Phoebe.Business
                     stockFlow.CargoName = cargo.Name;
                     stockFlow.FirstCategoryName = cargo.FirstCategory.Name;
                     stockFlow.SecondCategoryName = cargo.SecondCategory.Name;
+                    stockFlow.ThirdCategoryName = cargo.ThirdCategory == null ? "" : cargo.ThirdCategory.Name;
                     stockFlow.Count = item.StockInDetails.Sum(r => r.Count);
                     stockFlow.FlowDate = item.ConfirmTime.Value;
                     stockFlow.Type = StockFlowType.StockIn;
@@ -470,6 +471,7 @@ namespace Phoebe.Business
                     stockFlow.CargoName = cargo.Name;
                     stockFlow.FirstCategoryName = cargo.FirstCategory.Name;
                     stockFlow.SecondCategoryName = cargo.SecondCategory.Name;
+                    stockFlow.ThirdCategoryName = cargo.ThirdCategory == null ? "" : cargo.ThirdCategory.Name;
                     stockFlow.Count = item.TransferDetails.Sum(r => r.Count);
                     stockFlow.FlowDate = item.ConfirmTime.Value;
                     stockFlow.Type = StockFlowType.TransferIn;
@@ -487,6 +489,7 @@ namespace Phoebe.Business
                     stockFlow.CargoName = cargo.Name;
                     stockFlow.FirstCategoryName = cargo.FirstCategory.Name;
                     stockFlow.SecondCategoryName = cargo.SecondCategory.Name;
+                    stockFlow.ThirdCategoryName = cargo.ThirdCategory == null ? "" : cargo.ThirdCategory.Name;
                     stockFlow.Count = -item.StockOutDetails.Sum(r => r.Count);
                     stockFlow.FlowDate = item.ConfirmTime.Value;
                     stockFlow.Type = StockFlowType.StockOut;
@@ -504,6 +507,7 @@ namespace Phoebe.Business
                     stockFlow.CargoName = cargo.Name;
                     stockFlow.FirstCategoryName = cargo.FirstCategory.Name;
                     stockFlow.SecondCategoryName = cargo.SecondCategory.Name;
+                    stockFlow.ThirdCategoryName = cargo.ThirdCategory == null ? "" : cargo.ThirdCategory.Name;
                     stockFlow.Count = -item.TransferDetails.Sum(r => r.Count);
                     stockFlow.FlowDate = item.ConfirmTime.Value;
                     stockFlow.Type = StockFlowType.TransferOut;
