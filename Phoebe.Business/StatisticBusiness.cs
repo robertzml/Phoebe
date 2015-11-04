@@ -146,6 +146,42 @@ namespace Phoebe.Business
             var data = this.context.Settlements.Where(r => r.CustomerType == customerType && r.CustomerID == customerID && r.Status == (int)EntityStatus.SettlePaid);
             return data.ToList();
         }
+
+        /// <summary>
+        /// 获取库存分类汇总
+        /// </summary>
+        /// <param name="firstCategoryID">一级分类</param>
+        /// <param name="secondCategoryID">二级分类</param>
+        /// <returns></returns>
+        public List<StoreThirdCategory> GetStoreCategorySummary(int firstCategoryID, int secondCategoryID)
+        {
+            var stores = this.context.Stocks.Where(r => r.Status == (int)EntityStatus.StoreIn);
+
+            var records = from r in stores
+                          where r.Cargo.FirstCategoryID == firstCategoryID && r.Cargo.SecondCategoryID == secondCategoryID
+                          group r by r.Cargo.ThirdCategoryID into g
+                          select new { g.Key, Count = g.Sum(r => r.Count) };
+
+            List<StoreThirdCategory> data = new List<StoreThirdCategory>();
+
+            foreach (var item in records)
+            {
+                StoreThirdCategory third = new StoreThirdCategory();
+                third.ThirdCategoryID = item.Key == null ? 0 : item.Key.Value;
+                third.StoreCount = item.Count;
+
+                if (third.ThirdCategoryID != 0)
+                {
+                    third.ThirdCategoryName = this.context.ThirdCategories.Find(third.ThirdCategoryID).Name;
+                }
+                else
+                    third.ThirdCategoryName = "(无)";
+
+                data.Add(third);
+            }
+
+            return data;
+        }
         #endregion //Method
     }
 }

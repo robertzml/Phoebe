@@ -17,6 +17,20 @@ namespace Phoebe.UI.Controllers
     [EnhancedAuthorize]
     public class StatisticController : Controller
     {
+        #region Field
+        /// <summary>
+        /// 货品业务
+        /// </summary>
+        private StatisticBusiness statisticBusienss;
+        #endregion //Field
+
+        #region Constructor
+        public StatisticController()
+        {
+            this.statisticBusienss = new StatisticBusiness();
+        }
+        #endregion ///Constructor
+
         #region Action
         /// <summary>
         /// 客户流水统计
@@ -38,8 +52,7 @@ namespace Phoebe.UI.Controllers
         {
             if (ModelState.IsValid)
             {
-                StatisticBusiness statisticBusienss = new StatisticBusiness();
-                var data = statisticBusienss.GetFlowByCustomer(model.CustomerType, model.CustomerID, model.DateFrom.Date, model.DateTo.Date);
+                var data = this.statisticBusienss.GetFlowByCustomer(model.CustomerType, model.CustomerID, model.DateFrom.Date, model.DateTo.Date);
 
                 return View(data);
             }
@@ -159,6 +172,39 @@ namespace Phoebe.UI.Controllers
         }
 
         /// <summary>
+        /// 库存分类汇总
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult CategorySummary()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 库存分类汇总
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult CategorySummaryResult(CategorySummaryInput model)
+        {
+            if (ModelState.IsValid)
+            {
+                var data = this.statisticBusienss.GetStoreCategorySummary(model.FirstCategoryID, model.SecondCategoryID);
+
+                CategoryBusiness categoryBusiness = new CategoryBusiness();
+                ViewBag.SecondCategoryName = categoryBusiness.GetSecondCategory(model.SecondCategoryID).Name;
+
+                return View(data);
+            }
+            else
+            {
+                return View("CategorySummary", model);
+            }
+        }
+        #region Partial
+        /// <summary>
         /// 按客户获取分类库存
         /// </summary>
         /// <param name="customerType">客户类型</param>
@@ -166,8 +212,7 @@ namespace Phoebe.UI.Controllers
         /// <returns></returns>
         public ActionResult GetClassifyStoreByCustomer(int customerType, int customerID)
         {
-            StatisticBusiness statisticBusienss = new StatisticBusiness();
-            var data = statisticBusienss.GetClassifyStoreByCustomer(customerType, customerID);
+            var data = this.statisticBusienss.GetClassifyStoreByCustomer(customerType, customerID);
 
             return View(data);
         }
@@ -180,11 +225,11 @@ namespace Phoebe.UI.Controllers
         /// <returns></returns>
         public ActionResult GetPaidSettleByCustomer(int customerType, int customerID)
         {
-            StatisticBusiness statisticBusienss = new StatisticBusiness();
-            var data = statisticBusienss.GetPaidSettleByCustomer(customerType, customerID);
+            var data = this.statisticBusienss.GetPaidSettleByCustomer(customerType, customerID);
 
             return View(data);
         }
+        #endregion //Partial
         #endregion //Action
     }
 }

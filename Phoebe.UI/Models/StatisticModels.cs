@@ -106,4 +106,25 @@ namespace Phoebe.UI.Models
         [Display(Name = "日期选择")]
         public DateTime Date { get; set; }
     }
+
+    /// <summary>
+    /// 库存分类汇总输入模型
+    /// </summary>
+    public class CategorySummaryInput
+    {
+        /// <summary>
+        /// 一级分类
+        /// </summary>
+        [Required]
+        [UIHint("FirstCategoryList")]
+        [Display(Name = "一级分类")]
+        public int FirstCategoryID { get; set; }
+
+        /// <summary>
+        /// 二级分类
+        /// </summary>
+        [Required]
+        [Display(Name = "二级分类")]
+        public int SecondCategoryID { get; set; }
+    }
 }
