@@ -142,4 +142,26 @@ namespace Phoebe.UI.Models
         [Display(Name = "二级分类")]
         public int SecondCategoryID { get; set; }
     }
+
+    /// <summary>
+    /// 收款统计输入模型
+    /// </summary>
+    public class PaidSummaryInput
+    {
+        /// <summary>
+        /// 开始日期
+        /// </summary>
+        [Required]
+        [DataType(DataType.Date)]
+        [Display(Name = "开始日期")]
+        public DateTime DateFrom { get; set; }
+
+        /// <summary>
+        /// 结束日期
+        /// </summary>
+        [Required]
+        [DataType(DataType.Date)]
+        [Display(Name = "结束日期")]
+        public DateTime DateTo { get; set; }
+    }
 }

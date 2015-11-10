@@ -197,6 +197,37 @@ namespace Phoebe.UI.Controllers
             }
         }
 
+        /// <summary>
+        /// 收款统计
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult ReceiptSummary()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 收款统计
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult ReceiptSummaryResult(PaidSummaryInput model)
+        {
+            if (ModelState.IsValid)
+            {
+                var data = this.statisticBusienss.GetReceiptRecords(model.DateFrom.Date, model.DateTo.Date);
+
+                return View(data);
+            }
+            else
+            {
+                return View("ReceiptSummary", model);
+            }
+        }
+
         #region Partial
         /// <summary>
         /// 按客户获取分类库存

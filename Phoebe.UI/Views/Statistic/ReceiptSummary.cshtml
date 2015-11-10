@@ -1,12 +1,11 @@
-﻿@model Phoebe.UI.Models.ContractFlowInput
+﻿@model Phoebe.UI.Models.PaidSummaryInput
 
 @{
-    ViewBag.Title = "合同流水统计";
-
+    ViewBag.Title = "收款统计";
     AjaxOptions ajaxOpts = new AjaxOptions
     {
         UpdateTargetId = "process-result",
-        Url = Url.Action("ContractFlowResult", "Statistic"),
+        Url = Url.Action("ReceiptSummaryResult", "Statistic"),
         HttpMethod = "POST",
         OnBegin = "phoebe.showLoading()",
         OnComplete = "phoebe.hideLoading()",
@@ -57,27 +56,14 @@
                 </div>
             </div>
             <div class="portlet-body">
-                @using (Ajax.BeginForm("ContractFlowResult", new { controller = "Statistic" }, ajaxOpts, new { @class = "form-horizontal" }))
+                @using (Ajax.BeginForm("ReceiptSummaryResult", new { controller = "Statistic" }, ajaxOpts, new { @class = "form-horizontal" }))
                 {
                     @Html.AntiForgeryToken()
 
                     <div class="form-body">
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                        <div class="row">
-                            <div class="col-md-12">
-                                @Html.ValidationMessageFor(model => model.ContractID, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
 
                         <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label class="control-label col-md-3">合同选择</label>
-                                    <div class="col-md-8">
-                                        <select id="ContractID" name="ContractID" class="form-control" data-val="true" data-val-required="请选择合同"></select>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label class="control-label col-md-3">日期选择</label>
@@ -103,6 +89,8 @@
         </div>
     </div>
 </div>
+<!-- END PAGE CONTENT-->
+
 
 <div id="ajax-load" style="display: none;">
     <img src="~/assets/global/img/ajax-loading.gif" alt="load" />
@@ -117,21 +105,8 @@
     @Scripts.Render("~/bundles/datepicker")
     <script type="text/javascript">
         $(function () {
-            phoebe.leftNavActive($('#menu-contract-flow-statistic'));
+            phoebe.leftNavActive($('#menu-receipt-summary-statistic'));
             phoebe.initDatePicker($('#date-range-picker'), false);
-
-            function loadContracts($dom) {
-                $.getJSON('/Contract/GetContracts', { type: 2 }, function (response) {
-                    $dom.append(" <option value=''>-- 请选择 --</option>");
-                    $.each(response, function (i, item) {
-                        $dom.append("<option value='" + item.ID + "'>" + item.Name + "</option>");
-                    });
-
-                    phoebe.initSelect2($dom);
-                });
-            }
-
-            loadContracts($('#ContractID'));
         });
     </script>
 }

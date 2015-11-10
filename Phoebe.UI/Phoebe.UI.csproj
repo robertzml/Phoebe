@@ -391,37 +391,6 @@
     <Content Include="assets\global\plugins\jquery-bootpag\jquery.bootpag.js" />
     <Content Include="assets\global\plugins\jquery-bootpag\jquery.bootpag.min.js" />
     <Content Include="assets\global\plugins\jquery-bootpag\LICENSE.txt" />
-    <Content Include="assets\global\plugins\jquery-file-upload\blueimp-gallery\blueimp-gallery.min.css" />
-    <Content Include="assets\global\plugins\jquery-file-upload\blueimp-gallery\jquery.blueimp-gallery.min.js" />
-    <Content Include="assets\global\plugins\jquery-file-upload\cors\postmessage.html" />
-    <Content Include="assets\global\plugins\jquery-file-upload\cors\result.html" />
-    <Content Include="assets\global\plugins\jquery-file-upload\css\demo-ie8.css" />
-    <Content Include="assets\global\plugins\jquery-file-upload\css\demo.css" />
-    <Content Include="assets\global\plugins\jquery-file-upload\css\jquery.fileupload-noscript.css" />
-    <Content Include="assets\global\plugins\jquery-file-upload\css\jquery.fileupload-ui-noscript.css" />
-    <Content Include="assets\global\plugins\jquery-file-upload\css\jquery.fileupload-ui.css" />
-    <Content Include="assets\global\plugins\jquery-file-upload\css\jquery.fileupload.css" />
-    <Content Include="assets\global\plugins\jquery-file-upload\css\style.css" />
-    <Content Include="assets\global\plugins\jquery-file-upload\img\loading.gif" />
-    <Content Include="assets\global\plugins\jquery-file-upload\img\progressbar.gif" />
-    <Content Include="assets\global\plugins\jquery-file-upload\js\app.js" />
-    <Content Include="assets\global\plugins\jquery-file-upload\js\cors\jquery.postmessage-transport.js" />
-    <Content Include="assets\global\plugins\jquery-file-upload\js\cors\jquery.xdr-transport.js" />
-    <Content Include="assets\global\plugins\jquery-file-upload\js\jquery.fileupload-angular.js" />
-    <Content Include="assets\global\plugins\jquery-file-upload\js\jquery.fileupload-audio.js" />
-    <Content Include="assets\global\plugins\jquery-file-upload\js\jquery.fileupload-image.js" />
-    <Content Include="assets\global\plugins\jquery-file-upload\js\jquery.fileupload-jquery-ui.js" />
-    <Content Include="assets\global\plugins\jquery-file-upload\js\jquery.fileupload-process.js" />
-    <Content Include="assets\global\plugins\jquery-file-upload\js\jquery.fileupload-ui.js" />
-    <Content Include="assets\global\plugins\jquery-file-upload\js\jquery.fileupload-validate.js" />
-    <Content Include="assets\global\plugins\jquery-file-upload\js\jquery.fileupload-video.js" />
-    <Content Include="assets\global\plugins\jquery-file-upload\js\jquery.fileupload.js" />
-    <Content Include="assets\global\plugins\jquery-file-upload\js\jquery.iframe-transport.js" />
-    <Content Include="assets\global\plugins\jquery-file-upload\js\main.js" />
-    <Content Include="assets\global\plugins\jquery-file-upload\js\vendor\canvas-to-blob.min.js" />
-    <Content Include="assets\global\plugins\jquery-file-upload\js\vendor\jquery.ui.widget.js" />
-    <Content Include="assets\global\plugins\jquery-file-upload\js\vendor\load-image.min.js" />
-    <Content Include="assets\global\plugins\jquery-file-upload\js\vendor\tmpl.min.js" />
     <Content Include="assets\global\plugins\jquery-knob\js\jquery.knob.js" />
     <Content Include="assets\global\plugins\jquery-migrate.min.js" />
     <Content Include="assets\global\plugins\jquery-mixitup\jquery.mixitup.min.js" />
@@ -497,8 +466,6 @@
     <Content Include="assets\global\plugins\uniform\images\sprite_original.png" />
     <Content Include="assets\global\plugins\uniform\jquery.uniform.js" />
     <Content Include="assets\global\plugins\uniform\jquery.uniform.min.js" />
-    <Content Include="assets\global\plugins\zoom\jquery.zoom.js" />
-    <Content Include="assets\global\plugins\zoom\jquery.zoom.min.js" />
     <Content Include="assets\global\scripts\datatable.js" />
     <Content Include="assets\global\scripts\metronic.js" />
     <Content Include="Content\login.css" />
@@ -537,7 +504,6 @@
     <Content Include="assets\global\plugins\font-awesome\fonts\fontawesome-webfont.woff2" />
     <Content Include="assets\global\plugins\font-awesome\fonts\FontAwesome.otf" />
     <Content Include="assets\global\plugins\jquery-bootpag\README.md" />
-    <Content Include="assets\global\plugins\jquery-file-upload\README.md" />
     <Content Include="assets\global\plugins\jquery-knob\LICENSE" />
     <Content Include="assets\global\plugins\jquery-knob\README.md" />
     <Content Include="assets\global\plugins\jquery-mixitup\mixitup.jquery.json" />
@@ -696,6 +662,8 @@
     <Content Include="Views\Statistic\CustomerStoreResult.cshtml" />
     <Content Include="Views\Stock\History.cshtml" />
     <Content Include="Views\Stock\HistoryProcess.cshtml" />
+    <Content Include="Views\Statistic\ReceiptSummary.cshtml" />
+    <Content Include="Views\Statistic\ReceiptSummaryResult.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

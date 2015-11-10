@@ -156,7 +156,7 @@ namespace Phoebe.Business
             data.StoreCount = data.FirstStore.Sum(r => r.StoreCount);
             return data;
         }
-        
+
         /// <summary>
         /// 按客户获取付款信息
         /// </summary>
@@ -225,7 +225,7 @@ namespace Phoebe.Business
                 else
                 {
                     StoreClassifyPlanModel model = new StoreClassifyPlanModel
-                    { 
+                    {
                         CategoryNumber = number,
                         FirstCategoryID = item.FirstCategoryID,
                         FirstCategoryName = item.FirstCategoryName,
@@ -275,6 +275,37 @@ namespace Phoebe.Business
             }
 
             data.StoreCount = data.FirstStore.Sum(r => r.StoreCount);
+            return data;
+        }
+
+        /// <summary>
+        /// 获取收款记录
+        /// </summary>
+        /// <param name="start">开始日期</param>
+        /// <param name="end">结束日期</param>
+        /// <returns></returns>
+        public List<Receipt> GetReceiptRecords(DateTime start, DateTime end)
+        {
+            List<Receipt> data = new List<Receipt>();
+
+            var settles = this.context.Settlements.Where(r => r.Status == (int)EntityStatus.SettlePaid && r.ConfirmTime >= start && r.ConfirmTime <= end);
+
+            foreach (var item in settles)
+            {
+                Receipt receipt = new Receipt();
+                receipt.CustomerType = item.CustomerType;
+                receipt.CustomerID = item.CustomerID;
+                receipt.CustomerName = item.CustomerName();
+                receipt.StartTime = item.StartTime;
+                receipt.EndTime = item.EndTime;
+                receipt.TotalPrice = item.TotalPrice;
+                receipt.PaidPrice = item.PaidPrice.Value;
+                receipt.Difference = receipt.PaidPrice - receipt.TotalPrice;
+                receipt.ConfirmTime = item.ConfirmTime.Value;
+
+                data.Add(receipt);
+            }
+
             return data;
         }
         #endregion //Method
