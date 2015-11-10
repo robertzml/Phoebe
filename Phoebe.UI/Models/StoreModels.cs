@@ -26,4 +26,18 @@ namespace Phoebe.UI.Models
         [Display(Name = "日期选择")]
         public DateTime Date { get; set; }
     }
+
+    /// <summary>
+    /// 库存历史输入模型
+    /// </summary>
+    public class StoreHistoryInput
+    {
+        /// <summary>
+        /// 日期选择
+        /// </summary>
+        [Required]
+        [DataType(DataType.Date)]
+        [Display(Name = "日期选择")]
+        public DateTime Date { get; set; }
+    }
 }

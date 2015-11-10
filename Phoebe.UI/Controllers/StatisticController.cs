@@ -63,6 +63,39 @@ namespace Phoebe.UI.Controllers
         }
 
         /// <summary>
+        /// 客户库存统计
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult CustomerStore()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 客户库存统计
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult CustomerStoreResult(CustomerStoreInput model)
+        {
+            if (ModelState.IsValid)
+            {
+                var data = this.statisticBusienss.GetStoreByCustomer(model.CustomerType, model.CustomerID, model.Date.Date);
+
+                ViewBag.ClassifyStore = this.statisticBusienss.ConvertToClassify(data);
+
+                return View(data);
+            }
+            else
+            {
+                return View("CustomerStore", model);
+            }
+        }
+
+        /// <summary>
         /// 合同流水统计
         /// </summary>
         /// <returns></returns>
@@ -116,7 +149,7 @@ namespace Phoebe.UI.Controllers
         /// <returns></returns>
         [ValidateAntiForgeryToken]
         [HttpPost]
-        public ActionResult ContractStoreProcess(StoreSnapshootInput model)
+        public ActionResult ContractStoreResult(StoreSnapshootInput model)
         {
             if (ModelState.IsValid)
             {
@@ -128,46 +161,6 @@ namespace Phoebe.UI.Controllers
             else
             {
                 return View("ContractStore", model);
-            }
-        }
-
-        /// <summary>
-        /// 库存汇总
-        /// </summary>
-        /// <returns></returns>
-        public ActionResult StoreSummary()
-        {
-            return View();
-        }
-
-        /// <summary>
-        /// 库存汇总
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
-        [ValidateAntiForgeryToken]
-        [HttpPost]
-        public ActionResult StoreSummaryProcess(StoreSummaryInput model)
-        {
-            if (ModelState.IsValid)
-            {
-                ContractBusiness contractBusiness = new ContractBusiness();
-                StoreBusiness storeBusiness = new StoreBusiness();
-
-                List<Storage> data = new List<Storage>();
-                var contracts = contractBusiness.Get();
-
-                foreach (var item in contracts)
-                {
-                    var s = storeBusiness.GetInDay(item.ID, model.Date);
-                    data.AddRange(s);
-                }
-
-                return View(data);
-            }
-            else
-            {
-                return View("StoreSummary", model);
             }
         }
 
@@ -203,6 +196,7 @@ namespace Phoebe.UI.Controllers
                 return View("CategorySummary", model);
             }
         }
+
         #region Partial
         /// <summary>
         /// 按客户获取分类库存

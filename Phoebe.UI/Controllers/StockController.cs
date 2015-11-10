@@ -33,7 +33,7 @@ namespace Phoebe.UI.Controllers
 
         #region Action
         /// <summary>
-        /// 库存历史
+        /// 库存记录
         /// </summary>
         /// <returns></returns>
         public ActionResult Index()
@@ -85,6 +85,47 @@ namespace Phoebe.UI.Controllers
         {
             var data = this.storeBusiness.GetStorage();
             return View(data);
+        }
+
+        /// <summary>
+        /// 库存历史
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult History()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 库存历史
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult HistoryProcess(StoreHistoryInput model)
+        {
+            if (ModelState.IsValid)
+            {
+                ContractBusiness contractBusiness = new ContractBusiness();
+                StoreBusiness storeBusiness = new StoreBusiness();
+
+                List<Storage> data = new List<Storage>();
+                var contracts = contractBusiness.Get();
+
+                foreach (var item in contracts)
+                {
+                    var s = storeBusiness.GetInDay(item.ID, model.Date);
+                    data.AddRange(s);
+                }
+
+                return View(data);
+            }
+            else
+            {
+                return View("History", model);
+            }
         }
 
         /// <summary>

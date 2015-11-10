@@ -1,12 +1,11 @@
-﻿@model Phoebe.UI.Models.StoreSummaryInput
+﻿@model Phoebe.UI.Models.CustomerStoreInput
 
 @{
-    ViewBag.Title = "库存汇总";
-
+    ViewBag.Title = "客户库存统计";
     AjaxOptions ajaxOpts = new AjaxOptions
     {
         UpdateTargetId = "process-result",
-        Url = Url.Action("StoreSummaryProcess", "Statistic"),
+        Url = Url.Action("CustomerStoreResult", "Statistic"),
         HttpMethod = "POST",
         OnBegin = "phoebe.showLoading()",
         OnComplete = "phoebe.hideLoading()",
@@ -14,10 +13,10 @@
     };
 }
 
+
 @section styles {
     @Styles.Render("~/Content/datepicker")
 }
-
 
 <!-- BEGIN PAGE HEADER-->
 <h3 class="page-title">
@@ -31,7 +30,7 @@
             <i class="fa fa-angle-right"></i>
         </li>
         <li>
-            <a href="#">财务结算</a>
+            <a href="#">统计报表</a>
             <i class="fa fa-angle-right"></i>
         </li>
         <li>
@@ -58,15 +57,36 @@
                 </div>
             </div>
             <div class="portlet-body">
-                @using (Ajax.BeginForm("StoreSummaryProcess", new { controller = "Statistic" }, ajaxOpts, new { @class = "form-horizontal" }))
+                @using (Ajax.BeginForm("CustomerStoreResult", new { controller = "Statistic" }, ajaxOpts, new { @class = "form-horizontal" }))
                 {
                     @Html.AntiForgeryToken()
 
                     <div class="form-body">
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="row">
+                            <div class="col-md-12">
+                                @Html.ValidationMessageFor(model => model.CustomerID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">客户类型</label>
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.CustomerType, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">客户选择</label>
+                                    <div class="col-md-8">
+                                        <select id="CustomerID" name="CustomerID" class="form-control" data-val="true" data-val-required="请选择客户"></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-3" })
                                     <div class="col-md-8">
@@ -75,7 +95,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-offset-4 col-md-4">
+                            <div class="col-md-2">
                                 <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> 确定</button>
                             </div>
                         </div>
@@ -95,13 +115,32 @@
 </div>
 <!-- END PAGE CONTENT-->
 
-
 @section Scripts {
     @Scripts.Render("~/bundles/datepicker")
     <script type="text/javascript">
         $(function () {
-            phoebe.leftNavActive($('#menu-store-summary-statistic'));
+            phoebe.leftNavActive($('#menu-customer-store-statistic'));
             phoebe.initDatePicker($('#Date'));
+
+            function loadCustomers($dom, type) {
+
+                $.getJSON('/Contract/GetCustomers', { type: type }, function (response) {
+                    $dom.append(" <option value=''>-- 请选择 --</option>");
+                    $.each(response, function (i, item) {
+                        $dom.append("<option value='" + item.ID + "'>" + item.Name + "</option>");
+                    });
+                });
+            }
+
+            $('#CustomerType').change(function () {
+                var  customerType = $(this).val();
+
+                $('#CustomerID').empty();
+                if (customerType == '')
+                    return;
+
+                loadCustomers($('#CustomerID'), customerType);
+            });
         });
     </script>
 }

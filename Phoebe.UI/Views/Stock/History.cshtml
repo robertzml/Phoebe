@@ -1,12 +1,12 @@
-﻿@model Phoebe.UI.Models.ContractStoreInput
+﻿@model Phoebe.UI.Models.StoreHistoryInput
 
 @{
-    ViewBag.Title = "合同库存统计";
+    ViewBag.Title = "库存历史";
 
     AjaxOptions ajaxOpts = new AjaxOptions
     {
         UpdateTargetId = "process-result",
-        Url = Url.Action("ContractStoreResult", "Statistic"),
+        Url = Url.Action("HistoryProcess", "Stock"),
         HttpMethod = "POST",
         OnBegin = "phoebe.showLoading()",
         OnComplete = "phoebe.hideLoading()",
@@ -17,6 +17,7 @@
 @section styles {
     @Styles.Render("~/Content/datepicker")
 }
+
 
 <!-- BEGIN PAGE HEADER-->
 <h3 class="page-title">
@@ -30,7 +31,7 @@
             <i class="fa fa-angle-right"></i>
         </li>
         <li>
-            <a href="#">统计报表</a>
+            <a href="#">仓库管理</a>
             <i class="fa fa-angle-right"></i>
         </li>
         <li>
@@ -57,27 +58,14 @@
                 </div>
             </div>
             <div class="portlet-body">
-                @using (Ajax.BeginForm("ContractStoreResult", new { controller = "Statistic" }, ajaxOpts, new { @class = "form-horizontal" }))
+                @using (Ajax.BeginForm("HistoryProcess", new { controller = "Stock" }, ajaxOpts, new { @class = "form-horizontal" }))
                 {
                     @Html.AntiForgeryToken()
 
                     <div class="form-body">
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                        <div class="row">
-                            <div class="col-md-12">
-                                @Html.ValidationMessageFor(model => model.ContractID, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
 
                         <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label class="control-label col-md-3">合同选择</label>
-                                    <div class="col-md-8">
-                                        <select id="ContractID" name="ContractID" class="form-control" data-val="true" data-val-required="请选择合同"></select>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-3" })
@@ -87,7 +75,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-offset-4 col-md-4">
                                 <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> 确定</button>
                             </div>
                         </div>
@@ -112,21 +100,8 @@
     @Scripts.Render("~/bundles/datepicker")
     <script type="text/javascript">
         $(function () {
-            phoebe.leftNavActive($('#menu-contract-store-statistic'));
+            phoebe.leftNavActive($('#menu-stock-history'));
             phoebe.initDatePicker($('#Date'));
-
-            function loadContracts($dom) {
-
-                $.getJSON('/Contract/GetContracts', { type: 2 }, function (response) {
-                    $dom.append(" <option value=''>-- 请选择 --</option>");
-                    $.each(response, function (i, item) {
-                        $dom.append("<option value='" + item.ID + "'>" + item.Name + "</option>");
-                    });
-                });
-            }
-
-            loadContracts($('#ContractID'));
-            phoebe.initSelect2($('#ContractID'));
         });
     </script>
 }

@@ -44,6 +44,35 @@ namespace Phoebe.UI.Models
     }
 
     /// <summary>
+    /// 客户库存统计输入模型
+    /// </summary>
+    public class CustomerStoreInput
+    {
+        /// <summary>
+        /// 客户类型
+        /// </summary>
+        [Required]
+        [UIHint("CustomerType")]
+        [Display(Name = "客户类型")]
+        public int CustomerType { get; set; }
+
+        /// <summary>
+        /// 客户ID
+        /// </summary>
+        [Required]
+        [Display(Name = "客户选择")]
+        public int CustomerID { get; set; }
+
+        /// <summary>
+        /// 日期
+        /// </summary>
+        [Required]
+        [DataType(DataType.Date)]
+        [Display(Name = "日期")]
+        public DateTime Date { get; set; }
+    }
+
+    /// <summary>
     /// 合同流水输入模型
     /// </summary>
     public class ContractFlowInput
@@ -84,20 +113,6 @@ namespace Phoebe.UI.Models
         [Display(Name = "合同选择")]
         public int ContractID { get; set; }
 
-        /// <summary>
-        /// 日期选择
-        /// </summary>
-        [Required]
-        [DataType(DataType.Date)]
-        [Display(Name = "日期选择")]
-        public DateTime Date { get; set; }
-    }
-
-    /// <summary>
-    /// 库存汇总输入模型
-    /// </summary>
-    public class StoreSummaryInput
-    {
         /// <summary>
         /// 日期选择
         /// </summary>

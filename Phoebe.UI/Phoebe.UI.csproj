@@ -679,9 +679,7 @@
     <Content Include="Views\Statistic\ContractFlow.cshtml" />
     <Content Include="Views\Statistic\ContractFlowResult.cshtml" />
     <Content Include="Views\Statistic\ContractStore.cshtml" />
-    <Content Include="Views\Statistic\ContractStoreProcess.cshtml" />
-    <Content Include="Views\Statistic\StoreSummary.cshtml" />
-    <Content Include="Views\Statistic\StoreSummaryProcess.cshtml" />
+    <Content Include="Views\Statistic\ContractStoreResult.cshtml" />
     <Content Include="Views\Settle\List.cshtml" />
     <Content Include="Views\Settle\Index.cshtml" />
     <Content Include="Views\Settle\ProcessInfo.cshtml" />
@@ -694,6 +692,10 @@
     <Content Include="Views\Statistic\CustomerFlowResult.cshtml" />
     <Content Include="Views\Statistic\CategorySummary.cshtml" />
     <Content Include="Views\Statistic\CategorySummaryResult.cshtml" />
+    <Content Include="Views\Statistic\CustomerStore.cshtml" />
+    <Content Include="Views\Statistic\CustomerStoreResult.cshtml" />
+    <Content Include="Views\Stock\History.cshtml" />
+    <Content Include="Views\Stock\HistoryProcess.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

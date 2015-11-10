@@ -51,6 +51,28 @@ namespace Phoebe.Business
         }
 
         /// <summary>
+        /// 按客户获取库存
+        /// </summary>
+        /// <param name="customerType">客户类型</param>
+        /// <param name="customerID">客户ID</param>
+        /// <param name="date">日期</param>
+        /// <returns></returns>
+        public List<Storage> GetStoreByCustomer(int customerType, int customerID, DateTime date)
+        {
+            List<Storage> data = new List<Storage>();
+            var contracts = this.context.Contracts.Where(r => r.CustomerType == customerType && r.CustomerID == customerID);
+
+            StoreBusiness storeBusiness = new StoreBusiness();
+            foreach (var contract in contracts)
+            {
+                var store = storeBusiness.GetInDay(contract.ID, date);
+                data.AddRange(store);
+            }
+
+            return data;
+        }
+
+        /// <summary>
         /// 按客户获取分类库存
         /// </summary>
         /// <param name="customerType">客户类型</param>
@@ -134,7 +156,7 @@ namespace Phoebe.Business
             data.StoreCount = data.FirstStore.Sum(r => r.StoreCount);
             return data;
         }
-
+        
         /// <summary>
         /// 按客户获取付款信息
         /// </summary>
@@ -180,6 +202,79 @@ namespace Phoebe.Business
                 data.Add(third);
             }
 
+            return data;
+        }
+
+        /// <summary>
+        /// 对指定库存进行分类统计
+        /// </summary>
+        /// <param name="storage">库存</param>
+        /// <returns></returns>
+        public StoreClassifyModel ConvertToClassify(List<Storage> storage)
+        {
+            List<StoreClassifyPlanModel> plans = new List<StoreClassifyPlanModel>();
+            foreach (var item in storage)
+            {
+                string number = string.Format("{0}-{1}-{2}", item.FirstCategoryID, item.SecondCategoryID, item.ThirdCategoryID);
+
+                if (plans.Any(r => r.CategoryNumber == number))
+                {
+                    var model = plans.Single(r => r.CategoryNumber == number);
+                    model.StoreCount += item.Count;
+                }
+                else
+                {
+                    StoreClassifyPlanModel model = new StoreClassifyPlanModel
+                    { 
+                        CategoryNumber = number,
+                        FirstCategoryID = item.FirstCategoryID,
+                        FirstCategoryName = item.FirstCategoryName,
+                        SecondCategoryID = item.SecondCategoryID,
+                        SecondCategoryName = item.SecondCategoryName,
+                        ThirdCategoryID = item.ThirdCategoryID,
+                        ThirdCategoryName = item.ThirdCategoryName,
+                        StoreCount = item.Count
+                    };
+
+                    plans.Add(model);
+                }
+            }
+
+            StoreClassifyModel data = new StoreClassifyModel();
+            data.FirstStore = new List<StoreFirstCategory>();
+
+            foreach (var firstId in plans.Select(r => r.FirstCategoryID).Distinct())
+            {
+                StoreFirstCategory first = new StoreFirstCategory();
+                first.FirstCategoryID = firstId;
+                first.FirstCategoryName = plans.First(r => r.FirstCategoryID == firstId).FirstCategoryName;
+                first.SecondStore = new List<StoreSecondCategory>();
+
+                foreach (var secondId in plans.Where(r => r.FirstCategoryID == firstId).Select(s => s.SecondCategoryID).Distinct())
+                {
+                    StoreSecondCategory second = new StoreSecondCategory();
+                    second.SecondCategoryID = secondId;
+                    second.SecondCategoryName = plans.First(r => r.FirstCategoryID == firstId && r.SecondCategoryID == secondId).SecondCategoryName;
+                    second.ThirdStore = new List<StoreThirdCategory>();
+
+                    foreach (var thirdId in plans.Where(r => r.FirstCategoryID == firstId && r.SecondCategoryID == secondId).Select(s => s.ThirdCategoryID).Distinct())
+                    {
+                        StoreThirdCategory third = new StoreThirdCategory();
+                        third.ThirdCategoryID = thirdId;
+                        third.ThirdCategoryName = plans.First(r => r.FirstCategoryID == firstId && r.SecondCategoryID == secondId && r.ThirdCategoryID == thirdId).ThirdCategoryName;
+                        third.StoreCount = plans.Single(r => r.FirstCategoryID == firstId && r.SecondCategoryID == secondId && r.ThirdCategoryID == thirdId).StoreCount;
+
+                        second.ThirdStore.Add(third);
+                    }
+
+                    second.StoreCount = second.ThirdStore.Sum(r => r.StoreCount);
+                    first.SecondStore.Add(second);
+                }
+                first.StoreCount = first.SecondStore.Sum(r => r.StoreCount);
+                data.FirstStore.Add(first);
+            }
+
+            data.StoreCount = data.FirstStore.Sum(r => r.StoreCount);
             return data;
         }
         #endregion //Method

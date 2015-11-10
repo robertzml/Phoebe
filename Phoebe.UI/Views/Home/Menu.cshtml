@@ -69,12 +69,17 @@
                     </li>
                     <li>
                         <a href="@Url.Action("Index", "Stock")" id="menu-stock-index">
-                            库存历史
+                            库存记录
                         </a>
                     </li>
                     <li>
                         <a href="@Url.Action("List", "Stock")" id="menu-stock-list">
                             库位记录
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("History", "Stock")" id="menu-stock-history">
+                            库存历史
                         </a>
                     </li>
                     <li>
@@ -270,6 +275,11 @@
                         </a>
                     </li>
                     <li>
+                        <a href="@Url.Action("CustomerStore", "Statistic")" id="menu-customer-store-statistic">
+                            客户库存统计
+                        </a>
+                    </li>
+                    <li>
                         <a href="@Url.Action("ContractFlow", "Statistic")" id="menu-contract-flow-statistic">
                             合同流水统计
                         </a>
@@ -277,11 +287,6 @@
                     <li>
                         <a href="@Url.Action("ContractStore", "Statistic")" id="menu-contract-store-statistic">
                             合同库存统计
-                        </a>
-                    </li>
-                    <li>
-                        <a href="@Url.Action("StoreSummary", "Statistic")" id="menu-store-summary-statistic">
-                            库存汇总
                         </a>
                     </li>
                     <li>

@@ -283,8 +283,11 @@ namespace Phoebe.Business
                     storage.Number = item.Warehouse.Number;
                     storage.StockID = item.StockID.Value;
                     storage.CargoID = cargo.ID;
+                    storage.FirstCategoryID = cargo.FirstCategoryID;
                     storage.FirstCategoryName = cargo.FirstCategory.Name;
+                    storage.SecondCategoryID = cargo.SecondCategoryID;
                     storage.SecondCategoryName = cargo.SecondCategory.Name;
+                    storage.ThirdCategoryID = cargo.ThirdCategoryID == null ? 0 : cargo.ThirdCategoryID.Value;
                     storage.ThirdCategoryName = cargo.ThirdCategory == null ? "" : cargo.ThirdCategory.Name;
                     storage.ContractID = contractID;
                     storage.ContractName = cargo.Contract.Name;
@@ -306,8 +309,11 @@ namespace Phoebe.Business
                         storage.Number = item.Warehouse.Number;
                         storage.StockID = item.StockID;
                         storage.CargoID = cargo.ID;
+                        storage.FirstCategoryID = cargo.FirstCategoryID;
                         storage.FirstCategoryName = cargo.FirstCategory.Name;
+                        storage.SecondCategoryID = cargo.SecondCategoryID;
                         storage.SecondCategoryName = cargo.SecondCategory.Name;
+                        storage.ThirdCategoryID = cargo.ThirdCategoryID == null ? 0 : cargo.ThirdCategoryID.Value;
                         storage.ThirdCategoryName = cargo.ThirdCategory == null ? "" : cargo.ThirdCategory.Name;
                         storage.ContractID = contractID;
                         storage.ContractName = cargo.Contract.Name;
