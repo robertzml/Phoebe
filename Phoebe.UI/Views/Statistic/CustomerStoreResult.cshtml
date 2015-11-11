@@ -44,6 +44,9 @@
                                 @Html.DisplayNameFor(model => model.Count)
                             </th>
                             <th>
+                                @Html.DisplayNameFor(model => model.Weight)
+                            </th>
+                            <th>
                                 @Html.DisplayNameFor(model => model.InTime)
                             </th>
                         </tr>
@@ -69,6 +72,9 @@
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Count)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Weight)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.InTime)
@@ -115,20 +121,32 @@
                                 三类数量
                             </th>
                             <th>
+                                三类重量(吨)
+                            </th>
+                            <th>
                                 二类数量
                             </th>
                             <th>
+                                二类重量(吨)
+                            </th>
+                            <th>
                                 一类数量
+                            </th>
+                            <th>
+                                一类重量(吨)
                             </th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
-                            <th colspan="5">
+                            <th colspan="7">
                                 合计
                             </th>
                             <th>
                                 @classify.StoreCount
+                            </th>
+                            <th>
+                                @classify.Weight
                             </th>
                         </tr>
                     </tfoot>
@@ -148,11 +166,20 @@
                                 <td>
                                     @item.SecondStore[0].ThirdStore[0].StoreCount
                                 </td>
+                                <td>
+                                    @item.SecondStore[0].ThirdStore[0].Weight
+                                </td>
                                 <td rowspan="@item.SecondStore[0].ThirdStore.Count">
                                     @item.SecondStore[0].StoreCount
                                 </td>
+                                <td rowspan="@item.SecondStore[0].ThirdStore.Count">
+                                    @item.SecondStore[0].Weight
+                                </td>
                                 <td rowspan="@item.SecondStore.Sum(r => r.ThirdStore.Count)">
                                     @item.StoreCount
+                                </td>
+                                <td rowspan="@item.SecondStore.Sum(r => r.ThirdStore.Count)">
+                                    @item.Weight
                                 </td>
                             </tr>
                             for (int i = 1; i < item.SecondStore[0].ThirdStore.Count; i++)
@@ -163,6 +190,9 @@
                                     </td>
                                     <td>
                                         @item.SecondStore[0].ThirdStore[i].StoreCount
+                                    </td>
+                                    <td>
+                                        @item.SecondStore[0].ThirdStore[i].Weight
                                     </td>
                                 </tr>
                             }
@@ -179,8 +209,14 @@
                                     <td>
                                         @item.SecondStore[i].ThirdStore[0].StoreCount
                                     </td>
+                                    <td>
+                                        @item.SecondStore[i].ThirdStore[0].Weight
+                                    </td>
                                     <td rowspan="@item.SecondStore[i].ThirdStore.Count">
                                         @item.SecondStore[i].StoreCount
+                                    </td>
+                                    <td rowspan="@item.SecondStore[i].ThirdStore.Count">
+                                        @item.SecondStore[i].Weight
                                     </td>
                                 </tr>
 
@@ -192,6 +228,9 @@
                                         </td>
                                         <td>
                                             @item.SecondStore[i].ThirdStore[j].StoreCount
+                                        </td>
+                                        <td>
+                                            @item.SecondStore[i].ThirdStore[j].Weight
                                         </td>
                                     </tr>
                                 }

@@ -96,6 +96,7 @@ namespace Phoebe.Business
                 {
                     var model = plans.Single(r => r.CategoryNumber == number);
                     model.StoreCount += item.StoreCount;
+                    model.Weight += model.StoreCount * item.UnitWeight / 1000;
                 }
                 else
                 {
@@ -110,7 +111,8 @@ namespace Phoebe.Business
                         SecondCategoryName = item.SecondCategory.Name,
                         ThirdCategoryID = item.ThirdCategoryID == null ? 0 : item.ThirdCategoryID.Value,
                         ThirdCategoryName = item.ThirdCategory == null ? "" : item.ThirdCategory.Name,
-                        StoreCount = item.StoreCount
+                        StoreCount = item.StoreCount,
+                        Weight = item.StoreCount * item.UnitWeight / 1000
                     };
 
                     plans.Add(model);
@@ -142,18 +144,22 @@ namespace Phoebe.Business
                         third.ThirdCategoryID = thirdId;
                         third.ThirdCategoryName = plans.First(r => r.FirstCategoryID == firstId && r.SecondCategoryID == secondId && r.ThirdCategoryID == thirdId).ThirdCategoryName;
                         third.StoreCount = plans.Single(r => r.FirstCategoryID == firstId && r.SecondCategoryID == secondId && r.ThirdCategoryID == thirdId).StoreCount;
+                        third.Weight = plans.Single(r => r.FirstCategoryID == firstId && r.SecondCategoryID == secondId && r.ThirdCategoryID == thirdId).Weight;
 
                         second.ThirdStore.Add(third);
                     }
 
                     second.StoreCount = second.ThirdStore.Sum(r => r.StoreCount);
+                    second.Weight = second.ThirdStore.Sum(r => r.Weight);
                     first.SecondStore.Add(second);
                 }
                 first.StoreCount = first.SecondStore.Sum(r => r.StoreCount);
+                first.Weight = first.SecondStore.Sum(r => r.Weight);
                 data.FirstStore.Add(first);
             }
 
             data.StoreCount = data.FirstStore.Sum(r => r.StoreCount);
+            data.Weight = data.FirstStore.Sum(r => r.Weight);
             return data;
         }
 
@@ -221,6 +227,7 @@ namespace Phoebe.Business
                 {
                     var model = plans.Single(r => r.CategoryNumber == number);
                     model.StoreCount += item.Count;
+                    model.Weight += item.Weight;
                 }
                 else
                 {
@@ -233,7 +240,8 @@ namespace Phoebe.Business
                         SecondCategoryName = item.SecondCategoryName,
                         ThirdCategoryID = item.ThirdCategoryID,
                         ThirdCategoryName = item.ThirdCategoryName,
-                        StoreCount = item.Count
+                        StoreCount = item.Count,
+                        Weight = item.Weight
                     };
 
                     plans.Add(model);
@@ -263,18 +271,22 @@ namespace Phoebe.Business
                         third.ThirdCategoryID = thirdId;
                         third.ThirdCategoryName = plans.First(r => r.FirstCategoryID == firstId && r.SecondCategoryID == secondId && r.ThirdCategoryID == thirdId).ThirdCategoryName;
                         third.StoreCount = plans.Single(r => r.FirstCategoryID == firstId && r.SecondCategoryID == secondId && r.ThirdCategoryID == thirdId).StoreCount;
+                        third.Weight = plans.Single(r => r.FirstCategoryID == firstId && r.SecondCategoryID == secondId && r.ThirdCategoryID == thirdId).Weight;
 
                         second.ThirdStore.Add(third);
                     }
 
                     second.StoreCount = second.ThirdStore.Sum(r => r.StoreCount);
+                    second.Weight = second.ThirdStore.Sum(r => r.Weight);
                     first.SecondStore.Add(second);
                 }
                 first.StoreCount = first.SecondStore.Sum(r => r.StoreCount);
+                first.Weight = first.SecondStore.Sum(r => r.Weight);
                 data.FirstStore.Add(first);
             }
 
             data.StoreCount = data.FirstStore.Sum(r => r.StoreCount);
+            data.Weight = data.FirstStore.Sum(r => r.Weight);
             return data;
         }
 

@@ -97,6 +97,12 @@ namespace Phoebe.Model
         public int Count { get; set; }
 
         /// <summary>
+        /// 重量
+        /// </summary>
+        [Display(Name = "重量(吨)")]
+        public double Weight { get; set; }
+
+        /// <summary>
         /// 入库时间
         /// </summary>
         [DataType(DataType.Date)]

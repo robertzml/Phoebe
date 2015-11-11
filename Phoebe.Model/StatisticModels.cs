@@ -77,6 +77,12 @@ namespace Phoebe.Model
         /// </summary>
         [Display(Name = "在库数量")]
         public int StoreCount { get; set; }
+
+        /// <summary>
+        /// 重量
+        /// </summary>
+        [Display(Name = "重量(吨)")]
+        public double Weight { get; set; }
     }
 
     /// <summary>
@@ -112,6 +118,12 @@ namespace Phoebe.Model
         /// </summary>
         [Display(Name = "在库数量")]
         public int StoreCount { get; set; }
+
+        /// <summary>
+        /// 重量
+        /// </summary>
+        [Display(Name = "重量(吨)")]
+        public double Weight { get; set; }
     }
 
     /// <summary>
@@ -136,6 +148,12 @@ namespace Phoebe.Model
         /// </summary>
         [Display(Name = "在库数量")]
         public int StoreCount { get; set; }
+
+        /// <summary>
+        /// 重量
+        /// </summary>
+        [Display(Name = "重量(吨)")]
+        public double Weight { get; set; }
 
         /// <summary>
         /// 二级分类
@@ -165,6 +183,12 @@ namespace Phoebe.Model
         /// </summary>
         [Display(Name = "在库数量")]
         public int StoreCount { get; set; }
+
+        /// <summary>
+        /// 重量
+        /// </summary>
+        [Display(Name = "重量(吨)")]
+        public double Weight { get; set; }
 
         /// <summary>
         /// 三级分类
@@ -200,5 +224,11 @@ namespace Phoebe.Model
         /// </summary>
         [Display(Name = "在库数量")]
         public int StoreCount { get; set; }
+
+        /// <summary>
+        /// 重量
+        /// </summary>
+        [Display(Name = "重量(吨)")]
+        public double Weight { get; set; }
     }
 }

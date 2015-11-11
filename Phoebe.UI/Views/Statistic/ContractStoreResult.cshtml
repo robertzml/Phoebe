@@ -43,6 +43,9 @@
                                 @Html.DisplayNameFor(model => model.Count)
                             </th>
                             <th>
+                                @Html.DisplayNameFor(model => model.Weight)
+                            </th>
+                            <th>
                                 @Html.DisplayNameFor(model => model.InTime)
                             </th>
                         </tr>
@@ -68,6 +71,9 @@
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Count)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Weight)
                                 </td>
                                 <td>
                                     @item.InTime.ToDateString()

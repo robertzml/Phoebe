@@ -55,6 +55,14 @@
             </tr>
             <tr>
                 <td>
+                    @Html.DisplayNameFor(model => model.ThirdCategoryID)
+                </td>
+                <td>
+                    @(Model.ThirdCategory == null ? "" : Model.ThirdCategory.Name)
+                </td>
+            </tr>
+            <tr>
+                <td>
                     总重量 (t)
                 </td>
                 <td>

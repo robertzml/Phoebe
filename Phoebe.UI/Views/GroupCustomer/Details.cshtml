@@ -173,6 +173,12 @@
                                 签订日期
                             </th>
                             <th>
+                                计费方式
+                            </th>
+                            <th>
+                                是否计时
+                            </th>
+                            <th>
                                 状态
                             </th>
                             <th>
@@ -190,6 +196,12 @@
                             </th>
                             <th>
                                 签订日期
+                            </th>
+                            <th>
+                                计费方式
+                            </th>
+                            <th>
+                                是否计时
                             </th>
                             <th>
                                 状态
@@ -211,6 +223,15 @@
                                 </td>
                                 <td>
                                     @item.SignDate.ToDateString()
+                                </td>
+                                <td>
+                                    @{
+                                        BillingType type3 = (BillingType)item.BillingType;
+                                        @type3.DisplayName()
+                                    }
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.IsTiming)
                                 </td>
                                 <td>
                                     @(((EntityStatus)item.Status).DisplayName())

@@ -37,10 +37,16 @@
                                 @Html.DisplayNameFor(model => model.SecondCategoryName)
                             </th>
                             <th>
+                                @Html.DisplayNameFor(model => model.ThirdCategoryName)
+                            </th>
+                            <th>
                                 @Html.DisplayNameFor(model => model.Type)
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.Count)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Weight)
                             </th>
                         </tr>
                     </thead>
@@ -58,11 +64,17 @@
                             <th data-filter="true">
                                 @Html.DisplayNameFor(model => model.SecondCategoryName)
                             </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.SecondCategoryName)
+                            </th>
                             <th data-filter="true">
                                 @Html.DisplayNameFor(model => model.Type)
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.Count)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Weight)
                             </th>
                         </tr>
                     </tfoot>
@@ -83,6 +95,9 @@
                                     @Html.DisplayFor(modelItem => item.SecondCategoryName)
                                 </td>
                                 <td>
+                                    @Html.DisplayFor(modelItem => item.ThirdCategoryName)
+                                </td>
+                                <td>
                                     @{
                                         StockFlowType type = (StockFlowType)item.Type;
                                         @type.DisplayName()
@@ -91,8 +106,75 @@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Count)
                                 </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Weight)
+                                </td>
                             </tr>
                         }
+                    </tbody>
+                </table>
+
+                <hr />
+                <h3>汇总</h3>
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                类型
+                            </th>
+                            <th>
+                                数量
+                            </th>
+                            <th>
+                                重量(吨)
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                入库
+                            </td>
+                            <td>
+                                @Model.Where(r => r.Type == StockFlowType.StockIn).Sum(r => r.Count)
+                            </td>
+                            <td>
+                                @Model.Where(r => r.Type == StockFlowType.StockIn).Sum(r => r.Weight)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                出库
+                            </td>
+                            <td>
+                                @Model.Where(r => r.Type == StockFlowType.StockOut).Sum(r => r.Count)
+                            </td>
+                            <td>
+                                @Model.Where(r => r.Type == StockFlowType.StockOut).Sum(r => r.Weight)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                转入
+                            </td>
+                            <td>
+                                @Model.Where(r => r.Type == StockFlowType.TransferIn).Sum(r => r.Count)
+                            </td>
+                            <td>
+                                @Model.Where(r => r.Type == StockFlowType.TransferIn).Sum(r => r.Weight)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                转出
+                            </td>
+                            <td>
+                                @Model.Where(r => r.Type == StockFlowType.TransferOut).Sum(r => r.Count)
+                            </td>
+                            <td>
+                                @Model.Where(r => r.Type == StockFlowType.TransferOut).Sum(r => r.Weight)
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
