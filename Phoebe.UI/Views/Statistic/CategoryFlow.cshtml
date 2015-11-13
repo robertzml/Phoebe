@@ -1,17 +1,21 @@
-﻿@model Phoebe.UI.Models.CategorySummaryInput
+﻿@model Phoebe.UI.Models.CategoryFlowInput
 
 @{
-    ViewBag.Title = "库存分类汇总";
+    ViewBag.Title = "库存流水汇总";
 
     AjaxOptions ajaxOpts = new AjaxOptions
     {
         UpdateTargetId = "process-result",
-        Url = Url.Action("CategorySummaryResult", "Statistic"),
+        Url = Url.Action("CategoryFlowResult", "Statistic"),
         HttpMethod = "POST",
         OnBegin = "phoebe.showLoading()",
         OnComplete = "phoebe.hideLoading()",
         OnSuccess = "phoebe.showMessage('提交成功')"
     };
+}
+
+@section styles {
+    @Styles.Render("~/Content/datepicker")
 }
 
 <!-- BEGIN PAGE HEADER-->
@@ -53,7 +57,7 @@
                 </div>
             </div>
             <div class="portlet-body">
-                @using (Ajax.BeginForm("CategorySummaryResult", new { controller = "Statistic" }, ajaxOpts, new { @class = "form-horizontal" }))
+                @using (Ajax.BeginForm("CategoryFlowResult", new { controller = "Statistic" }, ajaxOpts, new { @class = "form-horizontal" }))
                 {
                     @Html.AntiForgeryToken()
 
@@ -84,6 +88,24 @@
                                 </div>
                             </div>
                             <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">日期选择</label>
+                                    <div class="col-md-9">
+                                        <div class="input-group input-medium date-picker input-daterange" id="date-range-picker">
+                                            <input type="text" class="form-control" name="DateFrom" data-val="true" data-val-required="请选择开始日期">
+                                            <span class="input-group-addon">
+                                                至
+                                            </span>
+                                            <input type="text" class="form-control" name="DateTo" data-val="true" data-val-required="请选择结束日期">
+                                        </div>
+                                        <!-- /input-group -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
                                 <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> 确定</button>
                             </div>
                         </div>
@@ -104,11 +126,12 @@
 <!-- END PAGE CONTENT-->
 
 @section Scripts {
+    @Scripts.Render("~/bundles/datepicker")
     <script type="text/javascript">
         $(function () {
-            phoebe.leftNavActive($('#menu-category-summary-statistic'));
+            phoebe.leftNavActive($('#menu-category-flow-statistic'));
             phoebe.initDatePicker($('#date-range-picker'), false);
-          
+
             function loadSecond($dom, firstId) {
                 $.getJSON('/Category/GetSecondCategory', { firstId: firstId }, function (response) {
                     $dom.append(" <option value=''>-- 请选择 --</option>");
@@ -127,6 +150,7 @@
 
                 loadSecond($('#SecondCategoryID'), firstId);
             });
+          
         });
     </script>
 }

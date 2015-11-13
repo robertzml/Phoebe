@@ -664,6 +664,8 @@
     <Content Include="Views\Stock\HistoryProcess.cshtml" />
     <Content Include="Views\Statistic\ReceiptSummary.cshtml" />
     <Content Include="Views\Statistic\ReceiptSummaryResult.cshtml" />
+    <Content Include="Views\Statistic\CategoryFlow.cshtml" />
+    <Content Include="Views\Statistic\CategoryFlowResult.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -291,6 +291,29 @@ namespace Phoebe.Business
         }
 
         /// <summary>
+        /// 获取库存分类流水
+        /// </summary>
+        /// <param name="firstCategoryID">一类ID</param>
+        /// <param name="secondCategoryID">二类ID</param>
+        /// <param name="start">开始日期</param>
+        /// <param name="end">结束日期</param>
+        /// <returns></returns>
+        public List<CategoryFlow> GetStoreCategoryFlow(int firstCategoryID, int secondCategoryID, DateTime start, DateTime end)
+        {
+            List<CategoryFlow> data = new List<CategoryFlow>();
+
+            StoreBusiness storeBusiness = new StoreBusiness();
+
+            for (DateTime step = start; step <= end; step = step.AddDays(1))
+            {
+                var flows = storeBusiness.GetDaysFlow(firstCategoryID, secondCategoryID, step);
+                data.AddRange(flows);
+            }
+
+            return data;
+        }
+
+        /// <summary>
         /// 获取收款记录
         /// </summary>
         /// <param name="start">开始日期</param>
@@ -320,6 +343,8 @@ namespace Phoebe.Business
 
             return data;
         }
+
+
         #endregion //Method
     }
 }

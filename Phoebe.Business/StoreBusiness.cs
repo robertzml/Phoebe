@@ -539,6 +539,58 @@ namespace Phoebe.Business
 
             return data;
         }
+
+        /// <summary>
+        /// 获取分类日流水
+        /// </summary>
+        /// <param name="firstCategoryID">一类ID</param>
+        /// <param name="secondCategoryID">二类ID</param>
+        /// <param name="date">日期</param>
+        /// <returns></returns>
+        public List<CategoryFlow> GetDaysFlow(int firstCategoryID, int secondCategoryID, DateTime date)
+        {
+            List<CategoryFlow> data = new List<CategoryFlow>();
+
+            var stockIns = this.context.StockIns.Where(r => r.ConfirmTime == date && r.Cargo.FirstCategoryID == firstCategoryID && r.Cargo.SecondCategoryID == secondCategoryID);
+            if (stockIns.Count() != 0)
+            {
+                CategoryFlow stockFlow = new CategoryFlow();
+                foreach (var item in stockIns)
+                {
+                    stockFlow.FirstCategoryName = item.Cargo.FirstCategory.Name;
+                    stockFlow.SecondCategoryName = item.Cargo.SecondCategory.Name;
+                    stockFlow.ThirdCategoryName = item.Cargo.ThirdCategory == null ? "" : item.Cargo.ThirdCategory.Name;
+                    int totalCount = item.StockInDetails.Sum(r => r.Count);
+                    stockFlow.Count += totalCount;
+                    stockFlow.Weight += totalCount * item.Cargo.UnitWeight / 1000;
+                }
+
+                stockFlow.FlowDate = date;
+                stockFlow.Type = CategoryFlowType.StockIn;
+                data.Add(stockFlow);
+            }
+
+            var stockOuts = this.context.StockOuts.Where(r => r.ConfirmTime == date && r.Cargo.FirstCategoryID == firstCategoryID && r.Cargo.SecondCategoryID == secondCategoryID);
+            if (stockOuts.Count() != 0)
+            {
+                CategoryFlow stockFlow = new CategoryFlow();
+                foreach (var item in stockIns)
+                {
+                    stockFlow.FirstCategoryName = item.Cargo.FirstCategory.Name;
+                    stockFlow.SecondCategoryName = item.Cargo.SecondCategory.Name;
+                    stockFlow.ThirdCategoryName = item.Cargo.ThirdCategory == null ? "" : item.Cargo.ThirdCategory.Name;
+                    int totalCount = item.StockInDetails.Sum(r => r.Count);
+                    stockFlow.Count -= totalCount;
+                    stockFlow.Weight += totalCount * item.Cargo.UnitWeight / 1000;
+                }
+
+                stockFlow.FlowDate = date;
+                stockFlow.Type = CategoryFlowType.StockOut;
+                data.Add(stockFlow);
+            }
+
+            return data;
+        }
         #endregion //Stock
 
         #region Stock In

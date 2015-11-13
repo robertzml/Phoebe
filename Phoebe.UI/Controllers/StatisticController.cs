@@ -198,6 +198,37 @@ namespace Phoebe.UI.Controllers
         }
 
         /// <summary>
+        /// 库存流水汇总
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult CategoryFlow()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 库存流水汇总
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult CategoryFlowResult(CategoryFlowInput model)
+        {
+            if (ModelState.IsValid)
+            {
+                var data = this.statisticBusienss.GetStoreCategoryFlow(model.FirstCategoryID, model.SecondCategoryID, model.DateFrom, model.DateTo);
+
+                return View(data);
+            }
+            else
+            {
+                return View("CategoryFlow", model);
+            }
+        }
+
+        /// <summary>
         /// 收款统计
         /// </summary>
         /// <returns></returns>
