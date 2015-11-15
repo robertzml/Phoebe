@@ -89,6 +89,17 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
+                                    <label class="control-label col-md-3">三级分类</label>
+                                    <div class="col-md-8">
+                                        <select class="form-control" id="ThirdCategoryID" name="ThirdCategoryID"></select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
                                     <label class="control-label col-md-3">日期选择</label>
                                     <div class="col-md-9">
                                         <div class="input-group input-medium date-picker input-daterange" id="date-range-picker">
@@ -102,9 +113,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="row">
                             <div class="col-md-4">
                                 <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> 确定</button>
                             </div>
@@ -141,14 +149,34 @@
                 });
             }
 
+            function loadThird($dom, secondId) {
+                $.getJSON('/Category/GetThirdCategory', { secondId: secondId }, function (response) {
+                    $dom.append(" <option value=''>-- 请选择 --</option>");
+                    $.each(response, function (i, item) {
+                        $dom.append("<option value='" + item.ID + "'>" + item.Name + "</option>");
+                    });
+                });
+            }
+
             $('#FirstCategoryID').change(function () {
                 var firstId = $(this).val();
 
                 $('#SecondCategoryID').empty();
+                $('#ThirdCategoryID').empty();
                 if (firstId == '')
                     return;
 
                 loadSecond($('#SecondCategoryID'), firstId);
+            });
+
+            $('#SecondCategoryID').change(function () {
+                var secondId = $(this).val();
+
+                $('#ThirdCategoryID').empty();
+                if (secondId == '')
+                    return;
+
+                loadThird($('#ThirdCategoryID'), secondId);
             });
           
         });

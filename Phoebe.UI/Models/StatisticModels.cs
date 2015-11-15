@@ -164,6 +164,12 @@ namespace Phoebe.UI.Models
         public int SecondCategoryID { get; set; }
 
         /// <summary>
+        /// 三级分类
+        /// </summary>
+        [Display(Name = "三级分类")]
+        public int? ThirdCategoryID { get; set; }
+
+        /// <summary>
         /// 开始日期
         /// </summary>
         [Required]

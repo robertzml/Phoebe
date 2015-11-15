@@ -295,10 +295,11 @@ namespace Phoebe.Business
         /// </summary>
         /// <param name="firstCategoryID">一类ID</param>
         /// <param name="secondCategoryID">二类ID</param>
+        /// <param name="thirdCategoryID">三类ID</param>
         /// <param name="start">开始日期</param>
         /// <param name="end">结束日期</param>
         /// <returns></returns>
-        public List<CategoryFlow> GetStoreCategoryFlow(int firstCategoryID, int secondCategoryID, DateTime start, DateTime end)
+        public List<CategoryFlow> GetStoreCategoryFlow(int firstCategoryID, int secondCategoryID, int? thirdCategoryID, DateTime start, DateTime end)
         {
             List<CategoryFlow> data = new List<CategoryFlow>();
 
@@ -306,7 +307,7 @@ namespace Phoebe.Business
 
             for (DateTime step = start; step <= end; step = step.AddDays(1))
             {
-                var flows = storeBusiness.GetDaysFlow(firstCategoryID, secondCategoryID, step);
+                var flows = storeBusiness.GetDaysFlow(firstCategoryID, secondCategoryID, thirdCategoryID, step);
                 data.AddRange(flows);
             }
 

@@ -218,7 +218,7 @@ namespace Phoebe.UI.Controllers
         {
             if (ModelState.IsValid)
             {
-                var data = this.statisticBusienss.GetStoreCategoryFlow(model.FirstCategoryID, model.SecondCategoryID, model.DateFrom, model.DateTo);
+                var data = this.statisticBusienss.GetStoreCategoryFlow(model.FirstCategoryID, model.SecondCategoryID, model.ThirdCategoryID, model.DateFrom, model.DateTo);
 
                 return View(data);
             }

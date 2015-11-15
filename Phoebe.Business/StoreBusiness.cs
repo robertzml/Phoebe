@@ -545,13 +545,16 @@ namespace Phoebe.Business
         /// </summary>
         /// <param name="firstCategoryID">一类ID</param>
         /// <param name="secondCategoryID">二类ID</param>
+        /// <param name="thirdCategoryID">三类ID</param>
         /// <param name="date">日期</param>
         /// <returns></returns>
-        public List<CategoryFlow> GetDaysFlow(int firstCategoryID, int secondCategoryID, DateTime date)
+        public List<CategoryFlow> GetDaysFlow(int firstCategoryID, int secondCategoryID, int? thirdCategoryID, DateTime date)
         {
             List<CategoryFlow> data = new List<CategoryFlow>();
 
             var stockIns = this.context.StockIns.Where(r => r.ConfirmTime == date && r.Cargo.FirstCategoryID == firstCategoryID && r.Cargo.SecondCategoryID == secondCategoryID);
+            if (thirdCategoryID != null)
+                stockIns = stockIns.Where(r => r.Cargo.ThirdCategoryID == thirdCategoryID.Value);
             if (stockIns.Count() != 0)
             {
                 CategoryFlow stockFlow = new CategoryFlow();
@@ -571,6 +574,8 @@ namespace Phoebe.Business
             }
 
             var stockOuts = this.context.StockOuts.Where(r => r.ConfirmTime == date && r.Cargo.FirstCategoryID == firstCategoryID && r.Cargo.SecondCategoryID == secondCategoryID);
+            if (thirdCategoryID != null)
+                stockOuts = stockOuts.Where(r => r.Cargo.ThirdCategoryID == thirdCategoryID.Value);
             if (stockOuts.Count() != 0)
             {
                 CategoryFlow stockFlow = new CategoryFlow();
