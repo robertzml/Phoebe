@@ -31,5 +31,10 @@ namespace Phoebe.UI.Controllers
 
             return View();
         }
+
+        public ActionResult PrintDesign()
+        {
+            return View();
+        }
     }
 }

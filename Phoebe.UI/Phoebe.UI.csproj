@@ -538,6 +538,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\LodopFuncs.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\phoebe.js" />
     <Content Include="Scripts\respond.js" />
@@ -666,6 +667,7 @@
     <Content Include="Views\Statistic\ReceiptSummaryResult.cshtml" />
     <Content Include="Views\Statistic\CategoryFlow.cshtml" />
     <Content Include="Views\Statistic\CategoryFlowResult.cshtml" />
+    <Content Include="Views\Home\PrintDesign.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

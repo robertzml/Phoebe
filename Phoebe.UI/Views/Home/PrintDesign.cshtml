@@ -1,0 +1,69 @@
+﻿
+@{
+    ViewBag.Title = "打印设计";
+}
+
+<!-- BEGIN PAGE HEADER-->
+<h3 class="page-title">
+    @ViewBag.Title
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index", "Home")">主页</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#">Page Layouts</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#">Blank Page</a>
+        </li>
+    </ul>
+</div>
+<!-- END PAGE HEADER-->
+<!-- BEGIN PAGE CONTENT-->
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet box blue">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-sliders"></i>&nbsp;信息选择
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse">
+                    </a>
+                    <a href="javascript:;" class="reload">
+                    </a>
+                    <a href="javascript:;" class="remove">
+                    </a>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <a href="#" class="btn btn-info btn-sm" role="button" id="print-design"><i class="fa fa-check-circle"></i>&nbsp;打印设计</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END PAGE CONTENT-->
+
+@section Scripts {
+    <script type="text/javascript" src="~/Scripts/LodopFuncs.js"></script>
+    <script type="text/javascript">
+        $(function () {
+
+            var LODOP = getLodop();
+
+            function Design1() {
+                LODOP.PRINT_DESIGN();
+            };
+
+
+            $('a#print-design').click(function () {
+                Design1();
+            });
+        });
+    </script>
+}
