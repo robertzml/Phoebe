@@ -12,22 +12,16 @@ namespace Phoebe.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class UserGroup
+    public partial class Customer
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public UserGroup()
-        {
-            this.Users = new HashSet<User>();
-        }
-    
         public int ID { get; set; }
         public string Name { get; set; }
-        public string Title { get; set; }
-        public int Rank { get; set; }
+        public string Address { get; set; }
+        public string Telephone { get; set; }
+        public string Contact { get; set; }
+        public string ContactTelephone { get; set; }
+        public int Type { get; set; }
         public string Remark { get; set; }
         public int Status { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<User> Users { get; set; }
     }
 }

@@ -25,14 +25,13 @@ namespace Phoebe.Business
         #endregion //Constructor
 
         #region Method
-        #region GroupCustomer
         /// <summary>
-        /// 获取所有团体客户
+        /// 获取所有客户
         /// </summary>
         /// <returns></returns>
-        public List<GroupCustomer> GetGroupCustomer()
+        public List<Customer> Get()
         {
-            return this.context.GroupCustomers.ToList();
+            return this.context.Customers.ToList();
         }
 
         /// <summary>
@@ -40,21 +39,21 @@ namespace Phoebe.Business
         /// </summary>
         /// <param name="id">客户ID</param>
         /// <returns></returns>
-        public GroupCustomer GetGroupCustomer(int id)
+        public Customer Get(int id)
         {
-            return this.context.GroupCustomers.SingleOrDefault(r => r.ID == id);
+            return this.context.Customers.SingleOrDefault(r => r.ID == id);
         }
 
         /// <summary>
-        /// 添加团体客户
+        /// 添加客户
         /// </summary>
-        /// <param name="data">团体客户数据</param>
+        /// <param name="data">客户数据</param>
         /// <returns></returns>
-        public ErrorCode CreateGroupCustomer(GroupCustomer data)
+        public ErrorCode Create(Customer data)
         {
             try
             {
-                this.context.GroupCustomers.Add(data);
+                this.context.Customers.Add(data);
                 this.context.SaveChanges();
             }
             catch (Exception)
@@ -66,73 +65,11 @@ namespace Phoebe.Business
         }
 
         /// <summary>
-        /// 编辑团体客户
+        /// 编辑客户
         /// </summary>
-        /// <param name="data"></param>
+        /// <param name="data">客户数据</param>
         /// <returns></returns>
-        public ErrorCode EditGroupCustomer(GroupCustomer data)
-        {
-            try
-            {
-                this.context.Entry(data).State = EntityState.Modified;
-                this.context.SaveChanges();
-            }
-            catch(Exception)
-            {
-                return ErrorCode.Exception;
-            }
-
-            return ErrorCode.Success;
-        }
-        #endregion //GroupCustomer
-
-
-        #region ScatterCustomer
-        /// <summary>
-        /// 获取所有零散客户
-        /// </summary>
-        /// <returns></returns>
-        public List<ScatterCustomer> GetScatterCustomer()
-        {
-            return this.context.ScatterCustomers.ToList();
-        }
-
-        /// <summary>
-        /// 获取零散客户
-        /// </summary>
-        /// <param name="id">客户ID</param>
-        /// <returns></returns>
-        public ScatterCustomer GetScatterCustomer(int id)
-        {
-            return this.context.ScatterCustomers.SingleOrDefault(r => r.ID == id);
-        }
-
-        /// <summary>
-        /// 添加零散客户
-        /// </summary>
-        /// <param name="data">零散客户数据</param>
-        /// <returns></returns>
-        public ErrorCode CreateScatterCustomer(ScatterCustomer data)
-        {
-            try
-            {
-                this.context.ScatterCustomers.Add(data);
-                this.context.SaveChanges();
-            }
-            catch (Exception)
-            {
-                return ErrorCode.Exception;
-            }
-
-            return ErrorCode.Success;
-        }
-
-        /// <summary>
-        /// 编辑零散客户
-        /// </summary>
-        /// <param name="data">零散客户数据</param>
-        /// <returns></returns>
-        public ErrorCode EditScatterCustomer(ScatterCustomer data)
+        public ErrorCode Edit(Customer data)
         {
             try
             {
@@ -146,7 +83,7 @@ namespace Phoebe.Business
 
             return ErrorCode.Success;
         }
-        #endregion //ScatterCustomer
+
 
         /// <summary>
         /// 保存更新

@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Phoebe.UI", "Phoebe.UI\Phoebe.UI.csproj", "{269518C9-E2BE-42AC-97BF-B88A76428586}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Phoebe.Model", "Phoebe.Model\Phoebe.Model.csproj", "{5D9A347E-E452-4116-8DA3-C04E5A1ADAF2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Phoebe.Common", "Phoebe.Common\Phoebe.Common.csproj", "{52616E77-9DF3-41E5-B004-F8EA5BE4959A}"
@@ -19,10 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{269518C9-E2BE-42AC-97BF-B88A76428586}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{269518C9-E2BE-42AC-97BF-B88A76428586}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{269518C9-E2BE-42AC-97BF-B88A76428586}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{269518C9-E2BE-42AC-97BF-B88A76428586}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5D9A347E-E452-4116-8DA3-C04E5A1ADAF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5D9A347E-E452-4116-8DA3-C04E5A1ADAF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D9A347E-E452-4116-8DA3-C04E5A1ADAF2}.Release|Any CPU.ActiveCfg = Release|Any CPU

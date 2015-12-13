@@ -31,6 +31,7 @@
             this.mainMenu = new System.Windows.Forms.MenuStrip();
             this.menuCustomer = new System.Windows.Forms.ToolStripMenuItem();
             this.menuCustomerList = new System.Windows.Forms.ToolStripMenuItem();
+            this.mainStauts = new System.Windows.Forms.StatusStrip();
             this.mainMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -40,7 +41,7 @@
             this.menuCustomer});
             this.mainMenu.Location = new System.Drawing.Point(0, 0);
             this.mainMenu.Name = "mainMenu";
-            this.mainMenu.Size = new System.Drawing.Size(854, 25);
+            this.mainMenu.Size = new System.Drawing.Size(949, 25);
             this.mainMenu.TabIndex = 0;
             this.mainMenu.Text = "menuStrip1";
             // 
@@ -55,18 +56,30 @@
             // menuCustomerList
             // 
             this.menuCustomerList.Name = "menuCustomerList";
-            this.menuCustomerList.Size = new System.Drawing.Size(152, 22);
+            this.menuCustomerList.Size = new System.Drawing.Size(124, 22);
             this.menuCustomerList.Text = "客户列表";
+            this.menuCustomerList.Click += new System.EventHandler(this.menuCustomerList_Click);
+            // 
+            // mainStauts
+            // 
+            this.mainStauts.Location = new System.Drawing.Point(0, 523);
+            this.mainStauts.Name = "mainStauts";
+            this.mainStauts.Size = new System.Drawing.Size(949, 22);
+            this.mainStauts.TabIndex = 2;
+            this.mainStauts.Text = "statusStrip1";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(854, 506);
+            this.ClientSize = new System.Drawing.Size(949, 545);
+            this.Controls.Add(this.mainStauts);
             this.Controls.Add(this.mainMenu);
+            this.IsMdiContainer = true;
             this.MainMenuStrip = this.mainMenu;
             this.Name = "MainForm";
             this.Text = "华润冷链管理系统";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.mainMenu.ResumeLayout(false);
             this.mainMenu.PerformLayout();
             this.ResumeLayout(false);
@@ -79,6 +92,7 @@
         private System.Windows.Forms.MenuStrip mainMenu;
         private System.Windows.Forms.ToolStripMenuItem menuCustomer;
         private System.Windows.Forms.ToolStripMenuItem menuCustomerList;
+        private System.Windows.Forms.StatusStrip mainStauts;
     }
 }
 
