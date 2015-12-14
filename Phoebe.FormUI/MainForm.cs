@@ -10,6 +10,9 @@ using System.Windows.Forms;
 
 namespace Phoebe.FormUI
 {
+    /// <summary>
+    /// 主窗体
+    /// </summary>
     public partial class MainForm : Form
     {
         #region Contructor
@@ -31,7 +34,19 @@ namespace Phoebe.FormUI
             form.WindowState = FormWindowState.Maximized;
             form.Show();
         }
+
+        /// <summary>
+        /// 客户 - 添加客户
+        /// </summary>
+        private void menuCustomerAdd_Click(object sender, EventArgs e)
+        {
+            CustomerAddForm form = new CustomerAddForm();
+            form.ShowDialog();
+        }
         #endregion //Menu Event
+
         #endregion //Event
+
+
     }
 }

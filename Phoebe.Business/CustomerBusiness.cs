@@ -53,6 +53,8 @@ namespace Phoebe.Business
         {
             try
             {
+                data.Status = 0;
+
                 this.context.Customers.Add(data);
                 this.context.SaveChanges();
             }

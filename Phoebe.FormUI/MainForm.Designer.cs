@@ -32,6 +32,7 @@
             this.menuCustomer = new System.Windows.Forms.ToolStripMenuItem();
             this.menuCustomerList = new System.Windows.Forms.ToolStripMenuItem();
             this.mainStauts = new System.Windows.Forms.StatusStrip();
+            this.menuCustomerAdd = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -48,7 +49,8 @@
             // menuCustomer
             // 
             this.menuCustomer.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuCustomerList});
+            this.menuCustomerList,
+            this.menuCustomerAdd});
             this.menuCustomer.Name = "menuCustomer";
             this.menuCustomer.Size = new System.Drawing.Size(68, 21);
             this.menuCustomer.Text = "客户管理";
@@ -56,7 +58,7 @@
             // menuCustomerList
             // 
             this.menuCustomerList.Name = "menuCustomerList";
-            this.menuCustomerList.Size = new System.Drawing.Size(124, 22);
+            this.menuCustomerList.Size = new System.Drawing.Size(152, 22);
             this.menuCustomerList.Text = "客户列表";
             this.menuCustomerList.Click += new System.EventHandler(this.menuCustomerList_Click);
             // 
@@ -67,6 +69,13 @@
             this.mainStauts.Size = new System.Drawing.Size(949, 22);
             this.mainStauts.TabIndex = 2;
             this.mainStauts.Text = "statusStrip1";
+            // 
+            // menuCustomerAdd
+            // 
+            this.menuCustomerAdd.Name = "menuCustomerAdd";
+            this.menuCustomerAdd.Size = new System.Drawing.Size(152, 22);
+            this.menuCustomerAdd.Text = "添加客户";
+            this.menuCustomerAdd.Click += new System.EventHandler(this.menuCustomerAdd_Click);
             // 
             // MainForm
             // 
@@ -93,6 +102,7 @@
         private System.Windows.Forms.ToolStripMenuItem menuCustomer;
         private System.Windows.Forms.ToolStripMenuItem menuCustomerList;
         private System.Windows.Forms.StatusStrip mainStauts;
+        private System.Windows.Forms.ToolStripMenuItem menuCustomerAdd;
     }
 }
 
