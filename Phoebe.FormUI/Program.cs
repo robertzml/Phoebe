@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Phoebe.Model;
 
 namespace Phoebe.FormUI
 {
@@ -16,7 +17,13 @@ namespace Phoebe.FormUI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+
+            LoginForm login = new LoginForm();
+            if (login.ShowDialog() == DialogResult.OK)
+            {
+                User user = login.User;
+                Application.Run(new MainForm(user));
+            }
         }
     }
 }

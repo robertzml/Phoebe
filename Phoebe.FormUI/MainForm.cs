@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Phoebe.Model;
 
 namespace Phoebe.FormUI
 {
@@ -15,14 +16,34 @@ namespace Phoebe.FormUI
     /// </summary>
     public partial class MainForm : Form
     {
+        #region Field
+        private User currentUser;
+        #endregion //Field
+
         #region Contructor
-        public MainForm()
+        public MainForm(User user)
         {
             InitializeComponent();
+
+            this.currentUser = user;
         }
         #endregion //Constructor
 
+        #region Function
+        private void UpdateStatus()
+        {
+            this.statusUser.Text = this.currentUser.Name;
+        }
+        #endregion //Function
+
         #region Event
+        #region Form Event
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            UpdateStatus();
+        }
+        #endregion //Form Event
+
         #region Menu Event
         /// <summary>
         /// 客户 - 客户列表
@@ -43,10 +64,11 @@ namespace Phoebe.FormUI
             CustomerAddForm form = new CustomerAddForm();
             form.ShowDialog();
         }
+
         #endregion //Menu Event
 
         #endregion //Event
 
-
+       
     }
 }

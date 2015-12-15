@@ -6,6 +6,9 @@
     <edmx:Diagrams>
       <Diagram DiagramId="fea8aa1d5a594b8b811afd6a99555dfd" Name="Diagram1" ShowGrid="true" ZoomLevel="94">
         <EntityTypeShape EntityType="PhoebeModel.Customer" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="PhoebeModel.User" Width="1.5" PointX="13.75" PointY="5.375" />
+        <EntityTypeShape EntityType="PhoebeModel.UserGroup" Width="1.5" PointX="11.5" PointY="5.375" />
+        <AssociationConnector Association="PhoebeModel.FK_User_UserGroup" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

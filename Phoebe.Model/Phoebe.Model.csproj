@@ -101,6 +101,12 @@
     <Compile Include="StatisticModels.cs" />
     <Compile Include="StockFlow.cs" />
     <Compile Include="Storage.cs" />
+    <Compile Include="User.cs">
+      <DependentUpon>PhoebeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserGroup.cs">
+      <DependentUpon>PhoebeModel.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="PhoebeModel.edmx">
