@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Phoebe.Business;
+using Phoebe.Model;
 
 namespace Phoebe.FormUI
 {
@@ -16,6 +17,12 @@ namespace Phoebe.FormUI
     /// </summary>
     public partial class CustomerForm : Form
     {
+        #region Field
+        private CustomerBusiness customerBusiness;
+
+        private List<Customer> customerData;
+        #endregion //Field
+
         #region Constructor
         public CustomerForm()
         {
@@ -23,12 +30,39 @@ namespace Phoebe.FormUI
         }
         #endregion //Constructor
 
+        #region Function
+        private void InitControls()
+        {
+            //this.dataGridViewColumnType.DataSource = Enum.GetValues(typeof(CustomerType));
+            this.customerData = this.customerBusiness.Get();
+            this.customerBindingSource.DataSource = this.customerData;
+
+            this.comboBoxType.SelectedIndex = 0;
+        }
+        #endregion //Function
+
         #region Event
         private void CustomerForm_Load(object sender, EventArgs e)
         {
-            CustomerBusiness business = new CustomerBusiness();
+            this.customerBusiness  = new CustomerBusiness();
 
-            this.customerBindingSource.DataSource = business.Get();
+            InitControls();
+        }
+
+        /// <summary>
+        /// 查询
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonQuery_Click(object sender, EventArgs e)
+        {
+            var data = this.customerData;
+            if (this.comboBoxType.SelectedIndex != 0)
+            {
+                data = data.Where(r => r.Type == this.comboBoxType.SelectedIndex).ToList();
+            }
+
+            this.customerBindingSource.DataSource = data;
         }
         #endregion //Event
     }
