@@ -21,6 +21,11 @@ namespace Phoebe.Business
         /// 用户注册初始化时间
         /// </summary>
         private DateTime initialTime = new DateTime(2015, 1, 1);
+
+        /// <summary>
+        /// Root用户组ID
+        /// </summary>
+        private static int rootGroupId = 1;
         #endregion //Field
 
         #region Constructor
@@ -350,5 +355,15 @@ namespace Phoebe.Business
             return ErrorCode.Success;
         }
         #endregion //Method
+
+        #region Property
+        public static int RootGroupID
+        {
+            get
+            {
+                return rootGroupId;
+            }
+        }
+        #endregion //Property
     }
 }

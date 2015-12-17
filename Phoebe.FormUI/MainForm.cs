@@ -65,10 +65,29 @@ namespace Phoebe.FormUI
             form.ShowDialog();
         }
 
+        /// <summary>
+        /// 用户 - 用户组列表
+        /// </summary>
+        private void menuUserGroupList_Click(object sender, EventArgs e)
+        {
+            UserGroupForm form = new UserGroupForm(this.currentUser);
+            form.MdiParent = this;
+            form.WindowState = FormWindowState.Maximized;
+            form.Show();
+        }
+
+        /// <summary>
+        /// 用户 - 修改密码
+        /// </summary>
+        private void menuChangePassword_Click(object sender, EventArgs e)
+        {
+            ChangePasswordForm form = new ChangePasswordForm(this.currentUser);
+            form.ShowDialog();
+        }
         #endregion //Menu Event
 
         #endregion //Event
 
-       
+
     }
 }

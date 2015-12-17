@@ -32,12 +32,12 @@
             this.menuCustomer = new System.Windows.Forms.ToolStripMenuItem();
             this.menuCustomerList = new System.Windows.Forms.ToolStripMenuItem();
             this.menuCustomerAdd = new System.Windows.Forms.ToolStripMenuItem();
-            this.mainStauts = new System.Windows.Forms.StatusStrip();
             this.menuUser = new System.Windows.Forms.ToolStripMenuItem();
             this.menuUserList = new System.Windows.Forms.ToolStripMenuItem();
             this.menuUserGroupList = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuChangePassword = new System.Windows.Forms.ToolStripMenuItem();
+            this.mainStauts = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusUser = new System.Windows.Forms.ToolStripStatusLabel();
             this.mainMenu.SuspendLayout();
@@ -67,27 +67,16 @@
             // menuCustomerList
             // 
             this.menuCustomerList.Name = "menuCustomerList";
-            this.menuCustomerList.Size = new System.Drawing.Size(152, 22);
+            this.menuCustomerList.Size = new System.Drawing.Size(124, 22);
             this.menuCustomerList.Text = "客户列表";
             this.menuCustomerList.Click += new System.EventHandler(this.menuCustomerList_Click);
             // 
             // menuCustomerAdd
             // 
             this.menuCustomerAdd.Name = "menuCustomerAdd";
-            this.menuCustomerAdd.Size = new System.Drawing.Size(152, 22);
+            this.menuCustomerAdd.Size = new System.Drawing.Size(124, 22);
             this.menuCustomerAdd.Text = "添加客户";
             this.menuCustomerAdd.Click += new System.EventHandler(this.menuCustomerAdd_Click);
-            // 
-            // mainStauts
-            // 
-            this.mainStauts.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1,
-            this.statusUser});
-            this.mainStauts.Location = new System.Drawing.Point(0, 519);
-            this.mainStauts.Name = "mainStauts";
-            this.mainStauts.Size = new System.Drawing.Size(949, 26);
-            this.mainStauts.TabIndex = 2;
-            this.mainStauts.Text = "statusStrip1";
             // 
             // menuUser
             // 
@@ -111,6 +100,7 @@
             this.menuUserGroupList.Name = "menuUserGroupList";
             this.menuUserGroupList.Size = new System.Drawing.Size(152, 22);
             this.menuUserGroupList.Text = "用户组列表";
+            this.menuUserGroupList.Click += new System.EventHandler(this.menuUserGroupList_Click);
             // 
             // toolStripSeparator1
             // 
@@ -122,6 +112,18 @@
             this.menuChangePassword.Name = "menuChangePassword";
             this.menuChangePassword.Size = new System.Drawing.Size(152, 22);
             this.menuChangePassword.Text = "修改密码";
+            this.menuChangePassword.Click += new System.EventHandler(this.menuChangePassword_Click);
+            // 
+            // mainStauts
+            // 
+            this.mainStauts.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1,
+            this.statusUser});
+            this.mainStauts.Location = new System.Drawing.Point(0, 519);
+            this.mainStauts.Name = "mainStauts";
+            this.mainStauts.Size = new System.Drawing.Size(949, 26);
+            this.mainStauts.TabIndex = 2;
+            this.mainStauts.Text = "statusStrip1";
             // 
             // toolStripStatusLabel1
             // 
