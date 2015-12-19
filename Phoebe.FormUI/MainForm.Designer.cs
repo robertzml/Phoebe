@@ -94,6 +94,7 @@
             this.menuUserList.Name = "menuUserList";
             this.menuUserList.Size = new System.Drawing.Size(152, 22);
             this.menuUserList.Text = "用户列表";
+            this.menuUserList.Click += new System.EventHandler(this.menuUserList_Click);
             // 
             // menuUserGroupList
             // 
