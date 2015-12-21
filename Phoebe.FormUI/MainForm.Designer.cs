@@ -32,6 +32,8 @@
             this.menuCustomer = new System.Windows.Forms.ToolStripMenuItem();
             this.menuCustomerList = new System.Windows.Forms.ToolStripMenuItem();
             this.menuCustomerAdd = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuWarehouse = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuWarehouseList = new System.Windows.Forms.ToolStripMenuItem();
             this.menuUser = new System.Windows.Forms.ToolStripMenuItem();
             this.menuUserList = new System.Windows.Forms.ToolStripMenuItem();
             this.menuUserGroupList = new System.Windows.Forms.ToolStripMenuItem();
@@ -48,6 +50,7 @@
             // 
             this.mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuCustomer,
+            this.menuWarehouse,
             this.menuUser});
             this.mainMenu.Location = new System.Drawing.Point(0, 0);
             this.mainMenu.Name = "mainMenu";
@@ -78,6 +81,21 @@
             this.menuCustomerAdd.Text = "添加客户";
             this.menuCustomerAdd.Click += new System.EventHandler(this.menuCustomerAdd_Click);
             // 
+            // menuWarehouse
+            // 
+            this.menuWarehouse.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuWarehouseList});
+            this.menuWarehouse.Name = "menuWarehouse";
+            this.menuWarehouse.Size = new System.Drawing.Size(68, 21);
+            this.menuWarehouse.Text = "仓库管理";
+            // 
+            // menuWarehouseList
+            // 
+            this.menuWarehouseList.Name = "menuWarehouseList";
+            this.menuWarehouseList.Size = new System.Drawing.Size(152, 22);
+            this.menuWarehouseList.Text = "仓库列表";
+            this.menuWarehouseList.Click += new System.EventHandler(this.menuWarehouseList_Click);
+            // 
             // menuUser
             // 
             this.menuUser.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -92,26 +110,26 @@
             // menuUserList
             // 
             this.menuUserList.Name = "menuUserList";
-            this.menuUserList.Size = new System.Drawing.Size(152, 22);
+            this.menuUserList.Size = new System.Drawing.Size(136, 22);
             this.menuUserList.Text = "用户列表";
             this.menuUserList.Click += new System.EventHandler(this.menuUserList_Click);
             // 
             // menuUserGroupList
             // 
             this.menuUserGroupList.Name = "menuUserGroupList";
-            this.menuUserGroupList.Size = new System.Drawing.Size(152, 22);
+            this.menuUserGroupList.Size = new System.Drawing.Size(136, 22);
             this.menuUserGroupList.Text = "用户组列表";
             this.menuUserGroupList.Click += new System.EventHandler(this.menuUserGroupList_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(133, 6);
             // 
             // menuChangePassword
             // 
             this.menuChangePassword.Name = "menuChangePassword";
-            this.menuChangePassword.Size = new System.Drawing.Size(152, 22);
+            this.menuChangePassword.Size = new System.Drawing.Size(136, 22);
             this.menuChangePassword.Text = "修改密码";
             this.menuChangePassword.Click += new System.EventHandler(this.menuChangePassword_Click);
             // 
@@ -180,6 +198,8 @@
         private System.Windows.Forms.ToolStripMenuItem menuChangePassword;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel statusUser;
+        private System.Windows.Forms.ToolStripMenuItem menuWarehouse;
+        private System.Windows.Forms.ToolStripMenuItem menuWarehouseList;
     }
 }
 

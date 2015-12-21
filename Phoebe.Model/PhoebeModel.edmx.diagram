@@ -9,6 +9,8 @@
         <EntityTypeShape EntityType="PhoebeModel.User" Width="1.5" PointX="13.75" PointY="5.375" />
         <EntityTypeShape EntityType="PhoebeModel.UserGroup" Width="1.5" PointX="11.5" PointY="5.375" />
         <AssociationConnector Association="PhoebeModel.FK_User_UserGroup" />
+        <EntityTypeShape EntityType="PhoebeModel.Warehouse" Width="1.5" PointX="4.5" PointY="0.75" />
+        <AssociationConnector Association="PhoebeModel.FK_Warehouse_Warehouse" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -107,6 +107,9 @@
     <Compile Include="UserGroup.cs">
       <DependentUpon>PhoebeModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Warehouse.cs">
+      <DependentUpon>PhoebeModel.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="PhoebeModel.edmx">

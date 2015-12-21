@@ -66,6 +66,17 @@ namespace Phoebe.FormUI
         }
 
         /// <summary>
+        /// 仓库 - 仓库列表
+        /// </summary>
+        private void menuWarehouseList_Click(object sender, EventArgs e)
+        {
+            WarehouseForm form = new WarehouseForm();
+            form.MdiParent = this;
+            form.WindowState = FormWindowState.Maximized;
+            form.Show();
+        }
+
+        /// <summary>
         /// 用户 - 用户列表
         /// </summary>
         private void menuUserList_Click(object sender, EventArgs e)
@@ -95,11 +106,8 @@ namespace Phoebe.FormUI
             ChangePasswordForm form = new ChangePasswordForm(this.currentUser);
             form.ShowDialog();
         }
-
         #endregion //Menu Event
 
         #endregion //Event
-
-      
     }
 }
