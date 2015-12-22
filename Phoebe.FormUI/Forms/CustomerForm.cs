@@ -31,12 +31,15 @@ namespace Phoebe.FormUI
         #endregion //Constructor
 
         #region Function
-        private void InitControls()
+        private void InitData()
         {
-            //this.dataGridViewColumnType.DataSource = Enum.GetValues(typeof(CustomerType));
+            this.customerBusiness = new CustomerBusiness();
             this.customerData = this.customerBusiness.Get();
-            this.customerBindingSource.DataSource = this.customerData;
+        }
 
+        private void InitControl()
+        {
+            this.customerBindingSource.DataSource = this.customerData;
             this.comboBoxType.SelectedIndex = 0;
         }
         #endregion //Function
@@ -44,9 +47,8 @@ namespace Phoebe.FormUI
         #region Event
         private void CustomerForm_Load(object sender, EventArgs e)
         {
-            this.customerBusiness  = new CustomerBusiness();
-
-            InitControls();
+            InitData();
+            InitControl();
         }
 
         /// <summary>

@@ -7,14 +7,66 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Phoebe.Business;
+using Phoebe.Common;
+using Phoebe.Model;
 
 namespace Phoebe.FormUI
 {
     public partial class ContractForm : Form
     {
+        #region Field
+        private ContractBusiness contractBusiness;
+
+        private List<Contract> contractData;
+        #endregion//Field
+
+        #region Constructor
         public ContractForm()
         {
             InitializeComponent();
         }
+        #endregion //Constructor
+
+        #region Function
+        private void InitData()
+        {
+            this.contractBusiness = new ContractBusiness();
+            this.contractData = this.contractBusiness.Get();
+        }
+
+        private void InitControl()
+        {
+            this.contractBindingSource.DataSource = this.contractData;
+        }
+        #endregion //Function
+
+        #region Event
+        private void ContractForm_Load(object sender, EventArgs e)
+        {
+            InitData();
+            InitControl();
+        }
+
+        private void contractDataGridView_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
+            if (e.RowIndex < this.contractBindingSource.Count)
+            {
+                var contract = this.contractBindingSource[e.RowIndex] as Contract;
+
+                var grid = this.contractDataGridView;
+                if (contract.Customer != null)
+                {
+                    grid.Rows[e.RowIndex].Cells[this.columnCustomerName.Index].Value = contract.Customer.Name;
+                }
+                grid.Rows[e.RowIndex].Cells[this.columnBillingType.Index].Value = ((BillingType)contract.BillingType).DisplayName();
+
+                if (contract.User != null)
+                {
+                    grid.Rows[e.RowIndex].Cells[this.columnUser.Index].Value = contract.User.Name;
+                }
+            }
+        }
+        #endregion //Event
     }
 }

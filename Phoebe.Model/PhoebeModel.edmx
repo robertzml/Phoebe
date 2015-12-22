@@ -5,6 +5,23 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="PhoebeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Contract">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Number" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="CustomerID" Type="int" Nullable="false" />
+          <Property Name="SignDate" Type="datetime" Nullable="false" />
+          <Property Name="CloseDate" Type="datetime" />
+          <Property Name="BillingType" Type="int" Nullable="false" />
+          <Property Name="IsTiming" Type="bit" Nullable="false" />
+          <Property Name="CertificateNumber" Type="nchar" MaxLength="10" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="500" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Customer">
           <Key>
             <PropertyRef Name="ID" />
@@ -16,6 +33,35 @@
           <Property Name="Contact" Type="nvarchar" MaxLength="50" />
           <Property Name="ContactTelephone" Type="nvarchar" MaxLength="50" />
           <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="500" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FirstCategory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="500" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SecondCategory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FirstCategoryID" Type="int" Nullable="false" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="500" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ThirdCategory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SecondCategoryID" Type="int" Nullable="false" />
           <Property Name="Remark" Type="nvarchar" MaxLength="500" />
           <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
@@ -56,6 +102,54 @@
           <Property Name="Remark" Type="nvarchar" MaxLength="500" />
           <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Contract_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Contract">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contract_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Contract">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SecondCategory_FirstCategory">
+          <End Role="FirstCategory" Type="Self.FirstCategory" Multiplicity="1" />
+          <End Role="SecondCategory" Type="Self.SecondCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FirstCategory">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SecondCategory">
+              <PropertyRef Name="FirstCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ThirdCategory_SecondCategory">
+          <End Role="SecondCategory" Type="Self.SecondCategory" Multiplicity="1" />
+          <End Role="ThirdCategory" Type="Self.ThirdCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SecondCategory">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ThirdCategory">
+              <PropertyRef Name="SecondCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_User_UserGroup">
           <End Role="UserGroup" Type="Self.UserGroup" Multiplicity="1" />
           <End Role="User" Type="Self.User" Multiplicity="*" />
@@ -81,10 +175,30 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="PhoebeModelStoreContainer">
+          <EntitySet Name="Contract" EntityType="Self.Contract" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FirstCategory" EntityType="Self.FirstCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SecondCategory" EntityType="Self.SecondCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ThirdCategory" EntityType="Self.ThirdCategory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserGroup" EntityType="Self.UserGroup" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Warehouse" EntityType="Self.Warehouse" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Contract_Customer" Association="Self.FK_Contract_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Contract" EntitySet="Contract" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contract_User" Association="Self.FK_Contract_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Contract" EntitySet="Contract" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SecondCategory_FirstCategory" Association="Self.FK_SecondCategory_FirstCategory">
+            <End Role="FirstCategory" EntitySet="FirstCategory" />
+            <End Role="SecondCategory" EntitySet="SecondCategory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ThirdCategory_SecondCategory" Association="Self.FK_ThirdCategory_SecondCategory">
+            <End Role="SecondCategory" EntitySet="SecondCategory" />
+            <End Role="ThirdCategory" EntitySet="ThirdCategory" />
+          </AssociationSet>
           <AssociationSet Name="FK_User_UserGroup" Association="Self.FK_User_UserGroup">
             <End Role="UserGroup" EntitySet="UserGroup" />
             <End Role="User" EntitySet="User" />
@@ -111,6 +225,26 @@
             <End Role="Warehouse" EntitySet="Warehouses" />
             <End Role="Warehouse1" EntitySet="Warehouses" />
           </AssociationSet>
+          <EntitySet Name="Contracts" EntityType="PhoebeModel.Contract" />
+          <AssociationSet Name="FK_Contract_Customer" Association="PhoebeModel.FK_Contract_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Contract" EntitySet="Contracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contract_User" Association="PhoebeModel.FK_Contract_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Contract" EntitySet="Contracts" />
+          </AssociationSet>
+          <EntitySet Name="FirstCategories" EntityType="PhoebeModel.FirstCategory" />
+          <EntitySet Name="SecondCategories" EntityType="PhoebeModel.SecondCategory" />
+          <EntitySet Name="ThirdCategories" EntityType="PhoebeModel.ThirdCategory" />
+          <AssociationSet Name="FK_SecondCategory_FirstCategory" Association="PhoebeModel.FK_SecondCategory_FirstCategory">
+            <End Role="FirstCategory" EntitySet="FirstCategories" />
+            <End Role="SecondCategory" EntitySet="SecondCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ThirdCategory_SecondCategory" Association="PhoebeModel.FK_ThirdCategory_SecondCategory">
+            <End Role="SecondCategory" EntitySet="SecondCategories" />
+            <End Role="ThirdCategory" EntitySet="ThirdCategories" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Customer">
           <Key>
@@ -125,6 +259,7 @@
           <Property Name="Type" Type="Int32" Nullable="false" />
           <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Contracts" Relationship="PhoebeModel.FK_Contract_Customer" FromRole="Customer" ToRole="Contract" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -140,6 +275,7 @@
           <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" Nullable="false" />
           <NavigationProperty Name="UserGroup" Relationship="PhoebeModel.FK_User_UserGroup" FromRole="User" ToRole="UserGroup" />
+          <NavigationProperty Name="Contracts" Relationship="PhoebeModel.FK_Contract_User" FromRole="User" ToRole="Contract" />
         </EntityType>
         <EntityType Name="UserGroup">
           <Key>
@@ -188,6 +324,106 @@
             </Principal>
             <Dependent Role="Warehouse1">
               <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Contract">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Number" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerID" Type="Int32" Nullable="false" />
+          <Property Name="SignDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CloseDate" Type="DateTime" Precision="3" />
+          <Property Name="BillingType" Type="Int32" Nullable="false" />
+          <Property Name="IsTiming" Type="Boolean" Nullable="false" />
+          <Property Name="CertificateNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="PhoebeModel.FK_Contract_Customer" FromRole="Contract" ToRole="Customer" />
+          <NavigationProperty Name="User" Relationship="PhoebeModel.FK_Contract_User" FromRole="Contract" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_Contract_Customer">
+          <End Type="PhoebeModel.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="PhoebeModel.Contract" Role="Contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Contract">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contract_User">
+          <End Type="PhoebeModel.User" Role="User" Multiplicity="1" />
+          <End Type="PhoebeModel.Contract" Role="Contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Contract">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="FirstCategory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SecondCategories" Relationship="PhoebeModel.FK_SecondCategory_FirstCategory" FromRole="FirstCategory" ToRole="SecondCategory" />
+        </EntityType>
+        <EntityType Name="SecondCategory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FirstCategoryID" Type="Int32" Nullable="false" />
+          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="FirstCategory" Relationship="PhoebeModel.FK_SecondCategory_FirstCategory" FromRole="SecondCategory" ToRole="FirstCategory" />
+          <NavigationProperty Name="ThirdCategories" Relationship="PhoebeModel.FK_ThirdCategory_SecondCategory" FromRole="SecondCategory" ToRole="ThirdCategory" />
+        </EntityType>
+        <EntityType Name="ThirdCategory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SecondCategoryID" Type="Int32" Nullable="false" />
+          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SecondCategory" Relationship="PhoebeModel.FK_ThirdCategory_SecondCategory" FromRole="ThirdCategory" ToRole="SecondCategory" />
+        </EntityType>
+        <Association Name="FK_SecondCategory_FirstCategory">
+          <End Type="PhoebeModel.FirstCategory" Role="FirstCategory" Multiplicity="1" />
+          <End Type="PhoebeModel.SecondCategory" Role="SecondCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FirstCategory">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SecondCategory">
+              <PropertyRef Name="FirstCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ThirdCategory_SecondCategory">
+          <End Type="PhoebeModel.SecondCategory" Role="SecondCategory" Multiplicity="1" />
+          <End Type="PhoebeModel.ThirdCategory" Role="ThirdCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SecondCategory">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ThirdCategory">
+              <PropertyRef Name="SecondCategoryID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -247,6 +483,56 @@
                 <ScalarProperty Name="Hierarchy" ColumnName="Hierarchy" />
                 <ScalarProperty Name="ParentId" ColumnName="ParentId" />
                 <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contracts">
+            <EntityTypeMapping TypeName="PhoebeModel.Contract">
+              <MappingFragment StoreEntitySet="Contract">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="CertificateNumber" ColumnName="CertificateNumber" />
+                <ScalarProperty Name="IsTiming" ColumnName="IsTiming" />
+                <ScalarProperty Name="BillingType" ColumnName="BillingType" />
+                <ScalarProperty Name="CloseDate" ColumnName="CloseDate" />
+                <ScalarProperty Name="SignDate" ColumnName="SignDate" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FirstCategories">
+            <EntityTypeMapping TypeName="PhoebeModel.FirstCategory">
+              <MappingFragment StoreEntitySet="FirstCategory">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SecondCategories">
+            <EntityTypeMapping TypeName="PhoebeModel.SecondCategory">
+              <MappingFragment StoreEntitySet="SecondCategory">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="FirstCategoryID" ColumnName="FirstCategoryID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ThirdCategories">
+            <EntityTypeMapping TypeName="PhoebeModel.ThirdCategory">
+              <MappingFragment StoreEntitySet="ThirdCategory">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="SecondCategoryID" ColumnName="SecondCategoryID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>

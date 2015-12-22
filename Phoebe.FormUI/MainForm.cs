@@ -77,6 +77,37 @@ namespace Phoebe.FormUI
         }
 
         /// <summary>
+        /// 合同 - 合同列表
+        /// </summary>
+        private void menuContractList_Click(object sender, EventArgs e)
+        {
+            ContractForm form = new ContractForm();
+            form.MdiParent = this;
+            form.WindowState = FormWindowState.Maximized;
+            form.Show();
+        }
+
+        /// <summary>
+        /// 合同 - 签订合同
+        /// </summary>
+        private void menuContractSign_Click(object sender, EventArgs e)
+        {
+            ContractSignForm form = new ContractSignForm(this.currentUser);
+            form.ShowDialog();
+        }
+
+        /// <summary>
+        /// 货品 - 类别管理
+        /// </summary>
+        private void menuCategory_Click(object sender, EventArgs e)
+        {
+            CategoryForm form = new CategoryForm();
+            form.MdiParent = this;
+            form.WindowState = FormWindowState.Maximized;
+            form.Show();
+        }
+
+        /// <summary>
         /// 用户 - 用户列表
         /// </summary>
         private void menuUserList_Click(object sender, EventArgs e)
@@ -109,5 +140,6 @@ namespace Phoebe.FormUI
         #endregion //Menu Event
 
         #endregion //Event
+
     }
 }

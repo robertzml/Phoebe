@@ -5,12 +5,20 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="fea8aa1d5a594b8b811afd6a99555dfd" Name="Diagram1" ShowGrid="true" ZoomLevel="94">
-        <EntityTypeShape EntityType="PhoebeModel.Customer" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="PhoebeModel.Customer" Width="1.5" PointX="1" PointY="3.875" />
         <EntityTypeShape EntityType="PhoebeModel.User" Width="1.5" PointX="13.75" PointY="5.375" />
-        <EntityTypeShape EntityType="PhoebeModel.UserGroup" Width="1.5" PointX="11.5" PointY="5.375" />
+        <EntityTypeShape EntityType="PhoebeModel.UserGroup" Width="1.5" PointX="16.25" PointY="5.375" />
         <AssociationConnector Association="PhoebeModel.FK_User_UserGroup" />
-        <EntityTypeShape EntityType="PhoebeModel.Warehouse" Width="1.5" PointX="4.5" PointY="0.75" />
+        <EntityTypeShape EntityType="PhoebeModel.Warehouse" Width="1.5" PointX="3.25" PointY="0.625" />
         <AssociationConnector Association="PhoebeModel.FK_Warehouse_Warehouse" />
+        <EntityTypeShape EntityType="PhoebeModel.Contract" Width="1.5" PointX="6.125" PointY="4.25" />
+        <AssociationConnector Association="PhoebeModel.FK_Contract_Customer" />
+        <AssociationConnector Association="PhoebeModel.FK_Contract_User" />
+        <EntityTypeShape EntityType="PhoebeModel.FirstCategory" Width="1.5" PointX="9" PointY="1.375" />
+        <EntityTypeShape EntityType="PhoebeModel.SecondCategory" Width="1.5" PointX="11.25" PointY="1.25" />
+        <EntityTypeShape EntityType="PhoebeModel.ThirdCategory" Width="1.5" PointX="13.5" PointY="1.25" />
+        <AssociationConnector Association="PhoebeModel.FK_SecondCategory_FirstCategory" />
+        <AssociationConnector Association="PhoebeModel.FK_ThirdCategory_SecondCategory" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -35,13 +35,23 @@ namespace Phoebe.Business
         }
 
         /// <summary>
-        /// 获取团体客户
+        /// 获取客户
         /// </summary>
         /// <param name="id">客户ID</param>
         /// <returns></returns>
         public Customer Get(int id)
         {
             return this.context.Customers.SingleOrDefault(r => r.ID == id);
+        }
+
+        /// <summary>
+        /// 按类型获取客户
+        /// </summary>
+        /// <param name="type">客户类型</param>
+        /// <returns></returns>
+        public List<Customer> GetByType(CustomerType type)
+        {
+            return this.context.Customers.Where(r => r.Type == (int)type).ToList();
         }
 
         /// <summary>

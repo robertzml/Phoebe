@@ -34,6 +34,9 @@
             this.menuCustomerAdd = new System.Windows.Forms.ToolStripMenuItem();
             this.menuWarehouse = new System.Windows.Forms.ToolStripMenuItem();
             this.menuWarehouseList = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuContract = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuContractList = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuContractSign = new System.Windows.Forms.ToolStripMenuItem();
             this.menuUser = new System.Windows.Forms.ToolStripMenuItem();
             this.menuUserList = new System.Windows.Forms.ToolStripMenuItem();
             this.menuUserGroupList = new System.Windows.Forms.ToolStripMenuItem();
@@ -42,6 +45,9 @@
             this.mainStauts = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusUser = new System.Windows.Forms.ToolStripStatusLabel();
+            this.menuCargo = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStock = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuCategory = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenu.SuspendLayout();
             this.mainStauts.SuspendLayout();
             this.SuspendLayout();
@@ -51,6 +57,9 @@
             this.mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuCustomer,
             this.menuWarehouse,
+            this.menuContract,
+            this.menuCargo,
+            this.menuStock,
             this.menuUser});
             this.mainMenu.Location = new System.Drawing.Point(0, 0);
             this.mainMenu.Name = "mainMenu";
@@ -96,6 +105,29 @@
             this.menuWarehouseList.Text = "仓库列表";
             this.menuWarehouseList.Click += new System.EventHandler(this.menuWarehouseList_Click);
             // 
+            // menuContract
+            // 
+            this.menuContract.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuContractList,
+            this.menuContractSign});
+            this.menuContract.Name = "menuContract";
+            this.menuContract.Size = new System.Drawing.Size(68, 21);
+            this.menuContract.Text = "合同管理";
+            // 
+            // menuContractList
+            // 
+            this.menuContractList.Name = "menuContractList";
+            this.menuContractList.Size = new System.Drawing.Size(152, 22);
+            this.menuContractList.Text = "合同列表";
+            this.menuContractList.Click += new System.EventHandler(this.menuContractList_Click);
+            // 
+            // menuContractSign
+            // 
+            this.menuContractSign.Name = "menuContractSign";
+            this.menuContractSign.Size = new System.Drawing.Size(152, 22);
+            this.menuContractSign.Text = "签订合同";
+            this.menuContractSign.Click += new System.EventHandler(this.menuContractSign_Click);
+            // 
             // menuUser
             // 
             this.menuUser.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -110,26 +142,26 @@
             // menuUserList
             // 
             this.menuUserList.Name = "menuUserList";
-            this.menuUserList.Size = new System.Drawing.Size(136, 22);
+            this.menuUserList.Size = new System.Drawing.Size(152, 22);
             this.menuUserList.Text = "用户列表";
             this.menuUserList.Click += new System.EventHandler(this.menuUserList_Click);
             // 
             // menuUserGroupList
             // 
             this.menuUserGroupList.Name = "menuUserGroupList";
-            this.menuUserGroupList.Size = new System.Drawing.Size(136, 22);
+            this.menuUserGroupList.Size = new System.Drawing.Size(152, 22);
             this.menuUserGroupList.Text = "用户组列表";
             this.menuUserGroupList.Click += new System.EventHandler(this.menuUserGroupList_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(133, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
             // 
             // menuChangePassword
             // 
             this.menuChangePassword.Name = "menuChangePassword";
-            this.menuChangePassword.Size = new System.Drawing.Size(136, 22);
+            this.menuChangePassword.Size = new System.Drawing.Size(152, 22);
             this.menuChangePassword.Text = "修改密码";
             this.menuChangePassword.Click += new System.EventHandler(this.menuChangePassword_Click);
             // 
@@ -161,6 +193,27 @@
             this.statusUser.Name = "statusUser";
             this.statusUser.Size = new System.Drawing.Size(44, 21);
             this.statusUser.Text = "name";
+            // 
+            // menuCargo
+            // 
+            this.menuCargo.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuCategory});
+            this.menuCargo.Name = "menuCargo";
+            this.menuCargo.Size = new System.Drawing.Size(68, 21);
+            this.menuCargo.Text = "货品管理";
+            // 
+            // menuStock
+            // 
+            this.menuStock.Name = "menuStock";
+            this.menuStock.Size = new System.Drawing.Size(68, 21);
+            this.menuStock.Text = "冷库租赁";
+            // 
+            // menuCategory
+            // 
+            this.menuCategory.Name = "menuCategory";
+            this.menuCategory.Size = new System.Drawing.Size(152, 22);
+            this.menuCategory.Text = "类别管理";
+            this.menuCategory.Click += new System.EventHandler(this.menuCategory_Click);
             // 
             // MainForm
             // 
@@ -200,6 +253,12 @@
         private System.Windows.Forms.ToolStripStatusLabel statusUser;
         private System.Windows.Forms.ToolStripMenuItem menuWarehouse;
         private System.Windows.Forms.ToolStripMenuItem menuWarehouseList;
+        private System.Windows.Forms.ToolStripMenuItem menuContract;
+        private System.Windows.Forms.ToolStripMenuItem menuContractList;
+        private System.Windows.Forms.ToolStripMenuItem menuContractSign;
+        private System.Windows.Forms.ToolStripMenuItem menuCargo;
+        private System.Windows.Forms.ToolStripMenuItem menuCategory;
+        private System.Windows.Forms.ToolStripMenuItem menuStock;
     }
 }
 

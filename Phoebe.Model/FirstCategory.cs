@@ -12,26 +12,20 @@ namespace Phoebe.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class User
+    public partial class FirstCategory
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public User()
+        public FirstCategory()
         {
-            this.Contracts = new HashSet<Contract>();
+            this.SecondCategories = new HashSet<SecondCategory>();
         }
     
         public int ID { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public int UserGroupID { get; set; }
         public string Name { get; set; }
-        public System.DateTime LastLoginTime { get; set; }
-        public System.DateTime CurrentLoginTime { get; set; }
         public string Remark { get; set; }
         public int Status { get; set; }
     
-        public virtual UserGroup UserGroup { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Contract> Contracts { get; set; }
+        public virtual ICollection<SecondCategory> SecondCategories { get; set; }
     }
 }
