@@ -55,6 +55,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\CategoryThirdAddForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CategoryThirdAddForm.Designer.cs">
+      <DependentUpon>CategoryThirdAddForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CategorySecondAddForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CategorySecondAddForm.Designer.cs">
+      <DependentUpon>CategorySecondAddForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\CategoryFirstAddForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -136,6 +148,12 @@
     <Compile Include="Forms\WarehouseForm.Designer.cs">
       <DependentUpon>WarehouseForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Forms\CategoryThirdAddForm.resx">
+      <DependentUpon>CategoryThirdAddForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CategorySecondAddForm.resx">
+      <DependentUpon>CategorySecondAddForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\CategoryFirstAddForm.resx">
       <DependentUpon>CategoryFirstAddForm.cs</DependentUpon>
     </EmbeddedResource>

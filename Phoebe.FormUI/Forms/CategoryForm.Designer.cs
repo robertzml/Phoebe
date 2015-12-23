@@ -30,14 +30,17 @@
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.buttonAddFirst = new System.Windows.Forms.Button();
-            this.buttonAddSecond = new System.Windows.Forms.Button();
             this.buttonAddThird = new System.Windows.Forms.Button();
+            this.buttonAddSecond = new System.Windows.Forms.Button();
+            this.buttonAddFirst = new System.Windows.Forms.Button();
+            this.treeCategory = new System.Windows.Forms.TreeView();
+            this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.treeCategory);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Left;
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
@@ -59,6 +62,26 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "操作";
             // 
+            // buttonAddThird
+            // 
+            this.buttonAddThird.Location = new System.Drawing.Point(304, 42);
+            this.buttonAddThird.Name = "buttonAddThird";
+            this.buttonAddThird.Size = new System.Drawing.Size(96, 23);
+            this.buttonAddThird.TabIndex = 2;
+            this.buttonAddThird.Text = "添加三级分类";
+            this.buttonAddThird.UseVisualStyleBackColor = true;
+            this.buttonAddThird.Click += new System.EventHandler(this.buttonAddThird_Click);
+            // 
+            // buttonAddSecond
+            // 
+            this.buttonAddSecond.Location = new System.Drawing.Point(167, 42);
+            this.buttonAddSecond.Name = "buttonAddSecond";
+            this.buttonAddSecond.Size = new System.Drawing.Size(96, 23);
+            this.buttonAddSecond.TabIndex = 1;
+            this.buttonAddSecond.Text = "添加二级分类";
+            this.buttonAddSecond.UseVisualStyleBackColor = true;
+            this.buttonAddSecond.Click += new System.EventHandler(this.buttonAddSecond_Click);
+            // 
             // buttonAddFirst
             // 
             this.buttonAddFirst.Location = new System.Drawing.Point(30, 42);
@@ -69,23 +92,13 @@
             this.buttonAddFirst.UseVisualStyleBackColor = true;
             this.buttonAddFirst.Click += new System.EventHandler(this.buttonAddFirst_Click);
             // 
-            // buttonAddSecond
+            // treeCategory
             // 
-            this.buttonAddSecond.Location = new System.Drawing.Point(167, 42);
-            this.buttonAddSecond.Name = "buttonAddSecond";
-            this.buttonAddSecond.Size = new System.Drawing.Size(96, 23);
-            this.buttonAddSecond.TabIndex = 1;
-            this.buttonAddSecond.Text = "添加二级分类";
-            this.buttonAddSecond.UseVisualStyleBackColor = true;
-            // 
-            // buttonAddThird
-            // 
-            this.buttonAddThird.Location = new System.Drawing.Point(304, 42);
-            this.buttonAddThird.Name = "buttonAddThird";
-            this.buttonAddThird.Size = new System.Drawing.Size(96, 23);
-            this.buttonAddThird.TabIndex = 2;
-            this.buttonAddThird.Text = "添加三级分类";
-            this.buttonAddThird.UseVisualStyleBackColor = true;
+            this.treeCategory.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeCategory.Location = new System.Drawing.Point(3, 17);
+            this.treeCategory.Name = "treeCategory";
+            this.treeCategory.Size = new System.Drawing.Size(194, 421);
+            this.treeCategory.TabIndex = 0;
             // 
             // CategoryForm
             // 
@@ -98,6 +111,7 @@
             this.Padding = new System.Windows.Forms.Padding(3);
             this.Text = "类别管理";
             this.Load += new System.EventHandler(this.CategoryForm_Load);
+            this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -110,5 +124,6 @@
         private System.Windows.Forms.Button buttonAddThird;
         private System.Windows.Forms.Button buttonAddSecond;
         private System.Windows.Forms.Button buttonAddFirst;
+        private System.Windows.Forms.TreeView treeCategory;
     }
 }
