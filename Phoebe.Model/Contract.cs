@@ -14,6 +14,12 @@ namespace Phoebe.Model
     
     public partial class Contract
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Contract()
+        {
+            this.StockIns = new HashSet<StockIn>();
+        }
+    
         public int ID { get; set; }
         public string Number { get; set; }
         public string Name { get; set; }
@@ -29,5 +35,7 @@ namespace Phoebe.Model
     
         public virtual Customer Customer { get; set; }
         public virtual User User { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StockIn> StockIns { get; set; }
     }
 }

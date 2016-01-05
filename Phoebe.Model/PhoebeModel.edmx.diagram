@@ -19,7 +19,12 @@
         <EntityTypeShape EntityType="PhoebeModel.ThirdCategory" Width="1.5" PointX="13.5" PointY="1.25" />
         <AssociationConnector Association="PhoebeModel.FK_SecondCategory_FirstCategory" />
         <AssociationConnector Association="PhoebeModel.FK_ThirdCategory_SecondCategory" />
-      </Diagram>
+        <EntityTypeShape EntityType="PhoebeModel.Billing" Width="1.5" PointX="11.125" PointY="13.75" />
+        <EntityTypeShape EntityType="PhoebeModel.StockIn" Width="1.5" PointX="8.75" PointY="10.75" />
+        <AssociationConnector Association="PhoebeModel.FK_Billing_StockIn" />
+        <AssociationConnector Association="PhoebeModel.FK_StockIn_Contract" />
+        <AssociationConnector Association="PhoebeModel.FK_StockIn_User" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>
