@@ -21,6 +21,32 @@
           <Property Name="Remark" Type="nvarchar" MaxLength="500" />
           <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Cargo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="FirstCategoryID" Type="int" Nullable="false" />
+          <Property Name="SecondCategoryID" Type="int" Nullable="false" />
+          <Property Name="ThirdCategoryID" Type="int" />
+          <Property Name="Count" Type="int" Nullable="false" />
+          <Property Name="UnitWeight" Type="float" Nullable="false" />
+          <Property Name="TotalWeight" Type="float" Nullable="false" />
+          <Property Name="UnitVolume" Type="float" Nullable="false" />
+          <Property Name="TotalVolume" Type="float" Nullable="false" />
+          <Property Name="StoreCount" Type="int" Nullable="false" />
+          <Property Name="OriginPlace" Type="nvarchar" MaxLength="100" />
+          <Property Name="ShelfLife" Type="int" Nullable="false" />
+          <Property Name="Specification" Type="nvarchar" MaxLength="100" />
+          <Property Name="ContractID" Type="int" Nullable="false" />
+          <Property Name="RegisterTime" Type="datetime" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="InTime" Type="datetime" />
+          <Property Name="OutTime" Type="datetime" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="500" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Contract">
           <Key>
             <PropertyRef Name="ID" />
@@ -71,6 +97,20 @@
           <Property Name="Remark" Type="nvarchar" MaxLength="500" />
           <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Stock">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="WarehouseID" Type="int" Nullable="false" />
+          <Property Name="CargoID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Count" Type="int" Nullable="false" />
+          <Property Name="InTime" Type="datetime" Nullable="false" />
+          <Property Name="OutTime" Type="datetime" />
+          <Property Name="Source" Type="int" Nullable="false" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="50" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="StockIn">
           <Key>
             <PropertyRef Name="ID" />
@@ -82,6 +122,19 @@
           <Property Name="ContractID" Type="int" Nullable="false" />
           <Property Name="IsLock" Type="bit" Nullable="false" />
           <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="500" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StockInDetails">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="StockInID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="WarehouseID" Type="int" Nullable="false" />
+          <Property Name="CargoID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Count" Type="int" Nullable="false" />
+          <Property Name="StockID" Type="uniqueidentifier" />
           <Property Name="Remark" Type="nvarchar" MaxLength="500" />
           <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
@@ -144,6 +197,66 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Cargo_Contract">
+          <End Role="Contract" Type="Self.Contract" Multiplicity="1" />
+          <End Role="Cargo" Type="Self.Cargo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contract">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Cargo">
+              <PropertyRef Name="ContractID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cargo_FirstCategory">
+          <End Role="FirstCategory" Type="Self.FirstCategory" Multiplicity="1" />
+          <End Role="Cargo" Type="Self.Cargo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FirstCategory">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Cargo">
+              <PropertyRef Name="FirstCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cargo_SecondCategory">
+          <End Role="SecondCategory" Type="Self.SecondCategory" Multiplicity="1" />
+          <End Role="Cargo" Type="Self.Cargo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SecondCategory">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Cargo">
+              <PropertyRef Name="SecondCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cargo_ThirdCategory">
+          <End Role="ThirdCategory" Type="Self.ThirdCategory" Multiplicity="0..1" />
+          <End Role="Cargo" Type="Self.Cargo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ThirdCategory">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Cargo">
+              <PropertyRef Name="ThirdCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cargo_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Cargo" Type="Self.Cargo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Cargo">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Contract_Customer">
           <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
           <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
@@ -180,6 +293,32 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Stock_Cargo">
+          <End Role="Cargo" Type="Self.Cargo" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Stock" Type="Self.Stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cargo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Stock">
+              <PropertyRef Name="CargoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Stock_Warehouse">
+          <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="1" />
+          <End Role="Stock" Type="Self.Stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouse">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Stock">
+              <PropertyRef Name="WarehouseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_StockIn_Contract">
           <End Role="Contract" Type="Self.Contract" Multiplicity="1" />
           <End Role="StockIn" Type="Self.StockIn" Multiplicity="*" />
@@ -201,6 +340,56 @@
             </Principal>
             <Dependent Role="StockIn">
               <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockInDetails_Cargo">
+          <End Role="Cargo" Type="Self.Cargo" Multiplicity="1" />
+          <End Role="StockInDetails" Type="Self.StockInDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cargo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="StockInDetails">
+              <PropertyRef Name="CargoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockInDetails_Stock">
+          <End Role="Stock" Type="Self.Stock" Multiplicity="0..1" />
+          <End Role="StockInDetails" Type="Self.StockInDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stock">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="StockInDetails">
+              <PropertyRef Name="StockID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockInDetails_StockIn">
+          <End Role="StockIn" Type="Self.StockIn" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="StockInDetails" Type="Self.StockInDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StockIn">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="StockInDetails">
+              <PropertyRef Name="StockInID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockInDetails_Warehouse">
+          <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="1" />
+          <End Role="StockInDetails" Type="Self.StockInDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouse">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="StockInDetails">
+              <PropertyRef Name="WarehouseID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -242,11 +431,14 @@
         </Association>
         <EntityContainer Name="PhoebeModelStoreContainer">
           <EntitySet Name="Billing" EntityType="Self.Billing" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cargo" EntityType="Self.Cargo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Contract" EntityType="Self.Contract" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FirstCategory" EntityType="Self.FirstCategory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SecondCategory" EntityType="Self.SecondCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Stock" EntityType="Self.Stock" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StockIn" EntityType="Self.StockIn" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StockInDetails" EntityType="Self.StockInDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ThirdCategory" EntityType="Self.ThirdCategory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserGroup" EntityType="Self.UserGroup" Schema="dbo" store:Type="Tables" />
@@ -254,6 +446,26 @@
           <AssociationSet Name="FK_Billing_StockIn" Association="Self.FK_Billing_StockIn">
             <End Role="StockIn" EntitySet="StockIn" />
             <End Role="Billing" EntitySet="Billing" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cargo_Contract" Association="Self.FK_Cargo_Contract">
+            <End Role="Contract" EntitySet="Contract" />
+            <End Role="Cargo" EntitySet="Cargo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cargo_FirstCategory" Association="Self.FK_Cargo_FirstCategory">
+            <End Role="FirstCategory" EntitySet="FirstCategory" />
+            <End Role="Cargo" EntitySet="Cargo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cargo_SecondCategory" Association="Self.FK_Cargo_SecondCategory">
+            <End Role="SecondCategory" EntitySet="SecondCategory" />
+            <End Role="Cargo" EntitySet="Cargo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cargo_ThirdCategory" Association="Self.FK_Cargo_ThirdCategory">
+            <End Role="ThirdCategory" EntitySet="ThirdCategory" />
+            <End Role="Cargo" EntitySet="Cargo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cargo_User" Association="Self.FK_Cargo_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Cargo" EntitySet="Cargo" />
           </AssociationSet>
           <AssociationSet Name="FK_Contract_Customer" Association="Self.FK_Contract_Customer">
             <End Role="Customer" EntitySet="Customer" />
@@ -267,6 +479,14 @@
             <End Role="FirstCategory" EntitySet="FirstCategory" />
             <End Role="SecondCategory" EntitySet="SecondCategory" />
           </AssociationSet>
+          <AssociationSet Name="FK_Stock_Cargo" Association="Self.FK_Stock_Cargo">
+            <End Role="Cargo" EntitySet="Cargo" />
+            <End Role="Stock" EntitySet="Stock" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stock_Warehouse" Association="Self.FK_Stock_Warehouse">
+            <End Role="Warehouse" EntitySet="Warehouse" />
+            <End Role="Stock" EntitySet="Stock" />
+          </AssociationSet>
           <AssociationSet Name="FK_StockIn_Contract" Association="Self.FK_StockIn_Contract">
             <End Role="Contract" EntitySet="Contract" />
             <End Role="StockIn" EntitySet="StockIn" />
@@ -274,6 +494,22 @@
           <AssociationSet Name="FK_StockIn_User" Association="Self.FK_StockIn_User">
             <End Role="User" EntitySet="User" />
             <End Role="StockIn" EntitySet="StockIn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockInDetails_Cargo" Association="Self.FK_StockInDetails_Cargo">
+            <End Role="Cargo" EntitySet="Cargo" />
+            <End Role="StockInDetails" EntitySet="StockInDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockInDetails_Stock" Association="Self.FK_StockInDetails_Stock">
+            <End Role="Stock" EntitySet="Stock" />
+            <End Role="StockInDetails" EntitySet="StockInDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockInDetails_StockIn" Association="Self.FK_StockInDetails_StockIn">
+            <End Role="StockIn" EntitySet="StockIn" />
+            <End Role="StockInDetails" EntitySet="StockInDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockInDetails_Warehouse" Association="Self.FK_StockInDetails_Warehouse">
+            <End Role="Warehouse" EntitySet="Warehouse" />
+            <End Role="StockInDetails" EntitySet="StockInDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_ThirdCategory_SecondCategory" Association="Self.FK_ThirdCategory_SecondCategory">
             <End Role="SecondCategory" EntitySet="SecondCategory" />
@@ -339,6 +575,53 @@
             <End Role="User" EntitySet="Users" />
             <End Role="StockIn" EntitySet="StockIns" />
           </AssociationSet>
+          <EntitySet Name="Stocks" EntityType="PhoebeModel.Stock" />
+          <EntitySet Name="StockInDetails" EntityType="PhoebeModel.StockInDetail" />
+          <AssociationSet Name="FK_Stock_Warehouse" Association="PhoebeModel.FK_Stock_Warehouse">
+            <End Role="Warehouse" EntitySet="Warehouses" />
+            <End Role="Stock" EntitySet="Stocks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockInDetails_Stock" Association="PhoebeModel.FK_StockInDetails_Stock">
+            <End Role="Stock" EntitySet="Stocks" />
+            <End Role="StockInDetail" EntitySet="StockInDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockInDetails_StockIn" Association="PhoebeModel.FK_StockInDetails_StockIn">
+            <End Role="StockIn" EntitySet="StockIns" />
+            <End Role="StockInDetail" EntitySet="StockInDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockInDetails_Warehouse" Association="PhoebeModel.FK_StockInDetails_Warehouse">
+            <End Role="Warehouse" EntitySet="Warehouses" />
+            <End Role="StockInDetail" EntitySet="StockInDetails" />
+          </AssociationSet>
+          <EntitySet Name="Cargoes" EntityType="PhoebeModel.Cargo" />
+          <AssociationSet Name="FK_Cargo_Contract" Association="PhoebeModel.FK_Cargo_Contract">
+            <End Role="Contract" EntitySet="Contracts" />
+            <End Role="Cargo" EntitySet="Cargoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cargo_FirstCategory" Association="PhoebeModel.FK_Cargo_FirstCategory">
+            <End Role="FirstCategory" EntitySet="FirstCategories" />
+            <End Role="Cargo" EntitySet="Cargoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cargo_SecondCategory" Association="PhoebeModel.FK_Cargo_SecondCategory">
+            <End Role="SecondCategory" EntitySet="SecondCategories" />
+            <End Role="Cargo" EntitySet="Cargoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cargo_ThirdCategory" Association="PhoebeModel.FK_Cargo_ThirdCategory">
+            <End Role="ThirdCategory" EntitySet="ThirdCategories" />
+            <End Role="Cargo" EntitySet="Cargoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cargo_User" Association="PhoebeModel.FK_Cargo_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Cargo" EntitySet="Cargoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stock_Cargo" Association="PhoebeModel.FK_Stock_Cargo">
+            <End Role="Cargo" EntitySet="Cargoes" />
+            <End Role="Stock" EntitySet="Stocks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockInDetails_Cargo" Association="PhoebeModel.FK_StockInDetails_Cargo">
+            <End Role="Cargo" EntitySet="Cargoes" />
+            <End Role="StockInDetail" EntitySet="StockInDetails" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Customer">
           <Key>
@@ -371,6 +654,7 @@
           <NavigationProperty Name="UserGroup" Relationship="PhoebeModel.FK_User_UserGroup" FromRole="User" ToRole="UserGroup" />
           <NavigationProperty Name="Contracts" Relationship="PhoebeModel.FK_Contract_User" FromRole="User" ToRole="Contract" />
           <NavigationProperty Name="StockIns" Relationship="PhoebeModel.FK_StockIn_User" FromRole="User" ToRole="StockIn" />
+          <NavigationProperty Name="Cargoes" Relationship="PhoebeModel.FK_Cargo_User" FromRole="User" ToRole="Cargo" />
         </EntityType>
         <EntityType Name="UserGroup">
           <Key>
@@ -409,6 +693,8 @@
           <Property Name="Status" Type="Int32" Nullable="false" />
           <NavigationProperty Name="ChildrenWarehouse" Relationship="PhoebeModel.FK_Warehouse_Warehouse" FromRole="Warehouse" ToRole="Warehouse1" />
           <NavigationProperty Name="ParentWarehouse" Relationship="PhoebeModel.FK_Warehouse_Warehouse" FromRole="Warehouse1" ToRole="Warehouse" />
+          <NavigationProperty Name="Stocks" Relationship="PhoebeModel.FK_Stock_Warehouse" FromRole="Warehouse" ToRole="Stock" />
+          <NavigationProperty Name="StockInDetails" Relationship="PhoebeModel.FK_StockInDetails_Warehouse" FromRole="Warehouse" ToRole="StockInDetail" />
         </EntityType>
         <Association Name="FK_Warehouse_Warehouse">
           <End Type="PhoebeModel.Warehouse" Role="Warehouse" Multiplicity="0..1" />
@@ -441,6 +727,7 @@
           <NavigationProperty Name="Customer" Relationship="PhoebeModel.FK_Contract_Customer" FromRole="Contract" ToRole="Customer" />
           <NavigationProperty Name="User" Relationship="PhoebeModel.FK_Contract_User" FromRole="Contract" ToRole="User" />
           <NavigationProperty Name="StockIns" Relationship="PhoebeModel.FK_StockIn_Contract" FromRole="Contract" ToRole="StockIn" />
+          <NavigationProperty Name="Cargoes" Relationship="PhoebeModel.FK_Cargo_Contract" FromRole="Contract" ToRole="Cargo" />
         </EntityType>
         <Association Name="FK_Contract_Customer">
           <End Type="PhoebeModel.Customer" Role="Customer" Multiplicity="1" />
@@ -475,6 +762,7 @@
           <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" Nullable="false" />
           <NavigationProperty Name="SecondCategories" Relationship="PhoebeModel.FK_SecondCategory_FirstCategory" FromRole="FirstCategory" ToRole="SecondCategory" />
+          <NavigationProperty Name="Cargoes" Relationship="PhoebeModel.FK_Cargo_FirstCategory" FromRole="FirstCategory" ToRole="Cargo" />
         </EntityType>
         <EntityType Name="SecondCategory">
           <Key>
@@ -487,6 +775,7 @@
           <Property Name="Status" Type="Int32" Nullable="false" />
           <NavigationProperty Name="FirstCategory" Relationship="PhoebeModel.FK_SecondCategory_FirstCategory" FromRole="SecondCategory" ToRole="FirstCategory" />
           <NavigationProperty Name="ThirdCategories" Relationship="PhoebeModel.FK_ThirdCategory_SecondCategory" FromRole="SecondCategory" ToRole="ThirdCategory" />
+          <NavigationProperty Name="Cargoes" Relationship="PhoebeModel.FK_Cargo_SecondCategory" FromRole="SecondCategory" ToRole="Cargo" />
         </EntityType>
         <EntityType Name="ThirdCategory">
           <Key>
@@ -498,6 +787,7 @@
           <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" Nullable="false" />
           <NavigationProperty Name="SecondCategory" Relationship="PhoebeModel.FK_ThirdCategory_SecondCategory" FromRole="ThirdCategory" ToRole="SecondCategory" />
+          <NavigationProperty Name="Cargoes" Relationship="PhoebeModel.FK_Cargo_ThirdCategory" FromRole="ThirdCategory" ToRole="Cargo" />
         </EntityType>
         <Association Name="FK_SecondCategory_FirstCategory">
           <End Type="PhoebeModel.FirstCategory" Role="FirstCategory" Multiplicity="1" />
@@ -556,6 +846,7 @@
           <NavigationProperty Name="Billing" Relationship="PhoebeModel.FK_Billing_StockIn" FromRole="StockIn" ToRole="Billing" />
           <NavigationProperty Name="Contract" Relationship="PhoebeModel.FK_StockIn_Contract" FromRole="StockIn" ToRole="Contract" />
           <NavigationProperty Name="User" Relationship="PhoebeModel.FK_StockIn_User" FromRole="StockIn" ToRole="User" />
+          <NavigationProperty Name="StockInDetails" Relationship="PhoebeModel.FK_StockInDetails_StockIn" FromRole="StockIn" ToRole="StockInDetail" />
         </EntityType>
         <Association Name="FK_Billing_StockIn">
           <End Type="PhoebeModel.StockIn" Role="StockIn" Multiplicity="1" />
@@ -590,6 +881,209 @@
             </Principal>
             <Dependent Role="StockIn">
               <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Stock">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="WarehouseID" Type="Int32" Nullable="false" />
+          <Property Name="CargoID" Type="Guid" Nullable="false" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
+          <Property Name="InTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="OutTime" Type="DateTime" Precision="3" />
+          <Property Name="Source" Type="Int32" Nullable="false" />
+          <Property Name="Remark" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Warehouse" Relationship="PhoebeModel.FK_Stock_Warehouse" FromRole="Stock" ToRole="Warehouse" />
+          <NavigationProperty Name="StockInDetails" Relationship="PhoebeModel.FK_StockInDetails_Stock" FromRole="Stock" ToRole="StockInDetail" />
+          <NavigationProperty Name="Cargo" Relationship="PhoebeModel.FK_Stock_Cargo" FromRole="Stock" ToRole="Cargo" />
+        </EntityType>
+        <EntityType Name="StockInDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="StockInID" Type="Guid" Nullable="false" />
+          <Property Name="WarehouseID" Type="Int32" Nullable="false" />
+          <Property Name="CargoID" Type="Guid" Nullable="false" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
+          <Property Name="StockID" Type="Guid" />
+          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Stock" Relationship="PhoebeModel.FK_StockInDetails_Stock" FromRole="StockInDetail" ToRole="Stock" />
+          <NavigationProperty Name="StockIn" Relationship="PhoebeModel.FK_StockInDetails_StockIn" FromRole="StockInDetail" ToRole="StockIn" />
+          <NavigationProperty Name="Warehouse" Relationship="PhoebeModel.FK_StockInDetails_Warehouse" FromRole="StockInDetail" ToRole="Warehouse" />
+          <NavigationProperty Name="Cargo" Relationship="PhoebeModel.FK_StockInDetails_Cargo" FromRole="StockInDetail" ToRole="Cargo" />
+        </EntityType>
+        <Association Name="FK_Stock_Warehouse">
+          <End Type="PhoebeModel.Warehouse" Role="Warehouse" Multiplicity="1" />
+          <End Type="PhoebeModel.Stock" Role="Stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouse">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Stock">
+              <PropertyRef Name="WarehouseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockInDetails_Stock">
+          <End Type="PhoebeModel.Stock" Role="Stock" Multiplicity="0..1" />
+          <End Type="PhoebeModel.StockInDetail" Role="StockInDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stock">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="StockInDetail">
+              <PropertyRef Name="StockID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockInDetails_StockIn">
+          <End Type="PhoebeModel.StockIn" Role="StockIn" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="PhoebeModel.StockInDetail" Role="StockInDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StockIn">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="StockInDetail">
+              <PropertyRef Name="StockInID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockInDetails_Warehouse">
+          <End Type="PhoebeModel.Warehouse" Role="Warehouse" Multiplicity="1" />
+          <End Type="PhoebeModel.StockInDetail" Role="StockInDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouse">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="StockInDetail">
+              <PropertyRef Name="WarehouseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Cargo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FirstCategoryID" Type="Int32" Nullable="false" />
+          <Property Name="SecondCategoryID" Type="Int32" Nullable="false" />
+          <Property Name="ThirdCategoryID" Type="Int32" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
+          <Property Name="UnitWeight" Type="Double" Nullable="false" />
+          <Property Name="TotalWeight" Type="Double" Nullable="false" />
+          <Property Name="UnitVolume" Type="Double" Nullable="false" />
+          <Property Name="TotalVolume" Type="Double" Nullable="false" />
+          <Property Name="StoreCount" Type="Int32" Nullable="false" />
+          <Property Name="OriginPlace" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ShelfLife" Type="Int32" Nullable="false" />
+          <Property Name="Specification" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ContractID" Type="Int32" Nullable="false" />
+          <Property Name="RegisterTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="InTime" Type="DateTime" Precision="3" />
+          <Property Name="OutTime" Type="DateTime" Precision="3" />
+          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Contract" Relationship="PhoebeModel.FK_Cargo_Contract" FromRole="Cargo" ToRole="Contract" />
+          <NavigationProperty Name="FirstCategory" Relationship="PhoebeModel.FK_Cargo_FirstCategory" FromRole="Cargo" ToRole="FirstCategory" />
+          <NavigationProperty Name="SecondCategory" Relationship="PhoebeModel.FK_Cargo_SecondCategory" FromRole="Cargo" ToRole="SecondCategory" />
+          <NavigationProperty Name="ThirdCategory" Relationship="PhoebeModel.FK_Cargo_ThirdCategory" FromRole="Cargo" ToRole="ThirdCategory" />
+          <NavigationProperty Name="User" Relationship="PhoebeModel.FK_Cargo_User" FromRole="Cargo" ToRole="User" />
+          <NavigationProperty Name="Stocks" Relationship="PhoebeModel.FK_Stock_Cargo" FromRole="Cargo" ToRole="Stock" />
+          <NavigationProperty Name="StockInDetails" Relationship="PhoebeModel.FK_StockInDetails_Cargo" FromRole="Cargo" ToRole="StockInDetail" />
+        </EntityType>
+        <Association Name="FK_Cargo_Contract">
+          <End Type="PhoebeModel.Contract" Role="Contract" Multiplicity="1" />
+          <End Type="PhoebeModel.Cargo" Role="Cargo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contract">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Cargo">
+              <PropertyRef Name="ContractID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cargo_FirstCategory">
+          <End Type="PhoebeModel.FirstCategory" Role="FirstCategory" Multiplicity="1" />
+          <End Type="PhoebeModel.Cargo" Role="Cargo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FirstCategory">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Cargo">
+              <PropertyRef Name="FirstCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cargo_SecondCategory">
+          <End Type="PhoebeModel.SecondCategory" Role="SecondCategory" Multiplicity="1" />
+          <End Type="PhoebeModel.Cargo" Role="Cargo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SecondCategory">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Cargo">
+              <PropertyRef Name="SecondCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cargo_ThirdCategory">
+          <End Type="PhoebeModel.ThirdCategory" Role="ThirdCategory" Multiplicity="0..1" />
+          <End Type="PhoebeModel.Cargo" Role="Cargo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ThirdCategory">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Cargo">
+              <PropertyRef Name="ThirdCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cargo_User">
+          <End Type="PhoebeModel.User" Role="User" Multiplicity="1" />
+          <End Type="PhoebeModel.Cargo" Role="Cargo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Cargo">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Stock_Cargo">
+          <End Type="PhoebeModel.Cargo" Role="Cargo" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="PhoebeModel.Stock" Role="Stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cargo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Stock">
+              <PropertyRef Name="CargoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockInDetails_Cargo">
+          <End Type="PhoebeModel.Cargo" Role="Cargo" Multiplicity="1" />
+          <End Type="PhoebeModel.StockInDetail" Role="StockInDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cargo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="StockInDetail">
+              <PropertyRef Name="CargoID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -732,6 +1226,62 @@
                 <ScalarProperty Name="FlowNumber" ColumnName="FlowNumber" />
                 <ScalarProperty Name="MonthTime" ColumnName="MonthTime" />
                 <ScalarProperty Name="InTime" ColumnName="InTime" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stocks">
+            <EntityTypeMapping TypeName="PhoebeModel.Stock">
+              <MappingFragment StoreEntitySet="Stock">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="Source" ColumnName="Source" />
+                <ScalarProperty Name="OutTime" ColumnName="OutTime" />
+                <ScalarProperty Name="InTime" ColumnName="InTime" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="CargoID" ColumnName="CargoID" />
+                <ScalarProperty Name="WarehouseID" ColumnName="WarehouseID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StockInDetails">
+            <EntityTypeMapping TypeName="PhoebeModel.StockInDetail">
+              <MappingFragment StoreEntitySet="StockInDetails">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="StockID" ColumnName="StockID" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="CargoID" ColumnName="CargoID" />
+                <ScalarProperty Name="WarehouseID" ColumnName="WarehouseID" />
+                <ScalarProperty Name="StockInID" ColumnName="StockInID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cargoes">
+            <EntityTypeMapping TypeName="PhoebeModel.Cargo">
+              <MappingFragment StoreEntitySet="Cargo">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="OutTime" ColumnName="OutTime" />
+                <ScalarProperty Name="InTime" ColumnName="InTime" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="RegisterTime" ColumnName="RegisterTime" />
+                <ScalarProperty Name="ContractID" ColumnName="ContractID" />
+                <ScalarProperty Name="Specification" ColumnName="Specification" />
+                <ScalarProperty Name="ShelfLife" ColumnName="ShelfLife" />
+                <ScalarProperty Name="OriginPlace" ColumnName="OriginPlace" />
+                <ScalarProperty Name="StoreCount" ColumnName="StoreCount" />
+                <ScalarProperty Name="TotalVolume" ColumnName="TotalVolume" />
+                <ScalarProperty Name="UnitVolume" ColumnName="UnitVolume" />
+                <ScalarProperty Name="TotalWeight" ColumnName="TotalWeight" />
+                <ScalarProperty Name="UnitWeight" ColumnName="UnitWeight" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="ThirdCategoryID" ColumnName="ThirdCategoryID" />
+                <ScalarProperty Name="SecondCategoryID" ColumnName="SecondCategoryID" />
+                <ScalarProperty Name="FirstCategoryID" ColumnName="FirstCategoryID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

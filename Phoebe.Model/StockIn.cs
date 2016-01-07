@@ -14,6 +14,12 @@ namespace Phoebe.Model
     
     public partial class StockIn
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public StockIn()
+        {
+            this.StockInDetails = new HashSet<StockInDetail>();
+        }
+    
         public System.Guid ID { get; set; }
         public System.DateTime InTime { get; set; }
         public string MonthTime { get; set; }
@@ -27,5 +33,7 @@ namespace Phoebe.Model
         public virtual Billing Billing { get; set; }
         public virtual Contract Contract { get; set; }
         public virtual User User { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StockInDetail> StockInDetails { get; set; }
     }
 }

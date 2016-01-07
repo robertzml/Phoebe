@@ -54,6 +54,9 @@
     <Compile Include="Billing.cs">
       <DependentUpon>PhoebeModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Cargo.cs">
+      <DependentUpon>PhoebeModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="CategoryFlow.cs" />
     <Compile Include="ColdSettlement.cs" />
     <Compile Include="Contract.cs">
@@ -105,8 +108,14 @@
       <DependentUpon>PhoebeModel.tt</DependentUpon>
     </Compile>
     <Compile Include="StatisticModels.cs" />
+    <Compile Include="Stock.cs">
+      <DependentUpon>PhoebeModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="StockFlow.cs" />
     <Compile Include="StockIn.cs">
+      <DependentUpon>PhoebeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StockInDetail.cs">
       <DependentUpon>PhoebeModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Storage.cs" />

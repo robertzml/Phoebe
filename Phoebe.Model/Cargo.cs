@@ -12,27 +12,42 @@ namespace Phoebe.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Warehouse
+    public partial class Cargo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Warehouse()
+        public Cargo()
         {
-            this.ChildrenWarehouse = new HashSet<Warehouse>();
             this.Stocks = new HashSet<Stock>();
             this.StockInDetails = new HashSet<StockInDetail>();
         }
     
-        public int ID { get; set; }
+        public System.Guid ID { get; set; }
         public string Name { get; set; }
-        public string Number { get; set; }
-        public Nullable<int> ParentId { get; set; }
-        public int Hierarchy { get; set; }
+        public int FirstCategoryID { get; set; }
+        public int SecondCategoryID { get; set; }
+        public Nullable<int> ThirdCategoryID { get; set; }
+        public int Count { get; set; }
+        public double UnitWeight { get; set; }
+        public double TotalWeight { get; set; }
+        public double UnitVolume { get; set; }
+        public double TotalVolume { get; set; }
+        public int StoreCount { get; set; }
+        public string OriginPlace { get; set; }
+        public int ShelfLife { get; set; }
+        public string Specification { get; set; }
+        public int ContractID { get; set; }
+        public System.DateTime RegisterTime { get; set; }
+        public int UserID { get; set; }
+        public Nullable<System.DateTime> InTime { get; set; }
+        public Nullable<System.DateTime> OutTime { get; set; }
         public string Remark { get; set; }
         public int Status { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Warehouse> ChildrenWarehouse { get; set; }
-        public virtual Warehouse ParentWarehouse { get; set; }
+        public virtual Contract Contract { get; set; }
+        public virtual FirstCategory FirstCategory { get; set; }
+        public virtual SecondCategory SecondCategory { get; set; }
+        public virtual ThirdCategory ThirdCategory { get; set; }
+        public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Stock> Stocks { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

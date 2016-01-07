@@ -147,9 +147,4 @@ namespace Phoebe.Model
         [Display(Name = "状态")]
         public int Status { get; set; }
     }
-
-    [MetadataType(typeof(CargoMetadata))]
-    public partial class Cargo
-    {
-    }
 }

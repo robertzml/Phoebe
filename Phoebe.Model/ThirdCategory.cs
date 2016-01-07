@@ -14,6 +14,12 @@ namespace Phoebe.Model
     
     public partial class ThirdCategory
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public ThirdCategory()
+        {
+            this.Cargoes = new HashSet<Cargo>();
+        }
+    
         public int ID { get; set; }
         public string Name { get; set; }
         public int SecondCategoryID { get; set; }
@@ -21,5 +27,7 @@ namespace Phoebe.Model
         public int Status { get; set; }
     
         public virtual SecondCategory SecondCategory { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Cargo> Cargoes { get; set; }
     }
 }

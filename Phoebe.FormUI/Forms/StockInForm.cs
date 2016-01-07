@@ -22,7 +22,11 @@ namespace Phoebe.FormUI
 
         private ContractBusiness contractBusiness;
 
+        CategoryBusiness categoryBusiness;
+
         private StockIn currentStockIn;
+
+        private List<Cargo> currentCargoes;
         #endregion //Field
 
         #region Constructor
@@ -38,6 +42,9 @@ namespace Phoebe.FormUI
         {
             this.customerBusiness = new CustomerBusiness();
             this.contractBusiness = new ContractBusiness();
+            this.categoryBusiness = new CategoryBusiness();
+
+            this.currentCargoes = new List<Cargo>();
         }
 
         private void InitControl()
@@ -47,6 +54,28 @@ namespace Phoebe.FormUI
             this.comboBoxCustomer.DataSource = this.customerBusiness.Get();
             this.comboBoxCustomer.DisplayMember = "Name";
             this.comboBoxCustomer.ValueMember = "ID";
+
+                        
+
+            DataGridViewComboBoxColumn fcColumn = this.dataGridViewColumnFirstCategoryID;
+            fcColumn.DataSource = categoryBusiness.GetFirstCategory();
+            fcColumn.DisplayMember = "Name";
+            fcColumn.ValueMember = "ID";
+          
+
+            DataGridViewComboBoxColumn scColumn = this.dataGridViewColumnSecondCategoryID;
+            scColumn.DataSource = categoryBusiness.GetSecondEmpty();
+            scColumn.DisplayMember = "Name";
+            scColumn.ValueMember = "ID";
+
+            //this.cargoDataGridView.DataSource = this.currentCargoes;
+
+            //DataGridViewComboBoxCell cell = this.cargoDataGridView.Rows[e.RowIndex].Cells[this.dataGridViewColumnFirstCategoryID.Index] as DataGridViewComboBoxCell;
+            //cell.DataSource = categoryBusiness.GetFirstCategory();
+            //cell.DisplayMember = "Name";
+            //cell.ValueMember = "ID";
+
+            //((DataGridViewComboBoxColumn)cargoDataGridView.Columns["dataGridViewColumnFirstCategoryID"]).DefaultCellStyle.NullValue = "--请选择--";
         }
 
         /// <summary>
@@ -138,7 +167,51 @@ namespace Phoebe.FormUI
         {
 
         }
-        #endregion //Event
+        
 
+        private void cargoDataGridView_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            //var cargo = this.cargoDataGridView.Rows[e.RowIndex].DataBoundItem as Cargo;
+
+            //var row = this.cargoDataGridView.Rows[e.RowIndex];
+            //DataGridViewComboBoxCell cell = this.cargoDataGridView.Rows[e.RowIndex].Cells[this.dataGridViewColumnFirstCategoryID.Index] as DataGridViewComboBoxCell;
+          
+        }
+       
+
+        private void cargoDataGridView_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            //string message = e.Exception.Message;
+            //MessageBox.Show(message);
+        }
+
+        
+
+        private void cargoDataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0)
+                return;
+
+            if (e.ColumnIndex == this.dataGridViewColumnFirstCategoryID.Index)
+            {
+                int first = Convert.ToInt32(this.cargoDataGridView.Rows[e.RowIndex].Cells[this.dataGridViewColumnFirstCategoryID.Index].Value);
+
+                DataGridViewComboBoxColumn scColumn = this.dataGridViewColumnSecondCategoryID;
+                scColumn.DataSource = categoryBusiness.GetSecondCategoryByFirst(first); 
+                scColumn.DisplayMember = "Name";
+                scColumn.ValueMember = "ID";
+            }
+            else if (e.ColumnIndex == this.dataGridViewColumnSecondCategoryID.Index)
+            {
+                int second = Convert.ToInt32(this.cargoDataGridView.Rows[e.RowIndex].Cells[this.dataGridViewColumnSecondCategoryID.Index].Value);
+
+                DataGridViewComboBoxColumn tcColumn = this.dataGridViewColumnThirdCategoryID;
+                tcColumn.DataSource = categoryBusiness.GetThirdCategoryBySecond(second);
+                tcColumn.DisplayMember = "Name";
+                tcColumn.ValueMember = "ID";
+            }
+
+        }
+        #endregion //Event
     }
 }

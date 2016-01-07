@@ -60,7 +60,7 @@ namespace Phoebe.Business
         /// <returns></returns>
         public List<SecondCategory> GetSecondCategoryByFirst(int firstId)
         {
-            return this.context.SecondCategories.Where(r => r.FirstCategoryID == firstId).ToList();
+            return this.context.SecondCategories.Where(r => r.FirstCategoryID == firstId || r.ID == 0).ToList();
         }
 
         /// <summary>
@@ -74,13 +74,22 @@ namespace Phoebe.Business
         }
 
         /// <summary>
+        /// 获取空二级分类
+        /// </summary>
+        /// <returns></returns>
+        public List<SecondCategory> GetSecondEmpty()
+        {
+            return this.context.SecondCategories.Where(r => r.ID == 0).ToList();
+        }
+
+        /// <summary>
         /// 获取二级分类下三级分离
         /// </summary>
         /// <param name="secondId">二级分类ID</param>
         /// <returns></returns>
         public List<ThirdCategory> GetThirdCategoryBySecond(int secondId)
         {
-            return this.context.ThirdCategories.Where(r => r.SecondCategoryID == secondId).ToList();
+            return this.context.ThirdCategories.Where(r => r.SecondCategoryID == secondId || r.ID == 0).ToList();
         }
 
         /// <summary>
