@@ -63,20 +63,35 @@ namespace Phoebe.Business
             return this.context.StockIns.Where(r => r.Status == (int)status).ToList();
         }
 
-        public ErrorCode StockIn(StockIn data)
+        /// <summary>
+        /// 货品入库
+        /// </summary>
+        /// <param name="data">入库信息</param>
+        /// <param name="details">入库详细</param>
+        /// <param name="billing">计费信息</param>
+        /// <param name="cargos">货品信息</param>
+        /// <returns></returns>
+        public ErrorCode StockIn(StockIn data, List<StockInDetail> details, Billing billing, List<Cargo> cargos)
         {
             try
             {
-                data.ID = Guid.NewGuid();
-                //data.Status = (int)EntityStatus.StockInReady;
-
+                // add stock in             
                 this.context.StockIns.Add(data);
+
+                // add cargos            
+                this.context.Cargoes.AddRange(cargos);
+
+                // add billing            
+                this.context.Billings.Add(billing);
+
+                // add stock in details     
+                this.context.StockInDetails.AddRange(details);
 
                 this.context.SaveChanges();
 
                 return ErrorCode.Success;
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return ErrorCode.Exception;
             }

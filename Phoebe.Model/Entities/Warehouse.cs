@@ -42,13 +42,6 @@ namespace Phoebe.Model
         public int Hierarchy { get; set; }
 
         /// <summary>
-        /// 是否库位
-        /// </summary>
-        [Required]
-        [Display(Name = "是否库位")]
-        public bool IsStorage { get; set; }
-
-        /// <summary>
         /// 备注
         /// </summary>
         [DataType(DataType.MultilineText)]

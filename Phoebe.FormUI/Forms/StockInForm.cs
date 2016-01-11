@@ -22,7 +22,11 @@ namespace Phoebe.FormUI
 
         private ContractBusiness contractBusiness;
 
-        CategoryBusiness categoryBusiness;
+        private CategoryBusiness categoryBusiness;
+
+        private WarehouseBusiness warehouseBusiness;
+
+        private StoreBusiness storeBusiness;
 
         private StockIn currentStockIn;
 
@@ -43,39 +47,32 @@ namespace Phoebe.FormUI
             this.customerBusiness = new CustomerBusiness();
             this.contractBusiness = new ContractBusiness();
             this.categoryBusiness = new CategoryBusiness();
+            this.warehouseBusiness = new WarehouseBusiness();
+            this.storeBusiness = new StoreBusiness();
 
             this.currentCargoes = new List<Cargo>();
         }
 
         private void InitControl()
         {
-            //this.textBoxUser.Text = this.currentUser.Name;
-
             this.comboBoxCustomer.DataSource = this.customerBusiness.Get();
             this.comboBoxCustomer.DisplayMember = "Name";
             this.comboBoxCustomer.ValueMember = "ID";
-
-                        
 
             DataGridViewComboBoxColumn fcColumn = this.dataGridViewColumnFirstCategoryID;
             fcColumn.DataSource = categoryBusiness.GetFirstCategory();
             fcColumn.DisplayMember = "Name";
             fcColumn.ValueMember = "ID";
-          
 
             DataGridViewComboBoxColumn scColumn = this.dataGridViewColumnSecondCategoryID;
             scColumn.DataSource = categoryBusiness.GetSecondEmpty();
             scColumn.DisplayMember = "Name";
             scColumn.ValueMember = "ID";
 
-            //this.cargoDataGridView.DataSource = this.currentCargoes;
-
-            //DataGridViewComboBoxCell cell = this.cargoDataGridView.Rows[e.RowIndex].Cells[this.dataGridViewColumnFirstCategoryID.Index] as DataGridViewComboBoxCell;
-            //cell.DataSource = categoryBusiness.GetFirstCategory();
-            //cell.DisplayMember = "Name";
-            //cell.ValueMember = "ID";
-
-            //((DataGridViewComboBoxColumn)cargoDataGridView.Columns["dataGridViewColumnFirstCategoryID"]).DefaultCellStyle.NullValue = "--请选择--";
+            DataGridViewComboBoxColumn whColumn = this.dataGridViewColumnWarehouse;
+            whColumn.DataSource = this.warehouseBusiness.Get();
+            whColumn.DisplayMember = "Number";
+            whColumn.ValueMember = "ID";
         }
 
         /// <summary>
@@ -86,8 +83,8 @@ namespace Phoebe.FormUI
             this.currentStockIn.InTime = this.dateBusinessTime.Value.Date;
             this.currentStockIn.FlowNumber = this.textBoxFlowNumber.Text;
             this.currentStockIn.ContractID = Convert.ToInt32(this.comboBoxContract.SelectedValue);
-
-            this.currentStockIn.Remark = this.textBoxRemark.Text;
+            this.currentStockIn.UserID = this.currentUser.ID;
+            this.currentStockIn.Remark = this.textBoxRemark.Text;            
         }
 
         /// <summary>
@@ -111,6 +108,61 @@ namespace Phoebe.FormUI
             }
 
             this.textBoxUser.Text = this.currentStockIn.User.Name;
+        }
+
+        /// <summary>
+        /// 保存新项
+        /// </summary>
+        /// <returns></returns>
+        private ErrorCode SaveNewItem()
+        {
+            StockIn stockIn = new StockIn();
+            stockIn.ID = Guid.NewGuid();
+            stockIn.InTime = this.dateBusinessTime.Value.Date;
+            stockIn.MonthTime = stockIn.InTime.Year + stockIn.InTime.Month.ToString().PadLeft(2, '0');
+            stockIn.FlowNumber = this.textBoxFlowNumber.Text;
+            stockIn.ContractID = Convert.ToInt32(this.comboBoxContract.SelectedValue);
+            stockIn.IsLock = false;
+            stockIn.UserID = this.currentUser.ID;
+            stockIn.Remark = this.textBoxRemark.Text;
+            stockIn.Status = (int)EntityStatus.StockInReady;
+
+            Billing billing = new Billing();
+            billing.StockInID = stockIn.ID;
+            billing.UnitPrice = this.numericUnitPrice.Value;
+            billing.HandlingPrice = this.numericHandlingPrice.Value;
+            billing.FreezePrice = this.numericFreezePrice.Value;
+            billing.DisposePrice = this.numericDisposePrice.Value;
+            billing.PackingPrice = this.numericPackingPrice.Value;
+            billing.RentPrice = this.numericRentPrice.Value;
+            billing.OtherPrice = this.numericOtherPrice.Value;
+            billing.Status = (int)EntityStatus.BillingUnsettle;
+
+            List<Cargo> cargos = new List<Cargo>();
+            List<StockInDetail> details = new List<StockInDetail>();
+
+            foreach (DataGridViewRow row in this.cargoDataGridView.Rows)
+            {
+                var cargo = row.DataBoundItem as Cargo;
+                cargo.ID = Guid.NewGuid();
+                cargo.ContractID = stockIn.ContractID;
+                cargo.StoreCount = cargo.Count;
+                cargo.RegisterTime = stockIn.InTime;
+                cargo.UserID = stockIn.UserID;
+                cargo.Status = (int)EntityStatus.CargoStockInReady;
+                cargos.Add(cargo);
+
+                StockInDetail siDetail = new StockInDetail();
+                siDetail.ID = Guid.NewGuid();
+                siDetail.StockInID = stockIn.ID;
+                siDetail.CargoID = cargo.ID;
+                siDetail.WarehouseID = Convert.ToInt32(row.Cells[this.dataGridViewColumnWarehouse.Index].Value);
+                siDetail.Count = cargo.Count;
+                siDetail.Status = (int)EntityStatus.StockInReady;
+                details.Add(siDetail);
+            }
+
+            return this.storeBusiness.StockIn(stockIn, details, billing, cargos);
         }
         #endregion //Function
 
@@ -165,28 +217,28 @@ namespace Phoebe.FormUI
 
         private void toolSave_Click(object sender, EventArgs e)
         {
-
+            ErrorCode result = SaveNewItem();
+            if (result == ErrorCode.Success)
+            {
+                MessageBox.Show("保存成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("保存失败:" + result.DisplayName(), FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
-        
-
-        private void cargoDataGridView_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
-        {
-            //var cargo = this.cargoDataGridView.Rows[e.RowIndex].DataBoundItem as Cargo;
-
-            //var row = this.cargoDataGridView.Rows[e.RowIndex];
-            //DataGridViewComboBoxCell cell = this.cargoDataGridView.Rows[e.RowIndex].Cells[this.dataGridViewColumnFirstCategoryID.Index] as DataGridViewComboBoxCell;
-          
-        }
-       
 
         private void cargoDataGridView_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
-            //string message = e.Exception.Message;
-            //MessageBox.Show(message);
+            string message = e.Exception.Message;
+            MessageBox.Show(message);
         }
 
-        
-
+        /// <summary>
+        /// 单元格更改事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cargoDataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0)
@@ -197,7 +249,7 @@ namespace Phoebe.FormUI
                 int first = Convert.ToInt32(this.cargoDataGridView.Rows[e.RowIndex].Cells[this.dataGridViewColumnFirstCategoryID.Index].Value);
 
                 DataGridViewComboBoxColumn scColumn = this.dataGridViewColumnSecondCategoryID;
-                scColumn.DataSource = categoryBusiness.GetSecondCategoryByFirst(first); 
+                scColumn.DataSource = categoryBusiness.GetSecondCategoryByFirst(first);
                 scColumn.DisplayMember = "Name";
                 scColumn.ValueMember = "ID";
             }
@@ -210,7 +262,27 @@ namespace Phoebe.FormUI
                 tcColumn.DisplayMember = "Name";
                 tcColumn.ValueMember = "ID";
             }
-
+            else if (e.ColumnIndex == this.dataGridViewColumnCount.Index)
+            {
+                var cargo = this.cargoDataGridView.Rows[e.RowIndex].DataBoundItem as Cargo;
+                if (cargo.Count < 0)
+                    cargo.Count = 0;
+                cargo.TotalWeight = Math.Round(cargo.UnitWeight * cargo.Count, 3);
+            }
+            else if (e.ColumnIndex == this.dataGridViewColumnUnitWeight.Index)
+            {
+                var cargo = this.cargoDataGridView.Rows[e.RowIndex].DataBoundItem as Cargo;
+                if (cargo.UnitWeight < 0)
+                    cargo.UnitWeight = 0;
+                cargo.TotalWeight = Math.Round(cargo.UnitWeight * cargo.Count / 1000, 3);
+            }
+            else if (e.ColumnIndex == this.dataGridViewColumnUnitVolume.Index)
+            {
+                var cargo = this.cargoDataGridView.Rows[e.RowIndex].DataBoundItem as Cargo;
+                if (cargo.UnitVolume < 0)
+                    cargo.UnitVolume = 0;
+                cargo.TotalVolume = Math.Round(cargo.UnitVolume * cargo.Count, 3);
+            }
         }
         #endregion //Event
     }
