@@ -55,6 +55,8 @@ namespace Phoebe.FormUI
 
         private void InitControl()
         {
+            UpdateTree();
+
             this.comboBoxCustomer.DataSource = this.customerBusiness.Get();
             this.comboBoxCustomer.DisplayMember = "Name";
             this.comboBoxCustomer.ValueMember = "ID";
@@ -105,9 +107,31 @@ namespace Phoebe.FormUI
             {
                 this.comboBoxCustomer.SelectedValue = this.currentStockIn.Contract.CustomerID;
                 this.comboBoxContract.SelectedValue = this.currentStockIn.ContractID;
+                this.textBoxBillingType.Text = ((BillingType)this.currentStockIn.Contract.BillingType).DisplayName();
             }
 
             this.textBoxUser.Text = this.currentStockIn.User.Name;
+            this.textBoxRemark.Text = this.currentStockIn.Remark;
+
+            this.numericUnitPrice.Value = this.currentStockIn.Billing.UnitPrice;
+            this.numericHandlingPrice.Value = this.currentStockIn.Billing.HandlingPrice;
+            this.numericFreezePrice.Value = this.currentStockIn.Billing.FreezePrice;
+            this.numericDisposePrice.Value = this.currentStockIn.Billing.DisposePrice;
+            this.numericRentPrice.Value = this.currentStockIn.Billing.RentPrice;
+            this.numericOtherPrice.Value = this.currentStockIn.Billing.OtherPrice;
+        }
+
+        private void UpdateTree()
+        {
+            var months = this.storeBusiness.GetStockInMonthGroup();
+            for(int i = 0; i < months.Length; i++)
+            {
+                TreeNode node = new TreeNode();
+                node.Name = months[i];
+                node.Text = months[i];
+                node.Nodes.Add("");
+                this.treeViewReceipt.Nodes.Add(node);
+            }
         }
 
         /// <summary>
@@ -173,6 +197,30 @@ namespace Phoebe.FormUI
             InitControl();
         }
 
+        private void treeViewReceipt_BeforeExpand(object sender, TreeViewCancelEventArgs e)
+        {
+            var data = this.storeBusiness.GetStockInByMonth(e.Node.Name);
+            e.Node.Nodes.Clear();
+            foreach(var item in data)
+            {
+                TreeNode node = new TreeNode();
+                node.Name = item.ID.ToString();
+                node.Text = item.FlowNumber;
+                node.Tag = item;
+                e.Node.Nodes.Add(node);
+            }
+        }
+        private void treeViewReceipt_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            if (e.Node.Level == 0)
+                return;
+
+            this.groupBox2.Visible = this.groupBox3.Visible = true;
+
+            this.currentStockIn = e.Node.Tag as StockIn;
+            ModelToControl();
+        }
+
         private void comboBoxCustomer_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (this.comboBoxCustomer.SelectedIndex != -1)
@@ -206,13 +254,14 @@ namespace Phoebe.FormUI
         {
             this.groupBox2.Visible = this.groupBox3.Visible = true;
 
-            this.currentStockIn = new StockIn();
-            this.currentStockIn.InTime = DateTime.Now.Date;
-            this.currentStockIn.Status = (int)EntityStatus.StockInReady;
-            this.currentStockIn.FlowNumber = "";
-            this.currentStockIn.User = this.currentUser;
-
-            ModelToControl();
+            DateTime now = DateTime.Now.Date;
+            this.dateBusinessTime.Value = now;
+            this.textBoxFlowNumber.Text = this.storeBusiness.GetLastStockInFlowNumber(now);
+            this.comboBoxCustomer.SelectedIndex = -1;
+            this.comboBoxContract.SelectedIndex = -1;
+            this.textBoxBillingType.Text = "";
+            this.textBoxStatus.Text = EntityStatus.StockInReady.DisplayName();
+            this.textBoxUser.Text = this.currentUser.Name;
         }
 
         private void toolSave_Click(object sender, EventArgs e)
@@ -284,6 +333,7 @@ namespace Phoebe.FormUI
                 cargo.TotalVolume = Math.Round(cargo.UnitVolume * cargo.Count, 3);
             }
         }
+
         #endregion //Event
     }
 }

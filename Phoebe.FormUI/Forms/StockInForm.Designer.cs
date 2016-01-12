@@ -30,10 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StockInForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.treeView1 = new System.Windows.Forms.TreeView();
+            this.treeViewReceipt = new System.Windows.Forms.TreeView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label16 = new System.Windows.Forms.Label();
@@ -141,7 +141,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.treeView1);
+            this.groupBox1.Controls.Add(this.treeViewReceipt);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Left;
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
@@ -150,13 +150,15 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "单据";
             // 
-            // treeView1
+            // treeViewReceipt
             // 
-            this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeView1.Location = new System.Drawing.Point(3, 17);
-            this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(166, 602);
-            this.treeView1.TabIndex = 0;
+            this.treeViewReceipt.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeViewReceipt.Location = new System.Drawing.Point(3, 17);
+            this.treeViewReceipt.Name = "treeViewReceipt";
+            this.treeViewReceipt.Size = new System.Drawing.Size(166, 602);
+            this.treeViewReceipt.TabIndex = 0;
+            this.treeViewReceipt.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeViewReceipt_BeforeExpand);
+            this.treeViewReceipt.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewReceipt_AfterSelect);
             // 
             // groupBox2
             // 
@@ -460,6 +462,7 @@
             // 
             this.textBoxFlowNumber.Location = new System.Drawing.Point(845, 12);
             this.textBoxFlowNumber.Name = "textBoxFlowNumber";
+            this.textBoxFlowNumber.ReadOnly = true;
             this.textBoxFlowNumber.Size = new System.Drawing.Size(147, 21);
             this.textBoxFlowNumber.TabIndex = 8;
             // 
@@ -677,8 +680,8 @@
             // dataGridViewColumnTotalWeight
             // 
             this.dataGridViewColumnTotalWeight.DataPropertyName = "TotalWeight";
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Silver;
-            this.dataGridViewColumnTotalWeight.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.Silver;
+            this.dataGridViewColumnTotalWeight.DefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridViewColumnTotalWeight.HeaderText = "总重量(t)";
             this.dataGridViewColumnTotalWeight.Name = "dataGridViewColumnTotalWeight";
             this.dataGridViewColumnTotalWeight.ReadOnly = true;
@@ -693,8 +696,8 @@
             // dataGridViewColumnTotalVolume
             // 
             this.dataGridViewColumnTotalVolume.DataPropertyName = "TotalVolume";
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Silver;
-            this.dataGridViewColumnTotalVolume.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.Silver;
+            this.dataGridViewColumnTotalVolume.DefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridViewColumnTotalVolume.HeaderText = "总体积(立方)";
             this.dataGridViewColumnTotalVolume.Name = "dataGridViewColumnTotalVolume";
             this.dataGridViewColumnTotalVolume.ReadOnly = true;
@@ -1030,7 +1033,7 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.TextBox textBoxUser;
-        private System.Windows.Forms.TreeView treeView1;
+        private System.Windows.Forms.TreeView treeViewReceipt;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.ToolStripButton toolStripButton2;
         private System.Windows.Forms.BindingNavigator cargoBindingNavigator;

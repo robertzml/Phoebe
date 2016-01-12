@@ -64,6 +64,49 @@ namespace Phoebe.Business
         }
 
         /// <summary>
+        /// 获取入库月份分组
+        /// </summary>
+        /// <returns></returns>
+        /// <remarks>
+        /// 用于树形导航分组
+        /// </remarks>
+        public string[] GetStockInMonthGroup()
+        {
+            var m = this.context.StockIns.GroupBy(r => r.MonthTime).Select(g => g.Key).OrderByDescending(s => s);
+            return m.ToArray();
+        }
+
+        /// <summary>
+        /// 按月度获取入库记录
+        /// </summary>
+        /// <param name="monthTime">月份</param>
+        /// <returns></returns>
+        public List<StockIn> GetStockInByMonth(string monthTime)
+        {
+            var data = this.context.StockIns.Where(r => r.MonthTime == monthTime);
+            return data.ToList();
+        }
+
+        /// <summary>
+        /// 获取最新流水单号
+        /// </summary>
+        /// <param name="inTime">入库时间</param>
+        /// <returns></returns>
+        public string GetLastStockInFlowNumber(DateTime inTime)
+        {
+            var data = this.context.StockIns.Where(r => r.InTime == inTime).OrderByDescending(r => r.FlowNumber);
+            if (data.Count() == 0)
+                return string.Format("{0}{1}{2}0001",
+                    inTime.Year, inTime.Month.ToString().PadLeft(2, '0'), inTime.Day.ToString().PadLeft(2, '0'));
+            else
+            {
+                int newNumber = Convert.ToInt32(data.First().FlowNumber.Substring(8)) + 1;
+                return string.Format("{0}{1}{2}{3}", inTime.Year, inTime.Month.ToString().PadLeft(2, '0'),
+                    inTime.Day.ToString().PadLeft(2, '0'), newNumber.ToString().PadLeft(4, '0'));
+            }
+        }
+
+        /// <summary>
         /// 货品入库
         /// </summary>
         /// <param name="data">入库信息</param>
