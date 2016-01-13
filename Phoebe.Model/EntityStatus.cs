@@ -154,16 +154,10 @@ namespace Phoebe.Model
         StockInReady = 71,
 
         /// <summary>
-        /// 72:入库取消
-        /// </summary>
-        [Display(Name = "入库取消")]
-        StockInCancel = 72,
-
-        /// <summary>
-        /// 73:已入库
+        /// 72:已入库
         /// </summary>
         [Display(Name = "已入库")]
-        StockIn = 73,
+        StockIn = 72,
 
         /// <summary>
         /// 81:准备出库

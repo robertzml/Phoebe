@@ -28,9 +28,17 @@ namespace Phoebe.FormUI
 
         private StoreBusiness storeBusiness;
 
+        /// <summary>
+        /// 当前入库
+        /// </summary>
         private StockIn currentStockIn;
 
         private List<Cargo> currentCargoes;
+
+        /// <summary>
+        /// 是否新增
+        /// </summary>
+        private bool isNew = false;
         #endregion //Field
 
         #region Constructor
@@ -119,8 +127,17 @@ namespace Phoebe.FormUI
             this.numericDisposePrice.Value = this.currentStockIn.Billing.DisposePrice;
             this.numericRentPrice.Value = this.currentStockIn.Billing.RentPrice;
             this.numericOtherPrice.Value = this.currentStockIn.Billing.OtherPrice;
+
+            List<Cargo> cargos = new List<Cargo>();
+            foreach(var item in this.currentStockIn.StockInDetails)
+            {
+
+            }
         }
 
+        /// <summary>
+        /// 更新票据列表
+        /// </summary>
         private void UpdateTree()
         {
             var months = this.storeBusiness.GetStockInMonthGroup();
@@ -180,13 +197,24 @@ namespace Phoebe.FormUI
                 siDetail.ID = Guid.NewGuid();
                 siDetail.StockInID = stockIn.ID;
                 siDetail.CargoID = cargo.ID;
-                siDetail.WarehouseID = Convert.ToInt32(row.Cells[this.dataGridViewColumnWarehouse.Index].Value);
+                siDetail.WarehouseID = cargo.WarehouseID.Value;
                 siDetail.Count = cargo.Count;
                 siDetail.Status = (int)EntityStatus.StockInReady;
                 details.Add(siDetail);
             }
 
-            return this.storeBusiness.StockIn(stockIn, details, billing, cargos);
+            ErrorCode result = this.storeBusiness.StockIn(stockIn, details, billing, cargos);
+            if (result == ErrorCode.Success)
+            {
+                this.currentStockIn = this.storeBusiness.GetStockIn(stockIn.ID.ToString());
+                this.isNew = false;
+                return ErrorCode.Success;
+            }
+            else
+            {
+                return result;
+            }
+           
         }
         #endregion //Function
 
@@ -210,6 +238,12 @@ namespace Phoebe.FormUI
                 e.Node.Nodes.Add(node);
             }
         }
+
+        /// <summary>
+        /// 选择历史单据
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void treeViewReceipt_AfterSelect(object sender, TreeViewEventArgs e)
         {
             if (e.Node.Level == 0)
@@ -219,6 +253,88 @@ namespace Phoebe.FormUI
 
             this.currentStockIn = e.Node.Tag as StockIn;
             ModelToControl();
+            this.isNew = false;
+            if (this.currentStockIn.Status == (int)EntityStatus.StockInReady)
+            {
+                this.toolConfirm.Enabled = true;
+            }
+            else
+            {
+                this.toolConfirm.Enabled = false;
+            }
+        }
+
+        /// <summary>
+        /// 新建入库
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void toolNew_Click(object sender, EventArgs e)
+        {
+            this.isNew = true;
+            this.groupBox2.Visible = this.groupBox3.Visible = true;
+
+            DateTime now = DateTime.Now.Date;
+            this.dateBusinessTime.Value = now;
+            this.textBoxFlowNumber.Text = this.storeBusiness.GetLastStockInFlowNumber(now);
+            this.comboBoxCustomer.SelectedIndex = -1;
+            this.comboBoxContract.SelectedIndex = -1;
+            this.textBoxBillingType.Text = "";
+            this.textBoxStatus.Text = EntityStatus.StockInReady.DisplayName();
+            this.textBoxUser.Text = this.currentUser.Name;
+        }
+
+        /// <summary>
+        /// 保存入库
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void toolSave_Click(object sender, EventArgs e)
+        {
+            if (this.isNew)
+            {
+                ErrorCode result = SaveNewItem();
+                if (result == ErrorCode.Success)
+                {
+                    MessageBox.Show("保存成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.toolConfirm.Enabled = true;
+                    UpdateTree();
+                }
+                else
+                {
+                    MessageBox.Show("保存失败:" + result.DisplayName(), FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 入库确认
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void toolConfirm_Click(object sender, EventArgs e)
+        {
+            if (this.currentStockIn == null)
+            {
+                MessageBox.Show("当前未选中记录", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            if (this.currentStockIn.Status != (int)EntityStatus.StockInReady)
+            {
+                MessageBox.Show("当前记录已确认", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            ErrorCode result = this.storeBusiness.StockInConfirm(this.currentStockIn.ID);
+            if (result == ErrorCode.Success)
+            {
+                MessageBox.Show("入库已确认", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.toolConfirm.Enabled = false;
+            }
+            else
+            {
+                MessageBox.Show("入库确认失败:" + result.DisplayName(), FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void comboBoxCustomer_SelectedIndexChanged(object sender, EventArgs e)
@@ -244,38 +360,7 @@ namespace Phoebe.FormUI
                 this.textBoxBillingType.Text = "";
             }
         }
-
-        /// <summary>
-        /// 新建入库
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void toolNew_Click(object sender, EventArgs e)
-        {
-            this.groupBox2.Visible = this.groupBox3.Visible = true;
-
-            DateTime now = DateTime.Now.Date;
-            this.dateBusinessTime.Value = now;
-            this.textBoxFlowNumber.Text = this.storeBusiness.GetLastStockInFlowNumber(now);
-            this.comboBoxCustomer.SelectedIndex = -1;
-            this.comboBoxContract.SelectedIndex = -1;
-            this.textBoxBillingType.Text = "";
-            this.textBoxStatus.Text = EntityStatus.StockInReady.DisplayName();
-            this.textBoxUser.Text = this.currentUser.Name;
-        }
-
-        private void toolSave_Click(object sender, EventArgs e)
-        {
-            ErrorCode result = SaveNewItem();
-            if (result == ErrorCode.Success)
-            {
-                MessageBox.Show("保存成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else
-            {
-                MessageBox.Show("保存失败:" + result.DisplayName(), FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
+       
 
         private void cargoDataGridView_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
@@ -335,5 +420,7 @@ namespace Phoebe.FormUI
         }
 
         #endregion //Event
+
+       
     }
 }

@@ -32,6 +32,7 @@ namespace Phoebe.Model
         public double UnitVolume { get; set; }
         public double TotalVolume { get; set; }
         public int StoreCount { get; set; }
+        public Nullable<int> WarehouseID { get; set; }
         public string OriginPlace { get; set; }
         public int ShelfLife { get; set; }
         public string Specification { get; set; }
@@ -48,6 +49,7 @@ namespace Phoebe.Model
         public virtual SecondCategory SecondCategory { get; set; }
         public virtual ThirdCategory ThirdCategory { get; set; }
         public virtual User User { get; set; }
+        public virtual Warehouse Warehouse { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Stock> Stocks { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

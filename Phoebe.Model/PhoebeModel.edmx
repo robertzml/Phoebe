@@ -36,6 +36,7 @@
           <Property Name="UnitVolume" Type="float" Nullable="false" />
           <Property Name="TotalVolume" Type="float" Nullable="false" />
           <Property Name="StoreCount" Type="int" Nullable="false" />
+          <Property Name="WarehouseID" Type="int" />
           <Property Name="OriginPlace" Type="nvarchar" MaxLength="100" />
           <Property Name="ShelfLife" Type="int" Nullable="false" />
           <Property Name="Specification" Type="nvarchar" MaxLength="100" />
@@ -186,7 +187,9 @@
           <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_Billing_StockIn">
-          <End Role="StockIn" Type="Self.StockIn" Multiplicity="1" />
+          <End Role="StockIn" Type="Self.StockIn" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Billing" Type="Self.Billing" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="StockIn">
@@ -254,6 +257,18 @@
             </Principal>
             <Dependent Role="Cargo">
               <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cargo_Warehouse">
+          <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="0..1" />
+          <End Role="Cargo" Type="Self.Cargo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouse">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Cargo">
+              <PropertyRef Name="WarehouseID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -467,6 +482,10 @@
             <End Role="User" EntitySet="User" />
             <End Role="Cargo" EntitySet="Cargo" />
           </AssociationSet>
+          <AssociationSet Name="FK_Cargo_Warehouse" Association="Self.FK_Cargo_Warehouse">
+            <End Role="Warehouse" EntitySet="Warehouse" />
+            <End Role="Cargo" EntitySet="Cargo" />
+          </AssociationSet>
           <AssociationSet Name="FK_Contract_Customer" Association="Self.FK_Contract_Customer">
             <End Role="Customer" EntitySet="Customer" />
             <End Role="Contract" EntitySet="Contract" />
@@ -614,6 +633,10 @@
             <End Role="User" EntitySet="Users" />
             <End Role="Cargo" EntitySet="Cargoes" />
           </AssociationSet>
+          <AssociationSet Name="FK_Cargo_Warehouse" Association="PhoebeModel.FK_Cargo_Warehouse">
+            <End Role="Warehouse" EntitySet="Warehouses" />
+            <End Role="Cargo" EntitySet="Cargoes" />
+          </AssociationSet>
           <AssociationSet Name="FK_Stock_Cargo" Association="PhoebeModel.FK_Stock_Cargo">
             <End Role="Cargo" EntitySet="Cargoes" />
             <End Role="Stock" EntitySet="Stocks" />
@@ -695,6 +718,7 @@
           <NavigationProperty Name="ParentWarehouse" Relationship="PhoebeModel.FK_Warehouse_Warehouse" FromRole="Warehouse1" ToRole="Warehouse" />
           <NavigationProperty Name="Stocks" Relationship="PhoebeModel.FK_Stock_Warehouse" FromRole="Warehouse" ToRole="Stock" />
           <NavigationProperty Name="StockInDetails" Relationship="PhoebeModel.FK_StockInDetails_Warehouse" FromRole="Warehouse" ToRole="StockInDetail" />
+          <NavigationProperty Name="Cargoes" Relationship="PhoebeModel.FK_Cargo_Warehouse" FromRole="Warehouse" ToRole="Cargo" />
         </EntityType>
         <Association Name="FK_Warehouse_Warehouse">
           <End Type="PhoebeModel.Warehouse" Role="Warehouse" Multiplicity="0..1" />
@@ -983,6 +1007,7 @@
           <Property Name="UnitVolume" Type="Double" Nullable="false" />
           <Property Name="TotalVolume" Type="Double" Nullable="false" />
           <Property Name="StoreCount" Type="Int32" Nullable="false" />
+          <Property Name="WarehouseID" Type="Int32" />
           <Property Name="OriginPlace" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="ShelfLife" Type="Int32" Nullable="false" />
           <Property Name="Specification" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
@@ -998,6 +1023,7 @@
           <NavigationProperty Name="SecondCategory" Relationship="PhoebeModel.FK_Cargo_SecondCategory" FromRole="Cargo" ToRole="SecondCategory" />
           <NavigationProperty Name="ThirdCategory" Relationship="PhoebeModel.FK_Cargo_ThirdCategory" FromRole="Cargo" ToRole="ThirdCategory" />
           <NavigationProperty Name="User" Relationship="PhoebeModel.FK_Cargo_User" FromRole="Cargo" ToRole="User" />
+          <NavigationProperty Name="Warehouse" Relationship="PhoebeModel.FK_Cargo_Warehouse" FromRole="Cargo" ToRole="Warehouse" />
           <NavigationProperty Name="Stocks" Relationship="PhoebeModel.FK_Stock_Cargo" FromRole="Cargo" ToRole="Stock" />
           <NavigationProperty Name="StockInDetails" Relationship="PhoebeModel.FK_StockInDetails_Cargo" FromRole="Cargo" ToRole="StockInDetail" />
         </EntityType>
@@ -1058,6 +1084,18 @@
             </Principal>
             <Dependent Role="Cargo">
               <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cargo_Warehouse">
+          <End Type="PhoebeModel.Warehouse" Role="Warehouse" Multiplicity="0..1" />
+          <End Type="PhoebeModel.Cargo" Role="Cargo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouse">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Cargo">
+              <PropertyRef Name="WarehouseID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1272,6 +1310,7 @@
                 <ScalarProperty Name="Specification" ColumnName="Specification" />
                 <ScalarProperty Name="ShelfLife" ColumnName="ShelfLife" />
                 <ScalarProperty Name="OriginPlace" ColumnName="OriginPlace" />
+                <ScalarProperty Name="WarehouseID" ColumnName="WarehouseID" />
                 <ScalarProperty Name="StoreCount" ColumnName="StoreCount" />
                 <ScalarProperty Name="TotalVolume" ColumnName="TotalVolume" />
                 <ScalarProperty Name="UnitVolume" ColumnName="UnitVolume" />

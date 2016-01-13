@@ -139,6 +139,53 @@ namespace Phoebe.Business
                 return ErrorCode.Exception;
             }
         }
+
+        /// <summary>
+        /// 入库确认
+        /// </summary>
+        /// <param name="id">入库ID</param>
+        /// <returns></returns>
+        public ErrorCode StockInConfirm(Guid id)
+        {
+            try
+            {
+                StockIn si = this.context.StockIns.Find(id);
+                if (si == null)
+                    return ErrorCode.ObjectNotFound;
+                
+                si.Status = (int)EntityStatus.StockIn;
+
+                // add stock information
+                foreach (var item in si.StockInDetails)
+                {
+                    // change stock in details and cargo status
+                    item.Status = (int)EntityStatus.StockIn;
+                    item.Cargo.InTime = si.InTime;
+                    item.Cargo.Status = (int)EntityStatus.CargoStockIn;
+
+                    Stock stock = new Stock();
+                    stock.ID = Guid.NewGuid();
+                    stock.WarehouseID = item.WarehouseID;
+                    stock.Count = item.Count;
+                    stock.CargoID = item.CargoID;
+                    stock.InTime = si.InTime;
+                    stock.Source = 0;
+                    stock.Status = (int)EntityStatus.StoreIn;
+
+                    this.context.Stocks.Add(stock);
+
+                    item.StockID = stock.ID;
+
+                    this.context.SaveChanges();
+                }
+
+                return ErrorCode.Success;
+            }
+            catch(Exception)
+            {
+                return ErrorCode.Exception;
+            }
+        }
         #endregion //Stock In
         #endregion //Method
     }
