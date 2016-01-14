@@ -75,9 +75,14 @@ namespace Phoebe.FormUI
             fcColumn.ValueMember = "ID";
 
             DataGridViewComboBoxColumn scColumn = this.dataGridViewColumnSecondCategoryID;
-            scColumn.DataSource = categoryBusiness.GetSecondEmpty();
+            scColumn.DataSource = categoryBusiness.GetSecondCategory();
             scColumn.DisplayMember = "Name";
             scColumn.ValueMember = "ID";
+
+            DataGridViewComboBoxColumn tcColumn = this.dataGridViewColumnThirdCategoryID;
+            tcColumn.DataSource = categoryBusiness.GetThirdCategory();
+            tcColumn.DisplayMember = "Name";
+            tcColumn.ValueMember = "ID";
 
             DataGridViewComboBoxColumn whColumn = this.dataGridViewColumnWarehouse;
             whColumn.DataSource = this.warehouseBusiness.Get();
@@ -131,8 +136,10 @@ namespace Phoebe.FormUI
             List<Cargo> cargos = new List<Cargo>();
             foreach(var item in this.currentStockIn.StockInDetails)
             {
-
+                cargos.Add(item.Cargo);
             }
+
+            this.cargoDataGridView.DataSource = cargos;
         }
 
         /// <summary>
@@ -140,6 +147,8 @@ namespace Phoebe.FormUI
         /// </summary>
         private void UpdateTree()
         {
+            this.treeViewReceipt.Nodes.Clear();
+
             var months = this.storeBusiness.GetStockInMonthGroup();
             for(int i = 0; i < months.Length; i++)
             {
@@ -282,6 +291,9 @@ namespace Phoebe.FormUI
             this.textBoxBillingType.Text = "";
             this.textBoxStatus.Text = EntityStatus.StockInReady.DisplayName();
             this.textBoxUser.Text = this.currentUser.Name;
+
+            this.numericUnitPrice.Value = 0;
+            this.numericHandlingPrice.Value = 0;
         }
 
         /// <summary>
@@ -304,6 +316,10 @@ namespace Phoebe.FormUI
                 {
                     MessageBox.Show("保存失败:" + result.DisplayName(), FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
+            }
+            else
+            {
+
             }
         }
 
@@ -329,6 +345,7 @@ namespace Phoebe.FormUI
             if (result == ErrorCode.Success)
             {
                 MessageBox.Show("入库已确认", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.textBoxStatus.Text = EntityStatus.StockIn.DisplayName();
                 this.toolConfirm.Enabled = false;
             }
             else

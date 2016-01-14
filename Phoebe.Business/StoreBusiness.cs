@@ -83,7 +83,7 @@ namespace Phoebe.Business
         /// <returns></returns>
         public List<StockIn> GetStockInByMonth(string monthTime)
         {
-            var data = this.context.StockIns.Where(r => r.MonthTime == monthTime);
+            var data = this.context.StockIns.Where(r => r.MonthTime == monthTime).OrderByDescending(r => r.InTime);
             return data.ToList();
         }
 
