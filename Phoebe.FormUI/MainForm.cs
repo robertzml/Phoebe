@@ -108,6 +108,17 @@ namespace Phoebe.FormUI
         }
 
         /// <summary>
+        /// 货品 - 在库货品
+        /// </summary>
+        private void menuCargoIn_Click(object sender, EventArgs e)
+        {
+            CargoForm form = new CargoForm();
+            form.MdiParent = this;
+            form.WindowState = FormWindowState.Maximized;
+            form.Show();
+        }
+
+        /// <summary>
         /// 冷库租赁 - 货品入库
         /// </summary>
         private void menuStockIn_Click(object sender, EventArgs e)
@@ -151,5 +162,7 @@ namespace Phoebe.FormUI
         #endregion //Menu Event
 
         #endregion //Event
+
+       
     }
 }
