@@ -9,9 +9,9 @@
         <EntityTypeShape EntityType="PhoebeModel.User" Width="1.5" PointX="13.75" PointY="5.375" />
         <EntityTypeShape EntityType="PhoebeModel.UserGroup" Width="1.5" PointX="16.25" PointY="5.375" />
         <AssociationConnector Association="PhoebeModel.FK_User_UserGroup" />
-        <EntityTypeShape EntityType="PhoebeModel.Warehouse" Width="1.5" PointX="3.25" PointY="0.625" />
+        <EntityTypeShape EntityType="PhoebeModel.Warehouse" Width="1.5" PointX="1.75" PointY="8.625" />
         <AssociationConnector Association="PhoebeModel.FK_Warehouse_Warehouse" />
-        <EntityTypeShape EntityType="PhoebeModel.Contract" Width="1.5" PointX="4.875" PointY="4.375" />
+        <EntityTypeShape EntityType="PhoebeModel.Contract" Width="1.5" PointX="5.375" PointY="3.875" />
         <AssociationConnector Association="PhoebeModel.FK_Contract_Customer" />
         <AssociationConnector Association="PhoebeModel.FK_Contract_User" />
         <EntityTypeShape EntityType="PhoebeModel.FirstCategory" Width="1.5" PointX="9" PointY="1.375" />
@@ -19,13 +19,13 @@
         <EntityTypeShape EntityType="PhoebeModel.ThirdCategory" Width="1.5" PointX="13.5" PointY="1.25" />
         <AssociationConnector Association="PhoebeModel.FK_SecondCategory_FirstCategory" />
         <AssociationConnector Association="PhoebeModel.FK_ThirdCategory_SecondCategory" />
-        <EntityTypeShape EntityType="PhoebeModel.Billing" Width="1.5" PointX="13.75" PointY="14.625" />
-        <EntityTypeShape EntityType="PhoebeModel.StockIn" Width="1.5" PointX="10" PointY="14.25" />
+        <EntityTypeShape EntityType="PhoebeModel.Billing" Width="1.5" PointX="9.75" PointY="13" />
+        <EntityTypeShape EntityType="PhoebeModel.StockIn" Width="1.5" PointX="9.375" PointY="17.875" />
         <AssociationConnector Association="PhoebeModel.FK_Billing_StockIn" />
         <AssociationConnector Association="PhoebeModel.FK_StockIn_Contract" />
         <AssociationConnector Association="PhoebeModel.FK_StockIn_User" />
-        <EntityTypeShape EntityType="PhoebeModel.Stock" Width="1.5" PointX="8" PointY="19" />
-        <EntityTypeShape EntityType="PhoebeModel.StockInDetail" Width="1.5" PointX="6.375" PointY="14.625" />
+        <EntityTypeShape EntityType="PhoebeModel.Stock" Width="1.5" PointX="7.875" PointY="21.75" />
+        <EntityTypeShape EntityType="PhoebeModel.StockInDetail" Width="1.5" PointX="6.75" PointY="15.125" />
         <AssociationConnector Association="PhoebeModel.FK_Stock_Warehouse" />
         <AssociationConnector Association="PhoebeModel.FK_StockInDetails_Stock" />
         <AssociationConnector Association="PhoebeModel.FK_StockInDetails_StockIn" />
@@ -39,6 +39,14 @@
         <AssociationConnector Association="PhoebeModel.FK_Cargo_Warehouse" />
         <AssociationConnector Association="PhoebeModel.FK_Stock_Cargo" />
         <AssociationConnector Association="PhoebeModel.FK_StockInDetails_Cargo" />
+        <EntityTypeShape EntityType="PhoebeModel.StockOut" Width="1.5" PointX="12.5" PointY="18" />
+        <EntityTypeShape EntityType="PhoebeModel.StockOutDetail" Width="1.5" PointX="15.625" PointY="18.625" />
+        <AssociationConnector Association="PhoebeModel.FK_StockOutDetails_Cargo" />
+        <AssociationConnector Association="PhoebeModel.FK_StockOut_Contract" />
+        <AssociationConnector Association="PhoebeModel.FK_StockOutDetails_Stock" />
+        <AssociationConnector Association="PhoebeModel.FK_StockOut_User" />
+        <AssociationConnector Association="PhoebeModel.FK_StockOutDetails_StockOut" />
+        <AssociationConnector Association="PhoebeModel.FK_StockOutDetails_Warehouse" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -118,16 +118,16 @@ namespace Phoebe.Business
         {
             try
             {
-                // add stock in             
+                // add stock in
                 this.context.StockIns.Add(data);
 
-                // add cargos            
+                // add cargos
                 this.context.Cargoes.AddRange(cargos);
 
-                // add billing            
+                // add billing
                 this.context.Billings.Add(billing);
 
-                // add stock in details     
+                // add stock in details
                 this.context.StockInDetails.AddRange(details);
 
                 this.context.SaveChanges();
@@ -152,7 +152,7 @@ namespace Phoebe.Business
                 StockIn si = this.context.StockIns.Find(id);
                 if (si == null)
                     return ErrorCode.ObjectNotFound;
-                
+
                 si.Status = (int)EntityStatus.StockIn;
 
                 // add stock information
@@ -181,12 +181,93 @@ namespace Phoebe.Business
 
                 return ErrorCode.Success;
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return ErrorCode.Exception;
             }
         }
         #endregion //Stock In
+
+        #region Stock Out
+        /// <summary>
+        /// 获取出库记录
+        /// </summary>
+        /// <returns></returns>
+        public List<StockOut> GetStockOut()
+        {
+            return this.context.StockOuts.OrderByDescending(r => r.OutTime).ToList();
+        }
+
+        /// <summary>
+        /// 获取出库记录
+        /// </summary>
+        /// <param name="id">ID</param>
+        /// <returns></returns>
+        public StockOut GetStockOut(string id)
+        {
+            Guid gid;
+            if (!Guid.TryParse(id, out gid))
+                return null;
+
+            return this.context.StockOuts.Find(gid);
+        }
+
+        /// <summary>
+        /// 按月度获取出库记录
+        /// </summary>
+        /// <param name="monthTime">月份</param>
+        /// <returns></returns>
+        public List<StockOut> GetStockOutByMonth(string monthTime)
+        {
+            var data = this.context.StockOuts.Where(r => r.MonthTime == monthTime).OrderByDescending(r => r.OutTime);
+            return data.ToList();
+        }
+
+        /// <summary>
+        /// 获取最新出库流水单号
+        /// </summary>
+        /// <param name="outTime">出库时间</param>
+        /// <returns></returns>
+        public string GetLastStockOutFlowNumber(DateTime outTime)
+        {
+            var data = this.context.StockOuts.Where(r => r.OutTime == outTime).OrderByDescending(r => r.FlowNumber);
+            if (data.Count() == 0)
+                return string.Format("{0}{1}{2}0001",
+                    outTime.Year, outTime.Month.ToString().PadLeft(2, '0'), outTime.Day.ToString().PadLeft(2, '0'));
+            else
+            {
+                int newNumber = Convert.ToInt32(data.First().FlowNumber.Substring(8)) + 1;
+                return string.Format("{0}{1}{2}{3}", outTime.Year, outTime.Month.ToString().PadLeft(2, '0'),
+                    outTime.Day.ToString().PadLeft(2, '0'), newNumber.ToString().PadLeft(4, '0'));
+            }
+        }
+
+        /// <summary>
+        /// 货品出库
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="details"></param>
+        /// <returns></returns>
+        public ErrorCode StockOut(StockOut data, List<StockOutDetail> details)
+        {
+            try
+            {
+                // add stock out
+                this.context.StockOuts.Add(data);
+
+                // add stock in details
+                this.context.StockOutDetails.AddRange(details);
+
+                this.context.SaveChanges();
+
+                return ErrorCode.Success;
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+        }
+        #endregion //Stock Out
         #endregion //Method
     }
 }

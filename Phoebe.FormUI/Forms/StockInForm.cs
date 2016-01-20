@@ -139,7 +139,8 @@ namespace Phoebe.FormUI
                 cargos.Add(item.Cargo);
             }
 
-            this.cargoDataGridView.DataSource = cargos;
+            //this.cargoDataGridView.DataSource = cargos;
+            this.cargoBindingSource.DataSource = cargos;
         }
 
         /// <summary>
@@ -435,9 +436,6 @@ namespace Phoebe.FormUI
                 cargo.TotalVolume = Math.Round(cargo.UnitVolume * cargo.Count, 3);
             }
         }
-
         #endregion //Event
-
-       
     }
 }

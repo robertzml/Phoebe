@@ -130,6 +130,17 @@ namespace Phoebe.FormUI
         }
 
         /// <summary>
+        /// 冷库租赁 - 货品出库
+        /// </summary>
+        private void menuStockOut_Click(object sender, EventArgs e)
+        {
+            StockOutForm form = new StockOutForm(this.currentUser);
+            form.MdiParent = this;
+            form.WindowState = FormWindowState.Maximized;
+            form.Show();
+        }
+
+        /// <summary>
         /// 用户 - 用户列表
         /// </summary>
         private void menuUserList_Click(object sender, EventArgs e)
@@ -159,10 +170,9 @@ namespace Phoebe.FormUI
             ChangePasswordForm form = new ChangePasswordForm(this.currentUser);
             form.ShowDialog();
         }
+
         #endregion //Menu Event
 
         #endregion //Event
-
-       
     }
 }
