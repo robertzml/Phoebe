@@ -50,10 +50,59 @@ namespace Phoebe.FormUI
 
         private void InitControl()
         {
+            UpdateTree();
+
             this.comboBoxCustomer.DataSource = this.customerBusiness.Get();
             this.comboBoxCustomer.DisplayMember = "Name";
             this.comboBoxCustomer.ValueMember = "ID";
-         
+        }
+
+        /// <summary>
+        /// 更新模型数据到页面
+        /// </summary>
+        private void ModelToControl()
+        {
+            this.textBoxStatus.Text = ((EntityStatus)this.currentStockOut.Status).DisplayName();
+            this.dateBusinessTime.Value = this.currentStockOut.OutTime;
+            this.textBoxFlowNumber.Text = this.currentStockOut.FlowNumber.ToString();
+            if (this.currentStockOut.ContractID == 0)
+            {
+                this.comboBoxCustomer.SelectedIndex = -1;
+                this.comboBoxContract.SelectedIndex = -1;
+            }
+            else
+            {
+                this.comboBoxCustomer.SelectedValue = this.currentStockOut.Contract.CustomerID;
+                this.comboBoxContract.SelectedValue = this.currentStockOut.ContractID;
+            }
+            this.textBoxUser.Text = this.currentStockOut.User.Name;
+            this.textBoxRemark.Text = this.currentStockOut.Remark;
+
+            List<Cargo> cargos = new List<Cargo>();
+            foreach (var item in this.currentStockOut.StockOutDetails)
+            {
+                cargos.Add(item.Cargo);
+            }
+
+            this.cargoBindingSource.DataSource = cargos;
+        }
+
+        /// <summary>
+        /// 更新票据列表
+        /// </summary>
+        private void UpdateTree()
+        {
+            this.treeViewReceipt.Nodes.Clear();
+
+            var months = this.storeBusiness.GetStockOutMonthGroup();
+            for (int i = 0; i < months.Length; i++)
+            {
+                TreeNode node = new TreeNode();
+                node.Name = months[i];
+                node.Text = months[i];
+                node.Nodes.Add("");
+                this.treeViewReceipt.Nodes.Add(node);
+            }
         }
 
         /// <summary>
@@ -76,7 +125,21 @@ namespace Phoebe.FormUI
             List<StockOutDetail> details = new List<StockOutDetail>();
             foreach (DataGridViewRow row in this.cargoDataGridView.Rows)
             {
-                StockOutDetail soDetail = new StockOutDetail();
+                bool isSelect = Convert.ToBoolean(row.Cells[this.dataGridViewColumnSelect.Index].Value);
+                if (isSelect)
+                {
+                    var cargo = row.DataBoundItem as Cargo;
+
+                    StockOutDetail soDetail = new StockOutDetail();
+                    soDetail.ID = Guid.NewGuid();
+                    soDetail.StockOutID = stockOut.ID;
+                    soDetail.CargoID = cargo.ID;
+                    soDetail.WarehouseID = cargo.WarehouseID.Value;
+                    soDetail.StoreCount = cargo.StoreCount;
+                    soDetail.Count = Convert.ToInt32(row.Cells[this.dataGridViewColumnOutCount.Index].Value);
+                    soDetail.Status = (int)EntityStatus.StockOutReady;
+                    details.Add(soDetail);
+                }
             }
 
             ErrorCode result = this.storeBusiness.StockOut(stockOut, details);
@@ -100,6 +163,45 @@ namespace Phoebe.FormUI
             InitControl();
         }
 
+        private void treeViewReceipt_BeforeExpand(object sender, TreeViewCancelEventArgs e)
+        {
+            var data = this.storeBusiness.GetStockOutByMonth(e.Node.Name);
+            e.Node.Nodes.Clear();
+            foreach (var item in data)
+            {
+                TreeNode node = new TreeNode();
+                node.Name = item.ID.ToString();
+                node.Text = item.FlowNumber;
+                node.Tag = item;
+                e.Node.Nodes.Add(node);
+            }
+        }
+
+        /// <summary>
+        /// 选择历史单据
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void treeViewReceipt_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            if (e.Node.Level == 0)
+                return;
+
+            this.groupBox2.Visible = this.groupBox3.Visible = true;
+
+            this.currentStockOut = e.Node.Tag as StockOut;
+            ModelToControl();
+            this.isNew = false;
+            if (this.currentStockOut.Status == (int)EntityStatus.StockOutReady)
+            {
+                this.toolConfirm.Enabled = true;
+            }
+            else
+            {
+                this.toolConfirm.Enabled = false;
+            }
+        }
+
         private void toolNew_Click(object sender, EventArgs e)
         {
             this.isNew = true;
@@ -118,7 +220,17 @@ namespace Phoebe.FormUI
         {
             if (this.isNew)
             {
-
+                ErrorCode result = SaveNewItem();
+                if (result == ErrorCode.Success)
+                {
+                    MessageBox.Show("保存成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.toolConfirm.Enabled = true;
+                    UpdateTree();
+                }
+                else
+                {
+                    MessageBox.Show("保存失败:" + result.DisplayName(), FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
         }
 
@@ -144,7 +256,7 @@ namespace Phoebe.FormUI
             if (this.comboBoxContract.SelectedIndex != -1)
             {
                 int contractId = Convert.ToInt32(this.comboBoxContract.SelectedValue);
-                var data = this.cargoBusiness.GetByContract(contractId);
+                var data = this.cargoBusiness.GetInByContract(contractId);
                 this.cargoBindingSource.DataSource = data;
             }
         }
@@ -185,6 +297,9 @@ namespace Phoebe.FormUI
                 grid.Rows[e.RowIndex].Cells[this.dataGridViewColumnStatus.Index].Value = ((EntityStatus)cargo.Status).DisplayName();
             }
         }
+
         #endregion //Event
+
+      
     }
 }

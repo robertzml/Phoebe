@@ -224,6 +224,19 @@ namespace Phoebe.Business
         }
 
         /// <summary>
+        /// 获取出库月份分组
+        /// </summary>
+        /// <returns></returns>
+        /// <remarks>
+        /// 用于树形导航分组
+        /// </remarks>
+        public string[] GetStockOutMonthGroup()
+        {
+            var m = this.context.StockOuts.GroupBy(r => r.MonthTime).Select(g => g.Key).OrderByDescending(s => s);
+            return m.ToArray();
+        }
+
+        /// <summary>
         /// 获取最新出库流水单号
         /// </summary>
         /// <param name="outTime">出库时间</param>
@@ -256,6 +269,11 @@ namespace Phoebe.Business
                 this.context.StockOuts.Add(data);
 
                 // add stock in details
+                foreach(var item in details)
+                {
+                    var stock = this.context.Stocks.Single(r => r.CargoID == item.CargoID && r.Status == (int)EntityStatus.StoreIn);
+                    item.StockID = stock.ID;
+                }
                 this.context.StockOutDetails.AddRange(details);
 
                 this.context.SaveChanges();
