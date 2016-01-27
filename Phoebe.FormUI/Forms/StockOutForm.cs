@@ -85,6 +85,11 @@ namespace Phoebe.FormUI
             }
 
             this.cargoBindingSource.DataSource = cargos;
+
+            for (int i = 0; i < this.currentStockOut.StockOutDetails.Count; i++)
+            {
+                this.cargoDataGridView.Rows[i].Cells[this.dataGridViewColumnOutCount.Index].Value = this.currentStockOut.StockOutDetails.ElementAt(i).Count;
+            }
         }
 
         /// <summary>
@@ -194,18 +199,33 @@ namespace Phoebe.FormUI
             this.isNew = false;
             if (this.currentStockOut.Status == (int)EntityStatus.StockOutReady)
             {
+                this.toolSave.Enabled = true;
                 this.toolConfirm.Enabled = true;
+                this.groupBox2.Enabled = true;
+                this.dataGridViewColumnOutCount.ReadOnly = false;
             }
-            else
+            else if (this.currentStockOut.Status == (int)EntityStatus.StockOut)
             {
+                this.toolSave.Enabled = false;
                 this.toolConfirm.Enabled = false;
+                this.groupBox2.Enabled = false;
+                this.dataGridViewColumnOutCount.ReadOnly = true;
             }
         }
 
+        /// <summary>
+        /// 新建出库
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void toolNew_Click(object sender, EventArgs e)
         {
             this.isNew = true;
+            this.toolSave.Enabled = true;
+            this.toolConfirm.Enabled = false;
             this.groupBox2.Visible = this.groupBox3.Visible = true;
+            this.groupBox2.Enabled = true;
+            this.dataGridViewColumnOutCount.ReadOnly = false;
 
             DateTime now = DateTime.Now.Date;
             this.dateBusinessTime.Value = now;
@@ -214,8 +234,15 @@ namespace Phoebe.FormUI
             this.comboBoxContract.SelectedIndex = -1;
             this.textBoxStatus.Text = EntityStatus.StockOutReady.DisplayName();
             this.textBoxUser.Text = this.currentUser.Name;
+
+            this.cargoBindingSource.DataSource = null;
         }
 
+        /// <summary>
+        /// 出库保存
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void toolSave_Click(object sender, EventArgs e)
         {
             if (this.isNew)
@@ -234,6 +261,94 @@ namespace Phoebe.FormUI
             }
         }
 
+        /// <summary>
+        /// 出库确认
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void toolConfirm_Click(object sender, EventArgs e)
+        {
+            if (this.currentStockOut == null)
+            {
+                MessageBox.Show("当前未选中记录", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            if (this.currentStockOut.Status != (int)EntityStatus.StockOutReady)
+            {
+                MessageBox.Show("当前记录已确认", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            ErrorCode result = this.storeBusiness.StockOutConfirm(this.currentStockOut.ID);
+            if (result == ErrorCode.Success)
+            {
+                MessageBox.Show("出库已确认", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.textBoxStatus.Text = EntityStatus.StockOut.DisplayName();
+                this.toolConfirm.Enabled = false;
+            }
+            else
+            {
+                MessageBox.Show("出库确认失败:" + result.DisplayName(), FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        /// <summary>
+        /// 锁定记录
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void toolLock_Click(object sender, EventArgs e)
+        {
+            if (this.currentStockOut == null)
+            {
+                MessageBox.Show("当前未选中记录", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            ErrorCode result = this.storeBusiness.StockOutLock(this.currentStockOut.ID, true);
+            if (result == ErrorCode.Success)
+            {
+                MessageBox.Show("出库已锁定", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.groupBox2.Enabled = false;
+                this.cargoDataGridView.ReadOnly = true;
+
+                this.toolLock.Enabled = false;
+                this.toolUnlock.Enabled = true;
+            }
+            else
+            {
+                MessageBox.Show("出库锁定失败:" + result.DisplayName(), FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        /// <summary>
+        /// 解锁记录
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void toolUnlock_Click(object sender, EventArgs e)
+        {
+            if (this.currentStockOut == null)
+            {
+                MessageBox.Show("当前未选中记录", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            ErrorCode result = this.storeBusiness.StockOutLock(this.currentStockOut.ID, false);
+            if (result == ErrorCode.Success)
+            {
+                MessageBox.Show("出库已解锁", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.groupBox2.Enabled = true;
+                this.cargoDataGridView.ReadOnly = false;
+
+                this.toolLock.Enabled = true;
+                this.toolUnlock.Enabled = false;
+            }
+            else
+            {
+                MessageBox.Show("出库解锁失败:" + result.DisplayName(), FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
 
         private void comboBoxCustomer_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -297,9 +412,6 @@ namespace Phoebe.FormUI
                 grid.Rows[e.RowIndex].Cells[this.dataGridViewColumnStatus.Index].Value = ((EntityStatus)cargo.Status).DisplayName();
             }
         }
-
         #endregion //Event
-
-      
     }
 }

@@ -269,7 +269,7 @@ namespace Phoebe.Business
                 this.context.StockOuts.Add(data);
 
                 // add stock in details
-                foreach(var item in details)
+                foreach (var item in details)
                 {
                     var stock = this.context.Stocks.Single(r => r.CargoID == item.CargoID && r.Status == (int)EntityStatus.StoreIn);
                     item.StockID = stock.ID;
@@ -281,6 +281,85 @@ namespace Phoebe.Business
                 return ErrorCode.Success;
             }
             catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+        }
+
+        /// <summary>
+        /// 出库确认
+        /// </summary>
+        /// <param name="id">出库ID</param>
+        /// <returns></returns>
+        public ErrorCode StockOutConfirm(Guid id)
+        {
+            try
+            {
+                StockOut so = this.context.StockOuts.Find(id);
+                if (so == null)
+                    return ErrorCode.ObjectNotFound;
+
+                so.Status = (int)EntityStatus.StockOut;
+
+                foreach (var item in so.StockOutDetails)
+                {
+                    //check cargo count
+                    var cargo = item.Cargo;
+                    if (cargo.StoreCount < item.Count)
+                        return ErrorCode.StockOutCountOverflow;
+
+                    var stock = item.Stock;
+                    if (cargo.StoreCount == item.Count) // all stock out
+                    {
+                        cargo.StoreCount = 0;
+                        cargo.OutTime = so.OutTime;
+                        cargo.Status = (int)EntityStatus.CargoStockOut;
+
+                        stock.Count = 0;
+                        stock.OutTime = so.OutTime;
+                        stock.Status = (int)EntityStatus.StoreOut;
+                    }
+                    else
+                    {
+                        cargo.StoreCount -= item.Count;
+                        stock.Count -= item.Count;
+                    }
+
+                    //change stockout details status
+                    item.Status = (int)EntityStatus.StockOut;
+                }
+
+                this.context.SaveChanges();
+
+                return ErrorCode.Success;
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+        }
+
+        /// <summary>
+        /// 锁定出库
+        /// </summary>
+        /// <param name="id">出库ID</param>
+        /// <param name="isLock">是否锁定</param>
+        /// <returns></returns>
+        public ErrorCode StockOutLock(Guid id, bool isLock)
+        {
+            try
+            {
+                StockOut so = this.context.StockOuts.Find(id);
+                if (so == null)
+                    return ErrorCode.ObjectNotFound;
+
+                so.IsLock = isLock;
+
+                this.context.SaveChanges();
+
+                return ErrorCode.Success;
+            }
+            catch(Exception)
             {
                 return ErrorCode.Exception;
             }
