@@ -145,6 +145,8 @@ namespace Phoebe.FormUI
                 {
                     grid.Rows[e.RowIndex].Cells[this.dataGridViewColumnUserName.Index].Value = cargo.User.Name;
                 }
+
+                grid.Rows[e.RowIndex].Cells[this.dataGridViewColumnStatus.Index].Value = ((EntityStatus)cargo.Status).DisplayName();
             }
         }
         #endregion //Event

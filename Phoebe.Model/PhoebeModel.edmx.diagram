@@ -24,7 +24,7 @@
         <AssociationConnector Association="PhoebeModel.FK_Billing_StockIn" />
         <AssociationConnector Association="PhoebeModel.FK_StockIn_Contract" />
         <AssociationConnector Association="PhoebeModel.FK_StockIn_User" />
-        <EntityTypeShape EntityType="PhoebeModel.Stock" Width="1.5" PointX="7.875" PointY="21.75" />
+        <EntityTypeShape EntityType="PhoebeModel.Stock" Width="1.5" PointX="11.625" PointY="23.625" />
         <EntityTypeShape EntityType="PhoebeModel.StockInDetail" Width="1.5" PointX="6.75" PointY="15.125" />
         <AssociationConnector Association="PhoebeModel.FK_Stock_Warehouse" />
         <AssociationConnector Association="PhoebeModel.FK_StockInDetails_Stock" />
@@ -47,6 +47,16 @@
         <AssociationConnector Association="PhoebeModel.FK_StockOut_User" />
         <AssociationConnector Association="PhoebeModel.FK_StockOutDetails_StockOut" />
         <AssociationConnector Association="PhoebeModel.FK_StockOutDetails_Warehouse" />
+        <EntityTypeShape EntityType="PhoebeModel.StockMove" Width="1.5" PointX="18.75" PointY="20.375" />
+        <EntityTypeShape EntityType="PhoebeModel.StockMoveDetail" Width="1.5" PointX="22" PointY="18.75" />
+        <AssociationConnector Association="PhoebeModel.FK_StockMoveDetails_Cargo" />
+        <AssociationConnector Association="PhoebeModel.FK_StockMoveDetails_Cargo1" />
+        <AssociationConnector Association="PhoebeModel.FK_StockMove_Contract" />
+        <AssociationConnector Association="PhoebeModel.FK_StockMoveDetails_Stock" />
+        <AssociationConnector Association="PhoebeModel.FK_StockMoveDetails_Stock1" />
+        <AssociationConnector Association="PhoebeModel.FK_StockMove_User" />
+        <AssociationConnector Association="PhoebeModel.FK_StockMoveDetails_StockMove" />
+        <AssociationConnector Association="PhoebeModel.FK_StockMoveDetails_Warehouse" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -141,6 +141,17 @@ namespace Phoebe.FormUI
         }
 
         /// <summary>
+        /// 冷库租赁 - 货品移库
+        /// </summary>
+        private void menuStockMove_Click(object sender, EventArgs e)
+        {
+            StockMoveForm form = new StockMoveForm(this.currentUser);
+            form.MdiParent = this;
+            form.WindowState = FormWindowState.Maximized;
+            form.Show();
+        }
+
+        /// <summary>
         /// 用户 - 用户列表
         /// </summary>
         private void menuUserList_Click(object sender, EventArgs e)

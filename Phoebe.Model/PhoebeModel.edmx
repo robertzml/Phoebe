@@ -139,6 +139,36 @@
           <Property Name="Remark" Type="nvarchar" MaxLength="500" />
           <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="StockMove">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="MoveTime" Type="datetime" Nullable="false" />
+          <Property Name="MonthTime" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="FlowNumber" Type="nvarchar" MaxLength="12" Nullable="false" />
+          <Property Name="ContractID" Type="int" Nullable="false" />
+          <Property Name="IsLock" Type="bit" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="500" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StockMoveDetails">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="StockMoveID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SourceCargoID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="NewCargoID" Type="uniqueidentifier" />
+          <Property Name="WarehouseID" Type="int" Nullable="false" />
+          <Property Name="StoreCount" Type="int" Nullable="false" />
+          <Property Name="Count" Type="int" Nullable="false" />
+          <Property Name="SourceStockID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="NewStockID" Type="uniqueidentifier" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="500" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="StockOut">
           <Key>
             <PropertyRef Name="ID" />
@@ -436,6 +466,104 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_StockMove_Contract">
+          <End Role="Contract" Type="Self.Contract" Multiplicity="1" />
+          <End Role="StockMove" Type="Self.StockMove" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contract">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="StockMove">
+              <PropertyRef Name="ContractID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockMove_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="StockMove" Type="Self.StockMove" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="StockMove">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockMoveDetails_Cargo">
+          <End Role="Cargo" Type="Self.Cargo" Multiplicity="1" />
+          <End Role="StockMoveDetails" Type="Self.StockMoveDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cargo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="StockMoveDetails">
+              <PropertyRef Name="SourceCargoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockMoveDetails_Cargo1">
+          <End Role="Cargo" Type="Self.Cargo" Multiplicity="0..1" />
+          <End Role="StockMoveDetails" Type="Self.StockMoveDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cargo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="StockMoveDetails">
+              <PropertyRef Name="NewCargoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockMoveDetails_Stock">
+          <End Role="Stock" Type="Self.Stock" Multiplicity="1" />
+          <End Role="StockMoveDetails" Type="Self.StockMoveDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stock">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="StockMoveDetails">
+              <PropertyRef Name="SourceStockID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockMoveDetails_Stock1">
+          <End Role="Stock" Type="Self.Stock" Multiplicity="0..1" />
+          <End Role="StockMoveDetails" Type="Self.StockMoveDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stock">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="StockMoveDetails">
+              <PropertyRef Name="NewStockID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockMoveDetails_StockMove">
+          <End Role="StockMove" Type="Self.StockMove" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="StockMoveDetails" Type="Self.StockMoveDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StockMove">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="StockMoveDetails">
+              <PropertyRef Name="StockMoveID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockMoveDetails_Warehouse">
+          <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="1" />
+          <End Role="StockMoveDetails" Type="Self.StockMoveDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouse">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="StockMoveDetails">
+              <PropertyRef Name="WarehouseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_StockOut_Contract">
           <End Role="Contract" Type="Self.Contract" Multiplicity="1" />
           <End Role="StockOut" Type="Self.StockOut" Multiplicity="*" />
@@ -556,6 +684,8 @@
           <EntitySet Name="Stock" EntityType="Self.Stock" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StockIn" EntityType="Self.StockIn" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StockInDetails" EntityType="Self.StockInDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StockMove" EntityType="Self.StockMove" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StockMoveDetails" EntityType="Self.StockMoveDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StockOut" EntityType="Self.StockOut" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StockOutDetails" EntityType="Self.StockOutDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ThirdCategory" EntityType="Self.ThirdCategory" Schema="dbo" store:Type="Tables" />
@@ -633,6 +763,38 @@
           <AssociationSet Name="FK_StockInDetails_Warehouse" Association="Self.FK_StockInDetails_Warehouse">
             <End Role="Warehouse" EntitySet="Warehouse" />
             <End Role="StockInDetails" EntitySet="StockInDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockMove_Contract" Association="Self.FK_StockMove_Contract">
+            <End Role="Contract" EntitySet="Contract" />
+            <End Role="StockMove" EntitySet="StockMove" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockMove_User" Association="Self.FK_StockMove_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="StockMove" EntitySet="StockMove" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockMoveDetails_Cargo" Association="Self.FK_StockMoveDetails_Cargo">
+            <End Role="Cargo" EntitySet="Cargo" />
+            <End Role="StockMoveDetails" EntitySet="StockMoveDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockMoveDetails_Cargo1" Association="Self.FK_StockMoveDetails_Cargo1">
+            <End Role="Cargo" EntitySet="Cargo" />
+            <End Role="StockMoveDetails" EntitySet="StockMoveDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockMoveDetails_Stock" Association="Self.FK_StockMoveDetails_Stock">
+            <End Role="Stock" EntitySet="Stock" />
+            <End Role="StockMoveDetails" EntitySet="StockMoveDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockMoveDetails_Stock1" Association="Self.FK_StockMoveDetails_Stock1">
+            <End Role="Stock" EntitySet="Stock" />
+            <End Role="StockMoveDetails" EntitySet="StockMoveDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockMoveDetails_StockMove" Association="Self.FK_StockMoveDetails_StockMove">
+            <End Role="StockMove" EntitySet="StockMove" />
+            <End Role="StockMoveDetails" EntitySet="StockMoveDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockMoveDetails_Warehouse" Association="Self.FK_StockMoveDetails_Warehouse">
+            <End Role="Warehouse" EntitySet="Warehouse" />
+            <End Role="StockMoveDetails" EntitySet="StockMoveDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_StockOut_Contract" Association="Self.FK_StockOut_Contract">
             <End Role="Contract" EntitySet="Contract" />
@@ -799,6 +961,40 @@
             <End Role="Warehouse" EntitySet="Warehouses" />
             <End Role="StockOutDetail" EntitySet="StockOutDetails" />
           </AssociationSet>
+          <EntitySet Name="StockMoves" EntityType="PhoebeModel.StockMove" />
+          <EntitySet Name="StockMoveDetails" EntityType="PhoebeModel.StockMoveDetail" />
+          <AssociationSet Name="FK_StockMoveDetails_Cargo" Association="PhoebeModel.FK_StockMoveDetails_Cargo">
+            <End Role="Cargo" EntitySet="Cargoes" />
+            <End Role="StockMoveDetail" EntitySet="StockMoveDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockMoveDetails_Cargo1" Association="PhoebeModel.FK_StockMoveDetails_Cargo1">
+            <End Role="Cargo" EntitySet="Cargoes" />
+            <End Role="StockMoveDetail" EntitySet="StockMoveDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockMove_Contract" Association="PhoebeModel.FK_StockMove_Contract">
+            <End Role="Contract" EntitySet="Contracts" />
+            <End Role="StockMove" EntitySet="StockMoves" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockMoveDetails_Stock" Association="PhoebeModel.FK_StockMoveDetails_Stock">
+            <End Role="Stock" EntitySet="Stocks" />
+            <End Role="StockMoveDetail" EntitySet="StockMoveDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockMoveDetails_Stock1" Association="PhoebeModel.FK_StockMoveDetails_Stock1">
+            <End Role="Stock" EntitySet="Stocks" />
+            <End Role="StockMoveDetail" EntitySet="StockMoveDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockMove_User" Association="PhoebeModel.FK_StockMove_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="StockMove" EntitySet="StockMoves" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockMoveDetails_StockMove" Association="PhoebeModel.FK_StockMoveDetails_StockMove">
+            <End Role="StockMove" EntitySet="StockMoves" />
+            <End Role="StockMoveDetail" EntitySet="StockMoveDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockMoveDetails_Warehouse" Association="PhoebeModel.FK_StockMoveDetails_Warehouse">
+            <End Role="Warehouse" EntitySet="Warehouses" />
+            <End Role="StockMoveDetail" EntitySet="StockMoveDetails" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Customer">
           <Key>
@@ -833,6 +1029,7 @@
           <NavigationProperty Name="StockIns" Relationship="PhoebeModel.FK_StockIn_User" FromRole="User" ToRole="StockIn" />
           <NavigationProperty Name="Cargoes" Relationship="PhoebeModel.FK_Cargo_User" FromRole="User" ToRole="Cargo" />
           <NavigationProperty Name="StockOuts" Relationship="PhoebeModel.FK_StockOut_User" FromRole="User" ToRole="StockOut" />
+          <NavigationProperty Name="StockMoves" Relationship="PhoebeModel.FK_StockMove_User" FromRole="User" ToRole="StockMove" />
         </EntityType>
         <EntityType Name="UserGroup">
           <Key>
@@ -875,6 +1072,7 @@
           <NavigationProperty Name="StockInDetails" Relationship="PhoebeModel.FK_StockInDetails_Warehouse" FromRole="Warehouse" ToRole="StockInDetail" />
           <NavigationProperty Name="Cargoes" Relationship="PhoebeModel.FK_Cargo_Warehouse" FromRole="Warehouse" ToRole="Cargo" />
           <NavigationProperty Name="StockOutDetails" Relationship="PhoebeModel.FK_StockOutDetails_Warehouse" FromRole="Warehouse" ToRole="StockOutDetail" />
+          <NavigationProperty Name="StockMoveDetails" Relationship="PhoebeModel.FK_StockMoveDetails_Warehouse" FromRole="Warehouse" ToRole="StockMoveDetail" />
         </EntityType>
         <Association Name="FK_Warehouse_Warehouse">
           <End Type="PhoebeModel.Warehouse" Role="Warehouse" Multiplicity="0..1" />
@@ -909,6 +1107,7 @@
           <NavigationProperty Name="StockIns" Relationship="PhoebeModel.FK_StockIn_Contract" FromRole="Contract" ToRole="StockIn" />
           <NavigationProperty Name="Cargoes" Relationship="PhoebeModel.FK_Cargo_Contract" FromRole="Contract" ToRole="Cargo" />
           <NavigationProperty Name="StockOuts" Relationship="PhoebeModel.FK_StockOut_Contract" FromRole="Contract" ToRole="StockOut" />
+          <NavigationProperty Name="StockMoves" Relationship="PhoebeModel.FK_StockMove_Contract" FromRole="Contract" ToRole="StockMove" />
         </EntityType>
         <Association Name="FK_Contract_Customer">
           <End Type="PhoebeModel.Customer" Role="Customer" Multiplicity="1" />
@@ -1082,6 +1281,8 @@
           <NavigationProperty Name="StockInDetails" Relationship="PhoebeModel.FK_StockInDetails_Stock" FromRole="Stock" ToRole="StockInDetail" />
           <NavigationProperty Name="Cargo" Relationship="PhoebeModel.FK_Stock_Cargo" FromRole="Stock" ToRole="Cargo" />
           <NavigationProperty Name="StockOutDetails" Relationship="PhoebeModel.FK_StockOutDetails_Stock" FromRole="Stock" ToRole="StockOutDetail" />
+          <NavigationProperty Name="StockMoveDetails" Relationship="PhoebeModel.FK_StockMoveDetails_Stock" FromRole="Stock" ToRole="StockMoveDetail" />
+          <NavigationProperty Name="StockMoveDetails1" Relationship="PhoebeModel.FK_StockMoveDetails_Stock1" FromRole="Stock" ToRole="StockMoveDetail" />
         </EntityType>
         <EntityType Name="StockInDetail">
           <Key>
@@ -1185,6 +1386,8 @@
           <NavigationProperty Name="Stocks" Relationship="PhoebeModel.FK_Stock_Cargo" FromRole="Cargo" ToRole="Stock" />
           <NavigationProperty Name="StockInDetails" Relationship="PhoebeModel.FK_StockInDetails_Cargo" FromRole="Cargo" ToRole="StockInDetail" />
           <NavigationProperty Name="StockOutDetails" Relationship="PhoebeModel.FK_StockOutDetails_Cargo" FromRole="Cargo" ToRole="StockOutDetail" />
+          <NavigationProperty Name="StockMoveDetails" Relationship="PhoebeModel.FK_StockMoveDetails_Cargo" FromRole="Cargo" ToRole="StockMoveDetail" />
+          <NavigationProperty Name="StockMoveDetails1" Relationship="PhoebeModel.FK_StockMoveDetails_Cargo1" FromRole="Cargo" ToRole="StockMoveDetail" />
         </EntityType>
         <Association Name="FK_Cargo_Contract">
           <End Type="PhoebeModel.Contract" Role="Contract" Multiplicity="1" />
@@ -1389,6 +1592,143 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="StockOutDetail">
+              <PropertyRef Name="WarehouseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="StockMove">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="MoveTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="MonthTime" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="FlowNumber" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="ContractID" Type="Int32" Nullable="false" />
+          <Property Name="IsLock" Type="Boolean" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Contract" Relationship="PhoebeModel.FK_StockMove_Contract" FromRole="StockMove" ToRole="Contract" />
+          <NavigationProperty Name="User" Relationship="PhoebeModel.FK_StockMove_User" FromRole="StockMove" ToRole="User" />
+          <NavigationProperty Name="StockMoveDetails" Relationship="PhoebeModel.FK_StockMoveDetails_StockMove" FromRole="StockMove" ToRole="StockMoveDetail" />
+        </EntityType>
+        <EntityType Name="StockMoveDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="StockMoveID" Type="Guid" Nullable="false" />
+          <Property Name="SourceCargoID" Type="Guid" Nullable="false" />
+          <Property Name="NewCargoID" Type="Guid" />
+          <Property Name="WarehouseID" Type="Int32" Nullable="false" />
+          <Property Name="StoreCount" Type="Int32" Nullable="false" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
+          <Property Name="SourceStockID" Type="Guid" Nullable="false" />
+          <Property Name="NewStockID" Type="Guid" />
+          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SourceCargo" Relationship="PhoebeModel.FK_StockMoveDetails_Cargo" FromRole="StockMoveDetail" ToRole="Cargo" />
+          <NavigationProperty Name="NewCargo" Relationship="PhoebeModel.FK_StockMoveDetails_Cargo1" FromRole="StockMoveDetail" ToRole="Cargo" />
+          <NavigationProperty Name="SourceStock" Relationship="PhoebeModel.FK_StockMoveDetails_Stock" FromRole="StockMoveDetail" ToRole="Stock" />
+          <NavigationProperty Name="NewStock" Relationship="PhoebeModel.FK_StockMoveDetails_Stock1" FromRole="StockMoveDetail" ToRole="Stock" />
+          <NavigationProperty Name="StockMove" Relationship="PhoebeModel.FK_StockMoveDetails_StockMove" FromRole="StockMoveDetail" ToRole="StockMove" />
+          <NavigationProperty Name="Warehouse" Relationship="PhoebeModel.FK_StockMoveDetails_Warehouse" FromRole="StockMoveDetail" ToRole="Warehouse" />
+        </EntityType>
+        <Association Name="FK_StockMoveDetails_Cargo">
+          <End Type="PhoebeModel.Cargo" Role="Cargo" Multiplicity="1" />
+          <End Type="PhoebeModel.StockMoveDetail" Role="StockMoveDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cargo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="StockMoveDetail">
+              <PropertyRef Name="SourceCargoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockMoveDetails_Cargo1">
+          <End Type="PhoebeModel.Cargo" Role="Cargo" Multiplicity="0..1" />
+          <End Type="PhoebeModel.StockMoveDetail" Role="StockMoveDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cargo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="StockMoveDetail">
+              <PropertyRef Name="NewCargoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockMove_Contract">
+          <End Type="PhoebeModel.Contract" Role="Contract" Multiplicity="1" />
+          <End Type="PhoebeModel.StockMove" Role="StockMove" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contract">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="StockMove">
+              <PropertyRef Name="ContractID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockMoveDetails_Stock">
+          <End Type="PhoebeModel.Stock" Role="Stock" Multiplicity="1" />
+          <End Type="PhoebeModel.StockMoveDetail" Role="StockMoveDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stock">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="StockMoveDetail">
+              <PropertyRef Name="SourceStockID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockMoveDetails_Stock1">
+          <End Type="PhoebeModel.Stock" Role="Stock" Multiplicity="0..1" />
+          <End Type="PhoebeModel.StockMoveDetail" Role="StockMoveDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stock">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="StockMoveDetail">
+              <PropertyRef Name="NewStockID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockMove_User">
+          <End Type="PhoebeModel.User" Role="User" Multiplicity="1" />
+          <End Type="PhoebeModel.StockMove" Role="StockMove" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="StockMove">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockMoveDetails_StockMove">
+          <End Type="PhoebeModel.StockMove" Role="StockMove" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="PhoebeModel.StockMoveDetail" Role="StockMoveDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StockMove">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="StockMoveDetail">
+              <PropertyRef Name="StockMoveID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockMoveDetails_Warehouse">
+          <End Type="PhoebeModel.Warehouse" Role="Warehouse" Multiplicity="1" />
+          <End Type="PhoebeModel.StockMoveDetail" Role="StockMoveDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouse">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="StockMoveDetail">
               <PropertyRef Name="WarehouseID" />
             </Dependent>
           </ReferentialConstraint>
@@ -1619,6 +1959,38 @@
                 <ScalarProperty Name="CargoID" ColumnName="CargoID" />
                 <ScalarProperty Name="WarehouseID" ColumnName="WarehouseID" />
                 <ScalarProperty Name="StockOutID" ColumnName="StockOutID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StockMoves">
+            <EntityTypeMapping TypeName="PhoebeModel.StockMove">
+              <MappingFragment StoreEntitySet="StockMove">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="IsLock" ColumnName="IsLock" />
+                <ScalarProperty Name="ContractID" ColumnName="ContractID" />
+                <ScalarProperty Name="FlowNumber" ColumnName="FlowNumber" />
+                <ScalarProperty Name="MonthTime" ColumnName="MonthTime" />
+                <ScalarProperty Name="MoveTime" ColumnName="MoveTime" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StockMoveDetails">
+            <EntityTypeMapping TypeName="PhoebeModel.StockMoveDetail">
+              <MappingFragment StoreEntitySet="StockMoveDetails">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="NewStockID" ColumnName="NewStockID" />
+                <ScalarProperty Name="SourceStockID" ColumnName="SourceStockID" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="StoreCount" ColumnName="StoreCount" />
+                <ScalarProperty Name="WarehouseID" ColumnName="WarehouseID" />
+                <ScalarProperty Name="NewCargoID" ColumnName="NewCargoID" />
+                <ScalarProperty Name="SourceCargoID" ColumnName="SourceCargoID" />
+                <ScalarProperty Name="StockMoveID" ColumnName="StockMoveID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

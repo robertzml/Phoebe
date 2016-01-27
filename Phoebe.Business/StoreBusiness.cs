@@ -268,7 +268,7 @@ namespace Phoebe.Business
                 // add stock out
                 this.context.StockOuts.Add(data);
 
-                // add stock in details
+                // add stock out details
                 foreach (var item in details)
                 {
                     var stock = this.context.Stocks.Single(r => r.CargoID == item.CargoID && r.Status == (int)EntityStatus.StoreIn);
@@ -359,12 +359,111 @@ namespace Phoebe.Business
 
                 return ErrorCode.Success;
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return ErrorCode.Exception;
             }
         }
         #endregion //Stock Out
+
+        #region Stock Move
+        /// <summary>
+        /// 获取移库记录
+        /// </summary>
+        /// <returns></returns>
+        public List<StockMove> GetStockMove()
+        {
+            return this.context.StockMoves.OrderByDescending(r => r.MoveTime).ToList();
+        }
+
+        /// <summary>
+        /// 获取移库记录
+        /// </summary>
+        /// <param name="id">移库ID</param>
+        /// <returns></returns>
+        public StockMove GetStockMove(string id)
+        {
+            Guid gid;
+            if (!Guid.TryParse(id, out gid))
+                return null;
+
+            return this.context.StockMoves.Find(gid);
+        }
+
+        /// <summary>
+        /// 按月度获取移库记录
+        /// </summary>
+        /// <param name="monthTime">月份</param>
+        /// <returns></returns>
+        public List<StockMove> GetStockMoveByMonth(string monthTime)
+        {
+            var data = this.context.StockMoves.Where(r => r.MonthTime == monthTime).OrderByDescending(r => r.MoveTime);
+            return data.ToList();
+        }
+
+        /// <summary>
+        /// 获取移库月份分组
+        /// </summary>
+        /// <returns></returns>
+        /// <remarks>
+        /// 用于树形导航分组
+        /// </remarks>
+        public string[] GetStockMoveMonthGroup()
+        {
+            var m = this.context.StockMoves.GroupBy(r => r.MonthTime).Select(g => g.Key).OrderByDescending(s => s);
+            return m.ToArray();
+        }
+
+        /// <summary>
+        /// 获取最新移库流水单号
+        /// </summary>
+        /// <param name="moveTime">移库时间</param>
+        /// <returns></returns>
+        public string GetLastStockMoveFlowNumber(DateTime moveTime)
+        {
+            var data = this.context.StockMoves.Where(r => r.MoveTime == moveTime).OrderByDescending(r => r.FlowNumber);
+            if (data.Count() == 0)
+                return string.Format("{0}{1}{2}0001",
+                    moveTime.Year, moveTime.Month.ToString().PadLeft(2, '0'), moveTime.Day.ToString().PadLeft(2, '0'));
+            else
+            {
+                int newNumber = Convert.ToInt32(data.First().FlowNumber.Substring(8)) + 1;
+                return string.Format("{0}{1}{2}{3}", moveTime.Year, moveTime.Month.ToString().PadLeft(2, '0'),
+                    moveTime.Day.ToString().PadLeft(2, '0'), newNumber.ToString().PadLeft(4, '0'));
+            }
+        }
+
+        /// <summary>
+        /// 货品移库
+        /// </summary>
+        /// <param name="data">移库数据</param>
+        /// <param name="details">详细信息</param>
+        /// <returns></returns>
+        public ErrorCode StockMove(StockMove data, List<StockMoveDetail> details)
+        {
+            try
+            {
+                // add stock move
+                this.context.StockMoves.Add(data);
+
+                // add stock move details
+                foreach (var item in details)
+                {
+                    var stock = this.context.Stocks.Single(r => r.CargoID == item.SourceCargoID && r.Status == (int)EntityStatus.StoreIn);
+                    item.SourceStockID = stock.ID;
+                }
+                this.context.StockMoveDetails.AddRange(details);
+
+                this.context.SaveChanges();
+
+                return ErrorCode.Success;
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+        }
+        #endregion //Stock Move
         #endregion //Method
     }
 }

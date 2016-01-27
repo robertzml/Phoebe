@@ -43,6 +43,7 @@
             this.已出库货品ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStock = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStockIn = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStockOut = new System.Windows.Forms.ToolStripMenuItem();
             this.menuUser = new System.Windows.Forms.ToolStripMenuItem();
             this.menuUserList = new System.Windows.Forms.ToolStripMenuItem();
             this.menuUserGroupList = new System.Windows.Forms.ToolStripMenuItem();
@@ -51,7 +52,7 @@
             this.mainStauts = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusUser = new System.Windows.Forms.ToolStripStatusLabel();
-            this.menuStockOut = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStockMove = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenu.SuspendLayout();
             this.mainStauts.SuspendLayout();
             this.SuspendLayout();
@@ -145,28 +146,29 @@
             // menuCategory
             // 
             this.menuCategory.Name = "menuCategory";
-            this.menuCategory.Size = new System.Drawing.Size(136, 22);
+            this.menuCategory.Size = new System.Drawing.Size(152, 22);
             this.menuCategory.Text = "类别管理";
             this.menuCategory.Click += new System.EventHandler(this.menuCategory_Click);
             // 
             // menuCargoIn
             // 
             this.menuCargoIn.Name = "menuCargoIn";
-            this.menuCargoIn.Size = new System.Drawing.Size(136, 22);
+            this.menuCargoIn.Size = new System.Drawing.Size(152, 22);
             this.menuCargoIn.Text = "在库货品";
             this.menuCargoIn.Click += new System.EventHandler(this.menuCargoIn_Click);
             // 
             // 已出库货品ToolStripMenuItem
             // 
             this.已出库货品ToolStripMenuItem.Name = "已出库货品ToolStripMenuItem";
-            this.已出库货品ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.已出库货品ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.已出库货品ToolStripMenuItem.Text = "已出库货品";
             // 
             // menuStock
             // 
             this.menuStock.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuStockIn,
-            this.menuStockOut});
+            this.menuStockOut,
+            this.menuStockMove});
             this.menuStock.Name = "menuStock";
             this.menuStock.Size = new System.Drawing.Size(68, 21);
             this.menuStock.Text = "冷库租赁";
@@ -177,6 +179,13 @@
             this.menuStockIn.Size = new System.Drawing.Size(152, 22);
             this.menuStockIn.Text = "货品入库";
             this.menuStockIn.Click += new System.EventHandler(this.menuStockIn_Click);
+            // 
+            // menuStockOut
+            // 
+            this.menuStockOut.Name = "menuStockOut";
+            this.menuStockOut.Size = new System.Drawing.Size(152, 22);
+            this.menuStockOut.Text = "货品出库";
+            this.menuStockOut.Click += new System.EventHandler(this.menuStockOut_Click);
             // 
             // menuUser
             // 
@@ -244,12 +253,12 @@
             this.statusUser.Size = new System.Drawing.Size(44, 21);
             this.statusUser.Text = "name";
             // 
-            // menuStockOut
+            // menuStockMove
             // 
-            this.menuStockOut.Name = "menuStockOut";
-            this.menuStockOut.Size = new System.Drawing.Size(152, 22);
-            this.menuStockOut.Text = "货品出库";
-            this.menuStockOut.Click += new System.EventHandler(this.menuStockOut_Click);
+            this.menuStockMove.Name = "menuStockMove";
+            this.menuStockMove.Size = new System.Drawing.Size(152, 22);
+            this.menuStockMove.Text = "货品移库";
+            this.menuStockMove.Click += new System.EventHandler(this.menuStockMove_Click);
             // 
             // MainForm
             // 
@@ -299,6 +308,7 @@
         private System.Windows.Forms.ToolStripMenuItem menuCargoIn;
         private System.Windows.Forms.ToolStripMenuItem 已出库货品ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem menuStockOut;
+        private System.Windows.Forms.ToolStripMenuItem menuStockMove;
     }
 }
 
