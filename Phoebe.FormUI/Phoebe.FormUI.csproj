@@ -172,6 +172,12 @@
     <Compile Include="Forms\StockMoveForm.Designer.cs">
       <DependentUpon>StockMoveForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\StockForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\StockForm.Designer.cs">
+      <DependentUpon>StockForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Forms\CargoForm.resx">
       <DependentUpon>CargoForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -204,6 +210,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\StockForm.resx">
+      <DependentUpon>StockForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\StockMoveForm.resx">
       <DependentUpon>StockMoveForm.cs</DependentUpon>
@@ -238,6 +247,7 @@
     <None Include="Properties\DataSources\Phoebe.Model.Cargo.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.Contract.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.Customer.datasource" />
+    <None Include="Properties\DataSources\Phoebe.Model.Stock.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.User.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.UserGroup.datasource" />
     <None Include="Properties\Settings.settings">

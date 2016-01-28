@@ -21,6 +21,8 @@ namespace Phoebe.FormUI
         private CustomerBusiness customerBusiness;
 
         private ContractBusiness contractBusiness;
+
+        private CategoryBusiness categoryBusiness;
         #endregion //Field
 
         #region Constructor
@@ -36,11 +38,20 @@ namespace Phoebe.FormUI
             this.cargoBusiness = new CargoBusiness();
             this.customerBusiness = new CustomerBusiness();
             this.contractBusiness = new ContractBusiness();
+            this.categoryBusiness = new CategoryBusiness();
         }
 
         private void InitControl()
         {
-            this.comboBoxCustomerType.SelectedIndex = 0;
+            var customers = this.customerBusiness.Get();
+            customers.Insert(0, new Customer { ID = 0, Name = "--请选择--" });
+            this.comboBoxCustomer.DataSource = customers;
+            this.comboBoxCustomer.DisplayMember = "Name";
+            this.comboBoxCustomer.ValueMember = "ID";
+
+            this.comboBoxFirstCategory.DataSource = this.categoryBusiness.GetFirstCategory();
+            this.comboBoxFirstCategory.DisplayMember = "Name";
+            this.comboBoxFirstCategory.ValueMember = "ID";
         }
         #endregion //Function
 
@@ -51,34 +62,16 @@ namespace Phoebe.FormUI
             InitControl();
         }
 
-        private void comboBoxCustomerType_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (this.comboBoxCustomerType.SelectedIndex == -1)
-            {
-                this.comboBoxCustomer.Items.Clear();
-                this.comboBoxContract.Items.Clear();
-                return;
-            }
-
-            if (this.comboBoxCustomerType.SelectedIndex == 0)
-            {
-                this.comboBoxCustomer.DataSource = this.customerBusiness.GetByType(CustomerType.Group);
-                this.comboBoxCustomer.DisplayMember = "Name";
-                this.comboBoxCustomer.ValueMember = "ID";
-            }
-            else
-            {
-                this.comboBoxCustomer.DataSource = this.customerBusiness.GetByType(CustomerType.Scatter);
-                this.comboBoxCustomer.DisplayMember = "Name";
-                this.comboBoxCustomer.ValueMember = "ID";
-            }
-        }
-
+        /// <summary>
+        /// 客户选择
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void comboBoxCustomer_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (this.comboBoxCustomer.SelectedIndex == -1)
+            if (this.comboBoxCustomer.SelectedIndex == -1 || this.comboBoxCustomer.SelectedIndex == 0)
             {
-                this.comboBoxContract.Items.Clear();
+                this.comboBoxContract.DataSource = null;
                 return;
             }
 
@@ -91,23 +84,98 @@ namespace Phoebe.FormUI
         }
 
         /// <summary>
+        /// 一级分类选择
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void comboBoxFirstCategory_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.comboBoxFirstCategory.SelectedIndex == -1 || this.comboBoxFirstCategory.SelectedIndex == 0)
+            {
+                this.comboBoxSecondCategory.DataSource = null;
+                this.comboBoxThirdCategory.DataSource = null;
+                return;
+            }
+
+            this.comboBoxSecondCategory.DataSource = this.categoryBusiness.GetSecondCategoryByFirst(Convert.ToInt32(this.comboBoxFirstCategory.SelectedValue));
+            this.comboBoxSecondCategory.DisplayMember = "Name";
+            this.comboBoxSecondCategory.ValueMember = "ID";
+        }
+
+        /// <summary>
+        /// 二级分类选择
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void comboBoxSecondCategory_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.comboBoxSecondCategory.SelectedIndex == -1 || this.comboBoxSecondCategory.SelectedIndex == 0)
+            {
+                this.comboBoxThirdCategory.DataSource = null;
+                return;
+            }
+
+            this.comboBoxThirdCategory.DataSource = this.categoryBusiness.GetThirdCategoryBySecond(Convert.ToInt32(this.comboBoxSecondCategory.SelectedValue));
+            this.comboBoxThirdCategory.DisplayMember = "Name";
+            this.comboBoxThirdCategory.ValueMember = "ID";
+        }
+
+        /// <summary>
         /// 查询
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void buttonQuery_Click(object sender, EventArgs e)
         {
+            List<Cargo> data;
             int customerID = Convert.ToInt32(this.comboBoxCustomer.SelectedValue);
-            if (customerID == -1)
-                return;
 
-            int contractID = Convert.ToInt32(this.comboBoxContract.SelectedValue);
-            if (contractID == -1 || contractID == 0)
-                this.cargoBindingSource.DataSource = this.cargoBusiness.GetByCustomer(customerID);
+            if (customerID == -1 || customerID == 0)
+            {
+                data = this.cargoBusiness.Get();
+            }
             else
-                this.cargoBindingSource.DataSource = this.cargoBusiness.GetByContract(contractID);
-        }
+            {
+                int contractID = Convert.ToInt32(this.comboBoxContract.SelectedValue);
+                if (contractID == -1 || contractID == 0)
+                    data = this.cargoBusiness.GetByCustomer(customerID);
+                else
+                    data = this.cargoBusiness.GetByContract(contractID);
+            }
 
+            if (this.comboBoxFirstCategory.SelectedIndex > 0)
+            {
+                int first = Convert.ToInt32(this.comboBoxFirstCategory.SelectedValue);
+                data = data.Where(r => r.FirstCategoryID == first).ToList();
+            }
+
+            if (this.comboBoxSecondCategory.SelectedIndex > 0)
+            {
+                int second = Convert.ToInt32(this.comboBoxSecondCategory.SelectedValue);
+                data = data.Where(r => r.SecondCategoryID == second).ToList();
+            }
+
+            if (this.comboBoxThirdCategory.SelectedIndex > 0)
+            {
+                int third = Convert.ToInt32(this.comboBoxThirdCategory.SelectedValue);
+                data = data.Where(r => r.ThirdCategoryID == third).ToList();
+            }
+
+            if (this.checkBoxStockInReady.Checked == false)
+            {
+                data = data.Where(r => r.Status != (int)EntityStatus.CargoStockInReady).ToList();
+            }
+            if (this.checkBoxStockIn.Checked == false)
+            {
+                data = data.Where(r => r.Status != (int)EntityStatus.CargoStockIn).ToList();
+            }
+            if (this.checkBoxStockOut.Checked == false)
+            {
+                data = data.Where(r => r.Status != (int)EntityStatus.CargoStockOut).ToList();
+            }
+
+            this.cargoBindingSource.DataSource = data;
+        }        
 
         private void cargoDataGridView_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
         {
@@ -150,6 +218,5 @@ namespace Phoebe.FormUI
             }
         }
         #endregion //Event
-
     }
 }

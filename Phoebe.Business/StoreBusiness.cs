@@ -28,6 +28,68 @@ namespace Phoebe.Business
         #endregion //Function
 
         #region Method
+        #region Stock
+        /// <summary>
+        /// 获取所有库存记录
+        /// </summary>
+        /// <returns></returns>
+        public List<Stock> GetStock()
+        {
+            return this.context.Stocks.ToList();
+        }
+
+        /// <summary>
+        /// 获取库存记录
+        /// </summary>
+        /// <param name="id">库存ID</param>
+        /// <returns></returns>
+        public Stock GetStock(string id)
+        {
+            Guid gid;
+            if (!Guid.TryParse(id, out gid))
+                return null;
+
+            return this.context.Stocks.Find(gid);
+        }
+
+        /// <summary>
+        /// 根据客户获取库存
+        /// </summary>
+        /// <param name="customerID">客户ID</param>
+        /// <returns></returns>
+        public List<Stock> GetByCustomer(int customerID)
+        {
+            var cargos = from r in this.context.Cargoes
+                         where (from s in this.context.Contracts
+                                where s.CustomerID == customerID
+                                select s.ID).Contains(r.ContractID)
+                         select r;
+
+            var stocks = from r in this.context.Stocks
+                         where cargos.Select(s => s.ID).Contains(r.CargoID)
+                         orderby r.Warehouse.Number
+                         select r;
+
+            return stocks.ToList();
+        }
+
+        /// <summary>
+        /// 根据合同获取库存
+        /// </summary>
+        /// <param name="contractID">合同ID</param>
+        /// <returns></returns>
+        public List<Stock> GetByContract(int contractID)
+        {
+            var data = from r in this.context.Stocks
+                       where (from s in this.context.Cargoes
+                              where s.ContractID == contractID
+                              select s.ID).Contains(r.CargoID)
+                       select r;
+
+            return data.ToList();
+        }
+        #endregion //Stock
+
         #region Stock In
         /// <summary>
         /// 获取所有入库记录

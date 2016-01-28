@@ -98,12 +98,6 @@ namespace Phoebe.Model
         CargoStockIn = 53,
 
         /// <summary>
-        /// 54:货品准备出库
-        /// </summary>
-        [Display(Name = "准备出库")]
-        CargoStockOutReady = 54,
-
-        /// <summary>
         /// 55:货品出库
         /// </summary>
         [Display(Name = "出库")]
@@ -114,24 +108,6 @@ namespace Phoebe.Model
         /// </summary>
         [Display(Name = "准备移库")]
         CargoStockMoveReady = 56,
-
-        /// <summary>
-        /// 57:货品准备转户
-        /// </summary>
-        [Display(Name = "准备转户")]
-        CargoTransferReady = 57,
-
-        /// <summary>
-        /// 58:货品转户取消
-        /// </summary>
-        [Display(Name = "转户取消")]
-        CargoTransferCancel = 58,
-
-        /// <summary>
-        /// 58:货品已转户
-        /// </summary>
-        [Display(Name = "已转户")]
-        CargoHasTransfer = 59,
         #endregion //Cargo
 
         #region Store

@@ -108,11 +108,22 @@ namespace Phoebe.FormUI
         }
 
         /// <summary>
-        /// 货品 - 在库货品
+        /// 货品 - 货品信息
         /// </summary>
-        private void menuCargoIn_Click(object sender, EventArgs e)
+        private void menuCargoList_Click(object sender, EventArgs e)
         {
             CargoForm form = new CargoForm();
+            form.MdiParent = this;
+            form.WindowState = FormWindowState.Maximized;
+            form.Show();
+        }
+
+        /// <summary>
+        /// 货品 - 库存记录
+        /// </summary>
+        private void menuStockList_Click(object sender, EventArgs e)
+        {
+            StockForm form = new StockForm();
             form.MdiParent = this;
             form.WindowState = FormWindowState.Maximized;
             form.Show();
@@ -181,7 +192,6 @@ namespace Phoebe.FormUI
             ChangePasswordForm form = new ChangePasswordForm(this.currentUser);
             form.ShowDialog();
         }
-
         #endregion //Menu Event
 
         #endregion //Event

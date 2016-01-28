@@ -30,23 +30,18 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CargoForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.buttonQuery = new System.Windows.Forms.Button();
             this.comboBoxContract = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.comboBoxCustomer = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.comboBoxCustomerType = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.cargoDataGridView = new System.Windows.Forms.DataGridView();
-            this.cargoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.cargoBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
-            this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
-            this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
@@ -55,46 +50,51 @@
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.cargoBindingNavigatorSaveItem = new System.Windows.Forms.ToolStripButton();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewColumnContract = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewColumnFirstCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewColumnSecondCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewColumnThirdCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewColumnWarehouse = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewColumnUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewColumnStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.checkBoxStockInReady = new System.Windows.Forms.CheckBox();
+            this.checkBoxStockIn = new System.Windows.Forms.CheckBox();
+            this.checkBoxStockOut = new System.Windows.Forms.CheckBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.comboBoxFirstCategory = new System.Windows.Forms.ComboBox();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewColumnWarehouse = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewColumnUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewColumnStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cargoBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.comboBoxSecondCategory = new System.Windows.Forms.ComboBox();
+            this.comboBoxThirdCategory = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cargoDataGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cargoBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cargoBindingNavigator)).BeginInit();
             this.cargoBindingNavigator.SuspendLayout();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cargoBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.buttonQuery);
-            this.groupBox1.Controls.Add(this.comboBoxContract);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.comboBoxCustomer);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.comboBoxCustomerType);
-            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.panel1);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
@@ -105,7 +105,7 @@
             // 
             // buttonQuery
             // 
-            this.buttonQuery.Location = new System.Drawing.Point(14, 120);
+            this.buttonQuery.Location = new System.Drawing.Point(785, 106);
             this.buttonQuery.Name = "buttonQuery";
             this.buttonQuery.Size = new System.Drawing.Size(75, 23);
             this.buttonQuery.TabIndex = 6;
@@ -117,7 +117,7 @@
             // 
             this.comboBoxContract.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxContract.FormattingEnabled = true;
-            this.comboBoxContract.Location = new System.Drawing.Point(509, 25);
+            this.comboBoxContract.Location = new System.Drawing.Point(315, 13);
             this.comboBoxContract.Name = "comboBoxContract";
             this.comboBoxContract.Size = new System.Drawing.Size(121, 20);
             this.comboBoxContract.TabIndex = 5;
@@ -125,7 +125,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(450, 28);
+            this.label3.Location = new System.Drawing.Point(256, 16);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(53, 12);
             this.label3.TabIndex = 4;
@@ -135,7 +135,7 @@
             // 
             this.comboBoxCustomer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxCustomer.FormattingEnabled = true;
-            this.comboBoxCustomer.Location = new System.Drawing.Point(295, 25);
+            this.comboBoxCustomer.Location = new System.Drawing.Point(91, 13);
             this.comboBoxCustomer.Name = "comboBoxCustomer";
             this.comboBoxCustomer.Size = new System.Drawing.Size(121, 20);
             this.comboBoxCustomer.TabIndex = 3;
@@ -144,33 +144,11 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(236, 28);
+            this.label2.Location = new System.Drawing.Point(32, 16);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 12);
             this.label2.TabIndex = 2;
             this.label2.Text = "客户名称";
-            // 
-            // comboBoxCustomerType
-            // 
-            this.comboBoxCustomerType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxCustomerType.FormattingEnabled = true;
-            this.comboBoxCustomerType.Items.AddRange(new object[] {
-            "团体客户",
-            "零散客户"});
-            this.comboBoxCustomerType.Location = new System.Drawing.Point(71, 25);
-            this.comboBoxCustomerType.Name = "comboBoxCustomerType";
-            this.comboBoxCustomerType.Size = new System.Drawing.Size(121, 20);
-            this.comboBoxCustomerType.TabIndex = 1;
-            this.comboBoxCustomerType.SelectedIndexChanged += new System.EventHandler(this.comboBoxCustomerType_SelectedIndexChanged);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 28);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 12);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "客户类型";
             // 
             // groupBox2
             // 
@@ -223,16 +201,12 @@
             this.cargoDataGridView.TabIndex = 0;
             this.cargoDataGridView.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.cargoDataGridView_RowPrePaint);
             // 
-            // cargoBindingSource
-            // 
-            this.cargoBindingSource.DataSource = typeof(Phoebe.Model.Cargo);
-            // 
             // cargoBindingNavigator
             // 
-            this.cargoBindingNavigator.AddNewItem = this.bindingNavigatorAddNewItem;
+            this.cargoBindingNavigator.AddNewItem = null;
             this.cargoBindingNavigator.BindingSource = this.cargoBindingSource;
             this.cargoBindingNavigator.CountItem = this.bindingNavigatorCountItem;
-            this.cargoBindingNavigator.DeleteItem = this.bindingNavigatorDeleteItem;
+            this.cargoBindingNavigator.DeleteItem = null;
             this.cargoBindingNavigator.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.bindingNavigatorMoveFirstItem,
             this.bindingNavigatorMovePreviousItem,
@@ -242,10 +216,7 @@
             this.bindingNavigatorSeparator1,
             this.bindingNavigatorMoveNextItem,
             this.bindingNavigatorMoveLastItem,
-            this.bindingNavigatorSeparator2,
-            this.bindingNavigatorAddNewItem,
-            this.bindingNavigatorDeleteItem,
-            this.cargoBindingNavigatorSaveItem});
+            this.bindingNavigatorSeparator2});
             this.cargoBindingNavigator.Location = new System.Drawing.Point(3, 17);
             this.cargoBindingNavigator.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
             this.cargoBindingNavigator.MoveLastItem = this.bindingNavigatorMoveLastItem;
@@ -257,30 +228,12 @@
             this.cargoBindingNavigator.TabIndex = 2;
             this.cargoBindingNavigator.Text = "bindingNavigator1";
             // 
-            // bindingNavigatorAddNewItem
-            // 
-            this.bindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
-            this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
-            this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorAddNewItem.Text = "新添";
-            // 
             // bindingNavigatorCountItem
             // 
             this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
             this.bindingNavigatorCountItem.Size = new System.Drawing.Size(32, 22);
             this.bindingNavigatorCountItem.Text = "/ {0}";
             this.bindingNavigatorCountItem.ToolTipText = "总项数";
-            // 
-            // bindingNavigatorDeleteItem
-            // 
-            this.bindingNavigatorDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorDeleteItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteItem.Image")));
-            this.bindingNavigatorDeleteItem.Name = "bindingNavigatorDeleteItem";
-            this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorDeleteItem.Text = "删除";
             // 
             // bindingNavigatorMoveFirstItem
             // 
@@ -342,30 +295,6 @@
             this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
             this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
-            // cargoBindingNavigatorSaveItem
-            // 
-            this.cargoBindingNavigatorSaveItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.cargoBindingNavigatorSaveItem.Enabled = false;
-            this.cargoBindingNavigatorSaveItem.Image = ((System.Drawing.Image)(resources.GetObject("cargoBindingNavigatorSaveItem.Image")));
-            this.cargoBindingNavigatorSaveItem.Name = "cargoBindingNavigatorSaveItem";
-            this.cargoBindingNavigatorSaveItem.Size = new System.Drawing.Size(23, 22);
-            this.cargoBindingNavigatorSaveItem.Text = "保存数据";
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "ID";
-            this.dataGridViewTextBoxColumn1.HeaderText = "ID";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.Visible = false;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "Name";
-            this.dataGridViewTextBoxColumn2.HeaderText = "名称";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            // 
             // dataGridViewColumnContract
             // 
             this.dataGridViewColumnContract.HeaderText = "所属合同";
@@ -390,6 +319,135 @@
             this.dataGridViewColumnThirdCategory.Name = "dataGridViewColumnThirdCategory";
             this.dataGridViewColumnThirdCategory.ReadOnly = true;
             // 
+            // dataGridViewColumnWarehouse
+            // 
+            this.dataGridViewColumnWarehouse.HeaderText = "所在仓库";
+            this.dataGridViewColumnWarehouse.Name = "dataGridViewColumnWarehouse";
+            this.dataGridViewColumnWarehouse.ReadOnly = true;
+            // 
+            // dataGridViewColumnUserName
+            // 
+            this.dataGridViewColumnUserName.HeaderText = "登记人";
+            this.dataGridViewColumnUserName.Name = "dataGridViewColumnUserName";
+            this.dataGridViewColumnUserName.ReadOnly = true;
+            // 
+            // dataGridViewColumnStatus
+            // 
+            this.dataGridViewColumnStatus.HeaderText = "状态";
+            this.dataGridViewColumnStatus.Name = "dataGridViewColumnStatus";
+            this.dataGridViewColumnStatus.ReadOnly = true;
+            // 
+            // checkBoxStockInReady
+            // 
+            this.checkBoxStockInReady.AutoSize = true;
+            this.checkBoxStockInReady.Checked = true;
+            this.checkBoxStockInReady.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxStockInReady.Location = new System.Drawing.Point(34, 110);
+            this.checkBoxStockInReady.Name = "checkBoxStockInReady";
+            this.checkBoxStockInReady.Size = new System.Drawing.Size(72, 16);
+            this.checkBoxStockInReady.TabIndex = 7;
+            this.checkBoxStockInReady.Text = "准备入库";
+            this.checkBoxStockInReady.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxStockIn
+            // 
+            this.checkBoxStockIn.AutoSize = true;
+            this.checkBoxStockIn.Checked = true;
+            this.checkBoxStockIn.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxStockIn.Location = new System.Drawing.Point(128, 110);
+            this.checkBoxStockIn.Name = "checkBoxStockIn";
+            this.checkBoxStockIn.Size = new System.Drawing.Size(48, 16);
+            this.checkBoxStockIn.TabIndex = 8;
+            this.checkBoxStockIn.Text = "入库";
+            this.checkBoxStockIn.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxStockOut
+            // 
+            this.checkBoxStockOut.AutoSize = true;
+            this.checkBoxStockOut.Checked = true;
+            this.checkBoxStockOut.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxStockOut.Location = new System.Drawing.Point(198, 110);
+            this.checkBoxStockOut.Name = "checkBoxStockOut";
+            this.checkBoxStockOut.Size = new System.Drawing.Size(48, 16);
+            this.checkBoxStockOut.TabIndex = 9;
+            this.checkBoxStockOut.Text = "出库";
+            this.checkBoxStockOut.UseVisualStyleBackColor = true;
+            // 
+            // panel1
+            // 
+            this.panel1.AutoScroll = true;
+            this.panel1.Controls.Add(this.comboBoxThirdCategory);
+            this.panel1.Controls.Add(this.comboBoxSecondCategory);
+            this.panel1.Controls.Add(this.comboBoxFirstCategory);
+            this.panel1.Controls.Add(this.label6);
+            this.panel1.Controls.Add(this.label5);
+            this.panel1.Controls.Add(this.label4);
+            this.panel1.Controls.Add(this.buttonQuery);
+            this.panel1.Controls.Add(this.checkBoxStockOut);
+            this.panel1.Controls.Add(this.checkBoxStockIn);
+            this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.checkBoxStockInReady);
+            this.panel1.Controls.Add(this.comboBoxCustomer);
+            this.panel1.Controls.Add(this.label3);
+            this.panel1.Controls.Add(this.comboBoxContract);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(3, 17);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(951, 143);
+            this.panel1.TabIndex = 11;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(32, 60);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(53, 12);
+            this.label4.TabIndex = 10;
+            this.label4.Text = "一级分类";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(256, 60);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(53, 12);
+            this.label5.TabIndex = 11;
+            this.label5.Text = "二级分类";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(487, 60);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(53, 12);
+            this.label6.TabIndex = 12;
+            this.label6.Text = "三级分类";
+            // 
+            // comboBoxFirstCategory
+            // 
+            this.comboBoxFirstCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxFirstCategory.FormattingEnabled = true;
+            this.comboBoxFirstCategory.Location = new System.Drawing.Point(91, 57);
+            this.comboBoxFirstCategory.Name = "comboBoxFirstCategory";
+            this.comboBoxFirstCategory.Size = new System.Drawing.Size(121, 20);
+            this.comboBoxFirstCategory.TabIndex = 13;
+            this.comboBoxFirstCategory.SelectedIndexChanged += new System.EventHandler(this.comboBoxFirstCategory_SelectedIndexChanged);
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "ID";
+            this.dataGridViewTextBoxColumn1.HeaderText = "ID";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "Name";
+            this.dataGridViewTextBoxColumn2.HeaderText = "名称";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            // 
             // dataGridViewTextBoxColumn6
             // 
             this.dataGridViewTextBoxColumn6.DataPropertyName = "Count";
@@ -403,7 +461,6 @@
             this.dataGridViewTextBoxColumn7.HeaderText = "单位重量(kg)";
             this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
             this.dataGridViewTextBoxColumn7.ReadOnly = true;
-            this.dataGridViewTextBoxColumn7.Width = 120;
             // 
             // dataGridViewTextBoxColumn8
             // 
@@ -411,7 +468,6 @@
             this.dataGridViewTextBoxColumn8.HeaderText = "总重量(t)";
             this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
             this.dataGridViewTextBoxColumn8.ReadOnly = true;
-            this.dataGridViewTextBoxColumn8.Width = 120;
             // 
             // dataGridViewTextBoxColumn9
             // 
@@ -435,12 +491,6 @@
             this.dataGridViewTextBoxColumn11.HeaderText = "在库数量";
             this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
             this.dataGridViewTextBoxColumn11.ReadOnly = true;
-            // 
-            // dataGridViewColumnWarehouse
-            // 
-            this.dataGridViewColumnWarehouse.HeaderText = "所在仓库";
-            this.dataGridViewColumnWarehouse.Name = "dataGridViewColumnWarehouse";
-            this.dataGridViewColumnWarehouse.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn13
             // 
@@ -473,9 +523,9 @@
             // dataGridViewTextBoxColumn19
             // 
             this.dataGridViewTextBoxColumn19.DataPropertyName = "InTime";
-            dataGridViewCellStyle1.Format = "d";
-            dataGridViewCellStyle1.NullValue = null;
-            this.dataGridViewTextBoxColumn19.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Format = "d";
+            dataGridViewCellStyle3.NullValue = null;
+            this.dataGridViewTextBoxColumn19.DefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridViewTextBoxColumn19.HeaderText = "入库时间";
             this.dataGridViewTextBoxColumn19.Name = "dataGridViewTextBoxColumn19";
             this.dataGridViewTextBoxColumn19.ReadOnly = true;
@@ -483,17 +533,11 @@
             // dataGridViewTextBoxColumn20
             // 
             this.dataGridViewTextBoxColumn20.DataPropertyName = "OutTime";
-            dataGridViewCellStyle2.Format = "d";
-            this.dataGridViewTextBoxColumn20.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Format = "d";
+            this.dataGridViewTextBoxColumn20.DefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridViewTextBoxColumn20.HeaderText = "出库时间";
             this.dataGridViewTextBoxColumn20.Name = "dataGridViewTextBoxColumn20";
             this.dataGridViewTextBoxColumn20.ReadOnly = true;
-            // 
-            // dataGridViewColumnUserName
-            // 
-            this.dataGridViewColumnUserName.HeaderText = "登记人";
-            this.dataGridViewColumnUserName.Name = "dataGridViewColumnUserName";
-            this.dataGridViewColumnUserName.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn21
             // 
@@ -502,11 +546,28 @@
             this.dataGridViewTextBoxColumn21.Name = "dataGridViewTextBoxColumn21";
             this.dataGridViewTextBoxColumn21.ReadOnly = true;
             // 
-            // dataGridViewColumnStatus
+            // cargoBindingSource
             // 
-            this.dataGridViewColumnStatus.HeaderText = "状态";
-            this.dataGridViewColumnStatus.Name = "dataGridViewColumnStatus";
-            this.dataGridViewColumnStatus.ReadOnly = true;
+            this.cargoBindingSource.DataSource = typeof(Phoebe.Model.Cargo);
+            // 
+            // comboBoxSecondCategory
+            // 
+            this.comboBoxSecondCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxSecondCategory.FormattingEnabled = true;
+            this.comboBoxSecondCategory.Location = new System.Drawing.Point(315, 57);
+            this.comboBoxSecondCategory.Name = "comboBoxSecondCategory";
+            this.comboBoxSecondCategory.Size = new System.Drawing.Size(121, 20);
+            this.comboBoxSecondCategory.TabIndex = 14;
+            this.comboBoxSecondCategory.SelectedIndexChanged += new System.EventHandler(this.comboBoxSecondCategory_SelectedIndexChanged);
+            // 
+            // comboBoxThirdCategory
+            // 
+            this.comboBoxThirdCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxThirdCategory.FormattingEnabled = true;
+            this.comboBoxThirdCategory.Location = new System.Drawing.Point(546, 57);
+            this.comboBoxThirdCategory.Name = "comboBoxThirdCategory";
+            this.comboBoxThirdCategory.Size = new System.Drawing.Size(121, 20);
+            this.comboBoxThirdCategory.TabIndex = 15;
             // 
             // CargoForm
             // 
@@ -520,14 +581,15 @@
             this.Text = "货品管理";
             this.Load += new System.EventHandler(this.CargoForm_Load);
             this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cargoDataGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cargoBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cargoBindingNavigator)).EndInit();
             this.cargoBindingNavigator.ResumeLayout(false);
             this.cargoBindingNavigator.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cargoBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -539,15 +601,11 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox comboBoxCustomer;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox comboBoxCustomerType;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.DataGridView cargoDataGridView;
         private System.Windows.Forms.BindingSource cargoBindingSource;
         private System.Windows.Forms.BindingNavigator cargoBindingNavigator;
-        private System.Windows.Forms.ToolStripButton bindingNavigatorAddNewItem;
         private System.Windows.Forms.ToolStripLabel bindingNavigatorCountItem;
-        private System.Windows.Forms.ToolStripButton bindingNavigatorDeleteItem;
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveFirstItem;
         private System.Windows.Forms.ToolStripButton bindingNavigatorMovePreviousItem;
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator;
@@ -556,7 +614,6 @@
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveNextItem;
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
-        private System.Windows.Forms.ToolStripButton cargoBindingNavigatorSaveItem;
         private System.Windows.Forms.Button buttonQuery;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
@@ -580,5 +637,15 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewColumnUserName;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn21;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewColumnStatus;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.ComboBox comboBoxFirstCategory;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.CheckBox checkBoxStockOut;
+        private System.Windows.Forms.CheckBox checkBoxStockIn;
+        private System.Windows.Forms.CheckBox checkBoxStockInReady;
+        private System.Windows.Forms.ComboBox comboBoxSecondCategory;
+        private System.Windows.Forms.ComboBox comboBoxThirdCategory;
     }
 }
