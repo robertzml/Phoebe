@@ -33,6 +33,14 @@ namespace Phoebe.FormUI
         private bool isNew = false;
         #endregion //Field
 
+        #region Constructor
+        public StockMoveForm(User user)
+        {
+            InitializeComponent();
+            this.currentUser = user;
+        }
+        #endregion //Constructor
+
         #region Function
         private void InitData()
         {
@@ -45,7 +53,7 @@ namespace Phoebe.FormUI
 
         private void InitControl()
         {
-            //UpdateTree();
+            UpdateTree();
 
             this.comboBoxCustomer.DataSource = this.customerBusiness.Get();
             this.comboBoxCustomer.DisplayMember = "Name";
@@ -56,23 +64,114 @@ namespace Phoebe.FormUI
             whColumn.DisplayMember = "Number";
             whColumn.ValueMember = "ID";
         }
-        #endregion //Function
 
-        #region Constructor
-        public StockMoveForm(User user)
+        /// <summary>
+        /// 更新模型数据到页面
+        /// </summary>
+        private void ModelToControl()
         {
-            InitializeComponent();
-            this.currentUser = user;
+            this.textBoxStatus.Text = ((EntityStatus)this.currentStockMove.Status).DisplayName();
+            this.dateBusinessTime.Value = this.currentStockMove.MoveTime;
+            this.textBoxFlowNumber.Text = this.currentStockMove.FlowNumber.ToString();
+            if (this.currentStockMove.ContractID == 0)
+            {
+                this.comboBoxCustomer.SelectedIndex = -1;
+                this.comboBoxContract.SelectedIndex = -1;
+            }
+            else
+            {
+                this.comboBoxCustomer.SelectedValue = this.currentStockMove.Contract.CustomerID;
+                this.comboBoxContract.SelectedValue = this.currentStockMove.ContractID;
+            }
+            this.textBoxUser.Text = this.currentStockMove.User.Name;
+            this.textBoxRemark.Text = this.currentStockMove.Remark;
+
+            List<Cargo> cargos = new List<Cargo>();
+            foreach (var item in this.currentStockMove.StockMoveDetails)
+            {
+                cargos.Add(item.SourceCargo);
+            }
+
+            this.cargoBindingSource.DataSource = cargos;
+
+            for (int i = 0; i < this.currentStockMove.StockMoveDetails.Count; i++)
+            {
+                this.cargoDataGridView.Rows[i].Cells[this.dataGridViewColumnMoveCount.Index].Value = this.currentStockMove.StockMoveDetails.ElementAt(i).Count;
+                this.cargoDataGridView.Rows[i].Cells[this.dataGridViewColumnNewWarehouse.Index].Value = this.currentStockMove.StockMoveDetails.ElementAt(i).WarehouseID;
+            }
         }
-        #endregion //Constructor
+
+        /// <summary>
+        /// 更新票据列表
+        /// </summary>
+        private void UpdateTree()
+        {
+            this.treeViewReceipt.Nodes.Clear();
+
+            var months = this.storeBusiness.GetStockMoveMonthGroup();
+            for (int i = 0; i < months.Length; i++)
+            {
+                TreeNode node = new TreeNode();
+                node.Name = months[i];
+                node.Text = months[i];
+                node.Nodes.Add("");
+                this.treeViewReceipt.Nodes.Add(node);
+            }
+        }
+
+        public ErrorCode SaveNewItem()
+        {
+            StockMove stockMove = new StockMove();
+            stockMove.ID = Guid.NewGuid();
+            stockMove.MoveTime = this.dateBusinessTime.Value.Date;
+            stockMove.MonthTime = stockMove.MoveTime.Year + stockMove.MoveTime.Month.ToString().PadLeft(2, '0');
+            stockMove.FlowNumber = this.textBoxFlowNumber.Text;
+            stockMove.ContractID = Convert.ToInt32(this.comboBoxContract.SelectedValue);
+            stockMove.IsLock = false;
+            stockMove.UserID = this.currentUser.ID;
+            stockMove.Remark = this.textBoxRemark.Text;
+            stockMove.Status = (int)EntityStatus.StockMoveReady;
+
+            List<StockMoveDetail> details = new List<StockMoveDetail>();
+            foreach (DataGridViewRow row in this.cargoDataGridView.Rows)
+            {
+                bool isSelect = Convert.ToBoolean(row.Cells[this.dataGridViewColumnSelect.Index].Value);
+                if (isSelect)
+                {
+                    var cargo = row.DataBoundItem as Cargo;
+
+                    StockMoveDetail smDetail = new StockMoveDetail();
+                    smDetail.ID = Guid.NewGuid();
+                    smDetail.StockMoveID = stockMove.ID;
+                    smDetail.SourceCargoID = cargo.ID;
+                    smDetail.WarehouseID = Convert.ToInt32(row.Cells[this.dataGridViewColumnNewWarehouse.Index].Value);
+                    smDetail.StoreCount = cargo.StoreCount;
+                    smDetail.Count = Convert.ToInt32(row.Cells[this.dataGridViewColumnMoveCount.Index].Value);
+                    smDetail.Status = (int)EntityStatus.StockMoveReady;
+                    details.Add(smDetail);
+                }
+            }
+
+            ErrorCode result = this.storeBusiness.StockMove(stockMove, details);
+            if (result == ErrorCode.Success)
+            {
+                this.currentStockMove = this.storeBusiness.GetStockMove(stockMove.ID.ToString());
+                this.isNew = false;
+                return ErrorCode.Success;
+            }
+            else
+            {
+                return result;
+            }
+        }
+        #endregion //Function
 
         #region Event
         private void StockMoveForm_Load(object sender, EventArgs e)
         {
             InitData();
             InitControl();
-        }
-        
+        }        
 
         private void treeViewReceipt_BeforeExpand(object sender, TreeViewCancelEventArgs e)
         {
@@ -96,7 +195,7 @@ namespace Phoebe.FormUI
             this.groupBox2.Visible = this.groupBox3.Visible = true;
 
             this.currentStockMove = e.Node.Tag as StockMove;
-            //ModelToControl();
+            ModelToControl();
             this.isNew = false;
             if (this.currentStockMove.Status == (int)EntityStatus.StockMoveReady)
             {
@@ -144,7 +243,51 @@ namespace Phoebe.FormUI
         /// <param name="e"></param>
         private void toolSave_Click(object sender, EventArgs e)
         {
+            if (this.isNew)
+            {
+                ErrorCode result = SaveNewItem();
+                if (result == ErrorCode.Success)
+                {
+                    MessageBox.Show("保存成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.toolConfirm.Enabled = true;
+                    UpdateTree();
+                }
+                else
+                {
+                    MessageBox.Show("保存失败:" + result.DisplayName(), FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+        }
 
+        /// <summary>
+        /// 移库确认
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void toolConfirm_Click(object sender, EventArgs e)
+        {
+            if (this.currentStockMove == null)
+            {
+                MessageBox.Show("当前未选中记录", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            if (this.currentStockMove.Status != (int)EntityStatus.StockMoveReady)
+            {
+                MessageBox.Show("当前记录已确认", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            ErrorCode result = this.storeBusiness.StockMoveConfirm(this.currentStockMove.ID);
+            if (result == ErrorCode.Success)
+            {
+                MessageBox.Show("移库已确认", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.textBoxStatus.Text = EntityStatus.StockMove.DisplayName();
+                this.toolConfirm.Enabled = false;
+            }
+            else
+            {
+                MessageBox.Show("移库确认失败:" + result.DisplayName(), FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void comboBoxCustomer_SelectedIndexChanged(object sender, EventArgs e)
@@ -166,8 +309,9 @@ namespace Phoebe.FormUI
         {
             if (this.comboBoxContract.SelectedIndex != -1)
             {
-                int contractId = Convert.ToInt32(this.comboBoxContract.SelectedValue);
-                var data = this.cargoBusiness.GetInByContract(contractId);
+                var contract = this.comboBoxContract.SelectedItem as Contract;
+                //int contractId = Convert.ToInt32(this.comboBoxContract.SelectedValue);
+                var data = this.cargoBusiness.GetInByContract(contract.ID);
                 this.cargoBindingSource.DataSource = data;
             }
         }
@@ -208,5 +352,7 @@ namespace Phoebe.FormUI
             }
         }
         #endregion //Event
+
+        
     }
 }

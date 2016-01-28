@@ -463,6 +463,110 @@ namespace Phoebe.Business
                 return ErrorCode.Exception;
             }
         }
+
+        /// <summary>
+        /// 移库确认
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ErrorCode StockMoveConfirm(Guid id)
+        {
+            try
+            {
+                StockMove sm = this.context.StockMoves.Find(id);                
+                if (sm == null)
+                    return ErrorCode.ObjectNotFound;
+
+                sm.Status = (int)EntityStatus.StockMove;
+
+                foreach(var item in sm.StockMoveDetails)
+                {
+                    //check cargo count
+                    var cargo = item.SourceCargo;
+                    if (cargo.StoreCount < item.Count)
+                        return ErrorCode.StockOutCountOverflow;
+
+                    var stock = item.SourceStock;
+                    if (cargo.StoreCount == item.Count) // all move
+                    {
+                        cargo.WarehouseID = item.WarehouseID;
+
+                        stock.Count = 0;
+                        stock.OutTime = sm.MoveTime;
+                        stock.Status = (int)EntityStatus.StoreOut;
+
+                        Stock newStock = new Stock();
+                        newStock.ID = Guid.NewGuid();
+                        newStock.WarehouseID = item.WarehouseID;
+                        newStock.CargoID = cargo.ID;
+                        newStock.Count = item.Count;
+                        newStock.InTime = sm.MoveTime;
+                        newStock.Source = 1;
+                        newStock.Remark = stock.Remark;
+                        newStock.Status = (int)EntityStatus.StoreIn;
+
+                        this.context.Stocks.Add(newStock);
+                    }
+                    else
+                    {
+                        cargo.StoreCount -= item.Count;
+                        stock.Count -= item.Count;
+
+                        // add new cargo
+                        Cargo newCargo = new Cargo
+                        {
+                            ID = Guid.NewGuid(),
+                            Name = cargo.Name,
+                            FirstCategoryID = cargo.FirstCategoryID,
+                            SecondCategoryID = cargo.SecondCategoryID,
+                            ThirdCategoryID = cargo.ThirdCategoryID,
+                            Count = item.Count,
+                            UnitWeight = cargo.UnitWeight,
+                            TotalWeight = Math.Round(Convert.ToDouble(item.Count * cargo.UnitWeight / 1000), 3),
+                            UnitVolume = cargo.UnitVolume,
+                            TotalVolume = Math.Round(Convert.ToDouble(item.Count * cargo.UnitVolume), 3),
+                            StoreCount = item.Count,
+                            WarehouseID = item.WarehouseID,
+                            OriginPlace = cargo.OriginPlace,
+                            Specification = cargo.Specification,
+                            ShelfLife = cargo.ShelfLife,
+                            ContractID = cargo.ContractID,
+                            RegisterTime = cargo.RegisterTime,
+                            UserID = cargo.UserID,
+                            InTime = cargo.InTime,
+                            Remark = cargo.Remark,
+                            Status = (int)EntityStatus.CargoStockIn
+                        };
+
+                        this.context.Cargoes.Add(newCargo);
+
+                        // add new stock
+                        Stock newStock = new Stock();
+                        newStock.ID = Guid.NewGuid();
+                        newStock.WarehouseID = item.WarehouseID;
+                        newStock.CargoID = cargo.ID;
+                        newStock.Count = item.Count;
+                        newStock.InTime = sm.MoveTime;
+                        newStock.Source = 1;
+                        newStock.Remark = stock.Remark;
+                        newStock.Status = (int)EntityStatus.StoreIn;
+
+                        this.context.Stocks.Add(newStock);
+                    }
+
+                    //change stockmove details status
+                    item.Status = (int)EntityStatus.StockMove;
+                }
+
+                this.context.SaveChanges();
+
+                return ErrorCode.Success;
+            }
+            catch(Exception)
+            {
+                return ErrorCode.Exception;
+            }
+        }
         #endregion //Stock Move
         #endregion //Method
     }

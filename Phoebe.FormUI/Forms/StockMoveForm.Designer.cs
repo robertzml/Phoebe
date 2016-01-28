@@ -33,23 +33,16 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.treeViewReceipt = new System.Windows.Forms.TreeView();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.toolNew = new System.Windows.Forms.ToolStripButton();
             this.打开OToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolSave = new System.Windows.Forms.ToolStripButton();
             this.打印PToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
+            this.toolConfirm = new System.Windows.Forms.ToolStripButton();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label4 = new System.Windows.Forms.Label();
-            this.textBoxFlowNumber = new System.Windows.Forms.TextBox();
-            this.dateBusinessTime = new System.Windows.Forms.DateTimePicker();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textBoxStatus = new System.Windows.Forms.TextBox();
-            this.textBoxBusinessType = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.textBoxRemark = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
@@ -58,24 +51,30 @@
             this.label6 = new System.Windows.Forms.Label();
             this.comboBoxCustomer = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.treeViewReceipt = new System.Windows.Forms.TreeView();
-            this.toolConfirm = new System.Windows.Forms.ToolStripButton();
+            this.label4 = new System.Windows.Forms.Label();
+            this.textBoxFlowNumber = new System.Windows.Forms.TextBox();
+            this.dateBusinessTime = new System.Windows.Forms.DateTimePicker();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.textBoxStatus = new System.Windows.Forms.TextBox();
+            this.textBoxBusinessType = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.cargoDataGridView = new System.Windows.Forms.DataGridView();
             this.cargoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.cargoBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
+            this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
+            this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.bindingNavigatorPositionItem = new System.Windows.Forms.ToolStripTextBox();
-            this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.cargoBindingNavigatorSaveItem = new System.Windows.Forms.ToolStripButton();
-            this.cargoDataGridView = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewColumnSelect = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewColumnFirstCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -102,12 +101,12 @@
             this.groupBox1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cargoDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cargoBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cargoBindingNavigator)).BeginInit();
             this.cargoBindingNavigator.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.cargoDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -120,6 +119,16 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "单据";
+            // 
+            // treeViewReceipt
+            // 
+            this.treeViewReceipt.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeViewReceipt.Location = new System.Drawing.Point(3, 17);
+            this.treeViewReceipt.Name = "treeViewReceipt";
+            this.treeViewReceipt.Size = new System.Drawing.Size(166, 550);
+            this.treeViewReceipt.TabIndex = 0;
+            this.treeViewReceipt.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeViewReceipt_BeforeExpand);
+            this.treeViewReceipt.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewReceipt_AfterSelect);
             // 
             // toolStrip1
             // 
@@ -135,11 +144,6 @@
             this.toolStrip1.Size = new System.Drawing.Size(719, 25);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
-            // 
-            // toolStripSeparator
-            // 
-            this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(6, 25);
             // 
             // toolNew
             // 
@@ -175,6 +179,20 @@
             this.打印PToolStripButton.Size = new System.Drawing.Size(67, 22);
             this.打印PToolStripButton.Text = "打印(&P)";
             // 
+            // toolStripSeparator
+            // 
+            this.toolStripSeparator.Name = "toolStripSeparator";
+            this.toolStripSeparator.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolConfirm
+            // 
+            this.toolConfirm.Image = global::Phoebe.FormUI.Properties.Resources.check;
+            this.toolConfirm.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolConfirm.Name = "toolConfirm";
+            this.toolConfirm.Size = new System.Drawing.Size(76, 22);
+            this.toolConfirm.Text = "移库确认";
+            this.toolConfirm.Click += new System.EventHandler(this.toolConfirm_Click);
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.panel1);
@@ -186,19 +204,6 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "基本信息";
             this.groupBox2.Visible = false;
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.cargoDataGridView);
-            this.groupBox3.Controls.Add(this.cargoBindingNavigator);
-            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox3.Location = new System.Drawing.Point(175, 172);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(719, 401);
-            this.groupBox3.TabIndex = 3;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "货品信息";
-            this.groupBox3.Visible = false;
             // 
             // panel1
             // 
@@ -225,74 +230,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(713, 124);
             this.panel1.TabIndex = 0;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(834, 19);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(53, 12);
-            this.label4.TabIndex = 17;
-            this.label4.Text = "流水单号";
-            // 
-            // textBoxFlowNumber
-            // 
-            this.textBoxFlowNumber.Location = new System.Drawing.Point(893, 16);
-            this.textBoxFlowNumber.Name = "textBoxFlowNumber";
-            this.textBoxFlowNumber.ReadOnly = true;
-            this.textBoxFlowNumber.Size = new System.Drawing.Size(147, 21);
-            this.textBoxFlowNumber.TabIndex = 18;
-            // 
-            // dateBusinessTime
-            // 
-            this.dateBusinessTime.Location = new System.Drawing.Point(620, 16);
-            this.dateBusinessTime.Name = "dateBusinessTime";
-            this.dateBusinessTime.Size = new System.Drawing.Size(147, 21);
-            this.dateBusinessTime.TabIndex = 16;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(561, 19);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(53, 12);
-            this.label3.TabIndex = 15;
-            this.label3.Text = "业务日期";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(279, 19);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 12);
-            this.label2.TabIndex = 13;
-            this.label2.Text = "业务状态";
-            // 
-            // textBoxStatus
-            // 
-            this.textBoxStatus.Location = new System.Drawing.Point(338, 16);
-            this.textBoxStatus.Name = "textBoxStatus";
-            this.textBoxStatus.ReadOnly = true;
-            this.textBoxStatus.Size = new System.Drawing.Size(147, 21);
-            this.textBoxStatus.TabIndex = 14;
-            // 
-            // textBoxBusinessType
-            // 
-            this.textBoxBusinessType.Location = new System.Drawing.Point(75, 16);
-            this.textBoxBusinessType.Name = "textBoxBusinessType";
-            this.textBoxBusinessType.ReadOnly = true;
-            this.textBoxBusinessType.Size = new System.Drawing.Size(147, 21);
-            this.textBoxBusinessType.TabIndex = 12;
-            this.textBoxBusinessType.Text = "货品移库";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(16, 19);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 12);
-            this.label1.TabIndex = 11;
-            this.label1.Text = "业务类型";
             // 
             // textBoxRemark
             // 
@@ -365,23 +302,126 @@
             this.label5.TabIndex = 37;
             this.label5.Text = "所属合同";
             // 
-            // treeViewReceipt
+            // label4
             // 
-            this.treeViewReceipt.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeViewReceipt.Location = new System.Drawing.Point(3, 17);
-            this.treeViewReceipt.Name = "treeViewReceipt";
-            this.treeViewReceipt.Size = new System.Drawing.Size(166, 550);
-            this.treeViewReceipt.TabIndex = 0;
-            this.treeViewReceipt.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeViewReceipt_BeforeExpand);
-            this.treeViewReceipt.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewReceipt_AfterSelect);
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(834, 19);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(53, 12);
+            this.label4.TabIndex = 17;
+            this.label4.Text = "流水单号";
             // 
-            // toolConfirm
+            // textBoxFlowNumber
             // 
-            this.toolConfirm.Image = global::Phoebe.FormUI.Properties.Resources.check;
-            this.toolConfirm.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolConfirm.Name = "toolConfirm";
-            this.toolConfirm.Size = new System.Drawing.Size(76, 22);
-            this.toolConfirm.Text = "移库确认";
+            this.textBoxFlowNumber.Location = new System.Drawing.Point(893, 16);
+            this.textBoxFlowNumber.Name = "textBoxFlowNumber";
+            this.textBoxFlowNumber.ReadOnly = true;
+            this.textBoxFlowNumber.Size = new System.Drawing.Size(147, 21);
+            this.textBoxFlowNumber.TabIndex = 18;
+            // 
+            // dateBusinessTime
+            // 
+            this.dateBusinessTime.Location = new System.Drawing.Point(620, 16);
+            this.dateBusinessTime.Name = "dateBusinessTime";
+            this.dateBusinessTime.Size = new System.Drawing.Size(147, 21);
+            this.dateBusinessTime.TabIndex = 16;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(561, 19);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(53, 12);
+            this.label3.TabIndex = 15;
+            this.label3.Text = "业务日期";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(279, 19);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(53, 12);
+            this.label2.TabIndex = 13;
+            this.label2.Text = "业务状态";
+            // 
+            // textBoxStatus
+            // 
+            this.textBoxStatus.Location = new System.Drawing.Point(338, 16);
+            this.textBoxStatus.Name = "textBoxStatus";
+            this.textBoxStatus.ReadOnly = true;
+            this.textBoxStatus.Size = new System.Drawing.Size(147, 21);
+            this.textBoxStatus.TabIndex = 14;
+            // 
+            // textBoxBusinessType
+            // 
+            this.textBoxBusinessType.Location = new System.Drawing.Point(75, 16);
+            this.textBoxBusinessType.Name = "textBoxBusinessType";
+            this.textBoxBusinessType.ReadOnly = true;
+            this.textBoxBusinessType.Size = new System.Drawing.Size(147, 21);
+            this.textBoxBusinessType.TabIndex = 12;
+            this.textBoxBusinessType.Text = "货品移库";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(16, 19);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(53, 12);
+            this.label1.TabIndex = 11;
+            this.label1.Text = "业务类型";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.cargoDataGridView);
+            this.groupBox3.Controls.Add(this.cargoBindingNavigator);
+            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox3.Location = new System.Drawing.Point(175, 172);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(719, 401);
+            this.groupBox3.TabIndex = 3;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "货品信息";
+            this.groupBox3.Visible = false;
+            // 
+            // cargoDataGridView
+            // 
+            this.cargoDataGridView.AllowUserToAddRows = false;
+            this.cargoDataGridView.AllowUserToDeleteRows = false;
+            this.cargoDataGridView.AutoGenerateColumns = false;
+            this.cargoDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.cargoDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewColumnSelect,
+            this.dataGridViewTextBoxColumn2,
+            this.dataGridViewColumnFirstCategory,
+            this.dataGridViewColumnSecondCategory,
+            this.dataGridViewColumnThirdCategory,
+            this.dataGridViewTextBoxColumn6,
+            this.dataGridViewTextBoxColumn7,
+            this.dataGridViewTextBoxColumn8,
+            this.dataGridViewTextBoxColumn9,
+            this.dataGridViewTextBoxColumn10,
+            this.dataGridViewTextBoxColumn11,
+            this.dataGridViewColumnMoveCount,
+            this.dataGridViewColumnSourceWarehouse,
+            this.dataGridViewColumnNewWarehouse,
+            this.dataGridViewTextBoxColumn13,
+            this.dataGridViewTextBoxColumn14,
+            this.dataGridViewTextBoxColumn15,
+            this.dataGridViewTextBoxColumn17,
+            this.dataGridViewColumnUser,
+            this.dataGridViewTextBoxColumn19,
+            this.dataGridViewTextBoxColumn20,
+            this.dataGridViewTextBoxColumn21,
+            this.dataGridViewColumnStatus});
+            this.cargoDataGridView.DataSource = this.cargoBindingSource;
+            this.cargoDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cargoDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+            this.cargoDataGridView.Location = new System.Drawing.Point(3, 42);
+            this.cargoDataGridView.Name = "cargoDataGridView";
+            this.cargoDataGridView.RowTemplate.Height = 23;
+            this.cargoDataGridView.Size = new System.Drawing.Size(713, 356);
+            this.cargoDataGridView.TabIndex = 0;
+            this.cargoDataGridView.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.cargoDataGridView_RowPrePaint);
             // 
             // cargoBindingSource
             // 
@@ -417,6 +457,33 @@
             this.cargoBindingNavigator.TabIndex = 4;
             this.cargoBindingNavigator.Text = "bindingNavigator1";
             // 
+            // bindingNavigatorAddNewItem
+            // 
+            this.bindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorAddNewItem.Enabled = false;
+            this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
+            this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
+            this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorAddNewItem.Text = "新添";
+            // 
+            // bindingNavigatorCountItem
+            // 
+            this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
+            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(32, 22);
+            this.bindingNavigatorCountItem.Text = "/ {0}";
+            this.bindingNavigatorCountItem.ToolTipText = "总项数";
+            // 
+            // bindingNavigatorDeleteItem
+            // 
+            this.bindingNavigatorDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorDeleteItem.Enabled = false;
+            this.bindingNavigatorDeleteItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteItem.Image")));
+            this.bindingNavigatorDeleteItem.Name = "bindingNavigatorDeleteItem";
+            this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorDeleteItem.Text = "删除";
+            // 
             // bindingNavigatorMoveFirstItem
             // 
             this.bindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -449,16 +516,9 @@
             this.bindingNavigatorPositionItem.Text = "0";
             this.bindingNavigatorPositionItem.ToolTipText = "当前位置";
             // 
-            // bindingNavigatorCountItem
-            // 
-            this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
-            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(32, 22);
-            this.bindingNavigatorCountItem.Text = "/ {0}";
-            this.bindingNavigatorCountItem.ToolTipText = "总项数";
-            // 
             // bindingNavigatorSeparator1
             // 
-            this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator";
+            this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator1";
             this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
             // bindingNavigatorMoveNextItem
@@ -481,28 +541,8 @@
             // 
             // bindingNavigatorSeparator2
             // 
-            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator";
+            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
             this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
-            // 
-            // bindingNavigatorAddNewItem
-            // 
-            this.bindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorAddNewItem.Enabled = false;
-            this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
-            this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
-            this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorAddNewItem.Text = "新添";
-            // 
-            // bindingNavigatorDeleteItem
-            // 
-            this.bindingNavigatorDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorDeleteItem.Enabled = false;
-            this.bindingNavigatorDeleteItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteItem.Image")));
-            this.bindingNavigatorDeleteItem.Name = "bindingNavigatorDeleteItem";
-            this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorDeleteItem.Text = "删除";
             // 
             // cargoBindingNavigatorSaveItem
             // 
@@ -512,54 +552,6 @@
             this.cargoBindingNavigatorSaveItem.Name = "cargoBindingNavigatorSaveItem";
             this.cargoBindingNavigatorSaveItem.Size = new System.Drawing.Size(23, 22);
             this.cargoBindingNavigatorSaveItem.Text = "保存数据";
-            // 
-            // cargoDataGridView
-            // 
-            this.cargoDataGridView.AllowUserToAddRows = false;
-            this.cargoDataGridView.AllowUserToDeleteRows = false;
-            this.cargoDataGridView.AutoGenerateColumns = false;
-            this.cargoDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.cargoDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewColumnSelect,
-            this.dataGridViewTextBoxColumn2,
-            this.dataGridViewColumnFirstCategory,
-            this.dataGridViewColumnSecondCategory,
-            this.dataGridViewColumnThirdCategory,
-            this.dataGridViewTextBoxColumn6,
-            this.dataGridViewTextBoxColumn7,
-            this.dataGridViewTextBoxColumn8,
-            this.dataGridViewTextBoxColumn9,
-            this.dataGridViewTextBoxColumn10,
-            this.dataGridViewTextBoxColumn11,
-            this.dataGridViewColumnMoveCount,
-            this.dataGridViewColumnSourceWarehouse,
-            this.dataGridViewColumnNewWarehouse,
-            this.dataGridViewTextBoxColumn13,
-            this.dataGridViewTextBoxColumn14,
-            this.dataGridViewTextBoxColumn15,
-            this.dataGridViewTextBoxColumn17,
-            this.dataGridViewColumnUser,
-            this.dataGridViewTextBoxColumn19,
-            this.dataGridViewTextBoxColumn20,
-            this.dataGridViewTextBoxColumn21,
-            this.dataGridViewColumnStatus});
-            this.cargoDataGridView.DataSource = this.cargoBindingSource;
-            this.cargoDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cargoDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.cargoDataGridView.Location = new System.Drawing.Point(3, 42);
-            this.cargoDataGridView.Name = "cargoDataGridView";
-            this.cargoDataGridView.RowTemplate.Height = 23;
-            this.cargoDataGridView.Size = new System.Drawing.Size(713, 356);
-            this.cargoDataGridView.TabIndex = 0;
-            this.cargoDataGridView.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.cargoDataGridView_RowPrePaint);
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "ID";
-            this.dataGridViewTextBoxColumn1.HeaderText = "ID";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.Visible = false;
             // 
             // dataGridViewColumnSelect
             // 
@@ -740,15 +732,15 @@
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cargoDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cargoBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cargoBindingNavigator)).EndInit();
             this.cargoBindingNavigator.ResumeLayout(false);
             this.cargoBindingNavigator.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.cargoDataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -799,7 +791,6 @@
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
         private System.Windows.Forms.ToolStripButton cargoBindingNavigatorSaveItem;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewCheckBoxColumn dataGridViewColumnSelect;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewColumnFirstCategory;
