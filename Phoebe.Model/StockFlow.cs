@@ -13,16 +13,31 @@ namespace Phoebe.Model
     public class StockFlow
     {
         /// <summary>
-        /// 货品ID
+        /// 客户ID
         /// </summary>
-        [Display(Name = "货品ID")]
-        public System.Guid CargoID { get; set; }
+        public int CustomerID { get; set; }
+
+        /// <summary>
+        /// 客户名称
+        /// </summary>
+        public string CustomerName { get; set; }
 
         /// <summary>
         /// 合同ID
         /// </summary>
         [Display(Name = "合同ID")]
         public int ContractID { get; set; }
+
+        /// <summary>
+        /// 合同名称
+        /// </summary>
+        public string ContractName { get; set; }
+
+        /// <summary>
+        /// 货品ID
+        /// </summary>
+        [Display(Name = "货品ID")]
+        public System.Guid CargoID { get; set; }
 
         /// <summary>
         /// 货品名称
@@ -49,12 +64,6 @@ namespace Phoebe.Model
         public string ThirdCategoryName { get; set; }
 
         /// <summary>
-        /// 所属合同
-        /// </summary>
-        [Display(Name = "所属合同")]
-        public string ContractName { get; set; }
-
-        /// <summary>
         /// 流水数量
         /// </summary>
         /// <remarks>
@@ -62,6 +71,11 @@ namespace Phoebe.Model
         /// </remarks>
         [Display(Name = "流水数量")]
         public int Count { get; set; }
+
+        /// <summary>
+        /// 单位重量(kg)
+        /// </summary>
+        public double UnitWeight { get; set; }
 
         /// <summary>
         /// 重量
@@ -99,18 +113,6 @@ namespace Phoebe.Model
         /// 出库
         /// </summary>
         [Display(Name = "出库")]
-        StockOut = 2,
-
-        /// <summary>
-        /// 转入
-        /// </summary>
-        [Display(Name = "转入")]
-        TransferIn = 3,
-
-        /// <summary>
-        /// 转出
-        /// </summary>
-        [Display(Name = "转出")]
-        TransferOut = 4
+        StockOut = 2
     }
 }

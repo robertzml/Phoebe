@@ -33,8 +33,6 @@ namespace Phoebe.FormUI
         /// </summary>
         private StockIn currentStockIn;
 
-        private List<Cargo> currentCargoes;
-
         /// <summary>
         /// 是否新增
         /// </summary>
@@ -56,9 +54,7 @@ namespace Phoebe.FormUI
             this.contractBusiness = new ContractBusiness();
             this.categoryBusiness = new CategoryBusiness();
             this.warehouseBusiness = new WarehouseBusiness();
-            this.storeBusiness = new StoreBusiness();
-
-            this.currentCargoes = new List<Cargo>();
+            this.storeBusiness = new StoreBusiness();     
         }
 
         private void InitControl()
@@ -138,8 +134,7 @@ namespace Phoebe.FormUI
             {
                 cargos.Add(item.Cargo);
             }
-
-            //this.cargoDataGridView.DataSource = cargos;
+            
             this.cargoBindingSource.DataSource = cargos;
         }
 
@@ -195,6 +190,11 @@ namespace Phoebe.FormUI
             foreach (DataGridViewRow row in this.cargoDataGridView.Rows)
             {
                 var cargo = row.DataBoundItem as Cargo;
+                if (cargo.WarehouseID == null)
+                {
+                    return ErrorCode.WarehouseCannotBeEmpty;
+                }
+
                 cargo.ID = Guid.NewGuid();
                 cargo.ContractID = stockIn.ContractID;
                 cargo.StoreCount = cargo.Count;
@@ -267,10 +267,14 @@ namespace Phoebe.FormUI
             if (this.currentStockIn.Status == (int)EntityStatus.StockInReady)
             {
                 this.toolConfirm.Enabled = true;
+                this.groupBox2.Enabled = true;
+                this.groupBox3.Enabled = true;
             }
-            else
+            else if (this.currentStockIn.Status == (int)EntityStatus.StockIn)
             {
                 this.toolConfirm.Enabled = false;
+                this.groupBox2.Enabled = false;
+                this.groupBox3.Enabled = false;
             }
         }
 
@@ -292,9 +296,17 @@ namespace Phoebe.FormUI
             this.textBoxBillingType.Text = "";
             this.textBoxStatus.Text = EntityStatus.StockInReady.DisplayName();
             this.textBoxUser.Text = this.currentUser.Name;
+            this.textBoxRemark.Text = "";
 
             this.numericUnitPrice.Value = 0;
             this.numericHandlingPrice.Value = 0;
+            this.numericFreezePrice.Value = 0;
+            this.numericDisposePrice.Value = 0;
+            this.numericPackingPrice.Value = 0;
+            this.numericRentPrice.Value = 0;
+            this.numericOtherPrice.Value = 0;
+
+            this.cargoBindingSource.DataSource = new List<Cargo>();
         }
 
         /// <summary>
@@ -311,7 +323,6 @@ namespace Phoebe.FormUI
                 {
                     MessageBox.Show("保存成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.toolConfirm.Enabled = true;
-                    UpdateTree();
                 }
                 else
                 {
@@ -353,6 +364,11 @@ namespace Phoebe.FormUI
             {
                 MessageBox.Show("入库确认失败:" + result.DisplayName(), FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+        }
+
+        private void toolRefresh_Click(object sender, EventArgs e)
+        {
+            UpdateTree();
         }
 
         private void comboBoxCustomer_SelectedIndexChanged(object sender, EventArgs e)
@@ -437,5 +453,7 @@ namespace Phoebe.FormUI
             }
         }
         #endregion //Event
+
+       
     }
 }

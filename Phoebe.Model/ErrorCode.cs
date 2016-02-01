@@ -116,6 +116,12 @@ namespace Phoebe.Model
         WarehouseLevelOverflow = 30,
 
         /// <summary>
+        /// 仓库不能为空
+        /// </summary>
+        [Display(Name = "仓库不能为空")]
+        WarehouseCannotBeEmpty = 31,
+
+        /// <summary>
         /// 托盘使用中
         /// </summary>
         [Display(Name = "托盘使用中")]

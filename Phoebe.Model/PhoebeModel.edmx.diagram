@@ -20,15 +20,10 @@
         <AssociationConnector Association="PhoebeModel.FK_SecondCategory_FirstCategory" />
         <AssociationConnector Association="PhoebeModel.FK_ThirdCategory_SecondCategory" />
         <EntityTypeShape EntityType="PhoebeModel.Billing" Width="1.5" PointX="9.75" PointY="13" />
-        <EntityTypeShape EntityType="PhoebeModel.StockIn" Width="1.5" PointX="9.375" PointY="17.875" />
-        <AssociationConnector Association="PhoebeModel.FK_Billing_StockIn" />
-        <AssociationConnector Association="PhoebeModel.FK_StockIn_Contract" />
-        <AssociationConnector Association="PhoebeModel.FK_StockIn_User" />
         <EntityTypeShape EntityType="PhoebeModel.Stock" Width="1.5" PointX="11.625" PointY="23.625" />
-        <EntityTypeShape EntityType="PhoebeModel.StockInDetail" Width="1.5" PointX="6.75" PointY="15.125" />
+        <EntityTypeShape EntityType="PhoebeModel.StockInDetail" Width="1.5" PointX="4.125" PointY="15.625" />
         <AssociationConnector Association="PhoebeModel.FK_Stock_Warehouse" />
         <AssociationConnector Association="PhoebeModel.FK_StockInDetails_Stock" />
-        <AssociationConnector Association="PhoebeModel.FK_StockInDetails_StockIn" />
         <AssociationConnector Association="PhoebeModel.FK_StockInDetails_Warehouse" />
         <EntityTypeShape EntityType="PhoebeModel.Cargo" Width="1.5" PointX="19.25" PointY="9.625" />
         <AssociationConnector Association="PhoebeModel.FK_Cargo_Contract" />
@@ -57,6 +52,11 @@
         <AssociationConnector Association="PhoebeModel.FK_StockMove_User" />
         <AssociationConnector Association="PhoebeModel.FK_StockMoveDetails_StockMove" />
         <AssociationConnector Association="PhoebeModel.FK_StockMoveDetails_Warehouse" />
+        <EntityTypeShape EntityType="PhoebeModel.StockIn" Width="1.5" PointX="8.75" PointY="18.125" />
+        <AssociationConnector Association="PhoebeModel.FK_Billing_StockIn" />
+        <AssociationConnector Association="PhoebeModel.FK_StockIn_Contract" />
+        <AssociationConnector Association="PhoebeModel.FK_StockIn_User" />
+        <AssociationConnector Association="PhoebeModel.FK_StockInDetails_StockIn" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

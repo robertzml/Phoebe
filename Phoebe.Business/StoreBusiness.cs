@@ -145,7 +145,7 @@ namespace Phoebe.Business
         /// <returns></returns>
         public List<StockIn> GetStockInByMonth(string monthTime)
         {
-            var data = this.context.StockIns.Where(r => r.MonthTime == monthTime).OrderByDescending(r => r.InTime);
+            var data = this.context.StockIns.Where(r => r.MonthTime == monthTime).OrderByDescending(r => r.FlowNumber);
             return data.ToList();
         }
 
@@ -181,6 +181,7 @@ namespace Phoebe.Business
             try
             {
                 // add stock in
+                data.FlowNumber = GetLastStockInFlowNumber(data.InTime);
                 this.context.StockIns.Add(data);
 
                 // add cargos
@@ -281,7 +282,7 @@ namespace Phoebe.Business
         /// <returns></returns>
         public List<StockOut> GetStockOutByMonth(string monthTime)
         {
-            var data = this.context.StockOuts.Where(r => r.MonthTime == monthTime).OrderByDescending(r => r.OutTime);
+            var data = this.context.StockOuts.Where(r => r.MonthTime == monthTime).OrderByDescending(r => r.FlowNumber);
             return data.ToList();
         }
 
@@ -328,6 +329,7 @@ namespace Phoebe.Business
             try
             {
                 // add stock out
+                data.FlowNumber = GetLastStockOutFlowNumber(data.OutTime);
                 this.context.StockOuts.Add(data);
 
                 // add stock out details
@@ -459,7 +461,7 @@ namespace Phoebe.Business
         /// <returns></returns>
         public List<StockMove> GetStockMoveByMonth(string monthTime)
         {
-            var data = this.context.StockMoves.Where(r => r.MonthTime == monthTime).OrderByDescending(r => r.MoveTime);
+            var data = this.context.StockMoves.Where(r => r.MonthTime == monthTime).OrderByDescending(r => r.FlowNumber);
             return data.ToList();
         }
 
@@ -506,6 +508,7 @@ namespace Phoebe.Business
             try
             {
                 // add stock move
+                data.FlowNumber = GetLastStockMoveFlowNumber(data.MoveTime);
                 this.context.StockMoves.Add(data);
 
                 // add stock move details
