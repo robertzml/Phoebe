@@ -163,6 +163,19 @@ namespace Phoebe.FormUI
         }
 
         /// <summary>
+        /// 报表管理 - 日报表
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void menuDailyReport_Click(object sender, EventArgs e)
+        {
+            DailyReportForm form = new DailyReportForm();
+            form.MdiParent = this;
+            form.WindowState = FormWindowState.Maximized;
+            form.Show();
+        }
+
+        /// <summary>
         /// 用户 - 用户列表
         /// </summary>
         private void menuUserList_Click(object sender, EventArgs e)

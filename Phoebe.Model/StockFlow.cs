@@ -46,16 +46,33 @@ namespace Phoebe.Model
         public string CargoName { get; set; }
 
         /// <summary>
+        /// 一级分类ID
+        /// </summary>
+        public int FirstCategoryID { get; set; }
+
+        /// <summary>
         /// 一级分类
         /// </summary>
         [Display(Name = "一级分类")]
         public string FirstCategoryName { get; set; }
 
         /// <summary>
+        /// 二级分类ID
+        /// </summary>
+        [Display(Name = "二级分类ID")]
+        public int SecondCategoryID { get; set; }
+
+        /// <summary>
         /// 二级分类
         /// </summary>
         [Display(Name = "二级分类")]
         public string SecondCategoryName { get; set; }
+
+        /// <summary>
+        /// 三级分类ID
+        /// </summary>
+        [Display(Name = "三级分类ID")]
+        public int ThirdCategoryID { get; set; }
 
         /// <summary>
         /// 三级分类

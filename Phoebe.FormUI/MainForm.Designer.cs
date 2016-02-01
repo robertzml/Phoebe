@@ -277,6 +277,7 @@
             this.menuDailyReport.Name = "menuDailyReport";
             this.menuDailyReport.Size = new System.Drawing.Size(152, 22);
             this.menuDailyReport.Text = "日报表";
+            this.menuDailyReport.Click += new System.EventHandler(this.menuDailyReport_Click);
             // 
             // MainForm
             // 
