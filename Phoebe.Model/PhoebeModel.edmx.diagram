@@ -57,6 +57,12 @@
         <AssociationConnector Association="PhoebeModel.FK_StockIn_Contract" />
         <AssociationConnector Association="PhoebeModel.FK_StockIn_User" />
         <AssociationConnector Association="PhoebeModel.FK_StockInDetails_StockIn" />
+        <EntityTypeShape EntityType="PhoebeModel.Settlement" Width="1.5" PointX="19.25" PointY="4.125" />
+        <EntityTypeShape EntityType="PhoebeModel.SettlementDetail" Width="1.5" PointX="21.5" PointY="9" />
+        <AssociationConnector Association="PhoebeModel.FK_SettlementDetails_Cargo" />
+        <AssociationConnector Association="PhoebeModel.FK_SettlementDetails_Contract" />
+        <AssociationConnector Association="PhoebeModel.FK_Settlement_User" />
+        <AssociationConnector Association="PhoebeModel.FK_SettlementDetails_Settlement" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

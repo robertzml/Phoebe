@@ -163,6 +163,14 @@ namespace Phoebe.FormUI
         }
 
         /// <summary>
+        /// 结算管理 - 货品冷藏费
+        /// </summary>      
+        private void menuCargoColdPrice_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        /// <summary>
         /// 报表管理 - 日报表
         /// </summary>
         /// <param name="sender"></param>
