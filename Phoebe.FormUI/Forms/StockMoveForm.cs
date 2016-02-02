@@ -59,7 +59,7 @@ namespace Phoebe.FormUI
             this.comboBoxCustomer.DisplayMember = "Name";
             this.comboBoxCustomer.ValueMember = "ID";
 
-            DataGridViewComboBoxColumn whColumn = this.dataGridViewColumnNewWarehouse;
+            DataGridViewComboBoxColumn whColumn = this.columnNewWarehouse;
             whColumn.DataSource = this.warehouseBusiness.Get();
             whColumn.DisplayMember = "Number";
             whColumn.ValueMember = "ID";
@@ -96,8 +96,9 @@ namespace Phoebe.FormUI
 
             for (int i = 0; i < this.currentStockMove.StockMoveDetails.Count; i++)
             {
-                this.cargoDataGridView.Rows[i].Cells[this.dataGridViewColumnMoveCount.Index].Value = this.currentStockMove.StockMoveDetails.ElementAt(i).Count;
-                this.cargoDataGridView.Rows[i].Cells[this.dataGridViewColumnNewWarehouse.Index].Value = this.currentStockMove.StockMoveDetails.ElementAt(i).WarehouseID;
+                this.cargoDataGridView.Rows[i].Cells[this.columnSelect.Index].Value = true;
+                this.cargoDataGridView.Rows[i].Cells[this.columnMoveCount.Index].Value = this.currentStockMove.StockMoveDetails.ElementAt(i).Count;
+                this.cargoDataGridView.Rows[i].Cells[this.columnNewWarehouse.Index].Value = this.currentStockMove.StockMoveDetails.ElementAt(i).WarehouseID;
             }
         }
 
@@ -119,6 +120,23 @@ namespace Phoebe.FormUI
             }
         }
 
+        /// <summary>
+        /// 设置控件能否修改
+        /// </summary>
+        /// <param name="canEdit">能否修改</param>
+        private void SetControlEditable(bool canEdit)
+        {
+            this.dateBusinessTime.Enabled = this.comboBoxCustomer.Enabled = this.comboBoxContract.Enabled = canEdit;
+            this.textBoxRemark.ReadOnly = !canEdit;
+
+            this.cargoBindingNavigator.Enabled = canEdit;
+            this.columnSelect.ReadOnly = this.columnMoveCount.ReadOnly = this.columnNewWarehouse.ReadOnly = !canEdit;
+        }
+
+        /// <summary>
+        /// 保存新项
+        /// </summary>
+        /// <returns></returns>
         public ErrorCode SaveNewItem()
         {
             StockMove stockMove = new StockMove();
@@ -135,7 +153,7 @@ namespace Phoebe.FormUI
             List<StockMoveDetail> details = new List<StockMoveDetail>();
             foreach (DataGridViewRow row in this.cargoDataGridView.Rows)
             {
-                bool isSelect = Convert.ToBoolean(row.Cells[this.dataGridViewColumnSelect.Index].Value);
+                bool isSelect = Convert.ToBoolean(row.Cells[this.columnSelect.Index].Value);
                 if (isSelect)
                 {
                     var cargo = row.DataBoundItem as Cargo;
@@ -144,9 +162,9 @@ namespace Phoebe.FormUI
                     smDetail.ID = Guid.NewGuid();
                     smDetail.StockMoveID = stockMove.ID;
                     smDetail.SourceCargoID = cargo.ID;
-                    smDetail.WarehouseID = Convert.ToInt32(row.Cells[this.dataGridViewColumnNewWarehouse.Index].Value);
+                    smDetail.WarehouseID = Convert.ToInt32(row.Cells[this.columnNewWarehouse.Index].Value);
                     smDetail.StoreCount = cargo.StoreCount;
-                    smDetail.Count = Convert.ToInt32(row.Cells[this.dataGridViewColumnMoveCount.Index].Value);
+                    smDetail.Count = Convert.ToInt32(row.Cells[this.columnMoveCount.Index].Value);
                     smDetail.Status = (int)EntityStatus.StockMoveReady;
                     details.Add(smDetail);
                 }
@@ -171,7 +189,7 @@ namespace Phoebe.FormUI
         {
             InitData();
             InitControl();
-        }        
+        }
 
         private void treeViewReceipt_BeforeExpand(object sender, TreeViewCancelEventArgs e)
         {
@@ -201,13 +219,13 @@ namespace Phoebe.FormUI
             {
                 this.toolSave.Enabled = true;
                 this.toolConfirm.Enabled = true;
-                this.groupBox2.Enabled = true;
+                SetControlEditable(true);
             }
             else if (this.currentStockMove.Status == (int)EntityStatus.StockOut)
             {
                 this.toolSave.Enabled = false;
                 this.toolConfirm.Enabled = false;
-                this.groupBox2.Enabled = false;
+                SetControlEditable(false);
             }
         }
 
@@ -219,11 +237,12 @@ namespace Phoebe.FormUI
         private void toolNew_Click(object sender, EventArgs e)
         {
             this.isNew = true;
+            this.currentStockMove = null;
+
             this.toolSave.Enabled = true;
             this.toolConfirm.Enabled = false;
             this.groupBox2.Visible = this.groupBox3.Visible = true;
-            this.groupBox2.Enabled = true;
-           
+            SetControlEditable(true);
 
             DateTime now = DateTime.Now.Date;
             this.dateBusinessTime.Value = now;
@@ -243,6 +262,8 @@ namespace Phoebe.FormUI
         /// <param name="e"></param>
         private void toolSave_Click(object sender, EventArgs e)
         {
+            this.textBoxRemark.Focus(); //force datagrid complete change
+
             if (this.isNew)
             {
                 ErrorCode result = SaveNewItem();
@@ -250,7 +271,7 @@ namespace Phoebe.FormUI
                 {
                     MessageBox.Show("保存成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.toolConfirm.Enabled = true;
-                    UpdateTree();
+                    this.storeBusiness = new StoreBusiness();
                 }
                 else
                 {
@@ -283,6 +304,7 @@ namespace Phoebe.FormUI
                 MessageBox.Show("移库已确认", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.textBoxStatus.Text = EntityStatus.StockMove.DisplayName();
                 this.toolConfirm.Enabled = false;
+                SetControlEditable(false);
             }
             else
             {
@@ -290,6 +312,22 @@ namespace Phoebe.FormUI
             }
         }
 
+        /// <summary>
+        /// 刷新
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void toolRefresh_Click(object sender, EventArgs e)
+        {
+            this.storeBusiness = new StoreBusiness();
+            UpdateTree();
+        }
+
+        /// <summary>
+        /// 选择客户
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void comboBoxCustomer_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (this.comboBoxCustomer.SelectedIndex != -1)
@@ -305,12 +343,16 @@ namespace Phoebe.FormUI
             }
         }
 
+        /// <summary>
+        /// 合同选择
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void comboBoxContract_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (this.comboBoxContract.SelectedIndex != -1)
             {
                 var contract = this.comboBoxContract.SelectedItem as Contract;
-                //int contractId = Convert.ToInt32(this.comboBoxContract.SelectedValue);
                 var data = this.cargoBusiness.GetInByContract(contract.ID);
                 this.cargoBindingSource.DataSource = data;
             }
@@ -352,7 +394,5 @@ namespace Phoebe.FormUI
             }
         }
         #endregion //Event
-
-        
     }
 }

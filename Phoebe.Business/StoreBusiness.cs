@@ -145,7 +145,8 @@ namespace Phoebe.Business
         /// <returns></returns>
         public List<StockIn> GetStockInByMonth(string monthTime)
         {
-            var data = this.context.StockIns.Where(r => r.MonthTime == monthTime).OrderByDescending(r => r.FlowNumber);
+            var data = this.context.StockIns.Where(r => r.MonthTime == monthTime)
+                .OrderByDescending(r => r.FlowNumber);
             return data.ToList();
         }
 
@@ -341,7 +342,7 @@ namespace Phoebe.Business
                 this.context.StockOutDetails.AddRange(details);
 
                 this.context.SaveChanges();
-
+                
                 return ErrorCode.Success;
             }
             catch (Exception)

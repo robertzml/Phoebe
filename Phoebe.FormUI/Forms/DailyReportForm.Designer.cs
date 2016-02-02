@@ -29,26 +29,19 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DailyReportForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.comboBoxType = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.datePicker = new System.Windows.Forms.DateTimePicker();
+            this.textBoxTotalWeight = new System.Windows.Forms.TextBox();
             this.buttonQuery = new System.Windows.Forms.Button();
+            this.textBoxTotalCount = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.datePicker = new System.Windows.Forms.DateTimePicker();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.comboBoxType = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.stockFlowBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.stockFlowBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
-            this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
-            this.bindingNavigatorPositionItem = new System.Windows.Forms.ToolStripTextBox();
-            this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
-            this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.stockFlowDataGridView = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -61,16 +54,23 @@
             this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.textBoxTotalCount = new System.Windows.Forms.TextBox();
-            this.textBoxTotalWeight = new System.Windows.Forms.TextBox();
+            this.stockFlowBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.stockFlowBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
+            this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
+            this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
+            this.bindingNavigatorPositionItem = new System.Windows.Forms.ToolStripTextBox();
+            this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.stockFlowDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.stockFlowBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.stockFlowBindingNavigator)).BeginInit();
             this.stockFlowBindingNavigator.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.stockFlowDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -92,14 +92,65 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "功能";
             // 
-            // label1
+            // textBoxTotalWeight
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(23, 28);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(29, 12);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "类型";
+            this.textBoxTotalWeight.Location = new System.Drawing.Point(371, 82);
+            this.textBoxTotalWeight.Name = "textBoxTotalWeight";
+            this.textBoxTotalWeight.ReadOnly = true;
+            this.textBoxTotalWeight.Size = new System.Drawing.Size(140, 21);
+            this.textBoxTotalWeight.TabIndex = 3;
+            // 
+            // buttonQuery
+            // 
+            this.buttonQuery.Location = new System.Drawing.Point(576, 23);
+            this.buttonQuery.Name = "buttonQuery";
+            this.buttonQuery.Size = new System.Drawing.Size(75, 23);
+            this.buttonQuery.TabIndex = 4;
+            this.buttonQuery.Text = "查询";
+            this.buttonQuery.UseVisualStyleBackColor = true;
+            this.buttonQuery.Click += new System.EventHandler(this.buttonQuery_Click);
+            // 
+            // textBoxTotalCount
+            // 
+            this.textBoxTotalCount.Location = new System.Drawing.Point(97, 82);
+            this.textBoxTotalCount.Name = "textBoxTotalCount";
+            this.textBoxTotalCount.ReadOnly = true;
+            this.textBoxTotalCount.Size = new System.Drawing.Size(140, 21);
+            this.textBoxTotalCount.TabIndex = 2;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(312, 86);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(53, 12);
+            this.label4.TabIndex = 1;
+            this.label4.Text = "重量合计";
+            // 
+            // datePicker
+            // 
+            this.datePicker.Location = new System.Drawing.Point(371, 24);
+            this.datePicker.Name = "datePicker";
+            this.datePicker.Size = new System.Drawing.Size(164, 21);
+            this.datePicker.TabIndex = 3;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(23, 86);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(53, 12);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "数量合计";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(312, 28);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(29, 12);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "日期";
             // 
             // comboBoxType
             // 
@@ -113,31 +164,14 @@
             this.comboBoxType.Size = new System.Drawing.Size(140, 20);
             this.comboBoxType.TabIndex = 1;
             // 
-            // label2
+            // label1
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(312, 28);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(29, 12);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "日期";
-            // 
-            // datePicker
-            // 
-            this.datePicker.Location = new System.Drawing.Point(371, 24);
-            this.datePicker.Name = "datePicker";
-            this.datePicker.Size = new System.Drawing.Size(164, 21);
-            this.datePicker.TabIndex = 3;
-            // 
-            // buttonQuery
-            // 
-            this.buttonQuery.Location = new System.Drawing.Point(576, 23);
-            this.buttonQuery.Name = "buttonQuery";
-            this.buttonQuery.Size = new System.Drawing.Size(75, 23);
-            this.buttonQuery.TabIndex = 4;
-            this.buttonQuery.Text = "查询";
-            this.buttonQuery.UseVisualStyleBackColor = true;
-            this.buttonQuery.Click += new System.EventHandler(this.buttonQuery_Click);
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(23, 28);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(29, 12);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "类型";
             // 
             // groupBox2
             // 
@@ -151,108 +185,11 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "报表记录";
             // 
-            // stockFlowBindingSource
-            // 
-            this.stockFlowBindingSource.DataSource = typeof(Phoebe.Model.StockFlow);
-            // 
-            // stockFlowBindingNavigator
-            // 
-            this.stockFlowBindingNavigator.AddNewItem = null;
-            this.stockFlowBindingNavigator.BindingSource = this.stockFlowBindingSource;
-            this.stockFlowBindingNavigator.CountItem = this.bindingNavigatorCountItem;
-            this.stockFlowBindingNavigator.DeleteItem = null;
-            this.stockFlowBindingNavigator.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.bindingNavigatorMoveFirstItem,
-            this.bindingNavigatorMovePreviousItem,
-            this.bindingNavigatorSeparator,
-            this.bindingNavigatorPositionItem,
-            this.bindingNavigatorCountItem,
-            this.bindingNavigatorSeparator1,
-            this.bindingNavigatorMoveNextItem,
-            this.bindingNavigatorMoveLastItem,
-            this.bindingNavigatorSeparator2});
-            this.stockFlowBindingNavigator.Location = new System.Drawing.Point(3, 17);
-            this.stockFlowBindingNavigator.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
-            this.stockFlowBindingNavigator.MoveLastItem = this.bindingNavigatorMoveLastItem;
-            this.stockFlowBindingNavigator.MoveNextItem = this.bindingNavigatorMoveNextItem;
-            this.stockFlowBindingNavigator.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
-            this.stockFlowBindingNavigator.Name = "stockFlowBindingNavigator";
-            this.stockFlowBindingNavigator.PositionItem = this.bindingNavigatorPositionItem;
-            this.stockFlowBindingNavigator.Size = new System.Drawing.Size(818, 25);
-            this.stockFlowBindingNavigator.TabIndex = 2;
-            this.stockFlowBindingNavigator.Text = "bindingNavigator1";
-            // 
-            // bindingNavigatorMoveFirstItem
-            // 
-            this.bindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMoveFirstItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveFirstItem.Image")));
-            this.bindingNavigatorMoveFirstItem.Name = "bindingNavigatorMoveFirstItem";
-            this.bindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorMoveFirstItem.Text = "移到第一条记录";
-            // 
-            // bindingNavigatorMovePreviousItem
-            // 
-            this.bindingNavigatorMovePreviousItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMovePreviousItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMovePreviousItem.Image")));
-            this.bindingNavigatorMovePreviousItem.Name = "bindingNavigatorMovePreviousItem";
-            this.bindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorMovePreviousItem.Text = "移到上一条记录";
-            // 
-            // bindingNavigatorSeparator
-            // 
-            this.bindingNavigatorSeparator.Name = "bindingNavigatorSeparator";
-            this.bindingNavigatorSeparator.Size = new System.Drawing.Size(6, 25);
-            // 
-            // bindingNavigatorPositionItem
-            // 
-            this.bindingNavigatorPositionItem.AccessibleName = "位置";
-            this.bindingNavigatorPositionItem.AutoSize = false;
-            this.bindingNavigatorPositionItem.Name = "bindingNavigatorPositionItem";
-            this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(50, 23);
-            this.bindingNavigatorPositionItem.Text = "0";
-            this.bindingNavigatorPositionItem.ToolTipText = "当前位置";
-            // 
-            // bindingNavigatorCountItem
-            // 
-            this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
-            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(32, 22);
-            this.bindingNavigatorCountItem.Text = "/ {0}";
-            this.bindingNavigatorCountItem.ToolTipText = "总项数";
-            // 
-            // bindingNavigatorSeparator1
-            // 
-            this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator";
-            this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
-            // bindingNavigatorMoveNextItem
-            // 
-            this.bindingNavigatorMoveNextItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMoveNextItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveNextItem.Image")));
-            this.bindingNavigatorMoveNextItem.Name = "bindingNavigatorMoveNextItem";
-            this.bindingNavigatorMoveNextItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveNextItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorMoveNextItem.Text = "移到下一条记录";
-            // 
-            // bindingNavigatorMoveLastItem
-            // 
-            this.bindingNavigatorMoveLastItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMoveLastItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveLastItem.Image")));
-            this.bindingNavigatorMoveLastItem.Name = "bindingNavigatorMoveLastItem";
-            this.bindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorMoveLastItem.Text = "移到最后一条记录";
-            // 
-            // bindingNavigatorSeparator2
-            // 
-            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator";
-            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
-            // 
             // stockFlowDataGridView
             // 
             this.stockFlowDataGridView.AllowUserToAddRows = false;
             this.stockFlowDataGridView.AllowUserToDeleteRows = false;
+            this.stockFlowDataGridView.AllowUserToResizeRows = false;
             this.stockFlowDataGridView.AutoGenerateColumns = false;
             this.stockFlowDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.stockFlowDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -343,8 +280,8 @@
             // dataGridViewTextBoxColumn16
             // 
             this.dataGridViewTextBoxColumn16.DataPropertyName = "FlowDate";
-            dataGridViewCellStyle3.Format = "d";
-            this.dataGridViewTextBoxColumn16.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Format = "d";
+            this.dataGridViewTextBoxColumn16.DefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewTextBoxColumn16.HeaderText = "日期";
             this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
             this.dataGridViewTextBoxColumn16.ReadOnly = true;
@@ -355,39 +292,103 @@
             this.columnType.Name = "columnType";
             this.columnType.ReadOnly = true;
             // 
-            // label3
+            // stockFlowBindingSource
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(23, 86);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(53, 12);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "数量合计";
+            this.stockFlowBindingSource.DataSource = typeof(Phoebe.Model.StockFlow);
             // 
-            // label4
+            // stockFlowBindingNavigator
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(312, 86);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(53, 12);
-            this.label4.TabIndex = 1;
-            this.label4.Text = "重量合计";
+            this.stockFlowBindingNavigator.AddNewItem = null;
+            this.stockFlowBindingNavigator.BindingSource = this.stockFlowBindingSource;
+            this.stockFlowBindingNavigator.CountItem = this.bindingNavigatorCountItem;
+            this.stockFlowBindingNavigator.DeleteItem = null;
+            this.stockFlowBindingNavigator.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.bindingNavigatorMoveFirstItem,
+            this.bindingNavigatorMovePreviousItem,
+            this.bindingNavigatorSeparator,
+            this.bindingNavigatorPositionItem,
+            this.bindingNavigatorCountItem,
+            this.bindingNavigatorSeparator1,
+            this.bindingNavigatorMoveNextItem,
+            this.bindingNavigatorMoveLastItem,
+            this.bindingNavigatorSeparator2});
+            this.stockFlowBindingNavigator.Location = new System.Drawing.Point(3, 17);
+            this.stockFlowBindingNavigator.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
+            this.stockFlowBindingNavigator.MoveLastItem = this.bindingNavigatorMoveLastItem;
+            this.stockFlowBindingNavigator.MoveNextItem = this.bindingNavigatorMoveNextItem;
+            this.stockFlowBindingNavigator.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
+            this.stockFlowBindingNavigator.Name = "stockFlowBindingNavigator";
+            this.stockFlowBindingNavigator.PositionItem = this.bindingNavigatorPositionItem;
+            this.stockFlowBindingNavigator.Size = new System.Drawing.Size(818, 25);
+            this.stockFlowBindingNavigator.TabIndex = 2;
+            this.stockFlowBindingNavigator.Text = "bindingNavigator1";
             // 
-            // textBoxTotalCount
+            // bindingNavigatorCountItem
             // 
-            this.textBoxTotalCount.Location = new System.Drawing.Point(97, 82);
-            this.textBoxTotalCount.Name = "textBoxTotalCount";
-            this.textBoxTotalCount.ReadOnly = true;
-            this.textBoxTotalCount.Size = new System.Drawing.Size(140, 21);
-            this.textBoxTotalCount.TabIndex = 2;
+            this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
+            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(32, 22);
+            this.bindingNavigatorCountItem.Text = "/ {0}";
+            this.bindingNavigatorCountItem.ToolTipText = "总项数";
             // 
-            // textBoxTotalWeight
+            // bindingNavigatorMoveFirstItem
             // 
-            this.textBoxTotalWeight.Location = new System.Drawing.Point(371, 82);
-            this.textBoxTotalWeight.Name = "textBoxTotalWeight";
-            this.textBoxTotalWeight.ReadOnly = true;
-            this.textBoxTotalWeight.Size = new System.Drawing.Size(140, 21);
-            this.textBoxTotalWeight.TabIndex = 3;
+            this.bindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMoveFirstItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveFirstItem.Image")));
+            this.bindingNavigatorMoveFirstItem.Name = "bindingNavigatorMoveFirstItem";
+            this.bindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMoveFirstItem.Text = "移到第一条记录";
+            // 
+            // bindingNavigatorMovePreviousItem
+            // 
+            this.bindingNavigatorMovePreviousItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMovePreviousItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMovePreviousItem.Image")));
+            this.bindingNavigatorMovePreviousItem.Name = "bindingNavigatorMovePreviousItem";
+            this.bindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMovePreviousItem.Text = "移到上一条记录";
+            // 
+            // bindingNavigatorSeparator
+            // 
+            this.bindingNavigatorSeparator.Name = "bindingNavigatorSeparator";
+            this.bindingNavigatorSeparator.Size = new System.Drawing.Size(6, 25);
+            // 
+            // bindingNavigatorPositionItem
+            // 
+            this.bindingNavigatorPositionItem.AccessibleName = "位置";
+            this.bindingNavigatorPositionItem.AutoSize = false;
+            this.bindingNavigatorPositionItem.Name = "bindingNavigatorPositionItem";
+            this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(50, 23);
+            this.bindingNavigatorPositionItem.Text = "0";
+            this.bindingNavigatorPositionItem.ToolTipText = "当前位置";
+            // 
+            // bindingNavigatorSeparator1
+            // 
+            this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator1";
+            this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // bindingNavigatorMoveNextItem
+            // 
+            this.bindingNavigatorMoveNextItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMoveNextItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveNextItem.Image")));
+            this.bindingNavigatorMoveNextItem.Name = "bindingNavigatorMoveNextItem";
+            this.bindingNavigatorMoveNextItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMoveNextItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMoveNextItem.Text = "移到下一条记录";
+            // 
+            // bindingNavigatorMoveLastItem
+            // 
+            this.bindingNavigatorMoveLastItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMoveLastItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveLastItem.Image")));
+            this.bindingNavigatorMoveLastItem.Name = "bindingNavigatorMoveLastItem";
+            this.bindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMoveLastItem.Text = "移到最后一条记录";
+            // 
+            // bindingNavigatorSeparator2
+            // 
+            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
+            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
             // DailyReportForm
             // 
@@ -404,11 +405,11 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.stockFlowDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.stockFlowBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.stockFlowBindingNavigator)).EndInit();
             this.stockFlowBindingNavigator.ResumeLayout(false);
             this.stockFlowBindingNavigator.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.stockFlowDataGridView)).EndInit();
             this.ResumeLayout(false);
 
         }
