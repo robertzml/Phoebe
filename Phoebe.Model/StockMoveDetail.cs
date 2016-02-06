@@ -21,6 +21,7 @@ namespace Phoebe.Model
         public int WarehouseID { get; set; }
         public int StoreCount { get; set; }
         public int Count { get; set; }
+        public double MoveWeight { get; set; }
         public System.Guid SourceStockID { get; set; }
         public Nullable<System.Guid> NewStockID { get; set; }
         public string Remark { get; set; }

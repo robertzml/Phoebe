@@ -37,6 +37,9 @@ namespace Phoebe.FormUI
             UpdateCategoryTree();
         }
 
+        /// <summary>
+        /// 更新树形菜单
+        /// </summary>
         private void UpdateCategoryTree()
         {
             this.treeCategory.BeginUpdate();
@@ -68,6 +71,11 @@ namespace Phoebe.FormUI
             this.treeCategory.EndUpdate();
         }
 
+        /// <summary>
+        /// 更新二级分类
+        /// </summary>
+        /// <param name="first"></param>
+        /// <param name="parent"></param>
         private void UpdateSecondCategory(FirstCategory first, TreeNode parent)
         {
             List<SecondCategory> secondCategory = this.categoryBusiness.GetSecondCategoryByFirst(first.ID, false);
@@ -87,6 +95,11 @@ namespace Phoebe.FormUI
             return;
         }
 
+        /// <summary>
+        /// 更新三级分类
+        /// </summary>
+        /// <param name="second"></param>
+        /// <param name="parent"></param>
         private void UpdateThirdCategory(SecondCategory second, TreeNode parent)
         {
             List<ThirdCategory> thirdCategory = this.categoryBusiness.GetThirdCategoryBySecond(second.ID, false);
@@ -119,18 +132,21 @@ namespace Phoebe.FormUI
         {
             CategoryFirstAddForm form = new CategoryFirstAddForm();
             form.ShowDialog();
+            UpdateCategoryTree();
         }
 
         private void buttonAddSecond_Click(object sender, EventArgs e)
         {
             CategorySecondAddForm form = new CategorySecondAddForm();
             form.ShowDialog();
+            UpdateCategoryTree();
         }        
 
         private void buttonAddThird_Click(object sender, EventArgs e)
         {
             CategoryThirdAddForm form = new CategoryThirdAddForm();
             form.ShowDialog();
+            UpdateCategoryTree();
         }
         #endregion //Event
     }

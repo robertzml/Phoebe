@@ -90,6 +90,7 @@ namespace Phoebe.FormUI
             {
                 this.cargoDataGridView.Rows[i].Cells[this.columnSelect.Index].Value = true;
                 this.cargoDataGridView.Rows[i].Cells[this.columnOutCount.Index].Value = this.currentStockOut.StockOutDetails.ElementAt(i).Count;
+                this.cargoDataGridView.Rows[i].Cells[this.columnOutWeight.Index].Value = this.currentStockOut.StockOutDetails.ElementAt(i).OutWeight;
             }
         }
 
@@ -156,6 +157,7 @@ namespace Phoebe.FormUI
                     soDetail.WarehouseID = cargo.WarehouseID.Value;
                     soDetail.StoreCount = cargo.StoreCount;
                     soDetail.Count = Convert.ToInt32(row.Cells[this.columnOutCount.Index].Value);
+                    soDetail.OutWeight = cargo.UnitWeight * soDetail.Count / 1000;
                     soDetail.Status = (int)EntityStatus.StockOutReady;
                     details.Add(soDetail);
                 }
@@ -176,12 +178,22 @@ namespace Phoebe.FormUI
         #endregion //Function
 
         #region Event
+        /// <summary>
+        /// 窗体载入
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void StockOutForm_Load(object sender, EventArgs e)
         {
             InitData();
             InitControl();
         }
 
+        /// <summary>
+        /// 树形菜单载入
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void treeViewReceipt_BeforeExpand(object sender, TreeViewCancelEventArgs e)
         {
             var data = this.storeBusiness.GetStockOutByMonth(e.Node.Name);

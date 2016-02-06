@@ -31,7 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StockMoveForm));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.treeViewReceipt = new System.Windows.Forms.TreeView();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -41,6 +40,7 @@
             this.打印PToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.toolConfirm = new System.Windows.Forms.ToolStripButton();
+            this.toolRefresh = new System.Windows.Forms.ToolStripButton();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.textBoxRemark = new System.Windows.Forms.TextBox();
@@ -80,23 +80,22 @@
             this.dataGridViewColumnSecondCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewColumnThirdCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnMoveCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnMoveWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnMoveCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewColumnSourceWarehouse = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnNewWarehouse = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewColumnUser = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewColumnStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.toolRefresh = new System.Windows.Forms.ToolStripButton();
             this.groupBox1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -114,7 +113,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Left;
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(172, 570);
+            this.groupBox1.Size = new System.Drawing.Size(172, 618);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "单据";
@@ -122,9 +121,9 @@
             // treeViewReceipt
             // 
             this.treeViewReceipt.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeViewReceipt.Location = new System.Drawing.Point(3, 17);
+            this.treeViewReceipt.Location = new System.Drawing.Point(3, 16);
             this.treeViewReceipt.Name = "treeViewReceipt";
-            this.treeViewReceipt.Size = new System.Drawing.Size(166, 550);
+            this.treeViewReceipt.Size = new System.Drawing.Size(166, 599);
             this.treeViewReceipt.TabIndex = 0;
             this.treeViewReceipt.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeViewReceipt_BeforeExpand);
             this.treeViewReceipt.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewReceipt_AfterSelect);
@@ -193,13 +192,22 @@
             this.toolConfirm.Text = "移库确认";
             this.toolConfirm.Click += new System.EventHandler(this.toolConfirm_Click);
             // 
+            // toolRefresh
+            // 
+            this.toolRefresh.Image = global::Phoebe.FormUI.Properties.Resources.refresh;
+            this.toolRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolRefresh.Name = "toolRefresh";
+            this.toolRefresh.Size = new System.Drawing.Size(52, 22);
+            this.toolRefresh.Text = "刷新";
+            this.toolRefresh.Click += new System.EventHandler(this.toolRefresh_Click);
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.panel1);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox2.Location = new System.Drawing.Point(175, 28);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(719, 144);
+            this.groupBox2.Size = new System.Drawing.Size(719, 156);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "基本信息";
@@ -226,60 +234,60 @@
             this.panel1.Controls.Add(this.textBoxBusinessType);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(3, 17);
+            this.panel1.Location = new System.Drawing.Point(3, 16);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(713, 124);
+            this.panel1.Size = new System.Drawing.Size(713, 137);
             this.panel1.TabIndex = 0;
             // 
             // textBoxRemark
             // 
-            this.textBoxRemark.Location = new System.Drawing.Point(893, 60);
+            this.textBoxRemark.Location = new System.Drawing.Point(893, 65);
             this.textBoxRemark.Name = "textBoxRemark";
-            this.textBoxRemark.Size = new System.Drawing.Size(147, 21);
+            this.textBoxRemark.Size = new System.Drawing.Size(147, 20);
             this.textBoxRemark.TabIndex = 44;
             // 
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(858, 63);
+            this.label15.Location = new System.Drawing.Point(858, 68);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(29, 12);
+            this.label15.Size = new System.Drawing.Size(31, 13);
             this.label15.TabIndex = 43;
             this.label15.Text = "备注";
             // 
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(573, 63);
+            this.label16.Location = new System.Drawing.Point(573, 68);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(41, 12);
+            this.label16.Size = new System.Drawing.Size(43, 13);
             this.label16.TabIndex = 41;
             this.label16.Text = "业务员";
             // 
             // textBoxUser
             // 
-            this.textBoxUser.Location = new System.Drawing.Point(620, 60);
+            this.textBoxUser.Location = new System.Drawing.Point(620, 65);
             this.textBoxUser.Name = "textBoxUser";
             this.textBoxUser.ReadOnly = true;
-            this.textBoxUser.Size = new System.Drawing.Size(147, 21);
+            this.textBoxUser.Size = new System.Drawing.Size(147, 20);
             this.textBoxUser.TabIndex = 42;
             // 
             // comboBoxContract
             // 
             this.comboBoxContract.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxContract.FormattingEnabled = true;
-            this.comboBoxContract.Location = new System.Drawing.Point(338, 60);
+            this.comboBoxContract.Location = new System.Drawing.Point(338, 65);
             this.comboBoxContract.Name = "comboBoxContract";
-            this.comboBoxContract.Size = new System.Drawing.Size(147, 20);
+            this.comboBoxContract.Size = new System.Drawing.Size(147, 21);
             this.comboBoxContract.TabIndex = 40;
             this.comboBoxContract.SelectedIndexChanged += new System.EventHandler(this.comboBoxContract_SelectedIndexChanged);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(16, 63);
+            this.label6.Location = new System.Drawing.Point(16, 68);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(53, 12);
+            this.label6.Size = new System.Drawing.Size(55, 13);
             this.label6.TabIndex = 38;
             this.label6.Text = "所属客户";
             // 
@@ -287,86 +295,86 @@
             // 
             this.comboBoxCustomer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxCustomer.FormattingEnabled = true;
-            this.comboBoxCustomer.Location = new System.Drawing.Point(75, 60);
+            this.comboBoxCustomer.Location = new System.Drawing.Point(75, 65);
             this.comboBoxCustomer.Name = "comboBoxCustomer";
-            this.comboBoxCustomer.Size = new System.Drawing.Size(147, 20);
+            this.comboBoxCustomer.Size = new System.Drawing.Size(147, 21);
             this.comboBoxCustomer.TabIndex = 39;
             this.comboBoxCustomer.SelectedIndexChanged += new System.EventHandler(this.comboBoxCustomer_SelectedIndexChanged);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(279, 63);
+            this.label5.Location = new System.Drawing.Point(279, 68);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(53, 12);
+            this.label5.Size = new System.Drawing.Size(55, 13);
             this.label5.TabIndex = 37;
             this.label5.Text = "所属合同";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(834, 19);
+            this.label4.Location = new System.Drawing.Point(834, 21);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(53, 12);
+            this.label4.Size = new System.Drawing.Size(55, 13);
             this.label4.TabIndex = 17;
             this.label4.Text = "流水单号";
             // 
             // textBoxFlowNumber
             // 
-            this.textBoxFlowNumber.Location = new System.Drawing.Point(893, 16);
+            this.textBoxFlowNumber.Location = new System.Drawing.Point(893, 17);
             this.textBoxFlowNumber.Name = "textBoxFlowNumber";
             this.textBoxFlowNumber.ReadOnly = true;
-            this.textBoxFlowNumber.Size = new System.Drawing.Size(147, 21);
+            this.textBoxFlowNumber.Size = new System.Drawing.Size(147, 20);
             this.textBoxFlowNumber.TabIndex = 18;
             // 
             // dateBusinessTime
             // 
-            this.dateBusinessTime.Location = new System.Drawing.Point(620, 16);
+            this.dateBusinessTime.Location = new System.Drawing.Point(620, 17);
             this.dateBusinessTime.Name = "dateBusinessTime";
-            this.dateBusinessTime.Size = new System.Drawing.Size(147, 21);
+            this.dateBusinessTime.Size = new System.Drawing.Size(147, 20);
             this.dateBusinessTime.TabIndex = 16;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(561, 19);
+            this.label3.Location = new System.Drawing.Point(561, 21);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(53, 12);
+            this.label3.Size = new System.Drawing.Size(55, 13);
             this.label3.TabIndex = 15;
             this.label3.Text = "业务日期";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(279, 19);
+            this.label2.Location = new System.Drawing.Point(279, 21);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 12);
+            this.label2.Size = new System.Drawing.Size(55, 13);
             this.label2.TabIndex = 13;
             this.label2.Text = "业务状态";
             // 
             // textBoxStatus
             // 
-            this.textBoxStatus.Location = new System.Drawing.Point(338, 16);
+            this.textBoxStatus.Location = new System.Drawing.Point(338, 17);
             this.textBoxStatus.Name = "textBoxStatus";
             this.textBoxStatus.ReadOnly = true;
-            this.textBoxStatus.Size = new System.Drawing.Size(147, 21);
+            this.textBoxStatus.Size = new System.Drawing.Size(147, 20);
             this.textBoxStatus.TabIndex = 14;
             // 
             // textBoxBusinessType
             // 
-            this.textBoxBusinessType.Location = new System.Drawing.Point(75, 16);
+            this.textBoxBusinessType.Location = new System.Drawing.Point(75, 17);
             this.textBoxBusinessType.Name = "textBoxBusinessType";
             this.textBoxBusinessType.ReadOnly = true;
-            this.textBoxBusinessType.Size = new System.Drawing.Size(147, 21);
+            this.textBoxBusinessType.Size = new System.Drawing.Size(147, 20);
             this.textBoxBusinessType.TabIndex = 12;
             this.textBoxBusinessType.Text = "货品移库";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(16, 19);
+            this.label1.Location = new System.Drawing.Point(16, 21);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 12);
+            this.label1.Size = new System.Drawing.Size(55, 13);
             this.label1.TabIndex = 11;
             this.label1.Text = "业务类型";
             // 
@@ -375,9 +383,9 @@
             this.groupBox3.Controls.Add(this.cargoDataGridView);
             this.groupBox3.Controls.Add(this.cargoBindingNavigator);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox3.Location = new System.Drawing.Point(175, 172);
+            this.groupBox3.Location = new System.Drawing.Point(175, 184);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(719, 401);
+            this.groupBox3.Size = new System.Drawing.Size(719, 437);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "货品信息";
@@ -396,18 +404,18 @@
             this.dataGridViewColumnSecondCategory,
             this.dataGridViewColumnThirdCategory,
             this.dataGridViewTextBoxColumn6,
+            this.dataGridViewTextBoxColumn11,
+            this.columnMoveCount,
             this.dataGridViewTextBoxColumn7,
+            this.columnMoveWeight,
             this.dataGridViewTextBoxColumn8,
             this.dataGridViewTextBoxColumn9,
             this.dataGridViewTextBoxColumn10,
-            this.dataGridViewTextBoxColumn11,
-            this.columnMoveCount,
             this.dataGridViewColumnSourceWarehouse,
             this.columnNewWarehouse,
             this.dataGridViewTextBoxColumn13,
             this.dataGridViewTextBoxColumn14,
             this.dataGridViewTextBoxColumn15,
-            this.dataGridViewTextBoxColumn17,
             this.dataGridViewColumnUser,
             this.dataGridViewTextBoxColumn19,
             this.dataGridViewTextBoxColumn21,
@@ -415,10 +423,10 @@
             this.cargoDataGridView.DataSource = this.cargoBindingSource;
             this.cargoDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cargoDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.cargoDataGridView.Location = new System.Drawing.Point(3, 42);
+            this.cargoDataGridView.Location = new System.Drawing.Point(3, 41);
             this.cargoDataGridView.Name = "cargoDataGridView";
             this.cargoDataGridView.RowTemplate.Height = 23;
-            this.cargoDataGridView.Size = new System.Drawing.Size(713, 356);
+            this.cargoDataGridView.Size = new System.Drawing.Size(713, 393);
             this.cargoDataGridView.TabIndex = 0;
             this.cargoDataGridView.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.cargoDataGridView_RowPrePaint);
             // 
@@ -444,7 +452,7 @@
             this.bindingNavigatorSeparator2,
             this.bindingNavigatorAddNewItem,
             this.bindingNavigatorDeleteItem});
-            this.cargoBindingNavigator.Location = new System.Drawing.Point(3, 17);
+            this.cargoBindingNavigator.Location = new System.Drawing.Point(3, 16);
             this.cargoBindingNavigator.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
             this.cargoBindingNavigator.MoveLastItem = this.bindingNavigatorMoveLastItem;
             this.cargoBindingNavigator.MoveNextItem = this.bindingNavigatorMoveNextItem;
@@ -576,9 +584,21 @@
             // dataGridViewTextBoxColumn6
             // 
             this.dataGridViewTextBoxColumn6.DataPropertyName = "Count";
-            this.dataGridViewTextBoxColumn6.HeaderText = "数量";
+            this.dataGridViewTextBoxColumn6.HeaderText = "总数量";
             this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
             this.dataGridViewTextBoxColumn6.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn11
+            // 
+            this.dataGridViewTextBoxColumn11.DataPropertyName = "StoreCount";
+            this.dataGridViewTextBoxColumn11.HeaderText = "在库数量";
+            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
+            this.dataGridViewTextBoxColumn11.ReadOnly = true;
+            // 
+            // columnMoveCount
+            // 
+            this.columnMoveCount.HeaderText = "移库数量";
+            this.columnMoveCount.Name = "columnMoveCount";
             // 
             // dataGridViewTextBoxColumn7
             // 
@@ -587,6 +607,11 @@
             this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
             this.dataGridViewTextBoxColumn7.ReadOnly = true;
             this.dataGridViewTextBoxColumn7.Width = 120;
+            // 
+            // columnMoveWeight
+            // 
+            this.columnMoveWeight.HeaderText = "移库重量(t)";
+            this.columnMoveWeight.Name = "columnMoveWeight";
             // 
             // dataGridViewTextBoxColumn8
             // 
@@ -611,18 +636,6 @@
             this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
             this.dataGridViewTextBoxColumn10.ReadOnly = true;
             this.dataGridViewTextBoxColumn10.Width = 120;
-            // 
-            // dataGridViewTextBoxColumn11
-            // 
-            this.dataGridViewTextBoxColumn11.DataPropertyName = "StoreCount";
-            this.dataGridViewTextBoxColumn11.HeaderText = "在库数量";
-            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
-            this.dataGridViewTextBoxColumn11.ReadOnly = true;
-            // 
-            // columnMoveCount
-            // 
-            this.columnMoveCount.HeaderText = "移库数量";
-            this.columnMoveCount.Name = "columnMoveCount";
             // 
             // dataGridViewColumnSourceWarehouse
             // 
@@ -658,16 +671,6 @@
             this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
             this.dataGridViewTextBoxColumn15.ReadOnly = true;
             // 
-            // dataGridViewTextBoxColumn17
-            // 
-            this.dataGridViewTextBoxColumn17.DataPropertyName = "RegisterTime";
-            dataGridViewCellStyle1.Format = "d";
-            dataGridViewCellStyle1.NullValue = null;
-            this.dataGridViewTextBoxColumn17.DefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridViewTextBoxColumn17.HeaderText = "登记时间";
-            this.dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
-            this.dataGridViewTextBoxColumn17.ReadOnly = true;
-            // 
             // dataGridViewColumnUser
             // 
             this.dataGridViewColumnUser.HeaderText = "登记人";
@@ -677,9 +680,9 @@
             // dataGridViewTextBoxColumn19
             // 
             this.dataGridViewTextBoxColumn19.DataPropertyName = "InTime";
-            dataGridViewCellStyle2.Format = "d";
-            dataGridViewCellStyle2.NullValue = null;
-            this.dataGridViewTextBoxColumn19.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Format = "d";
+            dataGridViewCellStyle1.NullValue = null;
+            this.dataGridViewTextBoxColumn19.DefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewTextBoxColumn19.HeaderText = "入库时间";
             this.dataGridViewTextBoxColumn19.Name = "dataGridViewTextBoxColumn19";
             this.dataGridViewTextBoxColumn19.ReadOnly = true;
@@ -697,20 +700,11 @@
             this.dataGridViewColumnStatus.Name = "dataGridViewColumnStatus";
             this.dataGridViewColumnStatus.ReadOnly = true;
             // 
-            // toolRefresh
-            // 
-            this.toolRefresh.Image = global::Phoebe.FormUI.Properties.Resources.refresh;
-            this.toolRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolRefresh.Name = "toolRefresh";
-            this.toolRefresh.Size = new System.Drawing.Size(52, 22);
-            this.toolRefresh.Text = "刷新";
-            this.toolRefresh.Click += new System.EventHandler(this.toolRefresh_Click);
-            // 
             // StockMoveForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(897, 576);
+            this.ClientSize = new System.Drawing.Size(897, 624);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.toolStrip1);
@@ -781,28 +775,28 @@
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveNextItem;
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
+        private System.Windows.Forms.ToolStripButton toolRefresh;
         private System.Windows.Forms.DataGridViewCheckBoxColumn columnSelect;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewColumnFirstCategory;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewColumnSecondCategory;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewColumnThirdCategory;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnMoveCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnMoveWeight;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnMoveCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewColumnSourceWarehouse;
         private System.Windows.Forms.DataGridViewComboBoxColumn columnNewWarehouse;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn14;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn15;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn17;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewColumnUser;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn19;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn21;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewColumnStatus;
-        private System.Windows.Forms.ToolStripButton toolRefresh;
     }
 }

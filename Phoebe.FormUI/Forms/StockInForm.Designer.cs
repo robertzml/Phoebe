@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StockInForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.treeViewReceipt = new System.Windows.Forms.TreeView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -130,7 +130,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Left;
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(172, 622);
+            this.groupBox1.Size = new System.Drawing.Size(172, 674);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "单据";
@@ -138,9 +138,9 @@
             // treeViewReceipt
             // 
             this.treeViewReceipt.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeViewReceipt.Location = new System.Drawing.Point(3, 17);
+            this.treeViewReceipt.Location = new System.Drawing.Point(3, 16);
             this.treeViewReceipt.Name = "treeViewReceipt";
-            this.treeViewReceipt.Size = new System.Drawing.Size(166, 602);
+            this.treeViewReceipt.Size = new System.Drawing.Size(166, 655);
             this.treeViewReceipt.TabIndex = 0;
             this.treeViewReceipt.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeViewReceipt_BeforeExpand);
             this.treeViewReceipt.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewReceipt_AfterSelect);
@@ -151,7 +151,7 @@
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox2.Location = new System.Drawing.Point(175, 28);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(786, 217);
+            this.groupBox2.Size = new System.Drawing.Size(786, 235);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "基本信息";
@@ -194,179 +194,179 @@
             this.panel1.Controls.Add(this.dateBusinessTime);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(3, 17);
+            this.panel1.Location = new System.Drawing.Point(3, 16);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(780, 197);
+            this.panel1.Size = new System.Drawing.Size(780, 216);
             this.panel1.TabIndex = 15;
             // 
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(798, 57);
+            this.label16.Location = new System.Drawing.Point(798, 62);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(41, 12);
+            this.label16.Size = new System.Drawing.Size(43, 13);
             this.label16.TabIndex = 31;
             this.label16.Text = "业务员";
             // 
             // textBoxUser
             // 
-            this.textBoxUser.Location = new System.Drawing.Point(845, 54);
+            this.textBoxUser.Location = new System.Drawing.Point(845, 59);
             this.textBoxUser.Name = "textBoxUser";
             this.textBoxUser.ReadOnly = true;
-            this.textBoxUser.Size = new System.Drawing.Size(147, 21);
+            this.textBoxUser.Size = new System.Drawing.Size(147, 20);
             this.textBoxUser.TabIndex = 32;
             // 
             // textBoxRemark
             // 
-            this.textBoxRemark.Location = new System.Drawing.Point(845, 142);
+            this.textBoxRemark.Location = new System.Drawing.Point(845, 154);
             this.textBoxRemark.Name = "textBoxRemark";
-            this.textBoxRemark.Size = new System.Drawing.Size(147, 21);
+            this.textBoxRemark.Size = new System.Drawing.Size(147, 20);
             this.textBoxRemark.TabIndex = 30;
             // 
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(810, 144);
+            this.label15.Location = new System.Drawing.Point(810, 156);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(29, 12);
+            this.label15.Size = new System.Drawing.Size(31, 13);
             this.label15.TabIndex = 29;
             this.label15.Text = "备注";
             // 
             // numericOtherPrice
             // 
-            this.numericOtherPrice.Location = new System.Drawing.Point(588, 142);
+            this.numericOtherPrice.Location = new System.Drawing.Point(588, 154);
             this.numericOtherPrice.Name = "numericOtherPrice";
-            this.numericOtherPrice.Size = new System.Drawing.Size(147, 21);
+            this.numericOtherPrice.Size = new System.Drawing.Size(147, 20);
             this.numericOtherPrice.TabIndex = 28;
             // 
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(529, 144);
+            this.label14.Location = new System.Drawing.Point(529, 156);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(53, 12);
+            this.label14.Size = new System.Drawing.Size(55, 13);
             this.label14.TabIndex = 27;
             this.label14.Text = "其它费用";
             // 
             // numericRentPrice
             // 
-            this.numericRentPrice.Location = new System.Drawing.Point(339, 142);
+            this.numericRentPrice.Location = new System.Drawing.Point(339, 154);
             this.numericRentPrice.Name = "numericRentPrice";
-            this.numericRentPrice.Size = new System.Drawing.Size(147, 21);
+            this.numericRentPrice.Size = new System.Drawing.Size(147, 20);
             this.numericRentPrice.TabIndex = 26;
             // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(292, 144);
+            this.label13.Location = new System.Drawing.Point(292, 156);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(41, 12);
+            this.label13.Size = new System.Drawing.Size(43, 13);
             this.label13.TabIndex = 25;
             this.label13.Text = "租赁费";
             // 
             // numericPackingPrice
             // 
-            this.numericPackingPrice.Location = new System.Drawing.Point(76, 142);
+            this.numericPackingPrice.Location = new System.Drawing.Point(76, 154);
             this.numericPackingPrice.Name = "numericPackingPrice";
-            this.numericPackingPrice.Size = new System.Drawing.Size(147, 21);
+            this.numericPackingPrice.Size = new System.Drawing.Size(147, 20);
             this.numericPackingPrice.TabIndex = 24;
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(29, 144);
+            this.label12.Location = new System.Drawing.Point(29, 156);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(41, 12);
+            this.label12.Size = new System.Drawing.Size(43, 13);
             this.label12.TabIndex = 23;
             this.label12.Text = "包装费";
             // 
             // numericDisposePrice
             // 
-            this.numericDisposePrice.Location = new System.Drawing.Point(845, 96);
+            this.numericDisposePrice.Location = new System.Drawing.Point(845, 104);
             this.numericDisposePrice.Name = "numericDisposePrice";
-            this.numericDisposePrice.Size = new System.Drawing.Size(147, 21);
+            this.numericDisposePrice.Size = new System.Drawing.Size(147, 20);
             this.numericDisposePrice.TabIndex = 22;
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(798, 100);
+            this.label11.Location = new System.Drawing.Point(798, 108);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(41, 12);
+            this.label11.Size = new System.Drawing.Size(43, 13);
             this.label11.TabIndex = 21;
             this.label11.Text = "处置费";
             // 
             // numericFreezePrice
             // 
-            this.numericFreezePrice.Location = new System.Drawing.Point(588, 96);
+            this.numericFreezePrice.Location = new System.Drawing.Point(588, 104);
             this.numericFreezePrice.Name = "numericFreezePrice";
-            this.numericFreezePrice.Size = new System.Drawing.Size(147, 21);
+            this.numericFreezePrice.Size = new System.Drawing.Size(147, 20);
             this.numericFreezePrice.TabIndex = 20;
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(541, 100);
+            this.label10.Location = new System.Drawing.Point(541, 108);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(41, 12);
+            this.label10.Size = new System.Drawing.Size(43, 13);
             this.label10.TabIndex = 19;
             this.label10.Text = "结冻费";
             // 
             // numericHandlingPrice
             // 
-            this.numericHandlingPrice.Location = new System.Drawing.Point(339, 96);
+            this.numericHandlingPrice.Location = new System.Drawing.Point(339, 104);
             this.numericHandlingPrice.Name = "numericHandlingPrice";
-            this.numericHandlingPrice.Size = new System.Drawing.Size(147, 21);
+            this.numericHandlingPrice.Size = new System.Drawing.Size(147, 20);
             this.numericHandlingPrice.TabIndex = 18;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(292, 100);
+            this.label9.Location = new System.Drawing.Point(292, 108);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(41, 12);
+            this.label9.Size = new System.Drawing.Size(43, 13);
             this.label9.TabIndex = 17;
             this.label9.Text = "装卸费";
             // 
             // textBoxBillingType
             // 
-            this.textBoxBillingType.Location = new System.Drawing.Point(588, 54);
+            this.textBoxBillingType.Location = new System.Drawing.Point(588, 59);
             this.textBoxBillingType.Name = "textBoxBillingType";
             this.textBoxBillingType.ReadOnly = true;
-            this.textBoxBillingType.Size = new System.Drawing.Size(147, 21);
+            this.textBoxBillingType.Size = new System.Drawing.Size(147, 20);
             this.textBoxBillingType.TabIndex = 16;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(529, 58);
+            this.label8.Location = new System.Drawing.Point(529, 63);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(53, 12);
+            this.label8.Size = new System.Drawing.Size(55, 13);
             this.label8.TabIndex = 15;
             this.label8.Text = "计费方式";
             // 
             // numericUnitPrice
             // 
-            this.numericUnitPrice.Location = new System.Drawing.Point(76, 96);
+            this.numericUnitPrice.Location = new System.Drawing.Point(76, 104);
             this.numericUnitPrice.Name = "numericUnitPrice";
-            this.numericUnitPrice.Size = new System.Drawing.Size(147, 21);
+            this.numericUnitPrice.Size = new System.Drawing.Size(147, 20);
             this.numericUnitPrice.TabIndex = 14;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(17, 16);
+            this.label1.Location = new System.Drawing.Point(17, 17);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 12);
+            this.label1.Size = new System.Drawing.Size(55, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "业务类型";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(5, 100);
+            this.label7.Location = new System.Drawing.Point(5, 108);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(65, 12);
+            this.label7.Size = new System.Drawing.Size(67, 13);
             this.label7.TabIndex = 13;
             this.label7.Text = "冷藏费单价";
             // 
@@ -374,96 +374,96 @@
             // 
             this.comboBoxContract.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxContract.FormattingEnabled = true;
-            this.comboBoxContract.Location = new System.Drawing.Point(339, 54);
+            this.comboBoxContract.Location = new System.Drawing.Point(339, 59);
             this.comboBoxContract.Name = "comboBoxContract";
-            this.comboBoxContract.Size = new System.Drawing.Size(147, 20);
+            this.comboBoxContract.Size = new System.Drawing.Size(147, 21);
             this.comboBoxContract.TabIndex = 12;
             this.comboBoxContract.SelectedIndexChanged += new System.EventHandler(this.comboBoxContract_SelectedIndexChanged);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(280, 16);
+            this.label2.Location = new System.Drawing.Point(280, 17);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 12);
+            this.label2.Size = new System.Drawing.Size(55, 13);
             this.label2.TabIndex = 3;
             this.label2.Text = "业务状态";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(17, 57);
+            this.label6.Location = new System.Drawing.Point(17, 62);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(53, 12);
+            this.label6.Size = new System.Drawing.Size(55, 13);
             this.label6.TabIndex = 10;
             this.label6.Text = "所属客户";
             // 
             // textBoxStatus
             // 
-            this.textBoxStatus.Location = new System.Drawing.Point(339, 12);
+            this.textBoxStatus.Location = new System.Drawing.Point(339, 13);
             this.textBoxStatus.Name = "textBoxStatus";
             this.textBoxStatus.ReadOnly = true;
-            this.textBoxStatus.Size = new System.Drawing.Size(147, 21);
+            this.textBoxStatus.Size = new System.Drawing.Size(147, 20);
             this.textBoxStatus.TabIndex = 4;
             // 
             // comboBoxCustomer
             // 
             this.comboBoxCustomer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxCustomer.FormattingEnabled = true;
-            this.comboBoxCustomer.Location = new System.Drawing.Point(76, 54);
+            this.comboBoxCustomer.Location = new System.Drawing.Point(76, 59);
             this.comboBoxCustomer.Name = "comboBoxCustomer";
-            this.comboBoxCustomer.Size = new System.Drawing.Size(147, 20);
+            this.comboBoxCustomer.Size = new System.Drawing.Size(147, 21);
             this.comboBoxCustomer.TabIndex = 11;
             this.comboBoxCustomer.SelectedIndexChanged += new System.EventHandler(this.comboBoxCustomer_SelectedIndexChanged);
             // 
             // textBoxBusinessType
             // 
-            this.textBoxBusinessType.Location = new System.Drawing.Point(76, 12);
+            this.textBoxBusinessType.Location = new System.Drawing.Point(76, 13);
             this.textBoxBusinessType.Name = "textBoxBusinessType";
             this.textBoxBusinessType.ReadOnly = true;
-            this.textBoxBusinessType.Size = new System.Drawing.Size(147, 21);
+            this.textBoxBusinessType.Size = new System.Drawing.Size(147, 20);
             this.textBoxBusinessType.TabIndex = 2;
             this.textBoxBusinessType.Text = "货品入库";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(280, 58);
+            this.label5.Location = new System.Drawing.Point(280, 63);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(53, 12);
+            this.label5.Size = new System.Drawing.Size(55, 13);
             this.label5.TabIndex = 9;
             this.label5.Text = "所属合同";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(786, 16);
+            this.label4.Location = new System.Drawing.Point(786, 17);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(53, 12);
+            this.label4.Size = new System.Drawing.Size(55, 13);
             this.label4.TabIndex = 7;
             this.label4.Text = "流水单号";
             // 
             // textBoxFlowNumber
             // 
-            this.textBoxFlowNumber.Location = new System.Drawing.Point(845, 12);
+            this.textBoxFlowNumber.Location = new System.Drawing.Point(845, 13);
             this.textBoxFlowNumber.Name = "textBoxFlowNumber";
             this.textBoxFlowNumber.ReadOnly = true;
-            this.textBoxFlowNumber.Size = new System.Drawing.Size(147, 21);
+            this.textBoxFlowNumber.Size = new System.Drawing.Size(147, 20);
             this.textBoxFlowNumber.TabIndex = 8;
             // 
             // dateBusinessTime
             // 
-            this.dateBusinessTime.Location = new System.Drawing.Point(588, 12);
+            this.dateBusinessTime.Location = new System.Drawing.Point(588, 13);
             this.dateBusinessTime.Name = "dateBusinessTime";
-            this.dateBusinessTime.Size = new System.Drawing.Size(147, 21);
+            this.dateBusinessTime.Size = new System.Drawing.Size(147, 20);
             this.dateBusinessTime.TabIndex = 6;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(529, 16);
+            this.label3.Location = new System.Drawing.Point(529, 17);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(53, 12);
+            this.label3.Size = new System.Drawing.Size(55, 13);
             this.label3.TabIndex = 5;
             this.label3.Text = "业务日期";
             // 
@@ -547,9 +547,9 @@
             this.groupBox3.Controls.Add(this.cargoDataGridView);
             this.groupBox3.Controls.Add(this.cargoBindingNavigator);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox3.Location = new System.Drawing.Point(175, 245);
+            this.groupBox3.Location = new System.Drawing.Point(175, 263);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(786, 380);
+            this.groupBox3.Size = new System.Drawing.Size(786, 414);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "货品信息";
@@ -581,10 +581,10 @@
             this.cargoDataGridView.DataSource = this.cargoBindingSource;
             this.cargoDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cargoDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.cargoDataGridView.Location = new System.Drawing.Point(3, 42);
+            this.cargoDataGridView.Location = new System.Drawing.Point(3, 41);
             this.cargoDataGridView.Name = "cargoDataGridView";
             this.cargoDataGridView.RowTemplate.Height = 23;
-            this.cargoDataGridView.Size = new System.Drawing.Size(780, 335);
+            this.cargoDataGridView.Size = new System.Drawing.Size(780, 370);
             this.cargoDataGridView.TabIndex = 4;
             this.cargoDataGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.cargoDataGridView_CellValueChanged);
             this.cargoDataGridView.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.cargoDataGridView_DataError);
@@ -645,8 +645,8 @@
             // columnTotalWeight
             // 
             this.columnTotalWeight.DataPropertyName = "TotalWeight";
-            dataGridViewCellStyle9.BackColor = System.Drawing.Color.Silver;
-            this.columnTotalWeight.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Silver;
+            this.columnTotalWeight.DefaultCellStyle = dataGridViewCellStyle1;
             this.columnTotalWeight.HeaderText = "总重量(t)";
             this.columnTotalWeight.Name = "columnTotalWeight";
             this.columnTotalWeight.ReadOnly = true;
@@ -661,8 +661,8 @@
             // columnTotalVolume
             // 
             this.columnTotalVolume.DataPropertyName = "TotalVolume";
-            dataGridViewCellStyle10.BackColor = System.Drawing.Color.Silver;
-            this.columnTotalVolume.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Silver;
+            this.columnTotalVolume.DefaultCellStyle = dataGridViewCellStyle2;
             this.columnTotalVolume.HeaderText = "总体积(立方)";
             this.columnTotalVolume.Name = "columnTotalVolume";
             this.columnTotalVolume.ReadOnly = true;
@@ -720,7 +720,7 @@
             this.bindingNavigatorSeparator2,
             this.bindingNavigatorAddNewItem,
             this.bindingNavigatorDeleteItem});
-            this.cargoBindingNavigator.Location = new System.Drawing.Point(3, 17);
+            this.cargoBindingNavigator.Location = new System.Drawing.Point(3, 16);
             this.cargoBindingNavigator.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
             this.cargoBindingNavigator.MoveLastItem = this.bindingNavigatorMoveLastItem;
             this.cargoBindingNavigator.MoveNextItem = this.bindingNavigatorMoveNextItem;
@@ -818,16 +818,16 @@
             // 
             // StockInForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(964, 628);
+            this.ClientSize = new System.Drawing.Size(964, 680);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.groupBox1);
             this.Name = "StockInForm";
             this.Padding = new System.Windows.Forms.Padding(3);
-            this.Text = "刷新 ";
+            this.Text = "货品入库";
             this.Load += new System.EventHandler(this.StockInForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);

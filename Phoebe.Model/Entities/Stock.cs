@@ -52,6 +52,12 @@ namespace Phoebe.Model
         public int Source { get; set; }
 
         /// <summary>
+        /// 目的地
+        /// </summary>
+        [Display(Name = "目的地")]
+        public Nullable<System.Int32> Destination { get; set; }
+
+        /// <summary>
         /// 备注
         /// </summary>
         [DataType(DataType.MultilineText)]

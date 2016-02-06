@@ -61,6 +61,7 @@
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnSource = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnDestination = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
@@ -83,7 +84,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(776, 141);
+            this.groupBox1.Size = new System.Drawing.Size(776, 153);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "操作";
@@ -91,17 +92,17 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(26, 33);
+            this.label2.Location = new System.Drawing.Point(26, 36);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 12);
+            this.label2.Size = new System.Drawing.Size(55, 13);
             this.label2.TabIndex = 6;
             this.label2.Text = "客户名称";
             // 
             // buttonQuery
             // 
-            this.buttonQuery.Location = new System.Drawing.Point(355, 96);
+            this.buttonQuery.Location = new System.Drawing.Point(355, 104);
             this.buttonQuery.Name = "buttonQuery";
-            this.buttonQuery.Size = new System.Drawing.Size(75, 23);
+            this.buttonQuery.Size = new System.Drawing.Size(75, 25);
             this.buttonQuery.TabIndex = 2;
             this.buttonQuery.Text = "查询";
             this.buttonQuery.UseVisualStyleBackColor = true;
@@ -111,18 +112,18 @@
             // 
             this.comboBoxCustomer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxCustomer.FormattingEnabled = true;
-            this.comboBoxCustomer.Location = new System.Drawing.Point(85, 30);
+            this.comboBoxCustomer.Location = new System.Drawing.Point(85, 33);
             this.comboBoxCustomer.Name = "comboBoxCustomer";
-            this.comboBoxCustomer.Size = new System.Drawing.Size(121, 20);
+            this.comboBoxCustomer.Size = new System.Drawing.Size(121, 21);
             this.comboBoxCustomer.TabIndex = 7;
             this.comboBoxCustomer.SelectedIndexChanged += new System.EventHandler(this.comboBoxCustomer_SelectedIndexChanged);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(250, 33);
+            this.label3.Location = new System.Drawing.Point(250, 36);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(53, 12);
+            this.label3.Size = new System.Drawing.Size(55, 13);
             this.label3.TabIndex = 8;
             this.label3.Text = "合同名称";
             // 
@@ -131,9 +132,9 @@
             this.checkBoxStoreOut.AutoSize = true;
             this.checkBoxStoreOut.Checked = true;
             this.checkBoxStoreOut.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxStoreOut.Location = new System.Drawing.Point(111, 100);
+            this.checkBoxStoreOut.Location = new System.Drawing.Point(111, 108);
             this.checkBoxStoreOut.Name = "checkBoxStoreOut";
-            this.checkBoxStoreOut.Size = new System.Drawing.Size(48, 16);
+            this.checkBoxStoreOut.Size = new System.Drawing.Size(50, 17);
             this.checkBoxStoreOut.TabIndex = 1;
             this.checkBoxStoreOut.Text = "出库";
             this.checkBoxStoreOut.UseVisualStyleBackColor = true;
@@ -142,9 +143,9 @@
             // 
             this.comboBoxContract.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxContract.FormattingEnabled = true;
-            this.comboBoxContract.Location = new System.Drawing.Point(309, 30);
+            this.comboBoxContract.Location = new System.Drawing.Point(309, 33);
             this.comboBoxContract.Name = "comboBoxContract";
-            this.comboBoxContract.Size = new System.Drawing.Size(121, 20);
+            this.comboBoxContract.Size = new System.Drawing.Size(121, 21);
             this.comboBoxContract.TabIndex = 9;
             // 
             // checkBoxStoreIn
@@ -152,9 +153,9 @@
             this.checkBoxStoreIn.AutoSize = true;
             this.checkBoxStoreIn.Checked = true;
             this.checkBoxStoreIn.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxStoreIn.Location = new System.Drawing.Point(28, 100);
+            this.checkBoxStoreIn.Location = new System.Drawing.Point(28, 108);
             this.checkBoxStoreIn.Name = "checkBoxStoreIn";
-            this.checkBoxStoreIn.Size = new System.Drawing.Size(48, 16);
+            this.checkBoxStoreIn.Size = new System.Drawing.Size(50, 17);
             this.checkBoxStoreIn.TabIndex = 0;
             this.checkBoxStoreIn.Text = "在库";
             this.checkBoxStoreIn.UseVisualStyleBackColor = true;
@@ -164,9 +165,9 @@
             this.groupBox2.Controls.Add(this.stockDataGridView);
             this.groupBox2.Controls.Add(this.stockBindingNavigator);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Location = new System.Drawing.Point(3, 144);
+            this.groupBox2.Location = new System.Drawing.Point(3, 156);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(776, 366);
+            this.groupBox2.Size = new System.Drawing.Size(776, 397);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "库存列表";
@@ -186,15 +187,16 @@
             this.dataGridViewTextBoxColumn5,
             this.dataGridViewTextBoxColumn6,
             this.columnSource,
+            this.columnDestination,
             this.dataGridViewTextBoxColumn8,
             this.columnStatus});
             this.stockDataGridView.DataSource = this.stockBindingSource;
             this.stockDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.stockDataGridView.Location = new System.Drawing.Point(3, 42);
+            this.stockDataGridView.Location = new System.Drawing.Point(3, 41);
             this.stockDataGridView.Name = "stockDataGridView";
             this.stockDataGridView.ReadOnly = true;
             this.stockDataGridView.RowTemplate.Height = 23;
-            this.stockDataGridView.Size = new System.Drawing.Size(770, 321);
+            this.stockDataGridView.Size = new System.Drawing.Size(770, 353);
             this.stockDataGridView.TabIndex = 0;
             this.stockDataGridView.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.stockDataGridView_RowPrePaint);
             // 
@@ -218,7 +220,7 @@
             this.bindingNavigatorMoveNextItem,
             this.bindingNavigatorMoveLastItem,
             this.bindingNavigatorSeparator2});
-            this.stockBindingNavigator.Location = new System.Drawing.Point(3, 17);
+            this.stockBindingNavigator.Location = new System.Drawing.Point(3, 16);
             this.stockBindingNavigator.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
             this.stockBindingNavigator.MoveLastItem = this.bindingNavigatorMoveLastItem;
             this.stockBindingNavigator.MoveNextItem = this.bindingNavigatorMoveNextItem;
@@ -354,6 +356,12 @@
             this.columnSource.Name = "columnSource";
             this.columnSource.ReadOnly = true;
             // 
+            // columnDestination
+            // 
+            this.columnDestination.HeaderText = "目的地";
+            this.columnDestination.Name = "columnDestination";
+            this.columnDestination.ReadOnly = true;
+            // 
             // dataGridViewTextBoxColumn8
             // 
             this.dataGridViewTextBoxColumn8.DataPropertyName = "Remark";
@@ -369,9 +377,9 @@
             // 
             // StockForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(782, 513);
+            this.ClientSize = new System.Drawing.Size(782, 556);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "StockForm";
@@ -422,6 +430,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnSource;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnDestination;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnStatus;
     }

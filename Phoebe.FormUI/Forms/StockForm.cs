@@ -143,6 +143,15 @@ namespace Phoebe.FormUI
                     grid.Rows[e.RowIndex].Cells[this.columnSource.Index].Value = "移库";
                 }
 
+                if (stock.Destination == 0)
+                {
+                    grid.Rows[e.RowIndex].Cells[this.columnDestination.Index].Value = "出库";
+                }
+                else
+                {
+                    grid.Rows[e.RowIndex].Cells[this.columnDestination.Index].Value = "移库";
+                }
+
                 grid.Rows[e.RowIndex].Cells[this.columnStatus.Index].Value = ((EntityStatus)stock.Status).DisplayName();
             }
         }

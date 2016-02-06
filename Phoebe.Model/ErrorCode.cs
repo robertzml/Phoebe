@@ -66,6 +66,12 @@ namespace Phoebe.Model
         /// </summary>
         [Display(Name = "编号重复")]
         DuplicateNumber = 8,
+
+        /// <summary>
+        /// 名称为空
+        /// </summary>
+        [Display(Name = "名称为空")]
+        EmptyName = 9,
         #endregion //System
 
         #region User

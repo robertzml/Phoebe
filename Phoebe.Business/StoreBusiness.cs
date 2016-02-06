@@ -24,7 +24,79 @@ namespace Phoebe.Business
         #endregion //Constructor
 
         #region Function
+        private Storage SetStorage(Cargo cargo, Stock stock, int count, double weight, SourceType source)
+        {
+            Storage storage = new Storage();
+            storage.WarehouseID = stock.WarehouseID;
+            storage.Number = stock.Warehouse.Number;
+            storage.StockID = stock.ID;
+            storage.CargoID = cargo.ID;
+            storage.CargoName = cargo.Name;
+            storage.ContractID = cargo.ContractID;
+            storage.ContractName = cargo.Contract.Name;
 
+            storage.FirstCategoryID = cargo.FirstCategoryID;
+            storage.FirstCategoryName = cargo.FirstCategory.Name;
+            storage.SecondCategoryID = cargo.SecondCategoryID;
+            storage.SecondCategoryName = cargo.SecondCategory.Name;
+            if (cargo.ThirdCategoryID != null)
+            {
+                storage.ThirdCategoryID = cargo.ThirdCategoryID.Value;
+                storage.ThirdCategoryName = cargo.ThirdCategory.Name;
+            }
+            else
+            {
+                storage.ThirdCategoryID = 0;
+                storage.ThirdCategoryName = "";
+            }
+            storage.Count = count;
+            storage.Weight = weight;
+            storage.InTime = cargo.InTime.Value;
+            storage.Source = (int)source;
+
+            return storage;
+        }
+
+        /// <summary>
+        /// 设置流水模型
+        /// </summary>
+        /// <param name="cargo">货品</param>
+        /// <param name="count">流水数量</param>
+        /// <param name="weight">流水重量</param>
+        /// <param name="date">流水日期</param>
+        /// <param name="type">流水类型</param>
+        /// <returns></returns>
+        private StockFlow SetStockFlow(Cargo cargo, int count, double weight, DateTime date, StockFlowType type)
+        {
+            StockFlow stockFlow = new StockFlow();
+            stockFlow.CargoID = cargo.ID;
+            stockFlow.CargoName = cargo.Name;
+            stockFlow.ContractID = cargo.ContractID;
+            stockFlow.ContractName = cargo.Contract.Name;
+
+            stockFlow.FirstCategoryID = cargo.FirstCategoryID;
+            stockFlow.FirstCategoryName = cargo.FirstCategory.Name;
+            stockFlow.SecondCategoryID = cargo.SecondCategoryID;
+            stockFlow.SecondCategoryName = cargo.SecondCategory.Name;
+            if (cargo.ThirdCategoryID == null)
+            {
+                stockFlow.ThirdCategoryID = 0;
+                stockFlow.ThirdCategoryName = "";
+            }
+            else
+            {
+                stockFlow.ThirdCategoryID = cargo.ThirdCategoryID.Value;
+                stockFlow.ThirdCategoryName = cargo.ThirdCategory.Name;
+            }
+
+            stockFlow.Count = count;
+            stockFlow.UnitWeight = cargo.UnitWeight;
+            stockFlow.Weight = weight;
+            stockFlow.FlowDate = date;
+            stockFlow.Type = type;
+
+            return stockFlow;
+        }
         #endregion //Function
 
         #region Method
@@ -100,92 +172,109 @@ namespace Phoebe.Business
             List<Storage> data = new List<Storage>();
 
             var cargo = this.context.Cargoes.Find(cargoID);
-            if (cargo.InTime > date || (cargo.OutTime < date))
+            if (cargo.InTime > date || cargo.OutTime < date)
                 return data;
 
-            //find stock in
-            var si = this.context.StockInDetails.SingleOrDefault(r => r.CargoID == cargoID && r.Status == (int)EntityStatus.StockIn);
-            if (si != null)
+            //find stock
+            var stocks = this.context.Stocks.Where(r => r.CargoID == cargoID);
+
+            if (stocks.Count() == 0)
+                return data;
+
+            foreach (var stock in stocks)
             {
-                Storage storage = new Storage();
-                storage.WarehouseID = si.WarehouseID;
-                storage.Number = si.Warehouse.Number;
-                storage.StockID = si.StockID.Value;
-                storage.CargoID = cargo.ID;
-                storage.ContractID = cargo.ContractID;
-                storage.CargoName = cargo.Name;
-                storage.FirstCategoryID = cargo.FirstCategoryID;
-                storage.FirstCategoryName = cargo.FirstCategory.Name;
-                storage.SecondCategoryID = cargo.SecondCategoryID;
-                storage.SecondCategoryName = cargo.SecondCategory.Name;
-                if (cargo.ThirdCategoryID != null)
-                {
-                    storage.ThirdCategoryID = cargo.ThirdCategoryID.Value;
-                    storage.ThirdCategoryName = cargo.ThirdCategory.Name;
-                }
-                else
-                {
-                    storage.ThirdCategoryID = 0;
-                    storage.ThirdCategoryName = "";
-                }
-                storage.Count = si.Count;
-                storage.Weight = Math.Round(storage.Count * cargo.UnitWeight / 1000, 3);
-                storage.InTime = si.StockIn.InTime;
-                storage.Source = 0;
+                if (stock.InTime > date || stock.OutTime < date)
+                    continue;
 
-                data.Add(storage);
-            }
-            else
-            {
-                var sm = this.context.StockMoveDetails.SingleOrDefault(r => r.NewCargoID == cargoID && r.Status == (int)EntityStatus.StockMove);
-
-                Storage storage = new Storage();
-                storage.WarehouseID = sm.WarehouseID;
-                storage.Number = sm.Warehouse.Number;
-                storage.StockID = sm.NewStockID.Value;
-                storage.CargoID = cargo.ID;
-                storage.ContractID = cargo.ContractID;
-                storage.CargoName = cargo.Name;
-                storage.FirstCategoryID = cargo.FirstCategoryID;
-                storage.FirstCategoryName = cargo.FirstCategory.Name;
-                storage.SecondCategoryID = cargo.SecondCategoryID;
-                storage.SecondCategoryName = cargo.SecondCategory.Name;
-                if (cargo.ThirdCategoryID != null)
+                if (stock.Source == (int)SourceType.StockIn)
                 {
-                    storage.ThirdCategoryID = cargo.ThirdCategoryID.Value;
-                    storage.ThirdCategoryName = cargo.ThirdCategory.Name;
+                    var si = this.context.StockInDetails.Single(r => r.StockID == stock.ID);
+                    var storage = SetStorage(cargo, stock, si.Count, si.InWeight, SourceType.StockIn);
+                    data.Add(storage);
                 }
-                else
+                else //source stock move
                 {
-                    storage.ThirdCategoryID = 0;
-                    storage.ThirdCategoryName = "";
+                    var sm = this.context.StockMoveDetails.Single(r => r.NewStockID == stock.ID);
+                    var storage = SetStorage(cargo, stock, sm.Count, sm.MoveWeight, SourceType.StockMove);
+                    data.Add(storage);
                 }
-                storage.Count = sm.Count;
-                storage.Weight = Math.Round(storage.Count * cargo.UnitWeight / 1000, 3);
-                storage.InTime = cargo.InTime.Value;
-                storage.Source = 1;
 
-                data.Add(storage);
-            }
-            
-
-            //find stock out
-            var stockOutDetails = cargo.StockOutDetails.Where(r => r.Status == (int)EntityStatus.StockOut && r.StockOut.OutTime <= date);
-            foreach (var item in stockOutDetails)
-            {
-                var s = data.SingleOrDefault(r => r.StockID == item.StockID);
-                if (s != null)
+                //find stock out
+                var stockOutDetails = this.context.StockOutDetails.Where(r => r.StockID == stock.ID && r.Status == (int)EntityStatus.StockOut && r.StockOut.OutTime <= date);
+                foreach (var item in stockOutDetails)
                 {
-                    s.Count -= item.Count;
-                    s.Weight -= item.Count * cargo.UnitWeight / 1000;
-                    if (s.Count == 0)
-                        data.Remove(s);
+                    var s = data.SingleOrDefault(r => r.StockID == item.StockID);
+                    if (s != null)
+                    {
+                        s.Count -= item.Count;
+                        s.Weight -= item.OutWeight;
+                    }
+                }
+
+                //find stock move out
+                var smOuts = this.context.StockMoveDetails.Where(r => r.SourceStockID == stock.ID && r.Status == (int)EntityStatus.StockMove && r.StockMove.MoveTime <= date);
+                foreach (var item in smOuts)
+                {
+                    var s = data.SingleOrDefault(r => r.StockID == item.SourceStockID);
+                    if (s != null)
+                    {
+                        s.Count -= item.Count;
+                        s.Weight -= item.MoveWeight;
+                    }
                 }
             }
 
             return data;
         }
 
+        /// <summary>
+        /// 获取货品日流水
+        /// </summary>
+        /// <param name="cargoID">货品ID</param>
+        /// <param name="date">日期</param>
+        /// <returns></returns>
+        public List<StockFlow> GetDaysFlow(Guid cargoID, DateTime date)
+        {
+            List<StockFlow> data = new List<StockFlow>();
+
+            var cargo = this.context.Cargoes.Find(cargoID);
+            if (cargo.InTime > date || cargo.OutTime < date)
+                return data;
+
+            //find stock in
+            var siDetail = this.context.StockInDetails.SingleOrDefault(r => r.CargoID == cargoID && r.Status == (int)EntityStatus.StockIn && r.StockIn.InTime == date);
+            if (siDetail != null)
+            {
+                var flow = SetStockFlow(cargo, siDetail.Count, siDetail.InWeight, date, StockFlowType.StockIn);
+                data.Add(flow);
+            }
+
+            //find stock out
+            var soDetails = this.context.StockOutDetails.Where(r => r.CargoID == cargoID && r.Status == (int)EntityStatus.StockOut && r.StockOut.OutTime == date);
+            foreach (var item in soDetails)
+            {
+                var flow = SetStockFlow(cargo, item.Count, item.OutWeight, date, StockFlowType.StockOut);
+                data.Add(flow);
+            }
+
+            //find stock move in
+            var smInDetail = this.context.StockMoveDetails.SingleOrDefault(r => r.NewCargoID == cargoID && r.Status == (int)EntityStatus.StockMove && r.StockMove.MoveTime == date);
+            if (smInDetail != null)
+            {
+                var flow = SetStockFlow(cargo, smInDetail.Count, smInDetail.MoveWeight, date, StockFlowType.StockMoveIn);
+                data.Add(flow);
+            }
+
+            //find stock move out
+            var smOutDetails = this.context.StockMoveDetails.Where(r => r.SourceCargoID == cargoID && r.Status == (int)EntityStatus.StockMove && r.StockMove.MoveTime == date);
+            foreach(var item in smOutDetails)
+            {
+                var flow = SetStockFlow(cargo, item.Count, item.MoveWeight, date, StockFlowType.StockMoveOut);
+                data.Add(flow);
+            }
+
+            return data;
+        }
         #endregion //Stock
 
         #region Stock In
@@ -331,7 +420,7 @@ namespace Phoebe.Business
                     stock.Count = item.Count;
                     stock.CargoID = item.CargoID;
                     stock.InTime = si.InTime;
-                    stock.Source = 0;
+                    stock.Source = (int)SourceType.StockIn;
                     stock.Status = (int)EntityStatus.StoreIn;
 
                     this.context.Stocks.Add(stock);
@@ -440,7 +529,7 @@ namespace Phoebe.Business
                 this.context.StockOutDetails.AddRange(details);
 
                 this.context.SaveChanges();
-                
+
                 return ErrorCode.Success;
             }
             catch (Exception)
@@ -480,6 +569,7 @@ namespace Phoebe.Business
 
                         stock.Count = 0;
                         stock.OutTime = so.OutTime;
+                        stock.Destination = (int)DestinationType.StockOut;
                         stock.Status = (int)EntityStatus.StoreOut;
                     }
                     else
@@ -637,13 +727,13 @@ namespace Phoebe.Business
         {
             try
             {
-                StockMove sm = this.context.StockMoves.Find(id);                
+                StockMove sm = this.context.StockMoves.Find(id);
                 if (sm == null)
                     return ErrorCode.ObjectNotFound;
 
                 sm.Status = (int)EntityStatus.StockMove;
 
-                foreach(var item in sm.StockMoveDetails)
+                foreach (var item in sm.StockMoveDetails)
                 {
                     //check cargo count
                     var cargo = item.SourceCargo;
@@ -657,6 +747,7 @@ namespace Phoebe.Business
 
                         stock.Count = 0;
                         stock.OutTime = sm.MoveTime;
+                        stock.Destination = (int)DestinationType.StockMove;
                         stock.Status = (int)EntityStatus.StoreOut;
 
                         Stock newStock = new Stock();
@@ -665,11 +756,13 @@ namespace Phoebe.Business
                         newStock.CargoID = cargo.ID;
                         newStock.Count = item.Count;
                         newStock.InTime = sm.MoveTime;
-                        newStock.Source = 1;
+                        newStock.Source = (int)SourceType.StockMove;
                         newStock.Remark = stock.Remark;
                         newStock.Status = (int)EntityStatus.StoreIn;
 
                         this.context.Stocks.Add(newStock);
+
+                        item.NewStockID = newStock.ID;
                     }
                     else
                     {
@@ -685,8 +778,9 @@ namespace Phoebe.Business
                             SecondCategoryID = cargo.SecondCategoryID,
                             ThirdCategoryID = cargo.ThirdCategoryID,
                             Count = item.Count,
+                            EqualWeight = cargo.EqualWeight,
                             UnitWeight = cargo.UnitWeight,
-                            TotalWeight = Math.Round(Convert.ToDouble(item.Count * cargo.UnitWeight / 1000), 3),
+                            TotalWeight = item.MoveWeight,
                             UnitVolume = cargo.UnitVolume,
                             TotalVolume = Math.Round(Convert.ToDouble(item.Count * cargo.UnitVolume), 3),
                             StoreCount = item.Count,
@@ -708,7 +802,7 @@ namespace Phoebe.Business
                         Stock newStock = new Stock();
                         newStock.ID = Guid.NewGuid();
                         newStock.WarehouseID = item.WarehouseID;
-                        newStock.CargoID = cargo.ID;
+                        newStock.CargoID = newCargo.ID;
                         newStock.Count = item.Count;
                         newStock.InTime = sm.MoveTime;
                         newStock.Source = 1;
@@ -729,7 +823,7 @@ namespace Phoebe.Business
 
                 return ErrorCode.Success;
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return ErrorCode.Exception;
             }

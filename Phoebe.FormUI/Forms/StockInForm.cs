@@ -226,9 +226,14 @@ namespace Phoebe.FormUI
                 {
                     return ErrorCode.WarehouseCannotBeEmpty;
                 }
+                if (cargo.Name == "")
+                {
+                    return ErrorCode.EmptyName;
+                }
 
                 cargo.ID = Guid.NewGuid();
                 cargo.ContractID = stockIn.ContractID;
+                cargo.EqualWeight = true;
                 cargo.StoreCount = cargo.Count;
                 cargo.RegisterTime = stockIn.InTime;
                 cargo.UserID = stockIn.UserID;
@@ -241,6 +246,7 @@ namespace Phoebe.FormUI
                 siDetail.CargoID = cargo.ID;
                 siDetail.WarehouseID = cargo.WarehouseID.Value;
                 siDetail.Count = cargo.Count;
+                siDetail.InWeight = cargo.TotalWeight;
                 siDetail.Status = (int)EntityStatus.StockInReady;
                 details.Add(siDetail);
             }
@@ -256,17 +262,26 @@ namespace Phoebe.FormUI
             {
                 return result;
             }
-
         }
         #endregion //Function
 
         #region Event
+        /// <summary>
+        /// 窗体载入
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void StockInForm_Load(object sender, EventArgs e)
         {
             InitData();
             InitControl();
         }
 
+        /// <summary>
+        /// 树形菜单载入
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void treeViewReceipt_BeforeExpand(object sender, TreeViewCancelEventArgs e)
         {
             var data = this.storeBusiness.GetStockInByMonth(e.Node.Name);
@@ -451,7 +466,6 @@ namespace Phoebe.FormUI
                 this.textBoxBillingType.Text = "";
             }
         }
-
 
         private void cargoDataGridView_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {

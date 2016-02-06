@@ -23,8 +23,8 @@ namespace Phoebe.Model
         public string Remark { get; set; }
         public int Status { get; set; }
     
-        public virtual Cargo Cargo { get; set; }
         public virtual Contract Contract { get; set; }
         public virtual Settlement Settlement { get; set; }
+        public virtual Cargo Cargo { get; set; }
     }
 }

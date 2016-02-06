@@ -72,6 +72,8 @@ namespace Phoebe.FormUI
             this.comboBoxContract.DataSource = contracts;
             this.comboBoxContract.DisplayMember = "Name";
             this.comboBoxContract.ValueMember = "ID";
+
+            this.comboBoxCargo.DataSource = null;
         }
 
         private void comboBoxContract_SelectedIndexChanged(object sender, EventArgs e)
@@ -80,14 +82,14 @@ namespace Phoebe.FormUI
                 return;
 
             var contract = this.comboBoxContract.SelectedItem as Contract;
-            var cargos = this.cargoBusiness.GetInByContract(contract.ID);
+            var cargos = this.cargoBusiness.GetByContract(contract.ID).Where(r => r.Status != (int)EntityStatus.CargoNotIn).ToList();
             cargos.Insert(0, new Cargo { Name = "--请选择--" });
 
             this.comboBoxCargo.DataSource = cargos;
             this.comboBoxCargo.DisplayMember = "Name";
             this.comboBoxCargo.ValueMember = "ID";
         }
-        
+
         /// <summary>
         /// 查询
         /// </summary>
@@ -108,9 +110,12 @@ namespace Phoebe.FormUI
                 }
 
                 var cargo = this.comboBoxCargo.SelectedItem as Cargo;
-                var storage = this.storeBusiness.GetInDay(cargo.ID, this.datePicker.Value.Date);
 
+                var storage = this.storeBusiness.GetInDay(cargo.ID, this.datePicker.Value.Date);
                 this.storageBindingSource.DataSource = storage;
+
+                var flow = this.storeBusiness.GetDaysFlow(cargo.ID, this.datePicker.Value.Date);
+                this.stockFlowBindingSource.DataSource = flow;
             }
         }
 
@@ -128,6 +133,16 @@ namespace Phoebe.FormUI
                 {
                     this.storageDataGridView.Rows[e.RowIndex].Cells[this.columnSource.Index].Value = "移库";
                 }
+            }
+        }       
+
+        private void stockFlowDataGridView_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
+            if (e.RowIndex < this.stockFlowBindingSource.Count)
+            {
+                var flow = this.stockFlowBindingSource[e.RowIndex] as StockFlow;
+
+                this.stockFlowDataGridView.Rows[e.RowIndex].Cells[this.columnFlowType.Index].Value = flow.Type.DisplayName(); 
             }
         }
         #endregion //Event

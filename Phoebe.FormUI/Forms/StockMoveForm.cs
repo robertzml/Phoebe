@@ -98,6 +98,7 @@ namespace Phoebe.FormUI
             {
                 this.cargoDataGridView.Rows[i].Cells[this.columnSelect.Index].Value = true;
                 this.cargoDataGridView.Rows[i].Cells[this.columnMoveCount.Index].Value = this.currentStockMove.StockMoveDetails.ElementAt(i).Count;
+                this.cargoDataGridView.Rows[i].Cells[this.columnMoveWeight.Index].Value = this.currentStockMove.StockMoveDetails.ElementAt(i).MoveWeight;
                 this.cargoDataGridView.Rows[i].Cells[this.columnNewWarehouse.Index].Value = this.currentStockMove.StockMoveDetails.ElementAt(i).WarehouseID;
             }
         }
@@ -165,6 +166,7 @@ namespace Phoebe.FormUI
                     smDetail.WarehouseID = Convert.ToInt32(row.Cells[this.columnNewWarehouse.Index].Value);
                     smDetail.StoreCount = cargo.StoreCount;
                     smDetail.Count = Convert.ToInt32(row.Cells[this.columnMoveCount.Index].Value);
+                    smDetail.MoveWeight = cargo.UnitWeight * smDetail.Count / 1000;
                     smDetail.Status = (int)EntityStatus.StockMoveReady;
                     details.Add(smDetail);
                 }

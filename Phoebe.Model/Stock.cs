@@ -30,13 +30,14 @@ namespace Phoebe.Model
         public System.DateTime InTime { get; set; }
         public Nullable<System.DateTime> OutTime { get; set; }
         public int Source { get; set; }
+        public Nullable<int> Destination { get; set; }
         public string Remark { get; set; }
         public int Status { get; set; }
     
+        public virtual Cargo Cargo { get; set; }
         public virtual Warehouse Warehouse { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StockInDetail> StockInDetails { get; set; }
-        public virtual Cargo Cargo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StockOutDetail> StockOutDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

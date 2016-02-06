@@ -84,4 +84,40 @@ namespace Phoebe.Model
         [Display(Name = "冷藏费用")]
         Cold = 2
     }
+
+    /// <summary>
+    /// 来源类型
+    /// </summary>
+    public enum SourceType
+    {
+        /// <summary>
+        /// 入库
+        /// </summary>
+        [Display(Name = "入库")]
+        StockIn = 0,
+
+        /// <summary>
+        /// 移库
+        /// </summary>
+        [Display(Name = "移库")]
+        StockMove = 1
+    }
+
+    /// <summary>
+    /// 目的地类型
+    /// </summary>
+    public enum DestinationType
+    {
+        /// <summary>
+        /// 出库
+        /// </summary>
+        [Display(Name = "出库")]
+        StockOut = 0,
+
+        /// <summary>
+        /// 移库
+        /// </summary>
+        [Display(Name = "移库")]
+        StockMove = 1
+    }
 }
