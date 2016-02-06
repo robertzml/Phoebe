@@ -37,16 +37,17 @@ namespace Phoebe.Model
         public System.Guid CargoID { get; set; }
 
         /// <summary>
-        /// 合同ID
-        /// </summary>
-        [Display(Name = "合同ID")]
-        public int ContractID { get; set; }
-
-        /// <summary>
         /// 货品名称
         /// </summary>
         [Display(Name = "货品名称")]
         public string CargoName { get; set; }
+
+
+        /// <summary>
+        /// 合同ID
+        /// </summary>
+        [Display(Name = "合同ID")]
+        public int ContractID { get; set; }
 
         /// <summary>
         /// 所属合同
@@ -97,7 +98,7 @@ namespace Phoebe.Model
         public int Count { get; set; }
 
         /// <summary>
-        /// 重量
+        /// 总重量
         /// </summary>
         [Display(Name = "重量(吨)")]
         public double Weight { get; set; }

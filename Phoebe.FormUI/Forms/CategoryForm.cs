@@ -50,7 +50,7 @@ namespace Phoebe.FormUI
             };
             this.treeCategory.Nodes.Add(top);
 
-            List<FirstCategory> firstCategory = this.categoryBusiness.GetFirstCategory();
+            List<FirstCategory> firstCategory = this.categoryBusiness.GetFirstCategory(false);
 
             foreach(var first in firstCategory)
             {
@@ -70,7 +70,7 @@ namespace Phoebe.FormUI
 
         private void UpdateSecondCategory(FirstCategory first, TreeNode parent)
         {
-            List<SecondCategory> secondCategory = this.categoryBusiness.GetSecondCategoryByFirst(first.ID);
+            List<SecondCategory> secondCategory = this.categoryBusiness.GetSecondCategoryByFirst(first.ID, false);
 
             foreach(var item in secondCategory)
             {
@@ -89,7 +89,7 @@ namespace Phoebe.FormUI
 
         private void UpdateThirdCategory(SecondCategory second, TreeNode parent)
         {
-            List<ThirdCategory> thirdCategory = this.categoryBusiness.GetThirdCategoryBySecond(second.ID);
+            List<ThirdCategory> thirdCategory = this.categoryBusiness.GetThirdCategoryBySecond(second.ID, false);
 
             foreach (var item in thirdCategory)
             {

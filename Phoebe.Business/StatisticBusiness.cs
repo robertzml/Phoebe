@@ -8,7 +8,7 @@ using Phoebe.Model;
 namespace Phoebe.Business
 {
     /// <summary>
-    /// 统计业务
+    /// 统计业务类
     /// </summary>
     public class StatisticBusiness
     {

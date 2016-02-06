@@ -130,6 +130,19 @@ namespace Phoebe.FormUI
         }
 
         /// <summary>
+        /// 货品 - 库存快照
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void menuStockSnapshoot_Click(object sender, EventArgs e)
+        {
+            StockSnapshootForm form = new StockSnapshootForm();
+            form.MdiParent = this;
+            form.WindowState = FormWindowState.Maximized;
+            form.Show();
+        }
+
+        /// <summary>
         /// 冷库租赁 - 货品入库
         /// </summary>
         private void menuStockIn_Click(object sender, EventArgs e)
@@ -167,7 +180,10 @@ namespace Phoebe.FormUI
         /// </summary>      
         private void menuCargoColdPrice_Click(object sender, EventArgs e)
         {
-
+            CargoColdPriceForm form = new CargoColdPriceForm();
+            form.MdiParent = this;
+            form.WindowState = FormWindowState.Maximized;
+            form.Show();
         }
 
         /// <summary>

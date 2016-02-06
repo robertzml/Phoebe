@@ -35,6 +35,19 @@ namespace Phoebe.Business
         }
 
         /// <summary>
+        /// 获取所有一级分类
+        /// </summary>
+        /// <param name="showEmpty">是否显示空分类</param>
+        /// <returns></returns>
+        public List<FirstCategory> GetFirstCategory(bool showEmpty)
+        {
+            if (showEmpty)
+                return GetFirstCategory();
+            else
+                return this.context.FirstCategories.Where(r => r.ID != 0).ToList();
+        }
+
+        /// <summary>
         /// 获取一级分类
         /// </summary>
         /// <param name="id">一级分类ID</param>
@@ -61,6 +74,20 @@ namespace Phoebe.Business
         public List<SecondCategory> GetSecondCategoryByFirst(int firstId)
         {
             return this.context.SecondCategories.Where(r => r.FirstCategoryID == firstId || r.ID == 0).ToList();
+        }
+
+        /// <summary>
+        /// 获取一级分类下二级分类
+        /// </summary>
+        /// <param name="firstId">一级分类ID</param>
+        /// <param name="showEmpty"></param>
+        /// <returns></returns>
+        public List<SecondCategory> GetSecondCategoryByFirst(int firstId, bool showEmpty)
+        {
+            if (showEmpty)
+                return GetSecondCategoryByFirst(firstId);
+            else
+                return this.context.SecondCategories.Where(r => r.FirstCategoryID == firstId).ToList();
         }
 
         /// <summary>
@@ -99,6 +126,20 @@ namespace Phoebe.Business
         public List<ThirdCategory> GetThirdCategoryBySecond(int secondId)
         {
             return this.context.ThirdCategories.Where(r => r.SecondCategoryID == secondId || r.ID == 0).ToList();
+        }
+
+        /// <summary>
+        /// 获取二级分类下三级分离
+        /// </summary>
+        /// <param name="secondId">二级分类ID</param>
+        /// <param name="showEmpty"></param>
+        /// <returns></returns>
+        public List<ThirdCategory> GetThirdCategoryBySecond(int secondId, bool showEmpty)
+        {
+            if (showEmpty)
+                return GetThirdCategoryBySecond(secondId);
+            else
+                return this.context.ThirdCategories.Where(r => r.SecondCategoryID == secondId).ToList();
         }
 
         /// <summary>
