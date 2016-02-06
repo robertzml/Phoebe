@@ -228,6 +228,27 @@ namespace Phoebe.Business
         }
 
         /// <summary>
+        /// 获取合同指定日库存
+        /// </summary>
+        /// <param name="contractID">合同ID</param>
+        /// <param name="date">日期</param>
+        /// <returns></returns>
+        public List<Storage> GetInDay(int contractID, DateTime date)
+        {
+            List<Storage> data = new List<Storage>();
+
+            var cargos = this.context.Cargoes.Where(r => r.ContractID == contractID && r.InTime <= date && (r.OutTime == null || r.OutTime > date));
+
+            foreach (var cargo in cargos)
+            {
+                var s = GetInDay(cargo.ID, date);
+                data.AddRange(s);
+            }
+
+            return data;
+        }
+
+        /// <summary>
         /// 获取货品日流水
         /// </summary>
         /// <param name="cargoID">货品ID</param>
@@ -271,6 +292,26 @@ namespace Phoebe.Business
             {
                 var flow = SetStockFlow(cargo, item.Count, item.MoveWeight, date, StockFlowType.StockMoveOut);
                 data.Add(flow);
+            }
+
+            return data;
+        }
+
+        /// <summary>
+        /// 获取合同日流水
+        /// </summary>
+        /// <param name="contractID">合同ID</param>
+        /// <param name="date">日期</param>
+        /// <returns></returns>
+        public List<StockFlow> GetDaysFlow(int contractID, DateTime date)
+        {
+            List<StockFlow> data = new List<StockFlow>();
+
+            var cargos = this.context.Cargoes.Where(r => r.ContractID == contractID && r.InTime <= date && (r.OutTime == null || r.OutTime >= date));
+            foreach (var cargo in cargos)
+            {
+                var s = GetDaysFlow(cargo.ID, date);
+                data.AddRange(s);
             }
 
             return data;

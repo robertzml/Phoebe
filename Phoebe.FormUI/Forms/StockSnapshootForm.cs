@@ -99,7 +99,19 @@ namespace Phoebe.FormUI
         {
             if (this.radioContract.Checked)
             {
+                if (this.comboBoxContract.SelectedIndex == -1 || this.comboBoxContract.SelectedIndex == 0)
+                {
+                    MessageBox.Show("未选择合同", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
 
+                var contract = this.comboBoxContract.SelectedItem as Contract;
+
+                var storage = this.storeBusiness.GetInDay(contract.ID, this.datePicker.Value.Date);
+                this.storageBindingSource.DataSource = storage;
+
+                var flow = this.storeBusiness.GetDaysFlow(contract.ID, this.datePicker.Value.Date);
+                this.stockFlowBindingSource.DataSource = flow;
             }
             else
             {

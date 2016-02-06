@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StockSnapshootForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
             this.buttonQuery = new System.Windows.Forms.Button();
@@ -58,19 +58,9 @@
             this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnSource = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.storageBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.storageBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
-            this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
-            this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
-            this.bindingNavigatorPositionItem = new System.Windows.Forms.ToolStripTextBox();
-            this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.stockFlowBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.stockFlowDataGridView = new System.Windows.Forms.DataGridView();
+            this.stockFlowBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dataGridViewTextBoxColumn25 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnFlowType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -86,11 +76,9 @@
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.storageDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.storageBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.storageBindingNavigator)).BeginInit();
-            this.storageBindingNavigator.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.stockFlowBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.stockFlowDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.stockFlowBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -221,7 +209,6 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.storageDataGridView);
-            this.groupBox2.Controls.Add(this.storageBindingNavigator);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox2.Location = new System.Drawing.Point(3, 112);
             this.groupBox2.Name = "groupBox2";
@@ -249,10 +236,10 @@
             this.columnSource});
             this.storageDataGridView.DataSource = this.storageBindingSource;
             this.storageDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.storageDataGridView.Location = new System.Drawing.Point(3, 41);
+            this.storageDataGridView.Location = new System.Drawing.Point(3, 16);
             this.storageDataGridView.Name = "storageDataGridView";
             this.storageDataGridView.ReadOnly = true;
-            this.storageDataGridView.Size = new System.Drawing.Size(938, 224);
+            this.storageDataGridView.Size = new System.Drawing.Size(938, 249);
             this.storageDataGridView.TabIndex = 0;
             this.storageDataGridView.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.storageDataGridView_RowPrePaint);
             // 
@@ -308,9 +295,9 @@
             // dataGridViewTextBoxColumn15
             // 
             this.dataGridViewTextBoxColumn15.DataPropertyName = "Weight";
-            dataGridViewCellStyle1.Format = "N3";
-            dataGridViewCellStyle1.NullValue = null;
-            this.dataGridViewTextBoxColumn15.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Format = "N3";
+            dataGridViewCellStyle5.NullValue = null;
+            this.dataGridViewTextBoxColumn15.DefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridViewTextBoxColumn15.HeaderText = "在库重量(t)";
             this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
             this.dataGridViewTextBoxColumn15.ReadOnly = true;
@@ -319,8 +306,8 @@
             // dataGridViewTextBoxColumn16
             // 
             this.dataGridViewTextBoxColumn16.DataPropertyName = "InTime";
-            dataGridViewCellStyle2.Format = "d";
-            this.dataGridViewTextBoxColumn16.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Format = "d";
+            this.dataGridViewTextBoxColumn16.DefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridViewTextBoxColumn16.HeaderText = "入库时间";
             this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
             this.dataGridViewTextBoxColumn16.ReadOnly = true;
@@ -335,100 +322,6 @@
             // 
             this.storageBindingSource.DataSource = typeof(Phoebe.Model.Storage);
             // 
-            // storageBindingNavigator
-            // 
-            this.storageBindingNavigator.AddNewItem = null;
-            this.storageBindingNavigator.BindingSource = this.storageBindingSource;
-            this.storageBindingNavigator.CountItem = this.bindingNavigatorCountItem;
-            this.storageBindingNavigator.DeleteItem = null;
-            this.storageBindingNavigator.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.bindingNavigatorMoveFirstItem,
-            this.bindingNavigatorMovePreviousItem,
-            this.bindingNavigatorSeparator,
-            this.bindingNavigatorPositionItem,
-            this.bindingNavigatorCountItem,
-            this.bindingNavigatorSeparator1,
-            this.bindingNavigatorMoveNextItem,
-            this.bindingNavigatorMoveLastItem,
-            this.bindingNavigatorSeparator2});
-            this.storageBindingNavigator.Location = new System.Drawing.Point(3, 16);
-            this.storageBindingNavigator.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
-            this.storageBindingNavigator.MoveLastItem = this.bindingNavigatorMoveLastItem;
-            this.storageBindingNavigator.MoveNextItem = this.bindingNavigatorMoveNextItem;
-            this.storageBindingNavigator.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
-            this.storageBindingNavigator.Name = "storageBindingNavigator";
-            this.storageBindingNavigator.PositionItem = this.bindingNavigatorPositionItem;
-            this.storageBindingNavigator.Size = new System.Drawing.Size(938, 25);
-            this.storageBindingNavigator.TabIndex = 3;
-            this.storageBindingNavigator.Text = "bindingNavigator1";
-            // 
-            // bindingNavigatorCountItem
-            // 
-            this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
-            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(32, 22);
-            this.bindingNavigatorCountItem.Text = "/ {0}";
-            this.bindingNavigatorCountItem.ToolTipText = "总项数";
-            // 
-            // bindingNavigatorMoveFirstItem
-            // 
-            this.bindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMoveFirstItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveFirstItem.Image")));
-            this.bindingNavigatorMoveFirstItem.Name = "bindingNavigatorMoveFirstItem";
-            this.bindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorMoveFirstItem.Text = "移到第一条记录";
-            // 
-            // bindingNavigatorMovePreviousItem
-            // 
-            this.bindingNavigatorMovePreviousItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMovePreviousItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMovePreviousItem.Image")));
-            this.bindingNavigatorMovePreviousItem.Name = "bindingNavigatorMovePreviousItem";
-            this.bindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorMovePreviousItem.Text = "移到上一条记录";
-            // 
-            // bindingNavigatorSeparator
-            // 
-            this.bindingNavigatorSeparator.Name = "bindingNavigatorSeparator";
-            this.bindingNavigatorSeparator.Size = new System.Drawing.Size(6, 25);
-            // 
-            // bindingNavigatorPositionItem
-            // 
-            this.bindingNavigatorPositionItem.AccessibleName = "位置";
-            this.bindingNavigatorPositionItem.AutoSize = false;
-            this.bindingNavigatorPositionItem.Name = "bindingNavigatorPositionItem";
-            this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(50, 23);
-            this.bindingNavigatorPositionItem.Text = "0";
-            this.bindingNavigatorPositionItem.ToolTipText = "当前位置";
-            // 
-            // bindingNavigatorSeparator1
-            // 
-            this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator1";
-            this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
-            // bindingNavigatorMoveNextItem
-            // 
-            this.bindingNavigatorMoveNextItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMoveNextItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveNextItem.Image")));
-            this.bindingNavigatorMoveNextItem.Name = "bindingNavigatorMoveNextItem";
-            this.bindingNavigatorMoveNextItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveNextItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorMoveNextItem.Text = "移到下一条记录";
-            // 
-            // bindingNavigatorMoveLastItem
-            // 
-            this.bindingNavigatorMoveLastItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMoveLastItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveLastItem.Image")));
-            this.bindingNavigatorMoveLastItem.Name = "bindingNavigatorMoveLastItem";
-            this.bindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorMoveLastItem.Text = "移到最后一条记录";
-            // 
-            // bindingNavigatorSeparator2
-            // 
-            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
-            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
-            // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.stockFlowDataGridView);
@@ -439,10 +332,6 @@
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "流水记录";
-            // 
-            // stockFlowBindingSource
-            // 
-            this.stockFlowBindingSource.DataSource = typeof(Phoebe.Model.StockFlow);
             // 
             // stockFlowDataGridView
             // 
@@ -471,11 +360,15 @@
             this.stockFlowDataGridView.TabIndex = 0;
             this.stockFlowDataGridView.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.stockFlowDataGridView_RowPrePaint);
             // 
+            // stockFlowBindingSource
+            // 
+            this.stockFlowBindingSource.DataSource = typeof(Phoebe.Model.StockFlow);
+            // 
             // dataGridViewTextBoxColumn25
             // 
             this.dataGridViewTextBoxColumn25.DataPropertyName = "FlowDate";
-            dataGridViewCellStyle3.Format = "d";
-            this.dataGridViewTextBoxColumn25.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle7.Format = "d";
+            this.dataGridViewTextBoxColumn25.DefaultCellStyle = dataGridViewCellStyle7;
             this.dataGridViewTextBoxColumn25.HeaderText = "流水日期";
             this.dataGridViewTextBoxColumn25.Name = "dataGridViewTextBoxColumn25";
             this.dataGridViewTextBoxColumn25.ReadOnly = true;
@@ -545,6 +438,9 @@
             // dataGridViewTextBoxColumn24
             // 
             this.dataGridViewTextBoxColumn24.DataPropertyName = "Weight";
+            dataGridViewCellStyle8.Format = "N3";
+            dataGridViewCellStyle8.NullValue = null;
+            this.dataGridViewTextBoxColumn24.DefaultCellStyle = dataGridViewCellStyle8;
             this.dataGridViewTextBoxColumn24.HeaderText = "流水重量(t)";
             this.dataGridViewTextBoxColumn24.Name = "dataGridViewTextBoxColumn24";
             this.dataGridViewTextBoxColumn24.ReadOnly = true;
@@ -565,15 +461,11 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.storageDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.storageBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.storageBindingNavigator)).EndInit();
-            this.storageBindingNavigator.ResumeLayout(false);
-            this.storageBindingNavigator.PerformLayout();
             this.groupBox3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.stockFlowBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.stockFlowDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.stockFlowBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -595,16 +487,6 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.DataGridView storageDataGridView;
         private System.Windows.Forms.BindingSource storageBindingSource;
-        private System.Windows.Forms.BindingNavigator storageBindingNavigator;
-        private System.Windows.Forms.ToolStripLabel bindingNavigatorCountItem;
-        private System.Windows.Forms.ToolStripButton bindingNavigatorMoveFirstItem;
-        private System.Windows.Forms.ToolStripButton bindingNavigatorMovePreviousItem;
-        private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator;
-        private System.Windows.Forms.ToolStripTextBox bindingNavigatorPositionItem;
-        private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator1;
-        private System.Windows.Forms.ToolStripButton bindingNavigatorMoveNextItem;
-        private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
-        private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
