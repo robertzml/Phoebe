@@ -34,14 +34,10 @@ namespace Phoebe.Business
         /// 非计时货品无冷藏费
         /// </remarks>
         /// <returns></returns>
-        public List<DailyColdRecord> ProcessDailyCold(string cargoID, DateTime start, DateTime end)
+        public List<DailyColdRecord> ProcessDailyCold(Guid cargoID, DateTime start, DateTime end)
         {
-            Guid cid;
-            if (!Guid.TryParse(cargoID, out cid))
-                return null;
-
             BillingBusiness billingBusiness = new BillingBusiness();
-            var records = billingBusiness.GetCargoColdRecord(cid, start, end);
+            var records = billingBusiness.GetCargoColdRecord(cargoID, start, end);
 
             return records;
         }

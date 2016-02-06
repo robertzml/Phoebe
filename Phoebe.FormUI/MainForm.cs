@@ -176,11 +176,13 @@ namespace Phoebe.FormUI
         }
 
         /// <summary>
-        /// 结算管理 - 货品冷藏费
-        /// </summary>      
-        private void menuCargoColdPrice_Click(object sender, EventArgs e)
+        /// 结算管理 - 冷藏费清单
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void menuColdPriceList_Click(object sender, EventArgs e)
         {
-            CargoColdPriceForm form = new CargoColdPriceForm();
+            ColdPriceForm form = new ColdPriceForm();
             form.MdiParent = this;
             form.WindowState = FormWindowState.Maximized;
             form.Show();

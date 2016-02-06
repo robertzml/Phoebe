@@ -14,12 +14,12 @@ using Phoebe.Model;
 namespace Phoebe.FormUI
 {
     /// <summary>
-    /// 库存快照窗体
+    /// 冷藏费清单窗体
     /// </summary>
-    public partial class StockSnapshootForm : Form
+    public partial class ColdPriceForm : Form
     {
         #region Field
-        private StoreBusiness storeBusiness;
+        private SettleBusiness settleBusiness;
 
         private CustomerBusiness customerBusiness;
 
@@ -29,7 +29,7 @@ namespace Phoebe.FormUI
         #endregion //Field
 
         #region Constructor
-        public StockSnapshootForm()
+        public ColdPriceForm()
         {
             InitializeComponent();
         }
@@ -38,7 +38,7 @@ namespace Phoebe.FormUI
         #region Function
         private void InitData()
         {
-            this.storeBusiness = new StoreBusiness();
+            this.settleBusiness = new SettleBusiness();
             this.customerBusiness = new CustomerBusiness();
             this.contractBusiness = new ContractBusiness();
             this.cargoBusiness = new CargoBusiness();
@@ -53,11 +53,11 @@ namespace Phoebe.FormUI
         #endregion //Function
 
         #region Event
-        private void StockSnapshootForm_Load(object sender, EventArgs e)
+        private void ColdPriceForm_Load(object sender, EventArgs e)
         {
             InitData();
             InitControl();
-        }
+        }                
 
         /// <summary>
         /// 客户选择
@@ -80,7 +80,7 @@ namespace Phoebe.FormUI
 
             this.comboBoxCargo.DataSource = null;
         }
-
+        
         /// <summary>
         /// 合同选择
         /// </summary>
@@ -99,7 +99,7 @@ namespace Phoebe.FormUI
             this.comboBoxCargo.DisplayMember = "Name";
             this.comboBoxCargo.ValueMember = "ID";
         }
-
+        
         /// <summary>
         /// 查询
         /// </summary>
@@ -109,19 +109,7 @@ namespace Phoebe.FormUI
         {
             if (this.radioContract.Checked)
             {
-                if (this.comboBoxContract.SelectedIndex == -1 || this.comboBoxContract.SelectedIndex == 0)
-                {
-                    MessageBox.Show("未选择合同", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return;
-                }
 
-                var contract = this.comboBoxContract.SelectedItem as Contract;
-
-                var storage = this.storeBusiness.GetInDay(contract.ID, this.datePicker.Value.Date);
-                this.storageBindingSource.DataSource = storage;
-
-                var flow = this.storeBusiness.GetDaysFlow(contract.ID, this.datePicker.Value.Date);
-                this.stockFlowBindingSource.DataSource = flow;
             }
             else
             {
@@ -133,38 +121,8 @@ namespace Phoebe.FormUI
 
                 var cargo = this.comboBoxCargo.SelectedItem as Cargo;
 
-                var storage = this.storeBusiness.GetInDay(cargo.ID, this.datePicker.Value.Date);
-                this.storageBindingSource.DataSource = storage;
-
-                var flow = this.storeBusiness.GetDaysFlow(cargo.ID, this.datePicker.Value.Date);
-                this.stockFlowBindingSource.DataSource = flow;
-            }
-        }
-
-        private void storageDataGridView_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
-        {
-            if (e.RowIndex < this.storageBindingSource.Count)
-            {
-                var storage = this.storageBindingSource[e.RowIndex] as Storage;
-
-                if (storage.Source == 0)
-                {
-                    this.storageDataGridView.Rows[e.RowIndex].Cells[this.columnSource.Index].Value = "入库";
-                }
-                else if (storage.Source == 1)
-                {
-                    this.storageDataGridView.Rows[e.RowIndex].Cells[this.columnSource.Index].Value = "移库";
-                }
-            }
-        }       
-
-        private void stockFlowDataGridView_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
-        {
-            if (e.RowIndex < this.stockFlowBindingSource.Count)
-            {
-                var flow = this.stockFlowBindingSource[e.RowIndex] as StockFlow;
-
-                this.stockFlowDataGridView.Rows[e.RowIndex].Cells[this.columnFlowType.Index].Value = flow.Type.DisplayName(); 
+                var records= this.settleBusiness.ProcessDailyCold(cargo.ID, dateStart.Value.Date, dateEnd.Value.Date);
+                this.dailyColdRecordBindingSource.DataSource = records;
             }
         }
         #endregion //Event

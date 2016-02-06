@@ -35,23 +35,23 @@ namespace Phoebe.Business
         {
             List<DailyColdRecord> records = new List<DailyColdRecord>();
 
-            //StoreBusiness storeBusiness = new StoreBusiness();
-            //var stores = storeBusiness.GetInDay(cargo.ID, date);
-            //var flows = storeBusiness.GetDaysFlow(cargo.ID, date);
+            StoreBusiness storeBusiness = new StoreBusiness();
+            var stores = storeBusiness.GetInDay(cargo.ID, date);
+            var flows = storeBusiness.GetDaysFlow(cargo.ID, date);
 
-            //// set daily flow
-            //foreach (var flow in flows)
-            //{
-            //    DailyColdRecord frecord = new DailyColdRecord();
-            //    frecord.RecordDate = date;
+            // set daily flow
+            foreach (var flow in flows)
+            {
+                DailyColdRecord frecord = new DailyColdRecord();
+                frecord.RecordDate = date;
 
-            //    frecord.CargoName = flow.CargoName;
-            //    frecord.Count = flow.Count;
-            //    frecord.UnitMeter = billingProcess.GetUnitMeter(cargo);
-            //    frecord.StoreMeter = billingProcess.CalculateTotalMeter(frecord.UnitMeter, flow.Count);
+                frecord.CargoName = flow.CargoName;
+                frecord.Count = flow.Count;
+                frecord.UnitMeter = billingProcess.GetUnitMeter(cargo);
+                frecord.StoreMeter = billingProcess.CalculateTotalMeter(frecord.UnitMeter, flow.Count);
 
-            //    records.Add(frecord);
-            //}
+                records.Add(frecord);
+            }
 
             //DailyColdRecord record;
             //if (flows.Count != 0)
@@ -112,10 +112,10 @@ namespace Phoebe.Business
             for (DateTime step = start.Date; step <= end; step = step.AddDays(1))
             {
                 var record = GetDailyColdRecord(cargo, step, billingProcess);
-                var last = record.Last();
+                //var last = record.Last();
 
-                totalFee += last.DailyFee;
-                last.TotalFee = totalFee;
+                //totalFee += last.DailyFee;
+                //last.TotalFee = totalFee;
 
                 records.AddRange(record);
             }

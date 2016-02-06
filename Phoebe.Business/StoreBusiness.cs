@@ -288,7 +288,7 @@ namespace Phoebe.Business
 
             //find stock move out
             var smOutDetails = this.context.StockMoveDetails.Where(r => r.SourceCargoID == cargoID && r.Status == (int)EntityStatus.StockMove && r.StockMove.MoveTime == date);
-            foreach(var item in smOutDetails)
+            foreach (var item in smOutDetails)
             {
                 var flow = SetStockFlow(cargo, item.Count, item.MoveWeight, date, StockFlowType.StockMoveOut);
                 data.Add(flow);

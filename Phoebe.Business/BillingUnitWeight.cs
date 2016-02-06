@@ -34,19 +34,36 @@ namespace Phoebe.Business
             throw new NotImplementedException();
         }
 
-        public decimal CalculateDailyFee(decimal totalMeter, decimal unitPrice)
-        {
-            throw new NotImplementedException();
-        }
-
-        public decimal CalculateTotalMeter(decimal unitMeter, int count)
-        {
-            throw new NotImplementedException();
-        }
-
+        /// <summary>
+        /// 获取单位重量
+        /// </summary>
+        /// <param name="cargo">货品</param>
+        /// <returns></returns>
         public decimal GetUnitMeter(Cargo cargo)
         {
-            throw new NotImplementedException();
+            return Convert.ToDecimal(cargo.UnitWeight);
+        }
+
+        /// <summary>
+        /// 计算货品总重量
+        /// </summary>
+        /// <param name="unitMeter">单位重量(kg)</param>
+        /// <param name="count">数量</param>
+        /// <returns>总重量(t)</returns>
+        public decimal CalculateTotalMeter(decimal unitMeter, int count)
+        {
+            return unitMeter * count / 1000;
+        }
+
+        /// <summary>
+        /// 计算货品日冷藏费
+        /// </summary>
+        /// <param name="totalMeter">总重量(t)</param>
+        /// <param name="unitPrice">单价(元/t)</param>
+        /// <returns></returns>
+        public decimal CalculateDailyFee(decimal totalMeter, decimal unitPrice)
+        {
+            return totalMeter * unitPrice;
         }
         #endregion //Method
     }
