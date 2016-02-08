@@ -84,7 +84,7 @@ namespace Phoebe.Model
         /// 流水数量
         /// </summary>
         /// <remarks>
-        /// 正为入库、转入，负为出库、转出
+        /// 正为入库、移入，负为出库、移出
         /// </remarks>
         [Display(Name = "流水数量")]
         public int Count { get; set; }
@@ -95,9 +95,9 @@ namespace Phoebe.Model
         public double UnitWeight { get; set; }
 
         /// <summary>
-        /// 重量
+        /// 流水重量(吨)
         /// </summary>
-        [Display(Name = "重量(吨)")]
+        [Display(Name = "流水重量(吨)")]
         public double Weight { get; set; }
 
         /// <summary>
@@ -113,6 +113,14 @@ namespace Phoebe.Model
         /// </summary>
         [Display(Name = "流水类型")]
         public StockFlowType Type { get; set; }
+
+        /// <summary>
+        /// 数量变化
+        /// </summary>
+        /// <remarks>
+        /// 整库移库时为否，冷藏费无更改
+        /// </remarks>
+        public bool CountChange { get; set; }
     }
 
     /// <summary>
@@ -120,6 +128,12 @@ namespace Phoebe.Model
     /// </summary>
     public enum StockFlowType
     {
+        /// <summary>
+        /// 无
+        /// </summary>
+        [Display(Name = "无")]
+        None = 0,
+
         /// <summary>
         /// 入库
         /// </summary>

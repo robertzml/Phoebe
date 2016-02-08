@@ -214,7 +214,7 @@ namespace Phoebe.FormUI
             billing.PackingPrice = this.numericPackingPrice.Value;
             billing.RentPrice = this.numericRentPrice.Value;
             billing.OtherPrice = this.numericOtherPrice.Value;
-            billing.Status = (int)EntityStatus.BillingUnsettle;
+            billing.Status = (int)EntityStatus.BillingNotInit;
 
             List<Cargo> cargos = new List<Cargo>();
             List<StockInDetail> details = new List<StockInDetail>();
@@ -235,6 +235,7 @@ namespace Phoebe.FormUI
                 cargo.ContractID = stockIn.ContractID;
                 cargo.EqualWeight = true;
                 cargo.StoreCount = cargo.Count;
+                cargo.UnitPrice = billing.UnitPrice;
                 cargo.RegisterTime = stockIn.InTime;
                 cargo.UserID = stockIn.UserID;
                 cargo.Status = (int)EntityStatus.CargoStockInReady;

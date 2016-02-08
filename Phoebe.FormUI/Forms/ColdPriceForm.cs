@@ -21,6 +21,8 @@ namespace Phoebe.FormUI
         #region Field
         private SettleBusiness settleBusiness;
 
+        private BillingBusiness billingBusiness;
+
         private CustomerBusiness customerBusiness;
 
         private ContractBusiness contractBusiness;
@@ -39,6 +41,7 @@ namespace Phoebe.FormUI
         private void InitData()
         {
             this.settleBusiness = new SettleBusiness();
+            this.billingBusiness = new BillingBusiness();
             this.customerBusiness = new CustomerBusiness();
             this.contractBusiness = new ContractBusiness();
             this.cargoBusiness = new CargoBusiness();
@@ -57,7 +60,7 @@ namespace Phoebe.FormUI
         {
             InitData();
             InitControl();
-        }                
+        }
 
         /// <summary>
         /// 客户选择
@@ -80,7 +83,7 @@ namespace Phoebe.FormUI
 
             this.comboBoxCargo.DataSource = null;
         }
-        
+
         /// <summary>
         /// 合同选择
         /// </summary>
@@ -99,7 +102,7 @@ namespace Phoebe.FormUI
             this.comboBoxCargo.DisplayMember = "Name";
             this.comboBoxCargo.ValueMember = "ID";
         }
-        
+
         /// <summary>
         /// 查询
         /// </summary>
@@ -109,7 +112,15 @@ namespace Phoebe.FormUI
         {
             if (this.radioContract.Checked)
             {
+                if (this.comboBoxContract.SelectedIndex == -1 || this.comboBoxContract.SelectedIndex == 0)
+                {
+                    MessageBox.Show("未选择合同", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
 
+                var contract = this.comboBoxContract.SelectedItem as Contract;
+                var records = this.billingBusiness.GetContractColdRecord(contract.ID, dateStart.Value.Date, dateEnd.Value.Date);
+                this.dailyColdRecordBindingSource.DataSource = records;
             }
             else
             {
@@ -121,8 +132,18 @@ namespace Phoebe.FormUI
 
                 var cargo = this.comboBoxCargo.SelectedItem as Cargo;
 
-                var records= this.settleBusiness.ProcessDailyCold(cargo.ID, dateStart.Value.Date, dateEnd.Value.Date);
+                var records = this.billingBusiness.GetCargoColdRecord(cargo.ID, dateStart.Value.Date, dateEnd.Value.Date);
                 this.dailyColdRecordBindingSource.DataSource = records;
+            }
+        }
+
+        private void dailyColdRecordDataGridView_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
+            if (e.RowIndex < this.dailyColdRecordBindingSource.Count)
+            {
+                var record = this.dailyColdRecordBindingSource[e.RowIndex] as DailyColdRecord;
+
+                this.dailyColdRecordDataGridView.Rows[e.RowIndex].Cells[this.columnFlowType.Index].Value = record.FlowType.DisplayName();
             }
         }
         #endregion //Event

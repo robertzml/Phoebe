@@ -24,6 +24,7 @@ namespace Phoebe.Model
         public double MoveWeight { get; set; }
         public System.Guid SourceStockID { get; set; }
         public Nullable<System.Guid> NewStockID { get; set; }
+        public bool IsAllMove { get; set; }
         public string Remark { get; set; }
         public int Status { get; set; }
     

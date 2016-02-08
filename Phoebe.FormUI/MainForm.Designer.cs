@@ -58,6 +58,7 @@
             this.mainStauts = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusUser = new System.Windows.Forms.ToolStripStatusLabel();
+            this.menuSettleCreate = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenu.SuspendLayout();
             this.mainStauts.SuspendLayout();
             this.SuspendLayout();
@@ -192,28 +193,29 @@
             // menuStockIn
             // 
             this.menuStockIn.Name = "menuStockIn";
-            this.menuStockIn.Size = new System.Drawing.Size(124, 22);
+            this.menuStockIn.Size = new System.Drawing.Size(152, 22);
             this.menuStockIn.Text = "货品入库";
             this.menuStockIn.Click += new System.EventHandler(this.menuStockIn_Click);
             // 
             // menuStockOut
             // 
             this.menuStockOut.Name = "menuStockOut";
-            this.menuStockOut.Size = new System.Drawing.Size(124, 22);
+            this.menuStockOut.Size = new System.Drawing.Size(152, 22);
             this.menuStockOut.Text = "货品出库";
             this.menuStockOut.Click += new System.EventHandler(this.menuStockOut_Click);
             // 
             // menuStockMove
             // 
             this.menuStockMove.Name = "menuStockMove";
-            this.menuStockMove.Size = new System.Drawing.Size(124, 22);
+            this.menuStockMove.Size = new System.Drawing.Size(152, 22);
             this.menuStockMove.Text = "货品移库";
             this.menuStockMove.Click += new System.EventHandler(this.menuStockMove_Click);
             // 
             // menuSettle
             // 
             this.menuSettle.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuColdPriceList});
+            this.menuColdPriceList,
+            this.menuSettleCreate});
             this.menuSettle.Name = "menuSettle";
             this.menuSettle.Size = new System.Drawing.Size(68, 21);
             this.menuSettle.Text = "结算管理";
@@ -236,7 +238,7 @@
             // menuDailyReport
             // 
             this.menuDailyReport.Name = "menuDailyReport";
-            this.menuDailyReport.Size = new System.Drawing.Size(112, 22);
+            this.menuDailyReport.Size = new System.Drawing.Size(152, 22);
             this.menuDailyReport.Text = "日报表";
             this.menuDailyReport.Click += new System.EventHandler(this.menuDailyReport_Click);
             // 
@@ -306,6 +308,12 @@
             this.statusUser.Size = new System.Drawing.Size(44, 21);
             this.statusUser.Text = "name";
             // 
+            // menuSettleCreate
+            // 
+            this.menuSettleCreate.Name = "menuSettleCreate";
+            this.menuSettleCreate.Size = new System.Drawing.Size(152, 22);
+            this.menuSettleCreate.Text = "费用结算";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -360,6 +368,7 @@
         private System.Windows.Forms.ToolStripMenuItem menuSettle;
         private System.Windows.Forms.ToolStripMenuItem menuStockSnapshoot;
         private System.Windows.Forms.ToolStripMenuItem menuColdPriceList;
+        private System.Windows.Forms.ToolStripMenuItem menuSettleCreate;
     }
 }
 

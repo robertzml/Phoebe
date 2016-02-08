@@ -53,6 +53,11 @@ namespace Phoebe.FormUI
         #endregion //Function
 
         #region Event
+        /// <summary>
+        /// 窗体载入
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void StockSnapshootForm_Load(object sender, EventArgs e)
         {
             InitData();

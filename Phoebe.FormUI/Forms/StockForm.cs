@@ -147,7 +147,7 @@ namespace Phoebe.FormUI
                 {
                     grid.Rows[e.RowIndex].Cells[this.columnDestination.Index].Value = "出库";
                 }
-                else
+                else if(stock.Destination == 1)
                 {
                     grid.Rows[e.RowIndex].Cells[this.columnDestination.Index].Value = "移库";
                 }

@@ -45,6 +45,29 @@ namespace Phoebe.Business
         }
 
         /// <summary>
+        /// 获取出入库计量
+        /// </summary>
+        /// <param name="flow">流水记录</param>
+        /// <returns></returns>
+        public decimal GetFlowMeter(StockFlow flow)
+        {
+            if (flow.Type == StockFlowType.StockOut || flow.Type == StockFlowType.StockMoveOut)
+                return -Convert.ToDecimal(flow.Weight);
+            else
+                return Convert.ToDecimal(flow.Weight);
+        }
+
+        /// <summary>
+        /// 获取在库计量
+        /// </summary>
+        /// <param name="storage">库存记录</param>
+        /// <returns></returns>
+        public decimal GetStoreMeter(Storage storage)
+        {
+            return Convert.ToDecimal(storage.Weight);
+        }
+
+        /// <summary>
         /// 计算货品总重量
         /// </summary>
         /// <param name="unitMeter">单位重量(kg)</param>

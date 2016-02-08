@@ -13,6 +13,12 @@ namespace Phoebe.Model
     public class Storage
     {
         /// <summary>
+        /// 库存日期
+        /// </summary>
+        [Display(Name = "库存日期")]
+        public DateTime StorageDate { get; set; }
+
+        /// <summary>
         /// 库位ID
         /// </summary>
         [Display(Name = "库位ID")]
@@ -98,9 +104,9 @@ namespace Phoebe.Model
         public int Count { get; set; }
 
         /// <summary>
-        /// 总重量
+        /// 在库重量(吨)
         /// </summary>
-        [Display(Name = "重量(吨)")]
+        [Display(Name = "在库重量(吨)")]
         public double Weight { get; set; }
 
         /// <summary>

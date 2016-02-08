@@ -35,7 +35,17 @@
         <AssociationConnector Association="PhoebeModel.FK_SettlementDetails_Contract" />
         <AssociationConnector Association="PhoebeModel.FK_Settlement_User" />
         <AssociationConnector Association="PhoebeModel.FK_SettlementDetails_Settlement" />
-        <EntityTypeShape EntityType="PhoebeModel.Cargo" Width="1.5" PointX="7.5" PointY="8.5" />
+        <EntityTypeShape EntityType="PhoebeModel.StockInDetail" Width="1.5" PointX="9.75" PointY="5.625" />
+        <EntityTypeShape EntityType="PhoebeModel.StockOutDetail" Width="1.5" PointX="12.75" PointY="10.5" />
+        <AssociationConnector Association="PhoebeModel.FK_StockInDetails_StockIn" />
+        <AssociationConnector Association="PhoebeModel.FK_StockInDetails_Warehouse" />
+        <AssociationConnector Association="PhoebeModel.FK_StockOutDetails_StockOut" />
+        <AssociationConnector Association="PhoebeModel.FK_StockOutDetails_Warehouse" />
+        <EntityTypeShape EntityType="PhoebeModel.Stock" Width="1.5" PointX="9.75" PointY="15.375" />
+        <AssociationConnector Association="PhoebeModel.FK_Stock_Warehouse" />
+        <AssociationConnector Association="PhoebeModel.FK_StockInDetails_Stock" />
+        <AssociationConnector Association="PhoebeModel.FK_StockOutDetails_Stock" />
+        <EntityTypeShape EntityType="PhoebeModel.Cargo" Width="1.5" PointX="7.5" PointY="8.25" />
         <AssociationConnector Association="PhoebeModel.FK_Cargo_Contract" />
         <AssociationConnector Association="PhoebeModel.FK_Cargo_FirstCategory" />
         <AssociationConnector Association="PhoebeModel.FK_Cargo_SecondCategory" />
@@ -43,20 +53,10 @@
         <AssociationConnector Association="PhoebeModel.FK_Cargo_User" />
         <AssociationConnector Association="PhoebeModel.FK_Cargo_Warehouse" />
         <AssociationConnector Association="PhoebeModel.FK_SettlementDetails_Cargo" />
-        <EntityTypeShape EntityType="PhoebeModel.StockInDetail" Width="1.5" PointX="9.75" PointY="5.625" />
-        <EntityTypeShape EntityType="PhoebeModel.StockOutDetail" Width="1.5" PointX="12.75" PointY="10.5" />
+        <AssociationConnector Association="PhoebeModel.FK_Stock_Cargo" />
         <AssociationConnector Association="PhoebeModel.FK_StockInDetails_Cargo" />
         <AssociationConnector Association="PhoebeModel.FK_StockOutDetails_Cargo" />
-        <AssociationConnector Association="PhoebeModel.FK_StockInDetails_StockIn" />
-        <AssociationConnector Association="PhoebeModel.FK_StockInDetails_Warehouse" />
-        <AssociationConnector Association="PhoebeModel.FK_StockOutDetails_StockOut" />
-        <AssociationConnector Association="PhoebeModel.FK_StockOutDetails_Warehouse" />
-        <EntityTypeShape EntityType="PhoebeModel.Stock" Width="1.5" PointX="9.75" PointY="15.375" />
-        <AssociationConnector Association="PhoebeModel.FK_Stock_Cargo" />
-        <AssociationConnector Association="PhoebeModel.FK_Stock_Warehouse" />
-        <AssociationConnector Association="PhoebeModel.FK_StockInDetails_Stock" />
-        <AssociationConnector Association="PhoebeModel.FK_StockOutDetails_Stock" />
-        <EntityTypeShape EntityType="PhoebeModel.StockMoveDetail" Width="1.5" PointX="15" PointY="11.75" />
+        <EntityTypeShape EntityType="PhoebeModel.StockMoveDetail" Width="1.5" PointX="15" PointY="11.5" />
         <AssociationConnector Association="PhoebeModel.FK_StockMoveDetails_Cargo" />
         <AssociationConnector Association="PhoebeModel.FK_StockMoveDetails_Cargo1" />
         <AssociationConnector Association="PhoebeModel.FK_StockMoveDetails_Stock" />

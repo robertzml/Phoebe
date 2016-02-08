@@ -42,7 +42,7 @@ namespace Phoebe.Model
         /// 出入库计量
         /// </summary>
         [Display(Name = "出入库计量")]
-        public decimal StoreMeter { get; set; }
+        public decimal FlowMeter { get; set; }
 
         /// <summary>
         ///  在库总计量
@@ -61,5 +61,11 @@ namespace Phoebe.Model
         /// </summary>
         [Display(Name = "冷藏费累计(元)")]
         public decimal TotalFee { get; set; }
+
+        /// <summary>
+        /// 出入库类型
+        /// </summary>
+        [Display(Name = "出入库类型")]
+        public StockFlowType FlowType { get; set; }
     }
 }

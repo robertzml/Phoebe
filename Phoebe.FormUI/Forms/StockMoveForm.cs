@@ -158,6 +158,10 @@ namespace Phoebe.FormUI
                 if (isSelect)
                 {
                     var cargo = row.DataBoundItem as Cargo;
+                    if (row.Cells[this.columnNewWarehouse.Index].Value == null)
+                    {
+                        return ErrorCode.WarehouseCannotBeEmpty;
+                    }
 
                     StockMoveDetail smDetail = new StockMoveDetail();
                     smDetail.ID = Guid.NewGuid();
@@ -166,6 +170,7 @@ namespace Phoebe.FormUI
                     smDetail.WarehouseID = Convert.ToInt32(row.Cells[this.columnNewWarehouse.Index].Value);
                     smDetail.StoreCount = cargo.StoreCount;
                     smDetail.Count = Convert.ToInt32(row.Cells[this.columnMoveCount.Index].Value);
+                    smDetail.IsAllMove = (smDetail.StoreCount == smDetail.Count);
                     smDetail.MoveWeight = cargo.UnitWeight * smDetail.Count / 1000;
                     smDetail.Status = (int)EntityStatus.StockMoveReady;
                     details.Add(smDetail);

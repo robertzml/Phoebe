@@ -229,7 +229,13 @@ namespace Phoebe.Model
         /// 122:基本费用已付款
         /// </summary>
         [Display(Name = "已付款")]
-        BillingPaid = 122
+        BillingPaid = 122,
+
+        /// <summary>
+        /// 123:基本费用未初始化
+        /// </summary>
+        [Display(Name = "未初始化")]
+        BillingNotInit = 123
         #endregion //Billing
     }
 }
