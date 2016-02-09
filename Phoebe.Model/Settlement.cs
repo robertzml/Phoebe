@@ -22,18 +22,18 @@ namespace Phoebe.Model
     
         public System.Guid ID { get; set; }
         public string Number { get; set; }
-        public int CustomerType { get; set; }
         public int CustomerID { get; set; }
         public System.DateTime StartTime { get; set; }
         public System.DateTime EndTime { get; set; }
-        public decimal PastPrice { get; set; }
-        public decimal SumPrice { get; set; }
+        public decimal PastFee { get; set; }
+        public decimal CurrentFee { get; set; }
+        public decimal SumFee { get; set; }
         public int Discount { get; set; }
         public decimal Remission { get; set; }
-        public decimal TotalPrice { get; set; }
-        public Nullable<decimal> PaidPrice { get; set; }
+        public decimal DueFee { get; set; }
+        public Nullable<decimal> PaidFee { get; set; }
         public System.DateTime SettleTime { get; set; }
-        public int UserID { get; set; }
+        public Nullable<int> UserID { get; set; }
         public Nullable<System.DateTime> ConfirmTime { get; set; }
         public string Remark { get; set; }
         public int Status { get; set; }

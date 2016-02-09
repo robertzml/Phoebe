@@ -162,12 +162,12 @@ namespace Phoebe.Business
                 case BillingType.UnitWeight:
                     billingProcess = new BillingUnitWeight();
                     break;
-                //case BillingType.UnitVolume:
-                //    billingProcess = new BillingUnitVolume();
-                //    break;
-                //case BillingType.Count:
-                //    billingProcess = new BillingCount();
-                //    break;
+                    //case BillingType.UnitVolume:
+                    //    billingProcess = new BillingUnitVolume();
+                    //    break;
+                    //case BillingType.Count:
+                    //    billingProcess = new BillingCount();
+                    //    break;
             }
 
             decimal totalFee = 0;
@@ -205,12 +205,12 @@ namespace Phoebe.Business
                 case BillingType.UnitWeight:
                     billingProcess = new BillingUnitWeight();
                     break;
-                //case BillingType.UnitVolume:
-                //    billingProcess = new BillingUnitVolume();
-                //    break;
-                //case BillingType.Count:
-                //    billingProcess = new BillingCount();
-                //    break;
+                    //case BillingType.UnitVolume:
+                    //    billingProcess = new BillingUnitVolume();
+                    //    break;
+                    //case BillingType.Count:
+                    //    billingProcess = new BillingCount();
+                    //    break;
             }
 
             decimal totalFee = 0;
@@ -226,6 +226,38 @@ namespace Phoebe.Business
             }
 
             return records;
+        }
+
+        /// <summary>
+        /// 计算合同冷藏费
+        /// </summary>
+        /// <param name="contractID">合同ID</param>
+        /// <param name="start">开始日期</param>
+        /// <param name="end">结束日期</param>
+        /// <returns></returns>
+        public decimal CalculateContractColdPrice(int contractID, DateTime start, DateTime end)
+        {
+            var contract = this.context.Contracts.Find(contractID);
+            if (contract == null || !contract.IsTiming)
+                return 0;
+
+            IBillingProcess billingProcess = null;
+            switch ((BillingType)contract.BillingType)
+            {
+                case BillingType.UnitWeight:
+                    billingProcess = new BillingUnitWeight();
+                    break;
+                //case BillingType.UnitVolume:
+                //    billingProcess = new BillingUnitVolume();
+                //    break;
+                //case BillingType.Count:
+                //    billingProcess = new BillingCount();
+                //    break;
+                default:
+                    return 0;
+            }
+
+            return billingProcess.CalculateContractColdPrice(contract, start, end);
         }
         #endregion //Method
     }

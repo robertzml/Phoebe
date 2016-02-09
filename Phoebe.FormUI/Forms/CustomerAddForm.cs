@@ -33,7 +33,7 @@ namespace Phoebe.FormUI
         }
         #endregion //Function
 
-        #region Action
+        #region Event
         private void CustomerAddForm_Load(object sender, EventArgs e)
         {
             this.customerBusiness = new CustomerBusiness();
@@ -80,6 +80,6 @@ namespace Phoebe.FormUI
                 MessageBox.Show("添加客户失败：" + result.DisplayName(), FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
-        #endregion //Action
+        #endregion //Event
     }
 }

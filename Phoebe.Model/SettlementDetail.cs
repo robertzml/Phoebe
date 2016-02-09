@@ -16,15 +16,15 @@ namespace Phoebe.Model
     {
         public System.Guid ID { get; set; }
         public System.Guid SettlementID { get; set; }
-        public Nullable<System.Guid> CargoID { get; set; }
+        public Nullable<System.Guid> StockInID { get; set; }
         public Nullable<int> ContractID { get; set; }
         public int ExpenseType { get; set; }
-        public decimal SumPrice { get; set; }
+        public decimal SumFee { get; set; }
         public string Remark { get; set; }
         public int Status { get; set; }
     
+        public virtual Billing Billing { get; set; }
         public virtual Contract Contract { get; set; }
         public virtual Settlement Settlement { get; set; }
-        public virtual Cargo Cargo { get; set; }
     }
 }

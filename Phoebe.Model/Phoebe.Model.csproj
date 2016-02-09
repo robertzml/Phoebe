@@ -67,8 +67,6 @@
     </Compile>
     <Compile Include="DailyColdRecord.cs" />
     <Compile Include="Entities\Customer.cs" />
-    <Compile Include="Entities\Settlement.cs" />
-    <Compile Include="Entities\SettlementDetail.cs" />
     <Compile Include="Entities\Stock.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\UserGroup.cs" />

@@ -212,6 +212,12 @@
     <Compile Include="Forms\SettleForm.Designer.cs">
       <DependentUpon>SettleForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\SettleListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SettleListForm.Designer.cs">
+      <DependentUpon>SettleListForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Forms\ColdPriceForm.resx">
       <DependentUpon>ColdPriceForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -292,11 +298,17 @@
     <EmbeddedResource Include="Forms\SettleForm.resx">
       <DependentUpon>SettleForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SettleListForm.resx">
+      <DependentUpon>SettleListForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\Phoebe.Model.Billing.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.Cargo.datasource" />
+    <None Include="Properties\DataSources\Phoebe.Model.ColdSettlement.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.Contract.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.Customer.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.DailyColdRecord.datasource" />
+    <None Include="Properties\DataSources\Phoebe.Model.Settlement.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.Stock.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.StockFlow.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.Storage.datasource" />

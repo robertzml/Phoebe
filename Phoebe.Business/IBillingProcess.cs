@@ -52,14 +52,6 @@ namespace Phoebe.Business
         decimal GetStoreMeter(Storage storage);
 
         /// <summary>
-        /// 计算货品总计量
-        /// </summary>
-        /// <param name="unitMeter">单位计量</param>
-        /// <param name="count">数量</param>
-        /// <returns></returns>
-        decimal CalculateTotalMeter(decimal unitMeter, int count);
-
-        /// <summary>
         /// 计算货品日冷藏费
         /// </summary>
         /// <param name="totalMeter">日总计量</param>

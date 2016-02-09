@@ -207,6 +207,7 @@ namespace Phoebe.FormUI
 
             Billing billing = new Billing();
             billing.StockInID = stockIn.ID;
+            billing.ContractID = stockIn.ContractID;
             billing.UnitPrice = this.numericUnitPrice.Value;
             billing.HandlingPrice = this.numericHandlingPrice.Value;
             billing.FreezePrice = this.numericFreezePrice.Value;
@@ -214,7 +215,10 @@ namespace Phoebe.FormUI
             billing.PackingPrice = this.numericPackingPrice.Value;
             billing.RentPrice = this.numericRentPrice.Value;
             billing.OtherPrice = this.numericOtherPrice.Value;
+            billing.InTime = stockIn.InTime;
             billing.Status = (int)EntityStatus.BillingNotInit;
+            billing.TotalPrice = billing.HandlingPrice + billing.FreezePrice + billing.DisposePrice +
+                billing.PackingPrice + billing.RentPrice + billing.OtherPrice;
 
             List<Cargo> cargos = new List<Cargo>();
             List<StockInDetail> details = new List<StockInDetail>();

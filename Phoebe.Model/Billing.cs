@@ -14,7 +14,14 @@ namespace Phoebe.Model
     
     public partial class Billing
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Billing()
+        {
+            this.SettlementDetails = new HashSet<SettlementDetail>();
+        }
+    
         public System.Guid StockInID { get; set; }
+        public int ContractID { get; set; }
         public decimal UnitPrice { get; set; }
         public decimal HandlingPrice { get; set; }
         public decimal FreezePrice { get; set; }
@@ -23,9 +30,13 @@ namespace Phoebe.Model
         public decimal RentPrice { get; set; }
         public decimal OtherPrice { get; set; }
         public decimal TotalPrice { get; set; }
+        public System.DateTime InTime { get; set; }
         public string Remark { get; set; }
         public int Status { get; set; }
     
+        public virtual Contract Contract { get; set; }
         public virtual StockIn StockIn { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SettlementDetail> SettlementDetails { get; set; }
     }
 }
