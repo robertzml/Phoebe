@@ -8,16 +8,16 @@ using Phoebe.Model;
 namespace Phoebe.Business
 {
     /// <summary>
-    /// 件重计费
+    /// 件体积计费
     /// </summary>
-    public class BillingUnitWeight : IBillingProcess
+    public class BillingUnitVolume : IBillingProcess
     {
         #region Field
         private PhoebeContext context;
         #endregion //Field
 
         #region Constructor
-        public BillingUnitWeight()
+        public BillingUnitVolume()
         {
             this.context = new PhoebeContext();
         }
@@ -25,7 +25,7 @@ namespace Phoebe.Business
 
         #region Method
         /// <summary>
-        /// 货品冷藏费计算
+        /// 冷藏费计算
         /// </summary>
         /// <param name="cargo">货品对象</param>
         /// <param name="start">开始日期</param>
@@ -47,7 +47,7 @@ namespace Phoebe.Business
                 else
                     days = end.Subtract(inTime).Days + 1;
 
-                totalFee = days * cargo.UnitPrice * Convert.ToDecimal(cargo.TotalWeight);
+                totalFee = days * cargo.UnitPrice * Convert.ToDecimal(cargo.TotalVolume);
 
                 // get store out
                 var stockOuts = from r in this.context.StockOutDetails
@@ -56,7 +56,7 @@ namespace Phoebe.Business
                                 select r;
                 foreach (var item in stockOuts)
                 {
-                    decimal dailyFee = cargo.UnitPrice * Convert.ToDecimal(item.OutWeight);
+                    decimal dailyFee = cargo.UnitPrice * Convert.ToDecimal(cargo.UnitVolume) * item.Count;
                     totalFee -= (end.Subtract(item.StockOut.OutTime).Days + 1) * dailyFee;
                 }
 
@@ -69,7 +69,7 @@ namespace Phoebe.Business
                 {
                     if (item.Count == item.StoreCount)
                         continue;
-                    decimal dailyFee = cargo.UnitPrice * Convert.ToDecimal(item.MoveWeight);
+                    decimal dailyFee = cargo.UnitPrice * Convert.ToDecimal(cargo.UnitVolume) * item.Count;
                     totalFee -= (end.Subtract(item.StockMove.MoveTime).Days + 1) * dailyFee;
                 }
             }
@@ -104,45 +104,43 @@ namespace Phoebe.Business
         }
 
         /// <summary>
-        /// 获取单位重量
+        /// 获取单位体积
         /// </summary>
         /// <param name="cargo">货品</param>
         /// <returns></returns>
         public decimal GetUnitMeter(Cargo cargo)
         {
-            return Convert.ToDecimal(cargo.UnitWeight);
+            return Convert.ToDecimal(cargo.UnitVolume);
         }
 
         /// <summary>
-        /// 获取出入库重量
+        /// 获取出入库体积
         /// </summary>
         /// <param name="flow">流水记录</param>
-        /// <param name="unitMeter">单位重量</param>
         /// <returns></returns>
         public decimal GetFlowMeter(StockFlow flow, decimal unitMeter)
         {
             if (flow.Type == StockFlowType.StockOut || flow.Type == StockFlowType.StockMoveOut)
-                return -Convert.ToDecimal(flow.Weight);
+                return -flow.Count * unitMeter;
             else
-                return Convert.ToDecimal(flow.Weight);
+                return flow.Count * unitMeter;
         }
 
         /// <summary>
-        /// 获取在库重量
+        /// 获取在库体积
         /// </summary>
         /// <param name="storage">库存记录</param>
-        /// <param name="unitMeter">单位重量</param>
         /// <returns></returns>
         public decimal GetStoreMeter(Storage storage, decimal unitMeter)
         {
-            return Convert.ToDecimal(storage.Weight);
+            return storage.Count * unitMeter;
         }
 
         /// <summary>
         /// 计算货品日冷藏费
         /// </summary>
-        /// <param name="totalMeter">总重量(t)</param>
-        /// <param name="unitPrice">单价(元/t)</param>
+        /// <param name="totalMeter">总体积(m3)</param>
+        /// <param name="unitPrice">单价(元/m3)</param>
         /// <returns></returns>
         public decimal CalculateDailyFee(decimal totalMeter, decimal unitPrice)
         {

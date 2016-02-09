@@ -30,8 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StockInForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.treeViewReceipt = new System.Windows.Forms.TreeView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -78,22 +76,6 @@
             this.toolRefresh = new System.Windows.Forms.ToolStripButton();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.cargoDataGridView = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewColumnFirstCategoryID = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dataGridViewColumnSecondCategoryID = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dataGridViewColumnThirdCategoryID = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dataGridViewColumnCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewColumnUnitWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnTotalWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewColumnUnitVolume = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnTotalVolume = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewColumnWarehouse = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cargoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.cargoBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
@@ -106,6 +88,21 @@
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.cargoBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.columnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewColumnFirstCategoryID = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dataGridViewColumnSecondCategoryID = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dataGridViewColumnThirdCategoryID = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.columnCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnUnitWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnTotalWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnUnitVolume = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnTotalVolume = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewColumnWarehouse = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -119,9 +116,9 @@
             this.toolStrip1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cargoDataGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cargoBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cargoBindingNavigator)).BeginInit();
             this.cargoBindingNavigator.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cargoBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -563,15 +560,14 @@
             this.cargoDataGridView.AutoGenerateColumns = false;
             this.cargoDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.cargoDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
             this.columnName,
             this.dataGridViewColumnFirstCategoryID,
             this.dataGridViewColumnSecondCategoryID,
             this.dataGridViewColumnThirdCategoryID,
-            this.dataGridViewColumnCount,
-            this.dataGridViewColumnUnitWeight,
+            this.columnCount,
+            this.columnUnitWeight,
             this.columnTotalWeight,
-            this.dataGridViewColumnUnitVolume,
+            this.columnUnitVolume,
             this.columnTotalVolume,
             this.dataGridViewColumnWarehouse,
             this.dataGridViewTextBoxColumn12,
@@ -589,118 +585,6 @@
             this.cargoDataGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.cargoDataGridView_CellValueChanged);
             this.cargoDataGridView.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.cargoDataGridView_DataError);
             this.cargoDataGridView.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.cargoDataGridView_RowsAdded);
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "ID";
-            this.dataGridViewTextBoxColumn1.HeaderText = "ID";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.Visible = false;
-            // 
-            // columnName
-            // 
-            this.columnName.DataPropertyName = "Name";
-            this.columnName.HeaderText = "名称";
-            this.columnName.Name = "columnName";
-            this.columnName.Width = 150;
-            // 
-            // dataGridViewColumnFirstCategoryID
-            // 
-            this.dataGridViewColumnFirstCategoryID.DataPropertyName = "FirstCategoryID";
-            this.dataGridViewColumnFirstCategoryID.HeaderText = "一级类别";
-            this.dataGridViewColumnFirstCategoryID.Name = "dataGridViewColumnFirstCategoryID";
-            this.dataGridViewColumnFirstCategoryID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewColumnFirstCategoryID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // dataGridViewColumnSecondCategoryID
-            // 
-            this.dataGridViewColumnSecondCategoryID.DataPropertyName = "SecondCategoryID";
-            this.dataGridViewColumnSecondCategoryID.HeaderText = "二级类别";
-            this.dataGridViewColumnSecondCategoryID.Name = "dataGridViewColumnSecondCategoryID";
-            this.dataGridViewColumnSecondCategoryID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewColumnSecondCategoryID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // dataGridViewColumnThirdCategoryID
-            // 
-            this.dataGridViewColumnThirdCategoryID.DataPropertyName = "ThirdCategoryID";
-            this.dataGridViewColumnThirdCategoryID.HeaderText = "三级类别";
-            this.dataGridViewColumnThirdCategoryID.Name = "dataGridViewColumnThirdCategoryID";
-            this.dataGridViewColumnThirdCategoryID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewColumnThirdCategoryID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // dataGridViewColumnCount
-            // 
-            this.dataGridViewColumnCount.DataPropertyName = "Count";
-            this.dataGridViewColumnCount.HeaderText = "数量";
-            this.dataGridViewColumnCount.Name = "dataGridViewColumnCount";
-            // 
-            // dataGridViewColumnUnitWeight
-            // 
-            this.dataGridViewColumnUnitWeight.DataPropertyName = "UnitWeight";
-            this.dataGridViewColumnUnitWeight.HeaderText = "单位重量(kg)";
-            this.dataGridViewColumnUnitWeight.Name = "dataGridViewColumnUnitWeight";
-            this.dataGridViewColumnUnitWeight.Width = 120;
-            // 
-            // columnTotalWeight
-            // 
-            this.columnTotalWeight.DataPropertyName = "TotalWeight";
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Silver;
-            this.columnTotalWeight.DefaultCellStyle = dataGridViewCellStyle1;
-            this.columnTotalWeight.HeaderText = "总重量(t)";
-            this.columnTotalWeight.Name = "columnTotalWeight";
-            this.columnTotalWeight.ReadOnly = true;
-            // 
-            // dataGridViewColumnUnitVolume
-            // 
-            this.dataGridViewColumnUnitVolume.DataPropertyName = "UnitVolume";
-            this.dataGridViewColumnUnitVolume.HeaderText = "单位体积(立方)";
-            this.dataGridViewColumnUnitVolume.Name = "dataGridViewColumnUnitVolume";
-            this.dataGridViewColumnUnitVolume.Width = 120;
-            // 
-            // columnTotalVolume
-            // 
-            this.columnTotalVolume.DataPropertyName = "TotalVolume";
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Silver;
-            this.columnTotalVolume.DefaultCellStyle = dataGridViewCellStyle2;
-            this.columnTotalVolume.HeaderText = "总体积(立方)";
-            this.columnTotalVolume.Name = "columnTotalVolume";
-            this.columnTotalVolume.ReadOnly = true;
-            // 
-            // dataGridViewColumnWarehouse
-            // 
-            this.dataGridViewColumnWarehouse.DataPropertyName = "WarehouseID";
-            this.dataGridViewColumnWarehouse.HeaderText = "仓库";
-            this.dataGridViewColumnWarehouse.Name = "dataGridViewColumnWarehouse";
-            // 
-            // dataGridViewTextBoxColumn12
-            // 
-            this.dataGridViewTextBoxColumn12.DataPropertyName = "OriginPlace";
-            this.dataGridViewTextBoxColumn12.HeaderText = "产地";
-            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
-            // 
-            // dataGridViewTextBoxColumn13
-            // 
-            this.dataGridViewTextBoxColumn13.DataPropertyName = "ShelfLife";
-            this.dataGridViewTextBoxColumn13.HeaderText = "保质期(月)";
-            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
-            // 
-            // dataGridViewTextBoxColumn14
-            // 
-            this.dataGridViewTextBoxColumn14.DataPropertyName = "Specification";
-            this.dataGridViewTextBoxColumn14.HeaderText = "规格";
-            this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
-            // 
-            // dataGridViewTextBoxColumn20
-            // 
-            this.dataGridViewTextBoxColumn20.DataPropertyName = "Remark";
-            this.dataGridViewTextBoxColumn20.HeaderText = "备注";
-            this.dataGridViewTextBoxColumn20.Name = "dataGridViewTextBoxColumn20";
-            this.dataGridViewTextBoxColumn20.Width = 200;
-            // 
-            // cargoBindingSource
-            // 
-            this.cargoBindingSource.DataSource = typeof(Phoebe.Model.Cargo);
             // 
             // cargoBindingNavigator
             // 
@@ -816,6 +700,106 @@
             this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
             this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
+            // cargoBindingSource
+            // 
+            this.cargoBindingSource.DataSource = typeof(Phoebe.Model.Cargo);
+            // 
+            // columnName
+            // 
+            this.columnName.DataPropertyName = "Name";
+            this.columnName.HeaderText = "名称";
+            this.columnName.Name = "columnName";
+            this.columnName.Width = 150;
+            // 
+            // dataGridViewColumnFirstCategoryID
+            // 
+            this.dataGridViewColumnFirstCategoryID.DataPropertyName = "FirstCategoryID";
+            this.dataGridViewColumnFirstCategoryID.HeaderText = "一级类别";
+            this.dataGridViewColumnFirstCategoryID.Name = "dataGridViewColumnFirstCategoryID";
+            this.dataGridViewColumnFirstCategoryID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewColumnFirstCategoryID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // dataGridViewColumnSecondCategoryID
+            // 
+            this.dataGridViewColumnSecondCategoryID.DataPropertyName = "SecondCategoryID";
+            this.dataGridViewColumnSecondCategoryID.HeaderText = "二级类别";
+            this.dataGridViewColumnSecondCategoryID.Name = "dataGridViewColumnSecondCategoryID";
+            this.dataGridViewColumnSecondCategoryID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewColumnSecondCategoryID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // dataGridViewColumnThirdCategoryID
+            // 
+            this.dataGridViewColumnThirdCategoryID.DataPropertyName = "ThirdCategoryID";
+            this.dataGridViewColumnThirdCategoryID.HeaderText = "三级类别";
+            this.dataGridViewColumnThirdCategoryID.Name = "dataGridViewColumnThirdCategoryID";
+            this.dataGridViewColumnThirdCategoryID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewColumnThirdCategoryID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // columnCount
+            // 
+            this.columnCount.DataPropertyName = "Count";
+            this.columnCount.HeaderText = "数量";
+            this.columnCount.Name = "columnCount";
+            // 
+            // columnUnitWeight
+            // 
+            this.columnUnitWeight.DataPropertyName = "UnitWeight";
+            this.columnUnitWeight.HeaderText = "单位重量(kg)";
+            this.columnUnitWeight.Name = "columnUnitWeight";
+            this.columnUnitWeight.Width = 120;
+            // 
+            // columnTotalWeight
+            // 
+            this.columnTotalWeight.DataPropertyName = "TotalWeight";
+            this.columnTotalWeight.HeaderText = "总重量(t)";
+            this.columnTotalWeight.Name = "columnTotalWeight";
+            this.columnTotalWeight.ReadOnly = true;
+            // 
+            // columnUnitVolume
+            // 
+            this.columnUnitVolume.DataPropertyName = "UnitVolume";
+            this.columnUnitVolume.HeaderText = "单位体积(立方)";
+            this.columnUnitVolume.Name = "columnUnitVolume";
+            this.columnUnitVolume.Width = 120;
+            // 
+            // columnTotalVolume
+            // 
+            this.columnTotalVolume.DataPropertyName = "TotalVolume";
+            this.columnTotalVolume.HeaderText = "总体积(立方)";
+            this.columnTotalVolume.Name = "columnTotalVolume";
+            this.columnTotalVolume.ReadOnly = true;
+            // 
+            // dataGridViewColumnWarehouse
+            // 
+            this.dataGridViewColumnWarehouse.DataPropertyName = "WarehouseID";
+            this.dataGridViewColumnWarehouse.HeaderText = "仓库";
+            this.dataGridViewColumnWarehouse.Name = "dataGridViewColumnWarehouse";
+            // 
+            // dataGridViewTextBoxColumn12
+            // 
+            this.dataGridViewTextBoxColumn12.DataPropertyName = "OriginPlace";
+            this.dataGridViewTextBoxColumn12.HeaderText = "产地";
+            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
+            // 
+            // dataGridViewTextBoxColumn13
+            // 
+            this.dataGridViewTextBoxColumn13.DataPropertyName = "ShelfLife";
+            this.dataGridViewTextBoxColumn13.HeaderText = "保质期(月)";
+            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
+            // 
+            // dataGridViewTextBoxColumn14
+            // 
+            this.dataGridViewTextBoxColumn14.DataPropertyName = "Specification";
+            this.dataGridViewTextBoxColumn14.HeaderText = "规格";
+            this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
+            // 
+            // dataGridViewTextBoxColumn20
+            // 
+            this.dataGridViewTextBoxColumn20.DataPropertyName = "Remark";
+            this.dataGridViewTextBoxColumn20.HeaderText = "备注";
+            this.dataGridViewTextBoxColumn20.Name = "dataGridViewTextBoxColumn20";
+            this.dataGridViewTextBoxColumn20.Width = 200;
+            // 
             // StockInForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -845,10 +829,10 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cargoDataGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cargoBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cargoBindingNavigator)).EndInit();
             this.cargoBindingNavigator.ResumeLayout(false);
             this.cargoBindingNavigator.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cargoBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -915,15 +899,14 @@
         private System.Windows.Forms.DataGridView cargoDataGridView;
         private System.Windows.Forms.ToolStripButton toolConfirm;
         private System.Windows.Forms.ToolStripButton toolRefresh;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnName;
         private System.Windows.Forms.DataGridViewComboBoxColumn dataGridViewColumnFirstCategoryID;
         private System.Windows.Forms.DataGridViewComboBoxColumn dataGridViewColumnSecondCategoryID;
         private System.Windows.Forms.DataGridViewComboBoxColumn dataGridViewColumnThirdCategoryID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewColumnCount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewColumnUnitWeight;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnCount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnUnitWeight;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnTotalWeight;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewColumnUnitVolume;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnUnitVolume;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnTotalVolume;
         private System.Windows.Forms.DataGridViewComboBoxColumn dataGridViewColumnWarehouse;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;

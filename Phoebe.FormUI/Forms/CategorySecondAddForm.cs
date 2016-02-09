@@ -34,7 +34,7 @@ namespace Phoebe.FormUI
 
         private void InitControl()
         {
-            this.comboBoxFirstCategory.DataSource = this.categoryBusiness.GetFirstCategory();
+            this.comboBoxFirstCategory.DataSource = this.categoryBusiness.GetFirstCategory(false);
             this.comboBoxFirstCategory.DisplayMember = "Name";
             this.comboBoxFirstCategory.ValueMember = "ID";
         }

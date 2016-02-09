@@ -41,15 +41,17 @@ namespace Phoebe.Business
         /// 获取出入库计量
         /// </summary>
         /// <param name="flow">流水记录</param>
+        /// <param name="unitMeter">单位计量</param>
         /// <returns></returns>
-        decimal GetFlowMeter(StockFlow flow);
+        decimal GetFlowMeter(StockFlow flow, decimal unitMeter);
 
         /// <summary>
         /// 获取在库计量
         /// </summary>
         /// <param name="storage">库存记录</param>
+        /// <param name="unitMeter">单位计量</param>
         /// <returns></returns>
-        decimal GetStoreMeter(Storage storage);
+        decimal GetStoreMeter(Storage storage, decimal unitMeter);
 
         /// <summary>
         /// 计算货品日冷藏费

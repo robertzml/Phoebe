@@ -37,6 +37,11 @@ namespace Phoebe.FormUI
         /// 是否新增
         /// </summary>
         private bool isNew = false;
+
+        /// <summary>
+        /// 货品是否等重
+        /// </summary>
+        private bool isEqualWeight = true;
         #endregion //Field
 
         #region Constructor
@@ -465,6 +470,17 @@ namespace Phoebe.FormUI
             {
                 Contract contract = this.comboBoxContract.SelectedItem as Contract;
                 this.textBoxBillingType.Text = ((BillingType)contract.BillingType).DisplayName();
+
+                if ((BillingType)contract.BillingType == BillingType.VariousWeight)
+                {
+                    this.isEqualWeight = false;
+                    this.columnTotalWeight.ReadOnly = false;
+                }
+                else
+                {
+                    this.isEqualWeight = true;
+                    this.columnTotalWeight.ReadOnly = true;
+                }
             }
             else
             {
@@ -503,21 +519,24 @@ namespace Phoebe.FormUI
                 InitThirdColumn(second);
                 this.cargoDataGridView.Rows[e.RowIndex].Cells[this.dataGridViewColumnThirdCategoryID.Index].Value = null;
             }
-            else if (e.ColumnIndex == this.dataGridViewColumnCount.Index)
+            else if (e.ColumnIndex == this.columnCount.Index)
             {
                 var cargo = this.cargoDataGridView.Rows[e.RowIndex].DataBoundItem as Cargo;
                 if (cargo.Count < 0)
                     cargo.Count = 0;
-                cargo.TotalWeight = Math.Round(cargo.UnitWeight * cargo.Count, 3);
+                if (this.isEqualWeight)
+                    cargo.TotalWeight = Math.Round(cargo.UnitWeight * cargo.Count / 1000, 3);
+                cargo.TotalVolume = Math.Round(cargo.UnitVolume * cargo.Count, 3);
             }
-            else if (e.ColumnIndex == this.dataGridViewColumnUnitWeight.Index)
+            else if (e.ColumnIndex == this.columnUnitWeight.Index)
             {
                 var cargo = this.cargoDataGridView.Rows[e.RowIndex].DataBoundItem as Cargo;
                 if (cargo.UnitWeight < 0)
                     cargo.UnitWeight = 0;
-                cargo.TotalWeight = Math.Round(cargo.UnitWeight * cargo.Count / 1000, 3);
+                if (this.isEqualWeight)
+                    cargo.TotalWeight = Math.Round(cargo.UnitWeight * cargo.Count / 1000, 3);
             }
-            else if (e.ColumnIndex == this.dataGridViewColumnUnitVolume.Index)
+            else if (e.ColumnIndex == this.columnUnitVolume.Index)
             {
                 var cargo = this.cargoDataGridView.Rows[e.RowIndex].DataBoundItem as Cargo;
                 if (cargo.UnitVolume < 0)

@@ -40,7 +40,10 @@ namespace Phoebe.FormUI
 
         private void InitControl()
         {
-
+            foreach(BillingType type in Enum.GetValues(typeof(BillingType)))
+            {
+                this.comboBoxBillingType.Items.Add(type.DisplayName());
+            }
         }
         #endregion //Function
 

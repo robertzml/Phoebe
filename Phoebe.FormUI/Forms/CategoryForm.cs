@@ -135,16 +135,42 @@ namespace Phoebe.FormUI
             UpdateCategoryTree();
         }
 
+        /// <summary>
+        /// 添加二级分类
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonAddSecond_Click(object sender, EventArgs e)
         {
             CategorySecondAddForm form = new CategorySecondAddForm();
             form.ShowDialog();
             UpdateCategoryTree();
-        }        
+        }
 
+        /// <summary>
+        /// 添加三级分类
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonAddThird_Click(object sender, EventArgs e)
         {
             CategoryThirdAddForm form = new CategoryThirdAddForm();
+            form.ShowDialog();
+            UpdateCategoryTree();
+        }
+        
+        /// <summary>
+        /// 编辑分类
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonEdit_Click(object sender, EventArgs e)
+        {
+            TreeNode node = this.treeCategory.SelectedNode;
+            if (node == null || node.Name == "0")
+                return;
+
+            CategoryEditForm form = new CategoryEditForm(Convert.ToInt32(node.Name), Convert.ToInt32(node.Tag));
             form.ShowDialog();
             UpdateCategoryTree();
         }

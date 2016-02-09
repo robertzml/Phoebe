@@ -48,7 +48,7 @@ namespace Phoebe.Business
                 frecord.CargoName = flow.CargoName;
                 frecord.Count = flow.Count;
                 frecord.UnitMeter = billingProcess.GetUnitMeter(cargo);
-                frecord.FlowMeter = billingProcess.GetFlowMeter(flow);
+                frecord.FlowMeter = billingProcess.GetFlowMeter(flow, frecord.UnitMeter);
                 frecord.FlowType = flow.Type;
 
                 records.Add(frecord);
@@ -68,7 +68,7 @@ namespace Phoebe.Business
             foreach (var storage in storages)
             {
                 decimal unitMeter = billingProcess.GetUnitMeter(cargo);
-                decimal totalMeter = billingProcess.GetStoreMeter(storage);
+                decimal totalMeter = billingProcess.GetStoreMeter(storage, unitMeter);
 
                 record.TotalMeter += totalMeter;
                 record.DailyFee += billingProcess.CalculateDailyFee(totalMeter, cargo.UnitPrice);
@@ -105,7 +105,7 @@ namespace Phoebe.Business
                 var cargo = this.context.Cargoes.Find(flow.CargoID);
 
                 frecord.UnitMeter = billingProcess.GetUnitMeter(cargo);
-                frecord.FlowMeter = billingProcess.GetFlowMeter(flow);
+                frecord.FlowMeter = billingProcess.GetFlowMeter(flow, frecord.UnitMeter);
                 frecord.FlowType = flow.Type;
 
                 records.Add(frecord);
@@ -127,7 +127,7 @@ namespace Phoebe.Business
                 var cargo = this.context.Cargoes.Find(storage.CargoID);
 
                 decimal unitMeter = billingProcess.GetUnitMeter(cargo);
-                decimal totalMeter = billingProcess.GetStoreMeter(storage);
+                decimal totalMeter = billingProcess.GetStoreMeter(storage, unitMeter);
 
                 record.TotalMeter += totalMeter;
                 record.DailyFee += billingProcess.CalculateDailyFee(totalMeter, cargo.UnitPrice);
@@ -162,12 +162,12 @@ namespace Phoebe.Business
                 case BillingType.UnitWeight:
                     billingProcess = new BillingUnitWeight();
                     break;
-                    //case BillingType.UnitVolume:
-                    //    billingProcess = new BillingUnitVolume();
-                    //    break;
-                    //case BillingType.Count:
-                    //    billingProcess = new BillingCount();
-                    //    break;
+                case BillingType.UnitVolume:
+                    billingProcess = new BillingUnitVolume();
+                    break;
+                case BillingType.Count:
+                    billingProcess = new BillingCount();
+                    break;
             }
 
             decimal totalFee = 0;
@@ -205,12 +205,12 @@ namespace Phoebe.Business
                 case BillingType.UnitWeight:
                     billingProcess = new BillingUnitWeight();
                     break;
-                    //case BillingType.UnitVolume:
-                    //    billingProcess = new BillingUnitVolume();
-                    //    break;
-                    //case BillingType.Count:
-                    //    billingProcess = new BillingCount();
-                    //    break;
+                case BillingType.UnitVolume:
+                    billingProcess = new BillingUnitVolume();
+                    break;
+                case BillingType.Count:
+                    billingProcess = new BillingCount();
+                    break;
             }
 
             decimal totalFee = 0;
@@ -247,12 +247,12 @@ namespace Phoebe.Business
                 case BillingType.UnitWeight:
                     billingProcess = new BillingUnitWeight();
                     break;
-                //case BillingType.UnitVolume:
-                //    billingProcess = new BillingUnitVolume();
-                //    break;
-                //case BillingType.Count:
-                //    billingProcess = new BillingCount();
-                //    break;
+                case BillingType.UnitVolume:
+                    billingProcess = new BillingUnitVolume();
+                    break;
+                case BillingType.Count:
+                    billingProcess = new BillingCount();
+                    break;
                 default:
                     return 0;
             }

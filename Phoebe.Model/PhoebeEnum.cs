@@ -64,7 +64,13 @@ namespace Phoebe.Model
         /// 计数
         /// </summary>
         [Display(Name = "计数", Description = "单价:元/件")]
-        Count = 3
+        Count = 3,
+
+        /// <summary>
+        /// 非等重
+        /// </summary>
+        [Display(Name = "非等重", Description = "单价:元/吨")]
+        VariousWeight = 4
     }
 
     /// <summary>
