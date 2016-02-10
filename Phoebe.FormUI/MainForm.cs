@@ -178,8 +178,6 @@ namespace Phoebe.FormUI
         /// <summary>
         /// 结算管理 - 冷藏费清单
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void menuColdPriceList_Click(object sender, EventArgs e)
         {
             ColdPriceForm form = new ColdPriceForm();
@@ -191,8 +189,6 @@ namespace Phoebe.FormUI
         /// <summary>
         /// 结算管理 - 结算记录
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void menuSettleList_Click(object sender, EventArgs e)
         {
             SettleListForm form = new SettleListForm();
@@ -204,14 +200,29 @@ namespace Phoebe.FormUI
         /// <summary>
         /// 结算管理 - 费用结算
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void menuSettleCreate_Click(object sender, EventArgs e)
         {
             SettleForm form = new SettleForm(this.currentUser);
             form.MdiParent = this;
             form.WindowState = FormWindowState.Maximized;
             form.Show();
+        }
+
+        /// <summary>
+        /// 结算管理 - 客户缴费
+        /// </summary>
+        private void menuPayment_Click(object sender, EventArgs e)
+        {
+            PaymentForm form = new PaymentForm(this.currentUser);
+            form.ShowDialog();
+        }
+
+        /// <summary>
+        /// 结算管理 - 客户对账
+        /// </summary>
+        private void menuAccount_Click(object sender, EventArgs e)
+        {
+
         }
 
         /// <summary>
@@ -260,5 +271,7 @@ namespace Phoebe.FormUI
         #endregion //Menu Event
 
         #endregion //Event
+
+       
     }
 }

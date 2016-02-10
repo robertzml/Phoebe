@@ -197,7 +197,15 @@ namespace Phoebe.Model
         /// 123:基本费用未初始化
         /// </summary>
         [Display(Name = "未初始化")]
-        BillingNotInit = 123
+        BillingNotInit = 123,
         #endregion //Billing
+
+        #region Payment
+        /// <summary>
+        /// 130:已付款
+        /// </summary>
+        [Display(Name = "已付款")]
+        PaymentPaid = 130
+        #endregion //Payment
     }
 }

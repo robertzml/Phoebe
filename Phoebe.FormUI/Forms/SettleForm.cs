@@ -154,6 +154,7 @@ namespace Phoebe.FormUI
             settlement.SettleTime = this.dateSettle.Value.Date;
             settlement.UserID = this.currentUser.ID;
             settlement.Remark = this.textBoxRemark.Text;
+            settlement.Status = (int)EntityStatus.Settled;
 
             List<SettlementDetail> details = new List<SettlementDetail>();
 
@@ -167,6 +168,7 @@ namespace Phoebe.FormUI
                 detail.StockInID = billing.StockInID;
                 detail.ExpenseType = (int)ExpenseType.Base;
                 detail.SumFee = billing.TotalPrice;
+                detail.Status = (int)EntityStatus.Settled;
 
                 details.Add(detail);
             }

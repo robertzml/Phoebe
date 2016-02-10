@@ -122,16 +122,10 @@ namespace Phoebe.Business
         {
             try
             {
-                data.ID = Guid.NewGuid();
-                data.Status = (int)EntityStatus.Settled;
-
                 this.context.Settlements.Add(data);
 
                 foreach (var item in details)
                 {
-                    item.SettlementID = data.ID;
-                    item.Status = (int)EntityStatus.Settled;
-
                     if (item.ExpenseType == (int)ExpenseType.Base)
                     {
                         var billing = this.context.Billings.Find(item.StockInID);

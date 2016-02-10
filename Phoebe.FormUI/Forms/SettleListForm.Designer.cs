@@ -29,14 +29,13 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.buttonQuery = new System.Windows.Forms.Button();
             this.comboBoxCustomer = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.settlementDataGridView = new System.Windows.Forms.DataGridView();
-            this.settlementBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.numberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.startTimeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.endTimeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -48,21 +47,25 @@
             this.columnUser = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.remarkDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.settlementBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.settlementDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.settlementBindingSource)).BeginInit();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.tableLayoutPanel1.SetColumnSpan(this.groupBox1, 2);
             this.groupBox1.Controls.Add(this.buttonQuery);
             this.groupBox1.Controls.Add(this.comboBoxCustomer);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(764, 84);
+            this.groupBox1.Size = new System.Drawing.Size(809, 94);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "选择";
@@ -99,9 +102,9 @@
             // 
             this.groupBox2.Controls.Add(this.settlementDataGridView);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Location = new System.Drawing.Point(3, 87);
+            this.groupBox2.Location = new System.Drawing.Point(3, 253);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(764, 305);
+            this.groupBox2.Size = new System.Drawing.Size(401, 235);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "结算记录";
@@ -129,13 +132,9 @@
             this.settlementDataGridView.Location = new System.Drawing.Point(3, 16);
             this.settlementDataGridView.Name = "settlementDataGridView";
             this.settlementDataGridView.ReadOnly = true;
-            this.settlementDataGridView.Size = new System.Drawing.Size(758, 286);
+            this.settlementDataGridView.Size = new System.Drawing.Size(395, 216);
             this.settlementDataGridView.TabIndex = 0;
             this.settlementDataGridView.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.settlementDataGridView_RowPrePaint);
-            // 
-            // settlementBindingSource
-            // 
-            this.settlementBindingSource.DataSource = typeof(Phoebe.Model.Settlement);
             // 
             // numberDataGridViewTextBoxColumn
             // 
@@ -189,8 +188,8 @@
             // settleTimeDataGridViewTextBoxColumn
             // 
             this.settleTimeDataGridViewTextBoxColumn.DataPropertyName = "SettleTime";
-            dataGridViewCellStyle1.Format = "d";
-            this.settleTimeDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Format = "d";
+            this.settleTimeDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
             this.settleTimeDataGridViewTextBoxColumn.HeaderText = "结算时间";
             this.settleTimeDataGridViewTextBoxColumn.Name = "settleTimeDataGridViewTextBoxColumn";
             this.settleTimeDataGridViewTextBoxColumn.ReadOnly = true;
@@ -214,13 +213,33 @@
             this.columnStatus.Name = "columnStatus";
             this.columnStatus.ReadOnly = true;
             // 
+            // settlementBindingSource
+            // 
+            this.settlementBindingSource.DataSource = typeof(Phoebe.Model.Settlement);
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Controls.Add(this.groupBox1, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.groupBox2, 0, 2);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 3;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 150F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(815, 491);
+            this.tableLayoutPanel1.TabIndex = 2;
+            // 
             // SettleListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(770, 395);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
+            this.ClientSize = new System.Drawing.Size(821, 497);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "SettleListForm";
             this.Padding = new System.Windows.Forms.Padding(3);
             this.Text = "结算记录";
@@ -230,6 +249,7 @@
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.settlementDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.settlementBindingSource)).EndInit();
+            this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -254,5 +274,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn columnUser;
         private System.Windows.Forms.DataGridViewTextBoxColumn remarkDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnStatus;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
     }
 }
