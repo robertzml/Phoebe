@@ -189,13 +189,26 @@ namespace Phoebe.FormUI
         }
 
         /// <summary>
+        /// 结算管理 - 结算记录
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void menuSettleList_Click(object sender, EventArgs e)
+        {
+            SettleListForm form = new SettleListForm();
+            form.MdiParent = this;
+            form.WindowState = FormWindowState.Maximized;
+            form.Show();
+        }
+
+        /// <summary>
         /// 结算管理 - 费用结算
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void menuSettleCreate_Click(object sender, EventArgs e)
         {
-            SettleForm form = new SettleForm();
+            SettleForm form = new SettleForm(this.currentUser);
             form.MdiParent = this;
             form.WindowState = FormWindowState.Maximized;
             form.Show();

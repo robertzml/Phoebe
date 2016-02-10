@@ -76,6 +76,9 @@
     <Compile Include="FirstCategory.cs">
       <DependentUpon>PhoebeModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Payment.cs">
+      <DependentUpon>PhoebeModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="PhoebeEnum.cs" />
     <Compile Include="PhoebeModel.Context.cs">
       <AutoGen>True</AutoGen>

@@ -53,6 +53,22 @@ namespace Phoebe.FormUI
             this.comboBoxCustomer.DisplayMember = "Name";
             this.comboBoxCustomer.ValueMember = "ID";
         }
+
+        private void SetColumnHeader(BillingType type)
+        {
+            if (type == BillingType.UnitVolume)
+            {
+                this.columnUnitMeter.HeaderText = "单位体积(立方)";
+                this.columnFlowMeter.HeaderText = "出入库体积(立方)";
+                this.columnStoreMeter.HeaderText = "在库体积(立方)";
+            }
+            else
+            {
+                this.columnUnitMeter.HeaderText = "单位重量(kg)";
+                this.columnFlowMeter.HeaderText = "出入库重量(t)";
+                this.columnStoreMeter.HeaderText = "在库重量(t)";
+            }
+        }
         #endregion //Function
 
         #region Event
@@ -119,6 +135,7 @@ namespace Phoebe.FormUI
                 }
 
                 var contract = this.comboBoxContract.SelectedItem as Contract;
+                SetColumnHeader((BillingType)contract.BillingType);
                 var records = this.billingBusiness.GetContractColdRecord(contract.ID, dateStart.Value.Date, dateEnd.Value.Date);
                 this.dailyColdRecordBindingSource.DataSource = records;
             }
@@ -131,7 +148,7 @@ namespace Phoebe.FormUI
                 }
 
                 var cargo = this.comboBoxCargo.SelectedItem as Cargo;
-
+                SetColumnHeader((BillingType)cargo.Contract.BillingType);
                 var records = this.billingBusiness.GetCargoColdRecord(cargo.ID, dateStart.Value.Date, dateEnd.Value.Date);
                 this.dailyColdRecordBindingSource.DataSource = records;
             }

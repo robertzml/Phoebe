@@ -19,15 +19,18 @@ namespace Phoebe.FormUI
     public partial class SettleForm : Form
     {
         #region Field
+        private User currentUser;
+
         private SettleBusiness settleBusiness;
 
         private CustomerBusiness customerBusiness;
         #endregion //Field
 
         #region Constructor
-        public SettleForm()
+        public SettleForm(User user)
         {
             InitializeComponent();
+            this.currentUser = user;
         }
         #endregion //Constructor
 
@@ -53,10 +56,7 @@ namespace Phoebe.FormUI
         /// </returns>
         private decimal CalculateFee()
         {
-            decimal sumFee = this.numericPastFee.Value + this.numericCurrentFee.Value;
-            this.textBoxSumFee.Text = Math.Round(sumFee, 2).ToString();
-
-            decimal dueFee = sumFee * this.numericDiscount.Value / 100 - this.numericRemission.Value;
+            decimal dueFee = this.numericSumFee.Value * this.numericDiscount.Value / 100 - this.numericRemission.Value;
             this.textBoxDueFee.Text = Math.Round(dueFee, 2).ToString();
 
             return dueFee;
@@ -93,11 +93,10 @@ namespace Phoebe.FormUI
             this.coldSettlementBindingSource.DataSource = colds;
 
             decimal totalPrice = billings.Sum(r => r.TotalPrice) + colds.Sum(r => r.ColdPrice);
-            this.numericCurrentFee.Value = totalPrice;
+            this.numericSumFee.Value = totalPrice;
 
             CalculateFee();
         }
-
 
         private void billingDataGridView_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
         {
@@ -109,6 +108,8 @@ namespace Phoebe.FormUI
                 {
                     this.billingDataGridView.Rows[e.RowIndex].Cells[this.columnContract.Index].Value = billing.Contract.Name;
                 }
+
+                this.billingDataGridView.Rows[e.RowIndex].Cells[this.columnStatus.Index].Value = ((EntityStatus)billing.Status).DisplayName();
             }
         }
 
@@ -146,13 +147,12 @@ namespace Phoebe.FormUI
             settlement.CustomerID = Convert.ToInt32(this.comboBoxCustomer.SelectedValue);
             settlement.StartTime = this.dateStart.Value.Date;
             settlement.EndTime = this.dateEnd.Value.Date;
-            settlement.PastFee = this.numericPastFee.Value;
-            settlement.CurrentFee = this.numericCurrentFee.Value;
-            settlement.SumFee = settlement.PastFee + settlement.CurrentFee;
+            settlement.SumFee = this.numericSumFee.Value;
             settlement.Discount = Convert.ToInt32(this.numericDiscount.Value);
             settlement.Remission = this.numericRemission.Value;
             settlement.DueFee = CalculateFee();
             settlement.SettleTime = this.dateSettle.Value.Date;
+            settlement.UserID = this.currentUser.ID;
             settlement.Remark = this.textBoxRemark.Text;
 
             List<SettlementDetail> details = new List<SettlementDetail>();

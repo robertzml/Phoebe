@@ -247,7 +247,7 @@ namespace Phoebe.FormUI
                 cargo.UnitPrice = billing.UnitPrice;
                 cargo.RegisterTime = stockIn.InTime;
                 cargo.UserID = stockIn.UserID;
-                cargo.Status = (int)EntityStatus.CargoStockInReady;
+                cargo.Status = (int)EntityStatus.CargoNotIn;
                 cargos.Add(cargo);
 
                 StockInDetail siDetail = new StockInDetail();

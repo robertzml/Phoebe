@@ -88,8 +88,8 @@ namespace Phoebe.Model
         /// <summary>
         /// 52:货品准备入库
         /// </summary>
-        [Display(Name = "准备入库")]
-        CargoStockInReady = 52,
+        //[Display(Name = "准备入库")]
+        //CargoStockInReady = 52,
 
         /// <summary>
         /// 53:货品入库
@@ -102,12 +102,6 @@ namespace Phoebe.Model
         /// </summary>
         [Display(Name = "出库")]
         CargoStockOut = 55,
-
-        /// <summary>
-        /// 56:货品准备移库
-        /// </summary>
-        [Display(Name = "准备移库")]
-        CargoStockMoveReady = 56,
         #endregion //Cargo
 
         #region Store
@@ -170,46 +164,20 @@ namespace Phoebe.Model
         /// </summary>
         [Display(Name = "已移库")]
         StockMove = 93,
-        #endregion //Store
-
-        #region Transfer
-        /// <summary>
-        /// 101:准备转户
-        /// </summary>
-        [Display(Name = "准备转户")]
-        TransferReady = 101,
-
-        /// <summary>
-        /// 102:转户取消
-        /// </summary>
-        [Display(Name = "转户取消")]
-        TransferCancel = 102,
-
-        /// <summary>
-        /// 103:已转户
-        /// </summary>
-        [Display(Name = "已转户")]
-        Transfer = 103,
-        #endregion //Transfer
+        #endregion //Store       
 
         #region Settlement
         /// <summary>
-        /// 111:结算单未付款
+        /// 111:结算单已结算
         /// </summary>
-        [Display(Name = "未付款")]
-        SettleUnpaid = 111,
+        [Display(Name = "已结算")]
+        Settled = 111,
 
         /// <summary>
-        /// 112:结算单已付款
+        /// 112:结算单已取消
         /// </summary>
-        [Display(Name = "已付款")]
-        SettlePaid = 112,
-
-        /// <summary>
-        /// 113:结算单已退回
-        /// </summary>
-        [Display(Name = "已退回")]
-        SettleCancel = 113,
+        [Display(Name = "已取消")]
+        SettleCancel = 112,
         #endregion //Settlement
 
         #region Billing
@@ -224,12 +192,6 @@ namespace Phoebe.Model
         /// </summary>
         [Display(Name = "已结算")]
         BillingSettle = 121,
-
-        /// <summary>
-        /// 122:基本费用已付款
-        /// </summary>
-        [Display(Name = "已付款")]
-        BillingPaid = 122,
 
         /// <summary>
         /// 123:基本费用未初始化

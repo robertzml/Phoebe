@@ -49,6 +49,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dailyColdRecordDataGridView = new System.Windows.Forms.DataGridView();
+            this.dailyColdRecordBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dailyColdRecordBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
@@ -59,22 +60,21 @@
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.dailyColdRecordBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnFlowType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnUnitMeter = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnFlowMeter = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnStoreMeter = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dailyColdRecordDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dailyColdRecordBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dailyColdRecordBindingNavigator)).BeginInit();
             this.dailyColdRecordBindingNavigator.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dailyColdRecordBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -243,9 +243,9 @@
             this.dataGridViewTextBoxColumn2,
             this.columnFlowType,
             this.dataGridViewTextBoxColumn3,
-            this.dataGridViewTextBoxColumn4,
+            this.columnUnitMeter,
             this.columnFlowMeter,
-            this.dataGridViewTextBoxColumn6,
+            this.columnStoreMeter,
             this.dataGridViewTextBoxColumn7,
             this.dataGridViewTextBoxColumn8});
             this.dailyColdRecordDataGridView.DataSource = this.dailyColdRecordBindingSource;
@@ -256,6 +256,10 @@
             this.dailyColdRecordDataGridView.Size = new System.Drawing.Size(910, 341);
             this.dailyColdRecordDataGridView.TabIndex = 0;
             this.dailyColdRecordDataGridView.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dailyColdRecordDataGridView_RowPrePaint);
+            // 
+            // dailyColdRecordBindingSource
+            // 
+            this.dailyColdRecordBindingSource.DataSource = typeof(Phoebe.Model.DailyColdRecord);
             // 
             // dailyColdRecordBindingNavigator
             // 
@@ -351,10 +355,6 @@
             this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
             this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
-            // dailyColdRecordBindingSource
-            // 
-            this.dailyColdRecordBindingSource.DataSource = typeof(Phoebe.Model.DailyColdRecord);
-            // 
             // dataGridViewTextBoxColumn1
             // 
             this.dataGridViewTextBoxColumn1.DataPropertyName = "RecordDate";
@@ -384,12 +384,13 @@
             this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
             this.dataGridViewTextBoxColumn3.ReadOnly = true;
             // 
-            // dataGridViewTextBoxColumn4
+            // columnUnitMeter
             // 
-            this.dataGridViewTextBoxColumn4.DataPropertyName = "UnitMeter";
-            this.dataGridViewTextBoxColumn4.HeaderText = "单位重量(kg)";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            this.columnUnitMeter.DataPropertyName = "UnitMeter";
+            this.columnUnitMeter.HeaderText = "单位重量(kg)";
+            this.columnUnitMeter.Name = "columnUnitMeter";
+            this.columnUnitMeter.ReadOnly = true;
+            this.columnUnitMeter.Width = 120;
             // 
             // columnFlowMeter
             // 
@@ -397,13 +398,15 @@
             this.columnFlowMeter.HeaderText = "出入库重量(t)";
             this.columnFlowMeter.Name = "columnFlowMeter";
             this.columnFlowMeter.ReadOnly = true;
+            this.columnFlowMeter.Width = 120;
             // 
-            // dataGridViewTextBoxColumn6
+            // columnStoreMeter
             // 
-            this.dataGridViewTextBoxColumn6.DataPropertyName = "TotalMeter";
-            this.dataGridViewTextBoxColumn6.HeaderText = "在库重量(t)";
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            this.dataGridViewTextBoxColumn6.ReadOnly = true;
+            this.columnStoreMeter.DataPropertyName = "TotalMeter";
+            this.columnStoreMeter.HeaderText = "在库重量(t)";
+            this.columnStoreMeter.Name = "columnStoreMeter";
+            this.columnStoreMeter.ReadOnly = true;
+            this.columnStoreMeter.Width = 120;
             // 
             // dataGridViewTextBoxColumn7
             // 
@@ -443,10 +446,10 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dailyColdRecordDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dailyColdRecordBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dailyColdRecordBindingNavigator)).EndInit();
             this.dailyColdRecordBindingNavigator.ResumeLayout(false);
             this.dailyColdRecordBindingNavigator.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dailyColdRecordBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -484,9 +487,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnFlowType;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnUnitMeter;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnFlowMeter;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnStoreMeter;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
     }

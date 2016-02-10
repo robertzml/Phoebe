@@ -43,29 +43,28 @@
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.billingDataGridView = new System.Windows.Forms.DataGridView();
-            this.columnContract = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.coldSettlementDataGridView = new System.Windows.Forms.DataGridView();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.textBoxNumber = new System.Windows.Forms.TextBox();
-            this.numericPastFee = new System.Windows.Forms.NumericUpDown();
-            this.textBoxSumFee = new System.Windows.Forms.TextBox();
-            this.numericDiscount = new System.Windows.Forms.NumericUpDown();
-            this.numericRemission = new System.Windows.Forms.NumericUpDown();
-            this.textBoxDueFee = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.dateSettle = new System.Windows.Forms.DateTimePicker();
+            this.textBoxRemark = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.numericSumFee = new System.Windows.Forms.NumericUpDown();
             this.buttonSave = new System.Windows.Forms.Button();
-            this.numericCurrentFee = new System.Windows.Forms.NumericUpDown();
+            this.dateSettle = new System.Windows.Forms.DateTimePicker();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.textBoxDueFee = new System.Windows.Forms.TextBox();
+            this.numericRemission = new System.Windows.Forms.NumericUpDown();
+            this.numericDiscount = new System.Windows.Forms.NumericUpDown();
+            this.textBoxNumber = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.columnContract = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -79,21 +78,17 @@
             this.rentPriceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.otherPriceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.totalPriceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.statusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.billingBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.label13 = new System.Windows.Forms.Label();
-            this.textBoxRemark = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.billingDataGridView)).BeginInit();
             this.groupBox3.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.coldSettlementDataGridView)).BeginInit();
+            this.tableLayoutPanel1.SuspendLayout();
             this.groupBox4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericPastFee)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericDiscount)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericSumFee)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericRemission)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericCurrentFee)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericDiscount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.coldSettlementBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.billingBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -202,7 +197,7 @@
             this.rentPriceDataGridViewTextBoxColumn,
             this.otherPriceDataGridViewTextBoxColumn,
             this.totalPriceDataGridViewTextBoxColumn,
-            this.statusDataGridViewTextBoxColumn});
+            this.columnStatus});
             this.billingDataGridView.DataSource = this.billingBindingSource;
             this.billingDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.billingDataGridView.Location = new System.Drawing.Point(3, 16);
@@ -211,12 +206,6 @@
             this.billingDataGridView.Size = new System.Drawing.Size(894, 107);
             this.billingDataGridView.TabIndex = 0;
             this.billingDataGridView.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.billingDataGridView_RowPrePaint);
-            // 
-            // columnContract
-            // 
-            this.columnContract.HeaderText = "所属合同";
-            this.columnContract.Name = "columnContract";
-            this.columnContract.ReadOnly = true;
             // 
             // groupBox3
             // 
@@ -228,6 +217,25 @@
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "冷藏费用";
+            // 
+            // coldSettlementDataGridView
+            // 
+            this.coldSettlementDataGridView.AllowUserToAddRows = false;
+            this.coldSettlementDataGridView.AllowUserToDeleteRows = false;
+            this.coldSettlementDataGridView.AutoGenerateColumns = false;
+            this.coldSettlementDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.coldSettlementDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn2,
+            this.dataGridViewTextBoxColumn3,
+            this.dataGridViewTextBoxColumn4,
+            this.dataGridViewTextBoxColumn5});
+            this.coldSettlementDataGridView.DataSource = this.coldSettlementBindingSource;
+            this.coldSettlementDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.coldSettlementDataGridView.Location = new System.Drawing.Point(3, 16);
+            this.coldSettlementDataGridView.Name = "coldSettlementDataGridView";
+            this.coldSettlementDataGridView.ReadOnly = true;
+            this.coldSettlementDataGridView.Size = new System.Drawing.Size(894, 107);
+            this.coldSettlementDataGridView.TabIndex = 0;
             // 
             // tableLayoutPanel1
             // 
@@ -249,30 +257,11 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(906, 531);
             this.tableLayoutPanel1.TabIndex = 3;
             // 
-            // coldSettlementDataGridView
-            // 
-            this.coldSettlementDataGridView.AllowUserToAddRows = false;
-            this.coldSettlementDataGridView.AllowUserToDeleteRows = false;
-            this.coldSettlementDataGridView.AutoGenerateColumns = false;
-            this.coldSettlementDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.coldSettlementDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn2,
-            this.dataGridViewTextBoxColumn3,
-            this.dataGridViewTextBoxColumn4,
-            this.dataGridViewTextBoxColumn5});
-            this.coldSettlementDataGridView.DataSource = this.coldSettlementBindingSource;
-            this.coldSettlementDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.coldSettlementDataGridView.Location = new System.Drawing.Point(3, 16);
-            this.coldSettlementDataGridView.Name = "coldSettlementDataGridView";
-            this.coldSettlementDataGridView.ReadOnly = true;
-            this.coldSettlementDataGridView.Size = new System.Drawing.Size(894, 107);
-            this.coldSettlementDataGridView.TabIndex = 0;
-            // 
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.textBoxRemark);
             this.groupBox4.Controls.Add(this.label13);
-            this.groupBox4.Controls.Add(this.numericCurrentFee);
+            this.groupBox4.Controls.Add(this.numericSumFee);
             this.groupBox4.Controls.Add(this.buttonSave);
             this.groupBox4.Controls.Add(this.dateSettle);
             this.groupBox4.Controls.Add(this.label12);
@@ -280,15 +269,11 @@
             this.groupBox4.Controls.Add(this.textBoxDueFee);
             this.groupBox4.Controls.Add(this.numericRemission);
             this.groupBox4.Controls.Add(this.numericDiscount);
-            this.groupBox4.Controls.Add(this.textBoxSumFee);
-            this.groupBox4.Controls.Add(this.numericPastFee);
             this.groupBox4.Controls.Add(this.textBoxNumber);
             this.groupBox4.Controls.Add(this.label10);
             this.groupBox4.Controls.Add(this.label9);
             this.groupBox4.Controls.Add(this.label8);
             this.groupBox4.Controls.Add(this.label7);
-            this.groupBox4.Controls.Add(this.label6);
-            this.groupBox4.Controls.Add(this.label5);
             this.groupBox4.Controls.Add(this.label4);
             this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox4.Location = new System.Drawing.Point(3, 357);
@@ -298,110 +283,78 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "费用结算";
             // 
-            // label4
+            // textBoxRemark
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(20, 34);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(55, 13);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "结算单号";
+            this.textBoxRemark.Location = new System.Drawing.Point(81, 122);
+            this.textBoxRemark.Name = "textBoxRemark";
+            this.textBoxRemark.Size = new System.Drawing.Size(230, 20);
+            this.textBoxRemark.TabIndex = 20;
             // 
-            // label5
+            // label13
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(245, 34);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(55, 13);
-            this.label5.TabIndex = 1;
-            this.label5.Text = "往期费用";
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(20, 129);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(31, 13);
+            this.label13.TabIndex = 19;
+            this.label13.Text = "备注";
             // 
-            // label6
+            // numericSumFee
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(473, 34);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(55, 13);
-            this.label6.TabIndex = 2;
-            this.label6.Text = "本期费用";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(688, 34);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(55, 13);
-            this.label7.TabIndex = 3;
-            this.label7.Text = "费用合计";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(20, 80);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(43, 13);
-            this.label8.TabIndex = 4;
-            this.label8.Text = "折扣率";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(245, 80);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(55, 13);
-            this.label9.TabIndex = 5;
-            this.label9.Text = "减免费用";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(473, 80);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(43, 13);
-            this.label10.TabIndex = 6;
-            this.label10.Text = "应付款";
-            // 
-            // textBoxNumber
-            // 
-            this.textBoxNumber.Location = new System.Drawing.Point(81, 30);
-            this.textBoxNumber.Name = "textBoxNumber";
-            this.textBoxNumber.Size = new System.Drawing.Size(136, 20);
-            this.textBoxNumber.TabIndex = 7;
-            // 
-            // numericPastFee
-            // 
-            this.numericPastFee.DecimalPlaces = 2;
-            this.numericPastFee.Location = new System.Drawing.Point(306, 30);
-            this.numericPastFee.Maximum = new decimal(new int[] {
+            this.numericSumFee.DecimalPlaces = 2;
+            this.numericSumFee.Location = new System.Drawing.Point(534, 30);
+            this.numericSumFee.Maximum = new decimal(new int[] {
             1000000,
             0,
             0,
             0});
-            this.numericPastFee.Name = "numericPastFee";
-            this.numericPastFee.Size = new System.Drawing.Size(136, 20);
-            this.numericPastFee.TabIndex = 8;
-            this.numericPastFee.ValueChanged += new System.EventHandler(this.numericPastFee_ValueChanged);
+            this.numericSumFee.Name = "numericSumFee";
+            this.numericSumFee.ReadOnly = true;
+            this.numericSumFee.Size = new System.Drawing.Size(136, 20);
+            this.numericSumFee.TabIndex = 18;
             // 
-            // textBoxSumFee
+            // buttonSave
             // 
-            this.textBoxSumFee.Location = new System.Drawing.Point(749, 30);
-            this.textBoxSumFee.Name = "textBoxSumFee";
-            this.textBoxSumFee.ReadOnly = true;
-            this.textBoxSumFee.Size = new System.Drawing.Size(136, 20);
-            this.textBoxSumFee.TabIndex = 10;
+            this.buttonSave.Location = new System.Drawing.Point(476, 119);
+            this.buttonSave.Name = "buttonSave";
+            this.buttonSave.Size = new System.Drawing.Size(75, 23);
+            this.buttonSave.TabIndex = 17;
+            this.buttonSave.Text = "保存";
+            this.buttonSave.UseVisualStyleBackColor = true;
+            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
-            // numericDiscount
+            // dateSettle
             // 
-            this.numericDiscount.Location = new System.Drawing.Point(81, 76);
-            this.numericDiscount.Name = "numericDiscount";
-            this.numericDiscount.Size = new System.Drawing.Size(136, 20);
-            this.numericDiscount.TabIndex = 11;
-            this.numericDiscount.Value = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            this.numericDiscount.ValueChanged += new System.EventHandler(this.numericDiscount_ValueChanged);
+            this.dateSettle.Location = new System.Drawing.Point(306, 30);
+            this.dateSettle.Name = "dateSettle";
+            this.dateSettle.Size = new System.Drawing.Size(136, 20);
+            this.dateSettle.TabIndex = 16;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(245, 34);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(55, 13);
+            this.label12.TabIndex = 15;
+            this.label12.Text = "结算时间";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(605, 124);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(214, 13);
+            this.label11.TabIndex = 14;
+            this.label11.Text = "应付款 = 费用合计 * 折扣率% - 减免费用";
+            // 
+            // textBoxDueFee
+            // 
+            this.textBoxDueFee.Location = new System.Drawing.Point(534, 76);
+            this.textBoxDueFee.Name = "textBoxDueFee";
+            this.textBoxDueFee.ReadOnly = true;
+            this.textBoxDueFee.Size = new System.Drawing.Size(136, 20);
+            this.textBoxDueFee.TabIndex = 13;
             // 
             // numericRemission
             // 
@@ -417,62 +370,82 @@
             this.numericRemission.TabIndex = 12;
             this.numericRemission.ValueChanged += new System.EventHandler(this.numericRemission_ValueChanged);
             // 
-            // textBoxDueFee
+            // numericDiscount
             // 
-            this.textBoxDueFee.Location = new System.Drawing.Point(534, 76);
-            this.textBoxDueFee.Name = "textBoxDueFee";
-            this.textBoxDueFee.ReadOnly = true;
-            this.textBoxDueFee.Size = new System.Drawing.Size(136, 20);
-            this.textBoxDueFee.TabIndex = 13;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(605, 124);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(280, 13);
-            this.label11.TabIndex = 14;
-            this.label11.Text = "应付款 = (往期费用 + 本期费用) * 折扣率% - 减免费用";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(20, 124);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(55, 13);
-            this.label12.TabIndex = 15;
-            this.label12.Text = "结算时间";
-            // 
-            // dateSettle
-            // 
-            this.dateSettle.Location = new System.Drawing.Point(81, 120);
-            this.dateSettle.Name = "dateSettle";
-            this.dateSettle.Size = new System.Drawing.Size(136, 20);
-            this.dateSettle.TabIndex = 16;
-            // 
-            // buttonSave
-            // 
-            this.buttonSave.Location = new System.Drawing.Point(476, 119);
-            this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(75, 23);
-            this.buttonSave.TabIndex = 17;
-            this.buttonSave.Text = "保存";
-            this.buttonSave.UseVisualStyleBackColor = true;
-            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
-            // 
-            // numericCurrentFee
-            // 
-            this.numericCurrentFee.DecimalPlaces = 2;
-            this.numericCurrentFee.Location = new System.Drawing.Point(534, 30);
-            this.numericCurrentFee.Maximum = new decimal(new int[] {
-            1000000,
+            this.numericDiscount.Location = new System.Drawing.Point(81, 76);
+            this.numericDiscount.Name = "numericDiscount";
+            this.numericDiscount.Size = new System.Drawing.Size(136, 20);
+            this.numericDiscount.TabIndex = 11;
+            this.numericDiscount.Value = new decimal(new int[] {
+            100,
             0,
             0,
             0});
-            this.numericCurrentFee.Name = "numericCurrentFee";
-            this.numericCurrentFee.ReadOnly = true;
-            this.numericCurrentFee.Size = new System.Drawing.Size(136, 20);
-            this.numericCurrentFee.TabIndex = 18;
+            this.numericDiscount.ValueChanged += new System.EventHandler(this.numericDiscount_ValueChanged);
+            // 
+            // textBoxNumber
+            // 
+            this.textBoxNumber.Location = new System.Drawing.Point(81, 30);
+            this.textBoxNumber.Name = "textBoxNumber";
+            this.textBoxNumber.Size = new System.Drawing.Size(136, 20);
+            this.textBoxNumber.TabIndex = 7;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(473, 80);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(43, 13);
+            this.label10.TabIndex = 6;
+            this.label10.Text = "应付款";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(245, 80);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(55, 13);
+            this.label9.TabIndex = 5;
+            this.label9.Text = "减免费用";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(20, 80);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(43, 13);
+            this.label8.TabIndex = 4;
+            this.label8.Text = "折扣率";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(473, 34);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(55, 13);
+            this.label7.TabIndex = 3;
+            this.label7.Text = "费用合计";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(20, 34);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(55, 13);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "结算单号";
+            // 
+            // columnContract
+            // 
+            this.columnContract.HeaderText = "所属合同";
+            this.columnContract.Name = "columnContract";
+            this.columnContract.ReadOnly = true;
+            // 
+            // columnStatus
+            // 
+            this.columnStatus.HeaderText = "状态";
+            this.columnStatus.Name = "columnStatus";
+            this.columnStatus.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn2
             // 
@@ -571,32 +544,9 @@
             this.totalPriceDataGridViewTextBoxColumn.Name = "totalPriceDataGridViewTextBoxColumn";
             this.totalPriceDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // statusDataGridViewTextBoxColumn
-            // 
-            this.statusDataGridViewTextBoxColumn.DataPropertyName = "Status";
-            this.statusDataGridViewTextBoxColumn.HeaderText = "Status";
-            this.statusDataGridViewTextBoxColumn.Name = "statusDataGridViewTextBoxColumn";
-            this.statusDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
             // billingBindingSource
             // 
             this.billingBindingSource.DataSource = typeof(Phoebe.Model.Billing);
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(245, 124);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(31, 13);
-            this.label13.TabIndex = 19;
-            this.label13.Text = "备注";
-            // 
-            // textBoxRemark
-            // 
-            this.textBoxRemark.Location = new System.Drawing.Point(306, 120);
-            this.textBoxRemark.Name = "textBoxRemark";
-            this.textBoxRemark.Size = new System.Drawing.Size(136, 20);
-            this.textBoxRemark.TabIndex = 20;
             // 
             // SettleForm
             // 
@@ -613,14 +563,13 @@
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.billingDataGridView)).EndInit();
             this.groupBox3.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.coldSettlementDataGridView)).EndInit();
+            this.tableLayoutPanel1.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericPastFee)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericDiscount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericSumFee)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericRemission)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericCurrentFee)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericDiscount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.coldSettlementBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.billingBindingSource)).EndInit();
             this.ResumeLayout(false);
@@ -640,16 +589,6 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.DataGridView billingDataGridView;
         private System.Windows.Forms.BindingSource billingBindingSource;
-        private System.Windows.Forms.DataGridViewTextBoxColumn inTimeDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnContract;
-        private System.Windows.Forms.DataGridViewTextBoxColumn handlingPriceDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn freezePriceDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn disposePriceDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn packingPriceDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn rentPriceDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn otherPriceDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn totalPriceDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn statusDataGridViewTextBoxColumn;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.DataGridView coldSettlementDataGridView;
@@ -666,18 +605,24 @@
         private System.Windows.Forms.TextBox textBoxDueFee;
         private System.Windows.Forms.NumericUpDown numericRemission;
         private System.Windows.Forms.NumericUpDown numericDiscount;
-        private System.Windows.Forms.TextBox textBoxSumFee;
-        private System.Windows.Forms.NumericUpDown numericPastFee;
         private System.Windows.Forms.TextBox textBoxNumber;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.NumericUpDown numericCurrentFee;
+        private System.Windows.Forms.NumericUpDown numericSumFee;
         private System.Windows.Forms.TextBox textBoxRemark;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.DataGridViewTextBoxColumn inTimeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnContract;
+        private System.Windows.Forms.DataGridViewTextBoxColumn handlingPriceDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn freezePriceDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn disposePriceDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn packingPriceDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn rentPriceDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn otherPriceDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn totalPriceDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnStatus;
     }
 }

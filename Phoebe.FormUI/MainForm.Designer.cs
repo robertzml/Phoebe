@@ -48,6 +48,7 @@
             this.menuStockMove = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSettle = new System.Windows.Forms.ToolStripMenuItem();
             this.menuColdPriceList = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuSettleList = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSettleCreate = new System.Windows.Forms.ToolStripMenuItem();
             this.menuReport = new System.Windows.Forms.ToolStripMenuItem();
             this.menuDailyReport = new System.Windows.Forms.ToolStripMenuItem();
@@ -59,7 +60,6 @@
             this.mainStauts = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusUser = new System.Windows.Forms.ToolStripStatusLabel();
-            this.结算记录ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenu.SuspendLayout();
             this.mainStauts.SuspendLayout();
             this.SuspendLayout();
@@ -164,7 +164,7 @@
             // 
             this.menuCargoList.Name = "menuCargoList";
             this.menuCargoList.Size = new System.Drawing.Size(124, 22);
-            this.menuCargoList.Text = "货品信息";
+            this.menuCargoList.Text = "货品记录";
             this.menuCargoList.Click += new System.EventHandler(this.menuCargoList_Click);
             // 
             // menuStockList
@@ -216,8 +216,8 @@
             // 
             this.menuSettle.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuColdPriceList,
-            this.结算记录ToolStripMenuItem,
-            this.menuSettleCreate});
+            this.menuSettleCreate,
+            this.menuSettleList});
             this.menuSettle.Name = "menuSettle";
             this.menuSettle.Size = new System.Drawing.Size(68, 21);
             this.menuSettle.Text = "结算管理";
@@ -228,6 +228,13 @@
             this.menuColdPriceList.Size = new System.Drawing.Size(152, 22);
             this.menuColdPriceList.Text = "冷藏费清单";
             this.menuColdPriceList.Click += new System.EventHandler(this.menuColdPriceList_Click);
+            // 
+            // menuSettleList
+            // 
+            this.menuSettleList.Name = "menuSettleList";
+            this.menuSettleList.Size = new System.Drawing.Size(152, 22);
+            this.menuSettleList.Text = "结算记录";
+            this.menuSettleList.Click += new System.EventHandler(this.menuSettleList_Click);
             // 
             // menuSettleCreate
             // 
@@ -317,12 +324,6 @@
             this.statusUser.Size = new System.Drawing.Size(44, 21);
             this.statusUser.Text = "name";
             // 
-            // 结算记录ToolStripMenuItem
-            // 
-            this.结算记录ToolStripMenuItem.Name = "结算记录ToolStripMenuItem";
-            this.结算记录ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.结算记录ToolStripMenuItem.Text = "结算记录";
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -378,7 +379,7 @@
         private System.Windows.Forms.ToolStripMenuItem menuStockSnapshoot;
         private System.Windows.Forms.ToolStripMenuItem menuColdPriceList;
         private System.Windows.Forms.ToolStripMenuItem menuSettleCreate;
-        private System.Windows.Forms.ToolStripMenuItem 结算记录ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem menuSettleList;
     }
 }
 

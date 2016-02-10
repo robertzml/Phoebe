@@ -168,6 +168,9 @@ namespace Phoebe.Business
                 case BillingType.Count:
                     billingProcess = new BillingCount();
                     break;
+                case BillingType.VariousWeight:
+                    billingProcess = new BillingVariousWeight();
+                    break;
             }
 
             decimal totalFee = 0;
@@ -211,6 +214,9 @@ namespace Phoebe.Business
                 case BillingType.Count:
                     billingProcess = new BillingCount();
                     break;
+                case BillingType.VariousWeight:
+                    billingProcess = new BillingVariousWeight();
+                    break;
             }
 
             decimal totalFee = 0;
@@ -252,6 +258,9 @@ namespace Phoebe.Business
                     break;
                 case BillingType.Count:
                     billingProcess = new BillingCount();
+                    break;
+                case BillingType.VariousWeight:
+                    billingProcess = new BillingVariousWeight();
                     break;
                 default:
                     return 0;

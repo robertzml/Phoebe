@@ -89,16 +89,6 @@ namespace Phoebe.Business
         }
 
         /// <summary>
-        /// 获取费用结算
-        /// </summary>
-        /// <param name="status">状态</param>
-        /// <returns></returns>
-        public List<Settlement> GetByStatus(EntityStatus status)
-        {
-            return this.context.Settlements.Where(r => r.Status == (int)status).ToList();
-        }
-
-        /// <summary>
         /// 按客户获取结算
         /// </summary>
         /// <param name="customerID">客户ID</param>
@@ -133,14 +123,14 @@ namespace Phoebe.Business
             try
             {
                 data.ID = Guid.NewGuid();
-                data.Status = (int)EntityStatus.SettleUnpaid;
+                data.Status = (int)EntityStatus.Settled;
 
                 this.context.Settlements.Add(data);
 
                 foreach (var item in details)
                 {
                     item.SettlementID = data.ID;
-                    item.Status = (int)EntityStatus.SettleUnpaid;
+                    item.Status = (int)EntityStatus.Settled;
 
                     if (item.ExpenseType == (int)ExpenseType.Base)
                     {

@@ -13,6 +13,9 @@ using Phoebe.Model;
 
 namespace Phoebe.FormUI
 {
+    /// <summary>
+    /// 货品记录窗体
+    /// </summary>
     public partial class CargoForm : Form
     {
         #region Field
@@ -56,6 +59,11 @@ namespace Phoebe.FormUI
         #endregion //Function
 
         #region Event
+        /// <summary>
+        /// 窗体载入
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CargoForm_Load(object sender, EventArgs e)
         {
             InitData();
@@ -161,9 +169,9 @@ namespace Phoebe.FormUI
                 data = data.Where(r => r.ThirdCategoryID == third).ToList();
             }
 
-            if (this.checkBoxStockInReady.Checked == false)
+            if (this.checkBoxNotIn.Checked == false)
             {
-                data = data.Where(r => r.Status != (int)EntityStatus.CargoStockInReady).ToList();
+                data = data.Where(r => r.Status != (int)EntityStatus.CargoNotIn).ToList();
             }
             if (this.checkBoxStockIn.Checked == false)
             {
@@ -175,7 +183,7 @@ namespace Phoebe.FormUI
             }
 
             this.cargoBindingSource.DataSource = data;
-        }        
+        }
 
         private void cargoDataGridView_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
         {

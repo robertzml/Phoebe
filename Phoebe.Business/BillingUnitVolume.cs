@@ -90,7 +90,7 @@ namespace Phoebe.Business
         /// <returns></returns>
         public decimal CalculateContractColdPrice(Contract contract, DateTime start, DateTime end)
         {
-            var cargos = contract.Cargoes.Where(r => r.Status != (int)EntityStatus.CargoNotIn && r.Status != (int)EntityStatus.CargoStockInReady);
+            var cargos = contract.Cargoes.Where(r => r.Status != (int)EntityStatus.CargoNotIn);
 
             decimal totalFee = 0;
 
