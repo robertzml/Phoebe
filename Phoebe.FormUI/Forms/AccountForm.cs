@@ -14,27 +14,30 @@ using Phoebe.Model;
 namespace Phoebe.FormUI
 {
     /// <summary>
-    /// 结算列表窗体
+    /// 客户对账窗体
     /// </summary>
-    public partial class SettleListForm : Form
+    public partial class AccountForm : Form
     {
         #region Field
         private SettleBusiness settleBusiness;
+
+        private PaymentBusiness paymentBusiness;
 
         private CustomerBusiness customerBusiness;
         #endregion //Field
 
         #region Constructor
-        public SettleListForm()
+        public AccountForm()
         {
             InitializeComponent();
         }
-        #endregion //Constrcutor
+        #endregion //Constructor
 
         #region Function
         private void InitData()
         {
             this.settleBusiness = new SettleBusiness();
+            this.paymentBusiness = new PaymentBusiness();
             this.customerBusiness = new CustomerBusiness();
         }
 
@@ -52,7 +55,7 @@ namespace Phoebe.FormUI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void SettleListForm_Load(object sender, EventArgs e)
+        private void AccountForm_Load(object sender, EventArgs e)
         {
             InitData();
             InitControl();
@@ -69,10 +72,21 @@ namespace Phoebe.FormUI
                 return;
 
             Customer customer = this.comboBoxCustomer.SelectedItem as Customer;
+
             var settles = this.settleBusiness.Get(customer.ID);
             this.settlementBindingSource.DataSource = settles;
-        }
 
+            var payments = this.paymentBusiness.Get(customer.ID);
+            this.paymentBindingSource.DataSource = payments;
+
+            var dueFee = settles.Sum(r => r.DueFee);
+            this.numericDueFee.Value = dueFee;
+
+            var paidFee = payments.Sum(r => r.PaidFee);
+            this.numericPaidFee.Value = paidFee;
+
+            this.numericDebtFee.Value = dueFee - paidFee;
+        }
 
         private void settlementDataGridView_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
         {
@@ -82,10 +96,21 @@ namespace Phoebe.FormUI
 
                 if (settlement.User != null)
                 {
-                    this.settlementDataGridView.Rows[e.RowIndex].Cells[this.columnUser.Index].Value = settlement.User.Name;
+                    this.settlementDataGridView.Rows[e.RowIndex].Cells[this.columnSettlementUser.Index].Value = settlement.User.Name;
                 }
+            }
+        }
 
-                this.settlementDataGridView.Rows[e.RowIndex].Cells[this.columnStatus.Index].Value = ((EntityStatus)settlement.Status).DisplayName();
+        private void paymentDataGridView_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
+            if (e.RowIndex < this.paymentBindingSource.Count)
+            {
+                var payment = this.paymentBindingSource[e.RowIndex] as Payment;
+
+                if (payment.User != null)
+                {
+                    this.paymentDataGridView.Rows[e.RowIndex].Cells[this.columnPaymentUser.Index].Value = payment.User.Name;
+                }
             }
         }
         #endregion //Event

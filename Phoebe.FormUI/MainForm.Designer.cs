@@ -49,7 +49,6 @@
             this.menuSettle = new System.Windows.Forms.ToolStripMenuItem();
             this.menuColdPriceList = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSettleCreate = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuSettleList = new System.Windows.Forms.ToolStripMenuItem();
             this.menuReport = new System.Windows.Forms.ToolStripMenuItem();
             this.menuDailyReport = new System.Windows.Forms.ToolStripMenuItem();
             this.menuUser = new System.Windows.Forms.ToolStripMenuItem();
@@ -220,7 +219,6 @@
             this.menuColdPriceList,
             this.menuSettleCreate,
             this.menuPayment,
-            this.menuSettleList,
             this.menuAccount});
             this.menuSettle.Name = "menuSettle";
             this.menuSettle.Size = new System.Drawing.Size(68, 21);
@@ -239,13 +237,6 @@
             this.menuSettleCreate.Size = new System.Drawing.Size(152, 22);
             this.menuSettleCreate.Text = "费用结算";
             this.menuSettleCreate.Click += new System.EventHandler(this.menuSettleCreate_Click);
-            // 
-            // menuSettleList
-            // 
-            this.menuSettleList.Name = "menuSettleList";
-            this.menuSettleList.Size = new System.Drawing.Size(152, 22);
-            this.menuSettleList.Text = "结算记录";
-            this.menuSettleList.Click += new System.EventHandler(this.menuSettleList_Click);
             // 
             // menuReport
             // 
@@ -397,7 +388,6 @@
         private System.Windows.Forms.ToolStripMenuItem menuStockSnapshoot;
         private System.Windows.Forms.ToolStripMenuItem menuColdPriceList;
         private System.Windows.Forms.ToolStripMenuItem menuSettleCreate;
-        private System.Windows.Forms.ToolStripMenuItem menuSettleList;
         private System.Windows.Forms.ToolStripMenuItem menuPayment;
         private System.Windows.Forms.ToolStripMenuItem menuAccount;
     }

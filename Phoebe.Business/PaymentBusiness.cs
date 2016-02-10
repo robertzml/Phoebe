@@ -34,6 +34,16 @@ namespace Phoebe.Business
         }
 
         /// <summary>
+        /// 获取客户所有缴费记录
+        /// </summary>
+        /// <param name="customerID">客户ID</param>
+        /// <returns></returns>
+        public List<Payment> Get(int customerID)
+        {
+            return this.context.Payments.Where(r => r.CustomerID == customerID).ToList();
+        }
+
+        /// <summary>
         /// 添加缴费
         /// </summary>
         /// <param name="data">缴费记录</param>
@@ -44,9 +54,11 @@ namespace Phoebe.Business
             {
                 this.context.Payments.Add(data);
 
+                this.context.SaveChanges();
+
                 return ErrorCode.Success;
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return ErrorCode.Exception;
             }
