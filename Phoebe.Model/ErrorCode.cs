@@ -72,6 +72,12 @@ namespace Phoebe.Model
         /// </summary>
         [Display(Name = "名称为空")]
         EmptyName = 9,
+
+        /// <summary>
+        /// 未选择记录
+        /// </summary>
+        [Display(Name = "未选择记录")]
+        EmptySelect = 10,
         #endregion //System
 
         #region User
@@ -160,6 +166,24 @@ namespace Phoebe.Model
         /// </summary>
         [Display(Name = "出库数量超出")]
         StockOutCountOverflow = 51,
+
+        /// <summary>
+        /// 出库数量为空
+        /// </summary>
+        [Display(Name = "出库数量为空")]
+        StockOutCountZero = 52,
+
+        /// <summary>
+        /// 移库数量超出
+        /// </summary>
+        [Display(Name = "移库数量超出")]
+        StockMoveCountOverflow = 53,
+
+        /// <summary>
+        /// 移库数量为空
+        /// </summary>
+        [Display(Name = "移库数量为空")]
+        StockMoveCountZero = 54,
         #endregion //Stock
     }
 }

@@ -796,7 +796,7 @@ namespace Phoebe.Business
                     //check cargo count
                     var cargo = item.SourceCargo;
                     if (cargo.StoreCount < item.Count)
-                        return ErrorCode.StockOutCountOverflow;
+                        return ErrorCode.StockMoveCountOverflow;
 
                     var stock = item.SourceStock;
                     if (cargo.StoreCount == item.Count) // all move

@@ -29,10 +29,17 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.buttonCalc = new System.Windows.Forms.Button();
             this.dateEnd = new System.Windows.Forms.DateTimePicker();
@@ -43,8 +50,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.billingDataGridView = new System.Windows.Forms.DataGridView();
+            this.billingBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.coldSettlementDataGridView = new System.Windows.Forms.DataGridView();
+            this.coldSettlementBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.textBoxRemark = new System.Windows.Forms.TextBox();
@@ -63,14 +72,8 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.columnContract = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.coldSettlementBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.inTimeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnContract = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.handlingPriceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.freezePriceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.disposePriceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -78,19 +81,23 @@
             this.rentPriceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.otherPriceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.totalPriceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.billingBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.columnStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.billingDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.billingBindingSource)).BeginInit();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.coldSettlementDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.coldSettlementBindingSource)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericSumFee)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericRemission)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericDiscount)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.coldSettlementBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.billingBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -207,6 +214,10 @@
             this.billingDataGridView.TabIndex = 0;
             this.billingDataGridView.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.billingDataGridView_RowPrePaint);
             // 
+            // billingBindingSource
+            // 
+            this.billingBindingSource.DataSource = typeof(Phoebe.Model.Billing);
+            // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.coldSettlementDataGridView);
@@ -236,6 +247,10 @@
             this.coldSettlementDataGridView.ReadOnly = true;
             this.coldSettlementDataGridView.Size = new System.Drawing.Size(894, 107);
             this.coldSettlementDataGridView.TabIndex = 0;
+            // 
+            // coldSettlementBindingSource
+            // 
+            this.coldSettlementBindingSource.DataSource = typeof(Phoebe.Model.ColdSettlement);
             // 
             // tableLayoutPanel1
             // 
@@ -435,11 +450,84 @@
             this.label4.TabIndex = 0;
             this.label4.Text = "结算单号";
             // 
+            // inTimeDataGridViewTextBoxColumn
+            // 
+            this.inTimeDataGridViewTextBoxColumn.DataPropertyName = "InTime";
+            dataGridViewCellStyle1.Format = "d";
+            this.inTimeDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle1;
+            this.inTimeDataGridViewTextBoxColumn.HeaderText = "入库时间";
+            this.inTimeDataGridViewTextBoxColumn.Name = "inTimeDataGridViewTextBoxColumn";
+            this.inTimeDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
             // columnContract
             // 
             this.columnContract.HeaderText = "所属合同";
             this.columnContract.Name = "columnContract";
             this.columnContract.ReadOnly = true;
+            // 
+            // handlingPriceDataGridViewTextBoxColumn
+            // 
+            this.handlingPriceDataGridViewTextBoxColumn.DataPropertyName = "HandlingPrice";
+            dataGridViewCellStyle2.Format = "C2";
+            dataGridViewCellStyle2.NullValue = null;
+            this.handlingPriceDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
+            this.handlingPriceDataGridViewTextBoxColumn.HeaderText = "装卸费";
+            this.handlingPriceDataGridViewTextBoxColumn.Name = "handlingPriceDataGridViewTextBoxColumn";
+            this.handlingPriceDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // freezePriceDataGridViewTextBoxColumn
+            // 
+            this.freezePriceDataGridViewTextBoxColumn.DataPropertyName = "FreezePrice";
+            dataGridViewCellStyle3.Format = "C2";
+            this.freezePriceDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle3;
+            this.freezePriceDataGridViewTextBoxColumn.HeaderText = "结冻费";
+            this.freezePriceDataGridViewTextBoxColumn.Name = "freezePriceDataGridViewTextBoxColumn";
+            this.freezePriceDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // disposePriceDataGridViewTextBoxColumn
+            // 
+            this.disposePriceDataGridViewTextBoxColumn.DataPropertyName = "DisposePrice";
+            dataGridViewCellStyle4.Format = "C2";
+            this.disposePriceDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle4;
+            this.disposePriceDataGridViewTextBoxColumn.HeaderText = "处置费";
+            this.disposePriceDataGridViewTextBoxColumn.Name = "disposePriceDataGridViewTextBoxColumn";
+            this.disposePriceDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // packingPriceDataGridViewTextBoxColumn
+            // 
+            this.packingPriceDataGridViewTextBoxColumn.DataPropertyName = "PackingPrice";
+            dataGridViewCellStyle5.Format = "C2";
+            this.packingPriceDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle5;
+            this.packingPriceDataGridViewTextBoxColumn.HeaderText = "包装费";
+            this.packingPriceDataGridViewTextBoxColumn.Name = "packingPriceDataGridViewTextBoxColumn";
+            this.packingPriceDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // rentPriceDataGridViewTextBoxColumn
+            // 
+            this.rentPriceDataGridViewTextBoxColumn.DataPropertyName = "RentPrice";
+            dataGridViewCellStyle6.Format = "C2";
+            this.rentPriceDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle6;
+            this.rentPriceDataGridViewTextBoxColumn.HeaderText = "租赁费";
+            this.rentPriceDataGridViewTextBoxColumn.Name = "rentPriceDataGridViewTextBoxColumn";
+            this.rentPriceDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // otherPriceDataGridViewTextBoxColumn
+            // 
+            this.otherPriceDataGridViewTextBoxColumn.DataPropertyName = "OtherPrice";
+            dataGridViewCellStyle7.Format = "C2";
+            this.otherPriceDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle7;
+            this.otherPriceDataGridViewTextBoxColumn.HeaderText = "其他费用";
+            this.otherPriceDataGridViewTextBoxColumn.Name = "otherPriceDataGridViewTextBoxColumn";
+            this.otherPriceDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // totalPriceDataGridViewTextBoxColumn
+            // 
+            this.totalPriceDataGridViewTextBoxColumn.DataPropertyName = "TotalPrice";
+            dataGridViewCellStyle8.Format = "C2";
+            this.totalPriceDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle8;
+            this.totalPriceDataGridViewTextBoxColumn.HeaderText = "费用总计";
+            this.totalPriceDataGridViewTextBoxColumn.Name = "totalPriceDataGridViewTextBoxColumn";
+            this.totalPriceDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // columnStatus
             // 
@@ -457,8 +545,8 @@
             // dataGridViewTextBoxColumn3
             // 
             this.dataGridViewTextBoxColumn3.DataPropertyName = "StartTime";
-            dataGridViewCellStyle2.Format = "d";
-            this.dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle9.Format = "d";
+            this.dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle9;
             this.dataGridViewTextBoxColumn3.HeaderText = "开始日期";
             this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
             this.dataGridViewTextBoxColumn3.ReadOnly = true;
@@ -466,8 +554,8 @@
             // dataGridViewTextBoxColumn4
             // 
             this.dataGridViewTextBoxColumn4.DataPropertyName = "EndTime";
-            dataGridViewCellStyle3.Format = "d";
-            this.dataGridViewTextBoxColumn4.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle10.Format = "d";
+            this.dataGridViewTextBoxColumn4.DefaultCellStyle = dataGridViewCellStyle10;
             this.dataGridViewTextBoxColumn4.HeaderText = "结束日期";
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             this.dataGridViewTextBoxColumn4.ReadOnly = true;
@@ -475,78 +563,12 @@
             // dataGridViewTextBoxColumn5
             // 
             this.dataGridViewTextBoxColumn5.DataPropertyName = "ColdPrice";
-            dataGridViewCellStyle4.Format = "C2";
-            dataGridViewCellStyle4.NullValue = null;
-            this.dataGridViewTextBoxColumn5.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle11.Format = "C2";
+            dataGridViewCellStyle11.NullValue = null;
+            this.dataGridViewTextBoxColumn5.DefaultCellStyle = dataGridViewCellStyle11;
             this.dataGridViewTextBoxColumn5.HeaderText = "冷藏费用";
             this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
             this.dataGridViewTextBoxColumn5.ReadOnly = true;
-            // 
-            // coldSettlementBindingSource
-            // 
-            this.coldSettlementBindingSource.DataSource = typeof(Phoebe.Model.ColdSettlement);
-            // 
-            // inTimeDataGridViewTextBoxColumn
-            // 
-            this.inTimeDataGridViewTextBoxColumn.DataPropertyName = "InTime";
-            dataGridViewCellStyle1.Format = "d";
-            this.inTimeDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle1;
-            this.inTimeDataGridViewTextBoxColumn.HeaderText = "入库时间";
-            this.inTimeDataGridViewTextBoxColumn.Name = "inTimeDataGridViewTextBoxColumn";
-            this.inTimeDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // handlingPriceDataGridViewTextBoxColumn
-            // 
-            this.handlingPriceDataGridViewTextBoxColumn.DataPropertyName = "HandlingPrice";
-            this.handlingPriceDataGridViewTextBoxColumn.HeaderText = "装卸费";
-            this.handlingPriceDataGridViewTextBoxColumn.Name = "handlingPriceDataGridViewTextBoxColumn";
-            this.handlingPriceDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // freezePriceDataGridViewTextBoxColumn
-            // 
-            this.freezePriceDataGridViewTextBoxColumn.DataPropertyName = "FreezePrice";
-            this.freezePriceDataGridViewTextBoxColumn.HeaderText = "结冻费";
-            this.freezePriceDataGridViewTextBoxColumn.Name = "freezePriceDataGridViewTextBoxColumn";
-            this.freezePriceDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // disposePriceDataGridViewTextBoxColumn
-            // 
-            this.disposePriceDataGridViewTextBoxColumn.DataPropertyName = "DisposePrice";
-            this.disposePriceDataGridViewTextBoxColumn.HeaderText = "处置费";
-            this.disposePriceDataGridViewTextBoxColumn.Name = "disposePriceDataGridViewTextBoxColumn";
-            this.disposePriceDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // packingPriceDataGridViewTextBoxColumn
-            // 
-            this.packingPriceDataGridViewTextBoxColumn.DataPropertyName = "PackingPrice";
-            this.packingPriceDataGridViewTextBoxColumn.HeaderText = "包装费";
-            this.packingPriceDataGridViewTextBoxColumn.Name = "packingPriceDataGridViewTextBoxColumn";
-            this.packingPriceDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // rentPriceDataGridViewTextBoxColumn
-            // 
-            this.rentPriceDataGridViewTextBoxColumn.DataPropertyName = "RentPrice";
-            this.rentPriceDataGridViewTextBoxColumn.HeaderText = "租赁费";
-            this.rentPriceDataGridViewTextBoxColumn.Name = "rentPriceDataGridViewTextBoxColumn";
-            this.rentPriceDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // otherPriceDataGridViewTextBoxColumn
-            // 
-            this.otherPriceDataGridViewTextBoxColumn.DataPropertyName = "OtherPrice";
-            this.otherPriceDataGridViewTextBoxColumn.HeaderText = "其他费用";
-            this.otherPriceDataGridViewTextBoxColumn.Name = "otherPriceDataGridViewTextBoxColumn";
-            this.otherPriceDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // totalPriceDataGridViewTextBoxColumn
-            // 
-            this.totalPriceDataGridViewTextBoxColumn.DataPropertyName = "TotalPrice";
-            this.totalPriceDataGridViewTextBoxColumn.HeaderText = "费用总计";
-            this.totalPriceDataGridViewTextBoxColumn.Name = "totalPriceDataGridViewTextBoxColumn";
-            this.totalPriceDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // billingBindingSource
-            // 
-            this.billingBindingSource.DataSource = typeof(Phoebe.Model.Billing);
             // 
             // SettleForm
             // 
@@ -562,16 +584,16 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.billingDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.billingBindingSource)).EndInit();
             this.groupBox3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.coldSettlementDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.coldSettlementBindingSource)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericSumFee)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericRemission)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericDiscount)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.coldSettlementBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.billingBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -592,10 +614,6 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.DataGridView coldSettlementDataGridView;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private System.Windows.Forms.BindingSource coldSettlementBindingSource;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Button buttonSave;
@@ -624,5 +642,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn otherPriceDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn totalPriceDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnStatus;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
     }
 }

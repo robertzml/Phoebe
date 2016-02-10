@@ -13,6 +13,9 @@ using Phoebe.Model;
 
 namespace Phoebe.FormUI
 {
+    /// <summary>
+    /// 货品出库窗体
+    /// </summary>
     public partial class StockOutForm : Form
     {
         #region Field
@@ -28,7 +31,15 @@ namespace Phoebe.FormUI
 
         private StoreBusiness storeBusiness;
 
+        /// <summary>
+        /// 是否新增
+        /// </summary>
         private bool isNew = false;
+
+        /// <summary>
+        /// 货品是否等重
+        /// </summary>
+        private bool isEqualWeight = true;
         #endregion //Field
 
         #region Constructor
@@ -157,10 +168,21 @@ namespace Phoebe.FormUI
                     soDetail.WarehouseID = cargo.WarehouseID.Value;
                     soDetail.StoreCount = cargo.StoreCount;
                     soDetail.Count = Convert.ToInt32(row.Cells[this.columnOutCount.Index].Value);
-                    soDetail.OutWeight = cargo.UnitWeight * soDetail.Count / 1000;
+                    if (soDetail.Count == 0)
+                    {
+                        return ErrorCode.StockOutCountZero;
+                    }
+                    if (this.isEqualWeight)
+                        soDetail.OutWeight = cargo.UnitWeight * soDetail.Count / 1000;
+                    else
+                        soDetail.OutWeight = Convert.ToDouble(row.Cells[this.columnOutWeight.Index].Value);
                     soDetail.Status = (int)EntityStatus.StockOutReady;
                     details.Add(soDetail);
                 }
+            }
+            if (details.Count == 0)
+            {
+                return ErrorCode.EmptySelect;
             }
 
             ErrorCode result = this.storeBusiness.StockOut(stockOut, details);
@@ -363,9 +385,44 @@ namespace Phoebe.FormUI
                 var contract = this.comboBoxContract.SelectedItem as Contract;               
                 var data = this.cargoBusiness.GetInByContract(contract.ID);
                 this.cargoBindingSource.DataSource = data;
+
+                if ((BillingType)contract.BillingType == BillingType.VariousWeight)
+                {
+                    this.isEqualWeight = false;
+                    this.columnOutWeight.ReadOnly = false;
+                }
+                else
+                {
+                    this.isEqualWeight = true;
+                    this.columnOutWeight.ReadOnly = true;
+                }
             }
         }
 
+        /// <summary>
+        /// 单元格更改事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cargoDataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0)
+                return;
+
+            var cargo = this.cargoDataGridView.Rows[e.RowIndex].DataBoundItem as Cargo;
+
+            if (e.ColumnIndex == this.columnOutCount.Index)
+            {
+                int outCount = Convert.ToInt32(this.cargoDataGridView.Rows[e.RowIndex].Cells[this.columnOutCount.Index].Value);
+                if (outCount < 0)
+                {
+                    this.cargoDataGridView.Rows[e.RowIndex].Cells[this.columnOutCount.Index].Value = 0;
+                    outCount = 0;
+                }
+                if (this.isEqualWeight)
+                    this.cargoDataGridView.Rows[e.RowIndex].Cells[this.columnOutWeight.Index].Value = Math.Round(cargo.UnitWeight * outCount / 1000, 3);
+            }
+        }
 
         private void cargoDataGridView_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
         {

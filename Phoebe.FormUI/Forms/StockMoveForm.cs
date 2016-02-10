@@ -30,7 +30,15 @@ namespace Phoebe.FormUI
 
         private WarehouseBusiness warehouseBusiness;
 
+        /// <summary>
+        /// 是否新增
+        /// </summary>
         private bool isNew = false;
+
+        /// <summary>
+        /// 货品是否等重
+        /// </summary>
+        private bool isEqualWeight = true;
         #endregion //Field
 
         #region Constructor
@@ -170,11 +178,22 @@ namespace Phoebe.FormUI
                     smDetail.WarehouseID = Convert.ToInt32(row.Cells[this.columnNewWarehouse.Index].Value);
                     smDetail.StoreCount = cargo.StoreCount;
                     smDetail.Count = Convert.ToInt32(row.Cells[this.columnMoveCount.Index].Value);
+                    if (smDetail.Count == 0)
+                    {
+                        return ErrorCode.StockMoveCountZero;
+                    }
                     smDetail.IsAllMove = (smDetail.StoreCount == smDetail.Count);
-                    smDetail.MoveWeight = cargo.UnitWeight * smDetail.Count / 1000;
+                    if (this.isEqualWeight)
+                        smDetail.MoveWeight = cargo.UnitWeight * smDetail.Count / 1000;
+                    else
+                        smDetail.MoveWeight = Convert.ToDouble(row.Cells[this.columnMoveWeight.Index].Value);
                     smDetail.Status = (int)EntityStatus.StockMoveReady;
                     details.Add(smDetail);
                 }
+            }
+            if (details.Count == 0)
+            {
+                return ErrorCode.EmptySelect;
             }
 
             ErrorCode result = this.storeBusiness.StockMove(stockMove, details);
@@ -192,12 +211,22 @@ namespace Phoebe.FormUI
         #endregion //Function
 
         #region Event
+        /// <summary>
+        /// 窗体载入
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void StockMoveForm_Load(object sender, EventArgs e)
         {
             InitData();
             InitControl();
         }
 
+        /// <summary>
+        /// 树形菜单载入
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void treeViewReceipt_BeforeExpand(object sender, TreeViewCancelEventArgs e)
         {
             var data = this.storeBusiness.GetStockMoveByMonth(e.Node.Name);
@@ -212,6 +241,11 @@ namespace Phoebe.FormUI
             }
         }
 
+        /// <summary>
+        /// 选择历史单据
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void treeViewReceipt_AfterSelect(object sender, TreeViewEventArgs e)
         {
             if (e.Node.Level == 0)
@@ -362,6 +396,42 @@ namespace Phoebe.FormUI
                 var contract = this.comboBoxContract.SelectedItem as Contract;
                 var data = this.cargoBusiness.GetInByContract(contract.ID);
                 this.cargoBindingSource.DataSource = data;
+
+                if ((BillingType)contract.BillingType == BillingType.VariousWeight)
+                {
+                    this.isEqualWeight = false;
+                    this.columnMoveWeight.ReadOnly = false;
+                }
+                else
+                {
+                    this.isEqualWeight = true;
+                    this.columnMoveWeight.ReadOnly = true;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 单元格值更改
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cargoDataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0)
+                return;
+
+            var cargo = this.cargoDataGridView.Rows[e.RowIndex].DataBoundItem as Cargo;
+
+            if (e.ColumnIndex == this.columnMoveCount.Index)
+            {
+                int moveCount = Convert.ToInt32(this.cargoDataGridView.Rows[e.RowIndex].Cells[this.columnMoveCount.Index].Value);
+                if (moveCount < 0)
+                {
+                    this.cargoDataGridView.Rows[e.RowIndex].Cells[this.columnMoveCount.Index].Value = 0;
+                    moveCount = 0;
+                }
+                if (this.isEqualWeight)
+                    this.cargoDataGridView.Rows[e.RowIndex].Cells[this.columnMoveWeight.Index].Value = Math.Round(cargo.UnitWeight * moveCount / 1000, 3);
             }
         }
 

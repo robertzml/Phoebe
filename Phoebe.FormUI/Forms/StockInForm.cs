@@ -13,6 +13,9 @@ using Phoebe.Model;
 
 namespace Phoebe.FormUI
 {
+    /// <summary>
+    /// 货品入库窗体
+    /// </summary>
     public partial class StockInForm : Form
     {
         #region Field
