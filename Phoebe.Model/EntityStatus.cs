@@ -56,7 +56,6 @@ namespace Phoebe.Model
         WarehouseReserve = 32,
         #endregion //Warehouse
 
-
         #region Tray
         /// <summary>
         /// 41:托盘未使用
@@ -181,18 +180,6 @@ namespace Phoebe.Model
         #endregion //Settlement
 
         #region Billing
-        /// <summary>
-        /// 120:基本费用未结算
-        /// </summary>
-        [Display(Name = "未结算")]
-        BillingUnsettle = 120,
-
-        /// <summary>
-        /// 121:基本费用已结算
-        /// </summary>
-        [Display(Name = "已结算")]
-        BillingSettle = 121,
-
         /// <summary>
         /// 123:基本费用未初始化
         /// </summary>

@@ -37,7 +37,7 @@ namespace Phoebe.Business
             var contracts = this.context.Contracts.Where(r => r.CustomerID == customerID);
 
             var billings = from r in this.context.Billings
-                           where r.Status == (int)EntityStatus.BillingUnsettle && r.InTime >= start && r.InTime <= end &&
+                           where r.InTime >= start && r.InTime <= end &&
                                 contracts.Select(s => s.ID).Contains(r.ContractID)
                            select r;
 
@@ -129,7 +129,7 @@ namespace Phoebe.Business
                     if (item.ExpenseType == (int)ExpenseType.Base)
                     {
                         var billing = this.context.Billings.Find(item.StockInID);
-                        billing.Status = (int)EntityStatus.BillingSettle;
+                        billing.Status = (int)EntityStatus.Normal;
                     }
 
                     this.context.SettlementDetails.Add(item);

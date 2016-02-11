@@ -462,7 +462,7 @@ namespace Phoebe.Business
                     return ErrorCode.ObjectNotFound;
 
                 si.Status = (int)EntityStatus.StockIn;
-                si.Billing.Status = (int)EntityStatus.BillingUnsettle;
+                si.Billing.Status = (int)EntityStatus.Normal;
 
                 // add stock information
                 foreach (var item in si.StockInDetails)

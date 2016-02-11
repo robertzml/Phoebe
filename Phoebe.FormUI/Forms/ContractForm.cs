@@ -13,6 +13,9 @@ using Phoebe.Model;
 
 namespace Phoebe.FormUI
 {
+    /// <summary>
+    /// 合同列表窗体
+    /// </summary>
     public partial class ContractForm : Form
     {
         #region Field
@@ -42,6 +45,11 @@ namespace Phoebe.FormUI
         #endregion //Function
 
         #region Event
+        /// <summary>
+        /// 窗体载入
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ContractForm_Load(object sender, EventArgs e)
         {
             InitData();
@@ -60,6 +68,7 @@ namespace Phoebe.FormUI
                     grid.Rows[e.RowIndex].Cells[this.columnCustomerName.Index].Value = contract.Customer.Name;
                 }
                 grid.Rows[e.RowIndex].Cells[this.columnBillingType.Index].Value = ((BillingType)contract.BillingType).DisplayName();
+                grid.Rows[e.RowIndex].Cells[this.columnBillingInfo.Index].Value = ((BillingType)contract.BillingType).DisplayDescription();
 
                 if (contract.User != null)
                 {
