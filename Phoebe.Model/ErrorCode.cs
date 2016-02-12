@@ -191,5 +191,19 @@ namespace Phoebe.Model
         [Display(Name = "移库数量为空")]
         StockMoveCountZero = 54,
         #endregion //Stock
+
+        #region Category
+        /// <summary>
+        /// 分类含有下级
+        /// </summary>
+        [Display(Name = "分类含有下级")]
+        CategoryHasChild = 70,
+
+        /// <summary>
+        /// 分类含有货品
+        /// </summary>
+        [Display(Name = "分类含有货品")]
+        CategoryHasCargo = 71,
+        #endregion //Category
     }
 }

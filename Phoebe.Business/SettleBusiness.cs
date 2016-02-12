@@ -126,6 +126,9 @@ namespace Phoebe.Business
 
                 foreach (var item in details)
                 {
+                    if (item.SumFee == 0)
+                        continue;
+
                     if (item.ExpenseType == (int)ExpenseType.Base)
                     {
                         var billing = this.context.Billings.Find(item.StockInID);

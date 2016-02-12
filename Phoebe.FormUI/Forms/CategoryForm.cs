@@ -174,6 +174,20 @@ namespace Phoebe.FormUI
             form.ShowDialog();
             UpdateCategoryTree();
         }
+        
+        /// <summary>
+        /// 删除分类
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonDelete_Click(object sender, EventArgs e)
+        {
+            TreeNode node = this.treeCategory.SelectedNode;
+            if (node == null || node.Name == "0")
+                return;
+
+
+        }
         #endregion //Event
     }
 }

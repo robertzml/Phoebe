@@ -19,9 +19,9 @@ namespace Phoebe.FormUI
     public partial class ContractForm : Form
     {
         #region Field
-        private ContractBusiness contractBusiness;
+        private CustomerBusiness customerBusiness;
 
-        private List<Contract> contractData;
+        private ContractBusiness contractBusiness;
         #endregion//Field
 
         #region Constructor
@@ -34,13 +34,17 @@ namespace Phoebe.FormUI
         #region Function
         private void InitData()
         {
+            this.customerBusiness = new CustomerBusiness();
             this.contractBusiness = new ContractBusiness();
-            this.contractData = this.contractBusiness.Get();
         }
 
         private void InitControl()
         {
-            this.contractBindingSource.DataSource = this.contractData;
+            var customers = this.customerBusiness.Get();
+            customers.Insert(0, new Customer { ID = 0, Name = "--请选择--" });
+            this.comboBoxCustomer.DataSource = customers;
+            this.comboBoxCustomer.DisplayMember = "Name";
+            this.comboBoxCustomer.ValueMember = "ID";
         }
         #endregion //Function
 
@@ -54,6 +58,67 @@ namespace Phoebe.FormUI
         {
             InitData();
             InitControl();
+        }
+
+        /// <summary>
+        /// 查询
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonQuery_Click(object sender, EventArgs e)
+        {
+            if (this.comboBoxCustomer.SelectedIndex == -1)
+                return;
+
+            if (this.comboBoxCustomer.SelectedIndex == 0)
+            {
+                this.contractBindingSource.DataSource = this.contractBusiness.Get();
+            }
+            else
+            {
+                var customer = this.comboBoxCustomer.SelectedItem as Customer;
+                this.contractBindingSource.DataSource = this.contractBusiness.GetByCustomer(customer.ID);
+            }
+        }
+
+        /// <summary>
+        /// 删除合同
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonDelete_Click(object sender, EventArgs e)
+        {
+            if (this.contractDataGridView.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("未选中记录", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            DialogResult dr = MessageBox.Show("是否确认删除选中合同", FormConstant.MessageBoxTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dr == DialogResult.Yes)
+            {
+                Contract contract = this.contractDataGridView.SelectedRows[0].DataBoundItem as Contract;
+                ErrorCode result = this.contractBusiness.Delete(contract);
+                if (result == ErrorCode.Success)
+                {
+                    MessageBox.Show("删除合同成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("删除合同失败：" + result.DisplayName(), FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 刷新
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonRefresh_Click(object sender, EventArgs e)
+        {
+            this.contractBusiness = new ContractBusiness();            
+            this.contractBindingSource.DataSource = this.contractBusiness.Get();
         }
 
         private void contractDataGridView_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)

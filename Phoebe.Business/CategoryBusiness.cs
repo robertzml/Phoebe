@@ -274,6 +274,81 @@ namespace Phoebe.Business
 
             return ErrorCode.Success;
         }
+
+        /// <summary>
+        /// 删除一级分类
+        /// </summary>
+        /// <param name="data">一级分类</param>
+        /// <returns></returns>
+        public ErrorCode DeleteFirstCategory(FirstCategory data)
+        {
+            try
+            {
+                if (this.context.SecondCategories.Count(r => r.FirstCategoryID == data.ID) > 0)
+                    return ErrorCode.CategoryHasChild;
+
+                if (this.context.Cargoes.Count(r => r.FirstCategoryID == data.ID) > 0)
+                    return ErrorCode.CategoryHasCargo;
+
+                this.context.FirstCategories.Remove(data);
+                this.context.SaveChanges();
+
+                return ErrorCode.Success;
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+        }
+
+        /// <summary>
+        /// 删除二级分类
+        /// </summary>
+        /// <param name="data">二级分类</param>
+        /// <returns></returns>
+        public ErrorCode DeleteSecondCategory(SecondCategory data)
+        {
+            try
+            {
+                if (this.context.ThirdCategories.Count(r => r.SecondCategoryID == data.ID) > 0)
+                    return ErrorCode.CategoryHasChild;
+
+                if (this.context.Cargoes.Count(r => r.SecondCategoryID == data.ID) > 0)
+                    return ErrorCode.CategoryHasCargo;
+
+                this.context.SecondCategories.Remove(data);
+                this.context.SaveChanges();
+
+                return ErrorCode.Success;
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+        }
+
+        /// <summary>
+        /// 删除三级分类
+        /// </summary>
+        /// <param name="data">三级分类</param>
+        /// <returns></returns>
+        public ErrorCode DeleteThirdCategory(ThirdCategory data)
+        {
+            try
+            {
+                if (this.context.Cargoes.Count(r => r.ThirdCategoryID == data.ID) > 0)
+                    return ErrorCode.CategoryHasCargo;
+
+                this.context.ThirdCategories.Remove(data);
+                this.context.SaveChanges();
+
+                return ErrorCode.Success;
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+        }
         #endregion //Method
     }
 }

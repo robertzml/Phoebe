@@ -31,10 +31,11 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.treeCategory = new System.Windows.Forms.TreeView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.buttonEdit = new System.Windows.Forms.Button();
             this.buttonAddThird = new System.Windows.Forms.Button();
             this.buttonAddSecond = new System.Windows.Forms.Button();
             this.buttonAddFirst = new System.Windows.Forms.Button();
-            this.buttonEdit = new System.Windows.Forms.Button();
+            this.buttonDelete = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -60,6 +61,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.buttonDelete);
             this.groupBox2.Controls.Add(this.buttonEdit);
             this.groupBox2.Controls.Add(this.buttonAddThird);
             this.groupBox2.Controls.Add(this.buttonAddSecond);
@@ -71,6 +73,16 @@
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "操作";
+            // 
+            // buttonEdit
+            // 
+            this.buttonEdit.Location = new System.Drawing.Point(30, 105);
+            this.buttonEdit.Name = "buttonEdit";
+            this.buttonEdit.Size = new System.Drawing.Size(75, 23);
+            this.buttonEdit.TabIndex = 3;
+            this.buttonEdit.Text = "编辑";
+            this.buttonEdit.UseVisualStyleBackColor = true;
+            this.buttonEdit.Click += new System.EventHandler(this.buttonEdit_Click);
             // 
             // buttonAddThird
             // 
@@ -102,15 +114,15 @@
             this.buttonAddFirst.UseVisualStyleBackColor = true;
             this.buttonAddFirst.Click += new System.EventHandler(this.buttonAddFirst_Click);
             // 
-            // buttonEdit
+            // buttonDelete
             // 
-            this.buttonEdit.Location = new System.Drawing.Point(30, 105);
-            this.buttonEdit.Name = "buttonEdit";
-            this.buttonEdit.Size = new System.Drawing.Size(75, 23);
-            this.buttonEdit.TabIndex = 3;
-            this.buttonEdit.Text = "编辑";
-            this.buttonEdit.UseVisualStyleBackColor = true;
-            this.buttonEdit.Click += new System.EventHandler(this.buttonEdit_Click);
+            this.buttonDelete.Location = new System.Drawing.Point(167, 104);
+            this.buttonDelete.Name = "buttonDelete";
+            this.buttonDelete.Size = new System.Drawing.Size(75, 23);
+            this.buttonDelete.TabIndex = 4;
+            this.buttonDelete.Text = "删除";
+            this.buttonDelete.UseVisualStyleBackColor = true;
+            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
             // 
             // CategoryForm
             // 
@@ -138,5 +150,6 @@
         private System.Windows.Forms.Button buttonAddFirst;
         private System.Windows.Forms.TreeView treeCategory;
         private System.Windows.Forms.Button buttonEdit;
+        private System.Windows.Forms.Button buttonDelete;
     }
 }
