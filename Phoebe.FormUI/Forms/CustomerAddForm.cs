@@ -13,6 +13,9 @@ using Phoebe.Model;
 
 namespace Phoebe.FormUI
 {
+    /// <summary>
+    /// 客户添加窗体
+    /// </summary>
     public partial class CustomerAddForm : Form
     {
         #region Field
@@ -34,6 +37,11 @@ namespace Phoebe.FormUI
         #endregion //Function
 
         #region Event
+        /// <summary>
+        /// 窗体载入
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CustomerAddForm_Load(object sender, EventArgs e)
         {
             this.customerBusiness = new CustomerBusiness();

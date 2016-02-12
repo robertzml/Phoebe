@@ -218,6 +218,17 @@ namespace Phoebe.FormUI
         }
 
         /// <summary>
+        /// 结算管理 - 结算记录
+        /// </summary>
+        private void menuSettleList_Click(object sender, EventArgs e)
+        {
+            SettleListForm form = new SettleListForm(this.currentUser);
+            form.MdiParent = this;
+            form.WindowState = FormWindowState.Maximized;
+            form.Show();
+        }
+
+        /// <summary>
         /// 报表管理 - 日报表
         /// </summary>
         /// <param name="sender"></param>
@@ -263,5 +274,7 @@ namespace Phoebe.FormUI
         #endregion //Menu Event
 
         #endregion //Event
+
+       
     }
 }

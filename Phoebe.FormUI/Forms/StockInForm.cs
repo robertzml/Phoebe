@@ -447,6 +447,25 @@ namespace Phoebe.FormUI
         }
 
         /// <summary>
+        /// 删除
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void toolDelete_Click(object sender, EventArgs e)
+        {
+            if (this.currentStockIn == null)
+            {
+                MessageBox.Show("当前未选中记录", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            if (this.currentStockIn.Status != (int)EntityStatus.StockInReady)
+            {
+                MessageBox.Show("当前记录已确认", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+        }
+
+        /// <summary>
         /// 客户选择
         /// </summary>
         /// <param name="sender"></param>

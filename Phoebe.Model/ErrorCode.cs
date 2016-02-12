@@ -106,7 +106,7 @@ namespace Phoebe.Model
         UserDisabled = 14,
         #endregion //User
 
-        #region Contract
+        #region Contract & Customer
         /// <summary>
         /// 合同编号重复
         /// </summary>
@@ -118,6 +118,12 @@ namespace Phoebe.Model
         /// </summary>
         [Display(Name = "有货品未出库")]
         ContractHasCargo = 22,
+
+        /// <summary>
+        /// 客户有合同
+        /// </summary>
+        [Display(Name = "客户有合同")]
+        CustomerHasContract = 25,
         #endregion //Contract
 
         #region Warehosue & Tray

@@ -96,23 +96,27 @@ namespace Phoebe.Business
             return ErrorCode.Success;
         }
 
-
         /// <summary>
-        /// 保存更新
+        /// 删除用户
         /// </summary>
+        /// <param name="data"></param>
         /// <returns></returns>
-        public ErrorCode Save()
+        public ErrorCode Delete(Customer data)
         {
             try
             {
+                if (this.context.Contracts.Count(r => r.CustomerID == data.ID) > 0)
+                    return ErrorCode.CustomerHasContract;
+
+                this.context.Customers.Remove(data);
                 this.context.SaveChanges();
+
+                return ErrorCode.Success;
             }
-            catch (Exception)
+            catch(Exception)
             {
                 return ErrorCode.Exception;
             }
-
-            return ErrorCode.Success;
         }
         #endregion //Method
     }

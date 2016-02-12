@@ -41,11 +41,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.settlementDataGridView = new System.Windows.Forms.DataGridView();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.settlementBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.paymentDataGridView = new System.Windows.Forms.DataGridView();
-            this.paymentBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.numberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.startTimeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.endTimeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -56,28 +51,33 @@
             this.settleTimeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnSettlementUser = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.remarkDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.paidFeeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.settlementBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.paymentDataGridView = new System.Windows.Forms.DataGridView();
+            this.paymentBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.numericDebtFee = new System.Windows.Forms.NumericUpDown();
+            this.numericPaidFee = new System.Windows.Forms.NumericUpDown();
+            this.numericDueFee = new System.Windows.Forms.NumericUpDown();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.paidTimeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.paidFeeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnPaymentUser = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.remarkDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.numericDueFee = new System.Windows.Forms.NumericUpDown();
-            this.numericPaidFee = new System.Windows.Forms.NumericUpDown();
-            this.numericDebtFee = new System.Windows.Forms.NumericUpDown();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.settlementDataGridView)).BeginInit();
-            this.groupBox3.SuspendLayout();
-            this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.settlementBindingSource)).BeginInit();
+            this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.paymentDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.paymentBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericDueFee)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericPaidFee)).BeginInit();
+            this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericDebtFee)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericPaidFee)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericDueFee)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -176,61 +176,6 @@
             this.settlementDataGridView.TabIndex = 0;
             this.settlementDataGridView.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.settlementDataGridView_RowPrePaint);
             // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.numericDebtFee);
-            this.groupBox3.Controls.Add(this.numericPaidFee);
-            this.groupBox3.Controls.Add(this.numericDueFee);
-            this.groupBox3.Controls.Add(this.label4);
-            this.groupBox3.Controls.Add(this.label3);
-            this.groupBox3.Controls.Add(this.label2);
-            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox3.Location = new System.Drawing.Point(443, 3);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(434, 114);
-            this.groupBox3.TabIndex = 2;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "费用信息";
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.paymentDataGridView);
-            this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox4.Location = new System.Drawing.Point(443, 123);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(434, 323);
-            this.groupBox4.TabIndex = 3;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "缴费记录";
-            // 
-            // settlementBindingSource
-            // 
-            this.settlementBindingSource.DataSource = typeof(Phoebe.Model.Settlement);
-            // 
-            // paymentDataGridView
-            // 
-            this.paymentDataGridView.AllowUserToAddRows = false;
-            this.paymentDataGridView.AllowUserToDeleteRows = false;
-            this.paymentDataGridView.AutoGenerateColumns = false;
-            this.paymentDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.paymentDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.paidFeeDataGridViewTextBoxColumn,
-            this.paidTimeDataGridViewTextBoxColumn,
-            this.columnPaymentUser,
-            this.remarkDataGridViewTextBoxColumn1});
-            this.paymentDataGridView.DataSource = this.paymentBindingSource;
-            this.paymentDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.paymentDataGridView.Location = new System.Drawing.Point(3, 16);
-            this.paymentDataGridView.Name = "paymentDataGridView";
-            this.paymentDataGridView.ReadOnly = true;
-            this.paymentDataGridView.Size = new System.Drawing.Size(428, 304);
-            this.paymentDataGridView.TabIndex = 0;
-            this.paymentDataGridView.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.paymentDataGridView_RowPrePaint);
-            // 
-            // paymentBindingSource
-            // 
-            this.paymentBindingSource.DataSource = typeof(Phoebe.Model.Payment);
-            // 
             // numberDataGridViewTextBoxColumn
             // 
             this.numberDataGridViewTextBoxColumn.DataPropertyName = "Number";
@@ -311,90 +256,60 @@
             this.remarkDataGridViewTextBoxColumn.Name = "remarkDataGridViewTextBoxColumn";
             this.remarkDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // paidFeeDataGridViewTextBoxColumn
+            // settlementBindingSource
             // 
-            this.paidFeeDataGridViewTextBoxColumn.DataPropertyName = "PaidFee";
-            dataGridViewCellStyle5.Format = "C2";
-            dataGridViewCellStyle5.NullValue = null;
-            this.paidFeeDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle5;
-            this.paidFeeDataGridViewTextBoxColumn.HeaderText = "缴费金额(元)";
-            this.paidFeeDataGridViewTextBoxColumn.Name = "paidFeeDataGridViewTextBoxColumn";
-            this.paidFeeDataGridViewTextBoxColumn.ReadOnly = true;
+            this.settlementBindingSource.DataSource = typeof(Phoebe.Model.Settlement);
             // 
-            // paidTimeDataGridViewTextBoxColumn
+            // groupBox4
             // 
-            this.paidTimeDataGridViewTextBoxColumn.DataPropertyName = "PaidTime";
-            this.paidTimeDataGridViewTextBoxColumn.HeaderText = "缴费时间";
-            this.paidTimeDataGridViewTextBoxColumn.Name = "paidTimeDataGridViewTextBoxColumn";
-            this.paidTimeDataGridViewTextBoxColumn.ReadOnly = true;
+            this.groupBox4.Controls.Add(this.paymentDataGridView);
+            this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox4.Location = new System.Drawing.Point(443, 123);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(434, 323);
+            this.groupBox4.TabIndex = 3;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "缴费记录";
             // 
-            // columnPaymentUser
+            // paymentDataGridView
             // 
-            this.columnPaymentUser.HeaderText = "收款人";
-            this.columnPaymentUser.Name = "columnPaymentUser";
-            this.columnPaymentUser.ReadOnly = true;
+            this.paymentDataGridView.AllowUserToAddRows = false;
+            this.paymentDataGridView.AllowUserToDeleteRows = false;
+            this.paymentDataGridView.AutoGenerateColumns = false;
+            this.paymentDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.paymentDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.paidTimeDataGridViewTextBoxColumn,
+            this.paidFeeDataGridViewTextBoxColumn,
+            this.columnPaymentUser,
+            this.remarkDataGridViewTextBoxColumn1});
+            this.paymentDataGridView.DataSource = this.paymentBindingSource;
+            this.paymentDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.paymentDataGridView.Location = new System.Drawing.Point(3, 16);
+            this.paymentDataGridView.Name = "paymentDataGridView";
+            this.paymentDataGridView.ReadOnly = true;
+            this.paymentDataGridView.Size = new System.Drawing.Size(428, 304);
+            this.paymentDataGridView.TabIndex = 0;
+            this.paymentDataGridView.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.paymentDataGridView_RowPrePaint);
             // 
-            // remarkDataGridViewTextBoxColumn1
+            // paymentBindingSource
             // 
-            this.remarkDataGridViewTextBoxColumn1.DataPropertyName = "Remark";
-            this.remarkDataGridViewTextBoxColumn1.HeaderText = "备注";
-            this.remarkDataGridViewTextBoxColumn1.Name = "remarkDataGridViewTextBoxColumn1";
-            this.remarkDataGridViewTextBoxColumn1.ReadOnly = true;
+            this.paymentBindingSource.DataSource = typeof(Phoebe.Model.Payment);
             // 
-            // label2
+            // groupBox3
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(7, 33);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(67, 13);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "累计应缴费";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(228, 33);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(67, 13);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "累计实缴费";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(7, 74);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(55, 13);
-            this.label4.TabIndex = 2;
-            this.label4.Text = "累计欠款";
-            // 
-            // numericDueFee
-            // 
-            this.numericDueFee.DecimalPlaces = 2;
-            this.numericDueFee.Location = new System.Drawing.Point(80, 31);
-            this.numericDueFee.Maximum = new decimal(new int[] {
-            10000000,
-            0,
-            0,
-            0});
-            this.numericDueFee.Name = "numericDueFee";
-            this.numericDueFee.ReadOnly = true;
-            this.numericDueFee.Size = new System.Drawing.Size(120, 20);
-            this.numericDueFee.TabIndex = 3;
-            // 
-            // numericPaidFee
-            // 
-            this.numericPaidFee.DecimalPlaces = 2;
-            this.numericPaidFee.Location = new System.Drawing.Point(301, 31);
-            this.numericPaidFee.Maximum = new decimal(new int[] {
-            10000000,
-            0,
-            0,
-            0});
-            this.numericPaidFee.Name = "numericPaidFee";
-            this.numericPaidFee.ReadOnly = true;
-            this.numericPaidFee.Size = new System.Drawing.Size(120, 20);
-            this.numericPaidFee.TabIndex = 4;
+            this.groupBox3.Controls.Add(this.numericDebtFee);
+            this.groupBox3.Controls.Add(this.numericPaidFee);
+            this.groupBox3.Controls.Add(this.numericDueFee);
+            this.groupBox3.Controls.Add(this.label4);
+            this.groupBox3.Controls.Add(this.label3);
+            this.groupBox3.Controls.Add(this.label2);
+            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox3.Location = new System.Drawing.Point(443, 3);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(434, 114);
+            this.groupBox3.TabIndex = 2;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "费用信息";
             // 
             // numericDebtFee
             // 
@@ -415,6 +330,91 @@
             this.numericDebtFee.Size = new System.Drawing.Size(120, 20);
             this.numericDebtFee.TabIndex = 5;
             // 
+            // numericPaidFee
+            // 
+            this.numericPaidFee.DecimalPlaces = 2;
+            this.numericPaidFee.Location = new System.Drawing.Point(301, 31);
+            this.numericPaidFee.Maximum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
+            this.numericPaidFee.Name = "numericPaidFee";
+            this.numericPaidFee.ReadOnly = true;
+            this.numericPaidFee.Size = new System.Drawing.Size(120, 20);
+            this.numericPaidFee.TabIndex = 4;
+            // 
+            // numericDueFee
+            // 
+            this.numericDueFee.DecimalPlaces = 2;
+            this.numericDueFee.Location = new System.Drawing.Point(80, 31);
+            this.numericDueFee.Maximum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
+            this.numericDueFee.Name = "numericDueFee";
+            this.numericDueFee.ReadOnly = true;
+            this.numericDueFee.Size = new System.Drawing.Size(120, 20);
+            this.numericDueFee.TabIndex = 3;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(7, 74);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(55, 13);
+            this.label4.TabIndex = 2;
+            this.label4.Text = "累计欠款";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(228, 33);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(67, 13);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "累计实缴费";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(7, 33);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(67, 13);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "累计应缴费";
+            // 
+            // paidTimeDataGridViewTextBoxColumn
+            // 
+            this.paidTimeDataGridViewTextBoxColumn.DataPropertyName = "PaidTime";
+            this.paidTimeDataGridViewTextBoxColumn.HeaderText = "缴费时间";
+            this.paidTimeDataGridViewTextBoxColumn.Name = "paidTimeDataGridViewTextBoxColumn";
+            this.paidTimeDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // paidFeeDataGridViewTextBoxColumn
+            // 
+            this.paidFeeDataGridViewTextBoxColumn.DataPropertyName = "PaidFee";
+            dataGridViewCellStyle5.Format = "C2";
+            dataGridViewCellStyle5.NullValue = null;
+            this.paidFeeDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle5;
+            this.paidFeeDataGridViewTextBoxColumn.HeaderText = "缴费金额(元)";
+            this.paidFeeDataGridViewTextBoxColumn.Name = "paidFeeDataGridViewTextBoxColumn";
+            this.paidFeeDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // columnPaymentUser
+            // 
+            this.columnPaymentUser.HeaderText = "收款人";
+            this.columnPaymentUser.Name = "columnPaymentUser";
+            this.columnPaymentUser.ReadOnly = true;
+            // 
+            // remarkDataGridViewTextBoxColumn1
+            // 
+            this.remarkDataGridViewTextBoxColumn1.DataPropertyName = "Remark";
+            this.remarkDataGridViewTextBoxColumn1.HeaderText = "备注";
+            this.remarkDataGridViewTextBoxColumn1.Name = "remarkDataGridViewTextBoxColumn1";
+            this.remarkDataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
             // AccountForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -430,15 +430,15 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.settlementDataGridView)).EndInit();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.settlementBindingSource)).EndInit();
+            this.groupBox4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.paymentDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.paymentBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericDueFee)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericPaidFee)).EndInit();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericDebtFee)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericPaidFee)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericDueFee)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -467,15 +467,15 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn settleTimeDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnSettlementUser;
         private System.Windows.Forms.DataGridViewTextBoxColumn remarkDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn paidFeeDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn paidTimeDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnPaymentUser;
-        private System.Windows.Forms.DataGridViewTextBoxColumn remarkDataGridViewTextBoxColumn1;
         private System.Windows.Forms.NumericUpDown numericDebtFee;
         private System.Windows.Forms.NumericUpDown numericPaidFee;
         private System.Windows.Forms.NumericUpDown numericDueFee;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn paidTimeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn paidFeeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnPaymentUser;
+        private System.Windows.Forms.DataGridViewTextBoxColumn remarkDataGridViewTextBoxColumn1;
     }
 }

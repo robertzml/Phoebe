@@ -49,6 +49,8 @@
             this.menuSettle = new System.Windows.Forms.ToolStripMenuItem();
             this.menuColdPriceList = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSettleCreate = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuPayment = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuAccount = new System.Windows.Forms.ToolStripMenuItem();
             this.menuReport = new System.Windows.Forms.ToolStripMenuItem();
             this.menuDailyReport = new System.Windows.Forms.ToolStripMenuItem();
             this.menuUser = new System.Windows.Forms.ToolStripMenuItem();
@@ -59,8 +61,7 @@
             this.mainStauts = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusUser = new System.Windows.Forms.ToolStripStatusLabel();
-            this.menuPayment = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuAccount = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuSettleList = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenu.SuspendLayout();
             this.mainStauts.SuspendLayout();
             this.SuspendLayout();
@@ -219,7 +220,8 @@
             this.menuColdPriceList,
             this.menuSettleCreate,
             this.menuPayment,
-            this.menuAccount});
+            this.menuAccount,
+            this.menuSettleList});
             this.menuSettle.Name = "menuSettle";
             this.menuSettle.Size = new System.Drawing.Size(68, 21);
             this.menuSettle.Text = "结算管理";
@@ -237,6 +239,20 @@
             this.menuSettleCreate.Size = new System.Drawing.Size(152, 22);
             this.menuSettleCreate.Text = "费用结算";
             this.menuSettleCreate.Click += new System.EventHandler(this.menuSettleCreate_Click);
+            // 
+            // menuPayment
+            // 
+            this.menuPayment.Name = "menuPayment";
+            this.menuPayment.Size = new System.Drawing.Size(152, 22);
+            this.menuPayment.Text = "客户缴费";
+            this.menuPayment.Click += new System.EventHandler(this.menuPayment_Click);
+            // 
+            // menuAccount
+            // 
+            this.menuAccount.Name = "menuAccount";
+            this.menuAccount.Size = new System.Drawing.Size(152, 22);
+            this.menuAccount.Text = "客户对账";
+            this.menuAccount.Click += new System.EventHandler(this.menuAccount_Click);
             // 
             // menuReport
             // 
@@ -319,19 +335,12 @@
             this.statusUser.Size = new System.Drawing.Size(44, 21);
             this.statusUser.Text = "name";
             // 
-            // menuPayment
+            // menuSettleList
             // 
-            this.menuPayment.Name = "menuPayment";
-            this.menuPayment.Size = new System.Drawing.Size(152, 22);
-            this.menuPayment.Text = "客户缴费";
-            this.menuPayment.Click += new System.EventHandler(this.menuPayment_Click);
-            // 
-            // menuAccount
-            // 
-            this.menuAccount.Name = "menuAccount";
-            this.menuAccount.Size = new System.Drawing.Size(152, 22);
-            this.menuAccount.Text = "客户对账";
-            this.menuAccount.Click += new System.EventHandler(this.menuAccount_Click);
+            this.menuSettleList.Name = "menuSettleList";
+            this.menuSettleList.Size = new System.Drawing.Size(152, 22);
+            this.menuSettleList.Text = "结算记录";
+            this.menuSettleList.Click += new System.EventHandler(this.menuSettleList_Click);
             // 
             // MainForm
             // 
@@ -390,6 +399,7 @@
         private System.Windows.Forms.ToolStripMenuItem menuSettleCreate;
         private System.Windows.Forms.ToolStripMenuItem menuPayment;
         private System.Windows.Forms.ToolStripMenuItem menuAccount;
+        private System.Windows.Forms.ToolStripMenuItem menuSettleList;
     }
 }
 

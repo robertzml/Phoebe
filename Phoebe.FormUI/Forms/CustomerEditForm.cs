@@ -13,6 +13,9 @@ using Phoebe.Model;
 
 namespace Phoebe.FormUI
 {
+    /// <summary>
+    /// 客户编辑窗体
+    /// </summary>
     public partial class CustomerEditForm : Form
     {
         #region Field
@@ -50,12 +53,22 @@ namespace Phoebe.FormUI
         #endregion //Function
 
         #region Event
+        /// <summary>
+        /// 窗体载入
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CustomerEditForm_Load(object sender, EventArgs e)
         {
             InitData();
             InitControl();
         }
 
+        /// <summary>
+        /// 保存
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonSave_Click(object sender, EventArgs e)
         {
             if (this.textBoxName.Text.Trim() == "")
