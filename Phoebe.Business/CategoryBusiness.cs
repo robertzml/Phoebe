@@ -278,12 +278,16 @@ namespace Phoebe.Business
         /// <summary>
         /// 删除一级分类
         /// </summary>
-        /// <param name="data">一级分类</param>
+        /// <param name="id">一级分类ID</param>
         /// <returns></returns>
-        public ErrorCode DeleteFirstCategory(FirstCategory data)
+        public ErrorCode DeleteFirstCategory(int id)
         {
             try
             {
+                var data = this.context.FirstCategories.Find(id);
+                if (data == null)
+                    return ErrorCode.ObjectNotFound;
+
                 if (this.context.SecondCategories.Count(r => r.FirstCategoryID == data.ID) > 0)
                     return ErrorCode.CategoryHasChild;
 
@@ -304,12 +308,16 @@ namespace Phoebe.Business
         /// <summary>
         /// 删除二级分类
         /// </summary>
-        /// <param name="data">二级分类</param>
+        /// <param name="id">二级分类ID</param>
         /// <returns></returns>
-        public ErrorCode DeleteSecondCategory(SecondCategory data)
+        public ErrorCode DeleteSecondCategory(int id)
         {
             try
             {
+                var data = this.context.SecondCategories.Find(id);
+                if (data == null)
+                    return ErrorCode.ObjectNotFound;
+
                 if (this.context.ThirdCategories.Count(r => r.SecondCategoryID == data.ID) > 0)
                     return ErrorCode.CategoryHasChild;
 
@@ -330,12 +338,16 @@ namespace Phoebe.Business
         /// <summary>
         /// 删除三级分类
         /// </summary>
-        /// <param name="data">三级分类</param>
+        /// <param name="id">三级分类ID</param>
         /// <returns></returns>
-        public ErrorCode DeleteThirdCategory(ThirdCategory data)
+        public ErrorCode DeleteThirdCategory(int id)
         {
             try
             {
+                var data = this.context.ThirdCategories.Find(id);
+                if (data == null)
+                    return ErrorCode.ObjectNotFound;
+
                 if (this.context.Cargoes.Count(r => r.ThirdCategoryID == data.ID) > 0)
                     return ErrorCode.CategoryHasCargo;
 

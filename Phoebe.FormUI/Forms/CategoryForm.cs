@@ -55,7 +55,7 @@ namespace Phoebe.FormUI
 
             List<FirstCategory> firstCategory = this.categoryBusiness.GetFirstCategory(false);
 
-            foreach(var first in firstCategory)
+            foreach (var first in firstCategory)
             {
                 TreeNode node = new TreeNode();
                 node.Name = first.ID.ToString();
@@ -80,7 +80,7 @@ namespace Phoebe.FormUI
         {
             List<SecondCategory> secondCategory = this.categoryBusiness.GetSecondCategoryByFirst(first.ID, false);
 
-            foreach(var item in secondCategory)
+            foreach (var item in secondCategory)
             {
                 TreeNode node = new TreeNode();
                 node.Name = item.ID.ToString();
@@ -158,7 +158,7 @@ namespace Phoebe.FormUI
             form.ShowDialog();
             UpdateCategoryTree();
         }
-        
+
         /// <summary>
         /// 编辑分类
         /// </summary>
@@ -174,7 +174,7 @@ namespace Phoebe.FormUI
             form.ShowDialog();
             UpdateCategoryTree();
         }
-        
+
         /// <summary>
         /// 删除分类
         /// </summary>
@@ -186,7 +186,34 @@ namespace Phoebe.FormUI
             if (node == null || node.Name == "0")
                 return;
 
+            DialogResult dr = MessageBox.Show("是否确认删除选中分类", FormConstant.MessageBoxTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dr == DialogResult.Yes)
+            {
+                ErrorCode result = ErrorCode.Success;
+                int id = Convert.ToInt32(node.Name);
+                int hierarchy = Convert.ToInt32(node.Tag);
+                switch (hierarchy)
+                {
+                    case 1:
+                        result = categoryBusiness.DeleteFirstCategory(id);
+                        break;
+                    case 2:
+                        result = categoryBusiness.DeleteSecondCategory(id);
+                        break;
+                    case 3:
+                        result = categoryBusiness.DeleteThirdCategory(id);
+                        break;
+                }
 
+                if (result == ErrorCode.Success)
+                {
+                    MessageBox.Show("删除分类成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("删除分类失败：" + result.DisplayName(), FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
         }
         #endregion //Event
     }
