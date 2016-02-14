@@ -135,12 +135,6 @@ namespace Phoebe.Model
         StockOutReady = 81,
 
         /// <summary>
-        /// 82:出库取消
-        /// </summary>
-        [Display(Name = "出库取消")]
-        StockOutCancel = 82,
-
-        /// <summary>
         /// 83:已出库
         /// </summary>
         [Display(Name = "已出库")]
@@ -151,12 +145,6 @@ namespace Phoebe.Model
         /// </summary>
         [Display(Name = "准备移库")]
         StockMoveReady = 91,
-
-        /// <summary>
-        /// 92:移库取消
-        /// </summary>
-        [Display(Name = "移库取消")]
-        StockMoveCancel = 92,
 
         /// <summary>
         /// 93:已移库

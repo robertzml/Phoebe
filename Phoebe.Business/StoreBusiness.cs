@@ -495,6 +495,38 @@ namespace Phoebe.Business
                 return ErrorCode.Exception;
             }
         }
+
+        /// <summary>
+        /// 删除入库
+        /// </summary>
+        /// <param name="data">入库记录</param>
+        /// <returns></returns>
+        public ErrorCode StockInDelete(StockIn data)
+        {
+            try
+            {
+                if (data.Status == (int)EntityStatus.StockIn)
+                    return ErrorCode.StockNotFound;
+
+                List<Cargo> cargos = new List<Cargo>();
+                foreach(var item in data.StockInDetails)
+                {
+                    cargos.Add(item.Cargo);
+                }
+
+
+                this.context.StockIns.Remove(data);
+                this.context.Cargoes.RemoveRange(cargos);
+
+                this.context.SaveChanges();
+
+                return ErrorCode.Success;
+            }
+            catch(Exception)
+            {
+                return ErrorCode.Exception;
+            }
+        }
         #endregion //Stock In
 
         #region Stock Out
@@ -671,6 +703,29 @@ namespace Phoebe.Business
                 return ErrorCode.Success;
             }
             catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+        }
+
+        /// <summary>
+        /// 删除出库
+        /// </summary>
+        /// <param name="data">出库记录</param>
+        /// <returns></returns>
+        public ErrorCode StockOutDelete(StockOut data)
+        {
+            try
+            {
+                if (data.Status == (int)EntityStatus.StockOut)
+                    return ErrorCode.ObjectNotFound;
+
+                this.context.StockOuts.Remove(data);
+                this.context.SaveChanges();
+
+                return ErrorCode.Success;
+            }
+            catch(Exception)
             {
                 return ErrorCode.Exception;
             }
@@ -885,6 +940,29 @@ namespace Phoebe.Business
                 return ErrorCode.Success;
             }
             catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+        }
+
+        /// <summary>
+        /// 删除移库
+        /// </summary>
+        /// <param name="data">移库记录</param>
+        /// <returns></returns>
+        public ErrorCode StockMoveDelete(StockMove data)
+        {
+            try
+            {
+                if (data.Status == (int)EntityStatus.StockMove)
+                    return ErrorCode.ObjectNotFound;
+
+                this.context.StockMoves.Remove(data);
+                this.context.SaveChanges();
+
+                return ErrorCode.Success;
+            }
+            catch(Exception)
             {
                 return ErrorCode.Exception;
             }

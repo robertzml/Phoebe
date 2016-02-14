@@ -328,12 +328,14 @@ namespace Phoebe.FormUI
             {
                 this.toolSave.Enabled = true;
                 this.toolConfirm.Enabled = true;
+                this.toolDelete.Enabled = true;
                 SetControlEditable(true);
             }
             else if (this.currentStockIn.Status == (int)EntityStatus.StockIn)
             {
                 this.toolSave.Enabled = false;
                 this.toolConfirm.Enabled = false;
+                this.toolDelete.Enabled = false;
                 SetControlEditable(false);
             }
         }
@@ -462,6 +464,21 @@ namespace Phoebe.FormUI
             {
                 MessageBox.Show("当前记录已确认", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
+            }
+
+            DialogResult dr = MessageBox.Show("是否确认删除选中记录", FormConstant.MessageBoxTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dr == DialogResult.Yes)
+            {
+                ErrorCode result = this.storeBusiness.StockInDelete(this.currentStockIn);
+                if (result == ErrorCode.Success)
+                {
+                    MessageBox.Show("删除成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.currentStockIn = null;
+                }
+                else
+                {
+                    MessageBox.Show("删除失败:" + result.DisplayName(), FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
         }
 

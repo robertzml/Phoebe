@@ -73,6 +73,16 @@ namespace Phoebe.FormUI.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap close_delete {
+            get {
+                object obj = ResourceManager.GetObject("close_delete", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap lock_32 {
             get {
                 object obj = ResourceManager.GetObject("lock_32", resourceCulture);

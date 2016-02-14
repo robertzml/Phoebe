@@ -263,12 +263,14 @@ namespace Phoebe.FormUI
             {
                 this.toolSave.Enabled = true;
                 this.toolConfirm.Enabled = true;
+                this.toolDelete.Enabled = true;
                 SetControlEditable(true);
             }
-            else if (this.currentStockMove.Status == (int)EntityStatus.StockOut)
+            else if (this.currentStockMove.Status == (int)EntityStatus.StockMove)
             {
                 this.toolSave.Enabled = false;
                 this.toolConfirm.Enabled = false;
+                this.toolDelete.Enabled = false;
                 SetControlEditable(false);
             }
         }
@@ -365,6 +367,40 @@ namespace Phoebe.FormUI
         {
             this.storeBusiness = new StoreBusiness();
             UpdateTree();
+        }
+
+        /// <summary>
+        /// 删除
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void toolDelete_Click(object sender, EventArgs e)
+        {
+            if (this.currentStockMove == null)
+            {
+                MessageBox.Show("当前未选中记录", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            if (this.currentStockMove.Status != (int)EntityStatus.StockMoveReady)
+            {
+                MessageBox.Show("当前记录已确认", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            DialogResult dr = MessageBox.Show("是否确认删除选中记录", FormConstant.MessageBoxTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dr == DialogResult.Yes)
+            {
+                ErrorCode result = this.storeBusiness.StockMoveDelete(this.currentStockMove);
+                if (result == ErrorCode.Success)
+                {
+                    MessageBox.Show("删除成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.currentStockMove = null;
+                }
+                else
+                {
+                    MessageBox.Show("删除失败:" + result.DisplayName(), FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
         }
 
         /// <summary>
