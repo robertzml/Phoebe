@@ -238,6 +238,10 @@ namespace Phoebe.FormUI
                 {
                     return ErrorCode.WarehouseCannotBeEmpty;
                 }
+                if (cargo.Count == 0)
+                {
+                    return ErrorCode.CargoCountZero;
+                }
                 if (cargo.Name == "")
                 {
                     return ErrorCode.EmptyName;
@@ -245,8 +249,14 @@ namespace Phoebe.FormUI
 
                 cargo.ID = Guid.NewGuid();
                 cargo.ContractID = stockIn.ContractID;
-                cargo.EqualWeight = true;
+                cargo.EqualWeight = this.isEqualWeight;
+                if (this.isEqualWeight)
+                {
+                    cargo.TotalWeight = Math.Round(cargo.Count * cargo.UnitWeight / 1000, 3);
+                    cargo.TotalVolume = Math.Round(cargo.Count * cargo.UnitVolume);
+                }
                 cargo.StoreCount = cargo.Count;
+                cargo.StoreWeight = cargo.TotalWeight;
                 cargo.UnitPrice = billing.UnitPrice;
                 cargo.RegisterTime = stockIn.InTime;
                 cargo.UserID = stockIn.UserID;

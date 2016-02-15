@@ -20,9 +20,9 @@ namespace Phoebe.Model
             this.StockOuts = new HashSet<StockOut>();
             this.StockMoves = new HashSet<StockMove>();
             this.StockIns = new HashSet<StockIn>();
-            this.Cargoes = new HashSet<Cargo>();
             this.Billings = new HashSet<Billing>();
             this.SettlementDetails = new HashSet<SettlementDetail>();
+            this.Cargoes = new HashSet<Cargo>();
         }
     
         public int ID { get; set; }
@@ -47,10 +47,10 @@ namespace Phoebe.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StockIn> StockIns { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Cargo> Cargoes { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Billing> Billings { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SettlementDetail> SettlementDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Cargo> Cargoes { get; set; }
     }
 }

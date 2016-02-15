@@ -28,11 +28,11 @@ namespace Phoebe.Model
         public string Remark { get; set; }
         public int Status { get; set; }
     
+        public virtual StockMove StockMove { get; set; }
+        public virtual Warehouse Warehouse { get; set; }
         public virtual Cargo SourceCargo { get; set; }
         public virtual Cargo NewCargo { get; set; }
         public virtual Stock SourceStock { get; set; }
         public virtual Stock NewStock { get; set; }
-        public virtual StockMove StockMove { get; set; }
-        public virtual Warehouse Warehouse { get; set; }
     }
 }

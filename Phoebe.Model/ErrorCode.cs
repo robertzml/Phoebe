@@ -158,6 +158,12 @@ namespace Phoebe.Model
         /// </summary>
         [Display(Name = "货品无法结算")]
         CargoCannotSettled = 41,
+
+        /// <summary>
+        /// 货品数量为零
+        /// </summary>
+        [Display(Name = "货品数量为零")]
+        CargoCountZero = 42,
         #endregion //Cargo
 
         #region Stock

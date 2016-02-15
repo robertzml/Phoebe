@@ -476,6 +476,7 @@ namespace Phoebe.Business
                     stock.ID = Guid.NewGuid();
                     stock.WarehouseID = item.WarehouseID;
                     stock.Count = item.Count;
+                    stock.Weight = item.InWeight;
                     stock.CargoID = item.CargoID;
                     stock.InTime = si.InTime;
                     stock.Source = (int)SourceType.StockIn;
@@ -654,10 +655,12 @@ namespace Phoebe.Business
                     if (cargo.StoreCount == item.Count) // all stock out
                     {
                         cargo.StoreCount = 0;
+                        cargo.StoreWeight = 0;
                         cargo.OutTime = so.OutTime;
                         cargo.Status = (int)EntityStatus.CargoStockOut;
 
                         stock.Count = 0;
+                        stock.Weight = 0;
                         stock.OutTime = so.OutTime;
                         stock.Destination = (int)DestinationType.StockOut;
                         stock.Status = (int)EntityStatus.StoreOut;
@@ -665,7 +668,9 @@ namespace Phoebe.Business
                     else
                     {
                         cargo.StoreCount -= item.Count;
+                        cargo.StoreWeight -= item.OutWeight;
                         stock.Count -= item.Count;
+                        stock.Weight = cargo.StoreWeight;
                     }
 
                     //change stockout details status
@@ -859,6 +864,7 @@ namespace Phoebe.Business
                         cargo.WarehouseID = item.WarehouseID;
 
                         stock.Count = 0;
+                        stock.Weight = 0;
                         stock.OutTime = sm.MoveTime;
                         stock.Destination = (int)DestinationType.StockMove;
                         stock.Status = (int)EntityStatus.StoreOut;
@@ -868,6 +874,7 @@ namespace Phoebe.Business
                         newStock.WarehouseID = item.WarehouseID;
                         newStock.CargoID = cargo.ID;
                         newStock.Count = item.Count;
+                        newStock.Weight = item.MoveWeight;
                         newStock.InTime = sm.MoveTime;
                         newStock.Source = (int)SourceType.StockMove;
                         newStock.Remark = stock.Remark;
@@ -881,7 +888,9 @@ namespace Phoebe.Business
                     else
                     {
                         cargo.StoreCount -= item.Count;
+                        cargo.StoreWeight -= item.MoveWeight;
                         stock.Count -= item.Count;
+                        stock.Weight = cargo.StoreWeight;
 
                         // add new cargo
                         Cargo newCargo = new Cargo
@@ -898,6 +907,7 @@ namespace Phoebe.Business
                             UnitVolume = cargo.UnitVolume,
                             TotalVolume = Math.Round(Convert.ToDouble(item.Count * cargo.UnitVolume), 3),
                             StoreCount = item.Count,
+                            StoreWeight = item.MoveWeight,
                             WarehouseID = item.WarehouseID,
                             UnitPrice = cargo.UnitPrice,
                             OriginPlace = cargo.OriginPlace,
@@ -919,6 +929,7 @@ namespace Phoebe.Business
                         newStock.WarehouseID = item.WarehouseID;
                         newStock.CargoID = newCargo.ID;
                         newStock.Count = item.Count;
+                        newStock.Weight = newCargo.TotalWeight;
                         newStock.InTime = sm.MoveTime;
                         newStock.Source = 1;
                         newStock.Remark = stock.Remark;

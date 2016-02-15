@@ -27,7 +27,7 @@ namespace Phoebe.Model
     
         public virtual StockOut StockOut { get; set; }
         public virtual Warehouse Warehouse { get; set; }
-        public virtual Stock Stock { get; set; }
         public virtual Cargo Cargo { get; set; }
+        public virtual Stock Stock { get; set; }
     }
 }

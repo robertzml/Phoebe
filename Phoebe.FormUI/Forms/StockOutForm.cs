@@ -173,7 +173,7 @@ namespace Phoebe.FormUI
                         return ErrorCode.StockOutCountZero;
                     }
                     if (this.isEqualWeight)
-                        soDetail.OutWeight = cargo.UnitWeight * soDetail.Count / 1000;
+                        soDetail.OutWeight = Math.Round(cargo.UnitWeight * soDetail.Count / 1000, 3);
                     else
                         soDetail.OutWeight = Convert.ToDouble(row.Cells[this.columnOutWeight.Index].Value);
                     soDetail.Status = (int)EntityStatus.StockOutReady;

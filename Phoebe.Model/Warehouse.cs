@@ -20,9 +20,9 @@ namespace Phoebe.Model
             this.ChildrenWarehouse = new HashSet<Warehouse>();
             this.StockInDetails = new HashSet<StockInDetail>();
             this.StockOutDetails = new HashSet<StockOutDetail>();
-            this.Stocks = new HashSet<Stock>();
-            this.Cargoes = new HashSet<Cargo>();
             this.StockMoveDetails = new HashSet<StockMoveDetail>();
+            this.Cargoes = new HashSet<Cargo>();
+            this.Stocks = new HashSet<Stock>();
         }
     
         public int ID { get; set; }
@@ -41,10 +41,10 @@ namespace Phoebe.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StockOutDetail> StockOutDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Stock> Stocks { get; set; }
+        public virtual ICollection<StockMoveDetail> StockMoveDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cargo> Cargoes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<StockMoveDetail> StockMoveDetails { get; set; }
+        public virtual ICollection<Stock> Stocks { get; set; }
     }
 }

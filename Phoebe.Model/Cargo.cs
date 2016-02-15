@@ -19,9 +19,9 @@ namespace Phoebe.Model
         {
             this.Stocks = new HashSet<Stock>();
             this.StockInDetails = new HashSet<StockInDetail>();
-            this.StockOutDetails = new HashSet<StockOutDetail>();
             this.StockMoveDetails = new HashSet<StockMoveDetail>();
             this.StockMoveDetails1 = new HashSet<StockMoveDetail>();
+            this.StockOutDetails = new HashSet<StockOutDetail>();
         }
     
         public System.Guid ID { get; set; }
@@ -36,6 +36,7 @@ namespace Phoebe.Model
         public double UnitVolume { get; set; }
         public double TotalVolume { get; set; }
         public int StoreCount { get; set; }
+        public double StoreWeight { get; set; }
         public Nullable<int> WarehouseID { get; set; }
         public decimal UnitPrice { get; set; }
         public string OriginPlace { get; set; }
@@ -60,10 +61,10 @@ namespace Phoebe.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StockInDetail> StockInDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<StockOutDetail> StockOutDetails { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StockMoveDetail> StockMoveDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StockMoveDetail> StockMoveDetails1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StockOutDetail> StockOutDetails { get; set; }
     }
 }
