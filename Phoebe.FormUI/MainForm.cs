@@ -17,6 +17,9 @@ namespace Phoebe.FormUI
     public partial class MainForm : Form
     {
         #region Field
+        /// <summary>
+        /// 当前用户
+        /// </summary>
         private User currentUser;
         #endregion //Field
 
@@ -38,6 +41,11 @@ namespace Phoebe.FormUI
 
         #region Event
         #region Form Event
+        /// <summary>
+        /// 窗体载入
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MainForm_Load(object sender, EventArgs e)
         {
             UpdateStatus();
@@ -242,6 +250,19 @@ namespace Phoebe.FormUI
         }
 
         /// <summary>
+        /// 报表管理 - 出入库报表
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void menuStockFlowReport_Click(object sender, EventArgs e)
+        {
+            StockFlowReportForm form = new StockFlowReportForm();
+            form.MdiParent = this;
+            form.WindowState = FormWindowState.Maximized;
+            form.Show();
+        }
+
+        /// <summary>
         /// 用户 - 用户列表
         /// </summary>
         private void menuUserList_Click(object sender, EventArgs e)
@@ -274,7 +295,5 @@ namespace Phoebe.FormUI
         #endregion //Menu Event
 
         #endregion //Event
-
-       
     }
 }

@@ -51,6 +51,7 @@
             this.menuSettleCreate = new System.Windows.Forms.ToolStripMenuItem();
             this.menuPayment = new System.Windows.Forms.ToolStripMenuItem();
             this.menuAccount = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuSettleList = new System.Windows.Forms.ToolStripMenuItem();
             this.menuReport = new System.Windows.Forms.ToolStripMenuItem();
             this.menuDailyReport = new System.Windows.Forms.ToolStripMenuItem();
             this.menuUser = new System.Windows.Forms.ToolStripMenuItem();
@@ -61,7 +62,7 @@
             this.mainStauts = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusUser = new System.Windows.Forms.ToolStripStatusLabel();
-            this.menuSettleList = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStockFlowReport = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenu.SuspendLayout();
             this.mainStauts.SuspendLayout();
             this.SuspendLayout();
@@ -95,14 +96,14 @@
             // menuCustomerList
             // 
             this.menuCustomerList.Name = "menuCustomerList";
-            this.menuCustomerList.Size = new System.Drawing.Size(124, 22);
+            this.menuCustomerList.Size = new System.Drawing.Size(152, 22);
             this.menuCustomerList.Text = "客户列表";
             this.menuCustomerList.Click += new System.EventHandler(this.menuCustomerList_Click);
             // 
             // menuCustomerAdd
             // 
             this.menuCustomerAdd.Name = "menuCustomerAdd";
-            this.menuCustomerAdd.Size = new System.Drawing.Size(124, 22);
+            this.menuCustomerAdd.Size = new System.Drawing.Size(152, 22);
             this.menuCustomerAdd.Text = "添加客户";
             this.menuCustomerAdd.Click += new System.EventHandler(this.menuCustomerAdd_Click);
             // 
@@ -229,35 +230,43 @@
             // menuColdPriceList
             // 
             this.menuColdPriceList.Name = "menuColdPriceList";
-            this.menuColdPriceList.Size = new System.Drawing.Size(152, 22);
+            this.menuColdPriceList.Size = new System.Drawing.Size(136, 22);
             this.menuColdPriceList.Text = "冷藏费清单";
             this.menuColdPriceList.Click += new System.EventHandler(this.menuColdPriceList_Click);
             // 
             // menuSettleCreate
             // 
             this.menuSettleCreate.Name = "menuSettleCreate";
-            this.menuSettleCreate.Size = new System.Drawing.Size(152, 22);
+            this.menuSettleCreate.Size = new System.Drawing.Size(136, 22);
             this.menuSettleCreate.Text = "费用结算";
             this.menuSettleCreate.Click += new System.EventHandler(this.menuSettleCreate_Click);
             // 
             // menuPayment
             // 
             this.menuPayment.Name = "menuPayment";
-            this.menuPayment.Size = new System.Drawing.Size(152, 22);
+            this.menuPayment.Size = new System.Drawing.Size(136, 22);
             this.menuPayment.Text = "客户缴费";
             this.menuPayment.Click += new System.EventHandler(this.menuPayment_Click);
             // 
             // menuAccount
             // 
             this.menuAccount.Name = "menuAccount";
-            this.menuAccount.Size = new System.Drawing.Size(152, 22);
+            this.menuAccount.Size = new System.Drawing.Size(136, 22);
             this.menuAccount.Text = "客户对账";
             this.menuAccount.Click += new System.EventHandler(this.menuAccount_Click);
+            // 
+            // menuSettleList
+            // 
+            this.menuSettleList.Name = "menuSettleList";
+            this.menuSettleList.Size = new System.Drawing.Size(136, 22);
+            this.menuSettleList.Text = "结算记录";
+            this.menuSettleList.Click += new System.EventHandler(this.menuSettleList_Click);
             // 
             // menuReport
             // 
             this.menuReport.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuDailyReport});
+            this.menuDailyReport,
+            this.menuStockFlowReport});
             this.menuReport.Name = "menuReport";
             this.menuReport.Size = new System.Drawing.Size(68, 21);
             this.menuReport.Text = "报表管理";
@@ -265,7 +274,7 @@
             // menuDailyReport
             // 
             this.menuDailyReport.Name = "menuDailyReport";
-            this.menuDailyReport.Size = new System.Drawing.Size(112, 22);
+            this.menuDailyReport.Size = new System.Drawing.Size(152, 22);
             this.menuDailyReport.Text = "日报表";
             this.menuDailyReport.Click += new System.EventHandler(this.menuDailyReport_Click);
             // 
@@ -311,7 +320,7 @@
             this.mainStauts.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
             this.statusUser});
-            this.mainStauts.Location = new System.Drawing.Point(0, 564);
+            this.mainStauts.Location = new System.Drawing.Point(0, 519);
             this.mainStauts.Name = "mainStauts";
             this.mainStauts.Size = new System.Drawing.Size(949, 26);
             this.mainStauts.TabIndex = 2;
@@ -335,18 +344,18 @@
             this.statusUser.Size = new System.Drawing.Size(44, 21);
             this.statusUser.Text = "name";
             // 
-            // menuSettleList
+            // menuStockFlowReport
             // 
-            this.menuSettleList.Name = "menuSettleList";
-            this.menuSettleList.Size = new System.Drawing.Size(152, 22);
-            this.menuSettleList.Text = "结算记录";
-            this.menuSettleList.Click += new System.EventHandler(this.menuSettleList_Click);
+            this.menuStockFlowReport.Name = "menuStockFlowReport";
+            this.menuStockFlowReport.Size = new System.Drawing.Size(152, 22);
+            this.menuStockFlowReport.Text = "出入库报表";
+            this.menuStockFlowReport.Click += new System.EventHandler(this.menuStockFlowReport_Click);
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(949, 590);
+            this.ClientSize = new System.Drawing.Size(949, 545);
             this.Controls.Add(this.mainStauts);
             this.Controls.Add(this.mainMenu);
             this.IsMdiContainer = true;
@@ -400,6 +409,7 @@
         private System.Windows.Forms.ToolStripMenuItem menuPayment;
         private System.Windows.Forms.ToolStripMenuItem menuAccount;
         private System.Windows.Forms.ToolStripMenuItem menuSettleList;
+        private System.Windows.Forms.ToolStripMenuItem menuStockFlowReport;
     }
 }
 

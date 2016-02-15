@@ -236,6 +236,12 @@
     <Compile Include="Forms\SettleListForm.Designer.cs">
       <DependentUpon>SettleListForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\StockFlowReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\StockFlowReportForm.Designer.cs">
+      <DependentUpon>StockFlowReportForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Forms\AccountForm.resx">
       <DependentUpon>AccountForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -327,6 +333,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SettleListForm.resx">
       <DependentUpon>SettleListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\StockFlowReportForm.resx">
+      <DependentUpon>StockFlowReportForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\Phoebe.Model.Billing.datasource" />
