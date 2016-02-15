@@ -172,6 +172,10 @@ namespace Phoebe.FormUI
                     {
                         return ErrorCode.StockOutCountZero;
                     }
+                    if (soDetail.Count > cargo.StoreCount)
+                    {
+                        return ErrorCode.StockMoveCountOverflow;
+                    }
                     if (this.isEqualWeight)
                         soDetail.OutWeight = Math.Round(cargo.UnitWeight * soDetail.Count / 1000, 3);
                     else

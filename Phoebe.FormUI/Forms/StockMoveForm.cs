@@ -185,6 +185,10 @@ namespace Phoebe.FormUI
                     {
                         return ErrorCode.StockMoveCountZero;
                     }
+                    if (smDetail.Count > cargo.StoreCount)
+                    {
+                        return ErrorCode.StockMoveCountOverflow;
+                    }
                     smDetail.IsAllMove = (smDetail.StoreCount == smDetail.Count);
                     if (this.isEqualWeight)
                         smDetail.MoveWeight = cargo.UnitWeight * smDetail.Count / 1000;
