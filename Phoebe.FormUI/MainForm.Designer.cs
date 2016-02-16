@@ -54,6 +54,7 @@
             this.menuSettleList = new System.Windows.Forms.ToolStripMenuItem();
             this.menuReport = new System.Windows.Forms.ToolStripMenuItem();
             this.menuDailyReport = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStockFlowReport = new System.Windows.Forms.ToolStripMenuItem();
             this.menuUser = new System.Windows.Forms.ToolStripMenuItem();
             this.menuUserList = new System.Windows.Forms.ToolStripMenuItem();
             this.menuUserGroupList = new System.Windows.Forms.ToolStripMenuItem();
@@ -62,7 +63,7 @@
             this.mainStauts = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusUser = new System.Windows.Forms.ToolStripStatusLabel();
-            this.menuStockFlowReport = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStockInventoryReport = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenu.SuspendLayout();
             this.mainStauts.SuspendLayout();
             this.SuspendLayout();
@@ -96,14 +97,14 @@
             // menuCustomerList
             // 
             this.menuCustomerList.Name = "menuCustomerList";
-            this.menuCustomerList.Size = new System.Drawing.Size(152, 22);
+            this.menuCustomerList.Size = new System.Drawing.Size(124, 22);
             this.menuCustomerList.Text = "客户列表";
             this.menuCustomerList.Click += new System.EventHandler(this.menuCustomerList_Click);
             // 
             // menuCustomerAdd
             // 
             this.menuCustomerAdd.Name = "menuCustomerAdd";
-            this.menuCustomerAdd.Size = new System.Drawing.Size(152, 22);
+            this.menuCustomerAdd.Size = new System.Drawing.Size(124, 22);
             this.menuCustomerAdd.Text = "添加客户";
             this.menuCustomerAdd.Click += new System.EventHandler(this.menuCustomerAdd_Click);
             // 
@@ -266,7 +267,8 @@
             // 
             this.menuReport.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuDailyReport,
-            this.menuStockFlowReport});
+            this.menuStockFlowReport,
+            this.menuStockInventoryReport});
             this.menuReport.Name = "menuReport";
             this.menuReport.Size = new System.Drawing.Size(68, 21);
             this.menuReport.Text = "报表管理";
@@ -277,6 +279,13 @@
             this.menuDailyReport.Size = new System.Drawing.Size(152, 22);
             this.menuDailyReport.Text = "日报表";
             this.menuDailyReport.Click += new System.EventHandler(this.menuDailyReport_Click);
+            // 
+            // menuStockFlowReport
+            // 
+            this.menuStockFlowReport.Name = "menuStockFlowReport";
+            this.menuStockFlowReport.Size = new System.Drawing.Size(152, 22);
+            this.menuStockFlowReport.Text = "出入库报表";
+            this.menuStockFlowReport.Click += new System.EventHandler(this.menuStockFlowReport_Click);
             // 
             // menuUser
             // 
@@ -344,12 +353,12 @@
             this.statusUser.Size = new System.Drawing.Size(44, 21);
             this.statusUser.Text = "name";
             // 
-            // menuStockFlowReport
+            // menuStockInventoryReport
             // 
-            this.menuStockFlowReport.Name = "menuStockFlowReport";
-            this.menuStockFlowReport.Size = new System.Drawing.Size(152, 22);
-            this.menuStockFlowReport.Text = "出入库报表";
-            this.menuStockFlowReport.Click += new System.EventHandler(this.menuStockFlowReport_Click);
+            this.menuStockInventoryReport.Name = "menuStockInventoryReport";
+            this.menuStockInventoryReport.Size = new System.Drawing.Size(152, 22);
+            this.menuStockInventoryReport.Text = "库存盘点报表";
+            this.menuStockInventoryReport.Click += new System.EventHandler(this.menuStockInventoryReport_Click);
             // 
             // MainForm
             // 
@@ -410,6 +419,7 @@
         private System.Windows.Forms.ToolStripMenuItem menuAccount;
         private System.Windows.Forms.ToolStripMenuItem menuSettleList;
         private System.Windows.Forms.ToolStripMenuItem menuStockFlowReport;
+        private System.Windows.Forms.ToolStripMenuItem menuStockInventoryReport;
     }
 }
 

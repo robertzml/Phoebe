@@ -75,6 +75,7 @@
     <Compile Include="FirstCategory.cs">
       <DependentUpon>PhoebeModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Inventory.cs" />
     <Compile Include="Payment.cs">
       <DependentUpon>PhoebeModel.tt</DependentUpon>
     </Compile>

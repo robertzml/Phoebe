@@ -23,6 +23,72 @@ namespace Phoebe.Business
         }
         #endregion //Constructor
 
+        #region Function
+        private Inventory SetInventoryStart(List<Inventory> data, Storage start, DateTime endTime, int customerID, string customerName)
+        {
+            var inv = data.SingleOrDefault(r => r.CustomerID == customerID && r.FirstCategoryID == start.FirstCategoryID &&
+                r.SecondCategoryID == start.SecondCategoryID && r.ThirdCategoryID == start.ThirdCategoryID);
+
+            if (inv == null)
+            {
+                Inventory inventory = new Inventory();
+                inventory.CustomerID = customerID;
+                inventory.CustomerName = customerName;
+                inventory.FirstCategoryID = start.FirstCategoryID;
+                inventory.FirstCategoryName = start.FirstCategoryName;
+                inventory.SecondCategoryID = start.SecondCategoryID;
+                inventory.SecondCategoryName = start.SecondCategoryName;
+                inventory.ThirdCategoryID = start.ThirdCategoryID;
+                inventory.ThirdCategoryName = start.ThirdCategoryName;
+                inventory.StartTime = start.StorageDate;
+                inventory.StartCount = start.Count;
+                inventory.StartWeight = start.Weight;
+                inventory.EndTime = endTime;
+
+                return inventory;
+            }
+            else
+            {
+                inv.StartCount += start.Count;
+                inv.StartWeight += start.Weight;
+
+                return null;
+            }
+        }
+
+        public Inventory SetInventoryEnd(List<Inventory> data, Storage end, DateTime startTime, int customerID, string customerName)
+        {
+            var inv = data.SingleOrDefault(r => r.CustomerID == customerID && r.FirstCategoryID == end.FirstCategoryID &&
+               r.SecondCategoryID == end.SecondCategoryID && r.ThirdCategoryID == end.ThirdCategoryID);
+
+            if (inv == null)
+            {
+                Inventory inventory = new Inventory();
+                inventory.CustomerID = customerID;
+                inventory.CustomerName = customerName;
+                inventory.FirstCategoryID = end.FirstCategoryID;
+                inventory.FirstCategoryName = end.FirstCategoryName;
+                inventory.SecondCategoryID = end.SecondCategoryID;
+                inventory.SecondCategoryName = end.SecondCategoryName;
+                inventory.ThirdCategoryID = end.ThirdCategoryID;
+                inventory.ThirdCategoryName = end.ThirdCategoryName;
+                inventory.StartTime = startTime;
+                inventory.EndTime = end.StorageDate;
+                inventory.EndCount = end.Count;
+                inventory.EndWeight = end.Weight;
+
+                return inventory;
+            }
+            else
+            {
+                inv.EndCount += end.Count;
+                inv.EndWeight += end.Weight;
+
+                return null;
+            }
+        }
+        #endregion //Function
+
         #region Method
         /// <summary>
         /// 获取日入库
@@ -264,6 +330,52 @@ namespace Phoebe.Business
                     flow.Type = StockFlowType.StockOut;
 
                     data.Add(flow);
+                }
+            }
+
+            return data;
+        }
+
+        /// <summary>
+        /// 获取库存盘点
+        /// </summary>
+        /// <param name="startTime">开始日期</param>
+        /// <param name="endTime">结束日期</param>
+        /// <param name="customerID">客户ID</param>
+        /// <returns></returns>
+        public List<Inventory> GetInventory(DateTime startTime, DateTime endTime, int customerID)
+        {
+            List<Inventory> data = new List<Inventory>();
+
+            StoreBusiness storeBusiness = new StoreBusiness();
+
+            var customer = this.context.Customers.Find(customerID);
+            var contracts = this.context.Contracts.Where(r => r.CustomerID == customer.ID);
+            int index = 1;
+
+            foreach (var contract in contracts)
+            {
+                var startStorages = storeBusiness.GetInDay(contract.ID, startTime);
+                var endStorages = storeBusiness.GetInDay(contract.ID, endTime);
+
+                foreach (var storage in startStorages)
+                {
+                    var inv = SetInventoryStart(data, storage, endTime, customer.ID, customer.Name);
+                    if (inv != null)
+                    {
+                        inv.Number = index++;
+                        data.Add(inv);
+                    }
+                }
+
+                foreach (var storage in endStorages)
+                {
+                    var inv = SetInventoryEnd(data, storage, startTime, customer.ID, customer.Name);
+                    if (inv != null)
+                    {
+                        inv.Number = index++;
+                        data.Add(inv);
+                    }
                 }
             }
 

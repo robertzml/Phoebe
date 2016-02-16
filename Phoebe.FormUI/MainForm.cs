@@ -263,6 +263,19 @@ namespace Phoebe.FormUI
         }
 
         /// <summary>
+        /// 报表管理 - 库存盘点报表
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void menuStockInventoryReport_Click(object sender, EventArgs e)
+        {
+            StockInventoryReportForm form = new StockInventoryReportForm();
+            form.MdiParent = this;
+            form.WindowState = FormWindowState.Maximized;
+            form.Show();
+        }
+
+        /// <summary>
         /// 用户 - 用户列表
         /// </summary>
         private void menuUserList_Click(object sender, EventArgs e)
