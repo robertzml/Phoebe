@@ -26,9 +26,7 @@ namespace Phoebe.FormUI
         private ContractBusiness contractBusiness;
 
         private CategoryBusiness categoryBusiness;
-
-        private WarehouseBusiness warehouseBusiness;
-
+    
         private StoreBusiness storeBusiness;
 
         /// <summary>
@@ -61,7 +59,6 @@ namespace Phoebe.FormUI
             this.customerBusiness = new CustomerBusiness();
             this.contractBusiness = new ContractBusiness();
             this.categoryBusiness = new CategoryBusiness();
-            this.warehouseBusiness = new WarehouseBusiness();
             this.storeBusiness = new StoreBusiness();
         }
 
@@ -87,11 +84,6 @@ namespace Phoebe.FormUI
             tcColumn.DataSource = categoryBusiness.GetThirdCategory();
             tcColumn.DisplayMember = "Name";
             tcColumn.ValueMember = "ID";
-
-            DataGridViewComboBoxColumn whColumn = this.dataGridViewColumnWarehouse;
-            whColumn.DataSource = this.warehouseBusiness.Get();
-            whColumn.DisplayMember = "Number";
-            whColumn.ValueMember = "ID";
         }
 
         /// <summary>
@@ -234,7 +226,7 @@ namespace Phoebe.FormUI
             foreach (DataGridViewRow row in this.cargoDataGridView.Rows)
             {
                 var cargo = row.DataBoundItem as Cargo;
-                if (cargo.WarehouseID == null)
+                if (string.IsNullOrEmpty(cargo.WarehouseNumber))
                 {
                     return ErrorCode.WarehouseCannotBeEmpty;
                 }
@@ -267,7 +259,7 @@ namespace Phoebe.FormUI
                 siDetail.ID = Guid.NewGuid();
                 siDetail.StockInID = stockIn.ID;
                 siDetail.CargoID = cargo.ID;
-                siDetail.WarehouseID = cargo.WarehouseID.Value;
+                siDetail.WarehouseNumber = cargo.WarehouseNumber;
                 siDetail.Count = cargo.Count;
                 siDetail.InWeight = cargo.TotalWeight;
                 siDetail.Status = (int)EntityStatus.StockInReady;

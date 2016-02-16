@@ -19,12 +19,6 @@ namespace Phoebe.Model
         public DateTime StorageDate { get; set; }
 
         /// <summary>
-        /// 库位ID
-        /// </summary>
-        [Display(Name = "库位ID")]
-        public int WarehouseID { get; set; }
-
-        /// <summary>
         /// 库位编号
         /// </summary>
         [Display(Name = "库位编号")]
@@ -47,7 +41,6 @@ namespace Phoebe.Model
         /// </summary>
         [Display(Name = "货品名称")]
         public string CargoName { get; set; }
-
 
         /// <summary>
         /// 合同ID

@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StockOutForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.treeViewReceipt = new System.Windows.Forms.TreeView();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -41,6 +41,7 @@
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.toolConfirm = new System.Windows.Forms.ToolStripButton();
             this.toolRefresh = new System.Windows.Forms.ToolStripButton();
+            this.toolDelete = new System.Windows.Forms.ToolStripButton();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.textBoxRemark = new System.Windows.Forms.TextBox();
@@ -61,6 +62,17 @@
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.cargoDataGridView = new System.Windows.Forms.DataGridView();
+            this.cargoBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.cargoBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
+            this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
+            this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
+            this.bindingNavigatorPositionItem = new System.Windows.Forms.ToolStripTextBox();
+            this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.columnSelect = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewColumnFirstCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -74,7 +86,7 @@
             this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewColumnWarehouse = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnWarehouseNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -82,18 +94,6 @@
             this.dataGridViewTextBoxColumn19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewColumnStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cargoBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.cargoBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
-            this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
-            this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
-            this.bindingNavigatorPositionItem = new System.Windows.Forms.ToolStripTextBox();
-            this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolDelete = new System.Windows.Forms.ToolStripButton();
             this.groupBox1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -200,6 +200,15 @@
             this.toolRefresh.Size = new System.Drawing.Size(52, 22);
             this.toolRefresh.Text = "刷新";
             this.toolRefresh.Click += new System.EventHandler(this.toolRefresh_Click);
+            // 
+            // toolDelete
+            // 
+            this.toolDelete.Image = global::Phoebe.FormUI.Properties.Resources.close_delete;
+            this.toolDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolDelete.Name = "toolDelete";
+            this.toolDelete.Size = new System.Drawing.Size(52, 22);
+            this.toolDelete.Text = "删除";
+            this.toolDelete.Click += new System.EventHandler(this.toolDelete_Click);
             // 
             // groupBox2
             // 
@@ -411,7 +420,7 @@
             this.dataGridViewTextBoxColumn8,
             this.dataGridViewTextBoxColumn9,
             this.dataGridViewTextBoxColumn10,
-            this.dataGridViewColumnWarehouse,
+            this.columnWarehouseNumber,
             this.dataGridViewTextBoxColumn13,
             this.dataGridViewTextBoxColumn14,
             this.dataGridViewTextBoxColumn15,
@@ -429,149 +438,6 @@
             this.cargoDataGridView.TabIndex = 0;
             this.cargoDataGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.cargoDataGridView_CellValueChanged);
             this.cargoDataGridView.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.cargoDataGridView_RowPrePaint);
-            // 
-            // columnSelect
-            // 
-            this.columnSelect.HeaderText = "选择";
-            this.columnSelect.Name = "columnSelect";
-            this.columnSelect.Width = 60;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "Name";
-            this.dataGridViewTextBoxColumn2.HeaderText = "名称";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            // 
-            // dataGridViewColumnFirstCategory
-            // 
-            this.dataGridViewColumnFirstCategory.HeaderText = "一级分类";
-            this.dataGridViewColumnFirstCategory.Name = "dataGridViewColumnFirstCategory";
-            this.dataGridViewColumnFirstCategory.ReadOnly = true;
-            // 
-            // dataGridViewColumnSecondCategory
-            // 
-            this.dataGridViewColumnSecondCategory.HeaderText = "二级分类";
-            this.dataGridViewColumnSecondCategory.Name = "dataGridViewColumnSecondCategory";
-            this.dataGridViewColumnSecondCategory.ReadOnly = true;
-            // 
-            // dataGridViewColumnThirdCategory
-            // 
-            this.dataGridViewColumnThirdCategory.HeaderText = "三级分类";
-            this.dataGridViewColumnThirdCategory.Name = "dataGridViewColumnThirdCategory";
-            this.dataGridViewColumnThirdCategory.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn6
-            // 
-            this.dataGridViewTextBoxColumn6.DataPropertyName = "Count";
-            this.dataGridViewTextBoxColumn6.HeaderText = "总数量";
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            this.dataGridViewTextBoxColumn6.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn11
-            // 
-            this.dataGridViewTextBoxColumn11.DataPropertyName = "StoreCount";
-            this.dataGridViewTextBoxColumn11.HeaderText = "在库数量";
-            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
-            this.dataGridViewTextBoxColumn11.ReadOnly = true;
-            // 
-            // columnOutCount
-            // 
-            this.columnOutCount.HeaderText = "出库数量";
-            this.columnOutCount.Name = "columnOutCount";
-            // 
-            // dataGridViewTextBoxColumn7
-            // 
-            this.dataGridViewTextBoxColumn7.DataPropertyName = "UnitWeight";
-            this.dataGridViewTextBoxColumn7.HeaderText = "单位重量(kg)";
-            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            this.dataGridViewTextBoxColumn7.ReadOnly = true;
-            this.dataGridViewTextBoxColumn7.Width = 120;
-            // 
-            // columnOutWeight
-            // 
-            this.columnOutWeight.HeaderText = "出库重量(t)";
-            this.columnOutWeight.Name = "columnOutWeight";
-            this.columnOutWeight.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn8
-            // 
-            this.dataGridViewTextBoxColumn8.DataPropertyName = "TotalWeight";
-            this.dataGridViewTextBoxColumn8.HeaderText = "总重量(t)";
-            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
-            this.dataGridViewTextBoxColumn8.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn9
-            // 
-            this.dataGridViewTextBoxColumn9.DataPropertyName = "UnitVolume";
-            this.dataGridViewTextBoxColumn9.HeaderText = "单位体积(立方)";
-            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
-            this.dataGridViewTextBoxColumn9.ReadOnly = true;
-            this.dataGridViewTextBoxColumn9.Width = 120;
-            // 
-            // dataGridViewTextBoxColumn10
-            // 
-            this.dataGridViewTextBoxColumn10.DataPropertyName = "TotalVolume";
-            this.dataGridViewTextBoxColumn10.HeaderText = "总体积(立方)";
-            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
-            this.dataGridViewTextBoxColumn10.ReadOnly = true;
-            this.dataGridViewTextBoxColumn10.Width = 120;
-            // 
-            // dataGridViewColumnWarehouse
-            // 
-            this.dataGridViewColumnWarehouse.HeaderText = "所在仓库";
-            this.dataGridViewColumnWarehouse.Name = "dataGridViewColumnWarehouse";
-            this.dataGridViewColumnWarehouse.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn13
-            // 
-            this.dataGridViewTextBoxColumn13.DataPropertyName = "OriginPlace";
-            this.dataGridViewTextBoxColumn13.HeaderText = "产地";
-            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
-            this.dataGridViewTextBoxColumn13.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn14
-            // 
-            this.dataGridViewTextBoxColumn14.DataPropertyName = "ShelfLife";
-            this.dataGridViewTextBoxColumn14.HeaderText = "保质期(月)";
-            this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
-            this.dataGridViewTextBoxColumn14.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn15
-            // 
-            this.dataGridViewTextBoxColumn15.DataPropertyName = "Specification";
-            this.dataGridViewTextBoxColumn15.HeaderText = "规格";
-            this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
-            this.dataGridViewTextBoxColumn15.ReadOnly = true;
-            // 
-            // dataGridViewColumnUser
-            // 
-            this.dataGridViewColumnUser.HeaderText = "登记人";
-            this.dataGridViewColumnUser.Name = "dataGridViewColumnUser";
-            this.dataGridViewColumnUser.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn19
-            // 
-            this.dataGridViewTextBoxColumn19.DataPropertyName = "InTime";
-            dataGridViewCellStyle2.Format = "d";
-            dataGridViewCellStyle2.NullValue = null;
-            this.dataGridViewTextBoxColumn19.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dataGridViewTextBoxColumn19.HeaderText = "入库时间";
-            this.dataGridViewTextBoxColumn19.Name = "dataGridViewTextBoxColumn19";
-            this.dataGridViewTextBoxColumn19.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn21
-            // 
-            this.dataGridViewTextBoxColumn21.DataPropertyName = "Remark";
-            this.dataGridViewTextBoxColumn21.HeaderText = "备注";
-            this.dataGridViewTextBoxColumn21.Name = "dataGridViewTextBoxColumn21";
-            this.dataGridViewTextBoxColumn21.ReadOnly = true;
-            // 
-            // dataGridViewColumnStatus
-            // 
-            this.dataGridViewColumnStatus.HeaderText = "状态";
-            this.dataGridViewColumnStatus.Name = "dataGridViewColumnStatus";
-            this.dataGridViewColumnStatus.ReadOnly = true;
             // 
             // cargoBindingSource
             // 
@@ -671,14 +537,149 @@
             this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
             this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
-            // toolDelete
+            // columnSelect
             // 
-            this.toolDelete.Image = global::Phoebe.FormUI.Properties.Resources.close_delete;
-            this.toolDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolDelete.Name = "toolDelete";
-            this.toolDelete.Size = new System.Drawing.Size(52, 22);
-            this.toolDelete.Text = "删除";
-            this.toolDelete.Click += new System.EventHandler(this.toolDelete_Click);
+            this.columnSelect.HeaderText = "选择";
+            this.columnSelect.Name = "columnSelect";
+            this.columnSelect.Width = 60;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "Name";
+            this.dataGridViewTextBoxColumn2.HeaderText = "名称";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            // 
+            // dataGridViewColumnFirstCategory
+            // 
+            this.dataGridViewColumnFirstCategory.HeaderText = "一级分类";
+            this.dataGridViewColumnFirstCategory.Name = "dataGridViewColumnFirstCategory";
+            this.dataGridViewColumnFirstCategory.ReadOnly = true;
+            // 
+            // dataGridViewColumnSecondCategory
+            // 
+            this.dataGridViewColumnSecondCategory.HeaderText = "二级分类";
+            this.dataGridViewColumnSecondCategory.Name = "dataGridViewColumnSecondCategory";
+            this.dataGridViewColumnSecondCategory.ReadOnly = true;
+            // 
+            // dataGridViewColumnThirdCategory
+            // 
+            this.dataGridViewColumnThirdCategory.HeaderText = "三级分类";
+            this.dataGridViewColumnThirdCategory.Name = "dataGridViewColumnThirdCategory";
+            this.dataGridViewColumnThirdCategory.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.DataPropertyName = "Count";
+            this.dataGridViewTextBoxColumn6.HeaderText = "总数量";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn11
+            // 
+            this.dataGridViewTextBoxColumn11.DataPropertyName = "StoreCount";
+            this.dataGridViewTextBoxColumn11.HeaderText = "在库数量";
+            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
+            this.dataGridViewTextBoxColumn11.ReadOnly = true;
+            // 
+            // columnOutCount
+            // 
+            this.columnOutCount.HeaderText = "出库数量";
+            this.columnOutCount.Name = "columnOutCount";
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.DataPropertyName = "UnitWeight";
+            this.dataGridViewTextBoxColumn7.HeaderText = "单位重量(kg)";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            this.dataGridViewTextBoxColumn7.ReadOnly = true;
+            this.dataGridViewTextBoxColumn7.Width = 120;
+            // 
+            // columnOutWeight
+            // 
+            this.columnOutWeight.HeaderText = "出库重量(t)";
+            this.columnOutWeight.Name = "columnOutWeight";
+            this.columnOutWeight.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn8
+            // 
+            this.dataGridViewTextBoxColumn8.DataPropertyName = "TotalWeight";
+            this.dataGridViewTextBoxColumn8.HeaderText = "总重量(t)";
+            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            this.dataGridViewTextBoxColumn8.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn9
+            // 
+            this.dataGridViewTextBoxColumn9.DataPropertyName = "UnitVolume";
+            this.dataGridViewTextBoxColumn9.HeaderText = "单位体积(立方)";
+            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+            this.dataGridViewTextBoxColumn9.ReadOnly = true;
+            this.dataGridViewTextBoxColumn9.Width = 120;
+            // 
+            // dataGridViewTextBoxColumn10
+            // 
+            this.dataGridViewTextBoxColumn10.DataPropertyName = "TotalVolume";
+            this.dataGridViewTextBoxColumn10.HeaderText = "总体积(立方)";
+            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
+            this.dataGridViewTextBoxColumn10.ReadOnly = true;
+            this.dataGridViewTextBoxColumn10.Width = 120;
+            // 
+            // columnWarehouseNumber
+            // 
+            this.columnWarehouseNumber.DataPropertyName = "WarehouseNumber";
+            this.columnWarehouseNumber.HeaderText = "所在仓库";
+            this.columnWarehouseNumber.Name = "columnWarehouseNumber";
+            this.columnWarehouseNumber.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn13
+            // 
+            this.dataGridViewTextBoxColumn13.DataPropertyName = "OriginPlace";
+            this.dataGridViewTextBoxColumn13.HeaderText = "产地";
+            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
+            this.dataGridViewTextBoxColumn13.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn14
+            // 
+            this.dataGridViewTextBoxColumn14.DataPropertyName = "ShelfLife";
+            this.dataGridViewTextBoxColumn14.HeaderText = "保质期(月)";
+            this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
+            this.dataGridViewTextBoxColumn14.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn15
+            // 
+            this.dataGridViewTextBoxColumn15.DataPropertyName = "Specification";
+            this.dataGridViewTextBoxColumn15.HeaderText = "规格";
+            this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
+            this.dataGridViewTextBoxColumn15.ReadOnly = true;
+            // 
+            // dataGridViewColumnUser
+            // 
+            this.dataGridViewColumnUser.HeaderText = "登记人";
+            this.dataGridViewColumnUser.Name = "dataGridViewColumnUser";
+            this.dataGridViewColumnUser.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn19
+            // 
+            this.dataGridViewTextBoxColumn19.DataPropertyName = "InTime";
+            dataGridViewCellStyle1.Format = "d";
+            dataGridViewCellStyle1.NullValue = null;
+            this.dataGridViewTextBoxColumn19.DefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridViewTextBoxColumn19.HeaderText = "入库时间";
+            this.dataGridViewTextBoxColumn19.Name = "dataGridViewTextBoxColumn19";
+            this.dataGridViewTextBoxColumn19.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn21
+            // 
+            this.dataGridViewTextBoxColumn21.DataPropertyName = "Remark";
+            this.dataGridViewTextBoxColumn21.HeaderText = "备注";
+            this.dataGridViewTextBoxColumn21.Name = "dataGridViewTextBoxColumn21";
+            this.dataGridViewTextBoxColumn21.ReadOnly = true;
+            // 
+            // dataGridViewColumnStatus
+            // 
+            this.dataGridViewColumnStatus.HeaderText = "状态";
+            this.dataGridViewColumnStatus.Name = "dataGridViewColumnStatus";
+            this.dataGridViewColumnStatus.ReadOnly = true;
             // 
             // StockOutForm
             // 
@@ -754,6 +755,7 @@
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
         private System.Windows.Forms.ToolStripButton toolRefresh;
+        private System.Windows.Forms.ToolStripButton toolDelete;
         private System.Windows.Forms.DataGridViewCheckBoxColumn columnSelect;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewColumnFirstCategory;
@@ -767,7 +769,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewColumnWarehouse;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnWarehouseNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn14;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn15;
@@ -775,6 +777,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn19;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn21;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewColumnStatus;
-        private System.Windows.Forms.ToolStripButton toolDelete;
     }
 }

@@ -165,7 +165,7 @@ namespace Phoebe.FormUI
                     soDetail.ID = Guid.NewGuid();
                     soDetail.StockOutID = stockOut.ID;
                     soDetail.CargoID = cargo.ID;
-                    soDetail.WarehouseID = cargo.WarehouseID.Value;
+                    soDetail.WarehouseNumber = cargo.WarehouseNumber;
                     soDetail.StoreCount = cargo.StoreCount;
                     soDetail.Count = Convert.ToInt32(row.Cells[this.columnOutCount.Index].Value);
                     if (soDetail.Count == 0)
@@ -484,11 +484,6 @@ namespace Phoebe.FormUI
                 if (cargo.ThirdCategory != null)
                 {
                     grid.Rows[e.RowIndex].Cells[this.dataGridViewColumnThirdCategory.Index].Value = cargo.ThirdCategory.Name;
-                }
-
-                if (cargo.Warehouse != null)
-                {
-                    grid.Rows[e.RowIndex].Cells[this.dataGridViewColumnWarehouse.Index].Value = cargo.Warehouse.Number;
                 }
 
                 if (cargo.User != null)

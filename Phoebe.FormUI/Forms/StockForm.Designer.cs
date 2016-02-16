@@ -54,7 +54,7 @@
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnWarehouse = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnWarehouseNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnCargo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnContract = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -181,7 +181,7 @@
             this.stockDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.stockDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn1,
-            this.columnWarehouse,
+            this.columnWarehouseNumber,
             this.columnCargo,
             this.columnContract,
             this.dataGridViewTextBoxColumn4,
@@ -308,11 +308,12 @@
             this.dataGridViewTextBoxColumn1.ReadOnly = true;
             this.dataGridViewTextBoxColumn1.Visible = false;
             // 
-            // columnWarehouse
+            // columnWarehouseNumber
             // 
-            this.columnWarehouse.HeaderText = "所在仓库";
-            this.columnWarehouse.Name = "columnWarehouse";
-            this.columnWarehouse.ReadOnly = true;
+            this.columnWarehouseNumber.DataPropertyName = "WarehouseNumber";
+            this.columnWarehouseNumber.HeaderText = "所在仓库";
+            this.columnWarehouseNumber.Name = "columnWarehouseNumber";
+            this.columnWarehouseNumber.ReadOnly = true;
             // 
             // columnCargo
             // 
@@ -432,7 +433,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox comboBoxContract;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnWarehouse;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnWarehouseNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnCargo;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnContract;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;

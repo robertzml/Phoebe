@@ -118,7 +118,7 @@ namespace Phoebe.Model
         /// 数量变化
         /// </summary>
         /// <remarks>
-        /// 整库移库时为否，冷藏费无更改
+        /// 整库移库时为否，冷藏费无更改，其它流水为真
         /// </remarks>
         public bool CountChange { get; set; }
     }

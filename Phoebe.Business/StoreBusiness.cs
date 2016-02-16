@@ -38,8 +38,7 @@ namespace Phoebe.Business
         {
             Storage storage = new Storage();
             storage.StorageDate = date;
-            storage.WarehouseID = stock.WarehouseID;
-            storage.Number = stock.Warehouse.Number;
+            storage.Number = stock.WarehouseNumber;
             storage.StockID = stock.ID;
             storage.CargoID = cargo.ID;
             storage.CargoName = cargo.Name;
@@ -153,7 +152,7 @@ namespace Phoebe.Business
 
             var stocks = from r in this.context.Stocks
                          where cargos.Select(s => s.ID).Contains(r.CargoID)
-                         orderby r.Warehouse.Number
+                         orderby r.WarehouseNumber
                          select r;
 
             return stocks.ToList();
@@ -474,7 +473,7 @@ namespace Phoebe.Business
 
                     Stock stock = new Stock();
                     stock.ID = Guid.NewGuid();
-                    stock.WarehouseID = item.WarehouseID;
+                    stock.WarehouseNumber = item.WarehouseNumber;
                     stock.Count = item.Count;
                     stock.Weight = item.InWeight;
                     stock.CargoID = item.CargoID;
@@ -861,7 +860,7 @@ namespace Phoebe.Business
                     var stock = item.SourceStock;
                     if (cargo.StoreCount == item.Count) // all move
                     {
-                        cargo.WarehouseID = item.WarehouseID;
+                        cargo.WarehouseNumber = item.WarehouseNumber;
 
                         stock.Count = 0;
                         stock.Weight = 0;
@@ -871,7 +870,7 @@ namespace Phoebe.Business
 
                         Stock newStock = new Stock();
                         newStock.ID = Guid.NewGuid();
-                        newStock.WarehouseID = item.WarehouseID;
+                        newStock.WarehouseNumber = item.WarehouseNumber;
                         newStock.CargoID = cargo.ID;
                         newStock.Count = item.Count;
                         newStock.Weight = item.MoveWeight;
@@ -908,7 +907,7 @@ namespace Phoebe.Business
                             TotalVolume = Math.Round(Convert.ToDouble(item.Count * cargo.UnitVolume), 3),
                             StoreCount = item.Count,
                             StoreWeight = item.MoveWeight,
-                            WarehouseID = item.WarehouseID,
+                            WarehouseNumber = item.WarehouseNumber,
                             UnitPrice = cargo.UnitPrice,
                             OriginPlace = cargo.OriginPlace,
                             Specification = cargo.Specification,
@@ -926,7 +925,7 @@ namespace Phoebe.Business
                         // add new stock
                         Stock newStock = new Stock();
                         newStock.ID = Guid.NewGuid();
-                        newStock.WarehouseID = item.WarehouseID;
+                        newStock.WarehouseNumber = item.WarehouseNumber;
                         newStock.CargoID = newCargo.ID;
                         newStock.Count = item.Count;
                         newStock.Weight = newCargo.TotalWeight;

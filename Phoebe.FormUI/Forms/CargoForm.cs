@@ -212,11 +212,6 @@ namespace Phoebe.FormUI
                     grid.Rows[e.RowIndex].Cells[this.dataGridViewColumnThirdCategory.Index].Value = cargo.ThirdCategory.Name;
                 }
 
-                if (cargo.Warehouse != null)
-                {
-                    grid.Rows[e.RowIndex].Cells[this.dataGridViewColumnWarehouse.Index].Value = cargo.Warehouse.Number;
-                }
-
                 if (cargo.User != null)
                 {
                     grid.Rows[e.RowIndex].Cells[this.dataGridViewColumnUserName.Index].Value = cargo.User.Name;

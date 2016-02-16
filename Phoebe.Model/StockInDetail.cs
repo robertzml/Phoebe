@@ -16,7 +16,7 @@ namespace Phoebe.Model
     {
         public System.Guid ID { get; set; }
         public System.Guid StockInID { get; set; }
-        public int WarehouseID { get; set; }
+        public string WarehouseNumber { get; set; }
         public System.Guid CargoID { get; set; }
         public int Count { get; set; }
         public double InWeight { get; set; }
@@ -24,9 +24,8 @@ namespace Phoebe.Model
         public string Remark { get; set; }
         public int Status { get; set; }
     
-        public virtual StockIn StockIn { get; set; }
-        public virtual Warehouse Warehouse { get; set; }
         public virtual Cargo Cargo { get; set; }
         public virtual Stock Stock { get; set; }
+        public virtual StockIn StockIn { get; set; }
     }
 }

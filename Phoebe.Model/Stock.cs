@@ -24,7 +24,7 @@ namespace Phoebe.Model
         }
     
         public System.Guid ID { get; set; }
-        public int WarehouseID { get; set; }
+        public string WarehouseNumber { get; set; }
         public System.Guid CargoID { get; set; }
         public int Count { get; set; }
         public double Weight { get; set; }
@@ -36,7 +36,6 @@ namespace Phoebe.Model
         public int Status { get; set; }
     
         public virtual Cargo Cargo { get; set; }
-        public virtual Warehouse Warehouse { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StockInDetail> StockInDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

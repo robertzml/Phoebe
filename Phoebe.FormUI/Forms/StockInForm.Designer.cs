@@ -67,15 +67,28 @@
             this.dateBusinessTime = new System.Windows.Forms.DateTimePicker();
             this.label3 = new System.Windows.Forms.Label();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolNew = new System.Windows.Forms.ToolStripButton();
+            this.打开OToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.toolSave = new System.Windows.Forms.ToolStripButton();
+            this.打印PToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
+            this.toolConfirm = new System.Windows.Forms.ToolStripButton();
+            this.toolRefresh = new System.Windows.Forms.ToolStripButton();
+            this.toolDelete = new System.Windows.Forms.ToolStripButton();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.cargoDataGridView = new System.Windows.Forms.DataGridView();
-            this.dataGridViewColumnWarehouse = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.cargoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.cargoBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
+            this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
+            this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.bindingNavigatorPositionItem = new System.Windows.Forms.ToolStripTextBox();
             this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.columnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewColumnFirstCategoryID = new System.Windows.Forms.DataGridViewComboBoxColumn();
@@ -86,24 +99,11 @@
             this.columnTotalWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnUnitVolume = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnTotalVolume = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnWarehouseNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cargoBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
-            this.toolNew = new System.Windows.Forms.ToolStripButton();
-            this.打开OToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.toolSave = new System.Windows.Forms.ToolStripButton();
-            this.打印PToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.toolConfirm = new System.Windows.Forms.ToolStripButton();
-            this.toolRefresh = new System.Windows.Forms.ToolStripButton();
-            this.toolDelete = new System.Windows.Forms.ToolStripButton();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -117,9 +117,9 @@
             this.toolStrip1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cargoDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cargoBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cargoBindingNavigator)).BeginInit();
             this.cargoBindingNavigator.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.cargoBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -483,10 +483,72 @@
             this.toolStrip1.TabStop = true;
             this.toolStrip1.Text = "toolStrip1";
             // 
+            // toolNew
+            // 
+            this.toolNew.Image = ((System.Drawing.Image)(resources.GetObject("toolNew.Image")));
+            this.toolNew.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolNew.Name = "toolNew";
+            this.toolNew.Size = new System.Drawing.Size(70, 22);
+            this.toolNew.Text = "新建(&N)";
+            this.toolNew.Click += new System.EventHandler(this.toolNew_Click);
+            // 
+            // 打开OToolStripButton
+            // 
+            this.打开OToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("打开OToolStripButton.Image")));
+            this.打开OToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.打开OToolStripButton.Name = "打开OToolStripButton";
+            this.打开OToolStripButton.Size = new System.Drawing.Size(70, 22);
+            this.打开OToolStripButton.Text = "打开(&O)";
+            // 
+            // toolSave
+            // 
+            this.toolSave.Image = ((System.Drawing.Image)(resources.GetObject("toolSave.Image")));
+            this.toolSave.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolSave.Name = "toolSave";
+            this.toolSave.Size = new System.Drawing.Size(67, 22);
+            this.toolSave.Text = "保存(&S)";
+            this.toolSave.Click += new System.EventHandler(this.toolSave_Click);
+            // 
+            // 打印PToolStripButton
+            // 
+            this.打印PToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("打印PToolStripButton.Image")));
+            this.打印PToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.打印PToolStripButton.Name = "打印PToolStripButton";
+            this.打印PToolStripButton.Size = new System.Drawing.Size(67, 22);
+            this.打印PToolStripButton.Text = "打印(&P)";
+            // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
             this.toolStripSeparator.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolConfirm
+            // 
+            this.toolConfirm.Enabled = false;
+            this.toolConfirm.Image = global::Phoebe.FormUI.Properties.Resources.check;
+            this.toolConfirm.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolConfirm.Name = "toolConfirm";
+            this.toolConfirm.Size = new System.Drawing.Size(76, 22);
+            this.toolConfirm.Text = "入库确认";
+            this.toolConfirm.Click += new System.EventHandler(this.toolConfirm_Click);
+            // 
+            // toolRefresh
+            // 
+            this.toolRefresh.Image = global::Phoebe.FormUI.Properties.Resources.refresh;
+            this.toolRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolRefresh.Name = "toolRefresh";
+            this.toolRefresh.Size = new System.Drawing.Size(52, 22);
+            this.toolRefresh.Text = "刷新";
+            this.toolRefresh.Click += new System.EventHandler(this.toolRefresh_Click);
+            // 
+            // toolDelete
+            // 
+            this.toolDelete.Image = global::Phoebe.FormUI.Properties.Resources.close_delete;
+            this.toolDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolDelete.Name = "toolDelete";
+            this.toolDelete.Size = new System.Drawing.Size(52, 22);
+            this.toolDelete.Text = "删除";
+            this.toolDelete.Click += new System.EventHandler(this.toolDelete_Click);
             // 
             // groupBox3
             // 
@@ -518,7 +580,7 @@
             this.columnTotalWeight,
             this.columnUnitVolume,
             this.columnTotalVolume,
-            this.dataGridViewColumnWarehouse,
+            this.columnWarehouseNumber,
             this.dataGridViewTextBoxColumn12,
             this.dataGridViewTextBoxColumn13,
             this.dataGridViewTextBoxColumn14,
@@ -535,11 +597,9 @@
             this.cargoDataGridView.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.cargoDataGridView_DataError);
             this.cargoDataGridView.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.cargoDataGridView_RowsAdded);
             // 
-            // dataGridViewColumnWarehouse
+            // cargoBindingSource
             // 
-            this.dataGridViewColumnWarehouse.DataPropertyName = "WarehouseID";
-            this.dataGridViewColumnWarehouse.HeaderText = "仓库";
-            this.dataGridViewColumnWarehouse.Name = "dataGridViewColumnWarehouse";
+            this.cargoBindingSource.DataSource = typeof(Phoebe.Model.Cargo);
             // 
             // cargoBindingNavigator
             // 
@@ -570,12 +630,48 @@
             this.cargoBindingNavigator.TabIndex = 3;
             this.cargoBindingNavigator.Text = "bindingNavigator1";
             // 
+            // bindingNavigatorAddNewItem
+            // 
+            this.bindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
+            this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
+            this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorAddNewItem.Text = "新添";
+            // 
             // bindingNavigatorCountItem
             // 
             this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
             this.bindingNavigatorCountItem.Size = new System.Drawing.Size(32, 22);
             this.bindingNavigatorCountItem.Text = "/ {0}";
             this.bindingNavigatorCountItem.ToolTipText = "总项数";
+            // 
+            // bindingNavigatorDeleteItem
+            // 
+            this.bindingNavigatorDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorDeleteItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteItem.Image")));
+            this.bindingNavigatorDeleteItem.Name = "bindingNavigatorDeleteItem";
+            this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorDeleteItem.Text = "删除";
+            // 
+            // bindingNavigatorMoveFirstItem
+            // 
+            this.bindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMoveFirstItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveFirstItem.Image")));
+            this.bindingNavigatorMoveFirstItem.Name = "bindingNavigatorMoveFirstItem";
+            this.bindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMoveFirstItem.Text = "移到第一条记录";
+            // 
+            // bindingNavigatorMovePreviousItem
+            // 
+            this.bindingNavigatorMovePreviousItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMovePreviousItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMovePreviousItem.Image")));
+            this.bindingNavigatorMovePreviousItem.Name = "bindingNavigatorMovePreviousItem";
+            this.bindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMovePreviousItem.Text = "移到上一条记录";
             // 
             // bindingNavigatorSeparator
             // 
@@ -595,6 +691,24 @@
             // 
             this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator1";
             this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // bindingNavigatorMoveNextItem
+            // 
+            this.bindingNavigatorMoveNextItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMoveNextItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveNextItem.Image")));
+            this.bindingNavigatorMoveNextItem.Name = "bindingNavigatorMoveNextItem";
+            this.bindingNavigatorMoveNextItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMoveNextItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMoveNextItem.Text = "移到下一条记录";
+            // 
+            // bindingNavigatorMoveLastItem
+            // 
+            this.bindingNavigatorMoveLastItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMoveLastItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveLastItem.Image")));
+            this.bindingNavigatorMoveLastItem.Name = "bindingNavigatorMoveLastItem";
+            this.bindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMoveLastItem.Text = "移到最后一条记录";
             // 
             // bindingNavigatorSeparator2
             // 
@@ -666,6 +780,12 @@
             this.columnTotalVolume.Name = "columnTotalVolume";
             this.columnTotalVolume.ReadOnly = true;
             // 
+            // columnWarehouseNumber
+            // 
+            this.columnWarehouseNumber.DataPropertyName = "WarehouseNumber";
+            this.columnWarehouseNumber.HeaderText = "仓库编号";
+            this.columnWarehouseNumber.Name = "columnWarehouseNumber";
+            // 
             // dataGridViewTextBoxColumn12
             // 
             this.dataGridViewTextBoxColumn12.DataPropertyName = "OriginPlace";
@@ -690,126 +810,6 @@
             this.dataGridViewTextBoxColumn20.HeaderText = "备注";
             this.dataGridViewTextBoxColumn20.Name = "dataGridViewTextBoxColumn20";
             this.dataGridViewTextBoxColumn20.Width = 200;
-            // 
-            // cargoBindingSource
-            // 
-            this.cargoBindingSource.DataSource = typeof(Phoebe.Model.Cargo);
-            // 
-            // bindingNavigatorAddNewItem
-            // 
-            this.bindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
-            this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
-            this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorAddNewItem.Text = "新添";
-            // 
-            // bindingNavigatorDeleteItem
-            // 
-            this.bindingNavigatorDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorDeleteItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteItem.Image")));
-            this.bindingNavigatorDeleteItem.Name = "bindingNavigatorDeleteItem";
-            this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorDeleteItem.Text = "删除";
-            // 
-            // bindingNavigatorMoveFirstItem
-            // 
-            this.bindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMoveFirstItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveFirstItem.Image")));
-            this.bindingNavigatorMoveFirstItem.Name = "bindingNavigatorMoveFirstItem";
-            this.bindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorMoveFirstItem.Text = "移到第一条记录";
-            // 
-            // bindingNavigatorMovePreviousItem
-            // 
-            this.bindingNavigatorMovePreviousItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMovePreviousItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMovePreviousItem.Image")));
-            this.bindingNavigatorMovePreviousItem.Name = "bindingNavigatorMovePreviousItem";
-            this.bindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorMovePreviousItem.Text = "移到上一条记录";
-            // 
-            // bindingNavigatorMoveNextItem
-            // 
-            this.bindingNavigatorMoveNextItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMoveNextItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveNextItem.Image")));
-            this.bindingNavigatorMoveNextItem.Name = "bindingNavigatorMoveNextItem";
-            this.bindingNavigatorMoveNextItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveNextItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorMoveNextItem.Text = "移到下一条记录";
-            // 
-            // bindingNavigatorMoveLastItem
-            // 
-            this.bindingNavigatorMoveLastItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMoveLastItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveLastItem.Image")));
-            this.bindingNavigatorMoveLastItem.Name = "bindingNavigatorMoveLastItem";
-            this.bindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorMoveLastItem.Text = "移到最后一条记录";
-            // 
-            // toolNew
-            // 
-            this.toolNew.Image = ((System.Drawing.Image)(resources.GetObject("toolNew.Image")));
-            this.toolNew.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolNew.Name = "toolNew";
-            this.toolNew.Size = new System.Drawing.Size(70, 22);
-            this.toolNew.Text = "新建(&N)";
-            this.toolNew.Click += new System.EventHandler(this.toolNew_Click);
-            // 
-            // 打开OToolStripButton
-            // 
-            this.打开OToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("打开OToolStripButton.Image")));
-            this.打开OToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.打开OToolStripButton.Name = "打开OToolStripButton";
-            this.打开OToolStripButton.Size = new System.Drawing.Size(70, 22);
-            this.打开OToolStripButton.Text = "打开(&O)";
-            // 
-            // toolSave
-            // 
-            this.toolSave.Image = ((System.Drawing.Image)(resources.GetObject("toolSave.Image")));
-            this.toolSave.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolSave.Name = "toolSave";
-            this.toolSave.Size = new System.Drawing.Size(67, 22);
-            this.toolSave.Text = "保存(&S)";
-            this.toolSave.Click += new System.EventHandler(this.toolSave_Click);
-            // 
-            // 打印PToolStripButton
-            // 
-            this.打印PToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("打印PToolStripButton.Image")));
-            this.打印PToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.打印PToolStripButton.Name = "打印PToolStripButton";
-            this.打印PToolStripButton.Size = new System.Drawing.Size(67, 22);
-            this.打印PToolStripButton.Text = "打印(&P)";
-            // 
-            // toolConfirm
-            // 
-            this.toolConfirm.Enabled = false;
-            this.toolConfirm.Image = global::Phoebe.FormUI.Properties.Resources.check;
-            this.toolConfirm.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolConfirm.Name = "toolConfirm";
-            this.toolConfirm.Size = new System.Drawing.Size(76, 22);
-            this.toolConfirm.Text = "入库确认";
-            this.toolConfirm.Click += new System.EventHandler(this.toolConfirm_Click);
-            // 
-            // toolRefresh
-            // 
-            this.toolRefresh.Image = global::Phoebe.FormUI.Properties.Resources.refresh;
-            this.toolRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolRefresh.Name = "toolRefresh";
-            this.toolRefresh.Size = new System.Drawing.Size(52, 22);
-            this.toolRefresh.Text = "刷新";
-            this.toolRefresh.Click += new System.EventHandler(this.toolRefresh_Click);
-            // 
-            // toolDelete
-            // 
-            this.toolDelete.Image = global::Phoebe.FormUI.Properties.Resources.close_delete;
-            this.toolDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolDelete.Name = "toolDelete";
-            this.toolDelete.Size = new System.Drawing.Size(52, 22);
-            this.toolDelete.Text = "删除";
-            this.toolDelete.Click += new System.EventHandler(this.toolDelete_Click);
             // 
             // StockInForm
             // 
@@ -840,10 +840,10 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cargoDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cargoBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cargoBindingNavigator)).EndInit();
             this.cargoBindingNavigator.ResumeLayout(false);
             this.cargoBindingNavigator.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.cargoBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -910,6 +910,7 @@
         private System.Windows.Forms.DataGridView cargoDataGridView;
         private System.Windows.Forms.ToolStripButton toolConfirm;
         private System.Windows.Forms.ToolStripButton toolRefresh;
+        private System.Windows.Forms.ToolStripButton toolDelete;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnName;
         private System.Windows.Forms.DataGridViewComboBoxColumn dataGridViewColumnFirstCategoryID;
         private System.Windows.Forms.DataGridViewComboBoxColumn dataGridViewColumnSecondCategoryID;
@@ -919,11 +920,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn columnTotalWeight;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnUnitVolume;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnTotalVolume;
-        private System.Windows.Forms.DataGridViewComboBoxColumn dataGridViewColumnWarehouse;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnWarehouseNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn14;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn20;
-        private System.Windows.Forms.ToolStripButton toolDelete;
     }
 }

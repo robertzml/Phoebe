@@ -119,11 +119,6 @@ namespace Phoebe.FormUI
                 var stock = this.stockBindingSource[e.RowIndex] as Stock;
                 var grid = this.stockDataGridView;
 
-                if (stock.Warehouse != null)
-                {
-                    grid.Rows[e.RowIndex].Cells[this.columnWarehouse.Index].Value = stock.Warehouse.Number;
-                }
-
                 if (stock.Cargo != null)
                 {
                     grid.Rows[e.RowIndex].Cells[this.columnCargo.Index].Value = stock.Cargo.Name;

@@ -31,8 +31,6 @@ namespace Phoebe.FormUI
 
         private StoreBusiness storeBusiness;
 
-        private WarehouseBusiness warehouseBusiness;
-
         /// <summary>
         /// 是否新增
         /// </summary>
@@ -59,7 +57,6 @@ namespace Phoebe.FormUI
             this.contractBusiness = new ContractBusiness();
             this.cargoBusiness = new CargoBusiness();
             this.storeBusiness = new StoreBusiness();
-            this.warehouseBusiness = new WarehouseBusiness();
         }
 
         private void InitControl()
@@ -69,11 +66,6 @@ namespace Phoebe.FormUI
             this.comboBoxCustomer.DataSource = this.customerBusiness.Get();
             this.comboBoxCustomer.DisplayMember = "Name";
             this.comboBoxCustomer.ValueMember = "ID";
-
-            DataGridViewComboBoxColumn whColumn = this.columnNewWarehouse;
-            whColumn.DataSource = this.warehouseBusiness.Get();
-            whColumn.DisplayMember = "Number";
-            whColumn.ValueMember = "ID";
         }
 
         /// <summary>
@@ -110,7 +102,7 @@ namespace Phoebe.FormUI
                 this.cargoDataGridView.Rows[i].Cells[this.columnSelect.Index].Value = true;
                 this.cargoDataGridView.Rows[i].Cells[this.columnMoveCount.Index].Value = this.currentStockMove.StockMoveDetails.ElementAt(i).Count;
                 this.cargoDataGridView.Rows[i].Cells[this.columnMoveWeight.Index].Value = this.currentStockMove.StockMoveDetails.ElementAt(i).MoveWeight;
-                this.cargoDataGridView.Rows[i].Cells[this.columnNewWarehouse.Index].Value = this.currentStockMove.StockMoveDetails.ElementAt(i).WarehouseID;
+                this.cargoDataGridView.Rows[i].Cells[this.columnNewWarehouse.Index].Value = this.currentStockMove.StockMoveDetails.ElementAt(i).WarehouseNumber;
             }
         }
 
@@ -178,7 +170,7 @@ namespace Phoebe.FormUI
                     smDetail.ID = Guid.NewGuid();
                     smDetail.StockMoveID = stockMove.ID;
                     smDetail.SourceCargoID = cargo.ID;
-                    smDetail.WarehouseID = Convert.ToInt32(row.Cells[this.columnNewWarehouse.Index].Value);
+                    smDetail.WarehouseNumber = row.Cells[this.columnNewWarehouse.Index].Value.ToString();
                     smDetail.StoreCount = cargo.StoreCount;
                     smDetail.Count = Convert.ToInt32(row.Cells[this.columnMoveCount.Index].Value);
                     if (smDetail.Count == 0)
@@ -498,11 +490,6 @@ namespace Phoebe.FormUI
                 if (cargo.ThirdCategory != null)
                 {
                     grid.Rows[e.RowIndex].Cells[this.dataGridViewColumnThirdCategory.Index].Value = cargo.ThirdCategory.Name;
-                }
-
-                if (cargo.Warehouse != null)
-                {
-                    grid.Rows[e.RowIndex].Cells[this.dataGridViewColumnSourceWarehouse.Index].Value = cargo.Warehouse.Number;
                 }
 
                 if (cargo.User != null)

@@ -74,7 +74,7 @@
             this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnStoreWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewColumnWarehouse = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnWarehouseNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -299,7 +299,7 @@
             this.dataGridViewTextBoxColumn10,
             this.dataGridViewTextBoxColumn11,
             this.columnStoreWeight,
-            this.dataGridViewColumnWarehouse,
+            this.columnWarehouseNumber,
             this.dataGridViewTextBoxColumn13,
             this.dataGridViewTextBoxColumn14,
             this.dataGridViewTextBoxColumn15,
@@ -508,11 +508,12 @@
             this.columnStoreWeight.ReadOnly = true;
             this.columnStoreWeight.Width = 120;
             // 
-            // dataGridViewColumnWarehouse
+            // columnWarehouseNumber
             // 
-            this.dataGridViewColumnWarehouse.HeaderText = "所在仓库";
-            this.dataGridViewColumnWarehouse.Name = "dataGridViewColumnWarehouse";
-            this.dataGridViewColumnWarehouse.ReadOnly = true;
+            this.columnWarehouseNumber.DataPropertyName = "WarehouseNumber";
+            this.columnWarehouseNumber.HeaderText = "所在仓库";
+            this.columnWarehouseNumber.Name = "columnWarehouseNumber";
+            this.columnWarehouseNumber.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn13
             // 
@@ -649,7 +650,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnStoreWeight;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewColumnWarehouse;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnWarehouseNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn14;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn15;
