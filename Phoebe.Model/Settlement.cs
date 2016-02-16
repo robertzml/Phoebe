@@ -34,6 +34,7 @@ namespace Phoebe.Model
         public string Remark { get; set; }
         public int Status { get; set; }
     
+        public virtual Customer Customer { get; set; }
         public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SettlementDetail> SettlementDetails { get; set; }

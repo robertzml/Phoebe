@@ -13,6 +13,9 @@ using Phoebe.Model;
 
 namespace Phoebe.FormUI
 {
+    /// <summary>
+    /// 库存记录窗体
+    /// </summary>
     public partial class StockForm : Form
     {
         #region Field
@@ -49,6 +52,11 @@ namespace Phoebe.FormUI
         #endregion //Function
 
         #region Event
+        /// <summary>
+        /// 窗体载入
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void StockForm_Load(object sender, EventArgs e)
         {
             InitData();

@@ -68,7 +68,80 @@ namespace Phoebe.FormUI
         /// <param name="e"></param>
         private void buttonQuery_Click(object sender, EventArgs e)
         {
+            if (this.comboBoxCustomer.SelectedIndex == -1)
+                return;
 
+            var customer = this.comboBoxCustomer.SelectedItem as Customer;
+
+            var data = this.settleBusiness.Get(customer.ID);
+            this.settlementBindingSource.DataSource = data;
+        }
+
+        /// <summary>
+        /// 删除
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonDelete_Click(object sender, EventArgs e)
+        {
+            if (this.comboBoxCustomer.SelectedIndex == -1)
+                return;
+
+            if (this.settlementDataGridView.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("未选中记录", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            DialogResult dr = MessageBox.Show("是否删除选中结算", FormConstant.MessageBoxTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dr == DialogResult.Yes)
+            {
+                var settle = this.settlementDataGridView.SelectedRows[0].DataBoundItem as Settlement;
+                ErrorCode result = this.settleBusiness.Delete(settle);
+                if (result == ErrorCode.Success)
+                {
+                    MessageBox.Show("删除结算成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("删除结算失败：" + result.DisplayName(), FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 刷新
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonRefresh_Click(object sender, EventArgs e)
+        {
+            this.settleBusiness = new SettleBusiness();
+
+            if (this.comboBoxCustomer.SelectedIndex == -1)
+                return;
+
+            var customer = this.comboBoxCustomer.SelectedItem as Customer;
+
+            var data = this.settleBusiness.Get(customer.ID);
+            this.settlementBindingSource.DataSource = data;
+        }
+
+        private void settlementDataGridView_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
+            if (e.RowIndex < this.settlementBindingSource.Count)
+            {
+                var settlement = this.settlementBindingSource[e.RowIndex] as Settlement;
+                                
+                if (settlement.Customer != null)
+                {
+                    this.settlementDataGridView.Rows[e.RowIndex].Cells[this.columnCustomer.Index].Value = settlement.Customer.Name;
+                }
+                if (settlement.User != null)
+                {
+                    this.settlementDataGridView.Rows[e.RowIndex].Cells[this.columnUser.Index].Value = settlement.User.Name;
+                }
+            }
         }
         #endregion //Event
     }

@@ -76,6 +76,32 @@ namespace Phoebe.FormUI
         }
 
         /// <summary>
+        /// 客户选择
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void comboBoxCustomer_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.comboBoxCustomer.SelectedIndex == -1)
+            {
+                this.textBoxLastStart.Text = this.textBoxLastEnd.Text = "";
+                return;
+            }
+
+            var customer = this.comboBoxCustomer.SelectedItem as Customer;
+            var last = this.settleBusiness.GetLast(customer.ID);
+
+            if (last == null)
+            {
+                this.textBoxLastStart.Text = this.textBoxLastEnd.Text = "";
+                return;
+            }
+
+            this.textBoxLastStart.Text = last.StartTime.ToShortDateString();
+            this.textBoxLastEnd.Text = last.EndTime.ToShortDateString();
+        }
+
+        /// <summary>
         /// 开始结算
         /// </summary>
         /// <param name="sender"></param>
@@ -84,6 +110,12 @@ namespace Phoebe.FormUI
         {
             if (this.comboBoxCustomer.SelectedIndex == -1)
                 return;
+
+            if (this.dateStart.Value.Date > this.dateEnd.Value.Date)
+            {
+                MessageBox.Show("开始日期不能大于结束日期", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
 
             var customer = this.comboBoxCustomer.SelectedItem as Customer;
             var billings = this.settleBusiness.BaseProcess(customer.ID, this.dateStart.Value.Date, this.dateEnd.Value.Date);
@@ -135,6 +167,9 @@ namespace Phoebe.FormUI
         /// <param name="e"></param>
         private void buttonSave_Click(object sender, EventArgs e)
         {
+            if (this.comboBoxCustomer.SelectedIndex == -1)
+                return;
+
             if (this.textBoxNumber.Text == "")
             {
                 MessageBox.Show("结算单号不能为空", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -197,6 +232,6 @@ namespace Phoebe.FormUI
                 MessageBox.Show("保存结算失败：" + result.DisplayName(), FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
-        #endregion //Event        
+        #endregion //Event
     }
 }

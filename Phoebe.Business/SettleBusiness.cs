@@ -95,7 +95,7 @@ namespace Phoebe.Business
         /// <returns></returns>
         public List<Settlement> Get(int customerID)
         {
-            return this.context.Settlements.Where(r => r.CustomerID == customerID).ToList();
+            return this.context.Settlements.Where(r => r.CustomerID == customerID).OrderByDescending(r => r.StartTime).ToList();
         }
 
         /// <summary>
@@ -110,6 +110,20 @@ namespace Phoebe.Business
                 return null;
 
             return this.context.Settlements.Find(gid);
+        }
+
+        /// <summary>
+        /// 获取客户上次结算
+        /// </summary>
+        /// <param name="customerID">客户ID</param>
+        /// <returns></returns>
+        public Settlement GetLast(int customerID)
+        {
+            var settles = this.context.Settlements.Where(r => r.CustomerID == customerID).OrderByDescending(r => r.EndTime);
+            if (settles.Count() == 0)
+                return null;
+            else
+                return settles.First();
         }
 
         /// <summary>
@@ -146,6 +160,26 @@ namespace Phoebe.Business
             }
 
             return ErrorCode.Success;
+        }
+
+        /// <summary>
+        /// 删除结算
+        /// </summary>
+        /// <param name="data">结算数据</param>
+        /// <returns></returns>
+        public ErrorCode Delete(Settlement data)
+        {
+            try
+            {
+                this.context.Settlements.Remove(data);
+                this.context.SaveChanges();
+
+                return ErrorCode.Success;
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
         }
         #endregion //Method
     }
