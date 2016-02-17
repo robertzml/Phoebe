@@ -22,7 +22,7 @@ namespace Phoebe.Model
         public string Remark { get; set; }
         public int Status { get; set; }
     
-        public virtual Customer Customer { get; set; }
         public virtual User User { get; set; }
+        public virtual Customer Customer { get; set; }
     }
 }

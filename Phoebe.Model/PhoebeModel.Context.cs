@@ -25,7 +25,6 @@ namespace Phoebe.Model
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserGroup> UserGroups { get; set; }
         public virtual DbSet<Warehouse> Warehouses { get; set; }
@@ -45,5 +44,6 @@ namespace Phoebe.Model
         public virtual DbSet<StockMoveDetail> StockMoveDetails { get; set; }
         public virtual DbSet<StockOutDetail> StockOutDetails { get; set; }
         public virtual DbSet<Settlement> Settlements { get; set; }
+        public virtual DbSet<Customer> Customers { get; set; }
     }
 }

@@ -125,7 +125,7 @@ namespace Phoebe.FormUI
         /// <param name="e"></param>
         private void buttonQuery_Click(object sender, EventArgs e)
         {
-            if (this.comboBoxType.SelectedIndex == -1)
+            if (!this.checkBoxIn.Checked && !this.checkBoxOut.Checked)
             {
                 MessageBox.Show("请选择类型", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
@@ -137,30 +137,37 @@ namespace Phoebe.FormUI
                 return;
             }
 
-            List<StockFlow> data;
-            if (this.comboBoxType.SelectedIndex == 0)
+            List<StockFlow> data = new List<StockFlow>();
+            List<StockFlow> inFlow;
+            List<StockFlow> outFlow;
+            if (this.checkBoxIn.Checked)
             {
                 if (this.comboBoxCustomer.SelectedIndex == -1 || this.comboBoxCustomer.SelectedIndex == 0)
                 {
-                    data = this.statisticBusiness.GetFlowIn(this.dateStart.Value.Date, this.dateEnd.Value.Date, 0);
+                    inFlow = this.statisticBusiness.GetFlowIn(this.dateStart.Value.Date, this.dateEnd.Value.Date, 0);
                 }
                 else
                 {
                     var customer = this.comboBoxCustomer.SelectedItem as Customer;
-                    data = this.statisticBusiness.GetFlowIn(this.dateStart.Value.Date, this.dateEnd.Value.Date, customer.ID);
+                    inFlow = this.statisticBusiness.GetFlowIn(this.dateStart.Value.Date, this.dateEnd.Value.Date, customer.ID);
                 }
+
+                data.AddRange(inFlow);
             }
-            else
+
+            if (this.checkBoxOut.Checked)
             {
                 if (this.comboBoxCustomer.SelectedIndex == -1 || this.comboBoxCustomer.SelectedIndex == 0)
                 {
-                    data = this.statisticBusiness.GetFlowOut(this.dateStart.Value.Date, this.dateEnd.Value.Date, 0);
+                    outFlow = this.statisticBusiness.GetFlowOut(this.dateStart.Value.Date, this.dateEnd.Value.Date, 0);
                 }
                 else
                 {
                     var customer = this.comboBoxCustomer.SelectedItem as Customer;
-                    data = this.statisticBusiness.GetFlowOut(this.dateStart.Value.Date, this.dateEnd.Value.Date, customer.ID);
+                    outFlow = this.statisticBusiness.GetFlowOut(this.dateStart.Value.Date, this.dateEnd.Value.Date, customer.ID);
                 }
+
+                data.AddRange(outFlow);
             }
 
             if (this.comboBoxFirstCategory.SelectedIndex != -1 && this.comboBoxFirstCategory.SelectedIndex != 0)

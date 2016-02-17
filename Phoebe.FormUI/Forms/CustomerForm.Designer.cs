@@ -39,7 +39,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.customerDataGridView = new System.Windows.Forms.DataGridView();
-            this.columnType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.customerBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
@@ -50,15 +49,17 @@
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.customerBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.columnID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.customerBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.customerDataGridView)).BeginInit();
@@ -78,16 +79,16 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(825, 108);
+            this.groupBox1.Size = new System.Drawing.Size(825, 100);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "查询";
             // 
             // buttonDelete
             // 
-            this.buttonDelete.Location = new System.Drawing.Point(641, 28);
+            this.buttonDelete.Location = new System.Drawing.Point(641, 26);
             this.buttonDelete.Name = "buttonDelete";
-            this.buttonDelete.Size = new System.Drawing.Size(75, 25);
+            this.buttonDelete.Size = new System.Drawing.Size(75, 23);
             this.buttonDelete.TabIndex = 5;
             this.buttonDelete.Text = "删除";
             this.buttonDelete.UseVisualStyleBackColor = true;
@@ -95,9 +96,9 @@
             // 
             // buttonEdit
             // 
-            this.buttonEdit.Location = new System.Drawing.Point(537, 28);
+            this.buttonEdit.Location = new System.Drawing.Point(537, 26);
             this.buttonEdit.Name = "buttonEdit";
-            this.buttonEdit.Size = new System.Drawing.Size(75, 25);
+            this.buttonEdit.Size = new System.Drawing.Size(75, 23);
             this.buttonEdit.TabIndex = 4;
             this.buttonEdit.Text = "编辑";
             this.buttonEdit.UseVisualStyleBackColor = true;
@@ -105,9 +106,9 @@
             // 
             // buttonRefresh
             // 
-            this.buttonRefresh.Location = new System.Drawing.Point(435, 28);
+            this.buttonRefresh.Location = new System.Drawing.Point(435, 26);
             this.buttonRefresh.Name = "buttonRefresh";
-            this.buttonRefresh.Size = new System.Drawing.Size(75, 25);
+            this.buttonRefresh.Size = new System.Drawing.Size(75, 23);
             this.buttonRefresh.TabIndex = 3;
             this.buttonRefresh.Text = "刷新";
             this.buttonRefresh.UseVisualStyleBackColor = true;
@@ -115,9 +116,9 @@
             // 
             // buttonQuery
             // 
-            this.buttonQuery.Location = new System.Drawing.Point(331, 27);
+            this.buttonQuery.Location = new System.Drawing.Point(331, 25);
             this.buttonQuery.Name = "buttonQuery";
-            this.buttonQuery.Size = new System.Drawing.Size(75, 25);
+            this.buttonQuery.Size = new System.Drawing.Size(75, 23);
             this.buttonQuery.TabIndex = 2;
             this.buttonQuery.Text = "查询";
             this.buttonQuery.UseVisualStyleBackColor = true;
@@ -131,17 +132,17 @@
             "--请选择--",
             "团体客户",
             "零散客户"});
-            this.comboBoxType.Location = new System.Drawing.Point(79, 30);
+            this.comboBoxType.Location = new System.Drawing.Point(79, 28);
             this.comboBoxType.Name = "comboBoxType";
-            this.comboBoxType.Size = new System.Drawing.Size(132, 21);
+            this.comboBoxType.Size = new System.Drawing.Size(132, 20);
             this.comboBoxType.TabIndex = 1;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(20, 34);
+            this.label1.Location = new System.Drawing.Point(20, 31);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(55, 13);
+            this.label1.Size = new System.Drawing.Size(53, 12);
             this.label1.TabIndex = 0;
             this.label1.Text = "客户类型";
             // 
@@ -150,9 +151,9 @@
             this.groupBox2.Controls.Add(this.customerDataGridView);
             this.groupBox2.Controls.Add(this.customerBindingNavigator);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Location = new System.Drawing.Point(3, 111);
+            this.groupBox2.Location = new System.Drawing.Point(3, 103);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(825, 431);
+            this.groupBox2.Size = new System.Drawing.Size(825, 397);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "客户信息";
@@ -167,6 +168,7 @@
             this.customerDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.columnID,
             this.dataGridViewTextBoxColumn2,
+            this.columnNumber,
             this.dataGridViewTextBoxColumn3,
             this.dataGridViewTextBoxColumn4,
             this.dataGridViewTextBoxColumn5,
@@ -176,21 +178,15 @@
             this.dataGridViewTextBoxColumn9});
             this.customerDataGridView.DataSource = this.customerBindingSource;
             this.customerDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customerDataGridView.Location = new System.Drawing.Point(3, 41);
+            this.customerDataGridView.Location = new System.Drawing.Point(3, 42);
             this.customerDataGridView.MultiSelect = false;
             this.customerDataGridView.Name = "customerDataGridView";
             this.customerDataGridView.ReadOnly = true;
             this.customerDataGridView.RowTemplate.Height = 23;
             this.customerDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.customerDataGridView.Size = new System.Drawing.Size(819, 387);
+            this.customerDataGridView.Size = new System.Drawing.Size(819, 352);
             this.customerDataGridView.TabIndex = 0;
             this.customerDataGridView.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.customerDataGridView_RowPrePaint);
-            // 
-            // columnType
-            // 
-            this.columnType.HeaderText = "类型";
-            this.columnType.Name = "columnType";
-            this.columnType.ReadOnly = true;
             // 
             // customerBindingNavigator
             // 
@@ -208,7 +204,7 @@
             this.bindingNavigatorMoveNextItem,
             this.bindingNavigatorMoveLastItem,
             this.bindingNavigatorSeparator2});
-            this.customerBindingNavigator.Location = new System.Drawing.Point(3, 16);
+            this.customerBindingNavigator.Location = new System.Drawing.Point(3, 17);
             this.customerBindingNavigator.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
             this.customerBindingNavigator.MoveLastItem = this.bindingNavigatorMoveLastItem;
             this.customerBindingNavigator.MoveNextItem = this.bindingNavigatorMoveNextItem;
@@ -286,6 +282,10 @@
             this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
             this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
+            // customerBindingSource
+            // 
+            this.customerBindingSource.DataSource = typeof(Phoebe.Model.Customer);
+            // 
             // columnID
             // 
             this.columnID.DataPropertyName = "ID";
@@ -299,6 +299,13 @@
             this.dataGridViewTextBoxColumn2.HeaderText = "名称";
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            // 
+            // columnNumber
+            // 
+            this.columnNumber.DataPropertyName = "Number";
+            this.columnNumber.HeaderText = "编号";
+            this.columnNumber.Name = "columnNumber";
+            this.columnNumber.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn3
             // 
@@ -328,6 +335,12 @@
             this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
             this.dataGridViewTextBoxColumn6.ReadOnly = true;
             // 
+            // columnType
+            // 
+            this.columnType.HeaderText = "类型";
+            this.columnType.Name = "columnType";
+            this.columnType.ReadOnly = true;
+            // 
             // dataGridViewTextBoxColumn8
             // 
             this.dataGridViewTextBoxColumn8.DataPropertyName = "Remark";
@@ -343,15 +356,11 @@
             this.dataGridViewTextBoxColumn9.ReadOnly = true;
             this.dataGridViewTextBoxColumn9.Visible = false;
             // 
-            // customerBindingSource
-            // 
-            this.customerBindingSource.DataSource = typeof(Phoebe.Model.Customer);
-            // 
             // CustomerForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(831, 545);
+            this.ClientSize = new System.Drawing.Size(831, 503);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "CustomerForm";
@@ -391,8 +400,11 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button buttonQuery;
         private System.Windows.Forms.Button buttonRefresh;
+        private System.Windows.Forms.Button buttonDelete;
+        private System.Windows.Forms.Button buttonEdit;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnID;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
@@ -400,7 +412,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn columnType;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
-        private System.Windows.Forms.Button buttonDelete;
-        private System.Windows.Forms.Button buttonEdit;
     }
 }

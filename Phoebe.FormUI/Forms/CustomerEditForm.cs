@@ -85,6 +85,7 @@ namespace Phoebe.FormUI
 
             Customer customer = this.customerBusiness.Get(this.currentCustomerID);
             customer.Name = this.textBoxName.Text.Trim();
+            customer.Number = this.textBoxNumber.Text.Trim();
             customer.Address = this.textBoxAddress.Text.Trim();
             customer.Telephone = this.textBoxTelephone.Text.Trim();
             customer.Contact = this.textBoxContact.Text;

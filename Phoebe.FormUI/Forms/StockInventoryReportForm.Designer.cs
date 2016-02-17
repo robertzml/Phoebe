@@ -29,35 +29,18 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StockInventoryReportForm));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StockInventoryReportForm));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.comboBoxCustomer = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.dateStart = new System.Windows.Forms.DateTimePicker();
-            this.dateEnd = new System.Windows.Forms.DateTimePicker();
-            this.comboBoxThirdCategory = new System.Windows.Forms.ComboBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.comboBoxSecondCategory = new System.Windows.Forms.ComboBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.comboBoxFirstCategory = new System.Windows.Forms.ComboBox();
-            this.label5 = new System.Windows.Forms.Label();
             this.buttonQuery = new System.Windows.Forms.Button();
+            this.dateEnd = new System.Windows.Forms.DateTimePicker();
+            this.dateStart = new System.Windows.Forms.DateTimePicker();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.comboBoxCustomer = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.inventoryBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.inventoryBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
-            this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
-            this.bindingNavigatorPositionItem = new System.Windows.Forms.ToolStripTextBox();
-            this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
-            this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.inventoryDataGridView = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -70,23 +53,34 @@
             this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.inventoryBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.inventoryBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
+            this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
+            this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
+            this.bindingNavigatorPositionItem = new System.Windows.Forms.ToolStripTextBox();
+            this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.checkBoxFirstCategory = new System.Windows.Forms.CheckBox();
+            this.checkBoxSecondCategory = new System.Windows.Forms.CheckBox();
+            this.checkBoxThirdCategory = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.inventoryDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.inventoryBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.inventoryBindingNavigator)).BeginInit();
             this.inventoryBindingNavigator.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.inventoryDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.checkBoxThirdCategory);
+            this.groupBox1.Controls.Add(this.checkBoxSecondCategory);
+            this.groupBox1.Controls.Add(this.checkBoxFirstCategory);
             this.groupBox1.Controls.Add(this.buttonQuery);
-            this.groupBox1.Controls.Add(this.comboBoxThirdCategory);
-            this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Controls.Add(this.comboBoxSecondCategory);
-            this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Controls.Add(this.comboBoxFirstCategory);
-            this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.dateEnd);
             this.groupBox1.Controls.Add(this.dateStart);
             this.groupBox1.Controls.Add(this.label3);
@@ -96,37 +90,34 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(862, 140);
+            this.groupBox1.Size = new System.Drawing.Size(862, 121);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "选择";
             // 
-            // label1
+            // buttonQuery
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(23, 33);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 12);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "客户选择";
+            this.buttonQuery.Location = new System.Drawing.Point(636, 80);
+            this.buttonQuery.Name = "buttonQuery";
+            this.buttonQuery.Size = new System.Drawing.Size(75, 23);
+            this.buttonQuery.TabIndex = 22;
+            this.buttonQuery.Text = "查询";
+            this.buttonQuery.UseVisualStyleBackColor = true;
+            this.buttonQuery.Click += new System.EventHandler(this.buttonQuery_Click);
             // 
-            // comboBoxCustomer
+            // dateEnd
             // 
-            this.comboBoxCustomer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxCustomer.FormattingEnabled = true;
-            this.comboBoxCustomer.Location = new System.Drawing.Point(82, 29);
-            this.comboBoxCustomer.Name = "comboBoxCustomer";
-            this.comboBoxCustomer.Size = new System.Drawing.Size(140, 20);
-            this.comboBoxCustomer.TabIndex = 1;
+            this.dateEnd.Location = new System.Drawing.Point(572, 29);
+            this.dateEnd.Name = "dateEnd";
+            this.dateEnd.Size = new System.Drawing.Size(139, 21);
+            this.dateEnd.TabIndex = 5;
             // 
-            // label2
+            // dateStart
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(263, 33);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 12);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "开始日期";
+            this.dateStart.Location = new System.Drawing.Point(323, 29);
+            this.dateStart.Name = "dateStart";
+            this.dateStart.Size = new System.Drawing.Size(139, 21);
+            this.dateStart.TabIndex = 4;
             // 
             // label3
             // 
@@ -137,193 +128,44 @@
             this.label3.TabIndex = 3;
             this.label3.Text = "结束日期";
             // 
-            // dateStart
+            // label2
             // 
-            this.dateStart.Location = new System.Drawing.Point(323, 29);
-            this.dateStart.Name = "dateStart";
-            this.dateStart.Size = new System.Drawing.Size(139, 21);
-            this.dateStart.TabIndex = 4;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(263, 33);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(53, 12);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "开始日期";
             // 
-            // dateEnd
+            // comboBoxCustomer
             // 
-            this.dateEnd.Location = new System.Drawing.Point(572, 29);
-            this.dateEnd.Name = "dateEnd";
-            this.dateEnd.Size = new System.Drawing.Size(139, 21);
-            this.dateEnd.TabIndex = 5;
+            this.comboBoxCustomer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxCustomer.FormattingEnabled = true;
+            this.comboBoxCustomer.Location = new System.Drawing.Point(82, 29);
+            this.comboBoxCustomer.Name = "comboBoxCustomer";
+            this.comboBoxCustomer.Size = new System.Drawing.Size(140, 20);
+            this.comboBoxCustomer.TabIndex = 1;
             // 
-            // comboBoxThirdCategory
+            // label1
             // 
-            this.comboBoxThirdCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxThirdCategory.FormattingEnabled = true;
-            this.comboBoxThirdCategory.Location = new System.Drawing.Point(571, 80);
-            this.comboBoxThirdCategory.Name = "comboBoxThirdCategory";
-            this.comboBoxThirdCategory.Size = new System.Drawing.Size(140, 20);
-            this.comboBoxThirdCategory.TabIndex = 21;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(512, 84);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(53, 12);
-            this.label7.TabIndex = 20;
-            this.label7.Text = "三级分类";
-            // 
-            // comboBoxSecondCategory
-            // 
-            this.comboBoxSecondCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxSecondCategory.FormattingEnabled = true;
-            this.comboBoxSecondCategory.Location = new System.Drawing.Point(322, 80);
-            this.comboBoxSecondCategory.Name = "comboBoxSecondCategory";
-            this.comboBoxSecondCategory.Size = new System.Drawing.Size(140, 20);
-            this.comboBoxSecondCategory.TabIndex = 19;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(263, 84);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(53, 12);
-            this.label6.TabIndex = 18;
-            this.label6.Text = "二级分类";
-            // 
-            // comboBoxFirstCategory
-            // 
-            this.comboBoxFirstCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxFirstCategory.FormattingEnabled = true;
-            this.comboBoxFirstCategory.Location = new System.Drawing.Point(82, 80);
-            this.comboBoxFirstCategory.Name = "comboBoxFirstCategory";
-            this.comboBoxFirstCategory.Size = new System.Drawing.Size(140, 20);
-            this.comboBoxFirstCategory.TabIndex = 17;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(23, 84);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(53, 12);
-            this.label5.TabIndex = 16;
-            this.label5.Text = "一级分类";
-            // 
-            // buttonQuery
-            // 
-            this.buttonQuery.Location = new System.Drawing.Point(757, 79);
-            this.buttonQuery.Name = "buttonQuery";
-            this.buttonQuery.Size = new System.Drawing.Size(75, 23);
-            this.buttonQuery.TabIndex = 22;
-            this.buttonQuery.Text = "查询";
-            this.buttonQuery.UseVisualStyleBackColor = true;
-            this.buttonQuery.Click += new System.EventHandler(this.buttonQuery_Click);
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(23, 33);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(53, 12);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "客户选择";
             // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.inventoryDataGridView);
             this.groupBox2.Controls.Add(this.inventoryBindingNavigator);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Location = new System.Drawing.Point(3, 143);
+            this.groupBox2.Location = new System.Drawing.Point(3, 124);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(862, 370);
+            this.groupBox2.Size = new System.Drawing.Size(862, 389);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "盘点记录";
-            // 
-            // inventoryBindingSource
-            // 
-            this.inventoryBindingSource.DataSource = typeof(Phoebe.Model.Inventory);
-            // 
-            // inventoryBindingNavigator
-            // 
-            this.inventoryBindingNavigator.AddNewItem = null;
-            this.inventoryBindingNavigator.BindingSource = this.inventoryBindingSource;
-            this.inventoryBindingNavigator.CountItem = this.bindingNavigatorCountItem;
-            this.inventoryBindingNavigator.DeleteItem = null;
-            this.inventoryBindingNavigator.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.bindingNavigatorMoveFirstItem,
-            this.bindingNavigatorMovePreviousItem,
-            this.bindingNavigatorSeparator,
-            this.bindingNavigatorPositionItem,
-            this.bindingNavigatorCountItem,
-            this.bindingNavigatorSeparator1,
-            this.bindingNavigatorMoveNextItem,
-            this.bindingNavigatorMoveLastItem,
-            this.bindingNavigatorSeparator2});
-            this.inventoryBindingNavigator.Location = new System.Drawing.Point(3, 17);
-            this.inventoryBindingNavigator.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
-            this.inventoryBindingNavigator.MoveLastItem = this.bindingNavigatorMoveLastItem;
-            this.inventoryBindingNavigator.MoveNextItem = this.bindingNavigatorMoveNextItem;
-            this.inventoryBindingNavigator.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
-            this.inventoryBindingNavigator.Name = "inventoryBindingNavigator";
-            this.inventoryBindingNavigator.PositionItem = this.bindingNavigatorPositionItem;
-            this.inventoryBindingNavigator.Size = new System.Drawing.Size(856, 25);
-            this.inventoryBindingNavigator.TabIndex = 2;
-            this.inventoryBindingNavigator.Text = "bindingNavigator1";
-            // 
-            // bindingNavigatorMoveFirstItem
-            // 
-            this.bindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMoveFirstItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveFirstItem.Image")));
-            this.bindingNavigatorMoveFirstItem.Name = "bindingNavigatorMoveFirstItem";
-            this.bindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorMoveFirstItem.Text = "移到第一条记录";
-            // 
-            // bindingNavigatorMovePreviousItem
-            // 
-            this.bindingNavigatorMovePreviousItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMovePreviousItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMovePreviousItem.Image")));
-            this.bindingNavigatorMovePreviousItem.Name = "bindingNavigatorMovePreviousItem";
-            this.bindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorMovePreviousItem.Text = "移到上一条记录";
-            // 
-            // bindingNavigatorSeparator
-            // 
-            this.bindingNavigatorSeparator.Name = "bindingNavigatorSeparator";
-            this.bindingNavigatorSeparator.Size = new System.Drawing.Size(6, 25);
-            // 
-            // bindingNavigatorPositionItem
-            // 
-            this.bindingNavigatorPositionItem.AccessibleName = "位置";
-            this.bindingNavigatorPositionItem.AutoSize = false;
-            this.bindingNavigatorPositionItem.Name = "bindingNavigatorPositionItem";
-            this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(50, 23);
-            this.bindingNavigatorPositionItem.Text = "0";
-            this.bindingNavigatorPositionItem.ToolTipText = "当前位置";
-            // 
-            // bindingNavigatorCountItem
-            // 
-            this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
-            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(32, 22);
-            this.bindingNavigatorCountItem.Text = "/ {0}";
-            this.bindingNavigatorCountItem.ToolTipText = "总项数";
-            // 
-            // bindingNavigatorSeparator1
-            // 
-            this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator";
-            this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
-            // bindingNavigatorMoveNextItem
-            // 
-            this.bindingNavigatorMoveNextItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMoveNextItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveNextItem.Image")));
-            this.bindingNavigatorMoveNextItem.Name = "bindingNavigatorMoveNextItem";
-            this.bindingNavigatorMoveNextItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveNextItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorMoveNextItem.Text = "移到下一条记录";
-            // 
-            // bindingNavigatorMoveLastItem
-            // 
-            this.bindingNavigatorMoveLastItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMoveLastItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveLastItem.Image")));
-            this.bindingNavigatorMoveLastItem.Name = "bindingNavigatorMoveLastItem";
-            this.bindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorMoveLastItem.Text = "移到最后一条记录";
-            // 
-            // bindingNavigatorSeparator2
-            // 
-            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator";
-            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
             // inventoryDataGridView
             // 
@@ -349,7 +191,7 @@
             this.inventoryDataGridView.Name = "inventoryDataGridView";
             this.inventoryDataGridView.ReadOnly = true;
             this.inventoryDataGridView.RowTemplate.Height = 23;
-            this.inventoryDataGridView.Size = new System.Drawing.Size(856, 325);
+            this.inventoryDataGridView.Size = new System.Drawing.Size(856, 344);
             this.inventoryDataGridView.TabIndex = 0;
             // 
             // dataGridViewTextBoxColumn1
@@ -433,6 +275,141 @@
             this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
             this.dataGridViewTextBoxColumn15.ReadOnly = true;
             // 
+            // inventoryBindingSource
+            // 
+            this.inventoryBindingSource.DataSource = typeof(Phoebe.Model.Inventory);
+            // 
+            // inventoryBindingNavigator
+            // 
+            this.inventoryBindingNavigator.AddNewItem = null;
+            this.inventoryBindingNavigator.BindingSource = this.inventoryBindingSource;
+            this.inventoryBindingNavigator.CountItem = this.bindingNavigatorCountItem;
+            this.inventoryBindingNavigator.DeleteItem = null;
+            this.inventoryBindingNavigator.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.bindingNavigatorMoveFirstItem,
+            this.bindingNavigatorMovePreviousItem,
+            this.bindingNavigatorSeparator,
+            this.bindingNavigatorPositionItem,
+            this.bindingNavigatorCountItem,
+            this.bindingNavigatorSeparator1,
+            this.bindingNavigatorMoveNextItem,
+            this.bindingNavigatorMoveLastItem,
+            this.bindingNavigatorSeparator2});
+            this.inventoryBindingNavigator.Location = new System.Drawing.Point(3, 17);
+            this.inventoryBindingNavigator.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
+            this.inventoryBindingNavigator.MoveLastItem = this.bindingNavigatorMoveLastItem;
+            this.inventoryBindingNavigator.MoveNextItem = this.bindingNavigatorMoveNextItem;
+            this.inventoryBindingNavigator.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
+            this.inventoryBindingNavigator.Name = "inventoryBindingNavigator";
+            this.inventoryBindingNavigator.PositionItem = this.bindingNavigatorPositionItem;
+            this.inventoryBindingNavigator.Size = new System.Drawing.Size(856, 25);
+            this.inventoryBindingNavigator.TabIndex = 2;
+            this.inventoryBindingNavigator.Text = "bindingNavigator1";
+            // 
+            // bindingNavigatorCountItem
+            // 
+            this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
+            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(32, 22);
+            this.bindingNavigatorCountItem.Text = "/ {0}";
+            this.bindingNavigatorCountItem.ToolTipText = "总项数";
+            // 
+            // bindingNavigatorMoveFirstItem
+            // 
+            this.bindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMoveFirstItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveFirstItem.Image")));
+            this.bindingNavigatorMoveFirstItem.Name = "bindingNavigatorMoveFirstItem";
+            this.bindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMoveFirstItem.Text = "移到第一条记录";
+            // 
+            // bindingNavigatorMovePreviousItem
+            // 
+            this.bindingNavigatorMovePreviousItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMovePreviousItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMovePreviousItem.Image")));
+            this.bindingNavigatorMovePreviousItem.Name = "bindingNavigatorMovePreviousItem";
+            this.bindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMovePreviousItem.Text = "移到上一条记录";
+            // 
+            // bindingNavigatorSeparator
+            // 
+            this.bindingNavigatorSeparator.Name = "bindingNavigatorSeparator";
+            this.bindingNavigatorSeparator.Size = new System.Drawing.Size(6, 25);
+            // 
+            // bindingNavigatorPositionItem
+            // 
+            this.bindingNavigatorPositionItem.AccessibleName = "位置";
+            this.bindingNavigatorPositionItem.AutoSize = false;
+            this.bindingNavigatorPositionItem.Name = "bindingNavigatorPositionItem";
+            this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(50, 23);
+            this.bindingNavigatorPositionItem.Text = "0";
+            this.bindingNavigatorPositionItem.ToolTipText = "当前位置";
+            // 
+            // bindingNavigatorSeparator1
+            // 
+            this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator1";
+            this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // bindingNavigatorMoveNextItem
+            // 
+            this.bindingNavigatorMoveNextItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMoveNextItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveNextItem.Image")));
+            this.bindingNavigatorMoveNextItem.Name = "bindingNavigatorMoveNextItem";
+            this.bindingNavigatorMoveNextItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMoveNextItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMoveNextItem.Text = "移到下一条记录";
+            // 
+            // bindingNavigatorMoveLastItem
+            // 
+            this.bindingNavigatorMoveLastItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMoveLastItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveLastItem.Image")));
+            this.bindingNavigatorMoveLastItem.Name = "bindingNavigatorMoveLastItem";
+            this.bindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMoveLastItem.Text = "移到最后一条记录";
+            // 
+            // bindingNavigatorSeparator2
+            // 
+            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
+            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // checkBoxFirstCategory
+            // 
+            this.checkBoxFirstCategory.AutoSize = true;
+            this.checkBoxFirstCategory.Checked = true;
+            this.checkBoxFirstCategory.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxFirstCategory.Enabled = false;
+            this.checkBoxFirstCategory.Location = new System.Drawing.Point(25, 83);
+            this.checkBoxFirstCategory.Name = "checkBoxFirstCategory";
+            this.checkBoxFirstCategory.Size = new System.Drawing.Size(72, 16);
+            this.checkBoxFirstCategory.TabIndex = 23;
+            this.checkBoxFirstCategory.Text = "一级分类";
+            this.checkBoxFirstCategory.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxSecondCategory
+            // 
+            this.checkBoxSecondCategory.AutoSize = true;
+            this.checkBoxSecondCategory.Checked = true;
+            this.checkBoxSecondCategory.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxSecondCategory.Location = new System.Drawing.Point(150, 83);
+            this.checkBoxSecondCategory.Name = "checkBoxSecondCategory";
+            this.checkBoxSecondCategory.Size = new System.Drawing.Size(72, 16);
+            this.checkBoxSecondCategory.TabIndex = 24;
+            this.checkBoxSecondCategory.Text = "二级分类";
+            this.checkBoxSecondCategory.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxThirdCategory
+            // 
+            this.checkBoxThirdCategory.AutoSize = true;
+            this.checkBoxThirdCategory.Checked = true;
+            this.checkBoxThirdCategory.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxThirdCategory.Location = new System.Drawing.Point(265, 83);
+            this.checkBoxThirdCategory.Name = "checkBoxThirdCategory";
+            this.checkBoxThirdCategory.Size = new System.Drawing.Size(72, 16);
+            this.checkBoxThirdCategory.TabIndex = 25;
+            this.checkBoxThirdCategory.Text = "三级分类";
+            this.checkBoxThirdCategory.UseVisualStyleBackColor = true;
+            // 
             // StockInventoryReportForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -448,11 +425,11 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.inventoryDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.inventoryBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.inventoryBindingNavigator)).EndInit();
             this.inventoryBindingNavigator.ResumeLayout(false);
             this.inventoryBindingNavigator.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.inventoryDataGridView)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -467,12 +444,6 @@
         private System.Windows.Forms.ComboBox comboBoxCustomer;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button buttonQuery;
-        private System.Windows.Forms.ComboBox comboBoxThirdCategory;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ComboBox comboBoxSecondCategory;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ComboBox comboBoxFirstCategory;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.DataGridView inventoryDataGridView;
         private System.Windows.Forms.BindingSource inventoryBindingSource;
@@ -497,5 +468,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn14;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn15;
+        private System.Windows.Forms.CheckBox checkBoxThirdCategory;
+        private System.Windows.Forms.CheckBox checkBoxSecondCategory;
+        private System.Windows.Forms.CheckBox checkBoxFirstCategory;
     }
 }

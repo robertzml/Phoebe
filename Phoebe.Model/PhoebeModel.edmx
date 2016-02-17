@@ -76,6 +76,7 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Number" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="Address" Type="nvarchar" MaxLength="300" Nullable="false" />
           <Property Name="Telephone" Type="nvarchar" MaxLength="50" />
           <Property Name="Contact" Type="nvarchar" MaxLength="50" />
@@ -945,7 +946,6 @@
     <edmx:ConceptualModels>
       <Schema Namespace="PhoebeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="PhoebeContext" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Customers" EntityType="PhoebeModel.Customer" />
           <EntitySet Name="Users" EntityType="PhoebeModel.User" />
           <EntitySet Name="UserGroups" EntityType="PhoebeModel.UserGroup" />
           <AssociationSet Name="FK_User_UserGroup" Association="PhoebeModel.FK_User_UserGroup">
@@ -958,10 +958,6 @@
             <End Role="Warehouse1" EntitySet="Warehouses" />
           </AssociationSet>
           <EntitySet Name="Contracts" EntityType="PhoebeModel.Contract" />
-          <AssociationSet Name="FK_Contract_Customer" Association="PhoebeModel.FK_Contract_Customer">
-            <End Role="Customer" EntitySet="Customers" />
-            <End Role="Contract" EntitySet="Contracts" />
-          </AssociationSet>
           <AssociationSet Name="FK_Contract_User" Association="PhoebeModel.FK_Contract_User">
             <End Role="User" EntitySet="Users" />
             <End Role="Contract" EntitySet="Contracts" />
@@ -1023,10 +1019,6 @@
             <End Role="SettlementDetail" EntitySet="SettlementDetails" />
           </AssociationSet>
           <EntitySet Name="Payments" EntityType="PhoebeModel.Payment" />
-          <AssociationSet Name="FK_Payment_Customer" Association="PhoebeModel.FK_Payment_Customer">
-            <End Role="Customer" EntitySet="Customers" />
-            <End Role="Payment" EntitySet="Payments" />
-          </AssociationSet>
           <AssociationSet Name="FK_Payment_User" Association="PhoebeModel.FK_Payment_User">
             <End Role="User" EntitySet="Users" />
             <End Role="Payment" EntitySet="Payments" />
@@ -1105,10 +1097,6 @@
             <End Role="StockOutDetail" EntitySet="StockOutDetails" />
           </AssociationSet>
           <EntitySet Name="Settlements" EntityType="PhoebeModel.Settlement" />
-          <AssociationSet Name="FK_Settlement_Customer" Association="PhoebeModel.FK_Settlement_Customer">
-            <End Role="Customer" EntitySet="Customers" />
-            <End Role="Settlement" EntitySet="Settlements" />
-          </AssociationSet>
           <AssociationSet Name="FK_Settlement_User" Association="PhoebeModel.FK_Settlement_User">
             <End Role="User" EntitySet="Users" />
             <End Role="Settlement" EntitySet="Settlements" />
@@ -1117,24 +1105,20 @@
             <End Role="Settlement" EntitySet="Settlements" />
             <End Role="SettlementDetail" EntitySet="SettlementDetails" />
           </AssociationSet>
+          <EntitySet Name="Customers" EntityType="PhoebeModel.Customer" />
+          <AssociationSet Name="FK_Contract_Customer" Association="PhoebeModel.FK_Contract_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Contract" EntitySet="Contracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payment_Customer" Association="PhoebeModel.FK_Payment_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Payment" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Settlement_Customer" Association="PhoebeModel.FK_Settlement_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Settlement" EntitySet="Settlements" />
+          </AssociationSet>
           </EntityContainer>
-        <EntityType Name="Customer">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Address" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
-          <Property Name="Telephone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Contact" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ContactTelephone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Type" Type="Int32" Nullable="false" />
-          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Contracts" Relationship="PhoebeModel.FK_Contract_Customer" FromRole="Customer" ToRole="Contract" />
-          <NavigationProperty Name="Payments" Relationship="PhoebeModel.FK_Payment_Customer" FromRole="Customer" ToRole="Payment" />
-          <NavigationProperty Name="Settlements" Relationship="PhoebeModel.FK_Settlement_Customer" FromRole="Customer" ToRole="Settlement" />
-        </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="ID" />
@@ -1223,7 +1207,6 @@
           <Property Name="UserID" Type="Int32" Nullable="false" />
           <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Customer" Relationship="PhoebeModel.FK_Contract_Customer" FromRole="Contract" ToRole="Customer" />
           <NavigationProperty Name="User" Relationship="PhoebeModel.FK_Contract_User" FromRole="Contract" ToRole="User" />
           <NavigationProperty Name="StockOuts" Relationship="PhoebeModel.FK_StockOut_Contract" FromRole="Contract" ToRole="StockOut" />
           <NavigationProperty Name="StockMoves" Relationship="PhoebeModel.FK_StockMove_Contract" FromRole="Contract" ToRole="StockMove" />
@@ -1231,19 +1214,8 @@
           <NavigationProperty Name="Billings" Relationship="PhoebeModel.FK_Billing_Contract" FromRole="Contract" ToRole="Billing" />
           <NavigationProperty Name="SettlementDetails" Relationship="PhoebeModel.FK_SettlementDetails_Contract" FromRole="Contract" ToRole="SettlementDetail" />
           <NavigationProperty Name="Cargoes" Relationship="PhoebeModel.FK_Cargo_Contract" FromRole="Contract" ToRole="Cargo" />
+          <NavigationProperty Name="Customer" Relationship="PhoebeModel.FK_Contract_Customer" FromRole="Contract" ToRole="Customer" />
         </EntityType>
-        <Association Name="FK_Contract_Customer">
-          <End Type="PhoebeModel.Customer" Role="Customer" Multiplicity="1" />
-          <End Type="PhoebeModel.Contract" Role="Contract" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Customer">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Contract">
-              <PropertyRef Name="CustomerID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Contract_User">
           <End Type="PhoebeModel.User" Role="User" Multiplicity="1" />
           <End Type="PhoebeModel.Contract" Role="Contract" Multiplicity="*" />
@@ -1538,21 +1510,9 @@
           <Property Name="UserID" Type="Int32" Nullable="false" />
           <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Customer" Relationship="PhoebeModel.FK_Payment_Customer" FromRole="Payment" ToRole="Customer" />
           <NavigationProperty Name="User" Relationship="PhoebeModel.FK_Payment_User" FromRole="Payment" ToRole="User" />
+          <NavigationProperty Name="Customer" Relationship="PhoebeModel.FK_Payment_Customer" FromRole="Payment" ToRole="Customer" />
         </EntityType>
-        <Association Name="FK_Payment_Customer">
-          <End Type="PhoebeModel.Customer" Role="Customer" Multiplicity="1" />
-          <End Type="PhoebeModel.Payment" Role="Payment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Customer">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Payment">
-              <PropertyRef Name="CustomerID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Payment_User">
           <End Type="PhoebeModel.User" Role="User" Multiplicity="1" />
           <End Type="PhoebeModel.Payment" Role="Payment" Multiplicity="*" />
@@ -1913,22 +1873,10 @@
           <Property Name="UserID" Type="Int32" Nullable="false" />
           <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Customer" Relationship="PhoebeModel.FK_Settlement_Customer" FromRole="Settlement" ToRole="Customer" />
           <NavigationProperty Name="User" Relationship="PhoebeModel.FK_Settlement_User" FromRole="Settlement" ToRole="User" />
           <NavigationProperty Name="SettlementDetails" Relationship="PhoebeModel.FK_SettlementDetails_Settlement" FromRole="Settlement" ToRole="SettlementDetail" />
+          <NavigationProperty Name="Customer" Relationship="PhoebeModel.FK_Settlement_Customer" FromRole="Settlement" ToRole="Customer" />
         </EntityType>
-        <Association Name="FK_Settlement_Customer">
-          <End Type="PhoebeModel.Customer" Role="Customer" Multiplicity="1" />
-          <End Type="PhoebeModel.Settlement" Role="Settlement" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Customer">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Settlement">
-              <PropertyRef Name="CustomerID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Settlement_User">
           <End Type="PhoebeModel.User" Role="User" Multiplicity="1" />
           <End Type="PhoebeModel.Settlement" Role="Settlement" Multiplicity="*" />
@@ -1955,27 +1903,66 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Number" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Telephone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Contact" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ContactTelephone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Contracts" Relationship="PhoebeModel.FK_Contract_Customer" FromRole="Customer" ToRole="Contract" />
+          <NavigationProperty Name="Payments" Relationship="PhoebeModel.FK_Payment_Customer" FromRole="Customer" ToRole="Payment" />
+          <NavigationProperty Name="Settlements" Relationship="PhoebeModel.FK_Settlement_Customer" FromRole="Customer" ToRole="Settlement" />
+        </EntityType>
+        <Association Name="FK_Contract_Customer">
+          <End Type="PhoebeModel.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="PhoebeModel.Contract" Role="Contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Contract">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payment_Customer">
+          <End Type="PhoebeModel.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="PhoebeModel.Payment" Role="Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Settlement_Customer">
+          <End Type="PhoebeModel.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="PhoebeModel.Settlement" Role="Settlement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Settlement">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="PhoebeModelStoreContainer" CdmEntityContainer="PhoebeContext">
-          <EntitySetMapping Name="Customers">
-            <EntityTypeMapping TypeName="PhoebeModel.Customer">
-              <MappingFragment StoreEntitySet="Customer">
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Remark" ColumnName="Remark" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="ContactTelephone" ColumnName="ContactTelephone" />
-                <ScalarProperty Name="Contact" ColumnName="Contact" />
-                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="PhoebeModel.User">
               <MappingFragment StoreEntitySet="User">
@@ -2270,6 +2257,22 @@
                 <ScalarProperty Name="StartTime" ColumnName="StartTime" />
                 <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
                 <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="PhoebeModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="ContactTelephone" ColumnName="ContactTelephone" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

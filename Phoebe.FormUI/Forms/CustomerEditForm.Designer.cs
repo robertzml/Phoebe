@@ -47,13 +47,15 @@
             this.label1 = new System.Windows.Forms.Label();
             this.buttonSave = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.textBoxNumber = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonCancel
             // 
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(260, 338);
+            this.buttonCancel.Location = new System.Drawing.Point(260, 361);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 5;
@@ -82,11 +84,11 @@
             // 
             // textBoxRemark
             // 
-            this.textBoxRemark.Location = new System.Drawing.Point(99, 227);
+            this.textBoxRemark.Location = new System.Drawing.Point(99, 260);
             this.textBoxRemark.Multiline = true;
             this.textBoxRemark.Name = "textBoxRemark";
             this.textBoxRemark.Size = new System.Drawing.Size(233, 55);
-            this.textBoxRemark.TabIndex = 13;
+            this.textBoxRemark.TabIndex = 7;
             // 
             // comboBoxType
             // 
@@ -95,50 +97,50 @@
             this.comboBoxType.Items.AddRange(new object[] {
             "团体客户",
             "零散客户"});
-            this.comboBoxType.Location = new System.Drawing.Point(99, 193);
+            this.comboBoxType.Location = new System.Drawing.Point(99, 226);
             this.comboBoxType.Name = "comboBoxType";
             this.comboBoxType.Size = new System.Drawing.Size(233, 20);
-            this.comboBoxType.TabIndex = 12;
+            this.comboBoxType.TabIndex = 6;
             // 
             // textBoxContactTelephone
             // 
-            this.textBoxContactTelephone.Location = new System.Drawing.Point(99, 159);
+            this.textBoxContactTelephone.Location = new System.Drawing.Point(99, 192);
             this.textBoxContactTelephone.Name = "textBoxContactTelephone";
             this.textBoxContactTelephone.Size = new System.Drawing.Size(233, 21);
-            this.textBoxContactTelephone.TabIndex = 11;
+            this.textBoxContactTelephone.TabIndex = 5;
             // 
             // textBoxContact
             // 
-            this.textBoxContact.Location = new System.Drawing.Point(99, 125);
+            this.textBoxContact.Location = new System.Drawing.Point(99, 158);
             this.textBoxContact.Name = "textBoxContact";
             this.textBoxContact.Size = new System.Drawing.Size(233, 21);
-            this.textBoxContact.TabIndex = 10;
+            this.textBoxContact.TabIndex = 4;
             // 
             // textBoxTelephone
             // 
-            this.textBoxTelephone.Location = new System.Drawing.Point(99, 91);
+            this.textBoxTelephone.Location = new System.Drawing.Point(99, 124);
             this.textBoxTelephone.Name = "textBoxTelephone";
             this.textBoxTelephone.Size = new System.Drawing.Size(233, 21);
-            this.textBoxTelephone.TabIndex = 9;
+            this.textBoxTelephone.TabIndex = 3;
             // 
             // textBoxAddress
             // 
             this.textBoxAddress.Location = new System.Drawing.Point(99, 57);
             this.textBoxAddress.Name = "textBoxAddress";
             this.textBoxAddress.Size = new System.Drawing.Size(233, 21);
-            this.textBoxAddress.TabIndex = 8;
+            this.textBoxAddress.TabIndex = 1;
             // 
             // textBoxName
             // 
             this.textBoxName.Location = new System.Drawing.Point(99, 23);
             this.textBoxName.Name = "textBoxName";
             this.textBoxName.Size = new System.Drawing.Size(233, 21);
-            this.textBoxName.TabIndex = 7;
+            this.textBoxName.TabIndex = 0;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(22, 230);
+            this.label7.Location = new System.Drawing.Point(22, 263);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(29, 12);
             this.label7.TabIndex = 6;
@@ -147,7 +149,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(22, 196);
+            this.label6.Location = new System.Drawing.Point(22, 229);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(53, 12);
             this.label6.TabIndex = 5;
@@ -156,7 +158,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(22, 162);
+            this.label5.Location = new System.Drawing.Point(22, 195);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(65, 12);
             this.label5.TabIndex = 4;
@@ -165,7 +167,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(22, 128);
+            this.label4.Location = new System.Drawing.Point(22, 161);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(41, 12);
             this.label4.TabIndex = 3;
@@ -174,7 +176,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(22, 94);
+            this.label3.Location = new System.Drawing.Point(22, 127);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(29, 12);
             this.label3.TabIndex = 2;
@@ -200,7 +202,7 @@
             // 
             // buttonSave
             // 
-            this.buttonSave.Location = new System.Drawing.Point(143, 338);
+            this.buttonSave.Location = new System.Drawing.Point(143, 361);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(75, 23);
             this.buttonSave.TabIndex = 4;
@@ -210,6 +212,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.textBoxNumber);
+            this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.textBoxRemark);
@@ -229,17 +233,33 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(373, 303);
+            this.groupBox1.Size = new System.Drawing.Size(373, 334);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "客户信息";
+            // 
+            // textBoxNumber
+            // 
+            this.textBoxNumber.Location = new System.Drawing.Point(99, 90);
+            this.textBoxNumber.Name = "textBoxNumber";
+            this.textBoxNumber.Size = new System.Drawing.Size(233, 21);
+            this.textBoxNumber.TabIndex = 2;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(22, 93);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(29, 12);
+            this.label10.TabIndex = 18;
+            this.label10.Text = "编号";
             // 
             // CustomerEditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
-            this.ClientSize = new System.Drawing.Size(379, 375);
+            this.ClientSize = new System.Drawing.Size(379, 406);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.groupBox1);
@@ -275,5 +295,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.TextBox textBoxNumber;
+        private System.Windows.Forms.Label label10;
     }
 }

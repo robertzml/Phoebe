@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StockFlowReportForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.buttonQuery = new System.Windows.Forms.Button();
             this.comboBoxThirdCategory = new System.Windows.Forms.ComboBox();
@@ -45,22 +45,14 @@
             this.label3 = new System.Windows.Forms.Label();
             this.comboBoxCustomer = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.comboBoxType = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.textBoxTotalWeight = new System.Windows.Forms.TextBox();
+            this.textBoxTotalCount = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.stockFlowDataGridView = new System.Windows.Forms.DataGridView();
-            this.stockFlowBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.stockFlowBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
-            this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
-            this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
-            this.bindingNavigatorPositionItem = new System.Windows.Forms.ToolStripTextBox();
-            this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -72,10 +64,19 @@
             this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.textBoxTotalWeight = new System.Windows.Forms.TextBox();
-            this.textBoxTotalCount = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
+            this.stockFlowBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.stockFlowBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
+            this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
+            this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
+            this.bindingNavigatorPositionItem = new System.Windows.Forms.ToolStripTextBox();
+            this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.checkBoxIn = new System.Windows.Forms.CheckBox();
+            this.checkBoxOut = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -87,6 +88,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.checkBoxOut);
+            this.groupBox1.Controls.Add(this.checkBoxIn);
             this.groupBox1.Controls.Add(this.buttonQuery);
             this.groupBox1.Controls.Add(this.comboBoxThirdCategory);
             this.groupBox1.Controls.Add(this.label7);
@@ -100,7 +103,6 @@
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.comboBoxCustomer);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.comboBoxType);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
@@ -226,18 +228,6 @@
             this.label2.TabIndex = 4;
             this.label2.Text = "客户选择";
             // 
-            // comboBoxType
-            // 
-            this.comboBoxType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxType.FormattingEnabled = true;
-            this.comboBoxType.Items.AddRange(new object[] {
-            "入库报表",
-            "出库报表"});
-            this.comboBoxType.Location = new System.Drawing.Point(75, 23);
-            this.comboBoxType.Name = "comboBoxType";
-            this.comboBoxType.Size = new System.Drawing.Size(140, 20);
-            this.comboBoxType.TabIndex = 3;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -260,6 +250,40 @@
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "合计";
+            // 
+            // textBoxTotalWeight
+            // 
+            this.textBoxTotalWeight.Location = new System.Drawing.Point(315, 34);
+            this.textBoxTotalWeight.Name = "textBoxTotalWeight";
+            this.textBoxTotalWeight.ReadOnly = true;
+            this.textBoxTotalWeight.Size = new System.Drawing.Size(140, 21);
+            this.textBoxTotalWeight.TabIndex = 7;
+            // 
+            // textBoxTotalCount
+            // 
+            this.textBoxTotalCount.Location = new System.Drawing.Point(76, 34);
+            this.textBoxTotalCount.Name = "textBoxTotalCount";
+            this.textBoxTotalCount.ReadOnly = true;
+            this.textBoxTotalCount.Size = new System.Drawing.Size(140, 21);
+            this.textBoxTotalCount.TabIndex = 6;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(17, 38);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(53, 12);
+            this.label9.TabIndex = 4;
+            this.label9.Text = "数量合计";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(256, 38);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(53, 12);
+            this.label8.TabIndex = 5;
+            this.label8.Text = "重量合计";
             // 
             // groupBox3
             // 
@@ -300,6 +324,84 @@
             this.stockFlowDataGridView.Size = new System.Drawing.Size(974, 281);
             this.stockFlowDataGridView.TabIndex = 0;
             this.stockFlowDataGridView.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.stockFlowDataGridView_RowPrePaint);
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "CustomerName";
+            this.dataGridViewTextBoxColumn2.HeaderText = "客户名称";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.DataPropertyName = "ContractName";
+            this.dataGridViewTextBoxColumn4.HeaderText = "合同名称";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.DataPropertyName = "CargoName";
+            this.dataGridViewTextBoxColumn6.HeaderText = "货品名称";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn8
+            // 
+            this.dataGridViewTextBoxColumn8.DataPropertyName = "FirstCategoryName";
+            this.dataGridViewTextBoxColumn8.HeaderText = "一级分类";
+            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            this.dataGridViewTextBoxColumn8.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn10
+            // 
+            this.dataGridViewTextBoxColumn10.DataPropertyName = "SecondCategoryName";
+            this.dataGridViewTextBoxColumn10.HeaderText = "二级分类";
+            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
+            this.dataGridViewTextBoxColumn10.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn12
+            // 
+            this.dataGridViewTextBoxColumn12.DataPropertyName = "ThirdCategoryName";
+            this.dataGridViewTextBoxColumn12.HeaderText = "三级分类";
+            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
+            this.dataGridViewTextBoxColumn12.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn13
+            // 
+            this.dataGridViewTextBoxColumn13.DataPropertyName = "Count";
+            this.dataGridViewTextBoxColumn13.HeaderText = "数量";
+            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
+            this.dataGridViewTextBoxColumn13.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn14
+            // 
+            this.dataGridViewTextBoxColumn14.DataPropertyName = "UnitWeight";
+            this.dataGridViewTextBoxColumn14.HeaderText = "单位重量(kg)";
+            this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
+            this.dataGridViewTextBoxColumn14.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn15
+            // 
+            this.dataGridViewTextBoxColumn15.DataPropertyName = "Weight";
+            this.dataGridViewTextBoxColumn15.HeaderText = "总重量(t)";
+            this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
+            this.dataGridViewTextBoxColumn15.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn16
+            // 
+            this.dataGridViewTextBoxColumn16.DataPropertyName = "FlowDate";
+            dataGridViewCellStyle1.Format = "d";
+            this.dataGridViewTextBoxColumn16.DefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridViewTextBoxColumn16.HeaderText = "日期";
+            this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
+            this.dataGridViewTextBoxColumn16.ReadOnly = true;
+            // 
+            // columnType
+            // 
+            this.columnType.HeaderText = "类型";
+            this.columnType.Name = "columnType";
+            this.columnType.ReadOnly = true;
             // 
             // stockFlowBindingSource
             // 
@@ -399,117 +501,29 @@
             this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
             this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
-            // dataGridViewTextBoxColumn2
+            // checkBoxIn
             // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "CustomerName";
-            this.dataGridViewTextBoxColumn2.HeaderText = "客户名称";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            this.checkBoxIn.AutoSize = true;
+            this.checkBoxIn.Checked = true;
+            this.checkBoxIn.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxIn.Location = new System.Drawing.Point(75, 25);
+            this.checkBoxIn.Name = "checkBoxIn";
+            this.checkBoxIn.Size = new System.Drawing.Size(48, 16);
+            this.checkBoxIn.TabIndex = 17;
+            this.checkBoxIn.Text = "入库";
+            this.checkBoxIn.UseVisualStyleBackColor = true;
             // 
-            // dataGridViewTextBoxColumn4
+            // checkBoxOut
             // 
-            this.dataGridViewTextBoxColumn4.DataPropertyName = "ContractName";
-            this.dataGridViewTextBoxColumn4.HeaderText = "合同名称";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn6
-            // 
-            this.dataGridViewTextBoxColumn6.DataPropertyName = "CargoName";
-            this.dataGridViewTextBoxColumn6.HeaderText = "货品名称";
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            this.dataGridViewTextBoxColumn6.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn8
-            // 
-            this.dataGridViewTextBoxColumn8.DataPropertyName = "FirstCategoryName";
-            this.dataGridViewTextBoxColumn8.HeaderText = "一级分类";
-            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
-            this.dataGridViewTextBoxColumn8.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn10
-            // 
-            this.dataGridViewTextBoxColumn10.DataPropertyName = "SecondCategoryName";
-            this.dataGridViewTextBoxColumn10.HeaderText = "二级分类";
-            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
-            this.dataGridViewTextBoxColumn10.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn12
-            // 
-            this.dataGridViewTextBoxColumn12.DataPropertyName = "ThirdCategoryName";
-            this.dataGridViewTextBoxColumn12.HeaderText = "三级分类";
-            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
-            this.dataGridViewTextBoxColumn12.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn13
-            // 
-            this.dataGridViewTextBoxColumn13.DataPropertyName = "Count";
-            this.dataGridViewTextBoxColumn13.HeaderText = "数量";
-            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
-            this.dataGridViewTextBoxColumn13.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn14
-            // 
-            this.dataGridViewTextBoxColumn14.DataPropertyName = "UnitWeight";
-            this.dataGridViewTextBoxColumn14.HeaderText = "单位重量(kg)";
-            this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
-            this.dataGridViewTextBoxColumn14.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn15
-            // 
-            this.dataGridViewTextBoxColumn15.DataPropertyName = "Weight";
-            this.dataGridViewTextBoxColumn15.HeaderText = "总重量(t)";
-            this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
-            this.dataGridViewTextBoxColumn15.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn16
-            // 
-            this.dataGridViewTextBoxColumn16.DataPropertyName = "FlowDate";
-            dataGridViewCellStyle2.Format = "d";
-            this.dataGridViewTextBoxColumn16.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dataGridViewTextBoxColumn16.HeaderText = "日期";
-            this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
-            this.dataGridViewTextBoxColumn16.ReadOnly = true;
-            // 
-            // columnType
-            // 
-            this.columnType.HeaderText = "类型";
-            this.columnType.Name = "columnType";
-            this.columnType.ReadOnly = true;
-            // 
-            // textBoxTotalWeight
-            // 
-            this.textBoxTotalWeight.Location = new System.Drawing.Point(315, 34);
-            this.textBoxTotalWeight.Name = "textBoxTotalWeight";
-            this.textBoxTotalWeight.ReadOnly = true;
-            this.textBoxTotalWeight.Size = new System.Drawing.Size(140, 21);
-            this.textBoxTotalWeight.TabIndex = 7;
-            // 
-            // textBoxTotalCount
-            // 
-            this.textBoxTotalCount.Location = new System.Drawing.Point(76, 34);
-            this.textBoxTotalCount.Name = "textBoxTotalCount";
-            this.textBoxTotalCount.ReadOnly = true;
-            this.textBoxTotalCount.Size = new System.Drawing.Size(140, 21);
-            this.textBoxTotalCount.TabIndex = 6;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(256, 38);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(53, 12);
-            this.label8.TabIndex = 5;
-            this.label8.Text = "重量合计";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(17, 38);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(53, 12);
-            this.label9.TabIndex = 4;
-            this.label9.Text = "数量合计";
+            this.checkBoxOut.AutoSize = true;
+            this.checkBoxOut.Checked = true;
+            this.checkBoxOut.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxOut.Location = new System.Drawing.Point(143, 25);
+            this.checkBoxOut.Name = "checkBoxOut";
+            this.checkBoxOut.Size = new System.Drawing.Size(48, 16);
+            this.checkBoxOut.TabIndex = 18;
+            this.checkBoxOut.Text = "出库";
+            this.checkBoxOut.UseVisualStyleBackColor = true;
             // 
             // StockFlowReportForm
             // 
@@ -547,7 +561,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox comboBoxCustomer;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox comboBoxType;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button buttonQuery;
         private System.Windows.Forms.ComboBox comboBoxThirdCategory;
@@ -585,5 +598,7 @@
         private System.Windows.Forms.TextBox textBoxTotalCount;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.CheckBox checkBoxOut;
+        private System.Windows.Forms.CheckBox checkBoxIn;
     }
 }

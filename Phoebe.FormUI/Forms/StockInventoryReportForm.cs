@@ -22,6 +22,8 @@ namespace Phoebe.FormUI
         private StatisticBusiness statisticBusiness;
 
         private CustomerBusiness customerBusiness;
+
+        private CategoryBusiness categoryBusiness;
         #endregion //Field
 
         #region Constructor
@@ -36,6 +38,7 @@ namespace Phoebe.FormUI
         {
             this.statisticBusiness = new StatisticBusiness();
             this.customerBusiness = new CustomerBusiness();
+            this.categoryBusiness = new CategoryBusiness();
         }
 
         private void InitControl()
@@ -59,7 +62,7 @@ namespace Phoebe.FormUI
             InitData();
             InitControl();
         }
-       
+
         /// <summary>
         /// 查询
         /// </summary>
@@ -70,17 +73,39 @@ namespace Phoebe.FormUI
             if (this.comboBoxCustomer.SelectedIndex == -1)
                 return;
 
+            if (this.dateStart.Value.Date > this.dateEnd.Value.Date)
+            {
+                MessageBox.Show("开始日期不能晚于结束日期", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            List<Inventory> data = new List<Inventory>();
             if (this.comboBoxCustomer.SelectedIndex == 0)
             {
-
+                var customers = this.customerBusiness.Get();
+                foreach (var customer in customers)
+                {
+                    var inv = this.statisticBusiness.GetInventory(this.dateStart.Value.Date, this.dateEnd.Value.Date, customer.ID);
+                    data.AddRange(inv);
+                }
             }
             else
             {
                 var customer = this.comboBoxCustomer.SelectedItem as Customer;
-
-                var data = this.statisticBusiness.GetInventory(this.dateStart.Value.Date, this.dateEnd.Value.Date, customer.ID);
-                this.inventoryBindingSource.DataSource = data;
+                data = this.statisticBusiness.GetInventory(this.dateStart.Value.Date, this.dateEnd.Value.Date, customer.ID);
             }
+
+            if (!this.checkBoxThirdCategory.Checked && this.checkBoxSecondCategory.Checked)
+            {
+                
+            }
+            else if (!this.checkBoxThirdCategory.Checked && !this.checkBoxSecondCategory.Checked)
+            {
+
+            }
+       
+
+            this.inventoryBindingSource.DataSource = data;
         }
         #endregion //Event
     }
