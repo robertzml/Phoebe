@@ -32,6 +32,8 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StockFlowReportForm));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.checkBoxOut = new System.Windows.Forms.CheckBox();
+            this.checkBoxIn = new System.Windows.Forms.CheckBox();
             this.buttonQuery = new System.Windows.Forms.Button();
             this.comboBoxThirdCategory = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -75,8 +77,6 @@
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.checkBoxIn = new System.Windows.Forms.CheckBox();
-            this.checkBoxOut = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -111,6 +111,30 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "选择";
+            // 
+            // checkBoxOut
+            // 
+            this.checkBoxOut.AutoSize = true;
+            this.checkBoxOut.Checked = true;
+            this.checkBoxOut.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxOut.Location = new System.Drawing.Point(143, 25);
+            this.checkBoxOut.Name = "checkBoxOut";
+            this.checkBoxOut.Size = new System.Drawing.Size(48, 16);
+            this.checkBoxOut.TabIndex = 18;
+            this.checkBoxOut.Text = "出库";
+            this.checkBoxOut.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxIn
+            // 
+            this.checkBoxIn.AutoSize = true;
+            this.checkBoxIn.Checked = true;
+            this.checkBoxIn.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxIn.Location = new System.Drawing.Point(75, 25);
+            this.checkBoxIn.Name = "checkBoxIn";
+            this.checkBoxIn.Size = new System.Drawing.Size(48, 16);
+            this.checkBoxIn.TabIndex = 17;
+            this.checkBoxIn.Text = "入库";
+            this.checkBoxIn.UseVisualStyleBackColor = true;
             // 
             // buttonQuery
             // 
@@ -212,7 +236,6 @@
             // 
             // comboBoxCustomer
             // 
-            this.comboBoxCustomer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxCustomer.FormattingEnabled = true;
             this.comboBoxCustomer.Location = new System.Drawing.Point(315, 23);
             this.comboBoxCustomer.Name = "comboBoxCustomer";
@@ -500,30 +523,6 @@
             // 
             this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
             this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
-            // 
-            // checkBoxIn
-            // 
-            this.checkBoxIn.AutoSize = true;
-            this.checkBoxIn.Checked = true;
-            this.checkBoxIn.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxIn.Location = new System.Drawing.Point(75, 25);
-            this.checkBoxIn.Name = "checkBoxIn";
-            this.checkBoxIn.Size = new System.Drawing.Size(48, 16);
-            this.checkBoxIn.TabIndex = 17;
-            this.checkBoxIn.Text = "入库";
-            this.checkBoxIn.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxOut
-            // 
-            this.checkBoxOut.AutoSize = true;
-            this.checkBoxOut.Checked = true;
-            this.checkBoxOut.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxOut.Location = new System.Drawing.Point(143, 25);
-            this.checkBoxOut.Name = "checkBoxOut";
-            this.checkBoxOut.Size = new System.Drawing.Size(48, 16);
-            this.checkBoxOut.TabIndex = 18;
-            this.checkBoxOut.Text = "出库";
-            this.checkBoxOut.UseVisualStyleBackColor = true;
             // 
             // StockFlowReportForm
             // 

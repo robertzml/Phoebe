@@ -24,6 +24,15 @@ namespace Phoebe.Business
         #endregion //Constructor
 
         #region Function
+        /// <summary>
+        /// 设置盘点期初数据
+        /// </summary>
+        /// <param name="data">数据</param>
+        /// <param name="start">期初库存</param>
+        /// <param name="endTime">期末时间</param>
+        /// <param name="customerID">客户ID</param>
+        /// <param name="customerName">客户名称</param>
+        /// <returns></returns>
         private Inventory SetInventoryStart(List<Inventory> data, Storage start, DateTime endTime, int customerID, string customerName)
         {
             var inv = data.SingleOrDefault(r => r.CustomerID == customerID && r.FirstCategoryID == start.FirstCategoryID &&
@@ -56,6 +65,14 @@ namespace Phoebe.Business
             }
         }
 
+        /// <summary>
+        /// 设置盘点期末数据
+        /// </summary>
+        /// <param name="data">数据</param>
+        /// <param name="end">期末库存</param>
+        /// <param name="StartTime">期初时间</param>
+        /// <param name="customerID">客户ID</param>
+        /// <param name="customerName">客户名称</param>
         public Inventory SetInventoryEnd(List<Inventory> data, Storage end, DateTime startTime, int customerID, string customerName)
         {
             var inv = data.SingleOrDefault(r => r.CustomerID == customerID && r.FirstCategoryID == end.FirstCategoryID &&
@@ -351,7 +368,6 @@ namespace Phoebe.Business
 
             var customer = this.context.Customers.Find(customerID);
             var contracts = this.context.Contracts.Where(r => r.CustomerID == customer.ID);
-            int index = 1;
 
             foreach (var contract in contracts)
             {
@@ -363,7 +379,6 @@ namespace Phoebe.Business
                     var inv = SetInventoryStart(data, storage, endTime, customer.ID, customer.Name);
                     if (inv != null)
                     {
-                        inv.Number = index++;
                         data.Add(inv);
                     }
                 }
@@ -373,7 +388,6 @@ namespace Phoebe.Business
                     var inv = SetInventoryEnd(data, storage, startTime, customer.ID, customer.Name);
                     if (inv != null)
                     {
-                        inv.Number = index++;
                         data.Add(inv);
                     }
                 }

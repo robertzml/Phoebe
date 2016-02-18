@@ -49,6 +49,63 @@ namespace Phoebe.FormUI
             this.comboBoxCustomer.DisplayMember = "Name";
             this.comboBoxCustomer.ValueMember = "ID";
         }
+
+        /// <summary>
+        /// 分组盘点结果
+        /// </summary>
+        /// <param name="input">数据输入</param>
+        /// <param name="category">分组标准，1:一级分类  2:二级分类</param>
+        /// <returns></returns>
+        private List<Inventory> GroupInventory(List<Inventory> input, int category)
+        {
+            List<Inventory> data = new List<Inventory>();
+
+            if (category == 2)
+            {
+                foreach (var item in input)
+                {
+                    var inv = data.SingleOrDefault(r => r.CustomerID == item.CustomerID && r.FirstCategoryID == item.FirstCategoryID &&
+                        r.SecondCategoryID == item.SecondCategoryID);
+
+                    if (inv == null)
+                    {
+                        item.ThirdCategoryID = 0;
+                        item.ThirdCategoryName = "";
+                        data.Add(item);
+                    }
+                    else
+                    {
+                        inv.StartCount += item.StartCount;
+                        inv.StartWeight += item.StartWeight;
+                        inv.EndCount += item.EndCount;
+                        inv.EndWeight += item.EndWeight;
+                    }
+                }
+            }
+            else if (category == 1)
+            {
+                foreach (var item in input)
+                {
+                    var inv = data.SingleOrDefault(r => r.CustomerID == item.CustomerID && r.FirstCategoryID == item.FirstCategoryID);
+
+                    if (inv == null)
+                    {
+                        item.SecondCategoryID = 0;
+                        item.SecondCategoryName = "";
+                        data.Add(item);
+                    }
+                    else
+                    {
+                        inv.StartCount += item.StartCount;
+                        inv.StartWeight += item.StartWeight;
+                        inv.EndCount += item.EndCount;
+                        inv.EndWeight += item.EndWeight;
+                    }
+                }
+            }
+
+            return data;
+        }
         #endregion //Function
 
         #region Event
@@ -97,13 +154,25 @@ namespace Phoebe.FormUI
 
             if (!this.checkBoxThirdCategory.Checked && this.checkBoxSecondCategory.Checked)
             {
-                
+                data = GroupInventory(data, 2);
             }
             else if (!this.checkBoxThirdCategory.Checked && !this.checkBoxSecondCategory.Checked)
             {
-
+                data = GroupInventory(data, 1);
             }
-       
+
+            int index = 1;
+            data.ForEach(r => r.Number = index++);
+
+            int totalStartCount = data.Sum(r => r.StartCount);
+            double totalStartWeight = data.Sum(r => r.StartWeight);
+            int totalEndCount = data.Sum(r => r.EndCount);
+            double totalEndWeight = data.Sum(r => r.EndWeight);
+
+            this.textBoxStartCount.Text = totalStartCount.ToString();
+            this.textBoxStartWeight.Text = totalStartWeight.ToString();
+            this.textBoxEndCount.Text = totalEndCount.ToString();
+            this.textBoxEndWeight.Text = totalEndWeight.ToString();
 
             this.inventoryBindingSource.DataSource = data;
         }

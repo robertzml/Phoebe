@@ -55,6 +55,7 @@
             this.menuReport = new System.Windows.Forms.ToolStripMenuItem();
             this.menuDailyReport = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStockFlowReport = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStockInventoryReport = new System.Windows.Forms.ToolStripMenuItem();
             this.menuUser = new System.Windows.Forms.ToolStripMenuItem();
             this.menuUserList = new System.Windows.Forms.ToolStripMenuItem();
             this.menuUserGroupList = new System.Windows.Forms.ToolStripMenuItem();
@@ -63,7 +64,6 @@
             this.mainStauts = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusUser = new System.Windows.Forms.ToolStripStatusLabel();
-            this.menuStockInventoryReport = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenu.SuspendLayout();
             this.mainStauts.SuspendLayout();
             this.SuspendLayout();
@@ -278,6 +278,7 @@
             this.menuDailyReport.Name = "menuDailyReport";
             this.menuDailyReport.Size = new System.Drawing.Size(152, 22);
             this.menuDailyReport.Text = "日报表";
+            this.menuDailyReport.Visible = false;
             this.menuDailyReport.Click += new System.EventHandler(this.menuDailyReport_Click);
             // 
             // menuStockFlowReport
@@ -286,6 +287,13 @@
             this.menuStockFlowReport.Size = new System.Drawing.Size(152, 22);
             this.menuStockFlowReport.Text = "出入库报表";
             this.menuStockFlowReport.Click += new System.EventHandler(this.menuStockFlowReport_Click);
+            // 
+            // menuStockInventoryReport
+            // 
+            this.menuStockInventoryReport.Name = "menuStockInventoryReport";
+            this.menuStockInventoryReport.Size = new System.Drawing.Size(152, 22);
+            this.menuStockInventoryReport.Text = "库存盘点报表";
+            this.menuStockInventoryReport.Click += new System.EventHandler(this.menuStockInventoryReport_Click);
             // 
             // menuUser
             // 
@@ -352,13 +360,6 @@
             this.statusUser.Name = "statusUser";
             this.statusUser.Size = new System.Drawing.Size(44, 21);
             this.statusUser.Text = "name";
-            // 
-            // menuStockInventoryReport
-            // 
-            this.menuStockInventoryReport.Name = "menuStockInventoryReport";
-            this.menuStockInventoryReport.Size = new System.Drawing.Size(152, 22);
-            this.menuStockInventoryReport.Text = "库存盘点报表";
-            this.menuStockInventoryReport.Click += new System.EventHandler(this.menuStockInventoryReport_Click);
             // 
             // MainForm
             // 

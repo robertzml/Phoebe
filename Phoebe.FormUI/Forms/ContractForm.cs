@@ -68,7 +68,10 @@ namespace Phoebe.FormUI
         private void buttonQuery_Click(object sender, EventArgs e)
         {
             if (this.comboBoxCustomer.SelectedIndex == -1)
+            {
+                MessageBox.Show("请选择客户", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
+            }
 
             if (this.comboBoxCustomer.SelectedIndex == 0)
             {
