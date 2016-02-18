@@ -182,6 +182,11 @@ namespace Phoebe.FormUI
                 data = data.Where(r => r.Status != (int)EntityStatus.CargoStockOut).ToList();
             }
 
+            this.textBoxTotalCount.Text = data.Sum(r => r.Count).ToString();
+            this.textBoxTotalWeight.Text = data.Sum(r => r.TotalWeight).ToString("f3") + " 吨";
+            this.textBoxTotalStoreCount.Text = data.Sum(r => r.StoreCount).ToString();
+            this.textBoxTotalStoreWeight.Text = data.Sum(r => r.StoreWeight).ToString("f3") + " 吨";
+
             this.cargoBindingSource.DataSource = data;
         }
 

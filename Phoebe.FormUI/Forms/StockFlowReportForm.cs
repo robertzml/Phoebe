@@ -188,9 +188,9 @@ namespace Phoebe.FormUI
 
             this.stockFlowBindingSource.DataSource = data;
             this.textBoxStockInCount.Text = data.Where(r => r.Type == StockFlowType.StockIn).Sum(r => r.Count).ToString();
-            this.textBoxStockInWeight.Text = data.Where(r => r.Type == StockFlowType.StockIn).Sum(r => r.Weight).ToString() + " 吨";
+            this.textBoxStockInWeight.Text = data.Where(r => r.Type == StockFlowType.StockIn).Sum(r => r.Weight).ToString("f3") + " 吨";
             this.textBoxStockOutCount.Text = data.Where(r => r.Type == StockFlowType.StockOut).Sum(r => r.Count).ToString();
-            this.textBoxStockOutWeight.Text = data.Where(r => r.Type == StockFlowType.StockOut).Sum(r => r.Weight).ToString() + " 吨";
+            this.textBoxStockOutWeight.Text = data.Where(r => r.Type == StockFlowType.StockOut).Sum(r => r.Weight).ToString("f3") + " 吨";
         }
 
         private void stockFlowDataGridView_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)

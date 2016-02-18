@@ -170,9 +170,9 @@ namespace Phoebe.FormUI
             double totalEndWeight = data.Sum(r => r.EndWeight);
 
             this.textBoxStartCount.Text = totalStartCount.ToString();
-            this.textBoxStartWeight.Text = totalStartWeight.ToString() + "吨";
+            this.textBoxStartWeight.Text = totalStartWeight.ToString("f3") + "吨";
             this.textBoxEndCount.Text = totalEndCount.ToString();
-            this.textBoxEndWeight.Text = totalEndWeight.ToString() + " 吨";
+            this.textBoxEndWeight.Text = totalEndWeight.ToString("f3") + " 吨";
 
             this.inventoryBindingSource.DataSource = data;
         }

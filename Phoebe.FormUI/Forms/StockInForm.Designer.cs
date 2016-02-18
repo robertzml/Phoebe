@@ -213,13 +213,14 @@
             this.textBoxUser.ReadOnly = true;
             this.textBoxUser.Size = new System.Drawing.Size(147, 21);
             this.textBoxUser.TabIndex = 32;
+            this.textBoxUser.TabStop = false;
             // 
             // textBoxRemark
             // 
             this.textBoxRemark.Location = new System.Drawing.Point(845, 142);
             this.textBoxRemark.Name = "textBoxRemark";
             this.textBoxRemark.Size = new System.Drawing.Size(147, 21);
-            this.textBoxRemark.TabIndex = 30;
+            this.textBoxRemark.TabIndex = 10;
             // 
             // label15
             // 
@@ -240,7 +241,7 @@
             0});
             this.numericOtherPrice.Name = "numericOtherPrice";
             this.numericOtherPrice.Size = new System.Drawing.Size(147, 21);
-            this.numericOtherPrice.TabIndex = 28;
+            this.numericOtherPrice.TabIndex = 9;
             // 
             // label14
             // 
@@ -261,7 +262,7 @@
             0});
             this.numericRentPrice.Name = "numericRentPrice";
             this.numericRentPrice.Size = new System.Drawing.Size(147, 21);
-            this.numericRentPrice.TabIndex = 26;
+            this.numericRentPrice.TabIndex = 8;
             // 
             // label13
             // 
@@ -282,7 +283,7 @@
             0});
             this.numericPackingPrice.Name = "numericPackingPrice";
             this.numericPackingPrice.Size = new System.Drawing.Size(147, 21);
-            this.numericPackingPrice.TabIndex = 24;
+            this.numericPackingPrice.TabIndex = 7;
             // 
             // label12
             // 
@@ -303,7 +304,7 @@
             0});
             this.numericDisposePrice.Name = "numericDisposePrice";
             this.numericDisposePrice.Size = new System.Drawing.Size(147, 21);
-            this.numericDisposePrice.TabIndex = 22;
+            this.numericDisposePrice.TabIndex = 6;
             // 
             // label11
             // 
@@ -324,7 +325,7 @@
             0});
             this.numericFreezePrice.Name = "numericFreezePrice";
             this.numericFreezePrice.Size = new System.Drawing.Size(147, 21);
-            this.numericFreezePrice.TabIndex = 20;
+            this.numericFreezePrice.TabIndex = 5;
             // 
             // label10
             // 
@@ -345,7 +346,7 @@
             0});
             this.numericHandlingPrice.Name = "numericHandlingPrice";
             this.numericHandlingPrice.Size = new System.Drawing.Size(147, 21);
-            this.numericHandlingPrice.TabIndex = 18;
+            this.numericHandlingPrice.TabIndex = 4;
             // 
             // label9
             // 
@@ -363,6 +364,7 @@
             this.textBoxBillingType.ReadOnly = true;
             this.textBoxBillingType.Size = new System.Drawing.Size(147, 21);
             this.textBoxBillingType.TabIndex = 16;
+            this.textBoxBillingType.TabStop = false;
             // 
             // label8
             // 
@@ -383,7 +385,7 @@
             0});
             this.numericUnitPrice.Name = "numericUnitPrice";
             this.numericUnitPrice.Size = new System.Drawing.Size(147, 21);
-            this.numericUnitPrice.TabIndex = 14;
+            this.numericUnitPrice.TabIndex = 3;
             // 
             // label1
             // 
@@ -410,7 +412,7 @@
             this.comboBoxContract.Location = new System.Drawing.Point(339, 54);
             this.comboBoxContract.Name = "comboBoxContract";
             this.comboBoxContract.Size = new System.Drawing.Size(147, 20);
-            this.comboBoxContract.TabIndex = 12;
+            this.comboBoxContract.TabIndex = 2;
             this.comboBoxContract.SelectedIndexChanged += new System.EventHandler(this.comboBoxContract_SelectedIndexChanged);
             // 
             // label2
@@ -438,6 +440,7 @@
             this.textBoxStatus.ReadOnly = true;
             this.textBoxStatus.Size = new System.Drawing.Size(147, 21);
             this.textBoxStatus.TabIndex = 4;
+            this.textBoxStatus.TabStop = false;
             // 
             // comboBoxCustomer
             // 
@@ -446,7 +449,7 @@
             this.comboBoxCustomer.Location = new System.Drawing.Point(76, 54);
             this.comboBoxCustomer.Name = "comboBoxCustomer";
             this.comboBoxCustomer.Size = new System.Drawing.Size(147, 20);
-            this.comboBoxCustomer.TabIndex = 11;
+            this.comboBoxCustomer.TabIndex = 1;
             this.comboBoxCustomer.SelectedIndexChanged += new System.EventHandler(this.comboBoxCustomer_SelectedIndexChanged);
             // 
             // textBoxBusinessType
@@ -456,6 +459,7 @@
             this.textBoxBusinessType.ReadOnly = true;
             this.textBoxBusinessType.Size = new System.Drawing.Size(147, 21);
             this.textBoxBusinessType.TabIndex = 2;
+            this.textBoxBusinessType.TabStop = false;
             this.textBoxBusinessType.Text = "货品入库";
             // 
             // label5
@@ -483,13 +487,14 @@
             this.textBoxFlowNumber.ReadOnly = true;
             this.textBoxFlowNumber.Size = new System.Drawing.Size(147, 21);
             this.textBoxFlowNumber.TabIndex = 8;
+            this.textBoxFlowNumber.TabStop = false;
             // 
             // dateBusinessTime
             // 
             this.dateBusinessTime.Location = new System.Drawing.Point(588, 12);
             this.dateBusinessTime.Name = "dateBusinessTime";
             this.dateBusinessTime.Size = new System.Drawing.Size(147, 21);
-            this.dateBusinessTime.TabIndex = 6;
+            this.dateBusinessTime.TabIndex = 0;
             // 
             // label3
             // 
