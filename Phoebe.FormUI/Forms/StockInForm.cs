@@ -238,6 +238,14 @@ namespace Phoebe.FormUI
                 {
                     return ErrorCode.EmptyName;
                 }
+                if (cargo.FirstCategoryID == 0)
+                {
+                    return ErrorCode.CategoryFirstEmpty;
+                }
+                if (cargo.SecondCategoryID == 0)
+                {
+                    return ErrorCode.CategorySecondEmpty;
+                }
 
                 cargo.ID = Guid.NewGuid();
                 cargo.ContractID = stockIn.ContractID;
@@ -386,6 +394,17 @@ namespace Phoebe.FormUI
         private void toolSave_Click(object sender, EventArgs e)
         {
             this.textBoxRemark.Focus(); //force datagrid complete change
+
+            if (this.comboBoxCustomer.SelectedIndex == -1)
+            {
+                MessageBox.Show("未选择客户", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            if (this.comboBoxContract.SelectedIndex == -1)
+            {
+                MessageBox.Show("未选择合同", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
 
             if (this.isNew)
             {

@@ -239,8 +239,6 @@ namespace Phoebe.FormUI
         /// <summary>
         /// 报表管理 - 日报表
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void menuDailyReport_Click(object sender, EventArgs e)
         {
             DailyReportForm form = new DailyReportForm();
@@ -252,8 +250,6 @@ namespace Phoebe.FormUI
         /// <summary>
         /// 报表管理 - 出入库报表
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void menuStockFlowReport_Click(object sender, EventArgs e)
         {
             StockFlowReportForm form = new StockFlowReportForm();
@@ -265,11 +261,20 @@ namespace Phoebe.FormUI
         /// <summary>
         /// 报表管理 - 库存盘点报表
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void menuStockInventoryReport_Click(object sender, EventArgs e)
         {
             StockInventoryReportForm form = new StockInventoryReportForm();
+            form.MdiParent = this;
+            form.WindowState = FormWindowState.Maximized;
+            form.Show();
+        }
+
+        /// <summary>
+        /// 报表管理 - 客户对账报表
+        /// </summary>
+        private void menuCustomerAccountReport_Click(object sender, EventArgs e)
+        {
+            CustomerAccountReportForm form = new CustomerAccountReportForm();
             form.MdiParent = this;
             form.WindowState = FormWindowState.Maximized;
             form.Show();

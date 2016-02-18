@@ -56,6 +56,7 @@
             this.menuDailyReport = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStockFlowReport = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStockInventoryReport = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuCustomerAccountReport = new System.Windows.Forms.ToolStripMenuItem();
             this.menuUser = new System.Windows.Forms.ToolStripMenuItem();
             this.menuUserList = new System.Windows.Forms.ToolStripMenuItem();
             this.menuUserGroupList = new System.Windows.Forms.ToolStripMenuItem();
@@ -268,7 +269,8 @@
             this.menuReport.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuDailyReport,
             this.menuStockFlowReport,
-            this.menuStockInventoryReport});
+            this.menuStockInventoryReport,
+            this.menuCustomerAccountReport});
             this.menuReport.Name = "menuReport";
             this.menuReport.Size = new System.Drawing.Size(68, 21);
             this.menuReport.Text = "报表管理";
@@ -294,6 +296,13 @@
             this.menuStockInventoryReport.Size = new System.Drawing.Size(152, 22);
             this.menuStockInventoryReport.Text = "库存盘点报表";
             this.menuStockInventoryReport.Click += new System.EventHandler(this.menuStockInventoryReport_Click);
+            // 
+            // menuCustomerAccountReport
+            // 
+            this.menuCustomerAccountReport.Name = "menuCustomerAccountReport";
+            this.menuCustomerAccountReport.Size = new System.Drawing.Size(152, 22);
+            this.menuCustomerAccountReport.Text = "客户对账报表";
+            this.menuCustomerAccountReport.Click += new System.EventHandler(this.menuCustomerAccountReport_Click);
             // 
             // menuUser
             // 
@@ -421,6 +430,7 @@
         private System.Windows.Forms.ToolStripMenuItem menuSettleList;
         private System.Windows.Forms.ToolStripMenuItem menuStockFlowReport;
         private System.Windows.Forms.ToolStripMenuItem menuStockInventoryReport;
+        private System.Windows.Forms.ToolStripMenuItem menuCustomerAccountReport;
     }
 }
 

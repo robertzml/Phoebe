@@ -210,6 +210,18 @@ namespace Phoebe.Model
         /// </summary>
         [Display(Name = "分类含有货品")]
         CategoryHasCargo = 71,
+
+        /// <summary>
+        /// 未选择一级分类
+        /// </summary>
+        [Display(Name = "未选择一级分类")]
+        CategoryFirstEmpty = 72,
+
+        /// <summary>
+        /// 未选择二级分类
+        /// </summary>
+        [Display(Name = "未选择二级分类")]
+        CategorySecondEmpty = 73,
         #endregion //Category
     }
 }

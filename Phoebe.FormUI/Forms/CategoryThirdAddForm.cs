@@ -13,6 +13,9 @@ using Phoebe.Model;
 
 namespace Phoebe.FormUI
 {
+    /// <summary>
+    /// 添加三级分类窗体
+    /// </summary>
     public partial class CategoryThirdAddForm : Form
     {
         #region Field
@@ -41,12 +44,22 @@ namespace Phoebe.FormUI
         #endregion //Function
 
         #region Event
+        /// <summary>
+        /// 窗体载入
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CategoryThirdAddForm_Load(object sender, EventArgs e)
         {
             InitData();
             InitControl();
         }
 
+        /// <summary>
+        /// 一级分类选择
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void comboBoxFirstCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (this.comboBoxFirstCategory.SelectedIndex != -1)
@@ -59,6 +72,11 @@ namespace Phoebe.FormUI
             }
         }
 
+        /// <summary>
+        /// 保存
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonConfirm_Click(object sender, EventArgs e)
         {
             if (this.textBoxName.Text.Trim() == "")

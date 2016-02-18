@@ -306,6 +306,17 @@ namespace Phoebe.FormUI
         {
             this.textBoxRemark.Focus(); //force datagrid complete change
 
+            if (this.comboBoxCustomer.SelectedIndex == -1)
+            {
+                MessageBox.Show("未选择客户", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            if (this.comboBoxContract.SelectedIndex == -1)
+            {
+                MessageBox.Show("未选择合同", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
             if (this.isNew)
             {
                 ErrorCode result = SaveNewItem();

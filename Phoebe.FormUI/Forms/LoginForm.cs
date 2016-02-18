@@ -13,6 +13,9 @@ using Phoebe.Model;
 
 namespace Phoebe.FormUI
 {
+    /// <summary>
+    /// 登录窗体
+    /// </summary>
     public partial class LoginForm : Form
     {
         #region Field

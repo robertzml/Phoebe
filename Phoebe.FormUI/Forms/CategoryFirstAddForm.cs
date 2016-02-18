@@ -13,6 +13,9 @@ using Phoebe.Model;
 
 namespace Phoebe.FormUI
 {
+    /// <summary>
+    /// 添加一级分类窗体
+    /// </summary>
     public partial class CategoryFirstAddForm : Form
     {
         #region Field
@@ -34,11 +37,21 @@ namespace Phoebe.FormUI
         #endregion //Function
 
         #region Event
+        /// <summary>
+        /// 窗体载入
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CategoryFirstAddForm_Load(object sender, EventArgs e)
         {
             InitData();
         }
 
+        /// <summary>
+        /// 保存
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonConfirm_Click(object sender, EventArgs e)
         {
             if (this.textBoxName.Text.Trim() == "")
