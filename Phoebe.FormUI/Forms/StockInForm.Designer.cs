@@ -233,6 +233,7 @@
             // 
             // numericOtherPrice
             // 
+            this.numericOtherPrice.DecimalPlaces = 2;
             this.numericOtherPrice.Location = new System.Drawing.Point(588, 142);
             this.numericOtherPrice.Maximum = new decimal(new int[] {
             100000,
@@ -254,6 +255,7 @@
             // 
             // numericRentPrice
             // 
+            this.numericRentPrice.DecimalPlaces = 2;
             this.numericRentPrice.Location = new System.Drawing.Point(339, 142);
             this.numericRentPrice.Maximum = new decimal(new int[] {
             100000,
@@ -275,6 +277,7 @@
             // 
             // numericPackingPrice
             // 
+            this.numericPackingPrice.DecimalPlaces = 2;
             this.numericPackingPrice.Location = new System.Drawing.Point(76, 142);
             this.numericPackingPrice.Maximum = new decimal(new int[] {
             100000,
@@ -296,6 +299,7 @@
             // 
             // numericDisposePrice
             // 
+            this.numericDisposePrice.DecimalPlaces = 2;
             this.numericDisposePrice.Location = new System.Drawing.Point(845, 96);
             this.numericDisposePrice.Maximum = new decimal(new int[] {
             100000,
@@ -317,6 +321,7 @@
             // 
             // numericFreezePrice
             // 
+            this.numericFreezePrice.DecimalPlaces = 2;
             this.numericFreezePrice.Location = new System.Drawing.Point(588, 96);
             this.numericFreezePrice.Maximum = new decimal(new int[] {
             100000,
@@ -338,6 +343,7 @@
             // 
             // numericHandlingPrice
             // 
+            this.numericHandlingPrice.DecimalPlaces = 2;
             this.numericHandlingPrice.Location = new System.Drawing.Point(339, 96);
             this.numericHandlingPrice.Maximum = new decimal(new int[] {
             100000,
@@ -377,6 +383,7 @@
             // 
             // numericUnitPrice
             // 
+            this.numericUnitPrice.DecimalPlaces = 2;
             this.numericUnitPrice.Location = new System.Drawing.Point(76, 96);
             this.numericUnitPrice.Maximum = new decimal(new int[] {
             10000,
