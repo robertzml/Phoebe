@@ -504,6 +504,23 @@ namespace Phoebe.FormUI
         }
 
         /// <summary>
+        /// 打印
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void toolPrint_Click(object sender, EventArgs e)
+        {
+            if (this.currentStockIn == null)
+            {
+                MessageBox.Show("当前未选中记录", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            StockInReportForm form = new StockInReportForm(this.currentStockIn);
+            form.ShowDialog();
+        }
+
+        /// <summary>
         /// 客户选择
         /// </summary>
         /// <param name="sender"></param>

@@ -176,6 +176,24 @@ namespace Phoebe.FormUI
 
             this.inventoryBindingSource.DataSource = data;
         }
+
+        /// <summary>
+        /// 打印
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonPrint_Click(object sender, EventArgs e)
+        {
+            if (this.inventoryBindingSource.DataSource == null)
+            {
+                MessageBox.Show("未选择数据", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            List<Inventory> data = this.inventoryBindingSource.DataSource as List<Inventory>;
+            StockInventoryPrintForm form = new StockInventoryPrintForm(data, this.dateStart.Value.Date, this.dateEnd.Value.Date);
+            form.ShowDialog();
+        }
         #endregion //Event
     }
 }
