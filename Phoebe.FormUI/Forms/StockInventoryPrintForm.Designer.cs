@@ -37,14 +37,14 @@
             this.reportViewer1.LocalReport.ReportEmbeddedResource = "Phoebe.FormUI.Report.Inventory.rdlc";
             this.reportViewer1.Location = new System.Drawing.Point(3, 3);
             this.reportViewer1.Name = "reportViewer1";
-            this.reportViewer1.Size = new System.Drawing.Size(768, 497);
+            this.reportViewer1.Size = new System.Drawing.Size(995, 514);
             this.reportViewer1.TabIndex = 0;
             // 
             // StockInventoryPrintForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(774, 503);
+            this.ClientSize = new System.Drawing.Size(1001, 520);
             this.Controls.Add(this.reportViewer1);
             this.Name = "StockInventoryPrintForm";
             this.Padding = new System.Windows.Forms.Padding(3);

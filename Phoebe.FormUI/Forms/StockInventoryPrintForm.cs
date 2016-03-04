@@ -23,8 +23,14 @@ namespace Phoebe.FormUI
         /// </summary>
         private List<Inventory> data;
 
+        /// <summary>
+        /// 期初时间
+        /// </summary>
         private DateTime start;
 
+        /// <summary>
+        /// 期末时间
+        /// </summary>
         private DateTime end;
         #endregion //Field
 
