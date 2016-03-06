@@ -193,6 +193,24 @@ namespace Phoebe.FormUI
             this.textBoxStockOutWeight.Text = data.Where(r => r.Type == StockFlowType.StockOut).Sum(r => r.Weight).ToString("f3") + " 吨";
         }
 
+        /// <summary>
+        /// 打印
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonPrint_Click(object sender, EventArgs e)
+        {
+            if (this.stockFlowBindingSource.DataSource == null)
+            {
+                MessageBox.Show("未选择数据", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            List<StockFlow> data = this.stockFlowBindingSource.DataSource as List<StockFlow>;
+            StockFlowPrintForm form = new StockFlowPrintForm(data, this.dateStart.Value.Date, this.dateEnd.Value.Date);
+            form.ShowDialog();
+        }
+
         private void stockFlowDataGridView_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
         {
             if (e.RowIndex < this.stockFlowBindingSource.Count)

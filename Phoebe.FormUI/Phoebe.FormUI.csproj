@@ -270,6 +270,12 @@
       <DependentUpon>StockInReportForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\RStockInDetail.cs" />
+    <Compile Include="Forms\StockFlowPrintForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\StockFlowPrintForm.Designer.cs">
+      <DependentUpon>StockFlowPrintForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Forms\AccountForm.resx">
       <DependentUpon>AccountForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -320,6 +326,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\StockFlowPrintForm.resx">
+      <DependentUpon>StockFlowPrintForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\StockForm.resx">
       <DependentUpon>StockForm.cs</DependentUpon>
@@ -378,6 +387,7 @@
       <DependentUpon>StockFlowReportForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\Inventory.rdlc" />
+    <EmbeddedResource Include="Report\StockFlow.rdlc" />
     <EmbeddedResource Include="Report\StockIn.rdlc" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\Phoebe.Model.AccountStatement.datasource" />

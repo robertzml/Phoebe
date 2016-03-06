@@ -29,9 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CargoForm));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CargoForm));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.checkBoxNotIn = new System.Windows.Forms.CheckBox();
@@ -50,6 +53,27 @@
             this.comboBoxContract = new System.Windows.Forms.ComboBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.cargoDataGridView = new System.Windows.Forms.DataGridView();
+            this.cargoBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.cargoBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
+            this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
+            this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
+            this.bindingNavigatorPositionItem = new System.Windows.Forms.ToolStripTextBox();
+            this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.textBoxTotalStoreWeight = new System.Windows.Forms.TextBox();
+            this.textBoxTotalStoreCount = new System.Windows.Forms.TextBox();
+            this.textBoxTotalWeight = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.textBoxTotalCount = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewColumnContract = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -73,27 +97,6 @@
             this.dataGridViewColumnUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewColumnStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cargoBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.cargoBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
-            this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
-            this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
-            this.bindingNavigatorPositionItem = new System.Windows.Forms.ToolStripTextBox();
-            this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.textBoxTotalCount = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.textBoxTotalWeight = new System.Windows.Forms.TextBox();
-            this.textBoxTotalStoreCount = new System.Windows.Forms.TextBox();
-            this.textBoxTotalStoreWeight = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -331,170 +334,6 @@
             this.cargoDataGridView.TabIndex = 0;
             this.cargoDataGridView.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.cargoDataGridView_RowPrePaint);
             // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "ID";
-            this.dataGridViewTextBoxColumn1.HeaderText = "ID";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.Visible = false;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "Name";
-            this.dataGridViewTextBoxColumn2.HeaderText = "名称";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            // 
-            // dataGridViewColumnContract
-            // 
-            this.dataGridViewColumnContract.HeaderText = "所属合同";
-            this.dataGridViewColumnContract.Name = "dataGridViewColumnContract";
-            this.dataGridViewColumnContract.ReadOnly = true;
-            // 
-            // dataGridViewColumnFirstCategory
-            // 
-            this.dataGridViewColumnFirstCategory.HeaderText = "一级分类";
-            this.dataGridViewColumnFirstCategory.Name = "dataGridViewColumnFirstCategory";
-            this.dataGridViewColumnFirstCategory.ReadOnly = true;
-            // 
-            // dataGridViewColumnSecondCategory
-            // 
-            this.dataGridViewColumnSecondCategory.HeaderText = "二级分类";
-            this.dataGridViewColumnSecondCategory.Name = "dataGridViewColumnSecondCategory";
-            this.dataGridViewColumnSecondCategory.ReadOnly = true;
-            // 
-            // dataGridViewColumnThirdCategory
-            // 
-            this.dataGridViewColumnThirdCategory.HeaderText = "三级分类";
-            this.dataGridViewColumnThirdCategory.Name = "dataGridViewColumnThirdCategory";
-            this.dataGridViewColumnThirdCategory.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn6
-            // 
-            this.dataGridViewTextBoxColumn6.DataPropertyName = "Count";
-            this.dataGridViewTextBoxColumn6.HeaderText = "数量";
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            this.dataGridViewTextBoxColumn6.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn7
-            // 
-            this.dataGridViewTextBoxColumn7.DataPropertyName = "UnitWeight";
-            this.dataGridViewTextBoxColumn7.HeaderText = "单位重量(kg)";
-            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            this.dataGridViewTextBoxColumn7.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn8
-            // 
-            this.dataGridViewTextBoxColumn8.DataPropertyName = "TotalWeight";
-            this.dataGridViewTextBoxColumn8.HeaderText = "总重量(t)";
-            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
-            this.dataGridViewTextBoxColumn8.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn9
-            // 
-            this.dataGridViewTextBoxColumn9.DataPropertyName = "UnitVolume";
-            this.dataGridViewTextBoxColumn9.HeaderText = "单位体积(立方)";
-            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
-            this.dataGridViewTextBoxColumn9.ReadOnly = true;
-            this.dataGridViewTextBoxColumn9.Width = 120;
-            // 
-            // dataGridViewTextBoxColumn10
-            // 
-            this.dataGridViewTextBoxColumn10.DataPropertyName = "TotalVolume";
-            this.dataGridViewTextBoxColumn10.HeaderText = "总体积(立方)";
-            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
-            this.dataGridViewTextBoxColumn10.ReadOnly = true;
-            this.dataGridViewTextBoxColumn10.Width = 120;
-            // 
-            // dataGridViewTextBoxColumn11
-            // 
-            this.dataGridViewTextBoxColumn11.DataPropertyName = "StoreCount";
-            this.dataGridViewTextBoxColumn11.HeaderText = "在库数量";
-            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
-            this.dataGridViewTextBoxColumn11.ReadOnly = true;
-            // 
-            // columnStoreWeight
-            // 
-            this.columnStoreWeight.DataPropertyName = "StoreWeight";
-            this.columnStoreWeight.HeaderText = "在库重量(t)";
-            this.columnStoreWeight.Name = "columnStoreWeight";
-            this.columnStoreWeight.ReadOnly = true;
-            this.columnStoreWeight.Width = 120;
-            // 
-            // columnWarehouseNumber
-            // 
-            this.columnWarehouseNumber.DataPropertyName = "WarehouseNumber";
-            this.columnWarehouseNumber.HeaderText = "所在仓库";
-            this.columnWarehouseNumber.Name = "columnWarehouseNumber";
-            this.columnWarehouseNumber.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn13
-            // 
-            this.dataGridViewTextBoxColumn13.DataPropertyName = "OriginPlace";
-            this.dataGridViewTextBoxColumn13.HeaderText = "产地";
-            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
-            this.dataGridViewTextBoxColumn13.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn14
-            // 
-            this.dataGridViewTextBoxColumn14.DataPropertyName = "ShelfLife";
-            this.dataGridViewTextBoxColumn14.HeaderText = "保质期(月)";
-            this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
-            this.dataGridViewTextBoxColumn14.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn15
-            // 
-            this.dataGridViewTextBoxColumn15.DataPropertyName = "Specification";
-            this.dataGridViewTextBoxColumn15.HeaderText = "规格";
-            this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
-            this.dataGridViewTextBoxColumn15.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn17
-            // 
-            this.dataGridViewTextBoxColumn17.DataPropertyName = "RegisterTime";
-            this.dataGridViewTextBoxColumn17.HeaderText = "登记时间";
-            this.dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
-            this.dataGridViewTextBoxColumn17.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn19
-            // 
-            this.dataGridViewTextBoxColumn19.DataPropertyName = "InTime";
-            dataGridViewCellStyle1.Format = "d";
-            dataGridViewCellStyle1.NullValue = null;
-            this.dataGridViewTextBoxColumn19.DefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridViewTextBoxColumn19.HeaderText = "入库时间";
-            this.dataGridViewTextBoxColumn19.Name = "dataGridViewTextBoxColumn19";
-            this.dataGridViewTextBoxColumn19.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn20
-            // 
-            this.dataGridViewTextBoxColumn20.DataPropertyName = "OutTime";
-            dataGridViewCellStyle2.Format = "d";
-            this.dataGridViewTextBoxColumn20.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dataGridViewTextBoxColumn20.HeaderText = "出库时间";
-            this.dataGridViewTextBoxColumn20.Name = "dataGridViewTextBoxColumn20";
-            this.dataGridViewTextBoxColumn20.ReadOnly = true;
-            // 
-            // dataGridViewColumnUserName
-            // 
-            this.dataGridViewColumnUserName.HeaderText = "登记人";
-            this.dataGridViewColumnUserName.Name = "dataGridViewColumnUserName";
-            this.dataGridViewColumnUserName.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn21
-            // 
-            this.dataGridViewTextBoxColumn21.DataPropertyName = "Remark";
-            this.dataGridViewTextBoxColumn21.HeaderText = "备注";
-            this.dataGridViewTextBoxColumn21.Name = "dataGridViewTextBoxColumn21";
-            this.dataGridViewTextBoxColumn21.ReadOnly = true;
-            // 
-            // dataGridViewColumnStatus
-            // 
-            this.dataGridViewColumnStatus.HeaderText = "状态";
-            this.dataGridViewColumnStatus.Name = "dataGridViewColumnStatus";
-            this.dataGridViewColumnStatus.ReadOnly = true;
-            // 
             // cargoBindingSource
             // 
             this.cargoBindingSource.DataSource = typeof(Phoebe.Model.Cargo);
@@ -628,40 +467,29 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "合计";
             // 
-            // label1
+            // textBoxTotalStoreWeight
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(36, 36);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(29, 12);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "数量";
+            this.textBoxTotalStoreWeight.Location = new System.Drawing.Point(715, 32);
+            this.textBoxTotalStoreWeight.Name = "textBoxTotalStoreWeight";
+            this.textBoxTotalStoreWeight.ReadOnly = true;
+            this.textBoxTotalStoreWeight.Size = new System.Drawing.Size(100, 21);
+            this.textBoxTotalStoreWeight.TabIndex = 7;
             // 
-            // label7
+            // textBoxTotalStoreCount
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(238, 36);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(29, 12);
-            this.label7.TabIndex = 1;
-            this.label7.Text = "重量";
+            this.textBoxTotalStoreCount.Location = new System.Drawing.Point(504, 32);
+            this.textBoxTotalStoreCount.Name = "textBoxTotalStoreCount";
+            this.textBoxTotalStoreCount.ReadOnly = true;
+            this.textBoxTotalStoreCount.Size = new System.Drawing.Size(100, 21);
+            this.textBoxTotalStoreCount.TabIndex = 6;
             // 
-            // label8
+            // textBoxTotalWeight
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(447, 36);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(53, 12);
-            this.label8.TabIndex = 2;
-            this.label8.Text = "在库数量";
-            // 
-            // textBoxTotalCount
-            // 
-            this.textBoxTotalCount.Location = new System.Drawing.Point(71, 32);
-            this.textBoxTotalCount.Name = "textBoxTotalCount";
-            this.textBoxTotalCount.ReadOnly = true;
-            this.textBoxTotalCount.Size = new System.Drawing.Size(100, 21);
-            this.textBoxTotalCount.TabIndex = 3;
+            this.textBoxTotalWeight.Location = new System.Drawing.Point(273, 32);
+            this.textBoxTotalWeight.Name = "textBoxTotalWeight";
+            this.textBoxTotalWeight.ReadOnly = true;
+            this.textBoxTotalWeight.Size = new System.Drawing.Size(100, 21);
+            this.textBoxTotalWeight.TabIndex = 5;
             // 
             // label9
             // 
@@ -672,29 +500,212 @@
             this.label9.TabIndex = 4;
             this.label9.Text = "在库重量";
             // 
-            // textBoxTotalWeight
+            // textBoxTotalCount
             // 
-            this.textBoxTotalWeight.Location = new System.Drawing.Point(273, 32);
-            this.textBoxTotalWeight.Name = "textBoxTotalWeight";
-            this.textBoxTotalWeight.ReadOnly = true;
-            this.textBoxTotalWeight.Size = new System.Drawing.Size(100, 21);
-            this.textBoxTotalWeight.TabIndex = 5;
+            this.textBoxTotalCount.Location = new System.Drawing.Point(71, 32);
+            this.textBoxTotalCount.Name = "textBoxTotalCount";
+            this.textBoxTotalCount.ReadOnly = true;
+            this.textBoxTotalCount.Size = new System.Drawing.Size(100, 21);
+            this.textBoxTotalCount.TabIndex = 3;
             // 
-            // textBoxTotalStoreCount
+            // label8
             // 
-            this.textBoxTotalStoreCount.Location = new System.Drawing.Point(504, 32);
-            this.textBoxTotalStoreCount.Name = "textBoxTotalStoreCount";
-            this.textBoxTotalStoreCount.ReadOnly = true;
-            this.textBoxTotalStoreCount.Size = new System.Drawing.Size(100, 21);
-            this.textBoxTotalStoreCount.TabIndex = 6;
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(447, 36);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(53, 12);
+            this.label8.TabIndex = 2;
+            this.label8.Text = "在库数量";
             // 
-            // textBoxTotalStoreWeight
+            // label7
             // 
-            this.textBoxTotalStoreWeight.Location = new System.Drawing.Point(715, 32);
-            this.textBoxTotalStoreWeight.Name = "textBoxTotalStoreWeight";
-            this.textBoxTotalStoreWeight.ReadOnly = true;
-            this.textBoxTotalStoreWeight.Size = new System.Drawing.Size(100, 21);
-            this.textBoxTotalStoreWeight.TabIndex = 7;
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(238, 36);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(29, 12);
+            this.label7.TabIndex = 1;
+            this.label7.Text = "重量";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(36, 36);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(29, 12);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "数量";
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "ID";
+            this.dataGridViewTextBoxColumn1.HeaderText = "ID";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "Name";
+            this.dataGridViewTextBoxColumn2.HeaderText = "名称";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            // 
+            // dataGridViewColumnContract
+            // 
+            this.dataGridViewColumnContract.HeaderText = "所属合同";
+            this.dataGridViewColumnContract.Name = "dataGridViewColumnContract";
+            this.dataGridViewColumnContract.ReadOnly = true;
+            // 
+            // dataGridViewColumnFirstCategory
+            // 
+            this.dataGridViewColumnFirstCategory.HeaderText = "一级分类";
+            this.dataGridViewColumnFirstCategory.Name = "dataGridViewColumnFirstCategory";
+            this.dataGridViewColumnFirstCategory.ReadOnly = true;
+            // 
+            // dataGridViewColumnSecondCategory
+            // 
+            this.dataGridViewColumnSecondCategory.HeaderText = "二级分类";
+            this.dataGridViewColumnSecondCategory.Name = "dataGridViewColumnSecondCategory";
+            this.dataGridViewColumnSecondCategory.ReadOnly = true;
+            // 
+            // dataGridViewColumnThirdCategory
+            // 
+            this.dataGridViewColumnThirdCategory.HeaderText = "三级分类";
+            this.dataGridViewColumnThirdCategory.Name = "dataGridViewColumnThirdCategory";
+            this.dataGridViewColumnThirdCategory.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.DataPropertyName = "Count";
+            this.dataGridViewTextBoxColumn6.HeaderText = "数量";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.DataPropertyName = "UnitWeight";
+            dataGridViewCellStyle1.NullValue = null;
+            this.dataGridViewTextBoxColumn7.DefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridViewTextBoxColumn7.HeaderText = "单位重量(kg)";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            this.dataGridViewTextBoxColumn7.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn8
+            // 
+            this.dataGridViewTextBoxColumn8.DataPropertyName = "TotalWeight";
+            dataGridViewCellStyle2.Format = "N3";
+            dataGridViewCellStyle2.NullValue = null;
+            this.dataGridViewTextBoxColumn8.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dataGridViewTextBoxColumn8.HeaderText = "总重量(t)";
+            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            this.dataGridViewTextBoxColumn8.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn9
+            // 
+            this.dataGridViewTextBoxColumn9.DataPropertyName = "UnitVolume";
+            this.dataGridViewTextBoxColumn9.HeaderText = "单位体积(立方)";
+            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+            this.dataGridViewTextBoxColumn9.ReadOnly = true;
+            this.dataGridViewTextBoxColumn9.Width = 120;
+            // 
+            // dataGridViewTextBoxColumn10
+            // 
+            this.dataGridViewTextBoxColumn10.DataPropertyName = "TotalVolume";
+            this.dataGridViewTextBoxColumn10.HeaderText = "总体积(立方)";
+            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
+            this.dataGridViewTextBoxColumn10.ReadOnly = true;
+            this.dataGridViewTextBoxColumn10.Width = 120;
+            // 
+            // dataGridViewTextBoxColumn11
+            // 
+            this.dataGridViewTextBoxColumn11.DataPropertyName = "StoreCount";
+            this.dataGridViewTextBoxColumn11.HeaderText = "在库数量";
+            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
+            this.dataGridViewTextBoxColumn11.ReadOnly = true;
+            // 
+            // columnStoreWeight
+            // 
+            this.columnStoreWeight.DataPropertyName = "StoreWeight";
+            dataGridViewCellStyle3.Format = "N3";
+            dataGridViewCellStyle3.NullValue = null;
+            this.columnStoreWeight.DefaultCellStyle = dataGridViewCellStyle3;
+            this.columnStoreWeight.HeaderText = "在库重量(t)";
+            this.columnStoreWeight.Name = "columnStoreWeight";
+            this.columnStoreWeight.ReadOnly = true;
+            this.columnStoreWeight.Width = 120;
+            // 
+            // columnWarehouseNumber
+            // 
+            this.columnWarehouseNumber.DataPropertyName = "WarehouseNumber";
+            this.columnWarehouseNumber.HeaderText = "所在仓库";
+            this.columnWarehouseNumber.Name = "columnWarehouseNumber";
+            this.columnWarehouseNumber.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn13
+            // 
+            this.dataGridViewTextBoxColumn13.DataPropertyName = "OriginPlace";
+            this.dataGridViewTextBoxColumn13.HeaderText = "产地";
+            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
+            this.dataGridViewTextBoxColumn13.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn14
+            // 
+            this.dataGridViewTextBoxColumn14.DataPropertyName = "ShelfLife";
+            this.dataGridViewTextBoxColumn14.HeaderText = "保质期(月)";
+            this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
+            this.dataGridViewTextBoxColumn14.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn15
+            // 
+            this.dataGridViewTextBoxColumn15.DataPropertyName = "Specification";
+            this.dataGridViewTextBoxColumn15.HeaderText = "规格";
+            this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
+            this.dataGridViewTextBoxColumn15.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn17
+            // 
+            this.dataGridViewTextBoxColumn17.DataPropertyName = "RegisterTime";
+            this.dataGridViewTextBoxColumn17.HeaderText = "登记时间";
+            this.dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
+            this.dataGridViewTextBoxColumn17.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn19
+            // 
+            this.dataGridViewTextBoxColumn19.DataPropertyName = "InTime";
+            dataGridViewCellStyle4.Format = "d";
+            dataGridViewCellStyle4.NullValue = null;
+            this.dataGridViewTextBoxColumn19.DefaultCellStyle = dataGridViewCellStyle4;
+            this.dataGridViewTextBoxColumn19.HeaderText = "入库时间";
+            this.dataGridViewTextBoxColumn19.Name = "dataGridViewTextBoxColumn19";
+            this.dataGridViewTextBoxColumn19.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn20
+            // 
+            this.dataGridViewTextBoxColumn20.DataPropertyName = "OutTime";
+            dataGridViewCellStyle5.Format = "d";
+            this.dataGridViewTextBoxColumn20.DefaultCellStyle = dataGridViewCellStyle5;
+            this.dataGridViewTextBoxColumn20.HeaderText = "出库时间";
+            this.dataGridViewTextBoxColumn20.Name = "dataGridViewTextBoxColumn20";
+            this.dataGridViewTextBoxColumn20.ReadOnly = true;
+            // 
+            // dataGridViewColumnUserName
+            // 
+            this.dataGridViewColumnUserName.HeaderText = "登记人";
+            this.dataGridViewColumnUserName.Name = "dataGridViewColumnUserName";
+            this.dataGridViewColumnUserName.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn21
+            // 
+            this.dataGridViewTextBoxColumn21.DataPropertyName = "Remark";
+            this.dataGridViewTextBoxColumn21.HeaderText = "备注";
+            this.dataGridViewTextBoxColumn21.Name = "dataGridViewTextBoxColumn21";
+            this.dataGridViewTextBoxColumn21.ReadOnly = true;
+            // 
+            // dataGridViewColumnStatus
+            // 
+            this.dataGridViewColumnStatus.HeaderText = "状态";
+            this.dataGridViewColumnStatus.Name = "dataGridViewColumnStatus";
+            this.dataGridViewColumnStatus.ReadOnly = true;
             // 
             // CargoForm
             // 
@@ -754,6 +765,16 @@
         private System.Windows.Forms.ComboBox comboBoxSecondCategory;
         private System.Windows.Forms.ComboBox comboBoxThirdCategory;
         private System.Windows.Forms.CheckBox checkBoxNotIn;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.TextBox textBoxTotalStoreWeight;
+        private System.Windows.Forms.TextBox textBoxTotalStoreCount;
+        private System.Windows.Forms.TextBox textBoxTotalWeight;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox textBoxTotalCount;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewColumnContract;
@@ -777,15 +798,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewColumnUserName;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn21;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewColumnStatus;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.TextBox textBoxTotalStoreWeight;
-        private System.Windows.Forms.TextBox textBoxTotalStoreCount;
-        private System.Windows.Forms.TextBox textBoxTotalWeight;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox textBoxTotalCount;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label1;
     }
 }
