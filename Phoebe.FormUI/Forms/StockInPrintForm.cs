@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,28 +14,30 @@ using Microsoft.Reporting.WinForms;
 namespace Phoebe.FormUI
 {
     /// <summary>
-    /// 入库报表窗体
+    /// 入库单打印窗体
     /// </summary>
-    public partial class StockInReportForm : Form
+    public partial class StockInPrintForm : Form
     {
         #region Field
         private StockIn stockIn;
         #endregion //Field
 
         #region Constructor
-        public StockInReportForm(StockIn stockIn)
+        public StockInPrintForm(StockIn stockIn)
         {
             InitializeComponent();
+
             this.stockIn = stockIn;
         }
         #endregion //Constructor
 
-        #region Function
-
-        #endregion //Function
-
         #region Event
-        private void StockInReportForm_Load(object sender, EventArgs e)
+        /// <summary>
+        /// 窗体载入
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void StockInPrintForm_Load(object sender, EventArgs e)
         {
             List<RStockInDetail> details = new List<RStockInDetail>();
 
@@ -71,13 +74,24 @@ namespace Phoebe.FormUI
 
             this.reportViewer1.LocalReport.SetParameters(parameters);
             this.reportViewer1.LocalReport.DataSources.Add(new ReportDataSource("StockInSet", details));
-            this.reportViewer1.RefreshReport();
 
-            //设置打印布局模式,显示物理页面大小
-            this.reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
-            //缩放模式为百分比,以100%方式显示
-            this.reportViewer1.ZoomMode = ZoomMode.Percent;
-            this.reportViewer1.ZoomPercent = 100;
+            var pageSettings = this.reportViewer1.GetPageSettings();
+            pageSettings.PaperSize = new PaperSize
+            {
+                Height = 366,
+                Width = 953
+            };
+            pageSettings.Margins = new Margins
+            {
+                Top = 20,
+                Bottom = 20,
+                Left = 40,
+                Right = 40
+            };
+            pageSettings.Landscape = false;
+            this.reportViewer1.SetPageSettings(pageSettings);
+
+            this.reportViewer1.RefreshReport();
         }
         #endregion //Event
     }

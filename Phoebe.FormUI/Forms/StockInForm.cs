@@ -516,7 +516,7 @@ namespace Phoebe.FormUI
                 return;
             }
 
-            StockInReportForm form = new StockInReportForm(this.currentStockIn);
+            StockInPrintForm form = new StockInPrintForm(this.currentStockIn);
             form.ShowDialog();
         }
 

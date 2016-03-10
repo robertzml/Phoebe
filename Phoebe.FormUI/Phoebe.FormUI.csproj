@@ -263,18 +263,18 @@
     <Compile Include="Forms\StockInventoryReportForm.Designer.cs">
       <DependentUpon>StockInventoryReportForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\StockInReportForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\StockInReportForm.Designer.cs">
-      <DependentUpon>StockInReportForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Model\RStockInDetail.cs" />
     <Compile Include="Forms\StockFlowPrintForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\StockFlowPrintForm.Designer.cs">
       <DependentUpon>StockFlowPrintForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\StockInPrintForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\StockInPrintForm.Designer.cs">
+      <DependentUpon>StockInPrintForm.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Forms\AccountForm.resx">
       <DependentUpon>AccountForm.cs</DependentUpon>
@@ -333,8 +333,8 @@
     <EmbeddedResource Include="Forms\StockForm.resx">
       <DependentUpon>StockForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\StockInReportForm.resx">
-      <DependentUpon>StockInReportForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\StockInPrintForm.resx">
+      <DependentUpon>StockInPrintForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\StockInventoryPrintForm.resx">
       <DependentUpon>StockInventoryPrintForm.cs</DependentUpon>
