@@ -339,6 +339,7 @@ namespace Phoebe.FormUI
                 this.toolSave.Enabled = true;
                 this.toolConfirm.Enabled = true;
                 this.toolDelete.Enabled = true;
+                this.toolPrint.Enabled = false;
                 SetControlEditable(true);
             }
             else if (this.currentStockIn.Status == (int)EntityStatus.StockIn)
@@ -346,6 +347,7 @@ namespace Phoebe.FormUI
                 this.toolSave.Enabled = false;
                 this.toolConfirm.Enabled = false;
                 this.toolDelete.Enabled = false;
+                this.toolPrint.Enabled = true;
                 SetControlEditable(false);
             }
         }
@@ -450,6 +452,7 @@ namespace Phoebe.FormUI
                 MessageBox.Show("入库已确认", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.textBoxStatus.Text = EntityStatus.StockIn.DisplayName();
                 this.toolConfirm.Enabled = false;
+                this.toolPrint.Enabled = true;
                 SetControlEditable(false);
             }
             else
@@ -513,6 +516,11 @@ namespace Phoebe.FormUI
             if (this.currentStockIn == null)
             {
                 MessageBox.Show("当前未选中记录", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            if (this.currentStockIn.Status != (int)EntityStatus.StockIn)
+            {
+                MessageBox.Show("入库记录未确认", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 

@@ -171,11 +171,13 @@
             // 
             // toolPrint
             // 
+            this.toolPrint.Enabled = false;
             this.toolPrint.Image = ((System.Drawing.Image)(resources.GetObject("toolPrint.Image")));
             this.toolPrint.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolPrint.Name = "toolPrint";
             this.toolPrint.Size = new System.Drawing.Size(67, 22);
             this.toolPrint.Text = "打印(&P)";
+            this.toolPrint.Click += new System.EventHandler(this.toolPrint_Click);
             // 
             // toolStripSeparator
             // 

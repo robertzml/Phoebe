@@ -14,37 +14,32 @@ using Microsoft.Reporting.WinForms;
 namespace Phoebe.FormUI
 {
     /// <summary>
-    /// 入库单打印窗体
+    /// 出库单打印
     /// </summary>
-    public partial class StockInPrintForm : Form
+    public partial class StockOutPrintForm : Form
     {
         #region Field
-        private StockIn stockIn;
+        private StockOut stockOut;
         #endregion //Field
 
         #region Constructor
-        public StockInPrintForm(StockIn stockIn)
+        public StockOutPrintForm(StockOut stockOut)
         {
             InitializeComponent();
 
-            this.stockIn = stockIn;
+            this.stockOut = stockOut;
         }
         #endregion //Constructor
 
         #region Event
-        /// <summary>
-        /// 窗体载入
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void StockInPrintForm_Load(object sender, EventArgs e)
+        private void StockOutPrintForm_Load(object sender, EventArgs e)
         {
-            List<RStockInDetail> details = new List<RStockInDetail>();
+            List<RStockOutDetail> details = new List<RStockOutDetail>();
 
             int number = 1;
-            foreach (var item in this.stockIn.StockInDetails)
+            foreach (var item in this.stockOut.StockOutDetails)
             {
-                RStockInDetail detail = new RStockInDetail();
+                RStockOutDetail detail = new RStockOutDetail();
                 detail.Number = number++;
                 detail.Name = item.Cargo.Name;
                 detail.FirstCategory = item.Cargo.FirstCategory.Name;
@@ -52,18 +47,19 @@ namespace Phoebe.FormUI
                 detail.ThirdCategory = item.Cargo.ThirdCategory == null ? "" : item.Cargo.ThirdCategory.Name;
                 detail.Count = item.Count;
                 detail.UnitWeight = item.Cargo.UnitWeight;
-                detail.TotalWeight = item.InWeight;
+                detail.TotalWeight = item.OutWeight;
                 detail.TotalVolume = item.Cargo.TotalVolume;
                 detail.Warehouse = item.WarehouseNumber;
 
                 details.Add(detail);
             }
 
-            var contract = this.stockIn.Contract;
+
+            var contract = this.stockOut.Contract;
 
             List<ReportParameter> parameters = new List<ReportParameter>();
-            ReportParameter rp1 = new ReportParameter("InTime", this.stockIn.InTime.ToString());
-            ReportParameter rp2 = new ReportParameter("FlowNumber", this.stockIn.FlowNumber);
+            ReportParameter rp1 = new ReportParameter("OutTime", this.stockOut.OutTime.ToString());
+            ReportParameter rp2 = new ReportParameter("FlowNumber", this.stockOut.FlowNumber);
             ReportParameter rp3 = new ReportParameter("CustomerName", contract.Customer.Name);
             ReportParameter rp4 = new ReportParameter("ContractNumber", contract.Number);
 
@@ -73,7 +69,7 @@ namespace Phoebe.FormUI
             parameters.Add(rp4);
 
             this.reportViewer1.LocalReport.SetParameters(parameters);
-            this.reportViewer1.LocalReport.DataSources.Add(new ReportDataSource("StockInSet", details));
+            this.reportViewer1.LocalReport.DataSources.Add(new ReportDataSource("StockOutSet", details));
 
             var pageSettings = this.reportViewer1.GetPageSettings();
             pageSettings.PaperSize = new PaperSize

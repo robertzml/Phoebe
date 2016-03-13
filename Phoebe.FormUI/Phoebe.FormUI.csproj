@@ -183,6 +183,7 @@
     <Compile Include="Forms\PaymentForm.Designer.cs">
       <DependentUpon>PaymentForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\RStockOutDetail.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Forms\UserGroupForm.cs">
@@ -276,6 +277,12 @@
     <Compile Include="Forms\StockInPrintForm.Designer.cs">
       <DependentUpon>StockInPrintForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\StockOutPrintForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\StockOutPrintForm.Designer.cs">
+      <DependentUpon>StockOutPrintForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Forms\AccountForm.resx">
       <DependentUpon>AccountForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -348,6 +355,9 @@
     <EmbeddedResource Include="Forms\StockOutForm.resx">
       <DependentUpon>StockOutForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\StockOutPrintForm.resx">
+      <DependentUpon>StockOutPrintForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\StockSnapshootForm.resx">
       <DependentUpon>StockSnapshootForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -389,6 +399,7 @@
     <EmbeddedResource Include="Report\Inventory.rdlc" />
     <EmbeddedResource Include="Report\StockFlow.rdlc" />
     <EmbeddedResource Include="Report\StockIn.rdlc" />
+    <EmbeddedResource Include="Report\StockOut.rdlc" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\Phoebe.Model.AccountStatement.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.Billing.datasource" />
@@ -408,6 +419,7 @@
     <None Include="Properties\DataSources\Phoebe.Model.User.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.UserGroup.datasource" />
     <None Include="Properties\DataSources\RStockInDetail.datasource" />
+    <None Include="Properties\DataSources\RStockOutDetail.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

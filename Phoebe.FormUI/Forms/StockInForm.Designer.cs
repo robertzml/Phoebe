@@ -558,6 +558,7 @@
             // 
             // toolPrint
             // 
+            this.toolPrint.Enabled = false;
             this.toolPrint.Image = ((System.Drawing.Image)(resources.GetObject("toolPrint.Image")));
             this.toolPrint.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolPrint.Name = "toolPrint";

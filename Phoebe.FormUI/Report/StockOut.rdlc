@@ -9,7 +9,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>入库日期:</Value>
+                <Value>出库日期:</Value>
                 <Style>
                   <FontFamily>宋体</FontFamily>
                 </Style>
@@ -19,42 +19,10 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox4</rd:DefaultName>
-        <Top>0.11465cm</Top>
-        <Left>0.14717cm</Left>
+        <Top>0.17639cm</Top>
+        <Left>0.2303cm</Left>
         <Height>0.6cm</Height>
         <Width>1.9091cm</Width>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="Textbox2">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>入库流水号：</Value>
-                <Style>
-                  <FontFamily>宋体</FontFamily>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox2</rd:DefaultName>
-        <Top>0.11465cm</Top>
-        <Left>4.77303cm</Left>
-        <Height>0.6cm</Height>
-        <Width>2.36771cm</Width>
-        <ZIndex>1</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -72,7 +40,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Parameters!InTime.Value</Value>
+                <Value>=Parameters!OutTime.Value</Value>
                 <Style>
                   <FontFamily>宋体</FontFamily>
                   <Format>d</Format>
@@ -85,10 +53,42 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>InTime</rd:DefaultName>
-        <Top>0.11465cm</Top>
-        <Left>2.1621cm</Left>
+        <Top>0.17639cm</Top>
+        <Left>2.24523cm</Left>
         <Height>0.6cm</Height>
         <Width>2.28833cm</Width>
+        <ZIndex>1</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox2">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>出库流水号：</Value>
+                <Style>
+                  <FontFamily>宋体</FontFamily>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox2</rd:DefaultName>
+        <Top>0.17639cm</Top>
+        <Left>4.85616cm</Left>
+        <Height>0.6cm</Height>
+        <Width>2.36771cm</Width>
         <ZIndex>2</ZIndex>
         <Style>
           <Border>
@@ -119,11 +119,139 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>FlowNumber</rd:DefaultName>
-        <Top>0.11465cm</Top>
-        <Left>7.24658cm</Left>
+        <Top>0.17639cm</Top>
+        <Left>7.32971cm</Left>
         <Height>0.6cm</Height>
         <Width>2.5cm</Width>
         <ZIndex>3</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox5">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>客户名称:</Value>
+                <Style>
+                  <FontFamily>宋体</FontFamily>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox4</rd:DefaultName>
+        <Top>0.17639cm</Top>
+        <Left>10.24422cm</Left>
+        <Height>0.6cm</Height>
+        <Width>1.83854cm</Width>
+        <ZIndex>4</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="CustomerName">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=Parameters!CustomerName.Value</Value>
+                <Style>
+                  <FontFamily>宋体</FontFamily>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>CustomerName</rd:DefaultName>
+        <Top>0.17639cm</Top>
+        <Left>12.1886cm</Left>
+        <Height>0.6cm</Height>
+        <Width>2.26188cm</Width>
+        <ZIndex>5</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox7">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>合同编号:</Value>
+                <Style>
+                  <FontFamily>宋体</FontFamily>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox4</rd:DefaultName>
+        <Top>0.17639cm</Top>
+        <Left>14.865cm</Left>
+        <Height>0.6cm</Height>
+        <Width>1.83855cm</Width>
+        <ZIndex>6</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="ContractNumber">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=Parameters!ContractNumber.Value</Value>
+                <Style>
+                  <FontFamily>宋体</FontFamily>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>ContractNumber</rd:DefaultName>
+        <Top>0.17639cm</Top>
+        <Left>16.85347cm</Left>
+        <Height>0.6cm</Height>
+        <Width>2.5cm</Width>
+        <ZIndex>7</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -961,12 +1089,12 @@
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
-        <DataSetName>StockInSet</DataSetName>
-        <Top>1.02871cm</Top>
-        <Left>0.19513cm</Left>
+        <DataSetName>StockOutSet</DataSetName>
+        <Top>1.19302cm</Top>
+        <Left>0.2303cm</Left>
         <Height>1.49104cm</Height>
-        <Width>19.54466cm</Width>
-        <ZIndex>4</ZIndex>
+        <Width>19.54468cm</Width>
+        <ZIndex>8</ZIndex>
         <Style>
           <Border>
             <Style>Solid</Style>
@@ -974,139 +1102,11 @@
           <FontFamily>宋体</FontFamily>
         </Style>
       </Tablix>
-      <Textbox Name="Textbox5">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>客户名称:</Value>
-                <Style>
-                  <FontFamily>宋体</FontFamily>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox4</rd:DefaultName>
-        <Top>0.11465cm</Top>
-        <Left>10.16109cm</Left>
-        <Height>0.6cm</Height>
-        <Width>1.83854cm</Width>
-        <ZIndex>5</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="Textbox7">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>合同编号:</Value>
-                <Style>
-                  <FontFamily>宋体</FontFamily>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox4</rd:DefaultName>
-        <Top>0.11465cm</Top>
-        <Left>14.78186cm</Left>
-        <Height>0.6cm</Height>
-        <Width>1.83855cm</Width>
-        <ZIndex>6</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="CustomerName">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>=Parameters!CustomerName.Value</Value>
-                <Style>
-                  <FontFamily>宋体</FontFamily>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>CustomerName</rd:DefaultName>
-        <Top>0.11465cm</Top>
-        <Left>12.10547cm</Left>
-        <Height>0.6cm</Height>
-        <Width>2.26188cm</Width>
-        <ZIndex>7</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="ContractNumber">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>=Parameters!ContractNumber.Value</Value>
-                <Style>
-                  <FontFamily>宋体</FontFamily>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>ContractNumber</rd:DefaultName>
-        <Top>0.11465cm</Top>
-        <Left>16.77033cm</Left>
-        <Height>0.6cm</Height>
-        <Width>2.5cm</Width>
-        <ZIndex>8</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
     </ReportItems>
     <Height>5.2cm</Height>
     <Style />
   </Body>
-  <Width>20.0358cm</Width>
+  <Width>20cm</Width>
   <Page>
     <PageHeader>
       <Height>0.8cm</Height>
@@ -1134,7 +1134,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox1</rd:DefaultName>
-          <Left>4.45553cm</Left>
+          <Top>0.00597cm</Top>
+          <Left>4.61052cm</Left>
           <Height>0.6882cm</Height>
           <Width>10.49042cm</Width>
           <Style>
@@ -1155,7 +1156,7 @@
       </Style>
     </PageHeader>
     <PageFooter>
-      <Height>0.84125cm</Height>
+      <Height>0.8cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -1177,8 +1178,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox1</rd:DefaultName>
-          <Top>0.17639cm</Top>
-          <Left>0.67519cm</Left>
+          <Top>0.10583cm</Top>
+          <Left>0.82915cm</Left>
           <Height>0.6cm</Height>
           <Width>3.39958cm</Width>
           <Style>
@@ -1209,8 +1210,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox1</rd:DefaultName>
-          <Top>0.17639cm</Top>
-          <Left>8.52922cm</Left>
+          <Top>0.10583cm</Top>
+          <Left>8.68318cm</Left>
           <Height>0.6cm</Height>
           <Width>3.39958cm</Width>
           <ZIndex>1</ZIndex>
@@ -1242,8 +1243,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox1</rd:DefaultName>
-          <Top>0.17639cm</Top>
-          <Left>15.6173cm</Left>
+          <Top>0.10583cm</Top>
+          <Left>15.77127cm</Left>
           <Height>0.6cm</Height>
           <Width>3.39958cm</Width>
           <ZIndex>2</ZIndex>
@@ -1258,7 +1259,8 @@
           </Style>
         </Textbox>
         <Line Name="Line1">
-          <Left>20.0358cm</Left>
+          <Top>0.03528cm</Top>
+          <Left>19.94431cm</Left>
           <Height>0cm</Height>
           <Width>-19.88862cm</Width>
           <ZIndex>3</ZIndex>
@@ -1278,16 +1280,12 @@
     </PageFooter>
     <PageHeight>9.3cm</PageHeight>
     <PageWidth>24.2cm</PageWidth>
-    <LeftMargin>1.3cm</LeftMargin>
-    <RightMargin>1.3cm</RightMargin>
-    <TopMargin>0.5cm</TopMargin>
-    <BottomMargin>0.5cm</BottomMargin>
+    <LeftMargin>2cm</LeftMargin>
+    <RightMargin>2cm</RightMargin>
+    <TopMargin>2cm</TopMargin>
+    <BottomMargin>2cm</BottomMargin>
     <ColumnSpacing>0.13cm</ColumnSpacing>
-    <Style>
-      <Border>
-        <Style>None</Style>
-      </Border>
-    </Style>
+    <Style />
   </Page>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
@@ -1296,11 +1294,11 @@
         <DataProvider>System.Data.DataSet</DataProvider>
         <ConnectString>/* Local Connection */</ConnectString>
       </ConnectionProperties>
-      <rd:DataSourceID>8ed9ae71-653c-46f0-ba04-fb368aa92446</rd:DataSourceID>
+      <rd:DataSourceID>ea44c1a4-b41b-43b6-b071-0596bb417b3a</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <DataSets>
-    <DataSet Name="StockInSet">
+    <DataSet Name="StockOutSet">
       <Query>
         <DataSourceName>PhoebeFormUI</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
@@ -1355,10 +1353,6 @@
     </DataSet>
   </DataSets>
   <ReportParameters>
-    <ReportParameter Name="InTime">
-      <DataType>DateTime</DataType>
-      <Prompt>ReportParameter1</Prompt>
-    </ReportParameter>
     <ReportParameter Name="FlowNumber">
       <DataType>String</DataType>
       <Prompt>ReportParameter1</Prompt>
@@ -1367,11 +1361,15 @@
       <DataType>String</DataType>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
+    <ReportParameter Name="OutTime">
+      <DataType>DateTime</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
     <ReportParameter Name="ContractNumber">
       <DataType>String</DataType>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
   </ReportParameters>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
-  <rd:ReportID>1e3b4575-c132-4792-ac32-ce93f8832b52</rd:ReportID>
+  <rd:ReportID>eca4d5b6-1818-4920-b6d1-f90d77314b3b</rd:ReportID>
 </Report>

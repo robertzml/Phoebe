@@ -1,6 +1,6 @@
 ﻿namespace Phoebe.FormUI
 {
-    partial class StockInPrintForm
+    partial class StockOutPrintForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,37 +28,28 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
-            this.RStockInDetailBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.RStockInDetailBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // reportViewer1
             // 
             this.reportViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.reportViewer1.LocalReport.ReportEmbeddedResource = "Phoebe.FormUI.Report.StockIn.rdlc";
+            this.reportViewer1.LocalReport.ReportEmbeddedResource = "Phoebe.FormUI.Report.StockOut.rdlc";
             this.reportViewer1.Location = new System.Drawing.Point(3, 3);
             this.reportViewer1.Name = "reportViewer1";
-            this.reportViewer1.Size = new System.Drawing.Size(799, 381);
+            this.reportViewer1.Size = new System.Drawing.Size(670, 357);
             this.reportViewer1.TabIndex = 0;
             // 
-            // RStockInDetailBindingSource
-            // 
-            this.RStockInDetailBindingSource.DataSource = typeof(Phoebe.FormUI.RStockInDetail);
-            // 
-            // StockInPrintForm
+            // StockOutPrintForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(805, 387);
+            this.ClientSize = new System.Drawing.Size(676, 363);
             this.Controls.Add(this.reportViewer1);
-            this.Name = "StockInPrintForm";
+            this.Name = "StockOutPrintForm";
             this.Padding = new System.Windows.Forms.Padding(3);
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "入库单打印";
-            this.Load += new System.EventHandler(this.StockInPrintForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.RStockInDetailBindingSource)).EndInit();
+            this.Text = "出库单打印";
+            this.Load += new System.EventHandler(this.StockOutPrintForm_Load);
             this.ResumeLayout(false);
 
         }
@@ -66,6 +57,5 @@
         #endregion
 
         private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
-        private System.Windows.Forms.BindingSource RStockInDetailBindingSource;
     }
 }
