@@ -9,7 +9,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>出库日期:</Value>
+                <Value>移库日期:</Value>
                 <Style>
                   <FontFamily>宋体</FontFamily>
                 </Style>
@@ -40,7 +40,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Parameters!OutTime.Value</Value>
+                <Value>=Parameters!MoveTime.Value</Value>
                 <Style>
                   <FontFamily>宋体</FontFamily>
                   <Format>d</Format>
@@ -75,7 +75,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>出库流水号：</Value>
+                <Value>移库流水号：</Value>
                 <Style>
                   <FontFamily>宋体</FontFamily>
                 </Style>
@@ -266,7 +266,7 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1.11982cm</Width>
+              <Width>1.01398cm</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>2.51802cm</Width>
@@ -278,10 +278,10 @@
               <Width>2.21978cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.13561cm</Width>
+              <Width>1.98146cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.61691cm</Width>
+              <Width>1.26018cm</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>1.84054cm</Width>
@@ -290,10 +290,13 @@
               <Width>1.47606cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.81507cm</Width>
+              <Width>1.52403cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.4465cm</Width>
+              <Width>1.7434cm</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>1.73271cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -694,7 +697,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>库位</Value>
+                              <Value>原库位</Value>
                               <Style>
                                 <FontFamily>宋体</FontFamily>
                                 <FontWeight>Bold</FontWeight>
@@ -707,6 +710,45 @@
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox19</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BottomBorder>
+                          <Style>Solid</Style>
+                          <Width>2pt</Width>
+                        </BottomBorder>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox36">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>新库位</Value>
+                              <Style>
+                                <FontFamily>宋体</FontFamily>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox36</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -1029,14 +1071,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Warehouse">
+                    <Textbox Name="SourceWarehouse">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!Warehouse.Value</Value>
+                              <Value>=Fields!SourceWarehouse.Value</Value>
                               <Style>
                                 <FontFamily>宋体</FontFamily>
                               </Style>
@@ -1047,7 +1089,41 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Warehouse</rd:DefaultName>
+                      <rd:DefaultName>SourceWarehouse</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="NewWarehouse">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!NewWarehouse.Value</Value>
+                              <Style>
+                                <FontFamily>宋体</FontFamily>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>NewWarehouse</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -1077,6 +1153,7 @@
             <TablixMember />
             <TablixMember />
             <TablixMember />
+            <TablixMember />
           </TablixMembers>
         </TablixColumnHierarchy>
         <TablixRowHierarchy>
@@ -1089,11 +1166,11 @@
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
-        <DataSetName>StockOutSet</DataSetName>
-        <Top>1.19302cm</Top>
-        <Left>0.2303cm</Left>
+        <DataSetName>StockMoveSet</DataSetName>
+        <Top>1.19615cm</Top>
+        <Left>0.22209cm</Left>
         <Height>1.49104cm</Height>
-        <Width>19.54468cm</Width>
+        <Width>19.66653cm</Width>
         <ZIndex>8</ZIndex>
         <Style>
           <Border>
@@ -1120,7 +1197,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>海安县华润食品有限公司冷链出库单</Value>
+                  <Value>海安县华润食品有限公司冷链移库单</Value>
                   <Style>
                     <FontFamily>黑体</FontFamily>
                     <FontSize>16pt</FontSize>
@@ -1134,8 +1211,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox1</rd:DefaultName>
-          <Top>0.00597cm</Top>
-          <Left>4.61052cm</Left>
+          <Left>4.75479cm</Left>
           <Height>0.6882cm</Height>
           <Width>10.49042cm</Width>
           <Style>
@@ -1259,8 +1335,8 @@
           </Style>
         </Textbox>
         <Line Name="Line1">
-          <Top>0.03528cm</Top>
-          <Left>19.94431cm</Left>
+          <Top>0cm</Top>
+          <Left>19.88862cm</Left>
           <Height>0cm</Height>
           <Width>-19.88862cm</Width>
           <ZIndex>3</ZIndex>
@@ -1294,11 +1370,11 @@
         <DataProvider>System.Data.DataSet</DataProvider>
         <ConnectString>/* Local Connection */</ConnectString>
       </ConnectionProperties>
-      <rd:DataSourceID>ea44c1a4-b41b-43b6-b071-0596bb417b3a</rd:DataSourceID>
+      <rd:DataSourceID>0104f1d4-a6b8-4b24-b996-0b92b86da518</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <DataSets>
-    <DataSet Name="StockOutSet">
+    <DataSet Name="StockMoveSet">
       <Query>
         <DataSourceName>PhoebeFormUI</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
@@ -1316,12 +1392,20 @@
           <DataField>Name</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="NewWarehouse">
+          <DataField>NewWarehouse</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="Number">
           <DataField>Number</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="SecondCategory">
           <DataField>SecondCategory</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SourceWarehouse">
+          <DataField>SourceWarehouse</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="ThirdCategory">
@@ -1340,19 +1424,19 @@
           <DataField>UnitWeight</DataField>
           <rd:TypeName>System.Double</rd:TypeName>
         </Field>
-        <Field Name="Warehouse">
-          <DataField>Warehouse</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>Phoebe.FormUI</rd:DataSetName>
-        <rd:TableName>RStockInDetail</rd:TableName>
-        <rd:ObjectDataSourceType>Phoebe.FormUI.RStockInDetail, Phoebe.FormUI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
+        <rd:TableName>RStockMoveDetail</rd:TableName>
+        <rd:ObjectDataSourceType>Phoebe.FormUI.RStockMoveDetail, Phoebe.FormUI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
       </rd:DataSetInfo>
     </DataSet>
   </DataSets>
   <ReportParameters>
+    <ReportParameter Name="MoveTime">
+      <DataType>DateTime</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
     <ReportParameter Name="FlowNumber">
       <DataType>String</DataType>
       <Prompt>ReportParameter1</Prompt>
@@ -1361,15 +1445,11 @@
       <DataType>String</DataType>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
-    <ReportParameter Name="OutTime">
-      <DataType>DateTime</DataType>
-      <Prompt>ReportParameter1</Prompt>
-    </ReportParameter>
     <ReportParameter Name="ContractNumber">
       <DataType>String</DataType>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
   </ReportParameters>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
-  <rd:ReportID>eca4d5b6-1818-4920-b6d1-f90d77314b3b</rd:ReportID>
+  <rd:ReportID>1061631b-7d48-4c28-814f-97ce8a69d3ea</rd:ReportID>
 </Report>

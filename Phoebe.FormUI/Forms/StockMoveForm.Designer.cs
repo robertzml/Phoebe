@@ -37,7 +37,7 @@
             this.toolNew = new System.Windows.Forms.ToolStripButton();
             this.打开OToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolSave = new System.Windows.Forms.ToolStripButton();
-            this.打印PToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.toolPrint = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.toolConfirm = new System.Windows.Forms.ToolStripButton();
             this.toolRefresh = new System.Windows.Forms.ToolStripButton();
@@ -133,7 +133,7 @@
             this.toolNew,
             this.打开OToolStripButton,
             this.toolSave,
-            this.打印PToolStripButton,
+            this.toolPrint,
             this.toolStripSeparator,
             this.toolConfirm,
             this.toolRefresh,
@@ -170,13 +170,15 @@
             this.toolSave.Text = "保存(&S)";
             this.toolSave.Click += new System.EventHandler(this.toolSave_Click);
             // 
-            // 打印PToolStripButton
+            // toolPrint
             // 
-            this.打印PToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("打印PToolStripButton.Image")));
-            this.打印PToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.打印PToolStripButton.Name = "打印PToolStripButton";
-            this.打印PToolStripButton.Size = new System.Drawing.Size(67, 22);
-            this.打印PToolStripButton.Text = "打印(&P)";
+            this.toolPrint.Enabled = false;
+            this.toolPrint.Image = ((System.Drawing.Image)(resources.GetObject("toolPrint.Image")));
+            this.toolPrint.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolPrint.Name = "toolPrint";
+            this.toolPrint.Size = new System.Drawing.Size(67, 22);
+            this.toolPrint.Text = "打印(&P)";
+            this.toolPrint.Click += new System.EventHandler(this.toolPrint_Click);
             // 
             // toolStripSeparator
             // 
@@ -731,7 +733,7 @@
         private System.Windows.Forms.ToolStripButton toolNew;
         private System.Windows.Forms.ToolStripButton 打开OToolStripButton;
         private System.Windows.Forms.ToolStripButton toolSave;
-        private System.Windows.Forms.ToolStripButton 打印PToolStripButton;
+        private System.Windows.Forms.ToolStripButton toolPrint;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;

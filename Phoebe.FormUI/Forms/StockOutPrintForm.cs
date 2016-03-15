@@ -81,8 +81,8 @@ namespace Phoebe.FormUI
             {
                 Top = 20,
                 Bottom = 20,
-                Left = 40,
-                Right = 30
+                Left = 20,
+                Right = 20
             };
             pageSettings.Landscape = false;
             this.reportViewer1.SetPageSettings(pageSettings);

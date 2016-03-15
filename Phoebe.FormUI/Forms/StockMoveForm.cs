@@ -260,6 +260,7 @@ namespace Phoebe.FormUI
                 this.toolSave.Enabled = true;
                 this.toolConfirm.Enabled = true;
                 this.toolDelete.Enabled = true;
+                this.toolPrint.Enabled = false;
                 SetControlEditable(true);
             }
             else if (this.currentStockMove.Status == (int)EntityStatus.StockMove)
@@ -267,6 +268,7 @@ namespace Phoebe.FormUI
                 this.toolSave.Enabled = false;
                 this.toolConfirm.Enabled = false;
                 this.toolDelete.Enabled = false;
+                this.toolPrint.Enabled = true;
                 SetControlEditable(false);
             }
         }
@@ -357,6 +359,7 @@ namespace Phoebe.FormUI
                 MessageBox.Show("移库已确认", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.textBoxStatus.Text = EntityStatus.StockMove.DisplayName();
                 this.toolConfirm.Enabled = false;
+                //this.toolPrint.Enabled = true;
                 SetControlEditable(false);
             }
             else
@@ -408,6 +411,28 @@ namespace Phoebe.FormUI
                     MessageBox.Show("删除失败:" + result.DisplayName(), FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
+        }
+
+        /// <summary>
+        /// 打印
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void toolPrint_Click(object sender, EventArgs e)
+        {
+            if (this.currentStockMove == null)
+            {
+                MessageBox.Show("当前未选中记录", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            if (this.currentStockMove.Status != (int)EntityStatus.StockMove)
+            {
+                MessageBox.Show("移库记录未确认", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            StockMovePrintForm form = new StockMovePrintForm(this.currentStockMove);
+            form.ShowDialog();
         }
 
         /// <summary>

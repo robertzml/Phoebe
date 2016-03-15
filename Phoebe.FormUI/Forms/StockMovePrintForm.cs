@@ -14,56 +14,51 @@ using Microsoft.Reporting.WinForms;
 namespace Phoebe.FormUI
 {
     /// <summary>
-    /// 入库单打印窗体
+    /// 移库打印窗体
     /// </summary>
-    public partial class StockInPrintForm : Form
+    public partial class StockMovePrintForm : Form
     {
         #region Field
-        private StockIn stockIn;
+        private StockMove stockMove;
         #endregion //Field
 
         #region Constructor
-        public StockInPrintForm(StockIn stockIn)
+        public StockMovePrintForm(StockMove stockMove)
         {
             InitializeComponent();
-
-            this.stockIn = stockIn;
+            this.stockMove = stockMove;
         }
         #endregion //Constructor
 
         #region Event
-        /// <summary>
-        /// 窗体载入
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void StockInPrintForm_Load(object sender, EventArgs e)
+        private void StockMovePrintForm_Load(object sender, EventArgs e)
         {
-            List<RStockInDetail> details = new List<RStockInDetail>();
+            List<RStockMoveDetail> details = new List<RStockMoveDetail>();
 
             int number = 1;
-            foreach (var item in this.stockIn.StockInDetails)
+            foreach (var item in this.stockMove.StockMoveDetails)
             {
-                RStockInDetail detail = new RStockInDetail();
+                RStockMoveDetail detail = new RStockMoveDetail();
                 detail.Number = number++;
-                detail.Name = item.Cargo.Name;
-                detail.FirstCategory = item.Cargo.FirstCategory.Name;
-                detail.SecondCategory = item.Cargo.SecondCategory.Name;
-                detail.ThirdCategory = item.Cargo.ThirdCategory == null ? "" : item.Cargo.ThirdCategory.Name;
+                detail.Name = item.SourceCargo.Name;
+                detail.FirstCategory = item.SourceCargo.FirstCategory.Name;
+                detail.SecondCategory = item.SourceCargo.SecondCategory.Name;
+                detail.ThirdCategory = item.SourceCargo.ThirdCategory == null ? "" : item.SourceCargo.ThirdCategory.Name;
                 detail.Count = item.Count;
-                detail.UnitWeight = item.Cargo.UnitWeight;
-                detail.TotalWeight = item.InWeight;
-                detail.TotalVolume = item.Cargo.TotalVolume;
-                detail.Warehouse = item.WarehouseNumber;
+                detail.UnitWeight = item.SourceCargo.UnitWeight;
+                detail.TotalWeight = item.MoveWeight;
+                detail.TotalVolume = item.SourceCargo.TotalVolume;
+                detail.SourceWarehouse = item.SourceCargo.WarehouseNumber;
+                detail.NewWarehouse = item.WarehouseNumber;
 
                 details.Add(detail);
             }
 
-            var contract = this.stockIn.Contract;
+            var contract = this.stockMove.Contract;
 
             List<ReportParameter> parameters = new List<ReportParameter>();
-            ReportParameter rp1 = new ReportParameter("InTime", this.stockIn.InTime.ToString());
-            ReportParameter rp2 = new ReportParameter("FlowNumber", this.stockIn.FlowNumber);
+            ReportParameter rp1 = new ReportParameter("MoveTime", this.stockMove.MoveTime.ToString());
+            ReportParameter rp2 = new ReportParameter("FlowNumber", this.stockMove.FlowNumber);
             ReportParameter rp3 = new ReportParameter("CustomerName", contract.Customer.Name);
             ReportParameter rp4 = new ReportParameter("ContractNumber", contract.Number);
 
@@ -73,7 +68,7 @@ namespace Phoebe.FormUI
             parameters.Add(rp4);
 
             this.reportViewer1.LocalReport.SetParameters(parameters);
-            this.reportViewer1.LocalReport.DataSources.Add(new ReportDataSource("StockInSet", details));
+            this.reportViewer1.LocalReport.DataSources.Add(new ReportDataSource("StockMoveSet", details));
 
             var pageSettings = this.reportViewer1.GetPageSettings();
             pageSettings.PaperSize = new PaperSize

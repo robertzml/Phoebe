@@ -183,6 +183,7 @@
     <Compile Include="Forms\PaymentForm.Designer.cs">
       <DependentUpon>PaymentForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\RStockMoveDetail.cs" />
     <Compile Include="Model\RStockOutDetail.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -283,6 +284,12 @@
     <Compile Include="Forms\StockOutPrintForm.Designer.cs">
       <DependentUpon>StockOutPrintForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\StockMovePrintForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\StockMovePrintForm.Designer.cs">
+      <DependentUpon>StockMovePrintForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Forms\AccountForm.resx">
       <DependentUpon>AccountForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -352,6 +359,9 @@
     <EmbeddedResource Include="Forms\StockMoveForm.resx">
       <DependentUpon>StockMoveForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\StockMovePrintForm.resx">
+      <DependentUpon>StockMovePrintForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\StockOutForm.resx">
       <DependentUpon>StockOutForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -399,6 +409,7 @@
     <EmbeddedResource Include="Report\Inventory.rdlc" />
     <EmbeddedResource Include="Report\StockFlow.rdlc" />
     <EmbeddedResource Include="Report\StockIn.rdlc" />
+    <EmbeddedResource Include="Report\StockMove.rdlc" />
     <EmbeddedResource Include="Report\StockOut.rdlc" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\Phoebe.Model.AccountStatement.datasource" />
@@ -419,6 +430,7 @@
     <None Include="Properties\DataSources\Phoebe.Model.User.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.UserGroup.datasource" />
     <None Include="Properties\DataSources\RStockInDetail.datasource" />
+    <None Include="Properties\DataSources\RStockMoveDetail.datasource" />
     <None Include="Properties\DataSources\RStockOutDetail.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

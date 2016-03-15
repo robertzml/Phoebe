@@ -965,7 +965,7 @@
         <Top>1.02871cm</Top>
         <Left>0.19513cm</Left>
         <Height>1.49104cm</Height>
-        <Width>19.54466cm</Width>
+        <Width>19.54468cm</Width>
         <ZIndex>4</ZIndex>
         <Style>
           <Border>
@@ -1106,7 +1106,7 @@
     <Height>5.2cm</Height>
     <Style />
   </Body>
-  <Width>20.0358cm</Width>
+  <Width>20.5cm</Width>
   <Page>
     <PageHeader>
       <Height>0.8cm</Height>
@@ -1258,6 +1258,7 @@
           </Style>
         </Textbox>
         <Line Name="Line1">
+          <Top>0cm</Top>
           <Left>20.0358cm</Left>
           <Height>0cm</Height>
           <Width>-19.88862cm</Width>
@@ -1278,8 +1279,8 @@
     </PageFooter>
     <PageHeight>9.3cm</PageHeight>
     <PageWidth>24.2cm</PageWidth>
-    <LeftMargin>1.3cm</LeftMargin>
-    <RightMargin>1.3cm</RightMargin>
+    <LeftMargin>1cm</LeftMargin>
+    <RightMargin>1cm</RightMargin>
     <TopMargin>0.5cm</TopMargin>
     <BottomMargin>0.5cm</BottomMargin>
     <ColumnSpacing>0.13cm</ColumnSpacing>
