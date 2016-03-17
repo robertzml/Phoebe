@@ -279,6 +279,7 @@ namespace Phoebe.FormUI
 
             this.toolSave.Enabled = true;
             this.toolConfirm.Enabled = false;
+            this.toolPrint.Enabled = false;
             this.groupBox2.Visible = this.groupBox3.Visible = true;
             SetControlEditable(true);
 
@@ -419,11 +420,11 @@ namespace Phoebe.FormUI
                 MessageBox.Show("当前未选中记录", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-            if (this.currentStockOut.Status != (int)EntityStatus.StockOut)
-            {
-                MessageBox.Show("出库记录未确认", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
+            //if (this.currentStockOut.Status != (int)EntityStatus.StockOut)
+            //{
+            //    MessageBox.Show("出库记录未确认", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //    return;
+            //}
 
             StockOutPrintForm form = new StockOutPrintForm(this.currentStockOut);
             form.ShowDialog();

@@ -285,6 +285,7 @@ namespace Phoebe.FormUI
 
             this.toolSave.Enabled = true;
             this.toolConfirm.Enabled = false;
+            this.toolPrint.Enabled = false;
             this.groupBox2.Visible = this.groupBox3.Visible = true;
             SetControlEditable(true);
 
@@ -359,7 +360,7 @@ namespace Phoebe.FormUI
                 MessageBox.Show("移库已确认", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.textBoxStatus.Text = EntityStatus.StockMove.DisplayName();
                 this.toolConfirm.Enabled = false;
-                //this.toolPrint.Enabled = true;
+                this.toolPrint.Enabled = true;
                 SetControlEditable(false);
             }
             else
@@ -391,11 +392,11 @@ namespace Phoebe.FormUI
                 MessageBox.Show("当前未选中记录", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-            if (this.currentStockMove.Status != (int)EntityStatus.StockMoveReady)
-            {
-                MessageBox.Show("当前记录已确认", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
+            //if (this.currentStockMove.Status != (int)EntityStatus.StockMoveReady)
+            //{
+            //    MessageBox.Show("当前记录已确认", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //    return;
+            //}
 
             DialogResult dr = MessageBox.Show("是否确认删除选中记录", FormConstant.MessageBoxTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (dr == DialogResult.Yes)
