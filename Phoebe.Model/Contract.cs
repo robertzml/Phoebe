@@ -49,8 +49,8 @@ namespace Phoebe.Model
         public virtual ICollection<Billing> Billings { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SettlementDetail> SettlementDetails { get; set; }
+        public virtual Customer Customer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cargo> Cargoes { get; set; }
-        public virtual Customer Customer { get; set; }
     }
 }

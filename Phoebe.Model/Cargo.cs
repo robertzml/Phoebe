@@ -29,6 +29,7 @@ namespace Phoebe.Model
         public int FirstCategoryID { get; set; }
         public int SecondCategoryID { get; set; }
         public Nullable<int> ThirdCategoryID { get; set; }
+        public string Number { get; set; }
         public int Count { get; set; }
         public bool EqualWeight { get; set; }
         public double UnitWeight { get; set; }

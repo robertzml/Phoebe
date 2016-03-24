@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.comboBoxFirstCategory = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.textBoxRemark = new System.Windows.Forms.TextBox();
             this.textBoxName = new System.Windows.Forms.TextBox();
@@ -36,14 +39,17 @@
             this.label1 = new System.Windows.Forms.Label();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonConfirm = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.comboBoxFirstCategory = new System.Windows.Forms.ComboBox();
-            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.textBoxNumber = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label7);
+            this.groupBox1.Controls.Add(this.textBoxNumber);
+            this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.comboBoxFirstCategory);
             this.groupBox1.Controls.Add(this.label4);
@@ -55,10 +61,38 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(340, 200);
+            this.groupBox1.Size = new System.Drawing.Size(340, 244);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "分类信息";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.ForeColor = System.Drawing.Color.Red;
+            this.label5.Location = new System.Drawing.Point(294, 74);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(11, 12);
+            this.label5.TabIndex = 7;
+            this.label5.Text = "*";
+            // 
+            // comboBoxFirstCategory
+            // 
+            this.comboBoxFirstCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxFirstCategory.FormattingEnabled = true;
+            this.comboBoxFirstCategory.Location = new System.Drawing.Point(91, 71);
+            this.comboBoxFirstCategory.Name = "comboBoxFirstCategory";
+            this.comboBoxFirstCategory.Size = new System.Drawing.Size(197, 20);
+            this.comboBoxFirstCategory.TabIndex = 6;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(22, 74);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(53, 12);
+            this.label4.TabIndex = 5;
+            this.label4.Text = "一级分类";
             // 
             // label3
             // 
@@ -72,7 +106,7 @@
             // 
             // textBoxRemark
             // 
-            this.textBoxRemark.Location = new System.Drawing.Point(91, 116);
+            this.textBoxRemark.Location = new System.Drawing.Point(91, 161);
             this.textBoxRemark.Multiline = true;
             this.textBoxRemark.Name = "textBoxRemark";
             this.textBoxRemark.Size = new System.Drawing.Size(197, 61);
@@ -88,7 +122,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(22, 119);
+            this.label2.Location = new System.Drawing.Point(22, 164);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(29, 12);
             this.label2.TabIndex = 1;
@@ -106,7 +140,7 @@
             // buttonCancel
             // 
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(213, 221);
+            this.buttonCancel.Location = new System.Drawing.Point(216, 271);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 5;
@@ -115,7 +149,7 @@
             // 
             // buttonConfirm
             // 
-            this.buttonConfirm.Location = new System.Drawing.Point(91, 221);
+            this.buttonConfirm.Location = new System.Drawing.Point(94, 271);
             this.buttonConfirm.Name = "buttonConfirm";
             this.buttonConfirm.Size = new System.Drawing.Size(75, 23);
             this.buttonConfirm.TabIndex = 4;
@@ -123,40 +157,39 @@
             this.buttonConfirm.UseVisualStyleBackColor = true;
             this.buttonConfirm.Click += new System.EventHandler(this.buttonConfirm_Click);
             // 
-            // label4
+            // label6
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(22, 74);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(53, 12);
-            this.label4.TabIndex = 5;
-            this.label4.Text = "一级分类";
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(22, 119);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(29, 12);
+            this.label6.TabIndex = 8;
+            this.label6.Text = "代码";
             // 
-            // comboBoxFirstCategory
+            // textBoxNumber
             // 
-            this.comboBoxFirstCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxFirstCategory.FormattingEnabled = true;
-            this.comboBoxFirstCategory.Location = new System.Drawing.Point(91, 71);
-            this.comboBoxFirstCategory.Name = "comboBoxFirstCategory";
-            this.comboBoxFirstCategory.Size = new System.Drawing.Size(197, 20);
-            this.comboBoxFirstCategory.TabIndex = 6;
+            this.textBoxNumber.Location = new System.Drawing.Point(91, 116);
+            this.textBoxNumber.MaxLength = 2;
+            this.textBoxNumber.Name = "textBoxNumber";
+            this.textBoxNumber.Size = new System.Drawing.Size(197, 21);
+            this.textBoxNumber.TabIndex = 9;
             // 
-            // label5
+            // label7
             // 
-            this.label5.AutoSize = true;
-            this.label5.ForeColor = System.Drawing.Color.Red;
-            this.label5.Location = new System.Drawing.Point(294, 74);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(11, 12);
-            this.label5.TabIndex = 7;
-            this.label5.Text = "*";
+            this.label7.AutoSize = true;
+            this.label7.ForeColor = System.Drawing.Color.Red;
+            this.label7.Location = new System.Drawing.Point(294, 119);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(11, 12);
+            this.label7.TabIndex = 10;
+            this.label7.Text = "*";
             // 
             // CategorySecondAddForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
-            this.ClientSize = new System.Drawing.Size(346, 268);
+            this.ClientSize = new System.Drawing.Size(346, 319);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonConfirm);
@@ -184,5 +217,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.Button buttonConfirm;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox textBoxNumber;
+        private System.Windows.Forms.Label label6;
     }
 }

@@ -23,11 +23,12 @@ namespace Phoebe.Model
         public int ID { get; set; }
         public string Name { get; set; }
         public int SecondCategoryID { get; set; }
+        public string Number { get; set; }
         public string Remark { get; set; }
         public int Status { get; set; }
     
-        public virtual SecondCategory SecondCategory { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cargo> Cargoes { get; set; }
+        public virtual SecondCategory SecondCategory { get; set; }
     }
 }

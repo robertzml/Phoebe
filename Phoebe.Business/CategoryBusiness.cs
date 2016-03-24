@@ -161,6 +161,11 @@ namespace Phoebe.Business
         {
             try
             {
+                if (this.context.FirstCategories.Any(r => r.Number == data.Number))
+                {
+                    return ErrorCode.DuplicateNumber;
+                }
+
                 data.Status = 0;
                 this.context.FirstCategories.Add(data);
                 this.context.SaveChanges();
@@ -182,6 +187,11 @@ namespace Phoebe.Business
         {
             try
             {
+                if (this.context.SecondCategories.Any(r => r.Number == data.Number && r.FirstCategoryID == data.FirstCategoryID))
+                {
+                    return ErrorCode.DuplicateNumber;
+                }
+
                 data.Status = 0;
                 this.context.SecondCategories.Add(data);
                 this.context.SaveChanges();
@@ -203,6 +213,11 @@ namespace Phoebe.Business
         {
             try
             {
+                if (this.context.ThirdCategories.Any(r => r.Number == data.Number && r.SecondCategoryID == data.SecondCategoryID))
+                {
+                    return ErrorCode.DuplicateNumber;
+                }
+
                 data.Status = 0;
                 this.context.ThirdCategories.Add(data);
                 this.context.SaveChanges();
@@ -224,6 +239,11 @@ namespace Phoebe.Business
         {
             try
             {
+                if (this.context.FirstCategories.Any(r => r.ID != data.ID && r.Number == data.Number))
+                {
+                    return ErrorCode.DuplicateNumber;
+                }
+
                 this.context.Entry(data).State = EntityState.Modified;
                 this.context.SaveChanges();
             }
@@ -244,6 +264,11 @@ namespace Phoebe.Business
         {
             try
             {
+                if (this.context.SecondCategories.Any(r => r.ID != data.ID && r.Number == data.Number && r.FirstCategoryID == data.FirstCategoryID))
+                {
+                    return ErrorCode.DuplicateNumber;
+                }
+
                 this.context.Entry(data).State = EntityState.Modified;
                 this.context.SaveChanges();
             }
@@ -264,6 +289,11 @@ namespace Phoebe.Business
         {
             try
             {
+                if (this.context.ThirdCategories.Any(r => r.ID != data.ID && r.Number == data.Number && r.SecondCategoryID == data.SecondCategoryID))
+                {
+                    return ErrorCode.DuplicateNumber;
+                }
+
                 this.context.Entry(data).State = EntityState.Modified;
                 this.context.SaveChanges();
             }

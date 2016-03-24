@@ -97,10 +97,22 @@ namespace Phoebe.FormUI
                 return;
             }
 
+            if (this.textBoxNumber.Text.Trim() == "")
+            {
+                MessageBox.Show("代码不能为空", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (this.textBoxNumber.Text.Length != 3)
+            {
+                MessageBox.Show("代码必须为3位", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             ThirdCategory third = new ThirdCategory
             {
                 Name = this.textBoxName.Text.Trim(),
                 SecondCategoryID = Convert.ToInt32(this.comboBoxSecondCategory.SelectedValue),
+                Number = this.textBoxNumber.Text,
                 Remark = this.textBoxRemark.Text
             };
 

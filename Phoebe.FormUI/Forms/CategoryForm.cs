@@ -29,7 +29,7 @@ namespace Phoebe.FormUI
         #region Function
         private void InitData()
         {
-            this.categoryBusiness = new CategoryBusiness();
+            //this.categoryBusiness = new CategoryBusiness();
         }
 
         private void InitControl()
@@ -42,6 +42,8 @@ namespace Phoebe.FormUI
         /// </summary>
         private void UpdateCategoryTree()
         {
+            this.categoryBusiness = new CategoryBusiness();
+
             this.treeCategory.BeginUpdate();
             this.treeCategory.Nodes.Clear();
 
@@ -117,10 +119,48 @@ namespace Phoebe.FormUI
         #endregion //Function
 
         #region Event
+        /// <summary>
+        /// 窗体载入
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CategoryForm_Load(object sender, EventArgs e)
         {
             InitData();
             InitControl();
+        }
+
+        /// <summary>
+        /// 选择分类
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void treeCategory_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            var node = e.Node;
+            if ((int)node.Tag == 0)
+                return;
+
+            int id = Convert.ToInt32(node.Name);
+            int hierarchy = Convert.ToInt32(node.Tag);
+            switch (hierarchy)
+            {
+                case 1:
+                    var first = categoryBusiness.GetFirstCategory(id);
+                    this.textBoxName.Text = first.Name;
+                    this.textBoxNumber.Text = first.Number;
+                    break;
+                case 2:
+                    var second = categoryBusiness.GetSecondCategory(id);
+                    this.textBoxName.Text = second.Name;
+                    this.textBoxNumber.Text = second.Number;
+                    break;
+                case 3:
+                    var third = categoryBusiness.GetThirdCategory(id);
+                    this.textBoxName.Text = third.Name;
+                    this.textBoxNumber.Text = third.Number;
+                    break;
+            }
         }
 
         /// <summary>
@@ -208,6 +248,7 @@ namespace Phoebe.FormUI
                 if (result == ErrorCode.Success)
                 {
                     MessageBox.Show("删除分类成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    UpdateCategoryTree();
                 }
                 else
                 {

@@ -49,6 +49,7 @@ namespace Phoebe.FormUI
                     {
                         var category = this.categoryBusiness.GetFirstCategory(this.categoryId);
                         this.textBoxName.Text = category.Name;
+                        this.textBoxNumber.Text = category.Number;
                         this.textBoxRemark.Text = category.Remark;
                         break;
                     }
@@ -56,6 +57,7 @@ namespace Phoebe.FormUI
                     {
                         var category = this.categoryBusiness.GetSecondCategory(this.categoryId);
                         this.textBoxName.Text = category.Name;
+                        this.textBoxNumber.Text = category.Number;
                         this.textBoxRemark.Text = category.Remark;
                         break;
                     }
@@ -63,6 +65,7 @@ namespace Phoebe.FormUI
                     {
                         var category = this.categoryBusiness.GetThirdCategory(this.categoryId);
                         this.textBoxName.Text = category.Name;
+                        this.textBoxNumber.Text = category.Number;
                         this.textBoxRemark.Text = category.Remark;
                         break;
                     }
@@ -96,30 +99,53 @@ namespace Phoebe.FormUI
                 MessageBox.Show("名称不能为空", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
+            if (this.textBoxNumber.Text == "")
+            {
+                MessageBox.Show("代码不能为空", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
             ErrorCode result = ErrorCode.Error;
             switch (this.hierarchy)
             {
                 case 1:
                     {
+                        if (this.textBoxNumber.Text.Length != 2)
+                        {
+                            MessageBox.Show("代码必须为2位", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
                         var category = this.categoryBusiness.GetFirstCategory(this.categoryId);
                         category.Name = this.textBoxName.Text;
+                        category.Number = this.textBoxNumber.Text;
                         category.Remark = this.textBoxRemark.Text;
                         result = this.categoryBusiness.EditFirstCategory(category);
                         break;
                     }
                 case 2:
                     {
+                        if (this.textBoxNumber.Text.Length != 2)
+                        {
+                            MessageBox.Show("代码必须为2位", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
                         var category = this.categoryBusiness.GetSecondCategory(this.categoryId);
                         category.Name = this.textBoxName.Text;
+                        category.Number = this.textBoxNumber.Text;
                         category.Remark = this.textBoxRemark.Text;
                         result = this.categoryBusiness.EditSecondCategory(category);
                         break;
                     }
                 case 3:
                     {
+                        if (this.textBoxNumber.Text.Length != 3)
+                        {
+                            MessageBox.Show("代码必须为3位", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
                         var category = this.categoryBusiness.GetThirdCategory(this.categoryId);
                         category.Name = this.textBoxName.Text;
+                        category.Number = this.textBoxNumber.Text;
                         category.Remark = this.textBoxRemark.Text;
                         result = this.categoryBusiness.EditThirdCategory(category);
                         break;

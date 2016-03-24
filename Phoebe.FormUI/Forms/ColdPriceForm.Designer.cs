@@ -33,6 +33,8 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dateEnd = new System.Windows.Forms.DateTimePicker();
             this.label5 = new System.Windows.Forms.Label();
@@ -95,42 +97,42 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(916, 135);
+            this.groupBox1.Size = new System.Drawing.Size(916, 125);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "选择";
             // 
             // dateEnd
             // 
-            this.dateEnd.Location = new System.Drawing.Point(621, 86);
+            this.dateEnd.Location = new System.Drawing.Point(621, 79);
             this.dateEnd.Name = "dateEnd";
-            this.dateEnd.Size = new System.Drawing.Size(175, 20);
+            this.dateEnd.Size = new System.Drawing.Size(175, 21);
             this.dateEnd.TabIndex = 11;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(560, 90);
+            this.label5.Location = new System.Drawing.Point(560, 83);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(55, 13);
+            this.label5.Size = new System.Drawing.Size(53, 12);
             this.label5.TabIndex = 10;
             this.label5.Text = "结束日期";
             // 
             // radioCargo
             // 
             this.radioCargo.AutoSize = true;
-            this.radioCargo.Location = new System.Drawing.Point(136, 88);
+            this.radioCargo.Location = new System.Drawing.Point(136, 81);
             this.radioCargo.Name = "radioCargo";
-            this.radioCargo.Size = new System.Drawing.Size(61, 17);
+            this.radioCargo.Size = new System.Drawing.Size(59, 16);
             this.radioCargo.TabIndex = 9;
             this.radioCargo.Text = "按货品";
             this.radioCargo.UseVisualStyleBackColor = true;
             // 
             // buttonQuery
             // 
-            this.buttonQuery.Location = new System.Drawing.Point(835, 84);
+            this.buttonQuery.Location = new System.Drawing.Point(835, 78);
             this.buttonQuery.Name = "buttonQuery";
-            this.buttonQuery.Size = new System.Drawing.Size(75, 25);
+            this.buttonQuery.Size = new System.Drawing.Size(75, 23);
             this.buttonQuery.TabIndex = 8;
             this.buttonQuery.Text = "查询";
             this.buttonQuery.UseVisualStyleBackColor = true;
@@ -140,9 +142,9 @@
             // 
             this.radioContract.AutoSize = true;
             this.radioContract.Checked = true;
-            this.radioContract.Location = new System.Drawing.Point(18, 88);
+            this.radioContract.Location = new System.Drawing.Point(18, 81);
             this.radioContract.Name = "radioContract";
-            this.radioContract.Size = new System.Drawing.Size(61, 17);
+            this.radioContract.Size = new System.Drawing.Size(59, 16);
             this.radioContract.TabIndex = 8;
             this.radioContract.TabStop = true;
             this.radioContract.Text = "按合同";
@@ -150,17 +152,17 @@
             // 
             // dateStart
             // 
-            this.dateStart.Location = new System.Drawing.Point(346, 86);
+            this.dateStart.Location = new System.Drawing.Point(346, 79);
             this.dateStart.Name = "dateStart";
-            this.dateStart.Size = new System.Drawing.Size(175, 20);
+            this.dateStart.Size = new System.Drawing.Size(175, 21);
             this.dateStart.TabIndex = 7;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(285, 90);
+            this.label4.Location = new System.Drawing.Point(285, 83);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(55, 13);
+            this.label4.Size = new System.Drawing.Size(53, 12);
             this.label4.TabIndex = 6;
             this.label4.Text = "开始日期";
             // 
@@ -168,17 +170,17 @@
             // 
             this.comboBoxCargo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxCargo.FormattingEnabled = true;
-            this.comboBoxCargo.Location = new System.Drawing.Point(621, 32);
+            this.comboBoxCargo.Location = new System.Drawing.Point(621, 30);
             this.comboBoxCargo.Name = "comboBoxCargo";
-            this.comboBoxCargo.Size = new System.Drawing.Size(175, 21);
+            this.comboBoxCargo.Size = new System.Drawing.Size(175, 20);
             this.comboBoxCargo.TabIndex = 5;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(562, 36);
+            this.label3.Location = new System.Drawing.Point(562, 33);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(55, 13);
+            this.label3.Size = new System.Drawing.Size(53, 12);
             this.label3.TabIndex = 4;
             this.label3.Text = "货品选择";
             // 
@@ -186,18 +188,18 @@
             // 
             this.comboBoxContract.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxContract.FormattingEnabled = true;
-            this.comboBoxContract.Location = new System.Drawing.Point(344, 32);
+            this.comboBoxContract.Location = new System.Drawing.Point(344, 30);
             this.comboBoxContract.Name = "comboBoxContract";
-            this.comboBoxContract.Size = new System.Drawing.Size(175, 21);
+            this.comboBoxContract.Size = new System.Drawing.Size(175, 20);
             this.comboBoxContract.TabIndex = 3;
             this.comboBoxContract.SelectedIndexChanged += new System.EventHandler(this.comboBoxContract_SelectedIndexChanged);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(285, 36);
+            this.label2.Location = new System.Drawing.Point(285, 33);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(55, 13);
+            this.label2.Size = new System.Drawing.Size(53, 12);
             this.label2.TabIndex = 2;
             this.label2.Text = "合同选择";
             // 
@@ -205,18 +207,18 @@
             // 
             this.comboBoxCustomer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxCustomer.FormattingEnabled = true;
-            this.comboBoxCustomer.Location = new System.Drawing.Point(74, 32);
+            this.comboBoxCustomer.Location = new System.Drawing.Point(74, 30);
             this.comboBoxCustomer.Name = "comboBoxCustomer";
-            this.comboBoxCustomer.Size = new System.Drawing.Size(175, 21);
+            this.comboBoxCustomer.Size = new System.Drawing.Size(175, 20);
             this.comboBoxCustomer.TabIndex = 1;
             this.comboBoxCustomer.SelectedIndexChanged += new System.EventHandler(this.comboBoxCustomer_SelectedIndexChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(15, 36);
+            this.label1.Location = new System.Drawing.Point(15, 33);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(55, 13);
+            this.label1.Size = new System.Drawing.Size(53, 12);
             this.label1.TabIndex = 0;
             this.label1.Text = "客户选择";
             // 
@@ -225,9 +227,9 @@
             this.groupBox2.Controls.Add(this.dailyColdRecordDataGridView);
             this.groupBox2.Controls.Add(this.dailyColdRecordBindingNavigator);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Location = new System.Drawing.Point(3, 138);
+            this.groupBox2.Location = new System.Drawing.Point(3, 128);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(916, 385);
+            this.groupBox2.Size = new System.Drawing.Size(916, 355);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "冷藏费清单";
@@ -250,10 +252,10 @@
             this.dataGridViewTextBoxColumn8});
             this.dailyColdRecordDataGridView.DataSource = this.dailyColdRecordBindingSource;
             this.dailyColdRecordDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dailyColdRecordDataGridView.Location = new System.Drawing.Point(3, 41);
+            this.dailyColdRecordDataGridView.Location = new System.Drawing.Point(3, 42);
             this.dailyColdRecordDataGridView.Name = "dailyColdRecordDataGridView";
             this.dailyColdRecordDataGridView.ReadOnly = true;
-            this.dailyColdRecordDataGridView.Size = new System.Drawing.Size(910, 341);
+            this.dailyColdRecordDataGridView.Size = new System.Drawing.Size(910, 310);
             this.dailyColdRecordDataGridView.TabIndex = 0;
             this.dailyColdRecordDataGridView.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dailyColdRecordDataGridView_RowPrePaint);
             // 
@@ -277,7 +279,7 @@
             this.bindingNavigatorMoveNextItem,
             this.bindingNavigatorMoveLastItem,
             this.bindingNavigatorSeparator2});
-            this.dailyColdRecordBindingNavigator.Location = new System.Drawing.Point(3, 16);
+            this.dailyColdRecordBindingNavigator.Location = new System.Drawing.Point(3, 17);
             this.dailyColdRecordBindingNavigator.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
             this.dailyColdRecordBindingNavigator.MoveLastItem = this.bindingNavigatorMoveLastItem;
             this.dailyColdRecordBindingNavigator.MoveNextItem = this.bindingNavigatorMoveNextItem;
@@ -395,6 +397,9 @@
             // columnFlowMeter
             // 
             this.columnFlowMeter.DataPropertyName = "FlowMeter";
+            dataGridViewCellStyle2.Format = "N3";
+            dataGridViewCellStyle2.NullValue = null;
+            this.columnFlowMeter.DefaultCellStyle = dataGridViewCellStyle2;
             this.columnFlowMeter.HeaderText = "出入库重量(t)";
             this.columnFlowMeter.Name = "columnFlowMeter";
             this.columnFlowMeter.ReadOnly = true;
@@ -403,6 +408,9 @@
             // columnStoreMeter
             // 
             this.columnStoreMeter.DataPropertyName = "TotalMeter";
+            dataGridViewCellStyle3.Format = "N3";
+            dataGridViewCellStyle3.NullValue = null;
+            this.columnStoreMeter.DefaultCellStyle = dataGridViewCellStyle3;
             this.columnStoreMeter.HeaderText = "在库重量(t)";
             this.columnStoreMeter.Name = "columnStoreMeter";
             this.columnStoreMeter.ReadOnly = true;
@@ -411,9 +419,9 @@
             // dataGridViewTextBoxColumn7
             // 
             this.dataGridViewTextBoxColumn7.DataPropertyName = "DailyFee";
-            dataGridViewCellStyle2.Format = "C2";
-            dataGridViewCellStyle2.NullValue = null;
-            this.dataGridViewTextBoxColumn7.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Format = "C2";
+            dataGridViewCellStyle4.NullValue = null;
+            this.dataGridViewTextBoxColumn7.DefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridViewTextBoxColumn7.HeaderText = "日冷藏费(元)";
             this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
             this.dataGridViewTextBoxColumn7.ReadOnly = true;
@@ -422,9 +430,9 @@
             // dataGridViewTextBoxColumn8
             // 
             this.dataGridViewTextBoxColumn8.DataPropertyName = "TotalFee";
-            dataGridViewCellStyle3.Format = "C2";
-            dataGridViewCellStyle3.NullValue = null;
-            this.dataGridViewTextBoxColumn8.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle5.Format = "C2";
+            dataGridViewCellStyle5.NullValue = null;
+            this.dataGridViewTextBoxColumn8.DefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridViewTextBoxColumn8.HeaderText = "冷藏费累计(元)";
             this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
             this.dataGridViewTextBoxColumn8.ReadOnly = true;
@@ -432,9 +440,9 @@
             // 
             // ColdPriceForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(922, 526);
+            this.ClientSize = new System.Drawing.Size(922, 486);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "ColdPriceForm";
