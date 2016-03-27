@@ -164,6 +164,12 @@ namespace Phoebe.Model
         /// </summary>
         [Display(Name = "货品数量为零")]
         CargoCountZero = 42,
+
+        /// <summary>
+        /// 货品编码错误
+        /// </summary>
+        [Display(Name = "货品编码错误")]
+        CargoNumberError = 43,
         #endregion //Cargo
 
         #region Stock

@@ -70,6 +70,10 @@ namespace Phoebe.FormUI
             }
 
             this.treeCategory.Nodes[0].Expand();
+            foreach (TreeNode item in this.treeCategory.Nodes[0].Nodes)
+            {
+                item.Expand();
+            }
             this.treeCategory.EndUpdate();
         }
 
@@ -90,7 +94,6 @@ namespace Phoebe.FormUI
                 node.Tag = 2;
 
                 parent.Nodes.Add(node);
-
                 UpdateThirdCategory(item, node);
             }
 

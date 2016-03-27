@@ -26,7 +26,7 @@ namespace Phoebe.FormUI
         private ContractBusiness contractBusiness;
 
         private CategoryBusiness categoryBusiness;
-    
+
         private StoreBusiness storeBusiness;
 
         /// <summary>
@@ -43,6 +43,11 @@ namespace Phoebe.FormUI
         /// 货品是否等重
         /// </summary>
         private bool isEqualWeight = true;
+
+        /// <summary>
+        /// 货品代码列表
+        /// </summary>
+        private List<CategoryNumber> numberList;
         #endregion //Field
 
         #region Constructor
@@ -70,44 +75,25 @@ namespace Phoebe.FormUI
             this.comboBoxCustomer.DisplayMember = "Name";
             this.comboBoxCustomer.ValueMember = "ID";
 
-            DataGridViewComboBoxColumn fcColumn = this.dataGridViewColumnFirstCategoryID;
-            fcColumn.DataSource = categoryBusiness.GetFirstCategory();
-            fcColumn.DisplayMember = "Name";
-            fcColumn.ValueMember = "ID";
+            InitCategoryNumberList();
+        }
 
-            DataGridViewComboBoxColumn scColumn = this.dataGridViewColumnSecondCategoryID;
-            scColumn.DataSource = categoryBusiness.GetSecondCategory();
-            scColumn.DisplayMember = "Name";
-            scColumn.ValueMember = "ID";
-
-            DataGridViewComboBoxColumn tcColumn = this.dataGridViewColumnThirdCategoryID;
-            tcColumn.DataSource = categoryBusiness.GetThirdCategory();
-            tcColumn.DisplayMember = "Name";
-            tcColumn.ValueMember = "ID";
+        private void InitCategoryNumberList()
+        {
+            this.numberList = this.categoryBusiness.GetNumber();
+            this.listBoxNumber.DataSource = numberList;
         }
 
         /// <summary>
-        /// 初始化二级分类
+        /// 更新分类列表
         /// </summary>
-        /// <param name="firstId"></param>
-        private void InitSecondColumn(int firstId)
+        /// <param name="number">输入代码</param>
+        private void FilterCategoryNumber(string number)
         {
-            DataGridViewComboBoxColumn scColumn = this.dataGridViewColumnSecondCategoryID;
-            scColumn.DataSource = categoryBusiness.GetSecondCategoryByFirst(firstId);
-            scColumn.DisplayMember = "Name";
-            scColumn.ValueMember = "ID";
-        }
-
-        /// <summary>
-        ///  初始化三级分类
-        /// </summary>
-        /// <param name="secondId"></param>
-        private void InitThirdColumn(int secondId)
-        {
-            DataGridViewComboBoxColumn tcColumn = this.dataGridViewColumnThirdCategoryID;
-            tcColumn.DataSource = categoryBusiness.GetThirdCategoryBySecond(secondId);
-            tcColumn.DisplayMember = "Name";
-            tcColumn.ValueMember = "ID";
+            if (string.IsNullOrEmpty(number))
+                this.listBoxNumber.DataSource = numberList;
+            else
+                this.listBoxNumber.DataSource = numberList.Where(r => r.Number.StartsWith(number)).ToList();
         }
 
         /// <summary>
@@ -185,7 +171,7 @@ namespace Phoebe.FormUI
             {
                 column.ReadOnly = !canEdit;
             }
-            this.columnTotalWeight.ReadOnly = this.columnTotalVolume.ReadOnly = true;
+            this.columnNumberName.ReadOnly = this.columnTotalWeight.ReadOnly = this.columnTotalVolume.ReadOnly = true;
         }
 
         /// <summary>
@@ -238,17 +224,21 @@ namespace Phoebe.FormUI
                 {
                     return ErrorCode.EmptyName;
                 }
-                if (cargo.FirstCategoryID == 0)
+                if (row.Cells[this.columnNumber.Index].Value == null)
                 {
-                    return ErrorCode.CategoryFirstEmpty;
+                    return ErrorCode.CargoNumberError;
                 }
-                if (cargo.SecondCategoryID == 0)
-                {
-                    return ErrorCode.CategorySecondEmpty;
-                }
+
+                CategoryNumber cnumber = this.categoryBusiness.TranslateNumber(row.Cells[this.columnNumber.Index].Value.ToString());
+                if (cnumber == null)
+                    return ErrorCode.CargoNumberError;
 
                 cargo.ID = Guid.NewGuid();
                 cargo.ContractID = stockIn.ContractID;
+                cargo.FirstCategoryID = cnumber.FirstCategoryId;
+                cargo.SecondCategoryID = cnumber.SecondCatgoryId;
+                if (cnumber.Level == 3)
+                    cargo.ThirdCategoryID = cnumber.ThirdCategoryId;
                 cargo.EqualWeight = this.isEqualWeight;
                 if (this.isEqualWeight)
                 {
@@ -590,22 +580,7 @@ namespace Phoebe.FormUI
             if (e.RowIndex < 0)
                 return;
 
-            if (e.ColumnIndex == this.dataGridViewColumnFirstCategoryID.Index)
-            {
-                int first = Convert.ToInt32(this.cargoDataGridView.Rows[e.RowIndex].Cells[this.dataGridViewColumnFirstCategoryID.Index].Value);
-
-                InitSecondColumn(first);
-                this.cargoDataGridView.Rows[e.RowIndex].Cells[this.dataGridViewColumnSecondCategoryID.Index].Value = 0;
-                this.cargoDataGridView.Rows[e.RowIndex].Cells[this.dataGridViewColumnThirdCategoryID.Index].Value = null;
-            }
-            else if (e.ColumnIndex == this.dataGridViewColumnSecondCategoryID.Index)
-            {
-                int second = Convert.ToInt32(this.cargoDataGridView.Rows[e.RowIndex].Cells[this.dataGridViewColumnSecondCategoryID.Index].Value);
-
-                InitThirdColumn(second);
-                this.cargoDataGridView.Rows[e.RowIndex].Cells[this.dataGridViewColumnThirdCategoryID.Index].Value = null;
-            }
-            else if (e.ColumnIndex == this.columnCount.Index)
+            if (e.ColumnIndex == this.columnCount.Index)
             {
                 var cargo = this.cargoDataGridView.Rows[e.RowIndex].DataBoundItem as Cargo;
                 if (cargo.Count < 0)
@@ -629,20 +604,44 @@ namespace Phoebe.FormUI
                     cargo.UnitVolume = 0;
                 cargo.TotalVolume = Math.Round(cargo.UnitVolume * cargo.Count, 3);
             }
+            else if (e.ColumnIndex == this.columnNumber.Index)
+            {
+                var number = this.cargoDataGridView.Rows[e.RowIndex].Cells[this.columnNumber.Index].Value;
+                if (number == null)
+                {
+                    this.cargoDataGridView.Rows[e.RowIndex].Cells[this.columnNumberName.Index].Value = "";
+                }
+                else
+                {
+                    var cnumber = this.categoryBusiness.TranslateNumber(number.ToString());
+                    if (cnumber != null)
+                        this.cargoDataGridView.Rows[e.RowIndex].Cells[this.columnNumberName.Index].Value = cnumber.GetName();
+                    else
+                        this.cargoDataGridView.Rows[e.RowIndex].Cells[this.columnNumberName.Index].Value = "";
+                }
+            }
         }
 
-        private void cargoDataGridView_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        /// <summary>
+        /// 单元格更改
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cargoDataGridView_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
-            int first = Convert.ToInt32(this.cargoDataGridView.Rows[e.RowIndex].Cells[this.dataGridViewColumnFirstCategoryID.Index].Value);
-            if (first > 0)
+            if (this.cargoDataGridView.CurrentCell.ColumnIndex == this.columnNumber.Index)
             {
-                InitSecondColumn(first);
+                DataGridViewTextBoxEditingControl editingControl = e.Control as DataGridViewTextBoxEditingControl;
+                editingControl.TextChanged += new EventHandler(editingControl_TextChanged);
             }
+        }
 
-            int second = Convert.ToInt32(this.cargoDataGridView.Rows[e.RowIndex].Cells[this.dataGridViewColumnSecondCategoryID.Index].Value);
-            if (second > 0)
+        void editingControl_TextChanged(object sender, EventArgs e)
+        {
+            if (this.cargoDataGridView.CurrentCell.ColumnIndex == this.columnNumber.Index)
             {
-                InitThirdColumn(second);
+                var text = sender as TextBox;
+                FilterCategoryNumber(text.Text);
             }
         }
         #endregion //Event

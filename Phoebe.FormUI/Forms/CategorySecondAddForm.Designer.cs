@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.textBoxNumber = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.comboBoxFirstCategory = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -39,9 +42,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonConfirm = new System.Windows.Forms.Button();
-            this.label6 = new System.Windows.Forms.Label();
-            this.textBoxNumber = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -65,6 +65,33 @@
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "分类信息";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.ForeColor = System.Drawing.Color.Red;
+            this.label7.Location = new System.Drawing.Point(294, 119);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(11, 12);
+            this.label7.TabIndex = 10;
+            this.label7.Text = "*";
+            // 
+            // textBoxNumber
+            // 
+            this.textBoxNumber.Location = new System.Drawing.Point(91, 116);
+            this.textBoxNumber.MaxLength = 4;
+            this.textBoxNumber.Name = "textBoxNumber";
+            this.textBoxNumber.Size = new System.Drawing.Size(197, 21);
+            this.textBoxNumber.TabIndex = 9;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(22, 119);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(29, 12);
+            this.label6.TabIndex = 8;
+            this.label6.Text = "代码";
             // 
             // label5
             // 
@@ -156,33 +183,6 @@
             this.buttonConfirm.Text = "保存";
             this.buttonConfirm.UseVisualStyleBackColor = true;
             this.buttonConfirm.Click += new System.EventHandler(this.buttonConfirm_Click);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(22, 119);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(29, 12);
-            this.label6.TabIndex = 8;
-            this.label6.Text = "代码";
-            // 
-            // textBoxNumber
-            // 
-            this.textBoxNumber.Location = new System.Drawing.Point(91, 116);
-            this.textBoxNumber.MaxLength = 2;
-            this.textBoxNumber.Name = "textBoxNumber";
-            this.textBoxNumber.Size = new System.Drawing.Size(197, 21);
-            this.textBoxNumber.TabIndex = 9;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.ForeColor = System.Drawing.Color.Red;
-            this.label7.Location = new System.Drawing.Point(294, 119);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(11, 12);
-            this.label7.TabIndex = 10;
-            this.label7.Text = "*";
             // 
             // CategorySecondAddForm
             // 

@@ -51,6 +51,7 @@ namespace Phoebe.FormUI
                         this.textBoxName.Text = category.Name;
                         this.textBoxNumber.Text = category.Number;
                         this.textBoxRemark.Text = category.Remark;
+                        this.textBoxNumber.MaxLength = 2;
                         break;
                     }
                 case 2:
@@ -59,6 +60,7 @@ namespace Phoebe.FormUI
                         this.textBoxName.Text = category.Name;
                         this.textBoxNumber.Text = category.Number;
                         this.textBoxRemark.Text = category.Remark;
+                        this.textBoxNumber.MaxLength = 4;
                         break;
                     }
                 case 3:
@@ -67,6 +69,7 @@ namespace Phoebe.FormUI
                         this.textBoxName.Text = category.Name;
                         this.textBoxNumber.Text = category.Number;
                         this.textBoxRemark.Text = category.Remark;
+                        this.textBoxNumber.MaxLength = 7;
                         break;
                     }
             }
@@ -124,9 +127,9 @@ namespace Phoebe.FormUI
                     }
                 case 2:
                     {
-                        if (this.textBoxNumber.Text.Length != 2)
+                        if (this.textBoxNumber.Text.Length != 4)
                         {
-                            MessageBox.Show("代码必须为2位", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            MessageBox.Show("代码必须为4位", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             return;
                         }
                         var category = this.categoryBusiness.GetSecondCategory(this.categoryId);
@@ -138,9 +141,9 @@ namespace Phoebe.FormUI
                     }
                 case 3:
                     {
-                        if (this.textBoxNumber.Text.Length != 3)
+                        if (this.textBoxNumber.Text.Length != 7)
                         {
-                            MessageBox.Show("代码必须为3位", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            MessageBox.Show("代码必须为7位", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             return;
                         }
                         var category = this.categoryBusiness.GetThirdCategory(this.categoryId);

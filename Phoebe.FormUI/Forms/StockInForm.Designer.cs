@@ -77,21 +77,6 @@
             this.toolDelete = new System.Windows.Forms.ToolStripButton();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.cargoDataGridView = new System.Windows.Forms.DataGridView();
-            this.columnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewColumnFirstCategoryID = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dataGridViewColumnSecondCategoryID = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dataGridViewColumnThirdCategoryID = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.columnCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnUnitWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnTotalWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnUnitVolume = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnTotalVolume = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnWarehouseNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cargoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.cargoBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
@@ -104,6 +89,23 @@
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.listBoxNumber = new System.Windows.Forms.ListBox();
+            this.cargoBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.columnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnNumberName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnUnitWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnTotalWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnUnitVolume = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnTotalVolume = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnWarehouseNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -117,18 +119,21 @@
             this.toolStrip1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cargoDataGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cargoBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cargoBindingNavigator)).BeginInit();
             this.cargoBindingNavigator.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cargoBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.treeViewReceipt);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(172, 622);
+            this.tableLayoutPanel1.SetRowSpan(this.groupBox1, 3);
+            this.groupBox1.Size = new System.Drawing.Size(194, 650);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "单据";
@@ -138,7 +143,7 @@
             this.treeViewReceipt.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeViewReceipt.Location = new System.Drawing.Point(3, 17);
             this.treeViewReceipt.Name = "treeViewReceipt";
-            this.treeViewReceipt.Size = new System.Drawing.Size(166, 602);
+            this.treeViewReceipt.Size = new System.Drawing.Size(188, 630);
             this.treeViewReceipt.TabIndex = 0;
             this.treeViewReceipt.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeViewReceipt_BeforeExpand);
             this.treeViewReceipt.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewReceipt_AfterSelect);
@@ -146,10 +151,10 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.panel1);
-            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox2.Location = new System.Drawing.Point(175, 28);
+            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox2.Location = new System.Drawing.Point(203, 28);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(786, 217);
+            this.groupBox2.Size = new System.Drawing.Size(972, 244);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "基本信息";
@@ -194,7 +199,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 17);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(780, 197);
+            this.panel1.Size = new System.Drawing.Size(966, 224);
             this.panel1.TabIndex = 15;
             // 
             // label16
@@ -523,9 +528,9 @@
             this.toolConfirm,
             this.toolRefresh,
             this.toolDelete});
-            this.toolStrip1.Location = new System.Drawing.Point(175, 3);
+            this.toolStrip1.Location = new System.Drawing.Point(200, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(786, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(978, 25);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.TabStop = true;
             this.toolStrip1.Text = "toolStrip1";
@@ -601,12 +606,13 @@
             // 
             // groupBox3
             // 
+            this.tableLayoutPanel1.SetColumnSpan(this.groupBox3, 2);
             this.groupBox3.Controls.Add(this.cargoDataGridView);
             this.groupBox3.Controls.Add(this.cargoBindingNavigator);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox3.Location = new System.Drawing.Point(175, 245);
+            this.groupBox3.Location = new System.Drawing.Point(203, 278);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(786, 380);
+            this.groupBox3.Size = new System.Drawing.Size(1172, 375);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "货品信息";
@@ -621,9 +627,8 @@
             this.cargoDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.cargoDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.columnName,
-            this.dataGridViewColumnFirstCategoryID,
-            this.dataGridViewColumnSecondCategoryID,
-            this.dataGridViewColumnThirdCategoryID,
+            this.columnNumber,
+            this.columnNumberName,
             this.columnCount,
             this.columnUnitWeight,
             this.columnTotalWeight,
@@ -640,111 +645,11 @@
             this.cargoDataGridView.Location = new System.Drawing.Point(3, 42);
             this.cargoDataGridView.Name = "cargoDataGridView";
             this.cargoDataGridView.RowTemplate.Height = 23;
-            this.cargoDataGridView.Size = new System.Drawing.Size(780, 335);
+            this.cargoDataGridView.Size = new System.Drawing.Size(1166, 330);
             this.cargoDataGridView.TabIndex = 4;
             this.cargoDataGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.cargoDataGridView_CellValueChanged);
             this.cargoDataGridView.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.cargoDataGridView_DataError);
-            this.cargoDataGridView.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.cargoDataGridView_RowsAdded);
-            // 
-            // columnName
-            // 
-            this.columnName.DataPropertyName = "Name";
-            this.columnName.HeaderText = "名称";
-            this.columnName.Name = "columnName";
-            this.columnName.Width = 150;
-            // 
-            // dataGridViewColumnFirstCategoryID
-            // 
-            this.dataGridViewColumnFirstCategoryID.DataPropertyName = "FirstCategoryID";
-            this.dataGridViewColumnFirstCategoryID.HeaderText = "一级类别";
-            this.dataGridViewColumnFirstCategoryID.Name = "dataGridViewColumnFirstCategoryID";
-            this.dataGridViewColumnFirstCategoryID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewColumnFirstCategoryID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // dataGridViewColumnSecondCategoryID
-            // 
-            this.dataGridViewColumnSecondCategoryID.DataPropertyName = "SecondCategoryID";
-            this.dataGridViewColumnSecondCategoryID.HeaderText = "二级类别";
-            this.dataGridViewColumnSecondCategoryID.Name = "dataGridViewColumnSecondCategoryID";
-            this.dataGridViewColumnSecondCategoryID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewColumnSecondCategoryID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // dataGridViewColumnThirdCategoryID
-            // 
-            this.dataGridViewColumnThirdCategoryID.DataPropertyName = "ThirdCategoryID";
-            this.dataGridViewColumnThirdCategoryID.HeaderText = "三级类别";
-            this.dataGridViewColumnThirdCategoryID.Name = "dataGridViewColumnThirdCategoryID";
-            this.dataGridViewColumnThirdCategoryID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewColumnThirdCategoryID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // columnCount
-            // 
-            this.columnCount.DataPropertyName = "Count";
-            this.columnCount.HeaderText = "数量";
-            this.columnCount.Name = "columnCount";
-            // 
-            // columnUnitWeight
-            // 
-            this.columnUnitWeight.DataPropertyName = "UnitWeight";
-            this.columnUnitWeight.HeaderText = "单位重量(kg)";
-            this.columnUnitWeight.Name = "columnUnitWeight";
-            this.columnUnitWeight.Width = 120;
-            // 
-            // columnTotalWeight
-            // 
-            this.columnTotalWeight.DataPropertyName = "TotalWeight";
-            this.columnTotalWeight.HeaderText = "总重量(t)";
-            this.columnTotalWeight.Name = "columnTotalWeight";
-            this.columnTotalWeight.ReadOnly = true;
-            // 
-            // columnUnitVolume
-            // 
-            this.columnUnitVolume.DataPropertyName = "UnitVolume";
-            this.columnUnitVolume.HeaderText = "单位体积(立方)";
-            this.columnUnitVolume.Name = "columnUnitVolume";
-            this.columnUnitVolume.Width = 120;
-            // 
-            // columnTotalVolume
-            // 
-            this.columnTotalVolume.DataPropertyName = "TotalVolume";
-            this.columnTotalVolume.HeaderText = "总体积(立方)";
-            this.columnTotalVolume.Name = "columnTotalVolume";
-            this.columnTotalVolume.ReadOnly = true;
-            // 
-            // columnWarehouseNumber
-            // 
-            this.columnWarehouseNumber.DataPropertyName = "WarehouseNumber";
-            this.columnWarehouseNumber.HeaderText = "仓库编号";
-            this.columnWarehouseNumber.Name = "columnWarehouseNumber";
-            // 
-            // dataGridViewTextBoxColumn12
-            // 
-            this.dataGridViewTextBoxColumn12.DataPropertyName = "OriginPlace";
-            this.dataGridViewTextBoxColumn12.HeaderText = "产地";
-            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
-            // 
-            // dataGridViewTextBoxColumn13
-            // 
-            this.dataGridViewTextBoxColumn13.DataPropertyName = "ShelfLife";
-            this.dataGridViewTextBoxColumn13.HeaderText = "保质期(月)";
-            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
-            // 
-            // dataGridViewTextBoxColumn14
-            // 
-            this.dataGridViewTextBoxColumn14.DataPropertyName = "Specification";
-            this.dataGridViewTextBoxColumn14.HeaderText = "规格";
-            this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
-            // 
-            // dataGridViewTextBoxColumn20
-            // 
-            this.dataGridViewTextBoxColumn20.DataPropertyName = "Remark";
-            this.dataGridViewTextBoxColumn20.HeaderText = "备注";
-            this.dataGridViewTextBoxColumn20.Name = "dataGridViewTextBoxColumn20";
-            this.dataGridViewTextBoxColumn20.Width = 200;
-            // 
-            // cargoBindingSource
-            // 
-            this.cargoBindingSource.DataSource = typeof(Phoebe.Model.Cargo);
+            this.cargoDataGridView.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.cargoDataGridView_EditingControlShowing);
             // 
             // cargoBindingNavigator
             // 
@@ -771,7 +676,7 @@
             this.cargoBindingNavigator.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.cargoBindingNavigator.Name = "cargoBindingNavigator";
             this.cargoBindingNavigator.PositionItem = this.bindingNavigatorPositionItem;
-            this.cargoBindingNavigator.Size = new System.Drawing.Size(780, 25);
+            this.cargoBindingNavigator.Size = new System.Drawing.Size(1166, 25);
             this.cargoBindingNavigator.TabIndex = 3;
             this.cargoBindingNavigator.Text = "bindingNavigator1";
             // 
@@ -860,15 +765,145 @@
             this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
             this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 3;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
+            this.tableLayoutPanel1.Controls.Add(this.groupBox1, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.groupBox4, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.groupBox3, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.groupBox2, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.toolStrip1, 1, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 3;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 250F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1378, 656);
+            this.tableLayoutPanel1.TabIndex = 3;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.listBoxNumber);
+            this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox4.Location = new System.Drawing.Point(1181, 3);
+            this.groupBox4.Name = "groupBox4";
+            this.tableLayoutPanel1.SetRowSpan(this.groupBox4, 2);
+            this.groupBox4.Size = new System.Drawing.Size(194, 269);
+            this.groupBox4.TabIndex = 3;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "货品代码";
+            // 
+            // listBoxNumber
+            // 
+            this.listBoxNumber.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listBoxNumber.FormattingEnabled = true;
+            this.listBoxNumber.ItemHeight = 12;
+            this.listBoxNumber.Location = new System.Drawing.Point(3, 17);
+            this.listBoxNumber.Name = "listBoxNumber";
+            this.listBoxNumber.Size = new System.Drawing.Size(188, 249);
+            this.listBoxNumber.TabIndex = 0;
+            // 
+            // cargoBindingSource
+            // 
+            this.cargoBindingSource.DataSource = typeof(Phoebe.Model.Cargo);
+            // 
+            // columnName
+            // 
+            this.columnName.DataPropertyName = "Name";
+            this.columnName.HeaderText = "名称";
+            this.columnName.Name = "columnName";
+            this.columnName.Width = 150;
+            // 
+            // columnNumber
+            // 
+            this.columnNumber.DataPropertyName = "Number";
+            this.columnNumber.HeaderText = "货品代码";
+            this.columnNumber.Name = "columnNumber";
+            // 
+            // columnNumberName
+            // 
+            this.columnNumberName.HeaderText = "货品类别";
+            this.columnNumberName.Name = "columnNumberName";
+            this.columnNumberName.ReadOnly = true;
+            // 
+            // columnCount
+            // 
+            this.columnCount.DataPropertyName = "Count";
+            this.columnCount.HeaderText = "数量";
+            this.columnCount.Name = "columnCount";
+            this.columnCount.Width = 80;
+            // 
+            // columnUnitWeight
+            // 
+            this.columnUnitWeight.DataPropertyName = "UnitWeight";
+            this.columnUnitWeight.HeaderText = "单位重量(kg)";
+            this.columnUnitWeight.Name = "columnUnitWeight";
+            this.columnUnitWeight.Width = 110;
+            // 
+            // columnTotalWeight
+            // 
+            this.columnTotalWeight.DataPropertyName = "TotalWeight";
+            this.columnTotalWeight.HeaderText = "总重量(t)";
+            this.columnTotalWeight.Name = "columnTotalWeight";
+            this.columnTotalWeight.ReadOnly = true;
+            // 
+            // columnUnitVolume
+            // 
+            this.columnUnitVolume.DataPropertyName = "UnitVolume";
+            this.columnUnitVolume.HeaderText = "单位体积(立方)";
+            this.columnUnitVolume.Name = "columnUnitVolume";
+            this.columnUnitVolume.Width = 120;
+            // 
+            // columnTotalVolume
+            // 
+            this.columnTotalVolume.DataPropertyName = "TotalVolume";
+            this.columnTotalVolume.HeaderText = "总体积(立方)";
+            this.columnTotalVolume.Name = "columnTotalVolume";
+            this.columnTotalVolume.ReadOnly = true;
+            // 
+            // columnWarehouseNumber
+            // 
+            this.columnWarehouseNumber.DataPropertyName = "WarehouseNumber";
+            this.columnWarehouseNumber.HeaderText = "仓库编号";
+            this.columnWarehouseNumber.Name = "columnWarehouseNumber";
+            // 
+            // dataGridViewTextBoxColumn12
+            // 
+            this.dataGridViewTextBoxColumn12.DataPropertyName = "OriginPlace";
+            this.dataGridViewTextBoxColumn12.HeaderText = "产地";
+            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
+            // 
+            // dataGridViewTextBoxColumn13
+            // 
+            this.dataGridViewTextBoxColumn13.DataPropertyName = "ShelfLife";
+            this.dataGridViewTextBoxColumn13.HeaderText = "保质期(月)";
+            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
+            // 
+            // dataGridViewTextBoxColumn14
+            // 
+            this.dataGridViewTextBoxColumn14.DataPropertyName = "Specification";
+            this.dataGridViewTextBoxColumn14.HeaderText = "规格";
+            this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
+            // 
+            // dataGridViewTextBoxColumn20
+            // 
+            this.dataGridViewTextBoxColumn20.DataPropertyName = "Remark";
+            this.dataGridViewTextBoxColumn20.HeaderText = "备注";
+            this.dataGridViewTextBoxColumn20.Name = "dataGridViewTextBoxColumn20";
+            this.dataGridViewTextBoxColumn20.Width = 180;
+            // 
             // StockInForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(964, 628);
-            this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.toolStrip1);
-            this.Controls.Add(this.groupBox1);
+            this.ClientSize = new System.Drawing.Size(1384, 662);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "StockInForm";
             this.Padding = new System.Windows.Forms.Padding(3);
             this.Text = "货品入库";
@@ -889,12 +924,14 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cargoDataGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cargoBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cargoBindingNavigator)).EndInit();
             this.cargoBindingNavigator.ResumeLayout(false);
             this.cargoBindingNavigator.PerformLayout();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.cargoBindingSource)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -960,10 +997,12 @@
         private System.Windows.Forms.ToolStripButton toolConfirm;
         private System.Windows.Forms.ToolStripButton toolRefresh;
         private System.Windows.Forms.ToolStripButton toolDelete;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.ListBox listBoxNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnName;
-        private System.Windows.Forms.DataGridViewComboBoxColumn dataGridViewColumnFirstCategoryID;
-        private System.Windows.Forms.DataGridViewComboBoxColumn dataGridViewColumnSecondCategoryID;
-        private System.Windows.Forms.DataGridViewComboBoxColumn dataGridViewColumnThirdCategoryID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnNumberName;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnUnitWeight;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnTotalWeight;

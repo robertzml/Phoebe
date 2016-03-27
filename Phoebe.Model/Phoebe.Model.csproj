@@ -59,6 +59,7 @@
       <DependentUpon>PhoebeModel.tt</DependentUpon>
     </Compile>
     <Compile Include="CategoryFlow.cs" />
+    <Compile Include="CategoryNumber.cs" />
     <Compile Include="ColdSettlement.cs" />
     <Compile Include="Contract.cs">
       <DependentUpon>PhoebeModel.tt</DependentUpon>

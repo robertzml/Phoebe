@@ -102,9 +102,9 @@ namespace Phoebe.FormUI
                 MessageBox.Show("代码不能为空", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            if (this.textBoxNumber.Text.Length != 3)
+            if (this.textBoxNumber.Text.Length != 7)
             {
-                MessageBox.Show("代码必须为3位", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("代码必须为7位", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 

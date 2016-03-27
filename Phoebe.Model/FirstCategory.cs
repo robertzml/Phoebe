@@ -17,8 +17,8 @@ namespace Phoebe.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public FirstCategory()
         {
-            this.Cargoes = new HashSet<Cargo>();
             this.SecondCategories = new HashSet<SecondCategory>();
+            this.Cargoes = new HashSet<Cargo>();
         }
     
         public int ID { get; set; }
@@ -28,8 +28,8 @@ namespace Phoebe.Model
         public int Status { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Cargo> Cargoes { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SecondCategory> SecondCategories { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Cargo> Cargoes { get; set; }
     }
 }

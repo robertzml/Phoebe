@@ -187,7 +187,7 @@ namespace Phoebe.Business
         {
             try
             {
-                if (this.context.SecondCategories.Any(r => r.Number == data.Number && r.FirstCategoryID == data.FirstCategoryID))
+                if (this.context.SecondCategories.Any(r => r.Number == data.Number))
                 {
                     return ErrorCode.DuplicateNumber;
                 }
@@ -213,7 +213,7 @@ namespace Phoebe.Business
         {
             try
             {
-                if (this.context.ThirdCategories.Any(r => r.Number == data.Number && r.SecondCategoryID == data.SecondCategoryID))
+                if (this.context.ThirdCategories.Any(r => r.Number == data.Number))
                 {
                     return ErrorCode.DuplicateNumber;
                 }
@@ -264,7 +264,7 @@ namespace Phoebe.Business
         {
             try
             {
-                if (this.context.SecondCategories.Any(r => r.ID != data.ID && r.Number == data.Number && r.FirstCategoryID == data.FirstCategoryID))
+                if (this.context.SecondCategories.Any(r => r.ID != data.ID && r.Number == data.Number))
                 {
                     return ErrorCode.DuplicateNumber;
                 }
@@ -289,7 +289,7 @@ namespace Phoebe.Business
         {
             try
             {
-                if (this.context.ThirdCategories.Any(r => r.ID != data.ID && r.Number == data.Number && r.SecondCategoryID == data.SecondCategoryID))
+                if (this.context.ThirdCategories.Any(r => r.ID != data.ID && r.Number == data.Number))
                 {
                     return ErrorCode.DuplicateNumber;
                 }
@@ -390,6 +390,94 @@ namespace Phoebe.Business
             {
                 return ErrorCode.Exception;
             }
+        }
+
+        /// <summary>
+        /// 获取所有分类编码
+        /// </summary>
+        /// <returns></returns>
+        public List<CategoryNumber> GetNumber()
+        {
+            List<CategoryNumber> data = new List<CategoryNumber>();
+            var firsts = this.context.FirstCategories.Where(r => r.ID != 0);
+
+            foreach (var first in firsts)
+            {
+                var seconds = this.context.SecondCategories.Where(r => r.FirstCategoryID == first.ID);
+
+                foreach (var second in seconds)
+                {
+                    CategoryNumber sn = new CategoryNumber
+                    {
+                        Level = 2,
+                        Number = second.Number,
+                        FirstCategoryId = first.ID,
+                        SecondCatgoryId = second.ID,
+                        SecondCategoryName = second.Name
+                    };
+
+                    data.Add(sn);
+
+                    var thirds = this.context.ThirdCategories.Where(r => r.SecondCategoryID == second.ID);
+                    foreach (var third in thirds)
+                    {
+                        CategoryNumber tn = new CategoryNumber
+                        {
+                            Level = 3,
+                            Number = third.Number,
+                            FirstCategoryId = first.ID,
+                            SecondCatgoryId = second.ID,
+                            SecondCategoryName = second.Name,
+                            ThirdCategoryId = third.ID,
+                            ThirdCategoryName = third.Name
+                        };
+
+                        data.Add(tn);
+                    }
+                }
+            }
+
+            return data;
+        }
+
+        /// <summary>
+        /// 转换编码
+        /// </summary>
+        /// <param name="number">编码</param>
+        /// <returns></returns>
+        public CategoryNumber TranslateNumber(string number)
+        {
+            CategoryNumber cn = new CategoryNumber();
+            cn.Number = number;
+
+            if (number.Length == 4)
+            {
+                var sc = this.context.SecondCategories.Where(r => r.Number == number);
+                if (sc.Count() == 0)
+                    return null;
+
+                cn.Level = 2;
+                cn.FirstCategoryId = sc.First().FirstCategoryID;
+                cn.SecondCatgoryId = sc.First().ID;
+                cn.SecondCategoryName = sc.First().Name;
+                return cn;
+            }
+            else if (number.Length == 7)
+            {
+                var tc = this.context.ThirdCategories.Where(r => r.Number == number);
+                if (tc.Count() == 0)
+                    return null;
+
+                cn.Level = 3;
+                cn.FirstCategoryId = tc.First().SecondCategory.FirstCategoryID;
+                cn.SecondCatgoryId = tc.First().SecondCategoryID;
+                cn.SecondCategoryName = tc.First().SecondCategory.Name;
+                cn.ThirdCategoryId = tc.First().ID;
+                cn.ThirdCategoryName = tc.First().Name;
+                return cn;
+            }
+            else
+                return null;
         }
         #endregion //Method
     }
