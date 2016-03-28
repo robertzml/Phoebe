@@ -134,6 +134,13 @@ namespace Phoebe.FormUI
             }
 
             this.cargoBindingSource.DataSource = cargos;
+
+            for (int i = 0; i < cargos.Count; i++)
+            {
+                var number = cargos[i].Number;
+                if (!string.IsNullOrEmpty(number))
+                    this.cargoDataGridView.Rows[i].Cells[this.columnNumberName.Index].Value = this.categoryBusiness.TranslateNumber(number).GetName();
+            }
         }
 
         /// <summary>
