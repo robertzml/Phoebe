@@ -528,6 +528,39 @@ namespace Phoebe.Business
         }
 
         /// <summary>
+        /// 入库编辑检查
+        /// </summary>
+        /// <param name="id">入库ID</param>
+        /// <remarks>
+        /// 有出库或移库操作的货品入库单无法编辑
+        /// </remarks>
+        /// <returns></returns>
+        public bool StockInUpdateCheck(Guid id)
+        {
+            try
+            {
+                var stockIn = this.context.StockIns.Find(id);
+                if (stockIn == null)
+                    return false;
+
+                foreach(var item in stockIn.StockInDetails)
+                {
+                    if (this.context.StockOutDetails.Count(r => r.CargoID == item.CargoID) > 0)
+                        return false;
+
+                    if (this.context.StockMoveDetails.Count(r => r.SourceCargoID == item.CargoID) > 0)
+                        return false;
+                }
+
+                return true;
+            }
+            catch(Exception)
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
         /// 编辑入库
         /// </summary>
         /// <param name="id">入库ID</param>

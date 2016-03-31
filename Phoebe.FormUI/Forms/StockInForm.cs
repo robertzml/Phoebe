@@ -642,6 +642,18 @@ namespace Phoebe.FormUI
         /// <param name="e"></param>
         private void toolEdit_Click(object sender, EventArgs e)
         {
+            if (this.currentStockIn == null)
+            {
+                MessageBox.Show("当前未选中记录", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            if (!this.storeBusiness.StockInUpdateCheck(this.currentStockIn.ID))
+            {
+                MessageBox.Show("当前入库记录无法修改", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
             ErrorCode result = SaveOldItem();
             if (result == ErrorCode.Success)
             {
