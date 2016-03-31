@@ -514,7 +514,6 @@ namespace Phoebe.Business
                     cargos.Add(item.Cargo);
                 }
 
-
                 this.context.StockIns.Remove(data);
                 this.context.Cargoes.RemoveRange(cargos);
 
@@ -523,6 +522,45 @@ namespace Phoebe.Business
                 return ErrorCode.Success;
             }
             catch(Exception)
+            {
+                return ErrorCode.Exception;
+            }
+        }
+
+        /// <summary>
+        /// 编辑入库
+        /// </summary>
+        /// <param name="id">入库ID</param>
+        /// <param name="billing">计费信息</param>
+        /// <param name="cargos">货品列表</param>
+        /// <returns></returns>
+        public ErrorCode StockInUpdate(Guid id, Billing billing, List<Cargo> cargos)
+        {
+            try
+            {
+                this.context.Entry(billing).State = System.Data.Entity.EntityState.Modified;
+
+                var stockIn = this.context.StockIns.Find(id);
+
+                foreach (var cargo in cargos)
+                {
+                    this.context.Entry<Cargo>(cargo).State = System.Data.Entity.EntityState.Modified;
+
+                    var siDetail = stockIn.StockInDetails.Single(r => r.CargoID == cargo.ID);
+                    siDetail.Count = cargo.Count;
+                    siDetail.InWeight = cargo.TotalWeight;
+                    siDetail.WarehouseNumber = cargo.WarehouseNumber;
+
+                    var stock = this.context.Stocks.Single(r => r.CargoID == cargo.ID);
+                    stock.WarehouseNumber = cargo.WarehouseNumber;
+                    stock.Count = cargo.Count;
+                    stock.Weight = cargo.TotalWeight;
+                }
+
+                this.context.SaveChanges();
+                return ErrorCode.Success;
+            }
+            catch (Exception)
             {
                 return ErrorCode.Exception;
             }

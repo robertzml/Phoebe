@@ -78,6 +78,9 @@ namespace Phoebe.FormUI
             InitCategoryNumberList();
         }
 
+        /// <summary>
+        /// 初始化分类列表
+        /// </summary>
         private void InitCategoryNumberList()
         {
             this.numberList = this.categoryBusiness.GetNumber();
@@ -140,6 +143,11 @@ namespace Phoebe.FormUI
                 var number = cargos[i].Number;
                 if (!string.IsNullOrEmpty(number))
                     this.cargoDataGridView.Rows[i].Cells[this.columnNumberName.Index].Value = this.categoryBusiness.TranslateNumber(number).GetName();
+                var cargo = cargos[i];
+                this.cargoDataGridView.Rows[i].Cells[this.columnFirstCategory.Index].Value = this.categoryBusiness.GetFirstCategory(cargo.FirstCategoryID).Name;
+                this.cargoDataGridView.Rows[i].Cells[this.columnSecondCategory.Index].Value = this.categoryBusiness.GetSecondCategory(cargo.SecondCategoryID).Name;
+                if (cargo.ThirdCategoryID != null)
+                    this.cargoDataGridView.Rows[i].Cells[this.columnThirdCategory.Index].Value = this.categoryBusiness.GetThirdCategory(cargo.ThirdCategoryID.Value).Name;
             }
         }
 
@@ -179,6 +187,7 @@ namespace Phoebe.FormUI
                 column.ReadOnly = !canEdit;
             }
             this.columnNumberName.ReadOnly = this.columnTotalWeight.ReadOnly = this.columnTotalVolume.ReadOnly = true;
+            this.columnFirstCategory.ReadOnly = this.columnSecondCategory.ReadOnly = this.columnThirdCategory.ReadOnly = true;
         }
 
         /// <summary>
@@ -222,10 +231,6 @@ namespace Phoebe.FormUI
                 if (string.IsNullOrEmpty(cargo.WarehouseNumber))
                 {
                     return ErrorCode.WarehouseCannotBeEmpty;
-                }
-                if (cargo.Count == 0)
-                {
-                    return ErrorCode.CargoCountZero;
                 }
                 if (cargo.Name == "")
                 {
@@ -283,6 +288,66 @@ namespace Phoebe.FormUI
                 return result;
             }
         }
+
+        /// <summary>
+        /// 保存修改项
+        /// </summary>
+        /// <returns></returns>
+        public ErrorCode SaveOldItem()
+        {
+            Billing billing = this.currentStockIn.Billing;         
+            billing.UnitPrice = this.numericUnitPrice.Value;
+            billing.HandlingPrice = this.numericHandlingPrice.Value;
+            billing.FreezePrice = this.numericFreezePrice.Value;
+            billing.DisposePrice = this.numericDisposePrice.Value;
+            billing.PackingPrice = this.numericPackingPrice.Value;
+            billing.RentPrice = this.numericRentPrice.Value;
+            billing.OtherPrice = this.numericOtherPrice.Value;
+         
+            billing.TotalPrice = billing.HandlingPrice + billing.FreezePrice + billing.DisposePrice +
+                billing.PackingPrice + billing.RentPrice + billing.OtherPrice;
+
+            List<Cargo> cargos = new List<Cargo>();
+            List<StockInDetail> details = new List<StockInDetail>();
+
+            foreach (DataGridViewRow row in this.cargoDataGridView.Rows)
+            {
+                var cargo = row.DataBoundItem as Cargo;
+                if (string.IsNullOrEmpty(cargo.WarehouseNumber))
+                {
+                    return ErrorCode.WarehouseCannotBeEmpty;
+                }
+                if (cargo.Name == "")
+                {
+                    return ErrorCode.EmptyName;
+                }
+                if (row.Cells[this.columnNumber.Index].Value == null)
+                {
+                    return ErrorCode.CargoNumberError;
+                }
+
+                CategoryNumber cnumber = this.categoryBusiness.TranslateNumber(row.Cells[this.columnNumber.Index].Value.ToString());
+                if (cnumber == null)
+                    return ErrorCode.CargoNumberError;
+               
+                cargo.FirstCategoryID = cnumber.FirstCategoryId;
+                cargo.SecondCategoryID = cnumber.SecondCatgoryId;
+                if (cnumber.Level == 3)
+                    cargo.ThirdCategoryID = cnumber.ThirdCategoryId;
+                cargo.EqualWeight = this.isEqualWeight;
+                if (this.isEqualWeight)
+                {
+                    cargo.TotalWeight = Math.Round(cargo.Count * cargo.UnitWeight / 1000, 3);
+                    cargo.TotalVolume = Math.Round(cargo.Count * cargo.UnitVolume);
+                }
+                cargo.StoreCount = cargo.Count;
+                cargo.StoreWeight = cargo.TotalWeight;
+                cargos.Add(cargo);
+            }
+
+            ErrorCode result = this.storeBusiness.StockInUpdate(this.currentStockIn.ID, billing, cargos);
+            return result;
+        }
         #endregion //Function
 
         #region Event
@@ -337,6 +402,9 @@ namespace Phoebe.FormUI
                 this.toolConfirm.Enabled = true;
                 this.toolDelete.Enabled = true;
                 this.toolPrint.Enabled = false;
+                this.toolUnlock.Enabled = false;
+                this.toolLock.Enabled = false;
+                this.toolEdit.Enabled = false;
                 SetControlEditable(true);
             }
             else if (this.currentStockIn.Status == (int)EntityStatus.StockIn)
@@ -345,6 +413,9 @@ namespace Phoebe.FormUI
                 this.toolConfirm.Enabled = false;
                 this.toolDelete.Enabled = false;
                 this.toolPrint.Enabled = true;
+                this.toolUnlock.Enabled = true;
+                this.toolLock.Enabled = false;
+                this.toolEdit.Enabled = false;
                 SetControlEditable(false);
             }
         }
@@ -362,8 +433,14 @@ namespace Phoebe.FormUI
             this.toolSave.Enabled = true;
             this.toolConfirm.Enabled = false;
             this.toolPrint.Enabled = false;
+            this.toolLock.Enabled = false;
+            this.toolUnlock.Enabled = false;
+            this.toolEdit.Enabled = false;
+
             this.groupBox2.Visible = this.groupBox3.Visible = true;
             SetControlEditable(true);
+           
+            InitCategoryNumberList();
 
             DateTime now = DateTime.Now.Date;
             this.dateBusinessTime.Value = now;
@@ -413,6 +490,8 @@ namespace Phoebe.FormUI
                 {
                     MessageBox.Show("保存成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.toolConfirm.Enabled = true;
+                    this.toolLock.Enabled = false;
+                    this.toolUnlock.Enabled = false;
                     this.storeBusiness = new StoreBusiness();
                 }
                 else
@@ -422,7 +501,7 @@ namespace Phoebe.FormUI
             }
             else
             {
-
+               
             }
         }
 
@@ -451,6 +530,8 @@ namespace Phoebe.FormUI
                 this.textBoxStatus.Text = EntityStatus.StockIn.DisplayName();
                 this.toolConfirm.Enabled = false;
                 this.toolPrint.Enabled = true;
+                this.toolLock.Enabled = false;
+                this.toolUnlock.Enabled = true;
                 SetControlEditable(false);
             }
             else
@@ -524,6 +605,56 @@ namespace Phoebe.FormUI
 
             StockInPrintForm form = new StockInPrintForm(this.currentStockIn);
             form.ShowDialog();
+        }
+
+        /// <summary>
+        /// 锁定
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void toolLock_Click(object sender, EventArgs e)
+        {
+            SetControlEditable(false);
+            this.toolEdit.Enabled = false;
+            this.toolLock.Enabled = false;
+            this.toolUnlock.Enabled = true;
+        }
+
+        /// <summary>
+        /// 解锁
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void toolUnlock_Click(object sender, EventArgs e)
+        {
+            SetControlEditable(true);
+            this.dateBusinessTime.Enabled = this.comboBoxCustomer.Enabled = this.comboBoxContract.Enabled = false;
+            this.toolEdit.Enabled = true;
+            this.toolLock.Enabled = true;
+            this.toolUnlock.Enabled = false;
+            this.cargoBindingNavigator.Enabled = false;
+        }
+
+        /// <summary>
+        /// 修改
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void toolEdit_Click(object sender, EventArgs e)
+        {
+            ErrorCode result = SaveOldItem();
+            if (result == ErrorCode.Success)
+            {
+                MessageBox.Show("修改成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.toolLock.Enabled = false;
+                this.toolUnlock.Enabled = false;
+                this.toolEdit.Enabled = false;
+                this.storeBusiness = new StoreBusiness();
+            }
+            else
+            {
+                MessageBox.Show("修改失败:" + result.DisplayName(), FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         /// <summary>
