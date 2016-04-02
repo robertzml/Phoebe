@@ -405,7 +405,7 @@ namespace Phoebe.FormUI
                 this.toolUnlock.Enabled = false;
                 this.toolLock.Enabled = false;
                 this.toolEdit.Enabled = false;
-                SetControlEditable(true);
+                SetControlEditable(false);
             }
             else if (this.currentStockIn.Status == (int)EntityStatus.StockIn)
             {
@@ -492,6 +492,7 @@ namespace Phoebe.FormUI
                     this.toolConfirm.Enabled = true;
                     this.toolLock.Enabled = false;
                     this.toolUnlock.Enabled = false;
+                    SetControlEditable(false);
                     this.storeBusiness = new StoreBusiness();
                 }
                 else

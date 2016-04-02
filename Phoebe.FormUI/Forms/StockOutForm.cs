@@ -255,7 +255,7 @@ namespace Phoebe.FormUI
                 this.toolConfirm.Enabled = true;
                 this.toolDelete.Enabled = true;
                 this.toolPrint.Enabled = false;
-                SetControlEditable(true);
+                SetControlEditable(false);
             }
             else if (this.currentStockOut.Status == (int)EntityStatus.StockOut)
             {
@@ -321,6 +321,7 @@ namespace Phoebe.FormUI
                 {
                     MessageBox.Show("保存成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.toolConfirm.Enabled = true;
+                    SetControlEditable(false);
                     this.storeBusiness = new StoreBusiness();
                 }
                 else
