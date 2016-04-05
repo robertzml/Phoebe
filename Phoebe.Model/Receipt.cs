@@ -8,16 +8,10 @@ using System.Threading.Tasks;
 namespace Phoebe.Model
 {
     /// <summary>
-    /// 收款模型类
+    /// 实时对账模型类
     /// </summary>
     public class Receipt
     {
-        /// <summary>
-        /// 客户类型
-        /// </summary>
-        [Display(Name = "客户类型")]
-        public int CustomerType { get; set; }
-
         /// <summary>
         /// 客户ID
         /// </summary>
@@ -45,28 +39,27 @@ namespace Phoebe.Model
         public System.DateTime EndTime { get; set; }
 
         /// <summary>
-        /// 应付款
+        /// 已结算费用
         /// </summary>
-        [Display(Name = "应付款(元)")]
-        public decimal TotalPrice { get; set; }
+        [Display(Name = "已结算费用(元)")]
+        public decimal SettleFee { get; set; }
+
+        /// <summary>
+        /// 未结算费用
+        /// </summary>
+        [Display(Name = "未结算费用(元)")]
+        public decimal RealFee { get; set; }
 
         /// <summary>
         /// 实付款
         /// </summary>
         [Display(Name = "实付款(元)")]
-        public decimal PaidPrice { get; set; }
+        public decimal PaidFee { get; set; }
 
         /// <summary>
         /// 差额
         /// </summary>
         [Display(Name = "差额(元)")]
         public decimal Difference { get; set; }
-
-        /// <summary>
-        /// 收款时间
-        /// </summary>
-        [DataType(DataType.Date)]
-        [Display(Name = "收款时间")]
-        public System.DateTime ConfirmTime { get; set; }
     }
 }

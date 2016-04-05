@@ -127,6 +127,63 @@ namespace Phoebe.Business
         }
 
         /// <summary>
+        /// 获取实时结算
+        /// </summary>
+        /// <param name="customerID">客户ID</param>
+        /// <param name="start">开始日期</param>
+        /// <param name="end">结束日期</param>
+        /// <returns></returns>
+        public Receipt GetRealTime(int customerID, DateTime start, DateTime end)
+        {
+            Receipt receipt = new Receipt();
+
+            var customer = this.context.Customers.Find(customerID);
+            if (customer == null)
+                return null;
+
+            receipt.CustomerID = customerID;
+            receipt.CustomerName = customer.Name;
+            receipt.SettleFee = 0;
+            receipt.RealFee = 0;
+
+            var settles = this.context.Settlements.Where(r => r.CustomerID == customerID).OrderByDescending(r => r.EndTime);
+            if (settles.Count() != 0)
+            {
+                receipt.SettleFee = settles.Sum(r => r.DueFee);
+
+                var last = settles.First();
+                start = last.EndTime.AddDays(1);
+            }
+
+            var contracts = this.context.Contracts.Where(r => r.CustomerID == customerID);
+
+            // get base fee
+            var billings = from r in this.context.Billings
+                           where r.InTime >= start && r.InTime <= end &&
+                                contracts.Select(s => s.ID).Contains(r.ContractID)
+                           select r;
+
+            receipt.RealFee = billings.Sum(r => r.TotalPrice);
+
+            // get cold fee
+            BillingBusiness billingBusiness = new BillingBusiness();
+
+            foreach (var contract in contracts)
+            {
+                receipt.RealFee += billingBusiness.CalculateContractColdPrice(contract.ID, start, end);
+            }
+
+            // get paid fee
+            var payments = this.context.Payments.Where(r => r.CustomerID == customerID);
+            if (payments.Count() != 0)
+                receipt.PaidFee = payments.Sum(r => r.PaidFee);
+
+            receipt.Difference = receipt.SettleFee + receipt.RealFee - receipt.PaidFee;
+
+            return receipt;
+        }
+
+        /// <summary>
         /// 添加结算
         /// </summary>
         /// <param name="data">结算数据</param>

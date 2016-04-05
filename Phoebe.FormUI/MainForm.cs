@@ -237,6 +237,17 @@ namespace Phoebe.FormUI
         }
 
         /// <summary>
+        /// 结算管理 - 实时结算
+        /// </summary>
+        private void menuSettleReal_Click(object sender, EventArgs e)
+        {
+            SettleRealForm form = new SettleRealForm();
+            form.MdiParent = this;
+            form.WindowState = FormWindowState.Maximized;
+            form.Show();
+        }
+
+        /// <summary>
         /// 报表管理 - 日报表
         /// </summary>
         private void menuDailyReport_Click(object sender, EventArgs e)
@@ -313,5 +324,7 @@ namespace Phoebe.FormUI
         #endregion //Menu Event
 
         #endregion //Event
+
+       
     }
 }

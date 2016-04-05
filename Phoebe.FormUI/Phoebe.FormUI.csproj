@@ -292,6 +292,12 @@
     <Compile Include="Forms\StockMovePrintForm.Designer.cs">
       <DependentUpon>StockMovePrintForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\SettleRealForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SettleRealForm.Designer.cs">
+      <DependentUpon>SettleRealForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Forms\AccountForm.resx">
       <DependentUpon>AccountForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -342,6 +348,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SettleRealForm.resx">
+      <DependentUpon>SettleRealForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\StockFlowPrintForm.resx">
       <DependentUpon>StockFlowPrintForm.cs</DependentUpon>
