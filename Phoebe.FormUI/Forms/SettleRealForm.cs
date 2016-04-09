@@ -83,6 +83,9 @@ namespace Phoebe.FormUI
             DateTime end = DateTime.Now.Date;
 
             var receipt = this.settleBusiness.GetRealTime(customer.ID, start, end);
+
+            this.textBoxStartTime.Text = start.ToShortDateString();
+            this.textBoxEndTime.Text = end.ToShortDateString();
             this.textBoxSettleFee.Text = receipt.SettleFee.ToString("f2") + " 元";
             this.textBoxRealFee.Text = receipt.RealFee.ToString("f2") + " 元";
             this.textBoxSumFee.Text = (receipt.SettleFee + receipt.RealFee).ToString("f2") + "元";

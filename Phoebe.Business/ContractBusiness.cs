@@ -206,6 +206,64 @@ namespace Phoebe.Business
                 return ErrorCode.Exception;
             }
         }
+
+        /// <summary>
+        /// 强制删除合同
+        /// </summary>
+        /// <param name="data">合同对象</param>
+        /// <returns></returns>
+        public ErrorCode ForceDelete(Contract data)
+        {
+            try
+            {
+                int customerId = data.CustomerID;
+
+                //delete the settlement                
+                var settles = this.context.Settlements.Where(r => r.CustomerID == customerId);
+                if (settles.Count() != 0)
+                {
+                    this.context.Settlements.RemoveRange(settles);
+                }
+
+                //delete the stock in
+                var stockIns = this.context.StockIns.Where(r => r.ContractID == data.ID);
+                if (stockIns.Count() != 0)
+                {
+                    this.context.StockIns.RemoveRange(stockIns);
+                }
+
+                //delete the stock out
+                var stockOuts = this.context.StockOuts.Where(r => r.ContractID == data.ID);
+                if (stockOuts.Count() != 0)
+                {
+                    this.context.StockOuts.RemoveRange(stockOuts);
+                }
+
+                //delete the stock move
+                var stockMoves = this.context.StockMoves.Where(r => r.ContractID == data.ID);
+                if (stockMoves.Count() != 0)
+                {
+                    this.context.StockMoves.RemoveRange(stockMoves);
+                }
+                this.context.SaveChanges();
+
+                //delete the cargos
+                var cargos = this.context.Cargoes.Where(r => r.ContractID == data.ID);
+                if (cargos.Count() != 0)
+                {
+                    this.context.Cargoes.RemoveRange(cargos);
+                }
+
+                this.context.Contracts.Remove(data);
+                this.context.SaveChanges();
+
+                return ErrorCode.Success;
+            }
+            catch (Exception e)
+            {
+                return ErrorCode.Exception;
+            }
+        }
         #endregion //Method
     }
 }

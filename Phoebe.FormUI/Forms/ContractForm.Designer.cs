@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ContractForm));
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.contractDataGridView = new System.Windows.Forms.DataGridView();
@@ -62,6 +62,7 @@
             this.buttonQuery = new System.Windows.Forms.Button();
             this.comboBoxCustomer = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.buttonForceDelete = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.contractDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.contractBindingSource)).BeginInit();
@@ -77,7 +78,7 @@
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Location = new System.Drawing.Point(3, 90);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(686, 379);
+            this.groupBox2.Size = new System.Drawing.Size(819, 379);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "合同列表";
@@ -109,7 +110,7 @@
             this.contractDataGridView.ReadOnly = true;
             this.contractDataGridView.RowTemplate.Height = 23;
             this.contractDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.contractDataGridView.Size = new System.Drawing.Size(680, 334);
+            this.contractDataGridView.Size = new System.Drawing.Size(813, 334);
             this.contractDataGridView.TabIndex = 0;
             this.contractDataGridView.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.contractDataGridView_RowPrePaint);
             // 
@@ -144,9 +145,9 @@
             // dataGridViewTextBoxColumn5
             // 
             this.dataGridViewTextBoxColumn5.DataPropertyName = "SignDate";
-            dataGridViewCellStyle1.Format = "d";
-            dataGridViewCellStyle1.NullValue = null;
-            this.dataGridViewTextBoxColumn5.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Format = "d";
+            dataGridViewCellStyle2.NullValue = null;
+            this.dataGridViewTextBoxColumn5.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewTextBoxColumn5.HeaderText = "签订日期";
             this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
             this.dataGridViewTextBoxColumn5.ReadOnly = true;
@@ -225,7 +226,7 @@
             this.contractBindingNavigator.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.contractBindingNavigator.Name = "contractBindingNavigator";
             this.contractBindingNavigator.PositionItem = this.bindingNavigatorPositionItem;
-            this.contractBindingNavigator.Size = new System.Drawing.Size(680, 25);
+            this.contractBindingNavigator.Size = new System.Drawing.Size(813, 25);
             this.contractBindingNavigator.TabIndex = 2;
             this.contractBindingNavigator.Text = "bindingNavigator1";
             // 
@@ -298,6 +299,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.buttonForceDelete);
             this.groupBox1.Controls.Add(this.buttonRefresh);
             this.groupBox1.Controls.Add(this.buttonDelete);
             this.groupBox1.Controls.Add(this.buttonQuery);
@@ -306,7 +308,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(686, 87);
+            this.groupBox1.Size = new System.Drawing.Size(819, 87);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "查询";
@@ -358,11 +360,21 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "客户名称";
             // 
+            // buttonForceDelete
+            // 
+            this.buttonForceDelete.Location = new System.Drawing.Point(604, 33);
+            this.buttonForceDelete.Name = "buttonForceDelete";
+            this.buttonForceDelete.Size = new System.Drawing.Size(75, 21);
+            this.buttonForceDelete.TabIndex = 5;
+            this.buttonForceDelete.Text = "强制删除";
+            this.buttonForceDelete.UseVisualStyleBackColor = true;
+            this.buttonForceDelete.Click += new System.EventHandler(this.buttonForceDelete_Click);
+            // 
             // ContractForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(692, 472);
+            this.ClientSize = new System.Drawing.Size(825, 472);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "ContractForm";
@@ -414,5 +426,6 @@
         private System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.Button buttonQuery;
         private System.Windows.Forms.ComboBox comboBoxCustomer;
+        private System.Windows.Forms.Button buttonForceDelete;
     }
 }

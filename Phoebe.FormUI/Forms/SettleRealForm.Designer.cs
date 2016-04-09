@@ -43,6 +43,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.textBoxSumFee = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.textBoxStartTime = new System.Windows.Forms.TextBox();
+            this.textBoxEndTime = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -90,6 +94,10 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.textBoxEndTime);
+            this.groupBox2.Controls.Add(this.textBoxStartTime);
+            this.groupBox2.Controls.Add(this.label8);
+            this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.textBoxSumFee);
             this.groupBox2.Controls.Add(this.textBoxDifference);
@@ -103,14 +111,14 @@
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox2.Location = new System.Drawing.Point(3, 90);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(841, 145);
+            this.groupBox2.Size = new System.Drawing.Size(841, 179);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "结算信息";
             // 
             // textBoxDifference
             // 
-            this.textBoxDifference.Location = new System.Drawing.Point(301, 98);
+            this.textBoxDifference.Location = new System.Drawing.Point(303, 128);
             this.textBoxDifference.Name = "textBoxDifference";
             this.textBoxDifference.ReadOnly = true;
             this.textBoxDifference.Size = new System.Drawing.Size(120, 21);
@@ -119,7 +127,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(266, 101);
+            this.label5.Location = new System.Drawing.Point(268, 131);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(29, 12);
             this.label5.TabIndex = 6;
@@ -127,7 +135,7 @@
             // 
             // textBoxPaidFee
             // 
-            this.textBoxPaidFee.Location = new System.Drawing.Point(75, 98);
+            this.textBoxPaidFee.Location = new System.Drawing.Point(77, 128);
             this.textBoxPaidFee.Name = "textBoxPaidFee";
             this.textBoxPaidFee.ReadOnly = true;
             this.textBoxPaidFee.Size = new System.Drawing.Size(120, 21);
@@ -135,7 +143,7 @@
             // 
             // textBoxRealFee
             // 
-            this.textBoxRealFee.Location = new System.Drawing.Point(301, 45);
+            this.textBoxRealFee.Location = new System.Drawing.Point(303, 75);
             this.textBoxRealFee.Name = "textBoxRealFee";
             this.textBoxRealFee.ReadOnly = true;
             this.textBoxRealFee.Size = new System.Drawing.Size(120, 21);
@@ -143,7 +151,7 @@
             // 
             // textBoxSettleFee
             // 
-            this.textBoxSettleFee.Location = new System.Drawing.Point(75, 45);
+            this.textBoxSettleFee.Location = new System.Drawing.Point(77, 75);
             this.textBoxSettleFee.Name = "textBoxSettleFee";
             this.textBoxSettleFee.ReadOnly = true;
             this.textBoxSettleFee.Size = new System.Drawing.Size(120, 21);
@@ -152,7 +160,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(28, 101);
+            this.label4.Location = new System.Drawing.Point(30, 131);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(41, 12);
             this.label4.TabIndex = 2;
@@ -161,7 +169,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(230, 48);
+            this.label3.Location = new System.Drawing.Point(232, 78);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(65, 12);
             this.label3.TabIndex = 1;
@@ -170,15 +178,15 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(16, 48);
+            this.label2.Location = new System.Drawing.Point(6, 78);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 12);
+            this.label2.Size = new System.Drawing.Size(65, 12);
             this.label2.TabIndex = 0;
-            this.label2.Text = "结算费用";
+            this.label2.Text = "已结算费用";
             // 
             // textBoxSumFee
             // 
-            this.textBoxSumFee.Location = new System.Drawing.Point(539, 45);
+            this.textBoxSumFee.Location = new System.Drawing.Point(539, 75);
             this.textBoxSumFee.Name = "textBoxSumFee";
             this.textBoxSumFee.ReadOnly = true;
             this.textBoxSumFee.Size = new System.Drawing.Size(120, 21);
@@ -187,11 +195,45 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(480, 48);
+            this.label6.Location = new System.Drawing.Point(480, 78);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(53, 12);
             this.label6.TabIndex = 9;
             this.label6.Text = "费用合计";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(18, 29);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(53, 12);
+            this.label7.TabIndex = 10;
+            this.label7.Text = "开始日期";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(244, 29);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(53, 12);
+            this.label8.TabIndex = 11;
+            this.label8.Text = "结束日期";
+            // 
+            // textBoxStartTime
+            // 
+            this.textBoxStartTime.Location = new System.Drawing.Point(77, 26);
+            this.textBoxStartTime.Name = "textBoxStartTime";
+            this.textBoxStartTime.ReadOnly = true;
+            this.textBoxStartTime.Size = new System.Drawing.Size(120, 21);
+            this.textBoxStartTime.TabIndex = 12;
+            // 
+            // textBoxEndTime
+            // 
+            this.textBoxEndTime.Location = new System.Drawing.Point(303, 26);
+            this.textBoxEndTime.Name = "textBoxEndTime";
+            this.textBoxEndTime.ReadOnly = true;
+            this.textBoxEndTime.Size = new System.Drawing.Size(120, 21);
+            this.textBoxEndTime.TabIndex = 13;
             // 
             // SettleRealForm
             // 
@@ -229,5 +271,9 @@
         private System.Windows.Forms.TextBox textBoxPaidFee;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox textBoxSumFee;
+        private System.Windows.Forms.TextBox textBoxEndTime;
+        private System.Windows.Forms.TextBox textBoxStartTime;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label7;
     }
 }

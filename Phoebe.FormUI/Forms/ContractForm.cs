@@ -19,15 +19,22 @@ namespace Phoebe.FormUI
     public partial class ContractForm : Form
     {
         #region Field
+        private User currentUser;
+
         private CustomerBusiness customerBusiness;
 
         private ContractBusiness contractBusiness;
         #endregion//Field
 
         #region Constructor
-        public ContractForm()
+        /// <summary>
+        /// 合同列表窗体
+        /// </summary>
+        /// <param name="user"></param>
+        public ContractForm(User user)
         {
             InitializeComponent();
+            this.currentUser = user;
         }
         #endregion //Constructor
 
@@ -45,6 +52,11 @@ namespace Phoebe.FormUI
             this.comboBoxCustomer.DataSource = customers;
             this.comboBoxCustomer.DisplayMember = "Name";
             this.comboBoxCustomer.ValueMember = "ID";
+
+            if (this.currentUser.UserGroupID == 1 || this.currentUser.UserGroupID == 2)
+                this.buttonForceDelete.Visible = true;
+            else
+                this.buttonForceDelete.Visible = false;
         }
         #endregion //Function
 
@@ -122,6 +134,38 @@ namespace Phoebe.FormUI
         {
             this.contractBusiness = new ContractBusiness();            
             this.contractBindingSource.DataSource = this.contractBusiness.Get();
+        }
+
+        /// <summary>
+        /// 强制删除
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <remarks>
+        /// 会删除该客户的所有结算记录，合同相关出入库记录，货品记录，库存记录
+        /// </remarks>
+        private void buttonForceDelete_Click(object sender, EventArgs e)
+        {
+            if (this.contractDataGridView.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("未选中记录", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            DialogResult dr = MessageBox.Show("是否确认删除选中合同?", FormConstant.MessageBoxTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dr == DialogResult.Yes)
+            {
+                Contract contract = this.contractDataGridView.SelectedRows[0].DataBoundItem as Contract;
+                ErrorCode result = this.contractBusiness.ForceDelete(contract);
+                if (result == ErrorCode.Success)
+                {
+                    MessageBox.Show("删除合同成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("删除合同失败：" + result.DisplayName(), FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }            
         }
 
         private void contractDataGridView_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)

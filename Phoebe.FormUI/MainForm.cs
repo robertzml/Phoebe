@@ -89,7 +89,7 @@ namespace Phoebe.FormUI
         /// </summary>
         private void menuContractList_Click(object sender, EventArgs e)
         {
-            ContractForm form = new ContractForm();
+            ContractForm form = new ContractForm(this.currentUser);
             form.MdiParent = this;
             form.WindowState = FormWindowState.Maximized;
             form.Show();
