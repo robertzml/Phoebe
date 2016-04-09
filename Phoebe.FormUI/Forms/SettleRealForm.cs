@@ -83,10 +83,11 @@ namespace Phoebe.FormUI
             DateTime end = DateTime.Now.Date;
 
             var receipt = this.settleBusiness.GetRealTime(customer.ID, start, end);
-            this.textBoxSettleFee.Text = receipt.SettleFee.ToString("f3") + " 元";
-            this.textBoxRealFee.Text = receipt.RealFee.ToString("f3") + " 元";
-            this.textBoxPaidFee.Text = receipt.PaidFee.ToString("f3") + " 元";
-            this.textBoxDifference.Text = receipt.Difference.ToString("f3") + " 元";
+            this.textBoxSettleFee.Text = receipt.SettleFee.ToString("f2") + " 元";
+            this.textBoxRealFee.Text = receipt.RealFee.ToString("f2") + " 元";
+            this.textBoxSumFee.Text = (receipt.SettleFee + receipt.RealFee).ToString("f2") + "元";
+            this.textBoxPaidFee.Text = receipt.PaidFee.ToString("f2") + " 元";
+            this.textBoxDifference.Text = receipt.Difference.ToString("f2") + " 元";
         }
         #endregion //Event
     }

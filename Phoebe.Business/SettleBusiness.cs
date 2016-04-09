@@ -37,7 +37,7 @@ namespace Phoebe.Business
             var contracts = this.context.Contracts.Where(r => r.CustomerID == customerID);
 
             var billings = from r in this.context.Billings
-                           where r.InTime >= start && r.InTime <= end &&
+                           where r.InTime >= start && r.InTime <= end && r.Status == 0 &&
                                 contracts.Select(s => s.ID).Contains(r.ContractID)
                            select r;
 
@@ -159,7 +159,7 @@ namespace Phoebe.Business
 
             // get base fee
             var billings = from r in this.context.Billings
-                           where r.InTime >= start && r.InTime <= end &&
+                           where r.InTime >= start && r.InTime <= end && r.Status == 0 && 
                                 contracts.Select(s => s.ID).Contains(r.ContractID)
                            select r;
 

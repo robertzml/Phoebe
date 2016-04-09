@@ -490,6 +490,7 @@ namespace Phoebe.FormUI
                 {
                     MessageBox.Show("保存成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.toolConfirm.Enabled = true;
+                    this.toolSave.Enabled = false;
                     this.toolLock.Enabled = false;
                     this.toolUnlock.Enabled = false;
                     SetControlEditable(false);
