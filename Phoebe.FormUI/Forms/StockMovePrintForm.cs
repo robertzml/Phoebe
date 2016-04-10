@@ -60,12 +60,10 @@ namespace Phoebe.FormUI
             ReportParameter rp1 = new ReportParameter("MoveTime", this.stockMove.MoveTime.ToString());
             ReportParameter rp2 = new ReportParameter("FlowNumber", this.stockMove.FlowNumber);
             ReportParameter rp3 = new ReportParameter("CustomerName", contract.Customer.Name);
-            ReportParameter rp4 = new ReportParameter("ContractNumber", contract.Number);
 
             parameters.Add(rp1);
             parameters.Add(rp2);
             parameters.Add(rp3);
-            parameters.Add(rp4);
 
             this.reportViewer1.LocalReport.SetParameters(parameters);
             this.reportViewer1.LocalReport.DataSources.Add(new ReportDataSource("StockMoveSet", details));
@@ -73,15 +71,15 @@ namespace Phoebe.FormUI
             var pageSettings = this.reportViewer1.GetPageSettings();
             pageSettings.PaperSize = new PaperSize
             {
-                Height = 366,
-                Width = 953
+                Height = 368,
+                Width = 852
             };
             pageSettings.Margins = new Margins
             {
                 Top = 20,
                 Bottom = 20,
-                Left = 20,
-                Right = 20
+                Left = 0,
+                Right = 0
             };
             pageSettings.Landscape = false;
             this.reportViewer1.SetPageSettings(pageSettings);
