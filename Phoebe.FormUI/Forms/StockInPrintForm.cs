@@ -78,15 +78,15 @@ namespace Phoebe.FormUI
             var pageSettings = this.reportViewer1.GetPageSettings();
             pageSettings.PaperSize = new PaperSize
             {
-                Height = 366,
-                Width = 953
+                Height = 368,
+                Width = 852
             };
             pageSettings.Margins = new Margins
             {
                 Top = 20,
                 Bottom = 20,
-                Left = 20,
-                Right = 20
+                Left = 0,
+                Right = 0
             };
             pageSettings.Landscape = false;
             this.reportViewer1.SetPageSettings(pageSettings);

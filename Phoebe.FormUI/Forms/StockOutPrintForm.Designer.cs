@@ -37,14 +37,14 @@
             this.reportViewer1.LocalReport.ReportEmbeddedResource = "Phoebe.FormUI.Report.StockOut.rdlc";
             this.reportViewer1.Location = new System.Drawing.Point(3, 3);
             this.reportViewer1.Name = "reportViewer1";
-            this.reportViewer1.Size = new System.Drawing.Size(808, 401);
+            this.reportViewer1.Size = new System.Drawing.Size(822, 381);
             this.reportViewer1.TabIndex = 0;
             // 
             // StockOutPrintForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(814, 407);
+            this.ClientSize = new System.Drawing.Size(828, 387);
             this.Controls.Add(this.reportViewer1);
             this.Name = "StockOutPrintForm";
             this.Padding = new System.Windows.Forms.Padding(3);

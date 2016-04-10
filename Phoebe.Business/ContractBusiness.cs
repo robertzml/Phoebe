@@ -259,7 +259,7 @@ namespace Phoebe.Business
 
                 return ErrorCode.Success;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return ErrorCode.Exception;
             }
