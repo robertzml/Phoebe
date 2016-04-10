@@ -65,12 +65,10 @@ namespace Phoebe.FormUI
             ReportParameter rp1 = new ReportParameter("InTime", this.stockIn.InTime.ToString());
             ReportParameter rp2 = new ReportParameter("FlowNumber", this.stockIn.FlowNumber);
             ReportParameter rp3 = new ReportParameter("CustomerName", contract.Customer.Name);
-            ReportParameter rp4 = new ReportParameter("ContractNumber", contract.Number);
 
             parameters.Add(rp1);
             parameters.Add(rp2);
             parameters.Add(rp3);
-            parameters.Add(rp4);
 
             this.reportViewer1.LocalReport.SetParameters(parameters);
             this.reportViewer1.LocalReport.DataSources.Add(new ReportDataSource("StockInSet", details));

@@ -48,6 +48,7 @@
             this.Controls.Add(this.reportViewer1);
             this.Name = "StockOutPrintForm";
             this.Padding = new System.Windows.Forms.Padding(3);
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "出库单打印";
             this.Load += new System.EventHandler(this.StockOutPrintForm_Load);
             this.ResumeLayout(false);

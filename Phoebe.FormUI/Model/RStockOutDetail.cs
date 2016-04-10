@@ -57,6 +57,16 @@ namespace Phoebe.FormUI
         public double TotalVolume { get; set; }
 
         /// <summary>
+        /// 在库数量
+        /// </summary>
+        public int StoreCount { get; set; }
+
+        /// <summary>
+        /// 在库重量
+        /// </summary>
+        public double StoreWeight { get; set; }
+
+        /// <summary>
         /// 仓位
         /// </summary>
         public string Warehouse { get; set; }
