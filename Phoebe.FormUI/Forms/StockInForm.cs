@@ -493,6 +493,7 @@ namespace Phoebe.FormUI
                     this.toolSave.Enabled = false;
                     this.toolLock.Enabled = false;
                     this.toolUnlock.Enabled = false;
+                    this.toolEdit.Enabled = false;
                     SetControlEditable(false);
                     this.storeBusiness = new StoreBusiness();
                 }
@@ -534,6 +535,7 @@ namespace Phoebe.FormUI
                 this.toolPrint.Enabled = true;
                 this.toolLock.Enabled = false;
                 this.toolUnlock.Enabled = true;
+                this.toolEdit.Enabled = false;
                 SetControlEditable(false);
             }
             else

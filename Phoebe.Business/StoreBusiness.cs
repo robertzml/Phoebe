@@ -805,6 +805,76 @@ namespace Phoebe.Business
                 return ErrorCode.Exception;
             }
         }
+
+        /// <summary>
+        /// 出库编辑检查
+        /// </summary>
+        /// <param name="id">出库ID</param>
+        /// <returns></returns>
+        /// <remarks>
+        /// 该合同后续有出库则无法编辑，或相关货品有移库记录无法编辑
+        /// </remarks>
+        public bool StockOutUpdateCheck(Guid id)
+        {
+            try
+            {
+                var stockOut = this.context.StockOuts.Find(id);
+                if (stockOut == null)
+                    return false;
+
+                var contract = stockOut.Contract;
+                if (this.context.StockOuts.Any(r => r.ContractID == contract.ID && r.OutTime >= stockOut.OutTime && r.FlowNumber != stockOut.FlowNumber))
+                    return false;
+
+                foreach (var item in stockOut.StockOutDetails)
+                {
+                    if (this.context.StockMoveDetails.Count(r => r.SourceCargoID == item.CargoID) > 0)
+                        return false;
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 编辑出库
+        /// </summary>
+        /// <param name="id">入库ID</param>
+        /// <param name="details">出库记录列表</param>
+        /// <returns></returns>
+        public ErrorCode StockOutUpdate(Guid id, List<StockOutDetail> details)
+        {
+            try
+            {
+                var stockOut = this.context.StockOuts.Find(id);
+
+                foreach (var soDetail in details)
+                {
+                    //this.context.Entry<Cargo>(cargo).State = System.Data.Entity.EntityState.Modified;
+
+                    //var siDetail = stockIn.StockInDetails.Single(r => r.CargoID == cargo.ID);
+                    //siDetail.Count = cargo.Count;
+                    //siDetail.InWeight = cargo.TotalWeight;
+                    //siDetail.WarehouseNumber = cargo.WarehouseNumber;
+
+                    //var stock = this.context.Stocks.Single(r => r.CargoID == cargo.ID);
+                    //stock.WarehouseNumber = cargo.WarehouseNumber;
+                    //stock.Count = cargo.Count;
+                    //stock.Weight = cargo.TotalWeight;
+                }
+
+                //this.context.SaveChanges();
+                return ErrorCode.Success;
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+        }
         #endregion //Stock Out
 
         #region Stock Move

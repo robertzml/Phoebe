@@ -94,6 +94,10 @@
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolLock = new System.Windows.Forms.ToolStripButton();
+            this.toolUnlock = new System.Windows.Forms.ToolStripButton();
+            this.toolEdit = new System.Windows.Forms.ToolStripButton();
             this.groupBox1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -136,7 +140,11 @@
             this.toolStripSeparator,
             this.toolConfirm,
             this.toolRefresh,
-            this.toolDelete});
+            this.toolDelete,
+            this.toolStripSeparator1,
+            this.toolLock,
+            this.toolUnlock,
+            this.toolEdit});
             this.toolStrip1.Location = new System.Drawing.Point(175, 3);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(779, 25);
@@ -687,6 +695,41 @@
             this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
             this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolLock
+            // 
+            this.toolLock.Enabled = false;
+            this.toolLock.Image = global::Phoebe.FormUI.Properties.Resources.lock_32;
+            this.toolLock.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolLock.Name = "toolLock";
+            this.toolLock.Size = new System.Drawing.Size(52, 22);
+            this.toolLock.Text = "锁定";
+            this.toolLock.Click += new System.EventHandler(this.toolLock_Click);
+            // 
+            // toolUnlock
+            // 
+            this.toolUnlock.Enabled = false;
+            this.toolUnlock.Image = global::Phoebe.FormUI.Properties.Resources.unlock_32;
+            this.toolUnlock.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolUnlock.Name = "toolUnlock";
+            this.toolUnlock.Size = new System.Drawing.Size(52, 22);
+            this.toolUnlock.Text = "解锁";
+            this.toolUnlock.Click += new System.EventHandler(this.toolUnlock_Click);
+            // 
+            // toolEdit
+            // 
+            this.toolEdit.Enabled = false;
+            this.toolEdit.Image = global::Phoebe.FormUI.Properties.Resources.pencil_edit;
+            this.toolEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolEdit.Name = "toolEdit";
+            this.toolEdit.Size = new System.Drawing.Size(52, 22);
+            this.toolEdit.Text = "修改";
+            this.toolEdit.Click += new System.EventHandler(this.toolStripButton3_Click);
+            // 
             // StockOutForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -783,5 +826,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn19;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn21;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewColumnStatus;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripButton toolLock;
+        private System.Windows.Forms.ToolStripButton toolUnlock;
+        private System.Windows.Forms.ToolStripButton toolEdit;
     }
 }
