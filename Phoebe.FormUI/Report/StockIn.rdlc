@@ -20,7 +20,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox4</rd:DefaultName>
         <Top>0.67056cm</Top>
-        <Left>9.75564cm</Left>
+        <Left>10.07314cm</Left>
         <Height>0.6cm</Height>
         <Width>1.9091cm</Width>
         <Style>
@@ -86,7 +86,7 @@
         </Paragraphs>
         <rd:DefaultName>InTime</rd:DefaultName>
         <Top>0.67056cm</Top>
-        <Left>11.77057cm</Left>
+        <Left>12.08807cm</Left>
         <Height>0.6cm</Height>
         <Width>2.28833cm</Width>
         <ZIndex>2</ZIndex>
@@ -1055,7 +1055,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox4</rd:DefaultName>
-        <Left>9.75564cm</Left>
+        <Left>10.07314cm</Left>
         <Height>0.57326cm</Height>
         <Width>6.61906cm</Width>
         <ZIndex>7</ZIndex>
@@ -1090,6 +1090,37 @@
         <Height>0.6cm</Height>
         <Width>3.58479cm</Width>
         <ZIndex>8</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox22">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>车号:</Value>
+                <Style>
+                  <FontFamily>宋体</FontFamily>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox4</rd:DefaultName>
+        <Left>4.64066cm</Left>
+        <Height>0.6cm</Height>
+        <Width>1.38875cm</Width>
+        <ZIndex>9</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1168,7 +1199,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>客户签字：</Value>
+                  <Value>经手人：</Value>
                   <Style>
                     <FontFamily>宋体</FontFamily>
                     <FontSize>12pt</FontSize>
@@ -1200,7 +1231,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>经手人：</Value>
+                  <Value>客户签字：</Value>
                   <Style>
                     <FontFamily>宋体</FontFamily>
                     <FontSize>12pt</FontSize>

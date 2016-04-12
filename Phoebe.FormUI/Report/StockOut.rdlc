@@ -20,7 +20,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox4</rd:DefaultName>
         <Top>0.67909cm</Top>
-        <Left>9.65395cm</Left>
+        <Left>9.97145cm</Left>
         <Height>0.6cm</Height>
         <Width>1.9091cm</Width>
         <Style>
@@ -54,7 +54,7 @@
         </Paragraphs>
         <rd:DefaultName>InTime</rd:DefaultName>
         <Top>0.67909cm</Top>
-        <Left>11.66888cm</Left>
+        <Left>11.98638cm</Left>
         <Height>0.6cm</Height>
         <Width>2.28833cm</Width>
         <ZIndex>1</ZIndex>
@@ -186,7 +186,7 @@
         <Top>0.67909cm</Top>
         <Left>2.35107cm</Left>
         <Height>0.6cm</Height>
-        <Width>5.09264cm</Width>
+        <Width>5.25167cm</Width>
         <ZIndex>5</ZIndex>
         <Style>
           <Border>
@@ -747,7 +747,7 @@
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
-                          <Style>Solid</Style>
+                          <Style>None</Style>
                         </Border>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
@@ -779,7 +779,7 @@
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
-                          <Style>Solid</Style>
+                          <Style>None</Style>
                         </Border>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
@@ -811,7 +811,7 @@
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
-                          <Style>Solid</Style>
+                          <Style>None</Style>
                         </Border>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
@@ -843,7 +843,7 @@
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
-                          <Style>Solid</Style>
+                          <Style>None</Style>
                         </Border>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
@@ -877,7 +877,7 @@
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
-                          <Style>Solid</Style>
+                          <Style>None</Style>
                         </Border>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
@@ -911,7 +911,7 @@
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
-                          <Style>Solid</Style>
+                          <Style>None</Style>
                         </Border>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
@@ -945,7 +945,7 @@
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
-                          <Style>Solid</Style>
+                          <Style>None</Style>
                         </Border>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
@@ -979,7 +979,7 @@
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
-                          <Style>Solid</Style>
+                          <Style>None</Style>
                         </Border>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
@@ -1013,7 +1013,7 @@
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
-                          <Style>Solid</Style>
+                          <Style>None</Style>
                         </Border>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
@@ -1048,7 +1048,7 @@
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
-                          <Style>Solid</Style>
+                          <Style>None</Style>
                         </Border>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
@@ -1082,7 +1082,7 @@
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
-                          <Style>Solid</Style>
+                          <Style>None</Style>
                         </Border>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
@@ -1152,7 +1152,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox4</rd:DefaultName>
         <Top>0.03528cm</Top>
-        <Left>9.66187cm</Left>
+        <Left>9.97937cm</Left>
         <Height>0.57326cm</Height>
         <Width>6.61906cm</Width>
         <ZIndex>7</ZIndex>
@@ -1188,6 +1188,38 @@
         <Height>0.6cm</Height>
         <Width>3.58479cm</Width>
         <ZIndex>8</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox22">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>车号:</Value>
+                <Style>
+                  <FontFamily>宋体</FontFamily>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox4</rd:DefaultName>
+        <Top>0.03528cm</Top>
+        <Left>4.86434cm</Left>
+        <Height>0.6cm</Height>
+        <Width>1.38875cm</Width>
+        <ZIndex>9</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1263,7 +1295,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>客户签字：</Value>
+                  <Value>经手人：</Value>
                   <Style>
                     <FontFamily>宋体</FontFamily>
                     <FontSize>12pt</FontSize>
@@ -1275,9 +1307,9 @@
           </Paragraphs>
           <rd:DefaultName>Textbox1</rd:DefaultName>
           <Top>0.07354cm</Top>
-          <Left>8.49867cm</Left>
+          <Left>11.99117cm</Left>
           <Height>0.6cm</Height>
-          <Width>3.39958cm</Width>
+          <Width>2.6852cm</Width>
           <Style>
             <Border>
               <Style>None</Style>
@@ -1295,7 +1327,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>经手人：</Value>
+                  <Value>客户签字：</Value>
                   <Style>
                     <FontFamily>宋体</FontFamily>
                     <FontSize>12pt</FontSize>
@@ -1307,9 +1339,9 @@
           </Paragraphs>
           <rd:DefaultName>Textbox1</rd:DefaultName>
           <Top>0.1cm</Top>
-          <Left>15.58675cm</Left>
+          <Left>16.22175cm</Left>
           <Height>0.6cm</Height>
-          <Width>3.39958cm</Width>
+          <Width>2.52646cm</Width>
           <ZIndex>1</ZIndex>
           <Style>
             <Border>
@@ -1340,7 +1372,7 @@
           </Paragraphs>
           <rd:DefaultName>Textbox4</rd:DefaultName>
           <Top>0.07354cm</Top>
-          <Left>0.5519cm</Left>
+          <Left>5.3144cm</Left>
           <Height>0.6cm</Height>
           <Width>2.28834cm</Width>
           <ZIndex>2</ZIndex>
@@ -1373,10 +1405,43 @@
           </Paragraphs>
           <rd:DefaultName>ContractNumber</rd:DefaultName>
           <Top>0.07056cm</Top>
-          <Left>3.01663cm</Left>
+          <Left>7.77913cm</Left>
           <Height>0.6cm</Height>
           <Width>2.89688cm</Width>
           <ZIndex>3</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+        <Textbox Name="Textbox8">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>备注：签字视为欠条</Value>
+                  <Style>
+                    <FontFamily>宋体</FontFamily>
+                    <FontSize>12pt</FontSize>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox4</rd:DefaultName>
+          <Top>0.07354cm</Top>
+          <Left>0.40669cm</Left>
+          <Height>0.6cm</Height>
+          <Width>4.09632cm</Width>
+          <ZIndex>4</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>
