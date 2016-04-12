@@ -201,43 +201,6 @@ namespace Phoebe.FormUI
                 return result;
             }
         }
-
-        /// <summary>
-        /// 保存修改项
-        /// </summary>
-        /// <returns></returns>
-        public ErrorCode SaveOldItem()
-        {           
-            List<StockOutDetail> details = new List<StockOutDetail>();
-
-            foreach (DataGridViewRow row in this.cargoDataGridView.Rows)
-            {
-                var cargo = row.DataBoundItem as Cargo;
-
-                StockOutDetail soDetail = new StockOutDetail();            
-                soDetail.CargoID = cargo.ID;
-                soDetail.WarehouseNumber = cargo.WarehouseNumber;
-                soDetail.StoreCount = cargo.StoreCount;
-                soDetail.Count = Convert.ToInt32(row.Cells[this.columnOutCount.Index].Value);
-                if (soDetail.Count == 0)
-                {
-                    return ErrorCode.StockOutCountZero;
-                }
-                if (soDetail.Count > cargo.StoreCount)
-                {
-                    return ErrorCode.StockMoveCountOverflow;
-                }
-                if (this.isEqualWeight)
-                    soDetail.OutWeight = Math.Round(cargo.UnitWeight * soDetail.Count / 1000, 3);
-                else
-                    soDetail.OutWeight = Convert.ToDouble(row.Cells[this.columnOutWeight.Index].Value);
-              
-                details.Add(soDetail);               
-            }
-
-            ErrorCode result = this.storeBusiness.StockOutUpdate(this.currentStockOut.ID, details);
-            return result;
-        }
         #endregion //Function
 
         #region Event
@@ -292,9 +255,6 @@ namespace Phoebe.FormUI
                 this.toolConfirm.Enabled = true;
                 this.toolDelete.Enabled = true;
                 this.toolPrint.Enabled = false;
-                this.toolUnlock.Enabled = false;
-                this.toolLock.Enabled = false;
-                this.toolEdit.Enabled = false;
                 SetControlEditable(false);
             }
             else if (this.currentStockOut.Status == (int)EntityStatus.StockOut)
@@ -303,9 +263,6 @@ namespace Phoebe.FormUI
                 this.toolConfirm.Enabled = false;
                 this.toolDelete.Enabled = false;
                 this.toolPrint.Enabled = true;
-                this.toolUnlock.Enabled = true;
-                this.toolLock.Enabled = false;
-                this.toolEdit.Enabled = false;
                 SetControlEditable(false);
             }
         }
@@ -323,9 +280,6 @@ namespace Phoebe.FormUI
             this.toolSave.Enabled = true;
             this.toolConfirm.Enabled = false;
             this.toolPrint.Enabled = false;
-            this.toolLock.Enabled = false;
-            this.toolUnlock.Enabled = false;
-            this.toolEdit.Enabled = false;
             this.groupBox2.Visible = this.groupBox3.Visible = true;
             SetControlEditable(true);
 
@@ -367,9 +321,6 @@ namespace Phoebe.FormUI
                 {
                     MessageBox.Show("保存成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.toolConfirm.Enabled = true;
-                    this.toolLock.Enabled = false;
-                    this.toolUnlock.Enabled = false;
-                    this.toolEdit.Enabled = false;
                     SetControlEditable(false);
                     this.storeBusiness = new StoreBusiness();
                 }
@@ -405,9 +356,6 @@ namespace Phoebe.FormUI
                 this.textBoxStatus.Text = EntityStatus.StockOut.DisplayName();
                 this.toolConfirm.Enabled = false;
                 this.toolPrint.Enabled = true;
-                this.toolLock.Enabled = false;
-                this.toolUnlock.Enabled = true;
-                this.toolEdit.Enabled = false;
                 SetControlEditable(false);
             }
             else
@@ -490,10 +438,6 @@ namespace Phoebe.FormUI
         /// <param name="e"></param>
         private void toolLock_Click(object sender, EventArgs e)
         {
-            SetControlEditable(false);
-            this.toolEdit.Enabled = false;
-            this.toolLock.Enabled = false;
-            this.toolUnlock.Enabled = true;
         }
 
         /// <summary>
@@ -503,11 +447,6 @@ namespace Phoebe.FormUI
         /// <param name="e"></param>
         private void toolUnlock_Click(object sender, EventArgs e)
         {
-            SetControlEditable(true);
-            this.dateBusinessTime.Enabled = this.comboBoxCustomer.Enabled = this.comboBoxContract.Enabled = false;
-            this.toolEdit.Enabled = true;
-            this.toolLock.Enabled = true;
-            this.toolUnlock.Enabled = false;
         }
 
         /// <summary>
@@ -517,31 +456,7 @@ namespace Phoebe.FormUI
         /// <param name="e"></param>
         private void toolStripButton3_Click(object sender, EventArgs e)
         {
-            if (this.currentStockOut == null)
-            {
-                MessageBox.Show("当前未选中记录", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-
-            if (!this.storeBusiness.StockOutUpdateCheck(this.currentStockOut.ID))
-            {
-                MessageBox.Show("当前入库记录无法修改", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-
-            ErrorCode result = SaveOldItem();
-            if (result == ErrorCode.Success)
-            {
-                MessageBox.Show("修改成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.toolLock.Enabled = false;
-                this.toolUnlock.Enabled = false;
-                this.toolEdit.Enabled = false;
-                this.storeBusiness = new StoreBusiness();
-            }
-            else
-            {
-                MessageBox.Show("修改失败:" + result.DisplayName(), FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+            
         }
 
         /// <summary>

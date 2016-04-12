@@ -505,23 +505,61 @@ namespace Phoebe.Business
         {
             try
             {
-                if (data.Status == (int)EntityStatus.StockIn)
-                    return ErrorCode.StockNotFound;
-
-                List<Cargo> cargos = new List<Cargo>();
-                foreach(var item in data.StockInDetails)
+                if (data.Status == (int)EntityStatus.StockInReady)
                 {
-                    cargos.Add(item.Cargo);
+                    List<Cargo> cargos = new List<Cargo>();
+                    foreach (var item in data.StockInDetails)
+                    {
+                        cargos.Add(item.Cargo);
+                    }
+
+                    this.context.StockIns.Remove(data);
+                    this.context.Cargoes.RemoveRange(cargos);
+
+                    this.context.SaveChanges();
+
+                    return ErrorCode.Success;
                 }
+                else if (data.Status == (int)EntityStatus.StockIn)
+                {
+                    var contract = data.Contract;
+                    List<Cargo> cargos = new List<Cargo>();
 
-                this.context.StockIns.Remove(data);
-                this.context.Cargoes.RemoveRange(cargos);
+                    // check could delete
+                    foreach (var item in data.StockInDetails)
+                    {
+                        var cargo = item.Cargo;
+                        if (this.context.StockMoveDetails.Any(r => r.SourceCargoID == cargo.ID))
+                            return ErrorCode.StockInCannotDelete;
+                    }
 
-                this.context.SaveChanges();
+                    foreach (var item in data.StockInDetails)
+                    {
+                        var cargo = item.Cargo;
 
-                return ErrorCode.Success;
+                        //delete the stock out
+                        var soDetails = this.context.StockOutDetails.Where(r => r.CargoID == cargo.ID);
+                        this.context.StockOutDetails.RemoveRange(soDetails);
+                        this.context.SaveChanges();
+
+                        var stockOuts = this.context.StockOuts.Where(r => r.StockOutDetails.Count == 0);
+                        this.context.StockOuts.RemoveRange(stockOuts);
+
+                        cargos.Add(cargo);
+                    }
+
+                    this.context.StockIns.Remove(data);
+                    this.context.Cargoes.RemoveRange(cargos);
+                    this.context.SaveChanges();
+
+                    return ErrorCode.Success;
+                }
+                else
+                {
+                    return ErrorCode.ObjectNotFound;
+                }
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return ErrorCode.Exception;
             }
@@ -837,42 +875,6 @@ namespace Phoebe.Business
             catch (Exception)
             {
                 return false;
-            }
-        }
-
-        /// <summary>
-        /// 编辑出库
-        /// </summary>
-        /// <param name="id">入库ID</param>
-        /// <param name="details">出库记录列表</param>
-        /// <returns></returns>
-        public ErrorCode StockOutUpdate(Guid id, List<StockOutDetail> details)
-        {
-            try
-            {
-                var stockOut = this.context.StockOuts.Find(id);
-
-                foreach (var soDetail in details)
-                {
-                    //this.context.Entry<Cargo>(cargo).State = System.Data.Entity.EntityState.Modified;
-
-                    //var siDetail = stockIn.StockInDetails.Single(r => r.CargoID == cargo.ID);
-                    //siDetail.Count = cargo.Count;
-                    //siDetail.InWeight = cargo.TotalWeight;
-                    //siDetail.WarehouseNumber = cargo.WarehouseNumber;
-
-                    //var stock = this.context.Stocks.Single(r => r.CargoID == cargo.ID);
-                    //stock.WarehouseNumber = cargo.WarehouseNumber;
-                    //stock.Count = cargo.Count;
-                    //stock.Weight = cargo.TotalWeight;
-                }
-
-                //this.context.SaveChanges();
-                return ErrorCode.Success;
-            }
-            catch (Exception)
-            {
-                return ErrorCode.Exception;
             }
         }
         #endregion //Stock Out

@@ -411,7 +411,7 @@ namespace Phoebe.FormUI
             {
                 this.toolSave.Enabled = false;
                 this.toolConfirm.Enabled = false;
-                this.toolDelete.Enabled = false;
+                this.toolDelete.Enabled = true;
                 this.toolPrint.Enabled = true;
                 this.toolUnlock.Enabled = true;
                 this.toolLock.Enabled = false;
@@ -566,12 +566,7 @@ namespace Phoebe.FormUI
             {
                 MessageBox.Show("当前未选中记录", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
-            }
-            if (this.currentStockIn.Status != (int)EntityStatus.StockInReady)
-            {
-                MessageBox.Show("当前记录已确认", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
+            }            
 
             DialogResult dr = MessageBox.Show("是否确认删除选中记录", FormConstant.MessageBoxTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (dr == DialogResult.Yes)

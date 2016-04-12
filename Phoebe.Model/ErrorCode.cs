@@ -202,6 +202,12 @@ namespace Phoebe.Model
         /// </summary>
         [Display(Name = "移库数量为空")]
         StockMoveCountZero = 54,
+
+        /// <summary>
+        /// 入库记录无法删除
+        /// </summary>
+        [Display(Name = "入库记录无法删除")]
+        StockInCannotDelete = 55,
         #endregion //Stock
 
         #region Category
