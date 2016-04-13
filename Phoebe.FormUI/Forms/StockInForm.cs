@@ -178,7 +178,8 @@ namespace Phoebe.FormUI
             this.dateBusinessTime.Enabled = this.comboBoxCustomer.Enabled = this.comboBoxContract.Enabled =
                 this.numericUnitPrice.Enabled = this.numericHandlingPrice.Enabled = this.numericFreezePrice.Enabled =
                 this.numericDisposePrice.Enabled = this.numericPackingPrice.Enabled = this.numericRentPrice.Enabled =
-                this.numericOtherPrice.Enabled = canEdit;
+                this.numericOtherPrice.Enabled = this.numericHandlingUnitPrice.Enabled =
+                this.numericFreezeUnitPrice.Enabled = canEdit;
             this.textBoxRemark.ReadOnly = !canEdit;
 
             this.cargoBindingNavigator.Enabled = canEdit;
@@ -711,6 +712,30 @@ namespace Phoebe.FormUI
             {
                 this.textBoxBillingType.Text = "";
             }
+        }
+
+        /// <summary>
+        /// 计算装卸费结冻费
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonCalculateFee_Click(object sender, EventArgs e)
+        {            
+            double totalWeight = 0;
+
+            foreach (DataGridViewRow row in this.cargoDataGridView.Rows)
+            {
+                var cargo = row.DataBoundItem as Cargo;
+                totalWeight += cargo.TotalWeight;
+            }
+
+            decimal handleUnitPrice = this.numericHandlingUnitPrice.Value;
+            decimal handlingPrice = (decimal)totalWeight * handleUnitPrice;
+            this.numericHandlingPrice.Value = handlingPrice;
+
+            decimal freezeUnitPrice = this.numericFreezeUnitPrice.Value;
+            decimal freezePrice = (decimal)totalWeight * freezeUnitPrice;
+            this.numericFreezePrice.Value = freezePrice;
         }
 
         private void cargoDataGridView_DataError(object sender, DataGridViewDataErrorEventArgs e)
