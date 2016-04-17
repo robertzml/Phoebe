@@ -31,6 +31,8 @@ namespace Phoebe.FormUI
 
         private StoreBusiness storeBusiness;
 
+        private CategoryBusiness categoryBusiness;
+
         /// <summary>
         /// 是否新增
         /// </summary>
@@ -57,6 +59,7 @@ namespace Phoebe.FormUI
             this.contractBusiness = new ContractBusiness();
             this.cargoBusiness = new CargoBusiness();
             this.storeBusiness = new StoreBusiness();
+            this.categoryBusiness = new CategoryBusiness();
         }
 
         private void InitControl()
@@ -456,7 +459,7 @@ namespace Phoebe.FormUI
         /// <param name="e"></param>
         private void toolStripButton3_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         /// <summary>
@@ -489,7 +492,7 @@ namespace Phoebe.FormUI
             if (this.comboBoxContract.SelectedIndex != -1)
             {
                 var contract = this.comboBoxContract.SelectedItem as Contract;
-                var data = this.cargoBusiness.GetInByContract(contract.ID);
+                var data = this.cargoBusiness.GetInByContract(contract.ID).OrderByDescending(r => r.InTime);
                 this.cargoBindingSource.DataSource = data;
 
                 if ((BillingType)contract.BillingType == BillingType.VariousWeight)
@@ -537,19 +540,9 @@ namespace Phoebe.FormUI
                 var cargo = this.cargoBindingSource[e.RowIndex] as Cargo;
                 var grid = this.cargoDataGridView;
 
-                if (cargo.FirstCategory != null)
+                if (cargo.Number != null)
                 {
-                    grid.Rows[e.RowIndex].Cells[this.dataGridViewColumnFirstCategory.Index].Value = cargo.FirstCategory.Name;
-                }
-
-                if (cargo.SecondCategory != null)
-                {
-                    grid.Rows[e.RowIndex].Cells[this.dataGridViewColumnSecondCategory.Index].Value = cargo.SecondCategory.Name;
-                }
-
-                if (cargo.ThirdCategory != null)
-                {
-                    grid.Rows[e.RowIndex].Cells[this.dataGridViewColumnThirdCategory.Index].Value = cargo.ThirdCategory.Name;
+                    grid.Rows[e.RowIndex].Cells[this.columnNumberName.Index].Value = this.categoryBusiness.TranslateNumber(cargo.Number).GetName();
                 }
 
                 if (cargo.User != null)

@@ -34,6 +34,9 @@
             this.treeViewReceipt = new System.Windows.Forms.TreeView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.buttonCalculateFee = new System.Windows.Forms.Button();
             this.numericFreezeUnitPrice = new System.Windows.Forms.NumericUpDown();
             this.label18 = new System.Windows.Forms.Label();
             this.numericHandlingUnitPrice = new System.Windows.Forms.NumericUpDown();
@@ -85,22 +88,6 @@
             this.toolEdit = new System.Windows.Forms.ToolStripButton();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.cargoDataGridView = new System.Windows.Forms.DataGridView();
-            this.columnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnNumberName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnFirstCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnSecondCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnThirdCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnUnitWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnTotalWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnUnitVolume = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnTotalVolume = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnWarehouseNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cargoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.cargoBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
@@ -117,9 +104,19 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.listBoxNumber = new System.Windows.Forms.ListBox();
-            this.buttonCalculateFee = new System.Windows.Forms.Button();
-            this.label19 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
+            this.columnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnNumberName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnUnitWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnTotalWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnUnitVolume = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnTotalVolume = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnWarehouseNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -224,6 +221,34 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(966, 254);
             this.panel1.TabIndex = 15;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(962, 100);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(35, 12);
+            this.label20.TabIndex = 39;
+            this.label20.Text = "元/吨";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(473, 100);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(35, 12);
+            this.label19.TabIndex = 38;
+            this.label19.Text = "元/吨";
+            // 
+            // buttonCalculateFee
+            // 
+            this.buttonCalculateFee.Location = new System.Drawing.Point(813, 147);
+            this.buttonCalculateFee.Name = "buttonCalculateFee";
+            this.buttonCalculateFee.Size = new System.Drawing.Size(119, 23);
+            this.buttonCalculateFee.TabIndex = 37;
+            this.buttonCalculateFee.Text = "计算装卸费结冻费";
+            this.buttonCalculateFee.UseVisualStyleBackColor = true;
+            this.buttonCalculateFee.Click += new System.EventHandler(this.buttonCalculateFee_Click);
             // 
             // numericFreezeUnitPrice
             // 
@@ -735,9 +760,6 @@
             this.columnName,
             this.columnNumber,
             this.columnNumberName,
-            this.columnFirstCategory,
-            this.columnSecondCategory,
-            this.columnThirdCategory,
             this.columnCount,
             this.columnUnitWeight,
             this.columnTotalWeight,
@@ -759,109 +781,6 @@
             this.cargoDataGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.cargoDataGridView_CellValueChanged);
             this.cargoDataGridView.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.cargoDataGridView_DataError);
             this.cargoDataGridView.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.cargoDataGridView_EditingControlShowing);
-            // 
-            // columnName
-            // 
-            this.columnName.DataPropertyName = "Name";
-            this.columnName.HeaderText = "名称";
-            this.columnName.Name = "columnName";
-            this.columnName.Width = 150;
-            // 
-            // columnNumber
-            // 
-            this.columnNumber.DataPropertyName = "Number";
-            this.columnNumber.HeaderText = "货品代码";
-            this.columnNumber.Name = "columnNumber";
-            // 
-            // columnNumberName
-            // 
-            this.columnNumberName.HeaderText = "货品类别";
-            this.columnNumberName.Name = "columnNumberName";
-            this.columnNumberName.ReadOnly = true;
-            // 
-            // columnFirstCategory
-            // 
-            this.columnFirstCategory.HeaderText = "一级分类";
-            this.columnFirstCategory.Name = "columnFirstCategory";
-            this.columnFirstCategory.ReadOnly = true;
-            // 
-            // columnSecondCategory
-            // 
-            this.columnSecondCategory.HeaderText = "二级分类";
-            this.columnSecondCategory.Name = "columnSecondCategory";
-            this.columnSecondCategory.ReadOnly = true;
-            // 
-            // columnThirdCategory
-            // 
-            this.columnThirdCategory.HeaderText = "三级分类";
-            this.columnThirdCategory.Name = "columnThirdCategory";
-            this.columnThirdCategory.ReadOnly = true;
-            // 
-            // columnCount
-            // 
-            this.columnCount.DataPropertyName = "Count";
-            this.columnCount.HeaderText = "数量";
-            this.columnCount.Name = "columnCount";
-            this.columnCount.Width = 80;
-            // 
-            // columnUnitWeight
-            // 
-            this.columnUnitWeight.DataPropertyName = "UnitWeight";
-            this.columnUnitWeight.HeaderText = "单位重量(kg)";
-            this.columnUnitWeight.Name = "columnUnitWeight";
-            this.columnUnitWeight.Width = 110;
-            // 
-            // columnTotalWeight
-            // 
-            this.columnTotalWeight.DataPropertyName = "TotalWeight";
-            this.columnTotalWeight.HeaderText = "总重量(t)";
-            this.columnTotalWeight.Name = "columnTotalWeight";
-            this.columnTotalWeight.ReadOnly = true;
-            // 
-            // columnUnitVolume
-            // 
-            this.columnUnitVolume.DataPropertyName = "UnitVolume";
-            this.columnUnitVolume.HeaderText = "单位体积(立方)";
-            this.columnUnitVolume.Name = "columnUnitVolume";
-            this.columnUnitVolume.Width = 120;
-            // 
-            // columnTotalVolume
-            // 
-            this.columnTotalVolume.DataPropertyName = "TotalVolume";
-            this.columnTotalVolume.HeaderText = "总体积(立方)";
-            this.columnTotalVolume.Name = "columnTotalVolume";
-            this.columnTotalVolume.ReadOnly = true;
-            // 
-            // columnWarehouseNumber
-            // 
-            this.columnWarehouseNumber.DataPropertyName = "WarehouseNumber";
-            this.columnWarehouseNumber.HeaderText = "仓库编号";
-            this.columnWarehouseNumber.Name = "columnWarehouseNumber";
-            // 
-            // dataGridViewTextBoxColumn12
-            // 
-            this.dataGridViewTextBoxColumn12.DataPropertyName = "OriginPlace";
-            this.dataGridViewTextBoxColumn12.HeaderText = "产地";
-            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
-            // 
-            // dataGridViewTextBoxColumn13
-            // 
-            this.dataGridViewTextBoxColumn13.DataPropertyName = "ShelfLife";
-            this.dataGridViewTextBoxColumn13.HeaderText = "保质期(月)";
-            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
-            // 
-            // dataGridViewTextBoxColumn14
-            // 
-            this.dataGridViewTextBoxColumn14.DataPropertyName = "Specification";
-            this.dataGridViewTextBoxColumn14.HeaderText = "规格";
-            this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
-            // 
-            // dataGridViewTextBoxColumn20
-            // 
-            this.dataGridViewTextBoxColumn20.DataPropertyName = "Remark";
-            this.dataGridViewTextBoxColumn20.HeaderText = "备注";
-            this.dataGridViewTextBoxColumn20.Name = "dataGridViewTextBoxColumn20";
-            this.dataGridViewTextBoxColumn20.Width = 180;
             // 
             // cargoBindingSource
             // 
@@ -1024,33 +943,90 @@
             this.listBoxNumber.Size = new System.Drawing.Size(188, 279);
             this.listBoxNumber.TabIndex = 0;
             // 
-            // buttonCalculateFee
+            // columnName
             // 
-            this.buttonCalculateFee.Location = new System.Drawing.Point(813, 147);
-            this.buttonCalculateFee.Name = "buttonCalculateFee";
-            this.buttonCalculateFee.Size = new System.Drawing.Size(119, 23);
-            this.buttonCalculateFee.TabIndex = 37;
-            this.buttonCalculateFee.Text = "计算装卸费结冻费";
-            this.buttonCalculateFee.UseVisualStyleBackColor = true;
-            this.buttonCalculateFee.Click += new System.EventHandler(this.buttonCalculateFee_Click);
+            this.columnName.DataPropertyName = "Name";
+            this.columnName.HeaderText = "名称";
+            this.columnName.Name = "columnName";
+            this.columnName.Width = 150;
             // 
-            // label19
+            // columnNumber
             // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(473, 100);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(35, 12);
-            this.label19.TabIndex = 38;
-            this.label19.Text = "元/吨";
+            this.columnNumber.DataPropertyName = "Number";
+            this.columnNumber.HeaderText = "货品代码";
+            this.columnNumber.Name = "columnNumber";
             // 
-            // label20
+            // columnNumberName
             // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(962, 100);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(35, 12);
-            this.label20.TabIndex = 39;
-            this.label20.Text = "元/吨";
+            this.columnNumberName.HeaderText = "货品类别";
+            this.columnNumberName.Name = "columnNumberName";
+            this.columnNumberName.ReadOnly = true;
+            // 
+            // columnCount
+            // 
+            this.columnCount.DataPropertyName = "Count";
+            this.columnCount.HeaderText = "数量";
+            this.columnCount.Name = "columnCount";
+            this.columnCount.Width = 80;
+            // 
+            // columnUnitWeight
+            // 
+            this.columnUnitWeight.DataPropertyName = "UnitWeight";
+            this.columnUnitWeight.HeaderText = "单位重量(kg)";
+            this.columnUnitWeight.Name = "columnUnitWeight";
+            this.columnUnitWeight.Width = 110;
+            // 
+            // columnTotalWeight
+            // 
+            this.columnTotalWeight.DataPropertyName = "TotalWeight";
+            this.columnTotalWeight.HeaderText = "总重量(t)";
+            this.columnTotalWeight.Name = "columnTotalWeight";
+            this.columnTotalWeight.ReadOnly = true;
+            // 
+            // columnUnitVolume
+            // 
+            this.columnUnitVolume.DataPropertyName = "UnitVolume";
+            this.columnUnitVolume.HeaderText = "单位体积(立方)";
+            this.columnUnitVolume.Name = "columnUnitVolume";
+            this.columnUnitVolume.Width = 120;
+            // 
+            // columnTotalVolume
+            // 
+            this.columnTotalVolume.DataPropertyName = "TotalVolume";
+            this.columnTotalVolume.HeaderText = "总体积(立方)";
+            this.columnTotalVolume.Name = "columnTotalVolume";
+            this.columnTotalVolume.ReadOnly = true;
+            // 
+            // columnWarehouseNumber
+            // 
+            this.columnWarehouseNumber.DataPropertyName = "WarehouseNumber";
+            this.columnWarehouseNumber.HeaderText = "仓库编号";
+            this.columnWarehouseNumber.Name = "columnWarehouseNumber";
+            // 
+            // dataGridViewTextBoxColumn12
+            // 
+            this.dataGridViewTextBoxColumn12.DataPropertyName = "OriginPlace";
+            this.dataGridViewTextBoxColumn12.HeaderText = "产地";
+            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
+            // 
+            // dataGridViewTextBoxColumn13
+            // 
+            this.dataGridViewTextBoxColumn13.DataPropertyName = "ShelfLife";
+            this.dataGridViewTextBoxColumn13.HeaderText = "保质期(月)";
+            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
+            // 
+            // dataGridViewTextBoxColumn14
+            // 
+            this.dataGridViewTextBoxColumn14.DataPropertyName = "Specification";
+            this.dataGridViewTextBoxColumn14.HeaderText = "规格";
+            this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
+            // 
+            // dataGridViewTextBoxColumn20
+            // 
+            this.dataGridViewTextBoxColumn20.DataPropertyName = "Remark";
+            this.dataGridViewTextBoxColumn20.HeaderText = "备注";
+            this.dataGridViewTextBoxColumn20.Name = "dataGridViewTextBoxColumn20";
+            this.dataGridViewTextBoxColumn20.Width = 180;
             // 
             // StockInForm
             // 
@@ -1159,12 +1135,17 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton toolLock;
         private System.Windows.Forms.ToolStripButton toolUnlock;
+        private System.Windows.Forms.ToolStripButton toolEdit;
+        private System.Windows.Forms.NumericUpDown numericFreezeUnitPrice;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.NumericUpDown numericHandlingUnitPrice;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Button buttonCalculateFee;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label19;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnName;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnNumberName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnFirstCategory;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnSecondCategory;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnThirdCategory;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnUnitWeight;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnTotalWeight;
@@ -1175,13 +1156,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn14;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn20;
-        private System.Windows.Forms.ToolStripButton toolEdit;
-        private System.Windows.Forms.NumericUpDown numericFreezeUnitPrice;
-        private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.NumericUpDown numericHandlingUnitPrice;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Button buttonCalculateFee;
-        private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.Label label19;
     }
 }

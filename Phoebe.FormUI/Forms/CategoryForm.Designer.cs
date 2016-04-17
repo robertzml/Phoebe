@@ -37,10 +37,11 @@
             this.buttonAddSecond = new System.Windows.Forms.Button();
             this.buttonAddFirst = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textBoxName = new System.Windows.Forms.TextBox();
             this.textBoxNumber = new System.Windows.Forms.TextBox();
+            this.textBoxName = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.buttonSetCargoCode = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -52,7 +53,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Left;
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(200, 441);
+            this.groupBox1.Size = new System.Drawing.Size(200, 510);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "类别列表";
@@ -62,12 +63,13 @@
             this.treeCategory.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeCategory.Location = new System.Drawing.Point(3, 17);
             this.treeCategory.Name = "treeCategory";
-            this.treeCategory.Size = new System.Drawing.Size(194, 421);
+            this.treeCategory.Size = new System.Drawing.Size(194, 490);
             this.treeCategory.TabIndex = 0;
             this.treeCategory.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeCategory_AfterSelect);
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.buttonSetCargoCode);
             this.groupBox2.Controls.Add(this.buttonDelete);
             this.groupBox2.Controls.Add(this.buttonEdit);
             this.groupBox2.Controls.Add(this.buttonAddThird);
@@ -76,7 +78,7 @@
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox2.Location = new System.Drawing.Point(203, 3);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(476, 149);
+            this.groupBox2.Size = new System.Drawing.Size(633, 149);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "操作";
@@ -140,19 +142,26 @@
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox3.Location = new System.Drawing.Point(203, 152);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(476, 137);
+            this.groupBox3.Size = new System.Drawing.Size(633, 137);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "信息";
             // 
-            // label1
+            // textBoxNumber
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(28, 30);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(29, 12);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "名称";
+            this.textBoxNumber.Location = new System.Drawing.Point(66, 69);
+            this.textBoxNumber.Name = "textBoxNumber";
+            this.textBoxNumber.ReadOnly = true;
+            this.textBoxNumber.Size = new System.Drawing.Size(197, 21);
+            this.textBoxNumber.TabIndex = 3;
+            // 
+            // textBoxName
+            // 
+            this.textBoxName.Location = new System.Drawing.Point(66, 27);
+            this.textBoxName.Name = "textBoxName";
+            this.textBoxName.ReadOnly = true;
+            this.textBoxName.Size = new System.Drawing.Size(197, 21);
+            this.textBoxName.TabIndex = 2;
             // 
             // label2
             // 
@@ -163,27 +172,30 @@
             this.label2.TabIndex = 1;
             this.label2.Text = "代码";
             // 
-            // textBoxName
+            // label1
             // 
-            this.textBoxName.Location = new System.Drawing.Point(66, 27);
-            this.textBoxName.Name = "textBoxName";
-            this.textBoxName.ReadOnly = true;
-            this.textBoxName.Size = new System.Drawing.Size(197, 21);
-            this.textBoxName.TabIndex = 2;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(28, 30);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(29, 12);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "名称";
             // 
-            // textBoxNumber
+            // buttonSetCargoCode
             // 
-            this.textBoxNumber.Location = new System.Drawing.Point(66, 69);
-            this.textBoxNumber.Name = "textBoxNumber";
-            this.textBoxNumber.ReadOnly = true;
-            this.textBoxNumber.Size = new System.Drawing.Size(197, 21);
-            this.textBoxNumber.TabIndex = 3;
+            this.buttonSetCargoCode.Location = new System.Drawing.Point(304, 94);
+            this.buttonSetCargoCode.Name = "buttonSetCargoCode";
+            this.buttonSetCargoCode.Size = new System.Drawing.Size(96, 23);
+            this.buttonSetCargoCode.TabIndex = 5;
+            this.buttonSetCargoCode.Text = "重设货品编码";
+            this.buttonSetCargoCode.UseVisualStyleBackColor = true;
+            this.buttonSetCargoCode.Click += new System.EventHandler(this.buttonSetCargoCode_Click);
             // 
             // CategoryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(682, 447);
+            this.ClientSize = new System.Drawing.Size(839, 516);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -214,5 +226,6 @@
         private System.Windows.Forms.TextBox textBoxName;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button buttonSetCargoCode;
     }
 }

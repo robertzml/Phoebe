@@ -151,6 +151,36 @@ namespace Phoebe.Business
 
             return ErrorCode.Success;
         }
+
+        /// <summary>
+        /// 设置货品编码
+        /// </summary>
+        public ErrorCode SetNumber()
+        {
+            try
+            {
+                var cargos = this.context.Cargoes;
+                foreach(var cargo in cargos)
+                {
+                    if (cargo.ThirdCategoryID == null)
+                    {
+                        cargo.Number = cargo.SecondCategory.Number;
+                    }
+                    else
+                    {
+                        cargo.Number = cargo.ThirdCategory.Number;
+                    }
+                }
+
+                this.context.SaveChanges();
+            }
+            catch(Exception)
+            {
+                return ErrorCode.Exception;
+            }
+
+            return ErrorCode.Success;
+        }
         #endregion //Method
     }
 }

@@ -259,6 +259,25 @@ namespace Phoebe.FormUI
                 }
             }
         }
+
+        /// <summary>
+        /// 重设货品编码
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonSetCargoCode_Click(object sender, EventArgs e)
+        {
+            CargoBusiness cargoBusiness = new CargoBusiness();
+            ErrorCode result = cargoBusiness.SetNumber();
+            if (result == ErrorCode.Success)
+            {
+                MessageBox.Show("更新编码成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("更新编码失败：" + result.DisplayName(), FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
         #endregion //Event
     }
 }

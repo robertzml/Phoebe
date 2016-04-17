@@ -1426,7 +1426,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>备注：签字视为欠条</Value>
+                  <Value>备注：此单视为欠条</Value>
                   <Style>
                     <FontFamily>宋体</FontFamily>
                     <FontSize>12pt</FontSize>

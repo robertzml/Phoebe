@@ -143,11 +143,6 @@ namespace Phoebe.FormUI
                 var number = cargos[i].Number;
                 if (!string.IsNullOrEmpty(number))
                     this.cargoDataGridView.Rows[i].Cells[this.columnNumberName.Index].Value = this.categoryBusiness.TranslateNumber(number).GetName();
-                var cargo = cargos[i];
-                this.cargoDataGridView.Rows[i].Cells[this.columnFirstCategory.Index].Value = this.categoryBusiness.GetFirstCategory(cargo.FirstCategoryID).Name;
-                this.cargoDataGridView.Rows[i].Cells[this.columnSecondCategory.Index].Value = this.categoryBusiness.GetSecondCategory(cargo.SecondCategoryID).Name;
-                if (cargo.ThirdCategoryID != null)
-                    this.cargoDataGridView.Rows[i].Cells[this.columnThirdCategory.Index].Value = this.categoryBusiness.GetThirdCategory(cargo.ThirdCategoryID.Value).Name;
             }
         }
 
@@ -188,7 +183,6 @@ namespace Phoebe.FormUI
                 column.ReadOnly = !canEdit;
             }
             this.columnNumberName.ReadOnly = this.columnTotalWeight.ReadOnly = this.columnTotalVolume.ReadOnly = true;
-            this.columnFirstCategory.ReadOnly = this.columnSecondCategory.ReadOnly = this.columnThirdCategory.ReadOnly = true;
         }
 
         /// <summary>
@@ -296,7 +290,7 @@ namespace Phoebe.FormUI
         /// <returns></returns>
         public ErrorCode SaveOldItem()
         {
-            Billing billing = this.currentStockIn.Billing;         
+            Billing billing = this.currentStockIn.Billing;
             billing.UnitPrice = this.numericUnitPrice.Value;
             billing.HandlingPrice = this.numericHandlingPrice.Value;
             billing.FreezePrice = this.numericFreezePrice.Value;
@@ -304,7 +298,7 @@ namespace Phoebe.FormUI
             billing.PackingPrice = this.numericPackingPrice.Value;
             billing.RentPrice = this.numericRentPrice.Value;
             billing.OtherPrice = this.numericOtherPrice.Value;
-         
+
             billing.TotalPrice = billing.HandlingPrice + billing.FreezePrice + billing.DisposePrice +
                 billing.PackingPrice + billing.RentPrice + billing.OtherPrice;
 
@@ -330,7 +324,7 @@ namespace Phoebe.FormUI
                 CategoryNumber cnumber = this.categoryBusiness.TranslateNumber(row.Cells[this.columnNumber.Index].Value.ToString());
                 if (cnumber == null)
                     return ErrorCode.CargoNumberError;
-               
+
                 cargo.FirstCategoryID = cnumber.FirstCategoryId;
                 cargo.SecondCategoryID = cnumber.SecondCatgoryId;
                 if (cnumber.Level == 3)
@@ -440,7 +434,7 @@ namespace Phoebe.FormUI
 
             this.groupBox2.Visible = this.groupBox3.Visible = true;
             SetControlEditable(true);
-           
+
             InitCategoryNumberList();
 
             DateTime now = DateTime.Now.Date;
@@ -505,7 +499,7 @@ namespace Phoebe.FormUI
             }
             else
             {
-               
+
             }
         }
 
@@ -567,7 +561,7 @@ namespace Phoebe.FormUI
             {
                 MessageBox.Show("当前未选中记录", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
-            }            
+            }
 
             DialogResult dr = MessageBox.Show("是否确认删除选中记录", FormConstant.MessageBoxTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (dr == DialogResult.Yes)
@@ -720,7 +714,7 @@ namespace Phoebe.FormUI
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void buttonCalculateFee_Click(object sender, EventArgs e)
-        {            
+        {
             double totalWeight = 0;
 
             foreach (DataGridViewRow row in this.cargoDataGridView.Rows)
