@@ -163,7 +163,8 @@ namespace Phoebe.Business
                                 contracts.Select(s => s.ID).Contains(r.ContractID)
                            select r;
 
-            receipt.RealFee = billings.Sum(r => r.TotalPrice);
+            if (billings.Count() > 0)
+                receipt.RealFee = billings.Sum(r => r.TotalPrice);
 
             // get cold fee
             BillingBusiness billingBusiness = new BillingBusiness();
