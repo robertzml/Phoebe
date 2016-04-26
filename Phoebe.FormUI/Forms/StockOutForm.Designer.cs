@@ -28,9 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StockOutForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.treeViewReceipt = new System.Windows.Forms.TreeView();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -66,8 +65,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.cargoDataGridView = new System.Windows.Forms.DataGridView();
-            this.cargoBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.cargoBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
+            this.cargoBindingNavigator = new System.Windows.Forms.BindingNavigator();
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
@@ -78,34 +76,37 @@
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.columnSelect = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnNumberName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnOutCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnOutWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnWarehouseNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewColumnUser = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewColumnStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label7 = new System.Windows.Forms.Label();
+            this.textBoxFilter = new System.Windows.Forms.TextBox();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnOutCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnOutWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnWarehouseNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewColumnUser = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewColumnStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cargoBindingSource = new System.Windows.Forms.BindingSource();
             this.groupBox1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cargoDataGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cargoBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cargoBindingNavigator)).BeginInit();
             this.cargoBindingNavigator.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cargoBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -263,7 +264,7 @@
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox2.Location = new System.Drawing.Point(175, 28);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(779, 147);
+            this.groupBox2.Size = new System.Drawing.Size(779, 175);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "基本信息";
@@ -273,6 +274,8 @@
             // 
             this.panel1.AutoScroll = true;
             this.panel1.AutoScrollMinSize = new System.Drawing.Size(1200, 0);
+            this.panel1.Controls.Add(this.textBoxFilter);
+            this.panel1.Controls.Add(this.label7);
             this.panel1.Controls.Add(this.textBoxRemark);
             this.panel1.Controls.Add(this.label15);
             this.panel1.Controls.Add(this.label16);
@@ -292,7 +295,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 17);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(773, 127);
+            this.panel1.Size = new System.Drawing.Size(773, 155);
             this.panel1.TabIndex = 0;
             // 
             // textBoxRemark
@@ -443,9 +446,9 @@
             this.groupBox3.Controls.Add(this.cargoDataGridView);
             this.groupBox3.Controls.Add(this.cargoBindingNavigator);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox3.Location = new System.Drawing.Point(175, 175);
+            this.groupBox3.Location = new System.Drawing.Point(175, 203);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(779, 372);
+            this.groupBox3.Size = new System.Drawing.Size(779, 344);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "货品信息";
@@ -462,6 +465,7 @@
             this.dataGridViewTextBoxColumn2,
             this.columnNumber,
             this.columnNumberName,
+            this.dataGridViewTextBoxColumn15,
             this.dataGridViewTextBoxColumn6,
             this.dataGridViewTextBoxColumn11,
             this.columnOutCount,
@@ -473,7 +477,6 @@
             this.columnWarehouseNumber,
             this.dataGridViewTextBoxColumn13,
             this.dataGridViewTextBoxColumn14,
-            this.dataGridViewTextBoxColumn15,
             this.dataGridViewColumnUser,
             this.dataGridViewTextBoxColumn19,
             this.dataGridViewTextBoxColumn21,
@@ -484,14 +487,10 @@
             this.cargoDataGridView.Location = new System.Drawing.Point(3, 42);
             this.cargoDataGridView.Name = "cargoDataGridView";
             this.cargoDataGridView.RowTemplate.Height = 23;
-            this.cargoDataGridView.Size = new System.Drawing.Size(773, 327);
+            this.cargoDataGridView.Size = new System.Drawing.Size(773, 299);
             this.cargoDataGridView.TabIndex = 0;
             this.cargoDataGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.cargoDataGridView_CellValueChanged);
             this.cargoDataGridView.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.cargoDataGridView_RowPrePaint);
-            // 
-            // cargoBindingSource
-            // 
-            this.cargoBindingSource.DataSource = typeof(Phoebe.Model.Cargo);
             // 
             // cargoBindingNavigator
             // 
@@ -593,13 +592,6 @@
             this.columnSelect.Name = "columnSelect";
             this.columnSelect.Width = 60;
             // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "Name";
-            this.dataGridViewTextBoxColumn2.HeaderText = "名称";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            // 
             // columnNumber
             // 
             this.columnNumber.DataPropertyName = "Number";
@@ -612,6 +604,67 @@
             this.columnNumberName.HeaderText = "货品类别";
             this.columnNumberName.Name = "columnNumberName";
             this.columnNumberName.ReadOnly = true;
+            // 
+            // columnOutCount
+            // 
+            this.columnOutCount.HeaderText = "出库数量";
+            this.columnOutCount.Name = "columnOutCount";
+            // 
+            // columnOutWeight
+            // 
+            this.columnOutWeight.HeaderText = "出库重量(t)";
+            this.columnOutWeight.Name = "columnOutWeight";
+            this.columnOutWeight.ReadOnly = true;
+            // 
+            // columnWarehouseNumber
+            // 
+            this.columnWarehouseNumber.DataPropertyName = "WarehouseNumber";
+            this.columnWarehouseNumber.HeaderText = "所在仓库";
+            this.columnWarehouseNumber.Name = "columnWarehouseNumber";
+            this.columnWarehouseNumber.ReadOnly = true;
+            // 
+            // dataGridViewColumnUser
+            // 
+            this.dataGridViewColumnUser.HeaderText = "登记人";
+            this.dataGridViewColumnUser.Name = "dataGridViewColumnUser";
+            this.dataGridViewColumnUser.ReadOnly = true;
+            // 
+            // dataGridViewColumnStatus
+            // 
+            this.dataGridViewColumnStatus.HeaderText = "状态";
+            this.dataGridViewColumnStatus.Name = "dataGridViewColumnStatus";
+            this.dataGridViewColumnStatus.ReadOnly = true;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(17, 104);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(53, 12);
+            this.label7.TabIndex = 36;
+            this.label7.Text = "类别筛选";
+            // 
+            // textBoxFilter
+            // 
+            this.textBoxFilter.Location = new System.Drawing.Point(74, 101);
+            this.textBoxFilter.Name = "textBoxFilter";
+            this.textBoxFilter.Size = new System.Drawing.Size(147, 21);
+            this.textBoxFilter.TabIndex = 37;
+            this.textBoxFilter.TextChanged += new System.EventHandler(this.textBoxFilter_TextChanged);
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "Name";
+            this.dataGridViewTextBoxColumn2.HeaderText = "名称";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn15
+            // 
+            this.dataGridViewTextBoxColumn15.DataPropertyName = "Specification";
+            this.dataGridViewTextBoxColumn15.HeaderText = "规格";
+            this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
+            this.dataGridViewTextBoxColumn15.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn6
             // 
@@ -627,11 +680,6 @@
             this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
             this.dataGridViewTextBoxColumn11.ReadOnly = true;
             // 
-            // columnOutCount
-            // 
-            this.columnOutCount.HeaderText = "出库数量";
-            this.columnOutCount.Name = "columnOutCount";
-            // 
             // dataGridViewTextBoxColumn7
             // 
             this.dataGridViewTextBoxColumn7.DataPropertyName = "UnitWeight";
@@ -639,12 +687,6 @@
             this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
             this.dataGridViewTextBoxColumn7.ReadOnly = true;
             this.dataGridViewTextBoxColumn7.Width = 120;
-            // 
-            // columnOutWeight
-            // 
-            this.columnOutWeight.HeaderText = "出库重量(t)";
-            this.columnOutWeight.Name = "columnOutWeight";
-            this.columnOutWeight.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn8
             // 
@@ -669,13 +711,6 @@
             this.dataGridViewTextBoxColumn10.ReadOnly = true;
             this.dataGridViewTextBoxColumn10.Width = 120;
             // 
-            // columnWarehouseNumber
-            // 
-            this.columnWarehouseNumber.DataPropertyName = "WarehouseNumber";
-            this.columnWarehouseNumber.HeaderText = "所在仓库";
-            this.columnWarehouseNumber.Name = "columnWarehouseNumber";
-            this.columnWarehouseNumber.ReadOnly = true;
-            // 
             // dataGridViewTextBoxColumn13
             // 
             this.dataGridViewTextBoxColumn13.DataPropertyName = "OriginPlace";
@@ -690,25 +725,12 @@
             this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
             this.dataGridViewTextBoxColumn14.ReadOnly = true;
             // 
-            // dataGridViewTextBoxColumn15
-            // 
-            this.dataGridViewTextBoxColumn15.DataPropertyName = "Specification";
-            this.dataGridViewTextBoxColumn15.HeaderText = "规格";
-            this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
-            this.dataGridViewTextBoxColumn15.ReadOnly = true;
-            // 
-            // dataGridViewColumnUser
-            // 
-            this.dataGridViewColumnUser.HeaderText = "登记人";
-            this.dataGridViewColumnUser.Name = "dataGridViewColumnUser";
-            this.dataGridViewColumnUser.ReadOnly = true;
-            // 
             // dataGridViewTextBoxColumn19
             // 
             this.dataGridViewTextBoxColumn19.DataPropertyName = "InTime";
-            dataGridViewCellStyle1.Format = "d";
-            dataGridViewCellStyle1.NullValue = null;
-            this.dataGridViewTextBoxColumn19.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Format = "d";
+            dataGridViewCellStyle2.NullValue = null;
+            this.dataGridViewTextBoxColumn19.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewTextBoxColumn19.HeaderText = "入库时间";
             this.dataGridViewTextBoxColumn19.Name = "dataGridViewTextBoxColumn19";
             this.dataGridViewTextBoxColumn19.ReadOnly = true;
@@ -720,11 +742,9 @@
             this.dataGridViewTextBoxColumn21.Name = "dataGridViewTextBoxColumn21";
             this.dataGridViewTextBoxColumn21.ReadOnly = true;
             // 
-            // dataGridViewColumnStatus
+            // cargoBindingSource
             // 
-            this.dataGridViewColumnStatus.HeaderText = "状态";
-            this.dataGridViewColumnStatus.Name = "dataGridViewColumnStatus";
-            this.dataGridViewColumnStatus.ReadOnly = true;
+            this.cargoBindingSource.DataSource = typeof(Phoebe.Model.Cargo);
             // 
             // StockOutForm
             // 
@@ -748,10 +768,10 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cargoDataGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cargoBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cargoBindingNavigator)).EndInit();
             this.cargoBindingNavigator.ResumeLayout(false);
             this.cargoBindingNavigator.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cargoBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -809,6 +829,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnNumberName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn15;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnOutCount;
@@ -820,10 +841,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn columnWarehouseNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn14;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn15;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewColumnUser;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn19;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn21;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewColumnStatus;
+        private System.Windows.Forms.TextBox textBoxFilter;
+        private System.Windows.Forms.Label label7;
     }
 }

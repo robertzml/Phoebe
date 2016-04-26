@@ -533,6 +533,34 @@ namespace Phoebe.FormUI
             }
         }
 
+        /// <summary>
+        /// 类别筛选
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void textBoxFilter_TextChanged(object sender, EventArgs e)
+        {
+            string number = this.textBoxFilter.Text;
+            if (string.IsNullOrEmpty(number))
+                return;
+
+            CurrencyManager cm = (CurrencyManager)BindingContext[this.cargoDataGridView.DataSource];
+            cm.SuspendBinding();
+            foreach (DataGridViewRow row in this.cargoDataGridView.Rows)
+            {
+                string cargoNumber = row.Cells[this.columnNumber.Index].Value.ToString();
+                if (cargoNumber.StartsWith(number))
+                {
+                    row.Visible = true;
+                }
+                else
+                {
+                    row.Visible = false;
+                }
+            }
+            cm.ResumeBinding();
+        }
+
         private void cargoDataGridView_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
         {
             if (e.RowIndex < this.cargoBindingSource.Count)
@@ -554,5 +582,6 @@ namespace Phoebe.FormUI
             }
         }
         #endregion //Event
+
     }
 }
