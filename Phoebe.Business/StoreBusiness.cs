@@ -877,6 +877,81 @@ namespace Phoebe.Business
                 return false;
             }
         }
+
+        /// <summary>
+        /// 出库编辑
+        /// </summary>
+        /// <param name="id">出库ID</param>
+        /// <param name="soDetails">出库记录</param>
+        /// <returns></returns>
+        public ErrorCode StockOutUpdate(Guid id, List<StockOutDetail> soDetails)
+        {
+            try
+            {
+                var so = this.context.StockOuts.Find(id);
+                var oldDetails = this.context.StockOutDetails.Where(r => r.StockOutID == id);
+
+                foreach (var item in oldDetails)
+                {
+                    //get new detail
+                    var newDetail = soDetails.Single(r => r.CargoID == item.CargoID);
+
+                    //reset cargo's and stock's count and weight
+                    var cargo = item.Cargo;
+                    cargo.StoreCount += item.Count;
+                    cargo.StoreWeight += item.OutWeight;
+
+                    var stock = item.Stock;
+                    stock.Count += item.Count;
+                    stock.Weight += item.OutWeight;
+
+                    //copy new count and weight
+                    item.Count = newDetail.Count;
+                    item.OutWeight = newDetail.OutWeight;                  
+
+                    //check cargo count                   
+                    if (cargo.StoreCount < item.Count)
+                        return ErrorCode.StockOutCountOverflow;
+
+                    if (cargo.StoreCount == item.Count) // all stock out
+                    {
+                        cargo.StoreCount = 0;
+                        cargo.StoreWeight = 0;
+                        cargo.OutTime = so.OutTime;
+                        cargo.Status = (int)EntityStatus.CargoStockOut;
+
+                        stock.Count = 0;
+                        stock.Weight = 0;
+                        stock.OutTime = so.OutTime;
+                        stock.Destination = (int)DestinationType.StockOut;
+                        stock.Status = (int)EntityStatus.StoreOut;
+                    }
+                    else
+                    {
+                        cargo.StoreCount -= item.Count;
+                        cargo.StoreWeight -= item.OutWeight;
+                        cargo.OutTime = null;
+                        cargo.Status = (int)EntityStatus.CargoStockIn;
+
+                        stock.Count -= item.Count;
+                        stock.Weight = cargo.StoreWeight;
+                        stock.OutTime = null;
+                        stock.Destination = null;
+                        stock.Status = (int)EntityStatus.StockIn;
+                    }
+
+                    //change stockout details status
+                    item.Status = (int)EntityStatus.StockOut;
+                }
+
+                this.context.SaveChanges();
+                return ErrorCode.Success;
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+        }
         #endregion //Stock Out
 
         #region Stock Move
