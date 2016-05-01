@@ -1,9 +1,0 @@
-﻿@model int?
-
-<select id="CustomerType" name="CustomerType" class="form-control">
-    <option value="">-- 请选择 --</option>
-    @foreach (CustomerType o in Enum.GetValues(typeof(CustomerType)))
-    {
-        <option value="@Convert.ToInt32(o)" @(Model == (int)o ? "selected='selected'" : "")>@o.DisplayName()</option>
-    }
-</select>
