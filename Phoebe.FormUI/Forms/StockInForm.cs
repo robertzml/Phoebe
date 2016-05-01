@@ -454,6 +454,8 @@ namespace Phoebe.FormUI
             this.numericPackingPrice.Value = 0;
             this.numericRentPrice.Value = 0;
             this.numericOtherPrice.Value = 0;
+            this.numericHandlingUnitPrice.Value = 0;
+            this.numericFreezeUnitPrice.Value = 0;
 
             this.cargoBindingSource.DataSource = new List<Cargo>();
         }
