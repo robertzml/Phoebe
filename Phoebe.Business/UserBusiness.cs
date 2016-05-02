@@ -204,7 +204,6 @@ namespace Phoebe.Business
         }
         #endregion //User Method
 
-
         #region UserGroup Method
         /// <summary>
         /// 获取所有用户组
