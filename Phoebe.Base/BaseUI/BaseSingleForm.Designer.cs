@@ -45,7 +45,7 @@
             this.plFill.Dock = System.Windows.Forms.DockStyle.Fill;
             this.plFill.Location = new System.Drawing.Point(0, 0);
             this.plFill.Name = "plFill";
-            this.plFill.Size = new System.Drawing.Size(369, 244);
+            this.plFill.Size = new System.Drawing.Size(430, 285);
             this.plFill.TabIndex = 0;
             // 
             // plBottom
@@ -56,9 +56,9 @@
             this.plBottom.Controls.Add(this.btnCanel);
             this.plBottom.Controls.Add(this.btnConfirm);
             this.plBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.plBottom.Location = new System.Drawing.Point(0, 244);
+            this.plBottom.Location = new System.Drawing.Point(0, 285);
             this.plBottom.Name = "plBottom";
-            this.plBottom.Size = new System.Drawing.Size(369, 54);
+            this.plBottom.Size = new System.Drawing.Size(430, 63);
             this.plBottom.TabIndex = 1;
             // 
             // btnCanel
@@ -66,9 +66,9 @@
             this.btnCanel.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnCanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCanel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCanel.Location = new System.Drawing.Point(262, 16);
+            this.btnCanel.Location = new System.Drawing.Point(306, 19);
             this.btnCanel.Name = "btnCanel";
-            this.btnCanel.Size = new System.Drawing.Size(75, 23);
+            this.btnCanel.Size = new System.Drawing.Size(87, 27);
             this.btnCanel.TabIndex = 1;
             this.btnCanel.Text = "取消";
             // 
@@ -76,19 +76,19 @@
             // 
             this.btnConfirm.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnConfirm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnConfirm.Location = new System.Drawing.Point(163, 16);
+            this.btnConfirm.Location = new System.Drawing.Point(190, 19);
             this.btnConfirm.Name = "btnConfirm";
-            this.btnConfirm.Size = new System.Drawing.Size(75, 23);
+            this.btnConfirm.Size = new System.Drawing.Size(87, 27);
             this.btnConfirm.TabIndex = 0;
             this.btnConfirm.Text = "确定";
             // 
             // BaseSingleForm
             // 
             this.AcceptButton = this.btnConfirm;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCanel;
-            this.ClientSize = new System.Drawing.Size(369, 298);
+            this.ClientSize = new System.Drawing.Size(430, 348);
             this.Controls.Add(this.plFill);
             this.Controls.Add(this.plBottom);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;

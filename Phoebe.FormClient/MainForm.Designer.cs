@@ -28,8 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
+            this.barManager1 = new DevExpress.XtraBars.BarManager();
             this.mainMenu = new DevExpress.XtraBars.Bar();
             this.menuCustomer = new DevExpress.XtraBars.BarSubItem();
             this.menuUser = new DevExpress.XtraBars.BarSubItem();
@@ -44,7 +43,7 @@
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.barSubItem2 = new DevExpress.XtraBars.BarSubItem();
             this.barCustomerList = new DevExpress.XtraBars.BarButtonItem();
-            this.tabMdiManager = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
+            this.tabMdiManager = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabMdiManager)).BeginInit();
             this.SuspendLayout();
@@ -197,7 +196,6 @@
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
             this.IsMdiContainer = true;
-            this.LookAndFeel.UseDefaultLookAndFeel = false;
             this.Name = "MainForm";
             this.Text = "华润冷链管理系统";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

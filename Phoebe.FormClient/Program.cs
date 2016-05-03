@@ -17,6 +17,7 @@ namespace Phoebe.FormClient
         {
             DevExpress.UserSkins.BonusSkins.Register();
             DevExpress.Skins.SkinManager.EnableFormSkins();
+            DevExpress.Skins.SkinManager.EnableMdiFormSkins();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 

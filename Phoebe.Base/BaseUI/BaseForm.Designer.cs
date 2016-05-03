@@ -38,7 +38,6 @@
             this.ClientSize = new System.Drawing.Size(793, 465);
             this.FormBorderEffect = DevExpress.XtraEditors.FormBorderEffect.Shadow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.LookAndFeel.UseDefaultLookAndFeel = false;
             this.Name = "BaseForm";
             this.Text = "BaseForm";
             this.ResumeLayout(false);
