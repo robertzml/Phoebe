@@ -7,12 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Phoebe.Base;
 
-namespace Phoebe.Base
+namespace Phoebe.FormClient
 {
-    public partial class BaseForm : DevExpress.XtraEditors.XtraForm
+    public partial class CustomerForm : BaseForm
     {
-        public BaseForm()
+        public CustomerForm()
         {
             InitializeComponent();
         }

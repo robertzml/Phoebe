@@ -1,6 +1,6 @@
-﻿namespace Phoebe.Base
+﻿namespace Phoebe.FormClient
 {
-    partial class BaseForm
+    partial class CustomerForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,21 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BaseForm));
-            this.SuspendLayout();
-            // 
-            // BaseForm
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(793, 465);
-            this.FormBorderEffect = DevExpress.XtraEditors.FormBorderEffect.Shadow;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.LookAndFeel.UseDefaultLookAndFeel = false;
-            this.Name = "BaseForm";
-            this.Text = "BaseForm";
-            this.ResumeLayout(false);
-
+            this.Text = "CustomerForm";
         }
 
         #endregion

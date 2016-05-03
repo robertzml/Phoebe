@@ -28,5 +28,32 @@ namespace Phoebe.FormClient
             this.currentUser = user;
         }
         #endregion //Constructor
+
+        #region Event
+        /// <summary>
+        /// 窗体载入
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+
+        #region Menu Event
+        /// <summary>
+        /// 用户管理 - 用户组列表
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void menuUserGroupList_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            UserGroupForm form = new UserGroupForm();
+            form.MdiParent = this;
+            form.Show();
+        }
+        #endregion //Menu Event
+        #endregion //Event
     }
 }
