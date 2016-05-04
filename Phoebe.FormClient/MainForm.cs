@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Phoebe.Base;
+using Phoebe.Common;
 using Phoebe.Model;
 
 namespace Phoebe.FormClient
@@ -15,19 +16,22 @@ namespace Phoebe.FormClient
     public partial class MainForm : BaseForm
     {
         #region Field
-        /// <summary>
-        /// 当前用户
-        /// </summary>
-        private User currentUser;
+       
         #endregion //Field
 
         #region Constructor
-        public MainForm(User user)
+        public MainForm()
         {
-            InitializeComponent();
-            this.currentUser = user;
+            InitializeComponent();            
         }
         #endregion //Constructor
+
+        #region Function
+        private void InitControl()
+        {
+            this.barUserName.Caption = this.currentUser.Name;
+        }
+        #endregion //Function
 
         #region Event
         /// <summary>
@@ -37,7 +41,7 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void MainForm_Load(object sender, EventArgs e)
         {
-
+            InitControl();
         }
 
 

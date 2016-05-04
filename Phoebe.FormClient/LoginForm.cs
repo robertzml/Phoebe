@@ -21,14 +21,14 @@ namespace Phoebe.FormClient
     {
         #region Field
         /// <summary>
-        /// 用户
-        /// </summary>
-        private User user;
-
-        /// <summary>
         /// 用户业务类
         /// </summary>
         private UserBusiness userBusiness;
+
+        /// <summary>
+        /// 用户
+        /// </summary>
+        private User user;
         #endregion //Field
 
         #region Constructor
@@ -37,6 +37,10 @@ namespace Phoebe.FormClient
             InitializeComponent();
         }
         #endregion //Constructor
+
+        #region Function
+       
+        #endregion //Function
 
         #region Event
         /// <summary>
@@ -74,7 +78,7 @@ namespace Phoebe.FormClient
 
             if (result == ErrorCode.Success)
             {
-                this.user = userBusiness.GetUser(userName);
+                this.user = userBusiness.GetUser(userName);               
                 this.DialogResult = System.Windows.Forms.DialogResult.OK;
                 this.Close();
             }
@@ -89,7 +93,7 @@ namespace Phoebe.FormClient
 
         #region Property
         /// <summary>
-        /// 用户
+        /// 登录用户
         /// </summary>
         public User User
         {

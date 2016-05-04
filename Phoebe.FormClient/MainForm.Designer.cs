@@ -28,7 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.barManager1 = new DevExpress.XtraBars.BarManager();
+            this.components = new System.ComponentModel.Container();
+            this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.mainMenu = new DevExpress.XtraBars.Bar();
             this.menuCustomer = new DevExpress.XtraBars.BarSubItem();
             this.menuUser = new DevExpress.XtraBars.BarSubItem();
@@ -43,7 +44,11 @@
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.barSubItem2 = new DevExpress.XtraBars.BarSubItem();
             this.barCustomerList = new DevExpress.XtraBars.BarButtonItem();
-            this.tabMdiManager = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager();
+            this.tabMdiManager = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
+            this.barStaticItem1 = new DevExpress.XtraBars.BarStaticItem();
+            this.barHeaderItem1 = new DevExpress.XtraBars.BarHeaderItem();
+            this.barUserName = new DevExpress.XtraBars.BarStaticItem();
+            this.barStaticItem2 = new DevExpress.XtraBars.BarStaticItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabMdiManager)).BeginInit();
             this.SuspendLayout();
@@ -66,9 +71,13 @@
             this.menuUser,
             this.menuUserList,
             this.menuUserGroupList,
-            this.menuChangePassword});
+            this.menuChangePassword,
+            this.barStaticItem1,
+            this.barHeaderItem1,
+            this.barUserName,
+            this.barStaticItem2});
             this.barManager1.MainMenu = this.mainMenu;
-            this.barManager1.MaxItemId = 9;
+            this.barManager1.MaxItemId = 13;
             this.barManager1.StatusBar = this.bar3;
             // 
             // mainMenu
@@ -135,6 +144,9 @@
             this.bar3.DockCol = 0;
             this.bar3.DockRow = 0;
             this.bar3.DockStyle = DevExpress.XtraBars.BarDockStyle.Bottom;
+            this.bar3.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.Caption, this.barStaticItem1, "当前用户:"),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barUserName)});
             this.bar3.OptionsBar.AllowQuickCustomization = false;
             this.bar3.OptionsBar.DrawDragBorder = false;
             this.bar3.OptionsBar.UseWholeRow = true;
@@ -151,22 +163,22 @@
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 579);
-            this.barDockControlBottom.Size = new System.Drawing.Size(1038, 23);
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 575);
+            this.barDockControlBottom.Size = new System.Drawing.Size(1038, 27);
             // 
             // barDockControlLeft
             // 
             this.barDockControlLeft.CausesValidation = false;
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.barDockControlLeft.Location = new System.Drawing.Point(0, 24);
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 555);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 551);
             // 
             // barDockControlRight
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
             this.barDockControlRight.Location = new System.Drawing.Point(1038, 24);
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 555);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 551);
             // 
             // barSubItem2
             // 
@@ -184,6 +196,34 @@
             this.tabMdiManager.ClosePageButtonShowMode = DevExpress.XtraTab.ClosePageButtonShowMode.InAllTabPageHeaders;
             this.tabMdiManager.MdiParent = this;
             this.tabMdiManager.PinPageButtonShowMode = DevExpress.XtraTab.PinPageButtonShowMode.InActiveTabPageHeader;
+            // 
+            // barStaticItem1
+            // 
+            this.barStaticItem1.Border = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.barStaticItem1.Caption = "当前用户:";
+            this.barStaticItem1.Id = 9;
+            this.barStaticItem1.Name = "barStaticItem1";
+            this.barStaticItem1.TextAlignment = System.Drawing.StringAlignment.Near;
+            // 
+            // barHeaderItem1
+            // 
+            this.barHeaderItem1.Caption = "barHeaderItem1";
+            this.barHeaderItem1.Id = 10;
+            this.barHeaderItem1.Name = "barHeaderItem1";
+            // 
+            // barUserName
+            // 
+            this.barUserName.Border = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.barUserName.Id = 11;
+            this.barUserName.Name = "barUserName";
+            this.barUserName.TextAlignment = System.Drawing.StringAlignment.Near;
+            // 
+            // barStaticItem2
+            // 
+            this.barStaticItem2.Caption = "barStaticItem2";
+            this.barStaticItem2.Id = 12;
+            this.barStaticItem2.Name = "barStaticItem2";
+            this.barStaticItem2.TextAlignment = System.Drawing.StringAlignment.Near;
             // 
             // MainForm
             // 
@@ -224,6 +264,10 @@
         private DevExpress.XtraBars.BarButtonItem menuUserList;
         private DevExpress.XtraBars.BarButtonItem menuUserGroupList;
         private DevExpress.XtraBars.BarButtonItem menuChangePassword;
+        private DevExpress.XtraBars.BarStaticItem barStaticItem1;
+        private DevExpress.XtraBars.BarStaticItem barUserName;
+        private DevExpress.XtraBars.BarHeaderItem barHeaderItem1;
+        private DevExpress.XtraBars.BarStaticItem barStaticItem2;
     }
 }
 

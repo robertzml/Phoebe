@@ -3,12 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Phoebe.Base;
+using Phoebe.Common;
 using Phoebe.Model;
 
 namespace Phoebe.FormClient
 {
     static class Program
     {
+        /// <summary>
+        /// 全局操作
+        /// </summary>
+        public static GlobalControl GC = new GlobalControl();
+
         /// <summary>
         /// 应用程序的主入口点。
         /// </summary>
@@ -24,8 +31,10 @@ namespace Phoebe.FormClient
             LoginForm login = new LoginForm();
             if (login.ShowDialog() == DialogResult.OK)
             {
-                User user = login.User;
-                Application.Run(new MainForm(user));
+                Program.GC.CurrentUser = Program.GC.ConvertToLoginUser(login.User);
+                Cache.Instance.Add("CurrentUser", Program.GC.CurrentUser); //缓存用户信息
+
+                Application.Run(new MainForm());
             }
         }
     }

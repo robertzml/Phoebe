@@ -76,7 +76,8 @@
     <Compile Include="Forms\CustomerForm.Designer.cs">
       <DependentUpon>CustomerForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormConstant.cs" />
+    <Compile Include="Other\GlobalControl.cs" />
+    <Compile Include="Other\FormConstant.cs" />
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
