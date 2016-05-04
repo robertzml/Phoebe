@@ -53,6 +53,7 @@
     <Reference Include="UIAutomationClient" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseBL\BaseBusiness.cs" />
     <Compile Include="BaseUI\BaseSingleForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -65,6 +66,7 @@
     <Compile Include="BaseUI\BaseForm.Designer.cs">
       <DependentUpon>BaseForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="BaseUI\ChildFormManage.cs" />
     <Compile Include="Entity\LoginUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

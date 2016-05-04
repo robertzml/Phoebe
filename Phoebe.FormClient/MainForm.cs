@@ -7,22 +7,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Phoebe.Base;
-using Phoebe.Common;
-using Phoebe.Model;
+using DevExpress.LookAndFeel;
 
 namespace Phoebe.FormClient
 {
+    using Phoebe.Base;
+    using Phoebe.Common;
+    using Phoebe.Model;
+
     public partial class MainForm : BaseForm
     {
         #region Field
-       
+
         #endregion //Field
 
         #region Constructor
         public MainForm()
         {
-            InitializeComponent();            
+            InitializeComponent();
+            UserLookAndFeel.Default.SetSkinStyle("Office 2013");
         }
         #endregion //Constructor
 
@@ -53,11 +56,21 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void menuUserGroupList_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            UserGroupForm form = new UserGroupForm();
-            form.MdiParent = this;
-            form.Show();
+            ChildFormManage.LoadMdiForm(this, typeof(UserGroupForm));
+        }
+
+        /// <summary>
+        /// 用户管理 - 修改密码
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void menuChangePassword_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            ChildFormManage.ShowDialogForm(typeof(ChangePasswordForm));
         }
         #endregion //Menu Event
+
         #endregion //Event
+
     }
 }

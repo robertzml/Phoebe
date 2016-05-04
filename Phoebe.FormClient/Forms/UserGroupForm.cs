@@ -14,10 +14,13 @@ using Phoebe.Model;
 
 namespace Phoebe.FormClient
 {
+    /// <summary>
+    /// 用户组窗体
+    /// </summary>
     public partial class UserGroupForm : BaseForm
     {
         public UserGroupForm()
-        {
+        {            
             InitializeComponent();
         }
 

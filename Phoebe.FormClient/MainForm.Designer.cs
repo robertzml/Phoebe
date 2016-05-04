@@ -38,17 +38,17 @@
             this.menuChangePassword = new DevExpress.XtraBars.BarButtonItem();
             this.barMdiList = new DevExpress.XtraBars.BarMdiChildrenListItem();
             this.bar3 = new DevExpress.XtraBars.Bar();
+            this.barStaticItem1 = new DevExpress.XtraBars.BarStaticItem();
+            this.barUserName = new DevExpress.XtraBars.BarStaticItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.barSubItem2 = new DevExpress.XtraBars.BarSubItem();
             this.barCustomerList = new DevExpress.XtraBars.BarButtonItem();
-            this.tabMdiManager = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
-            this.barStaticItem1 = new DevExpress.XtraBars.BarStaticItem();
             this.barHeaderItem1 = new DevExpress.XtraBars.BarHeaderItem();
-            this.barUserName = new DevExpress.XtraBars.BarStaticItem();
             this.barStaticItem2 = new DevExpress.XtraBars.BarStaticItem();
+            this.tabMdiManager = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabMdiManager)).BeginInit();
             this.SuspendLayout();
@@ -130,6 +130,7 @@
             this.menuChangePassword.Caption = "修改密码";
             this.menuChangePassword.Id = 7;
             this.menuChangePassword.Name = "menuChangePassword";
+            this.menuChangePassword.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuChangePassword_ItemClick);
             // 
             // barMdiList
             // 
@@ -151,6 +152,21 @@
             this.bar3.OptionsBar.DrawDragBorder = false;
             this.bar3.OptionsBar.UseWholeRow = true;
             this.bar3.Text = "Status bar";
+            // 
+            // barStaticItem1
+            // 
+            this.barStaticItem1.Border = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.barStaticItem1.Caption = "当前用户:";
+            this.barStaticItem1.Id = 9;
+            this.barStaticItem1.Name = "barStaticItem1";
+            this.barStaticItem1.TextAlignment = System.Drawing.StringAlignment.Near;
+            // 
+            // barUserName
+            // 
+            this.barUserName.Border = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.barUserName.Id = 11;
+            this.barUserName.Name = "barUserName";
+            this.barUserName.TextAlignment = System.Drawing.StringAlignment.Near;
             // 
             // barDockControlTop
             // 
@@ -191,32 +207,11 @@
             this.barCustomerList.Id = 8;
             this.barCustomerList.Name = "barCustomerList";
             // 
-            // tabMdiManager
-            // 
-            this.tabMdiManager.ClosePageButtonShowMode = DevExpress.XtraTab.ClosePageButtonShowMode.InAllTabPageHeaders;
-            this.tabMdiManager.MdiParent = this;
-            this.tabMdiManager.PinPageButtonShowMode = DevExpress.XtraTab.PinPageButtonShowMode.InActiveTabPageHeader;
-            // 
-            // barStaticItem1
-            // 
-            this.barStaticItem1.Border = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.barStaticItem1.Caption = "当前用户:";
-            this.barStaticItem1.Id = 9;
-            this.barStaticItem1.Name = "barStaticItem1";
-            this.barStaticItem1.TextAlignment = System.Drawing.StringAlignment.Near;
-            // 
             // barHeaderItem1
             // 
             this.barHeaderItem1.Caption = "barHeaderItem1";
             this.barHeaderItem1.Id = 10;
             this.barHeaderItem1.Name = "barHeaderItem1";
-            // 
-            // barUserName
-            // 
-            this.barUserName.Border = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.barUserName.Id = 11;
-            this.barUserName.Name = "barUserName";
-            this.barUserName.TextAlignment = System.Drawing.StringAlignment.Near;
             // 
             // barStaticItem2
             // 
@@ -224,6 +219,12 @@
             this.barStaticItem2.Id = 12;
             this.barStaticItem2.Name = "barStaticItem2";
             this.barStaticItem2.TextAlignment = System.Drawing.StringAlignment.Near;
+            // 
+            // tabMdiManager
+            // 
+            this.tabMdiManager.ClosePageButtonShowMode = DevExpress.XtraTab.ClosePageButtonShowMode.InAllTabPageHeaders;
+            this.tabMdiManager.MdiParent = this;
+            this.tabMdiManager.PinPageButtonShowMode = DevExpress.XtraTab.PinPageButtonShowMode.InActiveTabPageHeader;
             // 
             // MainForm
             // 
