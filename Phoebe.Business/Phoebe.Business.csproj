@@ -50,10 +50,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BL\CustomerBusiness.cs" />
+    <Compile Include="DAL\CustomerRepository.cs" />
     <Compile Include="UserBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Phoebe.Base\Phoebe.Base.csproj">
+      <Project>{3f322b29-447f-4d87-bcb3-aae4aa7bfdf9}</Project>
+      <Name>Phoebe.Base</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Phoebe.Common\Phoebe.Common.csproj">
       <Project>{52616e77-9df3-41e5-b004-f8ea5be4959a}</Project>
       <Name>Phoebe.Common</Name>

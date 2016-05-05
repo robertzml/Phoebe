@@ -32,6 +32,7 @@
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.mainMenu = new DevExpress.XtraBars.Bar();
             this.menuCustomer = new DevExpress.XtraBars.BarSubItem();
+            this.menuCustomerList = new DevExpress.XtraBars.BarButtonItem();
             this.menuUser = new DevExpress.XtraBars.BarSubItem();
             this.menuUserList = new DevExpress.XtraBars.BarButtonItem();
             this.menuUserGroupList = new DevExpress.XtraBars.BarButtonItem();
@@ -75,9 +76,10 @@
             this.barStaticItem1,
             this.barHeaderItem1,
             this.barUserName,
-            this.barStaticItem2});
+            this.barStaticItem2,
+            this.menuCustomerList});
             this.barManager1.MainMenu = this.mainMenu;
-            this.barManager1.MaxItemId = 13;
+            this.barManager1.MaxItemId = 14;
             this.barManager1.StatusBar = this.bar3;
             // 
             // mainMenu
@@ -100,7 +102,16 @@
             // 
             this.menuCustomer.Caption = "客户管理";
             this.menuCustomer.Id = 0;
+            this.menuCustomer.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.menuCustomerList)});
             this.menuCustomer.Name = "menuCustomer";
+            // 
+            // menuCustomerList
+            // 
+            this.menuCustomerList.Caption = "客户列表";
+            this.menuCustomerList.Id = 13;
+            this.menuCustomerList.Name = "menuCustomerList";
+            this.menuCustomerList.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuCustomerList_ItemClick);
             // 
             // menuUser
             // 
@@ -269,6 +280,7 @@
         private DevExpress.XtraBars.BarStaticItem barUserName;
         private DevExpress.XtraBars.BarHeaderItem barHeaderItem1;
         private DevExpress.XtraBars.BarStaticItem barStaticItem2;
+        private DevExpress.XtraBars.BarButtonItem menuCustomerList;
     }
 }
 

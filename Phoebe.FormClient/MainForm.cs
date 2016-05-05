@@ -49,6 +49,17 @@ namespace Phoebe.FormClient
 
 
         #region Menu Event
+
+        /// <summary>
+        /// 客户管理 - 客户列表
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void menuCustomerList_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            ChildFormManage.LoadMdiForm(this, typeof(CustomerForm));
+        }
+
         /// <summary>
         /// 用户管理 - 用户组列表
         /// </summary>

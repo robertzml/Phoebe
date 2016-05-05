@@ -65,11 +65,11 @@
             // 
             // btnCanel
             // 
-            this.btnCanel.Location = new System.Drawing.Point(183, 19);
+            this.btnCanel.Location = new System.Drawing.Point(279, 18);
             // 
             // btnConfirm
             // 
-            this.btnConfirm.Location = new System.Drawing.Point(67, 19);
+            this.btnConfirm.Location = new System.Drawing.Point(163, 18);
             this.btnConfirm.Text = "登录";
             this.btnConfirm.Click += new System.EventHandler(this.btnConfirm_Click);
             // 

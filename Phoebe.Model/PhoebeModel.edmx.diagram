@@ -8,6 +8,7 @@
         <EntityTypeShape EntityType="Phoebe.Model.User" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="Phoebe.Model.UserGroup" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
         <AssociationConnector Association="Phoebe.Model.FK_User_User" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Phoebe.Model.Customer" Width="1.5" PointX="0.75" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

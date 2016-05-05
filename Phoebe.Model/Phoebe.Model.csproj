@@ -52,6 +52,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Customer.cs">
+      <DependentUpon>PhoebeModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityStatus.cs" />
     <Compile Include="ErrorCode.cs" />
     <Compile Include="PhoebeModel.Context.cs">
