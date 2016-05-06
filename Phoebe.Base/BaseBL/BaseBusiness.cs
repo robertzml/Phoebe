@@ -9,7 +9,7 @@ namespace Phoebe.Base
     /// <summary>
     /// 业务逻辑基类
     /// </summary>
-    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="T">实体类</typeparam>
     public class BaseBusiness<T> where T : class, new()
     {
         #region Field

@@ -8,10 +8,12 @@ using System.Reflection;
 
 namespace Phoebe.Base
 {
+    using Phoebe.Common;
+
     /// <summary>
     /// 业务工厂类
     /// </summary>
-    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="T">业务类</typeparam>
     public class BusinessFactory<T> where T : class
     {
         #region Field
@@ -34,24 +36,16 @@ namespace Phoebe.Base
         {
             get
             {
-                string CacheKey = typeof(T).FullName;
-                T bll = (T)objCache[CacheKey];　 //从缓存读取  
+                string cacheKey = typeof(T).FullName;
+                T bll = (T)objCache[cacheKey];　 //从缓存读取  
                 if (bll == null)
                 {
                     lock (syncRoot)
                     {
                         if (bll == null)
                         {
-                            string filePath = typeof(T).Assembly.GetName().Name;
-                            Assembly assemblyObj = Assembly.Load(filePath);
-                            if (assemblyObj == null)
-                            {
-                                throw new ArgumentNullException("sFilePath", string.Format("无法加载sFilePath 的程序集"));
-                            }
-
-                            bll = (T)assemblyObj.CreateInstance(typeof(T).FullName); //反射创建  
-
-                            objCache.Add(typeof(T).FullName, bll);
+                            bll = Reflect<T>.Create(typeof(T).FullName, typeof(T).Assembly.GetName().Name); //反射创建，并缓存
+                            objCache.Add(cacheKey, bll);
                         }
                     }
                 }
