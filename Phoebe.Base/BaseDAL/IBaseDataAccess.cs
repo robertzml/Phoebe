@@ -13,10 +13,16 @@ namespace Phoebe.Base
     public interface IBaseDataAccess<T> where T : class
     {
         /// <summary>
+        /// 获取所有对象
+        /// </summary>
+        /// <returns></returns>
+        List<T> FindAll();
+
+        /// <summary>
         /// 根据ID查找对象
         /// </summary>
         /// <param name="id">ID</param>
         /// <returns></returns>
-        T FindById(int id);
+        T FindById(object id);
     }
 }

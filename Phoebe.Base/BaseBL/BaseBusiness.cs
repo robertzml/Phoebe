@@ -31,15 +31,26 @@ namespace Phoebe.Base
         #endregion //Function
 
         #region Method
+        #region Read
+        /// <summary>
+        /// 获取所有对象
+        /// </summary>
+        /// <returns></returns>
+        public virtual List<T> FindAll()
+        {
+            return baseDal.FindAll();
+        }
+
         /// <summary>
         /// 根据ID查找对象
         /// </summary>
         /// <param name="id">ID</param>
         /// <returns></returns>
-        public virtual T FindById(int id)
+        public virtual T FindById(object id)
         {
             return baseDal.FindById(id);
         }
+        #endregion //Read
         #endregion //Method
     }
 }

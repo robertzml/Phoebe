@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="BL\CustomerBusiness.cs" />
     <Compile Include="DAL\CustomerRepository.cs" />
+    <Compile Include="DAL\SqlDataAccess.cs" />
     <Compile Include="UserBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
