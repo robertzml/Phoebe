@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace Phoebe.Business.DAL
@@ -14,10 +15,6 @@ namespace Phoebe.Business.DAL
     /// </summary>
     public class CustomerRepository : SqlDataAccess<PhoebeContext>, IBaseDataAccess<Customer>
     {
-        #region Field
-
-        #endregion //Field
-
         #region Constructor
         public CustomerRepository()
         {
@@ -26,15 +23,6 @@ namespace Phoebe.Business.DAL
 
         #region Method
         /// <summary>
-        /// 获取所有客户
-        /// </summary>
-        /// <returns></returns>
-        public List<Customer> FindAll()
-        {
-            return this.context.Customers.ToList();
-        }
-
-        /// <summary>
         /// 根据ID查找客户
         /// </summary>
         /// <param name="id">ID</param>
@@ -42,6 +30,25 @@ namespace Phoebe.Business.DAL
         public Customer FindById(object id)
         {
             return this.context.Customers.Find(id);
+        }
+
+        /// <summary>
+        /// 获取所有客户
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Customer> FindAll()
+        {
+            return this.context.Customers;
+        }
+
+        /// <summary>
+        /// 根据条件查找客户
+        /// </summary>
+        /// <param name="predicate">查询条件</param>
+        /// <returns></returns>
+        public IEnumerable<Customer> Find(Expression<Func<Customer, bool>> predicate)
+        {
+            return this.context.Customers.Where(predicate);
         }
 
         /// <summary>
@@ -54,6 +61,7 @@ namespace Phoebe.Business.DAL
             try
             {
                 entity.Status = 0;
+
                 if (this.context.Customers.Any(r => r.Number == entity.Number))
                     return ErrorCode.DuplicateNumber;
 

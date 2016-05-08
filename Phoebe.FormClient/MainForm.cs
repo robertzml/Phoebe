@@ -61,6 +61,16 @@ namespace Phoebe.FormClient
         }
 
         /// <summary>
+        /// 合同管理 - 合同列表
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void menuContractList_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            ChildFormManage.LoadMdiForm(this, typeof(ContractForm));
+        }
+
+        /// <summary>
         /// 用户管理 - 用户组列表
         /// </summary>
         /// <param name="sender"></param>
@@ -82,6 +92,5 @@ namespace Phoebe.FormClient
         #endregion //Menu Event
 
         #endregion //Event
-
     }
 }

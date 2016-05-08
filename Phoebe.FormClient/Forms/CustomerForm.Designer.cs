@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
+            this.btnDelete = new DevExpress.XtraEditors.SimpleButton();
             this.btnEdit = new DevExpress.XtraEditors.SimpleButton();
             this.btnAdd = new DevExpress.XtraEditors.SimpleButton();
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
@@ -57,20 +58,30 @@
             // 
             // groupControl1
             // 
+            this.groupControl1.Controls.Add(this.btnDelete);
             this.groupControl1.Controls.Add(this.btnEdit);
             this.groupControl1.Controls.Add(this.btnAdd);
             this.groupControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupControl1.Location = new System.Drawing.Point(0, 0);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(882, 109);
+            this.groupControl1.Size = new System.Drawing.Size(882, 110);
             this.groupControl1.TabIndex = 0;
             this.groupControl1.Text = "操作";
             // 
+            // btnDelete
+            // 
+            this.btnDelete.Location = new System.Drawing.Point(271, 43);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(90, 40);
+            this.btnDelete.TabIndex = 2;
+            this.btnDelete.Text = "删除客户";
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
             // btnEdit
             // 
-            this.btnEdit.Location = new System.Drawing.Point(149, 43);
+            this.btnEdit.Location = new System.Drawing.Point(150, 43);
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(89, 41);
+            this.btnEdit.Size = new System.Drawing.Size(90, 40);
             this.btnEdit.TabIndex = 1;
             this.btnEdit.Text = "编辑客户";
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
@@ -79,7 +90,7 @@
             // 
             this.btnAdd.Location = new System.Drawing.Point(29, 43);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(89, 41);
+            this.btnAdd.Size = new System.Drawing.Size(90, 40);
             this.btnAdd.TabIndex = 0;
             this.btnAdd.Text = "添加客户";
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
@@ -88,9 +99,9 @@
             // 
             this.groupControl2.Controls.Add(this.dgcCustomer);
             this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl2.Location = new System.Drawing.Point(0, 109);
+            this.groupControl2.Location = new System.Drawing.Point(0, 110);
             this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(882, 463);
+            this.groupControl2.Size = new System.Drawing.Size(882, 462);
             this.groupControl2.TabIndex = 1;
             this.groupControl2.Text = "客户列表";
             // 
@@ -101,7 +112,7 @@
             this.dgcCustomer.Location = new System.Drawing.Point(2, 21);
             this.dgcCustomer.MainView = this.dgvCustomer;
             this.dgcCustomer.Name = "dgcCustomer";
-            this.dgcCustomer.Size = new System.Drawing.Size(878, 440);
+            this.dgcCustomer.Size = new System.Drawing.Size(878, 439);
             this.dgcCustomer.TabIndex = 0;
             this.dgcCustomer.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.dgvCustomer});
@@ -262,5 +273,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn colStatus;
         private DevExpress.XtraEditors.SimpleButton btnAdd;
         private DevExpress.XtraEditors.SimpleButton btnEdit;
+        private DevExpress.XtraEditors.SimpleButton btnDelete;
     }
 }

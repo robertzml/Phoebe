@@ -51,9 +51,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BL\CustomerBusiness.cs" />
+    <Compile Include="BL\ContractBusiness.cs" />
+    <Compile Include="DAL\ContractRepository.cs" />
     <Compile Include="DAL\CustomerRepository.cs" />
     <Compile Include="DAL\SqlDataAccess.cs" />
-    <Compile Include="UserBusiness.cs" />
+    <Compile Include="BL\UserBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

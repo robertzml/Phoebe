@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace Phoebe.Base
 {
@@ -11,17 +12,24 @@ namespace Phoebe.Base
     public interface IBaseDataAccess<T> where T : class
     {
         /// <summary>
-        /// 获取所有对象
-        /// </summary>
-        /// <returns></returns>
-        List<T> FindAll();
-
-        /// <summary>
         /// 根据ID查找对象
         /// </summary>
         /// <param name="id">ID</param>
         /// <returns></returns>
         T FindById(object id);
+
+        /// <summary>
+        /// 获取所有对象
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<T> FindAll();
+
+        /// <summary>
+        /// 根据条件查找
+        /// </summary>
+        /// <param name="predicate">查询条件</param>        
+        /// <returns></returns>
+        IEnumerable<T> Find(Expression<Func<T, bool>> predicate);
 
         /// <summary>
         /// 新建对象

@@ -28,5 +28,6 @@ namespace Phoebe.Model
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserGroup> UserGroups { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<Contract> Contracts { get; set; }
     }
 }

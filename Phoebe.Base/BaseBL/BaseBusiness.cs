@@ -36,7 +36,7 @@ namespace Phoebe.Base
         /// <returns></returns>
         public virtual List<T> FindAll()
         {
-            return this.baseDal.FindAll();
+            return this.baseDal.FindAll().ToList();
         }
 
         /// <summary>

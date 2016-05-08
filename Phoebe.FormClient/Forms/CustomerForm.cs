@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Text;
 using System.Windows.Forms;
 
@@ -85,6 +84,38 @@ namespace Phoebe.FormClient
             {
                 var status = (EntityStatus)e.Value;
                 e.DisplayText = status.DisplayName();
+            }
+        }
+
+        /// <summary>
+        /// 删除客户
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (this.dgvCustomer.SelectedRowsCount == 0)
+            {
+                MessageBox.Show("未选中记录", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            DialogResult dr = MessageBox.Show("是否确认删除选中客户", FormConstant.MessageBoxTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (dr == DialogResult.Yes)
+            {
+                int index = this.dgvCustomer.GetDataSourceRowIndex(this.dgvCustomer.GetSelectedRows()[0]);
+                var customer = this.bsCustomer[index] as Customer;
+
+                ErrorCode result = BusinessFactory<CustomerBusiness>.Instance.Delete(customer);
+                if (result == ErrorCode.Success)
+                {
+                    MessageBox.Show("删除客户成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("删除客户失败：" + result.DisplayName(), FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
         }
         #endregion //Event
