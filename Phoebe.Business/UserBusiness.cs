@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Phoebe.Base;
 using Phoebe.Common;
 using Phoebe.Model;
 
@@ -116,7 +117,7 @@ namespace Phoebe.Business
 
                 int count = this.context.Users.Count(r => r.UserName == data.UserName);
                 if (count > 0)
-                    return ErrorCode.DuplicateUserName;
+                    return ErrorCode.DuplicateName;
 
                 this.context.Users.Add(data);
                 this.context.SaveChanges();

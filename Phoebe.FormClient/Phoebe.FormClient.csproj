@@ -70,6 +70,18 @@
     <Reference Include="UIAutomationClient" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\CustomerEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CustomerEditForm.Designer.cs">
+      <DependentUpon>CustomerEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CustomerAddForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CustomerAddForm.Designer.cs">
+      <DependentUpon>CustomerAddForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\CustomerForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -107,6 +119,12 @@
     <EmbeddedResource Include="Forms\ChangePasswordForm.resx">
       <DependentUpon>ChangePasswordForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CustomerAddForm.resx">
+      <DependentUpon>CustomerAddForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CustomerEditForm.resx">
+      <DependentUpon>CustomerEditForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\CustomerForm.resx">
       <DependentUpon>CustomerForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -120,6 +138,7 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\Phoebe.Model.Customer.datasource" />
     <None Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

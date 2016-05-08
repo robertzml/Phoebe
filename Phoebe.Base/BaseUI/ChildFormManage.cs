@@ -15,7 +15,6 @@ namespace Phoebe.Base
         #region Constructor
         private ChildFormManage()
         {
-
         }
         #endregion //Constructor
 
@@ -59,6 +58,17 @@ namespace Phoebe.Base
         public static void ShowDialogForm(Type formType)
         {
             Form dialogForm = (Form)Activator.CreateInstance(formType);
+            dialogForm.ShowDialog();
+        }
+
+        /// <summary>
+        /// 弹出对话框窗体
+        /// </summary>
+        /// <param name="formType">待显示的窗体类型</param>
+        /// <param name="args">构造函数参数列表</param>
+        public static void ShowDialogForm(Type formType, object[] args)
+        {
+            Form dialogForm = (Form)Activator.CreateInstance(formType, args);
             dialogForm.ShowDialog();
         }
         #endregion //Method

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Phoebe.Business.DAL
 {
@@ -43,7 +43,63 @@ namespace Phoebe.Business.DAL
         {
             return this.context.Customers.Find(id);
         }
-        #endregion //Method
 
+        /// <summary>
+        /// 添加客户
+        /// </summary>
+        /// <param name="data">客户对象</param>
+        /// <returns></returns>
+        public ErrorCode Create(Customer entity)
+        {
+            try
+            {
+                entity.Status = 0;
+                if (this.context.Customers.Any(r => r.Number == entity.Number))
+                    return ErrorCode.DuplicateNumber;
+
+                this.context.Customers.Add(entity);
+                this.context.SaveChanges();
+
+                return ErrorCode.Success;
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+        }
+
+        /// <summary>
+        /// 编辑客户
+        /// </summary>
+        /// <param name="data">客户对象</param>
+        /// <returns></returns>
+        public ErrorCode Update(Customer entity)
+        {
+            try
+            {
+                if (this.context.Customers.Any(r => r.Id != entity.Id && r.Number == entity.Number))
+                    return ErrorCode.DuplicateNumber;
+
+                this.context.Entry(entity).State = EntityState.Modified;
+                this.context.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+
+            return ErrorCode.Success;
+        }
+
+        /// <summary>
+        /// 删除客户
+        /// </summary>
+        /// <param name="entity">客户对象</param>
+        /// <returns></returns>
+        public ErrorCode Delete(Customer entity)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion //Method
     }
 }

@@ -70,6 +70,7 @@
     <Compile Include="BaseUI\ChildFormManage.cs" />
     <Compile Include="BaseBL\BusinessFactory.cs" />
     <Compile Include="Entity\LoginUser.cs" />
+    <Compile Include="Entity\ErrorCode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

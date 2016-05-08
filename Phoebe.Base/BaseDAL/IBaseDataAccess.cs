@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Phoebe.Base
 {
@@ -24,5 +22,26 @@ namespace Phoebe.Base
         /// <param name="id">ID</param>
         /// <returns></returns>
         T FindById(object id);
+
+        /// <summary>
+        /// 新建对象
+        /// </summary>
+        /// <param name="entity">实体对象</param>
+        /// <returns></returns>
+        ErrorCode Create(T entity);
+
+        /// <summary>
+        /// 编辑对象
+        /// </summary>
+        /// <param name="entity">实体对象</param>
+        /// <returns></returns>
+        ErrorCode Update(T entity);
+
+        /// <summary>
+        /// 删除对象
+        /// </summary>
+        /// <param name="entity">实体对象</param>
+        /// <returns></returns>
+        ErrorCode Delete(T entity);
     }
 }

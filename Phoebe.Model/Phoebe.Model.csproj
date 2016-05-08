@@ -55,8 +55,8 @@
     <Compile Include="Customer.cs">
       <DependentUpon>PhoebeModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityStatus.cs" />
-    <Compile Include="ErrorCode.cs" />
+    <Compile Include="Helper\PhoebeEnum.cs" />
+    <Compile Include="System\EntityStatus.cs" />
     <Compile Include="PhoebeModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

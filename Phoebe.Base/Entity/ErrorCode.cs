@@ -1,15 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Phoebe.Model
+namespace Phoebe.Base
 {
-    /// <summary>
-    /// 错误代码
-    /// </summary>
     public enum ErrorCode
     {
         #region System
@@ -62,48 +55,48 @@ namespace Phoebe.Model
         NoPrivilege = 7,
 
         /// <summary>
-        /// 编号重复
-        /// </summary>
-        [Display(Name = "编号重复")]
-        DuplicateNumber = 8,
-
-        /// <summary>
         /// 名称为空
         /// </summary>
         [Display(Name = "名称为空")]
-        EmptyName = 9,
+        EmptyName = 8,
+
+        /// <summary>
+        /// 名称重复
+        /// </summary>
+        [Display(Name = "名称重复")]
+        DuplicateName = 11,
+
+        /// <summary>
+        /// 编号重复
+        /// </summary>
+        [Display(Name = "编号重复")]
+        DuplicateNumber = 10,
 
         /// <summary>
         /// 未选择记录
         /// </summary>
         [Display(Name = "未选择记录")]
-        EmptySelect = 10,
+        EmptySelect = 11,
         #endregion //System
 
         #region User
         /// <summary>
-        /// 用户名称重复
-        /// </summary>
-        [Display(Name = "用户名称重复")]
-        DuplicateUserName = 11,
-
-        /// <summary>
         /// 密码错误
         /// </summary>
         [Display(Name = "密码错误")]
-        WrongPassword = 12,
+        WrongPassword = 21,
 
         /// <summary>
         /// 用户不存在
         /// </summary>
         [Display(Name = "用户不存在")]
-        UserNotExist = 13,
+        UserNotExist = 22,
 
         /// <summary>
         /// 用户已禁用
         /// </summary>
         [Display(Name = "用户已禁用")]
-        UserDisabled = 14,
+        UserDisabled = 23,
         #endregion //User
     }
 }
