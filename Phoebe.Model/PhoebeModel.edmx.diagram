@@ -12,6 +12,8 @@
         <EntityTypeShape EntityType="Phoebe.Model.Contract" Width="1.5" PointX="5.25" PointY="2.625" />
         <AssociationConnector Association="Phoebe.Model.FK_Contract_Customer" />
         <AssociationConnector Association="Phoebe.Model.FK_Contract_User" />
+        <EntityTypeShape EntityType="Phoebe.Model.Category" Width="1.5" PointX="7.375" PointY="0.75" />
+        <AssociationConnector Association="Phoebe.Model.FK_Category_Category" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

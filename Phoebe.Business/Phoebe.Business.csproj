@@ -52,6 +52,8 @@
   <ItemGroup>
     <Compile Include="BL\CustomerBusiness.cs" />
     <Compile Include="BL\ContractBusiness.cs" />
+    <Compile Include="BL\CategoryBusiness.cs" />
+    <Compile Include="DAL\CategoryRepository.cs" />
     <Compile Include="DAL\ContractRepository.cs" />
     <Compile Include="DAL\CustomerRepository.cs" />
     <Compile Include="DAL\SqlDataAccess.cs" />

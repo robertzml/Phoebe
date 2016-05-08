@@ -70,6 +70,18 @@
     <Reference Include="UIAutomationClient" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\CategoryAddForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CategoryAddForm.Designer.cs">
+      <DependentUpon>CategoryAddForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CategoryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CategoryForm.Designer.cs">
+      <DependentUpon>CategoryForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ContractAddForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -128,6 +140,12 @@
     <Compile Include="Forms\UserGroupForm.Designer.cs">
       <DependentUpon>UserGroupForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Forms\CategoryAddForm.resx">
+      <DependentUpon>CategoryAddForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CategoryForm.resx">
+      <DependentUpon>CategoryForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\ChangePasswordForm.resx">
       <DependentUpon>ChangePasswordForm.cs</DependentUpon>
     </EmbeddedResource>

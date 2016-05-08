@@ -54,13 +54,13 @@
             this.plFill.Appearance.BackColor = System.Drawing.Color.White;
             this.plFill.Appearance.Options.UseBackColor = true;
             this.plFill.Controls.Add(this.groupControl1);
-            this.plFill.Size = new System.Drawing.Size(407, 163);
+            this.plFill.Size = new System.Drawing.Size(407, 154);
             // 
             // plBottom
             // 
             this.plBottom.Appearance.BackColor = System.Drawing.Color.White;
             this.plBottom.Appearance.Options.UseBackColor = true;
-            this.plBottom.Location = new System.Drawing.Point(0, 163);
+            this.plBottom.Location = new System.Drawing.Point(0, 154);
             this.plBottom.Size = new System.Drawing.Size(407, 63);
             // 
             // btnCanel
@@ -81,7 +81,7 @@
             this.groupControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl1.Location = new System.Drawing.Point(0, 0);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(407, 163);
+            this.groupControl1.Size = new System.Drawing.Size(407, 154);
             this.groupControl1.TabIndex = 0;
             this.groupControl1.Text = "用户信息";
             // 
@@ -98,7 +98,7 @@
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl1.Location = new System.Drawing.Point(2, 21);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(403, 140);
+            this.panelControl1.Size = new System.Drawing.Size(403, 131);
             this.panelControl1.TabIndex = 5;
             // 
             // pictureEdit1
@@ -147,7 +147,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(407, 226);
+            this.ClientSize = new System.Drawing.Size(407, 217);
             this.Name = "LoginForm";
             this.Text = "系统登录";
             this.Load += new System.EventHandler(this.LoginForm_Load);

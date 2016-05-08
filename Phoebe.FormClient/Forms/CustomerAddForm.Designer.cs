@@ -66,22 +66,22 @@
             this.plFill.Appearance.BackColor = System.Drawing.Color.White;
             this.plFill.Appearance.Options.UseBackColor = true;
             this.plFill.Controls.Add(this.groupControl1);
-            this.plFill.Size = new System.Drawing.Size(454, 414);
+            this.plFill.Size = new System.Drawing.Size(470, 414);
             // 
             // plBottom
             // 
             this.plBottom.Appearance.BackColor = System.Drawing.Color.White;
             this.plBottom.Appearance.Options.UseBackColor = true;
             this.plBottom.Location = new System.Drawing.Point(0, 414);
-            this.plBottom.Size = new System.Drawing.Size(454, 63);
+            this.plBottom.Size = new System.Drawing.Size(470, 63);
             // 
             // btnCanel
             // 
-            this.btnCanel.Location = new System.Drawing.Point(354, 19);
+            this.btnCanel.Location = new System.Drawing.Point(328, 18);
             // 
             // btnConfirm
             // 
-            this.btnConfirm.Location = new System.Drawing.Point(238, 19);
+            this.btnConfirm.Location = new System.Drawing.Point(212, 18);
             this.btnConfirm.Click += new System.EventHandler(this.btnConfirm_Click);
             // 
             // groupControl1
@@ -107,7 +107,7 @@
             this.groupControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl1.Location = new System.Drawing.Point(0, 0);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(454, 414);
+            this.groupControl1.Size = new System.Drawing.Size(470, 414);
             this.groupControl1.TabIndex = 0;
             this.groupControl1.Text = "客户信息";
             // 
@@ -247,7 +247,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(454, 477);
+            this.ClientSize = new System.Drawing.Size(470, 477);
             this.Name = "CustomerAddForm";
             this.Text = "添加客户";
             this.Load += new System.EventHandler(this.CustomerAddForm_Load);

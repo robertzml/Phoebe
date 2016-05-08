@@ -77,11 +77,11 @@
             // 
             // btnCanel
             // 
-            this.btnCanel.Location = new System.Drawing.Point(354, 19);
+            this.btnCanel.Location = new System.Drawing.Point(328, 18);
             // 
             // btnConfirm
             // 
-            this.btnConfirm.Location = new System.Drawing.Point(238, 19);
+            this.btnConfirm.Location = new System.Drawing.Point(212, 18);
             this.btnConfirm.Click += new System.EventHandler(this.btnConfirm_Click);
             // 
             // groupControl1
