@@ -26,10 +26,11 @@ namespace Phoebe.FormClient
         #endregion //Constructor
 
         #region Function
+        /// <summary>
+        /// 载入分类树
+        /// </summary>
         private void LoadTree()
         {
-            var categories = BusinessFactory<CategoryBusiness>.Instance.FindAll();
-
             this.tvCategory.BeginUpdate();
             this.tvCategory.Nodes.Clear();
 
@@ -41,7 +42,7 @@ namespace Phoebe.FormClient
             };
             this.tvCategory.Nodes.Add(top);
 
-            var firstCategory = categories.Where(r => r.Hierarchy == 1).OrderBy(r => r.Number);
+            var firstCategory = BusinessFactory<CategoryBusiness>.Instance.GetFirstCategory().OrderBy(r => r.Number);
 
             foreach (var first in firstCategory)
             {
@@ -71,7 +72,7 @@ namespace Phoebe.FormClient
         /// <param name="parentNode">上级节点</param>
         private void LoadChildNode(int parentId, int level, TreeNode parentNode)
         {
-            var children = BusinessFactory<CategoryBusiness>.Instance.GetChildCategory(parentId);
+            var children = BusinessFactory<CategoryBusiness>.Instance.GetChildCategory(parentId).OrderBy(r => r.Number);
 
             foreach (var item in children)
             {
@@ -82,9 +83,19 @@ namespace Phoebe.FormClient
 
                 parentNode.Nodes.Add(node);
 
+                if (level == 2)
+                    LoadChildNode(item.Id, 3, node);
             }
 
             return;
+        }
+
+        private void SetControl(Category category)
+        {
+            this.txtName.Text = category.Name.ToString();
+            this.txtHierarchy.Text = category.Hierarchy.ToString();
+            this.txtNumber.Text = category.Number.ToString();
+            this.txtRemark.Text = category.Remark.ToString();
         }
         #endregion //Function
 
@@ -97,6 +108,23 @@ namespace Phoebe.FormClient
         private void CategoryForm_Load(object sender, EventArgs e)
         {
             LoadTree();
+        }
+
+        /// <summary>
+        /// 选择分类
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tvCategory_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            var node = e.Node;
+            if ((int)node.Tag == 0)
+                return;
+
+            int id = Convert.ToInt32(node.Name);
+
+            var category = BusinessFactory<CategoryBusiness>.Instance.FindById(id);
+            SetControl(category);
         }
 
         /// <summary>
@@ -118,6 +146,32 @@ namespace Phoebe.FormClient
         private void btnAddSecond_Click(object sender, EventArgs e)
         {
             ChildFormManage.ShowDialogForm(typeof(CategoryAddForm), new object[] { 2 });
+            LoadTree();
+        }
+
+        /// <summary>
+        /// 添加三级分类
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnAddThird_Click(object sender, EventArgs e)
+        {
+            ChildFormManage.ShowDialogForm(typeof(CategoryAddForm), new object[] { 3 });
+            LoadTree();
+        }
+        
+        /// <summary>
+        /// 编辑分类
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            TreeNode node = this.tvCategory.SelectedNode;
+            if (node == null || node.Name == "0")
+                return;
+
+            ChildFormManage.ShowDialogForm(typeof(CategoryEditForm), new object[] { Convert.ToInt32(node.Name) });
             LoadTree();
         }
         #endregion //Event

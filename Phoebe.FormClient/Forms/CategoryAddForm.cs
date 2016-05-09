@@ -20,6 +20,9 @@ namespace Phoebe.FormClient
     public partial class CategoryAddForm : BaseSingleForm
     {
         #region Field
+        /// <summary>
+        /// 分类级别
+        /// </summary>
         private int hierarchy;
         #endregion //Field
 
@@ -41,6 +44,10 @@ namespace Phoebe.FormClient
             {
                 category.ParentId = Convert.ToInt32(this.cmbFirstCategory.EditValue);
             }
+            else if (this.hierarchy == 3)
+            {
+                category.ParentId = Convert.ToInt32(this.cmbSecondCategory.EditValue);
+            }
             category.Remark = this.txtRemark.Text;
         }
 
@@ -59,6 +66,24 @@ namespace Phoebe.FormClient
                 this.cmbFirstCategory.Properties.Items.Add(i);
             }
         }
+
+        /// <summary>
+        /// 载入二级分类
+        /// </summary>
+        /// <param name="firstId"></param>
+        private void LoadSecond(int firstId)
+        {
+            this.cmbSecondCategory.Properties.Items.Clear();
+            var second = BusinessFactory<CategoryBusiness>.Instance.GetChildCategory(firstId);
+            foreach (var item in second)
+            {
+                ImageComboBoxItem i = new ImageComboBoxItem();
+                i.Description = item.Name;
+                i.Value = item.Id;
+
+                this.cmbSecondCategory.Properties.Items.Add(i);
+            }
+        }
         #endregion //Function
 
         #region Event
@@ -71,18 +96,30 @@ namespace Phoebe.FormClient
         {
             if (hierarchy == 1)
             {
-                this.cmbFirstCategory.Enabled = false;
-                this.cmbSecondCategory.Enabled = false;
             }
             else if (hierarchy == 2)
             {
-                this.cmbSecondCategory.Enabled = false;
+                this.cmbFirstCategory.Enabled = true;
                 LoadFirst();
             }
             else if (hierarchy == 3)
             {
-
+                this.cmbFirstCategory.Enabled = true;
+                this.cmbSecondCategory.Enabled = true;
+                LoadFirst();
+                this.cmbFirstCategory.SelectedIndexChanged += new System.EventHandler(this.cmbFirstCategory_SelectedIndexChanged);
             }
+        }
+
+        /// <summary>
+        /// 选择一级分类
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cmbFirstCategory_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int firstId = Convert.ToInt32(this.cmbFirstCategory.EditValue);
+            LoadSecond(firstId);
         }
 
         /// <summary>
@@ -108,7 +145,12 @@ namespace Phoebe.FormClient
             {
                 if (this.cmbFirstCategory.SelectedItem == null)
                 {
-                    MessageBox.Show("一级分类不能为空", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("请选择一级分类", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                if (this.cmbSecondCategory.SelectedItem == null)
+                {
+                    MessageBox.Show("请选择二级分类", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
             }

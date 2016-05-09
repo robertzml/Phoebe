@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -70,10 +71,29 @@ namespace Phoebe.Business.DAL
             return ErrorCode.Success;
         }
 
-
+        /// <summary>
+        /// 编辑分类
+        /// </summary>
+        /// <param name="entity">分类对象</param>
+        /// <returns></returns>
         public ErrorCode Update(Category entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                if (this.context.Categories.Any(r => r.Id != entity.Id && r.Number == entity.Number))
+                {
+                    return ErrorCode.DuplicateNumber;
+                }
+
+                this.context.Entry(entity).State = EntityState.Modified;
+                this.context.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+
+            return ErrorCode.Success;
         }
 
 

@@ -70,6 +70,12 @@
     <Reference Include="UIAutomationClient" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\CategoryEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CategoryEditForm.Designer.cs">
+      <DependentUpon>CategoryEditForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\CategoryAddForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -140,6 +146,9 @@
     <Compile Include="Forms\UserGroupForm.Designer.cs">
       <DependentUpon>UserGroupForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Forms\CategoryEditForm.resx">
+      <DependentUpon>CategoryEditForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\CategoryAddForm.resx">
       <DependentUpon>CategoryAddForm.cs</DependentUpon>
     </EmbeddedResource>
