@@ -12,27 +12,27 @@ namespace Phoebe.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Category
+    public partial class StockIn
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Category()
+        public StockIn()
         {
-            this.ChildrenCategory = new HashSet<Category>();
-            this.Cargoes = new HashSet<Cargo>();
+            this.StockInDetails = new HashSet<StockInDetail>();
         }
     
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Number { get; set; }
-        public Nullable<int> ParentId { get; set; }
-        public int Hierarchy { get; set; }
+        public System.Guid Id { get; set; }
+        public System.DateTime InTime { get; set; }
+        public System.DateTime MonthTime { get; set; }
+        public string FlowNumber { get; set; }
+        public int ContractId { get; set; }
+        public int UserId { get; set; }
+        public System.DateTime OperatorTime { get; set; }
         public string Remark { get; set; }
         public int Status { get; set; }
     
+        public virtual Contract Contract { get; set; }
+        public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Category> ChildrenCategory { get; set; }
-        public virtual Category ParentCategory { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Cargo> Cargoes { get; set; }
+        public virtual ICollection<StockInDetail> StockInDetails { get; set; }
     }
 }

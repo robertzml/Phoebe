@@ -33,7 +33,6 @@
             this.ckbIsTiming = new DevExpress.XtraEditors.CheckEdit();
             this.cmbBillingType = new DevExpress.XtraEditors.ImageComboBoxEdit();
             this.txtSignDate = new DevExpress.XtraEditors.DateEdit();
-            this.textEdit3 = new DevExpress.XtraEditors.TextEdit();
             this.txtName = new DevExpress.XtraEditors.TextEdit();
             this.txtNumber = new DevExpress.XtraEditors.TextEdit();
             this.labelControl7 = new DevExpress.XtraEditors.LabelControl();
@@ -43,6 +42,7 @@
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
+            this.cmbCustomer = new DevExpress.XtraEditors.ComboBoxEdit();
             ((System.ComponentModel.ISupportInitialize)(this.plFill)).BeginInit();
             this.plFill.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.plBottom)).BeginInit();
@@ -54,9 +54,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.cmbBillingType.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSignDate.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSignDate.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit3.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtNumber.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbCustomer.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // plFill
@@ -75,20 +75,20 @@
             // 
             // btnCanel
             // 
-            this.btnCanel.Location = new System.Drawing.Point(330, 18);
+            this.btnCanel.Location = new System.Drawing.Point(360, 18);
             // 
             // btnConfirm
             // 
-            this.btnConfirm.Location = new System.Drawing.Point(214, 18);
+            this.btnConfirm.Location = new System.Drawing.Point(244, 18);
             this.btnConfirm.Click += new System.EventHandler(this.btnConfirm_Click);
             // 
             // groupControl1
             // 
+            this.groupControl1.Controls.Add(this.cmbCustomer);
             this.groupControl1.Controls.Add(this.txtRemark);
             this.groupControl1.Controls.Add(this.ckbIsTiming);
             this.groupControl1.Controls.Add(this.cmbBillingType);
             this.groupControl1.Controls.Add(this.txtSignDate);
-            this.groupControl1.Controls.Add(this.textEdit3);
             this.groupControl1.Controls.Add(this.txtName);
             this.groupControl1.Controls.Add(this.txtNumber);
             this.groupControl1.Controls.Add(this.labelControl7);
@@ -141,13 +141,6 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.txtSignDate.Size = new System.Drawing.Size(217, 20);
             this.txtSignDate.TabIndex = 10;
-            // 
-            // textEdit3
-            // 
-            this.textEdit3.Location = new System.Drawing.Point(84, 116);
-            this.textEdit3.Name = "textEdit3";
-            this.textEdit3.Size = new System.Drawing.Size(217, 20);
-            this.textEdit3.TabIndex = 9;
             // 
             // txtName
             // 
@@ -223,6 +216,16 @@
             this.labelControl1.TabIndex = 0;
             this.labelControl1.Text = "合同编号";
             // 
+            // cmbCustomer
+            // 
+            this.cmbCustomer.Location = new System.Drawing.Point(84, 116);
+            this.cmbCustomer.Name = "cmbCustomer";
+            this.cmbCustomer.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cmbCustomer.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.cmbCustomer.Size = new System.Drawing.Size(217, 20);
+            this.cmbCustomer.TabIndex = 14;
+            // 
             // ContractAddForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -243,9 +246,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.cmbBillingType.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSignDate.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSignDate.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit3.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtNumber.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbCustomer.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -265,7 +268,7 @@
         private DevExpress.XtraEditors.CheckEdit ckbIsTiming;
         private DevExpress.XtraEditors.ImageComboBoxEdit cmbBillingType;
         private DevExpress.XtraEditors.DateEdit txtSignDate;
-        private DevExpress.XtraEditors.TextEdit textEdit3;
         private DevExpress.XtraEditors.TextEdit txtName;
+        private DevExpress.XtraEditors.ComboBoxEdit cmbCustomer;
     }
 }

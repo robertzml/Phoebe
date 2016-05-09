@@ -10,6 +10,7 @@ namespace Phoebe.FormClient
     using Phoebe.Business;
     using Phoebe.Common;
     using Phoebe.Model;
+    using DevExpress.XtraEditors.Controls;
 
     /// <summary>
     /// 合同添加窗体
@@ -34,6 +35,15 @@ namespace Phoebe.FormClient
             contract.IsTiming = this.ckbIsTiming.Checked;
             contract.UserId = this.currentUser.Id;
             contract.Remark = this.txtRemark.Text;
+        }
+
+        private void LoadCustomers()
+        {
+            var customers = BusinessFactory<CustomerBusiness>.Instance.FindAll();
+            foreach(var item in customers)
+            {
+                
+            }
         }
         #endregion //Function
 

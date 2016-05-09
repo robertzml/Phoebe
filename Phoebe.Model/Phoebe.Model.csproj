@@ -52,6 +52,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cargo.cs">
+      <DependentUpon>PhoebeModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Category.cs">
       <DependentUpon>PhoebeModel.tt</DependentUpon>
     </Compile>
@@ -62,6 +65,16 @@
       <DependentUpon>PhoebeModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Helper\PhoebeEnum.cs" />
+    <Compile Include="StockIn.cs">
+      <DependentUpon>PhoebeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StockInDetail.cs">
+      <DependentUpon>PhoebeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Helper\StockInModel.cs" />
+    <Compile Include="Store.cs">
+      <DependentUpon>PhoebeModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="System\EntityStatus.cs" />
     <Compile Include="PhoebeModel.Context.cs">
       <AutoGen>True</AutoGen>

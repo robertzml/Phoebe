@@ -146,6 +146,21 @@
     <Compile Include="Forms\UserGroupForm.Designer.cs">
       <DependentUpon>UserGroupForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\StockInForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\StockInForm.Designer.cs">
+      <DependentUpon>StockInForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\StockInAddControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\StockInAddControl.Designer.cs">
+      <DependentUpon>StockInAddControl.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Controls\StockInAddControl.resx">
+      <DependentUpon>StockInAddControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\CategoryEditForm.resx">
       <DependentUpon>CategoryEditForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -182,9 +197,13 @@
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\StockInForm.resx">
+      <DependentUpon>StockInForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\Phoebe.Model.Contract.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.Customer.datasource" />
+    <None Include="Properties\DataSources\Phoebe.Model.StockInModel.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.User.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.UserGroup.datasource" />
     <None Include="Properties\licenses.licx" />

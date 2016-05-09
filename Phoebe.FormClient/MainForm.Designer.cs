@@ -35,6 +35,13 @@
             this.menuCustomerList = new DevExpress.XtraBars.BarButtonItem();
             this.menuContract = new DevExpress.XtraBars.BarSubItem();
             this.menuContractList = new DevExpress.XtraBars.BarButtonItem();
+            this.menuCargo = new DevExpress.XtraBars.BarSubItem();
+            this.menuCategory = new DevExpress.XtraBars.BarButtonItem();
+            this.menuStock = new DevExpress.XtraBars.BarSubItem();
+            this.menuStockIn = new DevExpress.XtraBars.BarButtonItem();
+            this.menuStockOut = new DevExpress.XtraBars.BarButtonItem();
+            this.menuStockMove = new DevExpress.XtraBars.BarButtonItem();
+            this.menuStore = new DevExpress.XtraBars.BarSubItem();
             this.menuUser = new DevExpress.XtraBars.BarSubItem();
             this.menuUserList = new DevExpress.XtraBars.BarButtonItem();
             this.menuUserGroupList = new DevExpress.XtraBars.BarButtonItem();
@@ -52,8 +59,6 @@
             this.barHeaderItem1 = new DevExpress.XtraBars.BarHeaderItem();
             this.barStaticItem2 = new DevExpress.XtraBars.BarStaticItem();
             this.tabMdiManager = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
-            this.menuCargo = new DevExpress.XtraBars.BarSubItem();
-            this.menuCategory = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabMdiManager)).BeginInit();
             this.SuspendLayout();
@@ -85,9 +90,14 @@
             this.menuContract,
             this.menuContractList,
             this.menuCargo,
-            this.menuCategory});
+            this.menuCategory,
+            this.menuStock,
+            this.menuStockIn,
+            this.menuStore,
+            this.menuStockOut,
+            this.menuStockMove});
             this.barManager1.MainMenu = this.mainMenu;
-            this.barManager1.MaxItemId = 18;
+            this.barManager1.MaxItemId = 23;
             this.barManager1.StatusBar = this.bar3;
             // 
             // mainMenu
@@ -100,6 +110,8 @@
             new DevExpress.XtraBars.LinkPersistInfo(this.menuCustomer),
             new DevExpress.XtraBars.LinkPersistInfo(this.menuContract),
             new DevExpress.XtraBars.LinkPersistInfo(this.menuCargo),
+            new DevExpress.XtraBars.LinkPersistInfo(this.menuStock),
+            new DevExpress.XtraBars.LinkPersistInfo(this.menuStore),
             new DevExpress.XtraBars.LinkPersistInfo(this.menuUser),
             new DevExpress.XtraBars.LinkPersistInfo(this.barMdiList)});
             this.mainMenu.OptionsBar.AllowQuickCustomization = false;
@@ -137,6 +149,56 @@
             this.menuContractList.Id = 15;
             this.menuContractList.Name = "menuContractList";
             this.menuContractList.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuContractList_ItemClick);
+            // 
+            // menuCargo
+            // 
+            this.menuCargo.Caption = "货品管理";
+            this.menuCargo.Id = 16;
+            this.menuCargo.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.menuCategory)});
+            this.menuCargo.Name = "menuCargo";
+            // 
+            // menuCategory
+            // 
+            this.menuCategory.Caption = "类别管理";
+            this.menuCategory.Id = 17;
+            this.menuCategory.Name = "menuCategory";
+            this.menuCategory.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuCategory_ItemClick);
+            // 
+            // menuStock
+            // 
+            this.menuStock.Caption = "冷库租赁";
+            this.menuStock.Id = 18;
+            this.menuStock.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.menuStockIn),
+            new DevExpress.XtraBars.LinkPersistInfo(this.menuStockOut),
+            new DevExpress.XtraBars.LinkPersistInfo(this.menuStockMove)});
+            this.menuStock.Name = "menuStock";
+            // 
+            // menuStockIn
+            // 
+            this.menuStockIn.Caption = "货品入库";
+            this.menuStockIn.Id = 19;
+            this.menuStockIn.Name = "menuStockIn";
+            this.menuStockIn.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuStockIn_ItemClick);
+            // 
+            // menuStockOut
+            // 
+            this.menuStockOut.Caption = "货品出库";
+            this.menuStockOut.Id = 21;
+            this.menuStockOut.Name = "menuStockOut";
+            // 
+            // menuStockMove
+            // 
+            this.menuStockMove.Caption = "货品移库";
+            this.menuStockMove.Id = 22;
+            this.menuStockMove.Name = "menuStockMove";
+            // 
+            // menuStore
+            // 
+            this.menuStore.Caption = "库存管理";
+            this.menuStore.Id = 20;
+            this.menuStore.Name = "menuStore";
             // 
             // menuUser
             // 
@@ -262,21 +324,6 @@
             this.tabMdiManager.MdiParent = this;
             this.tabMdiManager.PinPageButtonShowMode = DevExpress.XtraTab.PinPageButtonShowMode.InActiveTabPageHeader;
             // 
-            // menuCargo
-            // 
-            this.menuCargo.Caption = "货品管理";
-            this.menuCargo.Id = 16;
-            this.menuCargo.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(this.menuCategory)});
-            this.menuCargo.Name = "menuCargo";
-            // 
-            // menuCategory
-            // 
-            this.menuCategory.Caption = "类别管理";
-            this.menuCategory.Id = 17;
-            this.menuCategory.Name = "menuCategory";
-            this.menuCategory.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuCategory_ItemClick);
-            // 
             // MainForm
             // 
             this.AllowMdiBar = true;
@@ -325,6 +372,11 @@
         private DevExpress.XtraBars.BarButtonItem menuContractList;
         private DevExpress.XtraBars.BarSubItem menuCargo;
         private DevExpress.XtraBars.BarButtonItem menuCategory;
+        private DevExpress.XtraBars.BarSubItem menuStock;
+        private DevExpress.XtraBars.BarButtonItem menuStockIn;
+        private DevExpress.XtraBars.BarButtonItem menuStockOut;
+        private DevExpress.XtraBars.BarButtonItem menuStockMove;
+        private DevExpress.XtraBars.BarSubItem menuStore;
     }
 }
 

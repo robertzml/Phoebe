@@ -54,53 +54,10 @@ namespace Phoebe.Model
         /// </summary>
         [Display(Name = "废弃")]
         WarehouseReserve = 32,
-        #endregion //Warehouse
-
-        #region Tray
-        /// <summary>
-        /// 41:托盘未使用
-        /// </summary>
-        [Display(Name = "未使用")]
-        TrayUnused = 41,
-
-        /// <summary>
-        /// 42:托盘使用中
-        /// </summary>
-        [Display(Name = "使用中")]
-        TrayInuse = 42,
-
-        /// <summary>
-        /// 43:托盘废弃
-        /// </summary>
-        [Display(Name = "废弃")]
-        TrayAbandon = 43,
-        #endregion //Tray
-
+        #endregion //Warehouse        
 
         #region Cargo
-        /// <summary>
-        /// 51:货品未入库
-        /// </summary>
-        [Display(Name = "未入库")]
-        CargoNotIn = 51,
 
-        /// <summary>
-        /// 52:货品准备入库
-        /// </summary>
-        //[Display(Name = "准备入库")]
-        //CargoStockInReady = 52,
-
-        /// <summary>
-        /// 53:货品入库
-        /// </summary>
-        [Display(Name = "入库")]
-        CargoStockIn = 53,
-
-        /// <summary>
-        /// 55:货品出库
-        /// </summary>
-        [Display(Name = "出库")]
-        CargoStockOut = 55,
         #endregion //Cargo
 
         #region Store
@@ -115,7 +72,9 @@ namespace Phoebe.Model
         /// </summary>
         [Display(Name = "出库")]
         StoreOut = 62,
+        #endregion //Store
 
+        #region Stock
         /// <summary>
         /// 71:准备入库
         /// </summary>
@@ -151,7 +110,7 @@ namespace Phoebe.Model
         /// </summary>
         [Display(Name = "已移库")]
         StockMove = 93,
-        #endregion //Store       
+        #endregion //Stock       
 
         #region Settlement
         /// <summary>

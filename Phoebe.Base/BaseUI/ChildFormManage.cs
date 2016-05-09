@@ -71,6 +71,33 @@ namespace Phoebe.Base
             Form dialogForm = (Form)Activator.CreateInstance(formType, args);
             dialogForm.ShowDialog();
         }
+
+        /// <summary>
+        /// 窗体内部加载控件
+        /// </summary>
+        /// <param name="baseControl">载体控件</param>
+        /// <param name="contentControl">加载控件</param>
+        public static void LoadContentControl(Control baseControl, Type contentControl)
+        {
+            Control content = (Control)Activator.CreateInstance(contentControl);
+            baseControl.Controls.Clear();
+            baseControl.Controls.Add(content);
+            content.Dock = DockStyle.Fill;
+        }
+
+        /// <summary>
+        /// 窗体内部加载控件
+        /// </summary>
+        /// <param name="baseControl">载体控件</param>
+        /// <param name="contentControl">加载控件</param>
+        /// <param name="args">构造函数参数列表</param>
+        public static void LoadContentControl(Control baseControl, Type contentControl, object[] args)
+        {
+            Control content = (Control)Activator.CreateInstance(contentControl, args);
+            baseControl.Controls.Clear();
+            baseControl.Controls.Add(content);
+            content.Dock = DockStyle.Fill;
+        }
         #endregion //Method
     }
 }

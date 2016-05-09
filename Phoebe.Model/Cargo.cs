@@ -12,31 +12,26 @@ namespace Phoebe.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class User
+    public partial class Cargo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public User()
+        public Cargo()
         {
-            this.Contracts = new HashSet<Contract>();
-            this.StockIns = new HashSet<StockIn>();
             this.Stores = new HashSet<Store>();
         }
     
-        public int Id { get; set; }
-        public string UserName { get; set; }
-        public string Password { get; set; }
-        public int UserGroupId { get; set; }
-        public string Name { get; set; }
-        public System.DateTime LastLoginTime { get; set; }
-        public System.DateTime CurrentLoginTime { get; set; }
+        public System.Guid Id { get; set; }
+        public int CategoryId { get; set; }
+        public int GroupType { get; set; }
+        public double UnitWeight { get; set; }
+        public double UnitVolume { get; set; }
+        public int ContractId { get; set; }
+        public System.DateTime RegisterTime { get; set; }
         public string Remark { get; set; }
         public int Status { get; set; }
     
-        public virtual UserGroup UserGroup { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Contract> Contracts { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<StockIn> StockIns { get; set; }
+        public virtual Category Category { get; set; }
+        public virtual Contract Contract { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Store> Stores { get; set; }
     }

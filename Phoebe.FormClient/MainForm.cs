@@ -71,13 +71,23 @@ namespace Phoebe.FormClient
         }
 
         /// <summary>
-        /// 合同管理 - 类别管理
+        /// 货品管理 - 类别管理
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void menuCategory_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             ChildFormManage.LoadMdiForm(this, typeof(CategoryForm));
+        }
+
+        /// <summary>
+        /// 冷库租赁 - 货品入库
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void menuStockIn_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            ChildFormManage.LoadMdiForm(this, typeof(StockInForm));
         }
 
         /// <summary>
