@@ -28,162 +28,205 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
-            this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
-            this.cmbFirstCategory = new DevExpress.XtraEditors.ImageComboBoxEdit();
+            this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
+            this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.cmbSecondCategory = new DevExpress.XtraEditors.ImageComboBoxEdit();
-            this.txtRemark = new DevExpress.XtraEditors.MemoEdit();
+            this.cmbFirstCategory = new DevExpress.XtraEditors.ImageComboBoxEdit();
             this.txtNumber = new DevExpress.XtraEditors.TextEdit();
             this.txtName = new DevExpress.XtraEditors.TextEdit();
-            this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
+            this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.txtRemark = new DevExpress.XtraEditors.MemoEdit();
+            this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.plFill)).BeginInit();
             this.plFill.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.plBottom)).BeginInit();
             this.plBottom.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
-            this.groupControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.cmbFirstCategory.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
+            this.groupControl2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
+            this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cmbSecondCategory.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtRemark.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbFirstCategory.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtNumber.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtName.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtRemark.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             this.SuspendLayout();
             // 
             // plFill
             // 
             this.plFill.Appearance.BackColor = System.Drawing.Color.White;
             this.plFill.Appearance.Options.UseBackColor = true;
-            this.plFill.Controls.Add(this.groupControl1);
-            this.plFill.Size = new System.Drawing.Size(331, 301);
+            this.plFill.Controls.Add(this.groupControl2);
+            this.plFill.Size = new System.Drawing.Size(355, 215);
             // 
             // plBottom
             // 
             this.plBottom.Appearance.BackColor = System.Drawing.Color.White;
             this.plBottom.Appearance.Options.UseBackColor = true;
-            this.plBottom.Location = new System.Drawing.Point(0, 301);
-            this.plBottom.Size = new System.Drawing.Size(331, 63);
+            this.plBottom.Location = new System.Drawing.Point(0, 215);
+            this.plBottom.Size = new System.Drawing.Size(355, 63);
             // 
             // btnCanel
             // 
-            this.btnCanel.Location = new System.Drawing.Point(201, 18);
+            this.btnCanel.Location = new System.Drawing.Point(254, 18);
             // 
             // btnConfirm
             // 
-            this.btnConfirm.Location = new System.Drawing.Point(85, 18);
+            this.btnConfirm.Location = new System.Drawing.Point(138, 18);
             this.btnConfirm.Click += new System.EventHandler(this.btnConfirm_Click);
             // 
-            // labelControl1
+            // groupControl2
             // 
-            this.labelControl1.Location = new System.Drawing.Point(40, 40);
-            this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(24, 14);
-            this.labelControl1.TabIndex = 0;
-            this.labelControl1.Text = "名称";
+            this.groupControl2.Controls.Add(this.layoutControl1);
+            this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupControl2.Location = new System.Drawing.Point(0, 0);
+            this.groupControl2.Name = "groupControl2";
+            this.groupControl2.Size = new System.Drawing.Size(355, 215);
+            this.groupControl2.TabIndex = 6;
+            this.groupControl2.Text = "分类信息";
             // 
-            // labelControl2
+            // layoutControl1
             // 
-            this.labelControl2.Location = new System.Drawing.Point(40, 81);
-            this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(24, 14);
-            this.labelControl2.TabIndex = 1;
-            this.labelControl2.Text = "代码";
-            // 
-            // groupControl1
-            // 
-            this.groupControl1.Controls.Add(this.cmbFirstCategory);
-            this.groupControl1.Controls.Add(this.cmbSecondCategory);
-            this.groupControl1.Controls.Add(this.txtRemark);
-            this.groupControl1.Controls.Add(this.txtNumber);
-            this.groupControl1.Controls.Add(this.txtName);
-            this.groupControl1.Controls.Add(this.labelControl5);
-            this.groupControl1.Controls.Add(this.labelControl4);
-            this.groupControl1.Controls.Add(this.labelControl3);
-            this.groupControl1.Controls.Add(this.labelControl1);
-            this.groupControl1.Controls.Add(this.labelControl2);
-            this.groupControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl1.Location = new System.Drawing.Point(0, 0);
-            this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(331, 301);
-            this.groupControl1.TabIndex = 2;
-            this.groupControl1.Text = "分类信息";
-            // 
-            // cmbFirstCategory
-            // 
-            this.cmbFirstCategory.Enabled = false;
-            this.cmbFirstCategory.Location = new System.Drawing.Point(79, 119);
-            this.cmbFirstCategory.Name = "cmbFirstCategory";
-            this.cmbFirstCategory.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cmbFirstCategory.Size = new System.Drawing.Size(209, 20);
-            this.cmbFirstCategory.TabIndex = 2;
+            this.layoutControl1.Controls.Add(this.txtRemark);
+            this.layoutControl1.Controls.Add(this.cmbSecondCategory);
+            this.layoutControl1.Controls.Add(this.cmbFirstCategory);
+            this.layoutControl1.Controls.Add(this.txtNumber);
+            this.layoutControl1.Controls.Add(this.txtName);
+            this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.layoutControl1.Location = new System.Drawing.Point(2, 21);
+            this.layoutControl1.Name = "layoutControl1";
+            this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(573, 327, 492, 482);
+            this.layoutControl1.Root = this.layoutControlGroup1;
+            this.layoutControl1.Size = new System.Drawing.Size(351, 192);
+            this.layoutControl1.TabIndex = 5;
+            this.layoutControl1.Text = "layoutControl1";
             // 
             // cmbSecondCategory
             // 
             this.cmbSecondCategory.Enabled = false;
-            this.cmbSecondCategory.Location = new System.Drawing.Point(79, 160);
+            this.cmbSecondCategory.Location = new System.Drawing.Point(63, 84);
             this.cmbSecondCategory.Name = "cmbSecondCategory";
             this.cmbSecondCategory.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cmbSecondCategory.Size = new System.Drawing.Size(209, 20);
-            this.cmbSecondCategory.TabIndex = 3;
+            this.cmbSecondCategory.Size = new System.Drawing.Size(276, 20);
+            this.cmbSecondCategory.StyleController = this.layoutControl1;
+            this.cmbSecondCategory.TabIndex = 7;
             // 
-            // txtRemark
+            // cmbFirstCategory
             // 
-            this.txtRemark.Location = new System.Drawing.Point(79, 204);
-            this.txtRemark.Name = "txtRemark";
-            this.txtRemark.Size = new System.Drawing.Size(209, 76);
-            this.txtRemark.TabIndex = 4;
+            this.cmbFirstCategory.Enabled = false;
+            this.cmbFirstCategory.Location = new System.Drawing.Point(63, 60);
+            this.cmbFirstCategory.Name = "cmbFirstCategory";
+            this.cmbFirstCategory.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cmbFirstCategory.Size = new System.Drawing.Size(276, 20);
+            this.cmbFirstCategory.StyleController = this.layoutControl1;
+            this.cmbFirstCategory.TabIndex = 6;
             // 
             // txtNumber
             // 
-            this.txtNumber.Location = new System.Drawing.Point(79, 78);
+            this.txtNumber.Location = new System.Drawing.Point(63, 36);
             this.txtNumber.Name = "txtNumber";
             this.txtNumber.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow;
             this.txtNumber.Properties.Appearance.Options.UseBackColor = true;
-            this.txtNumber.Size = new System.Drawing.Size(209, 20);
-            this.txtNumber.TabIndex = 1;
+            this.txtNumber.Size = new System.Drawing.Size(276, 20);
+            this.txtNumber.StyleController = this.layoutControl1;
+            this.txtNumber.TabIndex = 5;
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(79, 37);
+            this.txtName.Location = new System.Drawing.Point(63, 12);
             this.txtName.Name = "txtName";
             this.txtName.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow;
             this.txtName.Properties.Appearance.Options.UseBackColor = true;
-            this.txtName.Size = new System.Drawing.Size(209, 20);
-            this.txtName.TabIndex = 0;
+            this.txtName.Size = new System.Drawing.Size(276, 20);
+            this.txtName.StyleController = this.layoutControl1;
+            this.txtName.TabIndex = 4;
             // 
-            // labelControl5
+            // layoutControlGroup1
             // 
-            this.labelControl5.Location = new System.Drawing.Point(40, 204);
-            this.labelControl5.Name = "labelControl5";
-            this.labelControl5.Size = new System.Drawing.Size(24, 14);
-            this.labelControl5.TabIndex = 4;
-            this.labelControl5.Text = "备注";
+            this.layoutControlGroup1.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+            this.layoutControlGroup1.GroupBordersVisible = false;
+            this.layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem1,
+            this.layoutControlItem2,
+            this.layoutControlItem3,
+            this.layoutControlItem4,
+            this.layoutControlItem5});
+            this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlGroup1.Name = "Root";
+            this.layoutControlGroup1.Size = new System.Drawing.Size(351, 192);
+            this.layoutControlGroup1.TextVisible = false;
             // 
-            // labelControl4
+            // layoutControlItem2
             // 
-            this.labelControl4.Location = new System.Drawing.Point(16, 163);
-            this.labelControl4.Name = "labelControl4";
-            this.labelControl4.Size = new System.Drawing.Size(48, 14);
-            this.labelControl4.TabIndex = 3;
-            this.labelControl4.Text = "二级分类";
+            this.layoutControlItem2.Control = this.txtNumber;
+            this.layoutControlItem2.Location = new System.Drawing.Point(0, 24);
+            this.layoutControlItem2.Name = "layoutControlItem2";
+            this.layoutControlItem2.Size = new System.Drawing.Size(331, 24);
+            this.layoutControlItem2.Text = "代码";
+            this.layoutControlItem2.TextSize = new System.Drawing.Size(48, 14);
             // 
-            // labelControl3
+            // layoutControlItem3
             // 
-            this.labelControl3.Location = new System.Drawing.Point(16, 122);
-            this.labelControl3.Name = "labelControl3";
-            this.labelControl3.Size = new System.Drawing.Size(48, 14);
-            this.labelControl3.TabIndex = 2;
-            this.labelControl3.Text = "一级分类";
+            this.layoutControlItem3.Control = this.cmbFirstCategory;
+            this.layoutControlItem3.Location = new System.Drawing.Point(0, 48);
+            this.layoutControlItem3.Name = "layoutControlItem3";
+            this.layoutControlItem3.Size = new System.Drawing.Size(331, 24);
+            this.layoutControlItem3.Text = "一级分类";
+            this.layoutControlItem3.TextSize = new System.Drawing.Size(48, 14);
+            // 
+            // layoutControlItem4
+            // 
+            this.layoutControlItem4.Control = this.cmbSecondCategory;
+            this.layoutControlItem4.Location = new System.Drawing.Point(0, 72);
+            this.layoutControlItem4.Name = "layoutControlItem4";
+            this.layoutControlItem4.Size = new System.Drawing.Size(331, 24);
+            this.layoutControlItem4.Text = "二级分类";
+            this.layoutControlItem4.TextSize = new System.Drawing.Size(48, 14);
+            // 
+            // txtRemark
+            // 
+            this.txtRemark.Location = new System.Drawing.Point(63, 108);
+            this.txtRemark.Name = "txtRemark";
+            this.txtRemark.Size = new System.Drawing.Size(276, 72);
+            this.txtRemark.StyleController = this.layoutControl1;
+            this.txtRemark.TabIndex = 8;
+            // 
+            // layoutControlItem5
+            // 
+            this.layoutControlItem5.Control = this.txtRemark;
+            this.layoutControlItem5.Location = new System.Drawing.Point(0, 96);
+            this.layoutControlItem5.Name = "layoutControlItem5";
+            this.layoutControlItem5.Size = new System.Drawing.Size(331, 76);
+            this.layoutControlItem5.Text = "备注";
+            this.layoutControlItem5.TextSize = new System.Drawing.Size(48, 14);
+            // 
+            // layoutControlItem1
+            // 
+            this.layoutControlItem1.Control = this.txtName;
+            this.layoutControlItem1.CustomizationFormText = "名称";
+            this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem1.Name = "layoutControlItem1";
+            this.layoutControlItem1.Size = new System.Drawing.Size(331, 24);
+            this.layoutControlItem1.Text = "名称";
+            this.layoutControlItem1.TextSize = new System.Drawing.Size(48, 14);
             // 
             // CategoryAddForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(331, 364);
+            this.ClientSize = new System.Drawing.Size(355, 278);
             this.Name = "CategoryAddForm";
             this.Text = "添加分类";
             this.Load += new System.EventHandler(this.CategoryAddForm_Load);
@@ -191,30 +234,38 @@
             this.plFill.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.plBottom)).EndInit();
             this.plBottom.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
-            this.groupControl1.ResumeLayout(false);
-            this.groupControl1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.cmbFirstCategory.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
+            this.groupControl2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
+            this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.cmbSecondCategory.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtRemark.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbFirstCategory.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtNumber.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtName.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtRemark.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private DevExpress.XtraEditors.GroupControl groupControl1;
+        private DevExpress.XtraEditors.GroupControl groupControl2;
+        private DevExpress.XtraLayout.LayoutControl layoutControl1;
         private DevExpress.XtraEditors.ImageComboBoxEdit cmbSecondCategory;
-        private DevExpress.XtraEditors.MemoEdit txtRemark;
+        private DevExpress.XtraEditors.ImageComboBoxEdit cmbFirstCategory;
         private DevExpress.XtraEditors.TextEdit txtNumber;
         private DevExpress.XtraEditors.TextEdit txtName;
-        private DevExpress.XtraEditors.LabelControl labelControl5;
-        private DevExpress.XtraEditors.LabelControl labelControl4;
-        private DevExpress.XtraEditors.LabelControl labelControl3;
-        private DevExpress.XtraEditors.LabelControl labelControl1;
-        private DevExpress.XtraEditors.LabelControl labelControl2;
-        private DevExpress.XtraEditors.ImageComboBoxEdit cmbFirstCategory;
+        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup1;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
+        private DevExpress.XtraEditors.MemoEdit txtRemark;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
     }
 }

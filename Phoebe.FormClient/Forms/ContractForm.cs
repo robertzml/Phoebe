@@ -52,6 +52,8 @@ namespace Phoebe.FormClient
         private void dgvContract_CustomColumnDisplayText(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs e)
         {
             int rowIndex = e.ListSourceRowIndex;
+            if (rowIndex < 0 || rowIndex >= this.bsContract.Count)
+                return;
 
             if (e.Column.FieldName == "CustomerId")
             {
@@ -63,13 +65,18 @@ namespace Phoebe.FormClient
                 var type = (BillingType)e.Value;
                 e.DisplayText = type.DisplayName();
             }
+            else if (e.Column.FieldName == "UserId")
+            {
+                var contract = this.bsContract[rowIndex] as Contract;
+                e.DisplayText = contract.User.Name;
+            }
             else if (e.Column.FieldName == "Status")
             {
                 var status = (EntityStatus)e.Value;
                 e.DisplayText = status.DisplayName();
             }
         }
-        
+
         /// <summary>
         /// 添加合同
         /// </summary>

@@ -148,6 +148,10 @@ namespace Phoebe.FormClient
                     MessageBox.Show("请选择一级分类", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
+            }
+
+            if (this.hierarchy == 3)
+            {
                 if (this.cmbSecondCategory.SelectedItem == null)
                 {
                     MessageBox.Show("请选择二级分类", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);

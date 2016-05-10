@@ -28,12 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
+            this.btnDelete = new DevExpress.XtraEditors.SimpleButton();
+            this.btnEdit = new DevExpress.XtraEditors.SimpleButton();
             this.btnAdd = new DevExpress.XtraEditors.SimpleButton();
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
             this.dgcContract = new DevExpress.XtraGrid.GridControl();
-            this.bsContract = new System.Windows.Forms.BindingSource(this.components);
+            this.bsContract = new System.Windows.Forms.BindingSource();
             this.dgvContract = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colNumber = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -46,8 +47,6 @@
             this.colUserId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colRemark = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colStatus = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.btnEdit = new DevExpress.XtraEditors.SimpleButton();
-            this.btnDelete = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
@@ -68,6 +67,22 @@
             this.groupControl1.Size = new System.Drawing.Size(931, 110);
             this.groupControl1.TabIndex = 0;
             this.groupControl1.Text = "操作";
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.Location = new System.Drawing.Point(268, 43);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(90, 40);
+            this.btnDelete.TabIndex = 3;
+            this.btnDelete.Text = "删除合同";
+            // 
+            // btnEdit
+            // 
+            this.btnEdit.Location = new System.Drawing.Point(150, 43);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(90, 40);
+            this.btnEdit.TabIndex = 2;
+            this.btnEdit.Text = "编辑合同";
             // 
             // btnAdd
             // 
@@ -157,6 +172,7 @@
             this.colCustomerId.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             this.colCustomerId.Caption = "客户名称";
             this.colCustomerId.FieldName = "CustomerId";
+            this.colCustomerId.FilterMode = DevExpress.XtraGrid.ColumnFilterMode.DisplayText;
             this.colCustomerId.Name = "colCustomerId";
             this.colCustomerId.Visible = true;
             this.colCustomerId.VisibleIndex = 2;
@@ -183,6 +199,7 @@
             this.colBillingType.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             this.colBillingType.Caption = "计费方式";
             this.colBillingType.FieldName = "BillingType";
+            this.colBillingType.FilterMode = DevExpress.XtraGrid.ColumnFilterMode.DisplayText;
             this.colBillingType.Name = "colBillingType";
             this.colBillingType.Visible = true;
             this.colBillingType.VisibleIndex = 5;
@@ -197,8 +214,11 @@
             // 
             // colUserId
             // 
+            this.colUserId.AppearanceCell.Options.UseTextOptions = true;
+            this.colUserId.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             this.colUserId.Caption = "登记人";
             this.colUserId.FieldName = "UserId";
+            this.colUserId.FilterMode = DevExpress.XtraGrid.ColumnFilterMode.DisplayText;
             this.colUserId.Name = "colUserId";
             this.colUserId.Visible = true;
             this.colUserId.VisibleIndex = 7;
@@ -215,27 +235,14 @@
             // 
             // colStatus
             // 
+            this.colStatus.AppearanceCell.Options.UseTextOptions = true;
+            this.colStatus.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             this.colStatus.Caption = "状态";
             this.colStatus.FieldName = "Status";
+            this.colStatus.FilterMode = DevExpress.XtraGrid.ColumnFilterMode.DisplayText;
             this.colStatus.Name = "colStatus";
             this.colStatus.Visible = true;
             this.colStatus.VisibleIndex = 9;
-            // 
-            // btnEdit
-            // 
-            this.btnEdit.Location = new System.Drawing.Point(154, 43);
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(90, 40);
-            this.btnEdit.TabIndex = 2;
-            this.btnEdit.Text = "编辑合同";
-            // 
-            // btnDelete
-            // 
-            this.btnDelete.Location = new System.Drawing.Point(269, 43);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(90, 40);
-            this.btnDelete.TabIndex = 3;
-            this.btnDelete.Text = "删除合同";
             // 
             // ContractForm
             // 

@@ -69,7 +69,7 @@ namespace Phoebe.FormClient
                 customers = customerList.Where(r => r.Number.StartsWith(prefix)).OrderBy(r => r.Number);
 
             this.lvCustomer.Items.Clear();
-            foreach(var item in customers)
+            foreach (var item in customers)
             {
                 ListViewItem lvi = new ListViewItem(item.Number);
                 lvi.Tag = item.Id;
@@ -84,7 +84,7 @@ namespace Phoebe.FormClient
             if (customers.Count() == 1 && customers.First().Number == prefix)
                 return customers.First();
             else
-                return null;            
+                return null;
         }
 
         /// <summary>
@@ -94,7 +94,7 @@ namespace Phoebe.FormClient
         private void UpdateContractList(int customerId)
         {
             var contracts = BusinessFactory<ContractBusiness>.Instance.GetByCustomer(customerId);
-                       
+
             this.cmbContract.Properties.Items.Clear();
             foreach (var item in contracts)
             {
@@ -152,7 +152,7 @@ namespace Phoebe.FormClient
             UpdateCustomerView("");
             UpdateCategoryView("");
         }
-        
+
         /// <summary>
         /// 输入客户代码
         /// </summary>
@@ -173,7 +173,7 @@ namespace Phoebe.FormClient
             else
                 this.txtCustomerName.Text = "";
         }
-        
+
         /// <summary>
         /// 选择客户
         /// </summary>
@@ -187,7 +187,7 @@ namespace Phoebe.FormClient
             this.txtCustomerNumber.EditValueChanged -= txtCustomerNumber_EditValueChanged;
 
             var select = this.lvCustomer.SelectedItems[0];
-            this.txtCustomerNumber.Text = select.SubItems[0].Text;          
+            this.txtCustomerNumber.Text = select.SubItems[0].Text;
             this.txtCustomerName.Text = select.SubItems[1].Text;
 
             this.txtCustomerNumber.EditValueChanged += txtCustomerNumber_EditValueChanged;
@@ -195,7 +195,7 @@ namespace Phoebe.FormClient
             this.customerId = Convert.ToInt32(select.Tag);
             UpdateContractList(this.customerId);
         }
-        
+
         /// <summary>
         /// 选择合同
         /// </summary>
