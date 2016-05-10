@@ -50,14 +50,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BL\CargoBusiness.cs" />
     <Compile Include="BL\CustomerBusiness.cs" />
     <Compile Include="BL\ContractBusiness.cs" />
     <Compile Include="BL\CategoryBusiness.cs" />
+    <Compile Include="BL\StockInBusiness.cs" />
+    <Compile Include="DAL\CargoRepository.cs" />
     <Compile Include="DAL\CategoryRepository.cs" />
+    <Compile Include="DAL\TransactionRepository.cs" />
     <Compile Include="DAL\ContractRepository.cs" />
     <Compile Include="DAL\CustomerRepository.cs" />
     <Compile Include="DAL\SqlDataAccess.cs" />
     <Compile Include="BL\UserBusiness.cs" />
+    <Compile Include="DAL\StockInDetailsRepository.cs" />
+    <Compile Include="DAL\StockInRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -71,6 +71,11 @@ namespace Phoebe.Business.DAL
             return ErrorCode.Success;
         }
 
+        public ErrorCode CreateRange(List<Category> entities)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// 编辑分类
         /// </summary>
@@ -101,7 +106,6 @@ namespace Phoebe.Business.DAL
         {
             throw new NotImplementedException();
         }
-
         #endregion //Method
     }
 }

@@ -26,7 +26,7 @@ namespace Phoebe.Model
         public string FlowNumber { get; set; }
         public int ContractId { get; set; }
         public int UserId { get; set; }
-        public System.DateTime OperatorTime { get; set; }
+        public System.DateTime CreateTime { get; set; }
         public string Remark { get; set; }
         public int Status { get; set; }
     

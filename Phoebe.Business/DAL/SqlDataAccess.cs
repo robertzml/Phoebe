@@ -22,5 +22,9 @@ namespace Phoebe.Business.DAL
             this.context = Reflect<T>.Create(typeof(T).FullName, typeof(T).Assembly.GetName().Name);
         }
         #endregion //Constructor
+
+        #region Method
+
+        #endregion //Method
     }
 }

@@ -72,6 +72,12 @@ namespace Phoebe.Model
         /// </summary>
         [Display(Name = "出库")]
         StoreOut = 62,
+
+        /// <summary>
+        /// 63:准备入库
+        /// </summary>
+        [Display(Name = "准备入库")]
+        StoreReady = 63,
         #endregion //Store
 
         #region Stock

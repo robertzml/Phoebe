@@ -39,6 +39,13 @@ namespace Phoebe.Base
         ErrorCode Create(T entity);
 
         /// <summary>
+        /// 新建多个对象
+        /// </summary>
+        /// <param name="entities">实体对象列表</param>
+        /// <returns></returns>
+        ErrorCode CreateRange(List<T> entities);
+
+        /// <summary>
         /// 编辑对象
         /// </summary>
         /// <param name="entity">实体对象</param>

@@ -12,12 +12,17 @@ namespace Phoebe.Model
     public class StockInModel
     {
         /// <summary>
-        /// 入库详细ID
+        /// 合同ID
+        /// </summary>
+        public int ContractId { get; set; }
+
+        /// <summary>
+        /// 入库记录ID
         /// </summary>
         public Guid Id { get; set; }
 
         /// <summary>
-        /// 入库记录ID
+        /// 入库单ID
         /// </summary>
         public Guid StockInId { get; set; }
 
@@ -55,6 +60,11 @@ namespace Phoebe.Model
         /// 入库数量
         /// </summary>
         public int InCount { get; set; }
+
+        /// <summary>
+        /// 货品分组方式
+        /// </summary>
+        public int GroupType { get; set; }
 
         /// <summary>
         /// 单位重量

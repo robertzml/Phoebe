@@ -98,5 +98,21 @@ namespace Phoebe.Base
         [Display(Name = "用户已禁用")]
         UserDisabled = 23,
         #endregion //User
+
+        #region Customer
+
+        #endregion //Customer
+
+        #region Contract
+
+        #endregion //Contract
+
+        #region Cargo
+        /// <summary>
+        /// 货品已存在
+        /// </summary>
+        [Display(Name = "货品已存在")]
+        CargoExist = 50,
+        #endregion //Cargo
     }
 }

@@ -15,12 +15,6 @@ namespace Phoebe.Business.DAL
     /// </summary>
     public class CustomerRepository : SqlDataAccess<PhoebeContext>, IBaseDataAccess<Customer>
     {
-        #region Constructor
-        public CustomerRepository()
-        {
-        }
-        #endregion //Constructor
-
         #region Method
         /// <summary>
         /// 根据ID查找客户
@@ -105,6 +99,11 @@ namespace Phoebe.Business.DAL
         /// <param name="entity">客户对象</param>
         /// <returns></returns>
         public ErrorCode Delete(Customer entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ErrorCode CreateRange(List<Customer> entities)
         {
             throw new NotImplementedException();
         }

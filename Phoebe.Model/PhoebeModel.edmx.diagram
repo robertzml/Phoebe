@@ -15,18 +15,18 @@
         <EntityTypeShape EntityType="Phoebe.Model.Category" Width="1.5" PointX="5.25" PointY="0.875" />
         <AssociationConnector Association="Phoebe.Model.FK_Category_Category" />
         <EntityTypeShape EntityType="Phoebe.Model.Cargo" Width="1.5" PointX="7.5" PointY="5.625" />
-        <EntityTypeShape EntityType="Phoebe.Model.StockIn" Width="1.5" PointX="10" PointY="7" />
-        <EntityTypeShape EntityType="Phoebe.Model.StockInDetail" Width="1.5" PointX="10" PointY="10.875" />
         <EntityTypeShape EntityType="Phoebe.Model.Store" Width="1.5" PointX="12.75" PointY="4.625" />
         <AssociationConnector Association="Phoebe.Model.FK_Cargo_Category" />
         <AssociationConnector Association="Phoebe.Model.FK_Cargo_Contract" />
         <AssociationConnector Association="Phoebe.Model.FK_Store_Cargo" />
+        <AssociationConnector Association="Phoebe.Model.FK_Store_User" />
+        <EntityTypeShape EntityType="Phoebe.Model.StockIn" Width="1.5" PointX="10.125" PointY="6.75" />
         <AssociationConnector Association="Phoebe.Model.FK_StockIn_Contract" />
         <AssociationConnector Association="Phoebe.Model.FK_StockIn_User" />
+        <EntityTypeShape EntityType="Phoebe.Model.StockInDetail" Width="1.5" PointX="10.25" PointY="10.75" />
         <AssociationConnector Association="Phoebe.Model.FK_StockInDetails_StockIn" />
         <AssociationConnector Association="Phoebe.Model.FK_StockInDetails_Store" />
-        <AssociationConnector Association="Phoebe.Model.FK_Store_User" />
-      </Diagram>
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

@@ -80,6 +80,11 @@ namespace Phoebe.Business.DAL
         {
             throw new NotImplementedException();
         }
+
+        public ErrorCode CreateRange(List<Contract> entities)
+        {
+            throw new NotImplementedException();
+        }
         #endregion //Method
     }
 }
