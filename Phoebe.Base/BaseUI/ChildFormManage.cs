@@ -80,9 +80,12 @@ namespace Phoebe.Base
         public static void LoadContentControl(Control baseControl, Type contentControl)
         {
             Control content = (Control)Activator.CreateInstance(contentControl);
+            baseControl.SuspendLayout();
             baseControl.Controls.Clear();
             baseControl.Controls.Add(content);
             content.Dock = DockStyle.Fill;
+            baseControl.ResumeLayout(false);
+            baseControl.PerformLayout();
         }
 
         /// <summary>
@@ -94,9 +97,12 @@ namespace Phoebe.Base
         public static void LoadContentControl(Control baseControl, Type contentControl, object[] args)
         {
             Control content = (Control)Activator.CreateInstance(contentControl, args);
+            baseControl.SuspendLayout();
             baseControl.Controls.Clear();
             baseControl.Controls.Add(content);
             content.Dock = DockStyle.Fill;
+            baseControl.ResumeLayout(false);
+            baseControl.PerformLayout();
         }
         #endregion //Method
     }

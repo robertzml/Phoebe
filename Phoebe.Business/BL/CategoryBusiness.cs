@@ -45,6 +45,16 @@ namespace Phoebe.Business
         }
 
         /// <summary>
+        /// 获取所有二三级分类
+        /// </summary>
+        /// <returns></returns>
+        public List<Category> GetLeafCategory()
+        {
+            Expression<Func<Category, bool>> predicate = r => r.Hierarchy == 2 || r.Hierarchy == 3;
+            return this.dal.Find(predicate).ToList();
+        }
+
+        /// <summary>
         /// 获取子分类
         /// </summary>
         /// <param name="parentId">所属父分类ID</param>

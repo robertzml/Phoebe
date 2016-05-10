@@ -43,6 +43,16 @@ namespace Phoebe.FormClient
         {
             ChildFormManage.LoadContentControl(this.plBody, typeof(StockInAddControl), new object[]{ this.currentUser });         
         }
+        
+        /// <summary>
+        /// 保存入库
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tsbSave_Click(object sender, EventArgs e)
+        {
+
+        }
         #endregion //Event
     }
 }

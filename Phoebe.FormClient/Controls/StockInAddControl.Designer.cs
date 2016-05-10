@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.dpInTime = new DevExpress.XtraEditors.DateEdit();
@@ -56,11 +55,10 @@
             this.labelControl12 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl11 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl10 = new DevExpress.XtraEditors.LabelControl();
-            this.spinEdit1 = new DevExpress.XtraEditors.SpinEdit();
             this.labelControl9 = new DevExpress.XtraEditors.LabelControl();
             this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
             this.dgcStockIn = new DevExpress.XtraGrid.GridControl();
-            this.bsStockIn = new System.Windows.Forms.BindingSource(this.components);
+            this.bsStockIn = new System.Windows.Forms.BindingSource();
             this.dgvStockIn = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colStockInId = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -81,11 +79,22 @@
             this.colRemark = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colStatus = new DevExpress.XtraGrid.Columns.GridColumn();
             this.groupControl4 = new DevExpress.XtraEditors.GroupControl();
-            this.groupControl5 = new DevExpress.XtraEditors.GroupControl();
-            this.listBoxControl2 = new DevExpress.XtraEditors.ListBoxControl();
             this.lvCustomer = new System.Windows.Forms.ListView();
             this.CustomerNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.CustomerName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.groupControl5 = new DevExpress.XtraEditors.GroupControl();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown5 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown6 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown7 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown8 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown9 = new System.Windows.Forms.NumericUpDown();
+            this.lvCategory = new System.Windows.Forms.ListView();
+            this.CategoryNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.CategoryName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
@@ -100,7 +109,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtStatus.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
             this.groupControl2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.spinEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).BeginInit();
             this.groupControl3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgcStockIn)).BeginInit();
@@ -110,7 +118,15 @@
             this.groupControl4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl5)).BeginInit();
             this.groupControl5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.listBoxControl2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown9)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -216,6 +232,7 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cmbContract.Size = new System.Drawing.Size(140, 20);
             this.cmbContract.TabIndex = 6;
+            this.cmbContract.SelectedIndexChanged += new System.EventHandler(this.cmbContract_SelectedIndexChanged);
             // 
             // txtBillingType
             // 
@@ -305,6 +322,15 @@
             // 
             // groupControl2
             // 
+            this.groupControl2.Controls.Add(this.numericUpDown9);
+            this.groupControl2.Controls.Add(this.numericUpDown8);
+            this.groupControl2.Controls.Add(this.numericUpDown7);
+            this.groupControl2.Controls.Add(this.numericUpDown6);
+            this.groupControl2.Controls.Add(this.numericUpDown5);
+            this.groupControl2.Controls.Add(this.numericUpDown4);
+            this.groupControl2.Controls.Add(this.numericUpDown3);
+            this.groupControl2.Controls.Add(this.numericUpDown2);
+            this.groupControl2.Controls.Add(this.numericUpDown1);
             this.groupControl2.Controls.Add(this.labelControl17);
             this.groupControl2.Controls.Add(this.labelControl16);
             this.groupControl2.Controls.Add(this.labelControl15);
@@ -313,10 +339,7 @@
             this.groupControl2.Controls.Add(this.labelControl12);
             this.groupControl2.Controls.Add(this.labelControl11);
             this.groupControl2.Controls.Add(this.labelControl10);
-            this.groupControl2.Controls.Add(this.spinEdit1);
             this.groupControl2.Controls.Add(this.labelControl9);
-            this.groupControl2.CustomHeaderButtons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] {
-            new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton()});
             this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl2.Location = new System.Drawing.Point(3, 163);
             this.groupControl2.Name = "groupControl2";
@@ -326,7 +349,7 @@
             // 
             // labelControl17
             // 
-            this.labelControl17.Location = new System.Drawing.Point(457, 123);
+            this.labelControl17.Location = new System.Drawing.Point(457, 117);
             this.labelControl17.Name = "labelControl17";
             this.labelControl17.Size = new System.Drawing.Size(48, 14);
             this.labelControl17.TabIndex = 22;
@@ -334,7 +357,7 @@
             // 
             // labelControl16
             // 
-            this.labelControl16.Location = new System.Drawing.Point(254, 123);
+            this.labelControl16.Location = new System.Drawing.Point(254, 117);
             this.labelControl16.Name = "labelControl16";
             this.labelControl16.Size = new System.Drawing.Size(36, 14);
             this.labelControl16.TabIndex = 21;
@@ -342,7 +365,7 @@
             // 
             // labelControl15
             // 
-            this.labelControl15.Location = new System.Drawing.Point(40, 123);
+            this.labelControl15.Location = new System.Drawing.Point(40, 117);
             this.labelControl15.Name = "labelControl15";
             this.labelControl15.Size = new System.Drawing.Size(36, 14);
             this.labelControl15.TabIndex = 20;
@@ -350,7 +373,7 @@
             // 
             // labelControl14
             // 
-            this.labelControl14.Location = new System.Drawing.Point(469, 82);
+            this.labelControl14.Location = new System.Drawing.Point(469, 76);
             this.labelControl14.Name = "labelControl14";
             this.labelControl14.Size = new System.Drawing.Size(36, 14);
             this.labelControl14.TabIndex = 19;
@@ -358,7 +381,7 @@
             // 
             // labelControl13
             // 
-            this.labelControl13.Location = new System.Drawing.Point(254, 82);
+            this.labelControl13.Location = new System.Drawing.Point(254, 76);
             this.labelControl13.Name = "labelControl13";
             this.labelControl13.Size = new System.Drawing.Size(36, 14);
             this.labelControl13.TabIndex = 18;
@@ -366,7 +389,7 @@
             // 
             // labelControl12
             // 
-            this.labelControl12.Location = new System.Drawing.Point(16, 82);
+            this.labelControl12.Location = new System.Drawing.Point(16, 76);
             this.labelControl12.Name = "labelControl12";
             this.labelControl12.Size = new System.Drawing.Size(60, 14);
             this.labelControl12.TabIndex = 17;
@@ -374,7 +397,7 @@
             // 
             // labelControl11
             // 
-            this.labelControl11.Location = new System.Drawing.Point(469, 41);
+            this.labelControl11.Location = new System.Drawing.Point(469, 35);
             this.labelControl11.Name = "labelControl11";
             this.labelControl11.Size = new System.Drawing.Size(36, 14);
             this.labelControl11.TabIndex = 16;
@@ -382,34 +405,15 @@
             // 
             // labelControl10
             // 
-            this.labelControl10.Location = new System.Drawing.Point(230, 41);
+            this.labelControl10.Location = new System.Drawing.Point(230, 35);
             this.labelControl10.Name = "labelControl10";
             this.labelControl10.Size = new System.Drawing.Size(60, 14);
             this.labelControl10.TabIndex = 15;
             this.labelControl10.Text = "装卸费单价";
             // 
-            // spinEdit1
-            // 
-            this.spinEdit1.EditValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.spinEdit1.Location = new System.Drawing.Point(82, 38);
-            this.spinEdit1.Name = "spinEdit1";
-            this.spinEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.spinEdit1.Properties.MaxValue = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            0});
-            this.spinEdit1.Size = new System.Drawing.Size(140, 20);
-            this.spinEdit1.TabIndex = 14;
-            // 
             // labelControl9
             // 
-            this.labelControl9.Location = new System.Drawing.Point(16, 41);
+            this.labelControl9.Location = new System.Drawing.Point(16, 35);
             this.labelControl9.Name = "labelControl9";
             this.labelControl9.Size = new System.Drawing.Size(60, 14);
             this.labelControl9.TabIndex = 13;
@@ -435,6 +439,7 @@
             this.dgcStockIn.Name = "dgcStockIn";
             this.dgcStockIn.Size = new System.Drawing.Size(1090, 231);
             this.dgcStockIn.TabIndex = 0;
+            this.dgcStockIn.UseEmbeddedNavigator = true;
             this.dgcStockIn.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.dgvStockIn});
             // 
@@ -614,25 +619,6 @@
             this.groupControl4.TabIndex = 3;
             this.groupControl4.Text = "客户列表";
             // 
-            // groupControl5
-            // 
-            this.groupControl5.Controls.Add(this.listBoxControl2);
-            this.groupControl5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl5.Location = new System.Drawing.Point(903, 3);
-            this.groupControl5.Name = "groupControl5";
-            this.tableLayoutPanel1.SetRowSpan(this.groupControl5, 2);
-            this.groupControl5.Size = new System.Drawing.Size(194, 314);
-            this.groupControl5.TabIndex = 4;
-            this.groupControl5.Text = "货品编码";
-            // 
-            // listBoxControl2
-            // 
-            this.listBoxControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listBoxControl2.Location = new System.Drawing.Point(2, 21);
-            this.listBoxControl2.Name = "listBoxControl2";
-            this.listBoxControl2.Size = new System.Drawing.Size(190, 291);
-            this.listBoxControl2.TabIndex = 0;
-            // 
             // lvCustomer
             // 
             this.lvCustomer.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -643,10 +629,12 @@
             this.lvCustomer.Location = new System.Drawing.Point(2, 21);
             this.lvCustomer.MultiSelect = false;
             this.lvCustomer.Name = "lvCustomer";
+            this.lvCustomer.Scrollable = false;
             this.lvCustomer.Size = new System.Drawing.Size(190, 291);
             this.lvCustomer.TabIndex = 0;
             this.lvCustomer.UseCompatibleStateImageBehavior = false;
             this.lvCustomer.View = System.Windows.Forms.View.Details;
+            this.lvCustomer.SelectedIndexChanged += new System.EventHandler(this.lvCustomer_SelectedIndexChanged);
             // 
             // CustomerNumber
             // 
@@ -657,6 +645,158 @@
             // 
             this.CustomerName.Text = "名称";
             this.CustomerName.Width = 190;
+            // 
+            // groupControl5
+            // 
+            this.groupControl5.Controls.Add(this.lvCategory);
+            this.groupControl5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupControl5.Location = new System.Drawing.Point(903, 3);
+            this.groupControl5.Name = "groupControl5";
+            this.tableLayoutPanel1.SetRowSpan(this.groupControl5, 2);
+            this.groupControl5.Size = new System.Drawing.Size(194, 314);
+            this.groupControl5.TabIndex = 4;
+            this.groupControl5.Text = "货品编码";
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.DecimalPlaces = 2;
+            this.numericUpDown1.Location = new System.Drawing.Point(82, 33);
+            this.numericUpDown1.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(140, 22);
+            this.numericUpDown1.TabIndex = 23;
+            // 
+            // numericUpDown2
+            // 
+            this.numericUpDown2.DecimalPlaces = 2;
+            this.numericUpDown2.Location = new System.Drawing.Point(296, 33);
+            this.numericUpDown2.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.numericUpDown2.Name = "numericUpDown2";
+            this.numericUpDown2.Size = new System.Drawing.Size(140, 22);
+            this.numericUpDown2.TabIndex = 24;
+            // 
+            // numericUpDown3
+            // 
+            this.numericUpDown3.DecimalPlaces = 2;
+            this.numericUpDown3.Location = new System.Drawing.Point(511, 33);
+            this.numericUpDown3.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.numericUpDown3.Name = "numericUpDown3";
+            this.numericUpDown3.Size = new System.Drawing.Size(140, 22);
+            this.numericUpDown3.TabIndex = 25;
+            // 
+            // numericUpDown4
+            // 
+            this.numericUpDown4.DecimalPlaces = 2;
+            this.numericUpDown4.Location = new System.Drawing.Point(82, 74);
+            this.numericUpDown4.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.numericUpDown4.Name = "numericUpDown4";
+            this.numericUpDown4.Size = new System.Drawing.Size(140, 22);
+            this.numericUpDown4.TabIndex = 26;
+            // 
+            // numericUpDown5
+            // 
+            this.numericUpDown5.DecimalPlaces = 2;
+            this.numericUpDown5.Location = new System.Drawing.Point(296, 74);
+            this.numericUpDown5.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.numericUpDown5.Name = "numericUpDown5";
+            this.numericUpDown5.Size = new System.Drawing.Size(140, 22);
+            this.numericUpDown5.TabIndex = 27;
+            // 
+            // numericUpDown6
+            // 
+            this.numericUpDown6.DecimalPlaces = 2;
+            this.numericUpDown6.Location = new System.Drawing.Point(511, 74);
+            this.numericUpDown6.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.numericUpDown6.Name = "numericUpDown6";
+            this.numericUpDown6.Size = new System.Drawing.Size(140, 22);
+            this.numericUpDown6.TabIndex = 28;
+            // 
+            // numericUpDown7
+            // 
+            this.numericUpDown7.DecimalPlaces = 2;
+            this.numericUpDown7.Location = new System.Drawing.Point(82, 115);
+            this.numericUpDown7.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.numericUpDown7.Name = "numericUpDown7";
+            this.numericUpDown7.Size = new System.Drawing.Size(140, 22);
+            this.numericUpDown7.TabIndex = 29;
+            // 
+            // numericUpDown8
+            // 
+            this.numericUpDown8.DecimalPlaces = 2;
+            this.numericUpDown8.Location = new System.Drawing.Point(296, 115);
+            this.numericUpDown8.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.numericUpDown8.Name = "numericUpDown8";
+            this.numericUpDown8.Size = new System.Drawing.Size(140, 22);
+            this.numericUpDown8.TabIndex = 30;
+            // 
+            // numericUpDown9
+            // 
+            this.numericUpDown9.DecimalPlaces = 2;
+            this.numericUpDown9.Location = new System.Drawing.Point(511, 115);
+            this.numericUpDown9.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.numericUpDown9.Name = "numericUpDown9";
+            this.numericUpDown9.Size = new System.Drawing.Size(140, 22);
+            this.numericUpDown9.TabIndex = 31;
+            // 
+            // lvCategory
+            // 
+            this.lvCategory.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.CategoryNumber,
+            this.CategoryName});
+            this.lvCategory.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lvCategory.Location = new System.Drawing.Point(2, 21);
+            this.lvCategory.MultiSelect = false;
+            this.lvCategory.Name = "lvCategory";
+            this.lvCategory.Size = new System.Drawing.Size(190, 291);
+            this.lvCategory.TabIndex = 0;
+            this.lvCategory.UseCompatibleStateImageBehavior = false;
+            this.lvCategory.View = System.Windows.Forms.View.Details;
+            // 
+            // CategoryNumber
+            // 
+            this.CategoryNumber.Text = "编码";
+            this.CategoryNumber.Width = 90;
+            // 
+            // CategoryName
+            // 
+            this.CategoryName.Text = "名称";
+            this.CategoryName.Width = 100;
             // 
             // StockInAddControl
             // 
@@ -682,7 +822,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
             this.groupControl2.ResumeLayout(false);
             this.groupControl2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.spinEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).EndInit();
             this.groupControl3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgcStockIn)).EndInit();
@@ -692,7 +831,15 @@
             this.groupControl4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl5)).EndInit();
             this.groupControl5.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.listBoxControl2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown9)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -721,9 +868,7 @@
         private DevExpress.XtraEditors.LabelControl labelControl3;
         private DevExpress.XtraEditors.LabelControl labelControl2;
         private DevExpress.XtraEditors.LabelControl labelControl1;
-        private DevExpress.XtraEditors.SpinEdit spinEdit1;
         private DevExpress.XtraEditors.LabelControl labelControl9;
-        private DevExpress.XtraEditors.ListBoxControl listBoxControl2;
         private DevExpress.XtraEditors.LabelControl labelControl17;
         private DevExpress.XtraEditors.LabelControl labelControl16;
         private DevExpress.XtraEditors.LabelControl labelControl15;
@@ -756,5 +901,17 @@
         private System.Windows.Forms.ListView lvCustomer;
         private System.Windows.Forms.ColumnHeader CustomerNumber;
         private System.Windows.Forms.ColumnHeader CustomerName;
+        private System.Windows.Forms.NumericUpDown numericUpDown3;
+        private System.Windows.Forms.NumericUpDown numericUpDown2;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown numericUpDown9;
+        private System.Windows.Forms.NumericUpDown numericUpDown8;
+        private System.Windows.Forms.NumericUpDown numericUpDown7;
+        private System.Windows.Forms.NumericUpDown numericUpDown6;
+        private System.Windows.Forms.NumericUpDown numericUpDown5;
+        private System.Windows.Forms.NumericUpDown numericUpDown4;
+        private System.Windows.Forms.ListView lvCategory;
+        private System.Windows.Forms.ColumnHeader CategoryNumber;
+        private System.Windows.Forms.ColumnHeader CategoryName;
     }
 }

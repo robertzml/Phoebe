@@ -36,7 +36,7 @@
             this.tsStockIn = new System.Windows.Forms.ToolStrip();
             this.tsbNew = new System.Windows.Forms.ToolStripButton();
             this.打开OToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.保存SToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.tsbSave = new System.Windows.Forms.ToolStripButton();
             this.打印PToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.剪切UToolStripButton = new System.Windows.Forms.ToolStripButton();
@@ -91,7 +91,7 @@
             this.tsStockIn.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsbNew,
             this.打开OToolStripButton,
-            this.保存SToolStripButton,
+            this.tsbSave,
             this.打印PToolStripButton,
             this.toolStripSeparator,
             this.剪切UToolStripButton,
@@ -109,8 +109,9 @@
             this.tsbNew.Image = ((System.Drawing.Image)(resources.GetObject("tsbNew.Image")));
             this.tsbNew.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbNew.Name = "tsbNew";
-            this.tsbNew.Size = new System.Drawing.Size(70, 22);
-            this.tsbNew.Text = "新建(&N)";
+            this.tsbNew.Size = new System.Drawing.Size(52, 22);
+            this.tsbNew.Text = "新建";
+            this.tsbNew.ToolTipText = "新建";
             this.tsbNew.Click += new System.EventHandler(this.tsbNew_Click);
             // 
             // 打开OToolStripButton
@@ -122,14 +123,14 @@
             this.打开OToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.打开OToolStripButton.Text = "打开(&O)";
             // 
-            // 保存SToolStripButton
+            // tsbSave
             // 
-            this.保存SToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.保存SToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("保存SToolStripButton.Image")));
-            this.保存SToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.保存SToolStripButton.Name = "保存SToolStripButton";
-            this.保存SToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.保存SToolStripButton.Text = "保存(&S)";
+            this.tsbSave.Image = ((System.Drawing.Image)(resources.GetObject("tsbSave.Image")));
+            this.tsbSave.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbSave.Name = "tsbSave";
+            this.tsbSave.Size = new System.Drawing.Size(52, 22);
+            this.tsbSave.Text = "保存";
+            this.tsbSave.Click += new System.EventHandler(this.tsbSave_Click);
             // 
             // 打印PToolStripButton
             // 
@@ -220,7 +221,7 @@
         private System.Windows.Forms.ToolStrip tsStockIn;
         private System.Windows.Forms.ToolStripButton tsbNew;
         private System.Windows.Forms.ToolStripButton 打开OToolStripButton;
-        private System.Windows.Forms.ToolStripButton 保存SToolStripButton;
+        private System.Windows.Forms.ToolStripButton tsbSave;
         private System.Windows.Forms.ToolStripButton 打印PToolStripButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
         private System.Windows.Forms.ToolStripButton 剪切UToolStripButton;
