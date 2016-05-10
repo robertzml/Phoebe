@@ -38,9 +38,14 @@ namespace Phoebe.FormClient
         private List<Category> categoryList;
 
         /// <summary>
-        /// 选中客户Id
+        /// 选中客户ID
         /// </summary>
         private int customerId;
+
+        /// <summary>
+        /// 选中合同ID
+        /// </summary>
+        private int contractId;
         #endregion //Field
 
         #region Constructor
@@ -123,13 +128,43 @@ namespace Phoebe.FormClient
             else
                 categories = this.categoryList.Where(r => r.Number.StartsWith(prefix)).OrderBy(r => r.Number);
 
+            this.lvCategory.Items.Clear();
+            foreach (var item in categories)
+            {
+                ListViewItem lvi = new ListViewItem(item.Number);
+                lvi.Tag = item.Id;
+
+                lvi.SubItems.Add(item.Name);
+
+                this.lvCategory.Items.Add(lvi);
+            }
+
             this.lvCategory.EndUpdate();
         }
         #endregion //Function
 
         #region Method
+        /// <summary>
+        /// 保存入库
+        /// </summary>
+        /// <returns></returns>
         public ErrorCode Save()
         {
+            foreach (StockInModel item in this.bsStockIn)
+            {
+                item.ContractId = this.contractId;
+
+                var category = BusinessFactory<CategoryBusiness>.Instance.GetByNumber(item.CategoryNumber);
+                item.CategoryId = category.Id;
+
+                var cargo = BusinessFactory<CargoBusiness>.Instance.Create(item);
+                if (cargo == null)
+                {
+                    return ErrorCode.CargoCreateFailed;
+                }
+                item.CargoId = cargo.Id;
+            }
+        
             return ErrorCode.Success;
         }
         #endregion //Method
@@ -147,7 +182,7 @@ namespace Phoebe.FormClient
             this.dpInTime.EditValue = DateTime.Now;
 
             this.customerList = BusinessFactory<CustomerBusiness>.Instance.FindAll();
-            this.categoryList = BusinessFactory<CategoryBusiness>.Instance.FindAll();
+            this.categoryList = BusinessFactory<CategoryBusiness>.Instance.GetLeafCategory();
 
             UpdateCustomerView("");
             UpdateCategoryView("");
@@ -209,7 +244,7 @@ namespace Phoebe.FormClient
             }
             else
             {
-                int contractId = Convert.ToInt32(this.cmbContract.EditValue);
+                this.contractId = Convert.ToInt32(this.cmbContract.EditValue);
                 var contract = BusinessFactory<ContractBusiness>.Instance.FindById(contractId);
 
                 this.txtBillingType.Text = ((BillingType)contract.BillingType).DisplayName();

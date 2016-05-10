@@ -64,6 +64,21 @@ namespace Phoebe.Business
             Expression<Func<Category, bool>> predicate = r => r.ParentId == parentId;
             return this.dal.Find(predicate).ToList();
         }
+
+        /// <summary>
+        /// 根据编码获取分类
+        /// </summary>
+        /// <param name="number">分类编码</param>
+        /// <returns></returns>
+        public Category GetByNumber(string number)
+        {
+            Expression<Func<Category, bool>> predicate = r => r.Number == number;
+            var data = this.dal.Find(predicate);
+            if (data.Count() == 0)
+                return null;
+            else
+                return data.First();
+        }
         #endregion //Method
     }
 }

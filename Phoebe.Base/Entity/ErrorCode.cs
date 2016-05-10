@@ -109,10 +109,16 @@ namespace Phoebe.Base
 
         #region Cargo
         /// <summary>
+        /// 货品创建失败
+        /// </summary>
+        [Display(Name = "货品创建失败")]
+        CargoCreateFailed = 50,
+
+        /// <summary>
         /// 货品已存在
         /// </summary>
         [Display(Name = "货品已存在")]
-        CargoExist = 50,
+        CargoExist = 51,
         #endregion //Cargo
     }
 }

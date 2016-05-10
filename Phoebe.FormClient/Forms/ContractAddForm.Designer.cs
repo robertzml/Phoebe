@@ -29,14 +29,18 @@
         private void InitializeComponent()
         {
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
+            this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.lvCustomer = new System.Windows.Forms.ListView();
+            this.colCustomerNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colCustomerName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.txtCustomerName = new DevExpress.XtraEditors.TextEdit();
             this.txtCustomerNumber = new DevExpress.XtraEditors.TextEdit();
             this.txtRemark = new DevExpress.XtraEditors.MemoEdit();
-            this.ckbIsTiming = new DevExpress.XtraEditors.CheckEdit();
             this.cmbBillingType = new DevExpress.XtraEditors.ImageComboBoxEdit();
+            this.ckbIsTiming = new DevExpress.XtraEditors.CheckEdit();
             this.txtSignDate = new DevExpress.XtraEditors.DateEdit();
-            this.txtName = new DevExpress.XtraEditors.TextEdit();
             this.txtNumber = new DevExpress.XtraEditors.TextEdit();
-            this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.txtName = new DevExpress.XtraEditors.TextEdit();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -45,28 +49,25 @@
             this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.txtCustomerName = new DevExpress.XtraEditors.TextEdit();
             this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.lvCustomer = new System.Windows.Forms.ListView();
             this.layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.colCustomerNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.colCustomerName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.plFill)).BeginInit();
             this.plFill.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.plBottom)).BeginInit();
             this.plBottom.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtCustomerNumber.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtRemark.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ckbIsTiming.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cmbBillingType.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtSignDate.Properties.CalendarTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtSignDate.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtName.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtNumber.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCustomerName.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCustomerNumber.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtRemark.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbBillingType.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ckbIsTiming.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSignDate.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSignDate.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtNumber.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
@@ -75,7 +76,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtCustomerName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).BeginInit();
             this.SuspendLayout();
@@ -96,11 +96,11 @@
             // 
             // btnCanel
             // 
-            this.btnCanel.Location = new System.Drawing.Point(513, 18);
+            this.btnCanel.Location = new System.Drawing.Point(697, 18);
             // 
             // btnConfirm
             // 
-            this.btnConfirm.Location = new System.Drawing.Point(397, 18);
+            this.btnConfirm.Location = new System.Drawing.Point(581, 18);
             this.btnConfirm.Click += new System.EventHandler(this.btnConfirm_Click);
             // 
             // groupControl1
@@ -112,82 +112,6 @@
             this.groupControl1.Size = new System.Drawing.Size(614, 335);
             this.groupControl1.TabIndex = 0;
             this.groupControl1.Text = "合同信息";
-            // 
-            // txtCustomerNumber
-            // 
-            this.txtCustomerNumber.Location = new System.Drawing.Point(64, 60);
-            this.txtCustomerNumber.Name = "txtCustomerNumber";
-            this.txtCustomerNumber.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow;
-            this.txtCustomerNumber.Properties.Appearance.Options.UseBackColor = true;
-            this.txtCustomerNumber.Size = new System.Drawing.Size(124, 20);
-            this.txtCustomerNumber.StyleController = this.layoutControl1;
-            this.txtCustomerNumber.TabIndex = 2;
-            this.txtCustomerNumber.EditValueChanged += new System.EventHandler(this.txtCustomerNumber_EditValueChanged);
-            // 
-            // txtRemark
-            // 
-            this.txtRemark.Location = new System.Drawing.Point(64, 155);
-            this.txtRemark.Name = "txtRemark";
-            this.txtRemark.Size = new System.Drawing.Size(332, 145);
-            this.txtRemark.StyleController = this.layoutControl1;
-            this.txtRemark.TabIndex = 6;
-            // 
-            // ckbIsTiming
-            // 
-            this.ckbIsTiming.EditValue = true;
-            this.ckbIsTiming.Location = new System.Drawing.Point(64, 132);
-            this.ckbIsTiming.Name = "ckbIsTiming";
-            this.ckbIsTiming.Properties.Caption = "是";
-            this.ckbIsTiming.Size = new System.Drawing.Size(332, 19);
-            this.ckbIsTiming.StyleController = this.layoutControl1;
-            this.ckbIsTiming.TabIndex = 5;
-            // 
-            // cmbBillingType
-            // 
-            this.cmbBillingType.Location = new System.Drawing.Point(64, 108);
-            this.cmbBillingType.Name = "cmbBillingType";
-            this.cmbBillingType.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow;
-            this.cmbBillingType.Properties.Appearance.Options.UseBackColor = true;
-            this.cmbBillingType.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cmbBillingType.Size = new System.Drawing.Size(332, 20);
-            this.cmbBillingType.StyleController = this.layoutControl1;
-            this.cmbBillingType.TabIndex = 4;
-            // 
-            // txtSignDate
-            // 
-            this.txtSignDate.EditValue = null;
-            this.txtSignDate.Location = new System.Drawing.Point(64, 84);
-            this.txtSignDate.Name = "txtSignDate";
-            this.txtSignDate.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow;
-            this.txtSignDate.Properties.Appearance.Options.UseBackColor = true;
-            this.txtSignDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txtSignDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txtSignDate.Size = new System.Drawing.Size(332, 20);
-            this.txtSignDate.StyleController = this.layoutControl1;
-            this.txtSignDate.TabIndex = 3;
-            // 
-            // txtName
-            // 
-            this.txtName.Location = new System.Drawing.Point(64, 36);
-            this.txtName.Name = "txtName";
-            this.txtName.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow;
-            this.txtName.Properties.Appearance.Options.UseBackColor = true;
-            this.txtName.Size = new System.Drawing.Size(332, 20);
-            this.txtName.StyleController = this.layoutControl1;
-            this.txtName.TabIndex = 1;
-            // 
-            // txtNumber
-            // 
-            this.txtNumber.Location = new System.Drawing.Point(64, 12);
-            this.txtNumber.Name = "txtNumber";
-            this.txtNumber.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow;
-            this.txtNumber.Properties.Appearance.Options.UseBackColor = true;
-            this.txtNumber.Size = new System.Drawing.Size(332, 20);
-            this.txtNumber.StyleController = this.layoutControl1;
-            this.txtNumber.TabIndex = 0;
             // 
             // layoutControl1
             // 
@@ -207,6 +131,118 @@
             this.layoutControl1.Size = new System.Drawing.Size(610, 312);
             this.layoutControl1.TabIndex = 17;
             this.layoutControl1.Text = "layoutControl1";
+            // 
+            // lvCustomer
+            // 
+            this.lvCustomer.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.colCustomerNumber,
+            this.colCustomerName});
+            this.lvCustomer.FullRowSelect = true;
+            this.lvCustomer.Location = new System.Drawing.Point(400, 29);
+            this.lvCustomer.MultiSelect = false;
+            this.lvCustomer.Name = "lvCustomer";
+            this.lvCustomer.Size = new System.Drawing.Size(198, 271);
+            this.lvCustomer.TabIndex = 16;
+            this.lvCustomer.TabStop = false;
+            this.lvCustomer.UseCompatibleStateImageBehavior = false;
+            this.lvCustomer.View = System.Windows.Forms.View.Details;
+            this.lvCustomer.SelectedIndexChanged += new System.EventHandler(this.lvCustomer_SelectedIndexChanged);
+            // 
+            // colCustomerNumber
+            // 
+            this.colCustomerNumber.Text = "代码";
+            this.colCustomerNumber.Width = 98;
+            // 
+            // colCustomerName
+            // 
+            this.colCustomerName.Text = "名称";
+            this.colCustomerName.Width = 100;
+            // 
+            // txtCustomerName
+            // 
+            this.txtCustomerName.Location = new System.Drawing.Point(243, 60);
+            this.txtCustomerName.Name = "txtCustomerName";
+            this.txtCustomerName.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
+            this.txtCustomerName.Properties.Appearance.Options.UseBackColor = true;
+            this.txtCustomerName.Size = new System.Drawing.Size(153, 20);
+            this.txtCustomerName.StyleController = this.layoutControl1;
+            this.txtCustomerName.TabIndex = 15;
+            // 
+            // txtCustomerNumber
+            // 
+            this.txtCustomerNumber.Location = new System.Drawing.Point(63, 60);
+            this.txtCustomerNumber.Name = "txtCustomerNumber";
+            this.txtCustomerNumber.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow;
+            this.txtCustomerNumber.Properties.Appearance.Options.UseBackColor = true;
+            this.txtCustomerNumber.Size = new System.Drawing.Size(125, 20);
+            this.txtCustomerNumber.StyleController = this.layoutControl1;
+            this.txtCustomerNumber.TabIndex = 2;
+            this.txtCustomerNumber.EditValueChanged += new System.EventHandler(this.txtCustomerNumber_EditValueChanged);
+            // 
+            // txtRemark
+            // 
+            this.txtRemark.Location = new System.Drawing.Point(63, 155);
+            this.txtRemark.Name = "txtRemark";
+            this.txtRemark.Size = new System.Drawing.Size(333, 145);
+            this.txtRemark.StyleController = this.layoutControl1;
+            this.txtRemark.TabIndex = 6;
+            // 
+            // cmbBillingType
+            // 
+            this.cmbBillingType.Location = new System.Drawing.Point(63, 108);
+            this.cmbBillingType.Name = "cmbBillingType";
+            this.cmbBillingType.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow;
+            this.cmbBillingType.Properties.Appearance.Options.UseBackColor = true;
+            this.cmbBillingType.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cmbBillingType.Size = new System.Drawing.Size(333, 20);
+            this.cmbBillingType.StyleController = this.layoutControl1;
+            this.cmbBillingType.TabIndex = 4;
+            // 
+            // ckbIsTiming
+            // 
+            this.ckbIsTiming.EditValue = true;
+            this.ckbIsTiming.Location = new System.Drawing.Point(63, 132);
+            this.ckbIsTiming.Name = "ckbIsTiming";
+            this.ckbIsTiming.Properties.Caption = "是";
+            this.ckbIsTiming.Size = new System.Drawing.Size(333, 19);
+            this.ckbIsTiming.StyleController = this.layoutControl1;
+            this.ckbIsTiming.TabIndex = 5;
+            // 
+            // txtSignDate
+            // 
+            this.txtSignDate.EditValue = null;
+            this.txtSignDate.Location = new System.Drawing.Point(63, 84);
+            this.txtSignDate.Name = "txtSignDate";
+            this.txtSignDate.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow;
+            this.txtSignDate.Properties.Appearance.Options.UseBackColor = true;
+            this.txtSignDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtSignDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtSignDate.Size = new System.Drawing.Size(333, 20);
+            this.txtSignDate.StyleController = this.layoutControl1;
+            this.txtSignDate.TabIndex = 3;
+            // 
+            // txtNumber
+            // 
+            this.txtNumber.Location = new System.Drawing.Point(63, 12);
+            this.txtNumber.Name = "txtNumber";
+            this.txtNumber.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow;
+            this.txtNumber.Properties.Appearance.Options.UseBackColor = true;
+            this.txtNumber.Size = new System.Drawing.Size(333, 20);
+            this.txtNumber.StyleController = this.layoutControl1;
+            this.txtNumber.TabIndex = 0;
+            // 
+            // txtName
+            // 
+            this.txtName.Location = new System.Drawing.Point(63, 36);
+            this.txtName.Name = "txtName";
+            this.txtName.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow;
+            this.txtName.Properties.Appearance.Options.UseBackColor = true;
+            this.txtName.Size = new System.Drawing.Size(333, 20);
+            this.txtName.StyleController = this.layoutControl1;
+            this.txtName.TabIndex = 1;
             // 
             // layoutControlGroup1
             // 
@@ -290,16 +326,6 @@
             this.layoutControlItem7.Text = "备注";
             this.layoutControlItem7.TextSize = new System.Drawing.Size(48, 14);
             // 
-            // txtCustomerName
-            // 
-            this.txtCustomerName.Location = new System.Drawing.Point(244, 60);
-            this.txtCustomerName.Name = "txtCustomerName";
-            this.txtCustomerName.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
-            this.txtCustomerName.Properties.Appearance.Options.UseBackColor = true;
-            this.txtCustomerName.Size = new System.Drawing.Size(152, 20);
-            this.txtCustomerName.StyleController = this.layoutControl1;
-            this.txtCustomerName.TabIndex = 15;
-            // 
             // layoutControlItem8
             // 
             this.layoutControlItem8.Control = this.txtCustomerName;
@@ -308,23 +334,6 @@
             this.layoutControlItem8.Size = new System.Drawing.Size(208, 24);
             this.layoutControlItem8.Text = "客户名称";
             this.layoutControlItem8.TextSize = new System.Drawing.Size(48, 14);
-            // 
-            // lvCustomer
-            // 
-            this.lvCustomer.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.colCustomerNumber,
-            this.colCustomerName});
-            this.lvCustomer.FullRowSelect = true;
-            this.lvCustomer.Location = new System.Drawing.Point(400, 29);
-            this.lvCustomer.MultiSelect = false;
-            this.lvCustomer.Name = "lvCustomer";
-            this.lvCustomer.Scrollable = false;
-            this.lvCustomer.Size = new System.Drawing.Size(198, 271);
-            this.lvCustomer.TabIndex = 16;
-            this.lvCustomer.TabStop = false;
-            this.lvCustomer.UseCompatibleStateImageBehavior = false;
-            this.lvCustomer.View = System.Windows.Forms.View.Details;
-            this.lvCustomer.SelectedIndexChanged += new System.EventHandler(this.lvCustomer_SelectedIndexChanged);
             // 
             // layoutControlItem9
             // 
@@ -335,16 +344,6 @@
             this.layoutControlItem9.Text = "客户列表";
             this.layoutControlItem9.TextLocation = DevExpress.Utils.Locations.Top;
             this.layoutControlItem9.TextSize = new System.Drawing.Size(48, 14);
-            // 
-            // colCustomerNumber
-            // 
-            this.colCustomerNumber.Text = "代码";
-            this.colCustomerNumber.Width = 98;
-            // 
-            // colCustomerName
-            // 
-            this.colCustomerName.Text = "名称";
-            this.colCustomerName.Width = 100;
             // 
             // ContractAddForm
             // 
@@ -360,16 +359,17 @@
             this.plBottom.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
             this.groupControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.txtCustomerNumber.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtRemark.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ckbIsTiming.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cmbBillingType.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtSignDate.Properties.CalendarTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtSignDate.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtName.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtNumber.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.txtCustomerName.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCustomerNumber.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtRemark.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbBillingType.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ckbIsTiming.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSignDate.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSignDate.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtNumber.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
@@ -378,7 +378,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtCustomerName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).EndInit();
             this.ResumeLayout(false);

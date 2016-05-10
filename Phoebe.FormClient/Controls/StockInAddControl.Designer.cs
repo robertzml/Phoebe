@@ -30,25 +30,46 @@
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
-            this.dpInTime = new DevExpress.XtraEditors.DateEdit();
-            this.txtUser = new DevExpress.XtraEditors.TextEdit();
+            this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.txtRemark = new DevExpress.XtraEditors.TextEdit();
-            this.cmbContract = new DevExpress.XtraEditors.ImageComboBoxEdit();
+            this.txtUser = new DevExpress.XtraEditors.TextEdit();
+            this.dpInTime = new DevExpress.XtraEditors.DateEdit();
             this.txtBillingType = new DevExpress.XtraEditors.TextEdit();
+            this.cmbContract = new DevExpress.XtraEditors.ImageComboBoxEdit();
             this.txtCustomerName = new DevExpress.XtraEditors.TextEdit();
             this.txtCustomerNumber = new DevExpress.XtraEditors.TextEdit();
             this.txtStatus = new DevExpress.XtraEditors.TextEdit();
+            this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
             this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
+            this.layoutControl2 = new DevExpress.XtraLayout.LayoutControl();
             this.numericUpDown9 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown8 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown7 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown8 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown6 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown5 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem11 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem12 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem13 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem14 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem15 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem16 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem17 = new DevExpress.XtraLayout.LayoutControlItem();
             this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
             this.dgcStockIn = new DevExpress.XtraGrid.GridControl();
             this.bsStockIn = new System.Windows.Forms.BindingSource();
@@ -56,12 +77,14 @@
             this.colId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colStockInId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colStoreId = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colContractId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCargoId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCategoryId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCategoryNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCategoryName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colSpecification = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colInCount = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colGroupType = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colUnitWeight = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colInWeight = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colUnitVolume = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -79,61 +102,20 @@
             this.lvCategory = new System.Windows.Forms.ListView();
             this.CategoryNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.CategoryName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
-            this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControl2 = new DevExpress.XtraLayout.LayoutControl();
-            this.layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem11 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem12 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem13 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem14 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem15 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem16 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem17 = new DevExpress.XtraLayout.LayoutControlItem();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
+            this.layoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtRemark.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtUser.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dpInTime.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dpInTime.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtUser.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtRemark.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cmbContract.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtBillingType.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbContract.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCustomerName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCustomerNumber.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtStatus.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
-            this.groupControl2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown9)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown8)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown7)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).BeginInit();
-            this.groupControl3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgcStockIn)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsStockIn)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvStockIn)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).BeginInit();
-            this.groupControl4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl5)).BeginInit();
-            this.groupControl5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
-            this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
@@ -143,8 +125,19 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
+            this.groupControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl2)).BeginInit();
             this.layoutControl2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).BeginInit();
@@ -155,6 +148,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem15)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem16)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem17)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).BeginInit();
+            this.groupControl3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgcStockIn)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsStockIn)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvStockIn)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).BeginInit();
+            this.groupControl4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl5)).BeginInit();
+            this.groupControl5.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -189,494 +191,6 @@
             this.groupControl1.TabIndex = 0;
             this.groupControl1.Text = "基本信息";
             // 
-            // dpInTime
-            // 
-            this.dpInTime.EditValue = null;
-            this.dpInTime.Location = new System.Drawing.Point(285, 7);
-            this.dpInTime.Name = "dpInTime";
-            this.dpInTime.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow;
-            this.dpInTime.Properties.Appearance.Options.UseBackColor = true;
-            this.dpInTime.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dpInTime.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dpInTime.Size = new System.Drawing.Size(171, 20);
-            this.dpInTime.StyleController = this.layoutControl1;
-            this.dpInTime.TabIndex = 1;
-            // 
-            // txtUser
-            // 
-            this.txtUser.Location = new System.Drawing.Point(512, 7);
-            this.txtUser.Name = "txtUser";
-            this.txtUser.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
-            this.txtUser.Properties.Appearance.Options.UseBackColor = true;
-            this.txtUser.Properties.ReadOnly = true;
-            this.txtUser.Size = new System.Drawing.Size(171, 20);
-            this.txtUser.StyleController = this.layoutControl1;
-            this.txtUser.TabIndex = 2;
-            // 
-            // txtRemark
-            // 
-            this.txtRemark.Location = new System.Drawing.Point(285, 65);
-            this.txtRemark.Name = "txtRemark";
-            this.txtRemark.Size = new System.Drawing.Size(171, 20);
-            this.txtRemark.StyleController = this.layoutControl1;
-            this.txtRemark.TabIndex = 3;
-            // 
-            // cmbContract
-            // 
-            this.cmbContract.Location = new System.Drawing.Point(512, 36);
-            this.cmbContract.Name = "cmbContract";
-            this.cmbContract.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow;
-            this.cmbContract.Properties.Appearance.Options.UseBackColor = true;
-            this.cmbContract.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cmbContract.Size = new System.Drawing.Size(171, 20);
-            this.cmbContract.StyleController = this.layoutControl1;
-            this.cmbContract.TabIndex = 6;
-            this.cmbContract.SelectedIndexChanged += new System.EventHandler(this.cmbContract_SelectedIndexChanged);
-            // 
-            // txtBillingType
-            // 
-            this.txtBillingType.Location = new System.Drawing.Point(59, 65);
-            this.txtBillingType.Name = "txtBillingType";
-            this.txtBillingType.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
-            this.txtBillingType.Properties.Appearance.Options.UseBackColor = true;
-            this.txtBillingType.Properties.ReadOnly = true;
-            this.txtBillingType.Size = new System.Drawing.Size(170, 20);
-            this.txtBillingType.StyleController = this.layoutControl1;
-            this.txtBillingType.TabIndex = 7;
-            // 
-            // txtCustomerName
-            // 
-            this.txtCustomerName.Location = new System.Drawing.Point(285, 36);
-            this.txtCustomerName.Name = "txtCustomerName";
-            this.txtCustomerName.Properties.ReadOnly = true;
-            this.txtCustomerName.Size = new System.Drawing.Size(171, 20);
-            this.txtCustomerName.StyleController = this.layoutControl1;
-            this.txtCustomerName.TabIndex = 5;
-            // 
-            // txtCustomerNumber
-            // 
-            this.txtCustomerNumber.Location = new System.Drawing.Point(59, 36);
-            this.txtCustomerNumber.Name = "txtCustomerNumber";
-            this.txtCustomerNumber.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow;
-            this.txtCustomerNumber.Properties.Appearance.Options.UseBackColor = true;
-            this.txtCustomerNumber.Size = new System.Drawing.Size(170, 20);
-            this.txtCustomerNumber.StyleController = this.layoutControl1;
-            this.txtCustomerNumber.TabIndex = 4;
-            this.txtCustomerNumber.EditValueChanged += new System.EventHandler(this.txtCustomerNumber_EditValueChanged);
-            // 
-            // txtStatus
-            // 
-            this.txtStatus.Location = new System.Drawing.Point(59, 7);
-            this.txtStatus.Name = "txtStatus";
-            this.txtStatus.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
-            this.txtStatus.Properties.Appearance.Options.UseBackColor = true;
-            this.txtStatus.Properties.ReadOnly = true;
-            this.txtStatus.Size = new System.Drawing.Size(170, 20);
-            this.txtStatus.StyleController = this.layoutControl1;
-            this.txtStatus.TabIndex = 0;
-            // 
-            // labelControl5
-            // 
-            this.labelControl5.Location = new System.Drawing.Point(457, 77);
-            this.labelControl5.Name = "labelControl5";
-            this.labelControl5.Size = new System.Drawing.Size(48, 14);
-            this.labelControl5.TabIndex = 4;
-            this.labelControl5.Text = "所属合同";
-            // 
-            // groupControl2
-            // 
-            this.groupControl2.Controls.Add(this.layoutControl2);
-            this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl2.Location = new System.Drawing.Point(3, 163);
-            this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(694, 154);
-            this.groupControl2.TabIndex = 1;
-            this.groupControl2.Text = "费用信息";
-            // 
-            // numericUpDown9
-            // 
-            this.numericUpDown9.DecimalPlaces = 2;
-            this.numericUpDown9.Location = new System.Drawing.Point(524, 65);
-            this.numericUpDown9.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.numericUpDown9.Name = "numericUpDown9";
-            this.numericUpDown9.Size = new System.Drawing.Size(159, 22);
-            this.numericUpDown9.TabIndex = 31;
-            // 
-            // numericUpDown8
-            // 
-            this.numericUpDown8.DecimalPlaces = 2;
-            this.numericUpDown8.Location = new System.Drawing.Point(296, 65);
-            this.numericUpDown8.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.numericUpDown8.Name = "numericUpDown8";
-            this.numericUpDown8.Size = new System.Drawing.Size(160, 22);
-            this.numericUpDown8.TabIndex = 30;
-            // 
-            // numericUpDown7
-            // 
-            this.numericUpDown7.DecimalPlaces = 2;
-            this.numericUpDown7.Location = new System.Drawing.Point(71, 65);
-            this.numericUpDown7.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.numericUpDown7.Name = "numericUpDown7";
-            this.numericUpDown7.Size = new System.Drawing.Size(157, 22);
-            this.numericUpDown7.TabIndex = 29;
-            // 
-            // numericUpDown6
-            // 
-            this.numericUpDown6.DecimalPlaces = 2;
-            this.numericUpDown6.Location = new System.Drawing.Point(524, 36);
-            this.numericUpDown6.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.numericUpDown6.Name = "numericUpDown6";
-            this.numericUpDown6.Size = new System.Drawing.Size(159, 22);
-            this.numericUpDown6.TabIndex = 28;
-            // 
-            // numericUpDown5
-            // 
-            this.numericUpDown5.DecimalPlaces = 2;
-            this.numericUpDown5.Location = new System.Drawing.Point(296, 36);
-            this.numericUpDown5.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.numericUpDown5.Name = "numericUpDown5";
-            this.numericUpDown5.Size = new System.Drawing.Size(160, 22);
-            this.numericUpDown5.TabIndex = 27;
-            // 
-            // numericUpDown4
-            // 
-            this.numericUpDown4.DecimalPlaces = 2;
-            this.numericUpDown4.Location = new System.Drawing.Point(71, 36);
-            this.numericUpDown4.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.numericUpDown4.Name = "numericUpDown4";
-            this.numericUpDown4.Size = new System.Drawing.Size(157, 22);
-            this.numericUpDown4.TabIndex = 26;
-            // 
-            // numericUpDown3
-            // 
-            this.numericUpDown3.DecimalPlaces = 2;
-            this.numericUpDown3.Location = new System.Drawing.Point(524, 7);
-            this.numericUpDown3.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.numericUpDown3.Name = "numericUpDown3";
-            this.numericUpDown3.Size = new System.Drawing.Size(159, 22);
-            this.numericUpDown3.TabIndex = 25;
-            // 
-            // numericUpDown2
-            // 
-            this.numericUpDown2.DecimalPlaces = 2;
-            this.numericUpDown2.Location = new System.Drawing.Point(296, 7);
-            this.numericUpDown2.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(160, 22);
-            this.numericUpDown2.TabIndex = 24;
-            // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.DecimalPlaces = 2;
-            this.numericUpDown1.Location = new System.Drawing.Point(71, 7);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(157, 22);
-            this.numericUpDown1.TabIndex = 23;
-            // 
-            // groupControl3
-            // 
-            this.tableLayoutPanel1.SetColumnSpan(this.groupControl3, 3);
-            this.groupControl3.Controls.Add(this.dgcStockIn);
-            this.groupControl3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl3.Location = new System.Drawing.Point(3, 323);
-            this.groupControl3.Name = "groupControl3";
-            this.groupControl3.Size = new System.Drawing.Size(1094, 254);
-            this.groupControl3.TabIndex = 2;
-            this.groupControl3.Text = "货品信息";
-            // 
-            // dgcStockIn
-            // 
-            this.dgcStockIn.DataSource = this.bsStockIn;
-            this.dgcStockIn.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgcStockIn.Location = new System.Drawing.Point(2, 21);
-            this.dgcStockIn.MainView = this.dgvStockIn;
-            this.dgcStockIn.Name = "dgcStockIn";
-            this.dgcStockIn.Size = new System.Drawing.Size(1090, 231);
-            this.dgcStockIn.TabIndex = 0;
-            this.dgcStockIn.UseEmbeddedNavigator = true;
-            this.dgcStockIn.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.dgvStockIn});
-            // 
-            // bsStockIn
-            // 
-            this.bsStockIn.DataSource = typeof(Phoebe.Model.StockInModel);
-            // 
-            // dgvStockIn
-            // 
-            this.dgvStockIn.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.colId,
-            this.colStockInId,
-            this.colStoreId,
-            this.colCargoId,
-            this.colCategoryId,
-            this.colCategoryNumber,
-            this.colCategoryName,
-            this.colSpecification,
-            this.colInCount,
-            this.colUnitWeight,
-            this.colInWeight,
-            this.colUnitVolume,
-            this.colInVolume,
-            this.colWarehouseNumber,
-            this.colOriginPlace,
-            this.colShelfLife,
-            this.colRemark,
-            this.colStatus});
-            this.dgvStockIn.GridControl = this.dgcStockIn;
-            this.dgvStockIn.Name = "dgvStockIn";
-            this.dgvStockIn.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.True;
-            this.dgvStockIn.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.True;
-            this.dgvStockIn.OptionsBehavior.EditorShowMode = DevExpress.Utils.EditorShowMode.Click;
-            this.dgvStockIn.OptionsCustomization.AllowFilter = false;
-            this.dgvStockIn.OptionsCustomization.AllowGroup = false;
-            this.dgvStockIn.OptionsCustomization.AllowSort = false;
-            this.dgvStockIn.OptionsFind.AllowFindPanel = false;
-            this.dgvStockIn.OptionsView.ShowFooter = true;
-            this.dgvStockIn.OptionsView.ShowGroupPanel = false;
-            // 
-            // colId
-            // 
-            this.colId.FieldName = "Id";
-            this.colId.Name = "colId";
-            // 
-            // colStockInId
-            // 
-            this.colStockInId.FieldName = "StockInId";
-            this.colStockInId.Name = "colStockInId";
-            // 
-            // colStoreId
-            // 
-            this.colStoreId.FieldName = "StoreId";
-            this.colStoreId.Name = "colStoreId";
-            // 
-            // colCargoId
-            // 
-            this.colCargoId.FieldName = "CargoId";
-            this.colCargoId.Name = "colCargoId";
-            // 
-            // colCategoryId
-            // 
-            this.colCategoryId.FieldName = "CategoryId";
-            this.colCategoryId.Name = "colCategoryId";
-            // 
-            // colCategoryNumber
-            // 
-            this.colCategoryNumber.Caption = "类别编码";
-            this.colCategoryNumber.FieldName = "CategoryNumber";
-            this.colCategoryNumber.Name = "colCategoryNumber";
-            this.colCategoryNumber.Visible = true;
-            this.colCategoryNumber.VisibleIndex = 0;
-            // 
-            // colCategoryName
-            // 
-            this.colCategoryName.Caption = "类别名称";
-            this.colCategoryName.FieldName = "CategoryName";
-            this.colCategoryName.Name = "colCategoryName";
-            this.colCategoryName.OptionsColumn.AllowEdit = false;
-            this.colCategoryName.OptionsColumn.ReadOnly = true;
-            this.colCategoryName.Visible = true;
-            this.colCategoryName.VisibleIndex = 1;
-            // 
-            // colSpecification
-            // 
-            this.colSpecification.Caption = "规格";
-            this.colSpecification.FieldName = "Specification";
-            this.colSpecification.Name = "colSpecification";
-            this.colSpecification.Visible = true;
-            this.colSpecification.VisibleIndex = 2;
-            // 
-            // colInCount
-            // 
-            this.colInCount.Caption = "入库数量";
-            this.colInCount.FieldName = "InCount";
-            this.colInCount.Name = "colInCount";
-            this.colInCount.Visible = true;
-            this.colInCount.VisibleIndex = 3;
-            // 
-            // colUnitWeight
-            // 
-            this.colUnitWeight.Caption = "单位重量(kg)";
-            this.colUnitWeight.FieldName = "UnitWeight";
-            this.colUnitWeight.Name = "colUnitWeight";
-            this.colUnitWeight.Visible = true;
-            this.colUnitWeight.VisibleIndex = 4;
-            // 
-            // colInWeight
-            // 
-            this.colInWeight.Caption = "总重量(t)";
-            this.colInWeight.FieldName = "InWeight";
-            this.colInWeight.Name = "colInWeight";
-            this.colInWeight.Visible = true;
-            this.colInWeight.VisibleIndex = 5;
-            // 
-            // colUnitVolume
-            // 
-            this.colUnitVolume.Caption = "单位体积(立方)";
-            this.colUnitVolume.FieldName = "UnitVolume";
-            this.colUnitVolume.Name = "colUnitVolume";
-            this.colUnitVolume.Visible = true;
-            this.colUnitVolume.VisibleIndex = 6;
-            // 
-            // colInVolume
-            // 
-            this.colInVolume.Caption = "总体积(立方)";
-            this.colInVolume.FieldName = "InVolume";
-            this.colInVolume.Name = "colInVolume";
-            this.colInVolume.Visible = true;
-            this.colInVolume.VisibleIndex = 7;
-            // 
-            // colWarehouseNumber
-            // 
-            this.colWarehouseNumber.Caption = "仓库编号";
-            this.colWarehouseNumber.FieldName = "WarehouseNumber";
-            this.colWarehouseNumber.Name = "colWarehouseNumber";
-            this.colWarehouseNumber.Visible = true;
-            this.colWarehouseNumber.VisibleIndex = 8;
-            // 
-            // colOriginPlace
-            // 
-            this.colOriginPlace.Caption = "产地";
-            this.colOriginPlace.FieldName = "OriginPlace";
-            this.colOriginPlace.Name = "colOriginPlace";
-            this.colOriginPlace.Visible = true;
-            this.colOriginPlace.VisibleIndex = 9;
-            // 
-            // colShelfLife
-            // 
-            this.colShelfLife.Caption = "保质期(月)";
-            this.colShelfLife.FieldName = "ShelfLife";
-            this.colShelfLife.Name = "colShelfLife";
-            this.colShelfLife.Visible = true;
-            this.colShelfLife.VisibleIndex = 10;
-            // 
-            // colRemark
-            // 
-            this.colRemark.Caption = "备注";
-            this.colRemark.FieldName = "Remark";
-            this.colRemark.Name = "colRemark";
-            this.colRemark.Visible = true;
-            this.colRemark.VisibleIndex = 11;
-            // 
-            // colStatus
-            // 
-            this.colStatus.FieldName = "Status";
-            this.colStatus.Name = "colStatus";
-            // 
-            // groupControl4
-            // 
-            this.groupControl4.Controls.Add(this.lvCustomer);
-            this.groupControl4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl4.Location = new System.Drawing.Point(703, 3);
-            this.groupControl4.Name = "groupControl4";
-            this.tableLayoutPanel1.SetRowSpan(this.groupControl4, 2);
-            this.groupControl4.Size = new System.Drawing.Size(194, 314);
-            this.groupControl4.TabIndex = 3;
-            this.groupControl4.Text = "客户列表";
-            // 
-            // lvCustomer
-            // 
-            this.lvCustomer.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.CustomerNumber,
-            this.CustomerName});
-            this.lvCustomer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lvCustomer.FullRowSelect = true;
-            this.lvCustomer.Location = new System.Drawing.Point(2, 21);
-            this.lvCustomer.MultiSelect = false;
-            this.lvCustomer.Name = "lvCustomer";
-            this.lvCustomer.Scrollable = false;
-            this.lvCustomer.Size = new System.Drawing.Size(190, 291);
-            this.lvCustomer.TabIndex = 0;
-            this.lvCustomer.UseCompatibleStateImageBehavior = false;
-            this.lvCustomer.View = System.Windows.Forms.View.Details;
-            this.lvCustomer.SelectedIndexChanged += new System.EventHandler(this.lvCustomer_SelectedIndexChanged);
-            // 
-            // CustomerNumber
-            // 
-            this.CustomerNumber.Text = "编号";
-            this.CustomerNumber.Width = 100;
-            // 
-            // CustomerName
-            // 
-            this.CustomerName.Text = "名称";
-            this.CustomerName.Width = 190;
-            // 
-            // groupControl5
-            // 
-            this.groupControl5.Controls.Add(this.lvCategory);
-            this.groupControl5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl5.Location = new System.Drawing.Point(903, 3);
-            this.groupControl5.Name = "groupControl5";
-            this.tableLayoutPanel1.SetRowSpan(this.groupControl5, 2);
-            this.groupControl5.Size = new System.Drawing.Size(194, 314);
-            this.groupControl5.TabIndex = 4;
-            this.groupControl5.Text = "货品编码";
-            // 
-            // lvCategory
-            // 
-            this.lvCategory.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.CategoryNumber,
-            this.CategoryName});
-            this.lvCategory.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lvCategory.FullRowSelect = true;
-            this.lvCategory.Location = new System.Drawing.Point(2, 21);
-            this.lvCategory.MultiSelect = false;
-            this.lvCategory.Name = "lvCategory";
-            this.lvCategory.Scrollable = false;
-            this.lvCategory.Size = new System.Drawing.Size(190, 291);
-            this.lvCategory.TabIndex = 0;
-            this.lvCategory.UseCompatibleStateImageBehavior = false;
-            this.lvCategory.View = System.Windows.Forms.View.Details;
-            // 
-            // CategoryNumber
-            // 
-            this.CategoryNumber.Text = "编码";
-            this.CategoryNumber.Width = 90;
-            // 
-            // CategoryName
-            // 
-            this.CategoryName.Text = "名称";
-            this.CategoryName.Width = 100;
-            // 
             // layoutControl1
             // 
             this.layoutControl1.Controls.Add(this.txtRemark);
@@ -694,6 +208,95 @@
             this.layoutControl1.Size = new System.Drawing.Size(690, 131);
             this.layoutControl1.TabIndex = 13;
             this.layoutControl1.Text = "layoutControl1";
+            // 
+            // txtRemark
+            // 
+            this.txtRemark.Location = new System.Drawing.Point(284, 65);
+            this.txtRemark.Name = "txtRemark";
+            this.txtRemark.Size = new System.Drawing.Size(172, 20);
+            this.txtRemark.StyleController = this.layoutControl1;
+            this.txtRemark.TabIndex = 3;
+            // 
+            // txtUser
+            // 
+            this.txtUser.Location = new System.Drawing.Point(511, 7);
+            this.txtUser.Name = "txtUser";
+            this.txtUser.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
+            this.txtUser.Properties.Appearance.Options.UseBackColor = true;
+            this.txtUser.Properties.ReadOnly = true;
+            this.txtUser.Size = new System.Drawing.Size(172, 20);
+            this.txtUser.StyleController = this.layoutControl1;
+            this.txtUser.TabIndex = 2;
+            // 
+            // dpInTime
+            // 
+            this.dpInTime.EditValue = null;
+            this.dpInTime.Location = new System.Drawing.Point(284, 7);
+            this.dpInTime.Name = "dpInTime";
+            this.dpInTime.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow;
+            this.dpInTime.Properties.Appearance.Options.UseBackColor = true;
+            this.dpInTime.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dpInTime.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dpInTime.Size = new System.Drawing.Size(172, 20);
+            this.dpInTime.StyleController = this.layoutControl1;
+            this.dpInTime.TabIndex = 1;
+            // 
+            // txtBillingType
+            // 
+            this.txtBillingType.Location = new System.Drawing.Point(58, 65);
+            this.txtBillingType.Name = "txtBillingType";
+            this.txtBillingType.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
+            this.txtBillingType.Properties.Appearance.Options.UseBackColor = true;
+            this.txtBillingType.Properties.ReadOnly = true;
+            this.txtBillingType.Size = new System.Drawing.Size(171, 20);
+            this.txtBillingType.StyleController = this.layoutControl1;
+            this.txtBillingType.TabIndex = 7;
+            // 
+            // cmbContract
+            // 
+            this.cmbContract.Location = new System.Drawing.Point(511, 36);
+            this.cmbContract.Name = "cmbContract";
+            this.cmbContract.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow;
+            this.cmbContract.Properties.Appearance.Options.UseBackColor = true;
+            this.cmbContract.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cmbContract.Size = new System.Drawing.Size(172, 20);
+            this.cmbContract.StyleController = this.layoutControl1;
+            this.cmbContract.TabIndex = 6;
+            this.cmbContract.SelectedIndexChanged += new System.EventHandler(this.cmbContract_SelectedIndexChanged);
+            // 
+            // txtCustomerName
+            // 
+            this.txtCustomerName.Location = new System.Drawing.Point(284, 36);
+            this.txtCustomerName.Name = "txtCustomerName";
+            this.txtCustomerName.Properties.ReadOnly = true;
+            this.txtCustomerName.Size = new System.Drawing.Size(172, 20);
+            this.txtCustomerName.StyleController = this.layoutControl1;
+            this.txtCustomerName.TabIndex = 5;
+            // 
+            // txtCustomerNumber
+            // 
+            this.txtCustomerNumber.Location = new System.Drawing.Point(58, 36);
+            this.txtCustomerNumber.Name = "txtCustomerNumber";
+            this.txtCustomerNumber.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow;
+            this.txtCustomerNumber.Properties.Appearance.Options.UseBackColor = true;
+            this.txtCustomerNumber.Size = new System.Drawing.Size(171, 20);
+            this.txtCustomerNumber.StyleController = this.layoutControl1;
+            this.txtCustomerNumber.TabIndex = 4;
+            this.txtCustomerNumber.EditValueChanged += new System.EventHandler(this.txtCustomerNumber_EditValueChanged);
+            // 
+            // txtStatus
+            // 
+            this.txtStatus.Location = new System.Drawing.Point(58, 7);
+            this.txtStatus.Name = "txtStatus";
+            this.txtStatus.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
+            this.txtStatus.Properties.Appearance.Options.UseBackColor = true;
+            this.txtStatus.Properties.ReadOnly = true;
+            this.txtStatus.Size = new System.Drawing.Size(171, 20);
+            this.txtStatus.StyleController = this.layoutControl1;
+            this.txtStatus.TabIndex = 0;
             // 
             // layoutControlGroup1
             // 
@@ -788,6 +391,24 @@
             this.layoutControlItem8.Text = "备注";
             this.layoutControlItem8.TextSize = new System.Drawing.Size(48, 14);
             // 
+            // labelControl5
+            // 
+            this.labelControl5.Location = new System.Drawing.Point(457, 77);
+            this.labelControl5.Name = "labelControl5";
+            this.labelControl5.Size = new System.Drawing.Size(48, 14);
+            this.labelControl5.TabIndex = 4;
+            this.labelControl5.Text = "所属合同";
+            // 
+            // groupControl2
+            // 
+            this.groupControl2.Controls.Add(this.layoutControl2);
+            this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupControl2.Location = new System.Drawing.Point(3, 163);
+            this.groupControl2.Name = "groupControl2";
+            this.groupControl2.Size = new System.Drawing.Size(694, 154);
+            this.groupControl2.TabIndex = 1;
+            this.groupControl2.Text = "费用信息";
+            // 
             // layoutControl2
             // 
             this.layoutControl2.Controls.Add(this.numericUpDown9);
@@ -807,6 +428,123 @@
             this.layoutControl2.Size = new System.Drawing.Size(690, 131);
             this.layoutControl2.TabIndex = 32;
             this.layoutControl2.Text = "layoutControl2";
+            // 
+            // numericUpDown9
+            // 
+            this.numericUpDown9.DecimalPlaces = 2;
+            this.numericUpDown9.Location = new System.Drawing.Point(523, 65);
+            this.numericUpDown9.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.numericUpDown9.Name = "numericUpDown9";
+            this.numericUpDown9.Size = new System.Drawing.Size(160, 22);
+            this.numericUpDown9.TabIndex = 31;
+            // 
+            // numericUpDown7
+            // 
+            this.numericUpDown7.DecimalPlaces = 2;
+            this.numericUpDown7.Location = new System.Drawing.Point(70, 65);
+            this.numericUpDown7.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.numericUpDown7.Name = "numericUpDown7";
+            this.numericUpDown7.Size = new System.Drawing.Size(158, 22);
+            this.numericUpDown7.TabIndex = 29;
+            // 
+            // numericUpDown8
+            // 
+            this.numericUpDown8.DecimalPlaces = 2;
+            this.numericUpDown8.Location = new System.Drawing.Point(295, 65);
+            this.numericUpDown8.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.numericUpDown8.Name = "numericUpDown8";
+            this.numericUpDown8.Size = new System.Drawing.Size(161, 22);
+            this.numericUpDown8.TabIndex = 30;
+            // 
+            // numericUpDown6
+            // 
+            this.numericUpDown6.DecimalPlaces = 2;
+            this.numericUpDown6.Location = new System.Drawing.Point(523, 36);
+            this.numericUpDown6.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.numericUpDown6.Name = "numericUpDown6";
+            this.numericUpDown6.Size = new System.Drawing.Size(160, 22);
+            this.numericUpDown6.TabIndex = 28;
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.DecimalPlaces = 2;
+            this.numericUpDown1.Location = new System.Drawing.Point(70, 7);
+            this.numericUpDown1.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(158, 22);
+            this.numericUpDown1.TabIndex = 23;
+            // 
+            // numericUpDown5
+            // 
+            this.numericUpDown5.DecimalPlaces = 2;
+            this.numericUpDown5.Location = new System.Drawing.Point(295, 36);
+            this.numericUpDown5.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.numericUpDown5.Name = "numericUpDown5";
+            this.numericUpDown5.Size = new System.Drawing.Size(161, 22);
+            this.numericUpDown5.TabIndex = 27;
+            // 
+            // numericUpDown2
+            // 
+            this.numericUpDown2.DecimalPlaces = 2;
+            this.numericUpDown2.Location = new System.Drawing.Point(295, 7);
+            this.numericUpDown2.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.numericUpDown2.Name = "numericUpDown2";
+            this.numericUpDown2.Size = new System.Drawing.Size(161, 22);
+            this.numericUpDown2.TabIndex = 24;
+            // 
+            // numericUpDown4
+            // 
+            this.numericUpDown4.DecimalPlaces = 2;
+            this.numericUpDown4.Location = new System.Drawing.Point(70, 36);
+            this.numericUpDown4.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.numericUpDown4.Name = "numericUpDown4";
+            this.numericUpDown4.Size = new System.Drawing.Size(158, 22);
+            this.numericUpDown4.TabIndex = 26;
+            // 
+            // numericUpDown3
+            // 
+            this.numericUpDown3.DecimalPlaces = 2;
+            this.numericUpDown3.Location = new System.Drawing.Point(523, 7);
+            this.numericUpDown3.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.numericUpDown3.Name = "numericUpDown3";
+            this.numericUpDown3.Size = new System.Drawing.Size(160, 22);
+            this.numericUpDown3.TabIndex = 25;
             // 
             // layoutControlGroup2
             // 
@@ -913,6 +651,271 @@
             this.layoutControlItem17.Text = "其它费用";
             this.layoutControlItem17.TextSize = new System.Drawing.Size(60, 14);
             // 
+            // groupControl3
+            // 
+            this.tableLayoutPanel1.SetColumnSpan(this.groupControl3, 3);
+            this.groupControl3.Controls.Add(this.dgcStockIn);
+            this.groupControl3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupControl3.Location = new System.Drawing.Point(3, 323);
+            this.groupControl3.Name = "groupControl3";
+            this.groupControl3.Size = new System.Drawing.Size(1094, 254);
+            this.groupControl3.TabIndex = 2;
+            this.groupControl3.Text = "货品信息";
+            // 
+            // dgcStockIn
+            // 
+            this.dgcStockIn.DataSource = this.bsStockIn;
+            this.dgcStockIn.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgcStockIn.Location = new System.Drawing.Point(2, 21);
+            this.dgcStockIn.MainView = this.dgvStockIn;
+            this.dgcStockIn.Name = "dgcStockIn";
+            this.dgcStockIn.Size = new System.Drawing.Size(1090, 231);
+            this.dgcStockIn.TabIndex = 0;
+            this.dgcStockIn.UseEmbeddedNavigator = true;
+            this.dgcStockIn.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.dgvStockIn});
+            // 
+            // bsStockIn
+            // 
+            this.bsStockIn.DataSource = typeof(Phoebe.Model.StockInModel);
+            // 
+            // dgvStockIn
+            // 
+            this.dgvStockIn.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.colId,
+            this.colStockInId,
+            this.colStoreId,
+            this.colContractId,
+            this.colCargoId,
+            this.colCategoryId,
+            this.colCategoryNumber,
+            this.colCategoryName,
+            this.colSpecification,
+            this.colInCount,
+            this.colGroupType,
+            this.colUnitWeight,
+            this.colInWeight,
+            this.colUnitVolume,
+            this.colInVolume,
+            this.colWarehouseNumber,
+            this.colOriginPlace,
+            this.colShelfLife,
+            this.colRemark,
+            this.colStatus});
+            this.dgvStockIn.GridControl = this.dgcStockIn;
+            this.dgvStockIn.Name = "dgvStockIn";
+            this.dgvStockIn.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.True;
+            this.dgvStockIn.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.True;
+            this.dgvStockIn.OptionsBehavior.EditorShowMode = DevExpress.Utils.EditorShowMode.Click;
+            this.dgvStockIn.OptionsCustomization.AllowFilter = false;
+            this.dgvStockIn.OptionsCustomization.AllowGroup = false;
+            this.dgvStockIn.OptionsCustomization.AllowSort = false;
+            this.dgvStockIn.OptionsFind.AllowFindPanel = false;
+            this.dgvStockIn.OptionsView.ShowFooter = true;
+            this.dgvStockIn.OptionsView.ShowGroupPanel = false;
+            // 
+            // colId
+            // 
+            this.colId.FieldName = "Id";
+            this.colId.Name = "colId";
+            // 
+            // colStockInId
+            // 
+            this.colStockInId.FieldName = "StockInId";
+            this.colStockInId.Name = "colStockInId";
+            // 
+            // colStoreId
+            // 
+            this.colStoreId.FieldName = "StoreId";
+            this.colStoreId.Name = "colStoreId";
+            // 
+            // colContractId
+            // 
+            this.colContractId.FieldName = "ContractId";
+            this.colContractId.Name = "colContractId";
+            // 
+            // colCargoId
+            // 
+            this.colCargoId.FieldName = "CargoId";
+            this.colCargoId.Name = "colCargoId";
+            // 
+            // colCategoryId
+            // 
+            this.colCategoryId.FieldName = "CategoryId";
+            this.colCategoryId.Name = "colCategoryId";
+            // 
+            // colCategoryNumber
+            // 
+            this.colCategoryNumber.Caption = "类别编码";
+            this.colCategoryNumber.FieldName = "CategoryNumber";
+            this.colCategoryNumber.Name = "colCategoryNumber";
+            this.colCategoryNumber.Visible = true;
+            this.colCategoryNumber.VisibleIndex = 0;
+            // 
+            // colCategoryName
+            // 
+            this.colCategoryName.Caption = "类别名称";
+            this.colCategoryName.FieldName = "CategoryName";
+            this.colCategoryName.Name = "colCategoryName";
+            this.colCategoryName.Visible = true;
+            this.colCategoryName.VisibleIndex = 1;
+            // 
+            // colSpecification
+            // 
+            this.colSpecification.Caption = "规格";
+            this.colSpecification.FieldName = "Specification";
+            this.colSpecification.Name = "colSpecification";
+            this.colSpecification.Visible = true;
+            this.colSpecification.VisibleIndex = 2;
+            // 
+            // colInCount
+            // 
+            this.colInCount.FieldName = "InCount";
+            this.colInCount.Name = "colInCount";
+            this.colInCount.Visible = true;
+            this.colInCount.VisibleIndex = 3;
+            // 
+            // colGroupType
+            // 
+            this.colGroupType.FieldName = "GroupType";
+            this.colGroupType.Name = "colGroupType";
+            this.colGroupType.Visible = true;
+            this.colGroupType.VisibleIndex = 4;
+            // 
+            // colUnitWeight
+            // 
+            this.colUnitWeight.FieldName = "UnitWeight";
+            this.colUnitWeight.Name = "colUnitWeight";
+            this.colUnitWeight.Visible = true;
+            this.colUnitWeight.VisibleIndex = 5;
+            // 
+            // colInWeight
+            // 
+            this.colInWeight.FieldName = "InWeight";
+            this.colInWeight.Name = "colInWeight";
+            this.colInWeight.Visible = true;
+            this.colInWeight.VisibleIndex = 6;
+            // 
+            // colUnitVolume
+            // 
+            this.colUnitVolume.FieldName = "UnitVolume";
+            this.colUnitVolume.Name = "colUnitVolume";
+            this.colUnitVolume.Visible = true;
+            this.colUnitVolume.VisibleIndex = 7;
+            // 
+            // colInVolume
+            // 
+            this.colInVolume.FieldName = "InVolume";
+            this.colInVolume.Name = "colInVolume";
+            this.colInVolume.Visible = true;
+            this.colInVolume.VisibleIndex = 8;
+            // 
+            // colWarehouseNumber
+            // 
+            this.colWarehouseNumber.FieldName = "WarehouseNumber";
+            this.colWarehouseNumber.Name = "colWarehouseNumber";
+            this.colWarehouseNumber.Visible = true;
+            this.colWarehouseNumber.VisibleIndex = 9;
+            // 
+            // colOriginPlace
+            // 
+            this.colOriginPlace.FieldName = "OriginPlace";
+            this.colOriginPlace.Name = "colOriginPlace";
+            this.colOriginPlace.Visible = true;
+            this.colOriginPlace.VisibleIndex = 10;
+            // 
+            // colShelfLife
+            // 
+            this.colShelfLife.FieldName = "ShelfLife";
+            this.colShelfLife.Name = "colShelfLife";
+            this.colShelfLife.Visible = true;
+            this.colShelfLife.VisibleIndex = 11;
+            // 
+            // colRemark
+            // 
+            this.colRemark.FieldName = "Remark";
+            this.colRemark.Name = "colRemark";
+            this.colRemark.Visible = true;
+            this.colRemark.VisibleIndex = 12;
+            // 
+            // colStatus
+            // 
+            this.colStatus.FieldName = "Status";
+            this.colStatus.Name = "colStatus";
+            // 
+            // groupControl4
+            // 
+            this.groupControl4.Controls.Add(this.lvCustomer);
+            this.groupControl4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupControl4.Location = new System.Drawing.Point(703, 3);
+            this.groupControl4.Name = "groupControl4";
+            this.tableLayoutPanel1.SetRowSpan(this.groupControl4, 2);
+            this.groupControl4.Size = new System.Drawing.Size(194, 314);
+            this.groupControl4.TabIndex = 3;
+            this.groupControl4.Text = "客户列表";
+            // 
+            // lvCustomer
+            // 
+            this.lvCustomer.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.CustomerNumber,
+            this.CustomerName});
+            this.lvCustomer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lvCustomer.FullRowSelect = true;
+            this.lvCustomer.Location = new System.Drawing.Point(2, 21);
+            this.lvCustomer.MultiSelect = false;
+            this.lvCustomer.Name = "lvCustomer";
+            this.lvCustomer.Size = new System.Drawing.Size(190, 291);
+            this.lvCustomer.TabIndex = 0;
+            this.lvCustomer.UseCompatibleStateImageBehavior = false;
+            this.lvCustomer.View = System.Windows.Forms.View.Details;
+            this.lvCustomer.SelectedIndexChanged += new System.EventHandler(this.lvCustomer_SelectedIndexChanged);
+            // 
+            // CustomerNumber
+            // 
+            this.CustomerNumber.Text = "编号";
+            this.CustomerNumber.Width = 100;
+            // 
+            // CustomerName
+            // 
+            this.CustomerName.Text = "名称";
+            this.CustomerName.Width = 190;
+            // 
+            // groupControl5
+            // 
+            this.groupControl5.Controls.Add(this.lvCategory);
+            this.groupControl5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupControl5.Location = new System.Drawing.Point(903, 3);
+            this.groupControl5.Name = "groupControl5";
+            this.tableLayoutPanel1.SetRowSpan(this.groupControl5, 2);
+            this.groupControl5.Size = new System.Drawing.Size(194, 314);
+            this.groupControl5.TabIndex = 4;
+            this.groupControl5.Text = "货品编码";
+            // 
+            // lvCategory
+            // 
+            this.lvCategory.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.CategoryNumber,
+            this.CategoryName});
+            this.lvCategory.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lvCategory.FullRowSelect = true;
+            this.lvCategory.Location = new System.Drawing.Point(2, 21);
+            this.lvCategory.MultiSelect = false;
+            this.lvCategory.Name = "lvCategory";
+            this.lvCategory.Size = new System.Drawing.Size(190, 291);
+            this.lvCategory.TabIndex = 0;
+            this.lvCategory.UseCompatibleStateImageBehavior = false;
+            this.lvCategory.View = System.Windows.Forms.View.Details;
+            // 
+            // CategoryNumber
+            // 
+            this.CategoryNumber.Text = "编码";
+            this.CategoryNumber.Width = 90;
+            // 
+            // CategoryName
+            // 
+            this.CategoryName.Text = "名称";
+            this.CategoryName.Width = 100;
+            // 
             // StockInAddControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -925,37 +928,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
             this.groupControl1.ResumeLayout(false);
             this.groupControl1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
+            this.layoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.txtRemark.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtUser.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dpInTime.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dpInTime.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtUser.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtRemark.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cmbContract.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtBillingType.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbContract.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCustomerName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCustomerNumber.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtStatus.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
-            this.groupControl2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown9)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown8)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown7)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).EndInit();
-            this.groupControl3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgcStockIn)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsStockIn)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvStockIn)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).EndInit();
-            this.groupControl4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl5)).EndInit();
-            this.groupControl5.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
-            this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
@@ -965,8 +948,19 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
+            this.groupControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl2)).EndInit();
             this.layoutControl2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).EndInit();
@@ -977,6 +971,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem15)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem16)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem17)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).EndInit();
+            this.groupControl3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgcStockIn)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsStockIn)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvStockIn)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).EndInit();
+            this.groupControl4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl5)).EndInit();
+            this.groupControl5.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1001,24 +1004,6 @@
         private DevExpress.XtraGrid.GridControl dgcStockIn;
         private DevExpress.XtraGrid.Views.Grid.GridView dgvStockIn;
         private System.Windows.Forms.BindingSource bsStockIn;
-        private DevExpress.XtraGrid.Columns.GridColumn colId;
-        private DevExpress.XtraGrid.Columns.GridColumn colStockInId;
-        private DevExpress.XtraGrid.Columns.GridColumn colStoreId;
-        private DevExpress.XtraGrid.Columns.GridColumn colCargoId;
-        private DevExpress.XtraGrid.Columns.GridColumn colCategoryId;
-        private DevExpress.XtraGrid.Columns.GridColumn colCategoryNumber;
-        private DevExpress.XtraGrid.Columns.GridColumn colCategoryName;
-        private DevExpress.XtraGrid.Columns.GridColumn colSpecification;
-        private DevExpress.XtraGrid.Columns.GridColumn colInCount;
-        private DevExpress.XtraGrid.Columns.GridColumn colUnitWeight;
-        private DevExpress.XtraGrid.Columns.GridColumn colInWeight;
-        private DevExpress.XtraGrid.Columns.GridColumn colUnitVolume;
-        private DevExpress.XtraGrid.Columns.GridColumn colInVolume;
-        private DevExpress.XtraGrid.Columns.GridColumn colWarehouseNumber;
-        private DevExpress.XtraGrid.Columns.GridColumn colOriginPlace;
-        private DevExpress.XtraGrid.Columns.GridColumn colShelfLife;
-        private DevExpress.XtraGrid.Columns.GridColumn colRemark;
-        private DevExpress.XtraGrid.Columns.GridColumn colStatus;
         private System.Windows.Forms.ListView lvCustomer;
         private System.Windows.Forms.ColumnHeader CustomerNumber;
         private System.Windows.Forms.ColumnHeader CustomerName;
@@ -1055,5 +1040,25 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem15;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem16;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem17;
+        private DevExpress.XtraGrid.Columns.GridColumn colId;
+        private DevExpress.XtraGrid.Columns.GridColumn colStockInId;
+        private DevExpress.XtraGrid.Columns.GridColumn colStoreId;
+        private DevExpress.XtraGrid.Columns.GridColumn colContractId;
+        private DevExpress.XtraGrid.Columns.GridColumn colCargoId;
+        private DevExpress.XtraGrid.Columns.GridColumn colCategoryId;
+        private DevExpress.XtraGrid.Columns.GridColumn colCategoryNumber;
+        private DevExpress.XtraGrid.Columns.GridColumn colCategoryName;
+        private DevExpress.XtraGrid.Columns.GridColumn colSpecification;
+        private DevExpress.XtraGrid.Columns.GridColumn colInCount;
+        private DevExpress.XtraGrid.Columns.GridColumn colGroupType;
+        private DevExpress.XtraGrid.Columns.GridColumn colUnitWeight;
+        private DevExpress.XtraGrid.Columns.GridColumn colInWeight;
+        private DevExpress.XtraGrid.Columns.GridColumn colUnitVolume;
+        private DevExpress.XtraGrid.Columns.GridColumn colInVolume;
+        private DevExpress.XtraGrid.Columns.GridColumn colWarehouseNumber;
+        private DevExpress.XtraGrid.Columns.GridColumn colOriginPlace;
+        private DevExpress.XtraGrid.Columns.GridColumn colShelfLife;
+        private DevExpress.XtraGrid.Columns.GridColumn colRemark;
+        private DevExpress.XtraGrid.Columns.GridColumn colStatus;
     }
 }

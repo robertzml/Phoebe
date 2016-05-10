@@ -12,11 +12,6 @@ namespace Phoebe.Model
     public class StockInModel
     {
         /// <summary>
-        /// 合同ID
-        /// </summary>
-        public int ContractId { get; set; }
-
-        /// <summary>
         /// 入库记录ID
         /// </summary>
         public Guid Id { get; set; }
@@ -30,6 +25,11 @@ namespace Phoebe.Model
         /// 库存ID
         /// </summary>
         public Guid StoreId { get; set; }
+
+        /// <summary>
+        /// 合同ID
+        /// </summary>
+        public int ContractId { get; set; }
 
         /// <summary>
         /// 货品ID

@@ -94,13 +94,12 @@ namespace Phoebe.Base
         /// <param name="baseControl">载体控件</param>
         /// <param name="contentControl">加载控件</param>
         /// <param name="args">构造函数参数列表</param>
-        public static void LoadContentControl(Control baseControl, Type contentControl, object[] args)
-        {
-            Control content = (Control)Activator.CreateInstance(contentControl, args);
+        public static void LoadContentControl(Control baseControl, Control contentControl)
+        {         
             baseControl.SuspendLayout();
             baseControl.Controls.Clear();
-            baseControl.Controls.Add(content);
-            content.Dock = DockStyle.Fill;
+            baseControl.Controls.Add(contentControl);
+            contentControl.Dock = DockStyle.Fill;
             baseControl.ResumeLayout(false);
             baseControl.PerformLayout();
         }

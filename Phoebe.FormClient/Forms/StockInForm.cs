@@ -20,6 +20,10 @@ namespace Phoebe.FormClient
     /// </summary>
     public partial class StockInForm : BaseForm
     {
+        #region Field
+        private StockInAddControl stockInAdd;
+        #endregion //Field
+
         #region Constructor
         public StockInForm()
         {
@@ -41,9 +45,10 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void tsbNew_Click(object sender, EventArgs e)
         {
-            ChildFormManage.LoadContentControl(this.plBody, typeof(StockInAddControl), new object[]{ this.currentUser });         
+            this.stockInAdd = new StockInAddControl(this.currentUser);
+            ChildFormManage.LoadContentControl(this.plBody, this.stockInAdd);
         }
-        
+
         /// <summary>
         /// 保存入库
         /// </summary>
@@ -51,7 +56,15 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void tsbSave_Click(object sender, EventArgs e)
         {
-
+            ErrorCode result = this.stockInAdd.Save();
+            if (result == ErrorCode.Success)
+            {
+                MessageBox.Show("保存入库成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("创建货品失败", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
         #endregion //Event
     }
