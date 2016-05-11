@@ -810,6 +810,8 @@
             this.colInWeight.FieldName = "InWeight";
             this.colInWeight.Name = "colInWeight";
             this.colInWeight.OptionsColumn.AllowEdit = false;
+            this.colInWeight.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "InWeight", "SUM={0:0.000}")});
             this.colInWeight.Visible = true;
             this.colInWeight.VisibleIndex = 5;
             // 

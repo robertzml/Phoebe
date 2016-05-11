@@ -57,6 +57,31 @@ namespace Phoebe.Business
         #endregion //Function
 
         #region Method
+        /// <summary>
+        /// 获取入库月份分组
+        /// </summary>
+        /// <returns></returns>
+        /// <remarks>
+        /// 用于树形导航分组
+        /// </remarks>
+        public string[] GetStockInMonthGroup()
+        {
+            var data = this.dal.FindAll().GroupBy(r => r.MonthTime).Select(g => g.Key).OrderByDescending(s => s);            
+            return data.ToArray();
+        }
+
+        /// <summary>
+        /// 按月度获取入库记录
+        /// </summary>
+        /// <param name="monthTime">月份</param>
+        /// <returns></returns>
+        public List<StockIn> GetStockInByMonth(string monthTime)
+        {
+            Expression<Func<StockIn, bool>> predicate = r => r.MonthTime == monthTime;
+            var data = this.dal.Find(predicate).OrderByDescending(r => r.FlowNumber);
+            return data.ToList();
+        }
+
         [Obsolete]
         public override ErrorCode Create(StockIn entity)
         {

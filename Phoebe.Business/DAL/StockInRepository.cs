@@ -20,9 +20,13 @@ namespace Phoebe.Business.DAL
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// 获取所有入库单
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<StockIn> FindAll()
         {
-            throw new NotImplementedException();
+            return this.context.StockIns;
         }
 
         /// <summary>

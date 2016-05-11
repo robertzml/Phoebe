@@ -28,9 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StockInForm));
-            this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
-            this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
+            this.tcStockIn = new DevExpress.XtraTab.XtraTabControl();
+            this.tpStockInList = new DevExpress.XtraTab.XtraTabPage();
+            this.tvStockIn = new System.Windows.Forms.TreeView();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.tsStockIn = new System.Windows.Forms.ToolStrip();
@@ -44,45 +47,66 @@
             this.粘贴PToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.plBody = new DevExpress.XtraEditors.PanelControl();
-            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
-            this.xtraTabControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tcStockIn)).BeginInit();
+            this.tcStockIn.SuspendLayout();
+            this.tpStockInList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
             this.tsStockIn.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.plBody)).BeginInit();
             this.SuspendLayout();
             // 
-            // xtraTabControl1
+            // tcStockIn
             // 
-            this.xtraTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.xtraTabControl1.Location = new System.Drawing.Point(2, 21);
-            this.xtraTabControl1.Name = "xtraTabControl1";
-            this.xtraTabControl1.SelectedTabPage = this.xtraTabPage1;
-            this.xtraTabControl1.Size = new System.Drawing.Size(258, 543);
-            this.xtraTabControl1.TabIndex = 0;
-            this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
-            this.xtraTabPage1,
+            this.tcStockIn.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tcStockIn.Location = new System.Drawing.Point(2, 21);
+            this.tcStockIn.Name = "tcStockIn";
+            this.tcStockIn.SelectedTabPage = this.tpStockInList;
+            this.tcStockIn.Size = new System.Drawing.Size(212, 543);
+            this.tcStockIn.TabIndex = 0;
+            this.tcStockIn.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
+            this.tpStockInList,
             this.xtraTabPage2});
             // 
-            // xtraTabPage1
+            // tpStockInList
             // 
-            this.xtraTabPage1.Name = "xtraTabPage1";
-            this.xtraTabPage1.Size = new System.Drawing.Size(252, 514);
-            this.xtraTabPage1.Text = "xtraTabPage1";
+            this.tpStockInList.Controls.Add(this.tvStockIn);
+            this.tpStockInList.Name = "tpStockInList";
+            this.tpStockInList.Size = new System.Drawing.Size(206, 514);
+            this.tpStockInList.Text = "列表";
+            // 
+            // tvStockIn
+            // 
+            this.tvStockIn.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tvStockIn.ImageIndex = 0;
+            this.tvStockIn.ImageList = this.imageList1;
+            this.tvStockIn.Location = new System.Drawing.Point(0, 0);
+            this.tvStockIn.Name = "tvStockIn";
+            this.tvStockIn.SelectedImageIndex = 0;
+            this.tvStockIn.Size = new System.Drawing.Size(206, 514);
+            this.tvStockIn.TabIndex = 0;
+            this.tvStockIn.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.tvStockIn_BeforeExpand);
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "database_page_32.png");
+            this.imageList1.Images.SetKeyName(1, "database_warning_32.png");
             // 
             // xtraTabPage2
             // 
             this.xtraTabPage2.Name = "xtraTabPage2";
-            this.xtraTabPage2.Size = new System.Drawing.Size(252, 514);
-            this.xtraTabPage2.Text = "xtraTabPage2";
+            this.xtraTabPage2.Size = new System.Drawing.Size(206, 514);
+            this.xtraTabPage2.Text = "查询";
             // 
             // groupControl1
             // 
-            this.groupControl1.Controls.Add(this.xtraTabControl1);
+            this.groupControl1.Controls.Add(this.tcStockIn);
             this.groupControl1.Dock = System.Windows.Forms.DockStyle.Left;
             this.groupControl1.Location = new System.Drawing.Point(0, 0);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(262, 566);
+            this.groupControl1.Size = new System.Drawing.Size(216, 566);
             this.groupControl1.TabIndex = 1;
             this.groupControl1.Text = "导航";
             // 
@@ -98,9 +122,9 @@
             this.复制CToolStripButton,
             this.粘贴PToolStripButton,
             this.toolStripSeparator1});
-            this.tsStockIn.Location = new System.Drawing.Point(262, 0);
+            this.tsStockIn.Location = new System.Drawing.Point(216, 0);
             this.tsStockIn.Name = "tsStockIn";
-            this.tsStockIn.Size = new System.Drawing.Size(702, 25);
+            this.tsStockIn.Size = new System.Drawing.Size(748, 25);
             this.tsStockIn.TabIndex = 7;
             this.tsStockIn.Text = "toolStrip1";
             // 
@@ -184,9 +208,9 @@
             this.plBody.Appearance.Options.UseBackColor = true;
             this.plBody.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.plBody.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.plBody.Location = new System.Drawing.Point(262, 25);
+            this.plBody.Location = new System.Drawing.Point(216, 25);
             this.plBody.Name = "plBody";
-            this.plBody.Size = new System.Drawing.Size(702, 541);
+            this.plBody.Size = new System.Drawing.Size(748, 541);
             this.plBody.TabIndex = 8;
             // 
             // StockInForm
@@ -200,8 +224,9 @@
             this.Name = "StockInForm";
             this.Text = "货品入库";
             this.Load += new System.EventHandler(this.StockInForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
-            this.xtraTabControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.tcStockIn)).EndInit();
+            this.tcStockIn.ResumeLayout(false);
+            this.tpStockInList.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
             this.groupControl1.ResumeLayout(false);
             this.tsStockIn.ResumeLayout(false);
@@ -214,8 +239,8 @@
 
         #endregion
 
-        private DevExpress.XtraTab.XtraTabControl xtraTabControl1;
-        private DevExpress.XtraTab.XtraTabPage xtraTabPage1;
+        private DevExpress.XtraTab.XtraTabControl tcStockIn;
+        private DevExpress.XtraTab.XtraTabPage tpStockInList;
         private DevExpress.XtraTab.XtraTabPage xtraTabPage2;
         private DevExpress.XtraEditors.GroupControl groupControl1;
         private System.Windows.Forms.ToolStrip tsStockIn;
@@ -229,5 +254,7 @@
         private System.Windows.Forms.ToolStripButton 粘贴PToolStripButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private DevExpress.XtraEditors.PanelControl plBody;
+        private System.Windows.Forms.TreeView tvStockIn;
+        private System.Windows.Forms.ImageList imageList1;
     }
 }

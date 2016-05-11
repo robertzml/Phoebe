@@ -31,6 +31,26 @@ namespace Phoebe.FormClient
         }
         #endregion //Constructor
 
+        #region Function
+        /// <summary>
+        /// 更新票据列表
+        /// </summary>
+        private void UpdateTree()
+        {
+            this.tvStockIn.Nodes.Clear();
+
+            var months = BusinessFactory<StockInBusiness>.Instance.GetStockInMonthGroup();
+            for (int i = 0; i < months.Length; i++)
+            {
+                TreeNode node = new TreeNode();
+                node.Name = months[i];
+                node.Text = months[i];
+                node.Nodes.Add("");
+                this.tvStockIn.Nodes.Add(node);
+            }
+        }
+        #endregion //Function
+
         #region Event
         /// <summary>
         /// 窗体载入
@@ -39,7 +59,26 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void StockInForm_Load(object sender, EventArgs e)
         {
+            UpdateTree();
+        }
 
+        /// <summary>
+        /// 树形菜单载入
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tvStockIn_BeforeExpand(object sender, TreeViewCancelEventArgs e)
+        {
+            var data = BusinessFactory<StockInBusiness>.Instance.GetStockInByMonth(e.Node.Name);
+            e.Node.Nodes.Clear();
+            foreach (var item in data)
+            {
+                TreeNode node = new TreeNode();
+                node.Name = item.Id.ToString();
+                node.Text = item.FlowNumber;
+                node.Tag = item;
+                e.Node.Nodes.Add(node);
+            }
         }
 
         /// <summary>
@@ -71,6 +110,6 @@ namespace Phoebe.FormClient
                 MessageBox.Show("保存入库失败，" + result.DisplayName() + ", " + errorMessage, FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
-        #endregion //Event
+        #endregion //Event     
     }
 }
