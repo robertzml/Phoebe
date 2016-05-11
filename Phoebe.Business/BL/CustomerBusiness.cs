@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Phoebe.Business
 {
@@ -32,5 +32,22 @@ namespace Phoebe.Business
             base.Init(this.dal);
         }
         #endregion //Constructor
+
+        #region Method
+        /// <summary>
+        /// 根据编码获取客户
+        /// </summary>
+        /// <param name="number">客户编码</param>
+        /// <returns></returns>
+        public Customer GetByNumber(string number)
+        {
+            Expression<Func<Customer, bool>> predicate = r => r.Number == number;
+            var data = this.dal.Find(predicate);
+            if (data.Count() == 0)
+                return null;
+            else
+                return data.First();
+        }
+        #endregion //Method
     }
 }

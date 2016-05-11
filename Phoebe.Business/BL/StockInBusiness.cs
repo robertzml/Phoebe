@@ -78,28 +78,13 @@ namespace Phoebe.Business
                 entity.FlowNumber = GetLastStockInFlowNumber(entity.InTime.Date);
                 entity.Status = (int)EntityStatus.StockInReady;
 
-                // generate stock in details
-                List<StockInDetail> details = new List<StockInDetail>();
-                foreach (var item in models)
-                {
-                    StockInDetail detail = new StockInDetail();
-                    detail.Id = Guid.NewGuid();
-                    detail.StockInId = entity.Id;
-                    detail.Count = item.InCount;
-                    detail.InWeight = item.InWeight;
-                    detail.InVolume = item.InVolume;
-                    detail.Remark = item.Remark;
-                    detail.Status = (int)EntityStatus.StockInReady;
-
-                    details.Add(detail);
-                }
-
                 // set store
                 List<Store> storeList = new List<Store>();
                 foreach (var item in models)
                 {
                     Store store = new Store();
                     store.Id = Guid.NewGuid();
+                    item.StoreId = store.Id;
                     store.CargoId = item.CargoId;
                     store.WarehouseNumber = item.WarehouseNumber;
                     store.TotalCount = item.InCount;
@@ -118,6 +103,23 @@ namespace Phoebe.Business
                     store.Status = (int)EntityStatus.StoreReady;
 
                     storeList.Add(store);
+                }
+
+                // generate stock in details
+                List<StockInDetail> details = new List<StockInDetail>();
+                foreach (var item in models)
+                {
+                    StockInDetail detail = new StockInDetail();
+                    detail.Id = Guid.NewGuid();
+                    detail.StockInId = entity.Id;
+                    detail.StoreId = item.StoreId;
+                    detail.Count = item.InCount;
+                    detail.InWeight = item.InWeight;
+                    detail.InVolume = item.InVolume;
+                    detail.Remark = item.Remark;
+                    detail.Status = (int)EntityStatus.StockInReady;
+
+                    details.Add(detail);
                 }
 
                 var trans = new TransactionRepository();

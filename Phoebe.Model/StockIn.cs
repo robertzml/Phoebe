@@ -22,7 +22,7 @@ namespace Phoebe.Model
     
         public System.Guid Id { get; set; }
         public System.DateTime InTime { get; set; }
-        public System.DateTime MonthTime { get; set; }
+        public string MonthTime { get; set; }
         public string FlowNumber { get; set; }
         public int ContractId { get; set; }
         public int UserId { get; set; }

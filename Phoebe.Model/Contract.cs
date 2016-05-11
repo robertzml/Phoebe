@@ -24,19 +24,19 @@ namespace Phoebe.Model
         public int Id { get; set; }
         public string Number { get; set; }
         public string Name { get; set; }
-        public Nullable<int> CustomerId { get; set; }
-        public Nullable<System.DateTime> SignDate { get; set; }
+        public int CustomerId { get; set; }
+        public System.DateTime SignDate { get; set; }
         public Nullable<System.DateTime> CloseDate { get; set; }
-        public Nullable<int> BillingType { get; set; }
-        public Nullable<bool> IsTiming { get; set; }
-        public Nullable<int> UserId { get; set; }
+        public int BillingType { get; set; }
+        public bool IsTiming { get; set; }
+        public int UserId { get; set; }
         public string Remark { get; set; }
-        public Nullable<int> Status { get; set; }
+        public int Status { get; set; }
     
-        public virtual Customer Customer { get; set; }
-        public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cargo> Cargoes { get; set; }
+        public virtual Customer Customer { get; set; }
+        public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StockIn> StockIns { get; set; }
     }

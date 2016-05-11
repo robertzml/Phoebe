@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
@@ -72,7 +73,7 @@
             this.layoutControlItem17 = new DevExpress.XtraLayout.LayoutControlItem();
             this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
             this.dgcStockIn = new DevExpress.XtraGrid.GridControl();
-            this.bsStockIn = new System.Windows.Forms.BindingSource();
+            this.bsStockIn = new System.Windows.Forms.BindingSource(this.components);
             this.dgvStockIn = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colStockInId = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -94,6 +95,8 @@
             this.colShelfLife = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colRemark = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colStatus = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            this.gnStockIn = new Phoebe.FormClient.GridNavigator();
             this.groupControl4 = new DevExpress.XtraEditors.GroupControl();
             this.lvCustomer = new System.Windows.Forms.ListView();
             this.CustomerNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -153,6 +156,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgcStockIn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsStockIn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStockIn)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
+            this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).BeginInit();
             this.groupControl4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl5)).BeginInit();
@@ -177,7 +182,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 160F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 160F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1100, 580);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1100, 624);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // groupControl1
@@ -655,10 +660,11 @@
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.groupControl3, 3);
             this.groupControl3.Controls.Add(this.dgcStockIn);
+            this.groupControl3.Controls.Add(this.panelControl1);
             this.groupControl3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl3.Location = new System.Drawing.Point(3, 323);
             this.groupControl3.Name = "groupControl3";
-            this.groupControl3.Size = new System.Drawing.Size(1094, 254);
+            this.groupControl3.Size = new System.Drawing.Size(1094, 298);
             this.groupControl3.TabIndex = 2;
             this.groupControl3.Text = "货品信息";
             // 
@@ -666,10 +672,10 @@
             // 
             this.dgcStockIn.DataSource = this.bsStockIn;
             this.dgcStockIn.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgcStockIn.Location = new System.Drawing.Point(2, 21);
+            this.dgcStockIn.Location = new System.Drawing.Point(2, 45);
             this.dgcStockIn.MainView = this.dgvStockIn;
             this.dgcStockIn.Name = "dgcStockIn";
-            this.dgcStockIn.Size = new System.Drawing.Size(1090, 231);
+            this.dgcStockIn.Size = new System.Drawing.Size(1090, 251);
             this.dgcStockIn.TabIndex = 0;
             this.dgcStockIn.UseEmbeddedNavigator = true;
             this.dgcStockIn.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -710,9 +716,11 @@
             this.dgvStockIn.OptionsCustomization.AllowFilter = false;
             this.dgvStockIn.OptionsCustomization.AllowGroup = false;
             this.dgvStockIn.OptionsCustomization.AllowSort = false;
+            this.dgvStockIn.OptionsFilter.AllowFilterEditor = false;
             this.dgvStockIn.OptionsFind.AllowFindPanel = false;
             this.dgvStockIn.OptionsView.ShowFooter = true;
             this.dgvStockIn.OptionsView.ShowGroupPanel = false;
+            this.dgvStockIn.CellValueChanging += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.dgvStockIn_CellValueChanging);
             // 
             // colId
             // 
@@ -757,6 +765,7 @@
             this.colCategoryName.Caption = "类别名称";
             this.colCategoryName.FieldName = "CategoryName";
             this.colCategoryName.Name = "colCategoryName";
+            this.colCategoryName.OptionsColumn.AllowEdit = false;
             this.colCategoryName.Visible = true;
             this.colCategoryName.VisibleIndex = 1;
             // 
@@ -770,8 +779,11 @@
             // 
             // colInCount
             // 
+            this.colInCount.Caption = "入库数量";
             this.colInCount.FieldName = "InCount";
             this.colInCount.Name = "colInCount";
+            this.colInCount.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "InCount", "SUM={0:0.##}")});
             this.colInCount.Visible = true;
             this.colInCount.VisibleIndex = 3;
             // 
@@ -779,69 +791,106 @@
             // 
             this.colGroupType.FieldName = "GroupType";
             this.colGroupType.Name = "colGroupType";
-            this.colGroupType.Visible = true;
-            this.colGroupType.VisibleIndex = 4;
             // 
             // colUnitWeight
             // 
+            this.colUnitWeight.Caption = "单位重量(kg)";
+            this.colUnitWeight.DisplayFormat.FormatString = "0.00";
+            this.colUnitWeight.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colUnitWeight.FieldName = "UnitWeight";
             this.colUnitWeight.Name = "colUnitWeight";
             this.colUnitWeight.Visible = true;
-            this.colUnitWeight.VisibleIndex = 5;
+            this.colUnitWeight.VisibleIndex = 4;
             // 
             // colInWeight
             // 
+            this.colInWeight.Caption = "总重量(t)";
+            this.colInWeight.DisplayFormat.FormatString = "0.000";
+            this.colInWeight.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colInWeight.FieldName = "InWeight";
             this.colInWeight.Name = "colInWeight";
+            this.colInWeight.OptionsColumn.AllowEdit = false;
             this.colInWeight.Visible = true;
-            this.colInWeight.VisibleIndex = 6;
+            this.colInWeight.VisibleIndex = 5;
             // 
             // colUnitVolume
             // 
+            this.colUnitVolume.Caption = "单位体积(立方)";
+            this.colUnitVolume.DisplayFormat.FormatString = "0.000";
+            this.colUnitVolume.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colUnitVolume.FieldName = "UnitVolume";
             this.colUnitVolume.Name = "colUnitVolume";
             this.colUnitVolume.Visible = true;
-            this.colUnitVolume.VisibleIndex = 7;
+            this.colUnitVolume.VisibleIndex = 6;
             // 
             // colInVolume
             // 
+            this.colInVolume.Caption = "总体积(立方)";
+            this.colInVolume.DisplayFormat.FormatString = "0.000";
+            this.colInVolume.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colInVolume.FieldName = "InVolume";
             this.colInVolume.Name = "colInVolume";
+            this.colInVolume.OptionsColumn.AllowEdit = false;
             this.colInVolume.Visible = true;
-            this.colInVolume.VisibleIndex = 8;
+            this.colInVolume.VisibleIndex = 7;
             // 
             // colWarehouseNumber
             // 
+            this.colWarehouseNumber.Caption = "仓库编号";
             this.colWarehouseNumber.FieldName = "WarehouseNumber";
             this.colWarehouseNumber.Name = "colWarehouseNumber";
             this.colWarehouseNumber.Visible = true;
-            this.colWarehouseNumber.VisibleIndex = 9;
+            this.colWarehouseNumber.VisibleIndex = 8;
             // 
             // colOriginPlace
             // 
+            this.colOriginPlace.Caption = "产地";
             this.colOriginPlace.FieldName = "OriginPlace";
             this.colOriginPlace.Name = "colOriginPlace";
             this.colOriginPlace.Visible = true;
-            this.colOriginPlace.VisibleIndex = 10;
+            this.colOriginPlace.VisibleIndex = 9;
             // 
             // colShelfLife
             // 
+            this.colShelfLife.Caption = "保质期(月)";
             this.colShelfLife.FieldName = "ShelfLife";
             this.colShelfLife.Name = "colShelfLife";
             this.colShelfLife.Visible = true;
-            this.colShelfLife.VisibleIndex = 11;
+            this.colShelfLife.VisibleIndex = 10;
             // 
             // colRemark
             // 
+            this.colRemark.Caption = "备注";
             this.colRemark.FieldName = "Remark";
             this.colRemark.Name = "colRemark";
             this.colRemark.Visible = true;
-            this.colRemark.VisibleIndex = 12;
+            this.colRemark.VisibleIndex = 11;
             // 
             // colStatus
             // 
             this.colStatus.FieldName = "Status";
             this.colStatus.Name = "colStatus";
+            // 
+            // panelControl1
+            // 
+            this.panelControl1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.panelControl1.Controls.Add(this.gnStockIn);
+            this.panelControl1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelControl1.Location = new System.Drawing.Point(2, 21);
+            this.panelControl1.Name = "panelControl1";
+            this.panelControl1.Size = new System.Drawing.Size(1090, 24);
+            this.panelControl1.TabIndex = 1;
+            // 
+            // gnStockIn
+            // 
+            this.gnStockIn.Dock = System.Windows.Forms.DockStyle.Left;
+            this.gnStockIn.GridView = this.dgvStockIn;
+            this.gnStockIn.Location = new System.Drawing.Point(0, 0);
+            this.gnStockIn.Margin = new System.Windows.Forms.Padding(0);
+            this.gnStockIn.MinimumSize = new System.Drawing.Size(200, 20);
+            this.gnStockIn.Name = "gnStockIn";
+            this.gnStockIn.Size = new System.Drawing.Size(247, 24);
+            this.gnStockIn.TabIndex = 0;
             // 
             // groupControl4
             // 
@@ -922,7 +971,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "StockInAddControl";
-            this.Size = new System.Drawing.Size(1100, 580);
+            this.Size = new System.Drawing.Size(1100, 624);
             this.Load += new System.EventHandler(this.StockInAddControl_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
@@ -976,6 +1025,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgcStockIn)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsStockIn)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStockIn)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
+            this.panelControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).EndInit();
             this.groupControl4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl5)).EndInit();
@@ -1060,5 +1111,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn colShelfLife;
         private DevExpress.XtraGrid.Columns.GridColumn colRemark;
         private DevExpress.XtraGrid.Columns.GridColumn colStatus;
+        private DevExpress.XtraEditors.PanelControl panelControl1;
+        private GridNavigator gnStockIn;
     }
 }

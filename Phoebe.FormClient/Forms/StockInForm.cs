@@ -31,8 +31,12 @@ namespace Phoebe.FormClient
         }
         #endregion //Constructor
 
-
         #region Event
+        /// <summary>
+        /// 窗体载入
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void StockInForm_Load(object sender, EventArgs e)
         {
 
@@ -56,14 +60,15 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void tsbSave_Click(object sender, EventArgs e)
         {
-            ErrorCode result = this.stockInAdd.Save();
+            string errorMessage;
+            ErrorCode result = this.stockInAdd.Save(out errorMessage);
             if (result == ErrorCode.Success)
             {
                 MessageBox.Show("保存入库成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
-                MessageBox.Show("创建货品失败", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("保存入库失败，" + result.DisplayName() + ", " + errorMessage, FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
         #endregion //Event

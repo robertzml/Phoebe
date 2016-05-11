@@ -28,11 +28,11 @@ namespace Phoebe.Model
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserGroup> UserGroups { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
-        public virtual DbSet<Contract> Contracts { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Cargo> Cargoes { get; set; }
         public virtual DbSet<Store> Stores { get; set; }
-        public virtual DbSet<StockIn> StockIns { get; set; }
         public virtual DbSet<StockInDetail> StockInDetails { get; set; }
+        public virtual DbSet<Contract> Contracts { get; set; }
+        public virtual DbSet<StockIn> StockIns { get; set; }
     }
 }

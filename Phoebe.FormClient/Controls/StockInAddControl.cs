@@ -5,12 +5,13 @@ using System.Drawing;
 using System.Data;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Phoebe.FormClient
 {
     using DevExpress.XtraEditors.Controls;
+    using DevExpress.XtraGrid.Columns;
+    using DevExpress.XtraGrid.Views.Grid;
     using Phoebe.Base;
     using Phoebe.Business;
     using Phoebe.Common;
@@ -38,14 +39,19 @@ namespace Phoebe.FormClient
         private List<Category> categoryList;
 
         /// <summary>
-        /// 选中客户ID
+        /// 选中客户
         /// </summary>
-        private int customerId;
+        private Customer selectCustomer;
 
         /// <summary>
-        /// 选中合同ID
+        /// 选中合同
         /// </summary>
-        private int contractId;
+        private Contract selectContract;
+
+        /// <summary>
+        /// 货品是否等重
+        /// </summary>
+        private bool isEqualWeight = true;
         #endregion //Field
 
         #region Constructor
@@ -63,7 +69,7 @@ namespace Phoebe.FormClient
         /// </summary>
         /// <param name="prefix">客户编码前缀</param>
         /// <returns></returns>
-        private Customer UpdateCustomerView(string prefix)
+        private void UpdateCustomerView(string prefix)
         {
             this.lvCustomer.BeginUpdate();
 
@@ -85,11 +91,6 @@ namespace Phoebe.FormClient
             }
 
             this.lvCustomer.EndUpdate();
-
-            if (customers.Count() == 1 && customers.First().Number == prefix)
-                return customers.First();
-            else
-                return null;
         }
 
         /// <summary>
@@ -148,11 +149,42 @@ namespace Phoebe.FormClient
         /// 保存入库
         /// </summary>
         /// <returns></returns>
-        public ErrorCode Save()
+        public ErrorCode Save(out string errorMessage)
         {
+            errorMessage = "";
+            this.dgvStockIn.CloseEditor();          
+            
+            // check input data
+            if (this.selectCustomer == null || this.selectContract == null)
+            {
+                errorMessage = "请选择客户和合同";
+                return ErrorCode.Error;
+            }
             foreach (StockInModel item in this.bsStockIn)
             {
-                item.ContractId = this.contractId;
+                if (item.CategoryId == 0)
+                {
+                    errorMessage = "请输入正确分类编码";
+                    return ErrorCode.Error;
+                }
+                if (item.InCount < 0)
+                {
+                    errorMessage = "入库数量不能为负数";
+                    return ErrorCode.Error;
+                }
+                if (string.IsNullOrEmpty(item.WarehouseNumber))
+                {
+                    errorMessage = "仓库编号不能为空";
+                    return ErrorCode.Error;
+                }
+            }
+
+            // add cargo and set item field
+            List<StockInModel> siModels = new List<StockInModel>();
+            foreach (StockInModel item in this.bsStockIn)
+            {
+                item.ContractId = this.selectContract.Id;
+                item.GroupType = this.selectContract.BillingType;
 
                 var category = BusinessFactory<CategoryBusiness>.Instance.GetByNumber(item.CategoryNumber);
                 item.CategoryId = category.Id;
@@ -163,9 +195,22 @@ namespace Phoebe.FormClient
                     return ErrorCode.CargoCreateFailed;
                 }
                 item.CargoId = cargo.Id;
+                siModels.Add(item);
             }
-        
-            return ErrorCode.Success;
+
+            // set stock in
+            StockIn si = new StockIn();
+            si.InTime = Convert.ToDateTime(this.dpInTime.EditValue).Date;
+            si.MonthTime = si.InTime.Year.ToString() + si.InTime.Month.ToString().PadLeft(2, '0');
+            si.ContractId = this.selectContract.Id;
+            si.UserId = this.currentUser.Id;
+            si.CreateTime = DateTime.Now;
+            si.Remark = this.txtRemark.Text;
+
+            // add stock in
+            ErrorCode result = BusinessFactory<StockInBusiness>.Instance.Create(si, siModels);
+
+            return result;
         }
         #endregion //Method
 
@@ -196,12 +241,13 @@ namespace Phoebe.FormClient
         private void txtCustomerNumber_EditValueChanged(object sender, EventArgs e)
         {
             string number = this.txtCustomerNumber.EditValue.ToString();
-            var customer = UpdateCustomerView(number);
+            UpdateCustomerView(number);
 
+            var customer = BusinessFactory<CustomerBusiness>.Instance.GetByNumber(number);
             if (customer != null)
             {
                 this.txtCustomerName.Text = customer.Name;
-                this.customerId = customer.Id;
+                this.selectCustomer = customer;
 
                 UpdateContractList(customer.Id);
             }
@@ -227,8 +273,9 @@ namespace Phoebe.FormClient
 
             this.txtCustomerNumber.EditValueChanged += txtCustomerNumber_EditValueChanged;
 
-            this.customerId = Convert.ToInt32(select.Tag);
-            UpdateContractList(this.customerId);
+            int customerId = Convert.ToInt32(select.Tag);
+            UpdateContractList(customerId);
+            this.selectCustomer = BusinessFactory<CustomerBusiness>.Instance.FindById(customerId);
         }
 
         /// <summary>
@@ -244,10 +291,92 @@ namespace Phoebe.FormClient
             }
             else
             {
-                this.contractId = Convert.ToInt32(this.cmbContract.EditValue);
-                var contract = BusinessFactory<ContractBusiness>.Instance.FindById(contractId);
+                int contractId = Convert.ToInt32(this.cmbContract.EditValue);
+                this.selectContract = BusinessFactory<ContractBusiness>.Instance.FindById(contractId);
 
-                this.txtBillingType.Text = ((BillingType)contract.BillingType).DisplayName();
+                if ((BillingType)this.selectContract.BillingType == BillingType.VariousWeight)
+                {
+                    this.isEqualWeight = false;
+                    this.colInWeight.OptionsColumn.AllowEdit = true;
+                }
+                else
+                {
+                    this.isEqualWeight = true;
+                    this.colInWeight.OptionsColumn.AllowEdit = false;
+                }
+                this.txtBillingType.Text = ((BillingType)this.selectContract.BillingType).DisplayName();
+            }
+        }
+
+        /// <summary>
+        /// 单元格更改事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dgvStockIn_CellValueChanging(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
+        {
+            if (e.Column.Name == "colCategoryNumber")
+            {
+                string number = e.Value.ToString();
+                UpdateCategoryView(number);
+
+                var category = BusinessFactory<CategoryBusiness>.Instance.GetByNumber(number, true);
+                if (category != null)
+                {
+                    this.dgvStockIn.SetRowCellValue(e.RowHandle, "CategoryName", category.Name);
+                    this.dgvStockIn.SetRowCellValue(e.RowHandle, "CategoryId", category.Id);
+                }
+                else
+                {
+                    this.dgvStockIn.SetRowCellValue(e.RowHandle, "CategoryName", "");
+                    this.dgvStockIn.SetRowCellValue(e.RowHandle, "CategoryId", 0);
+                }
+            }
+            else if (e.Column.Name == "colInCount")
+            {
+                int count = 0;
+                if (!Int32.TryParse(e.Value.ToString(), out count))
+                {
+                    return;
+                }
+
+                if (this.isEqualWeight)
+                {
+                    double unitWeight = Convert.ToDouble(this.dgvStockIn.GetRowCellValue(e.RowHandle, "UnitWeight"));
+                    double totalWeight = count * unitWeight / 1000;
+                    this.dgvStockIn.SetRowCellValue(e.RowHandle, "InWeight", totalWeight);
+                }
+
+                double unitVolume = Convert.ToDouble(this.dgvStockIn.GetRowCellValue(e.RowHandle, "UnitVolume"));
+                double totalVolume = count * unitVolume;
+                this.dgvStockIn.SetRowCellValue(e.RowHandle, "InVolume", totalVolume);
+            }
+            else if (e.Column.Name == "colUnitWeight")
+            {
+                if (!this.isEqualWeight)
+                    return;
+
+                double unitWeight = 0;
+                if (!double.TryParse(e.Value.ToString(), out unitWeight))
+                {
+                    return;
+                }
+
+                int count = Convert.ToInt32(this.dgvStockIn.GetRowCellValue(e.RowHandle, "InCount"));
+                double totalWeight = count * unitWeight / 1000;
+                this.dgvStockIn.SetRowCellValue(e.RowHandle, "InWeight", totalWeight);
+            }
+            else if (e.Column.Name == "colUnitVolume")
+            {
+                double unitVolume = 0;
+                if (!double.TryParse(e.Value.ToString(), out unitVolume))
+                {
+                    return;
+                }
+
+                int count = Convert.ToInt32(this.dgvStockIn.GetRowCellValue(e.RowHandle, "InCount"));
+                double totalVolume = count * unitVolume;
+                this.dgvStockIn.SetRowCellValue(e.RowHandle, "InVolume", totalVolume);
             }
         }
         #endregion //Event

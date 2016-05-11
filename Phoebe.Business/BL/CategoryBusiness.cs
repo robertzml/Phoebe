@@ -79,6 +79,29 @@ namespace Phoebe.Business
             else
                 return data.First();
         }
+
+        /// <summary>
+        /// 根据编码获取分类
+        /// </summary>
+        /// <param name="number">分类编码</param>
+        /// <param name="leafOnly">是否只获取节点编码</param>
+        /// <returns></returns>
+        public Category GetByNumber(string number, bool leafOnly)
+        {
+            if (leafOnly)
+            {
+                Expression<Func<Category, bool>> predicate = r => r.Number == number && (r.Hierarchy == 2 || r.Hierarchy == 3);
+                var data = this.dal.Find(predicate);
+                if (data.Count() == 0)
+                    return null;
+                else
+                    return data.First();
+            }
+            else
+            {
+                return GetByNumber(number);
+            }
+        }
         #endregion //Method
     }
 }

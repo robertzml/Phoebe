@@ -23,7 +23,7 @@ namespace Phoebe.Model
         public string Remark { get; set; }
         public int Status { get; set; }
     
-        public virtual StockIn StockIn { get; set; }
         public virtual Store Store { get; set; }
+        public virtual StockIn StockIn { get; set; }
     }
 }

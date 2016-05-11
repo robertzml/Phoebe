@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 
 namespace Phoebe.Business.DAL
-{    
+{
     using Phoebe.Base;
     using Phoebe.Model;
 
@@ -20,17 +20,21 @@ namespace Phoebe.Business.DAL
             throw new NotImplementedException();
         }
 
-        public IEnumerable<StockIn> Find(Expression<Func<StockIn, bool>> predicate)
-        {
-            throw new NotImplementedException();
-        }
-
         public IEnumerable<StockIn> FindAll()
         {
             throw new NotImplementedException();
         }
 
-     
+        /// <summary>
+        /// 按条件查询入库单
+        /// </summary>
+        /// <param name="predicate">查询条件</param>
+        /// <returns></returns>
+        public IEnumerable<StockIn> Find(Expression<Func<StockIn, bool>> predicate)
+        {
+            return this.context.StockIns.Where(predicate);
+        }
+
 
         public ErrorCode Create(StockIn entity)
         {

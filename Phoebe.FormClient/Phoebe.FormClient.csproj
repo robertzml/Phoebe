@@ -124,6 +124,12 @@
     <Compile Include="Forms\ChangePasswordForm.Designer.cs">
       <DependentUpon>ChangePasswordForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\GridNavigator.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\GridNavigator.Designer.cs">
+      <DependentUpon>GridNavigator.cs</DependentUpon>
+    </Compile>
     <Compile Include="Other\GlobalControl.cs" />
     <Compile Include="Other\FormConstant.cs" />
     <Compile Include="LoginForm.cs">
@@ -158,6 +164,9 @@
     <Compile Include="Controls\StockInAddControl.Designer.cs">
       <DependentUpon>StockInAddControl.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Controls\GridNavigator.resx">
+      <DependentUpon>GridNavigator.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\StockInAddControl.resx">
       <DependentUpon>StockInAddControl.cs</DependentUpon>
     </EmbeddedResource>

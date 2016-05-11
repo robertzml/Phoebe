@@ -54,7 +54,7 @@ namespace Phoebe.FormClient
         /// </summary>
         /// <param name="prefix">客户编码前缀</param>
         /// <returns></returns>
-        private Customer UpdateCustomerView(string prefix)
+        private void UpdateCustomerView(string prefix)
         {
             this.lvCustomer.BeginUpdate();
 
@@ -76,11 +76,6 @@ namespace Phoebe.FormClient
             }
 
             this.lvCustomer.EndUpdate();
-
-            if (customers.Count() == 1 && customers.First().Number == prefix)
-                return customers.First();
-            else
-                return null;
         }
         #endregion //Function
 
@@ -107,8 +102,9 @@ namespace Phoebe.FormClient
         private void txtCustomerNumber_EditValueChanged(object sender, EventArgs e)
         {
             string number = this.txtCustomerNumber.EditValue.ToString();
-            var customer = UpdateCustomerView(number);
+            UpdateCustomerView(number);
 
+            var customer = BusinessFactory<CustomerBusiness>.Instance.GetByNumber(number);
             if (customer != null)
             {
                 this.txtCustomerName.Text = customer.Name;

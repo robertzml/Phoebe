@@ -36,16 +36,16 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Number" Type="nvarchar" MaxLength="50" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" />
-          <Property Name="CustomerId" Type="int" />
-          <Property Name="SignDate" Type="datetime" />
+          <Property Name="Number" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CustomerId" Type="int" Nullable="false" />
+          <Property Name="SignDate" Type="datetime" Nullable="false" />
           <Property Name="CloseDate" Type="datetime" />
-          <Property Name="BillingType" Type="int" />
-          <Property Name="IsTiming" Type="bit" />
-          <Property Name="UserId" Type="int" />
+          <Property Name="BillingType" Type="int" Nullable="false" />
+          <Property Name="IsTiming" Type="bit" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="Remark" Type="nvarchar" MaxLength="500" />
-          <Property Name="Status" Type="int" />
+          <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
@@ -68,7 +68,7 @@
           </Key>
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="InTime" Type="datetime" Nullable="false" />
-          <Property Name="MonthTime" Type="datetime" Nullable="false" />
+          <Property Name="MonthTime" Type="char" MaxLength="6" Nullable="false" />
           <Property Name="FlowNumber" Type="char" MaxLength="12" Nullable="false" />
           <Property Name="ContractId" Type="int" Nullable="false" />
           <Property Name="UserId" Type="int" Nullable="false" />
@@ -176,7 +176,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Contract_Customer">
-          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
           <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Customer">
@@ -188,7 +188,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Contract_User">
-          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
@@ -362,8 +362,8 @@
           <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" Nullable="false" />
           <NavigationProperty Name="UserGroup" Relationship="Self.FK_User_User" FromRole="User" ToRole="UserGroup" />
-          <NavigationProperty Name="Contracts" Relationship="Phoebe.Model.FK_Contract_User" FromRole="User" ToRole="Contract" />
           <NavigationProperty Name="Stores" Relationship="Phoebe.Model.FK_Store_User" FromRole="User" ToRole="Store" />
+          <NavigationProperty Name="Contracts" Relationship="Phoebe.Model.FK_Contract_User" FromRole="User" ToRole="Contract" />
           <NavigationProperty Name="StockIns" Relationship="Phoebe.Model.FK_StockIn_User" FromRole="User" ToRole="StockIn" />
         </EntityType>
         <EntityType Name="UserGroup">
@@ -398,15 +398,6 @@
             <End Role="User" EntitySet="Users" />
           </AssociationSet>
           <EntitySet Name="Customers" EntityType="Phoebe.Model.Customer" />
-          <EntitySet Name="Contracts" EntityType="Phoebe.Model.Contract" />
-          <AssociationSet Name="FK_Contract_Customer" Association="Phoebe.Model.FK_Contract_Customer">
-            <End Role="Customer" EntitySet="Customers" />
-            <End Role="Contract" EntitySet="Contracts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Contract_User" Association="Phoebe.Model.FK_Contract_User">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Contract" EntitySet="Contracts" />
-          </AssociationSet>
           <EntitySet Name="Categories" EntityType="Phoebe.Model.Category" />
           <AssociationSet Name="FK_Category_Category" Association="Phoebe.Model.FK_Category_Category">
             <End Role="Category" EntitySet="Categories" />
@@ -418,10 +409,6 @@
             <End Role="Category" EntitySet="Categories" />
             <End Role="Cargo" EntitySet="Cargoes" />
           </AssociationSet>
-          <AssociationSet Name="FK_Cargo_Contract" Association="Phoebe.Model.FK_Cargo_Contract">
-            <End Role="Contract" EntitySet="Contracts" />
-            <End Role="Cargo" EntitySet="Cargoes" />
-          </AssociationSet>
           <AssociationSet Name="FK_Store_Cargo" Association="Phoebe.Model.FK_Store_Cargo">
             <End Role="Cargo" EntitySet="Cargoes" />
             <End Role="Store" EntitySet="Stores" />
@@ -429,6 +416,24 @@
           <AssociationSet Name="FK_Store_User" Association="Phoebe.Model.FK_Store_User">
             <End Role="User" EntitySet="Users" />
             <End Role="Store" EntitySet="Stores" />
+          </AssociationSet>
+          <EntitySet Name="StockInDetails" EntityType="Phoebe.Model.StockInDetail" />
+          <AssociationSet Name="FK_StockInDetails_Store" Association="Phoebe.Model.FK_StockInDetails_Store">
+            <End Role="Store" EntitySet="Stores" />
+            <End Role="StockInDetail" EntitySet="StockInDetails" />
+          </AssociationSet>
+          <EntitySet Name="Contracts" EntityType="Phoebe.Model.Contract" />
+          <AssociationSet Name="FK_Cargo_Contract" Association="Phoebe.Model.FK_Cargo_Contract">
+            <End Role="Contract" EntitySet="Contracts" />
+            <End Role="Cargo" EntitySet="Cargoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contract_Customer" Association="Phoebe.Model.FK_Contract_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Contract" EntitySet="Contracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contract_User" Association="Phoebe.Model.FK_Contract_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Contract" EntitySet="Contracts" />
           </AssociationSet>
           <EntitySet Name="StockIns" EntityType="Phoebe.Model.StockIn" />
           <AssociationSet Name="FK_StockIn_Contract" Association="Phoebe.Model.FK_StockIn_Contract">
@@ -439,13 +444,8 @@
             <End Role="User" EntitySet="Users" />
             <End Role="StockIn" EntitySet="StockIns" />
           </AssociationSet>
-          <EntitySet Name="StockInDetails" EntityType="Phoebe.Model.StockInDetail" />
           <AssociationSet Name="FK_StockInDetails_StockIn" Association="Phoebe.Model.FK_StockInDetails_StockIn">
             <End Role="StockIn" EntitySet="StockIns" />
-            <End Role="StockInDetail" EntitySet="StockInDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_StockInDetails_Store" Association="Phoebe.Model.FK_StockInDetails_Store">
-            <End Role="Store" EntitySet="Stores" />
             <End Role="StockInDetail" EntitySet="StockInDetails" />
           </AssociationSet>
           </EntityContainer>
@@ -465,50 +465,6 @@
           <Property Name="Status" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Contracts" Relationship="Phoebe.Model.FK_Contract_Customer" FromRole="Customer" ToRole="Contract" />
         </EntityType>
-        <EntityType Name="Contract">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CustomerId" Type="Int32" />
-          <Property Name="SignDate" Type="DateTime" Precision="3" />
-          <Property Name="CloseDate" Type="DateTime" Precision="3" />
-          <Property Name="BillingType" Type="Int32" />
-          <Property Name="IsTiming" Type="Boolean" />
-          <Property Name="UserId" Type="Int32" />
-          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="Int32" />
-          <NavigationProperty Name="Customer" Relationship="Phoebe.Model.FK_Contract_Customer" FromRole="Contract" ToRole="Customer" />
-          <NavigationProperty Name="User" Relationship="Phoebe.Model.FK_Contract_User" FromRole="Contract" ToRole="User" />
-          <NavigationProperty Name="Cargoes" Relationship="Phoebe.Model.FK_Cargo_Contract" FromRole="Contract" ToRole="Cargo" />
-          <NavigationProperty Name="StockIns" Relationship="Phoebe.Model.FK_StockIn_Contract" FromRole="Contract" ToRole="StockIn" />
-        </EntityType>
-        <Association Name="FK_Contract_Customer">
-          <End Type="Phoebe.Model.Customer" Role="Customer" Multiplicity="0..1" />
-          <End Type="Phoebe.Model.Contract" Role="Contract" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Customer">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Contract">
-              <PropertyRef Name="CustomerId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Contract_User">
-          <End Type="Phoebe.Model.User" Role="User" Multiplicity="0..1" />
-          <End Type="Phoebe.Model.Contract" Role="Contract" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Contract">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="Id" />
@@ -550,8 +506,8 @@
           <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Category" Relationship="Phoebe.Model.FK_Cargo_Category" FromRole="Cargo" ToRole="Category" />
-          <NavigationProperty Name="Contract" Relationship="Phoebe.Model.FK_Cargo_Contract" FromRole="Cargo" ToRole="Contract" />
           <NavigationProperty Name="Stores" Relationship="Phoebe.Model.FK_Store_Cargo" FromRole="Cargo" ToRole="Store" />
+          <NavigationProperty Name="Contract" Relationship="Phoebe.Model.FK_Cargo_Contract" FromRole="Cargo" ToRole="Contract" />
         </EntityType>
         <EntityType Name="Store">
           <Key>
@@ -593,18 +549,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Cargo_Contract">
-          <End Type="Phoebe.Model.Contract" Role="Contract" Multiplicity="1" />
-          <End Type="Phoebe.Model.Cargo" Role="Cargo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Contract">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Cargo">
-              <PropertyRef Name="ContractId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Store_Cargo">
           <End Type="Phoebe.Model.Cargo" Role="Cargo" Multiplicity="1" />
           <End Type="Phoebe.Model.Store" Role="Store" Multiplicity="*" />
@@ -629,13 +573,96 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="StockInDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="StockInId" Type="Guid" Nullable="false" />
+          <Property Name="StoreId" Type="Guid" Nullable="false" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
+          <Property Name="InWeight" Type="Double" Nullable="false" />
+          <Property Name="InVolume" Type="Double" Nullable="false" />
+          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Store" Relationship="Phoebe.Model.FK_StockInDetails_Store" FromRole="StockInDetail" ToRole="Store" />
+          <NavigationProperty Name="StockIn" Relationship="Phoebe.Model.FK_StockInDetails_StockIn" FromRole="StockInDetail" ToRole="StockIn" />
+        </EntityType>
+        <Association Name="FK_StockInDetails_Store">
+          <End Type="Phoebe.Model.Store" Role="Store" Multiplicity="1" />
+          <End Type="Phoebe.Model.StockInDetail" Role="StockInDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Store">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StockInDetail">
+              <PropertyRef Name="StoreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Contract">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Number" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <Property Name="SignDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CloseDate" Type="DateTime" Precision="3" />
+          <Property Name="BillingType" Type="Int32" Nullable="false" />
+          <Property Name="IsTiming" Type="Boolean" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cargoes" Relationship="Phoebe.Model.FK_Cargo_Contract" FromRole="Contract" ToRole="Cargo" />
+          <NavigationProperty Name="Customer" Relationship="Phoebe.Model.FK_Contract_Customer" FromRole="Contract" ToRole="Customer" />
+          <NavigationProperty Name="User" Relationship="Phoebe.Model.FK_Contract_User" FromRole="Contract" ToRole="User" />
+          <NavigationProperty Name="StockIns" Relationship="Phoebe.Model.FK_StockIn_Contract" FromRole="Contract" ToRole="StockIn" />
+        </EntityType>
+        <Association Name="FK_Cargo_Contract">
+          <End Type="Phoebe.Model.Contract" Role="Contract" Multiplicity="1" />
+          <End Type="Phoebe.Model.Cargo" Role="Cargo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contract">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cargo">
+              <PropertyRef Name="ContractId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contract_Customer">
+          <End Type="Phoebe.Model.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="Phoebe.Model.Contract" Role="Contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Contract">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contract_User">
+          <End Type="Phoebe.Model.User" Role="User" Multiplicity="1" />
+          <End Type="Phoebe.Model.Contract" Role="Contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Contract">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityType Name="StockIn">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" />
           <Property Name="InTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="MonthTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="MonthTime" Type="String" Nullable="false" MaxLength="6" FixedLength="true" Unicode="false" />
           <Property Name="FlowNumber" Type="String" Nullable="false" MaxLength="12" FixedLength="true" Unicode="false" />
           <Property Name="ContractId" Type="Int32" Nullable="false" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
@@ -670,21 +697,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="StockInDetail">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="StockInId" Type="Guid" Nullable="false" />
-          <Property Name="StoreId" Type="Guid" Nullable="false" />
-          <Property Name="Count" Type="Int32" Nullable="false" />
-          <Property Name="InWeight" Type="Double" Nullable="false" />
-          <Property Name="InVolume" Type="Double" Nullable="false" />
-          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="StockIn" Relationship="Phoebe.Model.FK_StockInDetails_StockIn" FromRole="StockInDetail" ToRole="StockIn" />
-          <NavigationProperty Name="Store" Relationship="Phoebe.Model.FK_StockInDetails_Store" FromRole="StockInDetail" ToRole="Store" />
-        </EntityType>
         <Association Name="FK_StockInDetails_StockIn">
           <End Type="Phoebe.Model.StockIn" Role="StockIn" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -696,18 +708,6 @@
             </Principal>
             <Dependent Role="StockInDetail">
               <PropertyRef Name="StockInId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_StockInDetails_Store">
-          <End Type="Phoebe.Model.Store" Role="Store" Multiplicity="1" />
-          <End Type="Phoebe.Model.StockInDetail" Role="StockInDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Store">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="StockInDetail">
-              <PropertyRef Name="StoreId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -756,23 +756,6 @@
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="Number" ColumnName="Number" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Contracts">
-            <EntityTypeMapping TypeName="Phoebe.Model.Contract">
-              <MappingFragment StoreEntitySet="Contract">
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Remark" ColumnName="Remark" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="IsTiming" ColumnName="IsTiming" />
-                <ScalarProperty Name="BillingType" ColumnName="BillingType" />
-                <ScalarProperty Name="CloseDate" ColumnName="CloseDate" />
-                <ScalarProperty Name="SignDate" ColumnName="SignDate" />
-                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Number" ColumnName="Number" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -831,6 +814,37 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="StockInDetails">
+            <EntityTypeMapping TypeName="Phoebe.Model.StockInDetail">
+              <MappingFragment StoreEntitySet="StockInDetails">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="InVolume" ColumnName="InVolume" />
+                <ScalarProperty Name="InWeight" ColumnName="InWeight" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="StoreId" ColumnName="StoreId" />
+                <ScalarProperty Name="StockInId" ColumnName="StockInId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contracts">
+            <EntityTypeMapping TypeName="Phoebe.Model.Contract">
+              <MappingFragment StoreEntitySet="Contract">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="IsTiming" ColumnName="IsTiming" />
+                <ScalarProperty Name="BillingType" ColumnName="BillingType" />
+                <ScalarProperty Name="CloseDate" ColumnName="CloseDate" />
+                <ScalarProperty Name="SignDate" ColumnName="SignDate" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="StockIns">
             <EntityTypeMapping TypeName="Phoebe.Model.StockIn">
               <MappingFragment StoreEntitySet="StockIn">
@@ -842,20 +856,6 @@
                 <ScalarProperty Name="FlowNumber" ColumnName="FlowNumber" />
                 <ScalarProperty Name="MonthTime" ColumnName="MonthTime" />
                 <ScalarProperty Name="InTime" ColumnName="InTime" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="StockInDetails">
-            <EntityTypeMapping TypeName="Phoebe.Model.StockInDetail">
-              <MappingFragment StoreEntitySet="StockInDetails">
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Remark" ColumnName="Remark" />
-                <ScalarProperty Name="InVolume" ColumnName="InVolume" />
-                <ScalarProperty Name="InWeight" ColumnName="InWeight" />
-                <ScalarProperty Name="Count" ColumnName="Count" />
-                <ScalarProperty Name="StoreId" ColumnName="StoreId" />
-                <ScalarProperty Name="StockInId" ColumnName="StockInId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
