@@ -22,12 +22,17 @@ namespace Phoebe.FormClient
     {
         #region Field
         /// <summary>
-        /// 流程状态
+        /// 当前入库单ID
+        /// </summary>
+        private Guid currentStockInId;
+
+        /// <summary>
+        /// 界面流程状态
         /// </summary>
         private StockInState state;
 
         /// <summary>
-        /// 入库单状态
+        /// 当前入库单状态
         /// </summary>
         private EntityStatus stockInState;
 
@@ -55,7 +60,7 @@ namespace Phoebe.FormClient
         /// </summary>
         private void UpdateToolbar()
         {
-            switch(this.stockInState)
+            switch (this.stockInState)
             {
                 case EntityStatus.Empty:
                     this.tsbNew.Enabled = true;
@@ -97,6 +102,7 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void StockInForm_Load(object sender, EventArgs e)
         {
+            this.currentStockInId = Guid.Empty;
             this.state = StockInState.Empty;
             this.stockInState = EntityStatus.Empty;
             UpdateTree();
@@ -139,8 +145,9 @@ namespace Phoebe.FormClient
             }
 
             this.state = StockInState.Open;
+            this.currentStockInId = new Guid(e.Node.Name);
             this.stockInState = (EntityStatus)e.Node.Tag;
-            this.stockInView = new StockInViewControl(new Guid(e.Node.Name));
+            this.stockInView = new StockInViewControl(this.currentStockInId);
             ChildFormManage.LoadContentControl(this.plBody, this.stockInView);
         }
 
@@ -173,6 +180,38 @@ namespace Phoebe.FormClient
             else
             {
                 MessageBox.Show("保存入库失败，" + result.DisplayName() + ", " + errorMessage, FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        /// <summary>
+        /// 删除入库
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tsbDelete_Click(object sender, EventArgs e)
+        {
+            if (this.currentStockInId == Guid.Empty)
+            {
+                MessageBox.Show("当前未选中入库单", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            if (this.stockInState != EntityStatus.StockInReady)
+            {
+                MessageBox.Show("入库已确认，无法删除", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            ErrorCode result = BusinessFactory<StockInBusiness>.Instance.Delete(this.currentStockInId);
+            if (result == ErrorCode.Success)
+            {
+                this.state = StockInState.Empty;
+                MessageBox.Show("删除入库成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.plBody.Controls.Clear();
+            }
+            else
+            {
+                MessageBox.Show("删除入库失败，" + result.DisplayName(), FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
         #endregion //Event

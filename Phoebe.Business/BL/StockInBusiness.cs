@@ -66,7 +66,7 @@ namespace Phoebe.Business
         /// </remarks>
         public string[] GetStockInMonthGroup()
         {
-            var data = this.dal.FindAll().GroupBy(r => r.MonthTime).Select(g => g.Key).OrderByDescending(s => s);            
+            var data = this.dal.FindAll().GroupBy(r => r.MonthTime).Select(g => g.Key).OrderByDescending(s => s);
             return data.ToArray();
         }
 
@@ -92,9 +92,10 @@ namespace Phoebe.Business
         /// 创建入库单
         /// </summary>
         /// <param name="entity">入库对象</param>
+        /// <param name="billing">计费对象</param>
         /// <param name="models">入库记录</param>
         /// <returns></returns>
-        public ErrorCode Create(StockIn entity, List<StockInModel> models)
+        public ErrorCode Create(StockIn entity, Billing billing, List<StockInModel> models)
         {
             try
             {
@@ -102,6 +103,10 @@ namespace Phoebe.Business
                 entity.Id = Guid.NewGuid();
                 entity.FlowNumber = GetLastStockInFlowNumber(entity.InTime.Date);
                 entity.Status = (int)EntityStatus.StockInReady;
+
+                // set billing
+                billing.StockInId = entity.Id;
+                billing.Status = (int)EntityStatus.BillingNotInit;
 
                 // set store
                 List<Store> storeList = new List<Store>();
@@ -148,7 +153,7 @@ namespace Phoebe.Business
                 }
 
                 var trans = new TransactionRepository();
-                ErrorCode result = trans.StockInTrans(entity, details, storeList);
+                ErrorCode result = trans.StockInAddTrans(entity, billing, details, storeList);
 
                 return result;
             }
@@ -170,7 +175,41 @@ namespace Phoebe.Business
 
                 return ErrorCode.Success;
             }
-            catch(Exception)
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+        }
+
+        /// <summary>
+        /// 删除入库
+        /// </summary>
+        /// <param name="id">入库单ID</param>
+        /// <returns></returns>
+        public ErrorCode Delete(Guid id)
+        {
+            try
+            {
+                StockIn stockIn = this.dal.FindById(id);
+                if (stockIn == null)
+                    return ErrorCode.ObjectNotFound;
+
+                if (stockIn.Status == (int)EntityStatus.StockIn)
+                    return ErrorCode.StockInCannotDelete;
+
+                // find store
+                List<Store> storeList = new List<Store>();
+                foreach (var item in stockIn.StockInDetails)
+                {
+                    storeList.Add(item.Store);
+                }
+
+                var trans = new TransactionRepository();
+                ErrorCode result = trans.StockInDeleteTrans(stockIn, storeList);
+
+                return result;
+            }
+            catch (Exception)
             {
                 return ErrorCode.Exception;
             }

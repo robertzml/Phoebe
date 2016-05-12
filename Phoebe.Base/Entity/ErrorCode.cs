@@ -120,5 +120,17 @@ namespace Phoebe.Base
         [Display(Name = "货品已存在")]
         CargoExist = 51,
         #endregion //Cargo
+
+        #region Store
+
+        #endregion //Store
+
+        #region Stock
+        /// <summary>
+        /// 入库记录无法删除
+        /// </summary>
+        [Display(Name = "入库记录无法删除")]
+        StockInCannotDelete = 70,
+        #endregion //Stock
     }
 }

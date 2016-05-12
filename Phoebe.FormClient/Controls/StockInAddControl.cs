@@ -150,8 +150,8 @@ namespace Phoebe.FormClient
         public ErrorCode Save(out string errorMessage)
         {
             errorMessage = "";
-            this.dgvStockIn.CloseEditor();          
-            
+            this.dgvStockIn.CloseEditor();
+
             // check input data
             if (this.selectCustomer == null || this.selectContract == null)
             {
@@ -205,8 +205,24 @@ namespace Phoebe.FormClient
             si.CreateTime = DateTime.Now;
             si.Remark = this.txtRemark.Text;
 
+            // set billing
+            Billing billing = new Billing();
+            billing.ContractId = si.ContractId;
+            billing.UnitPrice = this.nmUnitPrice.Value;
+            billing.HandlingUnitPrice = this.nmHandlingPrice.Value;
+            billing.HandlingPrice = this.nmHandlingPrice.Value;
+            billing.FreezeUnitPrice = this.nmFreezeUnitPrice.Value;
+            billing.FreezePrice = this.nmFreezePrice.Value;
+            billing.DisposePrice = this.nmDisposePrice.Value;
+            billing.PackingPrice = this.nmPackingPrice.Value;
+            billing.RentPrice = this.nmRentPrice.Value;
+            billing.OtherPrice = this.nmOtherPrice.Value;
+            billing.TotalPrice = billing.HandlingPrice + billing.FreezePrice + billing.DisposePrice +
+                billing.PackingPrice + billing.RentPrice + billing.OtherPrice;
+            billing.Remark = this.txtBillingRemark.Text;
+
             // add stock in
-            ErrorCode result = BusinessFactory<StockInBusiness>.Instance.Create(si, siModels);
+            ErrorCode result = BusinessFactory<StockInBusiness>.Instance.Create(si, billing, siModels);
 
             return result;
         }

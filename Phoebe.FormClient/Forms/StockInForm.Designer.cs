@@ -193,6 +193,7 @@
             this.tsbDelete.Name = "tsbDelete";
             this.tsbDelete.Size = new System.Drawing.Size(52, 22);
             this.tsbDelete.Text = "删除";
+            this.tsbDelete.Click += new System.EventHandler(this.tsbDelete_Click);
             // 
             // plBody
             // 
