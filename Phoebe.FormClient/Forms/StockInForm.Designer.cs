@@ -86,13 +86,17 @@
             this.tvStockIn.Size = new System.Drawing.Size(206, 514);
             this.tvStockIn.TabIndex = 0;
             this.tvStockIn.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.tvStockIn_BeforeExpand);
+            this.tvStockIn.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvStockIn_AfterSelect);
             // 
             // imageList1
             // 
             this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "database_page_32.png");
-            this.imageList1.Images.SetKeyName(1, "database_warning_32.png");
+            this.imageList1.Images.SetKeyName(0, "BONote_16x16.png");
+            this.imageList1.Images.SetKeyName(1, "BOProduct_16x16.png");
+            this.imageList1.Images.SetKeyName(2, "BOOrder_16x16.png");
+            this.imageList1.Images.SetKeyName(3, "BOSaleItem_16x16.png");
+            this.imageList1.Images.SetKeyName(4, "BOOrderItem_16x16.png");
             // 
             // xtraTabPage2
             // 

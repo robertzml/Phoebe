@@ -63,9 +63,9 @@ namespace Phoebe.FormClient.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        internal static System.Drawing.Bitmap database_page_32 {
+        internal static System.Drawing.Bitmap BOFolder_16x16 {
             get {
-                object obj = ResourceManager.GetObject("database_page_32", resourceCulture);
+                object obj = ResourceManager.GetObject("BOFolder_16x16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,109 @@ namespace Phoebe.FormClient.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        internal static System.Drawing.Bitmap database_warning_32 {
+        internal static System.Drawing.Bitmap BOFolder_32x32 {
             get {
-                object obj = ResourceManager.GetObject("database_warning_32", resourceCulture);
+                object obj = ResourceManager.GetObject("BOFolder_32x32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap BONote_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("BONote_16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap BONote_32x32 {
+            get {
+                object obj = ResourceManager.GetObject("BONote_32x32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap BOOrder_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("BOOrder_16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap BOOrder_32x32 {
+            get {
+                object obj = ResourceManager.GetObject("BOOrder_32x32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap BOOrderItem_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("BOOrderItem_16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap BOOrderItem_32x32 {
+            get {
+                object obj = ResourceManager.GetObject("BOOrderItem_32x32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap BOProduct_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("BOProduct_16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap BOProduct_32x32 {
+            get {
+                object obj = ResourceManager.GetObject("BOProduct_32x32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap BOSaleItem_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("BOSaleItem_16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap BOSaleItem_32x32 {
+            get {
+                object obj = ResourceManager.GetObject("BOSaleItem_32x32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

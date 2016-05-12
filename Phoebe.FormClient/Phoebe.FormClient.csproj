@@ -70,6 +70,12 @@
     <Reference Include="UIAutomationClient" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\StockInViewControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\StockInViewControl.Designer.cs">
+      <DependentUpon>StockInViewControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\CategoryEditForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -170,6 +176,9 @@
     <EmbeddedResource Include="Controls\StockInAddControl.resx">
       <DependentUpon>StockInAddControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\StockInViewControl.resx">
+      <DependentUpon>StockInViewControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\CategoryEditForm.resx">
       <DependentUpon>CategoryEditForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -264,6 +273,42 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\database_warning_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BOOrder_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BOOrder_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BOSaleItem_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BOSaleItem_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BONote_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BONote_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BOOrderItem_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BOOrderItem_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BOFolder_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BOFolder_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BOProduct_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BOProduct_32x32.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -21,6 +21,14 @@ namespace Phoebe.FormClient
     public partial class StockInForm : BaseForm
     {
         #region Field
+        /// <summary>
+        /// 流程状态
+        /// </summary>
+        private StockInState state;
+
+        /// <summary>
+        /// 新建入库界面
+        /// </summary>
         private StockInAddControl stockInAdd;
         #endregion //Field
 
@@ -45,6 +53,7 @@ namespace Phoebe.FormClient
                 TreeNode node = new TreeNode();
                 node.Name = months[i];
                 node.Text = months[i];
+                node.ImageIndex = 1;
                 node.Nodes.Add("");
                 this.tvStockIn.Nodes.Add(node);
             }
@@ -59,6 +68,7 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void StockInForm_Load(object sender, EventArgs e)
         {
+            this.state = StockInState.Empty;
             UpdateTree();
         }
 
@@ -77,8 +87,28 @@ namespace Phoebe.FormClient
                 node.Name = item.Id.ToString();
                 node.Text = item.FlowNumber;
                 node.Tag = item;
+                if (item.Status == (int)EntityStatus.StockInReady)
+                    node.ImageIndex = 2;
+                else
+                    node.ImageIndex = 3;
                 e.Node.Nodes.Add(node);
             }
+        }
+
+        /// <summary>
+        /// 选择历史单据
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tvStockIn_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            if (e.Node.Level == 0)
+            {
+                e.Node.SelectedImageIndex = 1;
+                return;
+            }
+
+
         }
 
         /// <summary>
@@ -88,6 +118,7 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void tsbNew_Click(object sender, EventArgs e)
         {
+            this.state = StockInState.New;
             this.stockInAdd = new StockInAddControl(this.currentUser);
             ChildFormManage.LoadContentControl(this.plBody, this.stockInAdd);
         }
@@ -103,6 +134,7 @@ namespace Phoebe.FormClient
             ErrorCode result = this.stockInAdd.Save(out errorMessage);
             if (result == ErrorCode.Success)
             {
+                this.state = StockInState.Saved;
                 MessageBox.Show("保存入库成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
@@ -110,6 +142,27 @@ namespace Phoebe.FormClient
                 MessageBox.Show("保存入库失败，" + result.DisplayName() + ", " + errorMessage, FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
-        #endregion //Event     
+        #endregion //Event
+
+        /// <summary>
+        /// 入库界面流程状态
+        /// </summary>
+        internal enum StockInState
+        {
+            /// <summary>
+            /// 初始化
+            /// </summary>
+            Empty = 0,
+
+            /// <summary>
+            /// 新建入库
+            /// </summary>
+            New = 1,
+
+            /// <summary>
+            /// 入库保存
+            /// </summary>
+            Saved = 2,
+        }
     }
 }
