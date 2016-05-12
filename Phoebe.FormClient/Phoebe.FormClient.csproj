@@ -170,12 +170,21 @@
     <Compile Include="Controls\StockInAddControl.Designer.cs">
       <DependentUpon>StockInAddControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\StockInEditControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\StockInEditControl.Designer.cs">
+      <DependentUpon>StockInEditControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utils\ModelTranslate.cs" />
     <EmbeddedResource Include="Controls\GridNavigator.resx">
       <DependentUpon>GridNavigator.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\StockInAddControl.resx">
       <DependentUpon>StockInAddControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\StockInEditControl.resx">
+      <DependentUpon>StockInEditControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\StockInViewControl.resx">
       <DependentUpon>StockInViewControl.cs</DependentUpon>

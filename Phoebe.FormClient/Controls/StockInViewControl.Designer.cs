@@ -79,6 +79,7 @@
             this.colStatus = new DevExpress.XtraGrid.Columns.GridColumn();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.txtFlowNumber = new DevExpress.XtraEditors.TextEdit();
             this.txtInTime = new DevExpress.XtraEditors.TextEdit();
             this.txtRemark = new DevExpress.XtraEditors.TextEdit();
             this.txtUser = new DevExpress.XtraEditors.TextEdit();
@@ -96,9 +97,8 @@
             this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
-            this.txtFlowNumber = new DevExpress.XtraEditors.TextEdit();
             this.layoutControlItem19 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
             this.groupControl2.SuspendLayout();
@@ -134,6 +134,7 @@
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtFlowNumber.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtInTime.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRemark.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtUser.Properties)).BeginInit();
@@ -151,7 +152,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtFlowNumber.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem19)).BeginInit();
             this.SuspendLayout();
             // 
@@ -495,7 +495,6 @@
             this.dgcStockIn.Name = "dgcStockIn";
             this.dgcStockIn.Size = new System.Drawing.Size(1090, 268);
             this.dgcStockIn.TabIndex = 0;
-            this.dgcStockIn.UseEmbeddedNavigator = true;
             this.dgcStockIn.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.dgvStockIn});
             // 
@@ -720,6 +719,17 @@
             this.layoutControl1.TabIndex = 13;
             this.layoutControl1.Text = "layoutControl1";
             // 
+            // txtFlowNumber
+            // 
+            this.txtFlowNumber.Location = new System.Drawing.Point(511, 60);
+            this.txtFlowNumber.Name = "txtFlowNumber";
+            this.txtFlowNumber.Properties.Appearance.BackColor = System.Drawing.Color.White;
+            this.txtFlowNumber.Properties.Appearance.Options.UseBackColor = true;
+            this.txtFlowNumber.Properties.ReadOnly = true;
+            this.txtFlowNumber.Size = new System.Drawing.Size(172, 20);
+            this.txtFlowNumber.StyleController = this.layoutControl1;
+            this.txtFlowNumber.TabIndex = 9;
+            // 
             // txtInTime
             // 
             this.txtInTime.Location = new System.Drawing.Point(284, 7);
@@ -902,22 +912,6 @@
             this.layoutControlItem2.Text = "业务日期";
             this.layoutControlItem2.TextSize = new System.Drawing.Size(48, 14);
             // 
-            // labelControl5
-            // 
-            this.labelControl5.Location = new System.Drawing.Point(457, 77);
-            this.labelControl5.Name = "labelControl5";
-            this.labelControl5.Size = new System.Drawing.Size(48, 14);
-            this.labelControl5.TabIndex = 4;
-            this.labelControl5.Text = "所属合同";
-            // 
-            // txtFlowNumber
-            // 
-            this.txtFlowNumber.Location = new System.Drawing.Point(511, 60);
-            this.txtFlowNumber.Name = "txtFlowNumber";
-            this.txtFlowNumber.Size = new System.Drawing.Size(172, 20);
-            this.txtFlowNumber.StyleController = this.layoutControl1;
-            this.txtFlowNumber.TabIndex = 9;
-            // 
             // layoutControlItem19
             // 
             this.layoutControlItem19.Control = this.txtFlowNumber;
@@ -926,6 +920,14 @@
             this.layoutControlItem19.Size = new System.Drawing.Size(227, 68);
             this.layoutControlItem19.Text = "流水号";
             this.layoutControlItem19.TextSize = new System.Drawing.Size(48, 14);
+            // 
+            // labelControl5
+            // 
+            this.labelControl5.Location = new System.Drawing.Point(457, 77);
+            this.labelControl5.Name = "labelControl5";
+            this.labelControl5.Size = new System.Drawing.Size(48, 14);
+            this.labelControl5.TabIndex = 4;
+            this.labelControl5.Text = "所属合同";
             // 
             // StockInViewControl
             // 
@@ -971,6 +973,7 @@
             this.groupControl1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.txtFlowNumber.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtInTime.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRemark.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtUser.Properties)).EndInit();
@@ -988,7 +991,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtFlowNumber.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem19)).EndInit();
             this.ResumeLayout(false);
 

@@ -9,15 +9,16 @@ using System.Windows.Forms;
 
 namespace Phoebe.FormClient
 {
+    using DevExpress.XtraEditors.Controls;
     using Phoebe.Base;
     using Phoebe.Business;
     using Phoebe.Common;
     using Phoebe.Model;
 
     /// <summary>
-    /// 货品入库查看
+    /// 编辑入库界面
     /// </summary>
-    public partial class StockInViewControl : UserControl
+    public partial class StockInEditControl : UserControl
     {
         #region Field
         /// <summary>
@@ -27,10 +28,10 @@ namespace Phoebe.FormClient
         #endregion //Field
 
         #region Constructor
-        public StockInViewControl(Guid stockInId)
+        public StockInEditControl(Guid stockInId)
         {
             InitializeComponent();
-            this.stockIn = BusinessFactory<StockInBusiness>.Instance.FindById(stockInId); 
+            this.stockIn = BusinessFactory<StockInBusiness>.Instance.FindById(stockInId);
         }
         #endregion //Constructor
 
@@ -69,13 +70,17 @@ namespace Phoebe.FormClient
         }
         #endregion //Function
 
+        #region Method
+        public ErrorCode Save()
+        {
+
+
+            return ErrorCode.Success;
+        }
+        #endregion //Method
+
         #region Event
-        /// <summary>
-        /// 窗体载入
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void StockInViewControl_Load(object sender, EventArgs e)
+        private void StockInEditControl_Load(object sender, EventArgs e)
         {
             SetBaseControl(this.stockIn);
             SetBillingControl(this.stockIn.Billing);

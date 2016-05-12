@@ -27,14 +27,19 @@ namespace Phoebe.FormClient
         private Guid currentStockInId;
 
         /// <summary>
-        /// 界面流程状态
-        /// </summary>
-        private StockInState state;
-
-        /// <summary>
         /// 当前入库单状态
         /// </summary>
         private EntityStatus stockInState;
+
+        /// <summary>
+        /// 界面流程状态
+        /// </summary>
+        private StockInFormState formState;
+
+        /// <summary>
+        /// 入库单查询界面
+        /// </summary>
+        private StockInViewControl stockInView;
 
         /// <summary>
         /// 新建入库界面
@@ -42,9 +47,9 @@ namespace Phoebe.FormClient
         private StockInAddControl stockInAdd;
 
         /// <summary>
-        /// 入库单查询界面
+        /// 编辑入库界面
         /// </summary>
-        private StockInViewControl stockInView;
+        private StockInEditControl stockInEdit;
         #endregion //Field
 
         #region Constructor
@@ -64,20 +69,46 @@ namespace Phoebe.FormClient
             {
                 case EntityStatus.Empty:
                     this.tsbNew.Enabled = true;
-                    this.tsbSave.Enabled = true;
+                    this.tsbSave.Enabled = false;
                     this.tsbConfirm.Enabled = false;
                     this.tsbPrint.Enabled = false;
                     this.tsbEdit.Enabled = false;
                     this.tsbRevert.Enabled = false;
                     this.tsbDelete.Enabled = false;
+                    if (this.formState == StockInFormState.Add)
+                    {
+                        this.tsbSave.Enabled = true;
+                    }
                     break;
                 case EntityStatus.StockInReady:
+                    if (this.formState == StockInFormState.View)
+                    {
+                        this.tsbNew.Enabled = true;
+                        this.tsbSave.Enabled = false;
+                        this.tsbConfirm.Enabled = true;
+                        this.tsbPrint.Enabled = true;
+                        this.tsbEdit.Enabled = true;
+                        this.tsbRevert.Enabled = false;
+                        this.tsbDelete.Enabled = true;
+                    }
+                    else if (this.formState == StockInFormState.Edit)
+                    {
+                        this.tsbNew.Enabled = true;
+                        this.tsbSave.Enabled = true;
+                        this.tsbConfirm.Enabled = false;
+                        this.tsbPrint.Enabled = false;
+                        this.tsbEdit.Enabled = false;
+                        this.tsbRevert.Enabled = false;
+                        this.tsbDelete.Enabled = false;
+                    }
+                    break;
+                case EntityStatus.StockIn:
                     this.tsbNew.Enabled = true;
                     this.tsbSave.Enabled = false;
-                    this.tsbConfirm.Enabled = true;
-                    this.tsbPrint.Enabled = false;
+                    this.tsbConfirm.Enabled = false;
+                    this.tsbPrint.Enabled = true;
                     this.tsbEdit.Enabled = false;
-                    this.tsbRevert.Enabled = false;
+                    this.tsbRevert.Enabled = true;
                     this.tsbDelete.Enabled = false;
                     break;
             }
@@ -135,9 +166,11 @@ namespace Phoebe.FormClient
         private void StockInForm_Load(object sender, EventArgs e)
         {
             this.currentStockInId = Guid.Empty;
-            this.state = StockInState.Empty;
             this.stockInState = EntityStatus.Empty;
+            this.formState = StockInFormState.Empty;
+
             UpdateTree();
+            UpdateToolbar();
         }
 
         /// <summary>
@@ -175,10 +208,12 @@ namespace Phoebe.FormClient
                 e.Node.SelectedImageIndex = 1;
                 return;
             }
-          
+
             this.currentStockInId = new Guid(e.Node.Name);
             this.stockInState = (EntityStatus)e.Node.Tag;
-            this.state = StockInState.Open;
+            this.formState = StockInFormState.View;
+
+            UpdateToolbar();
 
             this.stockInView = new StockInViewControl(this.currentStockInId);
             ChildFormManage.LoadContentControl(this.plBody, this.stockInView);
@@ -193,7 +228,9 @@ namespace Phoebe.FormClient
         {
             this.currentStockInId = Guid.Empty;
             this.stockInState = EntityStatus.Empty;
-            this.state = StockInState.Initialize;
+            this.formState = StockInFormState.Add;
+
+            UpdateToolbar();
 
             this.stockInAdd = new StockInAddControl(this.currentUser);
             ChildFormManage.LoadContentControl(this.plBody, this.stockInAdd);
@@ -205,26 +242,61 @@ namespace Phoebe.FormClient
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void tsbSave_Click(object sender, EventArgs e)
-        {
-            string errorMessage;
-            Guid newId;
-            ErrorCode result = this.stockInAdd.Save(out errorMessage, out newId);
-            if (result == ErrorCode.Success)
+        {          
+            if (this.formState == StockInFormState.Add) //保存新建
             {
-                MessageBox.Show("保存入库成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                string errorMessage;
+                Guid newId;
+                ErrorCode result = this.stockInAdd.Save(out errorMessage, out newId);
+                if (result == ErrorCode.Success)
+                {
+                    MessageBox.Show("保存入库成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                this.currentStockInId = newId;
-                this.stockInState = EntityStatus.StockInReady;
-                this.state = StockInState.New;
+                    this.currentStockInId = newId;
+                    this.stockInState = EntityStatus.StockInReady;
+                    this.formState = StockInFormState.View;
 
-                UpdateTree();
+                    UpdateTree();
+                    UpdateToolbar();
 
-                this.stockInView = new StockInViewControl(this.currentStockInId);
-                ChildFormManage.LoadContentControl(this.plBody, this.stockInView);
+                    this.stockInView = new StockInViewControl(this.currentStockInId);
+                    ChildFormManage.LoadContentControl(this.plBody, this.stockInView);
+                }
+                else
+                {
+                    MessageBox.Show("保存入库失败，" + result.DisplayName() + ", " + errorMessage, FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
-            else
+            else if (this.formState == StockInFormState.Edit) //保存修改
             {
-                MessageBox.Show("保存入库失败，" + result.DisplayName() + ", " + errorMessage, FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (this.currentStockInId == Guid.Empty)
+                {
+                    MessageBox.Show("当前未选中入库单", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+                if (this.stockInState != EntityStatus.StockInReady)
+                {
+                    MessageBox.Show("当前入库已确认，无法保存", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                ErrorCode result = this.stockInEdit.Save();
+                if (result == ErrorCode.Success)
+                {
+                    MessageBox.Show("保存入库成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    this.stockInState = EntityStatus.StockInReady;
+                    this.formState = StockInFormState.View;
+                                     
+                    UpdateToolbar();
+
+                    this.stockInView = new StockInViewControl(this.currentStockInId);
+                    ChildFormManage.LoadContentControl(this.plBody, this.stockInView);
+                }
+                else
+                {
+                    MessageBox.Show("保存入库失败，" + result.DisplayName(), FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
         }
 
@@ -243,7 +315,7 @@ namespace Phoebe.FormClient
 
             if (this.stockInState != EntityStatus.StockInReady)
             {
-                MessageBox.Show("入库已确认", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("当前入库已确认", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -253,7 +325,7 @@ namespace Phoebe.FormClient
                 MessageBox.Show("入库确认成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 this.stockInState = EntityStatus.StockIn;
-                this.state = StockInState.Open;
+                this.formState = StockInFormState.View;
 
                 UpdateTree();
                 UpdateToolbar();
@@ -271,7 +343,23 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void tsbEdit_Click(object sender, EventArgs e)
         {
+            if (this.currentStockInId == Guid.Empty)
+            {
+                MessageBox.Show("当前未选中入库单", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
 
+            if (this.stockInState != EntityStatus.StockInReady)
+            {
+                MessageBox.Show("当前入库已确认，无法编辑", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+                        
+            this.formState = StockInFormState.Edit;
+            UpdateToolbar();
+
+            this.stockInEdit = new StockInEditControl(this.currentStockInId);
+            ChildFormManage.LoadContentControl(this.plBody, this.stockInEdit);
         }
 
         /// <summary>
@@ -309,12 +397,12 @@ namespace Phoebe.FormClient
             {
                 ErrorCode result = BusinessFactory<StockInBusiness>.Instance.Delete(this.currentStockInId);
                 if (result == ErrorCode.Success)
-                {                    
+                {
                     MessageBox.Show("删除入库成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     this.currentStockInId = Guid.Empty;
                     this.stockInState = EntityStatus.Empty;
-                    this.state = StockInState.Empty;
+                    this.formState = StockInFormState.Empty;
 
                     ChildFormManage.LoadContentControl(this.plBody, this.plEmpty);
                     UpdateTree();
@@ -341,7 +429,7 @@ namespace Phoebe.FormClient
         /// <summary>
         /// 入库界面模式
         /// </summary>
-        internal enum StockInState
+        internal enum StockInFormState
         {
             /// <summary>
             /// 空
@@ -349,24 +437,19 @@ namespace Phoebe.FormClient
             Empty = 0,
 
             /// <summary>
-            /// 初始化
+            /// 新增模式
             /// </summary>
-            Initialize = 1,
+            Add = 1,
 
             /// <summary>
-            /// 历史入库
+            /// 查看模式
             /// </summary>
-            Open = 2,
-
-            /// <summary>
-            /// 新入库
-            /// </summary>
-            New = 3,
+            View = 2,
 
             /// <summary>
             /// 编辑模式
             /// </summary>
-            Edit = 4,
+            Edit = 3
         }
     }
 }
