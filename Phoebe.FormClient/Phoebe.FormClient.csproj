@@ -176,6 +176,12 @@
     <Compile Include="Controls\StockInEditControl.Designer.cs">
       <DependentUpon>StockInEditControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\StoreForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\StoreForm.Designer.cs">
+      <DependentUpon>StoreForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utils\ModelTranslate.cs" />
     <EmbeddedResource Include="Controls\GridNavigator.resx">
       <DependentUpon>GridNavigator.cs</DependentUpon>
@@ -216,6 +222,9 @@
     <EmbeddedResource Include="Forms\CustomerForm.resx">
       <DependentUpon>CustomerForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\StoreForm.resx">
+      <DependentUpon>StoreForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\UserGroupForm.resx">
       <DependentUpon>UserGroupForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -232,6 +241,7 @@
     <None Include="Properties\DataSources\Phoebe.Model.Contract.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.Customer.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.StockInModel.datasource" />
+    <None Include="Properties\DataSources\Phoebe.Model.Store.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.User.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.UserGroup.datasource" />
     <None Include="Properties\licenses.licx" />

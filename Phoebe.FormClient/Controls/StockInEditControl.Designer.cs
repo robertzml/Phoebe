@@ -482,11 +482,15 @@
             this.dgvStockIn.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.True;
             this.dgvStockIn.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.True;
             this.dgvStockIn.OptionsBehavior.EditorShowMode = DevExpress.Utils.EditorShowMode.Click;
+            this.dgvStockIn.OptionsCustomization.AllowColumnMoving = false;
             this.dgvStockIn.OptionsCustomization.AllowFilter = false;
             this.dgvStockIn.OptionsCustomization.AllowGroup = false;
+            this.dgvStockIn.OptionsCustomization.AllowQuickHideColumns = false;
             this.dgvStockIn.OptionsCustomization.AllowSort = false;
             this.dgvStockIn.OptionsFilter.AllowFilterEditor = false;
             this.dgvStockIn.OptionsFind.AllowFindPanel = false;
+            this.dgvStockIn.OptionsMenu.EnableColumnMenu = false;
+            this.dgvStockIn.OptionsMenu.EnableGroupPanelMenu = false;
             this.dgvStockIn.OptionsView.ShowFooter = true;
             this.dgvStockIn.OptionsView.ShowGroupPanel = false;
             // 

@@ -59,6 +59,7 @@
             this.barHeaderItem1 = new DevExpress.XtraBars.BarHeaderItem();
             this.barStaticItem2 = new DevExpress.XtraBars.BarStaticItem();
             this.tabMdiManager = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
+            this.menuStoreList = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabMdiManager)).BeginInit();
             this.SuspendLayout();
@@ -95,9 +96,10 @@
             this.menuStockIn,
             this.menuStore,
             this.menuStockOut,
-            this.menuStockMove});
+            this.menuStockMove,
+            this.menuStoreList});
             this.barManager1.MainMenu = this.mainMenu;
-            this.barManager1.MaxItemId = 23;
+            this.barManager1.MaxItemId = 24;
             this.barManager1.StatusBar = this.bar3;
             // 
             // mainMenu
@@ -198,6 +200,8 @@
             // 
             this.menuStore.Caption = "库存管理";
             this.menuStore.Id = 20;
+            this.menuStore.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.menuStoreList)});
             this.menuStore.Name = "menuStore";
             // 
             // menuUser
@@ -324,6 +328,13 @@
             this.tabMdiManager.MdiParent = this;
             this.tabMdiManager.PinPageButtonShowMode = DevExpress.XtraTab.PinPageButtonShowMode.InActiveTabPageHeader;
             // 
+            // menuStoreList
+            // 
+            this.menuStoreList.Caption = "库存记录";
+            this.menuStoreList.Id = 23;
+            this.menuStoreList.Name = "menuStoreList";
+            this.menuStoreList.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuStoreList_ItemClick);
+            // 
             // MainForm
             // 
             this.AllowMdiBar = true;
@@ -377,6 +388,7 @@
         private DevExpress.XtraBars.BarButtonItem menuStockOut;
         private DevExpress.XtraBars.BarButtonItem menuStockMove;
         private DevExpress.XtraBars.BarSubItem menuStore;
+        private DevExpress.XtraBars.BarButtonItem menuStoreList;
     }
 }
 
