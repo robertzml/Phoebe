@@ -50,6 +50,34 @@ namespace Phoebe.Business.DAL
         }
 
         /// <summary>
+        /// 入库确认事务
+        /// </summary>
+        /// <param name="stockIn">入库单对象</param>
+        /// <returns></returns>
+        public ErrorCode StockInConfirmTrans(StockIn stockIn)
+        {
+            try
+            {
+                stockIn.Status = (int)EntityStatus.StockIn;
+                stockIn.Billing.Status = (int)EntityStatus.Normal;
+
+                foreach(var item in stockIn.StockInDetails)
+                {
+                    item.Status = (int)EntityStatus.StockIn;
+                    item.Store.Status = (int)EntityStatus.StoreIn;
+                }
+
+                this.context.SaveChanges();
+
+                return ErrorCode.Success;
+            }
+            catch(Exception)
+            {
+                return ErrorCode.Exception;
+            }
+        }
+
+        /// <summary>
         /// 删除入库事务
         /// </summary>
         /// <param name="stockIn">入库单对象</param>

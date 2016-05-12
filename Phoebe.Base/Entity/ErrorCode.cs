@@ -131,6 +131,12 @@ namespace Phoebe.Base
         /// </summary>
         [Display(Name = "入库记录无法删除")]
         StockInCannotDelete = 70,
+
+        /// <summary>
+        /// 入库已确认
+        /// </summary>
+        [Display(Name = "入库已确认")]
+        StockInHasConfirm = 71,
         #endregion //Stock
     }
 }

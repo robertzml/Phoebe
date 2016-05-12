@@ -46,6 +46,7 @@
             this.tsbRevert = new System.Windows.Forms.ToolStripButton();
             this.tsbDelete = new System.Windows.Forms.ToolStripButton();
             this.plBody = new DevExpress.XtraEditors.PanelControl();
+            this.plEmpty = new DevExpress.XtraEditors.PanelControl();
             ((System.ComponentModel.ISupportInitialize)(this.tcStockIn)).BeginInit();
             this.tcStockIn.SuspendLayout();
             this.tpStockInList.SuspendLayout();
@@ -53,6 +54,8 @@
             this.groupControl1.SuspendLayout();
             this.tsStockIn.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.plBody)).BeginInit();
+            this.plBody.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.plEmpty)).BeginInit();
             this.SuspendLayout();
             // 
             // tcStockIn
@@ -156,6 +159,7 @@
             this.tsbConfirm.Name = "tsbConfirm";
             this.tsbConfirm.Size = new System.Drawing.Size(76, 22);
             this.tsbConfirm.Text = "入库确认";
+            this.tsbConfirm.Click += new System.EventHandler(this.tsbConfirm_Click);
             // 
             // tsbPrint
             // 
@@ -164,6 +168,7 @@
             this.tsbPrint.Name = "tsbPrint";
             this.tsbPrint.Size = new System.Drawing.Size(52, 22);
             this.tsbPrint.Text = "打印";
+            this.tsbPrint.Click += new System.EventHandler(this.tsbPrint_Click);
             // 
             // toolStripSeparator
             // 
@@ -177,6 +182,7 @@
             this.tsbEdit.Name = "tsbEdit";
             this.tsbEdit.Size = new System.Drawing.Size(52, 22);
             this.tsbEdit.Text = "编辑";
+            this.tsbEdit.Click += new System.EventHandler(this.tsbEdit_Click);
             // 
             // tsbRevert
             // 
@@ -185,6 +191,7 @@
             this.tsbRevert.Name = "tsbRevert";
             this.tsbRevert.Size = new System.Drawing.Size(52, 22);
             this.tsbRevert.Text = "撤回";
+            this.tsbRevert.Click += new System.EventHandler(this.tsbRevert_Click);
             // 
             // tsbDelete
             // 
@@ -200,11 +207,21 @@
             this.plBody.Appearance.BackColor = System.Drawing.Color.White;
             this.plBody.Appearance.Options.UseBackColor = true;
             this.plBody.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.plBody.Controls.Add(this.plEmpty);
             this.plBody.Dock = System.Windows.Forms.DockStyle.Fill;
             this.plBody.Location = new System.Drawing.Point(216, 25);
             this.plBody.Name = "plBody";
             this.plBody.Size = new System.Drawing.Size(748, 541);
             this.plBody.TabIndex = 8;
+            // 
+            // plEmpty
+            // 
+            this.plEmpty.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.plEmpty.Dock = System.Windows.Forms.DockStyle.Top;
+            this.plEmpty.Location = new System.Drawing.Point(0, 0);
+            this.plEmpty.Name = "plEmpty";
+            this.plEmpty.Size = new System.Drawing.Size(748, 100);
+            this.plEmpty.TabIndex = 0;
             // 
             // StockInForm
             // 
@@ -225,6 +242,8 @@
             this.tsStockIn.ResumeLayout(false);
             this.tsStockIn.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.plBody)).EndInit();
+            this.plBody.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.plEmpty)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -248,5 +267,6 @@
         private System.Windows.Forms.ToolStripButton tsbEdit;
         private System.Windows.Forms.ToolStripButton tsbRevert;
         private System.Windows.Forms.ToolStripButton tsbDelete;
+        private DevExpress.XtraEditors.PanelControl plEmpty;
     }
 }

@@ -45,6 +45,21 @@ namespace Phoebe.FormClient
             this.txtContract.Text = stockIn.Contract.Name;
             this.txtBillingType.Text = ((BillingType)stockIn.Contract.BillingType).DisplayName();
             this.txtRemark.Text = stockIn.Remark;
+            this.txtFlowNumber.Text = stockIn.FlowNumber;
+        }
+
+        private void SetBillingControl(Billing billing)
+        {
+            this.nmUnitPrice.Value = billing.UnitPrice;
+            this.nmHandlingUnitPrice.Value = billing.HandlingUnitPrice;
+            this.nmHandlingPrice.Value = billing.HandlingPrice;
+            this.nmFreezeUnitPrice.Value = billing.FreezeUnitPrice;
+            this.nmFreezePrice.Value = billing.FreezePrice;
+            this.nmDisposePrice.Value = billing.DisposePrice;
+            this.nmPackingPrice.Value = billing.PackingPrice;
+            this.nmRentPrice.Value = billing.RentPrice;
+            this.nmOtherPrice.Value = billing.OtherPrice;
+            this.txtBillingRemark.Text = billing.Remark;
         }
 
         private void SetDataControl(StockIn stockIn)
@@ -54,11 +69,16 @@ namespace Phoebe.FormClient
         }
         #endregion //Function
 
-
         #region Event
+        /// <summary>
+        /// 窗体载入
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void StockInViewControl_Load(object sender, EventArgs e)
         {
             SetBaseControl(this.stockIn);
+            SetBillingControl(this.stockIn.Billing);
             SetDataControl(this.stockIn);
         }
         #endregion //Event

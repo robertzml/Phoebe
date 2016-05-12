@@ -71,6 +71,15 @@ namespace Phoebe.FormClient
                     this.tsbRevert.Enabled = false;
                     this.tsbDelete.Enabled = false;
                     break;
+                case EntityStatus.StockInReady:
+                    this.tsbNew.Enabled = true;
+                    this.tsbSave.Enabled = false;
+                    this.tsbConfirm.Enabled = true;
+                    this.tsbPrint.Enabled = false;
+                    this.tsbEdit.Enabled = false;
+                    this.tsbRevert.Enabled = false;
+                    this.tsbDelete.Enabled = false;
+                    break;
             }
         }
 
@@ -79,6 +88,7 @@ namespace Phoebe.FormClient
         /// </summary>
         private void UpdateTree()
         {
+            this.tvStockIn.BeginUpdate();
             this.tvStockIn.Nodes.Clear();
 
             var months = BusinessFactory<StockInBusiness>.Instance.GetStockInMonthGroup();
@@ -91,6 +101,28 @@ namespace Phoebe.FormClient
                 node.Nodes.Add("");
                 this.tvStockIn.Nodes.Add(node);
             }
+            this.tvStockIn.EndUpdate();
+        }
+
+        private void SelectTreeNode()
+        {
+            if (this.currentStockInId == Guid.Empty)
+                return;
+
+            var si = BusinessFactory<StockInBusiness>.Instance.FindById(this.currentStockInId);
+            if (si == null)
+                return;
+
+            var nodes = this.tvStockIn.Nodes.Find(si.MonthTime, false);
+            if (nodes.Count() == 0)
+                return;
+
+            nodes[0].Expand();
+            var find = nodes[0].Nodes.Find(this.currentStockInId.ToString(), false);
+            if (find.Count() == 0)
+                return;
+
+            this.tvStockIn.SelectedNode = find[0];
         }
         #endregion //Function
 
@@ -143,10 +175,11 @@ namespace Phoebe.FormClient
                 e.Node.SelectedImageIndex = 1;
                 return;
             }
-
-            this.state = StockInState.Open;
+          
             this.currentStockInId = new Guid(e.Node.Name);
             this.stockInState = (EntityStatus)e.Node.Tag;
+            this.state = StockInState.Open;
+
             this.stockInView = new StockInViewControl(this.currentStockInId);
             ChildFormManage.LoadContentControl(this.plBody, this.stockInView);
         }
@@ -158,7 +191,10 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void tsbNew_Click(object sender, EventArgs e)
         {
-            this.state = StockInState.New;
+            this.currentStockInId = Guid.Empty;
+            this.stockInState = EntityStatus.Empty;
+            this.state = StockInState.Initialize;
+
             this.stockInAdd = new StockInAddControl(this.currentUser);
             ChildFormManage.LoadContentControl(this.plBody, this.stockInAdd);
         }
@@ -171,17 +207,83 @@ namespace Phoebe.FormClient
         private void tsbSave_Click(object sender, EventArgs e)
         {
             string errorMessage;
-            ErrorCode result = this.stockInAdd.Save(out errorMessage);
+            Guid newId;
+            ErrorCode result = this.stockInAdd.Save(out errorMessage, out newId);
             if (result == ErrorCode.Success)
             {
-                this.state = StockInState.Saved;
                 MessageBox.Show("保存入库成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                this.currentStockInId = newId;
+                this.stockInState = EntityStatus.StockInReady;
+                this.state = StockInState.New;
+
+                UpdateTree();
+
+                this.stockInView = new StockInViewControl(this.currentStockInId);
+                ChildFormManage.LoadContentControl(this.plBody, this.stockInView);
             }
             else
             {
                 MessageBox.Show("保存入库失败，" + result.DisplayName() + ", " + errorMessage, FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
+
+        /// <summary>
+        /// 入库确认
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tsbConfirm_Click(object sender, EventArgs e)
+        {
+            if (this.currentStockInId == Guid.Empty)
+            {
+                MessageBox.Show("当前未选中入库单", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            if (this.stockInState != EntityStatus.StockInReady)
+            {
+                MessageBox.Show("入库已确认", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            ErrorCode result = BusinessFactory<StockInBusiness>.Instance.Confirm(this.currentStockInId);
+            if (result == ErrorCode.Success)
+            {
+                MessageBox.Show("入库确认成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                this.stockInState = EntityStatus.StockIn;
+                this.state = StockInState.Open;
+
+                UpdateTree();
+                UpdateToolbar();
+            }
+            else
+            {
+                MessageBox.Show("入库确认失败，" + result.DisplayName(), FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        /// <summary>
+        /// 编辑
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tsbEdit_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// 撤回
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tsbRevert_Click(object sender, EventArgs e)
+        {
+
+        }
+
 
         /// <summary>
         /// 删除入库
@@ -202,44 +304,69 @@ namespace Phoebe.FormClient
                 return;
             }
 
-            ErrorCode result = BusinessFactory<StockInBusiness>.Instance.Delete(this.currentStockInId);
-            if (result == ErrorCode.Success)
+            DialogResult dr = MessageBox.Show("是否确认删除选中记录", FormConstant.MessageBoxTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dr == DialogResult.Yes)
             {
-                this.state = StockInState.Empty;
-                MessageBox.Show("删除入库成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.plBody.Controls.Clear();
+                ErrorCode result = BusinessFactory<StockInBusiness>.Instance.Delete(this.currentStockInId);
+                if (result == ErrorCode.Success)
+                {                    
+                    MessageBox.Show("删除入库成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    this.currentStockInId = Guid.Empty;
+                    this.stockInState = EntityStatus.Empty;
+                    this.state = StockInState.Empty;
+
+                    ChildFormManage.LoadContentControl(this.plBody, this.plEmpty);
+                    UpdateTree();
+                    UpdateToolbar();
+                }
+                else
+                {
+                    MessageBox.Show("删除入库失败，" + result.DisplayName(), FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
-            else
-            {
-                MessageBox.Show("删除入库失败，" + result.DisplayName(), FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+        }
+
+        /// <summary>
+        /// 打印
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tsbPrint_Click(object sender, EventArgs e)
+        {
+
         }
         #endregion //Event
 
         /// <summary>
-        /// 入库界面流程状态
+        /// 入库界面模式
         /// </summary>
         internal enum StockInState
         {
             /// <summary>
-            /// 初始化
+            /// 空
             /// </summary>
             Empty = 0,
 
             /// <summary>
-            /// 选择入库
+            /// 初始化
             /// </summary>
-            Open = 1,
+            Initialize = 1,
 
             /// <summary>
-            /// 新建入库
+            /// 历史入库
             /// </summary>
-            New = 2,
+            Open = 2,
 
             /// <summary>
-            /// 入库保存
+            /// 新入库
             /// </summary>
-            Saved = 3,
+            New = 3,
+
+            /// <summary>
+            /// 编辑模式
+            /// </summary>
+            Edit = 4,
         }
     }
 }

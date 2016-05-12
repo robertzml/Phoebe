@@ -146,10 +146,13 @@ namespace Phoebe.FormClient
         /// <summary>
         /// 保存入库
         /// </summary>
+        /// <param name="errorMessage">错误消息</param>
+        /// <param name="newId">新入库单ID</param>
         /// <returns></returns>
-        public ErrorCode Save(out string errorMessage)
+        public ErrorCode Save(out string errorMessage, out Guid newId)
         {
             errorMessage = "";
+            newId = Guid.Empty;
             this.dgvStockIn.CloseEditor();
 
             // check input data
@@ -198,6 +201,7 @@ namespace Phoebe.FormClient
 
             // set stock in
             StockIn si = new StockIn();
+            si.Id = Guid.NewGuid();
             si.InTime = Convert.ToDateTime(this.dpInTime.EditValue).Date;
             si.MonthTime = si.InTime.Year.ToString() + si.InTime.Month.ToString().PadLeft(2, '0');
             si.ContractId = this.selectContract.Id;
@@ -223,6 +227,8 @@ namespace Phoebe.FormClient
 
             // add stock in
             ErrorCode result = BusinessFactory<StockInBusiness>.Instance.Create(si, billing, siModels);
+            if (result == ErrorCode.Success)
+                newId = si.Id;
 
             return result;
         }

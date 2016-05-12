@@ -100,7 +100,6 @@ namespace Phoebe.Business
             try
             {
                 // set stock in
-                entity.Id = Guid.NewGuid();
                 entity.FlowNumber = GetLastStockInFlowNumber(entity.InTime.Date);
                 entity.Status = (int)EntityStatus.StockInReady;
 
@@ -172,8 +171,17 @@ namespace Phoebe.Business
         {
             try
             {
+                StockIn stockIn = this.dal.FindById(id);
+                if (stockIn == null)
+                    return ErrorCode.ObjectNotFound;
 
-                return ErrorCode.Success;
+                if (stockIn.Status == (int)EntityStatus.StockIn)
+                    return ErrorCode.StockInHasConfirm;
+
+                var trans = new TransactionRepository();
+                ErrorCode result = trans.StockInConfirmTrans(stockIn);
+
+                return result;
             }
             catch (Exception)
             {
