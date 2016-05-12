@@ -15,9 +15,14 @@ namespace Phoebe.Business.DAL
     public class StockInRepository : SqlDataAccess<PhoebeContext>, IBaseDataAccess<StockIn>
     {
         #region Method
+        /// <summary>
+        /// 根据ID查找入库单
+        /// </summary>
+        /// <param name="id">ID</param>
+        /// <returns></returns>
         public StockIn FindById(object id)
         {
-            throw new NotImplementedException();
+            return this.context.StockIns.Find(id);
         }
 
         /// <summary>

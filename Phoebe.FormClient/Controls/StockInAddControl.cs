@@ -10,8 +10,6 @@ using System.Windows.Forms;
 namespace Phoebe.FormClient
 {
     using DevExpress.XtraEditors.Controls;
-    using DevExpress.XtraGrid.Columns;
-    using DevExpress.XtraGrid.Views.Grid;
     using Phoebe.Base;
     using Phoebe.Business;
     using Phoebe.Common;

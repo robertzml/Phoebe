@@ -170,6 +170,7 @@
     <Compile Include="Controls\StockInAddControl.Designer.cs">
       <DependentUpon>StockInAddControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Utils\ModelTranslate.cs" />
     <EmbeddedResource Include="Controls\GridNavigator.resx">
       <DependentUpon>GridNavigator.cs</DependentUpon>
     </EmbeddedResource>
@@ -309,6 +310,54 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\BOProduct_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Apply_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Apply_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DeleteList_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DeleteList_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Reset_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Reset_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Cancel_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Cancel_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\EditName_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\EditName_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AddFile_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AddFile_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Print_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Print_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Save_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Save_32x32.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

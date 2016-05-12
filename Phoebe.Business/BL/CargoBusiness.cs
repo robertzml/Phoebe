@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Phoebe.Business
 {
@@ -25,7 +24,7 @@ namespace Phoebe.Business
 
         #region Constructor
         /// <summary>
-        /// 分类业务类
+        /// 货品业务类
         /// </summary>
         public CargoBusiness() : base()
         {

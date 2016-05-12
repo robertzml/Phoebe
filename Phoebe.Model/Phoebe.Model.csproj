@@ -52,6 +52,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Billing.cs">
+      <DependentUpon>PhoebeModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Cargo.cs">
       <DependentUpon>PhoebeModel.tt</DependentUpon>
     </Compile>

@@ -24,7 +24,7 @@ namespace Phoebe.Business
 
         #region Constructor
         /// <summary>
-        /// 客户业务类
+        /// 合同业务类
         /// </summary>
         public ContractBusiness() : base()
         {

@@ -38,14 +38,13 @@
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.tsStockIn = new System.Windows.Forms.ToolStrip();
             this.tsbNew = new System.Windows.Forms.ToolStripButton();
-            this.打开OToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.tsbSave = new System.Windows.Forms.ToolStripButton();
-            this.打印PToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.tsbConfirm = new System.Windows.Forms.ToolStripButton();
+            this.tsbPrint = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
-            this.剪切UToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.复制CToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.粘贴PToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsbEdit = new System.Windows.Forms.ToolStripButton();
+            this.tsbRevert = new System.Windows.Forms.ToolStripButton();
+            this.tsbDelete = new System.Windows.Forms.ToolStripButton();
             this.plBody = new DevExpress.XtraEditors.PanelControl();
             ((System.ComponentModel.ISupportInitialize)(this.tcStockIn)).BeginInit();
             this.tcStockIn.SuspendLayout();
@@ -118,14 +117,13 @@
             // 
             this.tsStockIn.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsbNew,
-            this.打开OToolStripButton,
             this.tsbSave,
-            this.打印PToolStripButton,
+            this.tsbConfirm,
+            this.tsbPrint,
             this.toolStripSeparator,
-            this.剪切UToolStripButton,
-            this.复制CToolStripButton,
-            this.粘贴PToolStripButton,
-            this.toolStripSeparator1});
+            this.tsbEdit,
+            this.tsbRevert,
+            this.tsbDelete});
             this.tsStockIn.Location = new System.Drawing.Point(216, 0);
             this.tsStockIn.Name = "tsStockIn";
             this.tsStockIn.Size = new System.Drawing.Size(748, 25);
@@ -134,7 +132,7 @@
             // 
             // tsbNew
             // 
-            this.tsbNew.Image = ((System.Drawing.Image)(resources.GetObject("tsbNew.Image")));
+            this.tsbNew.Image = global::Phoebe.FormClient.Properties.Resources.AddFile_16x16;
             this.tsbNew.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbNew.Name = "tsbNew";
             this.tsbNew.Size = new System.Drawing.Size(52, 22);
@@ -142,69 +140,59 @@
             this.tsbNew.ToolTipText = "新建";
             this.tsbNew.Click += new System.EventHandler(this.tsbNew_Click);
             // 
-            // 打开OToolStripButton
-            // 
-            this.打开OToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.打开OToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("打开OToolStripButton.Image")));
-            this.打开OToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.打开OToolStripButton.Name = "打开OToolStripButton";
-            this.打开OToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.打开OToolStripButton.Text = "打开(&O)";
-            // 
             // tsbSave
             // 
-            this.tsbSave.Image = ((System.Drawing.Image)(resources.GetObject("tsbSave.Image")));
+            this.tsbSave.Image = global::Phoebe.FormClient.Properties.Resources.Save_16x16;
             this.tsbSave.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbSave.Name = "tsbSave";
             this.tsbSave.Size = new System.Drawing.Size(52, 22);
             this.tsbSave.Text = "保存";
             this.tsbSave.Click += new System.EventHandler(this.tsbSave_Click);
             // 
-            // 打印PToolStripButton
+            // tsbConfirm
             // 
-            this.打印PToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.打印PToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("打印PToolStripButton.Image")));
-            this.打印PToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.打印PToolStripButton.Name = "打印PToolStripButton";
-            this.打印PToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.打印PToolStripButton.Text = "打印(&P)";
+            this.tsbConfirm.Image = global::Phoebe.FormClient.Properties.Resources.Apply_16x16;
+            this.tsbConfirm.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbConfirm.Name = "tsbConfirm";
+            this.tsbConfirm.Size = new System.Drawing.Size(76, 22);
+            this.tsbConfirm.Text = "入库确认";
+            // 
+            // tsbPrint
+            // 
+            this.tsbPrint.Image = global::Phoebe.FormClient.Properties.Resources.Print_16x16;
+            this.tsbPrint.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbPrint.Name = "tsbPrint";
+            this.tsbPrint.Size = new System.Drawing.Size(52, 22);
+            this.tsbPrint.Text = "打印";
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
             this.toolStripSeparator.Size = new System.Drawing.Size(6, 25);
             // 
-            // 剪切UToolStripButton
+            // tsbEdit
             // 
-            this.剪切UToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.剪切UToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("剪切UToolStripButton.Image")));
-            this.剪切UToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.剪切UToolStripButton.Name = "剪切UToolStripButton";
-            this.剪切UToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.剪切UToolStripButton.Text = "剪切(&U)";
+            this.tsbEdit.Image = global::Phoebe.FormClient.Properties.Resources.EditName_16x16;
+            this.tsbEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbEdit.Name = "tsbEdit";
+            this.tsbEdit.Size = new System.Drawing.Size(52, 22);
+            this.tsbEdit.Text = "编辑";
             // 
-            // 复制CToolStripButton
+            // tsbRevert
             // 
-            this.复制CToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.复制CToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("复制CToolStripButton.Image")));
-            this.复制CToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.复制CToolStripButton.Name = "复制CToolStripButton";
-            this.复制CToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.复制CToolStripButton.Text = "复制(&C)";
+            this.tsbRevert.Image = global::Phoebe.FormClient.Properties.Resources.Reset_16x16;
+            this.tsbRevert.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbRevert.Name = "tsbRevert";
+            this.tsbRevert.Size = new System.Drawing.Size(52, 22);
+            this.tsbRevert.Text = "撤回";
             // 
-            // 粘贴PToolStripButton
+            // tsbDelete
             // 
-            this.粘贴PToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.粘贴PToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("粘贴PToolStripButton.Image")));
-            this.粘贴PToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.粘贴PToolStripButton.Name = "粘贴PToolStripButton";
-            this.粘贴PToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.粘贴PToolStripButton.Text = "粘贴(&P)";
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            this.tsbDelete.Image = global::Phoebe.FormClient.Properties.Resources.Cancel_16x16;
+            this.tsbDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbDelete.Name = "tsbDelete";
+            this.tsbDelete.Size = new System.Drawing.Size(52, 22);
+            this.tsbDelete.Text = "删除";
             // 
             // plBody
             // 
@@ -249,16 +237,15 @@
         private DevExpress.XtraEditors.GroupControl groupControl1;
         private System.Windows.Forms.ToolStrip tsStockIn;
         private System.Windows.Forms.ToolStripButton tsbNew;
-        private System.Windows.Forms.ToolStripButton 打开OToolStripButton;
         private System.Windows.Forms.ToolStripButton tsbSave;
-        private System.Windows.Forms.ToolStripButton 打印PToolStripButton;
+        private System.Windows.Forms.ToolStripButton tsbPrint;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
-        private System.Windows.Forms.ToolStripButton 剪切UToolStripButton;
-        private System.Windows.Forms.ToolStripButton 复制CToolStripButton;
-        private System.Windows.Forms.ToolStripButton 粘贴PToolStripButton;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private DevExpress.XtraEditors.PanelControl plBody;
         private System.Windows.Forms.TreeView tvStockIn;
         private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.ToolStripButton tsbConfirm;
+        private System.Windows.Forms.ToolStripButton tsbEdit;
+        private System.Windows.Forms.ToolStripButton tsbRevert;
+        private System.Windows.Forms.ToolStripButton tsbDelete;
     }
 }

@@ -24,7 +24,7 @@ namespace Phoebe.Business
 
         #region Constructor
         /// <summary>
-        /// 客户业务类
+        /// 入库业务类
         /// </summary>
         public StockInBusiness() : base()
         {
@@ -153,6 +153,24 @@ namespace Phoebe.Business
                 return result;
             }
             catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+        }
+
+        /// <summary>
+        /// 入库确认
+        /// </summary>
+        /// <param name="id">入库单ID</param>
+        /// <returns></returns>
+        public ErrorCode Confirm(Guid id)
+        {
+            try
+            {
+
+                return ErrorCode.Success;
+            }
+            catch(Exception)
             {
                 return ErrorCode.Exception;
             }

@@ -5,6 +5,25 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="Phoebe.Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Billing">
+          <Key>
+            <PropertyRef Name="StockInId" />
+          </Key>
+          <Property Name="StockInId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ContractId" Type="int" Nullable="false" />
+          <Property Name="UnitPrice" Type="decimal" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="HandlingUnitPrice" Type="decimal" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="HandlingPrice" Type="decimal" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="FreezeUnitPrice" Type="decimal" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="FreezePrice" Type="decimal" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="DisposePrice" Type="decimal" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="PackingPrice" Type="decimal" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="RentPrice" Type="decimal" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="OtherPrice" Type="decimal" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="TotalPrice" Type="decimal" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="500" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Cargo">
           <Key>
             <PropertyRef Name="Id" />
@@ -139,6 +158,32 @@
           <Property Name="Remark" Type="nvarchar" MaxLength="500" />
           <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Billing_Contract">
+          <End Role="Contract" Type="Self.Contract" Multiplicity="1" />
+          <End Role="Billing" Type="Self.Billing" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contract">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Billing">
+              <PropertyRef Name="ContractId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Billing_StockIn">
+          <End Role="StockIn" Type="Self.StockIn" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Billing" Type="Self.Billing" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="StockIn">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Billing">
+              <PropertyRef Name="StockInId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Cargo_Category">
           <End Role="Category" Type="Self.Category" Multiplicity="1" />
           <End Role="Cargo" Type="Self.Cargo" Multiplicity="*" />
@@ -286,6 +331,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="PhoebeModelStoreContainer">
+          <EntitySet Name="Billing" EntityType="Self.Billing" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cargo" EntityType="Self.Cargo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Contract" EntityType="Self.Contract" Schema="dbo" store:Type="Tables" />
@@ -295,6 +341,14 @@
           <EntitySet Name="Store" EntityType="Self.Store" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserGroup" EntityType="Self.UserGroup" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Billing_Contract" Association="Self.FK_Billing_Contract">
+            <End Role="Contract" EntitySet="Contract" />
+            <End Role="Billing" EntitySet="Billing" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Billing_StockIn" Association="Self.FK_Billing_StockIn">
+            <End Role="StockIn" EntitySet="StockIn" />
+            <End Role="Billing" EntitySet="Billing" />
+          </AssociationSet>
           <AssociationSet Name="FK_Cargo_Category" Association="Self.FK_Cargo_Category">
             <End Role="Category" EntitySet="Category" />
             <End Role="Cargo" EntitySet="Cargo" />
@@ -447,6 +501,15 @@
           <AssociationSet Name="FK_StockInDetails_StockIn" Association="Phoebe.Model.FK_StockInDetails_StockIn">
             <End Role="StockIn" EntitySet="StockIns" />
             <End Role="StockInDetail" EntitySet="StockInDetails" />
+          </AssociationSet>
+          <EntitySet Name="Billings" EntityType="Phoebe.Model.Billing" />
+          <AssociationSet Name="FK_Billing_Contract" Association="Phoebe.Model.FK_Billing_Contract">
+            <End Role="Contract" EntitySet="Contracts" />
+            <End Role="Billing" EntitySet="Billings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Billing_StockIn" Association="Phoebe.Model.FK_Billing_StockIn">
+            <End Role="StockIn" EntitySet="StockIns" />
+            <End Role="Billing" EntitySet="Billings" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Customer">
@@ -619,6 +682,7 @@
           <NavigationProperty Name="Customer" Relationship="Phoebe.Model.FK_Contract_Customer" FromRole="Contract" ToRole="Customer" />
           <NavigationProperty Name="User" Relationship="Phoebe.Model.FK_Contract_User" FromRole="Contract" ToRole="User" />
           <NavigationProperty Name="StockIns" Relationship="Phoebe.Model.FK_StockIn_Contract" FromRole="Contract" ToRole="StockIn" />
+          <NavigationProperty Name="Billings" Relationship="Phoebe.Model.FK_Billing_Contract" FromRole="Contract" ToRole="Billing" />
         </EntityType>
         <Association Name="FK_Cargo_Contract">
           <End Type="Phoebe.Model.Contract" Role="Contract" Multiplicity="1" />
@@ -672,6 +736,7 @@
           <NavigationProperty Name="Contract" Relationship="Phoebe.Model.FK_StockIn_Contract" FromRole="StockIn" ToRole="Contract" />
           <NavigationProperty Name="User" Relationship="Phoebe.Model.FK_StockIn_User" FromRole="StockIn" ToRole="User" />
           <NavigationProperty Name="StockInDetails" Relationship="Phoebe.Model.FK_StockInDetails_StockIn" FromRole="StockIn" ToRole="StockInDetail" />
+          <NavigationProperty Name="Billing" Relationship="Phoebe.Model.FK_Billing_StockIn" FromRole="StockIn" ToRole="Billing" />
         </EntityType>
         <Association Name="FK_StockIn_Contract">
           <End Type="Phoebe.Model.Contract" Role="Contract" Multiplicity="1" />
@@ -707,6 +772,53 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="StockInDetail">
+              <PropertyRef Name="StockInId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Billing">
+          <Key>
+            <PropertyRef Name="StockInId" />
+          </Key>
+          <Property Name="StockInId" Type="Guid" Nullable="false" />
+          <Property Name="ContractId" Type="Int32" Nullable="false" />
+          <Property Name="UnitPrice" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
+          <Property Name="HandlingUnitPrice" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
+          <Property Name="HandlingPrice" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
+          <Property Name="FreezeUnitPrice" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
+          <Property Name="FreezePrice" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
+          <Property Name="DisposePrice" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
+          <Property Name="PackingPrice" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
+          <Property Name="RentPrice" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
+          <Property Name="OtherPrice" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
+          <Property Name="TotalPrice" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
+          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Contract" Relationship="Phoebe.Model.FK_Billing_Contract" FromRole="Billing" ToRole="Contract" />
+          <NavigationProperty Name="StockIn" Relationship="Phoebe.Model.FK_Billing_StockIn" FromRole="Billing" ToRole="StockIn" />
+        </EntityType>
+        <Association Name="FK_Billing_Contract">
+          <End Type="Phoebe.Model.Contract" Role="Contract" Multiplicity="1" />
+          <End Type="Phoebe.Model.Billing" Role="Billing" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contract">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Billing">
+              <PropertyRef Name="ContractId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Billing_StockIn">
+          <End Type="Phoebe.Model.StockIn" Role="StockIn" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Phoebe.Model.Billing" Role="Billing" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="StockIn">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Billing">
               <PropertyRef Name="StockInId" />
             </Dependent>
           </ReferentialConstraint>
@@ -857,6 +969,26 @@
                 <ScalarProperty Name="MonthTime" ColumnName="MonthTime" />
                 <ScalarProperty Name="InTime" ColumnName="InTime" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Billings">
+            <EntityTypeMapping TypeName="Phoebe.Model.Billing">
+              <MappingFragment StoreEntitySet="Billing">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="OtherPrice" ColumnName="OtherPrice" />
+                <ScalarProperty Name="RentPrice" ColumnName="RentPrice" />
+                <ScalarProperty Name="PackingPrice" ColumnName="PackingPrice" />
+                <ScalarProperty Name="DisposePrice" ColumnName="DisposePrice" />
+                <ScalarProperty Name="FreezePrice" ColumnName="FreezePrice" />
+                <ScalarProperty Name="FreezeUnitPrice" ColumnName="FreezeUnitPrice" />
+                <ScalarProperty Name="HandlingPrice" ColumnName="HandlingPrice" />
+                <ScalarProperty Name="HandlingUnitPrice" ColumnName="HandlingUnitPrice" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="ContractId" ColumnName="ContractId" />
+                <ScalarProperty Name="StockInId" ColumnName="StockInId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

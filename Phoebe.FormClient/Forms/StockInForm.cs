@@ -27,9 +27,19 @@ namespace Phoebe.FormClient
         private StockInState state;
 
         /// <summary>
+        /// 入库单状态
+        /// </summary>
+        private EntityStatus stockInState;
+
+        /// <summary>
         /// 新建入库界面
         /// </summary>
         private StockInAddControl stockInAdd;
+
+        /// <summary>
+        /// 入库单查询界面
+        /// </summary>
+        private StockInViewControl stockInView;
         #endregion //Field
 
         #region Constructor
@@ -40,6 +50,25 @@ namespace Phoebe.FormClient
         #endregion //Constructor
 
         #region Function
+        /// <summary>
+        /// 更新工具栏状态
+        /// </summary>
+        private void UpdateToolbar()
+        {
+            switch(this.stockInState)
+            {
+                case EntityStatus.Empty:
+                    this.tsbNew.Enabled = true;
+                    this.tsbSave.Enabled = true;
+                    this.tsbConfirm.Enabled = false;
+                    this.tsbPrint.Enabled = false;
+                    this.tsbEdit.Enabled = false;
+                    this.tsbRevert.Enabled = false;
+                    this.tsbDelete.Enabled = false;
+                    break;
+            }
+        }
+
         /// <summary>
         /// 更新票据列表
         /// </summary>
@@ -69,6 +98,7 @@ namespace Phoebe.FormClient
         private void StockInForm_Load(object sender, EventArgs e)
         {
             this.state = StockInState.Empty;
+            this.stockInState = EntityStatus.Empty;
             UpdateTree();
         }
 
@@ -86,7 +116,7 @@ namespace Phoebe.FormClient
                 TreeNode node = new TreeNode();
                 node.Name = item.Id.ToString();
                 node.Text = item.FlowNumber;
-                node.Tag = item;
+                node.Tag = item.Status;
                 if (item.Status == (int)EntityStatus.StockInReady)
                     node.ImageIndex = 2;
                 else
@@ -108,7 +138,10 @@ namespace Phoebe.FormClient
                 return;
             }
 
-
+            this.state = StockInState.Open;
+            this.stockInState = (EntityStatus)e.Node.Tag;
+            this.stockInView = new StockInViewControl(new Guid(e.Node.Name));
+            ChildFormManage.LoadContentControl(this.plBody, this.stockInView);
         }
 
         /// <summary>
@@ -155,14 +188,19 @@ namespace Phoebe.FormClient
             Empty = 0,
 
             /// <summary>
+            /// 选择入库
+            /// </summary>
+            Open = 1,
+
+            /// <summary>
             /// 新建入库
             /// </summary>
-            New = 1,
+            New = 2,
 
             /// <summary>
             /// 入库保存
             /// </summary>
-            Saved = 2,
+            Saved = 3,
         }
     }
 }

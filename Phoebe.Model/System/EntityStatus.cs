@@ -24,6 +24,12 @@ namespace Phoebe.Model
         /// </summary>
         [Display(Name = "已删除")]
         Deleted = 1,
+
+        /// <summary>
+        /// 2:为空
+        /// </summary>
+        [Display(Name = "为空")]
+        Empty = 2,
         #endregion //System
 
         #region User

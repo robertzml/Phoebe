@@ -19,6 +19,7 @@ namespace Phoebe.Model
         {
             this.Cargoes = new HashSet<Cargo>();
             this.StockIns = new HashSet<StockIn>();
+            this.Billings = new HashSet<Billing>();
         }
     
         public int Id { get; set; }
@@ -39,5 +40,7 @@ namespace Phoebe.Model
         public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StockIn> StockIns { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Billing> Billings { get; set; }
     }
 }
