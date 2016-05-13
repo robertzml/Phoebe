@@ -20,6 +20,23 @@ namespace Phoebe.FormClient
     /// </summary>
     public partial class StoreForm : BaseForm
     {
+        #region Field
+        /// <summary>
+        /// 客户列表
+        /// </summary>
+        private List<Customer> customerList;
+
+        /// <summary>
+        /// 分类列表
+        /// </summary>
+        private List<Category> categoryList;
+
+        /// <summary>
+        /// 选中客户
+        /// </summary>
+        private Customer selectCustomer;
+        #endregion //Field
+
         #region Constructor
         public StoreForm()
         {
@@ -27,10 +44,97 @@ namespace Phoebe.FormClient
         }
         #endregion //Constructor
 
+        #region Function
+        /// <summary>
+        /// 更新客户列表
+        /// </summary>
+        /// <param name="prefix">客户编码前缀</param>
+        /// <returns></returns>
+        private void UpdateCustomerView(string prefix)
+        {
+            this.lvCustomer.BeginUpdate();
+
+            IEnumerable<Customer> customers;
+            if (string.IsNullOrEmpty(prefix))
+                customers = customerList.OrderBy(r => r.Number);
+            else
+                customers = customerList.Where(r => r.Number.StartsWith(prefix)).OrderBy(r => r.Number);
+
+            this.lvCustomer.Items.Clear();
+            foreach (var item in customers)
+            {
+                ListViewItem lvi = new ListViewItem(item.Number);
+                lvi.Tag = item.Id;
+
+                lvi.SubItems.Add(item.Name);
+
+                this.lvCustomer.Items.Add(lvi);
+            }
+
+            this.lvCustomer.EndUpdate();
+        }
+
+        /// <summary>
+        /// 更新分类列表
+        /// </summary>
+        /// <param name="prefix">分类前缀</param>
+        private void UpdateCategoryView(string prefix)
+        {
+            this.lvCategory.BeginUpdate();
+
+            IEnumerable<Category> categories;
+            if (string.IsNullOrEmpty(prefix))
+                categories = this.categoryList.OrderBy(r => r.Number);
+            else
+                categories = this.categoryList.Where(r => r.Number.StartsWith(prefix)).OrderBy(r => r.Number);
+
+            this.lvCategory.Items.Clear();
+            foreach (var item in categories)
+            {
+                ListViewItem lvi = new ListViewItem(item.Number);
+                lvi.Tag = item.Id;
+
+                lvi.SubItems.Add(item.Name);
+
+                this.lvCategory.Items.Add(lvi);
+            }
+
+            this.lvCategory.EndUpdate();
+        }
+        #endregion //Function
+
         #region Event
+        /// <summary>
+        /// 窗体载入
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void StoreForm_Load(object sender, EventArgs e)
         {
+            this.selectCustomer = null;
+            this.customerList = BusinessFactory<CustomerBusiness>.Instance.FindAll();
+            this.categoryList = BusinessFactory<CategoryBusiness>.Instance.FindAll();
 
+            UpdateCustomerView("");
+            UpdateCategoryView("");
+        }
+
+
+        private void txtCustomerNumber_EditValueChanged(object sender, EventArgs e)
+        {
+            string number = this.txtCustomerNumber.EditValue.ToString();
+            UpdateCustomerView(number);
+
+            var customer = BusinessFactory<CustomerBusiness>.Instance.GetByNumber(number);
+            if (customer != null)
+            {
+                this.txtCustomerName.Text = customer.Name;
+                this.selectCustomer = customer;
+
+                //UpdateContractList(customer.Id);
+            }
+            else
+                this.txtCustomerName.Text = "";
         }
 
         /// <summary>
@@ -40,12 +144,20 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            var data = BusinessFactory<StoreBusiness>.Instance.FindAll();
+            List<Store> data = new List<Store>();
+            if (this.selectCustomer != null)
+            {
+                data = BusinessFactory<StoreBusiness>.Instance.GetByCustomer(this.selectCustomer.Id);
+            }
+            else
+            {
+                data = BusinessFactory<StoreBusiness>.Instance.FindAll();
+            }
             this.bsStore.DataSource = data;
         }
 
         /// <summary>
-        /// 自定义数据显示
+        /// 格式化数据显示
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -83,6 +195,27 @@ namespace Phoebe.FormClient
                 var status = (EntityStatus)e.Value;
                 e.DisplayText = status.DisplayName();
             }
+        }
+
+        /// <summary>
+        /// 自定义数据显示
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dgvStore_CustomUnboundColumnData(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDataEventArgs e)
+        {
+            int rowIndex = e.ListSourceRowIndex;
+            if (rowIndex < 0 || rowIndex >= this.bsStore.Count)
+                return;
+
+            var store = this.bsStore[rowIndex] as Store;
+
+            if (e.Column.FieldName == "colCustomerName" && e.IsGetData)
+                e.Value = store.Cargo.Contract.Customer.Name;
+            if (e.Column.FieldName == "colCategoryNumber" && e.IsGetData)
+                e.Value = store.Cargo.Category.Number;
+            if (e.Column.FieldName == "colCategoryName" && e.IsGetData)
+                e.Value = store.Cargo.Category.Name;
         }
         #endregion //Event
     }

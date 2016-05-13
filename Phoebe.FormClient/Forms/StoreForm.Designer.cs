@@ -53,6 +53,9 @@
             this.bsStore = new System.Windows.Forms.BindingSource(this.components);
             this.dgvStore = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colId = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colCustomerName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colCategoryNumber = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colCategoryName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colWarehouseNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colTotalCount = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colStoreCount = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -72,6 +75,14 @@
             this.colRemark = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colStatus = new DevExpress.XtraGrid.Columns.GridColumn();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.groupControl5 = new DevExpress.XtraEditors.GroupControl();
+            this.lvCategory = new System.Windows.Forms.ListView();
+            this.CategoryNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.CategoryName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.groupControl4 = new DevExpress.XtraEditors.GroupControl();
+            this.lvCustomer = new System.Windows.Forms.ListView();
+            this.CustomerNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.CustomerName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
@@ -98,6 +109,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.bsStore)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStore)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl5)).BeginInit();
+            this.groupControl5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).BeginInit();
+            this.groupControl4.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupControl1
@@ -106,7 +121,7 @@
             this.groupControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl1.Location = new System.Drawing.Point(3, 3);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(678, 194);
+            this.groupControl1.Size = new System.Drawing.Size(678, 234);
             this.groupControl1.TabIndex = 0;
             this.groupControl1.Text = "操作";
             // 
@@ -124,25 +139,25 @@
             this.layoutControl1.Location = new System.Drawing.Point(2, 21);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.layoutControlGroup1;
-            this.layoutControl1.Size = new System.Drawing.Size(674, 171);
+            this.layoutControl1.Size = new System.Drawing.Size(674, 211);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
             // chkStoreInReady
             // 
-            this.chkStoreInReady.Location = new System.Drawing.Point(181, 55);
+            this.chkStoreInReady.Location = new System.Drawing.Point(119, 55);
             this.chkStoreInReady.Name = "chkStoreInReady";
             this.chkStoreInReady.Properties.Caption = "准备入库";
-            this.chkStoreInReady.Size = new System.Drawing.Size(82, 19);
+            this.chkStoreInReady.Size = new System.Drawing.Size(144, 19);
             this.chkStoreInReady.StyleController = this.layoutControl1;
             this.chkStoreInReady.TabIndex = 11;
             // 
             // chkStoreOut
             // 
-            this.chkStoreOut.Location = new System.Drawing.Point(131, 55);
+            this.chkStoreOut.Location = new System.Drawing.Point(64, 55);
             this.chkStoreOut.Name = "chkStoreOut";
             this.chkStoreOut.Properties.Caption = "出库";
-            this.chkStoreOut.Size = new System.Drawing.Size(46, 19);
+            this.chkStoreOut.Size = new System.Drawing.Size(51, 19);
             this.chkStoreOut.StyleController = this.layoutControl1;
             this.chkStoreOut.TabIndex = 10;
             // 
@@ -151,7 +166,7 @@
             this.chkStoreIn.Location = new System.Drawing.Point(7, 55);
             this.chkStoreIn.Name = "chkStoreIn";
             this.chkStoreIn.Properties.Caption = "在库";
-            this.chkStoreIn.Size = new System.Drawing.Size(120, 19);
+            this.chkStoreIn.Size = new System.Drawing.Size(53, 19);
             this.chkStoreIn.StyleController = this.layoutControl1;
             this.chkStoreIn.TabIndex = 9;
             // 
@@ -196,6 +211,7 @@
             this.txtCustomerNumber.Size = new System.Drawing.Size(205, 20);
             this.txtCustomerNumber.StyleController = this.layoutControl1;
             this.txtCustomerNumber.TabIndex = 4;
+            this.txtCustomerNumber.EditValueChanged += new System.EventHandler(this.txtCustomerNumber_EditValueChanged);
             // 
             // layoutControlGroup1
             // 
@@ -213,7 +229,7 @@
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "layoutControlGroup1";
             this.layoutControlGroup1.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 5, 5, 5);
-            this.layoutControlGroup1.Size = new System.Drawing.Size(674, 171);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(674, 211);
             this.layoutControlGroup1.TextVisible = false;
             // 
             // layoutControlItem1
@@ -257,7 +273,7 @@
             this.layoutControlItem5.Control = this.btnSearch;
             this.layoutControlItem5.Location = new System.Drawing.Point(260, 48);
             this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(404, 113);
+            this.layoutControlItem5.Size = new System.Drawing.Size(404, 153);
             this.layoutControlItem5.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem5.TextVisible = false;
             // 
@@ -266,25 +282,25 @@
             this.layoutControlItem6.Control = this.chkStoreIn;
             this.layoutControlItem6.Location = new System.Drawing.Point(0, 48);
             this.layoutControlItem6.Name = "layoutControlItem6";
-            this.layoutControlItem6.Size = new System.Drawing.Size(124, 113);
+            this.layoutControlItem6.Size = new System.Drawing.Size(57, 153);
             this.layoutControlItem6.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem6.TextVisible = false;
             // 
             // layoutControlItem7
             // 
             this.layoutControlItem7.Control = this.chkStoreOut;
-            this.layoutControlItem7.Location = new System.Drawing.Point(124, 48);
+            this.layoutControlItem7.Location = new System.Drawing.Point(57, 48);
             this.layoutControlItem7.Name = "layoutControlItem7";
-            this.layoutControlItem7.Size = new System.Drawing.Size(50, 113);
+            this.layoutControlItem7.Size = new System.Drawing.Size(55, 153);
             this.layoutControlItem7.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem7.TextVisible = false;
             // 
             // layoutControlItem8
             // 
             this.layoutControlItem8.Control = this.chkStoreInReady;
-            this.layoutControlItem8.Location = new System.Drawing.Point(174, 48);
+            this.layoutControlItem8.Location = new System.Drawing.Point(112, 48);
             this.layoutControlItem8.Name = "layoutControlItem8";
-            this.layoutControlItem8.Size = new System.Drawing.Size(86, 113);
+            this.layoutControlItem8.Size = new System.Drawing.Size(148, 153);
             this.layoutControlItem8.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem8.TextVisible = false;
             // 
@@ -293,9 +309,9 @@
             this.tableLayoutPanel1.SetColumnSpan(this.groupControl2, 3);
             this.groupControl2.Controls.Add(this.dgcStore);
             this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl2.Location = new System.Drawing.Point(3, 203);
+            this.groupControl2.Location = new System.Drawing.Point(3, 243);
             this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(1078, 346);
+            this.groupControl2.Size = new System.Drawing.Size(1078, 306);
             this.groupControl2.TabIndex = 1;
             this.groupControl2.Text = "库存数据";
             // 
@@ -306,7 +322,7 @@
             this.dgcStore.Location = new System.Drawing.Point(2, 21);
             this.dgcStore.MainView = this.dgvStore;
             this.dgcStore.Name = "dgcStore";
-            this.dgcStore.Size = new System.Drawing.Size(1074, 323);
+            this.dgcStore.Size = new System.Drawing.Size(1074, 283);
             this.dgcStore.TabIndex = 0;
             this.dgcStore.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.dgvStore});
@@ -319,6 +335,9 @@
             // 
             this.dgvStore.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colId,
+            this.colCustomerName,
+            this.colCategoryNumber,
+            this.colCategoryName,
             this.colWarehouseNumber,
             this.colTotalCount,
             this.colStoreCount,
@@ -343,7 +362,11 @@
             this.dgvStore.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.True;
             this.dgvStore.OptionsBehavior.Editable = false;
             this.dgvStore.OptionsFind.AlwaysVisible = true;
+            this.dgvStore.OptionsView.ShowFooter = true;
             this.dgvStore.OptionsView.ShowGroupPanel = false;
+            this.dgvStore.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
+            new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.colStatus, DevExpress.Data.ColumnSortOrder.Ascending)});
+            this.dgvStore.CustomUnboundColumnData += new DevExpress.XtraGrid.Views.Base.CustomColumnDataEventHandler(this.dgvStore_CustomUnboundColumnData);
             this.dgvStore.CustomColumnDisplayText += new DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventHandler(this.dgvStore_CustomColumnDisplayText);
             // 
             // colId
@@ -351,61 +374,116 @@
             this.colId.FieldName = "Id";
             this.colId.Name = "colId";
             // 
+            // colCustomerName
+            // 
+            this.colCustomerName.Caption = "客户名称";
+            this.colCustomerName.FieldName = "colCustomerName";
+            this.colCustomerName.Name = "colCustomerName";
+            this.colCustomerName.UnboundType = DevExpress.Data.UnboundColumnType.String;
+            this.colCustomerName.Visible = true;
+            this.colCustomerName.VisibleIndex = 0;
+            this.colCustomerName.Width = 68;
+            // 
+            // colCategoryNumber
+            // 
+            this.colCategoryNumber.Caption = "类别编码";
+            this.colCategoryNumber.FieldName = "colCategoryNumber";
+            this.colCategoryNumber.Name = "colCategoryNumber";
+            this.colCategoryNumber.UnboundType = DevExpress.Data.UnboundColumnType.String;
+            this.colCategoryNumber.Visible = true;
+            this.colCategoryNumber.VisibleIndex = 1;
+            // 
+            // colCategoryName
+            // 
+            this.colCategoryName.Caption = "类别名称";
+            this.colCategoryName.FieldName = "colCategoryName";
+            this.colCategoryName.Name = "colCategoryName";
+            this.colCategoryName.UnboundType = DevExpress.Data.UnboundColumnType.String;
+            this.colCategoryName.Visible = true;
+            this.colCategoryName.VisibleIndex = 2;
+            // 
             // colWarehouseNumber
             // 
             this.colWarehouseNumber.Caption = "仓库编号";
             this.colWarehouseNumber.FieldName = "WarehouseNumber";
             this.colWarehouseNumber.Name = "colWarehouseNumber";
             this.colWarehouseNumber.Visible = true;
-            this.colWarehouseNumber.VisibleIndex = 0;
+            this.colWarehouseNumber.VisibleIndex = 9;
+            this.colWarehouseNumber.Width = 68;
             // 
             // colTotalCount
             // 
             this.colTotalCount.Caption = "总数量";
             this.colTotalCount.FieldName = "TotalCount";
             this.colTotalCount.Name = "colTotalCount";
+            this.colTotalCount.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "TotalCount", "合计={0:0.##}")});
             this.colTotalCount.Visible = true;
-            this.colTotalCount.VisibleIndex = 1;
+            this.colTotalCount.VisibleIndex = 3;
+            this.colTotalCount.Width = 56;
             // 
             // colStoreCount
             // 
             this.colStoreCount.Caption = "在库数量";
             this.colStoreCount.FieldName = "StoreCount";
             this.colStoreCount.Name = "colStoreCount";
+            this.colStoreCount.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "StoreCount", "合计={0:0.##}")});
             this.colStoreCount.Visible = true;
-            this.colStoreCount.VisibleIndex = 2;
+            this.colStoreCount.VisibleIndex = 4;
+            this.colStoreCount.Width = 68;
             // 
             // colTotalWeight
             // 
             this.colTotalWeight.Caption = "总重量(t)";
+            this.colTotalWeight.DisplayFormat.FormatString = "0.000";
+            this.colTotalWeight.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colTotalWeight.FieldName = "TotalWeight";
             this.colTotalWeight.Name = "colTotalWeight";
+            this.colTotalWeight.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "TotalWeight", "合计={0:0.000}")});
             this.colTotalWeight.Visible = true;
-            this.colTotalWeight.VisibleIndex = 3;
+            this.colTotalWeight.VisibleIndex = 5;
+            this.colTotalWeight.Width = 71;
             // 
             // colStoreWeight
             // 
             this.colStoreWeight.Caption = "在库重量(t)";
+            this.colStoreWeight.DisplayFormat.FormatString = "0.000";
+            this.colStoreWeight.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colStoreWeight.FieldName = "StoreWeight";
             this.colStoreWeight.Name = "colStoreWeight";
+            this.colStoreWeight.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "StoreWeight", "合计={0:0.000}")});
             this.colStoreWeight.Visible = true;
-            this.colStoreWeight.VisibleIndex = 4;
+            this.colStoreWeight.VisibleIndex = 6;
+            this.colStoreWeight.Width = 83;
             // 
             // colTotalVolume
             // 
             this.colTotalVolume.Caption = "总体积(立方)";
+            this.colTotalVolume.DisplayFormat.FormatString = "0.000";
+            this.colTotalVolume.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colTotalVolume.FieldName = "TotalVolume";
             this.colTotalVolume.Name = "colTotalVolume";
+            this.colTotalVolume.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "TotalVolume", "合计={0:0.000}")});
             this.colTotalVolume.Visible = true;
-            this.colTotalVolume.VisibleIndex = 5;
+            this.colTotalVolume.VisibleIndex = 7;
+            this.colTotalVolume.Width = 90;
             // 
             // colStoreVolume
             // 
             this.colStoreVolume.Caption = "在库体积(立方)";
+            this.colStoreVolume.DisplayFormat.FormatString = "0.000";
+            this.colStoreVolume.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colStoreVolume.FieldName = "StoreVolume";
             this.colStoreVolume.Name = "colStoreVolume";
+            this.colStoreVolume.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "StoreVolume", "合计={0:0.000}")});
             this.colStoreVolume.Visible = true;
-            this.colStoreVolume.VisibleIndex = 6;
+            this.colStoreVolume.VisibleIndex = 8;
+            this.colStoreVolume.Width = 102;
             // 
             // colInTime
             // 
@@ -413,7 +491,8 @@
             this.colInTime.FieldName = "InTime";
             this.colInTime.Name = "colInTime";
             this.colInTime.Visible = true;
-            this.colInTime.VisibleIndex = 7;
+            this.colInTime.VisibleIndex = 10;
+            this.colInTime.Width = 68;
             // 
             // colOutTime
             // 
@@ -421,7 +500,8 @@
             this.colOutTime.FieldName = "OutTime";
             this.colOutTime.Name = "colOutTime";
             this.colOutTime.Visible = true;
-            this.colOutTime.VisibleIndex = 8;
+            this.colOutTime.VisibleIndex = 11;
+            this.colOutTime.Width = 68;
             // 
             // colMoveTime
             // 
@@ -429,7 +509,8 @@
             this.colMoveTime.FieldName = "MoveTime";
             this.colMoveTime.Name = "colMoveTime";
             this.colMoveTime.Visible = true;
-            this.colMoveTime.VisibleIndex = 9;
+            this.colMoveTime.VisibleIndex = 12;
+            this.colMoveTime.Width = 68;
             // 
             // colSpecification
             // 
@@ -437,7 +518,8 @@
             this.colSpecification.FieldName = "Specification";
             this.colSpecification.Name = "colSpecification";
             this.colSpecification.Visible = true;
-            this.colSpecification.VisibleIndex = 10;
+            this.colSpecification.VisibleIndex = 13;
+            this.colSpecification.Width = 44;
             // 
             // colOriginPlace
             // 
@@ -445,7 +527,8 @@
             this.colOriginPlace.FieldName = "OriginPlace";
             this.colOriginPlace.Name = "colOriginPlace";
             this.colOriginPlace.Visible = true;
-            this.colOriginPlace.VisibleIndex = 11;
+            this.colOriginPlace.VisibleIndex = 14;
+            this.colOriginPlace.Width = 44;
             // 
             // colShelfLife
             // 
@@ -453,7 +536,8 @@
             this.colShelfLife.FieldName = "ShelfLife";
             this.colShelfLife.Name = "colShelfLife";
             this.colShelfLife.Visible = true;
-            this.colShelfLife.VisibleIndex = 12;
+            this.colShelfLife.VisibleIndex = 15;
+            this.colShelfLife.Width = 78;
             // 
             // colSource
             // 
@@ -464,7 +548,8 @@
             this.colSource.FilterMode = DevExpress.XtraGrid.ColumnFilterMode.DisplayText;
             this.colSource.Name = "colSource";
             this.colSource.Visible = true;
-            this.colSource.VisibleIndex = 13;
+            this.colSource.VisibleIndex = 16;
+            this.colSource.Width = 44;
             // 
             // colDestination
             // 
@@ -475,7 +560,8 @@
             this.colDestination.FilterMode = DevExpress.XtraGrid.ColumnFilterMode.DisplayText;
             this.colDestination.Name = "colDestination";
             this.colDestination.Visible = true;
-            this.colDestination.VisibleIndex = 14;
+            this.colDestination.VisibleIndex = 17;
+            this.colDestination.Width = 56;
             // 
             // colUserId
             // 
@@ -486,7 +572,8 @@
             this.colUserId.FilterMode = DevExpress.XtraGrid.ColumnFilterMode.DisplayText;
             this.colUserId.Name = "colUserId";
             this.colUserId.Visible = true;
-            this.colUserId.VisibleIndex = 15;
+            this.colUserId.VisibleIndex = 18;
+            this.colUserId.Width = 56;
             // 
             // colRemark
             // 
@@ -495,7 +582,8 @@
             this.colRemark.Name = "colRemark";
             this.colRemark.OptionsFilter.AllowFilter = false;
             this.colRemark.Visible = true;
-            this.colRemark.VisibleIndex = 16;
+            this.colRemark.VisibleIndex = 19;
+            this.colRemark.Width = 83;
             // 
             // colStatus
             // 
@@ -506,7 +594,8 @@
             this.colStatus.FilterMode = DevExpress.XtraGrid.ColumnFilterMode.DisplayText;
             this.colStatus.Name = "colStatus";
             this.colStatus.Visible = true;
-            this.colStatus.VisibleIndex = 17;
+            this.colStatus.VisibleIndex = 20;
+            this.colStatus.Width = 67;
             // 
             // tableLayoutPanel1
             // 
@@ -514,16 +603,88 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
+            this.tableLayoutPanel1.Controls.Add(this.groupControl5, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.groupControl4, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.groupControl1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.groupControl2, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 200F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 240F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1084, 552);
             this.tableLayoutPanel1.TabIndex = 2;
+            // 
+            // groupControl5
+            // 
+            this.groupControl5.Controls.Add(this.lvCategory);
+            this.groupControl5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupControl5.Location = new System.Drawing.Point(887, 3);
+            this.groupControl5.Name = "groupControl5";
+            this.groupControl5.Size = new System.Drawing.Size(194, 234);
+            this.groupControl5.TabIndex = 5;
+            this.groupControl5.Text = "类别编码";
+            // 
+            // lvCategory
+            // 
+            this.lvCategory.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.CategoryNumber,
+            this.CategoryName});
+            this.lvCategory.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lvCategory.FullRowSelect = true;
+            this.lvCategory.Location = new System.Drawing.Point(2, 21);
+            this.lvCategory.MultiSelect = false;
+            this.lvCategory.Name = "lvCategory";
+            this.lvCategory.Size = new System.Drawing.Size(190, 211);
+            this.lvCategory.TabIndex = 0;
+            this.lvCategory.UseCompatibleStateImageBehavior = false;
+            this.lvCategory.View = System.Windows.Forms.View.Details;
+            // 
+            // CategoryNumber
+            // 
+            this.CategoryNumber.Text = "编码";
+            this.CategoryNumber.Width = 90;
+            // 
+            // CategoryName
+            // 
+            this.CategoryName.Text = "名称";
+            this.CategoryName.Width = 100;
+            // 
+            // groupControl4
+            // 
+            this.groupControl4.Controls.Add(this.lvCustomer);
+            this.groupControl4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupControl4.Location = new System.Drawing.Point(687, 3);
+            this.groupControl4.Name = "groupControl4";
+            this.groupControl4.Size = new System.Drawing.Size(194, 234);
+            this.groupControl4.TabIndex = 4;
+            this.groupControl4.Text = "客户列表";
+            // 
+            // lvCustomer
+            // 
+            this.lvCustomer.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.CustomerNumber,
+            this.CustomerName});
+            this.lvCustomer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lvCustomer.FullRowSelect = true;
+            this.lvCustomer.Location = new System.Drawing.Point(2, 21);
+            this.lvCustomer.MultiSelect = false;
+            this.lvCustomer.Name = "lvCustomer";
+            this.lvCustomer.Size = new System.Drawing.Size(190, 211);
+            this.lvCustomer.TabIndex = 0;
+            this.lvCustomer.UseCompatibleStateImageBehavior = false;
+            this.lvCustomer.View = System.Windows.Forms.View.Details;
+            // 
+            // CustomerNumber
+            // 
+            this.CustomerNumber.Text = "编号";
+            this.CustomerNumber.Width = 90;
+            // 
+            // CustomerName
+            // 
+            this.CustomerName.Text = "名称";
+            this.CustomerName.Width = 150;
             // 
             // StoreForm
             // 
@@ -560,6 +721,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.bsStore)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStore)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl5)).EndInit();
+            this.groupControl5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).EndInit();
+            this.groupControl4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -609,5 +774,16 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem7;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem8;
+        private DevExpress.XtraEditors.GroupControl groupControl4;
+        private System.Windows.Forms.ListView lvCustomer;
+        private System.Windows.Forms.ColumnHeader CustomerNumber;
+        private System.Windows.Forms.ColumnHeader CustomerName;
+        private DevExpress.XtraEditors.GroupControl groupControl5;
+        private System.Windows.Forms.ListView lvCategory;
+        private System.Windows.Forms.ColumnHeader CategoryNumber;
+        private System.Windows.Forms.ColumnHeader CategoryName;
+        private DevExpress.XtraGrid.Columns.GridColumn colCustomerName;
+        private DevExpress.XtraGrid.Columns.GridColumn colCategoryNumber;
+        private DevExpress.XtraGrid.Columns.GridColumn colCategoryName;
     }
 }

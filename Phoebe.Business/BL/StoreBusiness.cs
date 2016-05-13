@@ -32,5 +32,15 @@ namespace Phoebe.Business
             base.Init(this.dal);
         }
         #endregion //Constructor
+
+        #region Method
+        public List<Store> GetByCustomer(int customerId)
+        {
+            Expression<Func<Store, bool>> predicate = r => r.Cargo.Contract.CustomerId == customerId;
+            var data = this.dal.Find(predicate);
+
+            return data.ToList();
+        }
+        #endregion //Method
     }
 }

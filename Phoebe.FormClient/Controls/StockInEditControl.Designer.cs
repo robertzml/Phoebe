@@ -555,7 +555,7 @@
             this.colInCount.FieldName = "InCount";
             this.colInCount.Name = "colInCount";
             this.colInCount.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "InCount", "SUM={0:0.##}")});
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "InCount", "合计={0:0.##}")});
             this.colInCount.Visible = true;
             this.colInCount.VisibleIndex = 3;
             // 
@@ -583,7 +583,7 @@
             this.colInWeight.Name = "colInWeight";
             this.colInWeight.OptionsColumn.AllowEdit = false;
             this.colInWeight.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "InWeight", "SUM={0:0.000}")});
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "InWeight", "合计={0:0.000}")});
             this.colInWeight.Visible = true;
             this.colInWeight.VisibleIndex = 5;
             // 
@@ -605,6 +605,8 @@
             this.colInVolume.FieldName = "InVolume";
             this.colInVolume.Name = "colInVolume";
             this.colInVolume.OptionsColumn.AllowEdit = false;
+            this.colInVolume.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "InVolume", "合计={0:0.000}")});
             this.colInVolume.Visible = true;
             this.colInVolume.VisibleIndex = 7;
             // 

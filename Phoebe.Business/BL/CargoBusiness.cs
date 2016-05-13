@@ -67,6 +67,14 @@ namespace Phoebe.Business
                 return exist.First();
             }
         }
+
+
+        public List<Cargo> GetByCustomer(int customerId)
+        {
+            Expression<Func<Cargo, bool>> predicate = r => r.Contract.CustomerId == customerId;
+            var data = this.dal.Find(predicate);
+            return data.ToList();
+        }
         #endregion //Method
     }
 }
