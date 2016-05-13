@@ -58,6 +58,18 @@ namespace Phoebe.Business
 
         #region Method
         /// <summary>
+        /// 获取最新入库单
+        /// </summary>
+        /// <param name="id">ID</param>
+        /// <returns></returns>
+        public StockIn Get(Guid id)
+        {
+            Expression<Func<StockIn, bool>> predicate = r => r.Id == id;
+            var data = this.dal.FindOne(predicate);
+            return data;
+        }
+
+        /// <summary>
         /// 获取入库月份分组
         /// </summary>
         /// <returns></returns>
@@ -184,6 +196,65 @@ namespace Phoebe.Business
                 return result;
             }
             catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+        }
+
+        public ErrorCode Edit(StockIn entity, Billing billing, List<StockInModel> siModels)
+        {
+            try
+            {
+                // set store
+                List<Store> stores = new List<Store>();
+                foreach (var item in siModels)
+                {
+                    Store store = new Store();
+                    store.Id = Guid.NewGuid();
+                    item.StoreId = store.Id;
+                    store.CargoId = item.CargoId;
+                    store.WarehouseNumber = item.WarehouseNumber;
+                    store.TotalCount = item.InCount;
+                    store.StoreCount = store.TotalCount;
+                    store.TotalWeight = item.InWeight;
+                    store.StoreWeight = store.TotalWeight;
+                    store.TotalVolume = item.InVolume;
+                    store.StoreVolume = store.TotalVolume;
+                    store.InTime = entity.InTime;
+                    store.MoveTime = entity.InTime;
+                    store.Specification = item.Specification;
+                    store.OriginPlace = item.OriginPlace;
+                    store.ShelfLife = item.ShelfLife;
+                    store.Source = (int)SourceType.StockIn;
+                    store.UserId = entity.UserId;
+                    store.Status = (int)EntityStatus.StoreReady;
+
+                    stores.Add(store);
+                }
+
+                // generate stock in details
+                List<StockInDetail> details = new List<StockInDetail>();
+                foreach (var item in siModels)
+                {
+                    StockInDetail detail = new StockInDetail();
+                    detail.Id = Guid.NewGuid();
+                    detail.StockInId = entity.Id;
+                    detail.StoreId = item.StoreId;
+                    detail.Count = item.InCount;
+                    detail.InWeight = item.InWeight;
+                    detail.InVolume = item.InVolume;
+                    detail.Remark = item.Remark;
+                    detail.Status = (int)EntityStatus.StockInReady;
+
+                    details.Add(detail);
+                }
+
+                var trans = new TransactionRepository();
+                ErrorCode result = trans.StockInUpdateTrans(entity, billing, details, stores);
+
+                return result;
+            }
+            catch(Exception)
             {
                 return ErrorCode.Exception;
             }

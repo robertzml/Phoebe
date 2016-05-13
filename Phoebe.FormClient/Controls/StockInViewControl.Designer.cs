@@ -207,7 +207,7 @@
             // 
             // txtBillingRemark
             // 
-            this.txtBillingRemark.Location = new System.Drawing.Point(70, 89);
+            this.txtBillingRemark.Location = new System.Drawing.Point(70, 94);
             this.txtBillingRemark.Name = "txtBillingRemark";
             this.txtBillingRemark.Properties.Appearance.BackColor = System.Drawing.Color.White;
             this.txtBillingRemark.Properties.Appearance.Options.UseBackColor = true;
@@ -444,7 +444,8 @@
             this.layoutControlItem15.Control = this.nmPackingPrice;
             this.layoutControlItem15.Location = new System.Drawing.Point(0, 58);
             this.layoutControlItem15.Name = "layoutControlItem15";
-            this.layoutControlItem15.Size = new System.Drawing.Size(225, 24);
+            this.layoutControlItem15.Size = new System.Drawing.Size(225, 29);
+            this.layoutControlItem15.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 5);
             this.layoutControlItem15.Text = "包装费";
             this.layoutControlItem15.TextSize = new System.Drawing.Size(60, 14);
             // 
@@ -469,9 +470,9 @@
             // layoutControlItem18
             // 
             this.layoutControlItem18.Control = this.txtBillingRemark;
-            this.layoutControlItem18.Location = new System.Drawing.Point(0, 82);
+            this.layoutControlItem18.Location = new System.Drawing.Point(0, 87);
             this.layoutControlItem18.Name = "layoutControlItem18";
-            this.layoutControlItem18.Size = new System.Drawing.Size(225, 39);
+            this.layoutControlItem18.Size = new System.Drawing.Size(225, 34);
             this.layoutControlItem18.Text = "备注";
             this.layoutControlItem18.TextSize = new System.Drawing.Size(60, 14);
             // 
@@ -727,7 +728,7 @@
             // 
             // txtFlowNumber
             // 
-            this.txtFlowNumber.Location = new System.Drawing.Point(511, 60);
+            this.txtFlowNumber.Location = new System.Drawing.Point(511, 65);
             this.txtFlowNumber.Name = "txtFlowNumber";
             this.txtFlowNumber.Properties.Appearance.BackColor = System.Drawing.Color.White;
             this.txtFlowNumber.Properties.Appearance.Options.UseBackColor = true;
@@ -749,7 +750,7 @@
             // 
             // txtRemark
             // 
-            this.txtRemark.Location = new System.Drawing.Point(284, 60);
+            this.txtRemark.Location = new System.Drawing.Point(284, 65);
             this.txtRemark.Name = "txtRemark";
             this.txtRemark.Properties.Appearance.BackColor = System.Drawing.Color.White;
             this.txtRemark.Properties.Appearance.Options.UseBackColor = true;
@@ -878,7 +879,8 @@
             this.layoutControlItem5.Control = this.txtCustomerName;
             this.layoutControlItem5.Location = new System.Drawing.Point(226, 29);
             this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(227, 24);
+            this.layoutControlItem5.Size = new System.Drawing.Size(227, 29);
+            this.layoutControlItem5.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 5);
             this.layoutControlItem5.Text = "客户名称";
             this.layoutControlItem5.TextSize = new System.Drawing.Size(48, 14);
             // 
@@ -887,7 +889,7 @@
             this.layoutControlItem6.Control = this.txtContract;
             this.layoutControlItem6.Location = new System.Drawing.Point(453, 29);
             this.layoutControlItem6.Name = "layoutControlItem6";
-            this.layoutControlItem6.Size = new System.Drawing.Size(227, 24);
+            this.layoutControlItem6.Size = new System.Drawing.Size(227, 29);
             this.layoutControlItem6.Text = "所属合同";
             this.layoutControlItem6.TextSize = new System.Drawing.Size(48, 14);
             // 
@@ -903,9 +905,9 @@
             // layoutControlItem8
             // 
             this.layoutControlItem8.Control = this.txtRemark;
-            this.layoutControlItem8.Location = new System.Drawing.Point(226, 53);
+            this.layoutControlItem8.Location = new System.Drawing.Point(226, 58);
             this.layoutControlItem8.Name = "layoutControlItem8";
-            this.layoutControlItem8.Size = new System.Drawing.Size(227, 68);
+            this.layoutControlItem8.Size = new System.Drawing.Size(227, 63);
             this.layoutControlItem8.Text = "备注";
             this.layoutControlItem8.TextSize = new System.Drawing.Size(48, 14);
             // 
@@ -921,9 +923,9 @@
             // layoutControlItem19
             // 
             this.layoutControlItem19.Control = this.txtFlowNumber;
-            this.layoutControlItem19.Location = new System.Drawing.Point(453, 53);
+            this.layoutControlItem19.Location = new System.Drawing.Point(453, 58);
             this.layoutControlItem19.Name = "layoutControlItem19";
-            this.layoutControlItem19.Size = new System.Drawing.Size(227, 68);
+            this.layoutControlItem19.Size = new System.Drawing.Size(227, 63);
             this.layoutControlItem19.Text = "流水号";
             this.layoutControlItem19.TextSize = new System.Drawing.Size(48, 14);
             // 

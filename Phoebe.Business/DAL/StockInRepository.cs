@@ -26,6 +26,16 @@ namespace Phoebe.Business.DAL
         }
 
         /// <summary>
+        /// 查找入库单
+        /// </summary>
+        /// <param name="predicate">查询条件</param>
+        /// <returns></returns>
+        public StockIn FindOne(Expression<Func<StockIn, bool>> predicate)
+        {
+            return this.context.StockIns.SingleOrDefault(predicate);
+        }
+
+        /// <summary>
         /// 获取所有入库单
         /// </summary>
         /// <returns></returns>
@@ -64,7 +74,6 @@ namespace Phoebe.Business.DAL
         {
             throw new NotImplementedException();
         }
-
         #endregion //Method
     }
 }

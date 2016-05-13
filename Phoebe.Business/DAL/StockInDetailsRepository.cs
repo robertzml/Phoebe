@@ -11,7 +11,7 @@ namespace Phoebe.Business.DAL
 
     public class StockInDetailsRepository : SqlDataAccess<PhoebeContext>, IBaseDataAccess<StockInDetail>
     {
-
+        #region Method
         public StockInDetail FindById(object id)
         {
             throw new NotImplementedException();
@@ -34,17 +34,7 @@ namespace Phoebe.Business.DAL
         /// <returns></returns>
         public ErrorCode Create(StockInDetail entity)
         {
-            try
-            {
-                this.context.StockInDetails.Add(entity);
-                this.context.SaveChanges();
-            }
-            catch (Exception)
-            {
-                return ErrorCode.Exception;
-            }
-
-            return ErrorCode.Success;
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -77,5 +67,11 @@ namespace Phoebe.Business.DAL
         {
             throw new NotImplementedException();
         }
+
+        public StockInDetail FindOne(Expression<Func<StockInDetail, bool>> predicate)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion //Method
     }
 }

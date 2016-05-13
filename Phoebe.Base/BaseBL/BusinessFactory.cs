@@ -47,6 +47,18 @@ namespace Phoebe.Base
                 return bll;
             }
         }
+
+        /// <summary>
+        /// 显示创建，不从缓存读取
+        /// </summary>
+        public static T New
+        {
+            get
+            {
+                T bll = Reflect<T>.Create(typeof(T).FullName, typeof(T).Assembly.GetName().Name); //反射创建
+                return bll;
+            }
+        }
         #endregion //Property
     }
 }

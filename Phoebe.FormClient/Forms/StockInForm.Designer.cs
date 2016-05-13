@@ -47,6 +47,8 @@
             this.tsbDelete = new System.Windows.Forms.ToolStripButton();
             this.plBody = new DevExpress.XtraEditors.PanelControl();
             this.plEmpty = new DevExpress.XtraEditors.PanelControl();
+            this.tsbClose = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             ((System.ComponentModel.ISupportInitialize)(this.tcStockIn)).BeginInit();
             this.tcStockIn.SuspendLayout();
             this.tpStockInList.SuspendLayout();
@@ -120,13 +122,15 @@
             // 
             this.tsStockIn.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsbNew,
+            this.tsbClose,
             this.tsbSave,
             this.tsbConfirm,
-            this.tsbPrint,
             this.toolStripSeparator,
             this.tsbEdit,
             this.tsbRevert,
-            this.tsbDelete});
+            this.tsbDelete,
+            this.toolStripSeparator1,
+            this.tsbPrint});
             this.tsStockIn.Location = new System.Drawing.Point(216, 0);
             this.tsStockIn.Name = "tsStockIn";
             this.tsStockIn.Size = new System.Drawing.Size(748, 25);
@@ -195,7 +199,7 @@
             // 
             // tsbDelete
             // 
-            this.tsbDelete.Image = global::Phoebe.FormClient.Properties.Resources.Cancel_16x16;
+            this.tsbDelete.Image = global::Phoebe.FormClient.Properties.Resources.Remove_16x16;
             this.tsbDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbDelete.Name = "tsbDelete";
             this.tsbDelete.Size = new System.Drawing.Size(52, 22);
@@ -222,6 +226,20 @@
             this.plEmpty.Name = "plEmpty";
             this.plEmpty.Size = new System.Drawing.Size(748, 100);
             this.plEmpty.TabIndex = 0;
+            // 
+            // tsbClose
+            // 
+            this.tsbClose.Image = global::Phoebe.FormClient.Properties.Resources.Close_16x16;
+            this.tsbClose.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbClose.Name = "tsbClose";
+            this.tsbClose.Size = new System.Drawing.Size(52, 22);
+            this.tsbClose.Text = "关闭";
+            this.tsbClose.Click += new System.EventHandler(this.tsbClose_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
             // StockInForm
             // 
@@ -268,5 +286,7 @@
         private System.Windows.Forms.ToolStripButton tsbRevert;
         private System.Windows.Forms.ToolStripButton tsbDelete;
         private DevExpress.XtraEditors.PanelControl plEmpty;
+        private System.Windows.Forms.ToolStripButton tsbClose;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }

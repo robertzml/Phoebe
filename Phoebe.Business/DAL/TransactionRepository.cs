@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Phoebe.Business.DAL
 {
@@ -72,6 +72,41 @@ namespace Phoebe.Business.DAL
                 return ErrorCode.Success;
             }
             catch(Exception)
+            {
+                return ErrorCode.Exception;
+            }
+        }
+
+
+        public ErrorCode StockInUpdateTrans(StockIn stockIn, Billing billing, List<StockInDetail> details, List<Store> stores)
+        {
+            try
+            {
+                //remove the old details and stores
+                List<StockInDetail> oldDetails = new List<StockInDetail>();
+                List<Store> oldStores = new List<Store>();
+                foreach(var item in stockIn.StockInDetails)
+                {
+                    oldDetails.Add(item);
+                    oldStores.Add(item.Store);
+                }
+                this.context.StockInDetails.RemoveRange(oldDetails);
+                this.context.Stores.RemoveRange(oldStores);
+
+                // modify stockIn and billing
+                this.context.Entry(stockIn).State = EntityState.Modified;
+                this.context.Entry(billing).State = EntityState.Modified;
+
+                // add stores
+                this.context.Stores.AddRange(stores);
+
+                // add stock in details
+                this.context.StockInDetails.AddRange(details);
+
+                this.context.SaveChanges();
+                return ErrorCode.Success;
+            }
+            catch(Exception e)
             {
                 return ErrorCode.Exception;
             }

@@ -19,6 +19,13 @@ namespace Phoebe.Base
         T FindById(object id);
 
         /// <summary>
+        /// 根据条件查找对象
+        /// </summary>
+        /// <param name="predicate">查询条件</param>
+        /// <returns></returns>
+        T FindOne(Expression<Func<T, bool>> predicate);
+
+        /// <summary>
         /// 获取所有对象
         /// </summary>
         /// <returns></returns>

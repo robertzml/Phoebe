@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Text;
 
 namespace Phoebe.Business.DAL
 {
@@ -10,86 +11,89 @@ namespace Phoebe.Business.DAL
     using Phoebe.Model;
 
     /// <summary>
-    /// 分类Repository
+    /// 用户Repository
     /// </summary>
-    public class CategoryRepository : SqlDataAccess<PhoebeContext>, IBaseDataAccess<Category>
+    public class UserRepository : SqlDataAccess<PhoebeContext>, IBaseDataAccess<User>
     {
         #region Method
         /// <summary>
-        /// 根据ID查找分类
+        /// 根据ID查找用户
         /// </summary>
         /// <param name="id">ID</param>
         /// <returns></returns>
-        public Category FindById(object id)
+        public User FindById(object id)
         {
-            return this.context.Categories.Find(id);
+            return this.context.Users.Find(id);
         }
 
         /// <summary>
-        /// 获取所有分类
-        /// </summary>
-        /// <returns></returns>
-        public IEnumerable<Category> FindAll()
-        {
-            return this.context.Categories;
-        }
-
-        /// <summary>
-        /// 按条件查找分类
+        /// 根据条件查找用户
         /// </summary>
         /// <param name="predicate">查询条件</param>
         /// <returns></returns>
-        public IEnumerable<Category> Find(Expression<Func<Category, bool>> predicate)
+        public User FindOne(Expression<Func<User, bool>> predicate)
         {
-            return this.context.Categories.Where(predicate);
+            return this.context.Users.SingleOrDefault(predicate);
         }
 
         /// <summary>
-        /// 添加分类
+        /// 获取所有用户
         /// </summary>
-        /// <param name="entity">分类实体</param>
         /// <returns></returns>
-        public ErrorCode Create(Category entity)
+        public IEnumerable<User> FindAll()
+        {
+            return this.context.Users;
+        }
+
+        /// <summary>
+        /// 按条件查找用户
+        /// </summary>
+        /// <param name="predicate">查询条件</param>
+        /// <returns></returns>
+        public IEnumerable<User> Find(Expression<Func<User, bool>> predicate)
+        {
+            return this.context.Users.Where(predicate);
+        }
+
+        /// <summary>
+        /// 添加用户
+        /// </summary>
+        /// <param name="entity">用户对象</param>
+        /// <returns></returns>
+        public ErrorCode Create(User entity)
         {
             try
             {
-                if (this.context.Categories.Any(r => r.Number == entity.Number))
-                {
-                    return ErrorCode.DuplicateNumber;
-                }
-
                 entity.Status = 0;
 
-                this.context.Categories.Add(entity);
+                if (this.context.Users.Any(r => r.UserName == entity.UserName))
+                    return ErrorCode.DuplicateName;
+
+                this.context.Users.Add(entity);
                 this.context.SaveChanges();
+
+                return ErrorCode.Success;
             }
             catch (Exception)
             {
                 return ErrorCode.Exception;
             }
-
-            return ErrorCode.Success;
         }
 
-        public ErrorCode CreateRange(List<Category> entities)
+        public ErrorCode CreateRange(List<User> entities)
         {
             throw new NotImplementedException();
         }
 
         /// <summary>
-        /// 编辑分类
+        /// 编辑用户
         /// </summary>
-        /// <param name="entity">分类对象</param>
+        /// <param name="entity">用户对象</param>
         /// <returns></returns>
-        public ErrorCode Update(Category entity)
+        public ErrorCode Update(User entity)
         {
             try
             {
-                if (this.context.Categories.Any(r => r.Id != entity.Id && r.Number == entity.Number))
-                {
-                    return ErrorCode.DuplicateNumber;
-                }
-
                 this.context.Entry(entity).State = EntityState.Modified;
                 this.context.SaveChanges();
             }
@@ -101,13 +105,7 @@ namespace Phoebe.Business.DAL
             return ErrorCode.Success;
         }
 
-
-        public ErrorCode Delete(Category entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Category FindOne(Expression<Func<Category, bool>> predicate)
+        public ErrorCode Delete(User entity)
         {
             throw new NotImplementedException();
         }

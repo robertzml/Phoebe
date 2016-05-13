@@ -161,6 +161,11 @@ namespace Phoebe.FormClient
                 errorMessage = "请选择客户和合同";
                 return ErrorCode.Error;
             }
+            if (this.bsStockIn.Count == 0)
+            {
+                errorMessage = "没有入库货品";
+                return ErrorCode.Error;
+            }
             foreach (StockInModel item in this.bsStockIn)
             {
                 if (item.CategoryId == 0)

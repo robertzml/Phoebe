@@ -21,6 +21,11 @@ namespace Phoebe.FormClient
     {
         #region Field
         /// <summary>
+        /// 关联入库单ID
+        /// </summary>
+        private Guid stockInId;
+
+        /// <summary>
         /// 关联入库单
         /// </summary>
         private StockIn stockIn;
@@ -30,7 +35,7 @@ namespace Phoebe.FormClient
         public StockInViewControl(Guid stockInId)
         {
             InitializeComponent();
-            this.stockIn = BusinessFactory<StockInBusiness>.Instance.FindById(stockInId); 
+            this.stockInId = stockInId;
         }
         #endregion //Constructor
 
@@ -77,6 +82,8 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void StockInViewControl_Load(object sender, EventArgs e)
         {
+            this.stockIn = BusinessFactory<StockInBusiness>.Instance.FindById(this.stockInId);
+
             SetBaseControl(this.stockIn);
             SetBillingControl(this.stockIn.Billing);
             SetDataControl(this.stockIn);

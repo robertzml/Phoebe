@@ -3,21 +3,25 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using Phoebe.Base;
-using Phoebe.Common;
-using Phoebe.Model;
 
 namespace Phoebe.Business
 {
+    using Phoebe.Base;
+    using Phoebe.Common;
+    using Phoebe.Model;
+    using Phoebe.Business.DAL;
+
     /// <summary>
     /// 用户业务类
     /// </summary>
-    public class UserBusiness
+    public class UserBusiness : BaseBusiness<User>
     {
         #region Field
-        private PhoebeContext context;
-
+        /// <summary>
+        /// 数据访问接口
+        /// </summary>
+        private IBaseDataAccess<User> dal;
+        
         /// <summary>
         /// 用户注册初始化时间
         /// </summary>
@@ -30,11 +34,16 @@ namespace Phoebe.Business
         #endregion //Field
 
         #region Constructor
-        public UserBusiness()
+        /// <summary>
+        /// 用户业务类
+        /// </summary>
+        public UserBusiness() : base()
         {
-            this.context = new PhoebeContext();
+            this.dal = new UserRepository();
+            base.Init(this.dal);
         }
         #endregion //Constructor
+      
 
         #region Function
         /// <summary>
@@ -48,7 +57,7 @@ namespace Phoebe.Business
             user.LastLoginTime = last;
             user.CurrentLoginTime = current;
 
-            this.context.SaveChanges();
+            this.dal.Update(user);
 
             return;
         }
@@ -65,11 +74,11 @@ namespace Phoebe.Business
         {
             if (isRoot)
             {
-                return this.context.Users.ToList();
+                return this.dal.FindAll().ToList();
             }
             else
             {
-                return this.context.Users.Where(r => r.Id != 1).ToList();
+                return this.dal.FindAll().Where(r => r.Id != 1).ToList();                
             }
         }
 
@@ -84,7 +93,7 @@ namespace Phoebe.Business
             if (id == 1 && !isRoot)
                 return null;
             else
-                return this.context.Users.Find(id);
+                return this.dal.FindById(id);                
         }
 
         /// <summary>
@@ -94,40 +103,8 @@ namespace Phoebe.Business
         /// <returns></returns>
         public User GetUser(string username)
         {
-            var data = this.context.Users.SingleOrDefault(r => r.UserName == username);
+            var data = this.dal.FindOne(r => r.UserName == username);            
             return data;
-        }
-
-        /// <summary>
-        /// 添加用户
-        /// </summary>
-        /// <param name="data">用户数据</param>
-        /// <returns></returns>
-        public ErrorCode CreateUser(User data)
-        {
-            try
-            {
-                data.Password = Hasher.SHA1Encrypt(data.Password);
-                data.LastLoginTime = initialTime;
-                data.CurrentLoginTime = initialTime;
-                data.Status = 0;
-
-                if (data.UserGroupId == 1)
-                    return ErrorCode.NoPrivilege;
-
-                int count = this.context.Users.Count(r => r.UserName == data.UserName);
-                if (count > 0)
-                    return ErrorCode.DuplicateName;
-
-                this.context.Users.Add(data);
-                this.context.SaveChanges();
-            }
-            catch (Exception)
-            {
-                return ErrorCode.Exception;
-            }
-
-            return ErrorCode.Success;
         }
 
         /// <summary>
@@ -139,20 +116,20 @@ namespace Phoebe.Business
         {
             try
             {
-                var user = this.context.Users.Find(data.Id);
-                if (user == null || data.Id == 1)
-                    return ErrorCode.ObjectNotFound;
+                //var user = this.context.Users.Find(data.Id);
+                //if (user == null || data.Id == 1)
+                //    return ErrorCode.ObjectNotFound;
 
-                user.UserGroupId = data.UserGroupId;
-                user.Name = data.Name;
-                user.Remark = data.Remark;
+                //user.UserGroupId = data.UserGroupId;
+                //user.Name = data.Name;
+                //user.Remark = data.Remark;
 
-                if (!string.IsNullOrEmpty(data.Password))
-                {
-                    user.Password = Hasher.SHA1Encrypt(data.Password);
-                }
+                //if (!string.IsNullOrEmpty(data.Password))
+                //{
+                //    user.Password = Hasher.SHA1Encrypt(data.Password);
+                //}
 
-                this.context.SaveChanges();
+                //this.context.SaveChanges();
             }
             catch (Exception)
             {
@@ -168,19 +145,19 @@ namespace Phoebe.Business
         /// <param name="id">用户ID</param>
         public void Enable(int id)
         {
-            try
-            {
-                var user = this.context.Users.Find(id);
-                if (user == null || id == 1)
-                    return;
+            //try
+            //{
+            //    var user = this.context.Users.Find(id);
+            //    if (user == null || id == 1)
+            //        return;
 
-                user.Status = (int)EntityStatus.Normal;
-                this.context.SaveChanges();
-            }
-            catch (Exception)
-            {
-                return;
-            }
+            //    user.Status = (int)EntityStatus.Normal;
+            //    this.context.SaveChanges();
+            //}
+            //catch (Exception)
+            //{
+            //    return;
+            //}
         }
 
         /// <summary>
@@ -189,19 +166,19 @@ namespace Phoebe.Business
         /// <param name="id">用户ID</param>
         public void Disable(int id)
         {
-            try
-            {
-                var user = this.context.Users.Find(id);
-                if (user == null || id == 1)
-                    return;
+            //try
+            //{
+            //    var user = this.context.Users.Find(id);
+            //    if (user == null || id == 1)
+            //        return;
 
-                user.Status = (int)EntityStatus.UserDisable;
-                this.context.SaveChanges();
-            }
-            catch (Exception)
-            {
-                return;
-            }
+            //    user.Status = (int)EntityStatus.UserDisable;
+            //    this.context.SaveChanges();
+            //}
+            //catch (Exception)
+            //{
+            //    return;
+            //}
         }
         #endregion //User Method
 
@@ -213,82 +190,83 @@ namespace Phoebe.Business
         /// <returns></returns>
         public List<UserGroup> GetUserGroup(bool isRoot)
         {
-            if (isRoot)
-            {
-                return this.context.UserGroups.ToList();
-            }
-            else
-            {
-                return this.context.UserGroups.Where(r => r.Id != 1).ToList();
-            }
+            return null;
+            //if (isRoot)
+            //{
+            //    return this.context.UserGroups.ToList();
+            //}
+            //else
+            //{
+            //    return this.context.UserGroups.Where(r => r.Id != 1).ToList();
+            //}
         }
 
-        /// <summary>
-        /// 获取用户组
-        /// </summary>
-        /// <param name="id">用户组ID</param>
-        /// <param name="isRoot">是否Root</param>
-        /// <returns></returns>
-        public UserGroup GetUserGroup(int id, bool isRoot)
-        {
-            if (id == 1 && !isRoot)
-                return null;
-            else
-                return this.context.UserGroups.Find(id);
-        }
+        ///// <summary>
+        ///// 获取用户组
+        ///// </summary>
+        ///// <param name="id">用户组ID</param>
+        ///// <param name="isRoot">是否Root</param>
+        ///// <returns></returns>
+        //public UserGroup GetUserGroup(int id, bool isRoot)
+        //{
+        //    if (id == 1 && !isRoot)
+        //        return null;
+        //    else
+        //        return this.context.UserGroups.Find(id);
+        //}
 
-        /// <summary>
-        /// 获取用户组
-        /// </summary>
-        /// <param name="name">用户组名称</param>
-        /// <returns></returns>
-        public UserGroup GetUserGroup(string name)
-        {
-            var data = this.context.UserGroups.SingleOrDefault(r => r.Name == name);
-            return data;
-        }
+        ///// <summary>
+        ///// 获取用户组
+        ///// </summary>
+        ///// <param name="name">用户组名称</param>
+        ///// <returns></returns>
+        //public UserGroup GetUserGroup(string name)
+        //{
+        //    var data = this.context.UserGroups.SingleOrDefault(r => r.Name == name);
+        //    return data;
+        //}
 
-        /// <summary>
-        /// 添加用户组
-        /// </summary>
-        /// <param name="data">用户组数据</param>
-        /// <returns></returns>
-        public ErrorCode CreateUserGroup(UserGroup data)
-        {
-            try
-            {
-                data.Status = 0;
+        ///// <summary>
+        ///// 添加用户组
+        ///// </summary>
+        ///// <param name="data">用户组数据</param>
+        ///// <returns></returns>
+        //public ErrorCode CreateUserGroup(UserGroup data)
+        //{
+        //    try
+        //    {
+        //        data.Status = 0;
 
-                this.context.UserGroups.Add(data);
-                this.context.SaveChanges();
-            }
-            catch (Exception)
-            {
-                return ErrorCode.Exception;
-            }
+        //        this.context.UserGroups.Add(data);
+        //        this.context.SaveChanges();
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return ErrorCode.Exception;
+        //    }
 
-            return ErrorCode.Success;
-        }
+        //    return ErrorCode.Success;
+        //}
 
-        /// <summary>
-        /// 编辑用户组
-        /// </summary>
-        /// <param name="data"></param>
-        /// <returns></returns>
-        public ErrorCode EditUserGroup(UserGroup data)
-        {
-            try
-            {
-                this.context.Entry(data).State = EntityState.Modified;
-                this.context.SaveChanges();
-            }
-            catch (Exception)
-            {
-                return ErrorCode.Exception;
-            }
+        ///// <summary>
+        ///// 编辑用户组
+        ///// </summary>
+        ///// <param name="data"></param>
+        ///// <returns></returns>
+        //public ErrorCode EditUserGroup(UserGroup data)
+        //{
+        //    try
+        //    {
+        //        this.context.Entry(data).State = EntityState.Modified;
+        //        this.context.SaveChanges();
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return ErrorCode.Exception;
+        //    }
 
-            return ErrorCode.Success;
-        }
+        //    return ErrorCode.Success;
+        //}
         #endregion //UserGroup Method
 
         /// <summary>
@@ -299,7 +277,8 @@ namespace Phoebe.Business
         /// <returns></returns>
         public ErrorCode Login(string username, string password)
         {
-            User user = this.context.Users.SingleOrDefault(r => r.UserName == username);
+            var user = this.dal.FindOne(r => r.UserName == username);
+            //User user = this.context.Users.SingleOrDefault(r => r.UserName == username);
             if (user == null)
                 return ErrorCode.UserNotExist;
 
@@ -323,16 +302,16 @@ namespace Phoebe.Business
         /// <returns></returns>
         public ErrorCode ChangePassword(string username, string oldPassword, string newPassword)
         {
-            var user = this.context.Users.SingleOrDefault(r => r.UserName == username);
-            if (user == null)
-                return ErrorCode.UserNotExist;
+            //var user = this.context.Users.SingleOrDefault(r => r.UserName == username);
+            //if (user == null)
+            //    return ErrorCode.UserNotExist;
 
-            if (user.Password != Hasher.SHA1Encrypt(oldPassword))
-                return ErrorCode.WrongPassword;
+            //if (user.Password != Hasher.SHA1Encrypt(oldPassword))
+            //    return ErrorCode.WrongPassword;
 
-            user.Password = Hasher.SHA1Encrypt(newPassword);
+            //user.Password = Hasher.SHA1Encrypt(newPassword);
 
-            this.context.SaveChanges();
+            //this.context.SaveChanges();
 
             return ErrorCode.Success;
         }

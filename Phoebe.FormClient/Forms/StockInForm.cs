@@ -135,6 +135,9 @@ namespace Phoebe.FormClient
             this.tvStockIn.EndUpdate();
         }
 
+        /// <summary>
+        /// 选择票据节点
+        /// </summary>
         private void SelectTreeNode()
         {
             if (this.currentStockInId == Guid.Empty)
@@ -237,12 +240,27 @@ namespace Phoebe.FormClient
         }
 
         /// <summary>
+        /// 关闭
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tsbClose_Click(object sender, EventArgs e)
+        {
+            this.currentStockInId = Guid.Empty;
+            this.stockInState = EntityStatus.Empty;
+            this.formState = StockInFormState.Empty;
+
+            UpdateToolbar();
+            ChildFormManage.LoadContentControl(this.plBody, this.plEmpty);
+        }
+
+        /// <summary>
         /// 保存入库
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void tsbSave_Click(object sender, EventArgs e)
-        {          
+        {
             if (this.formState == StockInFormState.Add) //保存新建
             {
                 string errorMessage;
@@ -264,7 +282,7 @@ namespace Phoebe.FormClient
                 }
                 else
                 {
-                    MessageBox.Show("保存入库失败，" + result.DisplayName() + ", " + errorMessage, FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("保存入库失败，" + result.DisplayName() + "， " + errorMessage, FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             else if (this.formState == StockInFormState.Edit) //保存修改
@@ -280,14 +298,15 @@ namespace Phoebe.FormClient
                     return;
                 }
 
-                ErrorCode result = this.stockInEdit.Save();
+                string errorMessage;
+                ErrorCode result = this.stockInEdit.Save(out errorMessage);
                 if (result == ErrorCode.Success)
                 {
                     MessageBox.Show("保存入库成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     this.stockInState = EntityStatus.StockInReady;
                     this.formState = StockInFormState.View;
-                                     
+
                     UpdateToolbar();
 
                     this.stockInView = new StockInViewControl(this.currentStockInId);
@@ -295,7 +314,7 @@ namespace Phoebe.FormClient
                 }
                 else
                 {
-                    MessageBox.Show("保存入库失败，" + result.DisplayName(), FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("保存入库失败，" + result.DisplayName() + "， " + errorMessage, FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
         }
@@ -354,7 +373,7 @@ namespace Phoebe.FormClient
                 MessageBox.Show("当前入库已确认，无法编辑", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-                        
+
             this.formState = StockInFormState.Edit;
             UpdateToolbar();
 

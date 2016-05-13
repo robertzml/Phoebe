@@ -58,6 +58,11 @@ namespace Phoebe.Business.DAL
         {
             throw new NotImplementedException();
         }
+
+        public Store FindOne(Expression<Func<Store, bool>> predicate)
+        {
+            throw new NotImplementedException();
+        }
         #endregion //Method
     }
 }

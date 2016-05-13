@@ -370,6 +370,7 @@
             this.layoutControlItem5.Location = new System.Drawing.Point(226, 29);
             this.layoutControlItem5.Name = "layoutControlItem5";
             this.layoutControlItem5.Size = new System.Drawing.Size(227, 29);
+            this.layoutControlItem5.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 5);
             this.layoutControlItem5.Text = "客户名称";
             this.layoutControlItem5.TextSize = new System.Drawing.Size(48, 14);
             // 
@@ -441,7 +442,7 @@
             // 
             // txtBillingRemark
             // 
-            this.txtBillingRemark.Location = new System.Drawing.Point(70, 89);
+            this.txtBillingRemark.Location = new System.Drawing.Point(70, 94);
             this.txtBillingRemark.Name = "txtBillingRemark";
             this.txtBillingRemark.Size = new System.Drawing.Size(158, 20);
             this.txtBillingRemark.StyleController = this.layoutControl2;
@@ -648,7 +649,8 @@
             this.layoutControlItem15.Control = this.nmPackingPrice;
             this.layoutControlItem15.Location = new System.Drawing.Point(0, 58);
             this.layoutControlItem15.Name = "layoutControlItem15";
-            this.layoutControlItem15.Size = new System.Drawing.Size(225, 24);
+            this.layoutControlItem15.Size = new System.Drawing.Size(225, 29);
+            this.layoutControlItem15.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 5);
             this.layoutControlItem15.Text = "包装费";
             this.layoutControlItem15.TextSize = new System.Drawing.Size(60, 14);
             // 
@@ -673,9 +675,9 @@
             // layoutControlItem18
             // 
             this.layoutControlItem18.Control = this.txtBillingRemark;
-            this.layoutControlItem18.Location = new System.Drawing.Point(0, 82);
+            this.layoutControlItem18.Location = new System.Drawing.Point(0, 87);
             this.layoutControlItem18.Name = "layoutControlItem18";
-            this.layoutControlItem18.Size = new System.Drawing.Size(225, 39);
+            this.layoutControlItem18.Size = new System.Drawing.Size(225, 34);
             this.layoutControlItem18.Text = "备注";
             this.layoutControlItem18.TextSize = new System.Drawing.Size(60, 14);
             // 

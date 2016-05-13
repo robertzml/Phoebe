@@ -68,6 +68,7 @@
     <Compile Include="BL\UserBusiness.cs" />
     <Compile Include="DAL\StockInDetailsRepository.cs" />
     <Compile Include="DAL\StockInRepository.cs" />
+    <Compile Include="DAL\UserRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
