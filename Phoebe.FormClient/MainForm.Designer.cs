@@ -42,6 +42,7 @@
             this.menuStockOut = new DevExpress.XtraBars.BarButtonItem();
             this.menuStockMove = new DevExpress.XtraBars.BarButtonItem();
             this.menuStore = new DevExpress.XtraBars.BarSubItem();
+            this.menuStoreList = new DevExpress.XtraBars.BarButtonItem();
             this.menuUser = new DevExpress.XtraBars.BarSubItem();
             this.menuUserList = new DevExpress.XtraBars.BarButtonItem();
             this.menuUserGroupList = new DevExpress.XtraBars.BarButtonItem();
@@ -59,7 +60,6 @@
             this.barHeaderItem1 = new DevExpress.XtraBars.BarHeaderItem();
             this.barStaticItem2 = new DevExpress.XtraBars.BarStaticItem();
             this.tabMdiManager = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
-            this.menuStoreList = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabMdiManager)).BeginInit();
             this.SuspendLayout();
@@ -189,6 +189,7 @@
             this.menuStockOut.Caption = "货品出库";
             this.menuStockOut.Id = 21;
             this.menuStockOut.Name = "menuStockOut";
+            this.menuStockOut.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuStockOut_ItemClick);
             // 
             // menuStockMove
             // 
@@ -203,6 +204,13 @@
             this.menuStore.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(this.menuStoreList)});
             this.menuStore.Name = "menuStore";
+            // 
+            // menuStoreList
+            // 
+            this.menuStoreList.Caption = "库存记录";
+            this.menuStoreList.Id = 23;
+            this.menuStoreList.Name = "menuStoreList";
+            this.menuStoreList.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuStoreList_ItemClick);
             // 
             // menuUser
             // 
@@ -327,13 +335,6 @@
             this.tabMdiManager.ClosePageButtonShowMode = DevExpress.XtraTab.ClosePageButtonShowMode.InAllTabPageHeaders;
             this.tabMdiManager.MdiParent = this;
             this.tabMdiManager.PinPageButtonShowMode = DevExpress.XtraTab.PinPageButtonShowMode.InActiveTabPageHeader;
-            // 
-            // menuStoreList
-            // 
-            this.menuStoreList.Caption = "库存记录";
-            this.menuStoreList.Id = 23;
-            this.menuStoreList.Name = "menuStoreList";
-            this.menuStoreList.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuStoreList_ItemClick);
             // 
             // MainForm
             // 

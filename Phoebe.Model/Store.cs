@@ -18,6 +18,7 @@ namespace Phoebe.Model
         public Store()
         {
             this.StockInDetails = new HashSet<StockInDetail>();
+            this.StockOutDetails = new HashSet<StockOutDetail>();
         }
     
         public System.Guid Id { get; set; }
@@ -45,5 +46,7 @@ namespace Phoebe.Model
         public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StockInDetail> StockInDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StockOutDetail> StockOutDetails { get; set; }
     }
 }

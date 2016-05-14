@@ -56,10 +56,12 @@
     <Compile Include="BL\ContractBusiness.cs" />
     <Compile Include="BL\CategoryBusiness.cs" />
     <Compile Include="BL\StockInBusiness.cs" />
+    <Compile Include="BL\StockOutBusiness.cs" />
     <Compile Include="BL\StoreBusiness.cs" />
     <Compile Include="DAL\BillingRepository.cs" />
     <Compile Include="DAL\CargoRepository.cs" />
     <Compile Include="DAL\CategoryRepository.cs" />
+    <Compile Include="DAL\StockOutRepository.cs" />
     <Compile Include="DAL\StoreRepository.cs" />
     <Compile Include="DAL\TransactionRepository.cs" />
     <Compile Include="DAL\ContractRepository.cs" />
