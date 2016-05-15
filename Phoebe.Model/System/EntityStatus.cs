@@ -106,10 +106,10 @@ namespace Phoebe.Model
         StockOutReady = 81,
 
         /// <summary>
-        /// 83:已出库
+        /// 82:已出库
         /// </summary>
         [Display(Name = "已出库")]
-        StockOut = 83,
+        StockOut = 82,
 
         /// <summary>
         /// 91:准备移库
@@ -118,10 +118,10 @@ namespace Phoebe.Model
         StockMoveReady = 91,
 
         /// <summary>
-        /// 93:已移库
+        /// 92:已移库
         /// </summary>
         [Display(Name = "已移库")]
-        StockMove = 93,
+        StockMove = 92,
         #endregion //Stock       
 
         #region Settlement

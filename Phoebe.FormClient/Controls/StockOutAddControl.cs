@@ -100,6 +100,60 @@ namespace Phoebe.FormClient
         }
         #endregion //Function
 
+        #region Method
+        public ErrorCode Save(out string errorMessage, out Guid newId)
+        {
+            errorMessage = "";
+            newId = Guid.Empty;
+            this.sogList.CloseEditor();
+
+            // check input data and format digit
+            if (this.selectCustomer == null || this.selectContract == null)
+            {
+                errorMessage = "请选择客户和合同";
+                return ErrorCode.Error;
+            }
+            if (this.sogList.DataSource.Count == 0)
+            {
+                errorMessage = "没有出库货品";
+                return ErrorCode.Error;
+            }
+            foreach (var item in this.sogList.DataSource)
+            {
+                if (item.OutCount > item.StoreCount)
+                {
+                    errorMessage = "出库数量大于在库数量";
+                    return ErrorCode.Error;
+                }
+                if (item.InTime > this.dpOutTime.DateTime.Date)
+                {
+                    errorMessage = "出库时间早于货品入库时间";
+                    return ErrorCode.Error;
+                }
+
+                item.OutWeight = Math.Round(item.OutWeight, 4);
+                item.OutVolume = Math.Round(item.OutVolume, 4);
+            }
+
+            // set stock out
+            StockOut so = new StockOut();
+            so.Id = Guid.NewGuid();
+            so.OutTime = this.dpOutTime.DateTime.Date;
+            so.MonthTime = so.OutTime.Year.ToString() + so.OutTime.Month.ToString().PadLeft(2, '0');
+            so.ContractId = this.selectContract.Id;
+            so.UserId = this.currentUser.Id;
+            so.CreateTime = DateTime.Now;
+            so.Remark = this.txtRemark.Text;
+
+            // add stock out
+            ErrorCode result = BusinessFactory<StockOutBusiness>.Instance.Create(so, this.sogList.DataSource);
+            if (result == ErrorCode.Success)
+                newId = so.Id;
+
+            return result;
+        }
+        #endregion //Method
+
         #region Event
         /// <summary>
         /// 控件载入

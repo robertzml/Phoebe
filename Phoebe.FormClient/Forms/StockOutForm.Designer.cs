@@ -136,6 +136,7 @@
             this.tsbClose.Name = "tsbClose";
             this.tsbClose.Size = new System.Drawing.Size(52, 22);
             this.tsbClose.Text = "关闭";
+            this.tsbClose.Click += new System.EventHandler(this.tsbClose_Click);
             // 
             // tsbSave
             // 
@@ -144,6 +145,7 @@
             this.tsbSave.Name = "tsbSave";
             this.tsbSave.Size = new System.Drawing.Size(52, 22);
             this.tsbSave.Text = "保存";
+            this.tsbSave.Click += new System.EventHandler(this.tsbSave_Click);
             // 
             // tsbConfirm
             // 
@@ -151,7 +153,8 @@
             this.tsbConfirm.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbConfirm.Name = "tsbConfirm";
             this.tsbConfirm.Size = new System.Drawing.Size(76, 22);
-            this.tsbConfirm.Text = "入库确认";
+            this.tsbConfirm.Text = "出库确认";
+            this.tsbConfirm.Click += new System.EventHandler(this.tsbConfirm_Click);
             // 
             // toolStripSeparator
             // 

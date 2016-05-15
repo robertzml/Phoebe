@@ -39,7 +39,7 @@ namespace Phoebe.Business
         /// </summary>
         /// <param name="inTime">入库时间</param>
         /// <returns></returns>
-        private string GetLastStockInFlowNumber(DateTime inTime)
+        private string GetLastFlowNumber(DateTime inTime)
         {
             Expression<Func<StockIn, bool>> predicate = r => r.InTime == inTime;
             var data = this.dal.Find(predicate).OrderByDescending(r => r.FlowNumber);
@@ -57,18 +57,6 @@ namespace Phoebe.Business
         #endregion //Function
 
         #region Method
-        /// <summary>
-        /// 获取最新入库单
-        /// </summary>
-        /// <param name="id">ID</param>
-        /// <returns></returns>
-        public StockIn Get(Guid id)
-        {
-            Expression<Func<StockIn, bool>> predicate = r => r.Id == id;
-            var data = this.dal.FindOne(predicate);
-            return data;
-        }
-
         /// <summary>
         /// 获取入库月份分组
         /// </summary>
@@ -112,7 +100,7 @@ namespace Phoebe.Business
             try
             {
                 // set stock in
-                entity.FlowNumber = GetLastStockInFlowNumber(entity.InTime.Date);
+                entity.FlowNumber = GetLastFlowNumber(entity.InTime.Date);
                 entity.Status = (int)EntityStatus.StockInReady;
 
                 // set billing
@@ -201,6 +189,13 @@ namespace Phoebe.Business
             }
         }
 
+        /// <summary>
+        /// 入库编辑
+        /// </summary>
+        /// <param name="entity">入库单</param>
+        /// <param name="billing">计费信息</param>
+        /// <param name="siModels">入库信息模型</param>
+        /// <returns></returns>
         public ErrorCode Edit(StockIn entity, Billing billing, List<StockInModel> siModels)
         {
             try

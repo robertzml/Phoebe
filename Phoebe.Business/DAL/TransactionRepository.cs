@@ -14,7 +14,7 @@ namespace Phoebe.Business.DAL
     /// </summary>
     public class TransactionRepository : SqlDataAccess<PhoebeContext>
     {
-        #region Method
+        #region StockIn Method
         /// <summary>
         /// 新建入库事务
         /// </summary>
@@ -61,7 +61,7 @@ namespace Phoebe.Business.DAL
                 stockIn.Status = (int)EntityStatus.StockIn;
                 stockIn.Billing.Status = (int)EntityStatus.Normal;
 
-                foreach(var item in stockIn.StockInDetails)
+                foreach (var item in stockIn.StockInDetails)
                 {
                     item.Status = (int)EntityStatus.StockIn;
                     item.Store.Status = (int)EntityStatus.StoreIn;
@@ -71,13 +71,20 @@ namespace Phoebe.Business.DAL
 
                 return ErrorCode.Success;
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return ErrorCode.Exception;
             }
         }
 
-
+        /// <summary>
+        /// 入库修改事务
+        /// </summary>
+        /// <param name="stockIn">入库单数据</param>
+        /// <param name="billing">计费数据</param>
+        /// <param name="details">入库记录数据</param>
+        /// <param name="stores">库存数据</param>
+        /// <returns></returns>
         public ErrorCode StockInUpdateTrans(StockIn stockIn, Billing billing, List<StockInDetail> details, List<Store> stores)
         {
             try
@@ -85,7 +92,7 @@ namespace Phoebe.Business.DAL
                 //remove the old details and stores
                 List<StockInDetail> oldDetails = new List<StockInDetail>();
                 List<Store> oldStores = new List<Store>();
-                foreach(var item in stockIn.StockInDetails)
+                foreach (var item in stockIn.StockInDetails)
                 {
                     oldDetails.Add(item);
                     oldStores.Add(item.Store);
@@ -106,7 +113,7 @@ namespace Phoebe.Business.DAL
                 this.context.SaveChanges();
                 return ErrorCode.Success;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return ErrorCode.Exception;
             }
@@ -137,6 +144,34 @@ namespace Phoebe.Business.DAL
 
             return ErrorCode.Success;
         }
-        #endregion //Method
+        #endregion //StockIn Method
+
+        #region StockOut Method
+        /// <summary>
+        /// 新建出库事务
+        /// </summary>
+        /// <param name="stockOut">出库单数据</param>
+        /// <param name="details">出库记录数据</param>
+        /// <returns></returns>
+        public ErrorCode StockOutAddTrans(StockOut stockOut, List<StockOutDetail> details)
+        {
+            try
+            {
+                // add stock out
+                this.context.StockOuts.Add(stockOut);
+
+                // add stock out details
+                this.context.StockOutDetails.AddRange(details);
+
+                this.context.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+
+            return ErrorCode.Success;
+        }
+        #endregion //StockOut Method
     }
 }

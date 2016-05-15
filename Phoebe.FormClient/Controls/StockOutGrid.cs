@@ -87,6 +87,14 @@ namespace Phoebe.FormClient
             this.colOutWeight.OptionsColumn.AllowEdit = !isEqualWeight;
             this.isEqualWeight = isEqualWeight;
         }
+
+        /// <summary>
+        /// 完成编辑
+        /// </summary>
+        public void CloseEditor()
+        {
+            this.dgvStockOut.CloseEditor();
+        }
         #endregion //Method
 
         #region Event
@@ -102,7 +110,7 @@ namespace Phoebe.FormClient
             this.colOutCount.Visible = this.showOutCount;
             this.colOutWeight.Visible = this.showOutCount;
             this.colOutVolume.Visible = this.showOutCount;
-            this.colRemark.Visible = this.showOutCount;            
+            this.colRemark.Visible = this.showOutCount;
         }
 
         /// <summary>

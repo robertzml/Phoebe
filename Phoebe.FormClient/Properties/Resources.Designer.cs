@@ -303,6 +303,16 @@ namespace Phoebe.FormClient.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap phoebe_logo {
+            get {
+                object obj = ResourceManager.GetObject("phoebe_logo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap Print_16x16 {
             get {
                 object obj = ResourceManager.GetObject("Print_16x16", resourceCulture);

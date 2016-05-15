@@ -15,9 +15,14 @@ namespace Phoebe.Business.DAL
     public class StockOutRepository : SqlDataAccess<PhoebeContext>, IBaseDataAccess<StockOut>
     {
         #region Method
+        /// <summary>
+        /// 查找出库单
+        /// </summary>
+        /// <param name="id">ID</param>
+        /// <returns></returns>
         public StockOut FindById(object id)
         {
-            throw new NotImplementedException();
+            return this.context.StockOuts.Find(id);
         }
 
         public StockOut FindOne(Expression<Func<StockOut, bool>> predicate)
@@ -30,9 +35,14 @@ namespace Phoebe.Business.DAL
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// 按条件查询出库
+        /// </summary>
+        /// <param name="predicate">查询条件</param>
+        /// <returns></returns>
         public IEnumerable<StockOut> Find(Expression<Func<StockOut, bool>> predicate)
         {
-            throw new NotImplementedException();
+            return this.context.StockOuts.Where(predicate);
         }
 
         public ErrorCode Create(StockOut entity)
