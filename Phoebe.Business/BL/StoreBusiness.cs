@@ -34,12 +34,41 @@ namespace Phoebe.Business
         #endregion //Constructor
 
         #region Method
+        /// <summary>
+        /// 按客户获取库存记录
+        /// </summary>
+        /// <param name="customerId">客户ID</param>
+        /// <returns></returns>
         public List<Store> GetByCustomer(int customerId)
         {
             Expression<Func<Store, bool>> predicate = r => r.Cargo.Contract.CustomerId == customerId;
             var data = this.dal.Find(predicate);
 
             return data.ToList();
+        }
+
+        /// <summary>
+        /// 按合同获取库存记录
+        /// </summary>
+        /// <param name="contractId">合同ID</param>
+        /// <param name="isStoreIn">是否限定在库</param>
+        /// <returns></returns>
+        public List<Store> GetByContract(int contractId, bool isStoreIn)
+        {
+            if (isStoreIn)
+            {
+                Expression<Func<Store, bool>> predicate = r => r.Cargo.ContractId == contractId && r.Status == (int)EntityStatus.StoreIn;
+                var data = this.dal.Find(predicate);
+
+                return data.ToList();
+            }
+            else
+            {
+                Expression<Func<Store, bool>> predicate = r => r.Cargo.ContractId == contractId;
+                var data = this.dal.Find(predicate);
+
+                return data.ToList();
+            }
         }
         #endregion //Method
     }

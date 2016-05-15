@@ -28,11 +28,6 @@ namespace Phoebe.FormClient
         private LoginUser currentUser;
 
         /// <summary>
-        /// 分类列表
-        /// </summary>
-        private List<Category> categoryList;
-
-        /// <summary>
         /// 选中客户
         /// </summary>
         private Customer selectCustomer;
@@ -46,6 +41,11 @@ namespace Phoebe.FormClient
         /// 货品是否等重
         /// </summary>
         private bool isEqualWeight = true;
+
+        /// <summary>
+        /// 分类列表，缓存页面使用
+        /// </summary>
+        private List<Category> categoryList;
         #endregion //Field
 
         #region Constructor
@@ -62,35 +62,6 @@ namespace Phoebe.FormClient
         #endregion //Constructor
 
         #region Function
-        /// <summary>
-        /// 更新客户列表
-        /// </summary>
-        /// <param name="prefix">客户编码前缀</param>
-        /// <returns></returns>
-        private void UpdateCustomerView(string prefix)
-        {
-            //this.lvCustomer.BeginUpdate();
-
-            //IEnumerable<Customer> customers;
-            //if (string.IsNullOrEmpty(prefix))
-            //    customers = customerList.OrderBy(r => r.Number);
-            //else
-            //    customers = customerList.Where(r => r.Number.StartsWith(prefix)).OrderBy(r => r.Number);
-
-            //this.lvCustomer.Items.Clear();
-            //foreach (var item in customers)
-            //{
-            //    ListViewItem lvi = new ListViewItem(item.Number);
-            //    lvi.Tag = item.Id;
-
-            //    lvi.SubItems.Add(item.Name);
-
-            //    this.lvCustomer.Items.Add(lvi);
-            //}
-
-            //this.lvCustomer.EndUpdate();
-        }
-
         /// <summary>
         /// 更新合同选择
         /// </summary>
@@ -112,6 +83,12 @@ namespace Phoebe.FormClient
             if (this.cmbContract.Properties.Items.Count > 0)
                 this.cmbContract.SelectedIndex = 0;
         }
+
+        private void SetDataControl(List<Store> stores)
+        {
+            var data = ModelTranslate.StoreToStockOut(stores);
+            this.sogFilter.SetDataSource(data);
+        }
         #endregion //Function
 
         #region Event
@@ -127,10 +104,8 @@ namespace Phoebe.FormClient
             this.dpOutTime.EditValue = DateTime.Now;
 
             this.clcCustomer.SetSource(BusinessFactory<CustomerBusiness>.Instance.FindAll());
-
             this.categoryList = BusinessFactory<CategoryBusiness>.Instance.GetLeafCategory();
-
-            UpdateCustomerView("");
+            this.clcCategory.SetSource(this.categoryList);
         }
 
         /// <summary>
@@ -141,7 +116,6 @@ namespace Phoebe.FormClient
         private void txtCustomerNumber_EditValueChanged(object sender, EventArgs e)
         {
             string number = this.txtCustomerNumber.EditValue.ToString();
-            // UpdateCustomerView(number);
             this.clcCustomer.UpdateView(number);
 
             var customer = BusinessFactory<CustomerBusiness>.Instance.GetByNumber(number);
@@ -163,13 +137,8 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void clcCustomer_CustomerItemSelected(object sender, EventArgs e)
         {
-            var lvCustomer = sender as ListView;
-            if (lvCustomer.SelectedItems.Count != 1)
-                return;
-            
             this.txtCustomerNumber.EditValueChanged -= txtCustomerNumber_EditValueChanged;
 
-            var select = lvCustomer.SelectedItems[0];
             this.txtCustomerNumber.Text = this.clcCustomer.SelectedNumber;
             this.txtCustomerName.Text = this.clcCustomer.SelectedName;
 
@@ -190,6 +159,7 @@ namespace Phoebe.FormClient
             if (this.cmbContract.SelectedIndex == -1)
             {
                 this.txtBillingType.Text = "";
+                this.selectContract = null;
             }
             else
             {
@@ -209,7 +179,44 @@ namespace Phoebe.FormClient
                 this.txtBillingType.Text = ((BillingType)this.selectContract.BillingType).DisplayName();
             }
         }
-        #endregion //Event
 
+        /// <summary>
+        /// 分类代码输入
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtCategoryNumber_EditValueChanged(object sender, EventArgs e)
+        {
+            string number = this.txtCategoryNumber.EditValue.ToString();
+            this.clcCategory.UpdateView(number);
+
+            var category = this.categoryList.SingleOrDefault(r => r.Number == number);
+            if (category != null)
+            {
+                this.txtCategoryName.Text = category.Name;
+            }
+            else
+            {
+                this.txtCategoryName.Text = "";
+            }
+        }
+
+        /// <summary>
+        /// 搜索库存记录
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            if (this.selectContract == null)
+            {
+                MessageBox.Show("未选择合同", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            var data = BusinessFactory<StoreBusiness>.Instance.GetByContract(this.selectContract.Id, true);
+            SetDataControl(data);
+        }
+        #endregion //Event
     }
 }

@@ -57,6 +57,11 @@ namespace Phoebe.Model
         public string Specification { get; set; }
 
         /// <summary>
+        /// 在库数量
+        /// </summary>
+        public int StoreCount { get; set; }
+
+        /// <summary>
         /// 出库数量
         /// </summary>
         public int OutCount { get; set; }

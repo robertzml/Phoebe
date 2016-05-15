@@ -24,7 +24,7 @@ namespace Phoebe.FormClient
         /// <summary>
         /// 客户列表
         /// </summary>
-        private List<Customer> customerList;
+        //private List<Customer> customerList;
 
         /// <summary>
         /// 分类列表
@@ -45,35 +45,6 @@ namespace Phoebe.FormClient
         #endregion //Constructor
 
         #region Function
-        /// <summary>
-        /// 更新客户列表
-        /// </summary>
-        /// <param name="prefix">客户编码前缀</param>
-        /// <returns></returns>
-        private void UpdateCustomerView(string prefix)
-        {
-            this.lvCustomer.BeginUpdate();
-
-            IEnumerable<Customer> customers;
-            if (string.IsNullOrEmpty(prefix))
-                customers = customerList.OrderBy(r => r.Number);
-            else
-                customers = customerList.Where(r => r.Number.StartsWith(prefix)).OrderBy(r => r.Number);
-
-            this.lvCustomer.Items.Clear();
-            foreach (var item in customers)
-            {
-                ListViewItem lvi = new ListViewItem(item.Number);
-                lvi.Tag = item.Id;
-
-                lvi.SubItems.Add(item.Name);
-
-                this.lvCustomer.Items.Add(lvi);
-            }
-
-            this.lvCustomer.EndUpdate();
-        }
-
         /// <summary>
         /// 更新分类列表
         /// </summary>
@@ -112,18 +83,25 @@ namespace Phoebe.FormClient
         private void StoreForm_Load(object sender, EventArgs e)
         {
             this.selectCustomer = null;
-            this.customerList = BusinessFactory<CustomerBusiness>.Instance.FindAll();
+
+            var customerList = BusinessFactory<CustomerBusiness>.Instance.FindAll();
+            this.clcCustomer.SetSource(customerList);
+
             this.categoryList = BusinessFactory<CategoryBusiness>.Instance.FindAll();
 
-            UpdateCustomerView("");
+         
             UpdateCategoryView("");
         }
 
-
+        /// <summary>
+        /// 输入客户代码
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void txtCustomerNumber_EditValueChanged(object sender, EventArgs e)
         {
             string number = this.txtCustomerNumber.EditValue.ToString();
-            UpdateCustomerView(number);
+            this.clcCustomer.UpdateView(number);
 
             var customer = BusinessFactory<CustomerBusiness>.Instance.GetByNumber(number);
             if (customer != null)
@@ -135,6 +113,24 @@ namespace Phoebe.FormClient
             }
             else
                 this.txtCustomerName.Text = "";
+        }
+
+        /// <summary>
+        /// 选择客户
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void clcCustomer_CustomerItemSelected(object sender, EventArgs e)
+        {
+            this.txtCustomerNumber.EditValueChanged -= txtCustomerNumber_EditValueChanged;
+
+            this.txtCustomerNumber.Text = this.clcCustomer.SelectedNumber;
+            this.txtCustomerName.Text = this.clcCustomer.SelectedName;
+
+            this.txtCustomerNumber.EditValueChanged += txtCustomerNumber_EditValueChanged;
+
+            int customerId = this.clcCustomer.SelectedId;
+            this.selectCustomer = BusinessFactory<CustomerBusiness>.Instance.FindById(customerId);
         }
 
         /// <summary>
@@ -218,5 +214,6 @@ namespace Phoebe.FormClient
                 e.Value = store.Cargo.Category.Name;
         }
         #endregion //Event
+
     }
 }

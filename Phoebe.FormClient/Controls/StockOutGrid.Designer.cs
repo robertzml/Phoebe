@@ -41,6 +41,7 @@
             this.colCategoryNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCategoryName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colSpecification = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colStoreCount = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colOutCount = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colGroupType = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colUnitWeight = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -86,6 +87,7 @@
             this.colCategoryNumber,
             this.colCategoryName,
             this.colSpecification,
+            this.colStoreCount,
             this.colOutCount,
             this.colGroupType,
             this.colUnitWeight,
@@ -158,82 +160,89 @@
             this.colSpecification.Visible = true;
             this.colSpecification.VisibleIndex = 2;
             // 
+            // colStoreCount
+            // 
+            this.colStoreCount.FieldName = "StoreCount";
+            this.colStoreCount.Name = "colStoreCount";
+            this.colStoreCount.Visible = true;
+            this.colStoreCount.VisibleIndex = 3;
+            // 
             // colOutCount
             // 
             this.colOutCount.FieldName = "OutCount";
             this.colOutCount.Name = "colOutCount";
             this.colOutCount.Visible = true;
-            this.colOutCount.VisibleIndex = 3;
+            this.colOutCount.VisibleIndex = 4;
             // 
             // colGroupType
             // 
             this.colGroupType.FieldName = "GroupType";
             this.colGroupType.Name = "colGroupType";
             this.colGroupType.Visible = true;
-            this.colGroupType.VisibleIndex = 4;
+            this.colGroupType.VisibleIndex = 5;
             // 
             // colUnitWeight
             // 
             this.colUnitWeight.FieldName = "UnitWeight";
             this.colUnitWeight.Name = "colUnitWeight";
             this.colUnitWeight.Visible = true;
-            this.colUnitWeight.VisibleIndex = 5;
+            this.colUnitWeight.VisibleIndex = 6;
             // 
             // colOutWeight
             // 
             this.colOutWeight.FieldName = "OutWeight";
             this.colOutWeight.Name = "colOutWeight";
             this.colOutWeight.Visible = true;
-            this.colOutWeight.VisibleIndex = 6;
+            this.colOutWeight.VisibleIndex = 7;
             // 
             // colUnitVolume
             // 
             this.colUnitVolume.FieldName = "UnitVolume";
             this.colUnitVolume.Name = "colUnitVolume";
             this.colUnitVolume.Visible = true;
-            this.colUnitVolume.VisibleIndex = 7;
+            this.colUnitVolume.VisibleIndex = 8;
             // 
             // colOutVolume
             // 
             this.colOutVolume.FieldName = "OutVolume";
             this.colOutVolume.Name = "colOutVolume";
             this.colOutVolume.Visible = true;
-            this.colOutVolume.VisibleIndex = 8;
+            this.colOutVolume.VisibleIndex = 9;
             // 
             // colWarehouseNumber
             // 
             this.colWarehouseNumber.FieldName = "WarehouseNumber";
             this.colWarehouseNumber.Name = "colWarehouseNumber";
             this.colWarehouseNumber.Visible = true;
-            this.colWarehouseNumber.VisibleIndex = 9;
+            this.colWarehouseNumber.VisibleIndex = 10;
             // 
             // colInTime
             // 
             this.colInTime.FieldName = "InTime";
             this.colInTime.Name = "colInTime";
             this.colInTime.Visible = true;
-            this.colInTime.VisibleIndex = 10;
+            this.colInTime.VisibleIndex = 11;
             // 
             // colOriginPlace
             // 
             this.colOriginPlace.FieldName = "OriginPlace";
             this.colOriginPlace.Name = "colOriginPlace";
             this.colOriginPlace.Visible = true;
-            this.colOriginPlace.VisibleIndex = 11;
+            this.colOriginPlace.VisibleIndex = 12;
             // 
             // colShelfLife
             // 
             this.colShelfLife.FieldName = "ShelfLife";
             this.colShelfLife.Name = "colShelfLife";
             this.colShelfLife.Visible = true;
-            this.colShelfLife.VisibleIndex = 12;
+            this.colShelfLife.VisibleIndex = 13;
             // 
             // colRemark
             // 
             this.colRemark.FieldName = "Remark";
             this.colRemark.Name = "colRemark";
             this.colRemark.Visible = true;
-            this.colRemark.VisibleIndex = 13;
+            this.colRemark.VisibleIndex = 14;
             // 
             // colStatus
             // 
@@ -270,6 +279,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn colCategoryNumber;
         private DevExpress.XtraGrid.Columns.GridColumn colCategoryName;
         private DevExpress.XtraGrid.Columns.GridColumn colSpecification;
+        private DevExpress.XtraGrid.Columns.GridColumn colStoreCount;
         private DevExpress.XtraGrid.Columns.GridColumn colOutCount;
         private DevExpress.XtraGrid.Columns.GridColumn colGroupType;
         private DevExpress.XtraGrid.Columns.GridColumn colUnitWeight;

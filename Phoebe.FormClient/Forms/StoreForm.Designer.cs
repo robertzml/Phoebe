@@ -79,10 +79,7 @@
             this.lvCategory = new System.Windows.Forms.ListView();
             this.CategoryNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.CategoryName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.groupControl4 = new DevExpress.XtraEditors.GroupControl();
-            this.lvCustomer = new System.Windows.Forms.ListView();
-            this.CustomerNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.CustomerName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.clcCustomer = new Phoebe.FormClient.CustomerListControl();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
@@ -111,8 +108,6 @@
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl5)).BeginInit();
             this.groupControl5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).BeginInit();
-            this.groupControl4.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupControl1
@@ -604,9 +599,9 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
             this.tableLayoutPanel1.Controls.Add(this.groupControl5, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.groupControl4, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.groupControl1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.groupControl2, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.clcCustomer, 1, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -651,40 +646,14 @@
             this.CategoryName.Text = "名称";
             this.CategoryName.Width = 100;
             // 
-            // groupControl4
+            // clcCustomer
             // 
-            this.groupControl4.Controls.Add(this.lvCustomer);
-            this.groupControl4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl4.Location = new System.Drawing.Point(687, 3);
-            this.groupControl4.Name = "groupControl4";
-            this.groupControl4.Size = new System.Drawing.Size(194, 234);
-            this.groupControl4.TabIndex = 4;
-            this.groupControl4.Text = "客户列表";
-            // 
-            // lvCustomer
-            // 
-            this.lvCustomer.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.CustomerNumber,
-            this.CustomerName});
-            this.lvCustomer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lvCustomer.FullRowSelect = true;
-            this.lvCustomer.Location = new System.Drawing.Point(2, 21);
-            this.lvCustomer.MultiSelect = false;
-            this.lvCustomer.Name = "lvCustomer";
-            this.lvCustomer.Size = new System.Drawing.Size(190, 211);
-            this.lvCustomer.TabIndex = 0;
-            this.lvCustomer.UseCompatibleStateImageBehavior = false;
-            this.lvCustomer.View = System.Windows.Forms.View.Details;
-            // 
-            // CustomerNumber
-            // 
-            this.CustomerNumber.Text = "编号";
-            this.CustomerNumber.Width = 90;
-            // 
-            // CustomerName
-            // 
-            this.CustomerName.Text = "名称";
-            this.CustomerName.Width = 150;
+            this.clcCustomer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.clcCustomer.Location = new System.Drawing.Point(687, 3);
+            this.clcCustomer.Name = "clcCustomer";
+            this.clcCustomer.Size = new System.Drawing.Size(194, 234);
+            this.clcCustomer.TabIndex = 6;
+            this.clcCustomer.CustomerItemSelected += new Phoebe.FormClient.CustomerListControl.ItemSelectHandle(this.clcCustomer_CustomerItemSelected);
             // 
             // StoreForm
             // 
@@ -723,8 +692,6 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl5)).EndInit();
             this.groupControl5.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).EndInit();
-            this.groupControl4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -774,10 +741,6 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem7;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem8;
-        private DevExpress.XtraEditors.GroupControl groupControl4;
-        private System.Windows.Forms.ListView lvCustomer;
-        private System.Windows.Forms.ColumnHeader CustomerNumber;
-        private System.Windows.Forms.ColumnHeader CustomerName;
         private DevExpress.XtraEditors.GroupControl groupControl5;
         private System.Windows.Forms.ListView lvCategory;
         private System.Windows.Forms.ColumnHeader CategoryNumber;
@@ -785,5 +748,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn colCustomerName;
         private DevExpress.XtraGrid.Columns.GridColumn colCategoryNumber;
         private DevExpress.XtraGrid.Columns.GridColumn colCategoryName;
+        private CustomerListControl clcCustomer;
     }
 }

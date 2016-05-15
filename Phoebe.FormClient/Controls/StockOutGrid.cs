@@ -38,6 +38,13 @@ namespace Phoebe.FormClient
         }
         #endregion //Constructor
 
+        #region Method
+        public void SetDataSource(List<StockOutModel> data)
+        {
+            this.bsStockOut.DataSource = data;
+        }
+        #endregion //Method
+
         #region Event
         /// <summary>
         /// 控件载入
