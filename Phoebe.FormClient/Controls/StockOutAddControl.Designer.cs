@@ -661,7 +661,6 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "StockOutAddControl";
             this.Size = new System.Drawing.Size(1000, 600);
-            this.Load += new System.EventHandler(this.StockOutAddControl_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
             this.groupControl1.ResumeLayout(false);

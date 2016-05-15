@@ -38,17 +38,17 @@
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.tsStockIn = new System.Windows.Forms.ToolStrip();
             this.tsbNew = new System.Windows.Forms.ToolStripButton();
+            this.tsbClose = new System.Windows.Forms.ToolStripButton();
             this.tsbSave = new System.Windows.Forms.ToolStripButton();
             this.tsbConfirm = new System.Windows.Forms.ToolStripButton();
-            this.tsbPrint = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.tsbEdit = new System.Windows.Forms.ToolStripButton();
             this.tsbRevert = new System.Windows.Forms.ToolStripButton();
             this.tsbDelete = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsbPrint = new System.Windows.Forms.ToolStripButton();
             this.plBody = new DevExpress.XtraEditors.PanelControl();
             this.plEmpty = new DevExpress.XtraEditors.PanelControl();
-            this.tsbClose = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             ((System.ComponentModel.ISupportInitialize)(this.tcStockIn)).BeginInit();
             this.tcStockIn.SuspendLayout();
             this.tpStockInList.SuspendLayout();
@@ -99,8 +99,7 @@
             this.imageList1.Images.SetKeyName(0, "BONote_16x16.png");
             this.imageList1.Images.SetKeyName(1, "BOProduct_16x16.png");
             this.imageList1.Images.SetKeyName(2, "BOOrder_16x16.png");
-            this.imageList1.Images.SetKeyName(3, "BOSaleItem_16x16.png");
-            this.imageList1.Images.SetKeyName(4, "BOOrderItem_16x16.png");
+            this.imageList1.Images.SetKeyName(3, "BOSale_16x16.png");
             // 
             // xtraTabPage2
             // 
@@ -147,6 +146,15 @@
             this.tsbNew.ToolTipText = "新建";
             this.tsbNew.Click += new System.EventHandler(this.tsbNew_Click);
             // 
+            // tsbClose
+            // 
+            this.tsbClose.Image = global::Phoebe.FormClient.Properties.Resources.Close_16x16;
+            this.tsbClose.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbClose.Name = "tsbClose";
+            this.tsbClose.Size = new System.Drawing.Size(52, 22);
+            this.tsbClose.Text = "关闭";
+            this.tsbClose.Click += new System.EventHandler(this.tsbClose_Click);
+            // 
             // tsbSave
             // 
             this.tsbSave.Image = global::Phoebe.FormClient.Properties.Resources.Save_16x16;
@@ -164,15 +172,6 @@
             this.tsbConfirm.Size = new System.Drawing.Size(76, 22);
             this.tsbConfirm.Text = "入库确认";
             this.tsbConfirm.Click += new System.EventHandler(this.tsbConfirm_Click);
-            // 
-            // tsbPrint
-            // 
-            this.tsbPrint.Image = global::Phoebe.FormClient.Properties.Resources.Print_16x16;
-            this.tsbPrint.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbPrint.Name = "tsbPrint";
-            this.tsbPrint.Size = new System.Drawing.Size(52, 22);
-            this.tsbPrint.Text = "打印";
-            this.tsbPrint.Click += new System.EventHandler(this.tsbPrint_Click);
             // 
             // toolStripSeparator
             // 
@@ -206,6 +205,20 @@
             this.tsbDelete.Text = "删除";
             this.tsbDelete.Click += new System.EventHandler(this.tsbDelete_Click);
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // tsbPrint
+            // 
+            this.tsbPrint.Image = global::Phoebe.FormClient.Properties.Resources.Print_16x16;
+            this.tsbPrint.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbPrint.Name = "tsbPrint";
+            this.tsbPrint.Size = new System.Drawing.Size(52, 22);
+            this.tsbPrint.Text = "打印";
+            this.tsbPrint.Click += new System.EventHandler(this.tsbPrint_Click);
+            // 
             // plBody
             // 
             this.plBody.Appearance.BackColor = System.Drawing.Color.White;
@@ -226,20 +239,6 @@
             this.plEmpty.Name = "plEmpty";
             this.plEmpty.Size = new System.Drawing.Size(748, 100);
             this.plEmpty.TabIndex = 0;
-            // 
-            // tsbClose
-            // 
-            this.tsbClose.Image = global::Phoebe.FormClient.Properties.Resources.Close_16x16;
-            this.tsbClose.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbClose.Name = "tsbClose";
-            this.tsbClose.Size = new System.Drawing.Size(52, 22);
-            this.tsbClose.Text = "关闭";
-            this.tsbClose.Click += new System.EventHandler(this.tsbClose_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
             // StockInForm
             // 

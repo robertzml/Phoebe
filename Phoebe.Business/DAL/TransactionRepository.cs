@@ -172,6 +172,50 @@ namespace Phoebe.Business.DAL
 
             return ErrorCode.Success;
         }
+
+        /// <summary>
+        /// 出库确认事务
+        /// </summary>
+        /// <param name="stockOut">出库单对象</param>
+        /// <returns></returns>
+        public ErrorCode StockOutConfirmTrans(StockOut stockOut)
+        {
+            try
+            {
+                stockOut.Status = (int)EntityStatus.StockOut;
+
+                // change store count and status
+                foreach (var item in stockOut.StockOutDetails)
+                {
+                    var store = item.Store;
+
+                    if (store.StoreCount == item.Count) // all stock out
+                    {
+                        store.StoreCount = 0;
+                        store.StoreWeight = 0;
+                        store.StoreVolume = 0;
+                        store.OutTime = stockOut.OutTime;
+                        store.Destination = (int)DestinationType.StockOut;
+                        store.Status = (int)EntityStatus.StoreOut;
+                    }
+                    else
+                    {
+                        store.StoreCount -= item.Count;
+                        store.StoreWeight -= item.OutWeight;
+                        store.StoreVolume -= item.OutVolume;
+                    }
+
+                    item.Status = (int)EntityStatus.StockOut;
+                }
+
+                this.context.SaveChanges();
+                return ErrorCode.Success;
+            }
+            catch(Exception)
+            {
+                return ErrorCode.Exception;
+            }
+        }
         #endregion //StockOut Method
     }
 }

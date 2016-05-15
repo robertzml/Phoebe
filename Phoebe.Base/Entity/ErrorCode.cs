@@ -137,6 +137,24 @@ namespace Phoebe.Base
         /// </summary>
         [Display(Name = "入库已确认")]
         StockInHasConfirm = 71,
+
+        /// <summary>
+        /// 出库记录无法删除
+        /// </summary>
+        [Display(Name = "出库记录无法删除")]
+        StockOutCannotDelete = 80,
+
+        /// <summary>
+        /// 出库已确认
+        /// </summary>
+        [Display(Name = "出库已确认")]
+        StockOutHasConfirm = 81,
+
+        /// <summary>
+        /// 出库数量超出
+        /// </summary>
+        [Display(Name = "出库数量超出")]
+        StockOutCountOverflow = 82
         #endregion //Stock
     }
 }

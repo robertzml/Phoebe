@@ -64,7 +64,7 @@ namespace Phoebe.Business
         /// <remarks>
         /// 用于树形导航分组
         /// </remarks>
-        public string[] GetStockInMonthGroup()
+        public string[] GetMonthGroup()
         {
             var data = this.dal.FindAll().GroupBy(r => r.MonthTime).Select(g => g.Key).OrderByDescending(s => s);
             return data.ToArray();
@@ -75,7 +75,7 @@ namespace Phoebe.Business
         /// </summary>
         /// <param name="monthTime">月份</param>
         /// <returns></returns>
-        public List<StockIn> GetStockInByMonth(string monthTime)
+        public List<StockIn> GetByMonth(string monthTime)
         {
             Expression<Func<StockIn, bool>> predicate = r => r.MonthTime == monthTime;
             var data = this.dal.Find(predicate).OrderByDescending(r => r.FlowNumber);

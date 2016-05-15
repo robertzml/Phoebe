@@ -212,6 +212,12 @@
     <Compile Include="Controls\StockOutGrid.Designer.cs">
       <DependentUpon>StockOutGrid.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\StockOutViewControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\StockOutViewControl.Designer.cs">
+      <DependentUpon>StockOutViewControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utils\ModelTranslate.cs" />
     <EmbeddedResource Include="Controls\CategoryListControl.resx">
       <DependentUpon>CategoryListControl.cs</DependentUpon>
@@ -281,6 +287,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\StockOutGrid.resx">
       <DependentUpon>StockOutGrid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\StockOutViewControl.resx">
+      <DependentUpon>StockOutViewControl.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\Phoebe.Model.Contract.datasource" />
@@ -438,6 +447,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\phoebe-logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BOSale_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BOSale_32x32.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

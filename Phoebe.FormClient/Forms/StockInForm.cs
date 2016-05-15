@@ -121,7 +121,7 @@ namespace Phoebe.FormClient
             this.tvStockIn.BeginUpdate();
             this.tvStockIn.Nodes.Clear();
 
-            var months = BusinessFactory<StockInBusiness>.Instance.GetStockInMonthGroup();
+            var months = BusinessFactory<StockInBusiness>.Instance.GetMonthGroup();
             for (int i = 0; i < months.Length; i++)
             {
                 TreeNode node = new TreeNode();
@@ -182,7 +182,7 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void tvStockIn_BeforeExpand(object sender, TreeViewCancelEventArgs e)
         {
-            var data = BusinessFactory<StockInBusiness>.Instance.GetStockInByMonth(e.Node.Name);
+            var data = BusinessFactory<StockInBusiness>.Instance.GetByMonth(e.Node.Name);
             e.Node.Nodes.Clear();
             foreach (var item in data)
             {

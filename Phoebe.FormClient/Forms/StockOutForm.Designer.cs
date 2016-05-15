@@ -28,10 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StockOutForm));
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.tcStockOut = new DevExpress.XtraTab.XtraTabControl();
             this.tpStockOutList = new DevExpress.XtraTab.XtraTabPage();
             this.tvStockOut = new System.Windows.Forms.TreeView();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
             this.tsStockOut = new System.Windows.Forms.ToolStrip();
             this.tsbNew = new System.Windows.Forms.ToolStripButton();
@@ -89,10 +92,24 @@
             // tvStockOut
             // 
             this.tvStockOut.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tvStockOut.ImageIndex = 0;
+            this.tvStockOut.ImageList = this.imageList1;
             this.tvStockOut.Location = new System.Drawing.Point(0, 0);
             this.tvStockOut.Name = "tvStockOut";
+            this.tvStockOut.SelectedImageIndex = 0;
             this.tvStockOut.Size = new System.Drawing.Size(206, 485);
             this.tvStockOut.TabIndex = 0;
+            this.tvStockOut.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.tvStockOut_BeforeExpand);
+            this.tvStockOut.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvStockOut_AfterSelect);
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "BONote_16x16.png");
+            this.imageList1.Images.SetKeyName(1, "BOProduct_16x16.png");
+            this.imageList1.Images.SetKeyName(2, "BOOrder_16x16.png");
+            this.imageList1.Images.SetKeyName(3, "BOSale_16x16.png");
             // 
             // xtraTabPage2
             // 
@@ -168,6 +185,7 @@
             this.tsbEdit.Name = "tsbEdit";
             this.tsbEdit.Size = new System.Drawing.Size(52, 22);
             this.tsbEdit.Text = "编辑";
+            this.tsbEdit.Click += new System.EventHandler(this.tsbEdit_Click);
             // 
             // tsbRevert
             // 
@@ -176,6 +194,7 @@
             this.tsbRevert.Name = "tsbRevert";
             this.tsbRevert.Size = new System.Drawing.Size(52, 22);
             this.tsbRevert.Text = "撤回";
+            this.tsbRevert.Click += new System.EventHandler(this.tsbRevert_Click);
             // 
             // tsbDelete
             // 
@@ -184,6 +203,7 @@
             this.tsbDelete.Name = "tsbDelete";
             this.tsbDelete.Size = new System.Drawing.Size(52, 22);
             this.tsbDelete.Text = "删除";
+            this.tsbDelete.Click += new System.EventHandler(this.tsbDelete_Click);
             // 
             // toolStripSeparator1
             // 
@@ -197,6 +217,7 @@
             this.tsbPrint.Name = "tsbPrint";
             this.tsbPrint.Size = new System.Drawing.Size(52, 22);
             this.tsbPrint.Text = "打印";
+            this.tsbPrint.Click += new System.EventHandler(this.tsbPrint_Click);
             // 
             // plBody
             // 
@@ -265,5 +286,6 @@
         private System.Windows.Forms.ToolStripButton tsbPrint;
         private DevExpress.XtraEditors.PanelControl plBody;
         private DevExpress.XtraEditors.PanelControl plEmpty;
+        private System.Windows.Forms.ImageList imageList1;
     }
 }

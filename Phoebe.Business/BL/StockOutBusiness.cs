@@ -58,6 +58,31 @@ namespace Phoebe.Business
 
         #region Method
         /// <summary>
+        /// 获取入库月份分组
+        /// </summary>
+        /// <returns></returns>
+        /// <remarks>
+        /// 用于树形导航分组
+        /// </remarks>
+        public string[] GetMonthGroup()
+        {
+            var data = this.dal.FindAll().GroupBy(r => r.MonthTime).Select(g => g.Key).OrderByDescending(s => s);
+            return data.ToArray();
+        }
+
+        /// <summary>
+        /// 按月度获取入库记录
+        /// </summary>
+        /// <param name="monthTime">月份</param>
+        /// <returns></returns>
+        public List<StockOut> GetByMonth(string monthTime)
+        {
+            Expression<Func<StockOut, bool>> predicate = r => r.MonthTime == monthTime;
+            var data = this.dal.Find(predicate).OrderByDescending(r => r.FlowNumber);
+            return data.ToList();
+        }
+
+        /// <summary>
         /// 创建出库单
         /// </summary>
         /// <param name="entity">出库单对象</param>
@@ -91,6 +116,67 @@ namespace Phoebe.Business
 
                 var trans = new TransactionRepository();
                 ErrorCode result = trans.StockOutAddTrans(entity, details);
+
+                return result;
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+        }
+
+        /// <summary>
+        /// 出库确认
+        /// </summary>
+        /// <param name="id">ID</param>
+        /// <returns></returns>
+        public ErrorCode Confirm(Guid id)
+        {
+            try
+            {
+                StockOut stockOut = this.dal.FindById(id);
+                if (stockOut == null)
+                    return ErrorCode.ObjectNotFound;
+
+                if (stockOut.Status == (int)EntityStatus.StockOut)
+                    return ErrorCode.StockOutHasConfirm;
+
+                // check and change store count
+                foreach (var item in stockOut.StockOutDetails)
+                {
+                    var store = item.Store;
+                    if (store.StoreCount < item.Count)
+                        return ErrorCode.StockOutCountOverflow;
+                }
+
+                var trans = new TransactionRepository();
+                var result = trans.StockOutConfirmTrans(stockOut);
+
+                return result;
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+        }
+
+        /// <summary>
+        /// 删除出库
+        /// </summary>
+        /// <param name="id">ID</param>
+        /// <returns></returns>
+        public ErrorCode Delete(Guid id)
+        {
+            try
+            {
+                StockOut stockOut = this.dal.FindById(id);
+                if (stockOut == null)
+                    return ErrorCode.ObjectNotFound;
+
+                if (stockOut.Status == (int)EntityStatus.StockOut)
+                    return ErrorCode.StockOutCannotDelete;
+
+                var result = this.dal.Delete(stockOut);
 
                 return result;
             }

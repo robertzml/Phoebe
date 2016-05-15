@@ -83,5 +83,45 @@ namespace Phoebe.FormClient
 
             return data;
         }
+
+        /// <summary>
+        /// 出库单转换
+        /// </summary>
+        /// <param name="stockOut">出库单对象</param>
+        /// <returns></returns>
+        public static List<StockOutModel> StockOutToModel(StockOut stockOut)
+        {
+            List<StockOutModel> data = new List<StockOutModel>();
+            foreach(var item in stockOut.StockOutDetails)
+            {
+                StockOutModel model = new StockOutModel();
+                model.Id = item.Id;
+                model.StockOutId = stockOut.Id;
+                model.StoreId = item.StoreId;
+                model.ContractId = stockOut.ContractId;
+                model.CargoId = item.Store.CargoId;
+                model.CategoryId = item.Store.Cargo.CategoryId;
+                model.CategoryNumber = item.Store.Cargo.Category.Number;
+                model.CategoryName = item.Store.Cargo.Category.Name;
+                model.Specification = item.Store.Specification;
+                model.StoreCount = item.StoreCount;
+                model.OutCount = item.Count;
+                model.GroupType = item.Store.Cargo.GroupType;
+                model.UnitWeight = item.Store.Cargo.UnitWeight;
+                model.OutWeight = item.OutWeight;
+                model.UnitVolume = item.Store.Cargo.UnitVolume;
+                model.OutVolume = item.OutVolume;
+                model.WarehouseNumber = item.Store.WarehouseNumber;
+                model.InTime = item.Store.InTime;
+                model.OriginPlace = item.Store.OriginPlace;
+                model.ShelfLife = item.Store.ShelfLife;
+                model.Remark = item.Remark;
+                model.Status = item.Status;
+
+                data.Add(model);
+            }
+
+            return data;
+        }
     }
 }

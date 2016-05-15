@@ -5,7 +5,6 @@ using System.Drawing;
 using System.Data;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Phoebe.FormClient
@@ -63,6 +62,17 @@ namespace Phoebe.FormClient
             InitializeComponent();
 
             this.currentUser = user;
+
+            this.txtStatus.Text = "新建出库";
+            this.txtUser.Text = this.currentUser.Name;
+            this.dpOutTime.EditValue = DateTime.Now;
+
+            this.customerList = BusinessFactory<CustomerBusiness>.Instance.FindAll();
+            this.clcCustomer.SetDataSource(customerList);
+            this.categoryList = BusinessFactory<CategoryBusiness>.Instance.GetLeafCategory();
+            this.clcCategory.SetDataSource(this.categoryList);
+
+            this.sogList.DataSource = new List<StockOutModel>();
         }
         #endregion //Constructor
 
@@ -101,9 +111,17 @@ namespace Phoebe.FormClient
         #endregion //Function
 
         #region Method
-        public ErrorCode Save(out string errorMessage, out Guid newId)
+        /// <summary>
+        /// 保存
+        /// </summary>
+        /// <param name="errorMessage">错误消息</param>
+        /// <param name="newId">新出库单ID</param>
+        /// <param name="month">月份</param>
+        /// <returns></returns>
+        public ErrorCode Save(out string errorMessage, out Guid newId, out string month)
         {
             errorMessage = "";
+            month = "";
             newId = Guid.Empty;
             this.sogList.CloseEditor();
 
@@ -148,32 +166,16 @@ namespace Phoebe.FormClient
             // add stock out
             ErrorCode result = BusinessFactory<StockOutBusiness>.Instance.Create(so, this.sogList.DataSource);
             if (result == ErrorCode.Success)
+            {
                 newId = so.Id;
+                month = so.MonthTime;
+            }
 
             return result;
         }
         #endregion //Method
 
         #region Event
-        /// <summary>
-        /// 控件载入
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void StockOutAddControl_Load(object sender, EventArgs e)
-        {
-            this.txtStatus.Text = "新建出库";
-            this.txtUser.Text = this.currentUser.Name;
-            this.dpOutTime.EditValue = DateTime.Now;
-
-            this.customerList = BusinessFactory<CustomerBusiness>.Instance.FindAll();
-            this.clcCustomer.SetDataSource(customerList);
-            this.categoryList = BusinessFactory<CategoryBusiness>.Instance.GetLeafCategory();
-            this.clcCategory.SetDataSource(this.categoryList);
-
-            this.sogList.DataSource = new List<StockOutModel>();
-        }
-
         /// <summary>
         /// 输入客户代码
         /// </summary>

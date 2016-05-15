@@ -30,9 +30,13 @@ namespace Phoebe.Business.DAL
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// 查找所有出库单
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<StockOut> FindAll()
         {
-            throw new NotImplementedException();
+            return this.context.StockOuts;
         }
 
         /// <summary>
@@ -60,9 +64,24 @@ namespace Phoebe.Business.DAL
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// 删除出库
+        /// </summary>
+        /// <param name="entity">出库对象</param>
+        /// <returns></returns>
         public ErrorCode Delete(StockOut entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                this.context.StockOuts.Remove(entity);
+                this.context.SaveChanges();
+
+                return ErrorCode.Success;
+            }
+            catch(Exception)
+            {
+                return ErrorCode.Exception;
+            }
         }
         #endregion //Method
     }
