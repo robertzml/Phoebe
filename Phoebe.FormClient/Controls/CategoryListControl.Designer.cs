@@ -60,6 +60,7 @@
             this.lvCategory.TabIndex = 1;
             this.lvCategory.UseCompatibleStateImageBehavior = false;
             this.lvCategory.View = System.Windows.Forms.View.Details;
+            this.lvCategory.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.lvCategory_ItemSelectionChanged);
             // 
             // CategoryNumber
             // 

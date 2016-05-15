@@ -54,7 +54,7 @@ namespace Phoebe.FormClient
         /// 设置数据源
         /// </summary>
         /// <param name="data">客户数据</param>
-        public void SetSource(List<Customer> data)
+        public void SetDataSource(List<Customer> data)
         {
             this.customerList = data;
             UpdateView("");
@@ -92,16 +92,6 @@ namespace Phoebe.FormClient
 
         #region Event
         /// <summary>
-        /// 控件载入
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void CustomerListControl_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        /// <summary>
         /// 选择客户
         /// </summary>
         /// <param name="sender"></param>
@@ -122,7 +112,7 @@ namespace Phoebe.FormClient
             this.selectedId = Convert.ToInt32(select.Tag);
 
             if (CustomerItemSelected != null)
-                CustomerItemSelected(sender, new EventArgs());//把按钮自身作为参数传递            
+                CustomerItemSelected(sender, new EventArgs());
         }
         #endregion //Event
 

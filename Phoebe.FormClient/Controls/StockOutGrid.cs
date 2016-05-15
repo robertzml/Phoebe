@@ -23,12 +23,22 @@ namespace Phoebe.FormClient
         /// <summary>
         /// 是否能编辑
         /// </summary>
-        private bool canEdit = true;
+        private bool editable = true;
 
         /// <summary>
         /// 是否显示Footer
         /// </summary>
         private bool showFooter = true;
+
+        /// <summary>
+        /// 是否显示出库数量
+        /// </summary>
+        private bool showOutCount = true;
+
+        /// <summary>
+        /// 是否等重
+        /// </summary>
+        private bool isEqualWeight = true;
         #endregion //Field
 
         #region Constructor
@@ -39,9 +49,43 @@ namespace Phoebe.FormClient
         #endregion //Constructor
 
         #region Method
-        public void SetDataSource(List<StockOutModel> data)
+        /// <summary>
+        /// 清空数据
+        /// </summary>
+        public void Clear()
         {
-            this.bsStockOut.DataSource = data;
+            this.bsStockOut.Clear();
+        }
+
+        /// <summary>
+        /// 获取选中数据
+        /// </summary>
+        /// <returns></returns>
+        public StockOutModel GetCurrentSelect()
+        {
+            int rowIndex = this.dgvStockOut.GetFocusedDataSourceRowIndex();
+            if (rowIndex < 0 || rowIndex >= this.bsStockOut.Count)
+                return null;
+            else
+                return this.bsStockOut[rowIndex] as StockOutModel;
+        }
+
+        /// <summary>
+        /// 更新列表绑定数据显示
+        /// </summary>
+        public void UpdateBindingData()
+        {
+            this.bsStockOut.ResetBindings(false);
+        }
+
+        /// <summary>
+        /// 设置货品是否等重
+        /// </summary>
+        /// <param name="isEqualWeight">是否等重</param>
+        public void SetEqualWeight(bool isEqualWeight)
+        {
+            this.colOutWeight.OptionsColumn.AllowEdit = !isEqualWeight;
+            this.isEqualWeight = isEqualWeight;
         }
         #endregion //Method
 
@@ -53,29 +97,80 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void StockOutGrid_Load(object sender, EventArgs e)
         {
+            this.dgvStockOut.OptionsBehavior.Editable = this.editable;
             this.dgvStockOut.OptionsView.ShowFooter = this.showFooter;
+            this.colOutCount.Visible = this.showOutCount;
+            this.colOutWeight.Visible = this.showOutCount;
+            this.colOutVolume.Visible = this.showOutCount;
+            this.colRemark.Visible = this.showOutCount;            
+        }
+
+        /// <summary>
+        /// 单元格更改事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dgvStockOut_CellValueChanging(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
+        {
+            if (e.Column.Name == "colOutCount")
+            {
+                int count = 0;
+                if (!Int32.TryParse(e.Value.ToString(), out count))
+                {
+                    return;
+                }
+
+                if (this.isEqualWeight)
+                {
+                    double unitWeight = Convert.ToDouble(this.dgvStockOut.GetRowCellValue(e.RowHandle, "UnitWeight"));
+                    double totalWeight = count * unitWeight / 1000;
+                    this.dgvStockOut.SetRowCellValue(e.RowHandle, "OutWeight", totalWeight);
+                }
+
+                double unitVolume = Convert.ToDouble(this.dgvStockOut.GetRowCellValue(e.RowHandle, "UnitVolume"));
+                double totalVolume = count * unitVolume;
+                this.dgvStockOut.SetRowCellValue(e.RowHandle, "OutVolume", totalVolume);
+            }
         }
         #endregion //Event
 
         #region Property
         /// <summary>
-        /// 是否能编辑
+        /// 数据源
         /// </summary>
-        public bool CanEdit
+        [Description("数据源")]
+        public List<StockOutModel> DataSource
         {
             get
             {
-                return this.canEdit;
+                return this.bsStockOut.DataSource as List<StockOutModel>;
             }
             set
             {
-                this.canEdit = value;
+                this.bsStockOut.DataSource = value;
+            }
+        }
+
+        /// <summary>
+        /// 是否能编辑
+        /// </summary>
+        [Description("是否能编辑")]
+        public bool Editable
+        {
+            get
+            {
+                return this.editable;
+            }
+            set
+            {
+                this.editable = value;
             }
         }
 
         /// <summary>
         /// 是否显示Footer
         /// </summary>
+        [Description("是否显示Footer")]
         public bool ShowFooter
         {
             get
@@ -87,7 +182,22 @@ namespace Phoebe.FormClient
                 this.showFooter = value;
             }
         }
-        #endregion //Property
 
+        /// <summary>
+        /// 是否显示出库数量，出库重量，出库体积
+        /// </summary>
+        [Description("是否显示出库数量，出库重量，出库体积")]
+        public bool ShowOutCount
+        {
+            get
+            {
+                return this.showOutCount;
+            }
+            set
+            {
+                this.showOutCount = value;
+            }
+        }
+        #endregion //Property
     }
 }

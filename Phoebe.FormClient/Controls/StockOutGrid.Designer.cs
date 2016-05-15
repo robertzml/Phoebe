@@ -104,10 +104,16 @@
             this.dgvStockOut.Name = "dgvStockOut";
             this.dgvStockOut.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
             this.dgvStockOut.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
+            this.dgvStockOut.OptionsBehavior.Editable = false;
+            this.dgvStockOut.OptionsCustomization.AllowGroup = false;
+            this.dgvStockOut.OptionsCustomization.AllowQuickHideColumns = false;
             this.dgvStockOut.OptionsFilter.AllowFilterEditor = false;
             this.dgvStockOut.OptionsFind.AllowFindPanel = false;
+            this.dgvStockOut.OptionsMenu.EnableColumnMenu = false;
+            this.dgvStockOut.OptionsMenu.EnableGroupPanelMenu = false;
             this.dgvStockOut.OptionsView.ShowFooter = true;
             this.dgvStockOut.OptionsView.ShowGroupPanel = false;
+            this.dgvStockOut.CellValueChanging += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.dgvStockOut_CellValueChanging);
             // 
             // colId
             // 
@@ -141,36 +147,47 @@
             // 
             // colCategoryNumber
             // 
+            this.colCategoryNumber.Caption = "分类编码";
             this.colCategoryNumber.FieldName = "CategoryNumber";
             this.colCategoryNumber.Name = "colCategoryNumber";
+            this.colCategoryNumber.OptionsColumn.AllowEdit = false;
             this.colCategoryNumber.Visible = true;
             this.colCategoryNumber.VisibleIndex = 0;
             // 
             // colCategoryName
             // 
+            this.colCategoryName.Caption = "分类名称";
             this.colCategoryName.FieldName = "CategoryName";
             this.colCategoryName.Name = "colCategoryName";
+            this.colCategoryName.OptionsColumn.AllowEdit = false;
             this.colCategoryName.Visible = true;
             this.colCategoryName.VisibleIndex = 1;
             // 
             // colSpecification
             // 
+            this.colSpecification.Caption = "规格";
             this.colSpecification.FieldName = "Specification";
             this.colSpecification.Name = "colSpecification";
+            this.colSpecification.OptionsColumn.AllowEdit = false;
             this.colSpecification.Visible = true;
             this.colSpecification.VisibleIndex = 2;
             // 
             // colStoreCount
             // 
+            this.colStoreCount.Caption = "在库数量";
             this.colStoreCount.FieldName = "StoreCount";
             this.colStoreCount.Name = "colStoreCount";
+            this.colStoreCount.OptionsColumn.AllowEdit = false;
             this.colStoreCount.Visible = true;
             this.colStoreCount.VisibleIndex = 3;
             // 
             // colOutCount
             // 
+            this.colOutCount.Caption = "出库数量";
             this.colOutCount.FieldName = "OutCount";
             this.colOutCount.Name = "colOutCount";
+            this.colOutCount.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "OutCount", "合计={0:0.##}")});
             this.colOutCount.Visible = true;
             this.colOutCount.VisibleIndex = 4;
             // 
@@ -178,71 +195,98 @@
             // 
             this.colGroupType.FieldName = "GroupType";
             this.colGroupType.Name = "colGroupType";
-            this.colGroupType.Visible = true;
-            this.colGroupType.VisibleIndex = 5;
             // 
             // colUnitWeight
             // 
+            this.colUnitWeight.Caption = "单位重量(kg)";
+            this.colUnitWeight.DisplayFormat.FormatString = "0.00";
+            this.colUnitWeight.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colUnitWeight.FieldName = "UnitWeight";
             this.colUnitWeight.Name = "colUnitWeight";
+            this.colUnitWeight.OptionsColumn.AllowEdit = false;
             this.colUnitWeight.Visible = true;
-            this.colUnitWeight.VisibleIndex = 6;
+            this.colUnitWeight.VisibleIndex = 5;
             // 
             // colOutWeight
             // 
+            this.colOutWeight.Caption = "出库重量(t)";
+            this.colOutWeight.DisplayFormat.FormatString = "0.####";
+            this.colOutWeight.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colOutWeight.FieldName = "OutWeight";
             this.colOutWeight.Name = "colOutWeight";
+            this.colOutWeight.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "OutWeight", "合计={0:0.####}")});
             this.colOutWeight.Visible = true;
-            this.colOutWeight.VisibleIndex = 7;
+            this.colOutWeight.VisibleIndex = 6;
             // 
             // colUnitVolume
             // 
+            this.colUnitVolume.Caption = "单位体积(立方)";
+            this.colUnitVolume.DisplayFormat.FormatString = "0.000";
+            this.colUnitVolume.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colUnitVolume.FieldName = "UnitVolume";
             this.colUnitVolume.Name = "colUnitVolume";
+            this.colUnitVolume.OptionsColumn.AllowEdit = false;
             this.colUnitVolume.Visible = true;
-            this.colUnitVolume.VisibleIndex = 8;
+            this.colUnitVolume.VisibleIndex = 7;
             // 
             // colOutVolume
             // 
+            this.colOutVolume.Caption = "出库体积(立方)";
+            this.colOutVolume.DisplayFormat.FormatString = "0.####";
+            this.colOutVolume.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colOutVolume.FieldName = "OutVolume";
             this.colOutVolume.Name = "colOutVolume";
+            this.colOutVolume.OptionsColumn.AllowEdit = false;
+            this.colOutVolume.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "OutVolume", "合计={0:0.####}")});
             this.colOutVolume.Visible = true;
-            this.colOutVolume.VisibleIndex = 9;
+            this.colOutVolume.VisibleIndex = 8;
             // 
             // colWarehouseNumber
             // 
+            this.colWarehouseNumber.Caption = "仓位编号";
             this.colWarehouseNumber.FieldName = "WarehouseNumber";
             this.colWarehouseNumber.Name = "colWarehouseNumber";
+            this.colWarehouseNumber.OptionsColumn.AllowEdit = false;
             this.colWarehouseNumber.Visible = true;
-            this.colWarehouseNumber.VisibleIndex = 10;
+            this.colWarehouseNumber.VisibleIndex = 9;
             // 
             // colInTime
             // 
+            this.colInTime.Caption = "入库时间";
             this.colInTime.FieldName = "InTime";
             this.colInTime.Name = "colInTime";
+            this.colInTime.OptionsColumn.AllowEdit = false;
             this.colInTime.Visible = true;
-            this.colInTime.VisibleIndex = 11;
+            this.colInTime.VisibleIndex = 10;
             // 
             // colOriginPlace
             // 
+            this.colOriginPlace.Caption = "产地";
             this.colOriginPlace.FieldName = "OriginPlace";
             this.colOriginPlace.Name = "colOriginPlace";
+            this.colOriginPlace.OptionsColumn.AllowEdit = false;
             this.colOriginPlace.Visible = true;
-            this.colOriginPlace.VisibleIndex = 12;
+            this.colOriginPlace.VisibleIndex = 11;
             // 
             // colShelfLife
             // 
+            this.colShelfLife.Caption = "保质期(月)";
             this.colShelfLife.FieldName = "ShelfLife";
             this.colShelfLife.Name = "colShelfLife";
+            this.colShelfLife.OptionsColumn.AllowEdit = false;
             this.colShelfLife.Visible = true;
-            this.colShelfLife.VisibleIndex = 13;
+            this.colShelfLife.VisibleIndex = 12;
             // 
             // colRemark
             // 
+            this.colRemark.Caption = "备注";
             this.colRemark.FieldName = "Remark";
             this.colRemark.Name = "colRemark";
+            this.colRemark.OptionsColumn.AllowSort = DevExpress.Utils.DefaultBoolean.False;
             this.colRemark.Visible = true;
-            this.colRemark.VisibleIndex = 14;
+            this.colRemark.VisibleIndex = 13;
             // 
             // colStatus
             // 

@@ -50,20 +50,19 @@
             this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
             this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
             this.layoutControl2 = new DevExpress.XtraLayout.LayoutControl();
+            this.btnRemoveFrom = new DevExpress.XtraEditors.SimpleButton();
+            this.btnAddTo = new DevExpress.XtraEditors.SimpleButton();
+            this.nmOutCount = new System.Windows.Forms.NumericUpDown();
+            this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
             this.txtCategoryName = new DevExpress.XtraEditors.TextEdit();
             this.txtCategoryNumber = new DevExpress.XtraEditors.TextEdit();
             this.layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.groupControl4 = new DevExpress.XtraEditors.GroupControl();
-            this.groupControl5 = new DevExpress.XtraEditors.GroupControl();
-            this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
-            this.simpleButton3 = new DevExpress.XtraEditors.SimpleButton();
             this.tabbedControlGroup1 = new DevExpress.XtraLayout.TabbedControlGroup();
             this.layoutControlGroup3 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem12 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.emptySpaceItem3 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.tabbedControlGroup2 = new DevExpress.XtraLayout.TabbedControlGroup();
             this.layoutControlGroup4 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem14 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -71,8 +70,10 @@
             this.layoutControlItem16 = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
-            this.emptySpaceItem3 = new DevExpress.XtraLayout.EmptySpaceItem();
+            this.groupControl4 = new DevExpress.XtraEditors.GroupControl();
+            this.groupControl5 = new DevExpress.XtraEditors.GroupControl();
             this.sogFilter = new Phoebe.FormClient.StockOutGrid();
+            this.sogList = new Phoebe.FormClient.StockOutGrid();
             this.clcCustomer = new Phoebe.FormClient.CustomerListControl();
             this.clcCategory = new Phoebe.FormClient.CategoryListControl();
             this.tableLayoutPanel1.SuspendLayout();
@@ -102,18 +103,16 @@
             this.groupControl3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl2)).BeginInit();
             this.layoutControl2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nmOutCount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCategoryName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCategoryNumber.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).BeginInit();
-            this.groupControl4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem12)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedControlGroup2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem14)).BeginInit();
@@ -121,7 +120,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem16)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).BeginInit();
+            this.groupControl4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl5)).BeginInit();
+            this.groupControl5.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -367,9 +369,9 @@
             // 
             // layoutControl2
             // 
-            this.layoutControl2.Controls.Add(this.simpleButton3);
-            this.layoutControl2.Controls.Add(this.simpleButton2);
-            this.layoutControl2.Controls.Add(this.numericUpDown1);
+            this.layoutControl2.Controls.Add(this.btnRemoveFrom);
+            this.layoutControl2.Controls.Add(this.btnAddTo);
+            this.layoutControl2.Controls.Add(this.nmOutCount);
             this.layoutControl2.Controls.Add(this.btnSearch);
             this.layoutControl2.Controls.Add(this.txtCategoryName);
             this.layoutControl2.Controls.Add(this.txtCategoryNumber);
@@ -382,10 +384,55 @@
             this.layoutControl2.TabIndex = 0;
             this.layoutControl2.Text = "layoutControl2";
             // 
+            // btnRemoveFrom
+            // 
+            this.btnRemoveFrom.Location = new System.Drawing.Point(173, 109);
+            this.btnRemoveFrom.Name = "btnRemoveFrom";
+            this.btnRemoveFrom.Size = new System.Drawing.Size(154, 22);
+            this.btnRemoveFrom.StyleController = this.layoutControl2;
+            this.btnRemoveFrom.TabIndex = 11;
+            this.btnRemoveFrom.Text = "删除出库";
+            this.btnRemoveFrom.Click += new System.EventHandler(this.btnRemoveFrom_Click);
+            // 
+            // btnAddTo
+            // 
+            this.btnAddTo.Location = new System.Drawing.Point(13, 109);
+            this.btnAddTo.Name = "btnAddTo";
+            this.btnAddTo.Size = new System.Drawing.Size(156, 22);
+            this.btnAddTo.StyleController = this.layoutControl2;
+            this.btnAddTo.TabIndex = 9;
+            this.btnAddTo.Text = "加入出库";
+            this.btnAddTo.Click += new System.EventHandler(this.btnAddTo_Click);
+            // 
+            // nmOutCount
+            // 
+            this.nmOutCount.Location = new System.Drawing.Point(64, 85);
+            this.nmOutCount.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.nmOutCount.Name = "nmOutCount";
+            this.nmOutCount.Size = new System.Drawing.Size(105, 22);
+            this.nmOutCount.TabIndex = 8;
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Location = new System.Drawing.Point(172, 37);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(155, 22);
+            this.btnSearch.StyleController = this.layoutControl2;
+            this.btnSearch.TabIndex = 6;
+            this.btnSearch.Text = "搜索";
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
             // txtCategoryName
             // 
             this.txtCategoryName.Location = new System.Drawing.Point(223, 13);
             this.txtCategoryName.Name = "txtCategoryName";
+            this.txtCategoryName.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
+            this.txtCategoryName.Properties.Appearance.Options.UseBackColor = true;
+            this.txtCategoryName.Properties.ReadOnly = true;
             this.txtCategoryName.Size = new System.Drawing.Size(104, 20);
             this.txtCategoryName.StyleController = this.layoutControl2;
             this.txtCategoryName.TabIndex = 5;
@@ -412,67 +459,6 @@
             this.layoutControlGroup2.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 5, 5, 5);
             this.layoutControlGroup2.Size = new System.Drawing.Size(340, 188);
             this.layoutControlGroup2.TextVisible = false;
-            // 
-            // groupControl4
-            // 
-            this.tableLayoutPanel1.SetColumnSpan(this.groupControl4, 2);
-            this.groupControl4.Controls.Add(this.sogFilter);
-            this.groupControl4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl4.Location = new System.Drawing.Point(3, 163);
-            this.groupControl4.Name = "groupControl4";
-            this.groupControl4.Size = new System.Drawing.Size(611, 211);
-            this.groupControl4.TabIndex = 3;
-            this.groupControl4.Text = "查询结果";
-            // 
-            // groupControl5
-            // 
-            this.tableLayoutPanel1.SetColumnSpan(this.groupControl5, 2);
-            this.groupControl5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl5.Location = new System.Drawing.Point(3, 380);
-            this.groupControl5.Name = "groupControl5";
-            this.groupControl5.Size = new System.Drawing.Size(611, 211);
-            this.groupControl5.TabIndex = 4;
-            this.groupControl5.Text = "出库列表";
-            // 
-            // btnSearch
-            // 
-            this.btnSearch.Location = new System.Drawing.Point(172, 37);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(155, 22);
-            this.btnSearch.StyleController = this.layoutControl2;
-            this.btnSearch.TabIndex = 6;
-            this.btnSearch.Text = "搜索";
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
-            // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.Location = new System.Drawing.Point(64, 85);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(105, 22);
-            this.numericUpDown1.TabIndex = 8;
-            // 
-            // simpleButton2
-            // 
-            this.simpleButton2.Location = new System.Drawing.Point(13, 109);
-            this.simpleButton2.Name = "simpleButton2";
-            this.simpleButton2.Size = new System.Drawing.Size(156, 22);
-            this.simpleButton2.StyleController = this.layoutControl2;
-            this.simpleButton2.TabIndex = 9;
-            this.simpleButton2.Text = "出库";
-            // 
-            // simpleButton3
-            // 
-            this.simpleButton3.Location = new System.Drawing.Point(173, 109);
-            this.simpleButton3.Name = "simpleButton3";
-            this.simpleButton3.Size = new System.Drawing.Size(154, 22);
-            this.simpleButton3.StyleController = this.layoutControl2;
-            this.simpleButton3.TabIndex = 11;
-            this.simpleButton3.Text = "取消";
             // 
             // tabbedControlGroup1
             // 
@@ -525,6 +511,14 @@
             this.layoutControlItem12.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem12.TextVisible = false;
             // 
+            // emptySpaceItem3
+            // 
+            this.emptySpaceItem3.AllowHotTrack = false;
+            this.emptySpaceItem3.Location = new System.Drawing.Point(0, 24);
+            this.emptySpaceItem3.Name = "emptySpaceItem3";
+            this.emptySpaceItem3.Size = new System.Drawing.Size(159, 29);
+            this.emptySpaceItem3.TextSize = new System.Drawing.Size(0, 0);
+            // 
             // tabbedControlGroup2
             // 
             this.tabbedControlGroup2.Location = new System.Drawing.Point(0, 72);
@@ -551,7 +545,7 @@
             // 
             // layoutControlItem14
             // 
-            this.layoutControlItem14.Control = this.numericUpDown1;
+            this.layoutControlItem14.Control = this.nmOutCount;
             this.layoutControlItem14.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem14.Name = "layoutControlItem14";
             this.layoutControlItem14.Size = new System.Drawing.Size(160, 24);
@@ -560,7 +554,7 @@
             // 
             // layoutControlItem15
             // 
-            this.layoutControlItem15.Control = this.simpleButton2;
+            this.layoutControlItem15.Control = this.btnAddTo;
             this.layoutControlItem15.Location = new System.Drawing.Point(0, 24);
             this.layoutControlItem15.Name = "layoutControlItem15";
             this.layoutControlItem15.Size = new System.Drawing.Size(160, 26);
@@ -569,7 +563,7 @@
             // 
             // layoutControlItem16
             // 
-            this.layoutControlItem16.Control = this.simpleButton3;
+            this.layoutControlItem16.Control = this.btnRemoveFrom;
             this.layoutControlItem16.Location = new System.Drawing.Point(160, 24);
             this.layoutControlItem16.Name = "layoutControlItem16";
             this.layoutControlItem16.Size = new System.Drawing.Size(158, 26);
@@ -594,24 +588,53 @@
             this.emptySpaceItem2.Size = new System.Drawing.Size(330, 37);
             this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
             // 
-            // emptySpaceItem3
+            // groupControl4
             // 
-            this.emptySpaceItem3.AllowHotTrack = false;
-            this.emptySpaceItem3.Location = new System.Drawing.Point(0, 24);
-            this.emptySpaceItem3.Name = "emptySpaceItem3";
-            this.emptySpaceItem3.Size = new System.Drawing.Size(159, 29);
-            this.emptySpaceItem3.TextSize = new System.Drawing.Size(0, 0);
+            this.tableLayoutPanel1.SetColumnSpan(this.groupControl4, 2);
+            this.groupControl4.Controls.Add(this.sogFilter);
+            this.groupControl4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupControl4.Location = new System.Drawing.Point(3, 163);
+            this.groupControl4.Name = "groupControl4";
+            this.groupControl4.Size = new System.Drawing.Size(611, 211);
+            this.groupControl4.TabIndex = 3;
+            this.groupControl4.Text = "查询结果";
+            // 
+            // groupControl5
+            // 
+            this.tableLayoutPanel1.SetColumnSpan(this.groupControl5, 2);
+            this.groupControl5.Controls.Add(this.sogList);
+            this.groupControl5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupControl5.Location = new System.Drawing.Point(3, 380);
+            this.groupControl5.Name = "groupControl5";
+            this.groupControl5.Size = new System.Drawing.Size(611, 211);
+            this.groupControl5.TabIndex = 4;
+            this.groupControl5.Text = "出库列表";
             // 
             // sogFilter
             // 
             this.sogFilter.BackColor = System.Drawing.Color.White;
-            this.sogFilter.CanEdit = false;
+            this.sogFilter.DataSource = null;
             this.sogFilter.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.sogFilter.Editable = false;
             this.sogFilter.Location = new System.Drawing.Point(2, 21);
             this.sogFilter.Name = "sogFilter";
             this.sogFilter.ShowFooter = false;
+            this.sogFilter.ShowOutCount = false;
             this.sogFilter.Size = new System.Drawing.Size(607, 188);
             this.sogFilter.TabIndex = 0;
+            // 
+            // sogList
+            // 
+            this.sogList.BackColor = System.Drawing.Color.White;
+            this.sogList.DataSource = null;
+            this.sogList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.sogList.Editable = true;
+            this.sogList.Location = new System.Drawing.Point(2, 21);
+            this.sogList.Name = "sogList";
+            this.sogList.ShowFooter = true;
+            this.sogList.ShowOutCount = true;
+            this.sogList.Size = new System.Drawing.Size(607, 188);
+            this.sogList.TabIndex = 0;
             // 
             // clcCustomer
             // 
@@ -629,6 +652,7 @@
             this.clcCategory.Name = "clcCategory";
             this.clcCategory.Size = new System.Drawing.Size(344, 211);
             this.clcCategory.TabIndex = 7;
+            this.clcCategory.CategoryItemSelected += new Phoebe.FormClient.CategoryListControl.ItemSelectHandle(this.clcCategory_CategoryItemSelected);
             // 
             // StockOutAddControl
             // 
@@ -665,18 +689,16 @@
             this.groupControl3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl2)).EndInit();
             this.layoutControl2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.nmOutCount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCategoryName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCategoryNumber.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).EndInit();
-            this.groupControl4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem12)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedControlGroup2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem14)).EndInit();
@@ -684,7 +706,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem16)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).EndInit();
+            this.groupControl4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl5)).EndInit();
+            this.groupControl5.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -721,9 +746,9 @@
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup2;
         private CustomerListControl clcCustomer;
         private CategoryListControl clcCategory;
-        private DevExpress.XtraEditors.SimpleButton simpleButton3;
-        private DevExpress.XtraEditors.SimpleButton simpleButton2;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private DevExpress.XtraEditors.SimpleButton btnRemoveFrom;
+        private DevExpress.XtraEditors.SimpleButton btnAddTo;
+        private System.Windows.Forms.NumericUpDown nmOutCount;
         private DevExpress.XtraEditors.SimpleButton btnSearch;
         private DevExpress.XtraLayout.TabbedControlGroup tabbedControlGroup1;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup3;
@@ -738,5 +763,6 @@
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem3;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem2;
+        private StockOutGrid sogList;
     }
 }

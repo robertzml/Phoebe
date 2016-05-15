@@ -184,8 +184,8 @@ namespace Phoebe.FormClient
             this.txtUser.Text = this.currentUser.Name;
             this.dpInTime.EditValue = DateTime.Now;
 
-            this.clcCustomer.SetSource(BusinessFactory<CustomerBusiness>.Instance.FindAll());
-            this.clcCategory.SetSource(BusinessFactory<CategoryBusiness>.Instance.GetLeafCategory());
+            this.clcCustomer.SetDataSource(BusinessFactory<CustomerBusiness>.Instance.FindAll());
+            this.clcCategory.SetDataSource(BusinessFactory<CategoryBusiness>.Instance.GetLeafCategory());
         }
 
         /// <summary>

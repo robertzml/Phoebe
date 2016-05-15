@@ -85,7 +85,7 @@ namespace Phoebe.FormClient
             this.selectCustomer = null;
 
             var customerList = BusinessFactory<CustomerBusiness>.Instance.FindAll();
-            this.clcCustomer.SetSource(customerList);
+            this.clcCustomer.SetDataSource(customerList);
 
             this.categoryList = BusinessFactory<CategoryBusiness>.Instance.FindAll();
 

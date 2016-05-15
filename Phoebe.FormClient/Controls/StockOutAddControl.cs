@@ -43,6 +43,11 @@ namespace Phoebe.FormClient
         private bool isEqualWeight = true;
 
         /// <summary>
+        /// 客户列表，缓存页面使用
+        /// </summary>
+        private List<Customer> customerList;
+
+        /// <summary>
         /// 分类列表，缓存页面使用
         /// </summary>
         private List<Category> categoryList;
@@ -84,10 +89,14 @@ namespace Phoebe.FormClient
                 this.cmbContract.SelectedIndex = 0;
         }
 
-        private void SetDataControl(List<Store> stores)
+        /// <summary>
+        /// 设置数据筛选表格
+        /// </summary>
+        /// <param name="stores">数据</param>
+        private void SetFilterDataControl(List<Store> stores)
         {
             var data = ModelTranslate.StoreToStockOut(stores);
-            this.sogFilter.SetDataSource(data);
+            this.sogFilter.DataSource = data;
         }
         #endregion //Function
 
@@ -103,9 +112,12 @@ namespace Phoebe.FormClient
             this.txtUser.Text = this.currentUser.Name;
             this.dpOutTime.EditValue = DateTime.Now;
 
-            this.clcCustomer.SetSource(BusinessFactory<CustomerBusiness>.Instance.FindAll());
+            this.customerList = BusinessFactory<CustomerBusiness>.Instance.FindAll();
+            this.clcCustomer.SetDataSource(customerList);
             this.categoryList = BusinessFactory<CategoryBusiness>.Instance.GetLeafCategory();
-            this.clcCategory.SetSource(this.categoryList);
+            this.clcCategory.SetDataSource(this.categoryList);
+
+            this.sogList.DataSource = new List<StockOutModel>();
         }
 
         /// <summary>
@@ -118,7 +130,7 @@ namespace Phoebe.FormClient
             string number = this.txtCustomerNumber.EditValue.ToString();
             this.clcCustomer.UpdateView(number);
 
-            var customer = BusinessFactory<CustomerBusiness>.Instance.GetByNumber(number);
+            var customer = this.customerList.SingleOrDefault(r => r.Number == number);
             if (customer != null)
             {
                 this.txtCustomerName.Text = customer.Name;
@@ -127,7 +139,11 @@ namespace Phoebe.FormClient
                 UpdateContractList(customer.Id);
             }
             else
+            {
                 this.txtCustomerName.Text = "";
+                this.selectCustomer = null;
+                this.cmbContract.Properties.Items.Clear();
+            }
         }
 
         /// <summary>
@@ -169,15 +185,18 @@ namespace Phoebe.FormClient
                 if ((BillingType)this.selectContract.BillingType == BillingType.VariousWeight)
                 {
                     this.isEqualWeight = false;
-                    // this.colInWeight.OptionsColumn.AllowEdit = true;
+                    this.sogList.SetEqualWeight(false);
                 }
                 else
                 {
                     this.isEqualWeight = true;
-                    // this.colInWeight.OptionsColumn.AllowEdit = false;
+                    this.sogList.SetEqualWeight(true);
                 }
                 this.txtBillingType.Text = ((BillingType)this.selectContract.BillingType).DisplayName();
             }
+
+            this.sogFilter.Clear();
+            this.sogList.Clear();
         }
 
         /// <summary>
@@ -202,6 +221,21 @@ namespace Phoebe.FormClient
         }
 
         /// <summary>
+        /// 选择分类
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void clcCategory_CategoryItemSelected(object sender, EventArgs e)
+        {
+            this.txtCategoryNumber.EditValueChanged -= txtCategoryNumber_EditValueChanged;
+
+            this.txtCategoryNumber.Text = this.clcCategory.SelectedNumber;
+            this.txtCategoryName.Text = this.clcCategory.SelectedName;
+
+            this.txtCategoryNumber.EditValueChanged += txtCategoryNumber_EditValueChanged;
+        }
+
+        /// <summary>
         /// 搜索库存记录
         /// </summary>
         /// <param name="sender"></param>
@@ -215,7 +249,73 @@ namespace Phoebe.FormClient
             }
 
             var data = BusinessFactory<StoreBusiness>.Instance.GetByContract(this.selectContract.Id, true);
-            SetDataControl(data);
+            var category = BusinessFactory<CategoryBusiness>.Instance.GetByParent(this.txtCategoryNumber.Text);
+            if (category != null)
+            {
+                data = data.Where(r => category.Select(s => s.Id).Contains(r.Cargo.CategoryId)).ToList();
+            }
+
+            SetFilterDataControl(data);
+        }
+
+        /// <summary>
+        /// 加入出库
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnAddTo_Click(object sender, EventArgs e)
+        {
+            if (this.selectContract == null)
+            {
+                MessageBox.Show("未选择合同", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            var select = this.sogFilter.GetCurrentSelect();
+            if (select == null)
+            {
+                MessageBox.Show("未选择货品", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            else
+            {
+                int count = Convert.ToInt32(this.nmOutCount.Value);
+                if (count > select.StoreCount)
+                {
+                    MessageBox.Show("出库数量大于在库数量", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                select.OutCount = count;
+                if (this.isEqualWeight)
+                {
+                    select.OutWeight = count * select.UnitWeight / 1000;
+                }
+                select.OutVolume = count * select.UnitVolume;
+
+                this.sogList.DataSource.Add(select);
+                this.sogList.UpdateBindingData();
+            }
+        }
+
+        /// <summary>
+        /// 删除出库
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnRemoveFrom_Click(object sender, EventArgs e)
+        {
+            var select = this.sogList.GetCurrentSelect();
+            if (select == null)
+            {
+                MessageBox.Show("未选择货品", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            else
+            {
+                this.sogList.DataSource.Remove(select);
+                this.sogList.UpdateBindingData();
+            }
         }
         #endregion //Event
     }

@@ -26,6 +26,16 @@ namespace Phoebe.Business.DAL
         }
 
         /// <summary>
+        /// 按条件查找分类
+        /// </summary>
+        /// <param name="predicate">查询条件</param>
+        /// <returns></returns>
+        public Category FindOne(Expression<Func<Category, bool>> predicate)
+        {
+            return this.context.Categories.SingleOrDefault(predicate);
+        }
+
+        /// <summary>
         /// 获取所有分类
         /// </summary>
         /// <returns></returns>
@@ -103,11 +113,6 @@ namespace Phoebe.Business.DAL
 
 
         public ErrorCode Delete(Category entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Category FindOne(Expression<Func<Category, bool>> predicate)
         {
             throw new NotImplementedException();
         }

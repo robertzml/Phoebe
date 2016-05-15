@@ -79,7 +79,6 @@
             this.Controls.Add(this.gpMain);
             this.Name = "CustomerListControl";
             this.Size = new System.Drawing.Size(220, 285);
-            this.Load += new System.EventHandler(this.CustomerListControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gpMain)).EndInit();
             this.gpMain.ResumeLayout(false);
             this.ResumeLayout(false);

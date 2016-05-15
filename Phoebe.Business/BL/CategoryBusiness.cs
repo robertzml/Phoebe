@@ -102,6 +102,31 @@ namespace Phoebe.Business
                 return GetByNumber(number);
             }
         }
+
+        /// <summary>
+        /// 获取分类及子分类
+        /// </summary>
+        /// <param name="number">分类编码</param>
+        /// <returns></returns>
+        public List<Category> GetByParent(string number)
+        {
+            var parent = this.dal.FindOne(r => r.Number == number);
+            if (parent == null)
+            {
+                return null;
+            }
+            else
+            {
+                List<Category> data = new List<Category>();
+
+                data.Add(parent);
+
+                var children = this.dal.Find(r => r.ParentId == parent.Id);
+                data.AddRange(children);
+
+                return data;
+            }
+        }
         #endregion //Method
     }
 }
