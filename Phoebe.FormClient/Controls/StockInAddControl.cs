@@ -16,7 +16,7 @@ namespace Phoebe.FormClient
     using Phoebe.Model;
 
     /// <summary>
-    /// 新建入库界面
+    /// 入库添加控件
     /// </summary>
     public partial class StockInAddControl : UserControl
     {

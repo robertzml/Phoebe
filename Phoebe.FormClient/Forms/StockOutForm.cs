@@ -20,7 +20,7 @@ namespace Phoebe.FormClient
     public partial class StockOutForm : BaseForm
     {
         #region Field
-
+        private StockOutAddControl stockOutAdd;
         #endregion //Field
 
         #region Constructor
@@ -29,5 +29,28 @@ namespace Phoebe.FormClient
             InitializeComponent();
         }
         #endregion //Constructor
+
+        #region Event
+        /// <summary>
+        /// 窗体载入
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void StockOutForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// 新建出库
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tsbNew_Click(object sender, EventArgs e)
+        {
+            this.stockOutAdd = new StockOutAddControl(this.currentUser);
+            ChildFormManage.LoadContentControl(this.plBody, this.stockOutAdd);
+        }
+        #endregion //Event
     }
 }

@@ -280,6 +280,8 @@
             // 
             this.txtCustomerName.Location = new System.Drawing.Point(284, 36);
             this.txtCustomerName.Name = "txtCustomerName";
+            this.txtCustomerName.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
+            this.txtCustomerName.Properties.Appearance.Options.UseBackColor = true;
             this.txtCustomerName.Properties.ReadOnly = true;
             this.txtCustomerName.Size = new System.Drawing.Size(172, 20);
             this.txtCustomerName.StyleController = this.layoutControl1;
@@ -971,7 +973,7 @@
             this.tableLayoutPanel1.SetRowSpan(this.groupControl5, 2);
             this.groupControl5.Size = new System.Drawing.Size(194, 314);
             this.groupControl5.TabIndex = 4;
-            this.groupControl5.Text = "货品编码";
+            this.groupControl5.Text = "类别编码";
             // 
             // lvCategory
             // 

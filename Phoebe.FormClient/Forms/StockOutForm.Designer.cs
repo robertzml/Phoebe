@@ -97,7 +97,7 @@
             // xtraTabPage2
             // 
             this.xtraTabPage2.Name = "xtraTabPage2";
-            this.xtraTabPage2.Size = new System.Drawing.Size(206, 413);
+            this.xtraTabPage2.Size = new System.Drawing.Size(206, 485);
             this.xtraTabPage2.Text = "查询";
             // 
             // tsStockOut
@@ -127,6 +127,7 @@
             this.tsbNew.Size = new System.Drawing.Size(52, 22);
             this.tsbNew.Text = "新建";
             this.tsbNew.ToolTipText = "新建";
+            this.tsbNew.Click += new System.EventHandler(this.tsbNew_Click);
             // 
             // tsbClose
             // 
@@ -225,6 +226,7 @@
             this.Controls.Add(this.groupControl1);
             this.Name = "StockOutForm";
             this.Text = "货品出库";
+            this.Load += new System.EventHandler(this.StockOutForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
             this.groupControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tcStockOut)).EndInit();
