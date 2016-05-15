@@ -98,7 +98,7 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void CustomerListControl_Load(object sender, EventArgs e)
         {
-           
+
         }
 
         /// <summary>
@@ -130,6 +130,7 @@ namespace Phoebe.FormClient
         /// <summary>
         /// 选择客户ID
         /// </summary>
+        [Description("选择客户ID")]
         public int SelectedId
         {
             get
@@ -141,6 +142,7 @@ namespace Phoebe.FormClient
         /// <summary>
         /// 选择客户编码
         /// </summary>
+        [Description("选择客户编码")]
         public string SelectedNumber
         {
             get
@@ -152,6 +154,7 @@ namespace Phoebe.FormClient
         /// <summary>
         /// 选择客户姓名
         /// </summary>
+        [Description("选择客户姓名")]
         public string SelectedName
         {
             get

@@ -99,14 +99,8 @@
             this.colStatus = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.gnStockIn = new Phoebe.FormClient.GridNavigator();
-            this.groupControl4 = new DevExpress.XtraEditors.GroupControl();
-            this.lvCustomer = new System.Windows.Forms.ListView();
-            this.CustomerNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.CustomerName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.groupControl5 = new DevExpress.XtraEditors.GroupControl();
-            this.lvCategory = new System.Windows.Forms.ListView();
-            this.CategoryNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.CategoryName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.clcCustomer = new Phoebe.FormClient.CustomerListControl();
+            this.clcCategory = new Phoebe.FormClient.CategoryListControl();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
@@ -162,10 +156,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvStockIn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).BeginInit();
-            this.groupControl4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl5)).BeginInit();
-            this.groupControl5.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -177,8 +167,8 @@
             this.tableLayoutPanel1.Controls.Add(this.groupControl1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.groupControl2, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.groupControl3, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.groupControl4, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.groupControl5, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.clcCustomer, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.clcCategory, 2, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -186,6 +176,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 160F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 160F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1100, 624);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
@@ -927,78 +918,24 @@
             this.gnStockIn.Size = new System.Drawing.Size(247, 26);
             this.gnStockIn.TabIndex = 0;
             // 
-            // groupControl4
+            // clcCustomer
             // 
-            this.groupControl4.Controls.Add(this.lvCustomer);
-            this.groupControl4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl4.Location = new System.Drawing.Point(703, 3);
-            this.groupControl4.Name = "groupControl4";
-            this.tableLayoutPanel1.SetRowSpan(this.groupControl4, 2);
-            this.groupControl4.Size = new System.Drawing.Size(194, 314);
-            this.groupControl4.TabIndex = 3;
-            this.groupControl4.Text = "客户列表";
+            this.clcCustomer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.clcCustomer.Location = new System.Drawing.Point(703, 3);
+            this.clcCustomer.Name = "clcCustomer";
+            this.tableLayoutPanel1.SetRowSpan(this.clcCustomer, 2);
+            this.clcCustomer.Size = new System.Drawing.Size(194, 314);
+            this.clcCustomer.TabIndex = 5;
+            this.clcCustomer.CustomerItemSelected += new Phoebe.FormClient.CustomerListControl.ItemSelectHandle(this.clcCustomer_CustomerItemSelected);
             // 
-            // lvCustomer
+            // clcCategory
             // 
-            this.lvCustomer.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.CustomerNumber,
-            this.CustomerName});
-            this.lvCustomer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lvCustomer.FullRowSelect = true;
-            this.lvCustomer.Location = new System.Drawing.Point(2, 21);
-            this.lvCustomer.MultiSelect = false;
-            this.lvCustomer.Name = "lvCustomer";
-            this.lvCustomer.Size = new System.Drawing.Size(190, 291);
-            this.lvCustomer.TabIndex = 0;
-            this.lvCustomer.UseCompatibleStateImageBehavior = false;
-            this.lvCustomer.View = System.Windows.Forms.View.Details;
-            this.lvCustomer.SelectedIndexChanged += new System.EventHandler(this.lvCustomer_SelectedIndexChanged);
-            // 
-            // CustomerNumber
-            // 
-            this.CustomerNumber.Text = "编号";
-            this.CustomerNumber.Width = 100;
-            // 
-            // CustomerName
-            // 
-            this.CustomerName.Text = "名称";
-            this.CustomerName.Width = 190;
-            // 
-            // groupControl5
-            // 
-            this.groupControl5.Controls.Add(this.lvCategory);
-            this.groupControl5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl5.Location = new System.Drawing.Point(903, 3);
-            this.groupControl5.Name = "groupControl5";
-            this.tableLayoutPanel1.SetRowSpan(this.groupControl5, 2);
-            this.groupControl5.Size = new System.Drawing.Size(194, 314);
-            this.groupControl5.TabIndex = 4;
-            this.groupControl5.Text = "类别编码";
-            // 
-            // lvCategory
-            // 
-            this.lvCategory.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.CategoryNumber,
-            this.CategoryName});
-            this.lvCategory.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lvCategory.FullRowSelect = true;
-            this.lvCategory.Location = new System.Drawing.Point(2, 21);
-            this.lvCategory.MultiSelect = false;
-            this.lvCategory.Name = "lvCategory";
-            this.lvCategory.Size = new System.Drawing.Size(190, 291);
-            this.lvCategory.TabIndex = 0;
-            this.lvCategory.UseCompatibleStateImageBehavior = false;
-            this.lvCategory.View = System.Windows.Forms.View.Details;
-            // 
-            // CategoryNumber
-            // 
-            this.CategoryNumber.Text = "编码";
-            this.CategoryNumber.Width = 90;
-            // 
-            // CategoryName
-            // 
-            this.CategoryName.Text = "名称";
-            this.CategoryName.Width = 100;
+            this.clcCategory.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.clcCategory.Location = new System.Drawing.Point(903, 3);
+            this.clcCategory.Name = "clcCategory";
+            this.tableLayoutPanel1.SetRowSpan(this.clcCategory, 2);
+            this.clcCategory.Size = new System.Drawing.Size(194, 314);
+            this.clcCategory.TabIndex = 6;
             // 
             // StockInAddControl
             // 
@@ -1064,10 +1001,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvStockIn)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).EndInit();
-            this.groupControl4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl5)).EndInit();
-            this.groupControl5.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1078,8 +1011,6 @@
         private DevExpress.XtraEditors.GroupControl groupControl1;
         private DevExpress.XtraEditors.GroupControl groupControl2;
         private DevExpress.XtraEditors.GroupControl groupControl3;
-        private DevExpress.XtraEditors.GroupControl groupControl4;
-        private DevExpress.XtraEditors.GroupControl groupControl5;
         private DevExpress.XtraEditors.DateEdit dpInTime;
         private DevExpress.XtraEditors.TextEdit txtUser;
         private DevExpress.XtraEditors.TextEdit txtRemark;
@@ -1092,9 +1023,6 @@
         private DevExpress.XtraGrid.GridControl dgcStockIn;
         private DevExpress.XtraGrid.Views.Grid.GridView dgvStockIn;
         private System.Windows.Forms.BindingSource bsStockIn;
-        private System.Windows.Forms.ListView lvCustomer;
-        private System.Windows.Forms.ColumnHeader CustomerNumber;
-        private System.Windows.Forms.ColumnHeader CustomerName;
         private System.Windows.Forms.NumericUpDown nmHandlingPrice;
         private System.Windows.Forms.NumericUpDown nmHandlingUnitPrice;
         private System.Windows.Forms.NumericUpDown nmUnitPrice;
@@ -1104,9 +1032,6 @@
         private System.Windows.Forms.NumericUpDown nmDisposePrice;
         private System.Windows.Forms.NumericUpDown nmFreezePrice;
         private System.Windows.Forms.NumericUpDown nmFreezeUnitPrice;
-        private System.Windows.Forms.ListView lvCategory;
-        private System.Windows.Forms.ColumnHeader CategoryNumber;
-        private System.Windows.Forms.ColumnHeader CategoryName;
         private DevExpress.XtraLayout.LayoutControl layoutControl1;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup1;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
@@ -1152,5 +1077,7 @@
         private GridNavigator gnStockIn;
         private DevExpress.XtraEditors.TextEdit txtBillingRemark;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem18;
+        private CustomerListControl clcCustomer;
+        private CategoryListControl clcCategory;
     }
 }
