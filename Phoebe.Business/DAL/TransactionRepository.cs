@@ -113,7 +113,7 @@ namespace Phoebe.Business.DAL
                 this.context.SaveChanges();
                 return ErrorCode.Success;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return ErrorCode.Exception;
             }

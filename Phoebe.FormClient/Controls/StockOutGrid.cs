@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -9,13 +8,10 @@ using System.Windows.Forms;
 
 namespace Phoebe.FormClient
 {
-    using Phoebe.Base;
-    using Phoebe.Business;
-    using Phoebe.Common;
     using Phoebe.Model;
 
     /// <summary>
-    /// 出库货品列表
+    /// 出库货品表格控件
     /// </summary>
     public partial class StockOutGrid : UserControl
     {

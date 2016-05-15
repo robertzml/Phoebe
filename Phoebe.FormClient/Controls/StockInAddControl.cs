@@ -39,7 +39,7 @@ namespace Phoebe.FormClient
         /// <summary>
         /// 货品是否等重
         /// </summary>
-        private bool isEqualWeight = true;
+        private bool isEqualWeight = true;      
         #endregion //Field
 
         #region Constructor
@@ -48,6 +48,15 @@ namespace Phoebe.FormClient
             InitializeComponent();
 
             this.currentUser = user;
+            this.txtStatus.Text = "新建入库";
+            this.txtUser.Text = this.currentUser.Name;
+            this.dpInTime.EditValue = DateTime.Now;
+
+            this.clcCustomer.SetDataSource(BusinessFactory<CustomerBusiness>.Instance.FindAll());
+            this.clcCategory.SetDataSource(BusinessFactory<CategoryBusiness>.Instance.GetLeafCategory());
+
+            this.sigList.DataSource = new List<StockInModel>();
+            this.sigList.SetCategoryList(BusinessFactory<CategoryBusiness>.Instance.GetLeafCategory());
         }
         #endregion //Constructor
 
@@ -86,7 +95,7 @@ namespace Phoebe.FormClient
         {
             errorMessage = "";
             newId = Guid.Empty;
-            this.dgvStockIn.CloseEditor();
+            this.sigList.CloseEditor();
 
             // check input data
             if (this.selectCustomer == null || this.selectContract == null)
@@ -94,12 +103,12 @@ namespace Phoebe.FormClient
                 errorMessage = "请选择客户和合同";
                 return ErrorCode.Error;
             }
-            if (this.bsStockIn.Count == 0)
+            if (this.sigList.DataSource.Count == 0)
             {
                 errorMessage = "没有入库货品";
                 return ErrorCode.Error;
             }
-            foreach (StockInModel item in this.bsStockIn)
+            foreach (StockInModel item in this.sigList.DataSource)
             {
                 if (item.CategoryId == 0)
                 {
@@ -120,7 +129,7 @@ namespace Phoebe.FormClient
 
             // add cargo and set item field
             List<StockInModel> siModels = new List<StockInModel>();
-            foreach (StockInModel item in this.bsStockIn)
+            foreach (StockInModel item in this.sigList.DataSource)
             {
                 item.ContractId = this.selectContract.Id;
                 item.GroupType = this.selectContract.BillingType;
@@ -180,12 +189,7 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void StockInAddControl_Load(object sender, EventArgs e)
         {
-            this.txtStatus.Text = "新建入库";
-            this.txtUser.Text = this.currentUser.Name;
-            this.dpInTime.EditValue = DateTime.Now;
-
-            this.clcCustomer.SetDataSource(BusinessFactory<CustomerBusiness>.Instance.FindAll());
-            this.clcCategory.SetDataSource(BusinessFactory<CategoryBusiness>.Instance.GetLeafCategory());
+            
         }
 
         /// <summary>
@@ -246,90 +250,39 @@ namespace Phoebe.FormClient
                 this.selectContract = BusinessFactory<ContractBusiness>.Instance.FindById(contractId);
 
                 if ((BillingType)this.selectContract.BillingType == BillingType.VariousWeight)
-                {
                     this.isEqualWeight = false;
-                    this.colInWeight.OptionsColumn.AllowEdit = true;
-                }
                 else
-                {
                     this.isEqualWeight = true;
-                    this.colInWeight.OptionsColumn.AllowEdit = false;
-                }
+
+                this.sigList.SetEqualWeight(this.isEqualWeight);
                 this.txtBillingType.Text = ((BillingType)this.selectContract.BillingType).DisplayName();
             }
         }
 
         /// <summary>
-        /// 单元格更改事件
+        /// 新增行
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void dgvStockIn_CellValueChanging(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
+        private void btnAddRow_Click(object sender, EventArgs e)
         {
-            if (e.Column.Name == "colCategoryNumber")
-            {
-                string number = e.Value.ToString();
-                this.clcCategory.UpdateView(number);
+            this.sigList.AddNew();
+        }
 
-                var category = BusinessFactory<CategoryBusiness>.Instance.GetByNumber(number, true);
-                if (category != null)
-                {
-                    this.dgvStockIn.SetRowCellValue(e.RowHandle, "CategoryName", category.Name);
-                    this.dgvStockIn.SetRowCellValue(e.RowHandle, "CategoryId", category.Id);
-                }
-                else
-                {
-                    this.dgvStockIn.SetRowCellValue(e.RowHandle, "CategoryName", "");
-                    this.dgvStockIn.SetRowCellValue(e.RowHandle, "CategoryId", 0);
-                }
-            }
-            else if (e.Column.Name == "colInCount")
-            {
-                int count = 0;
-                if (!Int32.TryParse(e.Value.ToString(), out count))
-                {
-                    return;
-                }
-
-                if (this.isEqualWeight)
-                {
-                    double unitWeight = Convert.ToDouble(this.dgvStockIn.GetRowCellValue(e.RowHandle, "UnitWeight"));
-                    double totalWeight = count * unitWeight / 1000;
-                    this.dgvStockIn.SetRowCellValue(e.RowHandle, "InWeight", totalWeight);
-                }
-
-                double unitVolume = Convert.ToDouble(this.dgvStockIn.GetRowCellValue(e.RowHandle, "UnitVolume"));
-                double totalVolume = count * unitVolume;
-                this.dgvStockIn.SetRowCellValue(e.RowHandle, "InVolume", totalVolume);
-            }
-            else if (e.Column.Name == "colUnitWeight")
-            {
-                if (!this.isEqualWeight)
-                    return;
-
-                double unitWeight = 0;
-                if (!double.TryParse(e.Value.ToString(), out unitWeight))
-                {
-                    return;
-                }
-
-                int count = Convert.ToInt32(this.dgvStockIn.GetRowCellValue(e.RowHandle, "InCount"));
-                double totalWeight = count * unitWeight / 1000;
-                this.dgvStockIn.SetRowCellValue(e.RowHandle, "InWeight", totalWeight);
-            }
-            else if (e.Column.Name == "colUnitVolume")
-            {
-                double unitVolume = 0;
-                if (!double.TryParse(e.Value.ToString(), out unitVolume))
-                {
-                    return;
-                }
-
-                int count = Convert.ToInt32(this.dgvStockIn.GetRowCellValue(e.RowHandle, "InCount"));
-                double totalVolume = count * unitVolume;
-                this.dgvStockIn.SetRowCellValue(e.RowHandle, "InVolume", totalVolume);
-            }
+        /// <summary>
+        /// 删除行
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnRemoveRow_Click(object sender, EventArgs e)
+        {
+            this.sigList.RemoveCurrent();
         }
         #endregion //Event
+
+        private void sigList_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
+        {
+            this.clcCategory.UpdateView(e.Value.ToString());
+        }
     }
 }

@@ -218,6 +218,18 @@
     <Compile Include="Controls\StockOutViewControl.Designer.cs">
       <DependentUpon>StockOutViewControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\StockOutEditControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\StockOutEditControl.Designer.cs">
+      <DependentUpon>StockOutEditControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\StockInGrid.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\StockInGrid.Designer.cs">
+      <DependentUpon>StockInGrid.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utils\ModelTranslate.cs" />
     <EmbeddedResource Include="Controls\CategoryListControl.resx">
       <DependentUpon>CategoryListControl.cs</DependentUpon>
@@ -234,11 +246,17 @@
     <EmbeddedResource Include="Controls\StockInEditControl.resx">
       <DependentUpon>StockInEditControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\StockInGrid.resx">
+      <DependentUpon>StockInGrid.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\StockInViewControl.resx">
       <DependentUpon>StockInViewControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\StockOutAddControl.resx">
       <DependentUpon>StockOutAddControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\StockOutEditControl.resx">
+      <DependentUpon>StockOutEditControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\CategoryEditForm.resx">
       <DependentUpon>CategoryEditForm.cs</DependentUpon>

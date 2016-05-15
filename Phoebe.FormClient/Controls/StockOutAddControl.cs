@@ -239,15 +239,11 @@ namespace Phoebe.FormClient
                 this.selectContract = BusinessFactory<ContractBusiness>.Instance.FindById(contractId);
 
                 if ((BillingType)this.selectContract.BillingType == BillingType.VariousWeight)
-                {
                     this.isEqualWeight = false;
-                    this.sogList.SetEqualWeight(false);
-                }
                 else
-                {
                     this.isEqualWeight = true;
-                    this.sogList.SetEqualWeight(true);
-                }
+
+                this.sogList.SetEqualWeight(this.isEqualWeight);
                 this.txtBillingType.Text = ((BillingType)this.selectContract.BillingType).DisplayName();
             }
 

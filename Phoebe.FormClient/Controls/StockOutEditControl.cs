@@ -15,9 +15,9 @@ namespace Phoebe.FormClient
     using Phoebe.Model;
 
     /// <summary>
-    /// 出库查看控件
+    /// 出库编辑控件
     /// </summary>
-    public partial class StockOutViewControl : UserControl
+    public partial class StockOutEditControl : UserControl
     {
         #region Field
         /// <summary>
@@ -28,17 +28,16 @@ namespace Phoebe.FormClient
 
         #region Constructor
         /// <summary>
-        /// 出库查看控件
+        /// 出库编辑控件
         /// </summary>
         /// <param name="stockOutId">出库单ID</param>
-        public StockOutViewControl(Guid stockOutId)
+        public StockOutEditControl(Guid stockOutId)
         {
             InitializeComponent();
 
             this.stockOut = BusinessFactory<StockOutBusiness>.Instance.FindById(stockOutId);
 
             SetBaseControl(this.stockOut);
-            SetDataControl(this.stockOut);
         }
         #endregion //Constructor
 
@@ -60,18 +59,6 @@ namespace Phoebe.FormClient
             this.txtFlowNumber.Text = stockOut.FlowNumber;
         }
 
-        /// <summary>
-        /// 设置出库数据信息
-        /// </summary>
-        /// <param name="stockOut">出库单对象</param>
-        private void SetDataControl(StockOut stockOut)
-        {
-            var data = ModelTranslate.StockOutToModel(stockOut);
-            this.sogList.DataSource = data;
-        }
         #endregion //Function
-
-        #region Event
-        #endregion //Event
     }
 }

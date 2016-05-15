@@ -46,6 +46,11 @@ namespace Phoebe.FormClient
         private StockOutViewControl stockOutView;
 
         /// <summary>
+        /// 编辑出库界面
+        /// </summary>
+        private StockOutEditControl stockOutEdit;
+
+        /// <summary>
         /// 最新选择树形节点
         /// </summary>
         private string lastMonth = "";
@@ -315,7 +320,23 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void tsbEdit_Click(object sender, EventArgs e)
         {
+            if (this.currentStockOutId == Guid.Empty)
+            {
+                MessageBox.Show("当前未选中出库单", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
 
+            if (this.stockOutState != EntityStatus.StockOutReady)
+            {
+                MessageBox.Show("出库已确认，无法编辑", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            this.formState = StockOutFormState.Edit;
+            UpdateToolbar();
+
+            this.stockOutEdit = new StockOutEditControl(this.currentStockOutId);
+            ChildFormManage.LoadContentControl(this.plBody, this.stockOutEdit);
         }
 
         /// <summary>
