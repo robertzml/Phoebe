@@ -130,7 +130,6 @@ namespace Phoebe.FormClient
                     DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs arg = new DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs(e.RowHandle, e.Column, number);                    
                     CellValueChanged(sender,arg);
                 }
-                //this.clcCategory.UpdateView(number);
 
                 var category = this.categoryList.SingleOrDefault(r => r.Number == number);
                 if (category != null)

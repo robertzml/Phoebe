@@ -143,11 +143,10 @@
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 4;
+            this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 160F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 160F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1100, 624);
             this.tableLayoutPanel1.TabIndex = 0;
@@ -433,14 +432,14 @@
             this.groupControl3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl3.Location = new System.Drawing.Point(3, 323);
             this.groupControl3.Name = "groupControl3";
-            this.groupControl3.Size = new System.Drawing.Size(1094, 278);
+            this.groupControl3.Size = new System.Drawing.Size(1094, 298);
             this.groupControl3.TabIndex = 2;
             this.groupControl3.Text = "货品信息";
             // 
             // btnRemoveRow
             // 
             this.btnRemoveRow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnRemoveRow.Location = new System.Drawing.Point(86, 250);
+            this.btnRemoveRow.Location = new System.Drawing.Point(86, 270);
             this.btnRemoveRow.Name = "btnRemoveRow";
             this.btnRemoveRow.Size = new System.Drawing.Size(75, 23);
             this.btnRemoveRow.TabIndex = 2;
@@ -450,7 +449,7 @@
             // btnAddRow
             // 
             this.btnAddRow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnAddRow.Location = new System.Drawing.Point(5, 250);
+            this.btnAddRow.Location = new System.Drawing.Point(5, 270);
             this.btnAddRow.Name = "btnAddRow";
             this.btnAddRow.Size = new System.Drawing.Size(75, 23);
             this.btnAddRow.TabIndex = 1;
@@ -464,7 +463,7 @@
             this.sigList.Editable = true;
             this.sigList.Location = new System.Drawing.Point(2, 21);
             this.sigList.Name = "sigList";
-            this.sigList.Size = new System.Drawing.Size(1090, 255);
+            this.sigList.Size = new System.Drawing.Size(1090, 275);
             this.sigList.TabIndex = 0;
             this.sigList.CellValueChanged += new Phoebe.FormClient.StockInGrid.CellChangedHandle(this.sigList_CellValueChanged);
             // 
@@ -707,7 +706,6 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "StockInAddControl";
             this.Size = new System.Drawing.Size(1100, 624);
-            this.Load += new System.EventHandler(this.StockInAddControl_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
             this.groupControl2.ResumeLayout(false);

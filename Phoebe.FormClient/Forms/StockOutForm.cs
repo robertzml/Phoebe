@@ -121,6 +121,7 @@ namespace Phoebe.FormClient
         /// <summary>
         /// 更新票据列表
         /// </summary>
+        /// <param name="month">打开节点</param>
         private void UpdateTree(string month = "")
         {
             this.tvStockOut.BeginUpdate();

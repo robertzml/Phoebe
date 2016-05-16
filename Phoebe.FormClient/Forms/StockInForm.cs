@@ -49,6 +49,11 @@ namespace Phoebe.FormClient
         /// 编辑入库界面
         /// </summary>
         private StockInEditControl stockInEdit;
+
+        /// <summary>
+        /// 最新选择树形节点
+        /// </summary>
+        private string lastMonth = "";
         #endregion //Field
 
         #region Constructor
@@ -116,7 +121,8 @@ namespace Phoebe.FormClient
         /// <summary>
         /// 更新票据列表
         /// </summary>
-        private void UpdateTree()
+        /// <param name="month">打开节点</param>
+        private void UpdateTree(string month = "")
         {
             this.tvStockIn.BeginUpdate();
             this.tvStockIn.Nodes.Clear();
@@ -131,31 +137,16 @@ namespace Phoebe.FormClient
                 node.Nodes.Add("");
                 this.tvStockIn.Nodes.Add(node);
             }
+
+            if (month != "")
+            {
+                var find = this.tvStockIn.Nodes.Find(month, false);
+                if (find.Count() != 0)
+                {
+                    find[0].Expand();
+                }
+            }
             this.tvStockIn.EndUpdate();
-        }
-
-        /// <summary>
-        /// 选择票据节点
-        /// </summary>
-        private void SelectTreeNode()
-        {
-            if (this.currentStockInId == Guid.Empty)
-                return;
-
-            var si = BusinessFactory<StockInBusiness>.Instance.FindById(this.currentStockInId);
-            if (si == null)
-                return;
-
-            var nodes = this.tvStockIn.Nodes.Find(si.MonthTime, false);
-            if (nodes.Count() == 0)
-                return;
-
-            nodes[0].Expand();
-            var find = nodes[0].Nodes.Find(this.currentStockInId.ToString(), false);
-            if (find.Count() == 0)
-                return;
-
-            this.tvStockIn.SelectedNode = find[0];
         }
         #endregion //Function
 
@@ -211,6 +202,7 @@ namespace Phoebe.FormClient
                 return;
             }
 
+            this.lastMonth = e.Node.Parent.Text;
             this.currentStockInId = new Guid(e.Node.Name);
             this.stockInState = (EntityStatus)e.Node.Tag;
             this.formState = StockInFormState.View;
@@ -262,9 +254,9 @@ namespace Phoebe.FormClient
         {
             if (this.formState == StockInFormState.Add) //保存新建
             {
-                string errorMessage;
+                string errorMessage, month;
                 Guid newId;
-                ErrorCode result = this.stockInAdd.Save(out errorMessage, out newId);
+                ErrorCode result = this.stockInAdd.Save(out errorMessage, out newId, out month);
                 if (result == ErrorCode.Success)
                 {
                     MessageBox.Show("保存入库成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -273,7 +265,7 @@ namespace Phoebe.FormClient
                     this.stockInState = EntityStatus.StockInReady;
                     this.formState = StockInFormState.View;
 
-                    UpdateTree();
+                    UpdateTree(month);
                     UpdateToolbar();
 
                     this.stockInView = new StockInViewControl(this.currentStockInId);
@@ -345,7 +337,7 @@ namespace Phoebe.FormClient
                 this.stockInState = EntityStatus.StockIn;
                 this.formState = StockInFormState.View;
 
-                UpdateTree();
+                UpdateTree(this.lastMonth);
                 UpdateToolbar();
             }
             else
@@ -423,7 +415,7 @@ namespace Phoebe.FormClient
                     this.formState = StockInFormState.Empty;
 
                     ChildFormManage.LoadContentControl(this.plBody, this.plEmpty);
-                    UpdateTree();
+                    UpdateTree(this.lastMonth);
                     UpdateToolbar();
                 }
                 else

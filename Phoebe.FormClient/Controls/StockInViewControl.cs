@@ -21,11 +21,6 @@ namespace Phoebe.FormClient
     {
         #region Field
         /// <summary>
-        /// 关联入库单ID
-        /// </summary>
-        private Guid stockInId;
-
-        /// <summary>
         /// 关联入库单
         /// </summary>
         private StockIn stockIn;
@@ -35,11 +30,20 @@ namespace Phoebe.FormClient
         public StockInViewControl(Guid stockInId)
         {
             InitializeComponent();
-            this.stockInId = stockInId;
+
+            this.stockIn = BusinessFactory<StockInBusiness>.Instance.FindById(stockInId);
+
+            SetBaseControl(this.stockIn);
+            SetBillingControl(this.stockIn.Billing);
+            SetDataControl(this.stockIn);
         }
         #endregion //Constructor
 
         #region Function
+        /// <summary>
+        /// 设置基础信息
+        /// </summary>
+        /// <param name="stockIn"></param>
         private void SetBaseControl(StockIn stockIn)
         {
             this.txtStatus.Text = ((EntityStatus)stockIn.Status).DisplayName();
@@ -53,6 +57,10 @@ namespace Phoebe.FormClient
             this.txtFlowNumber.Text = stockIn.FlowNumber;
         }
 
+        /// <summary>
+        /// 设置费用信息
+        /// </summary>
+        /// <param name="billing"></param>
         private void SetBillingControl(Billing billing)
         {
             this.nmUnitPrice.Value = billing.UnitPrice;
@@ -67,27 +75,18 @@ namespace Phoebe.FormClient
             this.txtBillingRemark.Text = billing.Remark;
         }
 
+        /// <summary>
+        /// 设置入库数据信息
+        /// </summary>
+        /// <param name="stockIn"></param>
         private void SetDataControl(StockIn stockIn)
         {
             var data = ModelTranslate.StockInToModel(stockIn);
-            this.bsStockIn.DataSource = data;
+            this.sigList.DataSource = data;
         }
         #endregion //Function
 
         #region Event
-        /// <summary>
-        /// 窗体载入
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void StockInViewControl_Load(object sender, EventArgs e)
-        {
-            this.stockIn = BusinessFactory<StockInBusiness>.Instance.FindById(this.stockInId);
-
-            SetBaseControl(this.stockIn);
-            SetBillingControl(this.stockIn.Billing);
-            SetDataControl(this.stockIn);
-        }
         #endregion //Event
     }
 }

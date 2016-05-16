@@ -65,7 +65,7 @@ namespace Phoebe.FormClient
 
             this.txtStatus.Text = "新建出库";
             this.txtUser.Text = this.currentUser.Name;
-            this.dpOutTime.EditValue = DateTime.Now;
+            this.dpOutTime.DateTime = DateTime.Now;
 
             this.customerList = BusinessFactory<CustomerBusiness>.Instance.FindAll();
             this.clcCustomer.SetDataSource(customerList);
@@ -112,7 +112,7 @@ namespace Phoebe.FormClient
 
         #region Method
         /// <summary>
-        /// 保存
+        /// 保存出库
         /// </summary>
         /// <param name="errorMessage">错误消息</param>
         /// <param name="newId">新出库单ID</param>

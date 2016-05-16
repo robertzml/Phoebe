@@ -39,7 +39,12 @@ namespace Phoebe.FormClient
         /// <summary>
         /// 货品是否等重
         /// </summary>
-        private bool isEqualWeight = true;      
+        private bool isEqualWeight = true;
+
+        /// <summary>
+        /// 客户列表，缓存页面使用
+        /// </summary>
+        private List<Customer> customerList;
         #endregion //Field
 
         #region Constructor
@@ -52,7 +57,9 @@ namespace Phoebe.FormClient
             this.txtUser.Text = this.currentUser.Name;
             this.dpInTime.EditValue = DateTime.Now;
 
-            this.clcCustomer.SetDataSource(BusinessFactory<CustomerBusiness>.Instance.FindAll());
+            this.customerList = BusinessFactory<CustomerBusiness>.Instance.FindAll();
+            this.clcCustomer.SetDataSource(customerList);
+
             this.clcCategory.SetDataSource(BusinessFactory<CategoryBusiness>.Instance.GetLeafCategory());
 
             this.sigList.DataSource = new List<StockInModel>();
@@ -90,10 +97,12 @@ namespace Phoebe.FormClient
         /// </summary>
         /// <param name="errorMessage">错误消息</param>
         /// <param name="newId">新入库单ID</param>
+        /// <param name="month">月份</param>
         /// <returns></returns>
-        public ErrorCode Save(out string errorMessage, out Guid newId)
+        public ErrorCode Save(out string errorMessage, out Guid newId, out string month)
         {
             errorMessage = "";
+            month = "";
             newId = Guid.Empty;
             this.sigList.CloseEditor();
 
@@ -122,7 +131,7 @@ namespace Phoebe.FormClient
                 }
                 if (string.IsNullOrEmpty(item.WarehouseNumber))
                 {
-                    errorMessage = "仓库编号不能为空";
+                    errorMessage = "仓位编号不能为空";
                     return ErrorCode.Error;
                 }
             }
@@ -149,7 +158,7 @@ namespace Phoebe.FormClient
             // set stock in
             StockIn si = new StockIn();
             si.Id = Guid.NewGuid();
-            si.InTime = Convert.ToDateTime(this.dpInTime.EditValue).Date;
+            si.InTime = this.dpInTime.DateTime.Date;
             si.MonthTime = si.InTime.Year.ToString() + si.InTime.Month.ToString().PadLeft(2, '0');
             si.ContractId = this.selectContract.Id;
             si.UserId = this.currentUser.Id;
@@ -175,23 +184,16 @@ namespace Phoebe.FormClient
             // add stock in
             ErrorCode result = BusinessFactory<StockInBusiness>.Instance.Create(si, billing, siModels);
             if (result == ErrorCode.Success)
+            {
                 newId = si.Id;
+                month = si.MonthTime;
+            }
 
             return result;
         }
         #endregion //Method
 
         #region Event
-        /// <summary>
-        /// 控件载入
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void StockInAddControl_Load(object sender, EventArgs e)
-        {
-            
-        }
-
         /// <summary>
         /// 输入客户代码
         /// </summary>
@@ -202,7 +204,7 @@ namespace Phoebe.FormClient
             string number = this.txtCustomerNumber.EditValue.ToString();
             this.clcCustomer.UpdateView(number);
 
-            var customer = BusinessFactory<CustomerBusiness>.Instance.GetByNumber(number);
+            var customer = this.customerList.SingleOrDefault(r => r.Number == number);
             if (customer != null)
             {
                 this.txtCustomerName.Text = customer.Name;
@@ -278,11 +280,16 @@ namespace Phoebe.FormClient
         {
             this.sigList.RemoveCurrent();
         }
-        #endregion //Event
 
+        /// <summary>
+        /// 单元格更改
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void sigList_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
         {
             this.clcCategory.UpdateView(e.Value.ToString());
         }
+        #endregion //Event
     }
 }
