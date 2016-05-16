@@ -227,6 +227,7 @@
             this.menuUserList.Caption = "用户列表";
             this.menuUserList.Id = 5;
             this.menuUserList.Name = "menuUserList";
+            this.menuUserList.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuUserList_ItemClick);
             // 
             // menuUserGroupList
             // 

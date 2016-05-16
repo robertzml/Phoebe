@@ -5,41 +5,55 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Phoebe.Base;
-using Phoebe.Business;
-using Phoebe.Common;
-using Phoebe.Model;
 
 namespace Phoebe.FormClient
 {
+    using Phoebe.Base;
+    using Phoebe.Business;
+    using Phoebe.Common;
+    using Phoebe.Model;
+
     /// <summary>
     /// 用户组窗体
     /// </summary>
     public partial class UserGroupForm : BaseForm
     {
+        #region Constructor
         public UserGroupForm()
-        {            
+        {
             InitializeComponent();
         }
+        #endregion //Constructor
 
+        #region Event
+        /// <summary>
+        /// 窗体载入
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UserGroupForm_Load(object sender, EventArgs e)
         {
-            UserBusiness userBusiness = new UserBusiness();
-            this.bsUserGroup.DataSource = userBusiness.GetUserGroup(true);
+            this.bsUserGroup.DataSource = BusinessFactory<UserGroupBusiness>.Instance.Get(this.currentUser.IsRoot);
         }
 
-        private void gridView1_CustomUnboundColumnData(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDataEventArgs e)
+        /// <summary>
+        /// 自定义显示
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dgvUserGroup_CustomColumnDisplayText(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs e)
         {
             int rowIndex = e.ListSourceRowIndex;
-
-            int status = Convert.ToInt32(gridView1.GetListSourceRowCellValue(rowIndex, "colStatus"));
-            
-            if (e.Column.FieldName != "colSt")
+            if (rowIndex < 0 || rowIndex >= this.bsUserGroup.Count)
                 return;
-            else
-                e.Value = ((EntityStatus)status).DisplayName();
+
+            if (e.Column.FieldName == "Status")
+            {
+                var status = (EntityStatus)e.Value;
+                e.DisplayText = status.DisplayName();
+            }
         }
+        #endregion //Event
     }
 }

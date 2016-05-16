@@ -2,17 +2,14 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Phoebe.FormClient
 {
     using Phoebe.Base;
     using Phoebe.Business;
-    using Phoebe.Model;
     using Phoebe.Common;
 
     /// <summary>
@@ -47,8 +44,7 @@ namespace Phoebe.FormClient
                 return;
             }
 
-            UserBusiness userBusiness = new UserBusiness();
-            ErrorCode result = userBusiness.ChangePassword(this.currentUser.UserName, this.txtOldPassword.Text, this.txtNewPassword.Text);
+            ErrorCode result = BusinessFactory<UserBusiness>.Instance.ChangePassword(this.currentUser.UserName, this.txtOldPassword.Text, this.txtNewPassword.Text);
             if (result == ErrorCode.Success)
             {
                 MessageBox.Show("修改密码成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);

@@ -230,6 +230,12 @@
     <Compile Include="Controls\StockInGrid.Designer.cs">
       <DependentUpon>StockInGrid.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\UserForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\UserForm.Designer.cs">
+      <DependentUpon>UserForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utils\ModelTranslate.cs" />
     <EmbeddedResource Include="Controls\CategoryListControl.resx">
       <DependentUpon>CategoryListControl.cs</DependentUpon>
@@ -290,6 +296,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\StoreForm.resx">
       <DependentUpon>StoreForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\UserForm.resx">
+      <DependentUpon>UserForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\UserGroupForm.resx">
       <DependentUpon>UserGroupForm.cs</DependentUpon>

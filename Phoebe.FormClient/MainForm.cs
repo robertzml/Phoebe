@@ -111,6 +111,16 @@ namespace Phoebe.FormClient
         }
 
         /// <summary>
+        /// 用户管理 - 用户列表
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void menuUserList_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            ChildFormManage.LoadMdiForm(this, typeof(UserForm));
+        }
+
+        /// <summary>
         /// 用户管理 - 用户组列表
         /// </summary>
         /// <param name="sender"></param>

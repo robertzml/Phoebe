@@ -58,6 +58,7 @@
     <Compile Include="BL\StockInBusiness.cs" />
     <Compile Include="BL\StockOutBusiness.cs" />
     <Compile Include="BL\StoreBusiness.cs" />
+    <Compile Include="BL\UserGroupBusiness.cs" />
     <Compile Include="DAL\BillingRepository.cs" />
     <Compile Include="DAL\CargoRepository.cs" />
     <Compile Include="DAL\CategoryRepository.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="BL\UserBusiness.cs" />
     <Compile Include="DAL\StockInDetailsRepository.cs" />
     <Compile Include="DAL\StockInRepository.cs" />
+    <Compile Include="DAL\UserGroupRepository.cs" />
     <Compile Include="DAL\UserRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

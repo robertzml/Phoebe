@@ -21,11 +21,6 @@ namespace Phoebe.FormClient
     {
         #region Field
         /// <summary>
-        /// 用户业务类
-        /// </summary>
-        private UserBusiness userBusiness;
-
-        /// <summary>
         /// 用户
         /// </summary>
         private User user;
@@ -39,7 +34,7 @@ namespace Phoebe.FormClient
         #endregion //Constructor
 
         #region Function
-       
+
         #endregion //Function
 
         #region Event
@@ -50,7 +45,6 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void LoginForm_Load(object sender, EventArgs e)
         {
-            this.userBusiness = new UserBusiness();
         }
 
         /// <summary>
@@ -74,11 +68,11 @@ namespace Phoebe.FormClient
                 return;
             }
 
-            ErrorCode result = userBusiness.Login(userName, this.txtPassword.Text);
+            ErrorCode result = BusinessFactory<UserBusiness>.Instance.Login(userName, this.txtPassword.Text);
 
             if (result == ErrorCode.Success)
             {
-                this.user = userBusiness.GetUser(userName);               
+                this.user = BusinessFactory<UserBusiness>.Instance.Get(userName);
                 this.DialogResult = System.Windows.Forms.DialogResult.OK;
                 this.Close();
             }
