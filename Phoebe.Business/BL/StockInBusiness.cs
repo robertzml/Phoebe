@@ -200,6 +200,9 @@ namespace Phoebe.Business
         {
             try
             {
+                if (entity.Status == (int)EntityStatus.StockIn)
+                    return ErrorCode.StockInHasConfirm;
+
                 // set store
                 List<Store> stores = new List<Store>();
                 foreach (var item in siModels)
@@ -249,7 +252,7 @@ namespace Phoebe.Business
 
                 return result;
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return ErrorCode.Exception;
             }

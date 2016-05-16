@@ -331,6 +331,12 @@ namespace Phoebe.FormClient
             }
             else
             {
+                if (this.sogList.CheckHasStore(select))
+                {
+                    MessageBox.Show("该货品已经加入", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
                 int count = Convert.ToInt32(this.nmOutCount.Value);
                 if (count > select.StoreCount)
                 {

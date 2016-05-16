@@ -276,6 +276,39 @@ namespace Phoebe.FormClient
                     MessageBox.Show("保存出库失败，" + result.DisplayName() + "， " + errorMessage, FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
+            else if (this.formState == StockOutFormState.Edit) //保存修改
+            {
+                if (this.currentStockOutId == Guid.Empty)
+                {
+                    MessageBox.Show("当前未选中出库单", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                if (this.stockOutState != EntityStatus.StockOutReady)
+                {
+                    MessageBox.Show("当前出库已确认，无法保存", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                string errorMessage;
+                ErrorCode result = this.stockOutEdit.Save(out errorMessage);
+                if (result == ErrorCode.Success)
+                {
+                    MessageBox.Show("保存出库成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    this.stockOutState = EntityStatus.StockOutReady;
+                    this.formState = StockOutFormState.View;
+
+                    UpdateToolbar();
+
+                    this.stockOutView = new StockOutViewControl(this.currentStockOutId);
+                    ChildFormManage.LoadContentControl(this.plBody, this.stockOutView);
+                }
+                else
+                {
+                    MessageBox.Show("保存出库失败，" + result.DisplayName() + "， " + errorMessage, FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
         }
 
         /// <summary>

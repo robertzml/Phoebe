@@ -136,11 +136,14 @@ namespace Phoebe.FormClient
             }
 
             // add cargo and set item field
-            List<StockInModel> siModels = new List<StockInModel>();
             foreach (StockInModel item in this.sigList.DataSource)
             {
                 item.ContractId = this.stockIn.ContractId;
                 item.GroupType = this.stockIn.Contract.BillingType;
+                item.UnitWeight = Math.Round(item.UnitWeight, 2);
+                item.UnitVolume = Math.Round(item.UnitVolume, 3);
+                item.InWeight = Math.Round(item.InWeight, 4);
+                item.InVolume = Math.Round(item.InVolume, 4);
 
                 var category = BusinessFactory<CategoryBusiness>.Instance.GetByNumber(item.CategoryNumber);
                 item.CategoryId = category.Id;
@@ -151,7 +154,6 @@ namespace Phoebe.FormClient
                     return ErrorCode.CargoCreateFailed;
                 }
                 item.CargoId = cargo.Id;
-                siModels.Add(item);
             }
 
             // set stock in
@@ -174,7 +176,7 @@ namespace Phoebe.FormClient
             billing.Remark = this.txtBillingRemark.Text;
 
             // add stock in
-            ErrorCode result = BusinessFactory<StockInBusiness>.Instance.Edit(si, billing, siModels);
+            ErrorCode result = BusinessFactory<StockInBusiness>.Instance.Edit(si, billing, this.sigList.DataSource);
 
             return result;
         }

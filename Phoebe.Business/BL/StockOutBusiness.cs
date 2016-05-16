@@ -161,6 +161,48 @@ namespace Phoebe.Business
         }
 
         /// <summary>
+        /// 出库编辑
+        /// </summary>
+        /// <param name="stockOut">出库单对象</param>
+        /// <param name="models">出库数据</param>
+        /// <returns></returns>
+        public ErrorCode Edit(StockOut stockOut, List<StockOutModel> models)
+        {
+            try
+            {
+                if (stockOut.Status == (int)EntityStatus.StockOut)
+                    return ErrorCode.StockOutHasConfirm;
+
+                // generate stock out details
+                List<StockOutDetail> details = new List<StockOutDetail>();
+                foreach (var item in models)
+                {
+                    StockOutDetail detail = new StockOutDetail();
+                    detail.Id = Guid.NewGuid();
+                    detail.StockOutId = stockOut.Id;
+                    detail.StoreId = item.StoreId;
+                    detail.StoreCount = item.StoreCount;
+                    detail.Count = item.OutCount;
+                    detail.OutWeight = item.OutWeight;
+                    detail.OutVolume = item.OutVolume;
+                    detail.Remark = item.Remark;
+                    detail.Status = (int)EntityStatus.StockOutReady;
+
+                    details.Add(detail);
+                }
+
+                var trans = new TransactionRepository();
+                ErrorCode result = trans.StockOutUpdateTrans(stockOut, details);
+
+                return result;
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+        }
+
+        /// <summary>
         /// 删除出库
         /// </summary>
         /// <param name="id">ID</param>

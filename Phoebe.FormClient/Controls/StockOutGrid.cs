@@ -91,6 +91,20 @@ namespace Phoebe.FormClient
         {
             this.dgvStockOut.CloseEditor();
         }
+
+        /// <summary>
+        /// 判断当前是否已有相应库存
+        /// </summary>
+        /// <param name="model">检查对象</param>
+        /// <returns></returns>
+        public bool CheckHasStore(StockOutModel model)
+        {
+            var data = this.bsStockOut.DataSource as List<StockOutModel>;
+            if (data.Any(r => r.StoreId == model.StoreId))
+                return true;
+            else
+                return false;
+        }
         #endregion //Method
 
         #region Event

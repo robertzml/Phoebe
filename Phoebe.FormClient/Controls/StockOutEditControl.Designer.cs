@@ -74,9 +74,9 @@
             this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
+            this.groupControl4 = new DevExpress.XtraEditors.GroupControl();
             this.sogFilter = new Phoebe.FormClient.StockOutGrid();
             this.clcCategory = new Phoebe.FormClient.CategoryListControl();
-            this.groupControl4 = new DevExpress.XtraEditors.GroupControl();
             this.sogList = new Phoebe.FormClient.StockOutGrid();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).BeginInit();
@@ -185,6 +185,7 @@
             this.btnRemoveFrom.StyleController = this.layoutControl2;
             this.btnRemoveFrom.TabIndex = 11;
             this.btnRemoveFrom.Text = "删除出库";
+            this.btnRemoveFrom.Click += new System.EventHandler(this.btnRemoveFrom_Click);
             // 
             // btnAddTo
             // 
@@ -194,6 +195,7 @@
             this.btnAddTo.StyleController = this.layoutControl2;
             this.btnAddTo.TabIndex = 9;
             this.btnAddTo.Text = "加入出库";
+            this.btnAddTo.Click += new System.EventHandler(this.btnAddTo_Click);
             // 
             // nmOutCount
             // 
@@ -215,6 +217,7 @@
             this.btnSearch.StyleController = this.layoutControl2;
             this.btnSearch.TabIndex = 6;
             this.btnSearch.Text = "搜索";
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // txtCategoryName
             // 
@@ -234,6 +237,7 @@
             this.txtCategoryNumber.Size = new System.Drawing.Size(104, 20);
             this.txtCategoryNumber.StyleController = this.layoutControl2;
             this.txtCategoryNumber.TabIndex = 4;
+            this.txtCategoryNumber.EditValueChanged += new System.EventHandler(this.txtCategoryNumber_EditValueChanged);
             // 
             // layoutControlGroup2
             // 
@@ -422,9 +426,8 @@
             // 
             this.txtRemark.Location = new System.Drawing.Point(253, 65);
             this.txtRemark.Name = "txtRemark";
-            this.txtRemark.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
+            this.txtRemark.Properties.Appearance.BackColor = System.Drawing.Color.White;
             this.txtRemark.Properties.Appearance.Options.UseBackColor = true;
-            this.txtRemark.Properties.ReadOnly = true;
             this.txtRemark.Size = new System.Drawing.Size(149, 20);
             this.txtRemark.StyleController = this.layoutControl1;
             this.txtRemark.TabIndex = 11;
@@ -628,6 +631,16 @@
             this.groupControl2.TabIndex = 2;
             this.groupControl2.Text = "查询结果";
             // 
+            // groupControl4
+            // 
+            this.groupControl4.Controls.Add(this.sogList);
+            this.groupControl4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupControl4.Location = new System.Drawing.Point(3, 383);
+            this.groupControl4.Name = "groupControl4";
+            this.groupControl4.Size = new System.Drawing.Size(644, 214);
+            this.groupControl4.TabIndex = 5;
+            this.groupControl4.Text = "出库列表";
+            // 
             // sogFilter
             // 
             this.sogFilter.BackColor = System.Drawing.Color.White;
@@ -648,16 +661,6 @@
             this.clcCategory.Name = "clcCategory";
             this.clcCategory.Size = new System.Drawing.Size(344, 214);
             this.clcCategory.TabIndex = 4;
-            // 
-            // groupControl4
-            // 
-            this.groupControl4.Controls.Add(this.sogList);
-            this.groupControl4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl4.Location = new System.Drawing.Point(3, 383);
-            this.groupControl4.Name = "groupControl4";
-            this.groupControl4.Size = new System.Drawing.Size(644, 214);
-            this.groupControl4.TabIndex = 5;
-            this.groupControl4.Text = "出库列表";
             // 
             // sogList
             // 

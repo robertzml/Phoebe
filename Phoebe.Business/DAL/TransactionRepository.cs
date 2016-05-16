@@ -211,7 +211,40 @@ namespace Phoebe.Business.DAL
                 this.context.SaveChanges();
                 return ErrorCode.Success;
             }
-            catch(Exception)
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+        }
+
+        /// <summary>
+        /// 出库编辑事务
+        /// </summary>
+        /// <param name="stockOut">出库单对象</param>
+        /// <param name="details">出库记录</param>
+        /// <returns></returns>
+        public ErrorCode StockOutUpdateTrans(StockOut stockOut, List<StockOutDetail> details)
+        {
+            try
+            {
+                // remove old stockout details
+                List<StockOutDetail> oldDetails = new List<StockOutDetail>();
+                foreach (var item in stockOut.StockOutDetails)
+                {
+                    oldDetails.Add(item);
+                }
+                this.context.StockOutDetails.RemoveRange(oldDetails);
+
+                // edit stock out
+                this.context.Entry(stockOut).State = EntityState.Modified;
+
+                // add new stock out details
+                this.context.StockOutDetails.AddRange(details);
+
+                this.context.SaveChanges();
+                return ErrorCode.Success;
+            }
+            catch (Exception)
             {
                 return ErrorCode.Exception;
             }
