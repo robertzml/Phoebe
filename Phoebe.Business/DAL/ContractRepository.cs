@@ -40,10 +40,10 @@ namespace Phoebe.Business.DAL
         /// <param name="predicate">查询条件</param>
         /// <returns></returns>
         public IEnumerable<Contract> Find(Expression<Func<Contract, bool>> predicate)
-        { 
+        {
             return this.context.Contracts.Where(predicate);
         }
-      
+
         /// <summary>
         /// 添加合同
         /// </summary>
@@ -55,8 +55,7 @@ namespace Phoebe.Business.DAL
             {
                 entity.Status = 0;
 
-                int count = this.context.Contracts.Count(r => r.Number == entity.Number);
-                if (count > 0)
+                if (this.context.Contracts.Any(r => r.Number == entity.Number))
                     return ErrorCode.DuplicateNumber;
 
                 this.context.Contracts.Add(entity);
@@ -70,10 +69,27 @@ namespace Phoebe.Business.DAL
             return ErrorCode.Success;
         }
 
-
+        /// <summary>
+        /// 编辑合同
+        /// </summary>
+        /// <param name="entity">合同实体</param>
+        /// <returns></returns>
         public ErrorCode Update(Contract entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                if (this.context.Contracts.Any(r => r.Id != entity.Id && r.Number == entity.Number))
+                    return ErrorCode.DuplicateNumber;
+
+                this.context.Entry(entity).State = EntityState.Modified;
+                this.context.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+
+            return ErrorCode.Success;
         }
 
         public ErrorCode Delete(Contract entity)

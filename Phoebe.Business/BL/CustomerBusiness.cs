@@ -48,6 +48,21 @@ namespace Phoebe.Business
             else
                 return data.First();
         }
+
+        /// <summary>
+        /// 删除客户
+        /// </summary>
+        /// <param name="entity">客户对象</param>
+        /// <returns></returns>
+        public override ErrorCode Delete(Customer entity)
+        {
+            var contracts = BusinessFactory<ContractBusiness>.Instance.GetByCustomer(entity.Id);
+            if (contracts.Count != 0)
+                return ErrorCode.CustomerHasContract;
+
+            var result = this.dal.Delete(entity);
+            return result;
+        }
         #endregion //Method
     }
 }

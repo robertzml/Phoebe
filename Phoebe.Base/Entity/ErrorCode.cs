@@ -100,11 +100,19 @@ namespace Phoebe.Base
         #endregion //User
 
         #region Customer
-
+        /// <summary>
+        /// 客户有合同
+        /// </summary>
+        [Display(Name = "客户有合同")]
+        CustomerHasContract = 30,
         #endregion //Customer
 
         #region Contract
-
+        /// <summary>
+        /// 合同有库存
+        /// </summary>
+        [Display(Name = "合同有库存")]
+        ContractHasStore = 40,
         #endregion //Contract
 
         #region Cargo

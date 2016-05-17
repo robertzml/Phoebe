@@ -31,6 +31,21 @@ namespace Phoebe.FormClient
         {
             this.bsCustomer.DataSource = BusinessFactory<CustomerBusiness>.Instance.FindAll();
         }
+
+        /// <summary>
+        /// 检查权限
+        /// </summary>
+        protected override void CheckPrivilege()
+        {
+            if (this.currentUser.Rank > 800)
+            {
+                this.btnDelete.Visible = true;
+            }
+            else
+            {
+                this.btnDelete.Visible = false;
+            }
+        }
         #endregion //Function
 
         #region Event
@@ -62,29 +77,14 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            var c = this.bsCustomer[this.dgvCustomer.GetDataSourceRowIndex(this.dgvCustomer.FocusedRowHandle)] as Customer;
-            ChildFormManage.ShowDialogForm(typeof(CustomerEditForm), new object[] { c.Id });
+            int rowIndex = this.dgvCustomer.GetFocusedDataSourceRowIndex();
+            if (rowIndex < 0 || rowIndex >= this.bsCustomer.Count)
+                return;
+
+            var customer = this.bsCustomer[rowIndex] as Customer;
+            ChildFormManage.ShowDialogForm(typeof(CustomerEditForm), new object[] { customer.Id });
 
             LoadData();
-        }
-
-        /// <summary>
-        /// 自定义数据显示
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void dgvCustomer_CustomColumnDisplayText(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs e)
-        {
-            if (e.Column.FieldName == "Type")
-            {
-                var type = (CustomerType)e.Value;
-                e.DisplayText = type.DisplayName();
-            }
-            else if (e.Column.FieldName == "Status")
-            {
-                var status = (EntityStatus)e.Value;
-                e.DisplayText = status.DisplayName();
-            }
         }
 
         /// <summary>
@@ -104,8 +104,11 @@ namespace Phoebe.FormClient
 
             if (dr == DialogResult.Yes)
             {
-                int index = this.dgvCustomer.GetDataSourceRowIndex(this.dgvCustomer.GetSelectedRows()[0]);
-                var customer = this.bsCustomer[index] as Customer;
+                int rowIndex = this.dgvCustomer.GetFocusedDataSourceRowIndex();
+                if (rowIndex < 0 || rowIndex >= this.bsCustomer.Count)
+                    return;
+
+                var customer = this.bsCustomer[rowIndex] as Customer;
 
                 ErrorCode result = BusinessFactory<CustomerBusiness>.Instance.Delete(customer);
                 if (result == ErrorCode.Success)
@@ -116,6 +119,27 @@ namespace Phoebe.FormClient
                 {
                     MessageBox.Show("删除客户失败：" + result.DisplayName(), FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
+
+                LoadData();
+            }
+        }
+
+        /// <summary>
+        /// 自定义数据显示
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dgvCustomer_CustomColumnDisplayText(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs e)
+        {
+            if (e.Column.FieldName == "Type")
+            {
+                var type = (CustomerType)e.Value;
+                e.DisplayText = type.DisplayName();
+            }
+            else if (e.Column.FieldName == "Status")
+            {
+                var status = (EntityStatus)e.Value;
+                e.DisplayText = status.DisplayName();
             }
         }
         #endregion //Event

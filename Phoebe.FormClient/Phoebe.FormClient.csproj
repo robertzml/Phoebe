@@ -70,6 +70,12 @@
     <Reference Include="UIAutomationClient" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\ContractEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ContractEditForm.Designer.cs">
+      <DependentUpon>ContractEditForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\CategoryListControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -278,6 +284,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ContractAddForm.resx">
       <DependentUpon>ContractAddForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ContractEditForm.resx">
+      <DependentUpon>ContractEditForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ContractForm.resx">
       <DependentUpon>ContractForm.cs</DependentUpon>

@@ -87,6 +87,23 @@ namespace Phoebe.FormClient
             ChildFormManage.ShowDialogForm(typeof(ContractAddForm));
             LoadData();
         }
+
+        /// <summary>
+        /// 编辑合同
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            int rowIndex = this.dgvContract.GetFocusedDataSourceRowIndex();
+            if (rowIndex < 0 || rowIndex >= this.bsContract.Count)
+                return;
+
+            var contract = this.bsContract[rowIndex] as Contract;
+            ChildFormManage.ShowDialogForm(typeof(ContractEditForm), new object[] { contract.Id });
+
+            LoadData();
+        }
         #endregion //Event
     }
 }

@@ -22,12 +22,37 @@ namespace Phoebe.Base
         #endregion //Field
 
         #region Constructor
+        /// <summary>
+        /// 窗体基类
+        /// </summary>
         public BaseForm()
         {
-            this.currentUser = Cache.Instance["CurrentUser"] as LoginUser;
-
             InitializeComponent();
+
+            this.currentUser = Cache.Instance["CurrentUser"] as LoginUser;
         }
         #endregion //Constructor
+
+        #region Function
+        /// <summary>
+        /// 检查相关权限
+        /// </summary>
+        protected virtual void CheckPrivilege()
+        {
+
+        }
+        #endregion //Function
+
+        #region Event
+        /// <summary>
+        /// 窗体载入
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BaseForm_Load(object sender, EventArgs e)
+        {
+            CheckPrivilege();
+        }
+        #endregion //Event
     }
 }

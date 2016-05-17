@@ -100,7 +100,17 @@ namespace Phoebe.Business.DAL
         /// <returns></returns>
         public ErrorCode Delete(Customer entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                this.context.Customers.Remove(entity);
+                this.context.SaveChanges();
+
+                return ErrorCode.Success;
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
         }
 
         public ErrorCode CreateRange(List<Customer> entities)
