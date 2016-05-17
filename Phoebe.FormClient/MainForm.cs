@@ -115,9 +115,9 @@ namespace Phoebe.FormClient
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void menuStoreSnapshoot_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        private void menuStoreSnapshot_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            ChildFormManage.LoadMdiForm(this, typeof(StoreSnapshootForm));
+            ChildFormManage.LoadMdiForm(this, typeof(StoreSnapshotForm));
         }
 
         /// <summary>

@@ -107,6 +107,12 @@ namespace Phoebe.Business
             }
         }
 
+        /// <summary>
+        /// 获取合同日流水
+        /// </summary>
+        /// <param name="contractId">合同ID</param>
+        /// <param name="date">日期</param>
+        /// <returns></returns>
         public List<StockFlow> GetDayFlow(int contractId, DateTime date)
         {
             List<StockFlow> data = new List<StockFlow>();
@@ -116,6 +122,14 @@ namespace Phoebe.Business
             foreach (var item in siDetails)
             {
                 var flow = SetStockFlow(item.Store, item.Count, item.InWeight, date, StockFlowType.StockIn);
+                data.Add(flow);
+            }
+
+            //find stock out
+            var soDetails = RepositoryFactory<StockOutDetailsRepository>.Instance.Find(r => r.StockOut.ContractId == contractId && r.StockOut.OutTime == date && r.Status == (int)EntityStatus.StockOut);
+            foreach (var item in soDetails)
+            {
+                var flow = SetStockFlow(item.Store, -item.Count, item.OutWeight, date, StockFlowType.StockOut);
                 data.Add(flow);
             }
 

@@ -63,6 +63,7 @@
     <Compile Include="DAL\CargoRepository.cs" />
     <Compile Include="DAL\CategoryRepository.cs" />
     <Compile Include="DAL\RepositoryFactory.cs" />
+    <Compile Include="DAL\StockOutDetailsRepository.cs" />
     <Compile Include="DAL\StockOutRepository.cs" />
     <Compile Include="DAL\StoreRepository.cs" />
     <Compile Include="DAL\TransactionRepository.cs" />

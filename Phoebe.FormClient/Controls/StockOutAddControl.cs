@@ -198,7 +198,7 @@ namespace Phoebe.FormClient
             {
                 this.txtCustomerName.Text = "";
                 this.selectCustomer = null;
-                this.cmbContract.Properties.Items.Clear();
+                UpdateContractList(0);
             }
         }
 

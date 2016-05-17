@@ -17,7 +17,7 @@ namespace Phoebe.FormClient
     /// <summary>
     /// 库存快照窗体
     /// </summary>
-    public partial class StoreSnapshootForm : BaseForm
+    public partial class StoreSnapshotForm : BaseForm
     {
         #region Field
         /// <summary>
@@ -26,18 +26,16 @@ namespace Phoebe.FormClient
         private Customer selectCustomer;
 
         /// <summary>
-        /// 选中合同
-        /// </summary>
-        private Contract selectContract;
-
-        /// <summary>
         /// 客户列表，缓存页面使用
         /// </summary>
         private List<Customer> customerList;
         #endregion //Field
 
         #region Constructor
-        public StoreSnapshootForm()
+        /// <summary>
+        /// 库存快照窗体
+        /// </summary>
+        public StoreSnapshotForm()
         {
             InitializeComponent();
         }
@@ -75,10 +73,12 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void StoreSnapshootForm_Load(object sender, EventArgs e)
         {
+            this.dpTime.DateTime = DateTime.Now.Date;
+
             this.customerList = BusinessFactory<CustomerBusiness>.Instance.FindAll();
             this.clcCustomer.SetDataSource(customerList);
         }
-       
+
         /// <summary>
         /// 输入客户代码
         /// </summary>
@@ -98,26 +98,30 @@ namespace Phoebe.FormClient
                 UpdateContractList(customer.Id);
             }
             else
+            {
                 this.txtCustomerName.Text = "";
+                UpdateContractList(0);
+            }
         }
 
         /// <summary>
-        /// 选择合同
+        /// 客户选择
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void cmbContract_SelectedIndexChanged(object sender, EventArgs e)
+        private void clcCustomer_CustomerItemSelected(object sender, EventArgs e)
         {
-            if (this.cmbContract.SelectedIndex == -1)
-            {
-                
-            }
-            else
-            {
-                int contractId = Convert.ToInt32(this.cmbContract.EditValue);
-                this.selectContract = BusinessFactory<ContractBusiness>.Instance.FindById(contractId);              
-            }
-        }
+            this.txtCustomerNumber.EditValueChanged -= txtCustomerNumber_EditValueChanged;
+
+            this.txtCustomerNumber.Text = this.clcCustomer.SelectedNumber;
+            this.txtCustomerName.Text = this.clcCustomer.SelectedName;
+
+            this.txtCustomerNumber.EditValueChanged += txtCustomerNumber_EditValueChanged;
+
+            int customerId = this.clcCustomer.SelectedId;
+            UpdateContractList(customerId);
+            this.selectCustomer = BusinessFactory<CustomerBusiness>.Instance.FindById(customerId);
+        }      
 
         /// <summary>
         /// 查询
@@ -126,12 +130,14 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void btnSeach_Click(object sender, EventArgs e)
         {
-            if (this.selectContract == null)
+            int contractId = Convert.ToInt32(this.cmbContract.EditValue);
+            if (contractId == 0)
             {
+                MessageBox.Show("请选择合同", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            var data = BusinessFactory<StoreBusiness>.Instance.GetDayFlow(this.selectContract.Id, this.dpTime.DateTime.Date);
+            var data = BusinessFactory<StoreBusiness>.Instance.GetDayFlow(contractId, this.dpTime.DateTime.Date);
             this.bsStockFlow.DataSource = data;
         }
         #endregion //Event

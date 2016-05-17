@@ -1,6 +1,6 @@
 ﻿namespace Phoebe.FormClient
 {
-    partial class StoreSnapshootForm
+    partial class StoreSnapshotForm
     {
         /// <summary>
         /// Required designer variable.
@@ -31,6 +31,8 @@
             this.components = new System.ComponentModel.Container();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
+            this.dpTime = new DevExpress.XtraEditors.DateEdit();
             this.cmbContract = new DevExpress.XtraEditors.ImageComboBoxEdit();
             this.txtCustomerName = new DevExpress.XtraEditors.TextEdit();
             this.txtCustomerNumber = new DevExpress.XtraEditors.TextEdit();
@@ -38,6 +40,8 @@
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.clcCustomer = new Phoebe.FormClient.CustomerListControl();
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
@@ -59,14 +63,12 @@
             this.colFlowDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colType = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCountChange = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.dpTime = new DevExpress.XtraEditors.DateEdit();
-            this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
-            this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dpTime.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dpTime.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbContract.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCustomerName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCustomerNumber.Properties)).BeginInit();
@@ -74,6 +76,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).BeginInit();
@@ -81,10 +85,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgcStockFlow)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsStockFlow)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStockFlow)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dpTime.Properties.CalendarTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dpTime.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
             this.SuspendLayout();
             // 
             // groupControl1
@@ -112,6 +112,30 @@
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
+            // btnSearch
+            // 
+            this.btnSearch.Location = new System.Drawing.Point(513, 36);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(199, 22);
+            this.btnSearch.StyleController = this.layoutControl1;
+            this.btnSearch.TabIndex = 9;
+            this.btnSearch.Text = "查询";
+            this.btnSearch.Click += new System.EventHandler(this.btnSeach_Click);
+            // 
+            // dpTime
+            // 
+            this.dpTime.EditValue = null;
+            this.dpTime.Location = new System.Drawing.Point(564, 12);
+            this.dpTime.Name = "dpTime";
+            this.dpTime.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dpTime.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dpTime.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.dpTime.Size = new System.Drawing.Size(148, 20);
+            this.dpTime.StyleController = this.layoutControl1;
+            this.dpTime.TabIndex = 8;
+            // 
             // cmbContract
             // 
             this.cmbContract.Location = new System.Drawing.Point(401, 12);
@@ -121,7 +145,6 @@
             this.cmbContract.Size = new System.Drawing.Size(108, 20);
             this.cmbContract.StyleController = this.layoutControl1;
             this.cmbContract.TabIndex = 6;
-            this.cmbContract.SelectedIndexChanged += new System.EventHandler(this.cmbContract_SelectedIndexChanged);
             // 
             // txtCustomerName
             // 
@@ -184,6 +207,24 @@
             this.layoutControlItem3.Text = "合同选择";
             this.layoutControlItem3.TextSize = new System.Drawing.Size(48, 14);
             // 
+            // layoutControlItem5
+            // 
+            this.layoutControlItem5.Control = this.dpTime;
+            this.layoutControlItem5.Location = new System.Drawing.Point(501, 0);
+            this.layoutControlItem5.Name = "layoutControlItem5";
+            this.layoutControlItem5.Size = new System.Drawing.Size(203, 24);
+            this.layoutControlItem5.Text = "日期";
+            this.layoutControlItem5.TextSize = new System.Drawing.Size(48, 14);
+            // 
+            // layoutControlItem4
+            // 
+            this.layoutControlItem4.Control = this.btnSearch;
+            this.layoutControlItem4.Location = new System.Drawing.Point(501, 24);
+            this.layoutControlItem4.Name = "layoutControlItem4";
+            this.layoutControlItem4.Size = new System.Drawing.Size(203, 127);
+            this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem4.TextVisible = false;
+            // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 2;
@@ -210,6 +251,7 @@
             this.clcCustomer.Name = "clcCustomer";
             this.clcCustomer.Size = new System.Drawing.Size(194, 194);
             this.clcCustomer.TabIndex = 1;
+            this.clcCustomer.CustomerItemSelected += new Phoebe.FormClient.CustomerListControl.ItemSelectHandle(this.clcCustomer_CustomerItemSelected);
             // 
             // groupControl2
             // 
@@ -365,47 +407,6 @@
             this.colCountChange.Visible = true;
             this.colCountChange.VisibleIndex = 13;
             // 
-            // dpTime
-            // 
-            this.dpTime.EditValue = null;
-            this.dpTime.Location = new System.Drawing.Point(564, 12);
-            this.dpTime.Name = "dpTime";
-            this.dpTime.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dpTime.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dpTime.Size = new System.Drawing.Size(148, 20);
-            this.dpTime.StyleController = this.layoutControl1;
-            this.dpTime.TabIndex = 8;
-            // 
-            // layoutControlItem5
-            // 
-            this.layoutControlItem5.Control = this.dpTime;
-            this.layoutControlItem5.Location = new System.Drawing.Point(501, 0);
-            this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(203, 24);
-            this.layoutControlItem5.Text = "日期";
-            this.layoutControlItem5.TextSize = new System.Drawing.Size(48, 14);
-            // 
-            // btnSearch
-            // 
-            this.btnSearch.Location = new System.Drawing.Point(513, 36);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(199, 22);
-            this.btnSearch.StyleController = this.layoutControl1;
-            this.btnSearch.TabIndex = 9;
-            this.btnSearch.Text = "查询";
-            this.btnSearch.Click += new System.EventHandler(this.btnSeach_Click);
-            // 
-            // layoutControlItem4
-            // 
-            this.layoutControlItem4.Control = this.btnSearch;
-            this.layoutControlItem4.Location = new System.Drawing.Point(501, 24);
-            this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(203, 127);
-            this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem4.TextVisible = false;
-            // 
             // StoreSnapshootForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -419,6 +420,8 @@
             this.groupControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dpTime.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dpTime.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbContract.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCustomerName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCustomerNumber.Properties)).EndInit();
@@ -426,6 +429,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).EndInit();
@@ -433,10 +438,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgcStockFlow)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsStockFlow)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStockFlow)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dpTime.Properties.CalendarTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dpTime.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
             this.ResumeLayout(false);
 
         }

@@ -242,11 +242,11 @@
     <Compile Include="Forms\UserForm.Designer.cs">
       <DependentUpon>UserForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\StoreSnapshootForm.cs">
+    <Compile Include="Forms\StoreSnapshotForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\StoreSnapshootForm.Designer.cs">
-      <DependentUpon>StoreSnapshootForm.cs</DependentUpon>
+    <Compile Include="Forms\StoreSnapshotForm.Designer.cs">
+      <DependentUpon>StoreSnapshotForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils\ModelTranslate.cs" />
     <EmbeddedResource Include="Controls\CategoryListControl.resx">
@@ -312,8 +312,8 @@
     <EmbeddedResource Include="Forms\StoreForm.resx">
       <DependentUpon>StoreForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\StoreSnapshootForm.resx">
-      <DependentUpon>StoreSnapshootForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\StoreSnapshotForm.resx">
+      <DependentUpon>StoreSnapshotForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\UserForm.resx">
       <DependentUpon>UserForm.cs</DependentUpon>

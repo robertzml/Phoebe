@@ -105,7 +105,7 @@ namespace Phoebe.FormClient
             month = "";
             newId = Guid.Empty;
             this.sigList.CloseEditor();
-
+        
             // check input data
             if (this.selectCustomer == null || this.selectContract == null)
             {
@@ -215,7 +215,11 @@ namespace Phoebe.FormClient
                 UpdateContractList(customer.Id);
             }
             else
+            {
                 this.txtCustomerName.Text = "";
+                UpdateContractList(0);
+                this.selectContract = null;
+            }
         }
 
         /// <summary>
