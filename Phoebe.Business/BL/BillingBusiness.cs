@@ -32,5 +32,9 @@ namespace Phoebe.Business
             base.Init(this.dal);
         }
         #endregion //Constructor
+
+        #region Method
+
+        #endregion //Method
     }
 }

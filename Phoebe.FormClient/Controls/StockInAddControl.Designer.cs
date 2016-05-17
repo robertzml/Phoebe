@@ -179,7 +179,7 @@
             this.layoutControl2.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(889, 214, 477, 518);
             this.layoutControl2.Root = this.layoutControlGroup2;
             this.layoutControl2.Size = new System.Drawing.Size(690, 131);
-            this.layoutControl2.TabIndex = 32;
+            this.layoutControl2.TabIndex = 0;
             this.layoutControl2.Text = "layoutControl2";
             // 
             // txtBillingRemark
@@ -188,7 +188,7 @@
             this.txtBillingRemark.Name = "txtBillingRemark";
             this.txtBillingRemark.Size = new System.Drawing.Size(158, 20);
             this.txtBillingRemark.StyleController = this.layoutControl2;
-            this.txtBillingRemark.TabIndex = 32;
+            this.txtBillingRemark.TabIndex = 9;
             // 
             // nmOtherPrice
             // 
@@ -201,7 +201,7 @@
             0});
             this.nmOtherPrice.Name = "nmOtherPrice";
             this.nmOtherPrice.Size = new System.Drawing.Size(160, 22);
-            this.nmOtherPrice.TabIndex = 31;
+            this.nmOtherPrice.TabIndex = 8;
             // 
             // nmPackingPrice
             // 
@@ -214,7 +214,7 @@
             0});
             this.nmPackingPrice.Name = "nmPackingPrice";
             this.nmPackingPrice.Size = new System.Drawing.Size(158, 22);
-            this.nmPackingPrice.TabIndex = 29;
+            this.nmPackingPrice.TabIndex = 6;
             // 
             // nmRentPrice
             // 
@@ -227,7 +227,7 @@
             0});
             this.nmRentPrice.Name = "nmRentPrice";
             this.nmRentPrice.Size = new System.Drawing.Size(161, 22);
-            this.nmRentPrice.TabIndex = 30;
+            this.nmRentPrice.TabIndex = 7;
             // 
             // nmDisposePrice
             // 
@@ -240,7 +240,7 @@
             0});
             this.nmDisposePrice.Name = "nmDisposePrice";
             this.nmDisposePrice.Size = new System.Drawing.Size(160, 22);
-            this.nmDisposePrice.TabIndex = 28;
+            this.nmDisposePrice.TabIndex = 5;
             // 
             // nmUnitPrice
             // 
@@ -253,7 +253,7 @@
             0});
             this.nmUnitPrice.Name = "nmUnitPrice";
             this.nmUnitPrice.Size = new System.Drawing.Size(158, 22);
-            this.nmUnitPrice.TabIndex = 23;
+            this.nmUnitPrice.TabIndex = 0;
             // 
             // nmFreezePrice
             // 
@@ -266,7 +266,7 @@
             0});
             this.nmFreezePrice.Name = "nmFreezePrice";
             this.nmFreezePrice.Size = new System.Drawing.Size(161, 22);
-            this.nmFreezePrice.TabIndex = 27;
+            this.nmFreezePrice.TabIndex = 4;
             // 
             // nmHandlingUnitPrice
             // 
@@ -279,7 +279,7 @@
             0});
             this.nmHandlingUnitPrice.Name = "nmHandlingUnitPrice";
             this.nmHandlingUnitPrice.Size = new System.Drawing.Size(161, 22);
-            this.nmHandlingUnitPrice.TabIndex = 24;
+            this.nmHandlingUnitPrice.TabIndex = 1;
             // 
             // nmFreezeUnitPrice
             // 
@@ -292,7 +292,7 @@
             0});
             this.nmFreezeUnitPrice.Name = "nmFreezeUnitPrice";
             this.nmFreezeUnitPrice.Size = new System.Drawing.Size(158, 22);
-            this.nmFreezeUnitPrice.TabIndex = 26;
+            this.nmFreezeUnitPrice.TabIndex = 3;
             // 
             // nmHandlingPrice
             // 
@@ -305,7 +305,7 @@
             0});
             this.nmHandlingPrice.Name = "nmHandlingPrice";
             this.nmHandlingPrice.Size = new System.Drawing.Size(160, 22);
-            this.nmHandlingPrice.TabIndex = 25;
+            this.nmHandlingPrice.TabIndex = 2;
             // 
             // layoutControlGroup2
             // 
@@ -474,7 +474,7 @@
             this.clcCustomer.Name = "clcCustomer";
             this.tableLayoutPanel1.SetRowSpan(this.clcCustomer, 2);
             this.clcCustomer.Size = new System.Drawing.Size(194, 314);
-            this.clcCustomer.TabIndex = 5;
+            this.clcCustomer.TabIndex = 3;
             this.clcCustomer.CustomerItemSelected += new Phoebe.FormClient.CustomerListControl.ItemSelectHandle(this.clcCustomer_CustomerItemSelected);
             // 
             // clcCategory
@@ -484,7 +484,7 @@
             this.clcCategory.Name = "clcCategory";
             this.tableLayoutPanel1.SetRowSpan(this.clcCategory, 2);
             this.clcCategory.Size = new System.Drawing.Size(194, 314);
-            this.clcCategory.TabIndex = 6;
+            this.clcCategory.TabIndex = 4;
             // 
             // groupControl4
             // 
@@ -493,7 +493,7 @@
             this.groupControl4.Location = new System.Drawing.Point(3, 3);
             this.groupControl4.Name = "groupControl4";
             this.groupControl4.Size = new System.Drawing.Size(694, 154);
-            this.groupControl4.TabIndex = 7;
+            this.groupControl4.TabIndex = 0;
             this.groupControl4.Text = "基本信息";
             // 
             // layoutControl3
@@ -520,7 +520,7 @@
             this.txtRemark.Name = "txtRemark";
             this.txtRemark.Size = new System.Drawing.Size(173, 20);
             this.txtRemark.StyleController = this.layoutControl3;
-            this.txtRemark.TabIndex = 3;
+            this.txtRemark.TabIndex = 7;
             // 
             // txtStatus
             // 
@@ -542,7 +542,7 @@
             this.txtBillingType.Properties.ReadOnly = true;
             this.txtBillingType.Size = new System.Drawing.Size(167, 20);
             this.txtBillingType.StyleController = this.layoutControl3;
-            this.txtBillingType.TabIndex = 7;
+            this.txtBillingType.TabIndex = 6;
             // 
             // txtUser
             // 
@@ -565,7 +565,7 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cmbContract.Size = new System.Drawing.Size(175, 20);
             this.cmbContract.StyleController = this.layoutControl3;
-            this.cmbContract.TabIndex = 6;
+            this.cmbContract.TabIndex = 5;
             this.cmbContract.SelectedIndexChanged += new System.EventHandler(this.cmbContract_SelectedIndexChanged);
             // 
             // dpInTime
@@ -592,7 +592,7 @@
             this.txtCustomerName.Properties.ReadOnly = true;
             this.txtCustomerName.Size = new System.Drawing.Size(173, 20);
             this.txtCustomerName.StyleController = this.layoutControl3;
-            this.txtCustomerName.TabIndex = 5;
+            this.txtCustomerName.TabIndex = 4;
             // 
             // txtCustomerNumber
             // 
@@ -602,7 +602,7 @@
             this.txtCustomerNumber.Properties.Appearance.Options.UseBackColor = true;
             this.txtCustomerNumber.Size = new System.Drawing.Size(167, 20);
             this.txtCustomerNumber.StyleController = this.layoutControl3;
-            this.txtCustomerNumber.TabIndex = 4;
+            this.txtCustomerNumber.TabIndex = 3;
             this.txtCustomerNumber.EditValueChanged += new System.EventHandler(this.txtCustomerNumber_EditValueChanged);
             // 
             // layoutControlGroup3

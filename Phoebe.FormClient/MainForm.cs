@@ -111,6 +111,16 @@ namespace Phoebe.FormClient
         }
 
         /// <summary>
+        /// 库存管理 - 库存快照
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void menuStoreSnapshoot_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            ChildFormManage.LoadMdiForm(this, typeof(StoreSnapshootForm));
+        }
+
+        /// <summary>
         /// 用户管理 - 用户列表
         /// </summary>
         /// <param name="sender"></param>

@@ -1,19 +1,23 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Text;
 
-namespace Phoebe.Base
+namespace Phoebe.Business.DAL
 {
     using Phoebe.Common;
 
     /// <summary>
-    /// 业务工厂类
+    /// Repository工厂类
     /// </summary>
-    /// <typeparam name="T">业务类</typeparam>
-    public class BusinessFactory<T> where T : class
+    /// <typeparam name="T"></typeparam>
+    public class RepositoryFactory<T> where T : SqlDataAccess<Phoebe.Model.PhoebeContext>
     {
         #region Field
         /// <summary>
-        /// 业务类缓存
+        /// 数据访问类缓存
         /// </summary>
         private static Hashtable objCache = new Hashtable();
 
@@ -24,9 +28,6 @@ namespace Phoebe.Base
         #endregion //Field
 
         #region Property
-        /// <summary>
-        /// 创建或者从缓存中获取对应业务类的实例
-        /// </summary>
         public static T Instance
         {
             get
@@ -44,18 +45,6 @@ namespace Phoebe.Base
                         }
                     }
                 }
-                return bll;
-            }
-        }
-
-        /// <summary>
-        /// 显示创建，不从缓存读取
-        /// </summary>
-        public static T New
-        {
-            get
-            {
-                T bll = Reflect<T>.Create(typeof(T).FullName, typeof(T).Assembly.GetName().Name); //反射创建
                 return bll;
             }
         }

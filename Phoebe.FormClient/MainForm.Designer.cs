@@ -28,8 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
+            this.barManager1 = new DevExpress.XtraBars.BarManager();
             this.mainMenu = new DevExpress.XtraBars.Bar();
             this.menuCustomer = new DevExpress.XtraBars.BarSubItem();
             this.menuCustomerList = new DevExpress.XtraBars.BarButtonItem();
@@ -43,6 +42,9 @@
             this.menuStockMove = new DevExpress.XtraBars.BarButtonItem();
             this.menuStore = new DevExpress.XtraBars.BarSubItem();
             this.menuStoreList = new DevExpress.XtraBars.BarButtonItem();
+            this.menuStoreSnapshoot = new DevExpress.XtraBars.BarButtonItem();
+            this.menuSettle = new DevExpress.XtraBars.BarSubItem();
+            this.menuColdPrice = new DevExpress.XtraBars.BarButtonItem();
             this.menuUser = new DevExpress.XtraBars.BarSubItem();
             this.menuUserList = new DevExpress.XtraBars.BarButtonItem();
             this.menuUserGroupList = new DevExpress.XtraBars.BarButtonItem();
@@ -59,7 +61,7 @@
             this.barCustomerList = new DevExpress.XtraBars.BarButtonItem();
             this.barHeaderItem1 = new DevExpress.XtraBars.BarHeaderItem();
             this.barStaticItem2 = new DevExpress.XtraBars.BarStaticItem();
-            this.tabMdiManager = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
+            this.tabMdiManager = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabMdiManager)).BeginInit();
             this.SuspendLayout();
@@ -97,9 +99,12 @@
             this.menuStore,
             this.menuStockOut,
             this.menuStockMove,
-            this.menuStoreList});
+            this.menuStoreList,
+            this.menuSettle,
+            this.menuColdPrice,
+            this.menuStoreSnapshoot});
             this.barManager1.MainMenu = this.mainMenu;
-            this.barManager1.MaxItemId = 24;
+            this.barManager1.MaxItemId = 27;
             this.barManager1.StatusBar = this.bar3;
             // 
             // mainMenu
@@ -114,6 +119,7 @@
             new DevExpress.XtraBars.LinkPersistInfo(this.menuCargo),
             new DevExpress.XtraBars.LinkPersistInfo(this.menuStock),
             new DevExpress.XtraBars.LinkPersistInfo(this.menuStore),
+            new DevExpress.XtraBars.LinkPersistInfo(this.menuSettle),
             new DevExpress.XtraBars.LinkPersistInfo(this.menuUser),
             new DevExpress.XtraBars.LinkPersistInfo(this.barMdiList)});
             this.mainMenu.OptionsBar.AllowQuickCustomization = false;
@@ -202,7 +208,8 @@
             this.menuStore.Caption = "库存管理";
             this.menuStore.Id = 20;
             this.menuStore.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(this.menuStoreList)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.menuStoreList),
+            new DevExpress.XtraBars.LinkPersistInfo(this.menuStoreSnapshoot)});
             this.menuStore.Name = "menuStore";
             // 
             // menuStoreList
@@ -211,6 +218,27 @@
             this.menuStoreList.Id = 23;
             this.menuStoreList.Name = "menuStoreList";
             this.menuStoreList.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuStoreList_ItemClick);
+            // 
+            // menuStoreSnapshoot
+            // 
+            this.menuStoreSnapshoot.Caption = "库存快照";
+            this.menuStoreSnapshoot.Id = 26;
+            this.menuStoreSnapshoot.Name = "menuStoreSnapshoot";
+            this.menuStoreSnapshoot.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuStoreSnapshoot_ItemClick);
+            // 
+            // menuSettle
+            // 
+            this.menuSettle.Caption = "费用结算";
+            this.menuSettle.Id = 24;
+            this.menuSettle.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.menuColdPrice)});
+            this.menuSettle.Name = "menuSettle";
+            // 
+            // menuColdPrice
+            // 
+            this.menuColdPrice.Caption = "冷藏费清单";
+            this.menuColdPrice.Id = 25;
+            this.menuColdPrice.Name = "menuColdPrice";
             // 
             // menuUser
             // 
@@ -391,6 +419,9 @@
         private DevExpress.XtraBars.BarButtonItem menuStockMove;
         private DevExpress.XtraBars.BarSubItem menuStore;
         private DevExpress.XtraBars.BarButtonItem menuStoreList;
+        private DevExpress.XtraBars.BarSubItem menuSettle;
+        private DevExpress.XtraBars.BarButtonItem menuColdPrice;
+        private DevExpress.XtraBars.BarButtonItem menuStoreSnapshoot;
     }
 }
 

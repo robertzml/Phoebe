@@ -183,7 +183,7 @@
             this.txtRemark.Name = "txtRemark";
             this.txtRemark.Size = new System.Drawing.Size(143, 20);
             this.txtRemark.StyleController = this.layoutControl1;
-            this.txtRemark.TabIndex = 11;
+            this.txtRemark.TabIndex = 7;
             // 
             // txtBillingType
             // 
@@ -193,7 +193,7 @@
             this.txtBillingType.Properties.Appearance.Options.UseBackColor = true;
             this.txtBillingType.Size = new System.Drawing.Size(133, 20);
             this.txtBillingType.StyleController = this.layoutControl1;
-            this.txtBillingType.TabIndex = 10;
+            this.txtBillingType.TabIndex = 6;
             // 
             // cmbContract
             // 
@@ -205,7 +205,7 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cmbContract.Size = new System.Drawing.Size(189, 20);
             this.cmbContract.StyleController = this.layoutControl1;
-            this.cmbContract.TabIndex = 9;
+            this.cmbContract.TabIndex = 5;
             this.cmbContract.EditValueChanged += new System.EventHandler(this.cmbContract_EditValueChanged);
             // 
             // txtCustomerNumber
@@ -216,7 +216,7 @@
             this.txtCustomerNumber.Properties.Appearance.Options.UseBackColor = true;
             this.txtCustomerNumber.Size = new System.Drawing.Size(133, 20);
             this.txtCustomerNumber.StyleController = this.layoutControl1;
-            this.txtCustomerNumber.TabIndex = 7;
+            this.txtCustomerNumber.TabIndex = 3;
             this.txtCustomerNumber.EditValueChanged += new System.EventHandler(this.txtCustomerNumber_EditValueChanged);
             // 
             // txtUser
@@ -227,7 +227,7 @@
             this.txtUser.Properties.Appearance.Options.UseBackColor = true;
             this.txtUser.Size = new System.Drawing.Size(189, 20);
             this.txtUser.StyleController = this.layoutControl1;
-            this.txtUser.TabIndex = 6;
+            this.txtUser.TabIndex = 2;
             // 
             // txtCustomerName
             // 
@@ -237,7 +237,7 @@
             this.txtCustomerName.Properties.Appearance.Options.UseBackColor = true;
             this.txtCustomerName.Size = new System.Drawing.Size(143, 20);
             this.txtCustomerName.StyleController = this.layoutControl1;
-            this.txtCustomerName.TabIndex = 8;
+            this.txtCustomerName.TabIndex = 4;
             // 
             // dpOutTime
             // 
@@ -252,7 +252,7 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dpOutTime.Size = new System.Drawing.Size(143, 20);
             this.dpOutTime.StyleController = this.layoutControl1;
-            this.dpOutTime.TabIndex = 5;
+            this.dpOutTime.TabIndex = 1;
             // 
             // txtStatus
             // 
@@ -262,7 +262,7 @@
             this.txtStatus.Properties.Appearance.Options.UseBackColor = true;
             this.txtStatus.Size = new System.Drawing.Size(133, 20);
             this.txtStatus.StyleController = this.layoutControl1;
-            this.txtStatus.TabIndex = 4;
+            this.txtStatus.TabIndex = 0;
             // 
             // layoutControlGroup1
             // 
@@ -364,7 +364,7 @@
             this.groupControl3.Location = new System.Drawing.Point(653, 163);
             this.groupControl3.Name = "groupControl3";
             this.groupControl3.Size = new System.Drawing.Size(344, 214);
-            this.groupControl3.TabIndex = 2;
+            this.groupControl3.TabIndex = 3;
             this.groupControl3.Text = "库存筛选";
             // 
             // layoutControl2
@@ -390,7 +390,7 @@
             this.btnRemoveFrom.Name = "btnRemoveFrom";
             this.btnRemoveFrom.Size = new System.Drawing.Size(154, 22);
             this.btnRemoveFrom.StyleController = this.layoutControl2;
-            this.btnRemoveFrom.TabIndex = 11;
+            this.btnRemoveFrom.TabIndex = 5;
             this.btnRemoveFrom.Text = "删除出库";
             this.btnRemoveFrom.Click += new System.EventHandler(this.btnRemoveFrom_Click);
             // 
@@ -400,7 +400,7 @@
             this.btnAddTo.Name = "btnAddTo";
             this.btnAddTo.Size = new System.Drawing.Size(156, 22);
             this.btnAddTo.StyleController = this.layoutControl2;
-            this.btnAddTo.TabIndex = 9;
+            this.btnAddTo.TabIndex = 4;
             this.btnAddTo.Text = "加入出库";
             this.btnAddTo.Click += new System.EventHandler(this.btnAddTo_Click);
             // 
@@ -414,7 +414,7 @@
             0});
             this.nmOutCount.Name = "nmOutCount";
             this.nmOutCount.Size = new System.Drawing.Size(105, 22);
-            this.nmOutCount.TabIndex = 8;
+            this.nmOutCount.TabIndex = 3;
             // 
             // btnSearch
             // 
@@ -422,7 +422,7 @@
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(155, 22);
             this.btnSearch.StyleController = this.layoutControl2;
-            this.btnSearch.TabIndex = 6;
+            this.btnSearch.TabIndex = 2;
             this.btnSearch.Text = "搜索";
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
@@ -435,7 +435,7 @@
             this.txtCategoryName.Properties.ReadOnly = true;
             this.txtCategoryName.Size = new System.Drawing.Size(104, 20);
             this.txtCategoryName.StyleController = this.layoutControl2;
-            this.txtCategoryName.TabIndex = 5;
+            this.txtCategoryName.TabIndex = 1;
             // 
             // txtCategoryNumber
             // 
@@ -443,7 +443,7 @@
             this.txtCategoryNumber.Name = "txtCategoryNumber";
             this.txtCategoryNumber.Size = new System.Drawing.Size(104, 20);
             this.txtCategoryNumber.StyleController = this.layoutControl2;
-            this.txtCategoryNumber.TabIndex = 4;
+            this.txtCategoryNumber.TabIndex = 0;
             this.txtCategoryNumber.EditValueChanged += new System.EventHandler(this.txtCategoryNumber_EditValueChanged);
             // 
             // layoutControlGroup2
@@ -596,7 +596,7 @@
             this.groupControl4.Location = new System.Drawing.Point(3, 163);
             this.groupControl4.Name = "groupControl4";
             this.groupControl4.Size = new System.Drawing.Size(644, 214);
-            this.groupControl4.TabIndex = 3;
+            this.groupControl4.TabIndex = 1;
             this.groupControl4.Text = "查询结果";
             // 
             // sogFilter
@@ -642,7 +642,7 @@
             this.clcCustomer.Location = new System.Drawing.Point(653, 3);
             this.clcCustomer.Name = "clcCustomer";
             this.clcCustomer.Size = new System.Drawing.Size(344, 154);
-            this.clcCustomer.TabIndex = 6;
+            this.clcCustomer.TabIndex = 2;
             this.clcCustomer.CustomerItemSelected += new Phoebe.FormClient.CustomerListControl.ItemSelectHandle(this.clcCustomer_CustomerItemSelected);
             // 
             // clcCategory
@@ -651,7 +651,7 @@
             this.clcCategory.Location = new System.Drawing.Point(653, 383);
             this.clcCategory.Name = "clcCategory";
             this.clcCategory.Size = new System.Drawing.Size(344, 214);
-            this.clcCategory.TabIndex = 7;
+            this.clcCategory.TabIndex = 5;
             this.clcCategory.CategoryItemSelected += new Phoebe.FormClient.CategoryListControl.ItemSelectHandle(this.clcCategory_CategoryItemSelected);
             // 
             // StockOutAddControl

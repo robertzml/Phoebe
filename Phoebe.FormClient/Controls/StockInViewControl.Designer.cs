@@ -77,7 +77,6 @@
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem19 = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
-            this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
             this.groupControl2.SuspendLayout();
@@ -158,7 +157,7 @@
             this.groupControl2.Location = new System.Drawing.Point(3, 163);
             this.groupControl2.Name = "groupControl2";
             this.groupControl2.Size = new System.Drawing.Size(1094, 154);
-            this.groupControl2.TabIndex = 4;
+            this.groupControl2.TabIndex = 1;
             this.groupControl2.Text = "费用信息";
             // 
             // layoutControl2
@@ -179,7 +178,7 @@
             this.layoutControl2.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(889, 214, 477, 518);
             this.layoutControl2.Root = this.layoutControlGroup2;
             this.layoutControl2.Size = new System.Drawing.Size(1090, 131);
-            this.layoutControl2.TabIndex = 32;
+            this.layoutControl2.TabIndex = 0;
             this.layoutControl2.Text = "layoutControl2";
             // 
             // txtBillingRemark
@@ -191,7 +190,7 @@
             this.txtBillingRemark.Properties.ReadOnly = true;
             this.txtBillingRemark.Size = new System.Drawing.Size(182, 20);
             this.txtBillingRemark.StyleController = this.layoutControl2;
-            this.txtBillingRemark.TabIndex = 32;
+            this.txtBillingRemark.TabIndex = 9;
             // 
             // nmOtherPrice
             // 
@@ -207,7 +206,7 @@
             this.nmOtherPrice.Name = "nmOtherPrice";
             this.nmOtherPrice.ReadOnly = true;
             this.nmOtherPrice.Size = new System.Drawing.Size(180, 22);
-            this.nmOtherPrice.TabIndex = 31;
+            this.nmOtherPrice.TabIndex = 8;
             // 
             // nmPackingPrice
             // 
@@ -223,7 +222,7 @@
             this.nmPackingPrice.Name = "nmPackingPrice";
             this.nmPackingPrice.ReadOnly = true;
             this.nmPackingPrice.Size = new System.Drawing.Size(182, 22);
-            this.nmPackingPrice.TabIndex = 29;
+            this.nmPackingPrice.TabIndex = 6;
             // 
             // nmRentPrice
             // 
@@ -239,7 +238,7 @@
             this.nmRentPrice.Name = "nmRentPrice";
             this.nmRentPrice.ReadOnly = true;
             this.nmRentPrice.Size = new System.Drawing.Size(192, 22);
-            this.nmRentPrice.TabIndex = 30;
+            this.nmRentPrice.TabIndex = 7;
             // 
             // nmDisposePrice
             // 
@@ -255,7 +254,7 @@
             this.nmDisposePrice.Name = "nmDisposePrice";
             this.nmDisposePrice.ReadOnly = true;
             this.nmDisposePrice.Size = new System.Drawing.Size(180, 22);
-            this.nmDisposePrice.TabIndex = 28;
+            this.nmDisposePrice.TabIndex = 5;
             // 
             // nmUnitPrice
             // 
@@ -271,7 +270,7 @@
             this.nmUnitPrice.Name = "nmUnitPrice";
             this.nmUnitPrice.ReadOnly = true;
             this.nmUnitPrice.Size = new System.Drawing.Size(182, 22);
-            this.nmUnitPrice.TabIndex = 23;
+            this.nmUnitPrice.TabIndex = 0;
             // 
             // nmFreezePrice
             // 
@@ -287,7 +286,7 @@
             this.nmFreezePrice.Name = "nmFreezePrice";
             this.nmFreezePrice.ReadOnly = true;
             this.nmFreezePrice.Size = new System.Drawing.Size(192, 22);
-            this.nmFreezePrice.TabIndex = 27;
+            this.nmFreezePrice.TabIndex = 4;
             // 
             // nmHandlingUnitPrice
             // 
@@ -303,7 +302,7 @@
             this.nmHandlingUnitPrice.Name = "nmHandlingUnitPrice";
             this.nmHandlingUnitPrice.ReadOnly = true;
             this.nmHandlingUnitPrice.Size = new System.Drawing.Size(192, 22);
-            this.nmHandlingUnitPrice.TabIndex = 24;
+            this.nmHandlingUnitPrice.TabIndex = 1;
             // 
             // nmFreezeUnitPrice
             // 
@@ -319,7 +318,7 @@
             this.nmFreezeUnitPrice.Name = "nmFreezeUnitPrice";
             this.nmFreezeUnitPrice.ReadOnly = true;
             this.nmFreezeUnitPrice.Size = new System.Drawing.Size(182, 22);
-            this.nmFreezeUnitPrice.TabIndex = 26;
+            this.nmFreezeUnitPrice.TabIndex = 3;
             // 
             // nmHandlingPrice
             // 
@@ -335,7 +334,7 @@
             this.nmHandlingPrice.Name = "nmHandlingPrice";
             this.nmHandlingPrice.ReadOnly = true;
             this.nmHandlingPrice.Size = new System.Drawing.Size(180, 22);
-            this.nmHandlingPrice.TabIndex = 25;
+            this.nmHandlingPrice.TabIndex = 2;
             // 
             // layoutControlGroup2
             // 
@@ -469,7 +468,7 @@
             this.groupControl3.Location = new System.Drawing.Point(3, 323);
             this.groupControl3.Name = "groupControl3";
             this.groupControl3.Size = new System.Drawing.Size(1094, 291);
-            this.groupControl3.TabIndex = 3;
+            this.groupControl3.TabIndex = 2;
             this.groupControl3.Text = "货品信息";
             // 
             // sigList
@@ -485,12 +484,11 @@
             // groupControl1
             // 
             this.groupControl1.Controls.Add(this.layoutControl1);
-            this.groupControl1.Controls.Add(this.labelControl5);
             this.groupControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl1.Location = new System.Drawing.Point(3, 3);
             this.groupControl1.Name = "groupControl1";
             this.groupControl1.Size = new System.Drawing.Size(1094, 154);
-            this.groupControl1.TabIndex = 1;
+            this.groupControl1.TabIndex = 0;
             this.groupControl1.Text = "基本信息";
             // 
             // layoutControl1
@@ -509,7 +507,7 @@
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.layoutControlGroup1;
             this.layoutControl1.Size = new System.Drawing.Size(1090, 131);
-            this.layoutControl1.TabIndex = 13;
+            this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
             // txtFlowNumber
@@ -521,7 +519,7 @@
             this.txtFlowNumber.Properties.ReadOnly = true;
             this.txtFlowNumber.Size = new System.Drawing.Size(194, 20);
             this.txtFlowNumber.StyleController = this.layoutControl1;
-            this.txtFlowNumber.TabIndex = 9;
+            this.txtFlowNumber.TabIndex = 8;
             // 
             // txtInTime
             // 
@@ -532,7 +530,7 @@
             this.txtInTime.Properties.ReadOnly = true;
             this.txtInTime.Size = new System.Drawing.Size(204, 20);
             this.txtInTime.StyleController = this.layoutControl1;
-            this.txtInTime.TabIndex = 8;
+            this.txtInTime.TabIndex = 1;
             // 
             // txtRemark
             // 
@@ -543,7 +541,7 @@
             this.txtRemark.Properties.ReadOnly = true;
             this.txtRemark.Size = new System.Drawing.Size(204, 20);
             this.txtRemark.StyleController = this.layoutControl1;
-            this.txtRemark.TabIndex = 3;
+            this.txtRemark.TabIndex = 7;
             // 
             // txtUser
             // 
@@ -565,7 +563,7 @@
             this.txtBillingType.Properties.ReadOnly = true;
             this.txtBillingType.Size = new System.Drawing.Size(194, 20);
             this.txtBillingType.StyleController = this.layoutControl1;
-            this.txtBillingType.TabIndex = 7;
+            this.txtBillingType.TabIndex = 6;
             // 
             // txtCustomerName
             // 
@@ -576,7 +574,7 @@
             this.txtCustomerName.Properties.ReadOnly = true;
             this.txtCustomerName.Size = new System.Drawing.Size(204, 20);
             this.txtCustomerName.StyleController = this.layoutControl1;
-            this.txtCustomerName.TabIndex = 5;
+            this.txtCustomerName.TabIndex = 4;
             // 
             // txtCustomerNumber
             // 
@@ -587,7 +585,7 @@
             this.txtCustomerNumber.Properties.ReadOnly = true;
             this.txtCustomerNumber.Size = new System.Drawing.Size(194, 20);
             this.txtCustomerNumber.StyleController = this.layoutControl1;
-            this.txtCustomerNumber.TabIndex = 4;
+            this.txtCustomerNumber.TabIndex = 3;
             // 
             // txtStatus
             // 
@@ -609,7 +607,7 @@
             this.txtContract.Properties.ReadOnly = true;
             this.txtContract.Size = new System.Drawing.Size(194, 20);
             this.txtContract.StyleController = this.layoutControl1;
-            this.txtContract.TabIndex = 6;
+            this.txtContract.TabIndex = 5;
             // 
             // layoutControlGroup1
             // 
@@ -724,14 +722,6 @@
             this.emptySpaceItem1.Size = new System.Drawing.Size(323, 121);
             this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
             // 
-            // labelControl5
-            // 
-            this.labelControl5.Location = new System.Drawing.Point(457, 77);
-            this.labelControl5.Name = "labelControl5";
-            this.labelControl5.Size = new System.Drawing.Size(48, 14);
-            this.labelControl5.TabIndex = 4;
-            this.labelControl5.Text = "所属合同";
-            // 
             // StockInViewControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -770,7 +760,6 @@
             this.groupControl3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
             this.groupControl1.ResumeLayout(false);
-            this.groupControl1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.txtFlowNumber.Properties)).EndInit();
@@ -816,7 +805,6 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem7;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem8;
-        private DevExpress.XtraEditors.LabelControl labelControl5;
         private DevExpress.XtraEditors.GroupControl groupControl3;
         private DevExpress.XtraEditors.TextEdit txtContract;
         private DevExpress.XtraEditors.TextEdit txtInTime;

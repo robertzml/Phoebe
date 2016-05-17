@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using System.Data.Entity;
 
 namespace Phoebe.Business
 {
@@ -32,6 +33,41 @@ namespace Phoebe.Business
             base.Init(this.dal);
         }
         #endregion //Constructor
+
+        #region Function
+        /// <summary>
+        /// 设置流水模型
+        /// </summary>
+        /// <param name="cargo">货品</param>
+        /// <param name="count">流水数量</param>
+        /// <param name="weight">流水重量</param>
+        /// <param name="date">流水日期</param>
+        /// <param name="type">流水类型</param>
+        /// <returns></returns>
+        private StockFlow SetStockFlow(Store store, int count, double weight, DateTime date, StockFlowType type)
+        {
+            StockFlow stockFlow = new StockFlow();
+            stockFlow.CustomerId = store.Cargo.Contract.CustomerId;
+            stockFlow.CustomerNumber = store.Cargo.Contract.Customer.Number;
+            stockFlow.CustomerName = store.Cargo.Contract.Customer.Name;
+
+            stockFlow.ContractId = store.Cargo.ContractId;
+            stockFlow.ContractName = store.Cargo.Contract.Name;
+
+            stockFlow.CategoryId = store.Cargo.CategoryId;
+            stockFlow.CategoryNumber = store.Cargo.Category.Number;
+            stockFlow.CategoryName = store.Cargo.Category.Name;
+
+            stockFlow.Count = count;
+            stockFlow.UnitWeight = store.Cargo.UnitWeight;
+            stockFlow.Weight = weight;
+            stockFlow.FlowDate = date;
+            stockFlow.Type = type;
+            stockFlow.CountChange = true;
+
+            return stockFlow;
+        }
+        #endregion //Function
 
         #region Method
         /// <summary>
@@ -69,6 +105,21 @@ namespace Phoebe.Business
 
                 return data.ToList();
             }
+        }
+
+        public List<StockFlow> GetDayFlow(int contractId, DateTime date)
+        {
+            List<StockFlow> data = new List<StockFlow>();
+
+            //find stock in
+            var siDetails = RepositoryFactory<StockInDetailsRepository>.Instance.Find(r => r.StockIn.ContractId == contractId && r.StockIn.InTime == date && r.Status == (int)EntityStatus.StockIn);
+            foreach (var item in siDetails)
+            {
+                var flow = SetStockFlow(item.Store, item.Count, item.InWeight, date, StockFlowType.StockIn);
+                data.Add(flow);
+            }
+
+            return data;
         }
         #endregion //Method
     }

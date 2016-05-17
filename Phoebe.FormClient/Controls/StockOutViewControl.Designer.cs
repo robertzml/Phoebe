@@ -136,7 +136,7 @@
             this.txtFlowNumber.Properties.ReadOnly = true;
             this.txtFlowNumber.Size = new System.Drawing.Size(154, 20);
             this.txtFlowNumber.StyleController = this.layoutControl1;
-            this.txtFlowNumber.TabIndex = 12;
+            this.txtFlowNumber.TabIndex = 8;
             // 
             // txtRemark
             // 
@@ -147,7 +147,7 @@
             this.txtRemark.Properties.ReadOnly = true;
             this.txtRemark.Size = new System.Drawing.Size(146, 20);
             this.txtRemark.StyleController = this.layoutControl1;
-            this.txtRemark.TabIndex = 11;
+            this.txtRemark.TabIndex = 7;
             // 
             // txtBillingType
             // 
@@ -158,7 +158,7 @@
             this.txtBillingType.Properties.ReadOnly = true;
             this.txtBillingType.Size = new System.Drawing.Size(120, 20);
             this.txtBillingType.StyleController = this.layoutControl1;
-            this.txtBillingType.TabIndex = 10;
+            this.txtBillingType.TabIndex = 6;
             // 
             // txtContract
             // 
@@ -169,7 +169,7 @@
             this.txtContract.Properties.ReadOnly = true;
             this.txtContract.Size = new System.Drawing.Size(154, 20);
             this.txtContract.StyleController = this.layoutControl1;
-            this.txtContract.TabIndex = 9;
+            this.txtContract.TabIndex = 5;
             // 
             // txtCustomerName
             // 
@@ -180,7 +180,7 @@
             this.txtCustomerName.Properties.ReadOnly = true;
             this.txtCustomerName.Size = new System.Drawing.Size(146, 20);
             this.txtCustomerName.StyleController = this.layoutControl1;
-            this.txtCustomerName.TabIndex = 8;
+            this.txtCustomerName.TabIndex = 4;
             // 
             // txtCustomerNumber
             // 
@@ -191,7 +191,7 @@
             this.txtCustomerNumber.Properties.ReadOnly = true;
             this.txtCustomerNumber.Size = new System.Drawing.Size(120, 20);
             this.txtCustomerNumber.StyleController = this.layoutControl1;
-            this.txtCustomerNumber.TabIndex = 7;
+            this.txtCustomerNumber.TabIndex = 3;
             // 
             // txtUser
             // 
@@ -202,7 +202,7 @@
             this.txtUser.Properties.ReadOnly = true;
             this.txtUser.Size = new System.Drawing.Size(154, 20);
             this.txtUser.StyleController = this.layoutControl1;
-            this.txtUser.TabIndex = 6;
+            this.txtUser.TabIndex = 2;
             // 
             // txtOutTime
             // 
@@ -213,7 +213,7 @@
             this.txtOutTime.Properties.ReadOnly = true;
             this.txtOutTime.Size = new System.Drawing.Size(146, 20);
             this.txtOutTime.StyleController = this.layoutControl1;
-            this.txtOutTime.TabIndex = 5;
+            this.txtOutTime.TabIndex = 1;
             // 
             // txtStatus
             // 
@@ -224,7 +224,7 @@
             this.txtStatus.Properties.ReadOnly = true;
             this.txtStatus.Size = new System.Drawing.Size(120, 20);
             this.txtStatus.StyleController = this.layoutControl1;
-            this.txtStatus.TabIndex = 4;
+            this.txtStatus.TabIndex = 0;
             // 
             // layoutControlGroup1
             // 
