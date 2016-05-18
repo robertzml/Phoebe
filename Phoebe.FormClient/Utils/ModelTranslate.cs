@@ -92,7 +92,7 @@ namespace Phoebe.FormClient
         public static List<StockOutModel> StockOutToModel(StockOut stockOut)
         {
             List<StockOutModel> data = new List<StockOutModel>();
-            foreach(var item in stockOut.StockOutDetails)
+            foreach (var item in stockOut.StockOutDetails)
             {
                 StockOutModel model = new StockOutModel();
                 model.Id = item.Id;
@@ -117,6 +117,39 @@ namespace Phoebe.FormClient
                 model.ShelfLife = item.Store.ShelfLife;
                 model.Remark = item.Remark;
                 model.Status = item.Status;
+
+                data.Add(model);
+            }
+
+            return data;
+        }
+
+        /// <summary>
+        /// 库存记录转移库记录
+        /// </summary>
+        /// <param name="stores">移库记录</param>
+        /// <returns></returns>
+        public static List<StockMoveModel> StoreToStockMove(List<Store> stores)
+        {
+            List<StockMoveModel> data = new List<StockMoveModel>();
+            foreach (var item in stores)
+            {
+                StockMoveModel model = new StockMoveModel();
+                model.SourceStoreId = item.Id;
+                model.ContractId = item.Cargo.ContractId;
+                model.CargoId = item.CargoId;
+                model.CategoryId = item.Cargo.CategoryId;
+                model.CategoryNumber = item.Cargo.Category.Number;
+                model.CategoryName = item.Cargo.Category.Name;
+                model.Specification = item.Specification;
+                model.StoreCount = item.StoreCount;
+                model.GroupType = item.Cargo.GroupType;
+                model.UnitWeight = item.Cargo.UnitWeight;
+                model.UnitVolume = item.Cargo.UnitVolume;
+                model.SourceWarehouseNumber = item.WarehouseNumber;
+                model.InTime = item.InTime;
+                model.OriginPlace = item.OriginPlace;
+                model.ShelfLife = item.ShelfLife;
 
                 data.Add(model);
             }

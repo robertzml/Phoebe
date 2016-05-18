@@ -14,7 +14,7 @@ namespace Phoebe.Business.DAL
     /// </summary>
     public class TransactionRepository : SqlDataAccess<PhoebeContext>
     {
-        #region StockIn Method
+        #region StockIn Trans
         /// <summary>
         /// 新建入库事务
         /// </summary>
@@ -144,9 +144,9 @@ namespace Phoebe.Business.DAL
 
             return ErrorCode.Success;
         }
-        #endregion //StockIn Method
+        #endregion //StockIn Trans
 
-        #region StockOut Method
+        #region StockOut Trans
         /// <summary>
         /// 新建出库事务
         /// </summary>
@@ -249,6 +249,38 @@ namespace Phoebe.Business.DAL
                 return ErrorCode.Exception;
             }
         }
-        #endregion //StockOut Method
+        #endregion //StockOut Trans
+
+        #region StockMove Trans
+        /// <summary>
+        /// 移库新增事务
+        /// </summary>
+        /// <param name="stockMove">移库单对象</param>
+        /// <param name="details">移库记录</param>
+        /// <param name="stores">新库存记录</param>
+        /// <returns></returns>
+        public ErrorCode StockMoveAddTrans(StockMove stockMove, List<StockMoveDetail> details, List<Store> stores)
+        {
+            try
+            {
+                // add stock move
+                this.context.StockMoves.Add(stockMove);
+
+                // add new stores
+                this.context.Stores.AddRange(stores);
+
+                // add stock move details
+                this.context.StockMoveDetails.AddRange(details);
+
+                this.context.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+
+            return ErrorCode.Success;
+        }
+        #endregion //StockMove Trans
     }
 }

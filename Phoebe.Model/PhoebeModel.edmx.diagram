@@ -35,6 +35,13 @@
         <AssociationConnector Association="Phoebe.Model.FK_StockOut_User" />
         <AssociationConnector Association="Phoebe.Model.FK_StockOutDetails_StockOut" />
         <AssociationConnector Association="Phoebe.Model.FK_StockOutDetails_Store" />
+        <EntityTypeShape EntityType="Phoebe.Model.StockMove" Width="1.5" PointX="14.375" PointY="11.5" />
+        <EntityTypeShape EntityType="Phoebe.Model.StockMoveDetail" Width="1.5" PointX="16.625" PointY="12.875" />
+        <AssociationConnector Association="Phoebe.Model.FK_StockMove_Contract" />
+        <AssociationConnector Association="Phoebe.Model.FK_StockMove_User" />
+        <AssociationConnector Association="Phoebe.Model.FK_StockMoveDetails_StockMove" />
+        <AssociationConnector Association="Phoebe.Model.FK_StockMoveDetails_Store_New" />
+        <AssociationConnector Association="Phoebe.Model.FK_StockMoveDetails_Store_Source" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

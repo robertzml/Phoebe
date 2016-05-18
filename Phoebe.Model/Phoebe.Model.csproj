@@ -69,6 +69,7 @@
     </Compile>
     <Compile Include="Helper\PhoebeEnum.cs" />
     <Compile Include="Helper\StockFlow.cs" />
+    <Compile Include="Helper\StockMoveModel.cs" />
     <Compile Include="Helper\StockOutModel.cs" />
     <Compile Include="Helper\Storage.cs" />
     <Compile Include="StockIn.cs">
@@ -78,6 +79,12 @@
       <DependentUpon>PhoebeModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Helper\StockInModel.cs" />
+    <Compile Include="StockMove.cs">
+      <DependentUpon>PhoebeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StockMoveDetail.cs">
+      <DependentUpon>PhoebeModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="StockOut.cs">
       <DependentUpon>PhoebeModel.tt</DependentUpon>
     </Compile>

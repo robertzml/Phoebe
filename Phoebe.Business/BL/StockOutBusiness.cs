@@ -92,7 +92,7 @@ namespace Phoebe.Business
         {
             try
             {
-                // set stock in
+                // set stock out
                 entity.FlowNumber = GetLastFlowNumber(entity.OutTime.Date);
                 entity.Status = (int)EntityStatus.StockOutReady;
 

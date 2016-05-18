@@ -16,9 +16,9 @@ namespace Phoebe.FormClient
     using Phoebe.Model;
 
     /// <summary>
-    /// 出库添加控件
+    /// 移库添加控件
     /// </summary>
-    public partial class StockOutAddControl : UserControl
+    public partial class StockMoveAddControl : UserControl
     {
         #region Field
         /// <summary>
@@ -54,10 +54,10 @@ namespace Phoebe.FormClient
 
         #region Constructor
         /// <summary>
-        /// 出库添加控件
+        /// 移库添加控件
         /// </summary>
-        /// <param name="user">登录用户</param>
-        public StockOutAddControl(LoginUser user)
+        /// <param name="user"></param>
+        public StockMoveAddControl(LoginUser user)
         {
             InitializeComponent();
 
@@ -65,14 +65,14 @@ namespace Phoebe.FormClient
 
             this.txtStatus.Text = "新建出库";
             this.txtUser.Text = this.currentUser.Name;
-            this.dpOutTime.DateTime = DateTime.Now;
+            this.dpMoveTime.DateTime = DateTime.Now.Date;
 
             this.customerList = BusinessFactory<CustomerBusiness>.Instance.FindAll();
             this.clcCustomer.SetDataSource(customerList);
             this.categoryList = BusinessFactory<CategoryBusiness>.Instance.GetLeafCategory();
             this.clcCategory.SetDataSource(this.categoryList);
 
-            this.sogList.DataSource = new List<StockOutModel>();
+            this.smgList.DataSource = new List<StockMoveModel>();
         }
         #endregion //Constructor
 
@@ -98,24 +98,14 @@ namespace Phoebe.FormClient
             if (this.cmbContract.Properties.Items.Count > 0)
                 this.cmbContract.SelectedIndex = 0;
         }
-
-        /// <summary>
-        /// 设置数据筛选表格
-        /// </summary>
-        /// <param name="stores">数据</param>
-        private void SetFilterDataControl(List<Store> stores)
-        {
-            var data = ModelTranslate.StoreToStockOut(stores);
-            this.sogFilter.DataSource = data;
-        }
         #endregion //Function
 
         #region Method
         /// <summary>
-        /// 保存出库
+        /// 保存移库
         /// </summary>
         /// <param name="errorMessage">错误消息</param>
-        /// <param name="newId">新出库单ID</param>
+        /// <param name="newId">新移库单ID</param>
         /// <param name="month">月份</param>
         /// <returns></returns>
         public ErrorCode Save(out string errorMessage, out Guid newId, out string month)
@@ -123,7 +113,7 @@ namespace Phoebe.FormClient
             errorMessage = "";
             month = "";
             newId = Guid.Empty;
-            this.sogList.CloseEditor();
+            this.smgList.CloseEditor();
 
             // check input data and format digit
             if (this.selectCustomer == null || this.selectContract == null)
@@ -131,44 +121,45 @@ namespace Phoebe.FormClient
                 errorMessage = "请选择客户和合同";
                 return ErrorCode.Error;
             }
-            if (this.sogList.DataSource.Count == 0)
+            if (this.smgList.DataSource.Count == 0)
             {
-                errorMessage = "没有出库货品";
+                errorMessage = "没有移库货品";
                 return ErrorCode.Error;
             }
-            foreach (var item in this.sogList.DataSource)
+
+            foreach (var item in this.smgList.DataSource)
             {
-                if (item.OutCount > item.StoreCount)
+                if (item.MoveCount > item.StoreCount)
                 {
-                    errorMessage = "出库数量大于在库数量";
+                    errorMessage = "移库数量大于在库数量";
                     return ErrorCode.Error;
                 }
-                if (item.InTime > this.dpOutTime.DateTime.Date)
+                if (item.InTime > this.dpMoveTime.DateTime.Date)
                 {
-                    errorMessage = "出库时间早于货品入库时间";
+                    errorMessage = "移库时间早于货品入库时间";
                     return ErrorCode.Error;
                 }
 
-                item.OutWeight = Math.Round(item.OutWeight, 4);
-                item.OutVolume = Math.Round(item.OutVolume, 4);
+                item.MoveWeight = Math.Round(item.MoveWeight, 4);
+                item.MoveVolume = Math.Round(item.MoveVolume, 4);
             }
 
-            // set stock out
-            StockOut so = new StockOut();
-            so.Id = Guid.NewGuid();
-            so.OutTime = this.dpOutTime.DateTime.Date;
-            so.MonthTime = so.OutTime.Year.ToString() + so.OutTime.Month.ToString().PadLeft(2, '0');
-            so.ContractId = this.selectContract.Id;
-            so.UserId = this.currentUser.Id;
-            so.CreateTime = DateTime.Now;
-            so.Remark = this.txtRemark.Text;
+            // set stock move
+            StockMove sm = new StockMove();
+            sm.Id = Guid.NewGuid();
+            sm.MoveTime = this.dpMoveTime.DateTime.Date;
+            sm.MonthTime = sm.MoveTime.Year.ToString() + sm.MoveTime.Month.ToString().PadLeft(2, '0');
+            sm.ContractId = this.selectContract.Id;
+            sm.UserId = this.currentUser.Id;
+            sm.CreateTime = DateTime.Now;
+            sm.Remark = this.txtRemark.Text;
 
-            // add stock out
-            ErrorCode result = BusinessFactory<StockOutBusiness>.Instance.Create(so, this.sogList.DataSource);
+            // add stock move
+            ErrorCode result = BusinessFactory<StockMoveBusiness>.Instance.Create(sm, this.smgList.DataSource);
             if (result == ErrorCode.Success)
             {
-                newId = so.Id;
-                month = so.MonthTime;
+                newId = sm.Id;
+                month = sm.MonthTime;
             }
 
             return result;
@@ -226,7 +217,7 @@ namespace Phoebe.FormClient
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void cmbContract_EditValueChanged(object sender, EventArgs e)
+        private void cmbContract_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (this.cmbContract.SelectedIndex == -1)
             {
@@ -243,12 +234,12 @@ namespace Phoebe.FormClient
                 else
                     this.isEqualWeight = true;
 
-                this.sogList.SetEqualWeight(this.isEqualWeight);
+                this.smgList.SetEqualWeight(this.isEqualWeight);
                 this.txtBillingType.Text = ((BillingType)this.selectContract.BillingType).DisplayName();
             }
 
-            this.sogFilter.Clear();
-            this.sogList.Clear();
+            this.smgFilter.Clear();
+            this.smgList.Clear();
         }
 
         /// <summary>
@@ -300,18 +291,19 @@ namespace Phoebe.FormClient
                 return;
             }
 
-            var data = BusinessFactory<StoreBusiness>.Instance.GetByContract(this.selectContract.Id, true);
+            var stores = BusinessFactory<StoreBusiness>.Instance.GetByContract(this.selectContract.Id, true);
             var category = BusinessFactory<CategoryBusiness>.Instance.GetByParent(this.txtCategoryNumber.Text);
             if (category != null)
             {
-                data = data.Where(r => category.Select(s => s.Id).Contains(r.Cargo.CategoryId)).ToList();
+                stores = stores.Where(r => category.Select(s => s.Id).Contains(r.Cargo.CategoryId)).ToList();
             }
 
-            SetFilterDataControl(data);
+            var data = ModelTranslate.StoreToStockMove(stores);
+            this.smgFilter.DataSource = data;
         }
 
         /// <summary>
-        /// 加入出库
+        /// 加入移库
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -323,7 +315,7 @@ namespace Phoebe.FormClient
                 return;
             }
 
-            var select = this.sogFilter.GetCurrentSelect();
+            var select = this.smgFilter.GetCurrentSelect();
             if (select == null)
             {
                 MessageBox.Show("未选择记录", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -331,39 +323,40 @@ namespace Phoebe.FormClient
             }
             else
             {
-                if (this.sogList.CheckHasStore(select))
+                if (this.smgList.CheckHasStore(select))
                 {
                     MessageBox.Show("该货品已经加入", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
 
-                int count = Convert.ToInt32(this.nmOutCount.Value);
+                int count = Convert.ToInt32(this.nmMoveCount.Value);
                 if (count > select.StoreCount)
                 {
-                    MessageBox.Show("出库数量大于在库数量", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("移库数量大于在库数量", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
 
-                select.OutCount = count;
+                select.MoveCount = count;
                 if (this.isEqualWeight)
                 {
-                    select.OutWeight = count * select.UnitWeight / 1000;
+                    select.MoveWeight = count * select.UnitWeight / 1000;
                 }
-                select.OutVolume = count * select.UnitVolume;
+                select.MoveVolume = count * select.UnitVolume;
+                select.NewWarehouseNumber = this.txtNewWarehouse.Text;
 
-                this.sogList.DataSource.Add(select);
-                this.sogList.UpdateBindingData();
+                this.smgList.DataSource.Add(select);
+                this.smgList.UpdateBindingData();
             }
         }
 
         /// <summary>
-        /// 删除出库
+        /// 删除移库
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnRemoveFrom_Click(object sender, EventArgs e)
         {
-            var select = this.sogList.GetCurrentSelect();
+            var select = this.smgList.GetCurrentSelect();
             if (select == null)
             {
                 MessageBox.Show("未选择记录", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -371,8 +364,8 @@ namespace Phoebe.FormClient
             }
             else
             {
-                this.sogList.DataSource.Remove(select);
-                this.sogList.UpdateBindingData();
+                this.smgList.DataSource.Remove(select);
+                this.smgList.UpdateBindingData();
             }
         }
         #endregion //Event

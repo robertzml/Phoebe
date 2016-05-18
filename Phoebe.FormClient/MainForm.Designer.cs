@@ -28,8 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
+            this.barManager1 = new DevExpress.XtraBars.BarManager();
             this.mainMenu = new DevExpress.XtraBars.Bar();
             this.menuCustomer = new DevExpress.XtraBars.BarSubItem();
             this.menuCustomerList = new DevExpress.XtraBars.BarButtonItem();
@@ -62,7 +61,7 @@
             this.barCustomerList = new DevExpress.XtraBars.BarButtonItem();
             this.barHeaderItem1 = new DevExpress.XtraBars.BarHeaderItem();
             this.barStaticItem2 = new DevExpress.XtraBars.BarStaticItem();
-            this.tabMdiManager = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
+            this.tabMdiManager = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabMdiManager)).BeginInit();
             this.SuspendLayout();
@@ -203,6 +202,7 @@
             this.menuStockMove.Caption = "货品移库";
             this.menuStockMove.Id = 22;
             this.menuStockMove.Name = "menuStockMove";
+            this.menuStockMove.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuStockMove_ItemClick);
             // 
             // menuStore
             // 
