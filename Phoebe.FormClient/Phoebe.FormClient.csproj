@@ -342,6 +342,7 @@
     <None Include="Properties\DataSources\Phoebe.Model.StockFlow.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.StockInModel.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.StockOutModel.datasource" />
+    <None Include="Properties\DataSources\Phoebe.Model.Storage.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.Store.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.User.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.UserGroup.datasource" />

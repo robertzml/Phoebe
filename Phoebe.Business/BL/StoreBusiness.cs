@@ -36,6 +36,43 @@ namespace Phoebe.Business
 
         #region Function
         /// <summary>
+        /// 设置库存模型
+        /// </summary>
+        /// <param name="stock">库存</param>
+        /// <param name="date">日期</param>
+        /// <param name="count">数量</param>
+        /// <param name="weight">总重量</param>
+        /// <param name="source">来源</param>
+        /// <returns></returns>
+        private Storage SetStorage(Store store, DateTime date, int count, double weight, SourceType source)
+        {
+            Storage storage = new Storage();
+            storage.StorageDate = date;
+            storage.StoreId = store.Id;
+            storage.CustomerId = store.Cargo.Contract.CustomerId;
+            storage.CustomerNumber = store.Cargo.Contract.Customer.Number;
+            storage.CustomerName = store.Cargo.Contract.Customer.Name;
+            storage.ContractId = store.Cargo.ContractId;
+            storage.ContractName = store.Cargo.Contract.Name;
+
+            storage.CategoryId = store.Cargo.CategoryId;
+            storage.CategoryNumber = store.Cargo.Category.Number;
+            storage.CategoryName = store.Cargo.Category.Name;
+            storage.Specification = store.Specification;
+            
+            storage.Count = count;
+            storage.UnitWeight = store.Cargo.UnitWeight;
+            storage.StoreWeight = weight;
+
+            storage.Number = store.WarehouseNumber;
+            storage.InTime = store.InTime;
+            storage.Source = source;
+
+            return storage;
+        }
+
+
+        /// <summary>
         /// 设置流水模型
         /// </summary>
         /// <param name="cargo">货品</param>
@@ -57,7 +94,7 @@ namespace Phoebe.Business
             stockFlow.CategoryId = store.Cargo.CategoryId;
             stockFlow.CategoryNumber = store.Cargo.Category.Number;
             stockFlow.CategoryName = store.Cargo.Category.Name;
-
+            stockFlow.Specification = store.Specification;
             stockFlow.Count = count;
             stockFlow.UnitWeight = store.Cargo.UnitWeight;
             stockFlow.Weight = weight;
@@ -105,6 +142,41 @@ namespace Phoebe.Business
 
                 return data.ToList();
             }
+        }
+
+        public List<Storage> GetInDay(int contractId, DateTime date)
+        {
+            List<Storage> data = new List<Storage>();
+
+            //find store
+            var stores = this.dal.Find(r => r.Cargo.ContractId == contractId && r.InTime <= date && (r.OutTime == null || r.OutTime > date));
+            if (stores.Count() == 0)
+                return data;
+
+            foreach (var store in stores)
+            {
+                // find stock in
+                if (store.Source == (int)SourceType.StockIn)
+                {
+                    var si = RepositoryFactory<StockInDetailsRepository>.Instance.FindOne(r => r.StoreId == store.Id);
+                    var storage = SetStorage(store, date, si.Count, si.InWeight, SourceType.StockIn);
+                    data.Add(storage);
+                }
+
+                //find stock out
+                var stockOutDetails = RepositoryFactory<StockOutDetailsRepository>.Instance.Find(r => r.StoreId == store.Id && r.Status == (int)EntityStatus.StockOut && r.StockOut.OutTime <= date);
+                foreach (var item in stockOutDetails)
+                {
+                    var s = data.SingleOrDefault(r => r.StoreId == item.StoreId);
+                    if (s != null)
+                    {
+                        s.Count -= item.Count;
+                        s.StoreWeight -= item.OutWeight;
+                    }
+                }
+            }
+
+            return data;
         }
 
         /// <summary>

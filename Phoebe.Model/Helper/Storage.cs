@@ -1,17 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Phoebe.Model
 {
     /// <summary>
-    /// 库存流水类
+    /// 库存记录类，表示指定日库存记录
     /// </summary>
-    public class StockFlow
+    public class Storage
     {
+        /// <summary>
+        /// 库存日期
+        /// </summary>
+        public DateTime StorageDate { get; set; }
+
+        /// <summary>
+        /// 库存ID
+        /// </summary>
+        public System.Guid StoreId { get; set; }
+
         /// <summary>
         /// 客户ID
         /// </summary>
@@ -38,17 +46,17 @@ namespace Phoebe.Model
         public string ContractName { get; set; }
 
         /// <summary>
-        /// 类别ID
+        /// 分类ID
         /// </summary>
         public int CategoryId { get; set; }
 
         /// <summary>
-        /// 类别编码
+        /// 分类编码
         /// </summary>
         public string CategoryNumber { get; set; }
 
         /// <summary>
-        /// 类别名称
+        /// 分类名称
         /// </summary>
         public string CategoryName { get; set; }
 
@@ -58,11 +66,8 @@ namespace Phoebe.Model
         public string Specification { get; set; }
 
         /// <summary>
-        /// 流水数量
+        /// 在库数量
         /// </summary>
-        /// <remarks>
-        /// 正为入库、移入，负为出库、移出
-        /// </remarks>
         public int Count { get; set; }
 
         /// <summary>
@@ -71,62 +76,23 @@ namespace Phoebe.Model
         public double UnitWeight { get; set; }
 
         /// <summary>
-        /// 流水重量(吨)
+        /// 在库重量(吨)
         /// </summary>
-        public double Weight { get; set; }
+        public double StoreWeight { get; set; }
 
         /// <summary>
-        /// 流水日期
+        /// 库位编号
         /// </summary>
-        public DateTime FlowDate { get; set; }
+        public string Number { get; set; }
 
         /// <summary>
-        /// 流水类型
+        /// 入库时间
         /// </summary>
-        public StockFlowType Type { get; set; }
+        public System.DateTime InTime { get; set; }
 
         /// <summary>
-        /// 数量变化
+        /// 来源
         /// </summary>
-        /// <remarks>
-        /// 整库移库时为否，冷藏费无更改，其它流水为真
-        /// </remarks>
-        public bool CountChange { get; set; }
-    }
-
-    /// <summary>
-    /// 流水类型
-    /// </summary>
-    public enum StockFlowType
-    {
-        /// <summary>
-        /// 无
-        /// </summary>
-        [Display(Name = "无")]
-        None = 0,
-
-        /// <summary>
-        /// 入库
-        /// </summary>
-        [Display(Name = "入库")]
-        StockIn = 1,
-
-        /// <summary>
-        /// 出库
-        /// </summary>
-        [Display(Name = "出库")]
-        StockOut = 2,
-
-        /// <summary>
-        /// 移入
-        /// </summary>
-        [Display(Name = "移入")]
-        StockMoveIn = 3,
-
-        /// <summary>
-        /// 移出
-        /// </summary>
-        [Display(Name = "移出")]
-        StockMoveOut = 4
+        public SourceType Source { get; set; }
     }
 }

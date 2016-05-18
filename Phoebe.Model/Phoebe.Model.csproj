@@ -70,6 +70,7 @@
     <Compile Include="Helper\PhoebeEnum.cs" />
     <Compile Include="Helper\StockFlow.cs" />
     <Compile Include="Helper\StockOutModel.cs" />
+    <Compile Include="Helper\Storage.cs" />
     <Compile Include="StockIn.cs">
       <DependentUpon>PhoebeModel.tt</DependentUpon>
     </Compile>

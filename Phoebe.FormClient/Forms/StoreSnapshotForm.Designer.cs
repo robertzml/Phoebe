@@ -57,12 +57,29 @@
             this.colCategoryId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCategoryNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCategoryName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colSpecification = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCount = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colUnitWeight = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colWeight = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colFlowDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colType = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCountChange = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.dgcStorage = new DevExpress.XtraGrid.GridControl();
+            this.dgvStorage = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.bsStorage = new System.Windows.Forms.BindingSource(this.components);
+            this.colStorageDate = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colCustomerNumber1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colCustomerName1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colContractName1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colCategoryNumber1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colCategoryName1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colSpecification1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colCount1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colUnitWeight1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colStoreWeight = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colNumber = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colInTime = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colSource = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
@@ -80,11 +97,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
+            this.groupControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).BeginInit();
             this.groupControl3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgcStockFlow)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsStockFlow)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStockFlow)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgcStorage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvStorage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsStorage)).BeginInit();
             this.SuspendLayout();
             // 
             // groupControl1
@@ -255,12 +276,13 @@
             // 
             // groupControl2
             // 
+            this.groupControl2.Controls.Add(this.dgcStorage);
             this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl2.Location = new System.Drawing.Point(3, 203);
             this.groupControl2.Name = "groupControl2";
             this.groupControl2.Size = new System.Drawing.Size(728, 190);
             this.groupControl2.TabIndex = 2;
-            this.groupControl2.Text = "groupControl2";
+            this.groupControl2.Text = "库存记录";
             // 
             // groupControl3
             // 
@@ -299,6 +321,7 @@
             this.colCategoryId,
             this.colCategoryNumber,
             this.colCategoryName,
+            this.colSpecification,
             this.colCount,
             this.colUnitWeight,
             this.colWeight,
@@ -307,113 +330,273 @@
             this.colCountChange});
             this.dgvStockFlow.GridControl = this.dgcStockFlow;
             this.dgvStockFlow.Name = "dgvStockFlow";
+            this.dgvStockFlow.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
+            this.dgvStockFlow.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
+            this.dgvStockFlow.OptionsBehavior.Editable = false;
+            this.dgvStockFlow.OptionsCustomization.AllowQuickHideColumns = false;
+            this.dgvStockFlow.OptionsFind.AllowFindPanel = false;
+            this.dgvStockFlow.OptionsMenu.EnableColumnMenu = false;
+            this.dgvStockFlow.OptionsMenu.EnableFooterMenu = false;
+            this.dgvStockFlow.OptionsMenu.EnableGroupPanelMenu = false;
+            this.dgvStockFlow.OptionsView.ShowFooter = true;
             this.dgvStockFlow.OptionsView.ShowGroupPanel = false;
             // 
             // colCustomerId
             // 
             this.colCustomerId.FieldName = "CustomerId";
             this.colCustomerId.Name = "colCustomerId";
-            this.colCustomerId.Visible = true;
-            this.colCustomerId.VisibleIndex = 0;
             // 
             // colCustomerNumber
             // 
+            this.colCustomerNumber.Caption = "客户编码";
             this.colCustomerNumber.FieldName = "CustomerNumber";
             this.colCustomerNumber.Name = "colCustomerNumber";
             this.colCustomerNumber.Visible = true;
-            this.colCustomerNumber.VisibleIndex = 1;
+            this.colCustomerNumber.VisibleIndex = 0;
             // 
             // colCustomerName
             // 
+            this.colCustomerName.Caption = "客户姓名";
             this.colCustomerName.FieldName = "CustomerName";
             this.colCustomerName.Name = "colCustomerName";
             this.colCustomerName.Visible = true;
-            this.colCustomerName.VisibleIndex = 2;
+            this.colCustomerName.VisibleIndex = 1;
             // 
             // colContractId
             // 
             this.colContractId.FieldName = "ContractId";
             this.colContractId.Name = "colContractId";
-            this.colContractId.Visible = true;
-            this.colContractId.VisibleIndex = 3;
             // 
             // colContractName
             // 
+            this.colContractName.Caption = "合同名称";
             this.colContractName.FieldName = "ContractName";
             this.colContractName.Name = "colContractName";
             this.colContractName.Visible = true;
-            this.colContractName.VisibleIndex = 4;
+            this.colContractName.VisibleIndex = 2;
             // 
             // colCategoryId
             // 
             this.colCategoryId.FieldName = "CategoryId";
             this.colCategoryId.Name = "colCategoryId";
-            this.colCategoryId.Visible = true;
-            this.colCategoryId.VisibleIndex = 5;
             // 
             // colCategoryNumber
             // 
+            this.colCategoryNumber.Caption = "类别编码";
             this.colCategoryNumber.FieldName = "CategoryNumber";
             this.colCategoryNumber.Name = "colCategoryNumber";
             this.colCategoryNumber.Visible = true;
-            this.colCategoryNumber.VisibleIndex = 6;
+            this.colCategoryNumber.VisibleIndex = 3;
             // 
             // colCategoryName
             // 
+            this.colCategoryName.Caption = "类别名称";
             this.colCategoryName.FieldName = "CategoryName";
             this.colCategoryName.Name = "colCategoryName";
             this.colCategoryName.Visible = true;
-            this.colCategoryName.VisibleIndex = 7;
+            this.colCategoryName.VisibleIndex = 4;
+            // 
+            // colSpecification
+            // 
+            this.colSpecification.Caption = "规格";
+            this.colSpecification.FieldName = "Specification";
+            this.colSpecification.Name = "colSpecification";
+            this.colSpecification.Visible = true;
+            this.colSpecification.VisibleIndex = 5;
             // 
             // colCount
             // 
+            this.colCount.Caption = "流水数量";
             this.colCount.FieldName = "Count";
             this.colCount.Name = "colCount";
+            this.colCount.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "Count", "SUM={0:0.##}")});
             this.colCount.Visible = true;
-            this.colCount.VisibleIndex = 8;
+            this.colCount.VisibleIndex = 6;
             // 
             // colUnitWeight
             // 
+            this.colUnitWeight.Caption = "单位重量(kg)";
             this.colUnitWeight.FieldName = "UnitWeight";
             this.colUnitWeight.Name = "colUnitWeight";
             this.colUnitWeight.Visible = true;
-            this.colUnitWeight.VisibleIndex = 9;
+            this.colUnitWeight.VisibleIndex = 7;
             // 
             // colWeight
             // 
+            this.colWeight.Caption = "流水重量(t)";
+            this.colWeight.DisplayFormat.FormatString = "0.####";
+            this.colWeight.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colWeight.FieldName = "Weight";
             this.colWeight.Name = "colWeight";
+            this.colWeight.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "Weight", "合计={0:0.####}")});
             this.colWeight.Visible = true;
-            this.colWeight.VisibleIndex = 10;
+            this.colWeight.VisibleIndex = 8;
             // 
             // colFlowDate
             // 
+            this.colFlowDate.Caption = "流水日期";
             this.colFlowDate.FieldName = "FlowDate";
             this.colFlowDate.Name = "colFlowDate";
             this.colFlowDate.Visible = true;
-            this.colFlowDate.VisibleIndex = 11;
+            this.colFlowDate.VisibleIndex = 9;
             // 
             // colType
             // 
+            this.colType.Caption = "流水类型";
             this.colType.FieldName = "Type";
+            this.colType.FilterMode = DevExpress.XtraGrid.ColumnFilterMode.DisplayText;
             this.colType.Name = "colType";
             this.colType.Visible = true;
-            this.colType.VisibleIndex = 12;
+            this.colType.VisibleIndex = 10;
             // 
             // colCountChange
             // 
             this.colCountChange.FieldName = "CountChange";
             this.colCountChange.Name = "colCountChange";
-            this.colCountChange.Visible = true;
-            this.colCountChange.VisibleIndex = 13;
             // 
-            // StoreSnapshootForm
+            // dgcStorage
+            // 
+            this.dgcStorage.DataSource = this.bsStorage;
+            this.dgcStorage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgcStorage.Location = new System.Drawing.Point(2, 21);
+            this.dgcStorage.MainView = this.dgvStorage;
+            this.dgcStorage.Name = "dgcStorage";
+            this.dgcStorage.Size = new System.Drawing.Size(724, 167);
+            this.dgcStorage.TabIndex = 0;
+            this.dgcStorage.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.dgvStorage});
+            // 
+            // dgvStorage
+            // 
+            this.dgvStorage.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.colStorageDate,
+            this.colCustomerNumber1,
+            this.colCustomerName1,
+            this.colContractName1,
+            this.colCategoryNumber1,
+            this.colCategoryName1,
+            this.colSpecification1,
+            this.colCount1,
+            this.colUnitWeight1,
+            this.colStoreWeight,
+            this.colNumber,
+            this.colInTime,
+            this.colSource});
+            this.dgvStorage.GridControl = this.dgcStorage;
+            this.dgvStorage.Name = "dgvStorage";
+            this.dgvStorage.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
+            this.dgvStorage.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
+            this.dgvStorage.OptionsBehavior.Editable = false;
+            this.dgvStorage.OptionsCustomization.AllowGroup = false;
+            this.dgvStorage.OptionsCustomization.AllowQuickHideColumns = false;
+            this.dgvStorage.OptionsFind.AllowFindPanel = false;
+            this.dgvStorage.OptionsView.ShowFooter = true;
+            this.dgvStorage.OptionsView.ShowGroupPanel = false;
+            // 
+            // bsStorage
+            // 
+            this.bsStorage.DataSource = typeof(Phoebe.Model.Storage);
+            // 
+            // colStorageDate
+            // 
+            this.colStorageDate.FieldName = "StorageDate";
+            this.colStorageDate.Name = "colStorageDate";
+            this.colStorageDate.Visible = true;
+            this.colStorageDate.VisibleIndex = 0;
+            // 
+            // colCustomerNumber1
+            // 
+            this.colCustomerNumber1.FieldName = "CustomerNumber";
+            this.colCustomerNumber1.Name = "colCustomerNumber1";
+            this.colCustomerNumber1.Visible = true;
+            this.colCustomerNumber1.VisibleIndex = 1;
+            // 
+            // colCustomerName1
+            // 
+            this.colCustomerName1.FieldName = "CustomerName";
+            this.colCustomerName1.Name = "colCustomerName1";
+            this.colCustomerName1.Visible = true;
+            this.colCustomerName1.VisibleIndex = 2;
+            // 
+            // colContractName1
+            // 
+            this.colContractName1.FieldName = "ContractName";
+            this.colContractName1.Name = "colContractName1";
+            this.colContractName1.Visible = true;
+            this.colContractName1.VisibleIndex = 3;
+            // 
+            // colCategoryNumber1
+            // 
+            this.colCategoryNumber1.FieldName = "CategoryNumber";
+            this.colCategoryNumber1.Name = "colCategoryNumber1";
+            this.colCategoryNumber1.Visible = true;
+            this.colCategoryNumber1.VisibleIndex = 4;
+            // 
+            // colCategoryName1
+            // 
+            this.colCategoryName1.FieldName = "CategoryName";
+            this.colCategoryName1.Name = "colCategoryName1";
+            this.colCategoryName1.Visible = true;
+            this.colCategoryName1.VisibleIndex = 5;
+            // 
+            // colSpecification1
+            // 
+            this.colSpecification1.FieldName = "Specification";
+            this.colSpecification1.Name = "colSpecification1";
+            this.colSpecification1.Visible = true;
+            this.colSpecification1.VisibleIndex = 6;
+            // 
+            // colCount1
+            // 
+            this.colCount1.FieldName = "Count";
+            this.colCount1.Name = "colCount1";
+            this.colCount1.Visible = true;
+            this.colCount1.VisibleIndex = 7;
+            // 
+            // colUnitWeight1
+            // 
+            this.colUnitWeight1.FieldName = "UnitWeight";
+            this.colUnitWeight1.Name = "colUnitWeight1";
+            this.colUnitWeight1.Visible = true;
+            this.colUnitWeight1.VisibleIndex = 8;
+            // 
+            // colStoreWeight
+            // 
+            this.colStoreWeight.FieldName = "StoreWeight";
+            this.colStoreWeight.Name = "colStoreWeight";
+            this.colStoreWeight.Visible = true;
+            this.colStoreWeight.VisibleIndex = 9;
+            // 
+            // colNumber
+            // 
+            this.colNumber.FieldName = "Number";
+            this.colNumber.Name = "colNumber";
+            this.colNumber.Visible = true;
+            this.colNumber.VisibleIndex = 10;
+            // 
+            // colInTime
+            // 
+            this.colInTime.FieldName = "InTime";
+            this.colInTime.Name = "colInTime";
+            this.colInTime.Visible = true;
+            this.colInTime.VisibleIndex = 11;
+            // 
+            // colSource
+            // 
+            this.colSource.FieldName = "Source";
+            this.colSource.Name = "colSource";
+            this.colSource.Visible = true;
+            this.colSource.VisibleIndex = 12;
+            // 
+            // StoreSnapshotForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(934, 593);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Name = "StoreSnapshootForm";
+            this.Name = "StoreSnapshotForm";
             this.Text = "库存快照";
             this.Load += new System.EventHandler(this.StoreSnapshootForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
@@ -433,11 +616,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
+            this.groupControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).EndInit();
             this.groupControl3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgcStockFlow)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsStockFlow)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStockFlow)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgcStorage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvStorage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsStorage)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -460,6 +647,10 @@
         private DevExpress.XtraGrid.GridControl dgcStockFlow;
         private System.Windows.Forms.BindingSource bsStockFlow;
         private DevExpress.XtraGrid.Views.Grid.GridView dgvStockFlow;
+        private DevExpress.XtraEditors.SimpleButton btnSearch;
+        private DevExpress.XtraEditors.DateEdit dpTime;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
         private DevExpress.XtraGrid.Columns.GridColumn colCustomerId;
         private DevExpress.XtraGrid.Columns.GridColumn colCustomerNumber;
         private DevExpress.XtraGrid.Columns.GridColumn colCustomerName;
@@ -468,15 +659,28 @@
         private DevExpress.XtraGrid.Columns.GridColumn colCategoryId;
         private DevExpress.XtraGrid.Columns.GridColumn colCategoryNumber;
         private DevExpress.XtraGrid.Columns.GridColumn colCategoryName;
+        private DevExpress.XtraGrid.Columns.GridColumn colSpecification;
         private DevExpress.XtraGrid.Columns.GridColumn colCount;
         private DevExpress.XtraGrid.Columns.GridColumn colUnitWeight;
         private DevExpress.XtraGrid.Columns.GridColumn colWeight;
         private DevExpress.XtraGrid.Columns.GridColumn colFlowDate;
         private DevExpress.XtraGrid.Columns.GridColumn colType;
         private DevExpress.XtraGrid.Columns.GridColumn colCountChange;
-        private DevExpress.XtraEditors.SimpleButton btnSearch;
-        private DevExpress.XtraEditors.DateEdit dpTime;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
+        private DevExpress.XtraGrid.GridControl dgcStorage;
+        private System.Windows.Forms.BindingSource bsStorage;
+        private DevExpress.XtraGrid.Views.Grid.GridView dgvStorage;
+        private DevExpress.XtraGrid.Columns.GridColumn colStorageDate;
+        private DevExpress.XtraGrid.Columns.GridColumn colCustomerNumber1;
+        private DevExpress.XtraGrid.Columns.GridColumn colCustomerName1;
+        private DevExpress.XtraGrid.Columns.GridColumn colContractName1;
+        private DevExpress.XtraGrid.Columns.GridColumn colCategoryNumber1;
+        private DevExpress.XtraGrid.Columns.GridColumn colCategoryName1;
+        private DevExpress.XtraGrid.Columns.GridColumn colSpecification1;
+        private DevExpress.XtraGrid.Columns.GridColumn colCount1;
+        private DevExpress.XtraGrid.Columns.GridColumn colUnitWeight1;
+        private DevExpress.XtraGrid.Columns.GridColumn colStoreWeight;
+        private DevExpress.XtraGrid.Columns.GridColumn colNumber;
+        private DevExpress.XtraGrid.Columns.GridColumn colInTime;
+        private DevExpress.XtraGrid.Columns.GridColumn colSource;
     }
 }

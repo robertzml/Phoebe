@@ -66,7 +66,7 @@
             this.btnCanel.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnCanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCanel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCanel.Location = new System.Drawing.Point(306, 19);
+            this.btnCanel.Location = new System.Drawing.Point(322, 18);
             this.btnCanel.Name = "btnCanel";
             this.btnCanel.Size = new System.Drawing.Size(87, 27);
             this.btnCanel.TabIndex = 1;
@@ -76,7 +76,7 @@
             // 
             this.btnConfirm.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnConfirm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnConfirm.Location = new System.Drawing.Point(190, 19);
+            this.btnConfirm.Location = new System.Drawing.Point(215, 18);
             this.btnConfirm.Name = "btnConfirm";
             this.btnConfirm.Size = new System.Drawing.Size(87, 27);
             this.btnConfirm.TabIndex = 0;

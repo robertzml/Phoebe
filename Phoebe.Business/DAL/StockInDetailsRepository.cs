@@ -20,9 +20,14 @@ namespace Phoebe.Business.DAL
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// 查找入库记录
+        /// </summary>
+        /// <param name="predicate">查询条件</param>
+        /// <returns></returns>
         public StockInDetail FindOne(Expression<Func<StockInDetail, bool>> predicate)
         {
-            throw new NotImplementedException();
+            return this.context.StockInDetails.SingleOrDefault(predicate);
         }
 
         public IEnumerable<StockInDetail> FindAll()

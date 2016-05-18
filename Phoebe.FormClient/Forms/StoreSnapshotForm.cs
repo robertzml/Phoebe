@@ -137,8 +137,11 @@ namespace Phoebe.FormClient
                 return;
             }
 
-            var data = BusinessFactory<StoreBusiness>.Instance.GetDayFlow(contractId, this.dpTime.DateTime.Date);
-            this.bsStockFlow.DataSource = data;
+            var storage = BusinessFactory<StoreBusiness>.Instance.GetInDay(contractId, this.dpTime.DateTime.Date);
+            this.bsStorage.DataSource = storage;
+
+            var flow = BusinessFactory<StoreBusiness>.Instance.GetDayFlow(contractId, this.dpTime.DateTime.Date);
+            this.bsStockFlow.DataSource = flow;
         }
         #endregion //Event
     }
