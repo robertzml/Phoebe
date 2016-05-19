@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -97,6 +96,11 @@ namespace Phoebe.FormClient
 
             if (this.cmbContract.Properties.Items.Count > 0)
                 this.cmbContract.SelectedIndex = 0;
+            else
+            {
+                this.selectContract = null;
+                this.txtBillingType.Text = "";
+            }
         }
 
         /// <summary>

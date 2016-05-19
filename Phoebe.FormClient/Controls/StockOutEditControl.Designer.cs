@@ -651,6 +651,7 @@
             this.clcCategory.Name = "clcCategory";
             this.clcCategory.Size = new System.Drawing.Size(344, 214);
             this.clcCategory.TabIndex = 4;
+            this.clcCategory.CategoryItemSelected += new Phoebe.FormClient.CategoryListControl.ItemSelectHandle(this.clcCategory_CategoryItemSelected);
             // 
             // groupControl4
             // 

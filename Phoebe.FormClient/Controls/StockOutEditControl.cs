@@ -109,6 +109,11 @@ namespace Phoebe.FormClient
             }
             foreach (var item in this.sogList.DataSource)
             {
+                if (item.OutCount < 0)
+                {
+                    errorMessage = "出库数量不能为负数";
+                    return ErrorCode.Error;
+                }
                 if (item.OutCount > item.StoreCount)
                 {
                     errorMessage = "出库数量大于在库数量";
@@ -154,6 +159,21 @@ namespace Phoebe.FormClient
             {
                 this.txtCategoryName.Text = "";
             }
+        }
+
+        /// <summary>
+        /// 选择分类
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void clcCategory_CategoryItemSelected(object sender, EventArgs e)
+        {
+            this.txtCategoryNumber.EditValueChanged -= txtCategoryNumber_EditValueChanged;
+
+            this.txtCategoryNumber.Text = this.clcCategory.SelectedNumber;
+            this.txtCategoryName.Text = this.clcCategory.SelectedName;
+
+            this.txtCategoryNumber.EditValueChanged += txtCategoryNumber_EditValueChanged;
         }
 
         /// <summary>

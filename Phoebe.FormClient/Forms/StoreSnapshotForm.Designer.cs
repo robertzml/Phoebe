@@ -33,18 +33,32 @@
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
             this.dpTime = new DevExpress.XtraEditors.DateEdit();
-            this.cmbContract = new DevExpress.XtraEditors.ImageComboBoxEdit();
             this.txtCustomerName = new DevExpress.XtraEditors.TextEdit();
             this.txtCustomerNumber = new DevExpress.XtraEditors.TextEdit();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.clcCustomer = new Phoebe.FormClient.CustomerListControl();
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
+            this.dgcStorage = new DevExpress.XtraGrid.GridControl();
+            this.bsStorage = new System.Windows.Forms.BindingSource(this.components);
+            this.dgvStorage = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.colStorageDate = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colCustomerNumber1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colCustomerName1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colContractName1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colCategoryNumber1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colCategoryName1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colSpecification1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colCount1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colUnitWeight1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colStoreWeight = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colNumber = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colInTime = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colSource = new DevExpress.XtraGrid.Columns.GridColumn();
             this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
             this.dgcStockFlow = new DevExpress.XtraGrid.GridControl();
             this.bsStockFlow = new System.Windows.Forms.BindingSource(this.components);
@@ -64,48 +78,34 @@
             this.colFlowDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colType = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCountChange = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.dgcStorage = new DevExpress.XtraGrid.GridControl();
-            this.dgvStorage = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.bsStorage = new System.Windows.Forms.BindingSource(this.components);
-            this.colStorageDate = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colCustomerNumber1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colCustomerName1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colContractName1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colCategoryNumber1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colCategoryName1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colSpecification1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colCount1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colUnitWeight1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colStoreWeight = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colNumber = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colInTime = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colSource = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.cmbContract = new DevExpress.XtraEditors.ImageComboBoxEdit();
+            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dpTime.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dpTime.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cmbContract.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCustomerName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCustomerNumber.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
             this.groupControl2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgcStorage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsStorage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvStorage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).BeginInit();
             this.groupControl3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgcStockFlow)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsStockFlow)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStockFlow)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgcStorage)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvStorage)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsStorage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbContract.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             this.SuspendLayout();
             // 
             // groupControl1
@@ -120,9 +120,9 @@
             // 
             // layoutControl1
             // 
+            this.layoutControl1.Controls.Add(this.cmbContract);
             this.layoutControl1.Controls.Add(this.btnSearch);
             this.layoutControl1.Controls.Add(this.dpTime);
-            this.layoutControl1.Controls.Add(this.cmbContract);
             this.layoutControl1.Controls.Add(this.txtCustomerName);
             this.layoutControl1.Controls.Add(this.txtCustomerNumber);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -135,9 +135,9 @@
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(513, 36);
+            this.btnSearch.Location = new System.Drawing.Point(499, 36);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(199, 22);
+            this.btnSearch.Size = new System.Drawing.Size(213, 22);
             this.btnSearch.StyleController = this.layoutControl1;
             this.btnSearch.TabIndex = 9;
             this.btnSearch.Text = "查询";
@@ -146,26 +146,16 @@
             // dpTime
             // 
             this.dpTime.EditValue = null;
-            this.dpTime.Location = new System.Drawing.Point(564, 12);
+            this.dpTime.Location = new System.Drawing.Point(550, 12);
             this.dpTime.Name = "dpTime";
             this.dpTime.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dpTime.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dpTime.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.dpTime.Size = new System.Drawing.Size(148, 20);
+            this.dpTime.Size = new System.Drawing.Size(162, 20);
             this.dpTime.StyleController = this.layoutControl1;
             this.dpTime.TabIndex = 8;
-            // 
-            // cmbContract
-            // 
-            this.cmbContract.Location = new System.Drawing.Point(401, 12);
-            this.cmbContract.Name = "cmbContract";
-            this.cmbContract.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cmbContract.Size = new System.Drawing.Size(108, 20);
-            this.cmbContract.StyleController = this.layoutControl1;
-            this.cmbContract.TabIndex = 6;
             // 
             // txtCustomerName
             // 
@@ -173,7 +163,7 @@
             this.txtCustomerName.Name = "txtCustomerName";
             this.txtCustomerName.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
             this.txtCustomerName.Properties.Appearance.Options.UseBackColor = true;
-            this.txtCustomerName.Size = new System.Drawing.Size(126, 20);
+            this.txtCustomerName.Size = new System.Drawing.Size(109, 20);
             this.txtCustomerName.StyleController = this.layoutControl1;
             this.txtCustomerName.TabIndex = 5;
             // 
@@ -193,9 +183,9 @@
             this.layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem1,
             this.layoutControlItem2,
-            this.layoutControlItem3,
             this.layoutControlItem5,
-            this.layoutControlItem4});
+            this.layoutControlItem4,
+            this.layoutControlItem3});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "layoutControlGroup1";
             this.layoutControlGroup1.Size = new System.Drawing.Size(724, 171);
@@ -215,34 +205,25 @@
             this.layoutControlItem2.Control = this.txtCustomerName;
             this.layoutControlItem2.Location = new System.Drawing.Point(157, 0);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(181, 151);
+            this.layoutControlItem2.Size = new System.Drawing.Size(164, 151);
             this.layoutControlItem2.Text = "客户姓名";
             this.layoutControlItem2.TextSize = new System.Drawing.Size(48, 14);
-            // 
-            // layoutControlItem3
-            // 
-            this.layoutControlItem3.Control = this.cmbContract;
-            this.layoutControlItem3.Location = new System.Drawing.Point(338, 0);
-            this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(163, 151);
-            this.layoutControlItem3.Text = "合同选择";
-            this.layoutControlItem3.TextSize = new System.Drawing.Size(48, 14);
             // 
             // layoutControlItem5
             // 
             this.layoutControlItem5.Control = this.dpTime;
-            this.layoutControlItem5.Location = new System.Drawing.Point(501, 0);
+            this.layoutControlItem5.Location = new System.Drawing.Point(487, 0);
             this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(203, 24);
+            this.layoutControlItem5.Size = new System.Drawing.Size(217, 24);
             this.layoutControlItem5.Text = "日期";
             this.layoutControlItem5.TextSize = new System.Drawing.Size(48, 14);
             // 
             // layoutControlItem4
             // 
             this.layoutControlItem4.Control = this.btnSearch;
-            this.layoutControlItem4.Location = new System.Drawing.Point(501, 24);
+            this.layoutControlItem4.Location = new System.Drawing.Point(487, 24);
             this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(203, 127);
+            this.layoutControlItem4.Size = new System.Drawing.Size(217, 127);
             this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem4.TextVisible = false;
             // 
@@ -283,6 +264,140 @@
             this.groupControl2.Size = new System.Drawing.Size(728, 190);
             this.groupControl2.TabIndex = 2;
             this.groupControl2.Text = "库存记录";
+            // 
+            // dgcStorage
+            // 
+            this.dgcStorage.DataSource = this.bsStorage;
+            this.dgcStorage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgcStorage.Location = new System.Drawing.Point(2, 21);
+            this.dgcStorage.MainView = this.dgvStorage;
+            this.dgcStorage.Name = "dgcStorage";
+            this.dgcStorage.Size = new System.Drawing.Size(724, 167);
+            this.dgcStorage.TabIndex = 0;
+            this.dgcStorage.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.dgvStorage});
+            // 
+            // bsStorage
+            // 
+            this.bsStorage.DataSource = typeof(Phoebe.Model.Storage);
+            // 
+            // dgvStorage
+            // 
+            this.dgvStorage.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.colStorageDate,
+            this.colCustomerNumber1,
+            this.colCustomerName1,
+            this.colContractName1,
+            this.colCategoryNumber1,
+            this.colCategoryName1,
+            this.colSpecification1,
+            this.colCount1,
+            this.colUnitWeight1,
+            this.colStoreWeight,
+            this.colNumber,
+            this.colInTime,
+            this.colSource});
+            this.dgvStorage.GridControl = this.dgcStorage;
+            this.dgvStorage.Name = "dgvStorage";
+            this.dgvStorage.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
+            this.dgvStorage.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
+            this.dgvStorage.OptionsBehavior.Editable = false;
+            this.dgvStorage.OptionsCustomization.AllowGroup = false;
+            this.dgvStorage.OptionsCustomization.AllowQuickHideColumns = false;
+            this.dgvStorage.OptionsFind.AllowFindPanel = false;
+            this.dgvStorage.OptionsView.ShowFooter = true;
+            this.dgvStorage.OptionsView.ShowGroupPanel = false;
+            // 
+            // colStorageDate
+            // 
+            this.colStorageDate.FieldName = "StorageDate";
+            this.colStorageDate.Name = "colStorageDate";
+            this.colStorageDate.Visible = true;
+            this.colStorageDate.VisibleIndex = 0;
+            // 
+            // colCustomerNumber1
+            // 
+            this.colCustomerNumber1.FieldName = "CustomerNumber";
+            this.colCustomerNumber1.Name = "colCustomerNumber1";
+            this.colCustomerNumber1.Visible = true;
+            this.colCustomerNumber1.VisibleIndex = 1;
+            // 
+            // colCustomerName1
+            // 
+            this.colCustomerName1.FieldName = "CustomerName";
+            this.colCustomerName1.Name = "colCustomerName1";
+            this.colCustomerName1.Visible = true;
+            this.colCustomerName1.VisibleIndex = 2;
+            // 
+            // colContractName1
+            // 
+            this.colContractName1.FieldName = "ContractName";
+            this.colContractName1.Name = "colContractName1";
+            this.colContractName1.Visible = true;
+            this.colContractName1.VisibleIndex = 3;
+            // 
+            // colCategoryNumber1
+            // 
+            this.colCategoryNumber1.FieldName = "CategoryNumber";
+            this.colCategoryNumber1.Name = "colCategoryNumber1";
+            this.colCategoryNumber1.Visible = true;
+            this.colCategoryNumber1.VisibleIndex = 4;
+            // 
+            // colCategoryName1
+            // 
+            this.colCategoryName1.FieldName = "CategoryName";
+            this.colCategoryName1.Name = "colCategoryName1";
+            this.colCategoryName1.Visible = true;
+            this.colCategoryName1.VisibleIndex = 5;
+            // 
+            // colSpecification1
+            // 
+            this.colSpecification1.FieldName = "Specification";
+            this.colSpecification1.Name = "colSpecification1";
+            this.colSpecification1.Visible = true;
+            this.colSpecification1.VisibleIndex = 6;
+            // 
+            // colCount1
+            // 
+            this.colCount1.FieldName = "Count";
+            this.colCount1.Name = "colCount1";
+            this.colCount1.Visible = true;
+            this.colCount1.VisibleIndex = 7;
+            // 
+            // colUnitWeight1
+            // 
+            this.colUnitWeight1.FieldName = "UnitWeight";
+            this.colUnitWeight1.Name = "colUnitWeight1";
+            this.colUnitWeight1.Visible = true;
+            this.colUnitWeight1.VisibleIndex = 8;
+            // 
+            // colStoreWeight
+            // 
+            this.colStoreWeight.FieldName = "StoreWeight";
+            this.colStoreWeight.Name = "colStoreWeight";
+            this.colStoreWeight.Visible = true;
+            this.colStoreWeight.VisibleIndex = 9;
+            // 
+            // colNumber
+            // 
+            this.colNumber.FieldName = "Number";
+            this.colNumber.Name = "colNumber";
+            this.colNumber.Visible = true;
+            this.colNumber.VisibleIndex = 10;
+            // 
+            // colInTime
+            // 
+            this.colInTime.FieldName = "InTime";
+            this.colInTime.Name = "colInTime";
+            this.colInTime.Visible = true;
+            this.colInTime.VisibleIndex = 11;
+            // 
+            // colSource
+            // 
+            this.colSource.FieldName = "Source";
+            this.colSource.Name = "colSource";
+            this.colSource.Visible = true;
+            this.colSource.VisibleIndex = 12;
             // 
             // groupControl3
             // 
@@ -456,139 +571,24 @@
             this.colCountChange.FieldName = "CountChange";
             this.colCountChange.Name = "colCountChange";
             // 
-            // dgcStorage
+            // cmbContract
             // 
-            this.dgcStorage.DataSource = this.bsStorage;
-            this.dgcStorage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgcStorage.Location = new System.Drawing.Point(2, 21);
-            this.dgcStorage.MainView = this.dgvStorage;
-            this.dgcStorage.Name = "dgcStorage";
-            this.dgcStorage.Size = new System.Drawing.Size(724, 167);
-            this.dgcStorage.TabIndex = 0;
-            this.dgcStorage.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.dgvStorage});
+            this.cmbContract.Location = new System.Drawing.Point(384, 12);
+            this.cmbContract.Name = "cmbContract";
+            this.cmbContract.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cmbContract.Size = new System.Drawing.Size(111, 20);
+            this.cmbContract.StyleController = this.layoutControl1;
+            this.cmbContract.TabIndex = 10;
             // 
-            // dgvStorage
+            // layoutControlItem3
             // 
-            this.dgvStorage.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.colStorageDate,
-            this.colCustomerNumber1,
-            this.colCustomerName1,
-            this.colContractName1,
-            this.colCategoryNumber1,
-            this.colCategoryName1,
-            this.colSpecification1,
-            this.colCount1,
-            this.colUnitWeight1,
-            this.colStoreWeight,
-            this.colNumber,
-            this.colInTime,
-            this.colSource});
-            this.dgvStorage.GridControl = this.dgcStorage;
-            this.dgvStorage.Name = "dgvStorage";
-            this.dgvStorage.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
-            this.dgvStorage.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
-            this.dgvStorage.OptionsBehavior.Editable = false;
-            this.dgvStorage.OptionsCustomization.AllowGroup = false;
-            this.dgvStorage.OptionsCustomization.AllowQuickHideColumns = false;
-            this.dgvStorage.OptionsFind.AllowFindPanel = false;
-            this.dgvStorage.OptionsView.ShowFooter = true;
-            this.dgvStorage.OptionsView.ShowGroupPanel = false;
-            // 
-            // bsStorage
-            // 
-            this.bsStorage.DataSource = typeof(Phoebe.Model.Storage);
-            // 
-            // colStorageDate
-            // 
-            this.colStorageDate.FieldName = "StorageDate";
-            this.colStorageDate.Name = "colStorageDate";
-            this.colStorageDate.Visible = true;
-            this.colStorageDate.VisibleIndex = 0;
-            // 
-            // colCustomerNumber1
-            // 
-            this.colCustomerNumber1.FieldName = "CustomerNumber";
-            this.colCustomerNumber1.Name = "colCustomerNumber1";
-            this.colCustomerNumber1.Visible = true;
-            this.colCustomerNumber1.VisibleIndex = 1;
-            // 
-            // colCustomerName1
-            // 
-            this.colCustomerName1.FieldName = "CustomerName";
-            this.colCustomerName1.Name = "colCustomerName1";
-            this.colCustomerName1.Visible = true;
-            this.colCustomerName1.VisibleIndex = 2;
-            // 
-            // colContractName1
-            // 
-            this.colContractName1.FieldName = "ContractName";
-            this.colContractName1.Name = "colContractName1";
-            this.colContractName1.Visible = true;
-            this.colContractName1.VisibleIndex = 3;
-            // 
-            // colCategoryNumber1
-            // 
-            this.colCategoryNumber1.FieldName = "CategoryNumber";
-            this.colCategoryNumber1.Name = "colCategoryNumber1";
-            this.colCategoryNumber1.Visible = true;
-            this.colCategoryNumber1.VisibleIndex = 4;
-            // 
-            // colCategoryName1
-            // 
-            this.colCategoryName1.FieldName = "CategoryName";
-            this.colCategoryName1.Name = "colCategoryName1";
-            this.colCategoryName1.Visible = true;
-            this.colCategoryName1.VisibleIndex = 5;
-            // 
-            // colSpecification1
-            // 
-            this.colSpecification1.FieldName = "Specification";
-            this.colSpecification1.Name = "colSpecification1";
-            this.colSpecification1.Visible = true;
-            this.colSpecification1.VisibleIndex = 6;
-            // 
-            // colCount1
-            // 
-            this.colCount1.FieldName = "Count";
-            this.colCount1.Name = "colCount1";
-            this.colCount1.Visible = true;
-            this.colCount1.VisibleIndex = 7;
-            // 
-            // colUnitWeight1
-            // 
-            this.colUnitWeight1.FieldName = "UnitWeight";
-            this.colUnitWeight1.Name = "colUnitWeight1";
-            this.colUnitWeight1.Visible = true;
-            this.colUnitWeight1.VisibleIndex = 8;
-            // 
-            // colStoreWeight
-            // 
-            this.colStoreWeight.FieldName = "StoreWeight";
-            this.colStoreWeight.Name = "colStoreWeight";
-            this.colStoreWeight.Visible = true;
-            this.colStoreWeight.VisibleIndex = 9;
-            // 
-            // colNumber
-            // 
-            this.colNumber.FieldName = "Number";
-            this.colNumber.Name = "colNumber";
-            this.colNumber.Visible = true;
-            this.colNumber.VisibleIndex = 10;
-            // 
-            // colInTime
-            // 
-            this.colInTime.FieldName = "InTime";
-            this.colInTime.Name = "colInTime";
-            this.colInTime.Visible = true;
-            this.colInTime.VisibleIndex = 11;
-            // 
-            // colSource
-            // 
-            this.colSource.FieldName = "Source";
-            this.colSource.Name = "colSource";
-            this.colSource.Visible = true;
-            this.colSource.VisibleIndex = 12;
+            this.layoutControlItem3.Control = this.cmbContract;
+            this.layoutControlItem3.Location = new System.Drawing.Point(321, 0);
+            this.layoutControlItem3.Name = "layoutControlItem3";
+            this.layoutControlItem3.Size = new System.Drawing.Size(166, 151);
+            this.layoutControlItem3.Text = "合同选择";
+            this.layoutControlItem3.TextSize = new System.Drawing.Size(48, 14);
             // 
             // StoreSnapshotForm
             // 
@@ -605,26 +605,26 @@
             this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dpTime.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dpTime.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cmbContract.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCustomerName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCustomerNumber.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
             this.groupControl2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgcStorage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsStorage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvStorage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).EndInit();
             this.groupControl3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgcStockFlow)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsStockFlow)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStockFlow)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgcStorage)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvStorage)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsStorage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbContract.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -633,13 +633,11 @@
 
         private DevExpress.XtraEditors.GroupControl groupControl1;
         private DevExpress.XtraLayout.LayoutControl layoutControl1;
-        private DevExpress.XtraEditors.ImageComboBoxEdit cmbContract;
         private DevExpress.XtraEditors.TextEdit txtCustomerName;
         private DevExpress.XtraEditors.TextEdit txtCustomerNumber;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup1;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private CustomerListControl clcCustomer;
         private DevExpress.XtraEditors.GroupControl groupControl2;
@@ -682,5 +680,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn colNumber;
         private DevExpress.XtraGrid.Columns.GridColumn colInTime;
         private DevExpress.XtraGrid.Columns.GridColumn colSource;
+        private DevExpress.XtraEditors.ImageComboBoxEdit cmbContract;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
     }
 }

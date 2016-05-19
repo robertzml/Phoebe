@@ -55,9 +55,6 @@
             this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
             this.btnRemoveRow = new DevExpress.XtraEditors.SimpleButton();
             this.btnAddRow = new DevExpress.XtraEditors.SimpleButton();
-            this.sigList = new Phoebe.FormClient.StockInGrid();
-            this.clcCustomer = new Phoebe.FormClient.CustomerListControl();
-            this.clcCategory = new Phoebe.FormClient.CategoryListControl();
             this.groupControl4 = new DevExpress.XtraEditors.GroupControl();
             this.layoutControl3 = new DevExpress.XtraLayout.LayoutControl();
             this.txtRemark = new DevExpress.XtraEditors.TextEdit();
@@ -77,6 +74,12 @@
             this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
+            this.btnCalc = new DevExpress.XtraEditors.SimpleButton();
+            this.layoutControlItem19 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.sigList = new Phoebe.FormClient.StockInGrid();
+            this.clcCustomer = new Phoebe.FormClient.CustomerListControl();
+            this.clcCategory = new Phoebe.FormClient.CategoryListControl();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
             this.groupControl2.SuspendLayout();
@@ -127,6 +130,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem19)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -163,6 +168,7 @@
             // 
             // layoutControl2
             // 
+            this.layoutControl2.Controls.Add(this.btnCalc);
             this.layoutControl2.Controls.Add(this.txtBillingRemark);
             this.layoutControl2.Controls.Add(this.nmOtherPrice);
             this.layoutControl2.Controls.Add(this.nmPackingPrice);
@@ -321,7 +327,9 @@
             this.layoutControlItem15,
             this.layoutControlItem16,
             this.layoutControlItem17,
-            this.layoutControlItem18});
+            this.layoutControlItem18,
+            this.emptySpaceItem1,
+            this.layoutControlItem19});
             this.layoutControlGroup2.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup2.Name = "Root";
             this.layoutControlGroup2.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 5, 5, 5);
@@ -410,7 +418,8 @@
             this.layoutControlItem17.Control = this.nmOtherPrice;
             this.layoutControlItem17.Location = new System.Drawing.Point(453, 58);
             this.layoutControlItem17.Name = "layoutControlItem17";
-            this.layoutControlItem17.Size = new System.Drawing.Size(227, 63);
+            this.layoutControlItem17.Size = new System.Drawing.Size(227, 29);
+            this.layoutControlItem17.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 5);
             this.layoutControlItem17.Text = "其它费用";
             this.layoutControlItem17.TextSize = new System.Drawing.Size(60, 14);
             // 
@@ -455,36 +464,6 @@
             this.btnAddRow.TabIndex = 1;
             this.btnAddRow.Text = "添加记录";
             this.btnAddRow.Click += new System.EventHandler(this.btnAddRow_Click);
-            // 
-            // sigList
-            // 
-            this.sigList.DataSource = null;
-            this.sigList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.sigList.Editable = true;
-            this.sigList.Location = new System.Drawing.Point(2, 21);
-            this.sigList.Name = "sigList";
-            this.sigList.Size = new System.Drawing.Size(1090, 275);
-            this.sigList.TabIndex = 0;
-            this.sigList.CellValueChanged += new Phoebe.FormClient.StockInGrid.CellChangedHandle(this.sigList_CellValueChanged);
-            // 
-            // clcCustomer
-            // 
-            this.clcCustomer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.clcCustomer.Location = new System.Drawing.Point(703, 3);
-            this.clcCustomer.Name = "clcCustomer";
-            this.tableLayoutPanel1.SetRowSpan(this.clcCustomer, 2);
-            this.clcCustomer.Size = new System.Drawing.Size(194, 314);
-            this.clcCustomer.TabIndex = 3;
-            this.clcCustomer.CustomerItemSelected += new Phoebe.FormClient.CustomerListControl.ItemSelectHandle(this.clcCustomer_CustomerItemSelected);
-            // 
-            // clcCategory
-            // 
-            this.clcCategory.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.clcCategory.Location = new System.Drawing.Point(903, 3);
-            this.clcCategory.Name = "clcCategory";
-            this.tableLayoutPanel1.SetRowSpan(this.clcCategory, 2);
-            this.clcCategory.Size = new System.Drawing.Size(194, 314);
-            this.clcCategory.TabIndex = 4;
             // 
             // groupControl4
             // 
@@ -700,6 +679,63 @@
             this.layoutControlItem8.Text = "备注";
             this.layoutControlItem8.TextSize = new System.Drawing.Size(48, 14);
             // 
+            // emptySpaceItem1
+            // 
+            this.emptySpaceItem1.AllowHotTrack = false;
+            this.emptySpaceItem1.Location = new System.Drawing.Point(453, 87);
+            this.emptySpaceItem1.Name = "emptySpaceItem1";
+            this.emptySpaceItem1.Size = new System.Drawing.Size(89, 34);
+            this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
+            // 
+            // btnCalc
+            // 
+            this.btnCalc.Location = new System.Drawing.Point(549, 94);
+            this.btnCalc.Name = "btnCalc";
+            this.btnCalc.Size = new System.Drawing.Size(134, 22);
+            this.btnCalc.StyleController = this.layoutControl2;
+            this.btnCalc.TabIndex = 10;
+            this.btnCalc.Text = "计算装卸费结冻费";
+            this.btnCalc.Click += new System.EventHandler(this.btnCalc_Click);
+            // 
+            // layoutControlItem19
+            // 
+            this.layoutControlItem19.Control = this.btnCalc;
+            this.layoutControlItem19.Location = new System.Drawing.Point(542, 87);
+            this.layoutControlItem19.Name = "layoutControlItem19";
+            this.layoutControlItem19.Size = new System.Drawing.Size(138, 34);
+            this.layoutControlItem19.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem19.TextVisible = false;
+            // 
+            // sigList
+            // 
+            this.sigList.DataSource = null;
+            this.sigList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.sigList.Editable = true;
+            this.sigList.Location = new System.Drawing.Point(2, 21);
+            this.sigList.Name = "sigList";
+            this.sigList.Size = new System.Drawing.Size(1090, 275);
+            this.sigList.TabIndex = 0;
+            this.sigList.CellValueChanged += new Phoebe.FormClient.StockInGrid.CellChangedHandle(this.sigList_CellValueChanged);
+            // 
+            // clcCustomer
+            // 
+            this.clcCustomer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.clcCustomer.Location = new System.Drawing.Point(703, 3);
+            this.clcCustomer.Name = "clcCustomer";
+            this.tableLayoutPanel1.SetRowSpan(this.clcCustomer, 2);
+            this.clcCustomer.Size = new System.Drawing.Size(194, 314);
+            this.clcCustomer.TabIndex = 3;
+            this.clcCustomer.CustomerItemSelected += new Phoebe.FormClient.CustomerListControl.ItemSelectHandle(this.clcCustomer_CustomerItemSelected);
+            // 
+            // clcCategory
+            // 
+            this.clcCategory.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.clcCategory.Location = new System.Drawing.Point(903, 3);
+            this.clcCategory.Name = "clcCategory";
+            this.tableLayoutPanel1.SetRowSpan(this.clcCategory, 2);
+            this.clcCategory.Size = new System.Drawing.Size(194, 314);
+            this.clcCategory.TabIndex = 4;
+            // 
             // StockInAddControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -757,6 +793,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem19)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -812,5 +850,8 @@
         private StockInGrid sigList;
         private DevExpress.XtraEditors.SimpleButton btnRemoveRow;
         private DevExpress.XtraEditors.SimpleButton btnAddRow;
+        private DevExpress.XtraEditors.SimpleButton btnCalc;
+        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem19;
     }
 }

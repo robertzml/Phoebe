@@ -55,6 +55,7 @@ namespace Phoebe.FormClient
             this.txtBillingType.Text = ((BillingType)stockIn.Contract.BillingType).DisplayName();
             this.txtRemark.Text = stockIn.Remark;
             this.txtFlowNumber.Text = stockIn.FlowNumber;
+            this.txtCreateTime.Text = stockIn.CreateTime.ToDateTimeString();
         }
 
         /// <summary>
@@ -88,5 +89,10 @@ namespace Phoebe.FormClient
 
         #region Event
         #endregion //Event
+
+        private void btnCalc_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

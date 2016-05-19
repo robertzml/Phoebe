@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -48,6 +47,10 @@ namespace Phoebe.FormClient
         #endregion //Field
 
         #region Constructor
+        /// <summary>
+        /// 入库添加控件
+        /// </summary>
+        /// <param name="user">登录用户</param>
         public StockInAddControl(LoginUser user)
         {
             InitializeComponent();
@@ -87,7 +90,14 @@ namespace Phoebe.FormClient
             }
 
             if (this.cmbContract.Properties.Items.Count > 0)
+            {
                 this.cmbContract.SelectedIndex = 0;
+            }
+            else
+            {
+                this.selectContract = null;
+                this.txtBillingType.Text = "";
+            }
         }
         #endregion //Function
 
@@ -171,7 +181,7 @@ namespace Phoebe.FormClient
             Billing billing = new Billing();
             billing.ContractId = si.ContractId;
             billing.UnitPrice = this.nmUnitPrice.Value;
-            billing.HandlingUnitPrice = this.nmHandlingPrice.Value;
+            billing.HandlingUnitPrice = this.nmHandlingUnitPrice.Value;
             billing.HandlingPrice = this.nmHandlingPrice.Value;
             billing.FreezeUnitPrice = this.nmFreezeUnitPrice.Value;
             billing.FreezePrice = this.nmFreezePrice.Value;
@@ -216,9 +226,9 @@ namespace Phoebe.FormClient
             }
             else
             {
+                this.selectCustomer = null;
                 this.txtCustomerName.Text = "";
                 UpdateContractList(0);
-                this.selectContract = null;
             }
         }
 
@@ -248,23 +258,32 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void cmbContract_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (this.cmbContract.SelectedIndex == -1)
-            {
-                this.txtBillingType.Text = "";
-            }
+            int contractId = Convert.ToInt32(this.cmbContract.EditValue);
+            this.selectContract = BusinessFactory<ContractBusiness>.Instance.FindById(contractId);
+
+            if ((BillingType)this.selectContract.BillingType == BillingType.VariousWeight)
+                this.isEqualWeight = false;
             else
-            {
-                int contractId = Convert.ToInt32(this.cmbContract.EditValue);
-                this.selectContract = BusinessFactory<ContractBusiness>.Instance.FindById(contractId);
+                this.isEqualWeight = true;
 
-                if ((BillingType)this.selectContract.BillingType == BillingType.VariousWeight)
-                    this.isEqualWeight = false;
-                else
-                    this.isEqualWeight = true;
+            this.sigList.SetEqualWeight(this.isEqualWeight);
+            this.txtBillingType.Text = ((BillingType)this.selectContract.BillingType).DisplayName();
+        }
 
-                this.sigList.SetEqualWeight(this.isEqualWeight);
-                this.txtBillingType.Text = ((BillingType)this.selectContract.BillingType).DisplayName();
-            }
+        /// <summary>
+        /// 计算装卸费结冻费
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnCalc_Click(object sender, EventArgs e)
+        {
+            decimal totalWeight = this.sigList.DataSource.Sum(r => r.InWeight);
+
+            decimal unitHandling = this.nmHandlingUnitPrice.Value;
+            this.nmHandlingPrice.Value = totalWeight * unitHandling;
+
+            decimal unitFreeze = this.nmFreezeUnitPrice.Value;
+            this.nmFreezePrice.Value = totalWeight * unitFreeze;
         }
 
         /// <summary>

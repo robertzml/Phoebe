@@ -188,6 +188,7 @@ namespace Phoebe.Business.DAL
                 foreach (var item in stockOut.StockOutDetails)
                 {
                     var store = item.Store;
+                    item.StoreCount = store.StoreCount;
 
                     if (store.StoreCount == item.Count) // all stock out
                     {

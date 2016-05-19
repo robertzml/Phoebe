@@ -97,6 +97,11 @@ namespace Phoebe.FormClient
 
             if (this.cmbContract.Properties.Items.Count > 0)
                 this.cmbContract.SelectedIndex = 0;
+            else
+            {
+                this.selectContract = null;
+                this.txtBillingType.Text = "";
+            }
         }
         #endregion //Function
 
@@ -144,7 +149,6 @@ namespace Phoebe.FormClient
                     errorMessage = "移库时间早于货品入库时间";
                     return ErrorCode.Error;
                 }
-               
                 if (string.IsNullOrEmpty(item.NewWarehouseNumber))
                 {
                     errorMessage = "新仓位编号不能为空";

@@ -54,7 +54,6 @@
             this.layoutControlItem18 = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
-            this.sigList = new Phoebe.FormClient.StockInGrid();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.txtFlowNumber = new DevExpress.XtraEditors.TextEdit();
@@ -77,6 +76,9 @@
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem19 = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
+            this.txtCreateTime = new DevExpress.XtraEditors.TextEdit();
+            this.layoutControlItem20 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.sigList = new Phoebe.FormClient.StockInGrid();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
             this.groupControl2.SuspendLayout();
@@ -130,6 +132,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem19)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCreateTime.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem20)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -175,7 +179,7 @@
             this.layoutControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl2.Location = new System.Drawing.Point(2, 21);
             this.layoutControl2.Name = "layoutControl2";
-            this.layoutControl2.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(889, 214, 477, 518);
+            this.layoutControl2.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(738, 221, 477, 518);
             this.layoutControl2.Root = this.layoutControlGroup2;
             this.layoutControl2.Size = new System.Drawing.Size(1090, 131);
             this.layoutControl2.TabIndex = 0;
@@ -471,16 +475,6 @@
             this.groupControl3.TabIndex = 2;
             this.groupControl3.Text = "货品信息";
             // 
-            // sigList
-            // 
-            this.sigList.DataSource = null;
-            this.sigList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.sigList.Editable = false;
-            this.sigList.Location = new System.Drawing.Point(2, 21);
-            this.sigList.Name = "sigList";
-            this.sigList.Size = new System.Drawing.Size(1090, 268);
-            this.sigList.TabIndex = 0;
-            // 
             // groupControl1
             // 
             this.groupControl1.Controls.Add(this.layoutControl1);
@@ -493,6 +487,7 @@
             // 
             // layoutControl1
             // 
+            this.layoutControl1.Controls.Add(this.txtCreateTime);
             this.layoutControl1.Controls.Add(this.txtFlowNumber);
             this.layoutControl1.Controls.Add(this.txtInTime);
             this.layoutControl1.Controls.Add(this.txtRemark);
@@ -623,7 +618,8 @@
             this.layoutControlItem8,
             this.layoutControlItem2,
             this.layoutControlItem19,
-            this.emptySpaceItem1});
+            this.emptySpaceItem1,
+            this.layoutControlItem20});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "layoutControlGroup1";
             this.layoutControlGroup1.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 5, 5, 5);
@@ -683,7 +679,8 @@
             this.layoutControlItem7.Control = this.txtBillingType;
             this.layoutControlItem7.Location = new System.Drawing.Point(0, 58);
             this.layoutControlItem7.Name = "layoutControlItem7";
-            this.layoutControlItem7.Size = new System.Drawing.Size(249, 63);
+            this.layoutControlItem7.Size = new System.Drawing.Size(249, 29);
+            this.layoutControlItem7.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 5);
             this.layoutControlItem7.Text = "计费方式";
             this.layoutControlItem7.TextSize = new System.Drawing.Size(48, 14);
             // 
@@ -721,6 +718,36 @@
             this.emptySpaceItem1.Name = "emptySpaceItem1";
             this.emptySpaceItem1.Size = new System.Drawing.Size(323, 121);
             this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
+            // 
+            // txtCreateTime
+            // 
+            this.txtCreateTime.Location = new System.Drawing.Point(58, 94);
+            this.txtCreateTime.Name = "txtCreateTime";
+            this.txtCreateTime.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
+            this.txtCreateTime.Properties.Appearance.Options.UseBackColor = true;
+            this.txtCreateTime.Properties.ReadOnly = true;
+            this.txtCreateTime.Size = new System.Drawing.Size(194, 20);
+            this.txtCreateTime.StyleController = this.layoutControl1;
+            this.txtCreateTime.TabIndex = 9;
+            // 
+            // layoutControlItem20
+            // 
+            this.layoutControlItem20.Control = this.txtCreateTime;
+            this.layoutControlItem20.Location = new System.Drawing.Point(0, 87);
+            this.layoutControlItem20.Name = "layoutControlItem20";
+            this.layoutControlItem20.Size = new System.Drawing.Size(249, 34);
+            this.layoutControlItem20.Text = "创建时间";
+            this.layoutControlItem20.TextSize = new System.Drawing.Size(48, 14);
+            // 
+            // sigList
+            // 
+            this.sigList.DataSource = null;
+            this.sigList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.sigList.Editable = false;
+            this.sigList.Location = new System.Drawing.Point(2, 21);
+            this.sigList.Name = "sigList";
+            this.sigList.Size = new System.Drawing.Size(1090, 268);
+            this.sigList.TabIndex = 0;
             // 
             // StockInViewControl
             // 
@@ -782,6 +809,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem19)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCreateTime.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem20)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -837,5 +866,7 @@
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem2;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
         private StockInGrid sigList;
+        private DevExpress.XtraEditors.TextEdit txtCreateTime;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem20;
     }
 }

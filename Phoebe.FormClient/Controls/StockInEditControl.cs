@@ -14,7 +14,7 @@ namespace Phoebe.FormClient
     using Phoebe.Model;
 
     /// <summary>
-    /// 编辑入库界面
+    /// 入库编辑控件
     /// </summary>
     public partial class StockInEditControl : UserControl
     {
@@ -31,6 +31,10 @@ namespace Phoebe.FormClient
         #endregion //Field
 
         #region Constructor
+        /// <summary>
+        /// 入库编辑控件
+        /// </summary>
+        /// <param name="stockInId">入库单ID</param>
         public StockInEditControl(Guid stockInId)
         {
             InitializeComponent();
@@ -163,7 +167,7 @@ namespace Phoebe.FormClient
             // set billing
             Billing billing = si.Billing;
             billing.UnitPrice = this.nmUnitPrice.Value;
-            billing.HandlingUnitPrice = this.nmHandlingPrice.Value;
+            billing.HandlingUnitPrice = this.nmHandlingUnitPrice.Value;
             billing.HandlingPrice = this.nmHandlingPrice.Value;
             billing.FreezeUnitPrice = this.nmFreezeUnitPrice.Value;
             billing.FreezePrice = this.nmFreezePrice.Value;
@@ -183,6 +187,22 @@ namespace Phoebe.FormClient
         #endregion //Method
 
         #region Event
+        /// <summary>
+        /// 计算装卸费结冻费
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnCalc_Click(object sender, EventArgs e)
+        {
+            decimal totalWeight = this.sigList.DataSource.Sum(r => r.InWeight);
+
+            decimal unitHandling = this.nmHandlingUnitPrice.Value;
+            this.nmHandlingPrice.Value = totalWeight * unitHandling;
+
+            decimal unitFreeze = this.nmFreezeUnitPrice.Value;
+            this.nmFreezePrice.Value = totalWeight * unitFreeze;
+        }
+
         /// <summary>
         /// 新增行
         /// </summary>

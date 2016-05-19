@@ -78,6 +78,9 @@
             this.layoutControlItem17 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem18 = new DevExpress.XtraLayout.LayoutControlItem();
             this.clcCategory = new Phoebe.FormClient.CategoryListControl();
+            this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
+            this.btnCalc = new DevExpress.XtraEditors.SimpleButton();
+            this.layoutControlItem20 = new DevExpress.XtraLayout.LayoutControlItem();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
@@ -129,6 +132,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem16)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem17)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem18)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem20)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -438,6 +443,7 @@
             // 
             // layoutControl2
             // 
+            this.layoutControl2.Controls.Add(this.btnCalc);
             this.layoutControl2.Controls.Add(this.txtBillingRemark);
             this.layoutControl2.Controls.Add(this.nmOtherPrice);
             this.layoutControl2.Controls.Add(this.nmPackingPrice);
@@ -596,7 +602,9 @@
             this.layoutControlItem15,
             this.layoutControlItem16,
             this.layoutControlItem17,
-            this.layoutControlItem18});
+            this.layoutControlItem18,
+            this.emptySpaceItem1,
+            this.layoutControlItem20});
             this.layoutControlGroup2.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup2.Name = "Root";
             this.layoutControlGroup2.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 5, 5, 5);
@@ -685,7 +693,8 @@
             this.layoutControlItem17.Control = this.nmOtherPrice;
             this.layoutControlItem17.Location = new System.Drawing.Point(586, 58);
             this.layoutControlItem17.Name = "layoutControlItem17";
-            this.layoutControlItem17.Size = new System.Drawing.Size(294, 63);
+            this.layoutControlItem17.Size = new System.Drawing.Size(294, 29);
+            this.layoutControlItem17.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 5);
             this.layoutControlItem17.Text = "其它费用";
             this.layoutControlItem17.TextSize = new System.Drawing.Size(60, 14);
             // 
@@ -706,6 +715,33 @@
             this.tableLayoutPanel1.SetRowSpan(this.clcCategory, 2);
             this.clcCategory.Size = new System.Drawing.Size(194, 314);
             this.clcCategory.TabIndex = 3;
+            // 
+            // emptySpaceItem1
+            // 
+            this.emptySpaceItem1.AllowHotTrack = false;
+            this.emptySpaceItem1.Location = new System.Drawing.Point(586, 87);
+            this.emptySpaceItem1.Name = "emptySpaceItem1";
+            this.emptySpaceItem1.Size = new System.Drawing.Size(147, 34);
+            this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
+            // 
+            // btnCalc
+            // 
+            this.btnCalc.Location = new System.Drawing.Point(740, 94);
+            this.btnCalc.Name = "btnCalc";
+            this.btnCalc.Size = new System.Drawing.Size(143, 22);
+            this.btnCalc.StyleController = this.layoutControl2;
+            this.btnCalc.TabIndex = 10;
+            this.btnCalc.Text = "计算装卸费结冻费";
+            this.btnCalc.Click += new System.EventHandler(this.btnCalc_Click);
+            // 
+            // layoutControlItem20
+            // 
+            this.layoutControlItem20.Control = this.btnCalc;
+            this.layoutControlItem20.Location = new System.Drawing.Point(733, 87);
+            this.layoutControlItem20.Name = "layoutControlItem20";
+            this.layoutControlItem20.Size = new System.Drawing.Size(147, 34);
+            this.layoutControlItem20.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem20.TextVisible = false;
             // 
             // StockInEditControl
             // 
@@ -765,6 +801,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem16)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem17)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem18)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem20)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -821,5 +859,8 @@
         private DevExpress.XtraEditors.SimpleButton btnAddRow;
         private StockInGrid sigList;
         private DevExpress.XtraEditors.SimpleButton btnRemoveRow;
+        private DevExpress.XtraEditors.SimpleButton btnCalc;
+        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem20;
     }
 }

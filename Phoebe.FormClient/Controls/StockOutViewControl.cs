@@ -58,6 +58,7 @@ namespace Phoebe.FormClient
             this.txtBillingType.Text = ((BillingType)stockOut.Contract.BillingType).DisplayName();
             this.txtRemark.Text = stockOut.Remark;
             this.txtFlowNumber.Text = stockOut.FlowNumber;
+            this.txtCreateTime.Text = stockOut.CreateTime.ToDateTimeString();
         }
 
         /// <summary>
