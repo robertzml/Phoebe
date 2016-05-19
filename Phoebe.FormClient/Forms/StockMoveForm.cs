@@ -46,6 +46,11 @@ namespace Phoebe.FormClient
         private StockMoveViewControl stockMoveView;
 
         /// <summary>
+        /// 编辑移库界面
+        /// </summary>
+        private StockMoveEditControl stockMoveEdit;
+
+        /// <summary>
         /// 最新选择树形节点
         /// </summary>
         private string lastMonth = "";
@@ -271,6 +276,39 @@ namespace Phoebe.FormClient
                     MessageBox.Show("保存移库失败，" + result.DisplayName() + "， " + errorMessage, FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
+            else if (this.formState == StockMoveFormState.Edit) //保存修改
+            {
+                if (this.currentStockMoveId == Guid.Empty)
+                {
+                    MessageBox.Show("当前未选中移库单", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                if (this.stockMoveState != EntityStatus.StockMoveReady)
+                {
+                    MessageBox.Show("当前移库已确认，无法保存", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                string errorMessage;
+                ErrorCode result = this.stockMoveEdit.Save(out errorMessage);
+                if (result == ErrorCode.Success)
+                {
+                    MessageBox.Show("保存移库成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    this.stockMoveState = EntityStatus.StockMoveReady;
+                    this.formState = StockMoveFormState.View;
+
+                    UpdateToolbar();
+
+                    this.stockMoveView = new StockMoveViewControl(this.currentStockMoveId);
+                    ChildFormManage.LoadContentControl(this.plBody, this.stockMoveView);
+                }
+                else
+                {
+                    MessageBox.Show("保存移库失败，" + result.DisplayName() + "， " + errorMessage, FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
         }
 
         /// <summary>
@@ -316,7 +354,23 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void tsbEdit_Click(object sender, EventArgs e)
         {
+            if (this.currentStockMoveId == Guid.Empty)
+            {
+                MessageBox.Show("当前未选中移库单", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
 
+            if (this.stockMoveState != EntityStatus.StockMoveReady)
+            {
+                MessageBox.Show("当前移库已确认，无法编辑", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            this.formState = StockMoveFormState.Edit;
+            UpdateToolbar();
+
+            this.stockMoveEdit = new StockMoveEditControl(this.currentStockMoveId);
+            ChildFormManage.LoadContentControl(this.plBody, this.stockMoveEdit);
         }
 
         /// <summary>

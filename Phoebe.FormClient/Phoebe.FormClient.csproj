@@ -272,6 +272,12 @@
     <Compile Include="Controls\StockMoveViewControl.Designer.cs">
       <DependentUpon>StockMoveViewControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\StockMoveEditControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\StockMoveEditControl.Designer.cs">
+      <DependentUpon>StockMoveEditControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utils\ModelTranslate.cs" />
     <EmbeddedResource Include="Controls\CategoryListControl.resx">
       <DependentUpon>CategoryListControl.cs</DependentUpon>
@@ -296,6 +302,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\StockMoveAddControl.resx">
       <DependentUpon>StockMoveAddControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\StockMoveEditControl.resx">
+      <DependentUpon>StockMoveEditControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\StockOutAddControl.resx">
       <DependentUpon>StockOutAddControl.cs</DependentUpon>

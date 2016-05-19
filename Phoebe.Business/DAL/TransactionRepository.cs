@@ -331,6 +331,46 @@ namespace Phoebe.Business.DAL
         }
 
         /// <summary>
+        /// 移库编辑事务
+        /// </summary>
+        /// <param name="stockMove">移库单对象</param>
+        /// <param name="details">移库信息</param>
+        /// <param name="stores">新库存</param>
+        /// <returns></returns>
+        public ErrorCode StockMoveUpdateTrans(StockMove stockMove, List<StockMoveDetail> details, List<Store> stores)
+        {
+            try
+            {
+                //remove the old details and stores
+                List<StockMoveDetail> oldDetails = new List<StockMoveDetail>();
+                List<Store> oldStores = new List<Store>();
+                foreach (var item in stockMove.StockMoveDetails)
+                {
+                    oldDetails.Add(item);
+                    oldStores.Add(item.NewStore);
+                }
+                this.context.StockMoveDetails.RemoveRange(oldDetails);
+                this.context.Stores.RemoveRange(oldStores);
+
+                //modify the stock move
+                this.context.Entry(stockMove).State = EntityState.Modified;
+
+                //add new stores
+                this.context.Stores.AddRange(stores);
+
+                //add stock move details
+                this.context.StockMoveDetails.AddRange(details);
+
+                this.context.SaveChanges();
+                return ErrorCode.Success;
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+        }
+
+        /// <summary>
         /// 删除移库事务
         /// </summary>
         /// <param name="stockMove">移库单对象</param>

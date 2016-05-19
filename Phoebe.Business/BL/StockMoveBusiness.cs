@@ -189,6 +189,76 @@ namespace Phoebe.Business
             }
         }
 
+        /// <summary>
+        /// 移库编辑
+        /// </summary>
+        /// <param name="stockMove">移库单</param>
+        /// <param name="models">移库数据</param>
+        /// <returns></returns>
+        public ErrorCode Edit(StockMove stockMove, List<StockMoveModel> models)
+        {
+            try
+            {
+                if (stockMove.Status == (int)EntityStatus.StockMove)
+                    return ErrorCode.StockMoveHasConfirm;
+
+                // set new store
+                List<Store> newStores = new List<Store>();
+                foreach (var item in models)
+                {
+                    Store store = new Store();
+                    store.Id = Guid.NewGuid();
+                    item.NewStoreId = store.Id;
+                    store.CargoId = item.CargoId;
+                    store.WarehouseNumber = item.NewWarehouseNumber;
+                    store.TotalCount = item.MoveCount;
+                    store.StoreCount = store.TotalCount;
+                    store.TotalWeight = item.MoveWeight;
+                    store.StoreWeight = store.TotalWeight;
+                    store.TotalVolume = item.MoveVolume;
+                    store.StoreVolume = store.TotalVolume;
+                    store.InTime = item.InTime;
+                    store.MoveTime = stockMove.MoveTime;
+                    store.Specification = item.Specification;
+                    store.OriginPlace = item.OriginPlace;
+                    store.ShelfLife = item.ShelfLife;
+                    store.Source = (int)SourceType.StockMove;
+                    store.UserId = stockMove.UserId;
+                    store.Status = (int)EntityStatus.StoreMoveReady;
+
+                    newStores.Add(store);
+                }
+
+                //generate stock move details
+                List<StockMoveDetail> details = new List<StockMoveDetail>();
+                foreach (var item in models)
+                {
+                    StockMoveDetail detail = new StockMoveDetail();
+                    detail.Id = Guid.NewGuid();
+                    detail.StockMoveId = stockMove.Id;
+                    detail.SourceStoreId = item.SourceStoreId;
+                    detail.NewStoreId = item.NewStoreId;
+                    detail.StoreCount = item.StoreCount;
+                    detail.Count = item.MoveCount;
+                    detail.MoveWeight = item.MoveWeight;
+                    detail.MoveVolume = item.MoveVolume;
+                    detail.IsAllMove = (item.StoreCount == item.MoveCount);
+                    detail.Remark = item.Remark;
+                    detail.Status = (int)EntityStatus.StockMoveReady;
+
+                    details.Add(detail);
+                }
+
+                var trans = new TransactionRepository();
+                ErrorCode result = trans.StockMoveUpdateTrans(stockMove, details, newStores);
+
+                return result;
+            }
+            catch(Exception)
+            {
+                return ErrorCode.Exception;
+            }
+        }
 
         /// <summary>
         /// 删除移库

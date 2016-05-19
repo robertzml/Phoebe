@@ -16,35 +16,20 @@ namespace Phoebe.FormClient
     using Phoebe.Model;
 
     /// <summary>
-    /// 移库添加控件
+    /// 移库编辑控件
     /// </summary>
-    public partial class StockMoveAddControl : UserControl
+    public partial class StockMoveEditControl : UserControl
     {
         #region Field
         /// <summary>
-        /// 登录用户
+        /// 关联移库单
         /// </summary>
-        private LoginUser currentUser;
-
-        /// <summary>
-        /// 选中客户
-        /// </summary>
-        private Customer selectCustomer;
-
-        /// <summary>
-        /// 选中合同
-        /// </summary>
-        private Contract selectContract;
+        private StockMove stockMove;
 
         /// <summary>
         /// 货品是否等重
         /// </summary>
         private bool isEqualWeight = true;
-
-        /// <summary>
-        /// 客户列表，缓存页面使用
-        /// </summary>
-        private List<Customer> customerList;
 
         /// <summary>
         /// 分类列表，缓存页面使用
@@ -54,73 +39,71 @@ namespace Phoebe.FormClient
 
         #region Constructor
         /// <summary>
-        /// 移库添加控件
+        /// 移库编辑控件
         /// </summary>
-        /// <param name="user"></param>
-        public StockMoveAddControl(LoginUser user)
+        /// <param name="stockMoveId">移库单ID</param>
+        public StockMoveEditControl(Guid stockMoveId)
         {
             InitializeComponent();
 
-            this.currentUser = user;
+            this.stockMove = BusinessFactory<StockMoveBusiness>.Instance.FindById(stockMoveId);
 
-            this.txtStatus.Text = "新建移库";
-            this.txtUser.Text = this.currentUser.Name;
-            this.dpMoveTime.DateTime = DateTime.Now.Date;
+            SetBaseControl(this.stockMove);
+            SetDataControl(this.stockMove);
 
-            this.customerList = BusinessFactory<CustomerBusiness>.Instance.FindAll();
-            this.clcCustomer.SetDataSource(customerList);
             this.categoryList = BusinessFactory<CategoryBusiness>.Instance.GetLeafCategory();
             this.clcCategory.SetDataSource(this.categoryList);
-
-            this.smgList.DataSource = new List<StockMoveModel>();
         }
         #endregion //Constructor
 
         #region Function
         /// <summary>
-        /// 更新合同选择
+        /// 设置基本信息
         /// </summary>
-        /// <param name="customerId">客户Id</param>
-        private void UpdateContractList(int customerId)
+        /// <param name="stockMove">移库单对象</param>
+        private void SetBaseControl(StockMove stockMove)
         {
-            var contracts = BusinessFactory<ContractBusiness>.Instance.GetByCustomer(customerId);
+            this.txtStatus.Text = ((EntityStatus)stockMove.Status).DisplayName();
+            this.txtMoveTime.Text = stockMove.MoveTime.ToShortDateString();
+            this.txtUser.Text = stockMove.User.Name;
+            this.txtCustomerNumber.Text = stockMove.Contract.Customer.Number;
+            this.txtCustomerName.Text = stockMove.Contract.Customer.Name;
+            this.txtContract.Text = stockMove.Contract.Name;
+            this.txtBillingType.Text = ((BillingType)stockMove.Contract.BillingType).DisplayName();
+            this.txtRemark.Text = stockMove.Remark;
+            this.txtFlowNumber.Text = stockMove.FlowNumber;
+        }
 
-            this.cmbContract.Properties.Items.Clear();
-            foreach (var item in contracts)
-            {
-                ImageComboBoxItem i = new ImageComboBoxItem();
-                i.Description = item.Name;
-                i.Value = item.Id;
+        /// <summary>
+        /// 设置移库数据信息
+        /// </summary>
+        /// <param name="stockMove">移库单对象</param>
+        private void SetDataControl(StockMove stockMove)
+        {
+            var data = ModelTranslate.StockMoveToModel(stockMove);
+            this.smgList.DataSource = data;
 
-                this.cmbContract.Properties.Items.Add(i);
-            }
+            if ((BillingType)stockMove.Contract.BillingType == BillingType.VariousWeight)
+                this.isEqualWeight = false;
+            else
+                this.isEqualWeight = true;
 
-            if (this.cmbContract.Properties.Items.Count > 0)
-                this.cmbContract.SelectedIndex = 0;
+            this.smgList.SetEqualWeight(this.isEqualWeight);
         }
         #endregion //Function
 
         #region Method
         /// <summary>
-        /// 保存移库
+        /// 保存
         /// </summary>
         /// <param name="errorMessage">错误消息</param>
-        /// <param name="newId">新移库单ID</param>
-        /// <param name="month">月份</param>
         /// <returns></returns>
-        public ErrorCode Save(out string errorMessage, out Guid newId, out string month)
+        public ErrorCode Save(out string errorMessage)
         {
             errorMessage = "";
-            month = "";
-            newId = Guid.Empty;
             this.smgList.CloseEditor();
 
             // check input data and format digit
-            if (this.selectCustomer == null || this.selectContract == null)
-            {
-                errorMessage = "请选择客户和合同";
-                return ErrorCode.Error;
-            }
             if (this.smgList.DataSource.Count == 0)
             {
                 errorMessage = "没有移库货品";
@@ -139,12 +122,11 @@ namespace Phoebe.FormClient
                     errorMessage = "移库数量大于在库数量";
                     return ErrorCode.Error;
                 }
-                if (item.InTime > this.dpMoveTime.DateTime.Date)
+                if (item.InTime > this.stockMove.MoveTime.Date)
                 {
                     errorMessage = "移库时间早于货品入库时间";
                     return ErrorCode.Error;
                 }
-               
                 if (string.IsNullOrEmpty(item.NewWarehouseNumber))
                 {
                     errorMessage = "新仓位编号不能为空";
@@ -156,103 +138,16 @@ namespace Phoebe.FormClient
             }
 
             // set stock move
-            StockMove sm = new StockMove();
-            sm.Id = Guid.NewGuid();
-            sm.MoveTime = this.dpMoveTime.DateTime.Date;
-            sm.MonthTime = sm.MoveTime.Year.ToString() + sm.MoveTime.Month.ToString().PadLeft(2, '0');
-            sm.ContractId = this.selectContract.Id;
-            sm.UserId = this.currentUser.Id;
-            sm.CreateTime = DateTime.Now;
-            sm.Remark = this.txtRemark.Text;
+            this.stockMove.Remark = this.txtRemark.Text;
 
-            // add stock move
-            ErrorCode result = BusinessFactory<StockMoveBusiness>.Instance.Create(sm, this.smgList.DataSource);
-            if (result == ErrorCode.Success)
-            {
-                newId = sm.Id;
-                month = sm.MonthTime;
-            }
+            //edit stock move
+            ErrorCode result = BusinessFactory<StockMoveBusiness>.Instance.Edit(stockMove, this.smgList.DataSource);
 
             return result;
         }
         #endregion //Method
 
         #region Event
-        /// <summary>
-        /// 输入客户代码
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void txtCustomerNumber_EditValueChanged(object sender, EventArgs e)
-        {
-            string number = this.txtCustomerNumber.EditValue.ToString();
-            this.clcCustomer.UpdateView(number);
-
-            var customer = this.customerList.SingleOrDefault(r => r.Number == number);
-            if (customer != null)
-            {
-                this.txtCustomerName.Text = customer.Name;
-                this.selectCustomer = customer;
-
-                UpdateContractList(customer.Id);
-            }
-            else
-            {
-                this.txtCustomerName.Text = "";
-                this.selectCustomer = null;
-                UpdateContractList(0);
-            }
-        }
-
-        /// <summary>
-        /// 选择客户
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void clcCustomer_CustomerItemSelected(object sender, EventArgs e)
-        {
-            this.txtCustomerNumber.EditValueChanged -= txtCustomerNumber_EditValueChanged;
-
-            this.txtCustomerNumber.Text = this.clcCustomer.SelectedNumber;
-            this.txtCustomerName.Text = this.clcCustomer.SelectedName;
-
-            this.txtCustomerNumber.EditValueChanged += txtCustomerNumber_EditValueChanged;
-
-            int customerId = this.clcCustomer.SelectedId;
-            UpdateContractList(customerId);
-            this.selectCustomer = BusinessFactory<CustomerBusiness>.Instance.FindById(customerId);
-        }
-
-        /// <summary>
-        /// 选择合同
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void cmbContract_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (this.cmbContract.SelectedIndex == -1)
-            {
-                this.txtBillingType.Text = "";
-                this.selectContract = null;
-            }
-            else
-            {
-                int contractId = Convert.ToInt32(this.cmbContract.EditValue);
-                this.selectContract = BusinessFactory<ContractBusiness>.Instance.FindById(contractId);
-
-                if ((BillingType)this.selectContract.BillingType == BillingType.VariousWeight)
-                    this.isEqualWeight = false;
-                else
-                    this.isEqualWeight = true;
-
-                this.smgList.SetEqualWeight(this.isEqualWeight);
-                this.txtBillingType.Text = ((BillingType)this.selectContract.BillingType).DisplayName();
-            }
-
-            this.smgFilter.Clear();
-            this.smgList.Clear();
-        }
-
         /// <summary>
         /// 分类代码输入
         /// </summary>
@@ -290,19 +185,13 @@ namespace Phoebe.FormClient
         }
 
         /// <summary>
-        /// 搜索库存记录
+        /// 搜索库存
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            if (this.selectContract == null)
-            {
-                MessageBox.Show("未选择合同", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-
-            var stores = BusinessFactory<StoreBusiness>.Instance.GetByContract(this.selectContract.Id, true);
+            var stores = BusinessFactory<StoreBusiness>.Instance.GetByContract(this.stockMove.ContractId, true);
             var category = BusinessFactory<CategoryBusiness>.Instance.GetByParent(this.txtCategoryNumber.Text);
             if (category != null)
             {
@@ -320,12 +209,6 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void btnAddTo_Click(object sender, EventArgs e)
         {
-            if (this.selectContract == null)
-            {
-                MessageBox.Show("未选择合同", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-
             var select = this.smgFilter.GetCurrentSelect();
             if (select == null)
             {
