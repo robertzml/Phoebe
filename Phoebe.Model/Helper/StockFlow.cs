@@ -68,12 +68,12 @@ namespace Phoebe.Model
         /// <summary>
         /// 单位重量(kg)
         /// </summary>
-        public double UnitWeight { get; set; }
+        public decimal UnitWeight { get; set; }
 
         /// <summary>
         /// 流水重量(吨)
         /// </summary>
-        public double Weight { get; set; }
+        public decimal Weight { get; set; }
 
         /// <summary>
         /// 流水日期

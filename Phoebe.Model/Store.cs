@@ -18,9 +18,9 @@ namespace Phoebe.Model
         public Store()
         {
             this.StockInDetails = new HashSet<StockInDetail>();
-            this.StockOutDetails = new HashSet<StockOutDetail>();
             this.StockMoveDetails = new HashSet<StockMoveDetail>();
             this.StockMoveDetails1 = new HashSet<StockMoveDetail>();
+            this.StockOutDetails = new HashSet<StockOutDetail>();
         }
     
         public System.Guid Id { get; set; }
@@ -28,10 +28,10 @@ namespace Phoebe.Model
         public string WarehouseNumber { get; set; }
         public int TotalCount { get; set; }
         public int StoreCount { get; set; }
-        public double TotalWeight { get; set; }
-        public double StoreWeight { get; set; }
-        public double TotalVolume { get; set; }
-        public double StoreVolume { get; set; }
+        public decimal TotalWeight { get; set; }
+        public decimal StoreWeight { get; set; }
+        public decimal TotalVolume { get; set; }
+        public decimal StoreVolume { get; set; }
         public System.DateTime InTime { get; set; }
         public Nullable<System.DateTime> OutTime { get; set; }
         public System.DateTime MoveTime { get; set; }
@@ -45,14 +45,14 @@ namespace Phoebe.Model
         public int Status { get; set; }
     
         public virtual Cargo Cargo { get; set; }
-        public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StockInDetail> StockInDetails { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<StockOutDetail> StockOutDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StockMoveDetail> StockMoveDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StockMoveDetail> StockMoveDetails1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StockOutDetail> StockOutDetails { get; set; }
+        public virtual User User { get; set; }
     }
 }

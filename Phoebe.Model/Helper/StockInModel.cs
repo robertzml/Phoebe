@@ -69,22 +69,22 @@ namespace Phoebe.Model
         /// <summary>
         /// 单位重量
         /// </summary>
-        public double UnitWeight { get; set; }
+        public decimal UnitWeight { get; set; }
 
         /// <summary>
         /// 总重量 
         /// </summary>
-        public double InWeight { get; set; }
+        public decimal InWeight { get; set; }
 
         /// <summary>
         /// 单位体积
         /// </summary>
-        public double UnitVolume { get; set; }
+        public decimal UnitVolume { get; set; }
 
         /// <summary>
         /// 总体积
         /// </summary>
-        public double InVolume { get; set; }
+        public decimal InVolume { get; set; }
 
         /// <summary>
         /// 仓库编号

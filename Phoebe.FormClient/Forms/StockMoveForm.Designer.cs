@@ -97,7 +97,7 @@
             // xtraTabPage2
             // 
             this.xtraTabPage2.Name = "xtraTabPage2";
-            this.xtraTabPage2.Size = new System.Drawing.Size(226, 565);
+            this.xtraTabPage2.Size = new System.Drawing.Size(206, 565);
             this.xtraTabPage2.Text = "查询";
             // 
             // tsStockMove
@@ -136,6 +136,7 @@
             this.tsbClose.Name = "tsbClose";
             this.tsbClose.Size = new System.Drawing.Size(52, 22);
             this.tsbClose.Text = "关闭";
+            this.tsbClose.Click += new System.EventHandler(this.tsbClose_Click);
             // 
             // tsbSave
             // 
@@ -144,6 +145,7 @@
             this.tsbSave.Name = "tsbSave";
             this.tsbSave.Size = new System.Drawing.Size(52, 22);
             this.tsbSave.Text = "保存";
+            this.tsbSave.Click += new System.EventHandler(this.tsbSave_Click);
             // 
             // tsbConfirm
             // 

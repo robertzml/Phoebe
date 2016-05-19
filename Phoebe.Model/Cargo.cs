@@ -23,16 +23,16 @@ namespace Phoebe.Model
         public System.Guid Id { get; set; }
         public int CategoryId { get; set; }
         public int GroupType { get; set; }
-        public double UnitWeight { get; set; }
-        public double UnitVolume { get; set; }
+        public decimal UnitWeight { get; set; }
+        public decimal UnitVolume { get; set; }
         public int ContractId { get; set; }
         public System.DateTime RegisterTime { get; set; }
         public string Remark { get; set; }
         public int Status { get; set; }
     
         public virtual Category Category { get; set; }
+        public virtual Contract Contract { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Store> Stores { get; set; }
-        public virtual Contract Contract { get; set; }
     }
 }

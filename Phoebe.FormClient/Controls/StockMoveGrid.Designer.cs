@@ -28,8 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.dgcStockMove = new DevExpress.XtraGrid.GridControl();
-            this.bsStockMove = new System.Windows.Forms.BindingSource();
+            this.bsStockMove = new System.Windows.Forms.BindingSource(this.components);
             this.dgvStockMove = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colStockMoveId = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -158,6 +159,7 @@
             // 
             this.colCategoryNumber.FieldName = "CategoryNumber";
             this.colCategoryNumber.Name = "colCategoryNumber";
+            this.colCategoryNumber.OptionsColumn.AllowEdit = false;
             this.colCategoryNumber.Visible = true;
             this.colCategoryNumber.VisibleIndex = 0;
             // 
@@ -165,6 +167,7 @@
             // 
             this.colCategoryName.FieldName = "CategoryName";
             this.colCategoryName.Name = "colCategoryName";
+            this.colCategoryName.OptionsColumn.AllowEdit = false;
             this.colCategoryName.Visible = true;
             this.colCategoryName.VisibleIndex = 1;
             // 
@@ -172,6 +175,7 @@
             // 
             this.colSpecification.FieldName = "Specification";
             this.colSpecification.Name = "colSpecification";
+            this.colSpecification.OptionsColumn.AllowEdit = false;
             this.colSpecification.Visible = true;
             this.colSpecification.VisibleIndex = 2;
             // 
@@ -179,6 +183,7 @@
             // 
             this.colStoreCount.FieldName = "StoreCount";
             this.colStoreCount.Name = "colStoreCount";
+            this.colStoreCount.OptionsColumn.AllowEdit = false;
             this.colStoreCount.Visible = true;
             this.colStoreCount.VisibleIndex = 3;
             // 
@@ -198,6 +203,7 @@
             // 
             this.colUnitWeight.FieldName = "UnitWeight";
             this.colUnitWeight.Name = "colUnitWeight";
+            this.colUnitWeight.OptionsColumn.AllowEdit = false;
             this.colUnitWeight.Visible = true;
             this.colUnitWeight.VisibleIndex = 5;
             // 
@@ -212,6 +218,7 @@
             // 
             this.colUnitVolume.FieldName = "UnitVolume";
             this.colUnitVolume.Name = "colUnitVolume";
+            this.colUnitVolume.OptionsColumn.AllowEdit = false;
             this.colUnitVolume.Visible = true;
             this.colUnitVolume.VisibleIndex = 7;
             // 
@@ -219,6 +226,7 @@
             // 
             this.colMoveVolume.FieldName = "MoveVolume";
             this.colMoveVolume.Name = "colMoveVolume";
+            this.colMoveVolume.OptionsColumn.AllowEdit = false;
             this.colMoveVolume.Visible = true;
             this.colMoveVolume.VisibleIndex = 8;
             // 
@@ -226,6 +234,7 @@
             // 
             this.colSourceWarehouseNumber.FieldName = "SourceWarehouseNumber";
             this.colSourceWarehouseNumber.Name = "colSourceWarehouseNumber";
+            this.colSourceWarehouseNumber.OptionsColumn.AllowEdit = false;
             this.colSourceWarehouseNumber.Visible = true;
             this.colSourceWarehouseNumber.VisibleIndex = 9;
             // 
@@ -240,6 +249,7 @@
             // 
             this.colInTime.FieldName = "InTime";
             this.colInTime.Name = "colInTime";
+            this.colInTime.OptionsColumn.AllowEdit = false;
             this.colInTime.Visible = true;
             this.colInTime.VisibleIndex = 11;
             // 
@@ -247,6 +257,7 @@
             // 
             this.colOriginPlace.FieldName = "OriginPlace";
             this.colOriginPlace.Name = "colOriginPlace";
+            this.colOriginPlace.OptionsColumn.AllowEdit = false;
             this.colOriginPlace.Visible = true;
             this.colOriginPlace.VisibleIndex = 12;
             // 
@@ -254,6 +265,7 @@
             // 
             this.colShelfLife.FieldName = "ShelfLife";
             this.colShelfLife.Name = "colShelfLife";
+            this.colShelfLife.OptionsColumn.AllowEdit = false;
             this.colShelfLife.Visible = true;
             this.colShelfLife.VisibleIndex = 13;
             // 

@@ -20,8 +20,8 @@ namespace Phoebe.Model
         public System.Guid NewStoreId { get; set; }
         public int StoreCount { get; set; }
         public int Count { get; set; }
-        public double MoveWeight { get; set; }
-        public double MoveVolume { get; set; }
+        public decimal MoveWeight { get; set; }
+        public decimal MoveVolume { get; set; }
         public bool IsAllMove { get; set; }
         public string Remark { get; set; }
         public int Status { get; set; }

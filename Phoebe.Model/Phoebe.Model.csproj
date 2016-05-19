@@ -72,13 +72,28 @@
     <Compile Include="Helper\StockMoveModel.cs" />
     <Compile Include="Helper\StockOutModel.cs" />
     <Compile Include="Helper\Storage.cs" />
+    <Compile Include="Helper\StockInModel.cs" />
+    <Compile Include="PhoebeModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PhoebeModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PhoebeModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PhoebeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PhoebeModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PhoebeModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="StockIn.cs">
       <DependentUpon>PhoebeModel.tt</DependentUpon>
     </Compile>
     <Compile Include="StockInDetail.cs">
       <DependentUpon>PhoebeModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Helper\StockInModel.cs" />
     <Compile Include="StockMove.cs">
       <DependentUpon>PhoebeModel.tt</DependentUpon>
     </Compile>
@@ -95,21 +110,6 @@
       <DependentUpon>PhoebeModel.tt</DependentUpon>
     </Compile>
     <Compile Include="System\EntityStatus.cs" />
-    <Compile Include="PhoebeModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PhoebeModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="PhoebeModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PhoebeModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="PhoebeModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PhoebeModel.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User.cs">
       <DependentUpon>PhoebeModel.tt</DependentUpon>

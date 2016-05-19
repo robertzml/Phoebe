@@ -44,7 +44,7 @@ namespace Phoebe.Business
         /// <param name="weight">总重量</param>
         /// <param name="source">来源</param>
         /// <returns></returns>
-        private Storage SetStorage(Store store, DateTime date, int count, double weight, SourceType source)
+        private Storage SetStorage(Store store, DateTime date, int count, decimal weight, SourceType source)
         {
             Storage storage = new Storage();
             storage.StorageDate = date;
@@ -81,7 +81,7 @@ namespace Phoebe.Business
         /// <param name="date">流水日期</param>
         /// <param name="type">流水类型</param>
         /// <returns></returns>
-        private StockFlow SetStockFlow(Store store, int count, double weight, DateTime date, StockFlowType type)
+        private StockFlow SetStockFlow(Store store, int count, decimal weight, DateTime date, StockFlowType type)
         {
             StockFlow stockFlow = new StockFlow();
             stockFlow.CustomerId = store.Cargo.Contract.CustomerId;

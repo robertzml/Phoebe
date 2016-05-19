@@ -73,12 +73,12 @@ namespace Phoebe.Model
         /// <summary>
         /// 单位重量(kg)
         /// </summary>
-        public double UnitWeight { get; set; }
+        public decimal UnitWeight { get; set; }
 
         /// <summary>
         /// 在库重量(吨)
         /// </summary>
-        public double StoreWeight { get; set; }
+        public decimal StoreWeight { get; set; }
 
         /// <summary>
         /// 库位编号

@@ -18,12 +18,12 @@ namespace Phoebe.Model
         public System.Guid StockInId { get; set; }
         public System.Guid StoreId { get; set; }
         public int Count { get; set; }
-        public double InWeight { get; set; }
-        public double InVolume { get; set; }
+        public decimal InWeight { get; set; }
+        public decimal InVolume { get; set; }
         public string Remark { get; set; }
         public int Status { get; set; }
     
-        public virtual Store Store { get; set; }
         public virtual StockIn StockIn { get; set; }
+        public virtual Store Store { get; set; }
     }
 }

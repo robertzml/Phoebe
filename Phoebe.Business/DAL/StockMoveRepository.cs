@@ -15,9 +15,14 @@ namespace Phoebe.Business.DAL
     public class StockMoveRepository : SqlDataAccess<PhoebeContext>, IBaseDataAccess<StockMove>
     {
         #region Method
+        /// <summary>
+        /// 查找移库
+        /// </summary>
+        /// <param name="id">ID</param>
+        /// <returns></returns>
         public StockMove FindById(object id)
         {
-            throw new NotImplementedException();
+            return this.context.StockMoves.Find(id);
         }
 
         public StockMove FindOne(Expression<Func<StockMove, bool>> predicate)
@@ -30,9 +35,14 @@ namespace Phoebe.Business.DAL
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// 按条件查询
+        /// </summary>
+        /// <param name="predicate">查询条件</param>
+        /// <returns></returns>
         public IEnumerable<StockMove> Find(Expression<Func<StockMove, bool>> predicate)
         {
-            throw new NotImplementedException();
+            return this.context.StockMoves.Where(predicate);
         }
 
         public ErrorCode Create(StockMove entity)

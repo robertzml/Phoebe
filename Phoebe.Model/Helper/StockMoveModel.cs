@@ -79,22 +79,22 @@ namespace Phoebe.Model
         /// <summary>
         /// 单位重量
         /// </summary>
-        public double UnitWeight { get; set; }
+        public decimal UnitWeight { get; set; }
 
         /// <summary>
         /// 移库重量
         /// </summary>
-        public double MoveWeight { get; set; }
+        public decimal MoveWeight { get; set; }
 
         /// <summary>
         /// 单位体积
         /// </summary>
-        public double UnitVolume { get; set; }
+        public decimal UnitVolume { get; set; }
 
         /// <summary>
         /// 移库体积
         /// </summary>
-        public double MoveVolume { get; set; }
+        public decimal MoveVolume { get; set; }
 
         /// <summary>
         /// 原库位编号

@@ -136,6 +136,55 @@ namespace Phoebe.FormClient
             this.stockMoveAdd = new StockMoveAddControl(this.currentUser);
             ChildFormManage.LoadContentControl(this.plBody, this.stockMoveAdd);
         }
+
+        /// <summary>
+        /// 关闭
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tsbClose_Click(object sender, EventArgs e)
+        {
+            this.currentStockMoveId = Guid.Empty;
+            this.stockMoveState = EntityStatus.Empty;
+            this.formState = StockMoveFormState.Empty;
+
+            UpdateToolbar();
+            ChildFormManage.LoadContentControl(this.plBody, this.plEmpty);
+        }
+
+        /// <summary>
+        /// 保存
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tsbSave_Click(object sender, EventArgs e)
+        {
+            if (this.formState == StockMoveFormState.Add) //保存新建
+            {
+                string errorMessage, month;
+                Guid newId;
+                ErrorCode result = this.stockMoveAdd.Save(out errorMessage, out newId, out month);
+                if (result == ErrorCode.Success)
+                {
+                    MessageBox.Show("保存移库成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    this.currentStockMoveId = newId;
+                    this.stockMoveState = EntityStatus.StockMoveReady;
+                    this.formState = StockMoveFormState.View;
+
+                    //UpdateTree(month);
+                    UpdateToolbar();
+
+                    //this.stockOutView = new StockOutViewControl(this.currentStockOutId);
+                    //ChildFormManage.LoadContentControl(this.plBody, this.stockOutView);
+                }
+                else
+                {
+                    MessageBox.Show("保存移库失败，" + result.DisplayName() + "， " + errorMessage, FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+        }
+
         #endregion //Event
 
         /// <summary>
@@ -163,5 +212,7 @@ namespace Phoebe.FormClient
             /// </summary>
             Edit = 3
         }
+
+      
     }
 }

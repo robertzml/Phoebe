@@ -19,8 +19,8 @@ namespace Phoebe.Model
         public System.Guid StoreId { get; set; }
         public int StoreCount { get; set; }
         public int Count { get; set; }
-        public double OutWeight { get; set; }
-        public double OutVolume { get; set; }
+        public decimal OutWeight { get; set; }
+        public decimal OutVolume { get; set; }
         public string Remark { get; set; }
         public int Status { get; set; }
     
