@@ -39,6 +39,16 @@ namespace Phoebe.FormClient
         /// 新建移库界面
         /// </summary>
         private StockMoveAddControl stockMoveAdd;
+
+        /// <summary>
+        /// 查看移库界面
+        /// </summary>
+        private StockMoveViewControl stockMoveView;
+
+        /// <summary>
+        /// 最新选择树形节点
+        /// </summary>
+        private string lastMonth = "";
         #endregion //Field
 
         #region Constructor
@@ -102,6 +112,37 @@ namespace Phoebe.FormClient
                     break;
             }
         }
+
+        /// <summary>
+        /// 更新票据列表
+        /// </summary>
+        /// <param name="month">打开节点</param>
+        private void UpdateTree(string month = "")
+        {
+            this.tvStockMove.BeginUpdate();
+            this.tvStockMove.Nodes.Clear();
+
+            var months = BusinessFactory<StockMoveBusiness>.Instance.GetMonthGroup();
+            for (int i = 0; i < months.Length; i++)
+            {
+                TreeNode node = new TreeNode();
+                node.Name = months[i];
+                node.Text = months[i];
+                node.ImageIndex = 1;
+                node.Nodes.Add("");
+                this.tvStockMove.Nodes.Add(node);
+            }
+
+            if (month != "")
+            {
+                var find = this.tvStockMove.Nodes.Find(month, false);
+                if (find.Count() != 0)
+                {
+                    find[0].Expand();
+                }
+            }
+            this.tvStockMove.EndUpdate();
+        }
         #endregion //Function
 
         #region Event
@@ -116,8 +157,55 @@ namespace Phoebe.FormClient
             this.stockMoveState = EntityStatus.Empty;
             this.formState = StockMoveFormState.Empty;
 
-            //UpdateTree();
+            UpdateTree();
             UpdateToolbar();
+        }
+
+        /// <summary>
+        /// 树形菜单载入
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tvStockMove_BeforeExpand(object sender, TreeViewCancelEventArgs e)
+        {
+            var data = BusinessFactory<StockMoveBusiness>.Instance.GetByMonth(e.Node.Name);
+            e.Node.Nodes.Clear();
+            foreach (var item in data)
+            {
+                TreeNode node = new TreeNode();
+                node.Name = item.Id.ToString();
+                node.Text = item.FlowNumber;
+                node.Tag = item.Status;
+                if (item.Status == (int)EntityStatus.StockMoveReady)
+                    node.ImageIndex = 2;
+                else
+                    node.ImageIndex = 3;
+                e.Node.Nodes.Add(node);
+            }
+        }
+
+        /// <summary>
+        /// 选择历史单据
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tvStockMove_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            if (e.Node.Level == 0)
+            {
+                e.Node.SelectedImageIndex = 1;
+                return;
+            }
+
+            this.lastMonth = e.Node.Parent.Text;
+            this.currentStockMoveId = new Guid(e.Node.Name);
+            this.stockMoveState = (EntityStatus)e.Node.Tag;
+            this.formState = StockMoveFormState.View;
+
+            UpdateToolbar();
+
+            this.stockMoveView = new StockMoveViewControl(this.currentStockMoveId);
+            ChildFormManage.LoadContentControl(this.plBody, this.stockMoveView);
         }
 
         /// <summary>
@@ -172,11 +260,11 @@ namespace Phoebe.FormClient
                     this.stockMoveState = EntityStatus.StockMoveReady;
                     this.formState = StockMoveFormState.View;
 
-                    //UpdateTree(month);
+                    UpdateTree(month);
                     UpdateToolbar();
 
-                    //this.stockOutView = new StockOutViewControl(this.currentStockOutId);
-                    //ChildFormManage.LoadContentControl(this.plBody, this.stockOutView);
+                    this.stockMoveView = new StockMoveViewControl(this.currentStockMoveId);
+                    ChildFormManage.LoadContentControl(this.plBody, this.stockMoveView);
                 }
                 else
                 {
@@ -185,6 +273,81 @@ namespace Phoebe.FormClient
             }
         }
 
+        /// <summary>
+        /// 移库确认
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tsbConfirm_Click(object sender, EventArgs e)
+        {
+            if (this.currentStockMoveId == Guid.Empty)
+            {
+                MessageBox.Show("当前未选中移库单", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            if (this.stockMoveState != EntityStatus.StockMoveReady)
+            {
+                MessageBox.Show("当前移库已确认", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            ErrorCode result = BusinessFactory<StockMoveBusiness>.Instance.Confirm(this.currentStockMoveId);
+            if (result == ErrorCode.Success)
+            {
+                MessageBox.Show("移库确认成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                this.stockMoveState = EntityStatus.StockMove;
+                this.formState = StockMoveFormState.View;
+
+                UpdateTree(this.lastMonth);
+                UpdateToolbar();
+            }
+            else
+            {
+                MessageBox.Show("移库确认失败，" + result.DisplayName(), FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        /// <summary>
+        /// 编辑
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tsbEdit_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// 撤回
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tsbRevert_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// 删除
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tsbDelete_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// 打印
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tsbPrint_Click(object sender, EventArgs e)
+        {
+
+        }
         #endregion //Event
 
         /// <summary>
@@ -212,7 +375,5 @@ namespace Phoebe.FormClient
             /// </summary>
             Edit = 3
         }
-
-      
     }
 }

@@ -162,7 +162,25 @@ namespace Phoebe.Base
         /// 出库数量超出
         /// </summary>
         [Display(Name = "出库数量超出")]
-        StockOutCountOverflow = 82
+        StockOutCountOverflow = 82,
+
+        /// <summary>
+        /// 移库记录无法删除
+        /// </summary>
+        [Display(Name = "移库记录无法删除")]
+        StockMoveCannotDelete = 90,
+
+        /// <summary>
+        /// 移库已确认
+        /// </summary>
+        [Display(Name = "移库已确认")]
+        StockMoveHasConfirm = 91,
+
+        /// <summary>
+        /// 移库数量超出
+        /// </summary>
+        [Display(Name = "移库数量超出")]
+        StockMoveCountOverflow = 92
         #endregion //Stock
     }
 }

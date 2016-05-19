@@ -156,5 +156,47 @@ namespace Phoebe.FormClient
 
             return data;
         }
+
+        /// <summary>
+        /// 移库单转换
+        /// </summary>
+        /// <param name="stockMove">移库单对象</param>
+        /// <returns></returns>
+        public static List<StockMoveModel> StockMoveToModel(StockMove stockMove)
+        {
+            List<StockMoveModel> data = new List<StockMoveModel>();
+            foreach (var item in stockMove.StockMoveDetails)
+            {
+                StockMoveModel model = new StockMoveModel();
+                model.Id = item.Id;
+                model.StockMoveId = stockMove.Id;
+                model.SourceStoreId = item.SourceStoreId;
+                model.NewStoreId = item.NewStoreId;
+                model.ContractId = stockMove.ContractId;
+                model.CargoId = item.SourceStore.CargoId;
+                model.CategoryId = item.SourceStore.Cargo.CategoryId;
+                model.CategoryNumber = item.SourceStore.Cargo.Category.Number;
+                model.CategoryName = item.SourceStore.Cargo.Category.Name;
+                model.Specification = item.SourceStore.Specification;
+                model.StoreCount = item.StoreCount;
+                model.MoveCount = item.Count;
+                model.GroupType = item.SourceStore.Cargo.GroupType;
+                model.UnitWeight = item.SourceStore.Cargo.UnitWeight;
+                model.MoveWeight = item.MoveWeight;
+                model.UnitVolume = item.SourceStore.Cargo.UnitVolume;
+                model.MoveVolume = item.MoveVolume;
+                model.SourceWarehouseNumber = item.SourceStore.WarehouseNumber;
+                model.NewWarehouseNumber = item.NewStore.WarehouseNumber;
+                model.InTime = item.SourceStore.InTime;
+                model.OriginPlace = item.SourceStore.OriginPlace;
+                model.ShelfLife = item.SourceStore.ShelfLife;
+                model.Remark = item.Remark;
+                model.Status = item.Status;
+
+                data.Add(model);
+            }
+
+            return data;
+        }
     }
 }

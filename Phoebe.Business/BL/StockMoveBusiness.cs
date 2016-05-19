@@ -58,6 +58,31 @@ namespace Phoebe.Business
 
         #region Method
         /// <summary>
+        /// 获取移库月份分组
+        /// </summary>
+        /// <returns></returns>
+        /// <remarks>
+        /// 用于树形导航分组
+        /// </remarks>
+        public string[] GetMonthGroup()
+        {
+            var data = this.dal.FindAll().GroupBy(r => r.MonthTime).Select(g => g.Key).OrderByDescending(s => s);
+            return data.ToArray();
+        }
+
+        /// <summary>
+        /// 按月度获取移库记录
+        /// </summary>
+        /// <param name="monthTime">月份</param>
+        /// <returns></returns>
+        public List<StockMove> GetByMonth(string monthTime)
+        {
+            Expression<Func<StockMove, bool>> predicate = r => r.MonthTime == monthTime;
+            var data = this.dal.Find(predicate).OrderByDescending(r => r.FlowNumber);
+            return data.ToList();
+        }
+
+        /// <summary>
         /// 创建移库单
         /// </summary>
         /// <param name="entity">移库单对象</param>
@@ -120,6 +145,41 @@ namespace Phoebe.Business
 
                 var trans = new TransactionRepository();
                 ErrorCode result = trans.StockMoveAddTrans(entity, details, newStores);
+
+                return result;
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+        }
+
+        /// <summary>
+        /// 移库确认
+        /// </summary>
+        /// <param name="id">移库单ID</param>
+        /// <returns></returns>
+        public ErrorCode Confirm(Guid id)
+        {
+            try
+            {
+                StockMove stockMove = this.dal.FindById(id);
+                if (stockMove == null)
+                    return ErrorCode.ObjectNotFound;
+
+                if (stockMove.Status == (int)EntityStatus.StockMove)
+                    return ErrorCode.StockMoveHasConfirm;
+
+                // check store count
+                foreach (var item in stockMove.StockMoveDetails)
+                {
+                    var store = item.SourceStore;
+                    if (store.StoreCount < item.Count)
+                        return ErrorCode.StockMoveCountOverflow;
+                }
+
+                var trans = new TransactionRepository();
+                var result = trans.StockMoveConfirmTrans(stockMove);
 
                 return result;
             }

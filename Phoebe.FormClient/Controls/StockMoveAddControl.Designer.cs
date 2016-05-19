@@ -31,40 +31,41 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
-            this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.txtStatus = new DevExpress.XtraEditors.TextEdit();
-            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.dpMoveTime = new DevExpress.XtraEditors.DateEdit();
-            this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.txtUser = new DevExpress.XtraEditors.TextEdit();
-            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.txtCustomerNumber = new DevExpress.XtraEditors.TextEdit();
-            this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.txtCustomerName = new DevExpress.XtraEditors.TextEdit();
-            this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.cmbContract = new DevExpress.XtraEditors.ImageComboBoxEdit();
-            this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.txtBillingType = new DevExpress.XtraEditors.TextEdit();
-            this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
             this.txtRemark = new DevExpress.XtraEditors.TextEdit();
+            this.txtBillingType = new DevExpress.XtraEditors.TextEdit();
+            this.cmbContract = new DevExpress.XtraEditors.ImageComboBoxEdit();
+            this.txtCustomerName = new DevExpress.XtraEditors.TextEdit();
+            this.txtCustomerNumber = new DevExpress.XtraEditors.TextEdit();
+            this.txtUser = new DevExpress.XtraEditors.TextEdit();
+            this.dpMoveTime = new DevExpress.XtraEditors.DateEdit();
+            this.txtStatus = new DevExpress.XtraEditors.TextEdit();
+            this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.clcCustomer = new Phoebe.FormClient.CustomerListControl();
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
+            this.smgFilter = new Phoebe.FormClient.StockMoveGrid();
             this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
-            this.groupControl4 = new DevExpress.XtraEditors.GroupControl();
             this.layoutControl2 = new DevExpress.XtraLayout.LayoutControl();
-            this.layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.txtCategoryNumber = new DevExpress.XtraEditors.TextEdit();
-            this.txtCategoryName = new DevExpress.XtraEditors.TextEdit();
+            this.btnRemoveFrom = new DevExpress.XtraEditors.SimpleButton();
+            this.btnAddTo = new DevExpress.XtraEditors.SimpleButton();
+            this.txtNewWarehouse = new DevExpress.XtraEditors.TextEdit();
+            this.nmMoveCount = new System.Windows.Forms.NumericUpDown();
             this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
+            this.txtCategoryName = new DevExpress.XtraEditors.TextEdit();
+            this.txtCategoryNumber = new DevExpress.XtraEditors.TextEdit();
+            this.layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.tabbedControlGroup1 = new DevExpress.XtraLayout.TabbedControlGroup();
             this.layoutControlGroup3 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem11 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.nmMoveCount = new System.Windows.Forms.NumericUpDown();
-            this.txtNewWarehouse = new DevExpress.XtraEditors.TextEdit();
-            this.btnAddTo = new DevExpress.XtraEditors.SimpleButton();
-            this.btnRemoveFrom = new DevExpress.XtraEditors.SimpleButton();
             this.tabbedControlGroup2 = new DevExpress.XtraLayout.TabbedControlGroup();
             this.layoutControlGroup4 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem12 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -72,51 +73,48 @@
             this.layoutControlItem14 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem15 = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
-            this.clcCustomer = new Phoebe.FormClient.CustomerListControl();
-            this.smgFilter = new Phoebe.FormClient.StockMoveGrid();
-            this.clcCategory = new Phoebe.FormClient.CategoryListControl();
+            this.groupControl4 = new DevExpress.XtraEditors.GroupControl();
             this.smgList = new Phoebe.FormClient.StockMoveGrid();
+            this.clcCategory = new Phoebe.FormClient.CategoryListControl();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtStatus.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtRemark.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtBillingType.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbContract.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCustomerName.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCustomerNumber.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtUser.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dpMoveTime.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dpMoveTime.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtStatus.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtUser.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtCustomerNumber.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtCustomerName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cmbContract.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtBillingType.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtRemark.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
             this.groupControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).BeginInit();
             this.groupControl3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).BeginInit();
-            this.groupControl4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl2)).BeginInit();
             this.layoutControl2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtCategoryNumber.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtNewWarehouse.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmMoveCount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCategoryName.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCategoryNumber.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nmMoveCount)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtNewWarehouse.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedControlGroup2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem12)).BeginInit();
@@ -124,6 +122,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem14)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem15)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).BeginInit();
+            this.groupControl4.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -175,6 +175,97 @@
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
+            // txtRemark
+            // 
+            this.txtRemark.Location = new System.Drawing.Point(283, 65);
+            this.txtRemark.Name = "txtRemark";
+            this.txtRemark.Size = new System.Drawing.Size(155, 20);
+            this.txtRemark.StyleController = this.layoutControl1;
+            this.txtRemark.TabIndex = 11;
+            // 
+            // txtBillingType
+            // 
+            this.txtBillingType.Location = new System.Drawing.Point(58, 65);
+            this.txtBillingType.Name = "txtBillingType";
+            this.txtBillingType.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
+            this.txtBillingType.Properties.Appearance.Options.UseBackColor = true;
+            this.txtBillingType.Properties.ReadOnly = true;
+            this.txtBillingType.Size = new System.Drawing.Size(170, 20);
+            this.txtBillingType.StyleController = this.layoutControl1;
+            this.txtBillingType.TabIndex = 10;
+            // 
+            // cmbContract
+            // 
+            this.cmbContract.Location = new System.Drawing.Point(493, 36);
+            this.cmbContract.Name = "cmbContract";
+            this.cmbContract.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow;
+            this.cmbContract.Properties.Appearance.Options.UseBackColor = true;
+            this.cmbContract.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cmbContract.Size = new System.Drawing.Size(170, 20);
+            this.cmbContract.StyleController = this.layoutControl1;
+            this.cmbContract.TabIndex = 9;
+            this.cmbContract.SelectedIndexChanged += new System.EventHandler(this.cmbContract_SelectedIndexChanged);
+            // 
+            // txtCustomerName
+            // 
+            this.txtCustomerName.Location = new System.Drawing.Point(283, 36);
+            this.txtCustomerName.Name = "txtCustomerName";
+            this.txtCustomerName.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
+            this.txtCustomerName.Properties.Appearance.Options.UseBackColor = true;
+            this.txtCustomerName.Size = new System.Drawing.Size(155, 20);
+            this.txtCustomerName.StyleController = this.layoutControl1;
+            this.txtCustomerName.TabIndex = 8;
+            // 
+            // txtCustomerNumber
+            // 
+            this.txtCustomerNumber.Location = new System.Drawing.Point(58, 36);
+            this.txtCustomerNumber.Name = "txtCustomerNumber";
+            this.txtCustomerNumber.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow;
+            this.txtCustomerNumber.Properties.Appearance.Options.UseBackColor = true;
+            this.txtCustomerNumber.Size = new System.Drawing.Size(170, 20);
+            this.txtCustomerNumber.StyleController = this.layoutControl1;
+            this.txtCustomerNumber.TabIndex = 7;
+            this.txtCustomerNumber.EditValueChanged += new System.EventHandler(this.txtCustomerNumber_EditValueChanged);
+            // 
+            // txtUser
+            // 
+            this.txtUser.Location = new System.Drawing.Point(493, 7);
+            this.txtUser.Name = "txtUser";
+            this.txtUser.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
+            this.txtUser.Properties.Appearance.Options.UseBackColor = true;
+            this.txtUser.Properties.ReadOnly = true;
+            this.txtUser.Size = new System.Drawing.Size(170, 20);
+            this.txtUser.StyleController = this.layoutControl1;
+            this.txtUser.TabIndex = 6;
+            // 
+            // dpMoveTime
+            // 
+            this.dpMoveTime.EditValue = null;
+            this.dpMoveTime.Location = new System.Drawing.Point(283, 7);
+            this.dpMoveTime.Name = "dpMoveTime";
+            this.dpMoveTime.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow;
+            this.dpMoveTime.Properties.Appearance.Options.UseBackColor = true;
+            this.dpMoveTime.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dpMoveTime.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dpMoveTime.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.dpMoveTime.Size = new System.Drawing.Size(155, 20);
+            this.dpMoveTime.StyleController = this.layoutControl1;
+            this.dpMoveTime.TabIndex = 5;
+            // 
+            // txtStatus
+            // 
+            this.txtStatus.Location = new System.Drawing.Point(58, 7);
+            this.txtStatus.Name = "txtStatus";
+            this.txtStatus.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
+            this.txtStatus.Properties.Appearance.Options.UseBackColor = true;
+            this.txtStatus.Properties.ReadOnly = true;
+            this.txtStatus.Size = new System.Drawing.Size(170, 20);
+            this.txtStatus.StyleController = this.layoutControl1;
+            this.txtStatus.TabIndex = 4;
+            // 
             // layoutControlGroup1
             // 
             this.layoutControlGroup1.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
@@ -194,17 +285,6 @@
             this.layoutControlGroup1.Size = new System.Drawing.Size(670, 131);
             this.layoutControlGroup1.TextVisible = false;
             // 
-            // txtStatus
-            // 
-            this.txtStatus.Location = new System.Drawing.Point(59, 7);
-            this.txtStatus.Name = "txtStatus";
-            this.txtStatus.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
-            this.txtStatus.Properties.Appearance.Options.UseBackColor = true;
-            this.txtStatus.Properties.ReadOnly = true;
-            this.txtStatus.Size = new System.Drawing.Size(169, 20);
-            this.txtStatus.StyleController = this.layoutControl1;
-            this.txtStatus.TabIndex = 4;
-            // 
             // layoutControlItem1
             // 
             this.layoutControlItem1.Control = this.txtStatus;
@@ -215,22 +295,6 @@
             this.layoutControlItem1.Text = "业务状态";
             this.layoutControlItem1.TextSize = new System.Drawing.Size(48, 14);
             // 
-            // dpMoveTime
-            // 
-            this.dpMoveTime.EditValue = null;
-            this.dpMoveTime.Location = new System.Drawing.Point(284, 7);
-            this.dpMoveTime.Name = "dpMoveTime";
-            this.dpMoveTime.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow;
-            this.dpMoveTime.Properties.Appearance.Options.UseBackColor = true;
-            this.dpMoveTime.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dpMoveTime.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dpMoveTime.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.dpMoveTime.Size = new System.Drawing.Size(154, 20);
-            this.dpMoveTime.StyleController = this.layoutControl1;
-            this.dpMoveTime.TabIndex = 5;
-            // 
             // layoutControlItem2
             // 
             this.layoutControlItem2.Control = this.dpMoveTime;
@@ -240,17 +304,6 @@
             this.layoutControlItem2.Text = "业务日期";
             this.layoutControlItem2.TextSize = new System.Drawing.Size(48, 14);
             // 
-            // txtUser
-            // 
-            this.txtUser.Location = new System.Drawing.Point(494, 7);
-            this.txtUser.Name = "txtUser";
-            this.txtUser.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
-            this.txtUser.Properties.Appearance.Options.UseBackColor = true;
-            this.txtUser.Properties.ReadOnly = true;
-            this.txtUser.Size = new System.Drawing.Size(169, 20);
-            this.txtUser.StyleController = this.layoutControl1;
-            this.txtUser.TabIndex = 6;
-            // 
             // layoutControlItem3
             // 
             this.layoutControlItem3.Control = this.txtUser;
@@ -259,17 +312,6 @@
             this.layoutControlItem3.Size = new System.Drawing.Size(225, 29);
             this.layoutControlItem3.Text = "业务员";
             this.layoutControlItem3.TextSize = new System.Drawing.Size(48, 14);
-            // 
-            // txtCustomerNumber
-            // 
-            this.txtCustomerNumber.Location = new System.Drawing.Point(59, 36);
-            this.txtCustomerNumber.Name = "txtCustomerNumber";
-            this.txtCustomerNumber.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow;
-            this.txtCustomerNumber.Properties.Appearance.Options.UseBackColor = true;
-            this.txtCustomerNumber.Size = new System.Drawing.Size(169, 20);
-            this.txtCustomerNumber.StyleController = this.layoutControl1;
-            this.txtCustomerNumber.TabIndex = 7;
-            this.txtCustomerNumber.EditValueChanged += new System.EventHandler(this.txtCustomerNumber_EditValueChanged);
             // 
             // layoutControlItem4
             // 
@@ -281,16 +323,6 @@
             this.layoutControlItem4.Text = "客户代码";
             this.layoutControlItem4.TextSize = new System.Drawing.Size(48, 14);
             // 
-            // txtCustomerName
-            // 
-            this.txtCustomerName.Location = new System.Drawing.Point(284, 36);
-            this.txtCustomerName.Name = "txtCustomerName";
-            this.txtCustomerName.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
-            this.txtCustomerName.Properties.Appearance.Options.UseBackColor = true;
-            this.txtCustomerName.Size = new System.Drawing.Size(154, 20);
-            this.txtCustomerName.StyleController = this.layoutControl1;
-            this.txtCustomerName.TabIndex = 8;
-            // 
             // layoutControlItem5
             // 
             this.layoutControlItem5.Control = this.txtCustomerName;
@@ -299,19 +331,6 @@
             this.layoutControlItem5.Size = new System.Drawing.Size(210, 29);
             this.layoutControlItem5.Text = "客户名称";
             this.layoutControlItem5.TextSize = new System.Drawing.Size(48, 14);
-            // 
-            // cmbContract
-            // 
-            this.cmbContract.Location = new System.Drawing.Point(494, 36);
-            this.cmbContract.Name = "cmbContract";
-            this.cmbContract.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow;
-            this.cmbContract.Properties.Appearance.Options.UseBackColor = true;
-            this.cmbContract.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cmbContract.Size = new System.Drawing.Size(169, 20);
-            this.cmbContract.StyleController = this.layoutControl1;
-            this.cmbContract.TabIndex = 9;
-            this.cmbContract.SelectedIndexChanged += new System.EventHandler(this.cmbContract_SelectedIndexChanged);
             // 
             // layoutControlItem6
             // 
@@ -322,17 +341,6 @@
             this.layoutControlItem6.Text = "所属合同";
             this.layoutControlItem6.TextSize = new System.Drawing.Size(48, 14);
             // 
-            // txtBillingType
-            // 
-            this.txtBillingType.Location = new System.Drawing.Point(59, 65);
-            this.txtBillingType.Name = "txtBillingType";
-            this.txtBillingType.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
-            this.txtBillingType.Properties.Appearance.Options.UseBackColor = true;
-            this.txtBillingType.Properties.ReadOnly = true;
-            this.txtBillingType.Size = new System.Drawing.Size(169, 20);
-            this.txtBillingType.StyleController = this.layoutControl1;
-            this.txtBillingType.TabIndex = 10;
-            // 
             // layoutControlItem7
             // 
             this.layoutControlItem7.Control = this.txtBillingType;
@@ -342,14 +350,6 @@
             this.layoutControlItem7.Text = "计费方式";
             this.layoutControlItem7.TextSize = new System.Drawing.Size(48, 14);
             // 
-            // txtRemark
-            // 
-            this.txtRemark.Location = new System.Drawing.Point(284, 65);
-            this.txtRemark.Name = "txtRemark";
-            this.txtRemark.Size = new System.Drawing.Size(154, 20);
-            this.txtRemark.StyleController = this.layoutControl1;
-            this.txtRemark.TabIndex = 11;
-            // 
             // layoutControlItem8
             // 
             this.layoutControlItem8.Control = this.txtRemark;
@@ -358,6 +358,15 @@
             this.layoutControlItem8.Size = new System.Drawing.Size(210, 63);
             this.layoutControlItem8.Text = "备注";
             this.layoutControlItem8.TextSize = new System.Drawing.Size(48, 14);
+            // 
+            // clcCustomer
+            // 
+            this.clcCustomer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.clcCustomer.Location = new System.Drawing.Point(683, 3);
+            this.clcCustomer.Name = "clcCustomer";
+            this.clcCustomer.Size = new System.Drawing.Size(314, 154);
+            this.clcCustomer.TabIndex = 1;
+            this.clcCustomer.CustomerItemSelected += new Phoebe.FormClient.CustomerListControl.ItemSelectHandle(this.clcCustomer_CustomerItemSelected);
             // 
             // groupControl2
             // 
@@ -369,6 +378,18 @@
             this.groupControl2.TabIndex = 2;
             this.groupControl2.Text = "查询结果";
             // 
+            // smgFilter
+            // 
+            this.smgFilter.DataSource = null;
+            this.smgFilter.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.smgFilter.Editable = false;
+            this.smgFilter.Location = new System.Drawing.Point(2, 21);
+            this.smgFilter.Name = "smgFilter";
+            this.smgFilter.ShowFooter = false;
+            this.smgFilter.ShowMoveCount = false;
+            this.smgFilter.Size = new System.Drawing.Size(670, 191);
+            this.smgFilter.TabIndex = 0;
+            // 
             // groupControl3
             // 
             this.groupControl3.Controls.Add(this.layoutControl2);
@@ -378,16 +399,6 @@
             this.groupControl3.Size = new System.Drawing.Size(314, 214);
             this.groupControl3.TabIndex = 3;
             this.groupControl3.Text = "库存筛选";
-            // 
-            // groupControl4
-            // 
-            this.groupControl4.Controls.Add(this.smgList);
-            this.groupControl4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl4.Location = new System.Drawing.Point(3, 383);
-            this.groupControl4.Name = "groupControl4";
-            this.groupControl4.Size = new System.Drawing.Size(674, 214);
-            this.groupControl4.TabIndex = 4;
-            this.groupControl4.Text = "移库列表";
             // 
             // layoutControl2
             // 
@@ -407,6 +418,76 @@
             this.layoutControl2.TabIndex = 0;
             this.layoutControl2.Text = "layoutControl2";
             // 
+            // btnRemoveFrom
+            // 
+            this.btnRemoveFrom.Location = new System.Drawing.Point(162, 97);
+            this.btnRemoveFrom.Name = "btnRemoveFrom";
+            this.btnRemoveFrom.Size = new System.Drawing.Size(137, 22);
+            this.btnRemoveFrom.StyleController = this.layoutControl2;
+            this.btnRemoveFrom.TabIndex = 10;
+            this.btnRemoveFrom.Text = "删除移库";
+            this.btnRemoveFrom.Click += new System.EventHandler(this.btnRemoveFrom_Click);
+            // 
+            // btnAddTo
+            // 
+            this.btnAddTo.Location = new System.Drawing.Point(11, 97);
+            this.btnAddTo.Name = "btnAddTo";
+            this.btnAddTo.Size = new System.Drawing.Size(147, 22);
+            this.btnAddTo.StyleController = this.layoutControl2;
+            this.btnAddTo.TabIndex = 9;
+            this.btnAddTo.Text = "加入移库";
+            this.btnAddTo.Click += new System.EventHandler(this.btnAddTo_Click);
+            // 
+            // txtNewWarehouse
+            // 
+            this.txtNewWarehouse.Location = new System.Drawing.Point(213, 73);
+            this.txtNewWarehouse.Name = "txtNewWarehouse";
+            this.txtNewWarehouse.Size = new System.Drawing.Size(86, 20);
+            this.txtNewWarehouse.StyleController = this.layoutControl2;
+            this.txtNewWarehouse.TabIndex = 8;
+            // 
+            // nmMoveCount
+            // 
+            this.nmMoveCount.Location = new System.Drawing.Point(62, 73);
+            this.nmMoveCount.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.nmMoveCount.Name = "nmMoveCount";
+            this.nmMoveCount.Size = new System.Drawing.Size(96, 22);
+            this.nmMoveCount.TabIndex = 7;
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Location = new System.Drawing.Point(161, 35);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(138, 22);
+            this.btnSearch.StyleController = this.layoutControl2;
+            this.btnSearch.TabIndex = 6;
+            this.btnSearch.Text = "搜索";
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
+            // txtCategoryName
+            // 
+            this.txtCategoryName.Location = new System.Drawing.Point(212, 11);
+            this.txtCategoryName.Name = "txtCategoryName";
+            this.txtCategoryName.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
+            this.txtCategoryName.Properties.Appearance.Options.UseBackColor = true;
+            this.txtCategoryName.Properties.ReadOnly = true;
+            this.txtCategoryName.Size = new System.Drawing.Size(87, 20);
+            this.txtCategoryName.StyleController = this.layoutControl2;
+            this.txtCategoryName.TabIndex = 5;
+            // 
+            // txtCategoryNumber
+            // 
+            this.txtCategoryNumber.Location = new System.Drawing.Point(62, 11);
+            this.txtCategoryNumber.Name = "txtCategoryNumber";
+            this.txtCategoryNumber.Size = new System.Drawing.Size(95, 20);
+            this.txtCategoryNumber.StyleController = this.layoutControl2;
+            this.txtCategoryNumber.TabIndex = 4;
+            this.txtCategoryNumber.EditValueChanged += new System.EventHandler(this.txtCategoryNumber_EditValueChanged);
+            // 
             // layoutControlGroup2
             // 
             this.layoutControlGroup2.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
@@ -420,36 +501,6 @@
             this.layoutControlGroup2.Padding = new DevExpress.XtraLayout.Utils.Padding(3, 3, 3, 3);
             this.layoutControlGroup2.Size = new System.Drawing.Size(310, 191);
             this.layoutControlGroup2.TextVisible = false;
-            // 
-            // txtCategoryNumber
-            // 
-            this.txtCategoryNumber.Location = new System.Drawing.Point(63, 11);
-            this.txtCategoryNumber.Name = "txtCategoryNumber";
-            this.txtCategoryNumber.Size = new System.Drawing.Size(94, 20);
-            this.txtCategoryNumber.StyleController = this.layoutControl2;
-            this.txtCategoryNumber.TabIndex = 4;
-            this.txtCategoryNumber.EditValueChanged += new System.EventHandler(this.txtCategoryNumber_EditValueChanged);
-            // 
-            // txtCategoryName
-            // 
-            this.txtCategoryName.Location = new System.Drawing.Point(213, 11);
-            this.txtCategoryName.Name = "txtCategoryName";
-            this.txtCategoryName.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
-            this.txtCategoryName.Properties.Appearance.Options.UseBackColor = true;
-            this.txtCategoryName.Properties.ReadOnly = true;
-            this.txtCategoryName.Size = new System.Drawing.Size(86, 20);
-            this.txtCategoryName.StyleController = this.layoutControl2;
-            this.txtCategoryName.TabIndex = 5;
-            // 
-            // btnSearch
-            // 
-            this.btnSearch.Location = new System.Drawing.Point(161, 35);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(138, 22);
-            this.btnSearch.StyleController = this.layoutControl2;
-            this.btnSearch.TabIndex = 6;
-            this.btnSearch.Text = "搜索";
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // tabbedControlGroup1
             // 
@@ -499,46 +550,6 @@
             this.layoutControlItem11.Size = new System.Drawing.Size(142, 26);
             this.layoutControlItem11.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem11.TextVisible = false;
-            // 
-            // nmMoveCount
-            // 
-            this.nmMoveCount.Location = new System.Drawing.Point(63, 73);
-            this.nmMoveCount.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.nmMoveCount.Name = "nmMoveCount";
-            this.nmMoveCount.Size = new System.Drawing.Size(95, 22);
-            this.nmMoveCount.TabIndex = 7;
-            // 
-            // txtNewWarehouse
-            // 
-            this.txtNewWarehouse.Location = new System.Drawing.Point(214, 73);
-            this.txtNewWarehouse.Name = "txtNewWarehouse";
-            this.txtNewWarehouse.Size = new System.Drawing.Size(85, 20);
-            this.txtNewWarehouse.StyleController = this.layoutControl2;
-            this.txtNewWarehouse.TabIndex = 8;
-            // 
-            // btnAddTo
-            // 
-            this.btnAddTo.Location = new System.Drawing.Point(11, 97);
-            this.btnAddTo.Name = "btnAddTo";
-            this.btnAddTo.Size = new System.Drawing.Size(147, 22);
-            this.btnAddTo.StyleController = this.layoutControl2;
-            this.btnAddTo.TabIndex = 9;
-            this.btnAddTo.Text = "加入移库";
-            this.btnAddTo.Click += new System.EventHandler(this.btnAddTo_Click);
-            // 
-            // btnRemoveFrom
-            // 
-            this.btnRemoveFrom.Location = new System.Drawing.Point(162, 97);
-            this.btnRemoveFrom.Name = "btnRemoveFrom";
-            this.btnRemoveFrom.Size = new System.Drawing.Size(137, 22);
-            this.btnRemoveFrom.StyleController = this.layoutControl2;
-            this.btnRemoveFrom.TabIndex = 10;
-            this.btnRemoveFrom.Text = "删除移库";
-            this.btnRemoveFrom.Click += new System.EventHandler(this.btnRemoveFrom_Click);
             // 
             // tabbedControlGroup2
             // 
@@ -607,35 +618,15 @@
             this.emptySpaceItem1.Size = new System.Drawing.Size(304, 61);
             this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
             // 
-            // clcCustomer
+            // groupControl4
             // 
-            this.clcCustomer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.clcCustomer.Location = new System.Drawing.Point(683, 3);
-            this.clcCustomer.Name = "clcCustomer";
-            this.clcCustomer.Size = new System.Drawing.Size(314, 154);
-            this.clcCustomer.TabIndex = 1;
-            this.clcCustomer.CustomerItemSelected += new Phoebe.FormClient.CustomerListControl.ItemSelectHandle(this.clcCustomer_CustomerItemSelected);
-            // 
-            // smgFilter
-            // 
-            this.smgFilter.DataSource = null;
-            this.smgFilter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.smgFilter.Editable = false;
-            this.smgFilter.Location = new System.Drawing.Point(2, 21);
-            this.smgFilter.Name = "smgFilter";
-            this.smgFilter.ShowFooter = false;
-            this.smgFilter.ShowMoveCount = false;
-            this.smgFilter.Size = new System.Drawing.Size(670, 191);
-            this.smgFilter.TabIndex = 0;
-            // 
-            // clcCategory
-            // 
-            this.clcCategory.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.clcCategory.Location = new System.Drawing.Point(683, 383);
-            this.clcCategory.Name = "clcCategory";
-            this.clcCategory.Size = new System.Drawing.Size(314, 214);
-            this.clcCategory.TabIndex = 5;
-            this.clcCategory.CategoryItemSelected += new Phoebe.FormClient.CategoryListControl.ItemSelectHandle(this.clcCategory_CategoryItemSelected);
+            this.groupControl4.Controls.Add(this.smgList);
+            this.groupControl4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupControl4.Location = new System.Drawing.Point(3, 383);
+            this.groupControl4.Name = "groupControl4";
+            this.groupControl4.Size = new System.Drawing.Size(674, 214);
+            this.groupControl4.TabIndex = 4;
+            this.groupControl4.Text = "移库列表";
             // 
             // smgList
             // 
@@ -649,6 +640,15 @@
             this.smgList.Size = new System.Drawing.Size(670, 191);
             this.smgList.TabIndex = 0;
             // 
+            // clcCategory
+            // 
+            this.clcCategory.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.clcCategory.Location = new System.Drawing.Point(683, 383);
+            this.clcCategory.Name = "clcCategory";
+            this.clcCategory.Size = new System.Drawing.Size(314, 214);
+            this.clcCategory.TabIndex = 5;
+            this.clcCategory.CategoryItemSelected += new Phoebe.FormClient.CategoryListControl.ItemSelectHandle(this.clcCategory_CategoryItemSelected);
+            // 
             // StockMoveAddControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -661,42 +661,40 @@
             this.groupControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtStatus.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtRemark.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtBillingType.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbContract.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCustomerName.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCustomerNumber.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtUser.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dpMoveTime.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dpMoveTime.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtStatus.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtUser.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtCustomerNumber.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtCustomerName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cmbContract.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtBillingType.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtRemark.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
             this.groupControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).EndInit();
             this.groupControl3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).EndInit();
-            this.groupControl4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl2)).EndInit();
             this.layoutControl2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtCategoryNumber.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtNewWarehouse.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmMoveCount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCategoryName.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCategoryNumber.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nmMoveCount)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtNewWarehouse.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedControlGroup2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem12)).EndInit();
@@ -704,6 +702,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem14)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem15)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).EndInit();
+            this.groupControl4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

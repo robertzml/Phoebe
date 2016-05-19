@@ -30,9 +30,13 @@ namespace Phoebe.Business.DAL
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// 获取所有移库
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<StockMove> FindAll()
         {
-            throw new NotImplementedException();
+            return this.context.StockMoves;
         }
 
         /// <summary>

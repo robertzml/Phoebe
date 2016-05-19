@@ -281,6 +281,54 @@ namespace Phoebe.Business.DAL
 
             return ErrorCode.Success;
         }
+
+        /// <summary>
+        /// 移库确认事务
+        /// </summary>
+        /// <param name="stockMove">移库单对象</param>
+        /// <returns></returns>
+        public ErrorCode StockMoveConfirmTrans(StockMove stockMove)
+        {
+            try
+            {
+                stockMove.Status = (int)EntityStatus.StockMove;
+
+                // change store count and status
+                foreach (var item in stockMove.StockMoveDetails)
+                {
+                    var sourceStore = item.SourceStore;
+                    item.StoreCount = sourceStore.StoreCount;
+
+                    if (sourceStore.StoreCount == item.Count) // all stock out
+                    {
+                        sourceStore.StoreCount = 0;
+                        sourceStore.StoreWeight = 0;
+                        sourceStore.StoreVolume = 0;
+                        sourceStore.OutTime = stockMove.MoveTime;
+                        sourceStore.Destination = (int)DestinationType.StockMove;
+                        sourceStore.Status = (int)EntityStatus.StoreOut;
+                    }
+                    else
+                    {
+                        sourceStore.StoreCount -= item.Count;
+                        sourceStore.StoreWeight -= item.MoveWeight;
+                        sourceStore.StoreVolume -= item.MoveVolume;
+                    }
+
+                    var newStore = item.NewStore;
+                    newStore.Status = (int)EntityStatus.StoreIn;
+
+                    item.Status = (int)EntityStatus.StockMove;
+                }
+
+                this.context.SaveChanges();
+                return ErrorCode.Success;
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+        }
         #endregion //StockMove Trans
     }
 }

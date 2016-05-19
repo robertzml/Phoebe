@@ -266,6 +266,12 @@
     <Compile Include="Controls\StockMoveGrid.Designer.cs">
       <DependentUpon>StockMoveGrid.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\StockMoveViewControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\StockMoveViewControl.Designer.cs">
+      <DependentUpon>StockMoveViewControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utils\ModelTranslate.cs" />
     <EmbeddedResource Include="Controls\CategoryListControl.resx">
       <DependentUpon>CategoryListControl.cs</DependentUpon>
@@ -362,6 +368,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\StockMoveGrid.resx">
       <DependentUpon>StockMoveGrid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\StockMoveViewControl.resx">
+      <DependentUpon>StockMoveViewControl.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\Phoebe.Model.Contract.datasource" />

@@ -117,6 +117,7 @@
             this.dgvStockMove.OptionsMenu.EnableColumnMenu = false;
             this.dgvStockMove.OptionsMenu.EnableFooterMenu = false;
             this.dgvStockMove.OptionsMenu.EnableGroupPanelMenu = false;
+            this.dgvStockMove.OptionsView.ShowFooter = true;
             this.dgvStockMove.OptionsView.ShowGroupPanel = false;
             this.dgvStockMove.CellValueChanging += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.dgvStockMove_CellValueChanging);
             // 
@@ -157,6 +158,7 @@
             // 
             // colCategoryNumber
             // 
+            this.colCategoryNumber.Caption = "分类编码";
             this.colCategoryNumber.FieldName = "CategoryNumber";
             this.colCategoryNumber.Name = "colCategoryNumber";
             this.colCategoryNumber.OptionsColumn.AllowEdit = false;
@@ -165,6 +167,7 @@
             // 
             // colCategoryName
             // 
+            this.colCategoryName.Caption = "分类名称";
             this.colCategoryName.FieldName = "CategoryName";
             this.colCategoryName.Name = "colCategoryName";
             this.colCategoryName.OptionsColumn.AllowEdit = false;
@@ -173,6 +176,7 @@
             // 
             // colSpecification
             // 
+            this.colSpecification.Caption = "规格";
             this.colSpecification.FieldName = "Specification";
             this.colSpecification.Name = "colSpecification";
             this.colSpecification.OptionsColumn.AllowEdit = false;
@@ -181,6 +185,7 @@
             // 
             // colStoreCount
             // 
+            this.colStoreCount.Caption = "在库数量";
             this.colStoreCount.FieldName = "StoreCount";
             this.colStoreCount.Name = "colStoreCount";
             this.colStoreCount.OptionsColumn.AllowEdit = false;
@@ -189,8 +194,11 @@
             // 
             // colMoveCount
             // 
+            this.colMoveCount.Caption = "移库数量";
             this.colMoveCount.FieldName = "MoveCount";
             this.colMoveCount.Name = "colMoveCount";
+            this.colMoveCount.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "MoveCount", "合计={0:0.##}")});
             this.colMoveCount.Visible = true;
             this.colMoveCount.VisibleIndex = 4;
             // 
@@ -201,6 +209,9 @@
             // 
             // colUnitWeight
             // 
+            this.colUnitWeight.Caption = "单位重量(kg)";
+            this.colUnitWeight.DisplayFormat.FormatString = "0.00";
+            this.colUnitWeight.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colUnitWeight.FieldName = "UnitWeight";
             this.colUnitWeight.Name = "colUnitWeight";
             this.colUnitWeight.OptionsColumn.AllowEdit = false;
@@ -209,13 +220,21 @@
             // 
             // colMoveWeight
             // 
+            this.colMoveWeight.Caption = "移库重量(t)";
+            this.colMoveWeight.DisplayFormat.FormatString = "0.####";
+            this.colMoveWeight.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colMoveWeight.FieldName = "MoveWeight";
             this.colMoveWeight.Name = "colMoveWeight";
+            this.colMoveWeight.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "MoveWeight", "合计={0:0.####}")});
             this.colMoveWeight.Visible = true;
             this.colMoveWeight.VisibleIndex = 6;
             // 
             // colUnitVolume
             // 
+            this.colUnitVolume.Caption = "单位体积(立方)";
+            this.colUnitVolume.DisplayFormat.FormatString = "0.000";
+            this.colUnitVolume.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colUnitVolume.FieldName = "UnitVolume";
             this.colUnitVolume.Name = "colUnitVolume";
             this.colUnitVolume.OptionsColumn.AllowEdit = false;
@@ -224,14 +243,20 @@
             // 
             // colMoveVolume
             // 
+            this.colMoveVolume.Caption = "移库体积(立方)";
+            this.colMoveVolume.DisplayFormat.FormatString = "0.####";
+            this.colMoveVolume.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colMoveVolume.FieldName = "MoveVolume";
             this.colMoveVolume.Name = "colMoveVolume";
             this.colMoveVolume.OptionsColumn.AllowEdit = false;
+            this.colMoveVolume.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "MoveVolume", "合计={0:0.####}")});
             this.colMoveVolume.Visible = true;
             this.colMoveVolume.VisibleIndex = 8;
             // 
             // colSourceWarehouseNumber
             // 
+            this.colSourceWarehouseNumber.Caption = "原库位";
             this.colSourceWarehouseNumber.FieldName = "SourceWarehouseNumber";
             this.colSourceWarehouseNumber.Name = "colSourceWarehouseNumber";
             this.colSourceWarehouseNumber.OptionsColumn.AllowEdit = false;
@@ -240,6 +265,7 @@
             // 
             // colNewWarehouseNumber
             // 
+            this.colNewWarehouseNumber.Caption = "新库位";
             this.colNewWarehouseNumber.FieldName = "NewWarehouseNumber";
             this.colNewWarehouseNumber.Name = "colNewWarehouseNumber";
             this.colNewWarehouseNumber.Visible = true;
@@ -247,6 +273,7 @@
             // 
             // colInTime
             // 
+            this.colInTime.Caption = "入库时间";
             this.colInTime.FieldName = "InTime";
             this.colInTime.Name = "colInTime";
             this.colInTime.OptionsColumn.AllowEdit = false;
@@ -255,6 +282,7 @@
             // 
             // colOriginPlace
             // 
+            this.colOriginPlace.Caption = "产地";
             this.colOriginPlace.FieldName = "OriginPlace";
             this.colOriginPlace.Name = "colOriginPlace";
             this.colOriginPlace.OptionsColumn.AllowEdit = false;
@@ -263,6 +291,7 @@
             // 
             // colShelfLife
             // 
+            this.colShelfLife.Caption = "保质期(月)";
             this.colShelfLife.FieldName = "ShelfLife";
             this.colShelfLife.Name = "colShelfLife";
             this.colShelfLife.OptionsColumn.AllowEdit = false;
@@ -271,6 +300,7 @@
             // 
             // colRemark
             // 
+            this.colRemark.Caption = "备注";
             this.colRemark.FieldName = "Remark";
             this.colRemark.Name = "colRemark";
             this.colRemark.Visible = true;

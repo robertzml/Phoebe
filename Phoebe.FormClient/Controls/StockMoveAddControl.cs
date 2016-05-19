@@ -129,6 +129,11 @@ namespace Phoebe.FormClient
 
             foreach (var item in this.smgList.DataSource)
             {
+                if (item.MoveCount < 0)
+                {
+                    errorMessage = "移库数量不能为负数";
+                    return ErrorCode.Error;
+                }
                 if (item.MoveCount > item.StoreCount)
                 {
                     errorMessage = "移库数量大于在库数量";
@@ -137,6 +142,12 @@ namespace Phoebe.FormClient
                 if (item.InTime > this.dpMoveTime.DateTime.Date)
                 {
                     errorMessage = "移库时间早于货品入库时间";
+                    return ErrorCode.Error;
+                }
+               
+                if (string.IsNullOrEmpty(item.NewWarehouseNumber))
+                {
+                    errorMessage = "新仓位编号不能为空";
                     return ErrorCode.Error;
                 }
 

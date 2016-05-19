@@ -58,7 +58,7 @@ namespace Phoebe.Business
 
         #region Method
         /// <summary>
-        /// 获取入库月份分组
+        /// 获取出库月份分组
         /// </summary>
         /// <returns></returns>
         /// <remarks>
@@ -71,7 +71,7 @@ namespace Phoebe.Business
         }
 
         /// <summary>
-        /// 按月度获取入库记录
+        /// 按月度获取出库记录
         /// </summary>
         /// <param name="monthTime">月份</param>
         /// <returns></returns>
@@ -141,7 +141,7 @@ namespace Phoebe.Business
                 if (stockOut.Status == (int)EntityStatus.StockOut)
                     return ErrorCode.StockOutHasConfirm;
 
-                // check and change store count
+                // check store count
                 foreach (var item in stockOut.StockOutDetails)
                 {
                     var store = item.Store;
