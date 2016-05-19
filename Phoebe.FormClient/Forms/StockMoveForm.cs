@@ -336,7 +336,39 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void tsbDelete_Click(object sender, EventArgs e)
         {
+            if (this.currentStockMoveId == Guid.Empty)
+            {
+                MessageBox.Show("当前未选中移库单", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
 
+            if (this.stockMoveState != EntityStatus.StockMoveReady)
+            {
+                MessageBox.Show("当前移库已确认，无法删除", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            DialogResult dr = MessageBox.Show("是否确认删除选中记录", FormConstant.MessageBoxTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dr == DialogResult.Yes)
+            {
+                ErrorCode result = BusinessFactory<StockMoveBusiness>.Instance.Delete(this.currentStockMoveId);
+                if (result == ErrorCode.Success)
+                {
+                    MessageBox.Show("删除移库成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    this.currentStockMoveId = Guid.Empty;
+                    this.stockMoveState = EntityStatus.Empty;
+                    this.formState = StockMoveFormState.Empty;
+
+                    ChildFormManage.LoadContentControl(this.plBody, this.plEmpty);
+                    UpdateTree(this.lastMonth);
+                    UpdateToolbar();
+                }
+                else
+                {
+                    MessageBox.Show("删除移库失败，" + result.DisplayName(), FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
         }
 
         /// <summary>

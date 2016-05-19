@@ -188,6 +188,42 @@ namespace Phoebe.Business
                 return ErrorCode.Exception;
             }
         }
+
+
+        /// <summary>
+        /// 删除移库
+        /// </summary>
+        /// <param name="id">移库单ID</param>
+        /// <returns></returns>
+        public ErrorCode Delete(Guid id)
+        {
+            try
+            {
+                StockMove stockMove = this.dal.FindById(id);
+
+                if (stockMove == null)
+                    return ErrorCode.ObjectNotFound;
+
+                if (stockMove.Status == (int)EntityStatus.StockMove)
+                    return ErrorCode.StockMoveCannotDelete;
+
+                // find store
+                List<Store> storeList = new List<Store>();
+                foreach (var item in stockMove.StockMoveDetails)
+                {
+                    storeList.Add(item.NewStore);
+                }
+
+                var trans = new TransactionRepository();
+                ErrorCode result = trans.StockMoveDeleteTrans(stockMove, storeList);
+
+                return result;
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+        }
         #endregion //Method
     }
 }

@@ -329,6 +329,32 @@ namespace Phoebe.Business.DAL
                 return ErrorCode.Exception;
             }
         }
+
+        /// <summary>
+        /// 删除移库事务
+        /// </summary>
+        /// <param name="stockMove">移库单对象</param>
+        /// <param name="stores">新库存对象</param>
+        /// <returns></returns>
+        public ErrorCode StockMoveDeleteTrans(StockMove stockMove, List<Store> stores)
+        {
+            try
+            {
+                // delete stock move with cascade
+                this.context.StockMoves.Remove(stockMove);
+
+                // delete new  store
+                this.context.Stores.RemoveRange(stores);
+
+                this.context.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+
+            return ErrorCode.Success;
+        }
         #endregion //StockMove Trans
     }
 }
