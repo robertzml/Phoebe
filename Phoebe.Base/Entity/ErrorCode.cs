@@ -127,6 +127,18 @@ namespace Phoebe.Base
         /// </summary>
         [Display(Name = "货品已存在")]
         CargoExist = 51,
+
+        /// <summary>
+        /// 分类含有下级
+        /// </summary>
+        [Display(Name = "分类含有下级")]
+        CategoryHasChild = 52,
+
+        /// <summary>
+        /// 分类含有货品
+        /// </summary>
+        [Display(Name = "分类含有货品")]
+        CategoryHasCargo = 53,
         #endregion //Cargo
 
         #region Store

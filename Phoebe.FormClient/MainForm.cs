@@ -2,15 +2,13 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using DevExpress.LookAndFeel;
 
 namespace Phoebe.FormClient
 {
+    using DevExpress.LookAndFeel;
     using Phoebe.Base;
     using Phoebe.Common;
     using Phoebe.Model;
@@ -47,9 +45,7 @@ namespace Phoebe.FormClient
             InitControl();
         }
 
-
         #region Menu Event
-
         /// <summary>
         /// 客户管理 - 客户列表
         /// </summary>

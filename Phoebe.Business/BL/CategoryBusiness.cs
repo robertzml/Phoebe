@@ -127,6 +127,31 @@ namespace Phoebe.Business
                 return data;
             }
         }
+
+        /// <summary>
+        /// 删除分类
+        /// </summary>
+        /// <param name="entity">分类对象</param>
+        /// <returns></returns>
+        public override ErrorCode Delete(Category entity)
+        {
+            try
+            {
+                if (this.dal.Find(r => r.ParentId == entity.Id).Count() > 0)
+                    return ErrorCode.CategoryHasChild;
+
+                if (RepositoryFactory<CargoRepository>.Instance.Find(r => r.CategoryId == entity.Id).Count() > 0)
+                    return ErrorCode.CategoryHasCargo;
+
+                this.dal.Delete(entity);
+
+                return ErrorCode.Success;
+            }
+            catch(Exception)
+            {
+                return ErrorCode.Exception;
+            }
+        }
         #endregion //Method
     }
 }

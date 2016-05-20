@@ -290,6 +290,12 @@
     <Compile Include="Controls\StockFlowGrid.Designer.cs">
       <DependentUpon>StockFlowGrid.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\StorageGrid.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\StorageGrid.Designer.cs">
+      <DependentUpon>StorageGrid.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utils\ModelTranslate.cs" />
     <EmbeddedResource Include="Controls\CategoryListControl.resx">
       <DependentUpon>CategoryListControl.cs</DependentUpon>
@@ -323,6 +329,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\StockOutEditControl.resx">
       <DependentUpon>StockOutEditControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\StorageGrid.resx">
+      <DependentUpon>StorageGrid.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\StoreGrid.resx">
       <DependentUpon>StoreGrid.cs</DependentUpon>

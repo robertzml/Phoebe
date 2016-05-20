@@ -46,6 +46,11 @@ namespace Phoebe.Model
         public string ContractName { get; set; }
 
         /// <summary>
+        /// 货品ID
+        /// </summary>
+        public Guid CargoId { get; set; }
+
+        /// <summary>
         /// 分类ID
         /// </summary>
         public int CategoryId { get; set; }
@@ -81,6 +86,16 @@ namespace Phoebe.Model
         public decimal StoreWeight { get; set; }
 
         /// <summary>
+        /// 单位体积(立方)
+        /// </summary>
+        public decimal UnitVolume { get; set; }
+
+        /// <summary>
+        /// 在库体积(立方)
+        /// </summary>
+        public decimal StoreVolume { get; set; }
+
+        /// <summary>
         /// 库位编号
         /// </summary>
         public string Number { get; set; }
@@ -94,5 +109,10 @@ namespace Phoebe.Model
         /// 来源
         /// </summary>
         public SourceType Source { get; set; }
+
+        /// <summary>
+        /// 备注
+        /// </summary>
+        public string Remark { get; set; }
     }
 }

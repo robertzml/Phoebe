@@ -26,6 +26,11 @@ namespace Phoebe.Business.DAL
             return this.context.Customers.Find(id);
         }
 
+        public Customer FindOne(Expression<Func<Customer, bool>> predicate)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// 获取所有客户
         /// </summary>
@@ -70,6 +75,11 @@ namespace Phoebe.Business.DAL
             }
         }
 
+        public ErrorCode CreateRange(List<Customer> entities)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// 编辑客户
         /// </summary>
@@ -111,16 +121,6 @@ namespace Phoebe.Business.DAL
             {
                 return ErrorCode.Exception;
             }
-        }
-
-        public ErrorCode CreateRange(List<Customer> entities)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Customer FindOne(Expression<Func<Customer, bool>> predicate)
-        {
-            throw new NotImplementedException();
         }
         #endregion //Method
     }

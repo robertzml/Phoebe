@@ -90,6 +90,10 @@ namespace Phoebe.FormClient
             return;
         }
 
+        /// <summary>
+        /// 设置控件
+        /// </summary>
+        /// <param name="category">分类对象</param>
         private void SetControl(Category category)
         {
             this.txtName.Text = category.Name.ToString();
@@ -159,7 +163,7 @@ namespace Phoebe.FormClient
             ChildFormManage.ShowDialogForm(typeof(CategoryAddForm), new object[] { 3 });
             LoadTree();
         }
-        
+
         /// <summary>
         /// 编辑分类
         /// </summary>
@@ -173,6 +177,36 @@ namespace Phoebe.FormClient
 
             ChildFormManage.ShowDialogForm(typeof(CategoryEditForm), new object[] { Convert.ToInt32(node.Name) });
             LoadTree();
+        }
+
+        /// <summary>
+        /// 删除分类
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            TreeNode node = this.tvCategory.SelectedNode;
+            if (node == null || node.Name == "0")
+                return;
+
+            DialogResult dr = MessageBox.Show("是否确认删除选中分类", FormConstant.MessageBoxTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dr == DialogResult.Yes)
+            {
+                int id = Convert.ToInt32(node.Name);
+                var category = BusinessFactory<CategoryBusiness>.Instance.FindById(id);
+
+                ErrorCode result = BusinessFactory<CategoryBusiness>.Instance.Delete(category);
+                if (result == ErrorCode.Success)
+                {
+                    MessageBox.Show("删除分类成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadTree();
+                }
+                else
+                {
+                    MessageBox.Show("删除分类失败：" + result.DisplayName(), FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
         }
         #endregion //Event
     }

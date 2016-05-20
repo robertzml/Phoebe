@@ -143,15 +143,21 @@ namespace Phoebe.Model
         StockOut = 2,
 
         /// <summary>
+        /// 移库
+        /// </summary>
+        [Display(Name = "移库")]
+        StockMove = 3,
+
+        /// <summary>
         /// 移入
         /// </summary>
         [Display(Name = "移入")]
-        StockMoveIn = 3,
+        StockMoveIn = 4,
 
         /// <summary>
         /// 移出
         /// </summary>
         [Display(Name = "移出")]
-        StockMoveOut = 4
+        StockMoveOut = 5
     }
 }

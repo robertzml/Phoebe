@@ -111,10 +111,24 @@ namespace Phoebe.Business.DAL
             return ErrorCode.Success;
         }
 
-
+        /// <summary>
+        /// 删除分类
+        /// </summary>
+        /// <param name="entity">分类对象</param>
+        /// <returns></returns>
         public ErrorCode Delete(Category entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                this.context.Categories.Remove(entity);
+                this.context.SaveChanges();
+
+                return ErrorCode.Success;
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
         }
         #endregion //Method
     }

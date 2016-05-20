@@ -248,7 +248,7 @@ namespace Phoebe.FormClient
 
             int customerId = this.clcCustomer.SelectedId;
             UpdateContractList(customerId);
-            this.selectCustomer = BusinessFactory<CustomerBusiness>.Instance.FindById(customerId);
+            this.selectCustomer = this.customerList.SingleOrDefault(r => r.Id == customerId);
         }
 
         /// <summary>

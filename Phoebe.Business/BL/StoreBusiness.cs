@@ -41,20 +41,23 @@ namespace Phoebe.Business
         /// <param name="stock">库存</param>
         /// <param name="date">日期</param>
         /// <param name="count">数量</param>
-        /// <param name="weight">总重量</param>
+        /// <param name="weight">在库重量</param>
+        /// <param name="volume">在库体积</param>
         /// <param name="source">来源</param>
         /// <returns></returns>
-        private Storage SetStorage(Store store, DateTime date, int count, decimal weight, SourceType source)
+        private Storage SetStorage(Store store, DateTime date, int count, decimal weight, decimal volume)
         {
             Storage storage = new Storage();
             storage.StorageDate = date;
             storage.StoreId = store.Id;
+
             storage.CustomerId = store.Cargo.Contract.CustomerId;
             storage.CustomerNumber = store.Cargo.Contract.Customer.Number;
             storage.CustomerName = store.Cargo.Contract.Customer.Name;
             storage.ContractId = store.Cargo.ContractId;
             storage.ContractName = store.Cargo.Contract.Name;
 
+            storage.CargoId = store.CargoId;
             storage.CategoryId = store.Cargo.CategoryId;
             storage.CategoryNumber = store.Cargo.Category.Number;
             storage.CategoryName = store.Cargo.Category.Name;
@@ -63,46 +66,15 @@ namespace Phoebe.Business
             storage.Count = count;
             storage.UnitWeight = store.Cargo.UnitWeight;
             storage.StoreWeight = weight;
+            storage.UnitVolume = store.Cargo.UnitVolume;
+            storage.StoreVolume = volume;
 
             storage.Number = store.WarehouseNumber;
             storage.InTime = store.InTime;
-            storage.Source = source;
+            storage.Source = (SourceType)store.Source;
+            storage.Remark = store.Remark;
 
             return storage;
-        }
-
-
-        /// <summary>
-        /// 设置流水模型
-        /// </summary>
-        /// <param name="cargo">货品</param>
-        /// <param name="count">流水数量</param>
-        /// <param name="weight">流水重量</param>
-        /// <param name="date">流水日期</param>
-        /// <param name="type">流水类型</param>
-        /// <returns></returns>
-        private StockFlow SetStockFlow(Store store, int count, decimal weight, DateTime date, StockFlowType type)
-        {
-            StockFlow stockFlow = new StockFlow();
-            stockFlow.CustomerId = store.Cargo.Contract.CustomerId;
-            stockFlow.CustomerNumber = store.Cargo.Contract.Customer.Number;
-            stockFlow.CustomerName = store.Cargo.Contract.Customer.Name;
-
-            stockFlow.ContractId = store.Cargo.ContractId;
-            stockFlow.ContractName = store.Cargo.Contract.Name;
-
-            stockFlow.CategoryId = store.Cargo.CategoryId;
-            stockFlow.CategoryNumber = store.Cargo.Category.Number;
-            stockFlow.CategoryName = store.Cargo.Category.Name;
-            stockFlow.Specification = store.Specification;
-            stockFlow.Count = count;
-            stockFlow.UnitWeight = store.Cargo.UnitWeight;
-            stockFlow.FlowWeight = weight;
-            stockFlow.FlowDate = date;
-            stockFlow.Type = type;
-            stockFlow.CountChange = true;
-
-            return stockFlow;
         }
 
         /// <summary>
@@ -205,6 +177,12 @@ namespace Phoebe.Business
             }
         }
 
+        /// <summary>
+        /// 获取合同指定日库存
+        /// </summary>
+        /// <param name="contractId">合同ID</param>
+        /// <param name="date">日期</param>
+        /// <returns></returns>
         public List<Storage> GetInDay(int contractId, DateTime date)
         {
             List<Storage> data = new List<Storage>();
@@ -216,11 +194,17 @@ namespace Phoebe.Business
 
             foreach (var store in stores)
             {
-                // find stock in
-                if (store.Source == (int)SourceType.StockIn)
+                // find in
+                if (store.Source == (int)SourceType.StockIn) //from stock in
                 {
                     var si = RepositoryFactory<StockInDetailsRepository>.Instance.FindOne(r => r.StoreId == store.Id);
-                    var storage = SetStorage(store, date, si.Count, si.InWeight, SourceType.StockIn);
+                    var storage = SetStorage(store, date, si.Count, si.InWeight, si.InVolume);
+                    data.Add(storage);
+                }
+                else //from stock move
+                {
+                    var sm = RepositoryFactory<StockMoveDetailsRepository>.Instance.FindOne(r => r.NewStoreId == store.Id);
+                    var storage = SetStorage(store, date, sm.Count, sm.MoveWeight, sm.MoveVolume);
                     data.Add(storage);
                 }
 
@@ -233,6 +217,20 @@ namespace Phoebe.Business
                     {
                         s.Count -= item.Count;
                         s.StoreWeight -= item.OutWeight;
+                        s.StoreVolume -= item.OutVolume;
+                    }
+                }
+
+                //find stock move out
+                var smOuts = RepositoryFactory<StockMoveDetailsRepository>.Instance.Find(r => r.SourceStoreId == store.Id && r.Status == (int)EntityStatus.StockMove && r.StockMove.MoveTime <= date);
+                foreach (var item in smOuts)
+                {
+                    var s = data.SingleOrDefault(r => r.StoreId == item.SourceStoreId);
+                    if (s != null)
+                    {
+                        s.Count -= item.Count;
+                        s.StoreWeight -= item.MoveWeight;
+                        s.StoreVolume -= item.MoveVolume;
                     }
                 }
             }
@@ -250,19 +248,27 @@ namespace Phoebe.Business
         {
             List<StockFlow> data = new List<StockFlow>();
 
-            //find stock in
+            // find stock in
             var siDetails = RepositoryFactory<StockInDetailsRepository>.Instance.Find(r => r.StockIn.ContractId == contractId && r.StockIn.InTime == date && r.Status == (int)EntityStatus.StockIn);
             foreach (var item in siDetails)
             {
-                var flow = SetStockFlow(item.Store, item.Count, item.InWeight, date, StockFlowType.StockIn);
+                var flow = SetStockFlow(item.Store, item.Id, item.StockIn.FlowNumber, item.Count, item.InWeight, item.InVolume, item.StockIn.InTime, StockFlowType.StockIn);
                 data.Add(flow);
             }
 
-            //find stock out
+            // find stock out
             var soDetails = RepositoryFactory<StockOutDetailsRepository>.Instance.Find(r => r.StockOut.ContractId == contractId && r.StockOut.OutTime == date && r.Status == (int)EntityStatus.StockOut);
             foreach (var item in soDetails)
             {
-                var flow = SetStockFlow(item.Store, -item.Count, item.OutWeight, date, StockFlowType.StockOut);
+                var flow = SetStockFlow(item.Store, item.Id, item.StockOut.FlowNumber, -item.Count, -item.OutWeight, -item.OutVolume, item.StockOut.OutTime, StockFlowType.StockOut);
+                data.Add(flow);
+            }
+
+            // find stock move
+            var smDetails = RepositoryFactory<StockMoveDetailsRepository>.Instance.Find(r => r.StockMove.ContractId == contractId && r.StockMove.MoveTime == date && r.Status == (int)EntityStatus.StockMove);
+            foreach (var item in smDetails)
+            {
+                var flow = SetStockFlow(item.SourceStore, item.Id, item.StockMove.FlowNumber, item.Count, item.MoveWeight, item.MoveVolume, item.StockMove.MoveTime, StockFlowType.StockMove);
                 data.Add(flow);
             }
 
@@ -300,13 +306,13 @@ namespace Phoebe.Business
             var so = RepositoryFactory<StockOutDetailsRepository>.Instance.Find(r => r.StoreId == id && r.Status == (int)EntityStatus.StockOut);
             foreach (var item in so)
             {
-                var flow = SetStockFlow(item.Store, item.Id, item.StockOut.FlowNumber, item.Count, item.OutWeight, item.OutVolume, item.StockOut.OutTime, StockFlowType.StockOut);
+                var flow = SetStockFlow(item.Store, item.Id, item.StockOut.FlowNumber, -item.Count, -item.OutWeight, -item.OutVolume, item.StockOut.OutTime, StockFlowType.StockOut);
                 data.Add(flow);
             }
             var smo = RepositoryFactory<StockMoveDetailsRepository>.Instance.Find(r => r.SourceStoreId == id && r.Status == (int)EntityStatus.StockMove);
             foreach (var item in smo)
             {
-                var flow = SetStockFlow(item.SourceStore, item.Id, item.StockMove.FlowNumber, item.Count, item.MoveWeight, item.MoveVolume, item.StockMove.MoveTime, StockFlowType.StockMoveOut);
+                var flow = SetStockFlow(item.SourceStore, item.Id, item.StockMove.FlowNumber, -item.Count, -item.MoveWeight, -item.MoveVolume, item.StockMove.MoveTime, StockFlowType.StockMoveOut);
                 data.Add(flow);
             }
 

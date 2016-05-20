@@ -31,29 +31,30 @@
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.tvCategory = new System.Windows.Forms.TreeView();
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
+            this.btnEdit = new DevExpress.XtraEditors.SimpleButton();
             this.btnAddThird = new DevExpress.XtraEditors.SimpleButton();
             this.btnAddSecond = new DevExpress.XtraEditors.SimpleButton();
             this.btnAddFirst = new DevExpress.XtraEditors.SimpleButton();
             this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
-            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
-            this.txtName = new DevExpress.XtraEditors.TextEdit();
-            this.txtHierarchy = new DevExpress.XtraEditors.TextEdit();
-            this.txtNumber = new DevExpress.XtraEditors.TextEdit();
-            this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
             this.txtRemark = new DevExpress.XtraEditors.MemoEdit();
-            this.btnEdit = new DevExpress.XtraEditors.SimpleButton();
+            this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
+            this.txtNumber = new DevExpress.XtraEditors.TextEdit();
+            this.txtHierarchy = new DevExpress.XtraEditors.TextEdit();
+            this.txtName = new DevExpress.XtraEditors.TextEdit();
+            this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
+            this.btnDelete = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
             this.groupControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).BeginInit();
             this.groupControl3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtName.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtHierarchy.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtNumber.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRemark.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtNumber.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtHierarchy.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtName.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // groupControl1
@@ -77,6 +78,7 @@
             // 
             // groupControl2
             // 
+            this.groupControl2.Controls.Add(this.btnDelete);
             this.groupControl2.Controls.Add(this.btnEdit);
             this.groupControl2.Controls.Add(this.btnAddThird);
             this.groupControl2.Controls.Add(this.btnAddSecond);
@@ -88,9 +90,18 @@
             this.groupControl2.TabIndex = 1;
             this.groupControl2.Text = "操作";
             // 
+            // btnEdit
+            // 
+            this.btnEdit.Location = new System.Drawing.Point(384, 45);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(92, 40);
+            this.btnEdit.TabIndex = 3;
+            this.btnEdit.Text = "编辑分类";
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            // 
             // btnAddThird
             // 
-            this.btnAddThird.Location = new System.Drawing.Point(277, 45);
+            this.btnAddThird.Location = new System.Drawing.Point(269, 45);
             this.btnAddThird.Name = "btnAddThird";
             this.btnAddThird.Size = new System.Drawing.Size(92, 40);
             this.btnAddThird.TabIndex = 2;
@@ -99,7 +110,7 @@
             // 
             // btnAddSecond
             // 
-            this.btnAddSecond.Location = new System.Drawing.Point(158, 45);
+            this.btnAddSecond.Location = new System.Drawing.Point(154, 45);
             this.btnAddSecond.Name = "btnAddSecond";
             this.btnAddSecond.Size = new System.Drawing.Size(92, 40);
             this.btnAddSecond.TabIndex = 1;
@@ -132,49 +143,22 @@
             this.groupControl3.TabIndex = 2;
             this.groupControl3.Text = "信息";
             // 
-            // labelControl1
+            // txtRemark
             // 
-            this.labelControl1.Location = new System.Drawing.Point(39, 53);
-            this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(24, 14);
-            this.labelControl1.TabIndex = 0;
-            this.labelControl1.Text = "名称";
+            this.txtRemark.Location = new System.Drawing.Point(376, 102);
+            this.txtRemark.Name = "txtRemark";
+            this.txtRemark.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
+            this.txtRemark.Properties.Appearance.Options.UseBackColor = true;
+            this.txtRemark.Size = new System.Drawing.Size(188, 96);
+            this.txtRemark.TabIndex = 7;
             // 
-            // labelControl2
+            // labelControl4
             // 
-            this.labelControl2.Location = new System.Drawing.Point(334, 53);
-            this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(24, 14);
-            this.labelControl2.TabIndex = 1;
-            this.labelControl2.Text = "级别";
-            // 
-            // labelControl3
-            // 
-            this.labelControl3.Location = new System.Drawing.Point(39, 104);
-            this.labelControl3.Name = "labelControl3";
-            this.labelControl3.Size = new System.Drawing.Size(24, 14);
-            this.labelControl3.TabIndex = 2;
-            this.labelControl3.Text = "代码";
-            // 
-            // txtName
-            // 
-            this.txtName.Location = new System.Drawing.Point(81, 50);
-            this.txtName.Name = "txtName";
-            this.txtName.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
-            this.txtName.Properties.Appearance.Options.UseBackColor = true;
-            this.txtName.Properties.ReadOnly = true;
-            this.txtName.Size = new System.Drawing.Size(188, 20);
-            this.txtName.TabIndex = 3;
-            // 
-            // txtHierarchy
-            // 
-            this.txtHierarchy.Location = new System.Drawing.Point(376, 50);
-            this.txtHierarchy.Name = "txtHierarchy";
-            this.txtHierarchy.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
-            this.txtHierarchy.Properties.Appearance.Options.UseBackColor = true;
-            this.txtHierarchy.Properties.ReadOnly = true;
-            this.txtHierarchy.Size = new System.Drawing.Size(188, 20);
-            this.txtHierarchy.TabIndex = 4;
+            this.labelControl4.Location = new System.Drawing.Point(334, 103);
+            this.labelControl4.Name = "labelControl4";
+            this.labelControl4.Size = new System.Drawing.Size(24, 14);
+            this.labelControl4.TabIndex = 6;
+            this.labelControl4.Text = "备注";
             // 
             // txtNumber
             // 
@@ -186,31 +170,58 @@
             this.txtNumber.Size = new System.Drawing.Size(188, 20);
             this.txtNumber.TabIndex = 5;
             // 
-            // labelControl4
+            // txtHierarchy
             // 
-            this.labelControl4.Location = new System.Drawing.Point(334, 103);
-            this.labelControl4.Name = "labelControl4";
-            this.labelControl4.Size = new System.Drawing.Size(24, 14);
-            this.labelControl4.TabIndex = 6;
-            this.labelControl4.Text = "备注";
+            this.txtHierarchy.Location = new System.Drawing.Point(376, 50);
+            this.txtHierarchy.Name = "txtHierarchy";
+            this.txtHierarchy.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
+            this.txtHierarchy.Properties.Appearance.Options.UseBackColor = true;
+            this.txtHierarchy.Properties.ReadOnly = true;
+            this.txtHierarchy.Size = new System.Drawing.Size(188, 20);
+            this.txtHierarchy.TabIndex = 4;
             // 
-            // txtRemark
+            // txtName
             // 
-            this.txtRemark.Location = new System.Drawing.Point(376, 102);
-            this.txtRemark.Name = "txtRemark";
-            this.txtRemark.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
-            this.txtRemark.Properties.Appearance.Options.UseBackColor = true;
-            this.txtRemark.Size = new System.Drawing.Size(188, 96);
-            this.txtRemark.TabIndex = 7;
+            this.txtName.Location = new System.Drawing.Point(81, 50);
+            this.txtName.Name = "txtName";
+            this.txtName.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
+            this.txtName.Properties.Appearance.Options.UseBackColor = true;
+            this.txtName.Properties.ReadOnly = true;
+            this.txtName.Size = new System.Drawing.Size(188, 20);
+            this.txtName.TabIndex = 3;
             // 
-            // btnEdit
+            // labelControl3
             // 
-            this.btnEdit.Location = new System.Drawing.Point(389, 45);
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(92, 40);
-            this.btnEdit.TabIndex = 3;
-            this.btnEdit.Text = "编辑分类";
-            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            this.labelControl3.Location = new System.Drawing.Point(39, 104);
+            this.labelControl3.Name = "labelControl3";
+            this.labelControl3.Size = new System.Drawing.Size(24, 14);
+            this.labelControl3.TabIndex = 2;
+            this.labelControl3.Text = "代码";
+            // 
+            // labelControl2
+            // 
+            this.labelControl2.Location = new System.Drawing.Point(334, 53);
+            this.labelControl2.Name = "labelControl2";
+            this.labelControl2.Size = new System.Drawing.Size(24, 14);
+            this.labelControl2.TabIndex = 1;
+            this.labelControl2.Text = "级别";
+            // 
+            // labelControl1
+            // 
+            this.labelControl1.Location = new System.Drawing.Point(39, 53);
+            this.labelControl1.Name = "labelControl1";
+            this.labelControl1.Size = new System.Drawing.Size(24, 14);
+            this.labelControl1.TabIndex = 0;
+            this.labelControl1.Text = "名称";
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.Location = new System.Drawing.Point(499, 45);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(92, 40);
+            this.btnDelete.TabIndex = 4;
+            this.btnDelete.Text = "删除分类";
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // CategoryForm
             // 
@@ -230,10 +241,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).EndInit();
             this.groupControl3.ResumeLayout(false);
             this.groupControl3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtName.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtHierarchy.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtNumber.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRemark.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtNumber.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtHierarchy.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtName.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -256,5 +267,6 @@
         private DevExpress.XtraEditors.MemoEdit txtRemark;
         private DevExpress.XtraEditors.LabelControl labelControl4;
         private DevExpress.XtraEditors.SimpleButton btnEdit;
+        private DevExpress.XtraEditors.SimpleButton btnDelete;
     }
 }

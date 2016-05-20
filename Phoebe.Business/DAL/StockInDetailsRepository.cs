@@ -62,19 +62,8 @@ namespace Phoebe.Business.DAL
         /// <returns></returns>
         public ErrorCode CreateRange(List<StockInDetail> entities)
         {
-            try
-            {
-                this.context.StockInDetails.AddRange(entities);
-                this.context.SaveChanges();
-            }
-            catch (Exception)
-            {
-                return ErrorCode.Exception;
-            }
-
-            return ErrorCode.Success;
+            throw new NotImplementedException();
         }
-
 
         public ErrorCode Update(StockInDetail entity)
         {

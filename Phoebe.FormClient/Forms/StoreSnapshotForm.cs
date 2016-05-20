@@ -120,8 +120,8 @@ namespace Phoebe.FormClient
 
             int customerId = this.clcCustomer.SelectedId;
             UpdateContractList(customerId);
-            this.selectCustomer = BusinessFactory<CustomerBusiness>.Instance.FindById(customerId);
-        }      
+            this.selectCustomer = this.customerList.SingleOrDefault(r => r.Id == customerId);
+        }
 
         /// <summary>
         /// 查询
@@ -130,6 +130,12 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void btnSeach_Click(object sender, EventArgs e)
         {
+            if (this.selectCustomer == null)
+            {
+                MessageBox.Show("请选择客户", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
             int contractId = Convert.ToInt32(this.cmbContract.EditValue);
             if (contractId == 0)
             {
@@ -138,10 +144,10 @@ namespace Phoebe.FormClient
             }
 
             var storage = BusinessFactory<StoreBusiness>.Instance.GetInDay(contractId, this.dpTime.DateTime.Date);
-            this.bsStorage.DataSource = storage;
+            this.srgList.DataSource = storage;
 
             var flow = BusinessFactory<StoreBusiness>.Instance.GetDayFlow(contractId, this.dpTime.DateTime.Date);
-            this.bsStockFlow.DataSource = flow;
+            this.sfgList.DataSource = flow;
         }
         #endregion //Event
     }
