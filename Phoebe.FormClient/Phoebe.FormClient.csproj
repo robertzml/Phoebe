@@ -272,12 +272,33 @@
     <Compile Include="Controls\StockMoveEditControl.Designer.cs">
       <DependentUpon>StockMoveEditControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\StoreTraceForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\StoreTraceForm.Designer.cs">
+      <DependentUpon>StoreTraceForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\StoreGrid.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\StoreGrid.Designer.cs">
+      <DependentUpon>StoreGrid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\StockFlowGrid.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\StockFlowGrid.Designer.cs">
+      <DependentUpon>StockFlowGrid.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utils\ModelTranslate.cs" />
     <EmbeddedResource Include="Controls\CategoryListControl.resx">
       <DependentUpon>CategoryListControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\CustomerListControl.resx">
       <DependentUpon>CustomerListControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\StockFlowGrid.resx">
+      <DependentUpon>StockFlowGrid.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\StockInAddControl.resx">
       <DependentUpon>StockInAddControl.cs</DependentUpon>
@@ -302,6 +323,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\StockOutEditControl.resx">
       <DependentUpon>StockOutEditControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\StoreGrid.resx">
+      <DependentUpon>StoreGrid.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\CategoryEditForm.resx">
       <DependentUpon>CategoryEditForm.cs</DependentUpon>
@@ -344,6 +368,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\StoreSnapshotForm.resx">
       <DependentUpon>StoreSnapshotForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\StoreTraceForm.resx">
+      <DependentUpon>StoreTraceForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\UserForm.resx">
       <DependentUpon>UserForm.cs</DependentUpon>

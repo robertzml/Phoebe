@@ -15,9 +15,14 @@ namespace Phoebe.Business.DAL
     public class StoreRepository : SqlDataAccess<PhoebeContext>, IBaseDataAccess<Store>
     {
         #region Method
+        /// <summary>
+        /// 根据ID查找库存
+        /// </summary>
+        /// <param name="id">ID</param>
+        /// <returns></returns>
         public Store FindById(object id)
         {
-            throw new NotImplementedException();
+            return this.context.Stores.Find(id);
         }
 
         /// <summary>

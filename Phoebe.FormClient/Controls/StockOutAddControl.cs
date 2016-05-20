@@ -102,16 +102,6 @@ namespace Phoebe.FormClient
                 this.txtBillingType.Text = "";
             }
         }
-
-        /// <summary>
-        /// 设置数据筛选表格
-        /// </summary>
-        /// <param name="stores">数据</param>
-        private void SetFilterDataControl(List<Store> stores)
-        {
-            var data = ModelTranslate.StoreToStockOut(stores);
-            this.sogFilter.DataSource = data;
-        }
         #endregion //Function
 
         #region Method
@@ -315,8 +305,9 @@ namespace Phoebe.FormClient
             {
                 data = data.Where(r => category.Select(s => s.Id).Contains(r.Cargo.CategoryId)).ToList();
             }
-
-            SetFilterDataControl(data);
+           
+            var models = ModelTranslate.StoreToStockOut(data);
+            this.sogFilter.DataSource = models;
         }
 
         /// <summary>

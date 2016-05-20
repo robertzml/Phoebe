@@ -15,9 +15,14 @@ namespace Phoebe.Business.DAL
     public class StockOutDetailsRepository : SqlDataAccess<PhoebeContext>, IBaseDataAccess<StockOutDetail>
     {
         #region Method
+        /// <summary>
+        /// 根据ID查找
+        /// </summary>
+        /// <param name="id">ID</param>
+        /// <returns></returns>
         public StockOutDetail FindById(object id)
         {
-            throw new NotImplementedException();
+            return this.context.StockOutDetails.Find(id);
         }
 
         public StockOutDetail FindOne(Expression<Func<StockOutDetail, bool>> predicate)

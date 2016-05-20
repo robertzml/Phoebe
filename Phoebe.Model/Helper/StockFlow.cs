@@ -13,6 +13,16 @@ namespace Phoebe.Model
     public class StockFlow
     {
         /// <summary>
+        /// 单据ID，根据类型变化
+        /// </summary>
+        public Guid StockId { get; set; }
+
+        /// <summary>
+        /// 流水号
+        /// </summary>
+        public string FlowNumber { get; set; }
+
+        /// <summary>
         /// 客户ID
         /// </summary>
         public int CustomerId { get; set; }
@@ -36,6 +46,11 @@ namespace Phoebe.Model
         /// 合同名称
         /// </summary>
         public string ContractName { get; set; }
+
+        /// <summary>
+        /// 货品ID
+        /// </summary>
+        public Guid CargoId { get; set; }
 
         /// <summary>
         /// 类别ID
@@ -73,7 +88,17 @@ namespace Phoebe.Model
         /// <summary>
         /// 流水重量(吨)
         /// </summary>
-        public decimal Weight { get; set; }
+        public decimal FlowWeight { get; set; }
+
+        /// <summary>
+        /// 单位体积(立方)
+        /// </summary>
+        public decimal UnitVolume { get; set; }
+
+        /// <summary>
+        /// 流水体积(立方)
+        /// </summary>
+        public decimal FlowVolume { get; set; }
 
         /// <summary>
         /// 流水日期
