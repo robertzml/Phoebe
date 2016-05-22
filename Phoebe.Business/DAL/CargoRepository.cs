@@ -15,9 +15,14 @@ namespace Phoebe.Business.DAL
     public class CargoRepository : SqlDataAccess<PhoebeContext>, IBaseDataAccess<Cargo>
     {
         #region Method
+        /// <summary>
+        /// 根据ID查找
+        /// </summary>
+        /// <param name="id">ID</param>
+        /// <returns></returns>
         public Cargo FindById(object id)
         {
-            throw new NotImplementedException();
+            return this.context.Cargoes.Find(id);
         }
 
         public IEnumerable<Cargo> FindAll()

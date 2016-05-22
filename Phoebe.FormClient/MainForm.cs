@@ -137,6 +137,16 @@ namespace Phoebe.FormClient
         }
 
         /// <summary>
+        /// 结算管理 - 冷藏费清单
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void menuColdPrice_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            ChildFormManage.LoadMdiForm(this, typeof(ColdPriceForm));
+        }
+
+        /// <summary>
         /// 用户管理 - 用户列表
         /// </summary>
         /// <param name="sender"></param>

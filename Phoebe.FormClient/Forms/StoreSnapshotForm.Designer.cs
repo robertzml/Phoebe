@@ -45,9 +45,9 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.clcCustomer = new Phoebe.FormClient.CustomerListControl();
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
+            this.srgList = new Phoebe.FormClient.StorageGrid();
             this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
             this.sfgList = new Phoebe.FormClient.StockFlowGrid();
-            this.srgList = new Phoebe.FormClient.StorageGrid();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
@@ -257,6 +257,15 @@
             this.groupControl2.TabIndex = 2;
             this.groupControl2.Text = "库存记录";
             // 
+            // srgList
+            // 
+            this.srgList.DataSource = null;
+            this.srgList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.srgList.Location = new System.Drawing.Point(2, 21);
+            this.srgList.Name = "srgList";
+            this.srgList.Size = new System.Drawing.Size(924, 167);
+            this.srgList.TabIndex = 0;
+            // 
             // groupControl3
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.groupControl3, 2);
@@ -276,15 +285,6 @@
             this.sfgList.Name = "sfgList";
             this.sfgList.Size = new System.Drawing.Size(924, 168);
             this.sfgList.TabIndex = 0;
-            // 
-            // srgList
-            // 
-            this.srgList.DataSource = null;
-            this.srgList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.srgList.Location = new System.Drawing.Point(2, 21);
-            this.srgList.Name = "srgList";
-            this.srgList.Size = new System.Drawing.Size(924, 167);
-            this.srgList.TabIndex = 0;
             // 
             // StoreSnapshotForm
             // 

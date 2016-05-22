@@ -44,6 +44,7 @@
             this.menuStore = new DevExpress.XtraBars.BarSubItem();
             this.menuStoreList = new DevExpress.XtraBars.BarButtonItem();
             this.menuStoreSnapshot = new DevExpress.XtraBars.BarButtonItem();
+            this.menuStoreTrace = new DevExpress.XtraBars.BarButtonItem();
             this.menuSettle = new DevExpress.XtraBars.BarSubItem();
             this.menuColdPrice = new DevExpress.XtraBars.BarButtonItem();
             this.menuUser = new DevExpress.XtraBars.BarSubItem();
@@ -63,7 +64,6 @@
             this.barHeaderItem1 = new DevExpress.XtraBars.BarHeaderItem();
             this.barStaticItem2 = new DevExpress.XtraBars.BarStaticItem();
             this.tabMdiManager = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
-            this.menuStoreTrace = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabMdiManager)).BeginInit();
             this.SuspendLayout();
@@ -231,6 +231,13 @@
             this.menuStoreSnapshot.Name = "menuStoreSnapshot";
             this.menuStoreSnapshot.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuStoreSnapshot_ItemClick);
             // 
+            // menuStoreTrace
+            // 
+            this.menuStoreTrace.Caption = "库存追溯";
+            this.menuStoreTrace.Id = 27;
+            this.menuStoreTrace.Name = "menuStoreTrace";
+            this.menuStoreTrace.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuStoreTrace_ItemClick);
+            // 
             // menuSettle
             // 
             this.menuSettle.Caption = "费用结算";
@@ -244,6 +251,7 @@
             this.menuColdPrice.Caption = "冷藏费清单";
             this.menuColdPrice.Id = 25;
             this.menuColdPrice.Name = "menuColdPrice";
+            this.menuColdPrice.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuColdPrice_ItemClick);
             // 
             // menuUser
             // 
@@ -369,13 +377,6 @@
             this.tabMdiManager.ClosePageButtonShowMode = DevExpress.XtraTab.ClosePageButtonShowMode.InAllTabPageHeaders;
             this.tabMdiManager.MdiParent = this;
             this.tabMdiManager.PinPageButtonShowMode = DevExpress.XtraTab.PinPageButtonShowMode.InActiveTabPageHeader;
-            // 
-            // menuStoreTrace
-            // 
-            this.menuStoreTrace.Caption = "库存追溯";
-            this.menuStoreTrace.Id = 27;
-            this.menuStoreTrace.Name = "menuStoreTrace";
-            this.menuStoreTrace.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuStoreTrace_ItemClick);
             // 
             // MainForm
             // 

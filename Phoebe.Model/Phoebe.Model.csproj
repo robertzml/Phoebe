@@ -67,6 +67,7 @@
     <Compile Include="Customer.cs">
       <DependentUpon>PhoebeModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Helper\DailyColdRecord.cs" />
     <Compile Include="Helper\PhoebeEnum.cs" />
     <Compile Include="Helper\StockFlow.cs" />
     <Compile Include="Helper\StockMoveModel.cs" />

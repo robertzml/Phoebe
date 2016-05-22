@@ -15,9 +15,24 @@ namespace Phoebe.Business.DAL
     public class BillingRepository : SqlDataAccess<PhoebeContext>, IBaseDataAccess<Billing>
     {
         #region Method
+        /// <summary>
+        /// 根据ID查找
+        /// </summary>
+        /// <param name="id">ID</param>
+        /// <returns></returns>
         public Billing FindById(object id)
         {
-            throw new NotImplementedException();
+            return this.context.Billings.Find(id);
+        }
+
+        /// <summary>
+        /// 根据条件查找
+        /// </summary>
+        /// <param name="predicate">查询条件</param>
+        /// <returns></returns>
+        public Billing FindOne(Expression<Func<Billing, bool>> predicate)
+        {
+            return this.context.Billings.SingleOrDefault(predicate);
         }
 
         public IEnumerable<Billing> FindAll()
@@ -47,11 +62,6 @@ namespace Phoebe.Business.DAL
         }
 
         public ErrorCode Delete(Billing entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Billing FindOne(Expression<Func<Billing, bool>> predicate)
         {
             throw new NotImplementedException();
         }

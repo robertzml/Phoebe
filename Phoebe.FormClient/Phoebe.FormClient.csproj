@@ -70,6 +70,12 @@
     <Reference Include="UIAutomationClient" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\ColdPriceForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ColdPriceForm.Designer.cs">
+      <DependentUpon>ColdPriceForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ContractEditForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -297,6 +303,9 @@
       <DependentUpon>StorageGrid.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils\ModelTranslate.cs" />
+    <EmbeddedResource Include="Forms\ColdPriceForm.resx">
+      <DependentUpon>ColdPriceForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\CategoryListControl.resx">
       <DependentUpon>CategoryListControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -411,6 +420,7 @@
     <None Include="packages.config" />
     <None Include="Properties\DataSources\Phoebe.Model.Contract.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.Customer.datasource" />
+    <None Include="Properties\DataSources\Phoebe.Model.DailyColdRecord.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.StockFlow.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.StockInModel.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.StockMoveModel.datasource" />

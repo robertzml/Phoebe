@@ -50,6 +50,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Billing\BillingUnitWeight.cs" />
+    <Compile Include="Billing\IBillingProcess.cs" />
     <Compile Include="BL\BillingBusiness.cs" />
     <Compile Include="BL\CargoBusiness.cs" />
     <Compile Include="BL\CustomerBusiness.cs" />

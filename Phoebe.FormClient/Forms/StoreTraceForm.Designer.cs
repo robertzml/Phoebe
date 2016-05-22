@@ -31,7 +31,12 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.btnTrace = new DevExpress.XtraEditors.SimpleButton();
             this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
+            this.rbStoreOut = new System.Windows.Forms.RadioButton();
+            this.rbStoreIn = new System.Windows.Forms.RadioButton();
+            this.txtCategoryName = new DevExpress.XtraEditors.TextEdit();
+            this.txtCategoryNumber = new DevExpress.XtraEditors.TextEdit();
             this.cmbContract = new DevExpress.XtraEditors.ImageComboBoxEdit();
             this.txtCustomerName = new DevExpress.XtraEditors.TextEdit();
             this.txtCustomerNumber = new DevExpress.XtraEditors.TextEdit();
@@ -39,29 +44,26 @@
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
-            this.txtCategoryNumber = new DevExpress.XtraEditors.TextEdit();
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.txtCategoryName = new DevExpress.XtraEditors.TextEdit();
             this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.rbStoreIn = new System.Windows.Forms.RadioButton();
             this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.rbStoreOut = new System.Windows.Forms.RadioButton();
             this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
-            this.btnTrace = new DevExpress.XtraEditors.SimpleButton();
             this.layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
             this.sgList = new Phoebe.FormClient.StoreGrid();
             this.clcCustomer = new Phoebe.FormClient.CustomerListControl();
             this.clcCategory = new Phoebe.FormClient.CategoryListControl();
+            this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
             this.sfgList = new Phoebe.FormClient.StockFlowGrid();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCategoryName.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCategoryNumber.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbContract.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCustomerName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCustomerNumber.Properties)).BeginInit();
@@ -69,19 +71,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
-            this.groupControl2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtCategoryNumber.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtCategoryName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
+            this.groupControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).BeginInit();
             this.groupControl3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -134,6 +134,16 @@
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
+            // btnTrace
+            // 
+            this.btnTrace.Location = new System.Drawing.Point(473, 65);
+            this.btnTrace.Name = "btnTrace";
+            this.btnTrace.Size = new System.Drawing.Size(90, 22);
+            this.btnTrace.StyleController = this.layoutControl1;
+            this.btnTrace.TabIndex = 11;
+            this.btnTrace.Text = "追溯";
+            this.btnTrace.Click += new System.EventHandler(this.btnTrace_Click);
+            // 
             // btnSearch
             // 
             this.btnSearch.Location = new System.Drawing.Point(379, 65);
@@ -143,6 +153,47 @@
             this.btnSearch.TabIndex = 7;
             this.btnSearch.Text = "查询";
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
+            // rbStoreOut
+            // 
+            this.rbStoreOut.Location = new System.Drawing.Point(435, 36);
+            this.rbStoreOut.Name = "rbStoreOut";
+            this.rbStoreOut.Size = new System.Drawing.Size(59, 25);
+            this.rbStoreOut.TabIndex = 10;
+            this.rbStoreOut.Text = "出库";
+            this.rbStoreOut.UseVisualStyleBackColor = true;
+            // 
+            // rbStoreIn
+            // 
+            this.rbStoreIn.Checked = true;
+            this.rbStoreIn.Location = new System.Drawing.Point(379, 36);
+            this.rbStoreIn.Name = "rbStoreIn";
+            this.rbStoreIn.Size = new System.Drawing.Size(52, 25);
+            this.rbStoreIn.TabIndex = 9;
+            this.rbStoreIn.TabStop = true;
+            this.rbStoreIn.Text = "在库";
+            this.rbStoreIn.UseVisualStyleBackColor = true;
+            // 
+            // txtCategoryName
+            // 
+            this.txtCategoryName.Location = new System.Drawing.Point(243, 36);
+            this.txtCategoryName.Name = "txtCategoryName";
+            this.txtCategoryName.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
+            this.txtCategoryName.Properties.Appearance.Options.UseBackColor = true;
+            this.txtCategoryName.Size = new System.Drawing.Size(132, 20);
+            this.txtCategoryName.StyleController = this.layoutControl1;
+            this.txtCategoryName.TabIndex = 8;
+            // 
+            // txtCategoryNumber
+            // 
+            this.txtCategoryNumber.Location = new System.Drawing.Point(63, 36);
+            this.txtCategoryNumber.Name = "txtCategoryNumber";
+            this.txtCategoryNumber.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow;
+            this.txtCategoryNumber.Properties.Appearance.Options.UseBackColor = true;
+            this.txtCategoryNumber.Size = new System.Drawing.Size(125, 20);
+            this.txtCategoryNumber.StyleController = this.layoutControl1;
+            this.txtCategoryNumber.TabIndex = 7;
+            this.txtCategoryNumber.EditValueChanged += new System.EventHandler(this.txtCategoryNumber_EditValueChanged);
             // 
             // cmbContract
             // 
@@ -223,28 +274,6 @@
             this.layoutControlItem3.Text = "所属合同";
             this.layoutControlItem3.TextSize = new System.Drawing.Size(48, 14);
             // 
-            // groupControl2
-            // 
-            this.tableLayoutPanel1.SetColumnSpan(this.groupControl2, 3);
-            this.groupControl2.Controls.Add(this.sgList);
-            this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl2.Location = new System.Drawing.Point(3, 203);
-            this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(979, 201);
-            this.groupControl2.TabIndex = 1;
-            this.groupControl2.Text = "库存列表";
-            // 
-            // txtCategoryNumber
-            // 
-            this.txtCategoryNumber.Location = new System.Drawing.Point(63, 36);
-            this.txtCategoryNumber.Name = "txtCategoryNumber";
-            this.txtCategoryNumber.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow;
-            this.txtCategoryNumber.Properties.Appearance.Options.UseBackColor = true;
-            this.txtCategoryNumber.Size = new System.Drawing.Size(125, 20);
-            this.txtCategoryNumber.StyleController = this.layoutControl1;
-            this.txtCategoryNumber.TabIndex = 7;
-            this.txtCategoryNumber.EditValueChanged += new System.EventHandler(this.txtCategoryNumber_EditValueChanged);
-            // 
             // layoutControlItem4
             // 
             this.layoutControlItem4.Control = this.txtCategoryNumber;
@@ -253,16 +282,6 @@
             this.layoutControlItem4.Size = new System.Drawing.Size(180, 127);
             this.layoutControlItem4.Text = "分类代码";
             this.layoutControlItem4.TextSize = new System.Drawing.Size(48, 14);
-            // 
-            // txtCategoryName
-            // 
-            this.txtCategoryName.Location = new System.Drawing.Point(243, 36);
-            this.txtCategoryName.Name = "txtCategoryName";
-            this.txtCategoryName.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
-            this.txtCategoryName.Properties.Appearance.Options.UseBackColor = true;
-            this.txtCategoryName.Size = new System.Drawing.Size(132, 20);
-            this.txtCategoryName.StyleController = this.layoutControl1;
-            this.txtCategoryName.TabIndex = 8;
             // 
             // layoutControlItem5
             // 
@@ -273,17 +292,6 @@
             this.layoutControlItem5.Text = "分类名称";
             this.layoutControlItem5.TextSize = new System.Drawing.Size(48, 14);
             // 
-            // rbStoreIn
-            // 
-            this.rbStoreIn.Checked = true;
-            this.rbStoreIn.Location = new System.Drawing.Point(379, 36);
-            this.rbStoreIn.Name = "rbStoreIn";
-            this.rbStoreIn.Size = new System.Drawing.Size(52, 25);
-            this.rbStoreIn.TabIndex = 9;
-            this.rbStoreIn.TabStop = true;
-            this.rbStoreIn.Text = "在库";
-            this.rbStoreIn.UseVisualStyleBackColor = true;
-            // 
             // layoutControlItem6
             // 
             this.layoutControlItem6.Control = this.rbStoreIn;
@@ -292,15 +300,6 @@
             this.layoutControlItem6.Size = new System.Drawing.Size(56, 29);
             this.layoutControlItem6.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem6.TextVisible = false;
-            // 
-            // rbStoreOut
-            // 
-            this.rbStoreOut.Location = new System.Drawing.Point(435, 36);
-            this.rbStoreOut.Name = "rbStoreOut";
-            this.rbStoreOut.Size = new System.Drawing.Size(59, 25);
-            this.rbStoreOut.TabIndex = 10;
-            this.rbStoreOut.Text = "出库";
-            this.rbStoreOut.UseVisualStyleBackColor = true;
             // 
             // layoutControlItem7
             // 
@@ -328,27 +327,6 @@
             this.layoutControlItem8.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem8.TextVisible = false;
             // 
-            // groupControl3
-            // 
-            this.tableLayoutPanel1.SetColumnSpan(this.groupControl3, 3);
-            this.groupControl3.Controls.Add(this.sfgList);
-            this.groupControl3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl3.Location = new System.Drawing.Point(3, 410);
-            this.groupControl3.Name = "groupControl3";
-            this.groupControl3.Size = new System.Drawing.Size(979, 201);
-            this.groupControl3.TabIndex = 4;
-            this.groupControl3.Text = "流水记录";
-            // 
-            // btnTrace
-            // 
-            this.btnTrace.Location = new System.Drawing.Point(473, 65);
-            this.btnTrace.Name = "btnTrace";
-            this.btnTrace.Size = new System.Drawing.Size(90, 22);
-            this.btnTrace.StyleController = this.layoutControl1;
-            this.btnTrace.TabIndex = 11;
-            this.btnTrace.Text = "追溯";
-            this.btnTrace.Click += new System.EventHandler(this.btnTrace_Click);
-            // 
             // layoutControlItem9
             // 
             this.layoutControlItem9.Control = this.btnTrace;
@@ -357,6 +335,17 @@
             this.layoutControlItem9.Size = new System.Drawing.Size(94, 98);
             this.layoutControlItem9.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem9.TextVisible = false;
+            // 
+            // groupControl2
+            // 
+            this.tableLayoutPanel1.SetColumnSpan(this.groupControl2, 3);
+            this.groupControl2.Controls.Add(this.sgList);
+            this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupControl2.Location = new System.Drawing.Point(3, 203);
+            this.groupControl2.Name = "groupControl2";
+            this.groupControl2.Size = new System.Drawing.Size(979, 201);
+            this.groupControl2.TabIndex = 1;
+            this.groupControl2.Text = "库存列表";
             // 
             // sgList
             // 
@@ -390,6 +379,17 @@
             this.clcCategory.TabIndex = 3;
             this.clcCategory.CategoryItemSelected += new Phoebe.FormClient.CategoryListControl.ItemSelectHandle(this.clcCategory_CategoryItemSelected);
             // 
+            // groupControl3
+            // 
+            this.tableLayoutPanel1.SetColumnSpan(this.groupControl3, 3);
+            this.groupControl3.Controls.Add(this.sfgList);
+            this.groupControl3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupControl3.Location = new System.Drawing.Point(3, 410);
+            this.groupControl3.Name = "groupControl3";
+            this.groupControl3.Size = new System.Drawing.Size(979, 201);
+            this.groupControl3.TabIndex = 4;
+            this.groupControl3.Text = "流水记录";
+            // 
             // sfgList
             // 
             this.sfgList.DataSource = null;
@@ -413,6 +413,8 @@
             this.groupControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.txtCategoryName.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCategoryNumber.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbContract.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCustomerName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCustomerNumber.Properties)).EndInit();
@@ -420,19 +422,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
-            this.groupControl2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.txtCategoryNumber.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtCategoryName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
+            this.groupControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).EndInit();
             this.groupControl3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).EndInit();
             this.ResumeLayout(false);
 
         }

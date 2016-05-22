@@ -146,6 +146,7 @@ namespace Phoebe.FormClient
                     find[0].Expand();
                 }
             }
+            this.lastMonth = month;
             this.tvStockOut.EndUpdate();
         }
         #endregion //Function
