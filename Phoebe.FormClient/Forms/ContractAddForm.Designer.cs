@@ -30,6 +30,7 @@
         {
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.clcCustomer = new Phoebe.FormClient.CustomerListControl();
             this.txtCustomerName = new DevExpress.XtraEditors.TextEdit();
             this.txtCustomerNumber = new DevExpress.XtraEditors.TextEdit();
             this.txtRemark = new DevExpress.XtraEditors.MemoEdit();
@@ -47,7 +48,6 @@
             this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.clcCustomer = new Phoebe.FormClient.CustomerListControl();
             this.layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.plFill)).BeginInit();
             this.plFill.SuspendLayout();
@@ -130,6 +130,15 @@
             this.layoutControl1.TabIndex = 17;
             this.layoutControl1.Text = "layoutControl1";
             // 
+            // clcCustomer
+            // 
+            this.clcCustomer.Location = new System.Drawing.Point(342, 12);
+            this.clcCustomer.Name = "clcCustomer";
+            this.clcCustomer.Size = new System.Drawing.Size(205, 285);
+            this.clcCustomer.TabIndex = 16;
+            this.clcCustomer.TabStop = false;
+            this.clcCustomer.CustomerItemSelected += new Phoebe.FormClient.CustomerListControl.ItemSelectHandle(this.clcCustomer_CustomerItemSelected);
+            // 
             // txtCustomerName
             // 
             this.txtCustomerName.Location = new System.Drawing.Point(200, 60);
@@ -192,6 +201,7 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.txtSignDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtSignDate.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.txtSignDate.Size = new System.Drawing.Size(275, 20);
             this.txtSignDate.StyleController = this.layoutControl1;
             this.txtSignDate.TabIndex = 3;
@@ -306,14 +316,6 @@
             this.layoutControlItem8.Size = new System.Drawing.Size(193, 24);
             this.layoutControlItem8.Text = "客户名称";
             this.layoutControlItem8.TextSize = new System.Drawing.Size(48, 14);
-            // 
-            // clcCustomer
-            // 
-            this.clcCustomer.Location = new System.Drawing.Point(342, 12);
-            this.clcCustomer.Name = "clcCustomer";
-            this.clcCustomer.Size = new System.Drawing.Size(205, 285);
-            this.clcCustomer.TabIndex = 16;
-            this.clcCustomer.CustomerItemSelected += new Phoebe.FormClient.CustomerListControl.ItemSelectHandle(this.clcCustomer_CustomerItemSelected);
             // 
             // layoutControlItem9
             // 

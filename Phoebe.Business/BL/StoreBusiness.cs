@@ -188,7 +188,7 @@ namespace Phoebe.Business
             List<Storage> data = new List<Storage>();
 
             //find store
-            var stores = this.dal.Find(r => r.Cargo.ContractId == contractId && r.InTime <= date && (r.OutTime == null || r.OutTime > date));
+            var stores = this.dal.Find(r => r.Cargo.ContractId == contractId && r.MoveTime <= date && (r.OutTime == null || r.OutTime > date));
             if (stores.Count() == 0)
                 return data;
 
@@ -243,8 +243,9 @@ namespace Phoebe.Business
         /// </summary>
         /// <param name="contractId">合同ID</param>
         /// <param name="date">日期</param>
+        /// <param name="includeMove">是否包含移库</param>
         /// <returns></returns>
-        public List<StockFlow> GetDayFlow(int contractId, DateTime date)
+        public List<StockFlow> GetDayFlow(int contractId, DateTime date, bool includeMove = true)
         {
             List<StockFlow> data = new List<StockFlow>();
 
@@ -264,12 +265,15 @@ namespace Phoebe.Business
                 data.Add(flow);
             }
 
-            // find stock move
-            var smDetails = RepositoryFactory<StockMoveDetailsRepository>.Instance.Find(r => r.StockMove.ContractId == contractId && r.StockMove.MoveTime == date && r.Status == (int)EntityStatus.StockMove);
-            foreach (var item in smDetails)
+            if (includeMove)
             {
-                var flow = SetStockFlow(item.SourceStore, item.Id, item.StockMove.FlowNumber, item.Count, item.MoveWeight, item.MoveVolume, item.StockMove.MoveTime, StockFlowType.StockMove);
-                data.Add(flow);
+                // find stock move
+                var smDetails = RepositoryFactory<StockMoveDetailsRepository>.Instance.Find(r => r.StockMove.ContractId == contractId && r.StockMove.MoveTime == date && r.Status == (int)EntityStatus.StockMove);
+                foreach (var item in smDetails)
+                {
+                    var flow = SetStockFlow(item.SourceStore, item.Id, item.StockMove.FlowNumber, item.Count, item.MoveWeight, item.MoveVolume, item.StockMove.MoveTime, StockFlowType.StockMove);
+                    data.Add(flow);
+                }
             }
 
             return data;

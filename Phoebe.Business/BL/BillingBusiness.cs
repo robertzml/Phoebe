@@ -42,16 +42,17 @@ namespace Phoebe.Business
         private Billing GetByStorage(Storage storage)
         {
             var store = BusinessFactory<StoreBusiness>.Instance.FindById(storage.StoreId);
-            if ((SourceType)store.Source == SourceType.StockIn)
+
+            // find the origin store
+            while ((SourceType)store.Source != SourceType.StockIn)
             {
-                var sid = RepositoryFactory<StockInDetailsRepository>.Instance.FindOne(r => r.StoreId == store.Id);
-                var billing = this.dal.FindById(sid.StockInId);
-                return billing;
+                var smd = RepositoryFactory<StockMoveDetailsRepository>.Instance.FindOne(r => r.NewStoreId == store.Id);
+                store = smd.SourceStore;
             }
-            else
-            {
-                return null;
-            }
+
+            var sid = RepositoryFactory<StockInDetailsRepository>.Instance.FindOne(r => r.StoreId == store.Id);
+            var billing = this.dal.FindById(sid.StockInId);
+            return billing;
         }
 
         /// <summary>
@@ -66,7 +67,7 @@ namespace Phoebe.Business
             List<DailyColdRecord> records = new List<DailyColdRecord>();
 
             var storages = BusinessFactory<StoreBusiness>.Instance.GetInDay(contract.Id, date);
-            var flows = BusinessFactory<StoreBusiness>.Instance.GetDayFlow(contract.Id, date);
+            var flows = BusinessFactory<StoreBusiness>.Instance.GetDayFlow(contract.Id, date, false);
 
             foreach (var flow in flows)
             {
