@@ -123,6 +123,17 @@ namespace Phoebe.Business
         #endregion //Function
 
         #region Method
+        public List<Store> GetByConditions(List<Func<Store, bool>> predicates)
+        {
+            IEnumerable<Store> data = this.dal.FindAll();
+            foreach(var item in predicates)
+            {
+                data = data.Where(item);
+            }
+
+            return data.ToList();
+        }
+
         /// <summary>
         /// 按客户获取库存记录
         /// </summary>

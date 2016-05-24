@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Phoebe.FormClient
 {
+    using DevExpress.XtraEditors.Controls;
     using Phoebe.Base;
     using Phoebe.Business;
     using Phoebe.Common;
@@ -24,7 +23,7 @@ namespace Phoebe.FormClient
         /// <summary>
         /// 客户列表
         /// </summary>
-        //private List<Customer> customerList;
+        private List<Customer> customerList;
 
         /// <summary>
         /// 分类列表
@@ -46,31 +45,31 @@ namespace Phoebe.FormClient
 
         #region Function
         /// <summary>
-        /// 更新分类列表
+        /// 更新合同选择
         /// </summary>
-        /// <param name="prefix">分类前缀</param>
-        private void UpdateCategoryView(string prefix)
+        /// <param name="customerId">客户Id</param>
+        private void UpdateContractList(int customerId)
         {
-            this.lvCategory.BeginUpdate();
+            var contracts = BusinessFactory<ContractBusiness>.Instance.GetByCustomer(customerId);
 
-            IEnumerable<Category> categories;
-            if (string.IsNullOrEmpty(prefix))
-                categories = this.categoryList.OrderBy(r => r.Number);
-            else
-                categories = this.categoryList.Where(r => r.Number.StartsWith(prefix)).OrderBy(r => r.Number);
+            this.cmbContract.Properties.Items.Clear();
 
-            this.lvCategory.Items.Clear();
-            foreach (var item in categories)
+            ImageComboBoxItem empty = new ImageComboBoxItem();
+            empty.Description = "--全部合同--";
+            empty.Value = 0;
+            this.cmbContract.Properties.Items.Add(empty);
+
+            foreach (var item in contracts)
             {
-                ListViewItem lvi = new ListViewItem(item.Number);
-                lvi.Tag = item.Id;
+                ImageComboBoxItem i = new ImageComboBoxItem();
+                i.Description = item.Name;
+                i.Value = item.Id;
 
-                lvi.SubItems.Add(item.Name);
-
-                this.lvCategory.Items.Add(lvi);
+                this.cmbContract.Properties.Items.Add(i);
             }
 
-            this.lvCategory.EndUpdate();
+            if (contracts.Count == 0)
+                this.cmbContract.EditValue = 0;
         }
         #endregion //Function
 
@@ -84,13 +83,11 @@ namespace Phoebe.FormClient
         {
             this.selectCustomer = null;
 
-            var customerList = BusinessFactory<CustomerBusiness>.Instance.FindAll();
+            this.customerList = BusinessFactory<CustomerBusiness>.Instance.FindAll();
             this.clcCustomer.SetDataSource(customerList);
 
             this.categoryList = BusinessFactory<CategoryBusiness>.Instance.FindAll();
-
-         
-            UpdateCategoryView("");
+            this.clcCategory.SetDataSource(categoryList);
         }
 
         /// <summary>
@@ -103,16 +100,19 @@ namespace Phoebe.FormClient
             string number = this.txtCustomerNumber.EditValue.ToString();
             this.clcCustomer.UpdateView(number);
 
-            var customer = BusinessFactory<CustomerBusiness>.Instance.GetByNumber(number);
+            var customer = this.customerList.SingleOrDefault(r => r.Number == number);
             if (customer != null)
             {
                 this.txtCustomerName.Text = customer.Name;
                 this.selectCustomer = customer;
-
-                //UpdateContractList(customer.Id);
+                UpdateContractList(customer.Id);
             }
             else
+            {
                 this.txtCustomerName.Text = "";
+                this.selectCustomer = null;
+                UpdateContractList(0);
+            }
         }
 
         /// <summary>
@@ -130,7 +130,44 @@ namespace Phoebe.FormClient
             this.txtCustomerNumber.EditValueChanged += txtCustomerNumber_EditValueChanged;
 
             int customerId = this.clcCustomer.SelectedId;
-            this.selectCustomer = BusinessFactory<CustomerBusiness>.Instance.FindById(customerId);
+            UpdateContractList(customerId);
+            this.selectCustomer = this.customerList.SingleOrDefault(r => r.Id == customerId);
+        }
+
+        /// <summary>
+        /// 输入类别代码
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtCategoryNumber_EditValueChanged(object sender, EventArgs e)
+        {
+            string number = this.txtCategoryNumber.EditValue.ToString();
+            this.clcCategory.UpdateView(number);
+
+            var category = this.categoryList.SingleOrDefault(r => r.Number == number);
+            if (category != null)
+            {
+                this.txtCategoryName.Text = category.Name;
+            }
+            else
+            {
+                this.txtCategoryName.Text = "";
+            }
+        }
+
+        /// <summary>
+        /// 选择分类
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void clcCategory_CategoryItemSelected(object sender, EventArgs e)
+        {
+            this.txtCategoryNumber.EditValueChanged -= txtCategoryNumber_EditValueChanged;
+
+            this.txtCategoryNumber.Text = this.clcCategory.SelectedNumber;
+            this.txtCategoryName.Text = this.clcCategory.SelectedName;
+
+            this.txtCategoryNumber.EditValueChanged += txtCategoryNumber_EditValueChanged;
         }
 
         /// <summary>
@@ -140,80 +177,39 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            List<Store> data = new List<Store>();
+            List<Func<Store, bool>> filter = new List<Func<Store, bool>>();
             if (this.selectCustomer != null)
             {
-                data = BusinessFactory<StoreBusiness>.Instance.GetByCustomer(this.selectCustomer.Id);
+                filter.Add(r => r.Cargo.Contract.CustomerId == this.selectCustomer.Id);
             }
-            else
+
+            var category = BusinessFactory<CategoryBusiness>.Instance.GetByParent(this.txtCategoryNumber.Text);
+            if (category != null)
             {
-                data = BusinessFactory<StoreBusiness>.Instance.FindAll();
+                filter.Add(r => category.Select(s => s.Id).Contains(r.Cargo.CategoryId));
             }
-            this.bsStore.DataSource = data;
-        }
 
-        /// <summary>
-        /// 格式化数据显示
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void dgvStore_CustomColumnDisplayText(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs e)
-        {
-            int rowIndex = e.ListSourceRowIndex;
-            if (rowIndex < 0 || rowIndex >= this.bsStore.Count)
-                return;
-
-            var store = this.bsStore[rowIndex] as Store;
-
-            if (e.Column.FieldName == "Source")
+            if (this.cmbContract.EditValue != null && Convert.ToInt32(this.cmbContract.EditValue) != 0)
             {
-                if (store.Source == 0)
-                    e.DisplayText = "入库";
-                else
-                    e.DisplayText = "移库";
+                filter.Add(r => r.Cargo.ContractId == Convert.ToInt32(this.cmbContract.EditValue));
             }
-            else if (e.Column.FieldName == "Destination")
-            {
-                if (store.Destination != null)
-                {
-                    if (store.Destination.Value == 0)
-                        e.DisplayText = "出库";
-                    else
-                        e.DisplayText = "移库";
-                }
-            }
-            else if (e.Column.FieldName == "UserId")
-            {
-                e.DisplayText = store.User.Name;
-            }
-            else if (e.Column.FieldName == "Status")
-            {
-                var status = (EntityStatus)e.Value;
-                e.DisplayText = status.DisplayName();
-            }
-        }
 
-        /// <summary>
-        /// 自定义数据显示
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void dgvStore_CustomUnboundColumnData(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDataEventArgs e)
-        {
-            int rowIndex = e.ListSourceRowIndex;
-            if (rowIndex < 0 || rowIndex >= this.bsStore.Count)
-                return;
+            if (!this.chkIn.Checked)
+            {
+                filter.Add(r => r.Status != (int)EntityStatus.StoreIn);
+            }
+            if (!this.chkOut.Checked)
+            {
+                filter.Add(r => r.Status != (int)EntityStatus.StoreOut);
+            }
+            if (!this.chkReady.Checked)
+            {
+                filter.Add(r => r.Status != (int)EntityStatus.StoreReady && r.Status != (int)EntityStatus.StoreMoveReady);
+            }
 
-            var store = this.bsStore[rowIndex] as Store;
-
-            if (e.Column.FieldName == "colCustomerName" && e.IsGetData)
-                e.Value = store.Cargo.Contract.Customer.Name;
-            if (e.Column.FieldName == "colCategoryNumber" && e.IsGetData)
-                e.Value = store.Cargo.Category.Number;
-            if (e.Column.FieldName == "colCategoryName" && e.IsGetData)
-                e.Value = store.Cargo.Category.Name;
+            var data = BusinessFactory<StoreBusiness>.Instance.GetByConditions(filter);
+            this.sgList.DataSource = data;
         }
         #endregion //Event
-
     }
 }

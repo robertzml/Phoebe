@@ -64,6 +64,9 @@ namespace Phoebe.FormClient
                 this.cmbContract.EditValue = contracts[0].Id;
             else
                 this.cmbContract.EditValue = null;
+
+            this.sfgList.Clear();
+            this.srgList.Clear();
         }
         #endregion //Function
 
@@ -96,7 +99,6 @@ namespace Phoebe.FormClient
             {
                 this.txtCustomerName.Text = customer.Name;
                 this.selectCustomer = customer;
-
                 UpdateContractList(customer.Id);
             }
             else

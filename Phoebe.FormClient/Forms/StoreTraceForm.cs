@@ -70,6 +70,9 @@ namespace Phoebe.FormClient
                 this.cmbContract.EditValue = contracts[0].Id;
             else
                 this.cmbContract.EditValue = null;
+
+            this.sfgList.Clear();
+            this.sgList.Clear();
         }
         #endregion //Function
 

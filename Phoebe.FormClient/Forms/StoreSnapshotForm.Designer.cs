@@ -144,6 +144,8 @@
             // 
             this.txtCustomerNumber.Location = new System.Drawing.Point(63, 12);
             this.txtCustomerNumber.Name = "txtCustomerNumber";
+            this.txtCustomerNumber.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow;
+            this.txtCustomerNumber.Properties.Appearance.Options.UseBackColor = true;
             this.txtCustomerNumber.Size = new System.Drawing.Size(102, 20);
             this.txtCustomerNumber.StyleController = this.layoutControl1;
             this.txtCustomerNumber.TabIndex = 4;

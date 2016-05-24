@@ -124,6 +124,12 @@ namespace Phoebe.Business
                 var children = this.dal.Find(r => r.ParentId == parent.Id);
                 data.AddRange(children);
 
+                foreach (var item in children)
+                {
+                    var nc = this.dal.Find(r => r.ParentId == item.Id);
+                    data.AddRange(nc);
+                }
+
                 return data;
             }
         }
@@ -147,7 +153,7 @@ namespace Phoebe.Business
 
                 return ErrorCode.Success;
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return ErrorCode.Exception;
             }

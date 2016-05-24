@@ -41,6 +41,16 @@ namespace Phoebe.FormClient
         /// 是否启用列编辑
         /// </summary>
         private bool enableColumn = false;
+
+        /// <summary>
+        /// 是否显示客户
+        /// </summary>
+        private bool showCustomer = false;
+
+        /// <summary>
+        /// 是否显示合同
+        /// </summary>
+        private bool showContract = false;
         #endregion //Field
 
         #region Constructor
@@ -103,6 +113,10 @@ namespace Phoebe.FormClient
 
             this.dgvStore.OptionsView.ShowFooter = this.showFooter;
             this.dgvStore.OptionsMenu.EnableFooterMenu = this.showFooter;
+
+            this.colCustomerNumber.Visible = this.showCustomer;
+            this.colCustomerName.Visible = this.showCustomer;
+            this.colContractName.Visible = this.showContract;
         }
 
         /// <summary>
@@ -159,6 +173,12 @@ namespace Phoebe.FormClient
 
             var store = this.bsStore[rowIndex] as Store;
 
+            if (e.Column.FieldName == "colCustomerNumber" && e.IsGetData)
+                e.Value = store.Cargo.Contract.Customer.Number;
+            if (e.Column.FieldName == "colCustomerName" && e.IsGetData)
+                e.Value = store.Cargo.Contract.Customer.Name;
+            if (e.Column.FieldName == "colContractName" && e.IsGetData)
+                e.Value = store.Cargo.Contract.Name;
             if (e.Column.FieldName == "colCategoryNumber" && e.IsGetData)
                 e.Value = store.Cargo.Category.Number;
             if (e.Column.FieldName == "colCategoryName" && e.IsGetData)
@@ -266,6 +286,38 @@ namespace Phoebe.FormClient
             set
             {
                 this.enableColumn = value;
+            }
+        }
+
+        /// <summary>
+        /// 是否显示客户
+        /// </summary>
+        [Description("是否显示客户")]
+        public bool ShowCustomer
+        {
+            get
+            {
+                return this.showCustomer;
+            }
+            set
+            {
+                this.showCustomer = value;
+            }
+        }
+
+        /// <summary>
+        /// 是否显示合同
+        /// </summary>
+        [Description("是否显示合同")]
+        public bool ShowContract
+        {
+            get
+            {
+                return this.showContract;
+            }
+            set
+            {
+                this.showContract = value;
             }
         }
         #endregion //Property

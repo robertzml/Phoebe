@@ -8,6 +8,7 @@ using System.Windows.Forms;
 
 namespace Phoebe.FormClient
 {
+    using DevExpress.XtraEditors.Controls;
     using Phoebe.Base;
     using Phoebe.Business;
     using Phoebe.Common;
@@ -46,7 +47,16 @@ namespace Phoebe.FormClient
         {
             var contracts = BusinessFactory<ContractBusiness>.Instance.GetByCustomer(customerId);
 
-            this.bsContract.DataSource = contracts;
+            this.cmbContract.Properties.Items.Clear();
+            foreach (var item in contracts)
+            {
+                ImageComboBoxItem i = new ImageComboBoxItem();
+                i.Description = item.Name;
+                i.Value = item.Id;
+
+                this.cmbContract.Properties.Items.Add(i);
+            }
+
             if (contracts.Count > 0)
                 this.cmbContract.EditValue = contracts[0].Id;
             else

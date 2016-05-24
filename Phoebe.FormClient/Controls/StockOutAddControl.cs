@@ -94,13 +94,10 @@ namespace Phoebe.FormClient
                 this.cmbContract.Properties.Items.Add(i);
             }
 
-            if (this.cmbContract.Properties.Items.Count > 0)
-                this.cmbContract.SelectedIndex = 0;
+            if (contracts.Count > 0)
+                this.cmbContract.EditValue = contracts[0].Id;
             else
-            {
-                this.selectContract = null;
-                this.txtBillingType.Text = "";
-            }
+                this.cmbContract.EditValue = null;
         }
         #endregion //Function
 
@@ -227,10 +224,10 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void cmbContract_EditValueChanged(object sender, EventArgs e)
         {
-            if (this.cmbContract.SelectedIndex == -1)
+            if (this.cmbContract.EditValue == null)
             {
-                this.txtBillingType.Text = "";
                 this.selectContract = null;
+                this.txtBillingType.Text = "";
             }
             else
             {

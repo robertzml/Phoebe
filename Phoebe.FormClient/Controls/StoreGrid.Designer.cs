@@ -33,6 +33,9 @@
             this.bsStore = new System.Windows.Forms.BindingSource(this.components);
             this.dgvStore = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colId = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colCustomerNumber = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colCustomerName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colContractName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCategoryNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCategoryName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colWarehouseNumber = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -80,6 +83,9 @@
             // 
             this.dgvStore.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colId,
+            this.colCustomerNumber,
+            this.colCustomerName,
+            this.colContractName,
             this.colCategoryNumber,
             this.colCategoryName,
             this.colWarehouseNumber,
@@ -117,6 +123,33 @@
             this.colId.FieldName = "Id";
             this.colId.Name = "colId";
             // 
+            // colCustomerNumber
+            // 
+            this.colCustomerNumber.Caption = "客户编码";
+            this.colCustomerNumber.FieldName = "colCustomerNumber";
+            this.colCustomerNumber.Name = "colCustomerNumber";
+            this.colCustomerNumber.UnboundType = DevExpress.Data.UnboundColumnType.String;
+            this.colCustomerNumber.Visible = true;
+            this.colCustomerNumber.VisibleIndex = 0;
+            // 
+            // colCustomerName
+            // 
+            this.colCustomerName.Caption = "客户姓名";
+            this.colCustomerName.FieldName = "colCustomerName";
+            this.colCustomerName.Name = "colCustomerName";
+            this.colCustomerName.UnboundType = DevExpress.Data.UnboundColumnType.String;
+            this.colCustomerName.Visible = true;
+            this.colCustomerName.VisibleIndex = 1;
+            // 
+            // colContractName
+            // 
+            this.colContractName.Caption = "所属合同";
+            this.colContractName.FieldName = "colContractName";
+            this.colContractName.Name = "colContractName";
+            this.colContractName.UnboundType = DevExpress.Data.UnboundColumnType.String;
+            this.colContractName.Visible = true;
+            this.colContractName.VisibleIndex = 2;
+            // 
             // colCategoryNumber
             // 
             this.colCategoryNumber.Caption = "分类编码";
@@ -124,7 +157,7 @@
             this.colCategoryNumber.Name = "colCategoryNumber";
             this.colCategoryNumber.UnboundType = DevExpress.Data.UnboundColumnType.String;
             this.colCategoryNumber.Visible = true;
-            this.colCategoryNumber.VisibleIndex = 0;
+            this.colCategoryNumber.VisibleIndex = 3;
             // 
             // colCategoryName
             // 
@@ -133,7 +166,7 @@
             this.colCategoryName.Name = "colCategoryName";
             this.colCategoryName.UnboundType = DevExpress.Data.UnboundColumnType.String;
             this.colCategoryName.Visible = true;
-            this.colCategoryName.VisibleIndex = 1;
+            this.colCategoryName.VisibleIndex = 4;
             // 
             // colWarehouseNumber
             // 
@@ -141,7 +174,7 @@
             this.colWarehouseNumber.FieldName = "WarehouseNumber";
             this.colWarehouseNumber.Name = "colWarehouseNumber";
             this.colWarehouseNumber.Visible = true;
-            this.colWarehouseNumber.VisibleIndex = 2;
+            this.colWarehouseNumber.VisibleIndex = 5;
             // 
             // colTotalCount
             // 
@@ -151,7 +184,7 @@
             this.colTotalCount.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "TotalCount", "合计={0:0.##}")});
             this.colTotalCount.Visible = true;
-            this.colTotalCount.VisibleIndex = 3;
+            this.colTotalCount.VisibleIndex = 6;
             // 
             // colStoreCount
             // 
@@ -161,7 +194,7 @@
             this.colStoreCount.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "StoreCount", "合计={0:0.##}")});
             this.colStoreCount.Visible = true;
-            this.colStoreCount.VisibleIndex = 4;
+            this.colStoreCount.VisibleIndex = 7;
             // 
             // colUnitWeight
             // 
@@ -172,7 +205,7 @@
             this.colUnitWeight.Name = "colUnitWeight";
             this.colUnitWeight.UnboundType = DevExpress.Data.UnboundColumnType.Decimal;
             this.colUnitWeight.Visible = true;
-            this.colUnitWeight.VisibleIndex = 6;
+            this.colUnitWeight.VisibleIndex = 9;
             // 
             // colTotalWeight
             // 
@@ -184,7 +217,7 @@
             this.colTotalWeight.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "TotalWeight", "合计={0:0.####}")});
             this.colTotalWeight.Visible = true;
-            this.colTotalWeight.VisibleIndex = 5;
+            this.colTotalWeight.VisibleIndex = 8;
             // 
             // colStoreWeight
             // 
@@ -196,7 +229,7 @@
             this.colStoreWeight.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "StoreWeight", "合计={0:0.####}")});
             this.colStoreWeight.Visible = true;
-            this.colStoreWeight.VisibleIndex = 7;
+            this.colStoreWeight.VisibleIndex = 10;
             // 
             // colUnitVolume
             // 
@@ -207,7 +240,7 @@
             this.colUnitVolume.Name = "colUnitVolume";
             this.colUnitVolume.UnboundType = DevExpress.Data.UnboundColumnType.Decimal;
             this.colUnitVolume.Visible = true;
-            this.colUnitVolume.VisibleIndex = 9;
+            this.colUnitVolume.VisibleIndex = 12;
             // 
             // colTotalVolume
             // 
@@ -219,7 +252,7 @@
             this.colTotalVolume.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "TotalVolume", "合计={0:0.####}")});
             this.colTotalVolume.Visible = true;
-            this.colTotalVolume.VisibleIndex = 8;
+            this.colTotalVolume.VisibleIndex = 11;
             // 
             // colStoreVolume
             // 
@@ -231,7 +264,7 @@
             this.colStoreVolume.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "StoreVolume", "合计={0:0.####}")});
             this.colStoreVolume.Visible = true;
-            this.colStoreVolume.VisibleIndex = 10;
+            this.colStoreVolume.VisibleIndex = 13;
             // 
             // colInTime
             // 
@@ -239,7 +272,7 @@
             this.colInTime.FieldName = "InTime";
             this.colInTime.Name = "colInTime";
             this.colInTime.Visible = true;
-            this.colInTime.VisibleIndex = 11;
+            this.colInTime.VisibleIndex = 14;
             // 
             // colOutTime
             // 
@@ -247,7 +280,7 @@
             this.colOutTime.FieldName = "OutTime";
             this.colOutTime.Name = "colOutTime";
             this.colOutTime.Visible = true;
-            this.colOutTime.VisibleIndex = 12;
+            this.colOutTime.VisibleIndex = 15;
             // 
             // colMoveTime
             // 
@@ -255,7 +288,7 @@
             this.colMoveTime.FieldName = "MoveTime";
             this.colMoveTime.Name = "colMoveTime";
             this.colMoveTime.Visible = true;
-            this.colMoveTime.VisibleIndex = 13;
+            this.colMoveTime.VisibleIndex = 16;
             // 
             // colSpecification
             // 
@@ -263,7 +296,7 @@
             this.colSpecification.FieldName = "Specification";
             this.colSpecification.Name = "colSpecification";
             this.colSpecification.Visible = true;
-            this.colSpecification.VisibleIndex = 14;
+            this.colSpecification.VisibleIndex = 17;
             // 
             // colOriginPlace
             // 
@@ -271,7 +304,7 @@
             this.colOriginPlace.FieldName = "OriginPlace";
             this.colOriginPlace.Name = "colOriginPlace";
             this.colOriginPlace.Visible = true;
-            this.colOriginPlace.VisibleIndex = 15;
+            this.colOriginPlace.VisibleIndex = 18;
             // 
             // colShelfLife
             // 
@@ -279,7 +312,7 @@
             this.colShelfLife.FieldName = "ShelfLife";
             this.colShelfLife.Name = "colShelfLife";
             this.colShelfLife.Visible = true;
-            this.colShelfLife.VisibleIndex = 16;
+            this.colShelfLife.VisibleIndex = 19;
             // 
             // colSource
             // 
@@ -290,7 +323,7 @@
             this.colSource.FilterMode = DevExpress.XtraGrid.ColumnFilterMode.DisplayText;
             this.colSource.Name = "colSource";
             this.colSource.Visible = true;
-            this.colSource.VisibleIndex = 17;
+            this.colSource.VisibleIndex = 20;
             // 
             // colDestination
             // 
@@ -301,7 +334,7 @@
             this.colDestination.FilterMode = DevExpress.XtraGrid.ColumnFilterMode.DisplayText;
             this.colDestination.Name = "colDestination";
             this.colDestination.Visible = true;
-            this.colDestination.VisibleIndex = 18;
+            this.colDestination.VisibleIndex = 21;
             // 
             // colUserId
             // 
@@ -311,7 +344,7 @@
             this.colUserId.FieldName = "UserId";
             this.colUserId.Name = "colUserId";
             this.colUserId.Visible = true;
-            this.colUserId.VisibleIndex = 19;
+            this.colUserId.VisibleIndex = 22;
             // 
             // colRemark
             // 
@@ -321,7 +354,7 @@
             this.colRemark.OptionsColumn.AllowGroup = DevExpress.Utils.DefaultBoolean.False;
             this.colRemark.OptionsFilter.AllowFilter = false;
             this.colRemark.Visible = true;
-            this.colRemark.VisibleIndex = 20;
+            this.colRemark.VisibleIndex = 23;
             // 
             // colStatus
             // 
@@ -332,7 +365,7 @@
             this.colStatus.FilterMode = DevExpress.XtraGrid.ColumnFilterMode.DisplayText;
             this.colStatus.Name = "colStatus";
             this.colStatus.Visible = true;
-            this.colStatus.VisibleIndex = 21;
+            this.colStatus.VisibleIndex = 24;
             // 
             // StoreGrid
             // 
@@ -377,5 +410,8 @@
         private DevExpress.XtraGrid.Columns.GridColumn colCategoryName;
         private DevExpress.XtraGrid.Columns.GridColumn colUnitWeight;
         private DevExpress.XtraGrid.Columns.GridColumn colUnitVolume;
+        private DevExpress.XtraGrid.Columns.GridColumn colCustomerNumber;
+        private DevExpress.XtraGrid.Columns.GridColumn colCustomerName;
+        private DevExpress.XtraGrid.Columns.GridColumn colContractName;
     }
 }

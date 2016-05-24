@@ -205,7 +205,7 @@
             this.cmbContract.Size = new System.Drawing.Size(170, 20);
             this.cmbContract.StyleController = this.layoutControl1;
             this.cmbContract.TabIndex = 9;
-            this.cmbContract.SelectedIndexChanged += new System.EventHandler(this.cmbContract_SelectedIndexChanged);
+            this.cmbContract.EditValueChanged += new System.EventHandler(this.cmbContract_EditValueChanged);
             // 
             // txtCustomerName
             // 
