@@ -40,7 +40,7 @@ namespace Phoebe.FormClient
 
         #region Function
         /// <summary>
-        /// 更新合同选择
+        /// 更新合同列表
         /// </summary>
         /// <param name="customerId">客户Id</param>
         private void UpdateContractList(int customerId)
@@ -61,6 +61,32 @@ namespace Phoebe.FormClient
                 this.cmbContract.EditValue = contracts[0].Id;
             else
                 this.cmbContract.EditValue = null;
+        }
+
+        /// <summary>
+        /// 设置列名称
+        /// </summary>
+        /// <param name="type">计费方式</param>
+        private void SetColumnHeader(BillingType type)
+        {
+            if (type == BillingType.UnitVolume)
+            {
+                this.colUnitMeter.Caption = "单位体积(立方)";
+                this.colFlowMeter.Caption = "出入库体积(立方)";
+                this.colTotalMeter.Caption = "在库体积(立方)";
+            }
+            else if (type == BillingType.Count)
+            {
+                this.colUnitMeter.Caption = "单位";
+                this.colFlowMeter.Caption = "出入库数量";
+                this.colTotalMeter.Caption = "在库数量";
+            }
+            else
+            {
+                this.colUnitMeter.Caption = "单位重量(kg)";
+                this.colFlowMeter.Caption = "出入库重量(t)";
+                this.colTotalMeter.Caption = "在库重量(t)";
+            }
         }
         #endregion //Function
 
@@ -124,6 +150,28 @@ namespace Phoebe.FormClient
         }
 
         /// <summary>
+        /// 合同选择
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cmbContract_EditValueChanged(object sender, EventArgs e)
+        {
+            if (this.cmbContract.EditValue == null)
+            {
+                this.txtBillingType.Text = "";
+            }
+            else
+            {
+                int contractId = Convert.ToInt32(this.cmbContract.EditValue);
+                var contract = BusinessFactory<ContractBusiness>.Instance.FindById(contractId);
+
+                this.txtBillingType.Text = ((BillingType)contract.BillingType).DisplayName();
+                this.txtIsTiming.Text = contract.IsTiming ? "是" : "否";
+                SetColumnHeader((BillingType)contract.BillingType);
+            }
+        }
+
+        /// <summary>
         /// 查询
         /// </summary>
         /// <param name="sender"></param>
@@ -147,6 +195,13 @@ namespace Phoebe.FormClient
             }
 
             int contractId = Convert.ToInt32(this.cmbContract.EditValue);
+            var contract = BusinessFactory<ContractBusiness>.Instance.FindById(contractId);
+            if (!contract.IsTiming)
+            {
+                MessageBox.Show("该合同不计时，无冷藏费。", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
             var records = BusinessFactory<BillingBusiness>.Instance.GetContractColdRecord(contractId, this.dpFrom.DateTime.Date, this.dpTo.DateTime.Date);
             this.bsDailyColdRecord.DataSource = records;
         }

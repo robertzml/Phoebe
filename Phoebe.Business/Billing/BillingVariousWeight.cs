@@ -2,31 +2,30 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Phoebe.Model;
 
 namespace Phoebe.Business
 {
     /// <summary>
-    /// 件重计费
+    /// 非等重计费
     /// </summary>
-    public class BillingUnitWeight : IBillingProcess
+    public class BillingVariousWeight : IBillingProcess
     {
         #region Method
         /// <summary>
-        /// 获取单位重量(kg)
+        /// 获取单位重量
         /// </summary>
         /// <param name="cargo">货品</param>
         /// <returns></returns>
         public decimal GetUnitMeter(Cargo cargo)
         {
-            return cargo.UnitWeight;
+            return 1;
         }
 
         /// <summary>
         /// 获取流水重量(t)
         /// </summary>
-        /// <param name="flow">流水重量</param>
+        /// <param name="flow">流水记录</param>
         /// <returns></returns>
         public decimal GetFlowMeter(StockFlow flow)
         {
@@ -39,7 +38,7 @@ namespace Phoebe.Business
         /// <summary>
         /// 获取在库重量(t)
         /// </summary>
-        /// <param name="storage">库存计量</param>
+        /// <param name="storage">库存记录</param>
         /// <returns></returns>
         public decimal GetStoreMeter(Storage storage)
         {

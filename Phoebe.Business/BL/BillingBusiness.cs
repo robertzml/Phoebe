@@ -80,7 +80,7 @@ namespace Phoebe.Business
                 var cargo = BusinessFactory<CargoBusiness>.Instance.FindById(flow.CargoId);
 
                 frecord.UnitMeter = billingProcess.GetUnitMeter(cargo);
-                frecord.FlowMeter = billingProcess.GetFlowMeter(flow, frecord.UnitMeter);
+                frecord.FlowMeter = billingProcess.GetFlowMeter(flow);
                 frecord.FlowType = flow.Type;
 
                 records.Add(frecord);
@@ -101,7 +101,7 @@ namespace Phoebe.Business
                 var cargo = BusinessFactory<CargoBusiness>.Instance.FindById(storage.CargoId);
 
                 decimal unitMeter = billingProcess.GetUnitMeter(cargo);
-                decimal totalMeter = billingProcess.GetStoreMeter(storage, unitMeter);
+                decimal totalMeter = billingProcess.GetStoreMeter(storage);
 
                 record.TotalMeter += totalMeter;
                 var billing = GetByStorage(storage);
@@ -136,15 +136,15 @@ namespace Phoebe.Business
                 case BillingType.UnitWeight:
                     billingProcess = new BillingUnitWeight();
                     break;
-                    //case BillingType.UnitVolume:
-                    //    billingProcess = new BillingUnitVolume();
-                    //    break;
-                    //case BillingType.Count:
-                    //    billingProcess = new BillingCount();
-                    //    break;
-                    //case BillingType.VariousWeight:
-                    //    billingProcess = new BillingVariousWeight();
-                    //    break;
+                case BillingType.UnitVolume:
+                    billingProcess = new BillingUnitVolume();
+                    break;
+                case BillingType.Count:
+                    billingProcess = new BillingCount();
+                    break;
+                case BillingType.VariousWeight:
+                    billingProcess = new BillingVariousWeight();
+                    break;
             }
 
             decimal totalFee = 0;

@@ -2,54 +2,53 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Phoebe.Model;
 
 namespace Phoebe.Business
 {
     /// <summary>
-    /// 件重计费
+    /// 计数计费
     /// </summary>
-    public class BillingUnitWeight : IBillingProcess
+    public class BillingCount : IBillingProcess
     {
         #region Method
         /// <summary>
-        /// 获取单位重量(kg)
+        /// 获取单位计量
         /// </summary>
         /// <param name="cargo">货品</param>
         /// <returns></returns>
         public decimal GetUnitMeter(Cargo cargo)
         {
-            return cargo.UnitWeight;
+            return 1;
         }
 
         /// <summary>
-        /// 获取流水重量(t)
+        /// 获取出入库数量
         /// </summary>
-        /// <param name="flow">流水重量</param>
+        /// <param name="flow">流水记录</param>
         /// <returns></returns>
         public decimal GetFlowMeter(StockFlow flow)
         {
             if (flow.Type == StockFlowType.StockOut || flow.Type == StockFlowType.StockMoveOut)
-                return -flow.FlowWeight;
+                return -flow.Count;
             else
-                return flow.FlowWeight;
+                return flow.Count;
         }
 
         /// <summary>
-        /// 获取在库重量(t)
+        /// 获取在库数量
         /// </summary>
-        /// <param name="storage">库存计量</param>
+        /// <param name="storage">库存记录</param>
         /// <returns></returns>
         public decimal GetStoreMeter(Storage storage)
         {
-            return storage.StoreWeight;
+            return storage.Count;
         }
 
         /// <summary>
         /// 计算日冷藏费
         /// </summary>
-        /// <param name="totalMeter">总重量</param>
+        /// <param name="totalMeter">总数量</param>
         /// <param name="unitPrice">单价</param>
         /// <returns></returns>
         public decimal CalculateDailyFee(decimal totalMeter, decimal unitPrice)
