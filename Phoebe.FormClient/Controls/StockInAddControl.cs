@@ -89,15 +89,10 @@ namespace Phoebe.FormClient
                 this.cmbContract.Properties.Items.Add(i);
             }
 
-            if (this.cmbContract.Properties.Items.Count > 0)
-            {
-                this.cmbContract.SelectedIndex = 0;
-            }
+            if (contracts.Count > 0)
+                this.cmbContract.EditValue = contracts[0].Id;
             else
-            {
-                this.selectContract = null;
-                this.txtBillingType.Text = "";
-            }
+                this.cmbContract.EditValue = null;
         }
         #endregion //Function
 
@@ -115,7 +110,7 @@ namespace Phoebe.FormClient
             month = "";
             newId = Guid.Empty;
             this.sigList.CloseEditor();
-        
+
             // check input data
             if (this.selectCustomer == null || this.selectContract == null)
             {
@@ -226,8 +221,8 @@ namespace Phoebe.FormClient
             }
             else
             {
-                this.selectCustomer = null;
                 this.txtCustomerName.Text = "";
+                this.selectCustomer = null;
                 UpdateContractList(0);
             }
         }
@@ -256,18 +251,26 @@ namespace Phoebe.FormClient
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void cmbContract_SelectedIndexChanged(object sender, EventArgs e)
+        private void cmbContract_EditValueChanged(object sender, EventArgs e)
         {
-            int contractId = Convert.ToInt32(this.cmbContract.EditValue);
-            this.selectContract = BusinessFactory<ContractBusiness>.Instance.FindById(contractId);
-
-            if ((BillingType)this.selectContract.BillingType == BillingType.VariousWeight)
-                this.isEqualWeight = false;
+            if (this.cmbContract.EditValue == null)
+            {
+                this.selectContract = null;
+                this.txtBillingType.Text = "";
+            }
             else
-                this.isEqualWeight = true;
+            {
+                int contractId = Convert.ToInt32(this.cmbContract.EditValue);
+                this.selectContract = BusinessFactory<ContractBusiness>.Instance.FindById(contractId);
 
-            this.sigList.SetEqualWeight(this.isEqualWeight);
-            this.txtBillingType.Text = ((BillingType)this.selectContract.BillingType).DisplayName();
+                if ((BillingType)this.selectContract.BillingType == BillingType.VariousWeight)
+                    this.isEqualWeight = false;
+                else
+                    this.isEqualWeight = true;
+
+                this.sigList.SetEqualWeight(this.isEqualWeight);
+                this.txtBillingType.Text = ((BillingType)this.selectContract.BillingType).DisplayName();
+            }
         }
 
         /// <summary>

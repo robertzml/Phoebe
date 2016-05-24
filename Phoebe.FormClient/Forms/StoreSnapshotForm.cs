@@ -60,8 +60,10 @@ namespace Phoebe.FormClient
                 this.cmbContract.Properties.Items.Add(i);
             }
 
-            if (this.cmbContract.Properties.Items.Count > 0)
-                this.cmbContract.SelectedIndex = 0;
+            if (contracts.Count > 0)
+                this.cmbContract.EditValue = contracts[0].Id;
+            else
+                this.cmbContract.EditValue = null;
         }
         #endregion //Function
 
@@ -99,6 +101,7 @@ namespace Phoebe.FormClient
             }
             else
             {
+                this.selectCustomer = null;
                 this.txtCustomerName.Text = "";
                 UpdateContractList(0);
             }
@@ -136,10 +139,16 @@ namespace Phoebe.FormClient
                 return;
             }
 
-            int contractId = Convert.ToInt32(this.cmbContract.EditValue);
-            if (contractId == 0)
+            if (this.cmbContract.EditValue == null)
             {
                 MessageBox.Show("请选择合同", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            int contractId = Convert.ToInt32(this.cmbContract.EditValue);
+
+            if (this.dpTime.DateTime.Date > DateTime.Now)
+            {
+                MessageBox.Show("日期超过今天", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -149,6 +158,6 @@ namespace Phoebe.FormClient
             var flow = BusinessFactory<StoreBusiness>.Instance.GetDayFlow(contractId, this.dpTime.DateTime.Date);
             this.sfgList.DataSource = flow;
         }
-        #endregion //Event
+        #endregion //Event     
     }
 }

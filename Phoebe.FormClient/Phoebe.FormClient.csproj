@@ -154,6 +154,12 @@
     <Compile Include="Forms\ChangePasswordForm.Designer.cs">
       <DependentUpon>ChangePasswordForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\TestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\TestForm.Designer.cs">
+      <DependentUpon>TestForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Other\GlobalControl.cs" />
     <Compile Include="Other\FormConstant.cs" />
     <Compile Include="LoginForm.cs">
@@ -389,6 +395,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\StoreTraceForm.resx">
       <DependentUpon>StoreTraceForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\TestForm.resx">
+      <DependentUpon>TestForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\UserForm.resx">
       <DependentUpon>UserForm.cs</DependentUpon>

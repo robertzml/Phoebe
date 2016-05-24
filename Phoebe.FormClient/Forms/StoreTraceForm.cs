@@ -66,8 +66,10 @@ namespace Phoebe.FormClient
                 this.cmbContract.Properties.Items.Add(i);
             }
 
-            if (this.cmbContract.Properties.Items.Count > 0)
-                this.cmbContract.SelectedIndex = 0;
+            if (contracts.Count > 0)
+                this.cmbContract.EditValue = contracts[0].Id;
+            else
+                this.cmbContract.EditValue = null;
         }
         #endregion //Function
 
@@ -190,7 +192,7 @@ namespace Phoebe.FormClient
             data = BusinessFactory<StoreBusiness>.Instance.GetByCustomer(this.selectCustomer.Id, storeStatus);
 
             // filter contract
-            if (this.cmbContract.SelectedIndex != -1)
+            if (this.cmbContract.EditValue != null)
             {
                 int contractId = Convert.ToInt32(this.cmbContract.EditValue);
                 data = data.Where(r => r.Cargo.ContractId == contractId).ToList();

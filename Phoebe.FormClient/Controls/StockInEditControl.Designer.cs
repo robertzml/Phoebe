@@ -54,18 +54,20 @@
             this.btnRemoveRow = new DevExpress.XtraEditors.SimpleButton();
             this.btnAddRow = new DevExpress.XtraEditors.SimpleButton();
             this.sigList = new Phoebe.FormClient.StockInGrid();
+            this.clcCategory = new Phoebe.FormClient.CategoryListControl();
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
             this.layoutControl2 = new DevExpress.XtraLayout.LayoutControl();
+            this.btnCalc = new DevExpress.XtraEditors.SimpleButton();
             this.txtBillingRemark = new DevExpress.XtraEditors.TextEdit();
-            this.nmOtherPrice = new System.Windows.Forms.NumericUpDown();
-            this.nmPackingPrice = new System.Windows.Forms.NumericUpDown();
-            this.nmRentPrice = new System.Windows.Forms.NumericUpDown();
-            this.nmDisposePrice = new System.Windows.Forms.NumericUpDown();
-            this.nmUnitPrice = new System.Windows.Forms.NumericUpDown();
-            this.nmFreezePrice = new System.Windows.Forms.NumericUpDown();
-            this.nmHandlingUnitPrice = new System.Windows.Forms.NumericUpDown();
-            this.nmFreezeUnitPrice = new System.Windows.Forms.NumericUpDown();
-            this.nmHandlingPrice = new System.Windows.Forms.NumericUpDown();
+            this.nmOtherPrice = new DevExpress.XtraEditors.SpinEdit();
+            this.nmRentPrice = new DevExpress.XtraEditors.SpinEdit();
+            this.nmPackingPrice = new DevExpress.XtraEditors.SpinEdit();
+            this.nmDisposePrice = new DevExpress.XtraEditors.SpinEdit();
+            this.nmFreezePrice = new DevExpress.XtraEditors.SpinEdit();
+            this.nmFreezeUnitPrice = new DevExpress.XtraEditors.SpinEdit();
+            this.nmHandlingPrice = new DevExpress.XtraEditors.SpinEdit();
+            this.nmHandlingUnitPrice = new DevExpress.XtraEditors.SpinEdit();
+            this.nmUnitPrice = new DevExpress.XtraEditors.SpinEdit();
             this.layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -77,9 +79,6 @@
             this.layoutControlItem16 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem17 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem18 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.clcCategory = new Phoebe.FormClient.CategoryListControl();
-            this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
-            this.btnCalc = new DevExpress.XtraEditors.SimpleButton();
             this.layoutControlItem20 = new DevExpress.XtraLayout.LayoutControlItem();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
@@ -112,15 +111,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl2)).BeginInit();
             this.layoutControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtBillingRemark.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nmOtherPrice)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nmPackingPrice)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nmRentPrice)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nmDisposePrice)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nmUnitPrice)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nmFreezePrice)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nmHandlingUnitPrice)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nmFreezeUnitPrice)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nmHandlingPrice)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmOtherPrice.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmRentPrice.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmPackingPrice.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmDisposePrice.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmFreezePrice.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmFreezeUnitPrice.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmHandlingPrice.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmHandlingUnitPrice.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmUnitPrice.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).BeginInit();
@@ -132,7 +131,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem16)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem17)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem18)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem20)).BeginInit();
             this.SuspendLayout();
             // 
@@ -142,9 +140,9 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Controls.Add(this.groupControl2, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.groupControl1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.groupControl3, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.groupControl2, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.clcCategory, 1, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
@@ -153,6 +151,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 160F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 160F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1100, 617);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
@@ -431,6 +430,15 @@
             this.sigList.TabIndex = 0;
             this.sigList.CellValueChanged += new Phoebe.FormClient.StockInGrid.CellChangedHandle(this.sigList_CellValueChanged);
             // 
+            // clcCategory
+            // 
+            this.clcCategory.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.clcCategory.Location = new System.Drawing.Point(903, 3);
+            this.clcCategory.Name = "clcCategory";
+            this.tableLayoutPanel1.SetRowSpan(this.clcCategory, 2);
+            this.clcCategory.Size = new System.Drawing.Size(194, 314);
+            this.clcCategory.TabIndex = 3;
+            // 
             // groupControl2
             // 
             this.groupControl2.Controls.Add(this.layoutControl2);
@@ -438,7 +446,7 @@
             this.groupControl2.Location = new System.Drawing.Point(3, 163);
             this.groupControl2.Name = "groupControl2";
             this.groupControl2.Size = new System.Drawing.Size(894, 154);
-            this.groupControl2.TabIndex = 1;
+            this.groupControl2.TabIndex = 4;
             this.groupControl2.Text = "费用信息";
             // 
             // layoutControl2
@@ -446,147 +454,228 @@
             this.layoutControl2.Controls.Add(this.btnCalc);
             this.layoutControl2.Controls.Add(this.txtBillingRemark);
             this.layoutControl2.Controls.Add(this.nmOtherPrice);
-            this.layoutControl2.Controls.Add(this.nmPackingPrice);
             this.layoutControl2.Controls.Add(this.nmRentPrice);
+            this.layoutControl2.Controls.Add(this.nmPackingPrice);
             this.layoutControl2.Controls.Add(this.nmDisposePrice);
-            this.layoutControl2.Controls.Add(this.nmUnitPrice);
             this.layoutControl2.Controls.Add(this.nmFreezePrice);
-            this.layoutControl2.Controls.Add(this.nmHandlingUnitPrice);
             this.layoutControl2.Controls.Add(this.nmFreezeUnitPrice);
             this.layoutControl2.Controls.Add(this.nmHandlingPrice);
+            this.layoutControl2.Controls.Add(this.nmHandlingUnitPrice);
+            this.layoutControl2.Controls.Add(this.nmUnitPrice);
             this.layoutControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl2.Location = new System.Drawing.Point(2, 21);
             this.layoutControl2.Name = "layoutControl2";
-            this.layoutControl2.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(889, 214, 477, 518);
             this.layoutControl2.Root = this.layoutControlGroup2;
             this.layoutControl2.Size = new System.Drawing.Size(890, 131);
             this.layoutControl2.TabIndex = 0;
             this.layoutControl2.Text = "layoutControl2";
             // 
+            // btnCalc
+            // 
+            this.btnCalc.Location = new System.Drawing.Point(589, 94);
+            this.btnCalc.Name = "btnCalc";
+            this.btnCalc.Size = new System.Drawing.Size(294, 22);
+            this.btnCalc.StyleController = this.layoutControl2;
+            this.btnCalc.TabIndex = 10;
+            this.btnCalc.Text = "计算装卸费结冻费";
+            this.btnCalc.Click += new System.EventHandler(this.btnCalc_Click);
+            // 
             // txtBillingRemark
             // 
             this.txtBillingRemark.Location = new System.Drawing.Point(70, 94);
             this.txtBillingRemark.Name = "txtBillingRemark";
-            this.txtBillingRemark.Size = new System.Drawing.Size(224, 20);
+            this.txtBillingRemark.Size = new System.Drawing.Size(219, 20);
             this.txtBillingRemark.StyleController = this.layoutControl2;
             this.txtBillingRemark.TabIndex = 9;
             // 
             // nmOtherPrice
             // 
-            this.nmOtherPrice.DecimalPlaces = 2;
-            this.nmOtherPrice.Location = new System.Drawing.Point(656, 65);
-            this.nmOtherPrice.Maximum = new decimal(new int[] {
-            100000,
+            this.nmOtherPrice.EditValue = new decimal(new int[] {
+            0,
             0,
             0,
             0});
+            this.nmOtherPrice.Location = new System.Drawing.Point(652, 65);
             this.nmOtherPrice.Name = "nmOtherPrice";
-            this.nmOtherPrice.Size = new System.Drawing.Size(227, 22);
-            this.nmOtherPrice.TabIndex = 8;
-            // 
-            // nmPackingPrice
-            // 
-            this.nmPackingPrice.DecimalPlaces = 2;
-            this.nmPackingPrice.Location = new System.Drawing.Point(70, 65);
-            this.nmPackingPrice.Maximum = new decimal(new int[] {
+            this.nmOtherPrice.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.nmOtherPrice.Properties.Mask.EditMask = "######.##";
+            this.nmOtherPrice.Properties.MaxValue = new decimal(new int[] {
             100000,
             0,
             0,
             0});
-            this.nmPackingPrice.Name = "nmPackingPrice";
-            this.nmPackingPrice.Size = new System.Drawing.Size(224, 22);
-            this.nmPackingPrice.TabIndex = 6;
+            this.nmOtherPrice.Size = new System.Drawing.Size(231, 20);
+            this.nmOtherPrice.StyleController = this.layoutControl2;
+            this.nmOtherPrice.TabIndex = 8;
             // 
             // nmRentPrice
             // 
-            this.nmRentPrice.DecimalPlaces = 2;
-            this.nmRentPrice.Location = new System.Drawing.Point(361, 65);
-            this.nmRentPrice.Maximum = new decimal(new int[] {
+            this.nmRentPrice.EditValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.nmRentPrice.Location = new System.Drawing.Point(356, 65);
+            this.nmRentPrice.Name = "nmRentPrice";
+            this.nmRentPrice.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.nmRentPrice.Properties.Mask.EditMask = "######.##";
+            this.nmRentPrice.Properties.MaxValue = new decimal(new int[] {
             100000,
             0,
             0,
             0});
-            this.nmRentPrice.Name = "nmRentPrice";
-            this.nmRentPrice.Size = new System.Drawing.Size(228, 22);
+            this.nmRentPrice.Size = new System.Drawing.Size(229, 20);
+            this.nmRentPrice.StyleController = this.layoutControl2;
             this.nmRentPrice.TabIndex = 7;
+            // 
+            // nmPackingPrice
+            // 
+            this.nmPackingPrice.EditValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.nmPackingPrice.Location = new System.Drawing.Point(70, 65);
+            this.nmPackingPrice.Name = "nmPackingPrice";
+            this.nmPackingPrice.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.nmPackingPrice.Properties.Mask.EditMask = "######.##";
+            this.nmPackingPrice.Properties.MaxValue = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.nmPackingPrice.Size = new System.Drawing.Size(219, 20);
+            this.nmPackingPrice.StyleController = this.layoutControl2;
+            this.nmPackingPrice.TabIndex = 6;
             // 
             // nmDisposePrice
             // 
-            this.nmDisposePrice.DecimalPlaces = 2;
-            this.nmDisposePrice.Location = new System.Drawing.Point(656, 36);
-            this.nmDisposePrice.Maximum = new decimal(new int[] {
+            this.nmDisposePrice.EditValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.nmDisposePrice.Location = new System.Drawing.Point(652, 36);
+            this.nmDisposePrice.Name = "nmDisposePrice";
+            this.nmDisposePrice.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.nmDisposePrice.Properties.Mask.EditMask = "######.##";
+            this.nmDisposePrice.Properties.MaxValue = new decimal(new int[] {
             100000,
             0,
             0,
             0});
-            this.nmDisposePrice.Name = "nmDisposePrice";
-            this.nmDisposePrice.Size = new System.Drawing.Size(227, 22);
+            this.nmDisposePrice.Size = new System.Drawing.Size(231, 20);
+            this.nmDisposePrice.StyleController = this.layoutControl2;
             this.nmDisposePrice.TabIndex = 5;
-            // 
-            // nmUnitPrice
-            // 
-            this.nmUnitPrice.DecimalPlaces = 2;
-            this.nmUnitPrice.Location = new System.Drawing.Point(70, 7);
-            this.nmUnitPrice.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.nmUnitPrice.Name = "nmUnitPrice";
-            this.nmUnitPrice.Size = new System.Drawing.Size(224, 22);
-            this.nmUnitPrice.TabIndex = 0;
             // 
             // nmFreezePrice
             // 
-            this.nmFreezePrice.DecimalPlaces = 2;
-            this.nmFreezePrice.Location = new System.Drawing.Point(361, 36);
-            this.nmFreezePrice.Maximum = new decimal(new int[] {
+            this.nmFreezePrice.EditValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.nmFreezePrice.Location = new System.Drawing.Point(356, 36);
+            this.nmFreezePrice.Name = "nmFreezePrice";
+            this.nmFreezePrice.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.nmFreezePrice.Properties.Mask.EditMask = "######.##";
+            this.nmFreezePrice.Properties.MaxValue = new decimal(new int[] {
             100000,
             0,
             0,
             0});
-            this.nmFreezePrice.Name = "nmFreezePrice";
-            this.nmFreezePrice.Size = new System.Drawing.Size(228, 22);
+            this.nmFreezePrice.Size = new System.Drawing.Size(229, 20);
+            this.nmFreezePrice.StyleController = this.layoutControl2;
             this.nmFreezePrice.TabIndex = 4;
-            // 
-            // nmHandlingUnitPrice
-            // 
-            this.nmHandlingUnitPrice.DecimalPlaces = 2;
-            this.nmHandlingUnitPrice.Location = new System.Drawing.Point(361, 7);
-            this.nmHandlingUnitPrice.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.nmHandlingUnitPrice.Name = "nmHandlingUnitPrice";
-            this.nmHandlingUnitPrice.Size = new System.Drawing.Size(228, 22);
-            this.nmHandlingUnitPrice.TabIndex = 1;
             // 
             // nmFreezeUnitPrice
             // 
-            this.nmFreezeUnitPrice.DecimalPlaces = 2;
+            this.nmFreezeUnitPrice.EditValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
             this.nmFreezeUnitPrice.Location = new System.Drawing.Point(70, 36);
-            this.nmFreezeUnitPrice.Maximum = new decimal(new int[] {
+            this.nmFreezeUnitPrice.Name = "nmFreezeUnitPrice";
+            this.nmFreezeUnitPrice.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.nmFreezeUnitPrice.Properties.Mask.EditMask = "#####.##";
+            this.nmFreezeUnitPrice.Properties.MaxValue = new decimal(new int[] {
             10000,
             0,
             0,
             0});
-            this.nmFreezeUnitPrice.Name = "nmFreezeUnitPrice";
-            this.nmFreezeUnitPrice.Size = new System.Drawing.Size(224, 22);
+            this.nmFreezeUnitPrice.Size = new System.Drawing.Size(219, 20);
+            this.nmFreezeUnitPrice.StyleController = this.layoutControl2;
             this.nmFreezeUnitPrice.TabIndex = 3;
             // 
             // nmHandlingPrice
             // 
-            this.nmHandlingPrice.DecimalPlaces = 2;
-            this.nmHandlingPrice.Location = new System.Drawing.Point(656, 7);
-            this.nmHandlingPrice.Maximum = new decimal(new int[] {
+            this.nmHandlingPrice.EditValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.nmHandlingPrice.Location = new System.Drawing.Point(652, 7);
+            this.nmHandlingPrice.Name = "nmHandlingPrice";
+            this.nmHandlingPrice.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.nmHandlingPrice.Properties.Mask.EditMask = "######.##";
+            this.nmHandlingPrice.Properties.MaxValue = new decimal(new int[] {
             100000,
             0,
             0,
             0});
-            this.nmHandlingPrice.Name = "nmHandlingPrice";
-            this.nmHandlingPrice.Size = new System.Drawing.Size(227, 22);
+            this.nmHandlingPrice.Size = new System.Drawing.Size(231, 20);
+            this.nmHandlingPrice.StyleController = this.layoutControl2;
             this.nmHandlingPrice.TabIndex = 2;
+            // 
+            // nmHandlingUnitPrice
+            // 
+            this.nmHandlingUnitPrice.EditValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.nmHandlingUnitPrice.Location = new System.Drawing.Point(356, 7);
+            this.nmHandlingUnitPrice.Name = "nmHandlingUnitPrice";
+            this.nmHandlingUnitPrice.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.nmHandlingUnitPrice.Properties.Mask.EditMask = "#####.##";
+            this.nmHandlingUnitPrice.Properties.MaxValue = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.nmHandlingUnitPrice.Size = new System.Drawing.Size(229, 20);
+            this.nmHandlingUnitPrice.StyleController = this.layoutControl2;
+            this.nmHandlingUnitPrice.TabIndex = 1;
+            // 
+            // nmUnitPrice
+            // 
+            this.nmUnitPrice.EditValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.nmUnitPrice.Location = new System.Drawing.Point(70, 7);
+            this.nmUnitPrice.Name = "nmUnitPrice";
+            this.nmUnitPrice.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.nmUnitPrice.Properties.Mask.EditMask = "#####.##";
+            this.nmUnitPrice.Properties.MaxValue = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.nmUnitPrice.Size = new System.Drawing.Size(219, 20);
+            this.nmUnitPrice.StyleController = this.layoutControl2;
+            this.nmUnitPrice.TabIndex = 0;
             // 
             // layoutControlGroup2
             // 
@@ -603,10 +692,9 @@
             this.layoutControlItem16,
             this.layoutControlItem17,
             this.layoutControlItem18,
-            this.emptySpaceItem1,
             this.layoutControlItem20});
             this.layoutControlGroup2.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlGroup2.Name = "Root";
+            this.layoutControlGroup2.Name = "layoutControlGroup1";
             this.layoutControlGroup2.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 5, 5, 5);
             this.layoutControlGroup2.Size = new System.Drawing.Size(890, 131);
             this.layoutControlGroup2.TextVisible = false;
@@ -615,8 +703,8 @@
             // 
             this.layoutControlItem9.Control = this.nmUnitPrice;
             this.layoutControlItem9.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem9.Name = "layoutControlItem9";
-            this.layoutControlItem9.Size = new System.Drawing.Size(291, 29);
+            this.layoutControlItem9.Name = "layoutControlItem1";
+            this.layoutControlItem9.Size = new System.Drawing.Size(286, 29);
             this.layoutControlItem9.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 5);
             this.layoutControlItem9.Text = "冷藏费单价";
             this.layoutControlItem9.TextSize = new System.Drawing.Size(60, 14);
@@ -624,18 +712,18 @@
             // layoutControlItem10
             // 
             this.layoutControlItem10.Control = this.nmHandlingUnitPrice;
-            this.layoutControlItem10.Location = new System.Drawing.Point(291, 0);
-            this.layoutControlItem10.Name = "layoutControlItem10";
-            this.layoutControlItem10.Size = new System.Drawing.Size(295, 29);
+            this.layoutControlItem10.Location = new System.Drawing.Point(286, 0);
+            this.layoutControlItem10.Name = "layoutControlItem2";
+            this.layoutControlItem10.Size = new System.Drawing.Size(296, 29);
             this.layoutControlItem10.Text = "装卸费单价";
             this.layoutControlItem10.TextSize = new System.Drawing.Size(60, 14);
             // 
             // layoutControlItem11
             // 
             this.layoutControlItem11.Control = this.nmHandlingPrice;
-            this.layoutControlItem11.Location = new System.Drawing.Point(586, 0);
-            this.layoutControlItem11.Name = "layoutControlItem11";
-            this.layoutControlItem11.Size = new System.Drawing.Size(294, 29);
+            this.layoutControlItem11.Location = new System.Drawing.Point(582, 0);
+            this.layoutControlItem11.Name = "layoutControlItem3";
+            this.layoutControlItem11.Size = new System.Drawing.Size(298, 29);
             this.layoutControlItem11.Text = "装卸费";
             this.layoutControlItem11.TextSize = new System.Drawing.Size(60, 14);
             // 
@@ -643,8 +731,8 @@
             // 
             this.layoutControlItem12.Control = this.nmFreezeUnitPrice;
             this.layoutControlItem12.Location = new System.Drawing.Point(0, 29);
-            this.layoutControlItem12.Name = "layoutControlItem12";
-            this.layoutControlItem12.Size = new System.Drawing.Size(291, 29);
+            this.layoutControlItem12.Name = "layoutControlItem4";
+            this.layoutControlItem12.Size = new System.Drawing.Size(286, 29);
             this.layoutControlItem12.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 5);
             this.layoutControlItem12.Text = "结冻费单价";
             this.layoutControlItem12.TextSize = new System.Drawing.Size(60, 14);
@@ -652,20 +740,18 @@
             // layoutControlItem13
             // 
             this.layoutControlItem13.Control = this.nmFreezePrice;
-            this.layoutControlItem13.Location = new System.Drawing.Point(291, 29);
-            this.layoutControlItem13.Name = "layoutControlItem13";
-            this.layoutControlItem13.Size = new System.Drawing.Size(295, 29);
-            this.layoutControlItem13.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 5);
+            this.layoutControlItem13.Location = new System.Drawing.Point(286, 29);
+            this.layoutControlItem13.Name = "layoutControlItem5";
+            this.layoutControlItem13.Size = new System.Drawing.Size(296, 29);
             this.layoutControlItem13.Text = "结冻费";
             this.layoutControlItem13.TextSize = new System.Drawing.Size(60, 14);
             // 
             // layoutControlItem14
             // 
             this.layoutControlItem14.Control = this.nmDisposePrice;
-            this.layoutControlItem14.Location = new System.Drawing.Point(586, 29);
-            this.layoutControlItem14.Name = "layoutControlItem14";
-            this.layoutControlItem14.Size = new System.Drawing.Size(294, 29);
-            this.layoutControlItem14.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 5);
+            this.layoutControlItem14.Location = new System.Drawing.Point(582, 29);
+            this.layoutControlItem14.Name = "layoutControlItem6";
+            this.layoutControlItem14.Size = new System.Drawing.Size(298, 29);
             this.layoutControlItem14.Text = "处置费";
             this.layoutControlItem14.TextSize = new System.Drawing.Size(60, 14);
             // 
@@ -673,8 +759,8 @@
             // 
             this.layoutControlItem15.Control = this.nmPackingPrice;
             this.layoutControlItem15.Location = new System.Drawing.Point(0, 58);
-            this.layoutControlItem15.Name = "layoutControlItem15";
-            this.layoutControlItem15.Size = new System.Drawing.Size(291, 29);
+            this.layoutControlItem15.Name = "layoutControlItem7";
+            this.layoutControlItem15.Size = new System.Drawing.Size(286, 29);
             this.layoutControlItem15.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 5);
             this.layoutControlItem15.Text = "包装费";
             this.layoutControlItem15.TextSize = new System.Drawing.Size(60, 14);
@@ -682,18 +768,18 @@
             // layoutControlItem16
             // 
             this.layoutControlItem16.Control = this.nmRentPrice;
-            this.layoutControlItem16.Location = new System.Drawing.Point(291, 58);
-            this.layoutControlItem16.Name = "layoutControlItem16";
-            this.layoutControlItem16.Size = new System.Drawing.Size(295, 63);
+            this.layoutControlItem16.Location = new System.Drawing.Point(286, 58);
+            this.layoutControlItem16.Name = "layoutControlItem8";
+            this.layoutControlItem16.Size = new System.Drawing.Size(296, 63);
             this.layoutControlItem16.Text = "租赁费";
             this.layoutControlItem16.TextSize = new System.Drawing.Size(60, 14);
             // 
             // layoutControlItem17
             // 
             this.layoutControlItem17.Control = this.nmOtherPrice;
-            this.layoutControlItem17.Location = new System.Drawing.Point(586, 58);
-            this.layoutControlItem17.Name = "layoutControlItem17";
-            this.layoutControlItem17.Size = new System.Drawing.Size(294, 29);
+            this.layoutControlItem17.Location = new System.Drawing.Point(582, 58);
+            this.layoutControlItem17.Name = "layoutControlItem9";
+            this.layoutControlItem17.Size = new System.Drawing.Size(298, 29);
             this.layoutControlItem17.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 5);
             this.layoutControlItem17.Text = "其它费用";
             this.layoutControlItem17.TextSize = new System.Drawing.Size(60, 14);
@@ -702,44 +788,17 @@
             // 
             this.layoutControlItem18.Control = this.txtBillingRemark;
             this.layoutControlItem18.Location = new System.Drawing.Point(0, 87);
-            this.layoutControlItem18.Name = "layoutControlItem18";
-            this.layoutControlItem18.Size = new System.Drawing.Size(291, 34);
+            this.layoutControlItem18.Name = "layoutControlItem10";
+            this.layoutControlItem18.Size = new System.Drawing.Size(286, 34);
             this.layoutControlItem18.Text = "备注";
             this.layoutControlItem18.TextSize = new System.Drawing.Size(60, 14);
-            // 
-            // clcCategory
-            // 
-            this.clcCategory.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.clcCategory.Location = new System.Drawing.Point(903, 3);
-            this.clcCategory.Name = "clcCategory";
-            this.tableLayoutPanel1.SetRowSpan(this.clcCategory, 2);
-            this.clcCategory.Size = new System.Drawing.Size(194, 314);
-            this.clcCategory.TabIndex = 3;
-            // 
-            // emptySpaceItem1
-            // 
-            this.emptySpaceItem1.AllowHotTrack = false;
-            this.emptySpaceItem1.Location = new System.Drawing.Point(586, 87);
-            this.emptySpaceItem1.Name = "emptySpaceItem1";
-            this.emptySpaceItem1.Size = new System.Drawing.Size(147, 34);
-            this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
-            // 
-            // btnCalc
-            // 
-            this.btnCalc.Location = new System.Drawing.Point(740, 94);
-            this.btnCalc.Name = "btnCalc";
-            this.btnCalc.Size = new System.Drawing.Size(143, 22);
-            this.btnCalc.StyleController = this.layoutControl2;
-            this.btnCalc.TabIndex = 10;
-            this.btnCalc.Text = "计算装卸费结冻费";
-            this.btnCalc.Click += new System.EventHandler(this.btnCalc_Click);
             // 
             // layoutControlItem20
             // 
             this.layoutControlItem20.Control = this.btnCalc;
-            this.layoutControlItem20.Location = new System.Drawing.Point(733, 87);
-            this.layoutControlItem20.Name = "layoutControlItem20";
-            this.layoutControlItem20.Size = new System.Drawing.Size(147, 34);
+            this.layoutControlItem20.Location = new System.Drawing.Point(582, 87);
+            this.layoutControlItem20.Name = "layoutControlItem11";
+            this.layoutControlItem20.Size = new System.Drawing.Size(298, 34);
             this.layoutControlItem20.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem20.TextVisible = false;
             // 
@@ -781,15 +840,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl2)).EndInit();
             this.layoutControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.txtBillingRemark.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nmOtherPrice)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nmPackingPrice)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nmRentPrice)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nmDisposePrice)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nmUnitPrice)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nmFreezePrice)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nmHandlingUnitPrice)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nmFreezeUnitPrice)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nmHandlingPrice)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmOtherPrice.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmRentPrice.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmPackingPrice.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmDisposePrice.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmFreezePrice.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmFreezeUnitPrice.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmHandlingPrice.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmHandlingUnitPrice.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmUnitPrice.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).EndInit();
@@ -801,7 +860,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem16)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem17)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem18)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem20)).EndInit();
             this.ResumeLayout(false);
 
@@ -810,29 +868,6 @@
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private DevExpress.XtraEditors.GroupControl groupControl2;
-        private DevExpress.XtraLayout.LayoutControl layoutControl2;
-        private DevExpress.XtraEditors.TextEdit txtBillingRemark;
-        private System.Windows.Forms.NumericUpDown nmOtherPrice;
-        private System.Windows.Forms.NumericUpDown nmPackingPrice;
-        private System.Windows.Forms.NumericUpDown nmRentPrice;
-        private System.Windows.Forms.NumericUpDown nmDisposePrice;
-        private System.Windows.Forms.NumericUpDown nmUnitPrice;
-        private System.Windows.Forms.NumericUpDown nmFreezePrice;
-        private System.Windows.Forms.NumericUpDown nmHandlingUnitPrice;
-        private System.Windows.Forms.NumericUpDown nmFreezeUnitPrice;
-        private System.Windows.Forms.NumericUpDown nmHandlingPrice;
-        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup2;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem9;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem10;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem11;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem12;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem13;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem14;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem15;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem16;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem17;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem18;
         private DevExpress.XtraEditors.GroupControl groupControl3;
         private DevExpress.XtraEditors.GroupControl groupControl1;
         private DevExpress.XtraLayout.LayoutControl layoutControl1;
@@ -859,8 +894,30 @@
         private DevExpress.XtraEditors.SimpleButton btnAddRow;
         private StockInGrid sigList;
         private DevExpress.XtraEditors.SimpleButton btnRemoveRow;
+        private DevExpress.XtraEditors.GroupControl groupControl2;
+        private DevExpress.XtraLayout.LayoutControl layoutControl2;
         private DevExpress.XtraEditors.SimpleButton btnCalc;
-        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
+        private DevExpress.XtraEditors.TextEdit txtBillingRemark;
+        private DevExpress.XtraEditors.SpinEdit nmOtherPrice;
+        private DevExpress.XtraEditors.SpinEdit nmRentPrice;
+        private DevExpress.XtraEditors.SpinEdit nmPackingPrice;
+        private DevExpress.XtraEditors.SpinEdit nmDisposePrice;
+        private DevExpress.XtraEditors.SpinEdit nmFreezePrice;
+        private DevExpress.XtraEditors.SpinEdit nmFreezeUnitPrice;
+        private DevExpress.XtraEditors.SpinEdit nmHandlingPrice;
+        private DevExpress.XtraEditors.SpinEdit nmHandlingUnitPrice;
+        private DevExpress.XtraEditors.SpinEdit nmUnitPrice;
+        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup2;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem9;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem10;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem11;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem12;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem13;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem14;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem15;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem16;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem17;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem18;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem20;
     }
 }

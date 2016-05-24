@@ -89,10 +89,5 @@ namespace Phoebe.FormClient
 
         #region Event
         #endregion //Event
-
-        private void btnCalc_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
