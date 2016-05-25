@@ -19,11 +19,43 @@ namespace Phoebe.FormClient
     public partial class UserForm : BaseForm
     {
         #region Constructor
+        /// <summary>
+        /// 用户列表窗体
+        /// </summary>
         public UserForm()
         {
             InitializeComponent();
         }
         #endregion //Constructor
+
+        #region Function
+        /// <summary>
+        /// 检查权限
+        /// </summary>
+        protected override void CheckPrivilege()
+        {
+            if (this.currentUser.UserGroupName == "Root" || this.currentUser.UserGroupName == "Administrator")
+            {
+                this.btnEnable.Visible = true;
+                this.btnDisable.Visible = true;
+                this.btnAdd.Visible = true;
+            }
+            else
+            {
+                this.btnEnable.Visible = false;
+                this.btnDisable.Visible = false;
+                this.btnAdd.Visible = false;
+            }
+        }
+
+        /// <summary>
+        /// 载入数据
+        /// </summary>
+        private void LoadData()
+        {
+            this.bsUser.DataSource = BusinessFactory<UserBusiness>.Instance.Get(this.currentUser.IsRoot);
+        }
+        #endregion //Function
 
         #region Event
         /// <summary>
@@ -33,13 +65,7 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void UserForm_Load(object sender, EventArgs e)
         {
-            this.bsUser.DataSource = BusinessFactory<UserBusiness>.Instance.Get(this.currentUser.IsRoot);
-
-            if (this.currentUser.Rank > 800)
-            {
-                this.btnEnable.Visible = true;
-                this.btnDisable.Visible = true;
-            }
+            LoadData();
         }
 
         /// <summary>
@@ -74,6 +100,17 @@ namespace Phoebe.FormClient
             BusinessFactory<UserBusiness>.Instance.Disable(user.Id);
 
             this.bsUser.ResetBindings(false);
+        }
+
+        /// <summary>
+        /// 添加用户
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            ChildFormManage.ShowDialogForm(typeof(UserAddForm));
+            LoadData();
         }
 
         /// <summary>

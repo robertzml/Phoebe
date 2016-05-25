@@ -64,11 +64,6 @@ namespace Phoebe.Business.DAL
         {
             try
             {
-                entity.Status = 0;
-
-                if (this.context.Users.Any(r => r.UserName == entity.UserName))
-                    return ErrorCode.DuplicateName;
-
                 this.context.Users.Add(entity);
                 this.context.SaveChanges();
 

@@ -37,6 +37,10 @@ namespace Phoebe.FormClient
         #endregion //Constructor
 
         #region Function
+        /// <summary>
+        /// 设置对象
+        /// </summary>
+        /// <param name="contract">合同</param>
         private void SetEntity(Contract contract)
         {
             contract.Number = this.txtNumber.Text.Trim();

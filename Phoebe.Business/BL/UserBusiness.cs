@@ -106,6 +106,27 @@ namespace Phoebe.Business
         }
 
         /// <summary>
+        /// 创建用户
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public override ErrorCode Create(User entity)
+        {
+            if (entity.UserGroupId == rootGroupId)
+                return ErrorCode.UserCannotCreate;
+
+            if (this.dal.Find(r => r.UserName == entity.UserName).Count() > 0)
+                return ErrorCode.DuplicateName;
+
+            entity.LastLoginTime = initialTime;
+            entity.CurrentLoginTime = initialTime;
+            entity.Status = 0;
+
+            var result = this.dal.Create(entity);
+            return result;
+        }
+
+        /// <summary>
         /// 启用用户
         /// </summary>
         /// <param name="id">用户ID</param>
@@ -181,6 +202,9 @@ namespace Phoebe.Business
         #endregion //Method
 
         #region Property
+        /// <summary>
+        /// Root用户组ID
+        /// </summary>
         public static int RootGroupID
         {
             get

@@ -308,6 +308,12 @@
     <Compile Include="Forms\SettleForm.Designer.cs">
       <DependentUpon>SettleForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\UserAddForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\UserAddForm.Designer.cs">
+      <DependentUpon>UserAddForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utils\ModelTranslate.cs" />
     <EmbeddedResource Include="Forms\ColdPriceForm.resx">
       <DependentUpon>ColdPriceForm.cs</DependentUpon>
@@ -398,6 +404,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\StoreTraceForm.resx">
       <DependentUpon>StoreTraceForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\UserAddForm.resx">
+      <DependentUpon>UserAddForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\UserForm.resx">
       <DependentUpon>UserForm.cs</DependentUpon>

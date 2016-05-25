@@ -31,8 +31,8 @@
             this.components = new System.ComponentModel.Container();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.dgcUser = new DevExpress.XtraGrid.GridControl();
-            this.dgvUser = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.bsUser = new System.Windows.Forms.BindingSource(this.components);
+            this.dgvUser = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colUserName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colUserGroupId = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -42,13 +42,14 @@
             this.colRemark = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colStatus = new DevExpress.XtraGrid.Columns.GridColumn();
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
-            this.btnEnable = new DevExpress.XtraEditors.SimpleButton();
             this.btnDisable = new DevExpress.XtraEditors.SimpleButton();
+            this.btnEnable = new DevExpress.XtraEditors.SimpleButton();
+            this.btnAdd = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgcUser)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvUser)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsUser)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvUser)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
             this.groupControl2.SuspendLayout();
             this.SuspendLayout();
@@ -75,6 +76,10 @@
             this.dgcUser.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.dgvUser});
             // 
+            // bsUser
+            // 
+            this.bsUser.DataSource = typeof(Phoebe.Model.User);
+            // 
             // dgvUser
             // 
             this.dgvUser.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
@@ -99,10 +104,6 @@
             this.dgvUser.OptionsMenu.EnableGroupPanelMenu = false;
             this.dgvUser.OptionsView.ShowGroupPanel = false;
             this.dgvUser.CustomColumnDisplayText += new DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventHandler(this.dgvUser_CustomColumnDisplayText);
-            // 
-            // bsUser
-            // 
-            this.bsUser.DataSource = typeof(Phoebe.Model.User);
             // 
             // colId
             // 
@@ -190,6 +191,7 @@
             // 
             // groupControl2
             // 
+            this.groupControl2.Controls.Add(this.btnAdd);
             this.groupControl2.Controls.Add(this.btnDisable);
             this.groupControl2.Controls.Add(this.btnEnable);
             this.groupControl2.Dock = System.Windows.Forms.DockStyle.Top;
@@ -199,25 +201,35 @@
             this.groupControl2.TabIndex = 1;
             this.groupControl2.Text = "操作";
             // 
+            // btnDisable
+            // 
+            this.btnDisable.Location = new System.Drawing.Point(156, 32);
+            this.btnDisable.Name = "btnDisable";
+            this.btnDisable.Size = new System.Drawing.Size(94, 39);
+            this.btnDisable.TabIndex = 1;
+            this.btnDisable.Text = "禁用";
+            this.btnDisable.Visible = false;
+            this.btnDisable.Click += new System.EventHandler(this.btnDisable_Click);
+            // 
             // btnEnable
             // 
-            this.btnEnable.Location = new System.Drawing.Point(39, 40);
+            this.btnEnable.Location = new System.Drawing.Point(28, 32);
             this.btnEnable.Name = "btnEnable";
-            this.btnEnable.Size = new System.Drawing.Size(75, 23);
+            this.btnEnable.Size = new System.Drawing.Size(94, 39);
             this.btnEnable.TabIndex = 0;
             this.btnEnable.Text = "启用";
             this.btnEnable.Visible = false;
             this.btnEnable.Click += new System.EventHandler(this.btnEnable_Click);
             // 
-            // btnDisable
+            // btnAdd
             // 
-            this.btnDisable.Location = new System.Drawing.Point(138, 40);
-            this.btnDisable.Name = "btnDisable";
-            this.btnDisable.Size = new System.Drawing.Size(75, 23);
-            this.btnDisable.TabIndex = 1;
-            this.btnDisable.Text = "禁用";
-            this.btnDisable.Visible = false;
-            this.btnDisable.Click += new System.EventHandler(this.btnDisable_Click);
+            this.btnAdd.Location = new System.Drawing.Point(284, 32);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(94, 39);
+            this.btnAdd.TabIndex = 2;
+            this.btnAdd.Text = "添加用户";
+            this.btnAdd.Visible = false;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // UserForm
             // 
@@ -232,8 +244,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
             this.groupControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgcUser)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvUser)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsUser)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvUser)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
             this.groupControl2.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -257,5 +269,6 @@
         private DevExpress.XtraEditors.GroupControl groupControl2;
         private DevExpress.XtraEditors.SimpleButton btnDisable;
         private DevExpress.XtraEditors.SimpleButton btnEnable;
+        private DevExpress.XtraEditors.SimpleButton btnAdd;
     }
 }

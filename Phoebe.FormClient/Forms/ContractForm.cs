@@ -31,6 +31,21 @@ namespace Phoebe.FormClient
         {
             this.bsContract.DataSource = BusinessFactory<ContractBusiness>.Instance.FindAll();
         }
+
+        /// <summary>
+        /// 检查权限
+        /// </summary>
+        protected override void CheckPrivilege()
+        {
+            if (this.currentUser.Rank > 800)
+            {
+                this.btnDelete.Visible = true;
+            }
+            else
+            {
+                this.btnDelete.Visible = false;
+            }
+        }
         #endregion //Function
 
         #region Event

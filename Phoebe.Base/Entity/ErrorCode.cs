@@ -97,6 +97,12 @@ namespace Phoebe.Base
         /// </summary>
         [Display(Name = "用户已禁用")]
         UserDisabled = 23,
+
+        /// <summary>
+        /// 用户无法创建
+        /// </summary>
+        [Display(Name = "用户无法创建")]
+        UserCannotCreate = 24,
         #endregion //User
 
         #region Customer
