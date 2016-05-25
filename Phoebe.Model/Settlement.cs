@@ -12,31 +12,30 @@ namespace Phoebe.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Billing
+    public partial class Settlement
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Billing()
+        public Settlement()
         {
             this.SettlementDetails = new HashSet<SettlementDetail>();
         }
     
-        public System.Guid StockInId { get; set; }
-        public int ContractId { get; set; }
-        public decimal UnitPrice { get; set; }
-        public decimal HandlingUnitPrice { get; set; }
-        public decimal HandlingPrice { get; set; }
-        public decimal FreezeUnitPrice { get; set; }
-        public decimal FreezePrice { get; set; }
-        public decimal DisposePrice { get; set; }
-        public decimal PackingPrice { get; set; }
-        public decimal RentPrice { get; set; }
-        public decimal OtherPrice { get; set; }
-        public decimal TotalPrice { get; set; }
+        public System.Guid Id { get; set; }
+        public string Number { get; set; }
+        public Nullable<int> CustomerId { get; set; }
+        public Nullable<System.DateTime> StartTime { get; set; }
+        public Nullable<System.DateTime> EndTime { get; set; }
+        public Nullable<decimal> SumFee { get; set; }
+        public Nullable<int> Discount { get; set; }
+        public Nullable<decimal> Remission { get; set; }
+        public Nullable<decimal> DueFee { get; set; }
+        public Nullable<System.DateTime> SettleTime { get; set; }
+        public Nullable<int> UserId { get; set; }
         public string Remark { get; set; }
-        public int Status { get; set; }
+        public Nullable<int> Status { get; set; }
     
-        public virtual Contract Contract { get; set; }
-        public virtual StockIn StockIn { get; set; }
+        public virtual Customer Customer { get; set; }
+        public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SettlementDetail> SettlementDetails { get; set; }
     }

@@ -161,6 +161,21 @@ namespace Phoebe.Business
 
             return records;
         }
+
+        /// <summary>
+        /// 按客户货品计费单
+        /// </summary>
+        /// <param name="customerId">客户ID</param>
+        /// <param name="start">开始日期</param>
+        /// <param name="end">结束日期</param>
+        /// <returns></returns>
+        public List<Billing> GetByCustomer(int customerId, DateTime start, DateTime end)
+        {
+            var billings = this.dal.Find(r => r.Status == (int)EntityStatus.Normal && r.StockIn.InTime >= start && r.StockIn.InTime <= end &&
+                r.Contract.CustomerId == customerId);
+
+            return billings.ToList();
+        }
         #endregion //Method
     }
 }

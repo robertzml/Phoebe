@@ -147,6 +147,16 @@ namespace Phoebe.FormClient
         }
 
         /// <summary>
+        /// 结算管理 - 费用结算
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void menuSettlement_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            ChildFormManage.LoadMdiForm(this, typeof(SettleForm));
+        }
+
+        /// <summary>
         /// 用户管理 - 用户列表
         /// </summary>
         /// <param name="sender"></param>

@@ -67,6 +67,7 @@
     <Compile Include="Customer.cs">
       <DependentUpon>PhoebeModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Helper\ColdSettlement.cs" />
     <Compile Include="Helper\DailyColdRecord.cs" />
     <Compile Include="Helper\PhoebeEnum.cs" />
     <Compile Include="Helper\StockFlow.cs" />
@@ -88,6 +89,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>PhoebeModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Settlement.cs">
+      <DependentUpon>PhoebeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SettlementDetail.cs">
+      <DependentUpon>PhoebeModel.tt</DependentUpon>
     </Compile>
     <Compile Include="StockIn.cs">
       <DependentUpon>PhoebeModel.tt</DependentUpon>

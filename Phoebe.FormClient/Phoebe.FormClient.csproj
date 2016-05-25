@@ -302,6 +302,12 @@
     <Compile Include="Controls\StorageGrid.Designer.cs">
       <DependentUpon>StorageGrid.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\SettleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SettleForm.Designer.cs">
+      <DependentUpon>SettleForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utils\ModelTranslate.cs" />
     <EmbeddedResource Include="Forms\ColdPriceForm.resx">
       <DependentUpon>ColdPriceForm.cs</DependentUpon>
@@ -375,6 +381,9 @@
     <EmbeddedResource Include="Forms\CustomerForm.resx">
       <DependentUpon>CustomerForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SettleForm.resx">
+      <DependentUpon>SettleForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\StockMoveForm.resx">
       <DependentUpon>StockMoveForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -418,6 +427,7 @@
       <DependentUpon>StockMoveViewControl.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\Phoebe.Model.Billing.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.Contract.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.Customer.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.DailyColdRecord.datasource" />

@@ -60,6 +60,7 @@
     <Compile Include="BL\CustomerBusiness.cs" />
     <Compile Include="BL\ContractBusiness.cs" />
     <Compile Include="BL\CategoryBusiness.cs" />
+    <Compile Include="BL\SettlementBusiness.cs" />
     <Compile Include="BL\StockInBusiness.cs" />
     <Compile Include="BL\StockMoveBusiness.cs" />
     <Compile Include="BL\StockOutBusiness.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="DAL\CargoRepository.cs" />
     <Compile Include="DAL\CategoryRepository.cs" />
     <Compile Include="DAL\RepositoryFactory.cs" />
+    <Compile Include="DAL\SettlementRepository.cs" />
     <Compile Include="DAL\StockMoveDetailsRepository.cs" />
     <Compile Include="DAL\StockMoveRepository.cs" />
     <Compile Include="DAL\StockOutDetailsRepository.cs" />

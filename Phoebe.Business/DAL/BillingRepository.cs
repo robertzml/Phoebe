@@ -40,10 +40,14 @@ namespace Phoebe.Business.DAL
             throw new NotImplementedException();
         }
 
-
+        /// <summary>
+        /// 根据条件查找
+        /// </summary>
+        /// <param name="predicate">查询条件</param>
+        /// <returns></returns>
         public IEnumerable<Billing> Find(Expression<Func<Billing, bool>> predicate)
         {
-            throw new NotImplementedException();
+            return this.context.Billings.Where(predicate);
         }
 
         public ErrorCode Create(Billing entity)

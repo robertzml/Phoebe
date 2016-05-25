@@ -22,6 +22,7 @@ namespace Phoebe.Model
             this.StockMoves = new HashSet<StockMove>();
             this.StockOuts = new HashSet<StockOut>();
             this.Stores = new HashSet<Store>();
+            this.Settlements = new HashSet<Settlement>();
         }
     
         public int Id { get; set; }
@@ -45,5 +46,7 @@ namespace Phoebe.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Store> Stores { get; set; }
         public virtual UserGroup UserGroup { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Settlement> Settlements { get; set; }
     }
 }

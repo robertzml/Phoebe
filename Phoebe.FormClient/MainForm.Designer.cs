@@ -64,6 +64,7 @@
             this.barHeaderItem1 = new DevExpress.XtraBars.BarHeaderItem();
             this.barStaticItem2 = new DevExpress.XtraBars.BarStaticItem();
             this.tabMdiManager = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
+            this.menuSettlement = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabMdiManager)).BeginInit();
             this.SuspendLayout();
@@ -105,9 +106,10 @@
             this.menuSettle,
             this.menuColdPrice,
             this.menuStoreSnapshot,
-            this.menuStoreTrace});
+            this.menuStoreTrace,
+            this.menuSettlement});
             this.barManager1.MainMenu = this.mainMenu;
-            this.barManager1.MaxItemId = 28;
+            this.barManager1.MaxItemId = 29;
             this.barManager1.StatusBar = this.bar3;
             // 
             // mainMenu
@@ -240,10 +242,11 @@
             // 
             // menuSettle
             // 
-            this.menuSettle.Caption = "费用结算";
+            this.menuSettle.Caption = "结算管理";
             this.menuSettle.Id = 24;
             this.menuSettle.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(this.menuColdPrice)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.menuColdPrice),
+            new DevExpress.XtraBars.LinkPersistInfo(this.menuSettlement)});
             this.menuSettle.Name = "menuSettle";
             // 
             // menuColdPrice
@@ -378,6 +381,13 @@
             this.tabMdiManager.MdiParent = this;
             this.tabMdiManager.PinPageButtonShowMode = DevExpress.XtraTab.PinPageButtonShowMode.InActiveTabPageHeader;
             // 
+            // menuSettlement
+            // 
+            this.menuSettlement.Caption = "费用结算";
+            this.menuSettlement.Id = 28;
+            this.menuSettlement.Name = "menuSettlement";
+            this.menuSettlement.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuSettlement_ItemClick);
+            // 
             // MainForm
             // 
             this.AllowMdiBar = true;
@@ -436,6 +446,7 @@
         private DevExpress.XtraBars.BarButtonItem menuColdPrice;
         private DevExpress.XtraBars.BarButtonItem menuStoreSnapshot;
         private DevExpress.XtraBars.BarButtonItem menuStoreTrace;
+        private DevExpress.XtraBars.BarButtonItem menuSettlement;
     }
 }
 

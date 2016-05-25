@@ -39,5 +39,7 @@ namespace Phoebe.Model
         public virtual DbSet<Store> Stores { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserGroup> UserGroups { get; set; }
+        public virtual DbSet<Settlement> Settlements { get; set; }
+        public virtual DbSet<SettlementDetail> SettlementDetails { get; set; }
     }
 }
