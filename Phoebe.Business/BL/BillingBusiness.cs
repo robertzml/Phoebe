@@ -117,6 +117,25 @@ namespace Phoebe.Business
 
         #region Method
         /// <summary>
+        /// 获取库存的计费信息
+        /// </summary>
+        /// <param name="store">库存对象</param>
+        /// <returns></returns>
+        public Billing GetByStore(Store store)
+        {
+            // find the origin store
+            while ((SourceType)store.Source != SourceType.StockIn)
+            {
+                var smd = RepositoryFactory<StockMoveDetailsRepository>.Instance.FindOne(r => r.NewStoreId == store.Id);
+                store = smd.SourceStore;
+            }
+
+            var sid = RepositoryFactory<StockInDetailsRepository>.Instance.FindOne(r => r.StoreId == store.Id);
+            var billing = this.dal.FindById(sid.StockInId);
+            return billing;
+        }
+
+        /// <summary>
         /// 获取合同冷藏费清单
         /// </summary>
         /// <param name="contractId">合同ID</param>
@@ -130,22 +149,7 @@ namespace Phoebe.Business
             if (contract == null || !contract.IsTiming)
                 return records;
 
-            IBillingProcess billingProcess = null;
-            switch ((BillingType)contract.BillingType)
-            {
-                case BillingType.UnitWeight:
-                    billingProcess = new BillingUnitWeight();
-                    break;
-                case BillingType.UnitVolume:
-                    billingProcess = new BillingUnitVolume();
-                    break;
-                case BillingType.Count:
-                    billingProcess = new BillingCount();
-                    break;
-                case BillingType.VariousWeight:
-                    billingProcess = new BillingVariousWeight();
-                    break;
-            }
+            IBillingProcess billingProcess = BillingFactory.Create((BillingType)contract.BillingType);
 
             decimal totalFee = 0;
             for (DateTime step = start.Date; step <= end; step = step.AddDays(1))
@@ -163,18 +167,48 @@ namespace Phoebe.Business
         }
 
         /// <summary>
-        /// 按客户货品计费单
+        /// 按客户获取基本费用
         /// </summary>
         /// <param name="customerId">客户ID</param>
         /// <param name="start">开始日期</param>
         /// <param name="end">结束日期</param>
         /// <returns></returns>
-        public List<Billing> GetByCustomer(int customerId, DateTime start, DateTime end)
+        public List<Billing> CalculateBaseFee(int customerId, DateTime start, DateTime end)
         {
             var billings = this.dal.Find(r => r.Status == (int)EntityStatus.Normal && r.StockIn.InTime >= start && r.StockIn.InTime <= end &&
                 r.Contract.CustomerId == customerId);
 
             return billings.ToList();
+        }
+
+        /// <summary>
+        /// 按客户获取冷藏费用
+        /// </summary>
+        /// <param name="customerId">客户ID</param>
+        /// <param name="start">开始日期</param>
+        /// <param name="end">结束日期</param>
+        /// <returns></returns>
+        public List<ColdSettlement> CalculateColdFee(int customerId, DateTime start, DateTime end)
+        {
+            List<ColdSettlement> data = new List<ColdSettlement>();
+
+            var contracts = BusinessFactory<ContractBusiness>.Instance.GetByCustomer(customerId);
+
+            foreach (var contract in contracts)
+            {
+                IBillingProcess billingProcess = BillingFactory.Create((BillingType)contract.BillingType);
+
+                ColdSettlement settle = new ColdSettlement();
+                settle.StartTime = start;
+                settle.EndTime = end;
+                settle.ContractId = contract.Id;
+                settle.ContractName = contract.Name;
+                settle.ColdFee = billingProcess.CalculateColdFee(contract, start, end);
+
+                data.Add(settle);
+            }
+
+            return data;
         }
         #endregion //Method
     }

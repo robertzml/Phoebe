@@ -70,6 +70,14 @@
             this.colRemark = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colStatus = new DevExpress.XtraGrid.Columns.GridColumn();
             this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
+            this.dgcCold = new DevExpress.XtraGrid.GridControl();
+            this.dgvCold = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.bsCold = new System.Windows.Forms.BindingSource(this.components);
+            this.colContractId1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colContractName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colStartTime = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colEndTime = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colColdFee = new DevExpress.XtraGrid.Columns.GridColumn();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
@@ -99,6 +107,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.bsBilling)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBilling)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).BeginInit();
+            this.groupControl3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgcCold)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCold)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsCold)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -551,12 +563,85 @@
             // 
             // groupControl3
             // 
+            this.groupControl3.Controls.Add(this.dgcCold);
             this.groupControl3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl3.Location = new System.Drawing.Point(3, 296);
             this.groupControl3.Name = "groupControl3";
             this.groupControl3.Size = new System.Drawing.Size(924, 107);
             this.groupControl3.TabIndex = 2;
             this.groupControl3.Text = "冷藏费用";
+            // 
+            // dgcCold
+            // 
+            this.dgcCold.DataSource = this.bsCold;
+            this.dgcCold.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgcCold.Location = new System.Drawing.Point(2, 21);
+            this.dgcCold.MainView = this.dgvCold;
+            this.dgcCold.Name = "dgcCold";
+            this.dgcCold.Size = new System.Drawing.Size(920, 84);
+            this.dgcCold.TabIndex = 0;
+            this.dgcCold.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.dgvCold});
+            // 
+            // dgvCold
+            // 
+            this.dgvCold.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.colContractId1,
+            this.colContractName,
+            this.colStartTime,
+            this.colEndTime,
+            this.colColdFee});
+            this.dgvCold.GridControl = this.dgcCold;
+            this.dgvCold.Name = "dgvCold";
+            this.dgvCold.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
+            this.dgvCold.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
+            this.dgvCold.OptionsBehavior.Editable = false;
+            this.dgvCold.OptionsCustomization.AllowFilter = false;
+            this.dgvCold.OptionsCustomization.AllowGroup = false;
+            this.dgvCold.OptionsCustomization.AllowQuickHideColumns = false;
+            this.dgvCold.OptionsFilter.AllowFilterEditor = false;
+            this.dgvCold.OptionsFind.AllowFindPanel = false;
+            this.dgvCold.OptionsMenu.EnableGroupPanelMenu = false;
+            this.dgvCold.OptionsView.ShowGroupPanel = false;
+            // 
+            // bsCold
+            // 
+            this.bsCold.DataSource = typeof(Phoebe.Model.ColdSettlement);
+            // 
+            // colContractId1
+            // 
+            this.colContractId1.FieldName = "ContractId";
+            this.colContractId1.Name = "colContractId1";
+            this.colContractId1.Visible = true;
+            this.colContractId1.VisibleIndex = 0;
+            // 
+            // colContractName
+            // 
+            this.colContractName.FieldName = "ContractName";
+            this.colContractName.Name = "colContractName";
+            this.colContractName.Visible = true;
+            this.colContractName.VisibleIndex = 1;
+            // 
+            // colStartTime
+            // 
+            this.colStartTime.FieldName = "StartTime";
+            this.colStartTime.Name = "colStartTime";
+            this.colStartTime.Visible = true;
+            this.colStartTime.VisibleIndex = 2;
+            // 
+            // colEndTime
+            // 
+            this.colEndTime.FieldName = "EndTime";
+            this.colEndTime.Name = "colEndTime";
+            this.colEndTime.Visible = true;
+            this.colEndTime.VisibleIndex = 3;
+            // 
+            // colColdFee
+            // 
+            this.colColdFee.FieldName = "ColdFee";
+            this.colColdFee.Name = "colColdFee";
+            this.colColdFee.Visible = true;
+            this.colColdFee.VisibleIndex = 4;
             // 
             // SettleForm
             // 
@@ -596,6 +681,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.bsBilling)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBilling)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).EndInit();
+            this.groupControl3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgcCold)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCold)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsCold)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -643,5 +732,13 @@
         private DevExpress.XtraGrid.Columns.GridColumn colRemark;
         private DevExpress.XtraGrid.Columns.GridColumn colStatus;
         private DevExpress.XtraEditors.GroupControl groupControl3;
+        private DevExpress.XtraGrid.GridControl dgcCold;
+        private System.Windows.Forms.BindingSource bsCold;
+        private DevExpress.XtraGrid.Views.Grid.GridView dgvCold;
+        private DevExpress.XtraGrid.Columns.GridColumn colContractId1;
+        private DevExpress.XtraGrid.Columns.GridColumn colContractName;
+        private DevExpress.XtraGrid.Columns.GridColumn colStartTime;
+        private DevExpress.XtraGrid.Columns.GridColumn colEndTime;
+        private DevExpress.XtraGrid.Columns.GridColumn colColdFee;
     }
 }

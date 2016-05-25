@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Billing\BillingCount.cs" />
+    <Compile Include="Billing\BillingFactory.cs" />
     <Compile Include="Billing\BillingUnitVolume.cs" />
     <Compile Include="Billing\BillingUnitWeight.cs" />
     <Compile Include="Billing\BillingVariousWeight.cs" />

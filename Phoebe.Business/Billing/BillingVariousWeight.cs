@@ -55,6 +55,11 @@ namespace Phoebe.Business
         {
             return totalMeter * unitPrice;
         }
+
+        public decimal CalculateColdFee(Contract contract, DateTime start, DateTime end)
+        {
+            throw new NotImplementedException();
+        }
         #endregion //Method
     }
 }

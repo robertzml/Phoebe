@@ -113,8 +113,15 @@ namespace Phoebe.FormClient
                 return;
             }
 
-            var billings = BusinessFactory<BillingBusiness>.Instance.GetByCustomer(this.selectCustomer.Id, this.dpFrom.DateTime.Date, this.dpTo.DateTime.Date);
+            this.Cursor = Cursors.WaitCursor;
+
+            var billings = BusinessFactory<BillingBusiness>.Instance.CalculateBaseFee(this.selectCustomer.Id, this.dpFrom.DateTime.Date, this.dpTo.DateTime.Date);
             this.bsBilling.DataSource = billings;
+
+            var colds = BusinessFactory<BillingBusiness>.Instance.CalculateColdFee(this.selectCustomer.Id, this.dpFrom.DateTime.Date, this.dpTo.DateTime.Date);
+            this.bsCold.DataSource = colds;
+
+            this.Cursor = Cursors.Default;
         }
 
         /// <summary>

@@ -41,5 +41,14 @@ namespace Phoebe.Business
         /// <param name="unitPrice">单价</param>
         /// <returns></returns>
         decimal CalculateDailyFee(decimal totalMeter, decimal unitPrice);
+
+        /// <summary>
+        /// 合同冷藏费计算
+        /// </summary>
+        /// <param name="contract">合同对象</param>
+        /// <param name="start">开始日期</param>
+        /// <param name="end">结束日期</param>
+        /// <returns></returns>
+        decimal CalculateColdFee(Contract contract, DateTime start, DateTime end);
     }
 }
