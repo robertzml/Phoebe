@@ -68,11 +68,22 @@ namespace Phoebe.Business
             }
         }
 
-
+        
         public List<Cargo> GetByCustomer(int customerId)
         {
             Expression<Func<Cargo, bool>> predicate = r => r.Contract.CustomerId == customerId;
             var data = this.dal.Find(predicate);
+            return data.ToList();
+        }
+
+        /// <summary>
+        /// 按合同获取货品
+        /// </summary>
+        /// <param name="contractId">合同ID</param>
+        /// <returns></returns>
+        public List<Cargo> GetByContract(int contractId)
+        {
+            var data = this.dal.Find(r => r.ContractId == contractId);
             return data.ToList();
         }
         #endregion //Method

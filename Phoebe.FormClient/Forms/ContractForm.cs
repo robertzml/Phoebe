@@ -104,6 +104,42 @@ namespace Phoebe.FormClient
 
             LoadData();
         }
+
+        /// <summary>
+        /// 删除合同
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (this.dgvContract.SelectedRowsCount == 0)
+            {
+                MessageBox.Show("未选中记录", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            DialogResult dr = MessageBox.Show("是否确认删除选中合同", FormConstant.MessageBoxTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dr == DialogResult.Yes)
+            {
+                int rowIndex = this.dgvContract.GetFocusedDataSourceRowIndex();
+                if (rowIndex < 0 || rowIndex >= this.bsContract.Count)
+                    return;
+
+                var contract = this.bsContract[rowIndex] as Contract;
+
+                ErrorCode result = BusinessFactory<ContractBusiness>.Instance.Delete(contract);
+                if (result == ErrorCode.Success)
+                {
+                    MessageBox.Show("删除合同成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("删除合同失败：" + result.DisplayName(), FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
+                LoadData();
+            }
+        }
         #endregion //Event
     }
 }

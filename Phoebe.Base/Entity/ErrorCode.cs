@@ -113,6 +113,12 @@ namespace Phoebe.Base
         /// </summary>
         [Display(Name = "合同有库存")]
         ContractHasStore = 40,
+
+        /// <summary>
+        /// 合同有货品
+        /// </summary>
+        [Display(Name = "合同有货品")]
+        ContractHasCargo = 41,
         #endregion //Contract
 
         #region Cargo

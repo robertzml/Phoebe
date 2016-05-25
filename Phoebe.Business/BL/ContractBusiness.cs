@@ -44,6 +44,23 @@ namespace Phoebe.Business
             Expression<Func<Contract, bool>> predicate = r => r.CustomerId == customerId;
             return this.dal.Find(predicate).ToList();
         }
+
+        /// <summary>
+        /// 删除合同
+        /// </summary>
+        /// <param name="entity">合同对象</param>
+        /// <returns></returns>
+        public override ErrorCode Delete(Contract entity)
+        {
+            if (BusinessFactory<BillingBusiness>.Instance.GetByContract(entity.Id).Count > 0)
+                return ErrorCode.ContractHasStore;
+
+            if (BusinessFactory<CargoBusiness>.Instance.GetByContract(entity.Id).Count > 0)
+                return ErrorCode.ContractHasCargo;
+
+            var result = this.dal.Delete(entity);
+            return result;
+        }
         #endregion //Method
     }
 }

@@ -136,7 +136,17 @@ namespace Phoebe.Business
         }
 
         /// <summary>
-        /// 获取合同冷藏费清单
+        /// 获取合同的计费信息
+        /// </summary>
+        /// <param name="contractId">合同ID</param>
+        /// <returns></returns>
+        public List<Billing> GetByContract(int contractId)
+        {
+            return this.dal.Find(r => r.ContractId == contractId).ToList();
+        }
+
+        /// <summary>
+        /// 获取合同日冷藏费记录 
         /// </summary>
         /// <param name="contractId">合同ID</param>
         /// <param name="start">开始日期</param>

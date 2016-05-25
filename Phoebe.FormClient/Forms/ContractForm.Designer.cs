@@ -76,6 +76,7 @@
             this.btnDelete.Size = new System.Drawing.Size(90, 40);
             this.btnDelete.TabIndex = 3;
             this.btnDelete.Text = "删除合同";
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnEdit
             // 

@@ -25,6 +25,11 @@ namespace Phoebe.Business.DAL
             return this.context.Contracts.Find(id);
         }
 
+        public Contract FindOne(Expression<Func<Contract, bool>> predicate)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// 查找所有合同
         /// </summary>
@@ -69,6 +74,11 @@ namespace Phoebe.Business.DAL
             return ErrorCode.Success;
         }
 
+        public ErrorCode CreateRange(List<Contract> entities)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// 编辑合同
         /// </summary>
@@ -92,19 +102,24 @@ namespace Phoebe.Business.DAL
             return ErrorCode.Success;
         }
 
+        /// <summary>
+        /// 删除合同
+        /// </summary>
+        /// <param name="entity">合同对象</param>
+        /// <returns></returns>
         public ErrorCode Delete(Contract entity)
         {
-            throw new NotImplementedException();
-        }
+            try
+            {
+                this.context.Contracts.Remove(entity);
+                this.context.SaveChanges();
 
-        public ErrorCode CreateRange(List<Contract> entities)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Contract FindOne(Expression<Func<Contract, bool>> predicate)
-        {
-            throw new NotImplementedException();
+                return ErrorCode.Success;
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
         }
         #endregion //Method
     }
