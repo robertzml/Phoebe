@@ -47,6 +47,7 @@
             this.menuStoreTrace = new DevExpress.XtraBars.BarButtonItem();
             this.menuSettle = new DevExpress.XtraBars.BarSubItem();
             this.menuColdPrice = new DevExpress.XtraBars.BarButtonItem();
+            this.menuSettlement = new DevExpress.XtraBars.BarButtonItem();
             this.menuUser = new DevExpress.XtraBars.BarSubItem();
             this.menuUserList = new DevExpress.XtraBars.BarButtonItem();
             this.menuUserGroupList = new DevExpress.XtraBars.BarButtonItem();
@@ -64,7 +65,7 @@
             this.barHeaderItem1 = new DevExpress.XtraBars.BarHeaderItem();
             this.barStaticItem2 = new DevExpress.XtraBars.BarStaticItem();
             this.tabMdiManager = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
-            this.menuSettlement = new DevExpress.XtraBars.BarButtonItem();
+            this.menuCustomerDashboard = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabMdiManager)).BeginInit();
             this.SuspendLayout();
@@ -107,9 +108,10 @@
             this.menuColdPrice,
             this.menuStoreSnapshot,
             this.menuStoreTrace,
-            this.menuSettlement});
+            this.menuSettlement,
+            this.menuCustomerDashboard});
             this.barManager1.MainMenu = this.mainMenu;
-            this.barManager1.MaxItemId = 29;
+            this.barManager1.MaxItemId = 30;
             this.barManager1.StatusBar = this.bar3;
             // 
             // mainMenu
@@ -138,7 +140,8 @@
             this.menuCustomer.Caption = "客户管理";
             this.menuCustomer.Id = 0;
             this.menuCustomer.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(this.menuCustomerList)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.menuCustomerList),
+            new DevExpress.XtraBars.LinkPersistInfo(this.menuCustomerDashboard)});
             this.menuCustomer.Name = "menuCustomer";
             // 
             // menuCustomerList
@@ -255,6 +258,13 @@
             this.menuColdPrice.Id = 25;
             this.menuColdPrice.Name = "menuColdPrice";
             this.menuColdPrice.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuColdPrice_ItemClick);
+            // 
+            // menuSettlement
+            // 
+            this.menuSettlement.Caption = "费用结算";
+            this.menuSettlement.Id = 28;
+            this.menuSettlement.Name = "menuSettlement";
+            this.menuSettlement.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuSettlement_ItemClick);
             // 
             // menuUser
             // 
@@ -381,12 +391,12 @@
             this.tabMdiManager.MdiParent = this;
             this.tabMdiManager.PinPageButtonShowMode = DevExpress.XtraTab.PinPageButtonShowMode.InActiveTabPageHeader;
             // 
-            // menuSettlement
+            // menuCustomerDashboard
             // 
-            this.menuSettlement.Caption = "费用结算";
-            this.menuSettlement.Id = 28;
-            this.menuSettlement.Name = "menuSettlement";
-            this.menuSettlement.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuSettlement_ItemClick);
+            this.menuCustomerDashboard.Caption = "客户综合";
+            this.menuCustomerDashboard.Id = 29;
+            this.menuCustomerDashboard.Name = "menuCustomerDashboard";
+            this.menuCustomerDashboard.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuCustomerDashboard_ItemClick);
             // 
             // MainForm
             // 
@@ -447,6 +457,7 @@
         private DevExpress.XtraBars.BarButtonItem menuStoreSnapshot;
         private DevExpress.XtraBars.BarButtonItem menuStoreTrace;
         private DevExpress.XtraBars.BarButtonItem menuSettlement;
+        private DevExpress.XtraBars.BarButtonItem menuCustomerDashboard;
     }
 }
 

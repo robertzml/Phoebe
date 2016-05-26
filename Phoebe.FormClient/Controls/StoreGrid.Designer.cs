@@ -205,7 +205,7 @@
             this.colUnitWeight.Name = "colUnitWeight";
             this.colUnitWeight.UnboundType = DevExpress.Data.UnboundColumnType.Decimal;
             this.colUnitWeight.Visible = true;
-            this.colUnitWeight.VisibleIndex = 9;
+            this.colUnitWeight.VisibleIndex = 8;
             // 
             // colTotalWeight
             // 
@@ -217,7 +217,7 @@
             this.colTotalWeight.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "TotalWeight", "合计={0:0.####}")});
             this.colTotalWeight.Visible = true;
-            this.colTotalWeight.VisibleIndex = 8;
+            this.colTotalWeight.VisibleIndex = 9;
             // 
             // colStoreWeight
             // 
@@ -240,7 +240,7 @@
             this.colUnitVolume.Name = "colUnitVolume";
             this.colUnitVolume.UnboundType = DevExpress.Data.UnboundColumnType.Decimal;
             this.colUnitVolume.Visible = true;
-            this.colUnitVolume.VisibleIndex = 12;
+            this.colUnitVolume.VisibleIndex = 11;
             // 
             // colTotalVolume
             // 
@@ -252,7 +252,7 @@
             this.colTotalVolume.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "TotalVolume", "合计={0:0.####}")});
             this.colTotalVolume.Visible = true;
-            this.colTotalVolume.VisibleIndex = 11;
+            this.colTotalVolume.VisibleIndex = 12;
             // 
             // colStoreVolume
             // 

@@ -357,6 +357,8 @@
             this.sgList.EnableGroup = false;
             this.sgList.Location = new System.Drawing.Point(2, 21);
             this.sgList.Name = "sgList";
+            this.sgList.ShowContract = false;
+            this.sgList.ShowCustomer = false;
             this.sgList.ShowFooter = true;
             this.sgList.Size = new System.Drawing.Size(975, 178);
             this.sgList.TabIndex = 0;

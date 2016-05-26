@@ -194,6 +194,8 @@ namespace Phoebe.FormClient
                 return;
             }
 
+            this.Cursor = Cursors.WaitCursor;
+
             int contractId = Convert.ToInt32(this.cmbContract.EditValue);
             var contract = BusinessFactory<ContractBusiness>.Instance.FindById(contractId);
             if (!contract.IsTiming)
@@ -204,6 +206,8 @@ namespace Phoebe.FormClient
 
             var records = BusinessFactory<BillingBusiness>.Instance.GetContractColdRecord(contractId, this.dpFrom.DateTime.Date, this.dpTo.DateTime.Date);
             this.bsDailyColdRecord.DataSource = records;
+
+            this.Cursor = Cursors.Default;
         }
         #endregion //Event
     }

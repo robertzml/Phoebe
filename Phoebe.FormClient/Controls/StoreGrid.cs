@@ -186,7 +186,7 @@ namespace Phoebe.FormClient
             if (e.Column.FieldName == "colUnitWeight" && e.IsGetData)
                 e.Value = store.Cargo.UnitWeight;
             if (e.Column.FieldName == "colUnitVolume" && e.IsGetData)
-                e.Value = store.Cargo.UnitWeight;
+                e.Value = store.Cargo.UnitVolume;
         }
         #endregion //Event
 

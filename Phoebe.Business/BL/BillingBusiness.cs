@@ -56,7 +56,7 @@ namespace Phoebe.Business
         }
 
         /// <summary>
-        /// 获取合同日冷藏费
+        /// 获取合同日冷藏费记录
         /// </summary>
         /// <param name="contract">合同对象</param>
         /// <param name="date">日期</param>
@@ -66,8 +66,8 @@ namespace Phoebe.Business
         {
             List<DailyColdRecord> records = new List<DailyColdRecord>();
 
-            var storages = BusinessFactory<StoreBusiness>.Instance.GetInDay(contract.Id, date);
             var flows = BusinessFactory<StoreBusiness>.Instance.GetDayFlow(contract.Id, date, false);
+            var storages = BusinessFactory<StoreBusiness>.Instance.GetInDay(contract.Id, date);
 
             foreach (var flow in flows)
             {
@@ -112,6 +112,37 @@ namespace Phoebe.Business
                 records.Add(record);
 
             return records;
+        }
+
+        /// <summary>
+        /// 计算合同冷藏费
+        /// </summary>
+        /// <param name="contract">合同</param>
+        /// <param name="start">开始日期</param>
+        /// <param name="end">结束日期</param>
+        /// <param name="billingProcess">计费处理</param>
+        /// <returns></returns>
+        private decimal CalculateColdFee(Contract contract, DateTime start, DateTime end, IBillingProcess billingProcess)
+        {
+            decimal totalFee = 0;
+
+            for (DateTime step = start.Date; step <= end; step = step.AddDays(1))
+            {
+                var storages = BusinessFactory<StoreBusiness>.Instance.GetInDay(contract.Id, step);
+
+                foreach (var storage in storages)
+                {
+                    var cargo = BusinessFactory<CargoBusiness>.Instance.FindById(storage.CargoId);
+
+                    decimal unitMeter = billingProcess.GetUnitMeter(cargo);
+                    decimal totalMeter = billingProcess.GetStoreMeter(storage);
+                    var billing = GetByStorage(storage);
+
+                    totalFee += billingProcess.CalculateDailyFee(totalMeter, billing.UnitPrice);
+                }
+            }
+
+            return totalFee;
         }
         #endregion //Function
 
@@ -213,7 +244,7 @@ namespace Phoebe.Business
                 settle.EndTime = end;
                 settle.ContractId = contract.Id;
                 settle.ContractName = contract.Name;
-                settle.ColdFee = billingProcess.CalculateColdFee(contract, start, end);
+                settle.ColdFee = CalculateColdFee(contract, start, end, billingProcess);
 
                 data.Add(settle);
             }

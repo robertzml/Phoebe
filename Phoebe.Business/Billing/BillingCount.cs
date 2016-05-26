@@ -58,49 +58,6 @@ namespace Phoebe.Business
         {
             return totalMeter * unitPrice;
         }
-
-        /// <summary>
-        /// 计算合同冷藏费
-        /// </summary>
-        /// <param name="contract">合同对象</param>
-        /// <param name="start">开始日期</param>
-        /// <param name="end">结束日期</param>
-        public decimal CalculateColdFee(Contract contract, DateTime start, DateTime end)
-        {
-            if (!contract.IsTiming)
-                return 0;
-
-            //find store
-            var stores = RepositoryFactory<StoreRepository>.Instance.Find(r => r.Cargo.ContractId == contract.Id && r.InTime <= end && (r.OutTime == null || r.OutTime > start));
-            if (stores.Count() == 0)
-                return 0;
-
-            decimal totalFee = 0;
-            foreach (var item in stores)
-            {
-                DateTime inTime = item.MoveTime;
-
-                int days = 0;
-                if (inTime < start)
-                    days = end.Subtract(start).Days + 1;
-                else
-                    days = end.Subtract(inTime).Days + 1;
-
-                var billing = BusinessFactory<BillingBusiness>.Instance.GetByStore(item);
-                totalFee += days * billing.UnitPrice * item.TotalCount;
-
-                // get store out
-                var stockOuts = RepositoryFactory<StockOutDetailsRepository>.Instance.Find(r => r.StoreId == item.Id && r.Status == (int)EntityStatus.StockOut &&
-                    r.StockOut.OutTime >= start && r.StockOut.OutTime <= end);
-                foreach (var so in stockOuts)
-                {
-                    decimal dailyFee = billing.UnitPrice * so.Count;
-                    totalFee -= (end.Subtract(so.StockOut.OutTime).Days + 1) * dailyFee;
-                }
-            }
-
-            return totalFee;
-        }
         #endregion //Method
     }
 }

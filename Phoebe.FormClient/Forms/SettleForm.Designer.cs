@@ -71,8 +71,8 @@
             this.colStatus = new DevExpress.XtraGrid.Columns.GridColumn();
             this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
             this.dgcCold = new DevExpress.XtraGrid.GridControl();
-            this.dgvCold = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.bsCold = new System.Windows.Forms.BindingSource(this.components);
+            this.dgvCold = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colContractId1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colContractName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colStartTime = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -109,8 +109,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).BeginInit();
             this.groupControl3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgcCold)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCold)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsCold)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCold)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -583,6 +583,10 @@
             this.dgcCold.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.dgvCold});
             // 
+            // bsCold
+            // 
+            this.bsCold.DataSource = typeof(Phoebe.Model.ColdSettlement);
+            // 
             // dgvCold
             // 
             this.dgvCold.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
@@ -604,44 +608,42 @@
             this.dgvCold.OptionsMenu.EnableGroupPanelMenu = false;
             this.dgvCold.OptionsView.ShowGroupPanel = false;
             // 
-            // bsCold
-            // 
-            this.bsCold.DataSource = typeof(Phoebe.Model.ColdSettlement);
-            // 
             // colContractId1
             // 
             this.colContractId1.FieldName = "ContractId";
             this.colContractId1.Name = "colContractId1";
-            this.colContractId1.Visible = true;
-            this.colContractId1.VisibleIndex = 0;
             // 
             // colContractName
             // 
+            this.colContractName.Caption = "合同名称";
             this.colContractName.FieldName = "ContractName";
             this.colContractName.Name = "colContractName";
             this.colContractName.Visible = true;
-            this.colContractName.VisibleIndex = 1;
+            this.colContractName.VisibleIndex = 0;
             // 
             // colStartTime
             // 
+            this.colStartTime.Caption = "开始日期";
             this.colStartTime.FieldName = "StartTime";
             this.colStartTime.Name = "colStartTime";
             this.colStartTime.Visible = true;
-            this.colStartTime.VisibleIndex = 2;
+            this.colStartTime.VisibleIndex = 1;
             // 
             // colEndTime
             // 
+            this.colEndTime.Caption = "结束日期";
             this.colEndTime.FieldName = "EndTime";
             this.colEndTime.Name = "colEndTime";
             this.colEndTime.Visible = true;
-            this.colEndTime.VisibleIndex = 3;
+            this.colEndTime.VisibleIndex = 2;
             // 
             // colColdFee
             // 
+            this.colColdFee.Caption = "冷藏费用(元)";
             this.colColdFee.FieldName = "ColdFee";
             this.colColdFee.Name = "colColdFee";
             this.colColdFee.Visible = true;
-            this.colColdFee.VisibleIndex = 4;
+            this.colColdFee.VisibleIndex = 3;
             // 
             // SettleForm
             // 
@@ -683,8 +685,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).EndInit();
             this.groupControl3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgcCold)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCold)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsCold)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCold)).EndInit();
             this.ResumeLayout(false);
 
         }

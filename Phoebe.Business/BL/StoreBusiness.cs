@@ -126,7 +126,7 @@ namespace Phoebe.Business
         public List<Store> GetByConditions(List<Func<Store, bool>> predicates)
         {
             IEnumerable<Store> data = this.dal.FindAll();
-            foreach(var item in predicates)
+            foreach (var item in predicates)
             {
                 data = data.Where(item);
             }
@@ -329,6 +329,45 @@ namespace Phoebe.Business
             {
                 var flow = SetStockFlow(item.SourceStore, item.Id, item.StockMove.FlowNumber, -item.Count, -item.MoveWeight, -item.MoveVolume, item.StockMove.MoveTime, StockFlowType.StockMoveOut);
                 data.Add(flow);
+            }
+
+            return data;
+        }
+
+        /// <summary>
+        /// 获取客户流水记录
+        /// </summary>
+        /// <param name="customerId">客户ID</param>
+        /// <returns></returns>
+        public List<StockFlow> GetCustomerFlow(int customerId, bool includeMove)
+        {
+            List<StockFlow> data = new List<StockFlow>();
+
+            // find stock in
+            var siDetails = RepositoryFactory<StockInDetailsRepository>.Instance.Find(r => r.StockIn.Contract.CustomerId == customerId && r.Status == (int)EntityStatus.StockIn);
+            foreach (var item in siDetails)
+            {
+                var flow = SetStockFlow(item.Store, item.Id, item.StockIn.FlowNumber, item.Count, item.InWeight, item.InVolume, item.StockIn.InTime, StockFlowType.StockIn);
+                data.Add(flow);
+            }
+
+            // find stock out
+            var soDetails = RepositoryFactory<StockOutDetailsRepository>.Instance.Find(r => r.StockOut.Contract.CustomerId == customerId && r.Status == (int)EntityStatus.StockOut);
+            foreach (var item in soDetails)
+            {
+                var flow = SetStockFlow(item.Store, item.Id, item.StockOut.FlowNumber, -item.Count, -item.OutWeight, -item.OutVolume, item.StockOut.OutTime, StockFlowType.StockOut);
+                data.Add(flow);
+            }
+
+            if (includeMove)
+            {
+                // find stock move
+                var smDetails = RepositoryFactory<StockMoveDetailsRepository>.Instance.Find(r => r.StockMove.Contract.CustomerId == customerId && r.Status == (int)EntityStatus.StockMove);
+                foreach (var item in smDetails)
+                {
+                    var flow = SetStockFlow(item.SourceStore, item.Id, item.StockMove.FlowNumber, item.Count, item.MoveWeight, item.MoveVolume, item.StockMove.MoveTime, StockFlowType.StockMove);
+                    data.Add(flow);
+                }
             }
 
             return data;

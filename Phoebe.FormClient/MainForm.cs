@@ -57,6 +57,16 @@ namespace Phoebe.FormClient
         }
 
         /// <summary>
+        /// 客户管理 - 客户综合
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void menuCustomerDashboard_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            ChildFormManage.LoadMdiForm(this, typeof(CustomerDashboardForm));
+        }
+
+        /// <summary>
         /// 合同管理 - 合同列表
         /// </summary>
         /// <param name="sender"></param>
