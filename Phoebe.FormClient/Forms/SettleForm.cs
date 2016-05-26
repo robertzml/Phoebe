@@ -38,6 +38,86 @@ namespace Phoebe.FormClient
         }
         #endregion //Constructor
 
+        #region Function
+        /// <summary>
+        /// 费用计算
+        /// </summary>
+        /// <returns>
+        /// 应付款
+        /// </returns>
+        private decimal CalculateFee()
+        {
+            decimal dueFee = this.nmSumFee.Value * this.nmDiscount.Value / 100 - this.nmRemission.Value;
+            this.txtDueFee.Text = Math.Round(dueFee, 2).ToString();
+
+            return dueFee;
+        }
+
+        /// <summary>
+        /// 设置实体
+        /// </summary>
+        /// <param name="settlement"></param>
+        private void SetEntity(Settlement settlement)
+        {
+            settlement.Id = Guid.NewGuid();
+            settlement.CustomerId = this.selectCustomer.Id;
+            settlement.StartTime = this.dpFrom.DateTime.Date;
+            settlement.EndTime = this.dpTo.DateTime.Date;
+            settlement.SumFee = this.nmSumFee.Value;
+            settlement.Discount = Convert.ToInt32(this.nmDiscount.Value);
+            settlement.Remission = this.nmRemission.Value;
+            settlement.DueFee = CalculateFee();
+            settlement.SettleTime = this.dpSettleTime.DateTime.Date;
+            settlement.UserId = this.currentUser.Id;
+            settlement.Remark = this.txtRemark.Text;
+            settlement.Status = (int)EntityStatus.Settled;
+        }
+
+        /// <summary>
+        /// 设置详细信息
+        /// </summary>
+        /// <param name="settlementId"></param>
+        /// <param name="details"></param>
+        private void SetDetails(Guid settlementId, List<SettlementDetail> details)
+        {
+            for (int i = 0; i < this.bsBilling.Count; i++)
+            {
+                var billing = this.bsBilling[i] as Billing;
+
+                SettlementDetail detail = new SettlementDetail();
+                detail.Id = Guid.NewGuid();
+                detail.SettlementId = settlementId;
+                detail.StockInId = billing.StockInId;
+                detail.ExpenseType = (int)ExpenseType.Base;
+                detail.SumFee = billing.TotalPrice;
+                detail.Status = (int)EntityStatus.Settled;
+
+                if (detail.SumFee == 0)
+                    continue;
+
+                details.Add(detail);
+            }
+
+            for (int i = 0; i < this.bsCold.Count; i++)
+            {
+                var cold = this.bsCold[i] as ColdSettlement;
+
+                SettlementDetail detail = new SettlementDetail();
+                detail.Id = Guid.NewGuid();
+                detail.SettlementId = settlementId;
+                detail.ContractId = cold.ContractId;
+                detail.ExpenseType = (int)ExpenseType.Cold;
+                detail.SumFee = cold.ColdFee;
+                detail.Status = (int)EntityStatus.Settled;
+
+                if (detail.SumFee == 0)
+                    continue;
+
+                details.Add(detail);
+            }
+        }
+        #endregion //Function
+
         #region Event
         /// <summary>
         /// 窗体载入
@@ -48,6 +128,7 @@ namespace Phoebe.FormClient
         {
             this.dpFrom.DateTime = DateTime.Now.Date;
             this.dpTo.DateTime = DateTime.Now.Date;
+            this.dpSettleTime.DateTime = DateTime.Now.Date;
 
             this.customerList = BusinessFactory<CustomerBusiness>.Instance.FindAll();
             this.clcCustomer.SetDataSource(customerList);
@@ -121,6 +202,11 @@ namespace Phoebe.FormClient
             var colds = BusinessFactory<BillingBusiness>.Instance.CalculateColdFee(this.selectCustomer.Id, this.dpFrom.DateTime.Date, this.dpTo.DateTime.Date);
             this.bsCold.DataSource = colds;
 
+            decimal totalPrice = billings.Sum(r => r.TotalPrice) + colds.Sum(r => r.ColdFee);
+            this.nmSumFee.Value = totalPrice;
+
+            CalculateFee();
+
             this.Cursor = Cursors.Default;
         }
 
@@ -142,6 +228,57 @@ namespace Phoebe.FormClient
                 e.DisplayText = billing.Contract.Name;
             }
         }
+
+        /// <summary>
+        /// 修改折扣率
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void nmDiscount_EditValueChanged(object sender, EventArgs e)
+        {
+            CalculateFee();
+        }
+
+        /// <summary>
+        /// 修改减免费用
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void nmRemission_EditValueChanged(object sender, EventArgs e)
+        {
+            CalculateFee();
+        }
+
+        /// <summary>
+        /// 保存
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if (this.selectCustomer == null)
+            {
+                MessageBox.Show("请选择客户", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            Settlement settlement = new Settlement();
+            SetEntity(settlement);
+
+            List<SettlementDetail> details = new List<SettlementDetail>();
+            SetDetails(settlement.Id, details);
+
+            ErrorCode result = BusinessFactory<SettlementBusiness>.Instance.Create(settlement, details);
+            if (result == ErrorCode.Success)
+            {
+                MessageBox.Show("保存结算成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("保存结算失败：" + result.DisplayName(), FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
         #endregion //Event
+
     }
 }

@@ -117,4 +117,22 @@ namespace Phoebe.Model
         [Display(Name = "移库")]
         StockMove = 1
     }
+
+    /// <summary>
+    /// 费用类型
+    /// </summary>
+    public enum ExpenseType
+    {
+        /// <summary>
+        /// 基本费用
+        /// </summary>
+        [Display(Name = "基本费用")]
+        Base = 1,
+
+        /// <summary>
+        /// 冷藏费用
+        /// </summary>
+        [Display(Name = "冷藏费用")]
+        Cold = 2
+    }
 }

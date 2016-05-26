@@ -397,5 +397,30 @@ namespace Phoebe.Business.DAL
             return ErrorCode.Success;
         }
         #endregion //StockMove Trans
+
+        #region Settlement Trans
+        /// <summary>
+        /// 结算添加业务
+        /// </summary>
+        /// <param name="settle">结算信息</param>
+        /// <param name="details">详细记录</param>
+        /// <returns></returns>
+        public ErrorCode SettlementAddTrans(Settlement settle, List<SettlementDetail> details)
+        {
+            try
+            {
+                this.context.Settlements.Add(settle);
+                this.context.SettlementDetails.AddRange(details);
+
+                this.context.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+
+            return ErrorCode.Success;
+        }
+        #endregion //Settlement Trans
     }
 }

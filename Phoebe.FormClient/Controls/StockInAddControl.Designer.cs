@@ -29,28 +29,6 @@
         private void InitializeComponent()
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
-            this.btnRemoveRow = new DevExpress.XtraEditors.SimpleButton();
-            this.btnAddRow = new DevExpress.XtraEditors.SimpleButton();
-            this.groupControl4 = new DevExpress.XtraEditors.GroupControl();
-            this.layoutControl3 = new DevExpress.XtraLayout.LayoutControl();
-            this.txtRemark = new DevExpress.XtraEditors.TextEdit();
-            this.txtStatus = new DevExpress.XtraEditors.TextEdit();
-            this.txtBillingType = new DevExpress.XtraEditors.TextEdit();
-            this.txtUser = new DevExpress.XtraEditors.TextEdit();
-            this.cmbContract = new DevExpress.XtraEditors.ImageComboBoxEdit();
-            this.dpInTime = new DevExpress.XtraEditors.DateEdit();
-            this.txtCustomerName = new DevExpress.XtraEditors.TextEdit();
-            this.txtCustomerNumber = new DevExpress.XtraEditors.TextEdit();
-            this.layoutControlGroup3 = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.btnCalc = new DevExpress.XtraEditors.SimpleButton();
@@ -76,34 +54,32 @@
             this.layoutControlItem17 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem18 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem19 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
+            this.btnRemoveRow = new DevExpress.XtraEditors.SimpleButton();
+            this.btnAddRow = new DevExpress.XtraEditors.SimpleButton();
             this.sigList = new Phoebe.FormClient.StockInGrid();
             this.clcCustomer = new Phoebe.FormClient.CustomerListControl();
             this.clcCategory = new Phoebe.FormClient.CategoryListControl();
+            this.groupControl4 = new DevExpress.XtraEditors.GroupControl();
+            this.layoutControl3 = new DevExpress.XtraLayout.LayoutControl();
+            this.txtRemark = new DevExpress.XtraEditors.TextEdit();
+            this.txtStatus = new DevExpress.XtraEditors.TextEdit();
+            this.txtBillingType = new DevExpress.XtraEditors.TextEdit();
+            this.txtUser = new DevExpress.XtraEditors.TextEdit();
+            this.cmbContract = new DevExpress.XtraEditors.ImageComboBoxEdit();
+            this.dpInTime = new DevExpress.XtraEditors.DateEdit();
+            this.txtCustomerName = new DevExpress.XtraEditors.TextEdit();
+            this.txtCustomerNumber = new DevExpress.XtraEditors.TextEdit();
+            this.layoutControlGroup3 = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
             this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).BeginInit();
-            this.groupControl3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).BeginInit();
-            this.groupControl4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControl3)).BeginInit();
-            this.layoutControl3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtRemark.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtStatus.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtBillingType.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtUser.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cmbContract.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dpInTime.Properties.CalendarTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dpInTime.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtCustomerName.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtCustomerNumber.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
@@ -130,6 +106,30 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem17)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem18)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem19)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).BeginInit();
+            this.groupControl3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).BeginInit();
+            this.groupControl4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControl3)).BeginInit();
+            this.layoutControl3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtRemark.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtStatus.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtBillingType.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtUser.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbContract.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dpInTime.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dpInTime.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCustomerName.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCustomerNumber.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -153,253 +153,6 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1100, 624);
             this.tableLayoutPanel1.TabIndex = 0;
-            // 
-            // groupControl3
-            // 
-            this.tableLayoutPanel1.SetColumnSpan(this.groupControl3, 3);
-            this.groupControl3.Controls.Add(this.btnRemoveRow);
-            this.groupControl3.Controls.Add(this.btnAddRow);
-            this.groupControl3.Controls.Add(this.sigList);
-            this.groupControl3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl3.Location = new System.Drawing.Point(3, 323);
-            this.groupControl3.Name = "groupControl3";
-            this.groupControl3.Size = new System.Drawing.Size(1094, 298);
-            this.groupControl3.TabIndex = 3;
-            this.groupControl3.Text = "货品信息";
-            // 
-            // btnRemoveRow
-            // 
-            this.btnRemoveRow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnRemoveRow.Location = new System.Drawing.Point(86, 270);
-            this.btnRemoveRow.Name = "btnRemoveRow";
-            this.btnRemoveRow.Size = new System.Drawing.Size(75, 23);
-            this.btnRemoveRow.TabIndex = 2;
-            this.btnRemoveRow.Text = "删除记录";
-            this.btnRemoveRow.Click += new System.EventHandler(this.btnRemoveRow_Click);
-            // 
-            // btnAddRow
-            // 
-            this.btnAddRow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnAddRow.Location = new System.Drawing.Point(5, 270);
-            this.btnAddRow.Name = "btnAddRow";
-            this.btnAddRow.Size = new System.Drawing.Size(75, 23);
-            this.btnAddRow.TabIndex = 1;
-            this.btnAddRow.Text = "添加记录";
-            this.btnAddRow.Click += new System.EventHandler(this.btnAddRow_Click);
-            // 
-            // groupControl4
-            // 
-            this.groupControl4.Controls.Add(this.layoutControl3);
-            this.groupControl4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl4.Location = new System.Drawing.Point(3, 3);
-            this.groupControl4.Name = "groupControl4";
-            this.groupControl4.Size = new System.Drawing.Size(694, 154);
-            this.groupControl4.TabIndex = 0;
-            this.groupControl4.Text = "基本信息";
-            // 
-            // layoutControl3
-            // 
-            this.layoutControl3.Controls.Add(this.txtRemark);
-            this.layoutControl3.Controls.Add(this.txtStatus);
-            this.layoutControl3.Controls.Add(this.txtBillingType);
-            this.layoutControl3.Controls.Add(this.txtUser);
-            this.layoutControl3.Controls.Add(this.cmbContract);
-            this.layoutControl3.Controls.Add(this.dpInTime);
-            this.layoutControl3.Controls.Add(this.txtCustomerName);
-            this.layoutControl3.Controls.Add(this.txtCustomerNumber);
-            this.layoutControl3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.layoutControl3.Location = new System.Drawing.Point(2, 21);
-            this.layoutControl3.Name = "layoutControl3";
-            this.layoutControl3.Root = this.layoutControlGroup3;
-            this.layoutControl3.Size = new System.Drawing.Size(690, 131);
-            this.layoutControl3.TabIndex = 0;
-            this.layoutControl3.Text = "layoutControl3";
-            // 
-            // txtRemark
-            // 
-            this.txtRemark.Location = new System.Drawing.Point(280, 65);
-            this.txtRemark.Name = "txtRemark";
-            this.txtRemark.Size = new System.Drawing.Size(173, 20);
-            this.txtRemark.StyleController = this.layoutControl3;
-            this.txtRemark.TabIndex = 7;
-            // 
-            // txtStatus
-            // 
-            this.txtStatus.Location = new System.Drawing.Point(58, 7);
-            this.txtStatus.Name = "txtStatus";
-            this.txtStatus.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
-            this.txtStatus.Properties.Appearance.Options.UseBackColor = true;
-            this.txtStatus.Properties.ReadOnly = true;
-            this.txtStatus.Size = new System.Drawing.Size(167, 20);
-            this.txtStatus.StyleController = this.layoutControl3;
-            this.txtStatus.TabIndex = 0;
-            // 
-            // txtBillingType
-            // 
-            this.txtBillingType.Location = new System.Drawing.Point(58, 65);
-            this.txtBillingType.Name = "txtBillingType";
-            this.txtBillingType.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
-            this.txtBillingType.Properties.Appearance.Options.UseBackColor = true;
-            this.txtBillingType.Properties.ReadOnly = true;
-            this.txtBillingType.Size = new System.Drawing.Size(167, 20);
-            this.txtBillingType.StyleController = this.layoutControl3;
-            this.txtBillingType.TabIndex = 6;
-            // 
-            // txtUser
-            // 
-            this.txtUser.Location = new System.Drawing.Point(508, 7);
-            this.txtUser.Name = "txtUser";
-            this.txtUser.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
-            this.txtUser.Properties.Appearance.Options.UseBackColor = true;
-            this.txtUser.Properties.ReadOnly = true;
-            this.txtUser.Size = new System.Drawing.Size(175, 20);
-            this.txtUser.StyleController = this.layoutControl3;
-            this.txtUser.TabIndex = 2;
-            // 
-            // cmbContract
-            // 
-            this.cmbContract.Location = new System.Drawing.Point(508, 36);
-            this.cmbContract.Name = "cmbContract";
-            this.cmbContract.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow;
-            this.cmbContract.Properties.Appearance.Options.UseBackColor = true;
-            this.cmbContract.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cmbContract.Size = new System.Drawing.Size(175, 20);
-            this.cmbContract.StyleController = this.layoutControl3;
-            this.cmbContract.TabIndex = 5;
-            this.cmbContract.EditValueChanged += new System.EventHandler(this.cmbContract_EditValueChanged);
-            // 
-            // dpInTime
-            // 
-            this.dpInTime.EditValue = null;
-            this.dpInTime.Location = new System.Drawing.Point(280, 7);
-            this.dpInTime.Name = "dpInTime";
-            this.dpInTime.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow;
-            this.dpInTime.Properties.Appearance.Options.UseBackColor = true;
-            this.dpInTime.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dpInTime.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dpInTime.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.dpInTime.Size = new System.Drawing.Size(173, 20);
-            this.dpInTime.StyleController = this.layoutControl3;
-            this.dpInTime.TabIndex = 1;
-            // 
-            // txtCustomerName
-            // 
-            this.txtCustomerName.Location = new System.Drawing.Point(280, 36);
-            this.txtCustomerName.Name = "txtCustomerName";
-            this.txtCustomerName.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
-            this.txtCustomerName.Properties.Appearance.Options.UseBackColor = true;
-            this.txtCustomerName.Properties.ReadOnly = true;
-            this.txtCustomerName.Size = new System.Drawing.Size(173, 20);
-            this.txtCustomerName.StyleController = this.layoutControl3;
-            this.txtCustomerName.TabIndex = 4;
-            // 
-            // txtCustomerNumber
-            // 
-            this.txtCustomerNumber.Location = new System.Drawing.Point(58, 36);
-            this.txtCustomerNumber.Name = "txtCustomerNumber";
-            this.txtCustomerNumber.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow;
-            this.txtCustomerNumber.Properties.Appearance.Options.UseBackColor = true;
-            this.txtCustomerNumber.Size = new System.Drawing.Size(167, 20);
-            this.txtCustomerNumber.StyleController = this.layoutControl3;
-            this.txtCustomerNumber.TabIndex = 3;
-            this.txtCustomerNumber.EditValueChanged += new System.EventHandler(this.txtCustomerNumber_EditValueChanged);
-            // 
-            // layoutControlGroup3
-            // 
-            this.layoutControlGroup3.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
-            this.layoutControlGroup3.GroupBordersVisible = false;
-            this.layoutControlGroup3.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem1,
-            this.layoutControlItem2,
-            this.layoutControlItem3,
-            this.layoutControlItem4,
-            this.layoutControlItem5,
-            this.layoutControlItem6,
-            this.layoutControlItem7,
-            this.layoutControlItem8});
-            this.layoutControlGroup3.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlGroup3.Name = "layoutControlGroup3";
-            this.layoutControlGroup3.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 5, 5, 5);
-            this.layoutControlGroup3.Size = new System.Drawing.Size(690, 131);
-            this.layoutControlGroup3.TextVisible = false;
-            // 
-            // layoutControlItem1
-            // 
-            this.layoutControlItem1.Control = this.txtStatus;
-            this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(222, 29);
-            this.layoutControlItem1.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 5);
-            this.layoutControlItem1.Text = "业务状态";
-            this.layoutControlItem1.TextSize = new System.Drawing.Size(48, 14);
-            // 
-            // layoutControlItem2
-            // 
-            this.layoutControlItem2.Control = this.dpInTime;
-            this.layoutControlItem2.Location = new System.Drawing.Point(222, 0);
-            this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(228, 29);
-            this.layoutControlItem2.Text = "业务日期";
-            this.layoutControlItem2.TextSize = new System.Drawing.Size(48, 14);
-            // 
-            // layoutControlItem3
-            // 
-            this.layoutControlItem3.Control = this.txtUser;
-            this.layoutControlItem3.Location = new System.Drawing.Point(450, 0);
-            this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(230, 29);
-            this.layoutControlItem3.Text = "业务员";
-            this.layoutControlItem3.TextSize = new System.Drawing.Size(48, 14);
-            // 
-            // layoutControlItem4
-            // 
-            this.layoutControlItem4.Control = this.txtCustomerNumber;
-            this.layoutControlItem4.Location = new System.Drawing.Point(0, 29);
-            this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(222, 29);
-            this.layoutControlItem4.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 5);
-            this.layoutControlItem4.Text = "客户代码";
-            this.layoutControlItem4.TextSize = new System.Drawing.Size(48, 14);
-            // 
-            // layoutControlItem5
-            // 
-            this.layoutControlItem5.Control = this.txtCustomerName;
-            this.layoutControlItem5.Location = new System.Drawing.Point(222, 29);
-            this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(228, 29);
-            this.layoutControlItem5.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 5);
-            this.layoutControlItem5.Text = "客户名称";
-            this.layoutControlItem5.TextSize = new System.Drawing.Size(48, 14);
-            // 
-            // layoutControlItem6
-            // 
-            this.layoutControlItem6.Control = this.cmbContract;
-            this.layoutControlItem6.Location = new System.Drawing.Point(450, 29);
-            this.layoutControlItem6.Name = "layoutControlItem6";
-            this.layoutControlItem6.Size = new System.Drawing.Size(230, 92);
-            this.layoutControlItem6.Text = "所属合同";
-            this.layoutControlItem6.TextSize = new System.Drawing.Size(48, 14);
-            // 
-            // layoutControlItem7
-            // 
-            this.layoutControlItem7.Control = this.txtBillingType;
-            this.layoutControlItem7.Location = new System.Drawing.Point(0, 58);
-            this.layoutControlItem7.Name = "layoutControlItem7";
-            this.layoutControlItem7.Size = new System.Drawing.Size(222, 63);
-            this.layoutControlItem7.Text = "计费方式";
-            this.layoutControlItem7.TextSize = new System.Drawing.Size(48, 14);
-            // 
-            // layoutControlItem8
-            // 
-            this.layoutControlItem8.Control = this.txtRemark;
-            this.layoutControlItem8.Location = new System.Drawing.Point(222, 58);
-            this.layoutControlItem8.Name = "layoutControlItem8";
-            this.layoutControlItem8.Size = new System.Drawing.Size(228, 63);
-            this.layoutControlItem8.Text = "备注";
-            this.layoutControlItem8.TextSize = new System.Drawing.Size(48, 14);
             // 
             // groupControl1
             // 
@@ -764,6 +517,39 @@
             this.layoutControlItem19.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem19.TextVisible = false;
             // 
+            // groupControl3
+            // 
+            this.tableLayoutPanel1.SetColumnSpan(this.groupControl3, 3);
+            this.groupControl3.Controls.Add(this.btnRemoveRow);
+            this.groupControl3.Controls.Add(this.btnAddRow);
+            this.groupControl3.Controls.Add(this.sigList);
+            this.groupControl3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupControl3.Location = new System.Drawing.Point(3, 323);
+            this.groupControl3.Name = "groupControl3";
+            this.groupControl3.Size = new System.Drawing.Size(1094, 298);
+            this.groupControl3.TabIndex = 3;
+            this.groupControl3.Text = "货品信息";
+            // 
+            // btnRemoveRow
+            // 
+            this.btnRemoveRow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnRemoveRow.Location = new System.Drawing.Point(86, 270);
+            this.btnRemoveRow.Name = "btnRemoveRow";
+            this.btnRemoveRow.Size = new System.Drawing.Size(75, 23);
+            this.btnRemoveRow.TabIndex = 2;
+            this.btnRemoveRow.Text = "删除记录";
+            this.btnRemoveRow.Click += new System.EventHandler(this.btnRemoveRow_Click);
+            // 
+            // btnAddRow
+            // 
+            this.btnAddRow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnAddRow.Location = new System.Drawing.Point(5, 270);
+            this.btnAddRow.Name = "btnAddRow";
+            this.btnAddRow.Size = new System.Drawing.Size(75, 23);
+            this.btnAddRow.TabIndex = 1;
+            this.btnAddRow.Text = "添加记录";
+            this.btnAddRow.Click += new System.EventHandler(this.btnAddRow_Click);
+            // 
             // sigList
             // 
             this.sigList.DataSource = null;
@@ -794,6 +580,220 @@
             this.clcCategory.Size = new System.Drawing.Size(194, 314);
             this.clcCategory.TabIndex = 4;
             // 
+            // groupControl4
+            // 
+            this.groupControl4.Controls.Add(this.layoutControl3);
+            this.groupControl4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupControl4.Location = new System.Drawing.Point(3, 3);
+            this.groupControl4.Name = "groupControl4";
+            this.groupControl4.Size = new System.Drawing.Size(694, 154);
+            this.groupControl4.TabIndex = 0;
+            this.groupControl4.Text = "基本信息";
+            // 
+            // layoutControl3
+            // 
+            this.layoutControl3.Controls.Add(this.txtRemark);
+            this.layoutControl3.Controls.Add(this.txtStatus);
+            this.layoutControl3.Controls.Add(this.txtBillingType);
+            this.layoutControl3.Controls.Add(this.txtUser);
+            this.layoutControl3.Controls.Add(this.cmbContract);
+            this.layoutControl3.Controls.Add(this.dpInTime);
+            this.layoutControl3.Controls.Add(this.txtCustomerName);
+            this.layoutControl3.Controls.Add(this.txtCustomerNumber);
+            this.layoutControl3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.layoutControl3.Location = new System.Drawing.Point(2, 21);
+            this.layoutControl3.Name = "layoutControl3";
+            this.layoutControl3.Root = this.layoutControlGroup3;
+            this.layoutControl3.Size = new System.Drawing.Size(690, 131);
+            this.layoutControl3.TabIndex = 0;
+            this.layoutControl3.Text = "layoutControl3";
+            // 
+            // txtRemark
+            // 
+            this.txtRemark.Location = new System.Drawing.Point(280, 65);
+            this.txtRemark.Name = "txtRemark";
+            this.txtRemark.Size = new System.Drawing.Size(173, 20);
+            this.txtRemark.StyleController = this.layoutControl3;
+            this.txtRemark.TabIndex = 7;
+            // 
+            // txtStatus
+            // 
+            this.txtStatus.Location = new System.Drawing.Point(58, 7);
+            this.txtStatus.Name = "txtStatus";
+            this.txtStatus.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
+            this.txtStatus.Properties.Appearance.Options.UseBackColor = true;
+            this.txtStatus.Properties.ReadOnly = true;
+            this.txtStatus.Size = new System.Drawing.Size(167, 20);
+            this.txtStatus.StyleController = this.layoutControl3;
+            this.txtStatus.TabIndex = 0;
+            // 
+            // txtBillingType
+            // 
+            this.txtBillingType.Location = new System.Drawing.Point(58, 65);
+            this.txtBillingType.Name = "txtBillingType";
+            this.txtBillingType.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
+            this.txtBillingType.Properties.Appearance.Options.UseBackColor = true;
+            this.txtBillingType.Properties.ReadOnly = true;
+            this.txtBillingType.Size = new System.Drawing.Size(167, 20);
+            this.txtBillingType.StyleController = this.layoutControl3;
+            this.txtBillingType.TabIndex = 6;
+            // 
+            // txtUser
+            // 
+            this.txtUser.Location = new System.Drawing.Point(508, 7);
+            this.txtUser.Name = "txtUser";
+            this.txtUser.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
+            this.txtUser.Properties.Appearance.Options.UseBackColor = true;
+            this.txtUser.Properties.ReadOnly = true;
+            this.txtUser.Size = new System.Drawing.Size(175, 20);
+            this.txtUser.StyleController = this.layoutControl3;
+            this.txtUser.TabIndex = 2;
+            // 
+            // cmbContract
+            // 
+            this.cmbContract.Location = new System.Drawing.Point(508, 36);
+            this.cmbContract.Name = "cmbContract";
+            this.cmbContract.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow;
+            this.cmbContract.Properties.Appearance.Options.UseBackColor = true;
+            this.cmbContract.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cmbContract.Size = new System.Drawing.Size(175, 20);
+            this.cmbContract.StyleController = this.layoutControl3;
+            this.cmbContract.TabIndex = 5;
+            this.cmbContract.EditValueChanged += new System.EventHandler(this.cmbContract_EditValueChanged);
+            // 
+            // dpInTime
+            // 
+            this.dpInTime.EditValue = null;
+            this.dpInTime.Location = new System.Drawing.Point(280, 7);
+            this.dpInTime.Name = "dpInTime";
+            this.dpInTime.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow;
+            this.dpInTime.Properties.Appearance.Options.UseBackColor = true;
+            this.dpInTime.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dpInTime.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dpInTime.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.dpInTime.Size = new System.Drawing.Size(173, 20);
+            this.dpInTime.StyleController = this.layoutControl3;
+            this.dpInTime.TabIndex = 1;
+            // 
+            // txtCustomerName
+            // 
+            this.txtCustomerName.Location = new System.Drawing.Point(280, 36);
+            this.txtCustomerName.Name = "txtCustomerName";
+            this.txtCustomerName.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
+            this.txtCustomerName.Properties.Appearance.Options.UseBackColor = true;
+            this.txtCustomerName.Properties.ReadOnly = true;
+            this.txtCustomerName.Size = new System.Drawing.Size(173, 20);
+            this.txtCustomerName.StyleController = this.layoutControl3;
+            this.txtCustomerName.TabIndex = 4;
+            // 
+            // txtCustomerNumber
+            // 
+            this.txtCustomerNumber.Location = new System.Drawing.Point(58, 36);
+            this.txtCustomerNumber.Name = "txtCustomerNumber";
+            this.txtCustomerNumber.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow;
+            this.txtCustomerNumber.Properties.Appearance.Options.UseBackColor = true;
+            this.txtCustomerNumber.Size = new System.Drawing.Size(167, 20);
+            this.txtCustomerNumber.StyleController = this.layoutControl3;
+            this.txtCustomerNumber.TabIndex = 3;
+            this.txtCustomerNumber.EditValueChanged += new System.EventHandler(this.txtCustomerNumber_EditValueChanged);
+            // 
+            // layoutControlGroup3
+            // 
+            this.layoutControlGroup3.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+            this.layoutControlGroup3.GroupBordersVisible = false;
+            this.layoutControlGroup3.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem1,
+            this.layoutControlItem2,
+            this.layoutControlItem3,
+            this.layoutControlItem4,
+            this.layoutControlItem5,
+            this.layoutControlItem6,
+            this.layoutControlItem7,
+            this.layoutControlItem8});
+            this.layoutControlGroup3.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlGroup3.Name = "layoutControlGroup3";
+            this.layoutControlGroup3.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 5, 5, 5);
+            this.layoutControlGroup3.Size = new System.Drawing.Size(690, 131);
+            this.layoutControlGroup3.TextVisible = false;
+            // 
+            // layoutControlItem1
+            // 
+            this.layoutControlItem1.Control = this.txtStatus;
+            this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem1.Name = "layoutControlItem1";
+            this.layoutControlItem1.Size = new System.Drawing.Size(222, 29);
+            this.layoutControlItem1.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 5);
+            this.layoutControlItem1.Text = "业务状态";
+            this.layoutControlItem1.TextSize = new System.Drawing.Size(48, 14);
+            // 
+            // layoutControlItem2
+            // 
+            this.layoutControlItem2.Control = this.dpInTime;
+            this.layoutControlItem2.Location = new System.Drawing.Point(222, 0);
+            this.layoutControlItem2.Name = "layoutControlItem2";
+            this.layoutControlItem2.Size = new System.Drawing.Size(228, 29);
+            this.layoutControlItem2.Text = "业务日期";
+            this.layoutControlItem2.TextSize = new System.Drawing.Size(48, 14);
+            // 
+            // layoutControlItem3
+            // 
+            this.layoutControlItem3.Control = this.txtUser;
+            this.layoutControlItem3.Location = new System.Drawing.Point(450, 0);
+            this.layoutControlItem3.Name = "layoutControlItem3";
+            this.layoutControlItem3.Size = new System.Drawing.Size(230, 29);
+            this.layoutControlItem3.Text = "业务员";
+            this.layoutControlItem3.TextSize = new System.Drawing.Size(48, 14);
+            // 
+            // layoutControlItem4
+            // 
+            this.layoutControlItem4.Control = this.txtCustomerNumber;
+            this.layoutControlItem4.Location = new System.Drawing.Point(0, 29);
+            this.layoutControlItem4.Name = "layoutControlItem4";
+            this.layoutControlItem4.Size = new System.Drawing.Size(222, 29);
+            this.layoutControlItem4.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 5);
+            this.layoutControlItem4.Text = "客户代码";
+            this.layoutControlItem4.TextSize = new System.Drawing.Size(48, 14);
+            // 
+            // layoutControlItem5
+            // 
+            this.layoutControlItem5.Control = this.txtCustomerName;
+            this.layoutControlItem5.Location = new System.Drawing.Point(222, 29);
+            this.layoutControlItem5.Name = "layoutControlItem5";
+            this.layoutControlItem5.Size = new System.Drawing.Size(228, 29);
+            this.layoutControlItem5.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 5);
+            this.layoutControlItem5.Text = "客户名称";
+            this.layoutControlItem5.TextSize = new System.Drawing.Size(48, 14);
+            // 
+            // layoutControlItem6
+            // 
+            this.layoutControlItem6.Control = this.cmbContract;
+            this.layoutControlItem6.Location = new System.Drawing.Point(450, 29);
+            this.layoutControlItem6.Name = "layoutControlItem6";
+            this.layoutControlItem6.Size = new System.Drawing.Size(230, 92);
+            this.layoutControlItem6.Text = "所属合同";
+            this.layoutControlItem6.TextSize = new System.Drawing.Size(48, 14);
+            // 
+            // layoutControlItem7
+            // 
+            this.layoutControlItem7.Control = this.txtBillingType;
+            this.layoutControlItem7.Location = new System.Drawing.Point(0, 58);
+            this.layoutControlItem7.Name = "layoutControlItem7";
+            this.layoutControlItem7.Size = new System.Drawing.Size(222, 63);
+            this.layoutControlItem7.Text = "计费方式";
+            this.layoutControlItem7.TextSize = new System.Drawing.Size(48, 14);
+            // 
+            // layoutControlItem8
+            // 
+            this.layoutControlItem8.Control = this.txtRemark;
+            this.layoutControlItem8.Location = new System.Drawing.Point(222, 58);
+            this.layoutControlItem8.Name = "layoutControlItem8";
+            this.layoutControlItem8.Size = new System.Drawing.Size(228, 63);
+            this.layoutControlItem8.Text = "备注";
+            this.layoutControlItem8.TextSize = new System.Drawing.Size(48, 14);
+            // 
             // StockInAddControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -802,30 +802,6 @@
             this.Name = "StockInAddControl";
             this.Size = new System.Drawing.Size(1100, 624);
             this.tableLayoutPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).EndInit();
-            this.groupControl3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).EndInit();
-            this.groupControl4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControl3)).EndInit();
-            this.layoutControl3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.txtRemark.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtStatus.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtBillingType.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtUser.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cmbContract.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dpInTime.Properties.CalendarTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dpInTime.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtCustomerName.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtCustomerNumber.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
             this.groupControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
@@ -852,6 +828,30 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem17)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem18)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem19)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).EndInit();
+            this.groupControl3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).EndInit();
+            this.groupControl4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControl3)).EndInit();
+            this.layoutControl3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.txtRemark.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtStatus.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtBillingType.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtUser.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbContract.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dpInTime.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dpInTime.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCustomerName.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCustomerNumber.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).EndInit();
             this.ResumeLayout(false);
 
         }
