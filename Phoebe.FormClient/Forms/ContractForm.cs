@@ -60,7 +60,7 @@ namespace Phoebe.FormClient
         }
 
         /// <summary>
-        /// 自定义数据显示
+        /// 格式化数据显示
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

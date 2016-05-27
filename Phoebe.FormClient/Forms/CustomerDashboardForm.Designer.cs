@@ -28,249 +28,299 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
-            this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
-            this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.txtCustomerNumber = new DevExpress.XtraEditors.TextEdit();
-            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.txtCustomerName = new DevExpress.XtraEditors.TextEdit();
-            this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
-            this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
-            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.sgList = new Phoebe.FormClient.StoreGrid();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CustomerDashboardForm));
+            this.accMain = new DevExpress.XtraBars.Navigation.AccordionControl();
+            this.accordionControlElement1 = new DevExpress.XtraBars.Navigation.AccordionControlElement();
+            this.aceCustomerInfo = new DevExpress.XtraBars.Navigation.AccordionControlElement();
+            this.accordionControlElement4 = new DevExpress.XtraBars.Navigation.AccordionControlElement();
+            this.accordionControlElement2 = new DevExpress.XtraBars.Navigation.AccordionControlElement();
+            this.aceStoreIn = new DevExpress.XtraBars.Navigation.AccordionControlElement();
+            this.aceFlows = new DevExpress.XtraBars.Navigation.AccordionControlElement();
+            this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            this.layoutControl2 = new DevExpress.XtraLayout.LayoutControl();
             this.clcCustomer = new Phoebe.FormClient.CustomerListControl();
-            this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
-            this.sfgList = new Phoebe.FormClient.StockFlowGrid();
-            this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
-            this.groupControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
-            this.layoutControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtCustomerNumber.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
+            this.btnConfirm = new DevExpress.XtraEditors.SimpleButton();
+            this.txtCustomerName = new DevExpress.XtraEditors.TextEdit();
+            this.txtCustomerNumber = new DevExpress.XtraEditors.TextEdit();
+            this.layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.plBody = new DevExpress.XtraEditors.PanelControl();
+            this.plContent = new DevExpress.XtraEditors.PanelControl();
+            this.lblCustomer = new DevExpress.XtraEditors.LabelControl();
+            ((System.ComponentModel.ISupportInitialize)(this.accMain)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
+            this.panelControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControl2)).BeginInit();
+            this.layoutControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtCustomerName.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCustomerNumber.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
-            this.groupControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).BeginInit();
-            this.groupControl3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.plBody)).BeginInit();
+            this.plBody.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.plContent)).BeginInit();
             this.SuspendLayout();
             // 
-            // tableLayoutPanel1
+            // accMain
             // 
-            this.tableLayoutPanel1.ColumnCount = 3;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 201F));
-            this.tableLayoutPanel1.Controls.Add(this.groupControl1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.groupControl2, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.clcCustomer, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.groupControl3, 0, 2);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 3;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 150F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(931, 538);
-            this.tableLayoutPanel1.TabIndex = 0;
+            this.accMain.AllowItemSelection = true;
+            this.accMain.Dock = System.Windows.Forms.DockStyle.Left;
+            this.accMain.Elements.AddRange(new DevExpress.XtraBars.Navigation.AccordionControlElement[] {
+            this.accordionControlElement1,
+            this.accordionControlElement2});
+            this.accMain.Location = new System.Drawing.Point(0, 0);
+            this.accMain.Name = "accMain";
+            this.accMain.Size = new System.Drawing.Size(160, 538);
+            this.accMain.TabIndex = 1;
+            this.accMain.Text = "accordionControl1";
+            this.accMain.ElementClick += new DevExpress.XtraBars.Navigation.ElementClickEventHandler(this.accMain_ElementClick);
             // 
-            // groupControl1
+            // accordionControlElement1
             // 
-            this.groupControl1.Controls.Add(this.layoutControl1);
-            this.groupControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl1.Location = new System.Drawing.Point(3, 3);
-            this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(359, 144);
-            this.groupControl1.TabIndex = 0;
-            this.groupControl1.Text = "客户选择";
+            this.accordionControlElement1.Elements.AddRange(new DevExpress.XtraBars.Navigation.AccordionControlElement[] {
+            this.aceCustomerInfo,
+            this.accordionControlElement4});
+            this.accordionControlElement1.Expanded = true;
+            this.accordionControlElement1.Image = ((System.Drawing.Image)(resources.GetObject("accordionControlElement1.Image")));
+            this.accordionControlElement1.Text = "常规";
             // 
-            // layoutControl1
+            // aceCustomerInfo
             // 
-            this.layoutControl1.Controls.Add(this.btnSearch);
-            this.layoutControl1.Controls.Add(this.txtCustomerName);
-            this.layoutControl1.Controls.Add(this.txtCustomerNumber);
-            this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.layoutControl1.Location = new System.Drawing.Point(2, 21);
-            this.layoutControl1.Name = "layoutControl1";
-            this.layoutControl1.Root = this.layoutControlGroup1;
-            this.layoutControl1.Size = new System.Drawing.Size(355, 121);
-            this.layoutControl1.TabIndex = 0;
-            this.layoutControl1.Text = "layoutControl1";
+            this.aceCustomerInfo.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
+            this.aceCustomerInfo.Tag = "UscCustomerInfo";
+            this.aceCustomerInfo.Text = "客户信息";
             // 
-            // layoutControlGroup1
+            // accordionControlElement4
             // 
-            this.layoutControlGroup1.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
-            this.layoutControlGroup1.GroupBordersVisible = false;
-            this.layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem1,
-            this.layoutControlItem2,
-            this.layoutControlItem3});
-            this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlGroup1.Name = "layoutControlGroup1";
-            this.layoutControlGroup1.Size = new System.Drawing.Size(355, 121);
-            this.layoutControlGroup1.TextVisible = false;
+            this.accordionControlElement4.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
+            this.accordionControlElement4.Tag = "UscCustomerContract";
+            this.accordionControlElement4.Text = "合同信息";
+            // 
+            // accordionControlElement2
+            // 
+            this.accordionControlElement2.Elements.AddRange(new DevExpress.XtraBars.Navigation.AccordionControlElement[] {
+            this.aceStoreIn,
+            this.aceFlows});
+            this.accordionControlElement2.Expanded = true;
+            this.accordionControlElement2.Text = "库存";
+            // 
+            // aceStoreIn
+            // 
+            this.aceStoreIn.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
+            this.aceStoreIn.Tag = "UscCustomerStoreIn";
+            this.aceStoreIn.Text = "在库库存";
+            // 
+            // aceFlows
+            // 
+            this.aceFlows.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
+            this.aceFlows.Tag = "UscCustomerFlow";
+            this.aceFlows.Text = "流水记录";
+            // 
+            // panelControl1
+            // 
+            this.panelControl1.Controls.Add(this.layoutControl2);
+            this.panelControl1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panelControl1.Location = new System.Drawing.Point(731, 0);
+            this.panelControl1.Name = "panelControl1";
+            this.panelControl1.Size = new System.Drawing.Size(200, 538);
+            this.panelControl1.TabIndex = 2;
+            // 
+            // layoutControl2
+            // 
+            this.layoutControl2.Controls.Add(this.clcCustomer);
+            this.layoutControl2.Controls.Add(this.btnConfirm);
+            this.layoutControl2.Controls.Add(this.txtCustomerName);
+            this.layoutControl2.Controls.Add(this.txtCustomerNumber);
+            this.layoutControl2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.layoutControl2.Location = new System.Drawing.Point(2, 2);
+            this.layoutControl2.Name = "layoutControl2";
+            this.layoutControl2.Root = this.layoutControlGroup2;
+            this.layoutControl2.Size = new System.Drawing.Size(196, 534);
+            this.layoutControl2.TabIndex = 0;
+            this.layoutControl2.Text = "layoutControl2";
+            // 
+            // clcCustomer
+            // 
+            this.clcCustomer.Location = new System.Drawing.Point(7, 125);
+            this.clcCustomer.Name = "clcCustomer";
+            this.clcCustomer.Size = new System.Drawing.Size(182, 402);
+            this.clcCustomer.TabIndex = 7;
+            this.clcCustomer.CustomerItemSelected += new Phoebe.FormClient.CustomerListControl.ItemSelectHandle(this.clcCustomer_CustomerItemSelected);
+            // 
+            // btnConfirm
+            // 
+            this.btnConfirm.Location = new System.Drawing.Point(7, 89);
+            this.btnConfirm.Name = "btnConfirm";
+            this.btnConfirm.Size = new System.Drawing.Size(182, 22);
+            this.btnConfirm.StyleController = this.layoutControl2;
+            this.btnConfirm.TabIndex = 6;
+            this.btnConfirm.Text = "确定";
+            this.btnConfirm.Click += new System.EventHandler(this.btnConfirm_Click);
+            // 
+            // txtCustomerName
+            // 
+            this.txtCustomerName.Location = new System.Drawing.Point(7, 65);
+            this.txtCustomerName.Name = "txtCustomerName";
+            this.txtCustomerName.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
+            this.txtCustomerName.Properties.Appearance.Options.UseBackColor = true;
+            this.txtCustomerName.Properties.ReadOnly = true;
+            this.txtCustomerName.Size = new System.Drawing.Size(182, 20);
+            this.txtCustomerName.StyleController = this.layoutControl2;
+            this.txtCustomerName.TabIndex = 5;
             // 
             // txtCustomerNumber
             // 
-            this.txtCustomerNumber.Location = new System.Drawing.Point(64, 12);
+            this.txtCustomerNumber.Location = new System.Drawing.Point(7, 24);
             this.txtCustomerNumber.Name = "txtCustomerNumber";
-            this.txtCustomerNumber.Size = new System.Drawing.Size(103, 20);
-            this.txtCustomerNumber.StyleController = this.layoutControl1;
+            this.txtCustomerNumber.Size = new System.Drawing.Size(182, 20);
+            this.txtCustomerNumber.StyleController = this.layoutControl2;
             this.txtCustomerNumber.TabIndex = 4;
             this.txtCustomerNumber.EditValueChanged += new System.EventHandler(this.txtCustomerNumber_EditValueChanged);
+            // 
+            // layoutControlGroup2
+            // 
+            this.layoutControlGroup2.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+            this.layoutControlGroup2.GroupBordersVisible = false;
+            this.layoutControlGroup2.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem1,
+            this.layoutControlItem2,
+            this.layoutControlItem3,
+            this.layoutControlItem4});
+            this.layoutControlGroup2.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlGroup2.Name = "layoutControlGroup2";
+            this.layoutControlGroup2.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 5, 5, 5);
+            this.layoutControlGroup2.Size = new System.Drawing.Size(196, 534);
+            this.layoutControlGroup2.TextVisible = false;
             // 
             // layoutControlItem1
             // 
             this.layoutControlItem1.Control = this.txtCustomerNumber;
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(159, 101);
+            this.layoutControlItem1.Size = new System.Drawing.Size(186, 41);
             this.layoutControlItem1.Text = "客户代码";
+            this.layoutControlItem1.TextLocation = DevExpress.Utils.Locations.Top;
             this.layoutControlItem1.TextSize = new System.Drawing.Size(48, 14);
-            // 
-            // txtCustomerName
-            // 
-            this.txtCustomerName.Location = new System.Drawing.Point(223, 12);
-            this.txtCustomerName.Name = "txtCustomerName";
-            this.txtCustomerName.Properties.ReadOnly = true;
-            this.txtCustomerName.Size = new System.Drawing.Size(120, 20);
-            this.txtCustomerName.StyleController = this.layoutControl1;
-            this.txtCustomerName.TabIndex = 5;
             // 
             // layoutControlItem2
             // 
             this.layoutControlItem2.Control = this.txtCustomerName;
-            this.layoutControlItem2.Location = new System.Drawing.Point(159, 0);
+            this.layoutControlItem2.Location = new System.Drawing.Point(0, 41);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(176, 24);
-            this.layoutControlItem2.Text = "客户姓名";
+            this.layoutControlItem2.Size = new System.Drawing.Size(186, 41);
+            this.layoutControlItem2.Text = "客户名称";
+            this.layoutControlItem2.TextLocation = DevExpress.Utils.Locations.Top;
             this.layoutControlItem2.TextSize = new System.Drawing.Size(48, 14);
-            // 
-            // groupControl2
-            // 
-            this.tableLayoutPanel1.SetColumnSpan(this.groupControl2, 2);
-            this.groupControl2.Controls.Add(this.sgList);
-            this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl2.Location = new System.Drawing.Point(3, 153);
-            this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(724, 188);
-            this.groupControl2.TabIndex = 1;
-            this.groupControl2.Text = "在库库存";
-            // 
-            // btnSearch
-            // 
-            this.btnSearch.Location = new System.Drawing.Point(171, 36);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(172, 22);
-            this.btnSearch.StyleController = this.layoutControl1;
-            this.btnSearch.TabIndex = 6;
-            this.btnSearch.Text = "查询";
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // layoutControlItem3
             // 
-            this.layoutControlItem3.Control = this.btnSearch;
-            this.layoutControlItem3.Location = new System.Drawing.Point(159, 24);
+            this.layoutControlItem3.Control = this.btnConfirm;
+            this.layoutControlItem3.Location = new System.Drawing.Point(0, 82);
             this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(176, 77);
+            this.layoutControlItem3.Size = new System.Drawing.Size(186, 36);
+            this.layoutControlItem3.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 10);
             this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem3.TextVisible = false;
             // 
-            // sgList
+            // layoutControlItem4
             // 
-            this.sgList.DataSource = null;
-            this.sgList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.sgList.EnableColumn = true;
-            this.sgList.EnableFilter = true;
-            this.sgList.EnableFind = false;
-            this.sgList.EnableGroup = false;
-            this.sgList.Location = new System.Drawing.Point(2, 21);
-            this.sgList.Name = "sgList";
-            this.sgList.ShowContract = true;
-            this.sgList.ShowCustomer = false;
-            this.sgList.ShowFooter = true;
-            this.sgList.Size = new System.Drawing.Size(720, 165);
-            this.sgList.TabIndex = 0;
+            this.layoutControlItem4.Control = this.clcCustomer;
+            this.layoutControlItem4.Location = new System.Drawing.Point(0, 118);
+            this.layoutControlItem4.Name = "layoutControlItem4";
+            this.layoutControlItem4.Size = new System.Drawing.Size(186, 406);
+            this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem4.TextVisible = false;
             // 
-            // clcCustomer
+            // plBody
             // 
-            this.clcCustomer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.clcCustomer.Location = new System.Drawing.Point(733, 3);
-            this.clcCustomer.Name = "clcCustomer";
-            this.clcCustomer.Size = new System.Drawing.Size(195, 144);
-            this.clcCustomer.TabIndex = 2;
-            this.clcCustomer.CustomerItemSelected += new Phoebe.FormClient.CustomerListControl.ItemSelectHandle(this.clcCustomer_CustomerItemSelected);
+            this.plBody.Controls.Add(this.plContent);
+            this.plBody.Controls.Add(this.lblCustomer);
+            this.plBody.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.plBody.Location = new System.Drawing.Point(160, 0);
+            this.plBody.Name = "plBody";
+            this.plBody.Size = new System.Drawing.Size(571, 538);
+            this.plBody.TabIndex = 3;
             // 
-            // groupControl3
+            // plContent
             // 
-            this.tableLayoutPanel1.SetColumnSpan(this.groupControl3, 2);
-            this.groupControl3.Controls.Add(this.sfgList);
-            this.groupControl3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl3.Location = new System.Drawing.Point(3, 347);
-            this.groupControl3.Name = "groupControl3";
-            this.groupControl3.Size = new System.Drawing.Size(724, 188);
-            this.groupControl3.TabIndex = 3;
-            this.groupControl3.Text = "流水记录";
+            this.plContent.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.plContent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.plContent.Location = new System.Drawing.Point(2, 30);
+            this.plContent.Name = "plContent";
+            this.plContent.Size = new System.Drawing.Size(567, 506);
+            this.plContent.TabIndex = 1;
             // 
-            // sfgList
+            // lblCustomer
             // 
-            this.sfgList.DataSource = null;
-            this.sfgList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.sfgList.Location = new System.Drawing.Point(2, 21);
-            this.sfgList.Name = "sfgList";
-            this.sfgList.Size = new System.Drawing.Size(720, 165);
-            this.sfgList.TabIndex = 0;
+            this.lblCustomer.Appearance.Font = new System.Drawing.Font("新宋体", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblCustomer.Appearance.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.lblCustomer.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+            this.lblCustomer.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblCustomer.Location = new System.Drawing.Point(2, 2);
+            this.lblCustomer.Name = "lblCustomer";
+            this.lblCustomer.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.lblCustomer.Size = new System.Drawing.Size(567, 28);
+            this.lblCustomer.TabIndex = 0;
+            this.lblCustomer.Text = "当前客户：";
             // 
             // CustomerDashboardForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(931, 538);
-            this.Controls.Add(this.tableLayoutPanel1);
+            this.Controls.Add(this.plBody);
+            this.Controls.Add(this.panelControl1);
+            this.Controls.Add(this.accMain);
             this.Name = "CustomerDashboardForm";
             this.Text = "客户综合";
             this.Load += new System.EventHandler(this.CustomerDashboardForm_Load);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
-            this.groupControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
-            this.layoutControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtCustomerNumber.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.accMain)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
+            this.panelControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControl2)).EndInit();
+            this.layoutControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.txtCustomerName.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCustomerNumber.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
-            this.groupControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).EndInit();
-            this.groupControl3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.plBody)).EndInit();
+            this.plBody.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.plContent)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private DevExpress.XtraEditors.GroupControl groupControl1;
-        private DevExpress.XtraLayout.LayoutControl layoutControl1;
+        private DevExpress.XtraBars.Navigation.AccordionControl accMain;
+        private DevExpress.XtraBars.Navigation.AccordionControlElement accordionControlElement1;
+        private DevExpress.XtraBars.Navigation.AccordionControlElement accordionControlElement2;
+        private DevExpress.XtraEditors.PanelControl panelControl1;
+        private DevExpress.XtraLayout.LayoutControl layoutControl2;
+        private DevExpress.XtraEditors.SimpleButton btnConfirm;
         private DevExpress.XtraEditors.TextEdit txtCustomerName;
         private DevExpress.XtraEditors.TextEdit txtCustomerNumber;
-        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup1;
+        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup2;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
-        private DevExpress.XtraEditors.GroupControl groupControl2;
-        private DevExpress.XtraEditors.SimpleButton btnSearch;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
-        private StoreGrid sgList;
         private CustomerListControl clcCustomer;
-        private DevExpress.XtraEditors.GroupControl groupControl3;
-        private StockFlowGrid sfgList;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
+        private DevExpress.XtraBars.Navigation.AccordionControlElement aceCustomerInfo;
+        private DevExpress.XtraBars.Navigation.AccordionControlElement accordionControlElement4;
+        private DevExpress.XtraEditors.PanelControl plBody;
+        private DevExpress.XtraEditors.PanelControl plContent;
+        private DevExpress.XtraEditors.LabelControl lblCustomer;
+        private DevExpress.XtraBars.Navigation.AccordionControlElement aceStoreIn;
+        private DevExpress.XtraBars.Navigation.AccordionControlElement aceFlows;
     }
 }

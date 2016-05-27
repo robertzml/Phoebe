@@ -251,6 +251,7 @@
             this.dpTo.EditValue = null;
             this.dpTo.Location = new System.Drawing.Point(570, 12);
             this.dpTo.Name = "dpTo";
+            this.dpTo.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.dpTo.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dpTo.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -265,6 +266,7 @@
             this.dpFrom.EditValue = null;
             this.dpFrom.Location = new System.Drawing.Point(379, 12);
             this.dpFrom.Name = "dpFrom";
+            this.dpFrom.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.dpFrom.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dpFrom.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -805,6 +807,7 @@
             this.dpSettleTime.EditValue = null;
             this.dpSettleTime.Location = new System.Drawing.Point(63, 12);
             this.dpSettleTime.Name = "dpSettleTime";
+            this.dpSettleTime.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.dpSettleTime.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dpSettleTime.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {

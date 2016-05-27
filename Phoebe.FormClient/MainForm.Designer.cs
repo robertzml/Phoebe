@@ -158,7 +158,6 @@
             this.menuCustomerDashboard.Caption = "客户综合";
             this.menuCustomerDashboard.Id = 29;
             this.menuCustomerDashboard.Name = "menuCustomerDashboard";
-            this.menuCustomerDashboard.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             this.menuCustomerDashboard.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuCustomerDashboard_ItemClick);
             // 
             // menuContract

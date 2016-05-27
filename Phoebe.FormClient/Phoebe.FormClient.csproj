@@ -160,8 +160,32 @@
     <Compile Include="Forms\ChangePasswordForm.Designer.cs">
       <DependentUpon>ChangePasswordForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Other\GlobalControl.cs" />
-    <Compile Include="Other\FormConstant.cs" />
+    <Compile Include="Base\UscBaseCustomer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Base\UscBaseCustomer.Designer.cs">
+      <DependentUpon>UscBaseCustomer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard\UscCustomerStoreIn.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Dashboard\UscCustomerStoreIn.Designer.cs">
+      <DependentUpon>UscCustomerStoreIn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard\UscCustomerFlow.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Dashboard\UscCustomerFlow.Designer.cs">
+      <DependentUpon>UscCustomerFlow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard\UscCustomerContract.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Dashboard\UscCustomerContract.Designer.cs">
+      <DependentUpon>UscCustomerContract.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Utils\GlobalControl.cs" />
+    <Compile Include="Utils\FormConstant.cs" />
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -326,7 +350,25 @@
     <Compile Include="Forms\SettleListForm.Designer.cs">
       <DependentUpon>SettleListForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dashboard\UscCustomerInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Dashboard\UscCustomerInfo.Designer.cs">
+      <DependentUpon>UscCustomerInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utils\ModelTranslate.cs" />
+    <EmbeddedResource Include="Dashboard\UscCustomerContract.resx">
+      <DependentUpon>UscCustomerContract.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dashboard\UscCustomerFlow.resx">
+      <DependentUpon>UscCustomerFlow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dashboard\UscCustomerInfo.resx">
+      <DependentUpon>UscCustomerInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dashboard\UscCustomerStoreIn.resx">
+      <DependentUpon>UscCustomerStoreIn.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\ColdPriceForm.resx">
       <DependentUpon>ColdPriceForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -623,6 +665,7 @@
   <ItemGroup>
     <None Include="Resources\BOSale_32x32.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
