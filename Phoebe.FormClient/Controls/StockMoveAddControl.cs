@@ -141,9 +141,9 @@ namespace Phoebe.FormClient
                     errorMessage = "移库数量大于在库数量";
                     return ErrorCode.Error;
                 }
-                if (item.InTime > this.dpMoveTime.DateTime.Date)
+                if (item.MoveTime > this.dpMoveTime.DateTime.Date)
                 {
-                    errorMessage = "移库时间早于货品入库时间";
+                    errorMessage = "移库时间早于货品移入时间";
                     return ErrorCode.Error;
                 }
                 if (string.IsNullOrEmpty(item.NewWarehouseNumber))

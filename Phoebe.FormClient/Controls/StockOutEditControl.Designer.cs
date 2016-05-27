@@ -134,7 +134,7 @@
             // 
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 350F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 300F));
             this.tableLayoutPanel1.Controls.Add(this.groupControl3, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.groupControl1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.groupControl2, 0, 1);
@@ -154,9 +154,9 @@
             // 
             this.groupControl3.Controls.Add(this.layoutControl2);
             this.groupControl3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl3.Location = new System.Drawing.Point(653, 163);
+            this.groupControl3.Location = new System.Drawing.Point(703, 163);
             this.groupControl3.Name = "groupControl3";
-            this.groupControl3.Size = new System.Drawing.Size(344, 214);
+            this.groupControl3.Size = new System.Drawing.Size(294, 214);
             this.groupControl3.TabIndex = 2;
             this.groupControl3.Text = "库存筛选";
             // 
@@ -173,15 +173,15 @@
             this.layoutControl2.Name = "layoutControl2";
             this.layoutControl2.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(349, 148, 456, 530);
             this.layoutControl2.Root = this.layoutControlGroup2;
-            this.layoutControl2.Size = new System.Drawing.Size(340, 191);
+            this.layoutControl2.Size = new System.Drawing.Size(290, 191);
             this.layoutControl2.TabIndex = 0;
             this.layoutControl2.Text = "layoutControl2";
             // 
             // btnRemoveFrom
             // 
-            this.btnRemoveFrom.Location = new System.Drawing.Point(173, 109);
+            this.btnRemoveFrom.Location = new System.Drawing.Point(148, 109);
             this.btnRemoveFrom.Name = "btnRemoveFrom";
-            this.btnRemoveFrom.Size = new System.Drawing.Size(154, 22);
+            this.btnRemoveFrom.Size = new System.Drawing.Size(129, 22);
             this.btnRemoveFrom.StyleController = this.layoutControl2;
             this.btnRemoveFrom.TabIndex = 5;
             this.btnRemoveFrom.Text = "删除出库";
@@ -191,7 +191,7 @@
             // 
             this.btnAddTo.Location = new System.Drawing.Point(13, 109);
             this.btnAddTo.Name = "btnAddTo";
-            this.btnAddTo.Size = new System.Drawing.Size(156, 22);
+            this.btnAddTo.Size = new System.Drawing.Size(131, 22);
             this.btnAddTo.StyleController = this.layoutControl2;
             this.btnAddTo.TabIndex = 4;
             this.btnAddTo.Text = "加入出库";
@@ -206,14 +206,14 @@
             0,
             0});
             this.nmOutCount.Name = "nmOutCount";
-            this.nmOutCount.Size = new System.Drawing.Size(105, 22);
+            this.nmOutCount.Size = new System.Drawing.Size(80, 22);
             this.nmOutCount.TabIndex = 3;
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(172, 37);
+            this.btnSearch.Location = new System.Drawing.Point(147, 37);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(155, 22);
+            this.btnSearch.Size = new System.Drawing.Size(130, 22);
             this.btnSearch.StyleController = this.layoutControl2;
             this.btnSearch.TabIndex = 2;
             this.btnSearch.Text = "搜索";
@@ -221,12 +221,12 @@
             // 
             // txtCategoryName
             // 
-            this.txtCategoryName.Location = new System.Drawing.Point(223, 13);
+            this.txtCategoryName.Location = new System.Drawing.Point(198, 13);
             this.txtCategoryName.Name = "txtCategoryName";
             this.txtCategoryName.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
             this.txtCategoryName.Properties.Appearance.Options.UseBackColor = true;
             this.txtCategoryName.Properties.ReadOnly = true;
-            this.txtCategoryName.Size = new System.Drawing.Size(104, 20);
+            this.txtCategoryName.Size = new System.Drawing.Size(79, 20);
             this.txtCategoryName.StyleController = this.layoutControl2;
             this.txtCategoryName.TabIndex = 1;
             // 
@@ -234,7 +234,7 @@
             // 
             this.txtCategoryNumber.Location = new System.Drawing.Point(64, 13);
             this.txtCategoryNumber.Name = "txtCategoryNumber";
-            this.txtCategoryNumber.Size = new System.Drawing.Size(104, 20);
+            this.txtCategoryNumber.Size = new System.Drawing.Size(79, 20);
             this.txtCategoryNumber.StyleController = this.layoutControl2;
             this.txtCategoryNumber.TabIndex = 0;
             this.txtCategoryNumber.EditValueChanged += new System.EventHandler(this.txtCategoryNumber_EditValueChanged);
@@ -250,7 +250,7 @@
             this.layoutControlGroup2.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup2.Name = "Root";
             this.layoutControlGroup2.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 5, 5, 5);
-            this.layoutControlGroup2.Size = new System.Drawing.Size(340, 191);
+            this.layoutControlGroup2.Size = new System.Drawing.Size(290, 191);
             this.layoutControlGroup2.TextVisible = false;
             // 
             // tabbedControlGroup1
@@ -261,7 +261,7 @@
             this.tabbedControlGroup1.SelectedTabPage = this.layoutControlGroup3;
             this.tabbedControlGroup1.SelectedTabPageIndex = 0;
             this.tabbedControlGroup1.ShowTabHeader = DevExpress.Utils.DefaultBoolean.False;
-            this.tabbedControlGroup1.Size = new System.Drawing.Size(330, 72);
+            this.tabbedControlGroup1.Size = new System.Drawing.Size(280, 72);
             this.tabbedControlGroup1.TabPages.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlGroup3});
             // 
@@ -274,32 +274,32 @@
             this.emptySpaceItem3});
             this.layoutControlGroup3.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup3.Name = "layoutControlGroup3";
-            this.layoutControlGroup3.Size = new System.Drawing.Size(318, 53);
+            this.layoutControlGroup3.Size = new System.Drawing.Size(268, 53);
             // 
             // layoutControlItem10
             // 
             this.layoutControlItem10.Control = this.txtCategoryNumber;
             this.layoutControlItem10.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem10.Name = "layoutControlItem9";
-            this.layoutControlItem10.Size = new System.Drawing.Size(159, 24);
+            this.layoutControlItem10.Size = new System.Drawing.Size(134, 24);
             this.layoutControlItem10.Text = "分类代码";
             this.layoutControlItem10.TextSize = new System.Drawing.Size(48, 14);
             // 
             // layoutControlItem11
             // 
             this.layoutControlItem11.Control = this.txtCategoryName;
-            this.layoutControlItem11.Location = new System.Drawing.Point(159, 0);
+            this.layoutControlItem11.Location = new System.Drawing.Point(134, 0);
             this.layoutControlItem11.Name = "layoutControlItem10";
-            this.layoutControlItem11.Size = new System.Drawing.Size(159, 24);
+            this.layoutControlItem11.Size = new System.Drawing.Size(134, 24);
             this.layoutControlItem11.Text = "分类名称";
             this.layoutControlItem11.TextSize = new System.Drawing.Size(48, 14);
             // 
             // layoutControlItem12
             // 
             this.layoutControlItem12.Control = this.btnSearch;
-            this.layoutControlItem12.Location = new System.Drawing.Point(159, 24);
+            this.layoutControlItem12.Location = new System.Drawing.Point(134, 24);
             this.layoutControlItem12.Name = "layoutControlItem12";
-            this.layoutControlItem12.Size = new System.Drawing.Size(159, 29);
+            this.layoutControlItem12.Size = new System.Drawing.Size(134, 29);
             this.layoutControlItem12.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 3);
             this.layoutControlItem12.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem12.TextVisible = false;
@@ -309,7 +309,7 @@
             this.emptySpaceItem3.AllowHotTrack = false;
             this.emptySpaceItem3.Location = new System.Drawing.Point(0, 24);
             this.emptySpaceItem3.Name = "emptySpaceItem3";
-            this.emptySpaceItem3.Size = new System.Drawing.Size(159, 29);
+            this.emptySpaceItem3.Size = new System.Drawing.Size(134, 29);
             this.emptySpaceItem3.TextSize = new System.Drawing.Size(0, 0);
             // 
             // tabbedControlGroup2
@@ -321,7 +321,7 @@
             this.tabbedControlGroup2.SelectedTabPage = this.layoutControlGroup4;
             this.tabbedControlGroup2.SelectedTabPageIndex = 0;
             this.tabbedControlGroup2.ShowTabHeader = DevExpress.Utils.DefaultBoolean.False;
-            this.tabbedControlGroup2.Size = new System.Drawing.Size(330, 69);
+            this.tabbedControlGroup2.Size = new System.Drawing.Size(280, 69);
             this.tabbedControlGroup2.TabPages.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlGroup4});
             // 
@@ -334,14 +334,14 @@
             this.emptySpaceItem2});
             this.layoutControlGroup4.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup4.Name = "layoutControlGroup4";
-            this.layoutControlGroup4.Size = new System.Drawing.Size(318, 50);
+            this.layoutControlGroup4.Size = new System.Drawing.Size(268, 50);
             // 
             // layoutControlItem14
             // 
             this.layoutControlItem14.Control = this.nmOutCount;
             this.layoutControlItem14.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem14.Name = "layoutControlItem14";
-            this.layoutControlItem14.Size = new System.Drawing.Size(160, 24);
+            this.layoutControlItem14.Size = new System.Drawing.Size(135, 24);
             this.layoutControlItem14.Text = "出库数量";
             this.layoutControlItem14.TextSize = new System.Drawing.Size(48, 14);
             // 
@@ -350,26 +350,26 @@
             this.layoutControlItem15.Control = this.btnAddTo;
             this.layoutControlItem15.Location = new System.Drawing.Point(0, 24);
             this.layoutControlItem15.Name = "layoutControlItem15";
-            this.layoutControlItem15.Size = new System.Drawing.Size(160, 26);
+            this.layoutControlItem15.Size = new System.Drawing.Size(135, 26);
             this.layoutControlItem15.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem15.TextVisible = false;
             // 
             // layoutControlItem16
             // 
             this.layoutControlItem16.Control = this.btnRemoveFrom;
-            this.layoutControlItem16.Location = new System.Drawing.Point(160, 24);
+            this.layoutControlItem16.Location = new System.Drawing.Point(135, 24);
             this.layoutControlItem16.Name = "layoutControlItem16";
-            this.layoutControlItem16.Size = new System.Drawing.Size(158, 26);
+            this.layoutControlItem16.Size = new System.Drawing.Size(133, 26);
             this.layoutControlItem16.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem16.TextVisible = false;
             // 
             // emptySpaceItem2
             // 
             this.emptySpaceItem2.AllowHotTrack = false;
-            this.emptySpaceItem2.Location = new System.Drawing.Point(160, 0);
+            this.emptySpaceItem2.Location = new System.Drawing.Point(135, 0);
             this.emptySpaceItem2.MinSize = new System.Drawing.Size(104, 24);
             this.emptySpaceItem2.Name = "emptySpaceItem1";
-            this.emptySpaceItem2.Size = new System.Drawing.Size(158, 24);
+            this.emptySpaceItem2.Size = new System.Drawing.Size(133, 24);
             this.emptySpaceItem2.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
             // 
@@ -378,7 +378,7 @@
             this.emptySpaceItem4.AllowHotTrack = false;
             this.emptySpaceItem4.Location = new System.Drawing.Point(0, 141);
             this.emptySpaceItem4.Name = "emptySpaceItem2";
-            this.emptySpaceItem4.Size = new System.Drawing.Size(330, 40);
+            this.emptySpaceItem4.Size = new System.Drawing.Size(280, 40);
             this.emptySpaceItem4.TextSize = new System.Drawing.Size(0, 0);
             // 
             // groupControl1
@@ -627,7 +627,7 @@
             this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl2.Location = new System.Drawing.Point(3, 163);
             this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(644, 214);
+            this.groupControl2.Size = new System.Drawing.Size(694, 214);
             this.groupControl2.TabIndex = 1;
             this.groupControl2.Text = "查询结果";
             // 
@@ -641,15 +641,15 @@
             this.sogFilter.Name = "sogFilter";
             this.sogFilter.ShowFooter = false;
             this.sogFilter.ShowOutCount = false;
-            this.sogFilter.Size = new System.Drawing.Size(640, 191);
+            this.sogFilter.Size = new System.Drawing.Size(690, 191);
             this.sogFilter.TabIndex = 0;
             // 
             // clcCategory
             // 
             this.clcCategory.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.clcCategory.Location = new System.Drawing.Point(653, 383);
+            this.clcCategory.Location = new System.Drawing.Point(703, 383);
             this.clcCategory.Name = "clcCategory";
-            this.clcCategory.Size = new System.Drawing.Size(344, 214);
+            this.clcCategory.Size = new System.Drawing.Size(294, 214);
             this.clcCategory.TabIndex = 4;
             this.clcCategory.CategoryItemSelected += new Phoebe.FormClient.CategoryListControl.ItemSelectHandle(this.clcCategory_CategoryItemSelected);
             // 
@@ -659,7 +659,7 @@
             this.groupControl4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl4.Location = new System.Drawing.Point(3, 383);
             this.groupControl4.Name = "groupControl4";
-            this.groupControl4.Size = new System.Drawing.Size(644, 214);
+            this.groupControl4.Size = new System.Drawing.Size(694, 214);
             this.groupControl4.TabIndex = 3;
             this.groupControl4.Text = "出库列表";
             // 
@@ -673,7 +673,7 @@
             this.sogList.Name = "sogList";
             this.sogList.ShowFooter = true;
             this.sogList.ShowOutCount = true;
-            this.sogList.Size = new System.Drawing.Size(640, 191);
+            this.sogList.Size = new System.Drawing.Size(690, 191);
             this.sogList.TabIndex = 0;
             // 
             // StockOutEditControl

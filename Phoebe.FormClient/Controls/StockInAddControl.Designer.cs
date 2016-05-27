@@ -667,6 +667,7 @@
             this.dpInTime.EditValue = null;
             this.dpInTime.Location = new System.Drawing.Point(280, 7);
             this.dpInTime.Name = "dpInTime";
+            this.dpInTime.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.dpInTime.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow;
             this.dpInTime.Properties.Appearance.Options.UseBackColor = true;
             this.dpInTime.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {

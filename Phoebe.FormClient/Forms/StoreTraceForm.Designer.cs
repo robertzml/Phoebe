@@ -51,6 +51,7 @@
             this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
             this.sgList = new Phoebe.FormClient.StoreGrid();
             this.clcCustomer = new Phoebe.FormClient.CustomerListControl();
@@ -78,6 +79,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
             this.groupControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).BeginInit();
@@ -241,7 +243,8 @@
             this.layoutControlItem7,
             this.emptySpaceItem1,
             this.layoutControlItem8,
-            this.layoutControlItem9});
+            this.layoutControlItem9,
+            this.emptySpaceItem2});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "layoutControlGroup1";
             this.layoutControlGroup1.Size = new System.Drawing.Size(575, 171);
@@ -279,7 +282,7 @@
             this.layoutControlItem4.Control = this.txtCategoryNumber;
             this.layoutControlItem4.Location = new System.Drawing.Point(0, 24);
             this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(180, 127);
+            this.layoutControlItem4.Size = new System.Drawing.Size(180, 55);
             this.layoutControlItem4.Text = "分类代码";
             this.layoutControlItem4.TextSize = new System.Drawing.Size(48, 14);
             // 
@@ -288,7 +291,7 @@
             this.layoutControlItem5.Control = this.txtCategoryName;
             this.layoutControlItem5.Location = new System.Drawing.Point(180, 24);
             this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(187, 127);
+            this.layoutControlItem5.Size = new System.Drawing.Size(187, 55);
             this.layoutControlItem5.Text = "分类名称";
             this.layoutControlItem5.TextSize = new System.Drawing.Size(48, 14);
             // 
@@ -323,7 +326,7 @@
             this.layoutControlItem8.Control = this.btnSearch;
             this.layoutControlItem8.Location = new System.Drawing.Point(367, 53);
             this.layoutControlItem8.Name = "layoutControlItem8";
-            this.layoutControlItem8.Size = new System.Drawing.Size(94, 98);
+            this.layoutControlItem8.Size = new System.Drawing.Size(94, 26);
             this.layoutControlItem8.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem8.TextVisible = false;
             // 
@@ -332,9 +335,17 @@
             this.layoutControlItem9.Control = this.btnTrace;
             this.layoutControlItem9.Location = new System.Drawing.Point(461, 53);
             this.layoutControlItem9.Name = "layoutControlItem9";
-            this.layoutControlItem9.Size = new System.Drawing.Size(94, 98);
+            this.layoutControlItem9.Size = new System.Drawing.Size(94, 26);
             this.layoutControlItem9.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem9.TextVisible = false;
+            // 
+            // emptySpaceItem2
+            // 
+            this.emptySpaceItem2.AllowHotTrack = false;
+            this.emptySpaceItem2.Location = new System.Drawing.Point(0, 79);
+            this.emptySpaceItem2.Name = "emptySpaceItem2";
+            this.emptySpaceItem2.Size = new System.Drawing.Size(555, 72);
+            this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
             // 
             // groupControl2
             // 
@@ -431,6 +442,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
             this.groupControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).EndInit();
@@ -470,5 +482,6 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem9;
         private DevExpress.XtraEditors.GroupControl groupControl3;
         private StockFlowGrid sfgList;
+        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem2;
     }
 }

@@ -62,6 +62,11 @@ namespace Phoebe.Model
         public string Specification { get; set; }
 
         /// <summary>
+        /// 总数量
+        /// </summary>
+        public int TotalCount { get; set; }
+
+        /// <summary>
         /// 在库数量
         /// </summary>
         public int StoreCount { get; set; }
@@ -110,6 +115,11 @@ namespace Phoebe.Model
         /// 入库时间
         /// </summary>
         public DateTime InTime { get; set; }
+
+        /// <summary>
+        /// 移入时间
+        /// </summary>
+        public DateTime MoveTime { get; set; }
 
         /// <summary>
         /// 产地

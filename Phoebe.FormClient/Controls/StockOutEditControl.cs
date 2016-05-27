@@ -119,9 +119,9 @@ namespace Phoebe.FormClient
                     errorMessage = "出库数量大于在库数量";
                     return ErrorCode.Error;
                 }
-                if (item.InTime > this.stockOut.OutTime.Date)
+                if (item.MoveTime > this.stockOut.OutTime.Date)
                 {
-                    errorMessage = "出库时间早于货品入库时间";
+                    errorMessage = "出库时间早于货品移入时间";
                     return ErrorCode.Error;
                 }
 

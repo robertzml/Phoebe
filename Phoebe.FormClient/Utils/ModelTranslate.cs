@@ -69,12 +69,14 @@ namespace Phoebe.FormClient
                 model.CategoryNumber = item.Cargo.Category.Number;
                 model.CategoryName = item.Cargo.Category.Name;
                 model.Specification = item.Specification;
+                model.TotalCount = item.TotalCount;
                 model.StoreCount = item.StoreCount;
                 model.GroupType = item.Cargo.GroupType;
                 model.UnitWeight = item.Cargo.UnitWeight;
                 model.UnitVolume = item.Cargo.UnitVolume;
                 model.WarehouseNumber = item.WarehouseNumber;
                 model.InTime = item.InTime;
+                model.MoveTime = item.MoveTime;
                 model.OriginPlace = item.OriginPlace;
                 model.ShelfLife = item.ShelfLife;
 
@@ -104,6 +106,7 @@ namespace Phoebe.FormClient
                 model.CategoryNumber = item.Store.Cargo.Category.Number;
                 model.CategoryName = item.Store.Cargo.Category.Name;
                 model.Specification = item.Store.Specification;
+                model.TotalCount = item.Store.TotalCount;
                 model.StoreCount = item.StoreCount;
                 model.OutCount = item.Count;
                 model.GroupType = item.Store.Cargo.GroupType;
@@ -113,6 +116,7 @@ namespace Phoebe.FormClient
                 model.OutVolume = item.OutVolume;
                 model.WarehouseNumber = item.Store.WarehouseNumber;
                 model.InTime = item.Store.InTime;
+                model.MoveTime = item.Store.MoveTime;
                 model.OriginPlace = item.Store.OriginPlace;
                 model.ShelfLife = item.Store.ShelfLife;
                 model.Remark = item.Remark;
@@ -142,12 +146,14 @@ namespace Phoebe.FormClient
                 model.CategoryNumber = item.Cargo.Category.Number;
                 model.CategoryName = item.Cargo.Category.Name;
                 model.Specification = item.Specification;
+                model.TotalCount = item.TotalCount;
                 model.StoreCount = item.StoreCount;
                 model.GroupType = item.Cargo.GroupType;
                 model.UnitWeight = item.Cargo.UnitWeight;
                 model.UnitVolume = item.Cargo.UnitVolume;
                 model.SourceWarehouseNumber = item.WarehouseNumber;
                 model.InTime = item.InTime;
+                model.MoveTime = item.MoveTime;
                 model.OriginPlace = item.OriginPlace;
                 model.ShelfLife = item.ShelfLife;
 
@@ -178,6 +184,7 @@ namespace Phoebe.FormClient
                 model.CategoryNumber = item.SourceStore.Cargo.Category.Number;
                 model.CategoryName = item.SourceStore.Cargo.Category.Name;
                 model.Specification = item.SourceStore.Specification;
+                model.TotalCount = item.SourceStore.TotalCount;
                 model.StoreCount = item.StoreCount;
                 model.MoveCount = item.Count;
                 model.GroupType = item.SourceStore.Cargo.GroupType;
@@ -188,6 +195,7 @@ namespace Phoebe.FormClient
                 model.SourceWarehouseNumber = item.SourceStore.WarehouseNumber;
                 model.NewWarehouseNumber = item.NewStore.WarehouseNumber;
                 model.InTime = item.SourceStore.InTime;
+                model.MoveTime = item.SourceStore.MoveTime;
                 model.OriginPlace = item.SourceStore.OriginPlace;
                 model.ShelfLife = item.SourceStore.ShelfLife;
                 model.Remark = item.Remark;
