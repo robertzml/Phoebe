@@ -86,18 +86,18 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="Number" Type="nvarchar" MaxLength="50" />
-          <Property Name="CustomerId" Type="int" />
-          <Property Name="StartTime" Type="datetime" />
-          <Property Name="EndTime" Type="datetime" />
-          <Property Name="SumFee" Type="decimal" Precision="18" Scale="3" />
-          <Property Name="Discount" Type="int" />
-          <Property Name="Remission" Type="decimal" Precision="18" Scale="3" />
-          <Property Name="DueFee" Type="decimal" Precision="18" Scale="3" />
-          <Property Name="SettleTime" Type="datetime" />
-          <Property Name="UserId" Type="int" />
+          <Property Name="Number" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CustomerId" Type="int" Nullable="false" />
+          <Property Name="StartTime" Type="datetime" Nullable="false" />
+          <Property Name="EndTime" Type="datetime" Nullable="false" />
+          <Property Name="SumFee" Type="decimal" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="Discount" Type="int" Nullable="false" />
+          <Property Name="Remission" Type="decimal" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="DueFee" Type="decimal" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="SettleTime" Type="datetime" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="Remark" Type="nvarchar" MaxLength="500" />
-          <Property Name="Status" Type="int" />
+          <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="SettlementDetails">
           <Key>
@@ -334,7 +334,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Settlement_Customer">
-          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
           <End Role="Settlement" Type="Self.Settlement" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Customer">
@@ -346,7 +346,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Settlement_User">
-          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="Settlement" Type="Self.Settlement" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
@@ -1379,7 +1379,6 @@
             <End Role="UserGroup" EntitySet="UserGroups" />
             <End Role="User" EntitySet="Users" />
           </AssociationSet>
-          <EntitySet Name="Settlements" EntityType="Phoebe.Model.Settlement" />
           <EntitySet Name="SettlementDetails" EntityType="Phoebe.Model.SettlementDetail" />
           <AssociationSet Name="FK_SettlementDetails_Billing" Association="Phoebe.Model.FK_SettlementDetails_Billing">
             <End Role="Billing" EntitySet="Billings" />
@@ -1389,6 +1388,7 @@
             <End Role="Contract" EntitySet="Contracts" />
             <End Role="SettlementDetail" EntitySet="SettlementDetails" />
           </AssociationSet>
+          <EntitySet Name="Settlements" EntityType="Phoebe.Model.Settlement" />
           <AssociationSet Name="FK_Settlement_Customer" Association="Phoebe.Model.FK_Settlement_Customer">
             <End Role="Customer" EntitySet="Customers" />
             <End Role="Settlement" EntitySet="Settlements" />
@@ -1402,27 +1402,6 @@
             <End Role="SettlementDetail" EntitySet="SettlementDetails" />
           </AssociationSet>
         </EntityContainer>
-        <EntityType Name="Settlement">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CustomerId" Type="Int32" />
-          <Property Name="StartTime" Type="DateTime" Precision="3" />
-          <Property Name="EndTime" Type="DateTime" Precision="3" />
-          <Property Name="SumFee" Type="Decimal" Precision="18" Scale="3" />
-          <Property Name="Discount" Type="Int32" />
-          <Property Name="Remission" Type="Decimal" Precision="18" Scale="3" />
-          <Property Name="DueFee" Type="Decimal" Precision="18" Scale="3" />
-          <Property Name="SettleTime" Type="DateTime" Precision="3" />
-          <Property Name="UserId" Type="Int32" />
-          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="Int32" />
-          <NavigationProperty Name="Customer" Relationship="Phoebe.Model.FK_Settlement_Customer" FromRole="Settlement" ToRole="Customer" />
-          <NavigationProperty Name="User" Relationship="Phoebe.Model.FK_Settlement_User" FromRole="Settlement" ToRole="User" />
-          <NavigationProperty Name="SettlementDetails" Relationship="Phoebe.Model.FK_SettlementDetails_Settlement" FromRole="Settlement" ToRole="SettlementDetail" />
-        </EntityType>
         <EntityType Name="SettlementDetail">
           <Key>
             <PropertyRef Name="Id" />
@@ -1463,8 +1442,29 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Settlement">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Number" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <Property Name="StartTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SumFee" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
+          <Property Name="Discount" Type="Int32" Nullable="false" />
+          <Property Name="Remission" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
+          <Property Name="DueFee" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
+          <Property Name="SettleTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="Phoebe.Model.FK_Settlement_Customer" FromRole="Settlement" ToRole="Customer" />
+          <NavigationProperty Name="User" Relationship="Phoebe.Model.FK_Settlement_User" FromRole="Settlement" ToRole="User" />
+          <NavigationProperty Name="SettlementDetails" Relationship="Phoebe.Model.FK_SettlementDetails_Settlement" FromRole="Settlement" ToRole="SettlementDetail" />
+        </EntityType>
         <Association Name="FK_Settlement_Customer">
-          <End Type="Phoebe.Model.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="Phoebe.Model.Customer" Role="Customer" Multiplicity="1" />
           <End Type="Phoebe.Model.Settlement" Role="Settlement" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Customer">
@@ -1476,7 +1476,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Settlement_User">
-          <End Type="Phoebe.Model.User" Role="User" Multiplicity="0..1" />
+          <End Type="Phoebe.Model.User" Role="User" Multiplicity="1" />
           <End Type="Phoebe.Model.Settlement" Role="Settlement" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
@@ -1732,6 +1732,20 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="SettlementDetails">
+            <EntityTypeMapping TypeName="Phoebe.Model.SettlementDetail">
+              <MappingFragment StoreEntitySet="SettlementDetails">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="SumFee" ColumnName="SumFee" />
+                <ScalarProperty Name="ExpenseType" ColumnName="ExpenseType" />
+                <ScalarProperty Name="ContractId" ColumnName="ContractId" />
+                <ScalarProperty Name="StockInId" ColumnName="StockInId" />
+                <ScalarProperty Name="SettlementId" ColumnName="SettlementId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Settlements">
             <EntityTypeMapping TypeName="Phoebe.Model.Settlement">
               <MappingFragment StoreEntitySet="Settlement">
@@ -1747,20 +1761,6 @@
                 <ScalarProperty Name="StartTime" ColumnName="StartTime" />
                 <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
                 <ScalarProperty Name="Number" ColumnName="Number" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="SettlementDetails">
-            <EntityTypeMapping TypeName="Phoebe.Model.SettlementDetail">
-              <MappingFragment StoreEntitySet="SettlementDetails">
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Remark" ColumnName="Remark" />
-                <ScalarProperty Name="SumFee" ColumnName="SumFee" />
-                <ScalarProperty Name="ExpenseType" ColumnName="ExpenseType" />
-                <ScalarProperty Name="ContractId" ColumnName="ContractId" />
-                <ScalarProperty Name="StockInId" ColumnName="StockInId" />
-                <ScalarProperty Name="SettlementId" ColumnName="SettlementId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

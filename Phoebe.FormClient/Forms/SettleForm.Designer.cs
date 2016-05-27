@@ -159,17 +159,18 @@
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Controls.Add(this.groupControl1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.groupControl2, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.groupControl3, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.groupControl4, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.groupControl2, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.groupControl3, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.groupControl4, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 4;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 180F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 150F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(939, 593);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
@@ -408,7 +409,7 @@
             // 
             this.groupControl2.Controls.Add(this.dgcBilling);
             this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl2.Location = new System.Drawing.Point(3, 183);
+            this.groupControl2.Location = new System.Drawing.Point(3, 333);
             this.groupControl2.Name = "groupControl2";
             this.groupControl2.Size = new System.Drawing.Size(933, 125);
             this.groupControl2.TabIndex = 1;
@@ -607,9 +608,9 @@
             // 
             this.groupControl3.Controls.Add(this.dgcCold);
             this.groupControl3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl3.Location = new System.Drawing.Point(3, 314);
+            this.groupControl3.Location = new System.Drawing.Point(3, 464);
             this.groupControl3.Name = "groupControl3";
-            this.groupControl3.Size = new System.Drawing.Size(933, 125);
+            this.groupControl3.Size = new System.Drawing.Size(933, 126);
             this.groupControl3.TabIndex = 2;
             this.groupControl3.Text = "冷藏费用";
             // 
@@ -620,7 +621,7 @@
             this.dgcCold.Location = new System.Drawing.Point(2, 21);
             this.dgcCold.MainView = this.dgvCold;
             this.dgcCold.Name = "dgcCold";
-            this.dgcCold.Size = new System.Drawing.Size(929, 102);
+            this.dgcCold.Size = new System.Drawing.Size(929, 103);
             this.dgcCold.TabIndex = 0;
             this.dgcCold.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.dgvCold});
@@ -696,9 +697,9 @@
             // 
             this.groupControl4.Controls.Add(this.layoutControl2);
             this.groupControl4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl4.Location = new System.Drawing.Point(3, 445);
+            this.groupControl4.Location = new System.Drawing.Point(3, 183);
             this.groupControl4.Name = "groupControl4";
-            this.groupControl4.Size = new System.Drawing.Size(933, 145);
+            this.groupControl4.Size = new System.Drawing.Size(933, 144);
             this.groupControl4.TabIndex = 3;
             this.groupControl4.Text = "费用结算";
             // 
@@ -716,7 +717,7 @@
             this.layoutControl2.Location = new System.Drawing.Point(2, 21);
             this.layoutControl2.Name = "layoutControl2";
             this.layoutControl2.Root = this.layoutControlGroup2;
-            this.layoutControl2.Size = new System.Drawing.Size(929, 122);
+            this.layoutControl2.Size = new System.Drawing.Size(929, 121);
             this.layoutControl2.TabIndex = 0;
             this.layoutControl2.Text = "layoutControl2";
             // 
@@ -740,6 +741,7 @@
             // 
             // btnSave
             // 
+            this.btnSave.Enabled = false;
             this.btnSave.Location = new System.Drawing.Point(715, 36);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(202, 22);
@@ -827,6 +829,8 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.nmSumFee.Properties.DisplayFormat.FormatString = "0.##";
             this.nmSumFee.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.nmSumFee.Properties.EditFormat.FormatString = "0.##";
+            this.nmSumFee.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.nmSumFee.Properties.EditValueChangedFiringMode = DevExpress.XtraEditors.Controls.EditValueChangedFiringMode.Default;
             this.nmSumFee.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.None;
             this.nmSumFee.Properties.ReadOnly = true;
@@ -866,7 +870,7 @@
             this.layoutControlItem16});
             this.layoutControlGroup2.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup2.Name = "layoutControlGroup2";
-            this.layoutControlGroup2.Size = new System.Drawing.Size(929, 122);
+            this.layoutControlGroup2.Size = new System.Drawing.Size(929, 121);
             this.layoutControlGroup2.TextVisible = false;
             // 
             // layoutControlItem9
@@ -938,7 +942,7 @@
             this.emptySpaceItem2.AllowHotTrack = false;
             this.emptySpaceItem2.Location = new System.Drawing.Point(0, 50);
             this.emptySpaceItem2.Name = "emptySpaceItem2";
-            this.emptySpaceItem2.Size = new System.Drawing.Size(909, 52);
+            this.emptySpaceItem2.Size = new System.Drawing.Size(909, 51);
             this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
             // 
             // layoutControlItem16

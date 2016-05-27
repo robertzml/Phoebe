@@ -8,7 +8,6 @@ using System.Windows.Forms;
 
 namespace Phoebe.FormClient
 {
-    using DevExpress.XtraEditors.Controls;
     using Phoebe.Base;
     using Phoebe.Business;
     using Phoebe.Common;
@@ -116,6 +115,40 @@ namespace Phoebe.FormClient
                 details.Add(detail);
             }
         }
+
+        /// <summary>
+        /// 客户更改
+        /// </summary>
+        /// <param name="customer">客户对象</param>
+        private void CustomerChange(Customer customer)
+        {
+            if (customer != null)
+            {
+                this.selectCustomer = customer;
+                this.txtCustomerName.Text = customer.Name;
+
+                var last = BusinessFactory<SettlementBusiness>.Instance.GetLast(customer.Id);
+                if (last == null)
+                {
+                    this.txtLastFrom.Text = this.txtLastTo.Text = "";
+                }
+                else
+                {
+                    this.txtLastFrom.Text = last.StartTime.ToShortDateString();
+                    this.txtLastTo.Text = last.EndTime.ToShortDateString();
+                }
+            }
+            else
+            {
+                this.selectCustomer = null;
+                this.txtCustomerName.Text = "";
+
+                this.txtLastFrom.Text = "";
+                this.txtLastTo.Text = "";
+            }
+
+            this.btnSave.Enabled = false;
+        }
         #endregion //Function
 
         #region Event
@@ -145,16 +178,7 @@ namespace Phoebe.FormClient
             this.clcCustomer.UpdateView(number);
 
             var customer = this.customerList.SingleOrDefault(r => r.Number == number);
-            if (customer != null)
-            {
-                this.selectCustomer = customer;
-                this.txtCustomerName.Text = customer.Name;
-            }
-            else
-            {
-                this.selectCustomer = null;
-                this.txtCustomerName.Text = "";
-            }
+            CustomerChange(customer);
         }
 
         /// <summary>
@@ -172,7 +196,8 @@ namespace Phoebe.FormClient
             this.txtCustomerNumber.EditValueChanged += txtCustomerNumber_EditValueChanged;
 
             int customerId = this.clcCustomer.SelectedId;
-            this.selectCustomer = this.customerList.SingleOrDefault(r => r.Id == customerId);
+            var customer = this.customerList.SingleOrDefault(r => r.Id == customerId);
+            CustomerChange(customer);
         }
 
         /// <summary>
@@ -206,6 +231,8 @@ namespace Phoebe.FormClient
             this.nmSumFee.Value = totalPrice;
 
             CalculateFee();
+
+            this.btnSave.Enabled = true;
 
             this.Cursor = Cursors.Default;
         }
@@ -272,6 +299,7 @@ namespace Phoebe.FormClient
             if (result == ErrorCode.Success)
             {
                 MessageBox.Show("保存结算成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.btnSave.Enabled = false;
             }
             else
             {
@@ -279,6 +307,5 @@ namespace Phoebe.FormClient
             }
         }
         #endregion //Event
-
     }
 }

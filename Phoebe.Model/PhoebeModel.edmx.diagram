@@ -42,10 +42,10 @@
         <AssociationConnector Association="Phoebe.Model.FK_StockOutDetails_Store" ManuallyRouted="false" />
         <AssociationConnector Association="Phoebe.Model.FK_Store_User" ManuallyRouted="false" />
         <AssociationConnector Association="Phoebe.Model.FK_User_User" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="Phoebe.Model.Settlement" Width="1.5" PointX="3.375" PointY="26.125" />
         <EntityTypeShape EntityType="Phoebe.Model.SettlementDetail" Width="1.5" PointX="6.75" PointY="29.25" />
         <AssociationConnector Association="Phoebe.Model.FK_SettlementDetails_Billing" />
         <AssociationConnector Association="Phoebe.Model.FK_SettlementDetails_Contract" />
+        <EntityTypeShape EntityType="Phoebe.Model.Settlement" Width="1.5" PointX="3" PointY="26.125" />
         <AssociationConnector Association="Phoebe.Model.FK_Settlement_Customer" />
         <AssociationConnector Association="Phoebe.Model.FK_Settlement_User" />
         <AssociationConnector Association="Phoebe.Model.FK_SettlementDetails_Settlement" />

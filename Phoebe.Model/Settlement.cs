@@ -22,17 +22,17 @@ namespace Phoebe.Model
     
         public System.Guid Id { get; set; }
         public string Number { get; set; }
-        public Nullable<int> CustomerId { get; set; }
-        public Nullable<System.DateTime> StartTime { get; set; }
-        public Nullable<System.DateTime> EndTime { get; set; }
-        public Nullable<decimal> SumFee { get; set; }
-        public Nullable<int> Discount { get; set; }
-        public Nullable<decimal> Remission { get; set; }
-        public Nullable<decimal> DueFee { get; set; }
-        public Nullable<System.DateTime> SettleTime { get; set; }
-        public Nullable<int> UserId { get; set; }
+        public int CustomerId { get; set; }
+        public System.DateTime StartTime { get; set; }
+        public System.DateTime EndTime { get; set; }
+        public decimal SumFee { get; set; }
+        public int Discount { get; set; }
+        public decimal Remission { get; set; }
+        public decimal DueFee { get; set; }
+        public System.DateTime SettleTime { get; set; }
+        public int UserId { get; set; }
         public string Remark { get; set; }
-        public Nullable<int> Status { get; set; }
+        public int Status { get; set; }
     
         public virtual Customer Customer { get; set; }
         public virtual User User { get; set; }
