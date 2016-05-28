@@ -254,7 +254,7 @@ namespace Phoebe.Business
 
                 return result;
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return ErrorCode.Exception;
             }
@@ -286,6 +286,52 @@ namespace Phoebe.Business
 
                 var trans = new TransactionRepository();
                 ErrorCode result = trans.StockMoveDeleteTrans(stockMove, storeList);
+
+                return result;
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+        }
+
+        /// <summary>
+        /// 移库撤回
+        /// </summary>
+        /// <param name="id">移库单ID</param>
+        /// <returns></returns>
+        public ErrorCode Revert(Guid id)
+        {
+            try
+            {
+                StockMove stockMove = this.dal.FindById(id);
+
+                if (stockMove == null)
+                    return ErrorCode.ObjectNotFound;
+
+                if (stockMove.Status != (int)EntityStatus.StockMove)
+                    return ErrorCode.StockMoveCannotRevert;
+
+                foreach (var item in stockMove.StockMoveDetails)
+                {
+                    // check source store
+                    var sourceStore = item.SourceStore;
+
+                    if (RepositoryFactory<StockOutDetailsRepository>.Instance.Find(r => r.StoreId == sourceStore.Id && r.StockOut.OutTime >= stockMove.MoveTime).Count() > 0)
+                        return ErrorCode.StockMoveCannotRevert;
+                    if (RepositoryFactory<StockMoveDetailsRepository>.Instance.Find(r => r.SourceStoreId == sourceStore.Id && string.Compare(r.StockMove.FlowNumber, stockMove.FlowNumber) > 0).Count() > 0)
+                        return ErrorCode.StockMoveCannotRevert;
+
+                    // check new store
+                    var newStore = item.NewStore;
+                    if (RepositoryFactory<StockOutDetailsRepository>.Instance.Find(r => r.StoreId == newStore.Id && r.StockOut.OutTime >= stockMove.MoveTime).Count() > 0)
+                        return ErrorCode.StockMoveCannotRevert;
+                    if (RepositoryFactory<StockMoveDetailsRepository>.Instance.Find(r => r.SourceStoreId == newStore.Id && string.Compare(r.StockMove.FlowNumber, stockMove.FlowNumber) > 0).Count() > 0)
+                        return ErrorCode.StockMoveCannotRevert;
+                }
+
+                var trans = new TransactionRepository();
+                var result = trans.StockMoveRevertTrans(stockMove);
 
                 return result;
             }

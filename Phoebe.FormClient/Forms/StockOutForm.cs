@@ -381,7 +381,37 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void tsbRevert_Click(object sender, EventArgs e)
         {
+            if (this.currentStockOutId == Guid.Empty)
+            {
+                MessageBox.Show("当前未选中出库单", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
 
+            if (this.stockOutState != EntityStatus.StockOut)
+            {
+                MessageBox.Show("当前出库未确认，无法撤回", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            DialogResult dr = MessageBox.Show("是否确认撤回选中记录", FormConstant.MessageBoxTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dr == DialogResult.Yes)
+            {
+                ErrorCode result = BusinessFactory<StockOutBusiness>.Instance.Revert(this.currentStockOutId);
+                if (result == ErrorCode.Success)
+                {
+                    MessageBox.Show("撤回出库成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    this.stockOutState = EntityStatus.StockOutReady;
+                    this.formState = StockOutFormState.View;
+
+                    UpdateTree(this.lastMonth);
+                    UpdateToolbar();
+                }
+                else
+                {
+                    MessageBox.Show("撤回出库失败，" + result.DisplayName(), FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
         }
 
         /// <summary>

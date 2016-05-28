@@ -291,6 +291,48 @@ namespace Phoebe.Business
                 return ErrorCode.Exception;
             }
         }
+
+        /// <summary>
+        /// 撤回入库
+        /// </summary>
+        /// <param name="id">入库单ID</param>
+        /// <returns></returns>
+        public ErrorCode Revert(Guid id)
+        {
+            try
+            {
+                StockIn stockIn = this.dal.FindById(id);
+                if (stockIn == null)
+                    return ErrorCode.ObjectNotFound;
+
+                if (stockIn.Status != (int)EntityStatus.StockIn)
+                    return ErrorCode.StockInCannotRevert;
+
+
+                foreach (var item in stockIn.StockInDetails)
+                {
+                    // get relate store
+                    var store = item.Store;
+
+                    // check has stock out
+                    if (RepositoryFactory<StockOutDetailsRepository>.Instance.Find(r => r.StoreId == store.Id).Count() > 0)
+                        return ErrorCode.StockInCannotRevert;
+
+                    // check has stock move
+                    if (RepositoryFactory<StockMoveDetailsRepository>.Instance.Find(r => r.SourceStoreId == store.Id).Count() > 0)
+                        return ErrorCode.StockInCannotRevert;
+                }
+
+                var trans = new TransactionRepository();
+                var result = trans.StockInRevertTrans(stockIn);
+
+                return result;
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+        }
         #endregion //Method
     }
 }

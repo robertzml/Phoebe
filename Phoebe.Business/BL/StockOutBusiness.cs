@@ -203,7 +203,7 @@ namespace Phoebe.Business
         }
 
         /// <summary>
-        /// 删除出库
+        /// 出库删除
         /// </summary>
         /// <param name="id">ID</param>
         /// <returns></returns>
@@ -219,6 +219,47 @@ namespace Phoebe.Business
                     return ErrorCode.StockOutCannotDelete;
 
                 var result = this.dal.Delete(stockOut);
+
+                return result;
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+        }
+
+        /// <summary>
+        /// 出库撤回
+        /// </summary>
+        /// <param name="id">出库单ID</param>
+        /// <returns></returns>
+        public ErrorCode Revert(Guid id)
+        {
+            try
+            {
+                StockOut stockOut = this.dal.FindById(id);
+                if (stockOut == null)
+                    return ErrorCode.ObjectNotFound;
+
+                if (stockOut.Status != (int)EntityStatus.StockOut)
+                    return ErrorCode.StockOutCannotRevert;
+
+                foreach (var item in stockOut.StockOutDetails)
+                {
+                    // get relate store
+                    var store = item.Store;
+
+                    // check has stock out
+                    if (RepositoryFactory<StockOutDetailsRepository>.Instance.Find(r => r.StoreId == store.Id && string.Compare(r.StockOut.FlowNumber, stockOut.FlowNumber) > 0).Count() > 0)
+                        return ErrorCode.StockOutCannotRevert;
+
+                    // check has stock move
+                    if (RepositoryFactory<StockMoveDetailsRepository>.Instance.Find(r => r.SourceStoreId == store.Id && r.StockMove.MoveTime >= stockOut.OutTime).Count() > 0)
+                        return ErrorCode.StockOutCannotRevert;
+                }
+
+                var trans = new TransactionRepository();
+                var result = trans.StockOutRevertTrans(stockOut);
 
                 return result;
             }

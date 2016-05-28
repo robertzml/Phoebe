@@ -171,6 +171,12 @@ namespace Phoebe.Base
         StockInHasConfirm = 71,
 
         /// <summary>
+        /// 入库记录无法撤回
+        /// </summary>
+        [Display(Name = "入库记录无法撤回")]
+        StockInCannotRevert = 72,
+
+        /// <summary>
         /// 出库记录无法删除
         /// </summary>
         [Display(Name = "出库记录无法删除")]
@@ -189,6 +195,12 @@ namespace Phoebe.Base
         StockOutCountOverflow = 82,
 
         /// <summary>
+        /// 出库记录无法撤回
+        /// </summary>
+        [Display(Name = "出库记录无法撤回")]
+        StockOutCannotRevert = 83,
+
+        /// <summary>
         /// 移库记录无法删除
         /// </summary>
         [Display(Name = "移库记录无法删除")]
@@ -204,7 +216,13 @@ namespace Phoebe.Base
         /// 移库数量超出
         /// </summary>
         [Display(Name = "移库数量超出")]
-        StockMoveCountOverflow = 92
+        StockMoveCountOverflow = 92,
+
+        /// <summary>
+        /// 移库记录无法撤回
+        /// </summary>
+        [Display(Name = "移库记录无法撤回")]
+        StockMoveCannotRevert = 93,
         #endregion //Stock
     }
 }

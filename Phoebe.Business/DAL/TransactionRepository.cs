@@ -120,7 +120,7 @@ namespace Phoebe.Business.DAL
         }
 
         /// <summary>
-        /// 删除入库事务
+        /// 入库删除事务
         /// </summary>
         /// <param name="stockIn">入库单对象</param>
         /// <param name="stores">库存对象</param>
@@ -143,6 +143,34 @@ namespace Phoebe.Business.DAL
             }
 
             return ErrorCode.Success;
+        }
+
+        /// <summary>
+        /// 入库撤回事务
+        /// </summary>
+        /// <param name="stockIn">入库单对象</param>
+        /// <returns></returns>
+        public ErrorCode StockInRevertTrans(StockIn stockIn)
+        {
+            try
+            {
+                stockIn.Status = (int)EntityStatus.StockInReady;
+                stockIn.Billing.Status = (int)EntityStatus.BillingNotInit;
+
+                foreach (var item in stockIn.StockInDetails)
+                {
+                    item.Status = (int)EntityStatus.StockInReady;
+                    item.Store.Status = (int)EntityStatus.StoreReady;
+                }
+
+                this.context.SaveChanges();
+
+                return ErrorCode.Success;
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
         }
         #endregion //StockIn Trans
 
@@ -241,6 +269,40 @@ namespace Phoebe.Business.DAL
 
                 // add new stock out details
                 this.context.StockOutDetails.AddRange(details);
+
+                this.context.SaveChanges();
+                return ErrorCode.Success;
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+        }
+
+        /// <summary>
+        /// 出库撤回事务
+        /// </summary>
+        /// <param name="stockOut">出库单对象</param>
+        /// <returns></returns>
+        public ErrorCode StockOutRevertTrans(StockOut stockOut)
+        {
+            try
+            {
+                stockOut.Status = (int)EntityStatus.StockOutReady;
+
+                foreach (var item in stockOut.StockOutDetails)
+                {
+                    item.Status = (int)EntityStatus.StockOutReady;
+
+                    var store = item.Store;
+
+                    store.StoreCount += item.Count;
+                    store.StoreWeight += item.OutWeight;
+                    store.StoreVolume += item.OutVolume;
+                    store.OutTime = null;
+                    store.Destination = null;
+                    store.Status = (int)EntityStatus.StoreIn;
+                }
 
                 this.context.SaveChanges();
                 return ErrorCode.Success;
@@ -395,6 +457,42 @@ namespace Phoebe.Business.DAL
             }
 
             return ErrorCode.Success;
+        }
+
+        /// <summary>
+        /// 移库撤回事务
+        /// </summary>
+        /// <param name="stockMove">移库单对象</param>
+        /// <returns></returns>
+        public ErrorCode StockMoveRevertTrans(StockMove stockMove)
+        {
+            try
+            {
+                stockMove.Status = (int)EntityStatus.StockMoveReady;
+
+                foreach (var item in stockMove.StockMoveDetails)
+                {
+                    item.Status = (int)EntityStatus.StockMoveReady;
+
+                    var sourceStore = item.SourceStore;
+                    sourceStore.StoreCount += item.Count;
+                    sourceStore.StoreWeight += item.MoveWeight;
+                    sourceStore.StoreVolume += item.MoveVolume;
+                    sourceStore.OutTime = null;
+                    sourceStore.Destination = null;
+                    sourceStore.Status = (int)EntityStatus.StoreIn;
+
+                    item.NewStore.Status = (int)EntityStatus.StoreMoveReady;
+                }
+
+                this.context.SaveChanges();
+
+                return ErrorCode.Success;
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
         }
         #endregion //StockMove Trans
 
