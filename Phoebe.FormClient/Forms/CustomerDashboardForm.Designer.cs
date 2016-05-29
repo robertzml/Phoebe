@@ -108,6 +108,7 @@
             this.aceStoreIn,
             this.aceFlows});
             this.accordionControlElement2.Expanded = true;
+            this.accordionControlElement2.Image = ((System.Drawing.Image)(resources.GetObject("accordionControlElement2.Image")));
             this.accordionControlElement2.Text = "库存";
             // 
             // aceStoreIn

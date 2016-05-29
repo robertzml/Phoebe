@@ -39,7 +39,7 @@ namespace Phoebe.FormClient
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void dcvContract_CustomColumnDisplayText(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs e)
+        private void dgvContract_CustomColumnDisplayText(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs e)
         {
             int rowIndex = e.ListSourceRowIndex;
             if (rowIndex < 0 || rowIndex >= this.bsContract.Count)

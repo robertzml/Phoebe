@@ -30,9 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
-            this.dgcContract = new DevExpress.XtraGrid.GridControl();
             this.bsContract = new System.Windows.Forms.BindingSource(this.components);
-            this.dcvContract = new DevExpress.XtraGrid.Views.Card.CardView();
+            this.dgcContract = new DevExpress.XtraGrid.GridControl();
+            this.dgvContract = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colName = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -46,9 +46,9 @@
             this.colStatus = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgcContract)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsContract)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dcvContract)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgcContract)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvContract)).BeginInit();
             this.SuspendLayout();
             // 
             // groupControl1
@@ -61,27 +61,25 @@
             this.groupControl1.TabIndex = 0;
             this.groupControl1.Text = "合同信息";
             // 
+            // bsContract
+            // 
+            this.bsContract.DataSource = typeof(Phoebe.Model.Contract);
+            // 
             // dgcContract
             // 
             this.dgcContract.DataSource = this.bsContract;
             this.dgcContract.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgcContract.Location = new System.Drawing.Point(2, 21);
-            this.dgcContract.MainView = this.dcvContract;
+            this.dgcContract.MainView = this.dgvContract;
             this.dgcContract.Name = "dgcContract";
             this.dgcContract.Size = new System.Drawing.Size(832, 381);
             this.dgcContract.TabIndex = 0;
             this.dgcContract.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.dcvContract});
+            this.dgvContract});
             // 
-            // bsContract
+            // dgvContract
             // 
-            this.bsContract.DataSource = typeof(Phoebe.Model.Contract);
-            // 
-            // dcvContract
-            // 
-            this.dcvContract.CardCaptionFormat = "记录{0}: {3}";
-            this.dcvContract.CardWidth = 300;
-            this.dcvContract.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.dgvContract.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colId,
             this.colNumber,
             this.colName,
@@ -93,17 +91,19 @@
             this.colUserId,
             this.colRemark,
             this.colStatus});
-            this.dcvContract.FocusedCardTopFieldIndex = 0;
-            this.dcvContract.GridControl = this.dgcContract;
-            this.dcvContract.Name = "dcvContract";
-            this.dcvContract.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
-            this.dcvContract.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
-            this.dcvContract.OptionsBehavior.Editable = false;
-            this.dcvContract.OptionsFilter.AllowFilterEditor = false;
-            this.dcvContract.OptionsFind.AllowFindPanel = false;
-            this.dcvContract.OptionsView.ShowQuickCustomizeButton = false;
-            this.dcvContract.VertScrollVisibility = DevExpress.XtraGrid.Views.Base.ScrollVisibility.Auto;
-            this.dcvContract.CustomColumnDisplayText += new DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventHandler(this.dcvContract_CustomColumnDisplayText);
+            this.dgvContract.GridControl = this.dgcContract;
+            this.dgvContract.Name = "dgvContract";
+            this.dgvContract.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
+            this.dgvContract.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
+            this.dgvContract.OptionsBehavior.Editable = false;
+            this.dgvContract.OptionsCustomization.AllowGroup = false;
+            this.dgvContract.OptionsCustomization.AllowQuickHideColumns = false;
+            this.dgvContract.OptionsFind.AllowFindPanel = false;
+            this.dgvContract.OptionsMenu.EnableColumnMenu = false;
+            this.dgvContract.OptionsMenu.EnableFooterMenu = false;
+            this.dgvContract.OptionsMenu.EnableGroupPanelMenu = false;
+            this.dgvContract.OptionsView.ShowGroupPanel = false;
+            this.dgvContract.CustomColumnDisplayText += new DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventHandler(this.dgvContract_CustomColumnDisplayText);
             // 
             // colId
             // 
@@ -112,7 +112,7 @@
             // 
             // colNumber
             // 
-            this.colNumber.Caption = "合同编码";
+            this.colNumber.Caption = "合同编号";
             this.colNumber.FieldName = "Number";
             this.colNumber.Name = "colNumber";
             this.colNumber.Visible = true;
@@ -149,8 +149,6 @@
             // 
             // colBillingType
             // 
-            this.colBillingType.AppearanceCell.Options.UseTextOptions = true;
-            this.colBillingType.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             this.colBillingType.Caption = "计费方式";
             this.colBillingType.FieldName = "BillingType";
             this.colBillingType.Name = "colBillingType";
@@ -167,8 +165,6 @@
             // 
             // colUserId
             // 
-            this.colUserId.AppearanceCell.Options.UseTextOptions = true;
-            this.colUserId.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             this.colUserId.Caption = "登记人";
             this.colUserId.FieldName = "UserId";
             this.colUserId.Name = "colUserId";
@@ -185,8 +181,6 @@
             // 
             // colStatus
             // 
-            this.colStatus.AppearanceCell.Options.UseTextOptions = true;
-            this.colStatus.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             this.colStatus.Caption = "状态";
             this.colStatus.FieldName = "Status";
             this.colStatus.Name = "colStatus";
@@ -202,9 +196,9 @@
             this.Size = new System.Drawing.Size(836, 404);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
             this.groupControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgcContract)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsContract)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dcvContract)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgcContract)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvContract)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -212,9 +206,9 @@
         #endregion
 
         private DevExpress.XtraEditors.GroupControl groupControl1;
-        private DevExpress.XtraGrid.GridControl dgcContract;
         private System.Windows.Forms.BindingSource bsContract;
-        private DevExpress.XtraGrid.Views.Card.CardView dcvContract;
+        private DevExpress.XtraGrid.GridControl dgcContract;
+        private DevExpress.XtraGrid.Views.Grid.GridView dgvContract;
         private DevExpress.XtraGrid.Columns.GridColumn colId;
         private DevExpress.XtraGrid.Columns.GridColumn colNumber;
         private DevExpress.XtraGrid.Columns.GridColumn colName;
