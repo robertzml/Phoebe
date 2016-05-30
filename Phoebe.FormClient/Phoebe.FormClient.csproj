@@ -184,6 +184,18 @@
     <Compile Include="Dashboard\UscCustomerContract.Designer.cs">
       <DependentUpon>UscCustomerContract.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dashboard\UscCustomerStoreOut.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Dashboard\UscCustomerStoreOut.Designer.cs">
+      <DependentUpon>UscCustomerStoreOut.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\PaymentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\PaymentForm.Designer.cs">
+      <DependentUpon>PaymentForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utils\GlobalControl.cs" />
     <Compile Include="Utils\FormConstant.cs" />
     <Compile Include="LoginForm.cs">
@@ -369,6 +381,9 @@
     <EmbeddedResource Include="Dashboard\UscCustomerStoreIn.resx">
       <DependentUpon>UscCustomerStoreIn.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dashboard\UscCustomerStoreOut.resx">
+      <DependentUpon>UscCustomerStoreOut.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\ColdPriceForm.resx">
       <DependentUpon>ColdPriceForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -443,6 +458,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\CustomerForm.resx">
       <DependentUpon>CustomerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PaymentForm.resx">
+      <DependentUpon>PaymentForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SettleForm.resx">
       <DependentUpon>SettleForm.cs</DependentUpon>

@@ -75,6 +75,9 @@
     <Compile Include="Helper\StockOutModel.cs" />
     <Compile Include="Helper\Storage.cs" />
     <Compile Include="Helper\StockInModel.cs" />
+    <Compile Include="Payment.cs">
+      <DependentUpon>PhoebeModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="PhoebeModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

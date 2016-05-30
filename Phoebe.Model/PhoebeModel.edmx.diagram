@@ -5,9 +5,9 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="f21a109fd1e444b38a3b6b59ff6ec277" Name="Diagram1" ShowGrid="true" ZoomLevel="86">
-        <EntityTypeShape EntityType="Phoebe.Model.Billing" Width="1.5" PointX="1.75" PointY="20.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Phoebe.Model.Billing" Width="1.5" PointX="2.375" PointY="20.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Phoebe.Model.Cargo" Width="1.5" PointX="7.75" PointY="12" IsExpanded="true" />
-        <EntityTypeShape EntityType="Phoebe.Model.Category" Width="1.5" PointX="8.125" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Phoebe.Model.Category" Width="1.5" PointX="7.625" PointY="7.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Phoebe.Model.Contract" Width="1.5" PointX="4.5" PointY="14.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Phoebe.Model.Customer" Width="1.5" PointX="1.25" PointY="14.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Phoebe.Model.StockIn" Width="1.5" PointX="6" PointY="21.875" IsExpanded="true" />
@@ -45,10 +45,13 @@
         <EntityTypeShape EntityType="Phoebe.Model.SettlementDetail" Width="1.5" PointX="6.75" PointY="29.25" />
         <AssociationConnector Association="Phoebe.Model.FK_SettlementDetails_Billing" />
         <AssociationConnector Association="Phoebe.Model.FK_SettlementDetails_Contract" />
-        <EntityTypeShape EntityType="Phoebe.Model.Settlement" Width="1.5" PointX="3" PointY="26.125" />
+        <EntityTypeShape EntityType="Phoebe.Model.Settlement" Width="1.5" PointX="4.25" PointY="26.5" />
         <AssociationConnector Association="Phoebe.Model.FK_Settlement_Customer" />
         <AssociationConnector Association="Phoebe.Model.FK_Settlement_User" />
         <AssociationConnector Association="Phoebe.Model.FK_SettlementDetails_Settlement" />
+        <EntityTypeShape EntityType="Phoebe.Model.Payment" Width="1.5" PointX="0.5" PointY="26.75" />
+        <AssociationConnector Association="Phoebe.Model.FK_Payment_Customer" />
+        <AssociationConnector Association="Phoebe.Model.FK_Payment_User" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

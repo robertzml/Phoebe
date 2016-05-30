@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
-            this.bsContract = new System.Windows.Forms.BindingSource(this.components);
             this.dgcContract = new DevExpress.XtraGrid.GridControl();
+            this.bsContract = new System.Windows.Forms.BindingSource(this.components);
             this.dgvContract = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colNumber = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -44,10 +44,11 @@
             this.colUserId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colRemark = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colStatus = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colBillingDescription = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bsContract)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgcContract)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsContract)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvContract)).BeginInit();
             this.SuspendLayout();
             // 
@@ -61,10 +62,6 @@
             this.groupControl1.TabIndex = 0;
             this.groupControl1.Text = "合同信息";
             // 
-            // bsContract
-            // 
-            this.bsContract.DataSource = typeof(Phoebe.Model.Contract);
-            // 
             // dgcContract
             // 
             this.dgcContract.DataSource = this.bsContract;
@@ -77,6 +74,10 @@
             this.dgcContract.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.dgvContract});
             // 
+            // bsContract
+            // 
+            this.bsContract.DataSource = typeof(Phoebe.Model.Contract);
+            // 
             // dgvContract
             // 
             this.dgvContract.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
@@ -87,6 +88,7 @@
             this.colSignDate,
             this.colCloseDate,
             this.colBillingType,
+            this.colBillingDescription,
             this.colIsTiming,
             this.colUserId,
             this.colRemark,
@@ -103,6 +105,7 @@
             this.dgvContract.OptionsMenu.EnableFooterMenu = false;
             this.dgvContract.OptionsMenu.EnableGroupPanelMenu = false;
             this.dgvContract.OptionsView.ShowGroupPanel = false;
+            this.dgvContract.CustomUnboundColumnData += new DevExpress.XtraGrid.Views.Base.CustomColumnDataEventHandler(this.dgvContract_CustomUnboundColumnData);
             this.dgvContract.CustomColumnDisplayText += new DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventHandler(this.dgvContract_CustomColumnDisplayText);
             // 
             // colId
@@ -149,8 +152,11 @@
             // 
             // colBillingType
             // 
+            this.colBillingType.AppearanceCell.Options.UseTextOptions = true;
+            this.colBillingType.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             this.colBillingType.Caption = "计费方式";
             this.colBillingType.FieldName = "BillingType";
+            this.colBillingType.FilterMode = DevExpress.XtraGrid.ColumnFilterMode.DisplayText;
             this.colBillingType.Name = "colBillingType";
             this.colBillingType.Visible = true;
             this.colBillingType.VisibleIndex = 4;
@@ -161,7 +167,7 @@
             this.colIsTiming.FieldName = "IsTiming";
             this.colIsTiming.Name = "colIsTiming";
             this.colIsTiming.Visible = true;
-            this.colIsTiming.VisibleIndex = 5;
+            this.colIsTiming.VisibleIndex = 6;
             // 
             // colUserId
             // 
@@ -169,7 +175,7 @@
             this.colUserId.FieldName = "UserId";
             this.colUserId.Name = "colUserId";
             this.colUserId.Visible = true;
-            this.colUserId.VisibleIndex = 6;
+            this.colUserId.VisibleIndex = 7;
             // 
             // colRemark
             // 
@@ -177,15 +183,28 @@
             this.colRemark.FieldName = "Remark";
             this.colRemark.Name = "colRemark";
             this.colRemark.Visible = true;
-            this.colRemark.VisibleIndex = 7;
+            this.colRemark.VisibleIndex = 8;
             // 
             // colStatus
             // 
+            this.colStatus.AppearanceCell.Options.UseTextOptions = true;
+            this.colStatus.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             this.colStatus.Caption = "状态";
             this.colStatus.FieldName = "Status";
+            this.colStatus.FilterMode = DevExpress.XtraGrid.ColumnFilterMode.DisplayText;
             this.colStatus.Name = "colStatus";
             this.colStatus.Visible = true;
-            this.colStatus.VisibleIndex = 8;
+            this.colStatus.VisibleIndex = 9;
+            // 
+            // colBillingDescription
+            // 
+            this.colBillingDescription.Caption = "计费说明";
+            this.colBillingDescription.FieldName = "colBillingDescription";
+            this.colBillingDescription.Name = "colBillingDescription";
+            this.colBillingDescription.OptionsFilter.AllowFilter = false;
+            this.colBillingDescription.UnboundType = DevExpress.Data.UnboundColumnType.String;
+            this.colBillingDescription.Visible = true;
+            this.colBillingDescription.VisibleIndex = 5;
             // 
             // UscCustomerContract
             // 
@@ -196,8 +215,8 @@
             this.Size = new System.Drawing.Size(836, 404);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
             this.groupControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.bsContract)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgcContract)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsContract)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvContract)).EndInit();
             this.ResumeLayout(false);
 
@@ -220,5 +239,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn colUserId;
         private DevExpress.XtraGrid.Columns.GridColumn colRemark;
         private DevExpress.XtraGrid.Columns.GridColumn colStatus;
+        private DevExpress.XtraGrid.Columns.GridColumn colBillingDescription;
     }
 }

@@ -72,6 +72,17 @@ namespace Phoebe.Business
         }
 
         /// <summary>
+        /// 获取客户结算记录
+        /// </summary>
+        /// <param name="customerId">客户ID</param>
+        /// <returns></returns>
+        public List<Settlement> GetByCustomer(int customerId)
+        {
+            var settles = this.dal.Find(r => r.CustomerId == customerId);
+            return settles.ToList();
+        }
+
+        /// <summary>
         /// 添加结算
         /// </summary>
         /// <param name="settlement">结算信息</param>

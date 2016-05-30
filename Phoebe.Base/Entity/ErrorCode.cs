@@ -111,6 +111,18 @@ namespace Phoebe.Base
         /// </summary>
         [Display(Name = "客户有合同")]
         CustomerHasContract = 30,
+
+        /// <summary>
+        /// 客户有结算
+        /// </summary>
+        [Display(Name = "客户有结算")]
+        CustomerHasSettlement = 31,
+
+        /// <summary>
+        /// 客户有缴费
+        /// </summary>
+        [Display(Name = "客户有缴费")]
+        CustomerHasPayment = 32,
         #endregion //Customer
 
         #region Contract

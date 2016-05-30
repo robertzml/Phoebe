@@ -35,6 +35,7 @@
             this.accordionControlElement4 = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             this.accordionControlElement2 = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             this.aceStoreIn = new DevExpress.XtraBars.Navigation.AccordionControlElement();
+            this.aceStoreOut = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             this.aceFlows = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.layoutControl2 = new DevExpress.XtraLayout.LayoutControl();
@@ -106,6 +107,7 @@
             // 
             this.accordionControlElement2.Elements.AddRange(new DevExpress.XtraBars.Navigation.AccordionControlElement[] {
             this.aceStoreIn,
+            this.aceStoreOut,
             this.aceFlows});
             this.accordionControlElement2.Expanded = true;
             this.accordionControlElement2.Image = ((System.Drawing.Image)(resources.GetObject("accordionControlElement2.Image")));
@@ -116,6 +118,12 @@
             this.aceStoreIn.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
             this.aceStoreIn.Tag = "UscCustomerStoreIn";
             this.aceStoreIn.Text = "在库库存";
+            // 
+            // aceStoreOut
+            // 
+            this.aceStoreOut.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
+            this.aceStoreOut.Tag = "UscCustomerStoreOut";
+            this.aceStoreOut.Text = "出库库存";
             // 
             // aceFlows
             // 
@@ -323,5 +331,6 @@
         private DevExpress.XtraEditors.LabelControl lblCustomer;
         private DevExpress.XtraBars.Navigation.AccordionControlElement aceStoreIn;
         private DevExpress.XtraBars.Navigation.AccordionControlElement aceFlows;
+        private DevExpress.XtraBars.Navigation.AccordionControlElement aceStoreOut;
     }
 }

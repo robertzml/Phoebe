@@ -48,6 +48,7 @@
             this.colUserId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colRemark = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colStatus = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colBillingDescription = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
@@ -132,6 +133,7 @@
             this.colSignDate,
             this.colCloseDate,
             this.colBillingType,
+            this.colBillingDescription,
             this.colIsTiming,
             this.colUserId,
             this.colRemark,
@@ -144,6 +146,7 @@
             this.dgvContract.OptionsFind.AlwaysVisible = true;
             this.dgvContract.OptionsView.ShowFooter = true;
             this.dgvContract.OptionsView.ShowGroupPanel = false;
+            this.dgvContract.CustomUnboundColumnData += new DevExpress.XtraGrid.Views.Base.CustomColumnDataEventHandler(this.dgvContract_CustomUnboundColumnData);
             this.dgvContract.CustomColumnDisplayText += new DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventHandler(this.dgvContract_CustomColumnDisplayText);
             // 
             // colId
@@ -213,7 +216,7 @@
             this.colIsTiming.FieldName = "IsTiming";
             this.colIsTiming.Name = "colIsTiming";
             this.colIsTiming.Visible = true;
-            this.colIsTiming.VisibleIndex = 6;
+            this.colIsTiming.VisibleIndex = 7;
             // 
             // colUserId
             // 
@@ -224,7 +227,7 @@
             this.colUserId.FilterMode = DevExpress.XtraGrid.ColumnFilterMode.DisplayText;
             this.colUserId.Name = "colUserId";
             this.colUserId.Visible = true;
-            this.colUserId.VisibleIndex = 7;
+            this.colUserId.VisibleIndex = 8;
             // 
             // colRemark
             // 
@@ -234,7 +237,7 @@
             this.colRemark.OptionsColumn.AllowSort = DevExpress.Utils.DefaultBoolean.False;
             this.colRemark.OptionsFilter.AllowFilter = false;
             this.colRemark.Visible = true;
-            this.colRemark.VisibleIndex = 8;
+            this.colRemark.VisibleIndex = 9;
             // 
             // colStatus
             // 
@@ -245,7 +248,17 @@
             this.colStatus.FilterMode = DevExpress.XtraGrid.ColumnFilterMode.DisplayText;
             this.colStatus.Name = "colStatus";
             this.colStatus.Visible = true;
-            this.colStatus.VisibleIndex = 9;
+            this.colStatus.VisibleIndex = 10;
+            // 
+            // colBillingDescription
+            // 
+            this.colBillingDescription.Caption = "计费说明";
+            this.colBillingDescription.FieldName = "colBillingDescription";
+            this.colBillingDescription.Name = "colBillingDescription";
+            this.colBillingDescription.OptionsFilter.AllowFilter = false;
+            this.colBillingDescription.UnboundType = DevExpress.Data.UnboundColumnType.String;
+            this.colBillingDescription.Visible = true;
+            this.colBillingDescription.VisibleIndex = 6;
             // 
             // ContractForm
             // 
@@ -289,5 +302,6 @@
         private DevExpress.XtraEditors.SimpleButton btnAdd;
         private DevExpress.XtraEditors.SimpleButton btnDelete;
         private DevExpress.XtraEditors.SimpleButton btnEdit;
+        private DevExpress.XtraGrid.Columns.GridColumn colBillingDescription;
     }
 }

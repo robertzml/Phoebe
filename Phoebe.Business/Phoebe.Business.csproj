@@ -61,6 +61,7 @@
     <Compile Include="BL\CustomerBusiness.cs" />
     <Compile Include="BL\ContractBusiness.cs" />
     <Compile Include="BL\CategoryBusiness.cs" />
+    <Compile Include="BL\PaymentBusiness.cs" />
     <Compile Include="BL\SettlementBusiness.cs" />
     <Compile Include="BL\StockInBusiness.cs" />
     <Compile Include="BL\StockMoveBusiness.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="DAL\BillingRepository.cs" />
     <Compile Include="DAL\CargoRepository.cs" />
     <Compile Include="DAL\CategoryRepository.cs" />
+    <Compile Include="DAL\PaymentRepository.cs" />
     <Compile Include="DAL\RepositoryFactory.cs" />
     <Compile Include="DAL\SettlementDetailsRepository.cs" />
     <Compile Include="DAL\SettlementRepository.cs" />

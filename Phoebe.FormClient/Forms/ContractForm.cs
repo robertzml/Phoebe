@@ -93,6 +93,23 @@ namespace Phoebe.FormClient
         }
 
         /// <summary>
+        /// 自定义数据显示
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dgvContract_CustomUnboundColumnData(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDataEventArgs e)
+        {
+            int rowIndex = e.ListSourceRowIndex;
+            if (rowIndex < 0 || rowIndex >= this.bsContract.Count)
+                return;
+
+            var contract = this.bsContract[rowIndex] as Contract;
+
+            if (e.Column.FieldName == "colBillingDescription" && e.IsGetData)
+                e.Value = ((BillingType)contract.BillingType).DisplayDescription();
+        }
+
+        /// <summary>
         /// 添加合同
         /// </summary>
         /// <param name="sender"></param>

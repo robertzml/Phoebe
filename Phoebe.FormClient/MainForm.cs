@@ -177,6 +177,16 @@ namespace Phoebe.FormClient
         }
 
         /// <summary>
+        /// 结算管理 - 客户缴费
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void menuPayment_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            ChildFormManage.ShowDialogForm(typeof(PaymentForm));
+        }
+
+        /// <summary>
         /// 用户管理 - 用户列表
         /// </summary>
         /// <param name="sender"></param>
@@ -208,6 +218,5 @@ namespace Phoebe.FormClient
         #endregion //Menu Event
 
         #endregion //Event
-
     }
 }

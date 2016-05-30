@@ -60,6 +60,14 @@ namespace Phoebe.Business
             if (contracts.Count != 0)
                 return ErrorCode.CustomerHasContract;
 
+            var settlements = BusinessFactory<SettlementBusiness>.Instance.GetByCustomer(entity.Id);
+            if (settlements.Count != 0)
+                return ErrorCode.CustomerHasSettlement;
+
+            var payments = BusinessFactory<PaymentBusiness>.Instance.GetByCustomer(entity.Id);
+            if (payments.Count != 0)
+                return ErrorCode.CustomerHasPayment;
+
             var result = this.dal.Delete(entity);
             return result;
         }
