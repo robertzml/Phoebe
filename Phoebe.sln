@@ -13,8 +13,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Phoebe.FormClient", "Phoebe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Phoebe.Base", "Phoebe.Base\Phoebe.Base.csproj", "{3F322B29-447F-4D87-BCB3-AAE4AA7BFDF9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Phoebe.Migrate", "Phoebe.Migrate\Phoebe.Migrate.csproj", "{0A9B64DC-8242-4A16-995D-E8B5632A590A}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,10 +39,6 @@ Global
 		{3F322B29-447F-4D87-BCB3-AAE4AA7BFDF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3F322B29-447F-4D87-BCB3-AAE4AA7BFDF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3F322B29-447F-4D87-BCB3-AAE4AA7BFDF9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0A9B64DC-8242-4A16-995D-E8B5632A590A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0A9B64DC-8242-4A16-995D-E8B5632A590A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0A9B64DC-8242-4A16-995D-E8B5632A590A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0A9B64DC-8242-4A16-995D-E8B5632A590A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
