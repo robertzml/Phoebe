@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Phoebe.FormClient
@@ -14,28 +16,42 @@ namespace Phoebe.FormClient
     using Phoebe.Model;
 
     /// <summary>
-    /// 客户缴费
+    /// 缴费管理窗体
     /// </summary>
-    public partial class PaymentForm : BaseSingleForm
+    public partial class PaymentForm : BaseForm
     {
-        #region Field
-        /// <summary>
-        /// 选中客户
-        /// </summary>
-        private Customer selectCustomer;
-
-        /// <summary>
-        /// 客户列表，缓存页面使用
-        /// </summary>
-        private List<Customer> customerList;
-        #endregion //Field
-
         #region Constructor
         public PaymentForm()
         {
             InitializeComponent();
         }
         #endregion //Constructor
+
+        #region Function
+        /// <summary>
+        /// 载入数据
+        /// </summary>
+        private void LoadData()
+        {
+            var data = BusinessFactory<PaymentBusiness>.Instance.FindAll();
+            this.bsPayment.DataSource = data;
+        }
+
+        /// <summary>
+        /// 检查权限
+        /// </summary>
+        protected override void CheckPrivilege()
+        {
+            if (this.currentUser.Rank > 800)
+            {
+                this.btnDelete.Visible = true;
+            }
+            else
+            {
+                this.btnDelete.Visible = false;
+            }
+        }
+        #endregion //Function
 
         #region Event
         /// <summary>
@@ -45,62 +61,78 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void PaymentForm_Load(object sender, EventArgs e)
         {
-            this.dpPaidTime.DateTime = DateTime.Now.Date;
-            this.txtUser.Text = this.currentUser.Name;
-
-            this.customerList = BusinessFactory<CustomerBusiness>.Instance.FindAll();
-            this.clcCustomer.SetDataSource(customerList);
+            LoadData();
         }
 
         /// <summary>
-        /// 输入客户代码
+        /// 格式化数据显示
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void txtCustomerNumber_EditValueChanged(object sender, EventArgs e)
+        private void dgvPayment_CustomColumnDisplayText(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs e)
         {
-            string number = this.txtCustomerNumber.EditValue.ToString();
-            this.clcCustomer.UpdateView(number);
+            int rowIndex = e.ListSourceRowIndex;
+            if (rowIndex < 0 || rowIndex >= this.bsPayment.Count)
+                return;
 
-            var customer = this.customerList.SingleOrDefault(r => r.Number == number);
-            if (customer != null)
+            if (e.Column.FieldName == "CustomerId")
             {
-                this.selectCustomer = customer;
-                this.txtCustomerName.Text = customer.Name;
+                var payment = this.bsPayment[rowIndex] as Payment;
+                e.DisplayText = payment.Customer.Name;
             }
-            else
+            else if (e.Column.FieldName == "UserId")
             {
-                this.selectCustomer = null;
-                this.txtCustomerName.Text = "";
+                var payment = this.bsPayment[rowIndex] as Payment;
+                e.DisplayText = payment.User.Name;
             }
         }
 
         /// <summary>
-        /// 客户选择
+        /// 客户缴费
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void clcCustomer_CustomerItemSelected(object sender, EventArgs e)
+        private void btnAdd_Click(object sender, EventArgs e)
         {
-            this.txtCustomerNumber.EditValueChanged -= txtCustomerNumber_EditValueChanged;
-
-            this.txtCustomerNumber.Text = this.clcCustomer.SelectedNumber;
-            this.txtCustomerName.Text = this.clcCustomer.SelectedName;
-
-            this.txtCustomerNumber.EditValueChanged += txtCustomerNumber_EditValueChanged;
-
-            int customerId = this.clcCustomer.SelectedId;
-            this.selectCustomer = this.customerList.SingleOrDefault(r => r.Id == customerId);
+            ChildFormManage.ShowDialogForm(typeof(PaymentAddForm));
+            LoadData();
         }
-       
+
+
         /// <summary>
-        /// 保存
+        /// 删除缴费
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnConfirm_Click(object sender, EventArgs e)
+        private void btnDelete_Click(object sender, EventArgs e)
         {
+            if (this.dgvPayment.SelectedRowsCount == 0)
+            {
+                MessageBox.Show("未选中记录", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
 
+            DialogResult dr = MessageBox.Show("是否确认删除选中缴费记录", FormConstant.MessageBoxTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dr == DialogResult.Yes)
+            {
+                int rowIndex = this.dgvPayment.GetFocusedDataSourceRowIndex();
+                if (rowIndex < 0 || rowIndex >= this.bsPayment.Count)
+                    return;
+
+                var payment = this.bsPayment[rowIndex] as Payment;
+
+                ErrorCode result = BusinessFactory<PaymentBusiness>.Instance.Delete(payment);
+                if (result == ErrorCode.Success)
+                {
+                    MessageBox.Show("删除缴费成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("删除缴费失败：" + result.DisplayName(), FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
+                LoadData();
+            }
         }
         #endregion //Event
     }

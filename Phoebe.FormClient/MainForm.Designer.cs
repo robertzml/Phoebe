@@ -50,6 +50,7 @@
             this.menuColdPrice = new DevExpress.XtraBars.BarButtonItem();
             this.menuSettlement = new DevExpress.XtraBars.BarButtonItem();
             this.menuSettleList = new DevExpress.XtraBars.BarButtonItem();
+            this.menuPayment = new DevExpress.XtraBars.BarButtonItem();
             this.menuUser = new DevExpress.XtraBars.BarSubItem();
             this.menuUserList = new DevExpress.XtraBars.BarButtonItem();
             this.menuUserGroupList = new DevExpress.XtraBars.BarButtonItem();
@@ -67,7 +68,6 @@
             this.barHeaderItem1 = new DevExpress.XtraBars.BarHeaderItem();
             this.barStaticItem2 = new DevExpress.XtraBars.BarStaticItem();
             this.tabMdiManager = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
-            this.menuPayment = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabMdiManager)).BeginInit();
             this.SuspendLayout();
@@ -286,6 +286,13 @@
             this.menuSettleList.Name = "menuSettleList";
             this.menuSettleList.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuSettleList_ItemClick);
             // 
+            // menuPayment
+            // 
+            this.menuPayment.Caption = "缴费管理";
+            this.menuPayment.Id = 31;
+            this.menuPayment.Name = "menuPayment";
+            this.menuPayment.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuPayment_ItemClick);
+            // 
             // menuUser
             // 
             this.menuUser.Caption = "用户管理";
@@ -410,13 +417,6 @@
             this.tabMdiManager.ClosePageButtonShowMode = DevExpress.XtraTab.ClosePageButtonShowMode.InAllTabPageHeaders;
             this.tabMdiManager.MdiParent = this;
             this.tabMdiManager.PinPageButtonShowMode = DevExpress.XtraTab.PinPageButtonShowMode.InActiveTabPageHeader;
-            // 
-            // menuPayment
-            // 
-            this.menuPayment.Caption = "客户缴费";
-            this.menuPayment.Id = 31;
-            this.menuPayment.Name = "menuPayment";
-            this.menuPayment.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuPayment_ItemClick);
             // 
             // MainForm
             // 

@@ -28,296 +28,184 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
-            this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
-            this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.txtCustomerNumber = new DevExpress.XtraEditors.TextEdit();
-            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.txtCustomerName = new DevExpress.XtraEditors.TextEdit();
-            this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.dpPaidTime = new DevExpress.XtraEditors.DateEdit();
-            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.nmPaidFee = new DevExpress.XtraEditors.SpinEdit();
-            this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.txtUser = new DevExpress.XtraEditors.TextEdit();
-            this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
-            this.txtRemark = new DevExpress.XtraEditors.MemoEdit();
-            this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.clcCustomer = new Phoebe.FormClient.CustomerListControl();
-            ((System.ComponentModel.ISupportInitialize)(this.plFill)).BeginInit();
-            this.plFill.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.plBottom)).BeginInit();
-            this.plBottom.SuspendLayout();
+            this.btnDelete = new DevExpress.XtraEditors.SimpleButton();
+            this.btnAdd = new DevExpress.XtraEditors.SimpleButton();
+            this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
+            this.dgcPayment = new DevExpress.XtraGrid.GridControl();
+            this.bsPayment = new System.Windows.Forms.BindingSource(this.components);
+            this.dgvPayment = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.colId = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colCustomerId = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colPaidFee = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colPaidTime = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colUserId = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colRemark = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colStatus = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
-            this.layoutControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtCustomerNumber.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtCustomerName.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dpPaidTime.Properties.CalendarTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dpPaidTime.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nmPaidFee.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtUser.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtRemark.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
+            this.groupControl2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgcPayment)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsPayment)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPayment)).BeginInit();
             this.SuspendLayout();
-            // 
-            // plFill
-            // 
-            this.plFill.Appearance.BackColor = System.Drawing.Color.White;
-            this.plFill.Appearance.Options.UseBackColor = true;
-            this.plFill.Controls.Add(this.groupControl1);
-            this.plFill.Controls.Add(this.clcCustomer);
-            this.plFill.Size = new System.Drawing.Size(639, 306);
-            // 
-            // plBottom
-            // 
-            this.plBottom.Appearance.BackColor = System.Drawing.Color.White;
-            this.plBottom.Appearance.Options.UseBackColor = true;
-            this.plBottom.Location = new System.Drawing.Point(0, 306);
-            this.plBottom.Size = new System.Drawing.Size(639, 63);
-            // 
-            // btnCanel
-            // 
-            this.btnCanel.Location = new System.Drawing.Point(540, 18);
-            // 
-            // btnConfirm
-            // 
-            this.btnConfirm.Location = new System.Drawing.Point(433, 18);
-            this.btnConfirm.Click += new System.EventHandler(this.btnConfirm_Click);
             // 
             // groupControl1
             // 
-            this.groupControl1.Controls.Add(this.layoutControl1);
-            this.groupControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupControl1.Controls.Add(this.btnDelete);
+            this.groupControl1.Controls.Add(this.btnAdd);
+            this.groupControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupControl1.Location = new System.Drawing.Point(0, 0);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(419, 306);
+            this.groupControl1.Size = new System.Drawing.Size(793, 110);
             this.groupControl1.TabIndex = 0;
-            this.groupControl1.Text = "缴费信息";
+            this.groupControl1.Text = "操作";
             // 
-            // layoutControl1
+            // btnDelete
             // 
-            this.layoutControl1.Controls.Add(this.txtRemark);
-            this.layoutControl1.Controls.Add(this.txtUser);
-            this.layoutControl1.Controls.Add(this.nmPaidFee);
-            this.layoutControl1.Controls.Add(this.dpPaidTime);
-            this.layoutControl1.Controls.Add(this.txtCustomerName);
-            this.layoutControl1.Controls.Add(this.txtCustomerNumber);
-            this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.layoutControl1.Location = new System.Drawing.Point(2, 21);
-            this.layoutControl1.Name = "layoutControl1";
-            this.layoutControl1.Root = this.layoutControlGroup1;
-            this.layoutControl1.Size = new System.Drawing.Size(415, 283);
-            this.layoutControl1.TabIndex = 0;
-            this.layoutControl1.Text = "layoutControl1";
+            this.btnDelete.Location = new System.Drawing.Point(179, 43);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(90, 40);
+            this.btnDelete.TabIndex = 3;
+            this.btnDelete.Text = "删除缴费";
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
-            // layoutControlGroup1
+            // btnAdd
             // 
-            this.layoutControlGroup1.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
-            this.layoutControlGroup1.GroupBordersVisible = false;
-            this.layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem1,
-            this.layoutControlItem2,
-            this.layoutControlItem3,
-            this.layoutControlItem4,
-            this.layoutControlItem5,
-            this.layoutControlItem6,
-            this.emptySpaceItem1});
-            this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlGroup1.Name = "layoutControlGroup1";
-            this.layoutControlGroup1.Size = new System.Drawing.Size(415, 283);
-            this.layoutControlGroup1.TextVisible = false;
+            this.btnAdd.Location = new System.Drawing.Point(44, 43);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(90, 40);
+            this.btnAdd.TabIndex = 2;
+            this.btnAdd.Text = "客户缴费";
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // txtCustomerNumber
+            // groupControl2
             // 
-            this.txtCustomerNumber.Location = new System.Drawing.Point(64, 12);
-            this.txtCustomerNumber.Name = "txtCustomerNumber";
-            this.txtCustomerNumber.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow;
-            this.txtCustomerNumber.Properties.Appearance.Options.UseBackColor = true;
-            this.txtCustomerNumber.Size = new System.Drawing.Size(135, 20);
-            this.txtCustomerNumber.StyleController = this.layoutControl1;
-            this.txtCustomerNumber.TabIndex = 4;
-            this.txtCustomerNumber.EditValueChanged += new System.EventHandler(this.txtCustomerNumber_EditValueChanged);
+            this.groupControl2.Controls.Add(this.dgcPayment);
+            this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupControl2.Location = new System.Drawing.Point(0, 110);
+            this.groupControl2.Name = "groupControl2";
+            this.groupControl2.Size = new System.Drawing.Size(793, 355);
+            this.groupControl2.TabIndex = 1;
+            this.groupControl2.Text = "缴费记录";
             // 
-            // layoutControlItem1
+            // dgcPayment
             // 
-            this.layoutControlItem1.Control = this.txtCustomerNumber;
-            this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(191, 24);
-            this.layoutControlItem1.Text = "客户代码";
-            this.layoutControlItem1.TextSize = new System.Drawing.Size(48, 14);
+            this.dgcPayment.DataSource = this.bsPayment;
+            this.dgcPayment.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgcPayment.Location = new System.Drawing.Point(2, 21);
+            this.dgcPayment.MainView = this.dgvPayment;
+            this.dgcPayment.Name = "dgcPayment";
+            this.dgcPayment.Size = new System.Drawing.Size(789, 332);
+            this.dgcPayment.TabIndex = 0;
+            this.dgcPayment.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.dgvPayment});
             // 
-            // txtCustomerName
+            // bsPayment
             // 
-            this.txtCustomerName.Location = new System.Drawing.Point(255, 12);
-            this.txtCustomerName.Name = "txtCustomerName";
-            this.txtCustomerName.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
-            this.txtCustomerName.Properties.Appearance.Options.UseBackColor = true;
-            this.txtCustomerName.Properties.ReadOnly = true;
-            this.txtCustomerName.Size = new System.Drawing.Size(148, 20);
-            this.txtCustomerName.StyleController = this.layoutControl1;
-            this.txtCustomerName.TabIndex = 5;
+            this.bsPayment.DataSource = typeof(Phoebe.Model.Payment);
             // 
-            // layoutControlItem2
+            // dgvPayment
             // 
-            this.layoutControlItem2.Control = this.txtCustomerName;
-            this.layoutControlItem2.Location = new System.Drawing.Point(191, 0);
-            this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(204, 24);
-            this.layoutControlItem2.Text = "客户名称";
-            this.layoutControlItem2.TextSize = new System.Drawing.Size(48, 14);
+            this.dgvPayment.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.colId,
+            this.colCustomerId,
+            this.colPaidFee,
+            this.colPaidTime,
+            this.colUserId,
+            this.colRemark,
+            this.colStatus});
+            this.dgvPayment.GridControl = this.dgcPayment;
+            this.dgvPayment.Name = "dgvPayment";
+            this.dgvPayment.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
+            this.dgvPayment.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
+            this.dgvPayment.OptionsBehavior.Editable = false;
+            this.dgvPayment.OptionsCustomization.AllowGroup = false;
+            this.dgvPayment.OptionsCustomization.AllowQuickHideColumns = false;
+            this.dgvPayment.OptionsMenu.EnableGroupPanelMenu = false;
+            this.dgvPayment.OptionsView.ShowFooter = true;
+            this.dgvPayment.OptionsView.ShowGroupPanel = false;
+            this.dgvPayment.CustomColumnDisplayText += new DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventHandler(this.dgvPayment_CustomColumnDisplayText);
             // 
-            // dpPaidTime
+            // colId
             // 
-            this.dpPaidTime.EditValue = null;
-            this.dpPaidTime.Location = new System.Drawing.Point(64, 36);
-            this.dpPaidTime.Name = "dpPaidTime";
-            this.dpPaidTime.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
-            this.dpPaidTime.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dpPaidTime.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dpPaidTime.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.dpPaidTime.Size = new System.Drawing.Size(135, 20);
-            this.dpPaidTime.StyleController = this.layoutControl1;
-            this.dpPaidTime.TabIndex = 6;
+            this.colId.FieldName = "Id";
+            this.colId.Name = "colId";
             // 
-            // layoutControlItem3
+            // colCustomerId
             // 
-            this.layoutControlItem3.Control = this.dpPaidTime;
-            this.layoutControlItem3.Location = new System.Drawing.Point(0, 24);
-            this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(191, 24);
-            this.layoutControlItem3.Text = "缴费时间";
-            this.layoutControlItem3.TextSize = new System.Drawing.Size(48, 14);
+            this.colCustomerId.AppearanceCell.Options.UseTextOptions = true;
+            this.colCustomerId.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            this.colCustomerId.Caption = "客户名称";
+            this.colCustomerId.FieldName = "CustomerId";
+            this.colCustomerId.FilterMode = DevExpress.XtraGrid.ColumnFilterMode.DisplayText;
+            this.colCustomerId.Name = "colCustomerId";
+            this.colCustomerId.Visible = true;
+            this.colCustomerId.VisibleIndex = 0;
             // 
-            // nmPaidFee
+            // colPaidFee
             // 
-            this.nmPaidFee.EditValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.nmPaidFee.Location = new System.Drawing.Point(255, 36);
-            this.nmPaidFee.Name = "nmPaidFee";
-            this.nmPaidFee.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow;
-            this.nmPaidFee.Properties.Appearance.Options.UseBackColor = true;
-            this.nmPaidFee.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.nmPaidFee.Properties.Mask.EditMask = "######.##";
-            this.nmPaidFee.Properties.MaxValue = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-            this.nmPaidFee.Size = new System.Drawing.Size(148, 20);
-            this.nmPaidFee.StyleController = this.layoutControl1;
-            this.nmPaidFee.TabIndex = 7;
+            this.colPaidFee.Caption = "缴费金额(元)";
+            this.colPaidFee.DisplayFormat.FormatString = "0.##";
+            this.colPaidFee.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.colPaidFee.FieldName = "PaidFee";
+            this.colPaidFee.Name = "colPaidFee";
+            this.colPaidFee.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "PaidFee", "合计={0:0.##}")});
+            this.colPaidFee.Visible = true;
+            this.colPaidFee.VisibleIndex = 1;
             // 
-            // layoutControlItem4
+            // colPaidTime
             // 
-            this.layoutControlItem4.Control = this.nmPaidFee;
-            this.layoutControlItem4.Location = new System.Drawing.Point(191, 24);
-            this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(204, 24);
-            this.layoutControlItem4.Text = "缴费金额";
-            this.layoutControlItem4.TextSize = new System.Drawing.Size(48, 14);
+            this.colPaidTime.Caption = "缴费日期";
+            this.colPaidTime.FieldName = "PaidTime";
+            this.colPaidTime.Name = "colPaidTime";
+            this.colPaidTime.Visible = true;
+            this.colPaidTime.VisibleIndex = 2;
             // 
-            // txtUser
+            // colUserId
             // 
-            this.txtUser.Location = new System.Drawing.Point(64, 60);
-            this.txtUser.Name = "txtUser";
-            this.txtUser.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
-            this.txtUser.Properties.Appearance.Options.UseBackColor = true;
-            this.txtUser.Properties.ReadOnly = true;
-            this.txtUser.Size = new System.Drawing.Size(135, 20);
-            this.txtUser.StyleController = this.layoutControl1;
-            this.txtUser.TabIndex = 8;
+            this.colUserId.AppearanceCell.Options.UseTextOptions = true;
+            this.colUserId.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            this.colUserId.Caption = "收款人";
+            this.colUserId.FieldName = "UserId";
+            this.colUserId.FilterMode = DevExpress.XtraGrid.ColumnFilterMode.DisplayText;
+            this.colUserId.Name = "colUserId";
+            this.colUserId.Visible = true;
+            this.colUserId.VisibleIndex = 3;
             // 
-            // layoutControlItem5
+            // colRemark
             // 
-            this.layoutControlItem5.Control = this.txtUser;
-            this.layoutControlItem5.Location = new System.Drawing.Point(0, 48);
-            this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(191, 24);
-            this.layoutControlItem5.Text = "收款人";
-            this.layoutControlItem5.TextSize = new System.Drawing.Size(48, 14);
+            this.colRemark.Caption = "备注";
+            this.colRemark.FieldName = "Remark";
+            this.colRemark.Name = "colRemark";
+            this.colRemark.Visible = true;
+            this.colRemark.VisibleIndex = 4;
             // 
-            // emptySpaceItem1
+            // colStatus
             // 
-            this.emptySpaceItem1.AllowHotTrack = false;
-            this.emptySpaceItem1.Location = new System.Drawing.Point(191, 48);
-            this.emptySpaceItem1.Name = "emptySpaceItem1";
-            this.emptySpaceItem1.Size = new System.Drawing.Size(204, 24);
-            this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
-            // 
-            // txtRemark
-            // 
-            this.txtRemark.Location = new System.Drawing.Point(64, 84);
-            this.txtRemark.Name = "txtRemark";
-            this.txtRemark.Size = new System.Drawing.Size(339, 187);
-            this.txtRemark.StyleController = this.layoutControl1;
-            this.txtRemark.TabIndex = 9;
-            // 
-            // layoutControlItem6
-            // 
-            this.layoutControlItem6.Control = this.txtRemark;
-            this.layoutControlItem6.Location = new System.Drawing.Point(0, 72);
-            this.layoutControlItem6.Name = "layoutControlItem6";
-            this.layoutControlItem6.Size = new System.Drawing.Size(395, 191);
-            this.layoutControlItem6.Text = "备注";
-            this.layoutControlItem6.TextSize = new System.Drawing.Size(48, 14);
-            // 
-            // clcCustomer
-            // 
-            this.clcCustomer.Dock = System.Windows.Forms.DockStyle.Right;
-            this.clcCustomer.Location = new System.Drawing.Point(419, 0);
-            this.clcCustomer.Name = "clcCustomer";
-            this.clcCustomer.Size = new System.Drawing.Size(220, 306);
-            this.clcCustomer.TabIndex = 1;
-            this.clcCustomer.CustomerItemSelected += new Phoebe.FormClient.CustomerListControl.ItemSelectHandle(this.clcCustomer_CustomerItemSelected);
+            this.colStatus.FieldName = "Status";
+            this.colStatus.Name = "colStatus";
             // 
             // PaymentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(639, 369);
+            this.ClientSize = new System.Drawing.Size(793, 465);
+            this.Controls.Add(this.groupControl2);
+            this.Controls.Add(this.groupControl1);
             this.Name = "PaymentForm";
-            this.Text = "客户缴费";
+            this.Text = "缴费管理";
             this.Load += new System.EventHandler(this.PaymentForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.plFill)).EndInit();
-            this.plFill.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.plBottom)).EndInit();
-            this.plBottom.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
             this.groupControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
-            this.layoutControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtCustomerNumber.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtCustomerName.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dpPaidTime.Properties.CalendarTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dpPaidTime.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nmPaidFee.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtUser.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtRemark.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
+            this.groupControl2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgcPayment)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsPayment)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPayment)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -325,21 +213,18 @@
         #endregion
 
         private DevExpress.XtraEditors.GroupControl groupControl1;
-        private DevExpress.XtraLayout.LayoutControl layoutControl1;
-        private DevExpress.XtraEditors.MemoEdit txtRemark;
-        private DevExpress.XtraEditors.TextEdit txtUser;
-        private DevExpress.XtraEditors.SpinEdit nmPaidFee;
-        private DevExpress.XtraEditors.DateEdit dpPaidTime;
-        private DevExpress.XtraEditors.TextEdit txtCustomerName;
-        private DevExpress.XtraEditors.TextEdit txtCustomerNumber;
-        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup1;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
-        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
-        private CustomerListControl clcCustomer;
+        private DevExpress.XtraEditors.GroupControl groupControl2;
+        private DevExpress.XtraEditors.SimpleButton btnAdd;
+        private DevExpress.XtraGrid.GridControl dgcPayment;
+        private System.Windows.Forms.BindingSource bsPayment;
+        private DevExpress.XtraGrid.Views.Grid.GridView dgvPayment;
+        private DevExpress.XtraGrid.Columns.GridColumn colId;
+        private DevExpress.XtraGrid.Columns.GridColumn colCustomerId;
+        private DevExpress.XtraGrid.Columns.GridColumn colPaidFee;
+        private DevExpress.XtraGrid.Columns.GridColumn colPaidTime;
+        private DevExpress.XtraGrid.Columns.GridColumn colUserId;
+        private DevExpress.XtraGrid.Columns.GridColumn colRemark;
+        private DevExpress.XtraGrid.Columns.GridColumn colStatus;
+        private DevExpress.XtraEditors.SimpleButton btnDelete;
     }
 }

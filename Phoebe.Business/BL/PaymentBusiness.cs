@@ -44,6 +44,20 @@ namespace Phoebe.Business
             var payments = this.dal.Find(r => r.CustomerId == customerId);
             return payments.ToList();
         }
+
+        /// <summary>
+        /// 添加缴费
+        /// </summary>
+        /// <param name="entity">缴费对象</param>
+        /// <returns></returns>
+        public override ErrorCode Create(Payment entity)
+        {
+            entity.Id = Guid.NewGuid();
+            entity.Status = 0;
+
+            var result = this.dal.Create(entity);
+            return result;
+        }
         #endregion //Method
     }
 }
