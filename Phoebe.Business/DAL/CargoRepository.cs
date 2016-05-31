@@ -25,9 +25,13 @@ namespace Phoebe.Business.DAL
             return this.context.Cargoes.Find(id);
         }
 
+        /// <summary>
+        /// 查找所有货品
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<Cargo> FindAll()
         {
-            throw new NotImplementedException();
+            return this.context.Cargoes;
         }
 
         /// <summary>

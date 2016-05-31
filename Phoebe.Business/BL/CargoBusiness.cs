@@ -68,7 +68,11 @@ namespace Phoebe.Business
             }
         }
 
-        
+        /// <summary>
+        /// 按客户查找货品
+        /// </summary>
+        /// <param name="customerId">客户ID</param>
+        /// <returns></returns>
         public List<Cargo> GetByCustomer(int customerId)
         {
             Expression<Func<Cargo, bool>> predicate = r => r.Contract.CustomerId == customerId;

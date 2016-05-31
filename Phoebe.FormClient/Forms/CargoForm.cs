@@ -15,29 +15,24 @@ namespace Phoebe.FormClient
     using Phoebe.Model;
 
     /// <summary>
-    /// 库存记录窗体
+    /// 货品列表窗体
     /// </summary>
-    public partial class StoreForm : BaseForm
+    public partial class CargoForm : BaseForm
     {
         #region Field
-        /// <summary>
-        /// 客户列表
-        /// </summary>
-        private List<Customer> customerList;
-
-        /// <summary>
-        /// 分类列表
-        /// </summary>
-        private List<Category> categoryList;
-
         /// <summary>
         /// 选中客户
         /// </summary>
         private Customer selectCustomer;
+
+        /// <summary>
+        /// 客户列表，缓存页面使用
+        /// </summary>
+        private List<Customer> customerList;
         #endregion //Field
 
         #region Constructor
-        public StoreForm()
+        public CargoForm()
         {
             InitializeComponent();
         }
@@ -78,15 +73,10 @@ namespace Phoebe.FormClient
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void StoreForm_Load(object sender, EventArgs e)
+        private void CargoForm_Load(object sender, EventArgs e)
         {
-            this.selectCustomer = null;
-
             this.customerList = BusinessFactory<CustomerBusiness>.Instance.FindAll();
             this.clcCustomer.SetDataSource(customerList);
-
-            this.categoryList = BusinessFactory<CategoryBusiness>.Instance.FindAll();
-            this.clcCategory.SetDataSource(categoryList);
         }
 
         /// <summary>
@@ -102,20 +92,20 @@ namespace Phoebe.FormClient
             var customer = this.customerList.SingleOrDefault(r => r.Number == number);
             if (customer != null)
             {
-                this.txtCustomerName.Text = customer.Name;
                 this.selectCustomer = customer;
+                this.txtCustomerName.Text = customer.Name;
                 UpdateContractList(customer.Id);
             }
             else
             {
-                this.txtCustomerName.Text = "";
                 this.selectCustomer = null;
+                this.txtCustomerName.Text = "";
                 UpdateContractList(0);
             }
         }
 
         /// <summary>
-        /// 选择客户
+        /// 客户选择
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -134,39 +124,45 @@ namespace Phoebe.FormClient
         }
 
         /// <summary>
-        /// 输入类别代码
+        /// 格式化数据显示
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void txtCategoryNumber_EditValueChanged(object sender, EventArgs e)
+        private void dgvCargo_CustomColumnDisplayText(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs e)
         {
-            string number = this.txtCategoryNumber.EditValue.ToString();
-            this.clcCategory.UpdateView(number);
+            int rowIndex = e.ListSourceRowIndex;
+            if (rowIndex < 0 || rowIndex >= this.bsCargo.Count)
+                return;
 
-            var category = this.categoryList.SingleOrDefault(r => r.Number == number);
-            if (category != null)
+            if (e.Column.FieldName == "ContractId")
             {
-                this.txtCategoryName.Text = category.Name;
+                var cargo = this.bsCargo[rowIndex] as Cargo;
+                e.DisplayText = cargo.Contract.Name;
             }
-            else
+            else if (e.Column.FieldName == "GroupType")
             {
-                this.txtCategoryName.Text = "";
+                var cargo = this.bsCargo[rowIndex] as Cargo;
+                e.DisplayText = ((BillingType)cargo.GroupType).DisplayName();
             }
         }
 
         /// <summary>
-        /// 选择分类
+        /// 自定义数据显示
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void clcCategory_CategoryItemSelected(object sender, EventArgs e)
+        private void dgvCargo_CustomUnboundColumnData(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDataEventArgs e)
         {
-            this.txtCategoryNumber.EditValueChanged -= txtCategoryNumber_EditValueChanged;
+            int rowIndex = e.ListSourceRowIndex;
+            if (rowIndex < 0 || rowIndex >= this.bsCargo.Count)
+                return;
 
-            this.txtCategoryNumber.Text = this.clcCategory.SelectedNumber;
-            this.txtCategoryName.Text = this.clcCategory.SelectedName;
+            var cargo = this.bsCargo[rowIndex] as Cargo;
 
-            this.txtCategoryNumber.EditValueChanged += txtCategoryNumber_EditValueChanged;
+            if (e.Column.FieldName == "colCategoryNumber" && e.IsGetData)
+                e.Value = cargo.Category.Number;
+            if (e.Column.FieldName == "colCategoryName" && e.IsGetData)
+                e.Value = cargo.Category.Name;
         }
 
         /// <summary>
@@ -176,38 +172,20 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            List<Func<Store, bool>> filter = new List<Func<Store, bool>>();
-            if (this.selectCustomer != null)
+            if (this.selectCustomer == null)
             {
-                filter.Add(r => r.Cargo.Contract.CustomerId == this.selectCustomer.Id);
+                MessageBox.Show("请选择客户", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
             }
 
-            var category = BusinessFactory<CategoryBusiness>.Instance.GetByParent(this.txtCategoryNumber.Text);
-            if (category != null)
+            var data = BusinessFactory<CargoBusiness>.Instance.GetByCustomer(this.selectCustomer.Id);
+
+            if (this.cmbContract.EditValue != null && (int)this.cmbContract.EditValue != 0)
             {
-                filter.Add(r => category.Select(s => s.Id).Contains(r.Cargo.CategoryId));
+                data = data.Where(r => r.ContractId == (int)this.cmbContract.EditValue).ToList();
             }
 
-            if (this.cmbContract.EditValue != null && Convert.ToInt32(this.cmbContract.EditValue) != 0)
-            {
-                filter.Add(r => r.Cargo.ContractId == Convert.ToInt32(this.cmbContract.EditValue));
-            }
-
-            if (!this.chkIn.Checked)
-            {
-                filter.Add(r => r.Status != (int)EntityStatus.StoreIn);
-            }
-            if (!this.chkOut.Checked)
-            {
-                filter.Add(r => r.Status != (int)EntityStatus.StoreOut);
-            }
-            if (!this.chkReady.Checked)
-            {
-                filter.Add(r => r.Status != (int)EntityStatus.StoreReady && r.Status != (int)EntityStatus.StoreMoveReady);
-            }
-
-            var data = BusinessFactory<StoreBusiness>.Instance.GetByConditions(filter);
-            this.sgList.DataSource = data;
+            this.bsCargo.DataSource = data;
         }
         #endregion //Event
     }

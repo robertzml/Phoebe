@@ -68,6 +68,7 @@
             this.barHeaderItem1 = new DevExpress.XtraBars.BarHeaderItem();
             this.barStaticItem2 = new DevExpress.XtraBars.BarStaticItem();
             this.tabMdiManager = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
+            this.menuCargoList = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabMdiManager)).BeginInit();
             this.SuspendLayout();
@@ -113,9 +114,10 @@
             this.menuSettlement,
             this.menuCustomerDashboard,
             this.menuSettleList,
-            this.menuPayment});
+            this.menuPayment,
+            this.menuCargoList});
             this.barManager1.MainMenu = this.mainMenu;
-            this.barManager1.MaxItemId = 32;
+            this.barManager1.MaxItemId = 33;
             this.barManager1.StatusBar = this.bar3;
             // 
             // mainMenu
@@ -182,7 +184,8 @@
             this.menuCargo.Caption = "货品管理";
             this.menuCargo.Id = 16;
             this.menuCargo.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(this.menuCategory)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.menuCategory),
+            new DevExpress.XtraBars.LinkPersistInfo(this.menuCargoList)});
             this.menuCargo.Name = "menuCargo";
             // 
             // menuCategory
@@ -418,6 +421,13 @@
             this.tabMdiManager.MdiParent = this;
             this.tabMdiManager.PinPageButtonShowMode = DevExpress.XtraTab.PinPageButtonShowMode.InActiveTabPageHeader;
             // 
+            // menuCargoList
+            // 
+            this.menuCargoList.Caption = "货品列表";
+            this.menuCargoList.Id = 32;
+            this.menuCargoList.Name = "menuCargoList";
+            this.menuCargoList.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuCargoList_ItemClick);
+            // 
             // MainForm
             // 
             this.AllowMdiBar = true;
@@ -480,6 +490,7 @@
         private DevExpress.XtraBars.BarButtonItem menuCustomerDashboard;
         private DevExpress.XtraBars.BarButtonItem menuSettleList;
         private DevExpress.XtraBars.BarButtonItem menuPayment;
+        private DevExpress.XtraBars.BarButtonItem menuCargoList;
     }
 }
 
