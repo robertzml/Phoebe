@@ -208,6 +208,12 @@
     <Compile Include="Forms\PaymentForm.Designer.cs">
       <DependentUpon>PaymentForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\StoreReceiptForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\StoreReceiptForm.Designer.cs">
+      <DependentUpon>StoreReceiptForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utils\GlobalControl.cs" />
     <Compile Include="Utils\FormConstant.cs" />
     <Compile Include="LoginForm.cs">
@@ -494,6 +500,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\StoreForm.resx">
       <DependentUpon>StoreForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\StoreReceiptForm.resx">
+      <DependentUpon>StoreReceiptForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\StoreSnapshotForm.resx">
       <DependentUpon>StoreSnapshotForm.cs</DependentUpon>

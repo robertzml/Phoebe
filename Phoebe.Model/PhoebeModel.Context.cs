@@ -36,11 +36,11 @@ namespace Phoebe.Model
         public virtual DbSet<StockMoveDetail> StockMoveDetails { get; set; }
         public virtual DbSet<StockOut> StockOuts { get; set; }
         public virtual DbSet<StockOutDetail> StockOutDetails { get; set; }
-        public virtual DbSet<Store> Stores { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserGroup> UserGroups { get; set; }
         public virtual DbSet<SettlementDetail> SettlementDetails { get; set; }
         public virtual DbSet<Settlement> Settlements { get; set; }
         public virtual DbSet<Payment> Payments { get; set; }
+        public virtual DbSet<Store> Stores { get; set; }
     }
 }

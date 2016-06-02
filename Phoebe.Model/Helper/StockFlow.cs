@@ -73,12 +73,17 @@ namespace Phoebe.Model
         public string Specification { get; set; }
 
         /// <summary>
+        /// 在库数量
+        /// </summary>
+        public int StoreCount { get; set; }
+
+        /// <summary>
         /// 流水数量
         /// </summary>
         /// <remarks>
         /// 正为入库、移入，负为出库、移出
         /// </remarks>
-        public int Count { get; set; }
+        public int FlowCount { get; set; }
 
         /// <summary>
         /// 单位重量(kg)
@@ -109,14 +114,6 @@ namespace Phoebe.Model
         /// 流水类型
         /// </summary>
         public StockFlowType Type { get; set; }
-
-        /// <summary>
-        /// 数量变化
-        /// </summary>
-        /// <remarks>
-        /// 整库移库时为否，冷藏费无更改，其它流水为真
-        /// </remarks>
-        public bool CountChange { get; set; }
     }
 
     /// <summary>

@@ -44,13 +44,14 @@
             this.colCategoryNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCategoryName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colSpecification = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colCount = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colFlowCount = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colUnitWeight = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colFlowWeight = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colUnitVolume = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colFlowVolume = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colFlowDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colType = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colStoreCount = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgcStockFlow)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsStockFlow)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStockFlow)).BeginInit();
@@ -87,7 +88,8 @@
             this.colCategoryNumber,
             this.colCategoryName,
             this.colSpecification,
-            this.colCount,
+            this.colStoreCount,
+            this.colFlowCount,
             this.colUnitWeight,
             this.colFlowWeight,
             this.colUnitVolume,
@@ -188,13 +190,13 @@
             this.colSpecification.Visible = true;
             this.colSpecification.VisibleIndex = 8;
             // 
-            // colCount
+            // colFlowCount
             // 
-            this.colCount.Caption = "流水数量";
-            this.colCount.FieldName = "Count";
-            this.colCount.Name = "colCount";
-            this.colCount.Visible = true;
-            this.colCount.VisibleIndex = 9;
+            this.colFlowCount.Caption = "流水数量";
+            this.colFlowCount.FieldName = "FlowCount";
+            this.colFlowCount.Name = "colFlowCount";
+            this.colFlowCount.Visible = true;
+            this.colFlowCount.VisibleIndex = 10;
             // 
             // colUnitWeight
             // 
@@ -204,7 +206,7 @@
             this.colUnitWeight.FieldName = "UnitWeight";
             this.colUnitWeight.Name = "colUnitWeight";
             this.colUnitWeight.Visible = true;
-            this.colUnitWeight.VisibleIndex = 10;
+            this.colUnitWeight.VisibleIndex = 11;
             // 
             // colFlowWeight
             // 
@@ -214,7 +216,7 @@
             this.colFlowWeight.FieldName = "FlowWeight";
             this.colFlowWeight.Name = "colFlowWeight";
             this.colFlowWeight.Visible = true;
-            this.colFlowWeight.VisibleIndex = 11;
+            this.colFlowWeight.VisibleIndex = 12;
             // 
             // colUnitVolume
             // 
@@ -224,7 +226,7 @@
             this.colUnitVolume.FieldName = "UnitVolume";
             this.colUnitVolume.Name = "colUnitVolume";
             this.colUnitVolume.Visible = true;
-            this.colUnitVolume.VisibleIndex = 12;
+            this.colUnitVolume.VisibleIndex = 13;
             // 
             // colFlowVolume
             // 
@@ -234,7 +236,7 @@
             this.colFlowVolume.FieldName = "FlowVolume";
             this.colFlowVolume.Name = "colFlowVolume";
             this.colFlowVolume.Visible = true;
-            this.colFlowVolume.VisibleIndex = 13;
+            this.colFlowVolume.VisibleIndex = 14;
             // 
             // colFlowDate
             // 
@@ -251,6 +253,14 @@
             this.colType.Name = "colType";
             this.colType.Visible = true;
             this.colType.VisibleIndex = 1;
+            // 
+            // colStoreCount
+            // 
+            this.colStoreCount.Caption = "在库数量";
+            this.colStoreCount.FieldName = "StoreCount";
+            this.colStoreCount.Name = "colStoreCount";
+            this.colStoreCount.Visible = true;
+            this.colStoreCount.VisibleIndex = 9;
             // 
             // StockFlowGrid
             // 
@@ -283,12 +293,13 @@
         private DevExpress.XtraGrid.Columns.GridColumn colCategoryNumber;
         private DevExpress.XtraGrid.Columns.GridColumn colCategoryName;
         private DevExpress.XtraGrid.Columns.GridColumn colSpecification;
-        private DevExpress.XtraGrid.Columns.GridColumn colCount;
+        private DevExpress.XtraGrid.Columns.GridColumn colFlowCount;
         private DevExpress.XtraGrid.Columns.GridColumn colUnitWeight;
         private DevExpress.XtraGrid.Columns.GridColumn colFlowWeight;
         private DevExpress.XtraGrid.Columns.GridColumn colUnitVolume;
         private DevExpress.XtraGrid.Columns.GridColumn colFlowVolume;
         private DevExpress.XtraGrid.Columns.GridColumn colFlowDate;
         private DevExpress.XtraGrid.Columns.GridColumn colType;
+        private DevExpress.XtraGrid.Columns.GridColumn colStoreCount;
     }
 }

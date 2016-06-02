@@ -33,9 +33,9 @@ namespace Phoebe.Business
         public decimal GetFlowMeter(StockFlow flow)
         {
             if (flow.Type == StockFlowType.StockOut || flow.Type == StockFlowType.StockMoveOut)
-                return -flow.Count;
+                return -flow.FlowCount;
             else
-                return flow.Count;
+                return flow.FlowCount;
         }
 
         /// <summary>

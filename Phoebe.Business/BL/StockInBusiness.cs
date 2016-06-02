@@ -128,6 +128,7 @@ namespace Phoebe.Business
                     store.OriginPlace = item.OriginPlace;
                     store.ShelfLife = item.ShelfLife;
                     store.Source = (int)SourceType.StockIn;
+                    store.UnitPrice = billing.UnitPrice;
                     store.UserId = entity.UserId;
                     store.Status = (int)EntityStatus.StoreReady;
 
@@ -224,6 +225,7 @@ namespace Phoebe.Business
                     store.OriginPlace = item.OriginPlace;
                     store.ShelfLife = item.ShelfLife;
                     store.Source = (int)SourceType.StockIn;
+                    store.UnitPrice = billing.UnitPrice;
                     store.UserId = entity.UserId;
                     store.Status = (int)EntityStatus.StoreReady;
 

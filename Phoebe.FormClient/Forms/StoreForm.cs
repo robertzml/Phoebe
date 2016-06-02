@@ -176,6 +176,7 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void btnSearch_Click(object sender, EventArgs e)
         {
+            this.Cursor = Cursors.WaitCursor;
             List<Func<Store, bool>> filter = new List<Func<Store, bool>>();
             if (this.selectCustomer != null)
             {
@@ -208,6 +209,8 @@ namespace Phoebe.FormClient
 
             var data = BusinessFactory<StoreBusiness>.Instance.GetByConditions(filter);
             this.sgList.DataSource = data;
+
+            this.Cursor = Cursors.Default;
         }
         #endregion //Event
     }

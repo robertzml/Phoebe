@@ -75,7 +75,7 @@ namespace Phoebe.Business
                 frecord.RecordDate = date;
                 frecord.CategoryNumber = flow.CategoryNumber;
                 frecord.CategoryName = flow.CategoryName;
-                frecord.Count = flow.Count;
+                frecord.Count = flow.FlowCount;
 
                 var cargo = BusinessFactory<CargoBusiness>.Instance.FindById(flow.CargoId);
 

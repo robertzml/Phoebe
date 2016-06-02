@@ -40,6 +40,7 @@ namespace Phoebe.Model
         public int ShelfLife { get; set; }
         public int Source { get; set; }
         public Nullable<int> Destination { get; set; }
+        public decimal UnitPrice { get; set; }
         public int UserId { get; set; }
         public string Remark { get; set; }
         public int Status { get; set; }

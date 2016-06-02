@@ -55,6 +55,7 @@
             this.colShelfLife = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colSource = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colDestination = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colUnitPrice = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colUserId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colRemark = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colStatus = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -105,6 +106,7 @@
             this.colShelfLife,
             this.colSource,
             this.colDestination,
+            this.colUnitPrice,
             this.colUserId,
             this.colRemark,
             this.colStatus});
@@ -113,6 +115,8 @@
             this.dgvStore.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
             this.dgvStore.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
             this.dgvStore.OptionsBehavior.Editable = false;
+            this.dgvStore.OptionsView.EnableAppearanceEvenRow = true;
+            this.dgvStore.OptionsView.EnableAppearanceOddRow = true;
             this.dgvStore.OptionsView.ShowFooter = true;
             this.dgvStore.OptionsView.ShowGroupPanel = false;
             this.dgvStore.CustomUnboundColumnData += new DevExpress.XtraGrid.Views.Base.CustomColumnDataEventHandler(this.dgvStore_CustomUnboundColumnData);
@@ -336,6 +340,16 @@
             this.colDestination.Visible = true;
             this.colDestination.VisibleIndex = 21;
             // 
+            // colUnitPrice
+            // 
+            this.colUnitPrice.Caption = "冷藏费单价";
+            this.colUnitPrice.DisplayFormat.FormatString = "0.##";
+            this.colUnitPrice.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.colUnitPrice.FieldName = "UnitPrice";
+            this.colUnitPrice.Name = "colUnitPrice";
+            this.colUnitPrice.Visible = true;
+            this.colUnitPrice.VisibleIndex = 23;
+            // 
             // colUserId
             // 
             this.colUserId.AppearanceCell.Options.UseTextOptions = true;
@@ -354,7 +368,7 @@
             this.colRemark.OptionsColumn.AllowGroup = DevExpress.Utils.DefaultBoolean.False;
             this.colRemark.OptionsFilter.AllowFilter = false;
             this.colRemark.Visible = true;
-            this.colRemark.VisibleIndex = 23;
+            this.colRemark.VisibleIndex = 24;
             // 
             // colStatus
             // 
@@ -365,7 +379,7 @@
             this.colStatus.FilterMode = DevExpress.XtraGrid.ColumnFilterMode.DisplayText;
             this.colStatus.Name = "colStatus";
             this.colStatus.Visible = true;
-            this.colStatus.VisibleIndex = 24;
+            this.colStatus.VisibleIndex = 25;
             // 
             // StoreGrid
             // 
@@ -413,5 +427,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn colCustomerNumber;
         private DevExpress.XtraGrid.Columns.GridColumn colCustomerName;
         private DevExpress.XtraGrid.Columns.GridColumn colContractName;
+        private DevExpress.XtraGrid.Columns.GridColumn colUnitPrice;
     }
 }

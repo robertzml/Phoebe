@@ -201,6 +201,7 @@ namespace Phoebe.FormClient
             if (!contract.IsTiming)
             {
                 MessageBox.Show("该合同不计时，无冷藏费。", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Cursor = Cursors.Default;
                 return;
             }
 
