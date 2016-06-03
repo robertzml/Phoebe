@@ -230,6 +230,10 @@ namespace Phoebe.FormClient
             decimal totalPrice = billings.Sum(r => r.TotalPrice) + colds.Sum(r => r.ColdFee);
             this.nmSumFee.Value = totalPrice;
 
+            this.nmDiscount.Value = 100;
+            this.nmRemission.Value = 0;
+            this.txtRemark.Text = "";
+
             CalculateFee();
 
             this.btnSave.Enabled = true;

@@ -156,6 +156,7 @@
             this.dpTo.EditValue = null;
             this.dpTo.Location = new System.Drawing.Point(412, 36);
             this.dpTo.Name = "dpTo";
+            this.dpTo.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.dpTo.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dpTo.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -170,6 +171,7 @@
             this.dpFrom.EditValue = null;
             this.dpFrom.Location = new System.Drawing.Point(235, 36);
             this.dpFrom.Name = "dpFrom";
+            this.dpFrom.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.dpFrom.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dpFrom.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {

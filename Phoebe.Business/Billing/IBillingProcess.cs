@@ -21,6 +21,20 @@ namespace Phoebe.Business
         decimal GetUnitMeter(Cargo cargo);
 
         /// <summary>
+        /// 获取单位计量
+        /// </summary>
+        /// <param name="flow">流水记录</param>
+        /// <returns></returns>
+        decimal GetUnitMeter(StockFlow flow);
+
+        /// <summary>
+        /// 获取单位计量
+        /// </summary>
+        /// <param name="storage">库存记录</param>
+        /// <returns></returns>
+        decimal GetUnitMeter(Storage storage);
+
+        /// <summary>
         /// 获取出入库计量
         /// </summary>
         /// <param name="flow">流水记录</param>

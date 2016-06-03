@@ -72,6 +72,7 @@ namespace Phoebe.Business
             storage.Number = store.WarehouseNumber;
             storage.InTime = store.InTime;
             storage.Source = (SourceType)store.Source;
+            storage.UnitPrice = store.UnitPrice;
             storage.Remark = store.Remark;
 
             return storage;
@@ -118,6 +119,7 @@ namespace Phoebe.Business
 
             stockFlow.FlowDate = date;
             stockFlow.Type = flowType;
+            stockFlow.UnitPrice = store.UnitPrice;
 
             return stockFlow;
         }

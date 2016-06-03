@@ -60,13 +60,13 @@ namespace Phoebe.FormClient
 
             if (e.Column.FieldName == "CustomerId")
             {
-                var contract = this.bsSettlement[rowIndex] as Contract;
-                e.DisplayText = contract.Customer.Name;
+                var settlement = this.bsSettlement[rowIndex] as Settlement;
+                e.DisplayText = settlement.Customer.Name;
             }
             else if (e.Column.FieldName == "UserId")
             {
-                var contract = this.bsSettlement[rowIndex] as Contract;
-                e.DisplayText = contract.User.Name;
+                var settlement = this.bsSettlement[rowIndex] as Settlement;
+                e.DisplayText = settlement.User.Name;
             }
         }
 

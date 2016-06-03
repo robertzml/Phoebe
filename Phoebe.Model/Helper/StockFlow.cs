@@ -114,6 +114,11 @@ namespace Phoebe.Model
         /// 流水类型
         /// </summary>
         public StockFlowType Type { get; set; }
+
+        /// <summary>
+        /// 冷藏费单价
+        /// </summary>
+        public decimal UnitPrice { get; set; }
     }
 
     /// <summary>

@@ -77,12 +77,14 @@ namespace Phoebe.Business
                 frecord.CategoryName = flow.CategoryName;
                 frecord.Count = flow.FlowCount;
 
-                var cargo = BusinessFactory<CargoBusiness>.Instance.FindById(flow.CargoId);
-
-                frecord.UnitMeter = billingProcess.GetUnitMeter(cargo);
+                frecord.UnitMeter = billingProcess.GetUnitMeter(flow);
                 frecord.FlowMeter = billingProcess.GetFlowMeter(flow);
                 frecord.FlowType = flow.Type;
 
+                if (!contract.IsTiming && flow.Type == StockFlowType.StockIn)
+                {
+                    frecord.DailyFee = billingProcess.CalculateDailyFee(frecord.FlowMeter, flow.UnitPrice);
+                }
                 records.Add(frecord);
             }
 
@@ -98,14 +100,11 @@ namespace Phoebe.Business
 
             foreach (var storage in storages)
             {
-                var cargo = BusinessFactory<CargoBusiness>.Instance.FindById(storage.CargoId);
-
-                decimal unitMeter = billingProcess.GetUnitMeter(cargo);
                 decimal totalMeter = billingProcess.GetStoreMeter(storage);
 
                 record.TotalMeter += totalMeter;
-                var billing = GetByStorage(storage);
-                record.DailyFee += billingProcess.CalculateDailyFee(totalMeter, billing.UnitPrice);
+                if (contract.IsTiming)
+                    record.DailyFee += billingProcess.CalculateDailyFee(totalMeter, storage.UnitPrice);
             }
 
             if (flows.Count == 0)
@@ -128,17 +127,25 @@ namespace Phoebe.Business
 
             for (DateTime step = start.Date; step <= end; step = step.AddDays(1))
             {
-                var storages = BusinessFactory<StoreBusiness>.Instance.GetInDay(contract.Id, step);
-
-                foreach (var storage in storages)
+                if (contract.IsTiming)
                 {
-                    var cargo = BusinessFactory<CargoBusiness>.Instance.FindById(storage.CargoId);
+                    var storages = BusinessFactory<StoreBusiness>.Instance.GetInDay(contract.Id, step);
 
-                    decimal unitMeter = billingProcess.GetUnitMeter(cargo);
-                    decimal totalMeter = billingProcess.GetStoreMeter(storage);
-                    var billing = GetByStorage(storage);
+                    foreach (var storage in storages)
+                    {
+                        decimal totalMeter = billingProcess.GetStoreMeter(storage);
+                        totalFee += billingProcess.CalculateDailyFee(totalMeter, storage.UnitPrice);
+                    }
+                }
+                else
+                {
+                    var flows = BusinessFactory<StoreBusiness>.Instance.GetDayFlow(contract.Id, step, false).Where(r => r.Type == StockFlowType.StockIn);
 
-                    totalFee += billingProcess.CalculateDailyFee(totalMeter, billing.UnitPrice);
+                    foreach (var flow in flows)
+                    {
+                        decimal flowMeter = billingProcess.GetFlowMeter(flow);
+                        totalFee += billingProcess.CalculateDailyFee(flowMeter, flow.UnitPrice);
+                    }
                 }
             }
 
@@ -187,7 +194,7 @@ namespace Phoebe.Business
         {
             List<DailyColdRecord> records = new List<DailyColdRecord>();
             var contract = BusinessFactory<ContractBusiness>.Instance.FindById(contractId);
-            if (contract == null || !contract.IsTiming)
+            if (contract == null)
                 return records;
 
             IBillingProcess billingProcess = BillingFactory.Create((BillingType)contract.BillingType);
@@ -196,11 +203,19 @@ namespace Phoebe.Business
             for (DateTime step = start.Date; step <= end; step = step.AddDays(1))
             {
                 var record = GetDailyColdRecord(contract, step, billingProcess);
-                var last = record.Last();
 
-                totalFee += last.DailyFee;
-                last.TotalFee = totalFee;
-
+                if (contract.IsTiming)
+                {
+                    var last = record.Last();
+                    totalFee += last.DailyFee;
+                    last.TotalFee = totalFee;
+                }
+                else
+                {
+                    var last = record.Last();
+                    totalFee += record.Sum(r => r.DailyFee);
+                    last.TotalFee = totalFee;
+                }
                 records.AddRange(record);
             }
 

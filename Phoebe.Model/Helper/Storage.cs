@@ -111,6 +111,11 @@ namespace Phoebe.Model
         public SourceType Source { get; set; }
 
         /// <summary>
+        /// 冷藏费单价
+        /// </summary>
+        public decimal UnitPrice { get; set; }
+
+        /// <summary>
         /// 备注
         /// </summary>
         public string Remark { get; set; }
