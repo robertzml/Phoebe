@@ -53,10 +53,6 @@ namespace Phoebe.Business.DAL
         {
             try
             {
-                if (this.context.Cargoes.Any(r => r.ContractId == entity.ContractId && r.CategoryId == entity.CategoryId &&
-                    r.GroupType == entity.GroupType && r.UnitWeight == entity.UnitWeight && r.UnitVolume == entity.UnitVolume))
-                    return ErrorCode.CargoExist;
-
                 this.context.Cargoes.Add(entity);
                 this.context.SaveChanges();
             }

@@ -63,22 +63,15 @@ namespace Phoebe.Business.DAL
         {
             try
             {
-                if (this.context.Categories.Any(r => r.Number == entity.Number))
-                {
-                    return ErrorCode.DuplicateNumber;
-                }
-
-                entity.Status = 0;
-
                 this.context.Categories.Add(entity);
                 this.context.SaveChanges();
+
+                return ErrorCode.Success;
             }
             catch (Exception)
             {
                 return ErrorCode.Exception;
             }
-
-            return ErrorCode.Success;
         }
 
         public ErrorCode CreateRange(List<Category> entities)
@@ -95,20 +88,15 @@ namespace Phoebe.Business.DAL
         {
             try
             {
-                if (this.context.Categories.Any(r => r.Id != entity.Id && r.Number == entity.Number))
-                {
-                    return ErrorCode.DuplicateNumber;
-                }
-
                 this.context.Entry(entity).State = EntityState.Modified;
                 this.context.SaveChanges();
+
+                return ErrorCode.Success;
             }
             catch (Exception)
             {
                 return ErrorCode.Exception;
             }
-
-            return ErrorCode.Success;
         }
 
         /// <summary>

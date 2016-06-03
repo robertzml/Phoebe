@@ -28,7 +28,7 @@ namespace Phoebe.Business
         /// </summary>
         public CustomerBusiness() : base()
         {
-            this.dal = new CustomerRepository();
+            this.dal = RepositoryFactory<CustomerRepository>.Instance;
             base.Init(this.dal);
         }
         #endregion //Constructor
@@ -47,6 +47,36 @@ namespace Phoebe.Business
                 return null;
             else
                 return data.First();
+        }
+
+        /// <summary>
+        /// 添加客户
+        /// </summary>
+        /// <param name="data">客户对象</param>
+        /// <returns></returns>
+        public override ErrorCode Create(Customer entity)
+        {
+            if (this.dal.Find(r => r.Number == entity.Number).Count() > 0)
+                return ErrorCode.DuplicateNumber;
+
+            entity.Status = 0;
+
+            var result = this.dal.Create(entity);
+            return result;
+        }
+
+        /// <summary>
+        /// 编辑客户
+        /// </summary>
+        /// <param name="data">客户对象</param>
+        /// <returns></returns>
+        public override ErrorCode Update(Customer entity)
+        {
+            if (this.dal.Find(r => r.Id != entity.Id && r.Number == entity.Number).Count() > 0)
+                return ErrorCode.DuplicateNumber;
+
+            var result = this.dal.Update(entity);
+            return result;
         }
 
         /// <summary>

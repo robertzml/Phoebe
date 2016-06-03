@@ -574,7 +574,5 @@ namespace Phoebe.Business.DAL
             return ErrorCode.Success;
         }
         #endregion //Settlement Trans
-
-
     }
 }

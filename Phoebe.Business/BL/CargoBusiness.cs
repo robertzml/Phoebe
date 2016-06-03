@@ -28,7 +28,7 @@ namespace Phoebe.Business
         /// </summary>
         public CargoBusiness() : base()
         {
-            this.dal = new CargoRepository();
+            this.dal = RepositoryFactory<CargoRepository>.Instance;
             base.Init(this.dal);
         }
         #endregion //Constructor
@@ -56,7 +56,7 @@ namespace Phoebe.Business
             var exist = this.dal.Find(predicate);
             if (exist.Count() == 0)
             {
-                ErrorCode result= this.dal.Create(cargo);
+                ErrorCode result = this.dal.Create(cargo);
                 if (result == ErrorCode.Success)
                     return cargo;
                 else

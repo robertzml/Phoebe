@@ -28,7 +28,7 @@ namespace Phoebe.Business
         /// </summary>
         public CategoryBusiness() : base()
         {
-            this.dal = new CategoryRepository();
+            this.dal = RepositoryFactory<CategoryRepository>.Instance;
             base.Init(this.dal);
         }
         #endregion //Constructor
@@ -131,6 +131,54 @@ namespace Phoebe.Business
                 }
 
                 return data;
+            }
+        }
+
+        /// <summary>
+        /// 添加分类
+        /// </summary>
+        /// <param name="entity">分类对象</param>
+        /// <returns></returns>
+        public override ErrorCode Create(Category entity)
+        {
+            try
+            {
+                if (this.dal.Find(r => r.Number == entity.Number).Count() > 0)
+                {
+                    return ErrorCode.DuplicateNumber;
+                }
+
+                entity.Status = 0;
+
+                var result = this.dal.Create(entity);
+                return result;
+            }
+            catch(Exception)
+            {
+                return ErrorCode.Exception;
+            }
+        }
+
+        /// <summary>
+        /// 编辑分类
+        /// </summary>
+        /// <param name="entity">分类对象</param>
+        /// <returns></returns>
+        public override ErrorCode Update(Category entity)
+        {
+            try
+            {
+                if (this.dal.Find(r => r.Id != entity.Id && r.Number == entity.Number).Count() > 0)
+                {
+                    return ErrorCode.DuplicateNumber;
+                }
+
+                var result = this.dal.Update(entity);
+                return result;
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
             }
         }
 

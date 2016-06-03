@@ -28,7 +28,7 @@ namespace Phoebe.Business
         /// </summary>
         public ContractBusiness() : base()
         {
-            this.dal = new ContractRepository();
+            this.dal = RepositoryFactory<ContractRepository>.Instance;
             base.Init(this.dal);
         }
         #endregion //Constructor
@@ -43,6 +43,36 @@ namespace Phoebe.Business
         {
             Expression<Func<Contract, bool>> predicate = r => r.CustomerId == customerId;
             return this.dal.Find(predicate).ToList();
+        }
+
+        /// <summary>
+        /// 添加合同
+        /// </summary>
+        /// <param name="entity">合同对象</param>
+        /// <returns></returns>
+        public override ErrorCode Create(Contract entity)
+        { 
+            if (this.dal.Find(r => r.Number == entity.Number).Count() > 0)
+                return ErrorCode.DuplicateNumber;
+
+            entity.Status = 0;
+
+            var result = this.dal.Create(entity);
+            return result;
+        }
+
+        /// <summary>
+        /// 编辑合同
+        /// </summary>
+        /// <param name="entity">合同实体</param>
+        /// <returns></returns>
+        public override ErrorCode Update(Contract entity)
+        {
+            if (this.dal.Find(r => r.Id != entity.Id && r.Number == entity.Number).Count() > 0)
+                return ErrorCode.DuplicateNumber;
+
+            var result = this.dal.Update(entity);
+            return result;
         }
 
         /// <summary>

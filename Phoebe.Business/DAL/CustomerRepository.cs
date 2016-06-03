@@ -59,11 +59,6 @@ namespace Phoebe.Business.DAL
         {
             try
             {
-                entity.Status = 0;
-
-                if (this.context.Customers.Any(r => r.Number == entity.Number))
-                    return ErrorCode.DuplicateNumber;
-
                 this.context.Customers.Add(entity);
                 this.context.SaveChanges();
 
@@ -89,18 +84,15 @@ namespace Phoebe.Business.DAL
         {
             try
             {
-                if (this.context.Customers.Any(r => r.Id != entity.Id && r.Number == entity.Number))
-                    return ErrorCode.DuplicateNumber;
-
                 this.context.Entry(entity).State = EntityState.Modified;
                 this.context.SaveChanges();
+
+                return ErrorCode.Success;
             }
             catch (Exception)
             {
                 return ErrorCode.Exception;
             }
-
-            return ErrorCode.Success;
         }
 
         /// <summary>
