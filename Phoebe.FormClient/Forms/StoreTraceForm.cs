@@ -238,6 +238,34 @@ namespace Phoebe.FormClient
 
             this.Cursor = Cursors.Default;
         }
+        
+        /// <summary>
+        /// 修正流水
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnFix_Click(object sender, EventArgs e)
+        {
+            var store = this.sgList.GetCurrentSelect();
+            if (store == null)
+            {
+                MessageBox.Show("未选择记录", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            ErrorCode result = BusinessFactory<StoreBusiness>.Instance.FixStore(store.Id);
+            if (result == ErrorCode.Success)
+            {
+                var flow = BusinessFactory<StoreBusiness>.Instance.GetStoreFlow(store.Id).OrderBy(r => r.FlowDate).ToList();
+                this.sfgList.DataSource = flow;
+
+                MessageBox.Show("流水修正成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("流水修正失败，" + result.DisplayName(), FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
         #endregion //Event
     }
 }

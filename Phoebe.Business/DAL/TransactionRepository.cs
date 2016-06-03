@@ -496,6 +496,60 @@ namespace Phoebe.Business.DAL
         }
         #endregion //StockMove Trans
 
+        #region Store Trans
+        /// <summary>
+        /// 库存修正事务
+        /// </summary>
+        /// <param name="store">库存记录</param>
+        /// <param name="flows">流水记录</param>
+        /// <returns></returns>
+        public ErrorCode StoreFixTrans(Store store, IEnumerable<StockFlow> flows)
+        {
+            try
+            {
+                int totalCount = store.TotalCount;
+                int remainCount = totalCount;
+
+                foreach (var flow in flows)
+                {
+                    if (flow.Type == StockFlowType.StockIn || flow.Type == StockFlowType.StockMoveIn)
+                        continue;
+
+                    if (flow.Type == StockFlowType.StockOut)
+                    {
+                        var so = RepositoryFactory<StockOutDetailsRepository>.Instance.FindById(flow.StockId);
+                        so.StoreCount = remainCount;
+                        remainCount = remainCount - so.Count;
+                    }
+
+                    if (flow.Type == StockFlowType.StockMoveOut)
+                    {
+                        var sm = RepositoryFactory<StockMoveDetailsRepository>.Instance.FindById(flow.StockId);
+                        sm.StoreCount = remainCount;
+                        remainCount = remainCount - sm.Count;
+                    }
+
+                    if (remainCount == 0)
+                    {
+                        store.OutTime = flow.FlowDate;
+                        if (flow.Type == StockFlowType.StockOut)
+                            store.Destination = (int)DestinationType.StockOut;
+                        else
+                            store.Destination = (int)DestinationType.StockMove;
+                    }
+                }
+
+                this.context.SaveChanges();
+
+                return ErrorCode.Success;
+            }
+            catch(Exception)
+            {
+                return ErrorCode.Exception;
+            }
+        }
+        #endregion //Store Trans
+
         #region Settlement Trans
         /// <summary>
         /// 结算添加业务
@@ -520,5 +574,7 @@ namespace Phoebe.Business.DAL
             return ErrorCode.Success;
         }
         #endregion //Settlement Trans
+
+
     }
 }

@@ -380,7 +380,7 @@ namespace Phoebe.Business
         }
 
         /// <summary>
-        /// 修正库存
+        /// 修正库存流水
         /// </summary>
         /// <param name="id">库存ID</param>
         /// <returns></returns>
@@ -391,10 +391,19 @@ namespace Phoebe.Business
         {
             try
             {
-                var stockOuts = RepositoryFactory<StockOutDetailsRepository>.Instance.Find(r => r.StoreId == id).OrderBy(r => r.StockOut.FlowNumber);
+                var store = this.dal.FindById(id);
 
+                if (store == null)
+                    return ErrorCode.ObjectNotFound;
+                if (store.Status == (int)EntityStatus.StoreReady || store.Status == (int)EntityStatus.StoreMoveReady)
+                    return ErrorCode.Error;
 
-                return ErrorCode.Success;
+                var flows = GetStoreFlow(id).OrderBy(r => r.FlowDate);
+
+                TransactionRepository trans = new TransactionRepository();
+                var result = trans.StoreFixTrans(store, flows);
+
+                return result;
             }
             catch (Exception)
             {

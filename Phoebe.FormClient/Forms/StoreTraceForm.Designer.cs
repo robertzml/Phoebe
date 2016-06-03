@@ -31,6 +31,7 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.btnFix = new DevExpress.XtraEditors.SimpleButton();
             this.btnTrace = new DevExpress.XtraEditors.SimpleButton();
             this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
             this.rbStoreOut = new System.Windows.Forms.RadioButton();
@@ -51,13 +52,14 @@
             this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
             this.sgList = new Phoebe.FormClient.StoreGrid();
             this.clcCustomer = new Phoebe.FormClient.CustomerListControl();
             this.clcCategory = new Phoebe.FormClient.CategoryListControl();
-            this.sfgList = new Phoebe.FormClient.StockFlowGrid();
             this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
+            this.sfgList = new Phoebe.FormClient.StockFlowGrid();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
@@ -79,6 +81,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
             this.groupControl2.SuspendLayout();
@@ -120,6 +123,7 @@
             // 
             // layoutControl1
             // 
+            this.layoutControl1.Controls.Add(this.btnFix);
             this.layoutControl1.Controls.Add(this.btnTrace);
             this.layoutControl1.Controls.Add(this.btnSearch);
             this.layoutControl1.Controls.Add(this.rbStoreOut);
@@ -137,11 +141,21 @@
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
+            // btnFix
+            // 
+            this.btnFix.Location = new System.Drawing.Point(375, 65);
+            this.btnFix.Name = "btnFix";
+            this.btnFix.Size = new System.Drawing.Size(182, 22);
+            this.btnFix.StyleController = this.layoutControl1;
+            this.btnFix.TabIndex = 12;
+            this.btnFix.Text = "修正流水";
+            this.btnFix.Click += new System.EventHandler(this.btnFix_Click);
+            // 
             // btnTrace
             // 
-            this.btnTrace.Location = new System.Drawing.Point(468, 65);
+            this.btnTrace.Location = new System.Drawing.Point(190, 65);
             this.btnTrace.Name = "btnTrace";
-            this.btnTrace.Size = new System.Drawing.Size(89, 22);
+            this.btnTrace.Size = new System.Drawing.Size(181, 22);
             this.btnTrace.StyleController = this.layoutControl1;
             this.btnTrace.TabIndex = 11;
             this.btnTrace.Text = "追溯";
@@ -149,9 +163,9 @@
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(375, 65);
+            this.btnSearch.Location = new System.Drawing.Point(12, 65);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(89, 22);
+            this.btnSearch.Size = new System.Drawing.Size(174, 22);
             this.btnSearch.StyleController = this.layoutControl1;
             this.btnSearch.TabIndex = 7;
             this.btnSearch.Text = "查询";
@@ -245,6 +259,7 @@
             this.emptySpaceItem1,
             this.layoutControlItem8,
             this.layoutControlItem9,
+            this.layoutControlItem10,
             this.emptySpaceItem2});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "layoutControlGroup1";
@@ -283,7 +298,7 @@
             this.layoutControlItem4.Control = this.txtCategoryNumber;
             this.layoutControlItem4.Location = new System.Drawing.Point(0, 24);
             this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(178, 55);
+            this.layoutControlItem4.Size = new System.Drawing.Size(178, 24);
             this.layoutControlItem4.Text = "分类代码";
             this.layoutControlItem4.TextSize = new System.Drawing.Size(48, 14);
             // 
@@ -292,7 +307,7 @@
             this.layoutControlItem5.Control = this.txtCategoryName;
             this.layoutControlItem5.Location = new System.Drawing.Point(178, 24);
             this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(185, 55);
+            this.layoutControlItem5.Size = new System.Drawing.Size(185, 24);
             this.layoutControlItem5.Text = "分类名称";
             this.layoutControlItem5.TextSize = new System.Drawing.Size(48, 14);
             // 
@@ -325,20 +340,31 @@
             // layoutControlItem8
             // 
             this.layoutControlItem8.Control = this.btnSearch;
-            this.layoutControlItem8.Location = new System.Drawing.Point(363, 53);
+            this.layoutControlItem8.Location = new System.Drawing.Point(0, 48);
             this.layoutControlItem8.Name = "layoutControlItem8";
-            this.layoutControlItem8.Size = new System.Drawing.Size(93, 26);
+            this.layoutControlItem8.Size = new System.Drawing.Size(178, 31);
+            this.layoutControlItem8.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 5, 0);
             this.layoutControlItem8.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem8.TextVisible = false;
             // 
             // layoutControlItem9
             // 
             this.layoutControlItem9.Control = this.btnTrace;
-            this.layoutControlItem9.Location = new System.Drawing.Point(456, 53);
+            this.layoutControlItem9.Location = new System.Drawing.Point(178, 48);
             this.layoutControlItem9.Name = "layoutControlItem9";
-            this.layoutControlItem9.Size = new System.Drawing.Size(93, 26);
+            this.layoutControlItem9.Size = new System.Drawing.Size(185, 31);
+            this.layoutControlItem9.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 5, 0);
             this.layoutControlItem9.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem9.TextVisible = false;
+            // 
+            // layoutControlItem10
+            // 
+            this.layoutControlItem10.Control = this.btnFix;
+            this.layoutControlItem10.Location = new System.Drawing.Point(363, 53);
+            this.layoutControlItem10.Name = "layoutControlItem10";
+            this.layoutControlItem10.Size = new System.Drawing.Size(186, 26);
+            this.layoutControlItem10.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem10.TextVisible = false;
             // 
             // emptySpaceItem2
             // 
@@ -393,15 +419,6 @@
             this.clcCategory.TabIndex = 3;
             this.clcCategory.CategoryItemSelected += new Phoebe.FormClient.CategoryListControl.ItemSelectHandle(this.clcCategory_CategoryItemSelected);
             // 
-            // sfgList
-            // 
-            this.sfgList.DataSource = null;
-            this.sfgList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.sfgList.Location = new System.Drawing.Point(2, 21);
-            this.sfgList.Name = "sfgList";
-            this.sfgList.Size = new System.Drawing.Size(969, 176);
-            this.sfgList.TabIndex = 0;
-            // 
             // groupControl3
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.groupControl3, 3);
@@ -412,6 +429,15 @@
             this.groupControl3.Size = new System.Drawing.Size(973, 199);
             this.groupControl3.TabIndex = 4;
             this.groupControl3.Text = "流水记录";
+            // 
+            // sfgList
+            // 
+            this.sfgList.DataSource = null;
+            this.sfgList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.sfgList.Location = new System.Drawing.Point(2, 21);
+            this.sfgList.Name = "sfgList";
+            this.sfgList.Size = new System.Drawing.Size(969, 176);
+            this.sfgList.TabIndex = 0;
             // 
             // StoreTraceForm
             // 
@@ -443,6 +469,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
             this.groupControl2.ResumeLayout(false);
@@ -482,7 +509,9 @@
         private DevExpress.XtraEditors.SimpleButton btnTrace;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem9;
         private StockFlowGrid sfgList;
-        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem2;
         private DevExpress.XtraEditors.GroupControl groupControl3;
+        private DevExpress.XtraEditors.SimpleButton btnFix;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem10;
+        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem2;
     }
 }

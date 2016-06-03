@@ -100,10 +100,12 @@ namespace Phoebe.Business
                 List<Store> newStores = new List<Store>();
                 foreach (var item in models)
                 {
+                    var sourceStore = RepositoryFactory<StoreRepository>.Instance.FindById(item.SourceStoreId);
+
                     Store store = new Store();
                     store.Id = Guid.NewGuid();
                     item.NewStoreId = store.Id;
-                    store.CargoId = item.CargoId;
+                    store.CargoId = sourceStore.CargoId;
                     store.WarehouseNumber = item.NewWarehouseNumber;
                     store.TotalCount = item.MoveCount;
                     store.StoreCount = store.TotalCount;
@@ -111,12 +113,13 @@ namespace Phoebe.Business
                     store.StoreWeight = store.TotalWeight;
                     store.TotalVolume = item.MoveVolume;
                     store.StoreVolume = store.TotalVolume;
-                    store.InTime = item.InTime;
+                    store.InTime = sourceStore.InTime;
                     store.MoveTime = entity.MoveTime;
-                    store.Specification = item.Specification;
-                    store.OriginPlace = item.OriginPlace;
-                    store.ShelfLife = item.ShelfLife;
+                    store.Specification = sourceStore.Specification;
+                    store.OriginPlace = sourceStore.OriginPlace;
+                    store.ShelfLife = sourceStore.ShelfLife;
                     store.Source = (int)SourceType.StockMove;
+                    store.UnitPrice = sourceStore.UnitPrice;
                     store.UserId = entity.UserId;
                     store.Status = (int)EntityStatus.StoreMoveReady;
 
@@ -206,10 +209,12 @@ namespace Phoebe.Business
                 List<Store> newStores = new List<Store>();
                 foreach (var item in models)
                 {
+                    var sourceStore = RepositoryFactory<StoreRepository>.Instance.FindById(item.SourceStoreId);
+
                     Store store = new Store();
                     store.Id = Guid.NewGuid();
                     item.NewStoreId = store.Id;
-                    store.CargoId = item.CargoId;
+                    store.CargoId = sourceStore.CargoId;
                     store.WarehouseNumber = item.NewWarehouseNumber;
                     store.TotalCount = item.MoveCount;
                     store.StoreCount = store.TotalCount;
@@ -217,12 +222,13 @@ namespace Phoebe.Business
                     store.StoreWeight = store.TotalWeight;
                     store.TotalVolume = item.MoveVolume;
                     store.StoreVolume = store.TotalVolume;
-                    store.InTime = item.InTime;
+                    store.InTime = sourceStore.InTime;
                     store.MoveTime = stockMove.MoveTime;
-                    store.Specification = item.Specification;
-                    store.OriginPlace = item.OriginPlace;
-                    store.ShelfLife = item.ShelfLife;
+                    store.Specification = sourceStore.Specification;
+                    store.OriginPlace = sourceStore.OriginPlace;
+                    store.ShelfLife = sourceStore.ShelfLife;
                     store.Source = (int)SourceType.StockMove;
+                    store.UnitPrice = sourceStore.UnitPrice;
                     store.UserId = stockMove.UserId;
                     store.Status = (int)EntityStatus.StoreMoveReady;
 
