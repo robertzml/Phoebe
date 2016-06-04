@@ -131,13 +131,13 @@ namespace Phoebe.FormClient
         {
             if (this.txtName.Text.Trim() == "")
             {
-                MessageBox.Show("名称不能为空", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageUtil.ShowWarning("名称不能为空");
                 return;
             }
 
             if (this.txtNumber.Text.Trim() == "")
             {
-                MessageBox.Show("代码不能为空", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageUtil.ShowWarning("代码不能为空");
                 return;
             }
 
@@ -145,7 +145,7 @@ namespace Phoebe.FormClient
             {
                 if (this.cmbFirstCategory.SelectedItem == null)
                 {
-                    MessageBox.Show("请选择一级分类", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageUtil.ShowWarning("请选择一级分类");
                     return;
                 }
             }
@@ -154,7 +154,7 @@ namespace Phoebe.FormClient
             {
                 if (this.cmbSecondCategory.SelectedItem == null)
                 {
-                    MessageBox.Show("请选择二级分类", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageUtil.ShowWarning("请选择二级分类");
                     return;
                 }
             }
@@ -165,12 +165,12 @@ namespace Phoebe.FormClient
             ErrorCode result = BusinessFactory<CategoryBusiness>.Instance.Create(category);
             if (result == ErrorCode.Success)
             {
-                MessageBox.Show("添加分类成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowInfo("添加分类成功");
                 this.Close();
             }
             else
             {
-                MessageBox.Show("添加分类失败：" + result.DisplayName(), FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowWarning("添加分类失败：" + result.DisplayName());
             }
         }
         #endregion //Event

@@ -76,13 +76,13 @@ namespace Phoebe.FormClient
         {
             if (this.txtName.Text.Trim() == "")
             {
-                MessageBox.Show("名称不能为空", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageUtil.ShowWarning("名称不能为空");
                 return;
             }
 
             if (this.txtNumber.Text.Trim() == "")
             {
-                MessageBox.Show("代码不能为空", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageUtil.ShowWarning("代码不能为空");
                 return;
             }
 
@@ -91,12 +91,12 @@ namespace Phoebe.FormClient
             ErrorCode result = BusinessFactory<CategoryBusiness>.Instance.Update(this.bindCategory);
             if (result == ErrorCode.Success)
             {
-                MessageBox.Show("编辑分类成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowInfo("编辑分类成功");
                 this.Close();
             }
             else
             {
-                MessageBox.Show("编辑分类失败：" + result.DisplayName(), FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowWarning("编辑分类失败：" + result.DisplayName());
             }
         }
         #endregion //Event

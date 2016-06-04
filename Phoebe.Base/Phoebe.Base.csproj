@@ -69,6 +69,7 @@
     </Compile>
     <Compile Include="BaseUI\ChildFormManage.cs" />
     <Compile Include="BaseBL\BusinessFactory.cs" />
+    <Compile Include="BaseUI\MessageUtil.cs" />
     <Compile Include="Entity\LoginUser.cs" />
     <Compile Include="Entity\ErrorCode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

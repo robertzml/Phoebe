@@ -190,8 +190,7 @@ namespace Phoebe.FormClient
             if (node == null || node.Name == "0")
                 return;
 
-            DialogResult dr = MessageBox.Show("是否确认删除选中分类", FormConstant.MessageBoxTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (dr == DialogResult.Yes)
+            if (MessageUtil.ConfirmYesNo("是否确认删除选中分类") == DialogResult.Yes)
             {
                 int id = Convert.ToInt32(node.Name);
                 var category = BusinessFactory<CategoryBusiness>.Instance.FindById(id);
@@ -199,12 +198,12 @@ namespace Phoebe.FormClient
                 ErrorCode result = BusinessFactory<CategoryBusiness>.Instance.Delete(category);
                 if (result == ErrorCode.Success)
                 {
-                    MessageBox.Show("删除分类成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageUtil.ShowInfo("删除分类成功");
                     LoadTree();
                 }
                 else
                 {
-                    MessageBox.Show("删除分类失败：" + result.DisplayName(), FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageUtil.ShowError("删除分类失败：" + result.DisplayName());
                 }
             }
         }

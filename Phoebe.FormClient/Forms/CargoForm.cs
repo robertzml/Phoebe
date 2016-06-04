@@ -174,7 +174,7 @@ namespace Phoebe.FormClient
         {
             if (this.selectCustomer == null)
             {
-                MessageBox.Show("请选择客户", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowClaim("请选择客户");
                 return;
             }
 

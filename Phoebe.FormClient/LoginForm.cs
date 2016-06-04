@@ -2,18 +2,17 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Phoebe.Base;
-using Phoebe.Business;
-using Phoebe.Common;
-using Phoebe.Model;
 
 namespace Phoebe.FormClient
 {
+    using Phoebe.Base;
+    using Phoebe.Business;
+    using Phoebe.Common;
+    using Phoebe.Model;
+
     /// <summary>
     /// 系统登录窗体
     /// </summary>
@@ -58,13 +57,13 @@ namespace Phoebe.FormClient
 
             if (userName == "")
             {
-                MessageBox.Show("用户名不能为空", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageUtil.ShowClaim("用户名不能为空");
                 return;
             }
 
             if (this.txtPassword.Text == "")
             {
-                MessageBox.Show("密码不能为空", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageUtil.ShowClaim("密码不能为空");
                 return;
             }
 
@@ -78,7 +77,7 @@ namespace Phoebe.FormClient
             }
             else
             {
-                MessageBox.Show(result.DisplayName(), FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageUtil.ShowWarning(result.DisplayName());
                 this.txtPassword.Text = "";
                 return;
             }
