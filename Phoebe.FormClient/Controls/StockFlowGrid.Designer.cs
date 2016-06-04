@@ -44,6 +44,7 @@
             this.colCategoryNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCategoryName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colSpecification = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colStoreCount = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colFlowCount = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colUnitWeight = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colFlowWeight = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -51,7 +52,6 @@
             this.colFlowVolume = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colFlowDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colType = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colStoreCount = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgcStockFlow)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsStockFlow)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStockFlow)).BeginInit();
@@ -102,11 +102,11 @@
             this.dgvStockFlow.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
             this.dgvStockFlow.OptionsBehavior.Editable = false;
             this.dgvStockFlow.OptionsCustomization.AllowGroup = false;
-            this.dgvStockFlow.OptionsCustomization.AllowQuickHideColumns = false;
             this.dgvStockFlow.OptionsFind.AllowFindPanel = false;
-            this.dgvStockFlow.OptionsMenu.EnableColumnMenu = false;
             this.dgvStockFlow.OptionsMenu.EnableFooterMenu = false;
             this.dgvStockFlow.OptionsMenu.EnableGroupPanelMenu = false;
+            this.dgvStockFlow.OptionsView.EnableAppearanceEvenRow = true;
+            this.dgvStockFlow.OptionsView.EnableAppearanceOddRow = true;
             this.dgvStockFlow.OptionsView.ShowGroupPanel = false;
             // 
             // colStockId
@@ -190,6 +190,14 @@
             this.colSpecification.Visible = true;
             this.colSpecification.VisibleIndex = 8;
             // 
+            // colStoreCount
+            // 
+            this.colStoreCount.Caption = "在库数量";
+            this.colStoreCount.FieldName = "StoreCount";
+            this.colStoreCount.Name = "colStoreCount";
+            this.colStoreCount.Visible = true;
+            this.colStoreCount.VisibleIndex = 9;
+            // 
             // colFlowCount
             // 
             this.colFlowCount.Caption = "流水数量";
@@ -253,14 +261,6 @@
             this.colType.Name = "colType";
             this.colType.Visible = true;
             this.colType.VisibleIndex = 1;
-            // 
-            // colStoreCount
-            // 
-            this.colStoreCount.Caption = "在库数量";
-            this.colStoreCount.FieldName = "StoreCount";
-            this.colStoreCount.Name = "colStoreCount";
-            this.colStoreCount.Visible = true;
-            this.colStoreCount.VisibleIndex = 9;
             // 
             // StockFlowGrid
             // 

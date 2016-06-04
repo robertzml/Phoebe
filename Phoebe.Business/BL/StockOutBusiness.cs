@@ -28,7 +28,7 @@ namespace Phoebe.Business
         /// </summary>
         public StockOutBusiness() : base()
         {
-            this.dal = new StockOutRepository();
+            this.dal = RepositoryFactory<StockOutRepository>.Instance;
             base.Init(this.dal);
         }
         #endregion //Constructor

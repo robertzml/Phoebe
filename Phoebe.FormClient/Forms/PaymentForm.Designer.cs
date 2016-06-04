@@ -125,6 +125,8 @@
             this.dgvPayment.OptionsCustomization.AllowGroup = false;
             this.dgvPayment.OptionsCustomization.AllowQuickHideColumns = false;
             this.dgvPayment.OptionsMenu.EnableGroupPanelMenu = false;
+            this.dgvPayment.OptionsView.EnableAppearanceEvenRow = true;
+            this.dgvPayment.OptionsView.EnableAppearanceOddRow = true;
             this.dgvPayment.OptionsView.ShowFooter = true;
             this.dgvPayment.OptionsView.ShowGroupPanel = false;
             this.dgvPayment.CustomColumnDisplayText += new DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventHandler(this.dgvPayment_CustomColumnDisplayText);

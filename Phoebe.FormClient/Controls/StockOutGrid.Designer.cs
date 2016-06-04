@@ -111,10 +111,8 @@
             this.dgvStockOut.OptionsBehavior.Editable = false;
             this.dgvStockOut.OptionsCustomization.AllowFilter = false;
             this.dgvStockOut.OptionsCustomization.AllowGroup = false;
-            this.dgvStockOut.OptionsCustomization.AllowQuickHideColumns = false;
             this.dgvStockOut.OptionsFilter.AllowFilterEditor = false;
             this.dgvStockOut.OptionsFind.AllowFindPanel = false;
-            this.dgvStockOut.OptionsMenu.EnableColumnMenu = false;
             this.dgvStockOut.OptionsMenu.EnableGroupPanelMenu = false;
             this.dgvStockOut.OptionsView.ShowFooter = true;
             this.dgvStockOut.OptionsView.ShowGroupPanel = false;

@@ -103,10 +103,8 @@
             this.dgvStockIn.OptionsBehavior.Editable = false;
             this.dgvStockIn.OptionsCustomization.AllowFilter = false;
             this.dgvStockIn.OptionsCustomization.AllowGroup = false;
-            this.dgvStockIn.OptionsCustomization.AllowQuickHideColumns = false;
             this.dgvStockIn.OptionsFilter.AllowFilterEditor = false;
             this.dgvStockIn.OptionsFind.AllowFindPanel = false;
-            this.dgvStockIn.OptionsMenu.EnableColumnMenu = false;
             this.dgvStockIn.OptionsMenu.EnableFooterMenu = false;
             this.dgvStockIn.OptionsMenu.EnableGroupPanelMenu = false;
             this.dgvStockIn.OptionsView.ShowFooter = true;

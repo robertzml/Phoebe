@@ -34,7 +34,7 @@ namespace Phoebe.Business
         /// </summary>
         public UserGroupBusiness() : base()
         {
-            this.dal = new UserGroupRepository();
+            this.dal = RepositoryFactory<UserGroupRepository>.Instance;
             base.Init(this.dal);
         }
         #endregion //Constructor

@@ -28,7 +28,7 @@ namespace Phoebe.Business
         /// </summary>
         public StockInBusiness() : base()
         {
-            this.dal = new StockInRepository();
+            this.dal = RepositoryFactory<StockInRepository>.Instance;
             base.Init(this.dal);
         }
         #endregion //Constructor

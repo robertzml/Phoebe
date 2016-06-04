@@ -145,6 +145,8 @@
             this.dgvSettlement.OptionsBehavior.Editable = false;
             this.dgvSettlement.OptionsFind.AlwaysVisible = true;
             this.dgvSettlement.OptionsMenu.EnableFooterMenu = false;
+            this.dgvSettlement.OptionsView.EnableAppearanceEvenRow = true;
+            this.dgvSettlement.OptionsView.EnableAppearanceOddRow = true;
             this.dgvSettlement.OptionsView.ShowGroupPanel = false;
             this.dgvSettlement.CustomColumnDisplayText += new DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventHandler(this.dgvSettlement_CustomColumnDisplayText);
             // 

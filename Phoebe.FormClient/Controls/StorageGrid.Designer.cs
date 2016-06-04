@@ -105,6 +105,8 @@
             this.dgvStorage.OptionsBehavior.Editable = false;
             this.dgvStorage.OptionsCustomization.AllowGroup = false;
             this.dgvStorage.OptionsMenu.EnableGroupPanelMenu = false;
+            this.dgvStorage.OptionsView.EnableAppearanceEvenRow = true;
+            this.dgvStorage.OptionsView.EnableAppearanceOddRow = true;
             this.dgvStorage.OptionsView.ShowFooter = true;
             this.dgvStorage.OptionsView.ShowGroupPanel = false;
             // 

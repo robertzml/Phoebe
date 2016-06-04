@@ -39,7 +39,7 @@ namespace Phoebe.Business
         /// </summary>
         public UserBusiness() : base()
         {
-            this.dal = new UserRepository();
+            this.dal = RepositoryFactory<UserRepository>.Instance;
             base.Init(this.dal);
         }
         #endregion //Constructor

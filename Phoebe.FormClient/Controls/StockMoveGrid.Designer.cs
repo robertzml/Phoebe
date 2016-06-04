@@ -115,10 +115,8 @@
             this.dgvStockMove.OptionsBehavior.Editable = false;
             this.dgvStockMove.OptionsCustomization.AllowFilter = false;
             this.dgvStockMove.OptionsCustomization.AllowGroup = false;
-            this.dgvStockMove.OptionsCustomization.AllowQuickHideColumns = false;
             this.dgvStockMove.OptionsFilter.AllowFilterEditor = false;
             this.dgvStockMove.OptionsFind.AllowFindPanel = false;
-            this.dgvStockMove.OptionsMenu.EnableColumnMenu = false;
             this.dgvStockMove.OptionsMenu.EnableFooterMenu = false;
             this.dgvStockMove.OptionsMenu.EnableGroupPanelMenu = false;
             this.dgvStockMove.OptionsView.ShowFooter = true;
