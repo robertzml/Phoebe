@@ -9,6 +9,7 @@ using System.Windows.Forms;
 
 namespace Phoebe.FormClient
 {
+    using DevExpress.XtraEditors.Controls;
     using Phoebe.Base;
     using Phoebe.Business;
     using Phoebe.Common;
@@ -149,6 +150,33 @@ namespace Phoebe.FormClient
             this.lastMonth = month;
             this.tvStockOut.EndUpdate();
         }
+
+        /// <summary>
+        /// 更新合同列表
+        /// </summary>
+        /// <param name="customerId">客户Id</param>
+        private void UpdateContractList(int customerId)
+        {
+            var contracts = BusinessFactory<ContractBusiness>.Instance.GetByCustomer(customerId);
+
+            this.cmbContract.Properties.Items.Clear();
+
+            ImageComboBoxItem empty = new ImageComboBoxItem();
+            empty.Description = "--全部合同--";
+            empty.Value = 0;
+            this.cmbContract.Properties.Items.Add(empty);
+
+            foreach (var item in contracts)
+            {
+                ImageComboBoxItem i = new ImageComboBoxItem();
+                i.Description = item.Name;
+                i.Value = item.Id;
+
+                this.cmbContract.Properties.Items.Add(i);
+            }
+
+            this.cmbContract.EditValue = 0;
+        }
         #endregion //Function
 
         #region Event
@@ -165,6 +193,8 @@ namespace Phoebe.FormClient
 
             UpdateTree();
             UpdateToolbar();
+
+            this.bsCustomer.DataSource = BusinessFactory<CustomerBusiness>.Instance.FindAll();
         }
 
         /// <summary>
@@ -206,6 +236,76 @@ namespace Phoebe.FormClient
             this.lastMonth = e.Node.Parent.Text;
             this.currentStockOutId = new Guid(e.Node.Name);
             this.stockOutState = (EntityStatus)e.Node.Tag;
+            this.formState = StockOutFormState.View;
+
+            UpdateToolbar();
+
+            this.stockOutView = new StockOutViewControl(this.currentStockOutId);
+            ChildFormManage.LoadContentControl(this.plBody, this.stockOutView);
+        }
+
+        /// <summary>
+        /// 客户选择
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void lkuCustomer_EditValueChanged(object sender, EventArgs e)
+        {
+            if (this.lkuCustomer.EditValue == null)
+                UpdateContractList(0);
+            else
+                UpdateContractList(Convert.ToInt32(this.lkuCustomer.EditValue));
+        }
+
+        /// <summary>
+        /// 搜索出库单
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            if (this.lkuCustomer.EditValue == null)
+            {
+                MessageBox.Show("请选择客户", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            List<StockOut> data;
+            if (this.cmbContract.EditValue != null && Convert.ToInt32(this.cmbContract.EditValue) != 0)
+            {
+                data = BusinessFactory<StockOutBusiness>.Instance.GetByContract((int)this.cmbContract.EditValue);
+            }
+            else
+            {
+                data = BusinessFactory<StockOutBusiness>.Instance.GetByCustomer((int)this.lkuCustomer.EditValue);
+            }
+
+            this.lbStockOut.DataSource = data;
+            this.lbStockOut.DisplayMember = "FlowNumber";
+            this.lbStockOut.ValueMember = "Id";
+        }
+
+        /// <summary>
+        /// 选择搜索单据
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void lbStockOut_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.lbStockOut.SelectedItem == null)
+                return;
+
+            var select = this.lbStockOut.SelectedItem as StockOut;
+
+            var stockOut = BusinessFactory<StockOutBusiness>.Instance.FindById(select.Id);
+            if (stockOut == null)
+            {
+                MessageBox.Show("该出库单已删除", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            this.currentStockOutId = stockOut.Id;
+            this.stockOutState = (EntityStatus)stockOut.Status;
             this.formState = StockOutFormState.View;
 
             UpdateToolbar();

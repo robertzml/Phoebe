@@ -83,6 +83,28 @@ namespace Phoebe.Business
         }
 
         /// <summary>
+        /// 根据客户查找出库单
+        /// </summary>
+        /// <param name="customerId">客户ID</param>
+        /// <returns></returns>
+        public List<StockOut> GetByCustomer(int customerId)
+        {
+            var data = this.dal.Find(r => r.Contract.CustomerId == customerId).OrderByDescending(r => r.FlowNumber);
+            return data.ToList();
+        }
+
+        /// <summary>
+        /// 根据合同查找出库单
+        /// </summary>
+        /// <param name="contractId">合同ID</param>
+        /// <returns></returns>
+        public List<StockOut> GetByContract(int contractId)
+        {
+            var data = this.dal.Find(r => r.ContractId == contractId).OrderByDescending(r => r.FlowNumber);
+            return data.ToList();
+        }
+
+        /// <summary>
         /// 创建出库单
         /// </summary>
         /// <param name="entity">出库单对象</param>
