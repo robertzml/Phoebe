@@ -25,6 +25,10 @@ namespace Phoebe.FormClient
         #endregion //Constructor
 
         #region Function
+        /// <summary>
+        /// 设置实体
+        /// </summary>
+        /// <param name="customer"></param>
         private void SetEntity(Customer customer)
         {
             customer.Name = this.txtName.Text.Trim();
@@ -58,25 +62,25 @@ namespace Phoebe.FormClient
         {
             if (this.txtName.Text.Trim() == "")
             {
-                MessageBox.Show("姓名不能为空", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageUtil.ShowClaim("姓名不能为空");
                 return;
             }
 
             if (this.txtNumber.Text.Trim() == "")
             {
-                MessageBox.Show("代码不能为空", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageUtil.ShowClaim("代码不能为空");
                 return;
             }
 
             if (this.txtAddress.Text.Trim() == "")
             {
-                MessageBox.Show("地址不能为空", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageUtil.ShowClaim("地址不能为空");
                 return;
             }
 
             if (this.cmbType.SelectedIndex == -1)
             {
-                MessageBox.Show("客户类型不能为空", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageUtil.ShowClaim("客户类型不能为空");
                 return;
             }
 
@@ -86,12 +90,12 @@ namespace Phoebe.FormClient
             ErrorCode result = BusinessFactory<CustomerBusiness>.Instance.Create(customer);
             if (result == ErrorCode.Success)
             {
-                MessageBox.Show("添加客户成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowInfo("添加客户成功");
                 this.Close();
             }
             else
             {
-                MessageBox.Show("添加客户失败：" + result.DisplayName(), FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowWarning("添加客户失败：" + result.DisplayName());
             }
         }
         #endregion //Event

@@ -212,21 +212,21 @@ namespace Phoebe.FormClient
             var select = this.smgFilter.GetCurrentSelect();
             if (select == null)
             {
-                MessageBox.Show("未选择记录", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowClaim("未选择记录");
                 return;
             }
             else
             {
                 if (this.smgList.CheckHasStore(select))
                 {
-                    MessageBox.Show("该货品已经加入", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageUtil.ShowClaim("该货品已经加入");
                     return;
                 }
 
                 int count = Convert.ToInt32(this.nmMoveCount.Value);
                 if (count > select.StoreCount)
                 {
-                    MessageBox.Show("移库数量大于在库数量", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageUtil.ShowClaim("移库数量大于在库数量");
                     return;
                 }
 
@@ -253,7 +253,7 @@ namespace Phoebe.FormClient
             var select = this.smgList.GetCurrentSelect();
             if (select == null)
             {
-                MessageBox.Show("未选择记录", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowClaim("未选择记录");
                 return;
             }
             else

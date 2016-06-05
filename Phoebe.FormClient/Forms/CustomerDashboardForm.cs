@@ -96,7 +96,7 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void CustomerDashboardForm_Load(object sender, EventArgs e)
         {
-            Cache.Instance.Add("CurrentCustomer", null);
+            //Cache.Instance.Add("CurrentCustomer", null);
 
             this.customerList = BusinessFactory<CustomerBusiness>.Instance.FindAll();
             this.clcCustomer.SetDataSource(customerList);
@@ -134,7 +134,7 @@ namespace Phoebe.FormClient
         {
             if (this.selectCustomer == null)
             {
-                MessageBox.Show("请选择客户", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowClaim("请选择客户");
                 return;
             }
 
@@ -174,7 +174,7 @@ namespace Phoebe.FormClient
 
             if (this.selectCustomer == null)
             {
-                MessageBox.Show("请先选择客户", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowClaim("请先选择客户");
             }
             else
             {

@@ -103,7 +103,7 @@ namespace Phoebe.FormClient
             int customerId = this.clcCustomer.SelectedId;
             this.selectCustomer = this.customerList.SingleOrDefault(r => r.Id == customerId);
         }
-       
+
         /// <summary>
         /// 保存
         /// </summary>
@@ -113,13 +113,13 @@ namespace Phoebe.FormClient
         {
             if (this.selectCustomer == null)
             {
-                MessageBox.Show("请选择客户", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowClaim("请选择客户");
                 return;
             }
 
             if (this.nmPaidFee.Value <= 0)
             {
-                MessageBox.Show("请输入正确金额", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowClaim("请输入正确金额");
                 return;
             }
 
@@ -129,12 +129,12 @@ namespace Phoebe.FormClient
             ErrorCode result = BusinessFactory<PaymentBusiness>.Instance.Create(payment);
             if (result == ErrorCode.Success)
             {
-                MessageBox.Show("添加缴费成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowInfo("添加缴费成功");
                 this.Close();
             }
             else
             {
-                MessageBox.Show("添加缴费失败：" + result.DisplayName(), FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowError("添加缴费失败：" + result.DisplayName());
             }
         }
         #endregion //Event

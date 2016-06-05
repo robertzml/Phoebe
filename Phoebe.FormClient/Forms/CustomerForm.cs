@@ -96,13 +96,11 @@ namespace Phoebe.FormClient
         {
             if (this.dgvCustomer.SelectedRowsCount == 0)
             {
-                MessageBox.Show("未选中记录", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowClaim("未选中记录");
                 return;
             }
 
-            DialogResult dr = MessageBox.Show("是否确认删除选中客户", FormConstant.MessageBoxTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if (dr == DialogResult.Yes)
+            if (MessageUtil.ConfirmYesNo("是否确认删除选中客户") == DialogResult.Yes)
             {
                 int rowIndex = this.dgvCustomer.GetFocusedDataSourceRowIndex();
                 if (rowIndex < 0 || rowIndex >= this.bsCustomer.Count)
@@ -113,11 +111,11 @@ namespace Phoebe.FormClient
                 ErrorCode result = BusinessFactory<CustomerBusiness>.Instance.Delete(customer);
                 if (result == ErrorCode.Success)
                 {
-                    MessageBox.Show("删除客户成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageUtil.ShowInfo("删除客户成功");
                 }
                 else
                 {
-                    MessageBox.Show("删除客户失败：" + result.DisplayName(), FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageUtil.ShowInfo("删除客户失败：" + result.DisplayName());
                 }
 
                 LoadData();

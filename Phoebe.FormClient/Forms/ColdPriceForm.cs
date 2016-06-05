@@ -180,17 +180,17 @@ namespace Phoebe.FormClient
         {
             if (this.selectCustomer == null)
             {
-                MessageBox.Show("请选择客户", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowClaim("请选择客户");
                 return;
             }
             if (this.cmbContract.EditValue == null)
             {
-                MessageBox.Show("请选择合同", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowClaim("请选择合同");
                 return;
             }
             if (this.dpFrom.DateTime > this.dpTo.DateTime)
             {
-                MessageBox.Show("开始日期大于结束日期", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowClaim("开始日期大于结束日期");
                 return;
             }
 
@@ -198,12 +198,6 @@ namespace Phoebe.FormClient
 
             int contractId = Convert.ToInt32(this.cmbContract.EditValue);
             var contract = BusinessFactory<ContractBusiness>.Instance.FindById(contractId);
-            //if (!contract.IsTiming)
-            //{
-            //    MessageBox.Show("该合同不计时，无冷藏费。", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //    this.Cursor = Cursors.Default;
-            //    return;
-            //}
 
             var records = BusinessFactory<BillingBusiness>.Instance.GetContractColdRecord(contractId, this.dpFrom.DateTime.Date, this.dpTo.DateTime.Date);
             this.bsDailyColdRecord.DataSource = records;

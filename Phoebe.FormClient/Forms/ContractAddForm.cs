@@ -116,22 +116,22 @@ namespace Phoebe.FormClient
         {
             if (this.txtNumber.Text.Trim() == "" || this.txtName.Text.Trim() == "")
             {
-                MessageBox.Show("合同编号名称不能为空", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageUtil.ShowClaim("合同编号名称不能为空");
                 return;
             }
             if (this.txtCustomerNumber.Text == "")
             {
-                MessageBox.Show("客户代码不能为空", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageUtil.ShowClaim("客户代码不能为空");
                 return;
             }
             if (this.txtSignDate.EditValue == null)
             {
-                MessageBox.Show("请选择签订日期", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageUtil.ShowClaim("请选择签订日期");
                 return;
             }
             if (this.cmbBillingType.EditValue == null)
             {
-                MessageBox.Show("请选择计费方式", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageUtil.ShowClaim("请选择计费方式");
                 return;
             }
 
@@ -141,12 +141,12 @@ namespace Phoebe.FormClient
             ErrorCode result = BusinessFactory<ContractBusiness>.Instance.Create(contract);
             if (result == ErrorCode.Success)
             {
-                MessageBox.Show("添加合同成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowInfo("添加合同成功");
                 this.Close();
             }
             else
             {
-                MessageBox.Show("添加合同失败：" + result.DisplayName(), FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowWarning("添加合同失败：" + result.DisplayName());
             }
         }
         #endregion //Event

@@ -260,7 +260,7 @@ namespace Phoebe.FormClient
                 ErrorCode result = this.stockMoveAdd.Save(out errorMessage, out newId, out month);
                 if (result == ErrorCode.Success)
                 {
-                    MessageBox.Show("保存移库成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageUtil.ShowInfo("保存移库成功");
 
                     this.currentStockMoveId = newId;
                     this.stockMoveState = EntityStatus.StockMoveReady;
@@ -274,20 +274,20 @@ namespace Phoebe.FormClient
                 }
                 else
                 {
-                    MessageBox.Show("保存移库失败，" + result.DisplayName() + "， " + errorMessage, FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageUtil.ShowWarning("保存移库失败，" + result.DisplayName() + "， " + errorMessage);
                 }
             }
             else if (this.formState == StockMoveFormState.Edit) //保存修改
             {
                 if (this.currentStockMoveId == Guid.Empty)
                 {
-                    MessageBox.Show("当前未选中移库单", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageUtil.ShowClaim("当前未选中移库单");
                     return;
                 }
 
                 if (this.stockMoveState != EntityStatus.StockMoveReady)
                 {
-                    MessageBox.Show("当前移库已确认，无法保存", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageUtil.ShowClaim("当前移库已确认，无法保存");
                     return;
                 }
 
@@ -295,7 +295,7 @@ namespace Phoebe.FormClient
                 ErrorCode result = this.stockMoveEdit.Save(out errorMessage);
                 if (result == ErrorCode.Success)
                 {
-                    MessageBox.Show("保存移库成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageUtil.ShowInfo("保存移库成功");
 
                     this.stockMoveState = EntityStatus.StockMoveReady;
                     this.formState = StockMoveFormState.View;
@@ -307,7 +307,7 @@ namespace Phoebe.FormClient
                 }
                 else
                 {
-                    MessageBox.Show("保存移库失败，" + result.DisplayName() + "， " + errorMessage, FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageUtil.ShowWarning("保存移库失败，" + result.DisplayName() + "， " + errorMessage);
                 }
             }
         }
@@ -321,20 +321,20 @@ namespace Phoebe.FormClient
         {
             if (this.currentStockMoveId == Guid.Empty)
             {
-                MessageBox.Show("当前未选中移库单", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowClaim("当前未选中移库单");
                 return;
             }
 
             if (this.stockMoveState != EntityStatus.StockMoveReady)
             {
-                MessageBox.Show("当前移库已确认", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowClaim("当前移库已确认");
                 return;
             }
 
             ErrorCode result = BusinessFactory<StockMoveBusiness>.Instance.Confirm(this.currentStockMoveId);
             if (result == ErrorCode.Success)
             {
-                MessageBox.Show("移库确认成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowInfo("移库确认成功");
 
                 this.stockMoveState = EntityStatus.StockMove;
                 this.formState = StockMoveFormState.View;
@@ -344,7 +344,7 @@ namespace Phoebe.FormClient
             }
             else
             {
-                MessageBox.Show("移库确认失败，" + result.DisplayName(), FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowWarning("移库确认失败，" + result.DisplayName());
             }
         }
 
@@ -357,13 +357,13 @@ namespace Phoebe.FormClient
         {
             if (this.currentStockMoveId == Guid.Empty)
             {
-                MessageBox.Show("当前未选中移库单", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowClaim("当前未选中移库单");
                 return;
             }
 
             if (this.stockMoveState != EntityStatus.StockMoveReady)
             {
-                MessageBox.Show("当前移库已确认，无法编辑", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowClaim("当前移库已确认，无法编辑");
                 return;
             }
 
@@ -383,23 +383,22 @@ namespace Phoebe.FormClient
         {
             if (this.currentStockMoveId == Guid.Empty)
             {
-                MessageBox.Show("当前未选中移库单", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowClaim("当前未选中移库单");
                 return;
             }
 
             if (this.stockMoveState != EntityStatus.StockMove)
             {
-                MessageBox.Show("当前移库未确认，无法撤回", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowClaim("当前移库未确认，无法撤回");
                 return;
             }
 
-            DialogResult dr = MessageBox.Show("是否确认撤回选中记录", FormConstant.MessageBoxTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (dr == DialogResult.Yes)
+            if (MessageUtil.ConfirmYesNo("是否确认撤回选中记录") == DialogResult.Yes)
             {
                 ErrorCode result = BusinessFactory<StockMoveBusiness>.Instance.Revert(this.currentStockMoveId);
                 if (result == ErrorCode.Success)
                 {
-                    MessageBox.Show("撤回移库成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageUtil.ShowInfo("撤回移库成功");
 
                     this.stockMoveState = EntityStatus.StockMoveReady;
                     this.formState = StockMoveFormState.View;
@@ -409,7 +408,7 @@ namespace Phoebe.FormClient
                 }
                 else
                 {
-                    MessageBox.Show("撤回移库失败，" + result.DisplayName(), FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageUtil.ShowWarning("撤回移库失败：" + result.DisplayName());
                 }
             }
         }
@@ -423,23 +422,22 @@ namespace Phoebe.FormClient
         {
             if (this.currentStockMoveId == Guid.Empty)
             {
-                MessageBox.Show("当前未选中移库单", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowClaim("当前未选中移库单");
                 return;
             }
 
             if (this.stockMoveState != EntityStatus.StockMoveReady)
             {
-                MessageBox.Show("当前移库已确认，无法删除", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowClaim("当前移库已确认，无法删除");
                 return;
             }
 
-            DialogResult dr = MessageBox.Show("是否确认删除选中记录", FormConstant.MessageBoxTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (dr == DialogResult.Yes)
+            if (MessageUtil.ConfirmYesNo("是否确认删除选中记录") == DialogResult.Yes)
             {
                 ErrorCode result = BusinessFactory<StockMoveBusiness>.Instance.Delete(this.currentStockMoveId);
                 if (result == ErrorCode.Success)
                 {
-                    MessageBox.Show("删除移库成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageUtil.ShowInfo("删除移库成功");
 
                     this.currentStockMoveId = Guid.Empty;
                     this.stockMoveState = EntityStatus.Empty;
@@ -451,7 +449,7 @@ namespace Phoebe.FormClient
                 }
                 else
                 {
-                    MessageBox.Show("删除移库失败，" + result.DisplayName(), FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageUtil.ShowWarning("删除移库失败：" + result.DisplayName());
                 }
             }
         }

@@ -83,27 +83,27 @@ namespace Phoebe.FormClient
         {
             if (this.txtUserName.Text.Trim() == "")
             {
-                MessageBox.Show("用户名不能为空", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageUtil.ShowClaim("用户名不能为空");
                 return;
             }
             if (this.txtName.Text.Trim() == "")
             {
-                MessageBox.Show("姓名不能为空", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageUtil.ShowClaim("姓名不能为空");
                 return;
             }
             if (this.txtPassword.Text.Trim() == "")
             {
-                MessageBox.Show("密码不能为空", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageUtil.ShowClaim("密码不能为空");
                 return;
             }
             if (this.txtPassword.Text.Trim() != this.txtConfirmPassword.Text)
             {
-                MessageBox.Show("两次输入密码不一致", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageUtil.ShowClaim("两次输入密码不一致");
                 return;
             }
             if (this.cmbUserGroup.EditValue == null)
             {
-                MessageBox.Show("用户组不能为空", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageUtil.ShowClaim("用户组不能为空");
                 return;
             }
 
@@ -113,12 +113,12 @@ namespace Phoebe.FormClient
             var result = BusinessFactory<UserBusiness>.Instance.Create(user);
             if (result == ErrorCode.Success)
             {
-                MessageBox.Show("添加用户成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowInfo("添加用户成功");
                 this.Close();
             }
             else
             {
-                MessageBox.Show("添加用户失败：" + result.DisplayName(), FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowError("添加用户失败：" + result.DisplayName());
             }
         }
         #endregion //Event

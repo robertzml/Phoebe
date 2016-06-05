@@ -266,7 +266,7 @@ namespace Phoebe.FormClient
         {
             if (this.lkuCustomer.EditValue == null)
             {
-                MessageBox.Show("请选择客户", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowClaim("请选择客户");
                 return;
             }
 
@@ -300,7 +300,7 @@ namespace Phoebe.FormClient
             var stockOut = BusinessFactory<StockOutBusiness>.Instance.FindById(select.Id);
             if (stockOut == null)
             {
-                MessageBox.Show("该出库单已删除", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowInfo("该出库单已删除");
                 return;
             }
 
@@ -360,7 +360,7 @@ namespace Phoebe.FormClient
                 ErrorCode result = this.stockOutAdd.Save(out errorMessage, out newId, out month);
                 if (result == ErrorCode.Success)
                 {
-                    MessageBox.Show("保存出库成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageUtil.ShowInfo("保存出库成功");
 
                     this.currentStockOutId = newId;
                     this.stockOutState = EntityStatus.StockOutReady;
@@ -374,20 +374,20 @@ namespace Phoebe.FormClient
                 }
                 else
                 {
-                    MessageBox.Show("保存出库失败，" + result.DisplayName() + "， " + errorMessage, FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageUtil.ShowWarning("保存出库失败，" + result.DisplayName() + "， " + errorMessage);
                 }
             }
             else if (this.formState == StockOutFormState.Edit) //保存修改
             {
                 if (this.currentStockOutId == Guid.Empty)
                 {
-                    MessageBox.Show("当前未选中出库单", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageUtil.ShowClaim("当前未选中出库单");
                     return;
                 }
 
                 if (this.stockOutState != EntityStatus.StockOutReady)
                 {
-                    MessageBox.Show("当前出库已确认，无法保存", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageUtil.ShowClaim("当前出库已确认，无法保存");
                     return;
                 }
 
@@ -395,7 +395,7 @@ namespace Phoebe.FormClient
                 ErrorCode result = this.stockOutEdit.Save(out errorMessage);
                 if (result == ErrorCode.Success)
                 {
-                    MessageBox.Show("保存出库成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageUtil.ShowInfo("保存出库成功");
 
                     this.stockOutState = EntityStatus.StockOutReady;
                     this.formState = StockOutFormState.View;
@@ -407,7 +407,7 @@ namespace Phoebe.FormClient
                 }
                 else
                 {
-                    MessageBox.Show("保存出库失败，" + result.DisplayName() + "， " + errorMessage, FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageUtil.ShowWarning("保存出库失败，" + result.DisplayName() + "， " + errorMessage);
                 }
             }
         }
@@ -421,20 +421,20 @@ namespace Phoebe.FormClient
         {
             if (this.currentStockOutId == Guid.Empty)
             {
-                MessageBox.Show("当前未选中出库单", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowClaim("当前未选中出库单");
                 return;
             }
 
             if (this.stockOutState != EntityStatus.StockOutReady)
             {
-                MessageBox.Show("当前出库已确认", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowClaim("当前出库已确认");
                 return;
             }
 
             ErrorCode result = BusinessFactory<StockOutBusiness>.Instance.Confirm(this.currentStockOutId);
             if (result == ErrorCode.Success)
             {
-                MessageBox.Show("出库确认成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowInfo("出库确认成功");
 
                 this.stockOutState = EntityStatus.StockOut;
                 this.formState = StockOutFormState.View;
@@ -444,7 +444,7 @@ namespace Phoebe.FormClient
             }
             else
             {
-                MessageBox.Show("出库确认失败，" + result.DisplayName(), FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowWarning("出库确认失败，" + result.DisplayName());
             }
         }
 
@@ -457,13 +457,13 @@ namespace Phoebe.FormClient
         {
             if (this.currentStockOutId == Guid.Empty)
             {
-                MessageBox.Show("当前未选中出库单", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowClaim("当前未选中出库单");
                 return;
             }
 
             if (this.stockOutState != EntityStatus.StockOutReady)
             {
-                MessageBox.Show("出库已确认，无法编辑", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowClaim("出库已确认，无法编辑");
                 return;
             }
 
@@ -483,23 +483,22 @@ namespace Phoebe.FormClient
         {
             if (this.currentStockOutId == Guid.Empty)
             {
-                MessageBox.Show("当前未选中出库单", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowClaim("当前未选中出库单");
                 return;
             }
 
             if (this.stockOutState != EntityStatus.StockOut)
             {
-                MessageBox.Show("当前出库未确认，无法撤回", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowClaim("当前出库未确认，无法撤回");
                 return;
             }
 
-            DialogResult dr = MessageBox.Show("是否确认撤回选中记录", FormConstant.MessageBoxTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (dr == DialogResult.Yes)
+            if (MessageUtil.ConfirmYesNo("是否确认撤回选中记录") == DialogResult.Yes)
             {
                 ErrorCode result = BusinessFactory<StockOutBusiness>.Instance.Revert(this.currentStockOutId);
                 if (result == ErrorCode.Success)
                 {
-                    MessageBox.Show("撤回出库成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageUtil.ShowInfo("撤回出库成功");
 
                     this.stockOutState = EntityStatus.StockOutReady;
                     this.formState = StockOutFormState.View;
@@ -509,7 +508,7 @@ namespace Phoebe.FormClient
                 }
                 else
                 {
-                    MessageBox.Show("撤回出库失败，" + result.DisplayName(), FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageUtil.ShowWarning("撤回出库失败，" + result.DisplayName());
                 }
             }
         }
@@ -523,23 +522,22 @@ namespace Phoebe.FormClient
         {
             if (this.currentStockOutId == Guid.Empty)
             {
-                MessageBox.Show("当前未选中出库单", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowClaim("当前未选中出库单");
                 return;
             }
 
             if (this.stockOutState != EntityStatus.StockOutReady)
             {
-                MessageBox.Show("出库已确认，无法删除", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowClaim("出库已确认，无法删除");
                 return;
             }
 
-            DialogResult dr = MessageBox.Show("是否确认删除选中记录", FormConstant.MessageBoxTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (dr == DialogResult.Yes)
+            if (MessageUtil.ConfirmYesNo("是否确认删除选中记录") == DialogResult.Yes)
             {
                 ErrorCode result = BusinessFactory<StockOutBusiness>.Instance.Delete(this.currentStockOutId);
                 if (result == ErrorCode.Success)
                 {
-                    MessageBox.Show("删除出库成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageUtil.ShowInfo("删除出库成功");
 
                     this.currentStockOutId = Guid.Empty;
                     this.stockOutState = EntityStatus.Empty;
@@ -551,7 +549,7 @@ namespace Phoebe.FormClient
                 }
                 else
                 {
-                    MessageBox.Show("删除出库失败，" + result.DisplayName(), FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageUtil.ShowWarning("删除出库失败：" + result.DisplayName());
                 }
             }
         }

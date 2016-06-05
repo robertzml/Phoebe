@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Phoebe.FormClient
@@ -91,17 +89,17 @@ namespace Phoebe.FormClient
         {
             if (this.txtNumber.Text.Trim() == "" || this.txtName.Text.Trim() == "")
             {
-                MessageBox.Show("合同编号名称不能为空", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageUtil.ShowClaim("合同编号名称不能为空");
                 return;
             }
             if (this.txtCustomerNumber.Text == "")
             {
-                MessageBox.Show("客户代码不能为空", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageUtil.ShowClaim("客户代码不能为空");
                 return;
             }
             if (this.dpSignDate.EditValue == null)
             {
-                MessageBox.Show("请选择签订日期", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageUtil.ShowClaim("请选择签订日期");
                 return;
             }
 
@@ -110,12 +108,12 @@ namespace Phoebe.FormClient
             ErrorCode result = BusinessFactory<ContractBusiness>.Instance.Update(this.bindContract);
             if (result == ErrorCode.Success)
             {
-                MessageBox.Show("编辑合同成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowInfo("编辑合同成功");
                 this.Close();
             }
             else
             {
-                MessageBox.Show("编辑合同失败：" + result.DisplayName(), FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowWarning("编辑合同失败：" + result.DisplayName());
             }
         }
         #endregion //Event

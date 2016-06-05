@@ -79,12 +79,11 @@ namespace Phoebe.FormClient
         {
             if (this.dgvSettlement.SelectedRowsCount == 0)
             {
-                MessageBox.Show("未选中记录", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowClaim("未选择记录");
                 return;
             }
 
-            DialogResult dr = MessageBox.Show("是否确认删除选中结算", FormConstant.MessageBoxTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (dr == DialogResult.Yes)
+            if (MessageUtil.ConfirmYesNo("是否确认删除选中结算") == DialogResult.Yes)
             {
                 int rowIndex = this.dgvSettlement.GetFocusedDataSourceRowIndex();
                 if (rowIndex < 0 || rowIndex >= this.bsSettlement.Count)
@@ -95,11 +94,11 @@ namespace Phoebe.FormClient
                 ErrorCode result = BusinessFactory<SettlementBusiness>.Instance.Delete(settlement);
                 if (result == ErrorCode.Success)
                 {
-                    MessageBox.Show("删除结算成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageUtil.ShowInfo("删除结算成功");
                 }
                 else
                 {
-                    MessageBox.Show("删除结算失败：" + result.DisplayName(), FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageUtil.ShowWarning("删除结算失败：" + result.DisplayName());
                 }
 
                 LoadData();

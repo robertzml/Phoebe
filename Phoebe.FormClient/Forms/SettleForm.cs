@@ -209,13 +209,13 @@ namespace Phoebe.FormClient
         {
             if (this.selectCustomer == null)
             {
-                MessageBox.Show("请选择客户", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowClaim("请选择客户");
                 return;
             }
 
             if (this.dpTo.DateTime < this.dpFrom.DateTime)
             {
-                MessageBox.Show("开始日期大于结束日期", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowClaim("开始日期大于结束日期");
                 return;
             }
 
@@ -289,7 +289,7 @@ namespace Phoebe.FormClient
         {
             if (this.selectCustomer == null)
             {
-                MessageBox.Show("请选择客户", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowClaim("请选择客户");
                 return;
             }
 
@@ -302,12 +302,12 @@ namespace Phoebe.FormClient
             ErrorCode result = BusinessFactory<SettlementBusiness>.Instance.Create(settlement, details);
             if (result == ErrorCode.Success)
             {
-                MessageBox.Show("保存结算成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowInfo("保存结算成功");
                 this.btnSave.Enabled = false;
             }
             else
             {
-                MessageBox.Show("保存结算失败：" + result.DisplayName(), FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowWarning("保存结算失败：" + result.DisplayName());
             }
         }
         #endregion //Event

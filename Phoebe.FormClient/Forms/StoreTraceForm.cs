@@ -179,7 +179,7 @@ namespace Phoebe.FormClient
         {
             if (this.selectCustomer == null)
             {
-                MessageBox.Show("请选择客户", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowClaim("请选择客户");
                 return;
             }
 
@@ -227,7 +227,7 @@ namespace Phoebe.FormClient
             var store = this.sgList.GetCurrentSelect();
             if (store == null)
             {
-                MessageBox.Show("未选择记录", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowClaim("未选择记录");
                 return;
             }
 
@@ -238,7 +238,7 @@ namespace Phoebe.FormClient
 
             this.Cursor = Cursors.Default;
         }
-        
+
         /// <summary>
         /// 修正流水
         /// </summary>
@@ -249,7 +249,7 @@ namespace Phoebe.FormClient
             var store = this.sgList.GetCurrentSelect();
             if (store == null)
             {
-                MessageBox.Show("未选择记录", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowClaim("未选择记录");
                 return;
             }
 
@@ -259,11 +259,11 @@ namespace Phoebe.FormClient
                 var flow = BusinessFactory<StoreBusiness>.Instance.GetStoreFlow(store.Id).OrderBy(r => r.FlowDate).ToList();
                 this.sfgList.DataSource = flow;
 
-                MessageBox.Show("流水修正成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowInfo("流水修正成功");
             }
             else
             {
-                MessageBox.Show("流水修正失败，" + result.DisplayName(), FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowWarning("流水修正失败：" + result.DisplayName());
             }
         }
         #endregion //Event

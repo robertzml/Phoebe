@@ -259,7 +259,7 @@ namespace Phoebe.FormClient
                 ErrorCode result = this.stockInAdd.Save(out errorMessage, out newId, out month);
                 if (result == ErrorCode.Success)
                 {
-                    MessageBox.Show("保存入库成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageUtil.ShowInfo("保存入库成功");
 
                     this.currentStockInId = newId;
                     this.stockInState = EntityStatus.StockInReady;
@@ -273,19 +273,19 @@ namespace Phoebe.FormClient
                 }
                 else
                 {
-                    MessageBox.Show("保存入库失败，" + result.DisplayName() + "， " + errorMessage, FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageUtil.ShowWarning("保存入库失败，" + result.DisplayName() + "， " + errorMessage);
                 }
             }
             else if (this.formState == StockInFormState.Edit) //保存修改
             {
                 if (this.currentStockInId == Guid.Empty)
                 {
-                    MessageBox.Show("当前未选中入库单", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageUtil.ShowClaim("当前未选中入库单");
                     return;
                 }
                 if (this.stockInState != EntityStatus.StockInReady)
                 {
-                    MessageBox.Show("当前入库已确认，无法保存", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageUtil.ShowClaim("当前入库已确认，无法保存");
                     return;
                 }
 
@@ -293,7 +293,7 @@ namespace Phoebe.FormClient
                 ErrorCode result = this.stockInEdit.Save(out errorMessage);
                 if (result == ErrorCode.Success)
                 {
-                    MessageBox.Show("保存入库成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageUtil.ShowInfo("保存入库成功");
 
                     this.stockInState = EntityStatus.StockInReady;
                     this.formState = StockInFormState.View;
@@ -305,7 +305,7 @@ namespace Phoebe.FormClient
                 }
                 else
                 {
-                    MessageBox.Show("保存入库失败，" + result.DisplayName() + "， " + errorMessage, FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageUtil.ShowWarning("保存入库失败，" + result.DisplayName() + "， " + errorMessage);
                 }
             }
         }
@@ -319,20 +319,20 @@ namespace Phoebe.FormClient
         {
             if (this.currentStockInId == Guid.Empty)
             {
-                MessageBox.Show("当前未选中入库单", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowClaim("当前未选中入库单");
                 return;
             }
 
             if (this.stockInState != EntityStatus.StockInReady)
             {
-                MessageBox.Show("当前入库已确认", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowClaim("当前入库已确认");
                 return;
             }
 
             ErrorCode result = BusinessFactory<StockInBusiness>.Instance.Confirm(this.currentStockInId);
             if (result == ErrorCode.Success)
             {
-                MessageBox.Show("入库确认成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowInfo("入库确认成功");
 
                 this.stockInState = EntityStatus.StockIn;
                 this.formState = StockInFormState.View;
@@ -342,7 +342,7 @@ namespace Phoebe.FormClient
             }
             else
             {
-                MessageBox.Show("入库确认失败，" + result.DisplayName(), FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowWarning("入库确认失败：" + result.DisplayName());
             }
         }
 
@@ -355,13 +355,13 @@ namespace Phoebe.FormClient
         {
             if (this.currentStockInId == Guid.Empty)
             {
-                MessageBox.Show("当前未选中入库单", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowClaim("当前未选中入库单");
                 return;
             }
 
             if (this.stockInState != EntityStatus.StockInReady)
             {
-                MessageBox.Show("当前入库已确认，无法编辑", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowClaim("当前入库已确认，无法编辑");
                 return;
             }
 
@@ -381,23 +381,22 @@ namespace Phoebe.FormClient
         {
             if (this.currentStockInId == Guid.Empty)
             {
-                MessageBox.Show("当前未选中入库单", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowClaim("当前未选中入库单");
                 return;
             }
 
             if (this.stockInState != EntityStatus.StockIn)
             {
-                MessageBox.Show("当前入库未确认，无法撤回", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowClaim("当前入库未确认，无法撤回");
                 return;
             }
 
-            DialogResult dr = MessageBox.Show("是否确认撤回选中记录", FormConstant.MessageBoxTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (dr == DialogResult.Yes)
+            if (MessageUtil.ConfirmYesNo("是否确认撤回选中记录") == DialogResult.Yes)
             {
                 ErrorCode result = BusinessFactory<StockInBusiness>.Instance.Revert(this.currentStockInId);
                 if (result == ErrorCode.Success)
                 {
-                    MessageBox.Show("撤回入库成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageUtil.ShowInfo("撤回入库成功");
 
                     this.stockInState = EntityStatus.StockInReady;
                     this.formState = StockInFormState.View;
@@ -407,7 +406,7 @@ namespace Phoebe.FormClient
                 }
                 else
                 {
-                    MessageBox.Show("撤回入库失败，" + result.DisplayName(), FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageUtil.ShowWarning("撤回入库失败：" + result.DisplayName());
                 }
             }
         }
@@ -422,23 +421,22 @@ namespace Phoebe.FormClient
         {
             if (this.currentStockInId == Guid.Empty)
             {
-                MessageBox.Show("当前未选中入库单", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowClaim("当前未选中入库单");
                 return;
             }
 
             if (this.stockInState != EntityStatus.StockInReady)
             {
-                MessageBox.Show("入库已确认，无法删除", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowClaim("入库已确认，无法删除");
                 return;
             }
 
-            DialogResult dr = MessageBox.Show("是否确认删除选中记录", FormConstant.MessageBoxTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (dr == DialogResult.Yes)
+            if (MessageUtil.ConfirmYesNo("是否确认删除选中记录") == DialogResult.Yes)
             {
                 ErrorCode result = BusinessFactory<StockInBusiness>.Instance.Delete(this.currentStockInId);
                 if (result == ErrorCode.Success)
                 {
-                    MessageBox.Show("删除入库成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageUtil.ShowInfo("删除入库成功");
 
                     this.currentStockInId = Guid.Empty;
                     this.stockInState = EntityStatus.Empty;
@@ -450,7 +448,7 @@ namespace Phoebe.FormClient
                 }
                 else
                 {
-                    MessageBox.Show("删除入库失败，" + result.DisplayName(), FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageUtil.ShowWarning("删除入库失败：" + result.DisplayName());
                 }
             }
         }

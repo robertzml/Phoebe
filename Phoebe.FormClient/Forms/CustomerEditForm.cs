@@ -86,7 +86,7 @@ namespace Phoebe.FormClient
             this.bindCustomer = BusinessFactory<CustomerBusiness>.Instance.FindById(this.customerId);
             SetControl(this.bindCustomer);
         }
-        
+
         /// <summary>
         /// 保存
         /// </summary>
@@ -96,25 +96,25 @@ namespace Phoebe.FormClient
         {
             if (this.txtName.Text.Trim() == "")
             {
-                MessageBox.Show("姓名不能为空", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageUtil.ShowClaim("姓名不能为空");
                 return;
             }
 
             if (this.txtNumber.Text.Trim() == "")
             {
-                MessageBox.Show("代码不能为空", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageUtil.ShowClaim("代码不能为空");
                 return;
             }
 
             if (this.txtAddress.Text.Trim() == "")
             {
-                MessageBox.Show("地址不能为空", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageUtil.ShowClaim("地址不能为空");
                 return;
             }
 
             if (this.cmbType.SelectedIndex == -1)
             {
-                MessageBox.Show("客户类型不能为空", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageUtil.ShowClaim("客户类型不能为空");
                 return;
             }
 
@@ -123,12 +123,12 @@ namespace Phoebe.FormClient
             ErrorCode result = BusinessFactory<CustomerBusiness>.Instance.Update(this.bindCustomer);
             if (result == ErrorCode.Success)
             {
-                MessageBox.Show("编辑客户成功", FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowInfo("编辑客户成功");
                 this.Close();
             }
             else
             {
-                MessageBox.Show("编辑客户失败：" + result.DisplayName(), FormConstant.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageUtil.ShowWarning("编辑客户失败：" + result.DisplayName());
             }
         }
         #endregion //Event
