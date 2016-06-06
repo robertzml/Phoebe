@@ -28,11 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.lkuCustomer = new DevExpress.XtraEditors.LookUpEdit();
-            this.bsCustomer = new System.Windows.Forms.BindingSource(this.components);
+            this.bsCustomer = new System.Windows.Forms.BindingSource();
             this.cmbContract = new DevExpress.XtraEditors.ImageComboBoxEdit();
             this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
             this.dpTime = new DevExpress.XtraEditors.DateEdit();

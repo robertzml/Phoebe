@@ -195,3 +195,4 @@ FakesAssemblies/
 # Visual Studio 6 workspace options file
 *.opt
 /Phoebe.FormClient/Properties/licenses.licx
+/Phoebe.Control/Properties/licenses.licx

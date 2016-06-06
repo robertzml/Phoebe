@@ -225,6 +225,12 @@ namespace Phoebe.FormClient
         {
             ChildFormManage.ShowDialogForm(typeof(ChangePasswordForm));
         }
+
+
+        private void menuTest_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            ChildFormManage.LoadMdiForm(this, typeof(TestForm));
+        }
         #endregion //Menu Event
 
         #endregion //Event

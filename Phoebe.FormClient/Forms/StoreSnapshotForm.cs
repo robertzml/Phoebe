@@ -88,6 +88,22 @@ namespace Phoebe.FormClient
         }
 
         /// <summary>
+        /// 格式化客户列表
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void lkuCustomer_CustomDisplayText(object sender, CustomDisplayTextEventArgs e)
+        {
+            if (this.lkuCustomer.EditValue == null)
+                return;
+
+            string number = lkuCustomer.GetColumnValue("Number").ToString();
+            string name = lkuCustomer.GetColumnValue("Name").ToString();
+
+            e.DisplayText = string.Format("{0} - {1}", number, name);
+        }
+
+        /// <summary>
         /// 查询
         /// </summary>
         /// <param name="sender"></param>
@@ -120,18 +136,5 @@ namespace Phoebe.FormClient
             this.sfgList.DataSource = flow;
         }
         #endregion //Event
-
-        private void lkuCustomer_CustomDisplayText(object sender, CustomDisplayTextEventArgs e)
-        {
-            if (this.lkuCustomer.EditValue == null)
-                return;
-
-            string Column1 = lkuCustomer.GetColumnValue("Number").ToString();
-            string Column2 = lkuCustomer.GetColumnValue("Name").ToString();
-
-            e.DisplayText = String.Format("{0} - {1}",
-                Column1,
-                Column2);
-        }
     }
 }

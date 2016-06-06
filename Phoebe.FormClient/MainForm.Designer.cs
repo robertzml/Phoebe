@@ -28,8 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
+            this.barManager1 = new DevExpress.XtraBars.BarManager();
             this.mainMenu = new DevExpress.XtraBars.Bar();
             this.menuCustomer = new DevExpress.XtraBars.BarSubItem();
             this.menuCustomerList = new DevExpress.XtraBars.BarButtonItem();
@@ -68,7 +67,8 @@
             this.barCustomerList = new DevExpress.XtraBars.BarButtonItem();
             this.barHeaderItem1 = new DevExpress.XtraBars.BarHeaderItem();
             this.barStaticItem2 = new DevExpress.XtraBars.BarStaticItem();
-            this.tabMdiManager = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
+            this.tabMdiManager = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager();
+            this.menuTest = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabMdiManager)).BeginInit();
             this.SuspendLayout();
@@ -115,9 +115,10 @@
             this.menuCustomerDashboard,
             this.menuSettleList,
             this.menuPayment,
-            this.menuCargoList});
+            this.menuCargoList,
+            this.menuTest});
             this.barManager1.MainMenu = this.mainMenu;
-            this.barManager1.MaxItemId = 34;
+            this.barManager1.MaxItemId = 35;
             this.barManager1.StatusBar = this.bar3;
             // 
             // mainMenu
@@ -310,7 +311,8 @@
             this.menuUser.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(this.menuUserList),
             new DevExpress.XtraBars.LinkPersistInfo(this.menuUserGroupList),
-            new DevExpress.XtraBars.LinkPersistInfo(this.menuChangePassword, true)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.menuChangePassword, true),
+            new DevExpress.XtraBars.LinkPersistInfo(this.menuTest)});
             this.menuUser.Name = "menuUser";
             // 
             // menuUserList
@@ -428,6 +430,13 @@
             this.tabMdiManager.MdiParent = this;
             this.tabMdiManager.PinPageButtonShowMode = DevExpress.XtraTab.PinPageButtonShowMode.InActiveTabPageHeader;
             // 
+            // menuTest
+            // 
+            this.menuTest.Caption = "测试窗体";
+            this.menuTest.Id = 34;
+            this.menuTest.Name = "menuTest";
+            this.menuTest.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuTest_ItemClick);
+            // 
             // MainForm
             // 
             this.AllowMdiBar = true;
@@ -491,6 +500,7 @@
         private DevExpress.XtraBars.BarButtonItem menuSettleList;
         private DevExpress.XtraBars.BarButtonItem menuPayment;
         private DevExpress.XtraBars.BarButtonItem menuCargoList;
+        private DevExpress.XtraBars.BarButtonItem menuTest;
     }
 }
 
