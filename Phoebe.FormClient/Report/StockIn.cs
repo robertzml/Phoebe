@@ -14,19 +14,27 @@ namespace Phoebe.FormClient.Report
     /// </summary>
     public partial class StockIn : DevExpress.XtraReports.UI.XtraReport
     {
+        #region Constructor
         public StockIn(RStockInModel model)
         {
             InitializeComponent();
 
             BindData(model);
         }
+        #endregion //Constructor
 
+        #region Function
+        /// <summary>
+        /// 绑定数据
+        /// </summary>
+        /// <param name="model">数据模型</param>
         private void BindData(RStockInModel model)
         {
             this.DataSource = model.Details;
             this.CustomerName.Value = model.CustomerName;
-            this.UserName.Value = model.UserName;
-         
+            this.InTime.Value = model.InTime;
+            this.FlowNumber.Value = model.FlowNumber;
         }
+        #endregion //Function
     }
 }

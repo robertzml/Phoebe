@@ -51,10 +51,17 @@ namespace Phoebe.FormClient
             return data;
         }
 
+        /// <summary>
+        /// 入库单转报表模型
+        /// </summary>
+        /// <param name="stockIn">入库单</param>
+        /// <returns></returns>
         public static Phoebe.Model.Report.RStockInModel StockInToReport(StockIn stockIn)
         {
             Phoebe.Model.Report.RStockInModel report = new Model.Report.RStockInModel();
             report.CustomerName = stockIn.Contract.Customer.Name;
+            report.InTime = stockIn.InTime;
+            report.FlowNumber = stockIn.FlowNumber;
             report.UserName = stockIn.User.Name;
 
             report.Details = new List<Model.Report.RStockInDetailsModel>();
@@ -63,6 +70,7 @@ namespace Phoebe.FormClient
                 Model.Report.RStockInDetailsModel detail = new Model.Report.RStockInDetailsModel();
                 detail.CategoryNumber = item.Store.Cargo.Category.Number;
                 detail.CategoryName = item.Store.Cargo.Category.Name;
+                detail.Specification = item.Store.Specification;
                 detail.Count = item.Count;
                 detail.UnitWeight = item.Store.Cargo.UnitWeight;
                 detail.TotalWeight = item.InWeight;

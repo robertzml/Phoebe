@@ -471,8 +471,7 @@ namespace Phoebe.FormClient
             var model = ModelTranslate.StockInToReport(stockIn);
 
             Report.StockIn report = new Report.StockIn(model);
-            
-            // Show the report's preview. 
+
             ReportPrintTool tool = new ReportPrintTool(report);
             tool.ShowPreview();
         }

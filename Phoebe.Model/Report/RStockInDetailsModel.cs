@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Phoebe.Model.Report
 {
     /// <summary>
-    /// 报表入库记录类
+    /// 入库记录报表类
     /// </summary>
     public class RStockInDetailsModel
     {
@@ -17,11 +17,19 @@ namespace Phoebe.Model.Report
         public int Number { get; set; }
 
         /// <summary>
-        /// 一级分类
+        /// 分类编码
         /// </summary>
         public string CategoryNumber { get; set; }
 
+        /// <summary>
+        /// 分类名称
+        /// </summary>
         public string CategoryName { get; set; }
+
+        /// <summary>
+        /// 规格
+        /// </summary>
+        public string Specification { get; set; }
 
         /// <summary>
         /// 数量
