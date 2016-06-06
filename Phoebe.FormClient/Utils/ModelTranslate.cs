@@ -51,6 +51,30 @@ namespace Phoebe.FormClient
             return data;
         }
 
+        public static Phoebe.Model.Report.RStockInModel StockInToReport(StockIn stockIn)
+        {
+            Phoebe.Model.Report.RStockInModel report = new Model.Report.RStockInModel();
+            report.CustomerName = stockIn.Contract.Customer.Name;
+            report.UserName = stockIn.User.Name;
+
+            report.Details = new List<Model.Report.RStockInDetailsModel>();
+            foreach(var item in stockIn.StockInDetails)
+            {
+                Model.Report.RStockInDetailsModel detail = new Model.Report.RStockInDetailsModel();
+                detail.CategoryNumber = item.Store.Cargo.Category.Number;
+                detail.CategoryName = item.Store.Cargo.Category.Name;
+                detail.Count = item.Count;
+                detail.UnitWeight = item.Store.Cargo.UnitWeight;
+                detail.TotalWeight = item.InWeight;
+                detail.TotalVolume = item.InVolume;
+                detail.Warehouse = item.Store.WarehouseNumber;
+
+                report.Details.Add(detail);
+            }
+
+            return report;
+        }
+
         /// <summary>
         /// 库存记录转出库记录
         /// </summary>

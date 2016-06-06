@@ -8,6 +8,7 @@ using System.Windows.Forms;
 
 namespace Phoebe.FormClient
 {
+    using DevExpress.XtraReports.UI;
     using Phoebe.Base;
     using Phoebe.Business;
     using Phoebe.Common;
@@ -460,7 +461,20 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void tsbPrint_Click(object sender, EventArgs e)
         {
+            if (this.currentStockInId == Guid.Empty)
+            {
+                MessageUtil.ShowClaim("当前未选中入库单");
+                return;
+            }
 
+            var stockIn = BusinessFactory<StockInBusiness>.Instance.FindById(this.currentStockInId);
+            var model = ModelTranslate.StockInToReport(stockIn);
+
+            Report.StockIn report = new Report.StockIn(model);
+            
+            // Show the report's preview. 
+            ReportPrintTool tool = new ReportPrintTool(report);
+            tool.ShowPreview();
         }
         #endregion //Event
 
