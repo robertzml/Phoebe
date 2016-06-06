@@ -106,16 +106,17 @@
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Number", "代码", 53, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near, DevExpress.Data.ColumnSortOrder.Ascending),
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "名称", 41, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near)});
             this.lkuCustomer.Properties.DataSource = this.bsCustomer;
-            this.lkuCustomer.Properties.DisplayMember = "Name";
+            this.lkuCustomer.Properties.DisplayMember = "Number";
             this.lkuCustomer.Properties.DropDownRows = 10;
+            this.lkuCustomer.Properties.ImmediatePopup = true;
             this.lkuCustomer.Properties.NullText = "请选择客户";
-            this.lkuCustomer.Properties.SearchMode = DevExpress.XtraEditors.Controls.SearchMode.AutoComplete;
             this.lkuCustomer.Properties.ShowFooter = false;
             this.lkuCustomer.Properties.ValueMember = "Id";
             this.lkuCustomer.Size = new System.Drawing.Size(240, 20);
             this.lkuCustomer.StyleController = this.layoutControl1;
             this.lkuCustomer.TabIndex = 11;
             this.lkuCustomer.EditValueChanged += new System.EventHandler(this.lkuCustomer_EditValueChanged);
+            this.lkuCustomer.CustomDisplayText += new DevExpress.XtraEditors.Controls.CustomDisplayTextEventHandler(this.lkuCustomer_CustomDisplayText);
             // 
             // bsCustomer
             // 
