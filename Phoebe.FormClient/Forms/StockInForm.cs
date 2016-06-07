@@ -214,6 +214,7 @@ namespace Phoebe.FormClient
             ChildFormManage.LoadContentControl(this.plBody, this.stockInView);
         }
 
+        #region Toolbar Event
         /// <summary>
         /// 新建入库
         /// </summary>
@@ -412,7 +413,6 @@ namespace Phoebe.FormClient
             }
         }
 
-
         /// <summary>
         /// 删除入库
         /// </summary>
@@ -475,6 +475,7 @@ namespace Phoebe.FormClient
             ReportPrintTool tool = new ReportPrintTool(report);
             tool.ShowPreview();
         }
+        #endregion //Toolbar Event
         #endregion //Event
 
         /// <summary>

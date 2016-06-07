@@ -64,7 +64,7 @@ namespace Phoebe.Business
         /// <returns></returns>
         public Settlement GetLast(int customerId)
         {
-            var settles = this.dal.FindAll().Where(r => r.CustomerId == customerId).OrderByDescending(r => r.EndTime);            
+            var settles = this.dal.FindAll().Where(r => r.CustomerId == customerId).OrderByDescending(r => r.EndTime);
             if (settles.Count() == 0)
                 return null;
             else
@@ -94,6 +94,56 @@ namespace Phoebe.Business
 
             TransactionRepository trans = new TransactionRepository();
             return trans.SettlementAddTrans(settlement, details);
+        }
+
+        /// <summary>
+        /// 获取客户欠款信息
+        /// </summary>
+        /// <param name="customerId">客户ID</param>
+        /// <param name="start">开始日期</param>
+        /// <param name="end">结束日期</param>
+        /// <returns></returns>
+        public Receipt GetDebt(int customerId, DateTime start, DateTime end)
+        {
+            Receipt receipt = new Receipt();
+
+            var customer = BusinessFactory<CustomerBusiness>.Instance.FindById(customerId);
+            if (customer == null)
+                return null;
+
+            receipt.CustomerId = customerId;
+            receipt.CustomerName = customer.Name;
+            receipt.SettleFee = 0;
+            receipt.UnSettleFee = 0;
+
+            var settles = this.dal.Find(r => r.CustomerId == customerId).OrderByDescending(r => r.EndTime);
+            if (settles.Count() != 0)
+            {
+                receipt.SettleFee = settles.Sum(r => r.DueFee);
+
+                var last = settles.First();
+                start = last.EndTime.AddDays(1);
+            }
+
+            // get base fee
+            var billings = BusinessFactory<BillingBusiness>.Instance.GetByCustomer(customerId, start, end);
+            if (billings.Count() > 0)
+                receipt.UnSettleFee = billings.Sum(r => r.TotalPrice);
+
+            // get cold fee         
+            var colds = BusinessFactory<BillingBusiness>.Instance.CalculateColdFee(customerId, start, end);
+            if (colds.Count > 0)
+                receipt.UnSettleFee += colds.Sum(r => r.ColdFee);
+
+            // get paid fee
+            var payments = BusinessFactory<PaymentBusiness>.Instance.GetByCustomer(customerId);
+            if (payments.Count() != 0)
+                receipt.PaidFee = payments.Sum(r => r.PaidFee);
+
+
+            receipt.DebtFee = receipt.SettleFee + receipt.UnSettleFee - receipt.PaidFee;
+
+            return receipt;
         }
         #endregion //Method
     }

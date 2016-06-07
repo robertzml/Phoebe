@@ -52,6 +52,7 @@
             this.menuSettlement = new DevExpress.XtraBars.BarButtonItem();
             this.menuSettleList = new DevExpress.XtraBars.BarButtonItem();
             this.menuPayment = new DevExpress.XtraBars.BarButtonItem();
+            this.menuDebt = new DevExpress.XtraBars.BarButtonItem();
             this.menuUser = new DevExpress.XtraBars.BarSubItem();
             this.menuUserList = new DevExpress.XtraBars.BarButtonItem();
             this.menuUserGroupList = new DevExpress.XtraBars.BarButtonItem();
@@ -117,9 +118,10 @@
             this.menuSettleList,
             this.menuPayment,
             this.menuCargoList,
-            this.menuTest});
+            this.menuTest,
+            this.menuDebt});
             this.barManager1.MainMenu = this.mainMenu;
-            this.barManager1.MaxItemId = 35;
+            this.barManager1.MaxItemId = 36;
             this.barManager1.StatusBar = this.bar3;
             // 
             // mainMenu
@@ -274,7 +276,8 @@
             new DevExpress.XtraBars.LinkPersistInfo(this.menuColdPrice),
             new DevExpress.XtraBars.LinkPersistInfo(this.menuSettlement),
             new DevExpress.XtraBars.LinkPersistInfo(this.menuSettleList),
-            new DevExpress.XtraBars.LinkPersistInfo(this.menuPayment)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.menuPayment),
+            new DevExpress.XtraBars.LinkPersistInfo(this.menuDebt)});
             this.menuSettle.Name = "menuSettle";
             // 
             // menuColdPrice
@@ -304,6 +307,13 @@
             this.menuPayment.Id = 31;
             this.menuPayment.Name = "menuPayment";
             this.menuPayment.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuPayment_ItemClick);
+            // 
+            // menuDebt
+            // 
+            this.menuDebt.Caption = "实时欠费";
+            this.menuDebt.Id = 35;
+            this.menuDebt.Name = "menuDebt";
+            this.menuDebt.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuDebt_ItemClick);
             // 
             // menuUser
             // 
@@ -503,6 +513,7 @@
         private DevExpress.XtraBars.BarButtonItem menuPayment;
         private DevExpress.XtraBars.BarButtonItem menuCargoList;
         private DevExpress.XtraBars.BarButtonItem menuTest;
+        private DevExpress.XtraBars.BarButtonItem menuDebt;
     }
 }
 

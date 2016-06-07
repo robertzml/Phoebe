@@ -180,6 +180,7 @@ namespace Phoebe.FormClient
         #endregion //Function
 
         #region Event
+        #region Control Event
         /// <summary>
         /// 窗体载入
         /// </summary>
@@ -324,6 +325,7 @@ namespace Phoebe.FormClient
             this.stockOutView = new StockOutViewControl(this.currentStockOutId);
             ChildFormManage.LoadContentControl(this.plBody, this.stockOutView);
         }
+        #endregion //Control Event
 
         #region Toolbar Event
         /// <summary>

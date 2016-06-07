@@ -70,6 +70,7 @@
     <Compile Include="Helper\ColdSettlement.cs" />
     <Compile Include="Helper\DailyColdRecord.cs" />
     <Compile Include="Helper\PhoebeEnum.cs" />
+    <Compile Include="Helper\Receipt.cs" />
     <Compile Include="Helper\StockFlow.cs" />
     <Compile Include="Helper\StockMoveModel.cs" />
     <Compile Include="Helper\StockOutModel.cs" />

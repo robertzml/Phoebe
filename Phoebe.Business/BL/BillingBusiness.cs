@@ -174,6 +174,19 @@ namespace Phoebe.Business
         }
 
         /// <summary>
+        /// 获取客户时间段内的计费信息
+        /// </summary>
+        /// <param name="customerId">客户ID</param>
+        /// <param name="start">开始日期</param>
+        /// <param name="end">结束日期</param>
+        /// <returns></returns>
+        public List<Billing> GetByCustomer(int customerId, DateTime start, DateTime end)
+        {
+            var data = this.dal.Find(r => r.StockIn.InTime >= start && r.StockIn.InTime <= end && r.Status == 0 && r.Contract.CustomerId == customerId);
+            return data.ToList();
+        }
+
+        /// <summary>
         /// 获取合同的计费信息
         /// </summary>
         /// <param name="contractId">合同ID</param>
