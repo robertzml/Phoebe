@@ -72,6 +72,8 @@ namespace Phoebe.FormClient
             this.dpTime.DateTime = DateTime.Now.Date;
 
             this.bsCustomer.DataSource = BusinessFactory<CustomerBusiness>.Instance.FindAll();
+
+            this.lkuCustomer.CustomDisplayText += new DevExpress.XtraEditors.Controls.CustomDisplayTextEventHandler(EventUtil.LkuCustomer_CustomDisplayText);
         }
 
         /// <summary>
@@ -85,22 +87,6 @@ namespace Phoebe.FormClient
                 UpdateContractList(0);
             else
                 UpdateContractList(Convert.ToInt32(this.lkuCustomer.EditValue));
-        }
-
-        /// <summary>
-        /// 格式化客户列表
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void lkuCustomer_CustomDisplayText(object sender, CustomDisplayTextEventArgs e)
-        {
-            if (this.lkuCustomer.EditValue == null)
-                return;
-
-            string number = lkuCustomer.GetColumnValue("Number").ToString();
-            string name = lkuCustomer.GetColumnValue("Name").ToString();
-
-            e.DisplayText = string.Format("{0} - {1}", number, name);
         }
 
         /// <summary>

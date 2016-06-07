@@ -28,7 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.barManager1 = new DevExpress.XtraBars.BarManager();
+            this.components = new System.ComponentModel.Container();
+            this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.mainMenu = new DevExpress.XtraBars.Bar();
             this.menuCustomer = new DevExpress.XtraBars.BarSubItem();
             this.menuCustomerList = new DevExpress.XtraBars.BarButtonItem();
@@ -55,6 +56,7 @@
             this.menuUserList = new DevExpress.XtraBars.BarButtonItem();
             this.menuUserGroupList = new DevExpress.XtraBars.BarButtonItem();
             this.menuChangePassword = new DevExpress.XtraBars.BarButtonItem();
+            this.menuTest = new DevExpress.XtraBars.BarButtonItem();
             this.barMdiList = new DevExpress.XtraBars.BarMdiChildrenListItem();
             this.bar3 = new DevExpress.XtraBars.Bar();
             this.barStaticItem1 = new DevExpress.XtraBars.BarStaticItem();
@@ -67,8 +69,7 @@
             this.barCustomerList = new DevExpress.XtraBars.BarButtonItem();
             this.barHeaderItem1 = new DevExpress.XtraBars.BarHeaderItem();
             this.barStaticItem2 = new DevExpress.XtraBars.BarStaticItem();
-            this.tabMdiManager = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager();
-            this.menuTest = new DevExpress.XtraBars.BarButtonItem();
+            this.tabMdiManager = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabMdiManager)).BeginInit();
             this.SuspendLayout();
@@ -336,6 +337,14 @@
             this.menuChangePassword.Name = "menuChangePassword";
             this.menuChangePassword.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuChangePassword_ItemClick);
             // 
+            // menuTest
+            // 
+            this.menuTest.Caption = "测试窗体";
+            this.menuTest.Id = 34;
+            this.menuTest.Name = "menuTest";
+            this.menuTest.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            this.menuTest.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuTest_ItemClick);
+            // 
             // barMdiList
             // 
             this.barMdiList.Caption = "窗口";
@@ -429,13 +438,6 @@
             this.tabMdiManager.ClosePageButtonShowMode = DevExpress.XtraTab.ClosePageButtonShowMode.InAllTabPageHeaders;
             this.tabMdiManager.MdiParent = this;
             this.tabMdiManager.PinPageButtonShowMode = DevExpress.XtraTab.PinPageButtonShowMode.InActiveTabPageHeader;
-            // 
-            // menuTest
-            // 
-            this.menuTest.Caption = "测试窗体";
-            this.menuTest.Id = 34;
-            this.menuTest.Name = "menuTest";
-            this.menuTest.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuTest_ItemClick);
             // 
             // MainForm
             // 

@@ -28,26 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StockOutForm));
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.tcStockOut = new DevExpress.XtraTab.XtraTabControl();
             this.tpStockOutList = new DevExpress.XtraTab.XtraTabPage();
             this.tvStockOut = new System.Windows.Forms.TreeView();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.imageList1 = new System.Windows.Forms.ImageList();
             this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
-            this.lbStockOut = new DevExpress.XtraEditors.ListBoxControl();
             this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
             this.cmbContract = new DevExpress.XtraEditors.ImageComboBoxEdit();
             this.lkuCustomer = new DevExpress.XtraEditors.LookUpEdit();
-            this.bsCustomer = new System.Windows.Forms.BindingSource(this.components);
+            this.bsCustomer = new System.Windows.Forms.BindingSource();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             this.tsStockOut = new System.Windows.Forms.ToolStrip();
             this.tsbNew = new System.Windows.Forms.ToolStripButton();
             this.tsbClose = new System.Windows.Forms.ToolStripButton();
@@ -61,6 +58,8 @@
             this.tsbPrint = new System.Windows.Forms.ToolStripButton();
             this.plBody = new DevExpress.XtraEditors.PanelControl();
             this.plEmpty = new DevExpress.XtraEditors.PanelControl();
+            this.lbStockOut = new DevExpress.XtraEditors.ImageListBoxControl();
+            this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tcStockOut)).BeginInit();
@@ -69,7 +68,6 @@
             this.xtraTabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.lbStockOut)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbContract.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lkuCustomer.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsCustomer)).BeginInit();
@@ -78,11 +76,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
             this.tsStockOut.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.plBody)).BeginInit();
             this.plBody.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.plEmpty)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lbStockOut)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
             this.SuspendLayout();
             // 
             // groupControl1
@@ -157,15 +156,6 @@
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
-            // lbStockOut
-            // 
-            this.lbStockOut.Location = new System.Drawing.Point(5, 119);
-            this.lbStockOut.Name = "lbStockOut";
-            this.lbStockOut.Size = new System.Drawing.Size(196, 361);
-            this.lbStockOut.StyleController = this.layoutControl1;
-            this.lbStockOut.TabIndex = 7;
-            this.lbStockOut.SelectedIndexChanged += new System.EventHandler(this.lbStockOut_SelectedIndexChanged);
-            // 
             // btnSearch
             // 
             this.btnSearch.Location = new System.Drawing.Point(8, 90);
@@ -196,10 +186,9 @@
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Number", "编号", 53, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near, DevExpress.Data.ColumnSortOrder.Ascending),
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "姓名", 41, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near)});
             this.lkuCustomer.Properties.DataSource = this.bsCustomer;
-            this.lkuCustomer.Properties.DisplayMember = "Name";
-            this.lkuCustomer.Properties.DropDownRows = 15;
+            this.lkuCustomer.Properties.DisplayMember = "Number";
+            this.lkuCustomer.Properties.DropDownRows = 10;
             this.lkuCustomer.Properties.NullText = "请选择客户";
-            this.lkuCustomer.Properties.SearchMode = DevExpress.XtraEditors.Controls.SearchMode.AutoComplete;
             this.lkuCustomer.Properties.ShowFooter = false;
             this.lkuCustomer.Properties.ValueMember = "Id";
             this.lkuCustomer.Size = new System.Drawing.Size(190, 20);
@@ -216,8 +205,7 @@
             this.layoutControlGroup1.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             this.layoutControlGroup1.GroupBordersVisible = false;
             this.layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlGroup2,
-            this.layoutControlItem4});
+            this.layoutControlGroup2});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "layoutControlGroup1";
             this.layoutControlGroup1.Padding = new DevExpress.XtraLayout.Utils.Padding(3, 3, 3, 3);
@@ -229,11 +217,12 @@
             this.layoutControlGroup2.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem3,
             this.layoutControlItem1,
-            this.layoutControlItem2});
+            this.layoutControlItem2,
+            this.layoutControlItem4});
             this.layoutControlGroup2.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup2.Name = "layoutControlGroup2";
             this.layoutControlGroup2.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            this.layoutControlGroup2.Size = new System.Drawing.Size(200, 114);
+            this.layoutControlGroup2.Size = new System.Drawing.Size(200, 479);
             this.layoutControlGroup2.TextVisible = false;
             // 
             // layoutControlItem3
@@ -264,15 +253,6 @@
             this.layoutControlItem2.Text = "合同选择";
             this.layoutControlItem2.TextLocation = DevExpress.Utils.Locations.Top;
             this.layoutControlItem2.TextSize = new System.Drawing.Size(48, 14);
-            // 
-            // layoutControlItem4
-            // 
-            this.layoutControlItem4.Control = this.lbStockOut;
-            this.layoutControlItem4.Location = new System.Drawing.Point(0, 114);
-            this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(200, 365);
-            this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem4.TextVisible = false;
             // 
             // tsStockOut
             // 
@@ -397,6 +377,25 @@
             this.plEmpty.Size = new System.Drawing.Size(736, 100);
             this.plEmpty.TabIndex = 0;
             // 
+            // lbStockOut
+            // 
+            this.lbStockOut.ImageList = this.imageList1;
+            this.lbStockOut.Location = new System.Drawing.Point(8, 116);
+            this.lbStockOut.Name = "lbStockOut";
+            this.lbStockOut.Size = new System.Drawing.Size(190, 361);
+            this.lbStockOut.StyleController = this.layoutControl1;
+            this.lbStockOut.TabIndex = 7;
+            this.lbStockOut.SelectedIndexChanged += new System.EventHandler(this.lbStockOut_SelectedIndexChanged);
+            // 
+            // layoutControlItem4
+            // 
+            this.layoutControlItem4.Control = this.lbStockOut;
+            this.layoutControlItem4.Location = new System.Drawing.Point(0, 108);
+            this.layoutControlItem4.Name = "layoutControlItem4";
+            this.layoutControlItem4.Size = new System.Drawing.Size(194, 365);
+            this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem4.TextVisible = false;
+            // 
             // StockOutForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -416,7 +415,6 @@
             this.xtraTabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.lbStockOut)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbContract.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lkuCustomer.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsCustomer)).EndInit();
@@ -425,12 +423,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
             this.tsStockOut.ResumeLayout(false);
             this.tsStockOut.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.plBody)).EndInit();
             this.plBody.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.plEmpty)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lbStockOut)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -458,7 +457,6 @@
         private DevExpress.XtraEditors.PanelControl plEmpty;
         private System.Windows.Forms.ImageList imageList1;
         private DevExpress.XtraLayout.LayoutControl layoutControl1;
-        private DevExpress.XtraEditors.ListBoxControl lbStockOut;
         private DevExpress.XtraEditors.SimpleButton btnSearch;
         private DevExpress.XtraEditors.ImageComboBoxEdit cmbContract;
         private DevExpress.XtraEditors.LookUpEdit lkuCustomer;
@@ -467,7 +465,8 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
         private System.Windows.Forms.BindingSource bsCustomer;
+        private DevExpress.XtraEditors.ImageListBoxControl lbStockOut;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
     }
 }

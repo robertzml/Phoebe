@@ -195,6 +195,7 @@ namespace Phoebe.FormClient
             UpdateToolbar();
 
             this.bsCustomer.DataSource = BusinessFactory<CustomerBusiness>.Instance.FindAll();
+            this.lkuCustomer.CustomDisplayText += new DevExpress.XtraEditors.Controls.CustomDisplayTextEventHandler(EventUtil.LkuCustomer_CustomDisplayText);
         }
 
         /// <summary>
@@ -280,9 +281,19 @@ namespace Phoebe.FormClient
                 data = BusinessFactory<StockOutBusiness>.Instance.GetByCustomer((int)this.lkuCustomer.EditValue);
             }
 
-            this.lbStockOut.DataSource = data;
-            this.lbStockOut.DisplayMember = "FlowNumber";
-            this.lbStockOut.ValueMember = "Id";
+            this.lbStockOut.Items.Clear();
+            foreach (var item in data)
+            {
+                ImageListBoxItem i = new ImageListBoxItem();
+                i.Description = item.FlowNumber;
+                i.Value = item.Id.ToString();
+                if (item.Status == (int)EntityStatus.StockOutReady)
+                    i.ImageIndex = 2;
+                else
+                    i.ImageIndex = 3;
+
+                this.lbStockOut.Items.Add(i);
+            }
         }
 
         /// <summary>
@@ -295,9 +306,9 @@ namespace Phoebe.FormClient
             if (this.lbStockOut.SelectedItem == null)
                 return;
 
-            var select = this.lbStockOut.SelectedItem as StockOut;
+            var id = this.lbStockOut.SelectedValue;
 
-            var stockOut = BusinessFactory<StockOutBusiness>.Instance.FindById(select.Id);
+            var stockOut = BusinessFactory<StockOutBusiness>.Instance.FindById(id);
             if (stockOut == null)
             {
                 MessageUtil.ShowInfo("该出库单已删除");
@@ -314,6 +325,7 @@ namespace Phoebe.FormClient
             ChildFormManage.LoadContentControl(this.plBody, this.stockOutView);
         }
 
+        #region Toolbar Event
         /// <summary>
         /// 新建出库
         /// </summary>
@@ -563,6 +575,7 @@ namespace Phoebe.FormClient
         {
 
         }
+        #endregion //Toolbar Event
         #endregion //Event
 
         /// <summary>
