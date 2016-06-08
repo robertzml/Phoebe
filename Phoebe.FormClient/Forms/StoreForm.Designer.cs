@@ -117,7 +117,7 @@
             this.lkuCustomer.Location = new System.Drawing.Point(58, 7);
             this.lkuCustomer.Name = "lkuCustomer";
             this.lkuCustomer.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.True;
-            this.lkuCustomer.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow;
+            this.lkuCustomer.Properties.Appearance.BackColor = System.Drawing.Color.White;
             this.lkuCustomer.Properties.Appearance.Options.UseBackColor = true;
             this.lkuCustomer.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});

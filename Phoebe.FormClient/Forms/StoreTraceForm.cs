@@ -22,16 +22,6 @@ namespace Phoebe.FormClient
     {
         #region Field
         /// <summary>
-        /// 选中客户
-        /// </summary>
-        private Customer selectCustomer;
-
-        /// <summary>
-        /// 客户列表，缓存页面使用
-        /// </summary>
-        private List<Customer> customerList;
-
-        /// <summary>
         /// 分类列表，缓存页面使用
         /// </summary>
         private List<Category> categoryList;
@@ -84,56 +74,26 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void StoreTraceForm_Load(object sender, EventArgs e)
         {
-            this.customerList = BusinessFactory<CustomerBusiness>.Instance.FindAll();
-            this.clcCustomer.SetDataSource(customerList);
             this.categoryList = BusinessFactory<CategoryBusiness>.Instance.GetLeafCategory();
-            this.clcCategory.SetDataSource(this.categoryList);
+            this.clcCategory.SetDataSource(categoryList);
+             
+            this.bsCustomer.DataSource = BusinessFactory<CustomerBusiness>.Instance.FindAll();
+            this.lkuCustomer.CustomDisplayText += new DevExpress.XtraEditors.Controls.CustomDisplayTextEventHandler(EventUtil.LkuCustomer_CustomDisplayText);
         }
 
         /// <summary>
-        /// 输入客户代码
+        /// 选择客户
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void txtCustomerNumber_EditValueChanged(object sender, EventArgs e)
+        private void lkuCustomer_EditValueChanged(object sender, EventArgs e)
         {
-            string number = this.txtCustomerNumber.EditValue.ToString();
-            this.clcCustomer.UpdateView(number);
-
-            var customer = this.customerList.SingleOrDefault(r => r.Number == number);
-            if (customer != null)
-            {
-                this.selectCustomer = customer;
-                this.txtCustomerName.Text = customer.Name;
-                UpdateContractList(customer.Id);
-            }
-            else
-            {
-                this.selectCustomer = null;
-                this.txtCustomerName.Text = "";
+            if (this.lkuCustomer.EditValue == null)
                 UpdateContractList(0);
-            }
+            else
+                UpdateContractList(Convert.ToInt32(this.lkuCustomer.EditValue));
         }
-
-        /// <summary>
-        /// 客户选择
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void clcCustomer_CustomerItemSelected(object sender, EventArgs e)
-        {
-            this.txtCustomerNumber.EditValueChanged -= txtCustomerNumber_EditValueChanged;
-
-            this.txtCustomerNumber.Text = this.clcCustomer.SelectedNumber;
-            this.txtCustomerName.Text = this.clcCustomer.SelectedName;
-
-            this.txtCustomerNumber.EditValueChanged += txtCustomerNumber_EditValueChanged;
-
-            int customerId = this.clcCustomer.SelectedId;
-            UpdateContractList(customerId);
-            this.selectCustomer = this.customerList.SingleOrDefault(r => r.Id == customerId);
-        }
-
+     
         /// <summary>
         /// 分类代码输入
         /// </summary>
@@ -177,7 +137,7 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            if (this.selectCustomer == null)
+            if (this.lkuCustomer.EditValue == null)
             {
                 MessageUtil.ShowClaim("请选择客户");
                 return;
@@ -191,8 +151,10 @@ namespace Phoebe.FormClient
             else
                 storeStatus = EntityStatus.StoreOut;
 
+            int customerId = Convert.ToInt32(this.lkuCustomer.EditValue);
+
             List<Store> data = new List<Store>();
-            data = BusinessFactory<StoreBusiness>.Instance.GetByCustomer(this.selectCustomer.Id, storeStatus);
+            data = BusinessFactory<StoreBusiness>.Instance.GetByCustomer(customerId, storeStatus);
 
             // filter contract
             if (this.cmbContract.EditValue != null)

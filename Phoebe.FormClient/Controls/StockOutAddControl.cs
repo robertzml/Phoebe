@@ -26,11 +26,6 @@ namespace Phoebe.FormClient
         private LoginUser currentUser;
 
         /// <summary>
-        /// 选中客户
-        /// </summary>
-        private Customer selectCustomer;
-
-        /// <summary>
         /// 选中合同
         /// </summary>
         private Contract selectContract;
@@ -39,11 +34,6 @@ namespace Phoebe.FormClient
         /// 货品是否等重
         /// </summary>
         private bool isEqualWeight = true;
-
-        /// <summary>
-        /// 客户列表，缓存页面使用
-        /// </summary>
-        private List<Customer> customerList;
 
         /// <summary>
         /// 分类列表，缓存页面使用
@@ -66,8 +56,9 @@ namespace Phoebe.FormClient
             this.txtUser.Text = this.currentUser.Name;
             this.dpOutTime.DateTime = DateTime.Now;
 
-            this.customerList = BusinessFactory<CustomerBusiness>.Instance.FindAll();
-            this.clcCustomer.SetDataSource(customerList);
+            this.bsCustomer.DataSource = BusinessFactory<CustomerBusiness>.Instance.FindAll();
+            this.lkuCustomer.CustomDisplayText += new DevExpress.XtraEditors.Controls.CustomDisplayTextEventHandler(EventUtil.LkuCustomer_CustomDisplayText);
+
             this.categoryList = BusinessFactory<CategoryBusiness>.Instance.GetLeafCategory();
             this.clcCategory.SetDataSource(this.categoryList);
 
@@ -117,9 +108,14 @@ namespace Phoebe.FormClient
             this.sogList.CloseEditor();
 
             // check input data and format digit
-            if (this.selectCustomer == null || this.selectContract == null)
+            if (this.lkuCustomer.EditValue == null)
             {
-                errorMessage = "请选择客户和合同";
+                errorMessage = "请选择客户";
+                return ErrorCode.Error;
+            }
+            if (this.selectContract == null)
+            {
+                errorMessage = "请选择合同";
                 return ErrorCode.Error;
             }
             if (this.sogList.DataSource.Count == 0)
@@ -173,48 +169,16 @@ namespace Phoebe.FormClient
 
         #region Event
         /// <summary>
-        /// 输入客户代码
+        /// 客户选择
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void txtCustomerNumber_EditValueChanged(object sender, EventArgs e)
+        private void lkuCustomer_EditValueChanged(object sender, EventArgs e)
         {
-            string number = this.txtCustomerNumber.EditValue.ToString();
-            this.clcCustomer.UpdateView(number);
-
-            var customer = this.customerList.SingleOrDefault(r => r.Number == number);
-            if (customer != null)
-            {
-                this.txtCustomerName.Text = customer.Name;
-                this.selectCustomer = customer;
-
-                UpdateContractList(customer.Id);
-            }
-            else
-            {
-                this.txtCustomerName.Text = "";
-                this.selectCustomer = null;
+            if (this.lkuCustomer.EditValue == null)
                 UpdateContractList(0);
-            }
-        }
-
-        /// <summary>
-        /// 选择客户
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void clcCustomer_CustomerItemSelected(object sender, EventArgs e)
-        {
-            this.txtCustomerNumber.EditValueChanged -= txtCustomerNumber_EditValueChanged;
-
-            this.txtCustomerNumber.Text = this.clcCustomer.SelectedNumber;
-            this.txtCustomerName.Text = this.clcCustomer.SelectedName;
-
-            this.txtCustomerNumber.EditValueChanged += txtCustomerNumber_EditValueChanged;
-
-            int customerId = this.clcCustomer.SelectedId;
-            UpdateContractList(customerId);
-            this.selectCustomer = this.customerList.SingleOrDefault(r => r.Id == customerId);
+            else
+                UpdateContractList(Convert.ToInt32(this.lkuCustomer.EditValue));
         }
 
         /// <summary>
