@@ -21,19 +21,9 @@ namespace Phoebe.FormClient
     {
         #region Field
         /// <summary>
-        /// 客户列表
-        /// </summary>
-        private List<Customer> customerList;
-
-        /// <summary>
         /// 分类列表
         /// </summary>
         private List<Category> categoryList;
-
-        /// <summary>
-        /// 选中客户
-        /// </summary>
-        private Customer selectCustomer;
         #endregion //Field
 
         #region Constructor
@@ -80,57 +70,24 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void StoreForm_Load(object sender, EventArgs e)
         {
-            this.selectCustomer = null;
-
-            this.customerList = BusinessFactory<CustomerBusiness>.Instance.FindAll();
-            this.clcCustomer.SetDataSource(customerList);
+            this.bsCustomer.DataSource = BusinessFactory<CustomerBusiness>.Instance.FindAll();
+            this.lkuCustomer.CustomDisplayText += new DevExpress.XtraEditors.Controls.CustomDisplayTextEventHandler(EventUtil.LkuCustomer_CustomDisplayText);
 
             this.categoryList = BusinessFactory<CategoryBusiness>.Instance.FindAll();
             this.clcCategory.SetDataSource(categoryList);
         }
 
         /// <summary>
-        /// 输入客户代码
+        /// 客户选择
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void txtCustomerNumber_EditValueChanged(object sender, EventArgs e)
+        private void lkuCustomer_EditValueChanged(object sender, EventArgs e)
         {
-            string number = this.txtCustomerNumber.EditValue.ToString();
-            this.clcCustomer.UpdateView(number);
-
-            var customer = this.customerList.SingleOrDefault(r => r.Number == number);
-            if (customer != null)
-            {
-                this.txtCustomerName.Text = customer.Name;
-                this.selectCustomer = customer;
-                UpdateContractList(customer.Id);
-            }
-            else
-            {
-                this.txtCustomerName.Text = "";
-                this.selectCustomer = null;
+            if (this.lkuCustomer.EditValue == null)
                 UpdateContractList(0);
-            }
-        }
-
-        /// <summary>
-        /// 选择客户
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void clcCustomer_CustomerItemSelected(object sender, EventArgs e)
-        {
-            this.txtCustomerNumber.EditValueChanged -= txtCustomerNumber_EditValueChanged;
-
-            this.txtCustomerNumber.Text = this.clcCustomer.SelectedNumber;
-            this.txtCustomerName.Text = this.clcCustomer.SelectedName;
-
-            this.txtCustomerNumber.EditValueChanged += txtCustomerNumber_EditValueChanged;
-
-            int customerId = this.clcCustomer.SelectedId;
-            UpdateContractList(customerId);
-            this.selectCustomer = this.customerList.SingleOrDefault(r => r.Id == customerId);
+            else
+                UpdateContractList(Convert.ToInt32(this.lkuCustomer.EditValue));
         }
 
         /// <summary>
@@ -178,9 +135,9 @@ namespace Phoebe.FormClient
         {
             this.Cursor = Cursors.WaitCursor;
             List<Func<Store, bool>> filter = new List<Func<Store, bool>>();
-            if (this.selectCustomer != null)
+            if (this.lkuCustomer.EditValue != null)
             {
-                filter.Add(r => r.Cargo.Contract.CustomerId == this.selectCustomer.Id);
+                filter.Add(r => r.Cargo.Contract.CustomerId == Convert.ToInt32(this.lkuCustomer.EditValue));
             }
 
             var category = BusinessFactory<CategoryBusiness>.Instance.GetByParent(this.txtCategoryNumber.Text);

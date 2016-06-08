@@ -72,7 +72,6 @@ namespace Phoebe.FormClient
             this.dpTime.DateTime = DateTime.Now.Date;
 
             this.bsCustomer.DataSource = BusinessFactory<CustomerBusiness>.Instance.FindAll();
-
             this.lkuCustomer.CustomDisplayText += new DevExpress.XtraEditors.Controls.CustomDisplayTextEventHandler(EventUtil.LkuCustomer_CustomDisplayText);
         }
 

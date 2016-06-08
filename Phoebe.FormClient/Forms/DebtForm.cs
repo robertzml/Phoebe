@@ -34,7 +34,6 @@ namespace Phoebe.FormClient
         private void DebtForm_Load(object sender, EventArgs e)
         {
             this.bsCustomer.DataSource = BusinessFactory<CustomerBusiness>.Instance.FindAll();
-
             this.lkuCustomer.CustomDisplayText += new DevExpress.XtraEditors.Controls.CustomDisplayTextEventHandler(EventUtil.LkuCustomer_CustomDisplayText);
         }
 

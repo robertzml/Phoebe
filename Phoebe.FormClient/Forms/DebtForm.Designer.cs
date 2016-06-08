@@ -33,6 +33,7 @@
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
             this.lkuCustomer = new DevExpress.XtraEditors.LookUpEdit();
+            this.bsCustomer = new System.Windows.Forms.BindingSource(this.components);
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -40,30 +41,30 @@
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.layoutControl2 = new DevExpress.XtraLayout.LayoutControl();
-            this.layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.txtStartTime = new DevExpress.XtraEditors.TextEdit();
-            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.txtEndTime = new DevExpress.XtraEditors.TextEdit();
-            this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.bsCustomer = new System.Windows.Forms.BindingSource(this.components);
-            this.txtSettleFee = new DevExpress.XtraEditors.TextEdit();
-            this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.txtUnSettleFee = new DevExpress.XtraEditors.TextEdit();
-            this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.txtSumFee = new DevExpress.XtraEditors.TextEdit();
-            this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.txtPaidFee = new DevExpress.XtraEditors.TextEdit();
-            this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
             this.txtDebt = new DevExpress.XtraEditors.TextEdit();
+            this.txtPaidFee = new DevExpress.XtraEditors.TextEdit();
+            this.txtSumFee = new DevExpress.XtraEditors.TextEdit();
+            this.txtUnSettleFee = new DevExpress.XtraEditors.TextEdit();
+            this.txtSettleFee = new DevExpress.XtraEditors.TextEdit();
+            this.txtEndTime = new DevExpress.XtraEditors.TextEdit();
+            this.txtStartTime = new DevExpress.XtraEditors.TextEdit();
+            this.layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.emptySpaceItem3 = new DevExpress.XtraLayout.EmptySpaceItem();
+            this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
+            this.emptySpaceItem3 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.emptySpaceItem4 = new DevExpress.XtraLayout.EmptySpaceItem();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lkuCustomer.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsCustomer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
@@ -74,24 +75,23 @@
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl2)).BeginInit();
             this.layoutControl2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtStartTime.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtEndTime.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsCustomer)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtSettleFee.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtUnSettleFee.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtSumFee.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtPaidFee.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDebt.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPaidFee.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSumFee.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtUnSettleFee.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSettleFee.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtEndTime.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtStartTime.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem4)).BeginInit();
             this.SuspendLayout();
             // 
@@ -136,8 +136,8 @@
             this.lkuCustomer.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.lkuCustomer.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Number", "编码", 53, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near, DevExpress.Data.ColumnSortOrder.Ascending),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "名称", 41, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near)});
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Number", "编号", 53, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near, DevExpress.Data.ColumnSortOrder.Ascending),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "姓名", 41, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near)});
             this.lkuCustomer.Properties.DataSource = this.bsCustomer;
             this.lkuCustomer.Properties.DisplayMember = "Number";
             this.lkuCustomer.Properties.DropDownRows = 10;
@@ -147,6 +147,10 @@
             this.lkuCustomer.Size = new System.Drawing.Size(179, 20);
             this.lkuCustomer.StyleController = this.layoutControl1;
             this.lkuCustomer.TabIndex = 4;
+            // 
+            // bsCustomer
+            // 
+            this.bsCustomer.DataSource = typeof(Phoebe.Model.Customer);
             // 
             // layoutControlGroup1
             // 
@@ -223,6 +227,83 @@
             this.layoutControl2.TabIndex = 0;
             this.layoutControl2.Text = "layoutControl2";
             // 
+            // txtDebt
+            // 
+            this.txtDebt.Location = new System.Drawing.Point(305, 60);
+            this.txtDebt.Name = "txtDebt";
+            this.txtDebt.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
+            this.txtDebt.Properties.Appearance.Options.UseBackColor = true;
+            this.txtDebt.Properties.ReadOnly = true;
+            this.txtDebt.Size = new System.Drawing.Size(196, 20);
+            this.txtDebt.StyleController = this.layoutControl2;
+            this.txtDebt.TabIndex = 10;
+            // 
+            // txtPaidFee
+            // 
+            this.txtPaidFee.Location = new System.Drawing.Point(75, 60);
+            this.txtPaidFee.Name = "txtPaidFee";
+            this.txtPaidFee.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
+            this.txtPaidFee.Properties.Appearance.Options.UseBackColor = true;
+            this.txtPaidFee.Properties.ReadOnly = true;
+            this.txtPaidFee.Size = new System.Drawing.Size(163, 20);
+            this.txtPaidFee.StyleController = this.layoutControl2;
+            this.txtPaidFee.TabIndex = 9;
+            // 
+            // txtSumFee
+            // 
+            this.txtSumFee.Location = new System.Drawing.Point(568, 36);
+            this.txtSumFee.Name = "txtSumFee";
+            this.txtSumFee.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
+            this.txtSumFee.Properties.Appearance.Options.UseBackColor = true;
+            this.txtSumFee.Properties.ReadOnly = true;
+            this.txtSumFee.Size = new System.Drawing.Size(205, 20);
+            this.txtSumFee.StyleController = this.layoutControl2;
+            this.txtSumFee.TabIndex = 8;
+            // 
+            // txtUnSettleFee
+            // 
+            this.txtUnSettleFee.Location = new System.Drawing.Point(305, 36);
+            this.txtUnSettleFee.Name = "txtUnSettleFee";
+            this.txtUnSettleFee.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
+            this.txtUnSettleFee.Properties.Appearance.Options.UseBackColor = true;
+            this.txtUnSettleFee.Properties.ReadOnly = true;
+            this.txtUnSettleFee.Size = new System.Drawing.Size(196, 20);
+            this.txtUnSettleFee.StyleController = this.layoutControl2;
+            this.txtUnSettleFee.TabIndex = 7;
+            // 
+            // txtSettleFee
+            // 
+            this.txtSettleFee.Location = new System.Drawing.Point(75, 36);
+            this.txtSettleFee.Name = "txtSettleFee";
+            this.txtSettleFee.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
+            this.txtSettleFee.Properties.Appearance.Options.UseBackColor = true;
+            this.txtSettleFee.Properties.ReadOnly = true;
+            this.txtSettleFee.Size = new System.Drawing.Size(163, 20);
+            this.txtSettleFee.StyleController = this.layoutControl2;
+            this.txtSettleFee.TabIndex = 6;
+            // 
+            // txtEndTime
+            // 
+            this.txtEndTime.Location = new System.Drawing.Point(305, 12);
+            this.txtEndTime.Name = "txtEndTime";
+            this.txtEndTime.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
+            this.txtEndTime.Properties.Appearance.Options.UseBackColor = true;
+            this.txtEndTime.Properties.ReadOnly = true;
+            this.txtEndTime.Size = new System.Drawing.Size(196, 20);
+            this.txtEndTime.StyleController = this.layoutControl2;
+            this.txtEndTime.TabIndex = 5;
+            // 
+            // txtStartTime
+            // 
+            this.txtStartTime.Location = new System.Drawing.Point(75, 12);
+            this.txtStartTime.Name = "txtStartTime";
+            this.txtStartTime.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
+            this.txtStartTime.Properties.Appearance.Options.UseBackColor = true;
+            this.txtStartTime.Properties.ReadOnly = true;
+            this.txtStartTime.Size = new System.Drawing.Size(163, 20);
+            this.txtStartTime.StyleController = this.layoutControl2;
+            this.txtStartTime.TabIndex = 4;
+            // 
             // layoutControlGroup2
             // 
             this.layoutControlGroup2.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
@@ -243,17 +324,6 @@
             this.layoutControlGroup2.Size = new System.Drawing.Size(785, 164);
             this.layoutControlGroup2.TextVisible = false;
             // 
-            // txtStartTime
-            // 
-            this.txtStartTime.Location = new System.Drawing.Point(76, 12);
-            this.txtStartTime.Name = "txtStartTime";
-            this.txtStartTime.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
-            this.txtStartTime.Properties.Appearance.Options.UseBackColor = true;
-            this.txtStartTime.Properties.ReadOnly = true;
-            this.txtStartTime.Size = new System.Drawing.Size(162, 20);
-            this.txtStartTime.StyleController = this.layoutControl2;
-            this.txtStartTime.TabIndex = 4;
-            // 
             // layoutControlItem3
             // 
             this.layoutControlItem3.Control = this.txtStartTime;
@@ -262,17 +332,6 @@
             this.layoutControlItem3.Size = new System.Drawing.Size(230, 24);
             this.layoutControlItem3.Text = "开始日期";
             this.layoutControlItem3.TextSize = new System.Drawing.Size(60, 14);
-            // 
-            // txtEndTime
-            // 
-            this.txtEndTime.Location = new System.Drawing.Point(306, 12);
-            this.txtEndTime.Name = "txtEndTime";
-            this.txtEndTime.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
-            this.txtEndTime.Properties.Appearance.Options.UseBackColor = true;
-            this.txtEndTime.Properties.ReadOnly = true;
-            this.txtEndTime.Size = new System.Drawing.Size(195, 20);
-            this.txtEndTime.StyleController = this.layoutControl2;
-            this.txtEndTime.TabIndex = 5;
             // 
             // layoutControlItem4
             // 
@@ -283,21 +342,6 @@
             this.layoutControlItem4.Text = "结束日期";
             this.layoutControlItem4.TextSize = new System.Drawing.Size(60, 14);
             // 
-            // bsCustomer
-            // 
-            this.bsCustomer.DataSource = typeof(Phoebe.Model.Customer);
-            // 
-            // txtSettleFee
-            // 
-            this.txtSettleFee.Location = new System.Drawing.Point(76, 36);
-            this.txtSettleFee.Name = "txtSettleFee";
-            this.txtSettleFee.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
-            this.txtSettleFee.Properties.Appearance.Options.UseBackColor = true;
-            this.txtSettleFee.Properties.ReadOnly = true;
-            this.txtSettleFee.Size = new System.Drawing.Size(162, 20);
-            this.txtSettleFee.StyleController = this.layoutControl2;
-            this.txtSettleFee.TabIndex = 6;
-            // 
             // layoutControlItem5
             // 
             this.layoutControlItem5.Control = this.txtSettleFee;
@@ -306,17 +350,6 @@
             this.layoutControlItem5.Size = new System.Drawing.Size(230, 24);
             this.layoutControlItem5.Text = "已结算费用";
             this.layoutControlItem5.TextSize = new System.Drawing.Size(60, 14);
-            // 
-            // txtUnSettleFee
-            // 
-            this.txtUnSettleFee.Location = new System.Drawing.Point(306, 36);
-            this.txtUnSettleFee.Name = "txtUnSettleFee";
-            this.txtUnSettleFee.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
-            this.txtUnSettleFee.Properties.Appearance.Options.UseBackColor = true;
-            this.txtUnSettleFee.Properties.ReadOnly = true;
-            this.txtUnSettleFee.Size = new System.Drawing.Size(195, 20);
-            this.txtUnSettleFee.StyleController = this.layoutControl2;
-            this.txtUnSettleFee.TabIndex = 7;
             // 
             // layoutControlItem6
             // 
@@ -327,37 +360,6 @@
             this.layoutControlItem6.Text = "未结算费用";
             this.layoutControlItem6.TextSize = new System.Drawing.Size(60, 14);
             // 
-            // txtSumFee
-            // 
-            this.txtSumFee.Location = new System.Drawing.Point(569, 36);
-            this.txtSumFee.Name = "txtSumFee";
-            this.txtSumFee.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
-            this.txtSumFee.Properties.Appearance.Options.UseBackColor = true;
-            this.txtSumFee.Properties.ReadOnly = true;
-            this.txtSumFee.Size = new System.Drawing.Size(204, 20);
-            this.txtSumFee.StyleController = this.layoutControl2;
-            this.txtSumFee.TabIndex = 8;
-            // 
-            // layoutControlItem7
-            // 
-            this.layoutControlItem7.Control = this.txtSumFee;
-            this.layoutControlItem7.Location = new System.Drawing.Point(493, 24);
-            this.layoutControlItem7.Name = "layoutControlItem7";
-            this.layoutControlItem7.Size = new System.Drawing.Size(272, 24);
-            this.layoutControlItem7.Text = "费用合计";
-            this.layoutControlItem7.TextSize = new System.Drawing.Size(60, 14);
-            // 
-            // txtPaidFee
-            // 
-            this.txtPaidFee.Location = new System.Drawing.Point(76, 60);
-            this.txtPaidFee.Name = "txtPaidFee";
-            this.txtPaidFee.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
-            this.txtPaidFee.Properties.Appearance.Options.UseBackColor = true;
-            this.txtPaidFee.Properties.ReadOnly = true;
-            this.txtPaidFee.Size = new System.Drawing.Size(162, 20);
-            this.txtPaidFee.StyleController = this.layoutControl2;
-            this.txtPaidFee.TabIndex = 9;
-            // 
             // layoutControlItem8
             // 
             this.layoutControlItem8.Control = this.txtPaidFee;
@@ -366,17 +368,6 @@
             this.layoutControlItem8.Size = new System.Drawing.Size(230, 24);
             this.layoutControlItem8.Text = "已付款";
             this.layoutControlItem8.TextSize = new System.Drawing.Size(60, 14);
-            // 
-            // txtDebt
-            // 
-            this.txtDebt.Location = new System.Drawing.Point(306, 60);
-            this.txtDebt.Name = "txtDebt";
-            this.txtDebt.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
-            this.txtDebt.Properties.Appearance.Options.UseBackColor = true;
-            this.txtDebt.Properties.ReadOnly = true;
-            this.txtDebt.Size = new System.Drawing.Size(195, 20);
-            this.txtDebt.StyleController = this.layoutControl2;
-            this.txtDebt.TabIndex = 10;
             // 
             // layoutControlItem9
             // 
@@ -387,13 +378,14 @@
             this.layoutControlItem9.Text = "欠款";
             this.layoutControlItem9.TextSize = new System.Drawing.Size(60, 14);
             // 
-            // emptySpaceItem3
+            // layoutControlItem7
             // 
-            this.emptySpaceItem3.AllowHotTrack = false;
-            this.emptySpaceItem3.Location = new System.Drawing.Point(493, 48);
-            this.emptySpaceItem3.Name = "emptySpaceItem3";
-            this.emptySpaceItem3.Size = new System.Drawing.Size(272, 24);
-            this.emptySpaceItem3.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem7.Control = this.txtSumFee;
+            this.layoutControlItem7.Location = new System.Drawing.Point(493, 24);
+            this.layoutControlItem7.Name = "layoutControlItem7";
+            this.layoutControlItem7.Size = new System.Drawing.Size(272, 24);
+            this.layoutControlItem7.Text = "费用合计";
+            this.layoutControlItem7.TextSize = new System.Drawing.Size(60, 14);
             // 
             // emptySpaceItem2
             // 
@@ -402,6 +394,14 @@
             this.emptySpaceItem2.Name = "emptySpaceItem2";
             this.emptySpaceItem2.Size = new System.Drawing.Size(272, 24);
             this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
+            // 
+            // emptySpaceItem3
+            // 
+            this.emptySpaceItem3.AllowHotTrack = false;
+            this.emptySpaceItem3.Location = new System.Drawing.Point(493, 48);
+            this.emptySpaceItem3.Name = "emptySpaceItem3";
+            this.emptySpaceItem3.Size = new System.Drawing.Size(272, 24);
+            this.emptySpaceItem3.TextSize = new System.Drawing.Size(0, 0);
             // 
             // emptySpaceItem4
             // 
@@ -426,6 +426,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.lkuCustomer.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsCustomer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
@@ -436,24 +437,23 @@
             this.panelControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl2)).EndInit();
             this.layoutControl2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtStartTime.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtEndTime.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsCustomer)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtSettleFee.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtUnSettleFee.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtSumFee.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtPaidFee.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDebt.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPaidFee.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSumFee.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtUnSettleFee.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSettleFee.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtEndTime.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtStartTime.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem4)).EndInit();
             this.ResumeLayout(false);
 

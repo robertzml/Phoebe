@@ -18,15 +18,6 @@ namespace Phoebe.FormClient
     public partial class ContractAddForm : BaseSingleForm
     {
         #region Field
-        /// <summary>
-        /// 客户列表
-        /// </summary>
-        private List<Customer> customerList;
-
-        /// <summary>
-        /// 选中客户Id
-        /// </summary>
-        private int customerId;
         #endregion //Field
 
         #region Constructor
@@ -45,7 +36,7 @@ namespace Phoebe.FormClient
         {
             contract.Number = this.txtNumber.Text.Trim();
             contract.Name = this.txtName.Text.Trim();
-            contract.CustomerId = this.customerId;
+            contract.CustomerId = Convert.ToInt32(this.lkuCustomer.EditValue);
             contract.SignDate = this.txtSignDate.DateTime.Date;
             contract.BillingType = (int)this.cmbBillingType.EditValue;
             contract.IsTiming = this.ckbIsTiming.Checked;
@@ -62,49 +53,11 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void ContractAddForm_Load(object sender, EventArgs e)
         {
-            this.customerList = BusinessFactory<CustomerBusiness>.Instance.FindAll();
-
             this.txtSignDate.EditValue = DateTime.Now;
             this.cmbBillingType.Properties.Items.AddEnum(typeof(BillingType));
 
-            this.clcCustomer.SetDataSource(this.customerList);
-        }
-
-        /// <summary>
-        /// 输入客户代码
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void txtCustomerNumber_EditValueChanged(object sender, EventArgs e)
-        {
-            string number = this.txtCustomerNumber.EditValue.ToString();
-            this.clcCustomer.UpdateView(number);
-
-            var customer = this.customerList.SingleOrDefault(r => r.Number == number);
-            if (customer != null)
-            {
-                this.txtCustomerName.Text = customer.Name;
-                this.customerId = customer.Id;
-            }
-            else
-                this.txtCustomerName.Text = "";
-        }
-
-        /// <summary>
-        /// 选择客户
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void clcCustomer_CustomerItemSelected(object sender, EventArgs e)
-        {
-            this.txtCustomerNumber.EditValueChanged -= txtCustomerNumber_EditValueChanged;
-
-            this.txtCustomerNumber.Text = this.clcCustomer.SelectedNumber;
-            this.txtCustomerName.Text = this.clcCustomer.SelectedName;
-
-            this.txtCustomerNumber.EditValueChanged += txtCustomerNumber_EditValueChanged;
-
-            this.customerId = this.clcCustomer.SelectedId;
+            this.bsCustomer.DataSource = BusinessFactory<CustomerBusiness>.Instance.FindAll();
+            this.lkuCustomer.CustomDisplayText += new DevExpress.XtraEditors.Controls.CustomDisplayTextEventHandler(EventUtil.LkuCustomer_CustomDisplayText);
         }
 
         /// <summary>
@@ -119,9 +72,9 @@ namespace Phoebe.FormClient
                 MessageUtil.ShowClaim("合同编号名称不能为空");
                 return;
             }
-            if (this.txtCustomerNumber.Text == "")
+            if (this.lkuCustomer.EditValue == null)
             {
-                MessageUtil.ShowClaim("客户代码不能为空");
+                MessageUtil.ShowClaim("请选择客户");
                 return;
             }
             if (this.txtSignDate.EditValue == null)

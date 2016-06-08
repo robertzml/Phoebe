@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -19,15 +18,6 @@ namespace Phoebe.FormClient
     public partial class SettleForm : BaseForm
     {
         #region Field
-        /// <summary>
-        /// 选中客户
-        /// </summary>
-        private Customer selectCustomer;
-
-        /// <summary>
-        /// 客户列表，缓存页面使用
-        /// </summary>
-        private List<Customer> customerList;
         #endregion //Field
 
         #region Constructor
@@ -59,7 +49,7 @@ namespace Phoebe.FormClient
         private void SetEntity(Settlement settlement)
         {
             settlement.Id = Guid.NewGuid();
-            settlement.CustomerId = this.selectCustomer.Id;
+            settlement.CustomerId = Convert.ToInt32(this.lkuCustomer.EditValue);
             settlement.StartTime = this.dpFrom.DateTime.Date;
             settlement.EndTime = this.dpTo.DateTime.Date;
             settlement.SumFee = this.nmSumFee.Value;
@@ -115,40 +105,6 @@ namespace Phoebe.FormClient
                 details.Add(detail);
             }
         }
-
-        /// <summary>
-        /// 客户更改
-        /// </summary>
-        /// <param name="customer">客户对象</param>
-        private void CustomerChange(Customer customer)
-        {
-            if (customer != null)
-            {
-                this.selectCustomer = customer;
-                this.txtCustomerName.Text = customer.Name;
-
-                var last = BusinessFactory<SettlementBusiness>.Instance.GetLast(customer.Id);
-                if (last == null)
-                {
-                    this.txtLastFrom.Text = this.txtLastTo.Text = "";
-                }
-                else
-                {
-                    this.txtLastFrom.Text = last.StartTime.ToShortDateString();
-                    this.txtLastTo.Text = last.EndTime.ToShortDateString();
-                }
-            }
-            else
-            {
-                this.selectCustomer = null;
-                this.txtCustomerName.Text = "";
-
-                this.txtLastFrom.Text = "";
-                this.txtLastTo.Text = "";
-            }
-
-            this.btnSave.Enabled = false;
-        }
         #endregion //Function
 
         #region Event
@@ -163,22 +119,8 @@ namespace Phoebe.FormClient
             this.dpTo.DateTime = DateTime.Now.Date;
             this.dpSettleTime.DateTime = DateTime.Now.Date;
 
-            this.customerList = BusinessFactory<CustomerBusiness>.Instance.FindAll();
-            this.clcCustomer.SetDataSource(customerList);
-        }
-
-        /// <summary>
-        /// 输入客户代码
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void txtCustomerNumber_EditValueChanged(object sender, EventArgs e)
-        {
-            string number = this.txtCustomerNumber.EditValue.ToString();
-            this.clcCustomer.UpdateView(number);
-
-            var customer = this.customerList.SingleOrDefault(r => r.Number == number);
-            CustomerChange(customer);
+            this.bsCustomer.DataSource = BusinessFactory<CustomerBusiness>.Instance.FindAll();
+            this.lkuCustomer.CustomDisplayText += new DevExpress.XtraEditors.Controls.CustomDisplayTextEventHandler(EventUtil.LkuCustomer_CustomDisplayText);
         }
 
         /// <summary>
@@ -186,18 +128,29 @@ namespace Phoebe.FormClient
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void clcCustomer_CustomerItemSelected(object sender, EventArgs e)
+        private void lkuCustomer_EditValueChanged(object sender, EventArgs e)
         {
-            this.txtCustomerNumber.EditValueChanged -= txtCustomerNumber_EditValueChanged;
+            if (this.lkuCustomer.EditValue == null)
+            {
+                this.txtLastFrom.Text = "";
+                this.txtLastTo.Text = "";
+            }
+            else
+            {
+                int customerId = Convert.ToInt32(this.lkuCustomer.EditValue);
+                var last = BusinessFactory<SettlementBusiness>.Instance.GetLast(customerId);
+                if (last == null)
+                {
+                    this.txtLastFrom.Text = this.txtLastTo.Text = "";
+                }
+                else
+                {
+                    this.txtLastFrom.Text = last.StartTime.ToShortDateString();
+                    this.txtLastTo.Text = last.EndTime.ToShortDateString();
+                }
+            }
 
-            this.txtCustomerNumber.Text = this.clcCustomer.SelectedNumber;
-            this.txtCustomerName.Text = this.clcCustomer.SelectedName;
-
-            this.txtCustomerNumber.EditValueChanged += txtCustomerNumber_EditValueChanged;
-
-            int customerId = this.clcCustomer.SelectedId;
-            var customer = this.customerList.SingleOrDefault(r => r.Id == customerId);
-            CustomerChange(customer);
+            this.btnSave.Enabled = false;
         }
 
         /// <summary>
@@ -207,7 +160,7 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void btnSettle_Click(object sender, EventArgs e)
         {
-            if (this.selectCustomer == null)
+            if (this.lkuCustomer.EditValue == null)
             {
                 MessageUtil.ShowClaim("请选择客户");
                 return;
@@ -221,10 +174,12 @@ namespace Phoebe.FormClient
 
             this.Cursor = Cursors.WaitCursor;
 
-            var billings = BusinessFactory<BillingBusiness>.Instance.CalculateBaseFee(this.selectCustomer.Id, this.dpFrom.DateTime.Date, this.dpTo.DateTime.Date);
+            int customerId = Convert.ToInt32(this.lkuCustomer.EditValue);
+
+            var billings = BusinessFactory<BillingBusiness>.Instance.CalculateBaseFee(customerId, this.dpFrom.DateTime.Date, this.dpTo.DateTime.Date);
             this.bsBilling.DataSource = billings;
 
-            var colds = BusinessFactory<BillingBusiness>.Instance.CalculateColdFee(this.selectCustomer.Id, this.dpFrom.DateTime.Date, this.dpTo.DateTime.Date);
+            var colds = BusinessFactory<BillingBusiness>.Instance.CalculateColdFee(customerId, this.dpFrom.DateTime.Date, this.dpTo.DateTime.Date);
             this.bsCold.DataSource = colds;
 
             decimal totalPrice = billings.Sum(r => r.TotalPrice) + colds.Sum(r => r.ColdFee);
@@ -287,7 +242,7 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (this.selectCustomer == null)
+            if (this.lkuCustomer.EditValue == null)
             {
                 MessageUtil.ShowClaim("请选择客户");
                 return;
