@@ -307,7 +307,7 @@ namespace Phoebe.FormClient
             if (this.lbStockOut.SelectedItem == null)
                 return;
 
-            var id = this.lbStockOut.SelectedValue;
+            var id = new Guid(this.lbStockOut.SelectedValue.ToString());
 
             var stockOut = BusinessFactory<StockOutBusiness>.Instance.FindById(id);
             if (stockOut == null)

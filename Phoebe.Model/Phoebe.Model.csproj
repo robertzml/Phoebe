@@ -96,6 +96,8 @@
     </Compile>
     <Compile Include="Report\RStockInDetailsModel.cs" />
     <Compile Include="Report\RStockInModel.cs" />
+    <Compile Include="Report\RStockOutDetailsModel.cs" />
+    <Compile Include="Report\RStockOutModel.cs" />
     <Compile Include="Settlement.cs">
       <DependentUpon>PhoebeModel.tt</DependentUpon>
     </Compile>

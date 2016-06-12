@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Phoebe.Model.Report
 {
     /// <summary>
-    /// 入库记录报表类
+    /// 出库记录报表类
     /// </summary>
-    public class RStockInDetailsModel
+    public class RStockOutDetailsModel
     {
         /// <summary>
         /// 序号
@@ -32,7 +31,7 @@ namespace Phoebe.Model.Report
         public string Specification { get; set; }
 
         /// <summary>
-        /// 数量
+        /// 出库数量
         /// </summary>
         public int Count { get; set; }
 
@@ -42,14 +41,19 @@ namespace Phoebe.Model.Report
         public decimal UnitWeight { get; set; }
 
         /// <summary>
-        /// 总重量
+        /// 出库重量
         /// </summary>
-        public decimal TotalWeight { get; set; }
+        public decimal OutWeight { get; set; }
 
         /// <summary>
-        /// 总体积
+        /// 在库数量
         /// </summary>
-        public decimal TotalVolume { get; set; }
+        public int TotalCount { get; set; }
+
+        /// <summary>
+        /// 出库体积
+        /// </summary>
+        public decimal OutVolume { get; set; }
 
         /// <summary>
         /// 仓位
