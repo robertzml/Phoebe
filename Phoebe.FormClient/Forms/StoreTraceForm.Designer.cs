@@ -54,9 +54,9 @@
             this.layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
-            this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
             this.sgList = new Phoebe.FormClient.StoreGrid();
             this.clcCategory = new Phoebe.FormClient.CategoryListControl();
+            this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
             this.sfgList = new Phoebe.FormClient.StockFlowGrid();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
@@ -365,17 +365,6 @@
             this.groupControl2.TabIndex = 1;
             this.groupControl2.Text = "库存列表";
             // 
-            // groupControl3
-            // 
-            this.tableLayoutPanel1.SetColumnSpan(this.groupControl3, 3);
-            this.groupControl3.Controls.Add(this.sfgList);
-            this.groupControl3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl3.Location = new System.Drawing.Point(3, 408);
-            this.groupControl3.Name = "groupControl3";
-            this.groupControl3.Size = new System.Drawing.Size(973, 199);
-            this.groupControl3.TabIndex = 4;
-            this.groupControl3.Text = "流水记录";
-            // 
             // sgList
             // 
             this.sgList.DataSource = null;
@@ -400,6 +389,17 @@
             this.clcCategory.Size = new System.Drawing.Size(194, 194);
             this.clcCategory.TabIndex = 3;
             this.clcCategory.CategoryItemSelected += new Phoebe.FormClient.CategoryListControl.ItemSelectHandle(this.clcCategory_CategoryItemSelected);
+            // 
+            // groupControl3
+            // 
+            this.tableLayoutPanel1.SetColumnSpan(this.groupControl3, 3);
+            this.groupControl3.Controls.Add(this.sfgList);
+            this.groupControl3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupControl3.Location = new System.Drawing.Point(3, 408);
+            this.groupControl3.Name = "groupControl3";
+            this.groupControl3.Size = new System.Drawing.Size(973, 199);
+            this.groupControl3.TabIndex = 4;
+            this.groupControl3.Text = "流水记录";
             // 
             // sfgList
             // 
