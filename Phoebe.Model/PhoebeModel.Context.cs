@@ -40,7 +40,7 @@ namespace Phoebe.Model
         public virtual DbSet<UserGroup> UserGroups { get; set; }
         public virtual DbSet<SettlementDetail> SettlementDetails { get; set; }
         public virtual DbSet<Settlement> Settlements { get; set; }
-        public virtual DbSet<Payment> Payments { get; set; }
         public virtual DbSet<Store> Stores { get; set; }
+        public virtual DbSet<Payment> Payments { get; set; }
     }
 }

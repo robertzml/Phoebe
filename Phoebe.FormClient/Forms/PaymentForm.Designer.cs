@@ -37,9 +37,11 @@
             this.bsPayment = new System.Windows.Forms.BindingSource(this.components);
             this.dgvPayment = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colId = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colTicketNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCustomerId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colPaidFee = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colPaidTime = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colPaidType = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colUserId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colRemark = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colStatus = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -111,9 +113,11 @@
             // 
             this.dgvPayment.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colId,
+            this.colTicketNumber,
             this.colCustomerId,
             this.colPaidFee,
             this.colPaidTime,
+            this.colPaidType,
             this.colUserId,
             this.colRemark,
             this.colStatus});
@@ -136,55 +140,71 @@
             this.colId.FieldName = "Id";
             this.colId.Name = "colId";
             // 
+            // colTicketNumber
+            // 
+            this.colTicketNumber.Caption = "票号";
+            this.colTicketNumber.FieldName = "TicketNumber";
+            this.colTicketNumber.Name = "colTicketNumber";
+            this.colTicketNumber.Visible = true;
+            this.colTicketNumber.VisibleIndex = 0;
+            // 
             // colCustomerId
             // 
-            this.colCustomerId.AppearanceCell.Options.UseTextOptions = true;
-            this.colCustomerId.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            this.colCustomerId.AppearanceHeader.Options.UseTextOptions = true;
+            this.colCustomerId.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             this.colCustomerId.Caption = "客户名称";
             this.colCustomerId.FieldName = "CustomerId";
             this.colCustomerId.FilterMode = DevExpress.XtraGrid.ColumnFilterMode.DisplayText;
             this.colCustomerId.Name = "colCustomerId";
             this.colCustomerId.Visible = true;
-            this.colCustomerId.VisibleIndex = 0;
+            this.colCustomerId.VisibleIndex = 1;
             // 
             // colPaidFee
             // 
             this.colPaidFee.Caption = "缴费金额(元)";
-            this.colPaidFee.DisplayFormat.FormatString = "0.##";
-            this.colPaidFee.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colPaidFee.FieldName = "PaidFee";
             this.colPaidFee.Name = "colPaidFee";
-            this.colPaidFee.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "PaidFee", "合计={0:0.##}")});
             this.colPaidFee.Visible = true;
-            this.colPaidFee.VisibleIndex = 1;
+            this.colPaidFee.VisibleIndex = 2;
             // 
             // colPaidTime
             // 
-            this.colPaidTime.Caption = "缴费日期";
+            this.colPaidTime.Caption = "缴费时间";
             this.colPaidTime.FieldName = "PaidTime";
             this.colPaidTime.Name = "colPaidTime";
             this.colPaidTime.Visible = true;
-            this.colPaidTime.VisibleIndex = 2;
+            this.colPaidTime.VisibleIndex = 3;
+            // 
+            // colPaidType
+            // 
+            this.colPaidType.AppearanceHeader.Options.UseTextOptions = true;
+            this.colPaidType.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            this.colPaidType.Caption = "缴费方式";
+            this.colPaidType.FieldName = "PaidType";
+            this.colPaidType.FilterMode = DevExpress.XtraGrid.ColumnFilterMode.DisplayText;
+            this.colPaidType.Name = "colPaidType";
+            this.colPaidType.Visible = true;
+            this.colPaidType.VisibleIndex = 4;
             // 
             // colUserId
             // 
-            this.colUserId.AppearanceCell.Options.UseTextOptions = true;
-            this.colUserId.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            this.colUserId.AppearanceHeader.Options.UseTextOptions = true;
+            this.colUserId.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             this.colUserId.Caption = "收款人";
             this.colUserId.FieldName = "UserId";
             this.colUserId.FilterMode = DevExpress.XtraGrid.ColumnFilterMode.DisplayText;
             this.colUserId.Name = "colUserId";
             this.colUserId.Visible = true;
-            this.colUserId.VisibleIndex = 3;
+            this.colUserId.VisibleIndex = 5;
             // 
             // colRemark
             // 
             this.colRemark.Caption = "备注";
             this.colRemark.FieldName = "Remark";
             this.colRemark.Name = "colRemark";
+            this.colRemark.OptionsFilter.AllowFilter = false;
             this.colRemark.Visible = true;
-            this.colRemark.VisibleIndex = 4;
+            this.colRemark.VisibleIndex = 6;
             // 
             // colStatus
             // 
@@ -220,13 +240,15 @@
         private DevExpress.XtraGrid.GridControl dgcPayment;
         private System.Windows.Forms.BindingSource bsPayment;
         private DevExpress.XtraGrid.Views.Grid.GridView dgvPayment;
+        private DevExpress.XtraEditors.SimpleButton btnDelete;
         private DevExpress.XtraGrid.Columns.GridColumn colId;
+        private DevExpress.XtraGrid.Columns.GridColumn colTicketNumber;
         private DevExpress.XtraGrid.Columns.GridColumn colCustomerId;
         private DevExpress.XtraGrid.Columns.GridColumn colPaidFee;
         private DevExpress.XtraGrid.Columns.GridColumn colPaidTime;
+        private DevExpress.XtraGrid.Columns.GridColumn colPaidType;
         private DevExpress.XtraGrid.Columns.GridColumn colUserId;
         private DevExpress.XtraGrid.Columns.GridColumn colRemark;
         private DevExpress.XtraGrid.Columns.GridColumn colStatus;
-        private DevExpress.XtraEditors.SimpleButton btnDelete;
     }
 }

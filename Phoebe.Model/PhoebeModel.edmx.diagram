@@ -42,9 +42,6 @@
         <AssociationConnector Association="Phoebe.Model.FK_Settlement_Customer" />
         <AssociationConnector Association="Phoebe.Model.FK_Settlement_User" />
         <AssociationConnector Association="Phoebe.Model.FK_SettlementDetails_Settlement" />
-        <EntityTypeShape EntityType="Phoebe.Model.Payment" Width="1.5" PointX="0.5" PointY="26.75" />
-        <AssociationConnector Association="Phoebe.Model.FK_Payment_Customer" />
-        <AssociationConnector Association="Phoebe.Model.FK_Payment_User" />
         <EntityTypeShape EntityType="Phoebe.Model.Store" Width="1.5" PointX="9.75" PointY="17.75" />
         <AssociationConnector Association="Phoebe.Model.FK_Store_Cargo" />
         <AssociationConnector Association="Phoebe.Model.FK_StockInDetails_Store" />
@@ -52,6 +49,9 @@
         <AssociationConnector Association="Phoebe.Model.FK_StockMoveDetails_Store_Source" />
         <AssociationConnector Association="Phoebe.Model.FK_StockOutDetails_Store" />
         <AssociationConnector Association="Phoebe.Model.FK_Store_User" />
+        <EntityTypeShape EntityType="Phoebe.Model.Payment" Width="1.5" PointX="0.5" PointY="24.25" />
+        <AssociationConnector Association="Phoebe.Model.FK_Payment_Customer" />
+        <AssociationConnector Association="Phoebe.Model.FK_Payment_User" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

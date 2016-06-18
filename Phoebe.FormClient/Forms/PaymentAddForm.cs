@@ -34,6 +34,7 @@ namespace Phoebe.FormClient
             payment.CustomerId = Convert.ToInt32(this.lkuCustomer.EditValue);
             payment.PaidFee = this.nmPaidFee.Value;
             payment.PaidTime = this.dpPaidTime.DateTime.Date;
+            payment.PaidType = (int)this.cmbType.EditValue;
             payment.UserId = this.currentUser.Id;
             payment.Remark = this.txtRemark.Text;
         }
@@ -50,6 +51,8 @@ namespace Phoebe.FormClient
             this.dpPaidTime.DateTime = DateTime.Now.Date;
             this.txtUser.Text = this.currentUser.Name;
 
+            this.cmbType.Properties.Items.AddEnum(typeof(PaymentType));
+
             this.bsCustomer.DataSource = BusinessFactory<CustomerBusiness>.Instance.FindAll();
             this.lkuCustomer.CustomDisplayText += new DevExpress.XtraEditors.Controls.CustomDisplayTextEventHandler(EventUtil.LkuCustomer_CustomDisplayText);
         }
@@ -64,6 +67,12 @@ namespace Phoebe.FormClient
             if (this.lkuCustomer.EditValue == null)
             {
                 MessageUtil.ShowClaim("请选择客户");
+                return;
+            }
+
+            if (this.cmbType.SelectedIndex == -1)
+            {
+                MessageUtil.ShowClaim("缴费方式不能为空");
                 return;
             }
 

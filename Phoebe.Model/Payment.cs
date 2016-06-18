@@ -15,9 +15,11 @@ namespace Phoebe.Model
     public partial class Payment
     {
         public System.Guid Id { get; set; }
+        public string TicketNumber { get; set; }
         public int CustomerId { get; set; }
         public decimal PaidFee { get; set; }
         public System.DateTime PaidTime { get; set; }
+        public int PaidType { get; set; }
         public int UserId { get; set; }
         public string Remark { get; set; }
         public int Status { get; set; }

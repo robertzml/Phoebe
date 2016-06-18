@@ -80,6 +80,11 @@ namespace Phoebe.FormClient
                 var payment = this.bsPayment[rowIndex] as Payment;
                 e.DisplayText = payment.Customer.Name;
             }
+            else if (e.Column.FieldName == "PaidType")
+            {
+                var payment = this.bsPayment[rowIndex] as Payment;
+                e.DisplayText = ((PaymentType)payment.PaidType).DisplayName();
+            }
             else if (e.Column.FieldName == "UserId")
             {
                 var payment = this.bsPayment[rowIndex] as Payment;

@@ -135,4 +135,22 @@ namespace Phoebe.Model
         [Display(Name = "冷藏费用")]
         Cold = 2
     }
+
+    /// <summary>
+    /// 缴费方式
+    /// </summary>
+    public enum PaymentType
+    {
+        [Display(Name = "现金")]
+        Cash = 1,
+
+        [Display(Name = "刷卡")]
+        Credit = 2,
+
+        [Display(Name = "转账")]
+        Transfer = 3,
+
+        [Display(Name = "支票")]
+        Cheque = 4
+    }
 }

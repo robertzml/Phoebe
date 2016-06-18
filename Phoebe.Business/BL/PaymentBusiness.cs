@@ -33,6 +33,28 @@ namespace Phoebe.Business
         }
         #endregion //Constructor
 
+        #region Function
+        /// <summary>
+        /// 创建新票号
+        /// </summary>
+        /// <param name="paidTime">缴费时间</param>
+        /// <returns></returns>
+        private string CreateTicketNumber(DateTime paidTime)
+        {
+            var data = this.dal.Find(r => r.PaidTime == paidTime).OrderByDescending(r => r.TicketNumber);
+
+            if (data.Count() == 0)
+                return string.Format("{0}{1}{2}-0001",
+                    paidTime.Year, paidTime.Month.ToString().PadLeft(2, '0'), paidTime.Day.ToString().PadLeft(2, '0'));
+            else
+            {
+                int newNumber = Convert.ToInt32(data.First().TicketNumber.Substring(9)) + 1;
+                return string.Format("{0}{1}{2}-{3}", paidTime.Year, paidTime.Month.ToString().PadLeft(2, '0'),
+                    paidTime.Day.ToString().PadLeft(2, '0'), newNumber.ToString().PadLeft(4, '0'));
+            }
+        }
+        #endregion //Function
+
         #region Method
         /// <summary>
         /// 获取客户缴费记录
@@ -53,6 +75,7 @@ namespace Phoebe.Business
         public override ErrorCode Create(Payment entity)
         {
             entity.Id = Guid.NewGuid();
+            entity.TicketNumber = CreateTicketNumber(entity.PaidTime);
             entity.Status = 0;
 
             var result = this.dal.Create(entity);

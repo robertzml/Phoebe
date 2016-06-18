@@ -84,6 +84,12 @@
     <Reference Include="UIAutomationClient" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\CargoStoreForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CargoStoreForm.Designer.cs">
+      <DependentUpon>CargoStoreForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\DebtForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -420,6 +426,9 @@
       <DependentUpon>UscCustomerInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils\ModelTranslate.cs" />
+    <EmbeddedResource Include="Forms\CargoStoreForm.resx">
+      <DependentUpon>CargoStoreForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dashboard\UscCustomerContract.resx">
       <DependentUpon>UscCustomerContract.cs</DependentUpon>
     </EmbeddedResource>

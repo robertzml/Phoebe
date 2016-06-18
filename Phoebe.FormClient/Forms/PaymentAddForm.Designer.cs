@@ -32,7 +32,6 @@
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.lkuCustomer = new DevExpress.XtraEditors.LookUpEdit();
-            this.bsCustomer = new System.Windows.Forms.BindingSource(this.components);
             this.txtRemark = new DevExpress.XtraEditors.MemoEdit();
             this.txtUser = new DevExpress.XtraEditors.TextEdit();
             this.nmPaidFee = new DevExpress.XtraEditors.SpinEdit();
@@ -42,8 +41,10 @@
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.bsCustomer = new System.Windows.Forms.BindingSource(this.components);
+            this.cmbType = new DevExpress.XtraEditors.ImageComboBoxEdit();
+            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.plFill)).BeginInit();
             this.plFill.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.plBottom)).BeginInit();
@@ -53,7 +54,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lkuCustomer.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsCustomer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRemark.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtUser.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nmPaidFee.Properties)).BeginInit();
@@ -64,8 +64,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsCustomer)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbType.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             this.SuspendLayout();
             // 
             // plFill
@@ -103,6 +105,7 @@
             // 
             // layoutControl1
             // 
+            this.layoutControl1.Controls.Add(this.cmbType);
             this.layoutControl1.Controls.Add(this.lkuCustomer);
             this.layoutControl1.Controls.Add(this.txtRemark);
             this.layoutControl1.Controls.Add(this.txtUser);
@@ -137,10 +140,6 @@
             this.lkuCustomer.StyleController = this.layoutControl1;
             this.lkuCustomer.TabIndex = 10;
             // 
-            // bsCustomer
-            // 
-            this.bsCustomer.DataSource = typeof(Phoebe.Model.Customer);
-            // 
             // txtRemark
             // 
             this.txtRemark.Location = new System.Drawing.Point(63, 84);
@@ -151,12 +150,12 @@
             // 
             // txtUser
             // 
-            this.txtUser.Location = new System.Drawing.Point(63, 60);
+            this.txtUser.Location = new System.Drawing.Point(268, 60);
             this.txtUser.Name = "txtUser";
             this.txtUser.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
             this.txtUser.Properties.Appearance.Options.UseBackColor = true;
             this.txtUser.Properties.ReadOnly = true;
-            this.txtUser.Size = new System.Drawing.Size(150, 20);
+            this.txtUser.Size = new System.Drawing.Size(165, 20);
             this.txtUser.StyleController = this.layoutControl1;
             this.txtUser.TabIndex = 8;
             // 
@@ -207,8 +206,8 @@
             this.layoutControlItem4,
             this.layoutControlItem5,
             this.layoutControlItem6,
-            this.emptySpaceItem1,
-            this.layoutControlItem2});
+            this.layoutControlItem2,
+            this.layoutControlItem1});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "layoutControlGroup1";
             this.layoutControlGroup1.Size = new System.Drawing.Size(445, 283);
@@ -235,9 +234,9 @@
             // layoutControlItem5
             // 
             this.layoutControlItem5.Control = this.txtUser;
-            this.layoutControlItem5.Location = new System.Drawing.Point(0, 48);
+            this.layoutControlItem5.Location = new System.Drawing.Point(205, 48);
             this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(205, 24);
+            this.layoutControlItem5.Size = new System.Drawing.Size(220, 24);
             this.layoutControlItem5.Text = "收款人";
             this.layoutControlItem5.TextSize = new System.Drawing.Size(48, 14);
             // 
@@ -250,14 +249,6 @@
             this.layoutControlItem6.Text = "备注";
             this.layoutControlItem6.TextSize = new System.Drawing.Size(48, 14);
             // 
-            // emptySpaceItem1
-            // 
-            this.emptySpaceItem1.AllowHotTrack = false;
-            this.emptySpaceItem1.Location = new System.Drawing.Point(205, 48);
-            this.emptySpaceItem1.Name = "emptySpaceItem1";
-            this.emptySpaceItem1.Size = new System.Drawing.Size(220, 24);
-            this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
-            // 
             // layoutControlItem2
             // 
             this.layoutControlItem2.Control = this.lkuCustomer;
@@ -266,6 +257,31 @@
             this.layoutControlItem2.Size = new System.Drawing.Size(425, 24);
             this.layoutControlItem2.Text = "客户选择";
             this.layoutControlItem2.TextSize = new System.Drawing.Size(48, 14);
+            // 
+            // bsCustomer
+            // 
+            this.bsCustomer.DataSource = typeof(Phoebe.Model.Customer);
+            // 
+            // cmbType
+            // 
+            this.cmbType.Location = new System.Drawing.Point(63, 60);
+            this.cmbType.Name = "cmbType";
+            this.cmbType.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow;
+            this.cmbType.Properties.Appearance.Options.UseBackColor = true;
+            this.cmbType.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cmbType.Size = new System.Drawing.Size(150, 20);
+            this.cmbType.StyleController = this.layoutControl1;
+            this.cmbType.TabIndex = 11;
+            // 
+            // layoutControlItem1
+            // 
+            this.layoutControlItem1.Control = this.cmbType;
+            this.layoutControlItem1.Location = new System.Drawing.Point(0, 48);
+            this.layoutControlItem1.Name = "layoutControlItem1";
+            this.layoutControlItem1.Size = new System.Drawing.Size(205, 24);
+            this.layoutControlItem1.Text = "缴费方式";
+            this.layoutControlItem1.TextSize = new System.Drawing.Size(48, 14);
             // 
             // PaymentAddForm
             // 
@@ -284,7 +300,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.lkuCustomer.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsCustomer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRemark.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtUser.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nmPaidFee.Properties)).EndInit();
@@ -295,8 +310,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsCustomer)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbType.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -314,9 +331,10 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
-        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
         private DevExpress.XtraEditors.LookUpEdit lkuCustomer;
         private System.Windows.Forms.BindingSource bsCustomer;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
+        private DevExpress.XtraEditors.ImageComboBoxEdit cmbType;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
     }
 }

@@ -71,6 +71,7 @@
             this.barHeaderItem1 = new DevExpress.XtraBars.BarHeaderItem();
             this.barStaticItem2 = new DevExpress.XtraBars.BarStaticItem();
             this.tabMdiManager = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
+            this.menuCargoStore = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabMdiManager)).BeginInit();
             this.SuspendLayout();
@@ -119,9 +120,10 @@
             this.menuPayment,
             this.menuCargoList,
             this.menuTest,
-            this.menuDebt});
+            this.menuDebt,
+            this.menuCargoStore});
             this.barManager1.MainMenu = this.mainMenu;
-            this.barManager1.MaxItemId = 36;
+            this.barManager1.MaxItemId = 37;
             this.barManager1.StatusBar = this.bar3;
             // 
             // mainMenu
@@ -189,7 +191,8 @@
             this.menuCargo.Id = 16;
             this.menuCargo.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(this.menuCategory),
-            new DevExpress.XtraBars.LinkPersistInfo(this.menuCargoList)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.menuCargoList),
+            new DevExpress.XtraBars.LinkPersistInfo(this.menuCargoStore)});
             this.menuCargo.Name = "menuCargo";
             // 
             // menuCategory
@@ -449,6 +452,12 @@
             this.tabMdiManager.MdiParent = this;
             this.tabMdiManager.PinPageButtonShowMode = DevExpress.XtraTab.PinPageButtonShowMode.InActiveTabPageHeader;
             // 
+            // menuCargoStore
+            // 
+            this.menuCargoStore.Caption = "货品库存";
+            this.menuCargoStore.Id = 36;
+            this.menuCargoStore.Name = "menuCargoStore";
+            // 
             // MainForm
             // 
             this.AllowMdiBar = true;
@@ -514,6 +523,7 @@
         private DevExpress.XtraBars.BarButtonItem menuCargoList;
         private DevExpress.XtraBars.BarButtonItem menuTest;
         private DevExpress.XtraBars.BarButtonItem menuDebt;
+        private DevExpress.XtraBars.BarButtonItem menuCargoStore;
     }
 }
 

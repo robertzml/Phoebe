@@ -86,9 +86,11 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TicketNumber" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="CustomerId" Type="int" Nullable="false" />
           <Property Name="PaidFee" Type="decimal" Precision="18" Scale="3" Nullable="false" />
           <Property Name="PaidTime" Type="datetime" Nullable="false" />
+          <Property Name="PaidType" Type="int" Nullable="false" />
           <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="Remark" Type="nvarchar" MaxLength="500" />
           <Property Name="Status" Type="int" Nullable="false" />
@@ -990,8 +992,8 @@
           <NavigationProperty Name="StockOuts" Relationship="Self.FK_StockOut_User" FromRole="User" ToRole="StockOut" />
           <NavigationProperty Name="UserGroup" Relationship="Self.FK_User_User" FromRole="User" ToRole="UserGroup" />
           <NavigationProperty Name="Settlements" Relationship="Phoebe.Model.FK_Settlement_User" FromRole="User" ToRole="Settlement" />
-          <NavigationProperty Name="Payments" Relationship="Phoebe.Model.FK_Payment_User" FromRole="User" ToRole="Payment" />
           <NavigationProperty Name="Stores" Relationship="Phoebe.Model.FK_Store_User" FromRole="User" ToRole="Store" />
+          <NavigationProperty Name="Payments" Relationship="Phoebe.Model.FK_Payment_User" FromRole="User" ToRole="Payment" />
         </EntityType>
         <EntityType Name="UserGroup">
           <Key>
@@ -1321,15 +1323,6 @@
             <End Role="Settlement" EntitySet="Settlements" />
             <End Role="SettlementDetail" EntitySet="SettlementDetails" />
           </AssociationSet>
-          <EntitySet Name="Payments" EntityType="Phoebe.Model.Payment" />
-          <AssociationSet Name="FK_Payment_Customer" Association="Phoebe.Model.FK_Payment_Customer">
-            <End Role="Customer" EntitySet="Customers" />
-            <End Role="Payment" EntitySet="Payments" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Payment_User" Association="Phoebe.Model.FK_Payment_User">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Payment" EntitySet="Payments" />
-          </AssociationSet>
           <EntitySet Name="Stores" EntityType="Phoebe.Model.Store" />
           <AssociationSet Name="FK_Store_Cargo" Association="Phoebe.Model.FK_Store_Cargo">
             <End Role="Cargo" EntitySet="Cargoes" />
@@ -1354,6 +1347,15 @@
           <AssociationSet Name="FK_Store_User" Association="Phoebe.Model.FK_Store_User">
             <End Role="User" EntitySet="Users" />
             <End Role="Store" EntitySet="Stores" />
+          </AssociationSet>
+          <EntitySet Name="Payments" EntityType="Phoebe.Model.Payment" />
+          <AssociationSet Name="FK_Payment_Customer" Association="Phoebe.Model.FK_Payment_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Payment" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payment_User" Association="Phoebe.Model.FK_Payment_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Payment" EntitySet="Payments" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="SettlementDetail">
@@ -1452,44 +1454,6 @@
             </Principal>
             <Dependent Role="SettlementDetail">
               <PropertyRef Name="SettlementId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Payment">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="CustomerId" Type="Int32" Nullable="false" />
-          <Property Name="PaidFee" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
-          <Property Name="PaidTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Customer" Relationship="Phoebe.Model.FK_Payment_Customer" FromRole="Payment" ToRole="Customer" />
-          <NavigationProperty Name="User" Relationship="Phoebe.Model.FK_Payment_User" FromRole="Payment" ToRole="User" />
-        </EntityType>
-        <Association Name="FK_Payment_Customer">
-          <End Type="Phoebe.Model.Customer" Role="Customer" Multiplicity="1" />
-          <End Type="Phoebe.Model.Payment" Role="Payment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Customer">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Payment">
-              <PropertyRef Name="CustomerId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Payment_User">
-          <End Type="Phoebe.Model.User" Role="User" Multiplicity="1" />
-          <End Type="Phoebe.Model.Payment" Role="Payment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Payment">
-              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1593,6 +1557,46 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Store">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="TicketNumber" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <Property Name="PaidFee" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
+          <Property Name="PaidTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PaidType" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="Phoebe.Model.FK_Payment_Customer" FromRole="Payment" ToRole="Customer" />
+          <NavigationProperty Name="User" Relationship="Phoebe.Model.FK_Payment_User" FromRole="Payment" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_Payment_Customer">
+          <End Type="Phoebe.Model.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="Phoebe.Model.Payment" Role="Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payment_User">
+          <End Type="Phoebe.Model.User" Role="User" Multiplicity="1" />
+          <End Type="Phoebe.Model.Payment" Role="Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payment">
               <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
@@ -1835,19 +1839,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Payments">
-            <EntityTypeMapping TypeName="Phoebe.Model.Payment">
-              <MappingFragment StoreEntitySet="Payment">
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Remark" ColumnName="Remark" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="PaidTime" ColumnName="PaidTime" />
-                <ScalarProperty Name="PaidFee" ColumnName="PaidFee" />
-                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Stores">
             <EntityTypeMapping TypeName="Phoebe.Model.Store">
               <MappingFragment StoreEntitySet="Store">
@@ -1871,6 +1862,21 @@
                 <ScalarProperty Name="TotalCount" ColumnName="TotalCount" />
                 <ScalarProperty Name="WarehouseNumber" ColumnName="WarehouseNumber" />
                 <ScalarProperty Name="CargoId" ColumnName="CargoId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Payments">
+            <EntityTypeMapping TypeName="Phoebe.Model.Payment">
+              <MappingFragment StoreEntitySet="Payment">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="PaidType" ColumnName="PaidType" />
+                <ScalarProperty Name="PaidTime" ColumnName="PaidTime" />
+                <ScalarProperty Name="PaidFee" ColumnName="PaidFee" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="TicketNumber" ColumnName="TicketNumber" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
