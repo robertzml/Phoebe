@@ -217,6 +217,17 @@ namespace Phoebe.Business
         }
 
         /// <summary>
+        /// 获取货品的在库数量
+        /// </summary>
+        /// <param name="cargoId">货品ID</param>
+        /// <returns></returns>
+        public int GetStoreCountByCargo(Guid cargoId)
+        {
+            var data = this.dal.Find(r => r.CargoId == cargoId && r.Status == (int)EntityStatus.StoreIn);
+            return data.Sum(r => r.StoreCount);
+        }
+
+        /// <summary>
         /// 获取合同指定日库存
         /// </summary>
         /// <param name="contractId">合同ID</param>

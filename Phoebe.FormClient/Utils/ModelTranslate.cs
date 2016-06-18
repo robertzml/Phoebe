@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Phoebe.FormClient
 {
+    using Phoebe.Base;
+    using Phoebe.Business;
+    using Phoebe.Common;
     using Phoebe.Model;
 
     /// <summary>
@@ -65,7 +67,7 @@ namespace Phoebe.FormClient
             report.UserName = stockIn.User.Name;
 
             report.Details = new List<Model.Report.RStockInDetailsModel>();
-            foreach(var item in stockIn.StockInDetails)
+            foreach (var item in stockIn.StockInDetails)
             {
                 Model.Report.RStockInDetailsModel detail = new Model.Report.RStockInDetailsModel();
                 detail.CategoryNumber = item.Store.Cargo.Category.Number;
@@ -76,6 +78,7 @@ namespace Phoebe.FormClient
                 detail.TotalWeight = item.InWeight;
                 detail.TotalVolume = item.InVolume;
                 detail.Warehouse = item.Store.WarehouseNumber;
+                detail.Remark = item.Remark;
 
                 report.Details.Add(detail);
             }
@@ -161,6 +164,40 @@ namespace Phoebe.FormClient
         }
 
         /// <summary>
+        /// 出库单转报表模型
+        /// </summary>
+        /// <param name="stockOut">出库单对象</param>
+        /// <returns></returns>
+        public static Phoebe.Model.Report.RStockOutModel StockOutToReport(StockOut stockOut)
+        {
+            Phoebe.Model.Report.RStockOutModel report = new Model.Report.RStockOutModel();
+            report.CustomerName = stockOut.Contract.Customer.Name;
+            report.OutTime = stockOut.OutTime;
+            report.FlowNumber = stockOut.FlowNumber;
+            report.UserName = stockOut.User.Name;
+
+            report.Details = new List<Model.Report.RStockOutDetailsModel>();
+            foreach (var item in stockOut.StockOutDetails)
+            {
+                Model.Report.RStockOutDetailsModel detail = new Model.Report.RStockOutDetailsModel();
+                detail.CategoryNumber = item.Store.Cargo.Category.Number;
+                detail.CategoryName = item.Store.Cargo.Category.Name;
+                detail.Specification = item.Store.Specification;
+                detail.Count = item.Count;
+                detail.UnitWeight = item.Store.Cargo.UnitWeight;
+                detail.OutWeight = item.OutWeight;
+                detail.OutVolume = item.OutVolume;
+                detail.TotalCount = BusinessFactory<StoreBusiness>.Instance.GetStoreCountByCargo(item.Store.CargoId);
+                detail.Warehouse = item.Store.WarehouseNumber;
+                detail.Remark = item.Remark;
+
+                report.Details.Add(detail);
+            }
+
+            return report;
+        }
+
+        /// <summary>
         /// 库存记录转移库记录
         /// </summary>
         /// <param name="stores">移库记录</param>
@@ -237,6 +274,26 @@ namespace Phoebe.FormClient
             }
 
             return data;
+        }
+
+        /// <summary>
+        /// 缴费单转报表模型
+        /// </summary>
+        /// <param name="payment">缴费记录</param>
+        /// <returns></returns>
+        public static Phoebe.Model.Report.RPaymentModel PaymentToReport(Payment payment)
+        {
+            Phoebe.Model.Report.RPaymentModel report = new Model.Report.RPaymentModel();
+            report.TicketNumber = payment.TicketNumber;
+            report.CustomerName = payment.Customer.Name;
+            report.PaidFee = payment.PaidFee;
+            report.PaidTime = payment.PaidTime;
+            report.PaidType = ((PaymentType)payment.PaidType).DisplayName();
+            report.Captial = Translate.NumberToRMB(payment.PaidFee);
+            report.User = payment.User.Name;
+            report.Remark = payment.Remark;
+
+            return report;
         }
     }
 }

@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Phoebe.FormClient
 {
+    using DevExpress.XtraReports.UI;
     using Phoebe.Base;
     using Phoebe.Business;
     using Phoebe.Common;
@@ -137,6 +136,32 @@ namespace Phoebe.FormClient
 
                 LoadData();
             }
+        }
+        
+        /// <summary>
+        /// 打印收据
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            if (this.dgvPayment.SelectedRowsCount == 0)
+            {
+                MessageUtil.ShowClaim("未选中记录");
+                return;
+            }
+
+            int rowIndex = this.dgvPayment.GetFocusedDataSourceRowIndex();
+            if (rowIndex < 0 || rowIndex >= this.bsPayment.Count)
+                return;
+
+            var payment = this.bsPayment[rowIndex] as Payment;
+            var model = ModelTranslate.PaymentToReport(payment);
+
+            Report.Payment report = new Report.Payment(model);
+
+            ReportPrintTool tool = new ReportPrintTool(report);
+            tool.ShowPreview();
         }
         #endregion //Event
     }

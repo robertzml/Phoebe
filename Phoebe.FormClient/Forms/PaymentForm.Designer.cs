@@ -45,6 +45,7 @@
             this.colUserId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colRemark = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colStatus = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.btnPrint = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
@@ -56,6 +57,7 @@
             // 
             // groupControl1
             // 
+            this.groupControl1.Controls.Add(this.btnPrint);
             this.groupControl1.Controls.Add(this.btnDelete);
             this.groupControl1.Controls.Add(this.btnAdd);
             this.groupControl1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -67,7 +69,7 @@
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(179, 43);
+            this.btnDelete.Location = new System.Drawing.Point(326, 43);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(90, 40);
             this.btnDelete.TabIndex = 3;
@@ -211,6 +213,15 @@
             this.colStatus.FieldName = "Status";
             this.colStatus.Name = "colStatus";
             // 
+            // btnPrint
+            // 
+            this.btnPrint.Location = new System.Drawing.Point(185, 43);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(90, 40);
+            this.btnPrint.TabIndex = 4;
+            this.btnPrint.Text = "打印收据";
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
+            // 
             // PaymentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -250,5 +261,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn colUserId;
         private DevExpress.XtraGrid.Columns.GridColumn colRemark;
         private DevExpress.XtraGrid.Columns.GridColumn colStatus;
+        private DevExpress.XtraEditors.SimpleButton btnPrint;
     }
 }

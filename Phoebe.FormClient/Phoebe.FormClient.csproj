@@ -240,6 +240,12 @@
     <Compile Include="Forms\PaymentForm.Designer.cs">
       <DependentUpon>PaymentForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Report\Payment.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\Payment.Designer.cs">
+      <DependentUpon>Payment.cs</DependentUpon>
+    </Compile>
     <Compile Include="Report\StockIn.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -590,6 +596,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\StockMoveViewControl.resx">
       <DependentUpon>StockMoveViewControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\Payment.resx">
+      <DependentUpon>Payment.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\StockIn.resx">
       <DependentUpon>StockIn.cs</DependentUpon>

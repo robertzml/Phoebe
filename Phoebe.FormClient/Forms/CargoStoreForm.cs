@@ -118,8 +118,12 @@ namespace Phoebe.FormClient
                 return;
             }
 
+            this.Cursor = Cursors.WaitCursor;
+
             var data = BusinessFactory<StoreBusiness>.Instance.GetByCargo(cargo.Id, true);
             this.sgList.DataSource = data;
+
+            this.Cursor = Cursors.Default;
         }
         #endregion //Event
     }
