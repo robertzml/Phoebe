@@ -97,6 +97,16 @@ namespace Phoebe.FormClient
         }
 
         /// <summary>
+        /// 货品管理 - 货品库存
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void menuCargoStore_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            ChildFormManage.LoadMdiForm(this, typeof(CargoStoreForm));
+        }
+
+        /// <summary>
         /// 冷库租赁 - 货品入库
         /// </summary>
         /// <param name="sender"></param>

@@ -15,15 +15,12 @@ namespace Phoebe.FormClient
     using Phoebe.Model;
 
     /// <summary>
-    /// 货品列表窗体
+    /// 货品库存窗体
     /// </summary>
-    public partial class CargoForm : BaseForm
+    public partial class CargoStoreForm : BaseForm
     {
-        #region Field
-        #endregion //Field
-
         #region Constructor
-        public CargoForm()
+        public CargoStoreForm()
         {
             InitializeComponent();
         }
@@ -64,7 +61,7 @@ namespace Phoebe.FormClient
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void CargoForm_Load(object sender, EventArgs e)
+        private void CargoStoreForm_Load(object sender, EventArgs e)
         {
             this.bsCustomer.DataSource = BusinessFactory<CustomerBusiness>.Instance.FindAll();
             this.lkuCustomer.CustomDisplayText += new DevExpress.XtraEditors.Controls.CustomDisplayTextEventHandler(EventUtil.LkuCustomer_CustomDisplayText);
@@ -84,11 +81,11 @@ namespace Phoebe.FormClient
         }
 
         /// <summary>
-        /// 查询
+        /// 查询货品
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnSearch_Click(object sender, EventArgs e)
+        private void btnFindCargo_Click(object sender, EventArgs e)
         {
             if (this.lkuCustomer.EditValue == null)
             {
@@ -105,6 +102,24 @@ namespace Phoebe.FormClient
             }
 
             this.cgList.DataSource = data;
+        }
+        
+        /// <summary>
+        /// 查询库存
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnFindStore_Click(object sender, EventArgs e)
+        {
+            var cargo = this.cgList.GetCurrentSelect();
+            if (cargo == null)
+            {
+                MessageUtil.ShowClaim("请选择货品");
+                return;
+            }
+
+            var data = BusinessFactory<StoreBusiness>.Instance.GetByCargo(cargo.Id, true);
+            this.sgList.DataSource = data;
         }
         #endregion //Event
     }

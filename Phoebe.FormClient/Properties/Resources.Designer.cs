@@ -323,9 +323,39 @@ namespace Phoebe.FormClient.Properties {
         /// <summary>
         ///   查找类似于 (Icon) 的 System.Drawing.Icon 类型的本地化资源。
         /// </summary>
-        internal static System.Drawing.Icon phoebe {
+        internal static System.Drawing.Icon phoebe_128x128 {
             get {
-                object obj = ResourceManager.GetObject("phoebe", resourceCulture);
+                object obj = ResourceManager.GetObject("phoebe_128x128", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似于 (Icon) 的 System.Drawing.Icon 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Icon phoebe_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("phoebe_16x16", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似于 (Icon) 的 System.Drawing.Icon 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Icon phoebe_36x36 {
+            get {
+                object obj = ResourceManager.GetObject("phoebe_36x36", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似于 (Icon) 的 System.Drawing.Icon 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Icon phoebe_64x64 {
+            get {
+                object obj = ResourceManager.GetObject("phoebe_64x64", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
             }
         }

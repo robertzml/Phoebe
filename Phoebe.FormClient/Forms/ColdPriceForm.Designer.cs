@@ -150,6 +150,7 @@
             this.lkuCustomer.Properties.DisplayMember = "Number";
             this.lkuCustomer.Properties.DropDownRows = 10;
             this.lkuCustomer.Properties.NullText = "请选择客户";
+            this.lkuCustomer.Properties.ShowFooter = false;
             this.lkuCustomer.Properties.ValueMember = "Id";
             this.lkuCustomer.Size = new System.Drawing.Size(205, 20);
             this.lkuCustomer.StyleController = this.layoutControl1;

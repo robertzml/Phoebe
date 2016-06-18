@@ -197,6 +197,26 @@ namespace Phoebe.Business
         }
 
         /// <summary>
+        /// 按货品查找库存
+        /// </summary>
+        /// <param name="cargoId">货品ID</param>
+        /// <param name="isStoreIn">是否限定在库</param>
+        /// <returns></returns>
+        public List<Store> GetByCargo(Guid cargoId, bool isStoreIn)
+        {
+            if (isStoreIn)
+            {
+                var data = this.dal.Find(r => r.CargoId == cargoId && r.Status == (int)EntityStatus.StoreIn);
+                return data.ToList();
+            }
+            else
+            {
+                var data = this.dal.Find(r => r.CargoId == cargoId);
+                return data.ToList();
+            }
+        }
+
+        /// <summary>
         /// 获取合同指定日库存
         /// </summary>
         /// <param name="contractId">合同ID</param>

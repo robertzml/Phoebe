@@ -39,6 +39,7 @@
             this.menuCargo = new DevExpress.XtraBars.BarSubItem();
             this.menuCategory = new DevExpress.XtraBars.BarButtonItem();
             this.menuCargoList = new DevExpress.XtraBars.BarButtonItem();
+            this.menuCargoStore = new DevExpress.XtraBars.BarButtonItem();
             this.menuStock = new DevExpress.XtraBars.BarSubItem();
             this.menuStockIn = new DevExpress.XtraBars.BarButtonItem();
             this.menuStockOut = new DevExpress.XtraBars.BarButtonItem();
@@ -71,7 +72,6 @@
             this.barHeaderItem1 = new DevExpress.XtraBars.BarHeaderItem();
             this.barStaticItem2 = new DevExpress.XtraBars.BarStaticItem();
             this.tabMdiManager = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
-            this.menuCargoStore = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabMdiManager)).BeginInit();
             this.SuspendLayout();
@@ -208,6 +208,13 @@
             this.menuCargoList.Id = 32;
             this.menuCargoList.Name = "menuCargoList";
             this.menuCargoList.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuCargoList_ItemClick);
+            // 
+            // menuCargoStore
+            // 
+            this.menuCargoStore.Caption = "货品库存";
+            this.menuCargoStore.Id = 36;
+            this.menuCargoStore.Name = "menuCargoStore";
+            this.menuCargoStore.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuCargoStore_ItemClick);
             // 
             // menuStock
             // 
@@ -451,12 +458,6 @@
             this.tabMdiManager.ClosePageButtonShowMode = DevExpress.XtraTab.ClosePageButtonShowMode.InAllTabPageHeaders;
             this.tabMdiManager.MdiParent = this;
             this.tabMdiManager.PinPageButtonShowMode = DevExpress.XtraTab.PinPageButtonShowMode.InActiveTabPageHeader;
-            // 
-            // menuCargoStore
-            // 
-            this.menuCargoStore.Caption = "货品库存";
-            this.menuCargoStore.Id = 36;
-            this.menuCargoStore.Name = "menuCargoStore";
             // 
             // MainForm
             // 

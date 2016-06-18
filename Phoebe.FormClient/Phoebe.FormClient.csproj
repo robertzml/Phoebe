@@ -34,7 +34,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Resources\phoebe.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\phoebe_64x64.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DevExpress.BonusSkins.v15.1, Version=15.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
@@ -84,6 +84,12 @@
     <Reference Include="UIAutomationClient" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\CargoGrid.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\CargoGrid.Designer.cs">
+      <DependentUpon>CargoGrid.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\CargoStoreForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -426,6 +432,9 @@
       <DependentUpon>UscCustomerInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils\ModelTranslate.cs" />
+    <EmbeddedResource Include="Controls\CargoGrid.resx">
+      <DependentUpon>CargoGrid.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\CargoStoreForm.resx">
       <DependentUpon>CargoStoreForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -765,6 +774,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\phoebe.ico" />
+    <None Include="Resources\phoebe_128x128.ico" />
+    <None Include="Resources\phoebe_64x64.ico" />
+    <None Include="Resources\phoebe_36x36.ico" />
+    <None Include="Resources\phoebe_16x16.ico" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
