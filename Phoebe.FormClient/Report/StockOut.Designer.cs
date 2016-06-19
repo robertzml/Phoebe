@@ -285,7 +285,7 @@
             // BottomMargin
             // 
             this.BottomMargin.Dpi = 254F;
-            this.BottomMargin.HeightF = 50F;
+            this.BottomMargin.HeightF = 80F;
             this.BottomMargin.Name = "BottomMargin";
             this.BottomMargin.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 254F);
             this.BottomMargin.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
@@ -973,8 +973,8 @@
             this.dsStockOut});
             this.DataSource = this.dsStockOut;
             this.Dpi = 254F;
-            this.Margins = new System.Drawing.Printing.Margins(40, 100, 50, 50);
-            this.PageHeight = 930;
+            this.Margins = new System.Drawing.Printing.Margins(40, 100, 50, 80);
+            this.PageHeight = 935;
             this.PageWidth = 2350;
             this.PaperKind = System.Drawing.Printing.PaperKind.Custom;
             this.Parameters.AddRange(new DevExpress.XtraReports.Parameters.Parameter[] {
