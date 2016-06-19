@@ -28,23 +28,26 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StockOutForm));
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.tcStockOut = new DevExpress.XtraTab.XtraTabControl();
             this.tpStockOutList = new DevExpress.XtraTab.XtraTabPage();
             this.tvStockOut = new System.Windows.Forms.TreeView();
-            this.imageList1 = new System.Windows.Forms.ImageList();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.lbStockOut = new DevExpress.XtraEditors.ImageListBoxControl();
             this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
             this.cmbContract = new DevExpress.XtraEditors.ImageComboBoxEdit();
             this.lkuCustomer = new DevExpress.XtraEditors.LookUpEdit();
-            this.bsCustomer = new System.Windows.Forms.BindingSource();
+            this.bsCustomer = new System.Windows.Forms.BindingSource(this.components);
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             this.tsStockOut = new System.Windows.Forms.ToolStrip();
             this.tsbNew = new System.Windows.Forms.ToolStripButton();
             this.tsbClose = new System.Windows.Forms.ToolStripButton();
@@ -58,8 +61,6 @@
             this.tsbPrint = new System.Windows.Forms.ToolStripButton();
             this.plBody = new DevExpress.XtraEditors.PanelControl();
             this.plEmpty = new DevExpress.XtraEditors.PanelControl();
-            this.lbStockOut = new DevExpress.XtraEditors.ImageListBoxControl();
-            this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tcStockOut)).BeginInit();
@@ -68,6 +69,7 @@
             this.xtraTabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.lbStockOut)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbContract.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lkuCustomer.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsCustomer)).BeginInit();
@@ -76,12 +78,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
             this.tsStockOut.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.plBody)).BeginInit();
             this.plBody.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.plEmpty)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lbStockOut)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
             this.SuspendLayout();
             // 
             // groupControl1
@@ -155,6 +156,16 @@
             this.layoutControl1.Size = new System.Drawing.Size(206, 485);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
+            // 
+            // lbStockOut
+            // 
+            this.lbStockOut.ImageList = this.imageList1;
+            this.lbStockOut.Location = new System.Drawing.Point(8, 116);
+            this.lbStockOut.Name = "lbStockOut";
+            this.lbStockOut.Size = new System.Drawing.Size(190, 361);
+            this.lbStockOut.StyleController = this.layoutControl1;
+            this.lbStockOut.TabIndex = 7;
+            this.lbStockOut.SelectedIndexChanged += new System.EventHandler(this.lbStockOut_SelectedIndexChanged);
             // 
             // btnSearch
             // 
@@ -253,6 +264,15 @@
             this.layoutControlItem2.Text = "合同选择";
             this.layoutControlItem2.TextLocation = DevExpress.Utils.Locations.Top;
             this.layoutControlItem2.TextSize = new System.Drawing.Size(48, 14);
+            // 
+            // layoutControlItem4
+            // 
+            this.layoutControlItem4.Control = this.lbStockOut;
+            this.layoutControlItem4.Location = new System.Drawing.Point(0, 108);
+            this.layoutControlItem4.Name = "layoutControlItem4";
+            this.layoutControlItem4.Size = new System.Drawing.Size(194, 365);
+            this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem4.TextVisible = false;
             // 
             // tsStockOut
             // 
@@ -377,25 +397,6 @@
             this.plEmpty.Size = new System.Drawing.Size(736, 100);
             this.plEmpty.TabIndex = 0;
             // 
-            // lbStockOut
-            // 
-            this.lbStockOut.ImageList = this.imageList1;
-            this.lbStockOut.Location = new System.Drawing.Point(8, 116);
-            this.lbStockOut.Name = "lbStockOut";
-            this.lbStockOut.Size = new System.Drawing.Size(190, 361);
-            this.lbStockOut.StyleController = this.layoutControl1;
-            this.lbStockOut.TabIndex = 7;
-            this.lbStockOut.SelectedIndexChanged += new System.EventHandler(this.lbStockOut_SelectedIndexChanged);
-            // 
-            // layoutControlItem4
-            // 
-            this.layoutControlItem4.Control = this.lbStockOut;
-            this.layoutControlItem4.Location = new System.Drawing.Point(0, 108);
-            this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(194, 365);
-            this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem4.TextVisible = false;
-            // 
             // StockOutForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -415,6 +416,7 @@
             this.xtraTabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.lbStockOut)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbContract.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lkuCustomer.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsCustomer)).EndInit();
@@ -423,13 +425,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
             this.tsStockOut.ResumeLayout(false);
             this.tsStockOut.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.plBody)).EndInit();
             this.plBody.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.plEmpty)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lbStockOut)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

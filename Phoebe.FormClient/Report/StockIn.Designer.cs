@@ -263,7 +263,7 @@
             // BottomMargin
             // 
             this.BottomMargin.Dpi = 254F;
-            this.BottomMargin.HeightF = 100F;
+            this.BottomMargin.HeightF = 50F;
             this.BottomMargin.Name = "BottomMargin";
             this.BottomMargin.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 254F);
             this.BottomMargin.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
@@ -321,7 +321,7 @@
             this.xrLine1.LineWidth = 3;
             this.xrLine1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.xrLine1.Name = "xrLine1";
-            this.xrLine1.SizeF = new System.Drawing.SizeF(2221F, 20F);
+            this.xrLine1.SizeF = new System.Drawing.SizeF(2152.208F, 20F);
             this.xrLine1.StylePriority.UseBorderWidth = false;
             // 
             // xrLabel10
@@ -492,10 +492,10 @@
             new DevExpress.XtraReports.UI.XRBinding(this.InTime, "Text", "{0:yyyy-MM-dd}")});
             this.xrLabel7.Dpi = 254F;
             this.xrLabel7.Font = new System.Drawing.Font("宋体", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.xrLabel7.LocationFloat = new DevExpress.Utils.PointFloat(1016F, 58.42F);
+            this.xrLabel7.LocationFloat = new DevExpress.Utils.PointFloat(1016F, 58.42004F);
             this.xrLabel7.Name = "xrLabel7";
             this.xrLabel7.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
-            this.xrLabel7.SizeF = new System.Drawing.SizeF(301.625F, 58.42F);
+            this.xrLabel7.SizeF = new System.Drawing.SizeF(314.8541F, 58.42001F);
             this.xrLabel7.StylePriority.UseFont = false;
             this.xrLabel7.StylePriority.UseTextAlignment = false;
             this.xrLabel7.Text = "xrLabel7";
@@ -837,7 +837,7 @@
             this.dsStockIn});
             this.DataSource = this.dsStockIn;
             this.Dpi = 254F;
-            this.Margins = new System.Drawing.Printing.Margins(20, 100, 50, 100);
+            this.Margins = new System.Drawing.Printing.Margins(40, 100, 50, 50);
             this.PageHeight = 930;
             this.PageWidth = 2350;
             this.PaperKind = System.Drawing.Printing.PaperKind.Custom;

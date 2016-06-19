@@ -9,6 +9,7 @@ using System.Windows.Forms;
 namespace Phoebe.FormClient
 {
     using DevExpress.XtraReports.UI;
+    using DevExpress.XtraEditors.Controls;
     using Phoebe.Base;
     using Phoebe.Business;
     using Phoebe.Common;
@@ -149,9 +150,37 @@ namespace Phoebe.FormClient
             this.lastMonth = month;
             this.tvStockIn.EndUpdate();
         }
+
+        /// <summary>
+        /// 更新合同列表
+        /// </summary>
+        /// <param name="customerId">客户Id</param>
+        private void UpdateContractList(int customerId)
+        {
+            var contracts = BusinessFactory<ContractBusiness>.Instance.GetByCustomer(customerId);
+
+            this.cmbContract.Properties.Items.Clear();
+
+            ImageComboBoxItem empty = new ImageComboBoxItem();
+            empty.Description = "--全部合同--";
+            empty.Value = 0;
+            this.cmbContract.Properties.Items.Add(empty);
+
+            foreach (var item in contracts)
+            {
+                ImageComboBoxItem i = new ImageComboBoxItem();
+                i.Description = item.Name;
+                i.Value = item.Id;
+
+                this.cmbContract.Properties.Items.Add(i);
+            }
+
+            this.cmbContract.EditValue = 0;
+        }
         #endregion //Function
 
         #region Event
+        #region Control Event
         /// <summary>
         /// 窗体载入
         /// </summary>
@@ -165,6 +194,9 @@ namespace Phoebe.FormClient
 
             UpdateTree();
             UpdateToolbar();
+
+            this.bsCustomer.DataSource = BusinessFactory<CustomerBusiness>.Instance.FindAll();
+            this.lkuCustomer.CustomDisplayText += new DevExpress.XtraEditors.Controls.CustomDisplayTextEventHandler(EventUtil.LkuCustomer_CustomDisplayText);
         }
 
         /// <summary>
@@ -213,6 +245,88 @@ namespace Phoebe.FormClient
             this.stockInView = new StockInViewControl(this.currentStockInId);
             ChildFormManage.LoadContentControl(this.plBody, this.stockInView);
         }
+
+        /// <summary>
+        /// 选择客户
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void lkuCustomer_EditValueChanged(object sender, EventArgs e)
+        {
+            if (this.lkuCustomer.EditValue == null)
+                UpdateContractList(0);
+            else
+                UpdateContractList(Convert.ToInt32(this.lkuCustomer.EditValue));
+        }
+
+        /// <summary>
+        /// 搜索入库单
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            if (this.lkuCustomer.EditValue == null)
+            {
+                MessageUtil.ShowClaim("请选择客户");
+                return;
+            }
+
+            List<StockIn> data;
+            if (this.cmbContract.EditValue != null && Convert.ToInt32(this.cmbContract.EditValue) != 0)
+            {
+                data = BusinessFactory<StockInBusiness>.Instance.GetByContract((int)this.cmbContract.EditValue);
+            }
+            else
+            {
+                data = BusinessFactory<StockInBusiness>.Instance.GetByCustomer((int)this.lkuCustomer.EditValue);
+            }
+
+            this.lbStockIn.Items.Clear();
+            foreach (var item in data)
+            {
+                ImageListBoxItem i = new ImageListBoxItem();
+                i.Description = item.FlowNumber;
+                i.Value = item.Id.ToString();
+                if (item.Status == (int)EntityStatus.StockOutReady)
+                    i.ImageIndex = 2;
+                else
+                    i.ImageIndex = 3;
+
+                this.lbStockIn.Items.Add(i);
+            }
+        }
+
+        /// <summary>
+        /// 选择搜索单据
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void lbStockIn_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            if (this.lbStockIn.SelectedItem == null)
+                return;
+
+            var id = new Guid(this.lbStockIn.SelectedValue.ToString());
+
+            var stockIn = BusinessFactory<StockInBusiness>.Instance.FindById(id);
+            if (stockIn == null)
+            {
+                MessageUtil.ShowInfo("该入库单已删除");
+                return;
+            }
+
+            this.currentStockInId = stockIn.Id;
+            this.stockInState = (EntityStatus)stockIn.Status;
+            this.formState = StockInFormState.View;
+
+            UpdateToolbar();
+
+            this.stockInView = new StockInViewControl(this.currentStockInId);
+            ChildFormManage.LoadContentControl(this.plBody, this.stockInView);
+        }
+        #endregion //Control Event
 
         #region Toolbar Event
         /// <summary>

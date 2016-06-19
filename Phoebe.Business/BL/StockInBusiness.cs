@@ -82,6 +82,29 @@ namespace Phoebe.Business
             return data.ToList();
         }
 
+        /// <summary>
+        /// 根据客户查找入库单
+        /// </summary>
+        /// <param name="customerId">客户ID</param>
+        /// <returns></returns>
+        public List<StockIn> GetByCustomer(int customerId)
+        {
+            var data = this.dal.Find(r => r.Contract.CustomerId == customerId).OrderByDescending(r => r.FlowNumber);
+            return data.ToList();
+        }
+
+        /// <summary>
+        /// 根据合同查找入库单
+        /// </summary>
+        /// <param name="contractId">合同ID</param>
+        /// <returns></returns>
+        public List<StockIn> GetByContract(int contractId)
+        {
+            var data = this.dal.Find(r => r.ContractId == contractId).OrderByDescending(r => r.FlowNumber);
+            return data.ToList();
+        }
+
+
         [Obsolete]
         public override ErrorCode Create(StockIn entity)
         {
