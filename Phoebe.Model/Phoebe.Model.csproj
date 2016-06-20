@@ -69,6 +69,7 @@
     </Compile>
     <Compile Include="Helper\ColdSettlement.cs" />
     <Compile Include="Helper\DailyColdRecord.cs" />
+    <Compile Include="Helper\IceEnum.cs" />
     <Compile Include="Helper\PhoebeEnum.cs" />
     <Compile Include="Helper\Receipt.cs" />
     <Compile Include="Helper\StockFlow.cs" />
@@ -76,6 +77,15 @@
     <Compile Include="Helper\StockOutModel.cs" />
     <Compile Include="Helper\Storage.cs" />
     <Compile Include="Helper\StockInModel.cs" />
+    <Compile Include="IceFlow.cs">
+      <DependentUpon>PhoebeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IceSale.cs">
+      <DependentUpon>PhoebeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IceStore.cs">
+      <DependentUpon>PhoebeModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Payment.cs">
       <DependentUpon>PhoebeModel.tt</DependentUpon>
     </Compile>

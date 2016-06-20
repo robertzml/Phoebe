@@ -48,6 +48,9 @@
             this.menuStoreList = new DevExpress.XtraBars.BarButtonItem();
             this.menuStoreSnapshot = new DevExpress.XtraBars.BarButtonItem();
             this.menuStoreTrace = new DevExpress.XtraBars.BarButtonItem();
+            this.menuIce = new DevExpress.XtraBars.BarSubItem();
+            this.menuIceStore = new DevExpress.XtraBars.BarButtonItem();
+            this.menuIceFlow = new DevExpress.XtraBars.BarButtonItem();
             this.menuSettle = new DevExpress.XtraBars.BarSubItem();
             this.menuColdPrice = new DevExpress.XtraBars.BarButtonItem();
             this.menuSettlement = new DevExpress.XtraBars.BarButtonItem();
@@ -121,9 +124,12 @@
             this.menuCargoList,
             this.menuTest,
             this.menuDebt,
-            this.menuCargoStore});
+            this.menuCargoStore,
+            this.menuIce,
+            this.menuIceStore,
+            this.menuIceFlow});
             this.barManager1.MainMenu = this.mainMenu;
-            this.barManager1.MaxItemId = 37;
+            this.barManager1.MaxItemId = 40;
             this.barManager1.StatusBar = this.bar3;
             // 
             // mainMenu
@@ -138,6 +144,7 @@
             new DevExpress.XtraBars.LinkPersistInfo(this.menuCargo),
             new DevExpress.XtraBars.LinkPersistInfo(this.menuStock),
             new DevExpress.XtraBars.LinkPersistInfo(this.menuStore),
+            new DevExpress.XtraBars.LinkPersistInfo(this.menuIce),
             new DevExpress.XtraBars.LinkPersistInfo(this.menuSettle),
             new DevExpress.XtraBars.LinkPersistInfo(this.menuUser),
             new DevExpress.XtraBars.LinkPersistInfo(this.barMdiList)});
@@ -277,6 +284,28 @@
             this.menuStoreTrace.Id = 27;
             this.menuStoreTrace.Name = "menuStoreTrace";
             this.menuStoreTrace.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuStoreTrace_ItemClick);
+            // 
+            // menuIce
+            // 
+            this.menuIce.Caption = "冰块管理";
+            this.menuIce.Id = 37;
+            this.menuIce.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.menuIceStore),
+            new DevExpress.XtraBars.LinkPersistInfo(this.menuIceFlow)});
+            this.menuIce.Name = "menuIce";
+            // 
+            // menuIceStore
+            // 
+            this.menuIceStore.Caption = "冰块库存";
+            this.menuIceStore.Id = 38;
+            this.menuIceStore.Name = "menuIceStore";
+            this.menuIceStore.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuIceStore_ItemClick);
+            // 
+            // menuIceFlow
+            // 
+            this.menuIceFlow.Caption = "冰块流水";
+            this.menuIceFlow.Id = 39;
+            this.menuIceFlow.Name = "menuIceFlow";
             // 
             // menuSettle
             // 
@@ -525,6 +554,9 @@
         private DevExpress.XtraBars.BarButtonItem menuTest;
         private DevExpress.XtraBars.BarButtonItem menuDebt;
         private DevExpress.XtraBars.BarButtonItem menuCargoStore;
+        private DevExpress.XtraBars.BarSubItem menuIce;
+        private DevExpress.XtraBars.BarButtonItem menuIceStore;
+        private DevExpress.XtraBars.BarButtonItem menuIceFlow;
     }
 }
 

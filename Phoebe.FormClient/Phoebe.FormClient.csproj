@@ -240,6 +240,12 @@
     <Compile Include="Forms\PaymentForm.Designer.cs">
       <DependentUpon>PaymentForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\IceStoreForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\IceStoreForm.Designer.cs">
+      <DependentUpon>IceStoreForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Report\Payment.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -539,6 +545,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\DebtForm.resx">
       <DependentUpon>DebtForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\IceStoreForm.resx">
+      <DependentUpon>IceStoreForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\PaymentAddForm.resx">
       <DependentUpon>PaymentAddForm.cs</DependentUpon>

@@ -7,7 +7,7 @@
       <Diagram DiagramId="f21a109fd1e444b38a3b6b59ff6ec277" Name="Diagram1" ShowGrid="true" ZoomLevel="86">
         <EntityTypeShape EntityType="Phoebe.Model.Billing" Width="1.5" PointX="2.375" PointY="20.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Phoebe.Model.Cargo" Width="1.5" PointX="7.75" PointY="12" IsExpanded="true" />
-        <EntityTypeShape EntityType="Phoebe.Model.Category" Width="1.5" PointX="7.625" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Phoebe.Model.Category" Width="1.5" PointX="6.125" PointY="5.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Phoebe.Model.Contract" Width="1.5" PointX="4.5" PointY="14.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Phoebe.Model.Customer" Width="1.5" PointX="1.25" PointY="14.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Phoebe.Model.StockIn" Width="1.5" PointX="6" PointY="21.875" IsExpanded="true" />
@@ -52,6 +52,12 @@
         <EntityTypeShape EntityType="Phoebe.Model.Payment" Width="1.5" PointX="0.5" PointY="24.25" />
         <AssociationConnector Association="Phoebe.Model.FK_Payment_Customer" />
         <AssociationConnector Association="Phoebe.Model.FK_Payment_User" />
+        <EntityTypeShape EntityType="Phoebe.Model.IceFlow" Width="1.5" PointX="15" PointY="12" />
+        <EntityTypeShape EntityType="Phoebe.Model.IceSale" Width="1.5" PointX="16.75" PointY="16.625" />
+        <AssociationConnector Association="Phoebe.Model.FK_IceSale_Customer" />
+        <AssociationConnector Association="Phoebe.Model.FK_IceFlow_User" />
+        <AssociationConnector Association="Phoebe.Model.FK_IceSale_IceFlow" />
+        <EntityTypeShape EntityType="Phoebe.Model.IceStore" Width="1.5" PointX="12.5" PointY="9.125" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
