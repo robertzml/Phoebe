@@ -30,14 +30,33 @@ namespace Phoebe.Business.DAL
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// 获取所有流水
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<IceFlow> FindAll()
         {
-            throw new NotImplementedException();
+            return this.context.IceFlows;
         }
 
+        /// <summary>
+        /// 添加流水
+        /// </summary>
+        /// <param name="entity">流水对象</param>
+        /// <returns></returns>
         public ErrorCode Create(IceFlow entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                this.context.IceFlows.Add(entity);
+                this.context.SaveChanges();
+
+                return ErrorCode.Success;
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
         }
 
         public ErrorCode CreateRange(List<IceFlow> entities)

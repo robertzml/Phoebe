@@ -34,7 +34,19 @@ namespace Phoebe.Business
         #endregion //Constructor
 
         #region Method
+        /// <summary>
+        /// 新增流水
+        /// </summary>
+        /// <param name="entity">流水对象</param>
+        /// <returns></returns>
+        public override ErrorCode Create(IceFlow entity)
+        {
+            entity.Id = Guid.NewGuid();
+            entity.Status = 0;
 
+            var result = this.dal.Create(entity);
+            return result;
+        }
         #endregion //Method
     }
 }

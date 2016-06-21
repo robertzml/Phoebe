@@ -306,6 +306,7 @@
             this.menuIceFlow.Caption = "冰块流水";
             this.menuIceFlow.Id = 39;
             this.menuIceFlow.Name = "menuIceFlow";
+            this.menuIceFlow.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuIceFlow_ItemClick);
             // 
             // menuSettle
             // 
