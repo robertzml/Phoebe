@@ -38,25 +38,10 @@ namespace Phoebe.Business.DAL
         {
             return this.context.IceFlows;
         }
-
-        /// <summary>
-        /// 添加流水
-        /// </summary>
-        /// <param name="entity">流水对象</param>
-        /// <returns></returns>
+       
         public ErrorCode Create(IceFlow entity)
         {
-            try
-            {
-                this.context.IceFlows.Add(entity);
-                this.context.SaveChanges();
-
-                return ErrorCode.Success;
-            }
-            catch (Exception)
-            {
-                return ErrorCode.Exception;
-            }
+            throw new NotImplementedException();
         }
 
         public ErrorCode CreateRange(List<IceFlow> entities)

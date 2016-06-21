@@ -52,9 +52,9 @@ namespace Phoebe.Model
         CompleteSaleOut = 4,
 
         /// <summary>
-        /// 整冰销售出库
+        /// 碎冰销售出库
         /// </summary>
-        [Display(Name = "整冰销售出库")]
+        [Display(Name = "碎冰销售出库")]
         FragmentSaleOut = 5,
     }
 }

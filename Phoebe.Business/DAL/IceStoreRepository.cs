@@ -20,9 +20,14 @@ namespace Phoebe.Business.DAL
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// 查找单条记录
+        /// </summary>
+        /// <param name="predicate">查询条件</param>
+        /// <returns></returns>
         public IceStore FindOne(Expression<Func<IceStore, bool>> predicate)
         {
-            throw new NotImplementedException();
+            return this.context.IceStores.SingleOrDefault(predicate);
         }
 
         public IEnumerable<IceStore> Find(Expression<Func<IceStore, bool>> predicate)
@@ -30,9 +35,13 @@ namespace Phoebe.Business.DAL
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// 查找所有记录
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<IceStore> FindAll()
         {
-            throw new NotImplementedException();
+            return this.context.IceStores;
         }
 
         public ErrorCode Create(IceStore entity)

@@ -574,5 +574,42 @@ namespace Phoebe.Business.DAL
             return ErrorCode.Success;
         }
         #endregion //Settlement Trans
+
+        #region Ice Trans
+        /// <summary>
+        /// 冰块流水添加业务
+        /// </summary>
+        /// <param name="iceFlow">冰块流水</param>
+        /// <returns></returns>
+        public ErrorCode IceFlowAddTrans(IceFlow iceFlow)
+        {
+            try
+            {
+                var store = this.context.IceStores.Single(r => r.Type == iceFlow.FlowType);
+
+                IceFlowType flowType = (IceFlowType)iceFlow.FlowType;
+                if (flowType == IceFlowType.CompleteStockIn || flowType == IceFlowType.FragmentStockIn)
+                {
+                    store.Count += iceFlow.FlowCount;
+                    store.Weight += iceFlow.FlowWeight;
+                }
+                else if (flowType == IceFlowType.CompleteMakeOut || flowType == IceFlowType.CompleteSaleOut || flowType == IceFlowType.FragmentSaleOut)
+                {
+                    store.Count -= iceFlow.FlowCount;
+                    store.Weight -= iceFlow.FlowWeight;
+                }
+
+                this.context.Entry(store).State = EntityState.Modified;
+                this.context.IceFlows.Add(iceFlow);
+                this.context.SaveChanges();
+
+                return ErrorCode.Success;
+            }
+            catch(Exception)
+            {
+                return ErrorCode.Exception;
+            }
+        }
+        #endregion //IceTrans
     }
 }

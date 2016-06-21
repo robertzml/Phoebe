@@ -44,7 +44,8 @@ namespace Phoebe.Business
             entity.Id = Guid.NewGuid();
             entity.Status = 0;
 
-            var result = this.dal.Create(entity);
+            var trans = new TransactionRepository();
+            var result = trans.IceFlowAddTrans(entity);
             return result;
         }
         #endregion //Method

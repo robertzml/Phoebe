@@ -72,6 +72,7 @@ namespace Phoebe.FormClient
         private void IceStockForm_Load(object sender, EventArgs e)
         {
             this.Text = flowType.DisplayName();
+            this.dpFlowTime.DateTime = DateTime.Now.Date;
             this.txtFlowType.Text = flowType.DisplayName();
             this.txtIceType.Text = iceType.DisplayName();
             this.txtUser.Text = this.currentUser.Name;
