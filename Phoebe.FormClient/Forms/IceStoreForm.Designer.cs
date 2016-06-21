@@ -32,7 +32,7 @@
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
-            this.comboBoxEdit1 = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.cmbFlowType = new DevExpress.XtraEditors.ComboBoxEdit();
             this.dpTo = new DevExpress.XtraEditors.DateEdit();
             this.dpFrom = new DevExpress.XtraEditors.DateEdit();
             this.txtFragmentWeight = new DevExpress.XtraEditors.TextEdit();
@@ -55,6 +55,8 @@
             this.layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
+            this.btnCompleteMakeOut = new DevExpress.XtraEditors.SimpleButton();
+            this.btnFragmentStockIn = new DevExpress.XtraEditors.SimpleButton();
             this.btnCompleteStockIn = new DevExpress.XtraEditors.SimpleButton();
             this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
             this.iceList = new Phoebe.FormClient.IceGridControl();
@@ -63,7 +65,7 @@
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbFlowType.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dpTo.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dpTo.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dpFrom.Properties.CalendarTimeProperties)).BeginInit();
@@ -96,8 +98,8 @@
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
             this.tableLayoutPanel1.Controls.Add(this.groupControl1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.groupControl2, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.groupControl3, 0, 1);
@@ -116,14 +118,14 @@
             this.groupControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl1.Location = new System.Drawing.Point(3, 3);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(497, 194);
+            this.groupControl1.Size = new System.Drawing.Size(597, 194);
             this.groupControl1.TabIndex = 0;
             this.groupControl1.Text = "查询";
             // 
             // layoutControl1
             // 
             this.layoutControl1.Controls.Add(this.btnSearch);
-            this.layoutControl1.Controls.Add(this.comboBoxEdit1);
+            this.layoutControl1.Controls.Add(this.cmbFlowType);
             this.layoutControl1.Controls.Add(this.dpTo);
             this.layoutControl1.Controls.Add(this.dpFrom);
             this.layoutControl1.Controls.Add(this.txtFragmentWeight);
@@ -136,34 +138,42 @@
             this.layoutControl1.Location = new System.Drawing.Point(2, 21);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.layoutControlGroup1;
-            this.layoutControl1.Size = new System.Drawing.Size(493, 171);
+            this.layoutControl1.Size = new System.Drawing.Size(593, 171);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(336, 113);
+            this.btnSearch.Location = new System.Drawing.Point(405, 113);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(140, 22);
+            this.btnSearch.Size = new System.Drawing.Size(171, 22);
             this.btnSearch.StyleController = this.layoutControl1;
             this.btnSearch.TabIndex = 13;
             this.btnSearch.Text = "查询";
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
-            // comboBoxEdit1
+            // cmbFlowType
             // 
-            this.comboBoxEdit1.Location = new System.Drawing.Point(402, 89);
-            this.comboBoxEdit1.Name = "comboBoxEdit1";
-            this.comboBoxEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.cmbFlowType.Location = new System.Drawing.Point(471, 89);
+            this.cmbFlowType.Name = "cmbFlowType";
+            this.cmbFlowType.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.comboBoxEdit1.Size = new System.Drawing.Size(74, 20);
-            this.comboBoxEdit1.StyleController = this.layoutControl1;
-            this.comboBoxEdit1.TabIndex = 12;
+            this.cmbFlowType.Properties.Items.AddRange(new object[] {
+            "全部",
+            "整冰入库",
+            "碎冰入库",
+            "整冰制冰出库",
+            "整冰销售出库",
+            "碎冰销售出库"});
+            this.cmbFlowType.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.cmbFlowType.Size = new System.Drawing.Size(105, 20);
+            this.cmbFlowType.StyleController = this.layoutControl1;
+            this.cmbFlowType.TabIndex = 12;
             // 
             // dpTo
             // 
             this.dpTo.EditValue = null;
-            this.dpTo.Location = new System.Drawing.Point(238, 89);
+            this.dpTo.Location = new System.Drawing.Point(271, 89);
             this.dpTo.Name = "dpTo";
             this.dpTo.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.dpTo.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -171,7 +181,7 @@
             this.dpTo.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dpTo.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.dpTo.Size = new System.Drawing.Size(94, 20);
+            this.dpTo.Size = new System.Drawing.Size(130, 20);
             this.dpTo.StyleController = this.layoutControl1;
             this.dpTo.TabIndex = 11;
             // 
@@ -186,29 +196,29 @@
             this.dpFrom.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dpFrom.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.dpFrom.Size = new System.Drawing.Size(85, 20);
+            this.dpFrom.Size = new System.Drawing.Size(118, 20);
             this.dpFrom.StyleController = this.layoutControl1;
             this.dpFrom.TabIndex = 10;
             // 
             // txtFragmentWeight
             // 
-            this.txtFragmentWeight.Location = new System.Drawing.Point(402, 41);
+            this.txtFragmentWeight.Location = new System.Drawing.Point(471, 41);
             this.txtFragmentWeight.Name = "txtFragmentWeight";
             this.txtFragmentWeight.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
             this.txtFragmentWeight.Properties.Appearance.Options.UseBackColor = true;
             this.txtFragmentWeight.Properties.ReadOnly = true;
-            this.txtFragmentWeight.Size = new System.Drawing.Size(74, 20);
+            this.txtFragmentWeight.Size = new System.Drawing.Size(105, 20);
             this.txtFragmentWeight.StyleController = this.layoutControl1;
             this.txtFragmentWeight.TabIndex = 9;
             // 
             // txtFragmentCount
             // 
-            this.txtFragmentCount.Location = new System.Drawing.Point(240, 41);
+            this.txtFragmentCount.Location = new System.Drawing.Point(274, 41);
             this.txtFragmentCount.Name = "txtFragmentCount";
             this.txtFragmentCount.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
             this.txtFragmentCount.Properties.Appearance.Options.UseBackColor = true;
             this.txtFragmentCount.Properties.ReadOnly = true;
-            this.txtFragmentCount.Size = new System.Drawing.Size(92, 20);
+            this.txtFragmentCount.Size = new System.Drawing.Size(127, 20);
             this.txtFragmentCount.StyleController = this.layoutControl1;
             this.txtFragmentCount.TabIndex = 8;
             // 
@@ -220,29 +230,29 @@
             this.textEdit4.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
             this.textEdit4.Properties.Appearance.Options.UseBackColor = true;
             this.textEdit4.Properties.ReadOnly = true;
-            this.textEdit4.Size = new System.Drawing.Size(87, 20);
+            this.textEdit4.Size = new System.Drawing.Size(121, 20);
             this.textEdit4.StyleController = this.layoutControl1;
             this.textEdit4.TabIndex = 7;
             // 
             // txtCompleteWeight
             // 
-            this.txtCompleteWeight.Location = new System.Drawing.Point(402, 17);
+            this.txtCompleteWeight.Location = new System.Drawing.Point(471, 17);
             this.txtCompleteWeight.Name = "txtCompleteWeight";
             this.txtCompleteWeight.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
             this.txtCompleteWeight.Properties.Appearance.Options.UseBackColor = true;
             this.txtCompleteWeight.Properties.ReadOnly = true;
-            this.txtCompleteWeight.Size = new System.Drawing.Size(74, 20);
+            this.txtCompleteWeight.Size = new System.Drawing.Size(105, 20);
             this.txtCompleteWeight.StyleController = this.layoutControl1;
             this.txtCompleteWeight.TabIndex = 6;
             // 
             // txtCompleteCount
             // 
-            this.txtCompleteCount.Location = new System.Drawing.Point(240, 17);
+            this.txtCompleteCount.Location = new System.Drawing.Point(274, 17);
             this.txtCompleteCount.Name = "txtCompleteCount";
             this.txtCompleteCount.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
             this.txtCompleteCount.Properties.Appearance.Options.UseBackColor = true;
             this.txtCompleteCount.Properties.ReadOnly = true;
-            this.txtCompleteCount.Size = new System.Drawing.Size(92, 20);
+            this.txtCompleteCount.Size = new System.Drawing.Size(127, 20);
             this.txtCompleteCount.StyleController = this.layoutControl1;
             this.txtCompleteCount.TabIndex = 5;
             // 
@@ -254,7 +264,7 @@
             this.textEdit1.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
             this.textEdit1.Properties.Appearance.Options.UseBackColor = true;
             this.textEdit1.Properties.ReadOnly = true;
-            this.textEdit1.Size = new System.Drawing.Size(87, 20);
+            this.textEdit1.Size = new System.Drawing.Size(121, 20);
             this.textEdit1.StyleController = this.layoutControl1;
             this.textEdit1.TabIndex = 4;
             // 
@@ -268,7 +278,7 @@
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "layoutControlGroup1";
             this.layoutControlGroup1.Padding = new DevExpress.XtraLayout.Utils.Padding(3, 3, 3, 3);
-            this.layoutControlGroup1.Size = new System.Drawing.Size(493, 171);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(593, 171);
             this.layoutControlGroup1.TextVisible = false;
             // 
             // layoutControlGroup2
@@ -282,7 +292,7 @@
             this.layoutControlItem6});
             this.layoutControlGroup2.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup2.Name = "layoutControlGroup2";
-            this.layoutControlGroup2.Size = new System.Drawing.Size(487, 72);
+            this.layoutControlGroup2.Size = new System.Drawing.Size(587, 72);
             this.layoutControlGroup2.TextVisible = false;
             // 
             // layoutControlItem1
@@ -290,7 +300,7 @@
             this.layoutControlItem1.Control = this.textEdit1;
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(157, 24);
+            this.layoutControlItem1.Size = new System.Drawing.Size(191, 24);
             this.layoutControlItem1.Text = "冰块类型";
             this.layoutControlItem1.TextSize = new System.Drawing.Size(63, 14);
             // 
@@ -299,43 +309,43 @@
             this.layoutControlItem4.Control = this.textEdit4;
             this.layoutControlItem4.Location = new System.Drawing.Point(0, 24);
             this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(157, 24);
+            this.layoutControlItem4.Size = new System.Drawing.Size(191, 24);
             this.layoutControlItem4.Text = "冰块类型";
             this.layoutControlItem4.TextSize = new System.Drawing.Size(63, 14);
             // 
             // layoutControlItem5
             // 
             this.layoutControlItem5.Control = this.txtFragmentCount;
-            this.layoutControlItem5.Location = new System.Drawing.Point(157, 24);
+            this.layoutControlItem5.Location = new System.Drawing.Point(191, 24);
             this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(162, 24);
+            this.layoutControlItem5.Size = new System.Drawing.Size(197, 24);
             this.layoutControlItem5.Text = "在库数量";
             this.layoutControlItem5.TextSize = new System.Drawing.Size(63, 14);
             // 
             // layoutControlItem2
             // 
             this.layoutControlItem2.Control = this.txtCompleteCount;
-            this.layoutControlItem2.Location = new System.Drawing.Point(157, 0);
+            this.layoutControlItem2.Location = new System.Drawing.Point(191, 0);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(162, 24);
+            this.layoutControlItem2.Size = new System.Drawing.Size(197, 24);
             this.layoutControlItem2.Text = "在库数量";
             this.layoutControlItem2.TextSize = new System.Drawing.Size(63, 14);
             // 
             // layoutControlItem3
             // 
             this.layoutControlItem3.Control = this.txtCompleteWeight;
-            this.layoutControlItem3.Location = new System.Drawing.Point(319, 0);
+            this.layoutControlItem3.Location = new System.Drawing.Point(388, 0);
             this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(144, 24);
+            this.layoutControlItem3.Size = new System.Drawing.Size(175, 24);
             this.layoutControlItem3.Text = "在库重量(t)";
             this.layoutControlItem3.TextSize = new System.Drawing.Size(63, 14);
             // 
             // layoutControlItem6
             // 
             this.layoutControlItem6.Control = this.txtFragmentWeight;
-            this.layoutControlItem6.Location = new System.Drawing.Point(319, 24);
+            this.layoutControlItem6.Location = new System.Drawing.Point(388, 24);
             this.layoutControlItem6.Name = "layoutControlItem6";
-            this.layoutControlItem6.Size = new System.Drawing.Size(144, 24);
+            this.layoutControlItem6.Size = new System.Drawing.Size(175, 24);
             this.layoutControlItem6.Text = "在库重量(t)";
             this.layoutControlItem6.TextSize = new System.Drawing.Size(63, 14);
             // 
@@ -348,7 +358,7 @@
             this.layoutControlItem10});
             this.layoutControlGroup3.Location = new System.Drawing.Point(0, 72);
             this.layoutControlGroup3.Name = "layoutControlGroup3";
-            this.layoutControlGroup3.Size = new System.Drawing.Size(487, 93);
+            this.layoutControlGroup3.Size = new System.Drawing.Size(587, 93);
             this.layoutControlGroup3.TextVisible = false;
             // 
             // layoutControlItem7
@@ -356,52 +366,72 @@
             this.layoutControlItem7.Control = this.dpFrom;
             this.layoutControlItem7.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem7.Name = "layoutControlItem7";
-            this.layoutControlItem7.Size = new System.Drawing.Size(155, 69);
+            this.layoutControlItem7.Size = new System.Drawing.Size(188, 69);
             this.layoutControlItem7.Text = "开始日期";
             this.layoutControlItem7.TextSize = new System.Drawing.Size(63, 14);
             // 
             // layoutControlItem8
             // 
             this.layoutControlItem8.Control = this.dpTo;
-            this.layoutControlItem8.Location = new System.Drawing.Point(155, 0);
+            this.layoutControlItem8.Location = new System.Drawing.Point(188, 0);
             this.layoutControlItem8.Name = "layoutControlItem8";
-            this.layoutControlItem8.Size = new System.Drawing.Size(164, 69);
+            this.layoutControlItem8.Size = new System.Drawing.Size(200, 69);
             this.layoutControlItem8.Text = "结束日期";
             this.layoutControlItem8.TextSize = new System.Drawing.Size(63, 14);
             // 
             // layoutControlItem9
             // 
-            this.layoutControlItem9.Control = this.comboBoxEdit1;
-            this.layoutControlItem9.Location = new System.Drawing.Point(319, 0);
+            this.layoutControlItem9.Control = this.cmbFlowType;
+            this.layoutControlItem9.Location = new System.Drawing.Point(388, 0);
             this.layoutControlItem9.Name = "layoutControlItem9";
-            this.layoutControlItem9.Size = new System.Drawing.Size(144, 24);
+            this.layoutControlItem9.Size = new System.Drawing.Size(175, 24);
             this.layoutControlItem9.Text = "流水类型";
             this.layoutControlItem9.TextSize = new System.Drawing.Size(63, 14);
             // 
             // layoutControlItem10
             // 
             this.layoutControlItem10.Control = this.btnSearch;
-            this.layoutControlItem10.Location = new System.Drawing.Point(319, 24);
+            this.layoutControlItem10.Location = new System.Drawing.Point(388, 24);
             this.layoutControlItem10.Name = "layoutControlItem10";
-            this.layoutControlItem10.Size = new System.Drawing.Size(144, 45);
+            this.layoutControlItem10.Size = new System.Drawing.Size(175, 45);
             this.layoutControlItem10.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem10.TextVisible = false;
             // 
             // groupControl2
             // 
+            this.groupControl2.Controls.Add(this.btnCompleteMakeOut);
+            this.groupControl2.Controls.Add(this.btnFragmentStockIn);
             this.groupControl2.Controls.Add(this.btnCompleteStockIn);
             this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl2.Location = new System.Drawing.Point(506, 3);
+            this.groupControl2.Location = new System.Drawing.Point(606, 3);
             this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(497, 194);
+            this.groupControl2.Size = new System.Drawing.Size(397, 194);
             this.groupControl2.TabIndex = 1;
             this.groupControl2.Text = "操作";
             // 
+            // btnCompleteMakeOut
+            // 
+            this.btnCompleteMakeOut.Location = new System.Drawing.Point(278, 52);
+            this.btnCompleteMakeOut.Name = "btnCompleteMakeOut";
+            this.btnCompleteMakeOut.Size = new System.Drawing.Size(99, 41);
+            this.btnCompleteMakeOut.TabIndex = 3;
+            this.btnCompleteMakeOut.Text = "整冰制冰出库";
+            this.btnCompleteMakeOut.Click += new System.EventHandler(this.btnCompleteMakeOut_Click);
+            // 
+            // btnFragmentStockIn
+            // 
+            this.btnFragmentStockIn.Location = new System.Drawing.Point(155, 52);
+            this.btnFragmentStockIn.Name = "btnFragmentStockIn";
+            this.btnFragmentStockIn.Size = new System.Drawing.Size(99, 41);
+            this.btnFragmentStockIn.TabIndex = 2;
+            this.btnFragmentStockIn.Text = "碎冰入库";
+            this.btnFragmentStockIn.Click += new System.EventHandler(this.btnFragmentStockIn_Click);
+            // 
             // btnCompleteStockIn
             // 
-            this.btnCompleteStockIn.Location = new System.Drawing.Point(45, 52);
+            this.btnCompleteStockIn.Location = new System.Drawing.Point(32, 52);
             this.btnCompleteStockIn.Name = "btnCompleteStockIn";
-            this.btnCompleteStockIn.Size = new System.Drawing.Size(88, 30);
+            this.btnCompleteStockIn.Size = new System.Drawing.Size(99, 41);
             this.btnCompleteStockIn.TabIndex = 1;
             this.btnCompleteStockIn.Text = "整冰入库";
             this.btnCompleteStockIn.Click += new System.EventHandler(this.btnCompleteStockIn_Click);
@@ -440,7 +470,7 @@
             this.groupControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbFlowType.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dpTo.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dpTo.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dpFrom.Properties.CalendarTimeProperties)).EndInit();
@@ -488,7 +518,7 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
         private DevExpress.XtraEditors.GroupControl groupControl2;
         private DevExpress.XtraEditors.SimpleButton btnSearch;
-        private DevExpress.XtraEditors.ComboBoxEdit comboBoxEdit1;
+        private DevExpress.XtraEditors.ComboBoxEdit cmbFlowType;
         private DevExpress.XtraEditors.DateEdit dpTo;
         private DevExpress.XtraEditors.DateEdit dpFrom;
         private DevExpress.XtraEditors.TextEdit txtFragmentWeight;
@@ -504,5 +534,7 @@
         private IceGridControl iceList;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup3;
         private DevExpress.XtraEditors.SimpleButton btnCompleteStockIn;
+        private DevExpress.XtraEditors.SimpleButton btnFragmentStockIn;
+        private DevExpress.XtraEditors.SimpleButton btnCompleteMakeOut;
     }
 }

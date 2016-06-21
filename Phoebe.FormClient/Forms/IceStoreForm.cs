@@ -54,16 +54,37 @@ namespace Phoebe.FormClient
         {
             LoadStores();
 
-            this.dpFrom.DateTime = DateTime.Now.Date;
+            this.dpFrom.DateTime = DateTime.Now.AddMonths(-1).Date; 
             this.dpTo.DateTime = DateTime.Now.Date;
+            this.cmbFlowType.SelectedIndex = 0;
         }
 
+        /// <summary>
+        /// 查询
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            var data = BusinessFactory<IceFlowBusiness>.Instance.FindAll();
-            this.iceList.DataSource = data;
+            if (this.dpFrom.DateTime > this.dpTo.DateTime)
+            {
+                MessageUtil.ShowClaim("结束日期早于开始日期");
+                return;
+            }
+
+            if (this.cmbFlowType.SelectedIndex == 0)
+            {
+                var data = BusinessFactory<IceFlowBusiness>.Instance.Get(this.dpFrom.DateTime, this.dpTo.DateTime);
+                this.iceList.DataSource = data;
+            }
+            else
+            {
+                IceFlowType flowType = (IceFlowType)this.cmbFlowType.SelectedIndex;
+                var data = BusinessFactory<IceFlowBusiness>.Instance.Get(this.dpFrom.DateTime, this.dpTo.DateTime, flowType);
+                this.iceList.DataSource = data;
+            }
         }
-       
+
         /// <summary>
         /// 整冰入库
         /// </summary>
@@ -72,6 +93,32 @@ namespace Phoebe.FormClient
         private void btnCompleteStockIn_Click(object sender, EventArgs e)
         {
             ChildFormManage.ShowDialogForm(typeof(IceStockForm), new object[] { IceFlowType.CompleteStockIn, IceType.Complete });
+
+            LoadStores();
+        }
+
+        /// <summary>
+        /// 碎冰入库
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnFragmentStockIn_Click(object sender, EventArgs e)
+        {
+            ChildFormManage.ShowDialogForm(typeof(IceStockForm), new object[] { IceFlowType.FragmentStockIn, IceType.Fragment });
+
+            LoadStores();
+        }
+
+        /// <summary>
+        /// 整冰制冰出库
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnCompleteMakeOut_Click(object sender, EventArgs e)
+        {
+            ChildFormManage.ShowDialogForm(typeof(IceStockForm), new object[] { IceFlowType.CompleteMakeOut, IceType.Complete });
+
+            LoadStores();
         }
         #endregion //Event
     }

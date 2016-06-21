@@ -25,9 +25,14 @@ namespace Phoebe.Business.DAL
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// 按条件查询
+        /// </summary>
+        /// <param name="predicate">查询条件</param>
+        /// <returns></returns>
         public IEnumerable<IceFlow> Find(Expression<Func<IceFlow, bool>> predicate)
         {
-            throw new NotImplementedException();
+            return this.context.IceFlows.Where(predicate);
         }
 
         /// <summary>

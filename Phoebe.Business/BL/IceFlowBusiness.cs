@@ -35,6 +35,31 @@ namespace Phoebe.Business
 
         #region Method
         /// <summary>
+        /// 按时间段获取流水
+        /// </summary>
+        /// <param name="from">开始日期</param>
+        /// <param name="to">结束日期</param>
+        /// <returns></returns>
+        public List<IceFlow> Get(DateTime from, DateTime to)
+        {
+            var data = this.dal.Find(r => r.FlowTime >= from && r.FlowTime <= to).OrderByDescending(r => r.FlowTime);
+            return data.ToList();
+        }
+
+        /// <summary>
+        /// 按时间段获取流水
+        /// </summary>
+        /// <param name="from">开始日期</param>
+        /// <param name="to">结束日期</param>
+        /// <param name="flowType">流水类型</param>
+        /// <returns></returns>
+        public List<IceFlow> Get(DateTime from, DateTime to, IceFlowType flowType)
+        {
+            var data = this.dal.Find(r => r.FlowTime >= from && r.FlowTime <= to && r.FlowType == (int)flowType).OrderByDescending(r => r.FlowTime);
+            return data.ToList();
+        }
+
+        /// <summary>
         /// 新增流水
         /// </summary>
         /// <param name="entity">流水对象</param>
@@ -43,6 +68,16 @@ namespace Phoebe.Business
         {
             entity.Id = Guid.NewGuid();
             entity.Status = 0;
+
+            //check store count
+            if (entity.FlowType == (int)IceFlowType.CompleteMakeOut)
+            {
+                var store = BusinessFactory<IceStoreBusiness>.Instance.GetByType((IceType)entity.IceType);
+                if (entity.FlowCount > store.Count)
+                    return ErrorCode.IceOutCountOverflow;
+                if (entity.FlowWeight > store.Weight)
+                    return ErrorCode.IceOutWeightOverflow;
+            }
 
             var trans = new TransactionRepository();
             var result = trans.IceFlowAddTrans(entity);

@@ -85,9 +85,14 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void btnConfirm_Click(object sender, EventArgs e)
         {
-            if (this.spFlowCount.Value == 0)
+            if (this.spFlowCount.Value <= 0)
             {
-                MessageUtil.ShowInfo("流水数量为0");
+                MessageUtil.ShowInfo("流水数量必须大于0");
+                return;
+            }
+            if (this.spFlowWeight.Value <= 0)
+            {
+                MessageUtil.ShowInfo("流水重量必须大于0");
                 return;
             }
 

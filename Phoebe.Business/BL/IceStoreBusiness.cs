@@ -34,7 +34,16 @@ namespace Phoebe.Business
         #endregion //Constructor
 
         #region Method
-
+        /// <summary>
+        /// 根据类型查找库存
+        /// </summary>
+        /// <param name="type">冰块类型</param>
+        /// <returns></returns>
+        public IceStore GetByType(IceType type)
+        {
+            var data = this.dal.FindOne(r => r.Type == (int)type);
+            return data;
+        }
         #endregion //Method
     }
 }

@@ -236,5 +236,19 @@ namespace Phoebe.Base
         [Display(Name = "移库记录无法撤回")]
         StockMoveCannotRevert = 93,
         #endregion //Stock
+
+        #region Ice
+        /// <summary>
+        /// 冰块出库数量超出
+        /// </summary>
+        [Display(Name = "冰块出库数量超出")]
+        IceOutCountOverflow = 100,
+
+        /// <summary>
+        /// 冰块出库重量超出
+        /// </summary>
+        [Display(Name = "冰块出库重量超出")]
+        IceOutWeightOverflow = 101,
+        #endregion //Ice
     }
 }

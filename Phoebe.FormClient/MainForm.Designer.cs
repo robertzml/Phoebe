@@ -28,8 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
+            this.barManager1 = new DevExpress.XtraBars.BarManager();
             this.mainMenu = new DevExpress.XtraBars.Bar();
             this.menuCustomer = new DevExpress.XtraBars.BarSubItem();
             this.menuCustomerList = new DevExpress.XtraBars.BarButtonItem();
@@ -50,7 +49,6 @@
             this.menuStoreTrace = new DevExpress.XtraBars.BarButtonItem();
             this.menuIce = new DevExpress.XtraBars.BarSubItem();
             this.menuIceStore = new DevExpress.XtraBars.BarButtonItem();
-            this.menuIceFlow = new DevExpress.XtraBars.BarButtonItem();
             this.menuSettle = new DevExpress.XtraBars.BarSubItem();
             this.menuColdPrice = new DevExpress.XtraBars.BarButtonItem();
             this.menuSettlement = new DevExpress.XtraBars.BarButtonItem();
@@ -74,7 +72,7 @@
             this.barCustomerList = new DevExpress.XtraBars.BarButtonItem();
             this.barHeaderItem1 = new DevExpress.XtraBars.BarHeaderItem();
             this.barStaticItem2 = new DevExpress.XtraBars.BarStaticItem();
-            this.tabMdiManager = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
+            this.tabMdiManager = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabMdiManager)).BeginInit();
             this.SuspendLayout();
@@ -126,8 +124,7 @@
             this.menuDebt,
             this.menuCargoStore,
             this.menuIce,
-            this.menuIceStore,
-            this.menuIceFlow});
+            this.menuIceStore});
             this.barManager1.MainMenu = this.mainMenu;
             this.barManager1.MaxItemId = 40;
             this.barManager1.StatusBar = this.bar3;
@@ -290,8 +287,7 @@
             this.menuIce.Caption = "冰块管理";
             this.menuIce.Id = 37;
             this.menuIce.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(this.menuIceStore),
-            new DevExpress.XtraBars.LinkPersistInfo(this.menuIceFlow)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.menuIceStore)});
             this.menuIce.Name = "menuIce";
             // 
             // menuIceStore
@@ -300,13 +296,6 @@
             this.menuIceStore.Id = 38;
             this.menuIceStore.Name = "menuIceStore";
             this.menuIceStore.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuIceStore_ItemClick);
-            // 
-            // menuIceFlow
-            // 
-            this.menuIceFlow.Caption = "冰块流水";
-            this.menuIceFlow.Id = 39;
-            this.menuIceFlow.Name = "menuIceFlow";
-            this.menuIceFlow.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuIceFlow_ItemClick);
             // 
             // menuSettle
             // 
@@ -557,7 +546,6 @@
         private DevExpress.XtraBars.BarButtonItem menuCargoStore;
         private DevExpress.XtraBars.BarSubItem menuIce;
         private DevExpress.XtraBars.BarButtonItem menuIceStore;
-        private DevExpress.XtraBars.BarButtonItem menuIceFlow;
     }
 }
 

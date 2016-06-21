@@ -543,7 +543,7 @@ namespace Phoebe.Business.DAL
 
                 return ErrorCode.Success;
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return ErrorCode.Exception;
             }
@@ -585,7 +585,7 @@ namespace Phoebe.Business.DAL
         {
             try
             {
-                var store = this.context.IceStores.Single(r => r.Type == iceFlow.FlowType);
+                var store = this.context.IceStores.Single(r => r.Type == iceFlow.IceType);
 
                 IceFlowType flowType = (IceFlowType)iceFlow.FlowType;
                 if (flowType == IceFlowType.CompleteStockIn || flowType == IceFlowType.FragmentStockIn)
@@ -597,6 +597,11 @@ namespace Phoebe.Business.DAL
                 {
                     store.Count -= iceFlow.FlowCount;
                     store.Weight -= iceFlow.FlowWeight;
+
+                    if (store.Count < 0)
+                        return ErrorCode.IceOutCountOverflow;
+                    if (store.Weight < 0)
+                        return ErrorCode.IceOutWeightOverflow;
                 }
 
                 this.context.Entry(store).State = EntityState.Modified;
@@ -605,7 +610,7 @@ namespace Phoebe.Business.DAL
 
                 return ErrorCode.Success;
             }
-            catch(Exception)
+            catch (Exception e)
             {
                 return ErrorCode.Exception;
             }
