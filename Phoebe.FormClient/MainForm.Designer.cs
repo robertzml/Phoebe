@@ -49,6 +49,7 @@
             this.menuStoreTrace = new DevExpress.XtraBars.BarButtonItem();
             this.menuIce = new DevExpress.XtraBars.BarSubItem();
             this.menuIceStore = new DevExpress.XtraBars.BarButtonItem();
+            this.menuIceSale = new DevExpress.XtraBars.BarButtonItem();
             this.menuSettle = new DevExpress.XtraBars.BarSubItem();
             this.menuColdPrice = new DevExpress.XtraBars.BarButtonItem();
             this.menuSettlement = new DevExpress.XtraBars.BarButtonItem();
@@ -124,9 +125,10 @@
             this.menuDebt,
             this.menuCargoStore,
             this.menuIce,
-            this.menuIceStore});
+            this.menuIceStore,
+            this.menuIceSale});
             this.barManager1.MainMenu = this.mainMenu;
-            this.barManager1.MaxItemId = 40;
+            this.barManager1.MaxItemId = 41;
             this.barManager1.StatusBar = this.bar3;
             // 
             // mainMenu
@@ -287,7 +289,8 @@
             this.menuIce.Caption = "冰块管理";
             this.menuIce.Id = 37;
             this.menuIce.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(this.menuIceStore)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.menuIceStore),
+            new DevExpress.XtraBars.LinkPersistInfo(this.menuIceSale)});
             this.menuIce.Name = "menuIce";
             // 
             // menuIceStore
@@ -296,6 +299,13 @@
             this.menuIceStore.Id = 38;
             this.menuIceStore.Name = "menuIceStore";
             this.menuIceStore.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuIceStore_ItemClick);
+            // 
+            // menuIceSale
+            // 
+            this.menuIceSale.Caption = "冰块销售";
+            this.menuIceSale.Id = 40;
+            this.menuIceSale.Name = "menuIceSale";
+            this.menuIceSale.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuIceSale_ItemClick);
             // 
             // menuSettle
             // 
@@ -546,6 +556,7 @@
         private DevExpress.XtraBars.BarButtonItem menuCargoStore;
         private DevExpress.XtraBars.BarSubItem menuIce;
         private DevExpress.XtraBars.BarButtonItem menuIceStore;
+        private DevExpress.XtraBars.BarButtonItem menuIceSale;
     }
 }
 

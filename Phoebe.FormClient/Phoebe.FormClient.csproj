@@ -258,6 +258,18 @@
     <Compile Include="Controls\IceGridControl.Designer.cs">
       <DependentUpon>IceGridControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\IceSaleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\IceSaleForm.Designer.cs">
+      <DependentUpon>IceSaleForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\IceSellForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\IceSellForm.Designer.cs">
+      <DependentUpon>IceSellForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Report\Payment.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -560,6 +572,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\DebtForm.resx">
       <DependentUpon>DebtForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\IceSaleForm.resx">
+      <DependentUpon>IceSaleForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\IceSellForm.resx">
+      <DependentUpon>IceSellForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\IceStockForm.resx">
       <DependentUpon>IceStockForm.cs</DependentUpon>
