@@ -55,12 +55,12 @@
             this.layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
+            this.btnDeleteFlow = new DevExpress.XtraEditors.SimpleButton();
             this.btnCompleteMakeOut = new DevExpress.XtraEditors.SimpleButton();
             this.btnFragmentStockIn = new DevExpress.XtraEditors.SimpleButton();
             this.btnCompleteStockIn = new DevExpress.XtraEditors.SimpleButton();
             this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
-            this.iceList = new Phoebe.FormClient.IceGridControl();
-            this.btnDeleteFlow = new DevExpress.XtraEditors.SimpleButton();
+            this.iceList = new Phoebe.FormClient.IceGrid();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
@@ -411,6 +411,15 @@
             this.groupControl2.TabIndex = 1;
             this.groupControl2.Text = "操作";
             // 
+            // btnDeleteFlow
+            // 
+            this.btnDeleteFlow.Location = new System.Drawing.Point(32, 125);
+            this.btnDeleteFlow.Name = "btnDeleteFlow";
+            this.btnDeleteFlow.Size = new System.Drawing.Size(100, 40);
+            this.btnDeleteFlow.TabIndex = 4;
+            this.btnDeleteFlow.Text = "删除流水记录";
+            this.btnDeleteFlow.Click += new System.EventHandler(this.btnDeleteFlow_Click);
+            // 
             // btnCompleteMakeOut
             // 
             this.btnCompleteMakeOut.Location = new System.Drawing.Point(278, 52);
@@ -457,15 +466,6 @@
             this.iceList.Name = "iceList";
             this.iceList.Size = new System.Drawing.Size(996, 356);
             this.iceList.TabIndex = 0;
-            // 
-            // btnDeleteFlow
-            // 
-            this.btnDeleteFlow.Location = new System.Drawing.Point(32, 125);
-            this.btnDeleteFlow.Name = "btnDeleteFlow";
-            this.btnDeleteFlow.Size = new System.Drawing.Size(100, 40);
-            this.btnDeleteFlow.TabIndex = 4;
-            this.btnDeleteFlow.Text = "删除流水记录";
-            this.btnDeleteFlow.Click += new System.EventHandler(this.btnDeleteFlow_Click);
             // 
             // IceStoreForm
             // 
@@ -542,7 +542,7 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem9;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem10;
         private DevExpress.XtraEditors.GroupControl groupControl3;
-        private IceGridControl iceList;
+        private IceGrid iceList;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup3;
         private DevExpress.XtraEditors.SimpleButton btnCompleteStockIn;
         private DevExpress.XtraEditors.SimpleButton btnFragmentStockIn;

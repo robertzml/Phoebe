@@ -14,10 +14,10 @@ namespace Phoebe.FormClient
     /// <summary>
     /// 冰块流水表格控件
     /// </summary>
-    public partial class IceGridControl : UserControl
+    public partial class IceGrid : UserControl
     {
         #region Constructor
-        public IceGridControl()
+        public IceGrid()
         {
             InitializeComponent();
         }

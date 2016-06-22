@@ -14,6 +14,73 @@ namespace Phoebe.Business.DAL
     /// </summary>
     public class TransactionRepository : SqlDataAccess<PhoebeContext>
     {
+        #region Contract Trans
+        /// <summary>
+        /// 强制删除合同业务
+        /// </summary>
+        /// <param name="contract">合同对象</param>
+        /// <returns></returns>
+        public ErrorCode ContractForceDeleteTrans(Contract contract)
+        {
+            try
+            {
+                int customerId = contract.CustomerId;
+
+                //delete the settlement
+                var settles = this.context.Settlements.Where(r => r.CustomerId == customerId);
+                if (settles.Count() != 0)
+                {
+                    this.context.Settlements.RemoveRange(settles);
+                }
+
+                //delete the stock in
+                var stockIns = this.context.StockIns.Where(r => r.ContractId == contract.Id);
+                if (stockIns.Count() != 0)
+                {
+                    this.context.StockIns.RemoveRange(stockIns);
+                }
+
+                //delete the stock out
+                var stockOuts = this.context.StockOuts.Where(r => r.ContractId == contract.Id);
+                if (stockOuts.Count() != 0)
+                {
+                    this.context.StockOuts.RemoveRange(stockOuts);
+                }
+
+                //delete the stock move
+                var stockMoves = this.context.StockMoves.Where(r => r.ContractId == contract.Id);
+                if (stockMoves.Count() != 0)
+                {
+                    this.context.StockMoves.RemoveRange(stockMoves);
+                }                
+
+                //delte the stores
+                var stores = this.context.Stores.Where(r => r.Cargo.ContractId == contract.Id);
+                if (stores.Count() != 0)
+                {
+                    this.context.Stores.RemoveRange(stores);
+                }
+                this.context.SaveChanges();
+
+                //delete the cargos
+                var cargos = this.context.Cargoes.Where(r => r.ContractId == contract.Id);
+                if (cargos.Count() != 0)
+                {
+                    this.context.Cargoes.RemoveRange(cargos);
+                }
+
+                this.context.Contracts.Remove(contract);
+                this.context.SaveChanges();
+
+                return ErrorCode.Success;
+            }
+            catch (Exception e)
+            {
+                return ErrorCode.Exception;
+            }
+        }
+        #endregion //Contract Trans
+
         #region StockIn Trans
         /// <summary>
         /// 新建入库事务

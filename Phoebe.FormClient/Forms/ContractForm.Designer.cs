@@ -44,11 +44,12 @@
             this.colSignDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCloseDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colBillingType = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colBillingDescription = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colIsTiming = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colUserId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colRemark = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colStatus = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colBillingDescription = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.btnForceDelete = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
@@ -60,6 +61,7 @@
             // 
             // groupControl1
             // 
+            this.groupControl1.Controls.Add(this.btnForceDelete);
             this.groupControl1.Controls.Add(this.btnDelete);
             this.groupControl1.Controls.Add(this.btnEdit);
             this.groupControl1.Controls.Add(this.btnAdd);
@@ -72,7 +74,7 @@
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(268, 43);
+            this.btnDelete.Location = new System.Drawing.Point(266, 43);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(90, 40);
             this.btnDelete.TabIndex = 3;
@@ -81,7 +83,7 @@
             // 
             // btnEdit
             // 
-            this.btnEdit.Location = new System.Drawing.Point(150, 43);
+            this.btnEdit.Location = new System.Drawing.Point(149, 43);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(90, 40);
             this.btnEdit.TabIndex = 2;
@@ -210,6 +212,16 @@
             this.colBillingType.Visible = true;
             this.colBillingType.VisibleIndex = 5;
             // 
+            // colBillingDescription
+            // 
+            this.colBillingDescription.Caption = "计费说明";
+            this.colBillingDescription.FieldName = "colBillingDescription";
+            this.colBillingDescription.Name = "colBillingDescription";
+            this.colBillingDescription.OptionsFilter.AllowFilter = false;
+            this.colBillingDescription.UnboundType = DevExpress.Data.UnboundColumnType.String;
+            this.colBillingDescription.Visible = true;
+            this.colBillingDescription.VisibleIndex = 6;
+            // 
             // colIsTiming
             // 
             this.colIsTiming.Caption = "是否计时";
@@ -250,15 +262,14 @@
             this.colStatus.Visible = true;
             this.colStatus.VisibleIndex = 10;
             // 
-            // colBillingDescription
+            // btnForceDelete
             // 
-            this.colBillingDescription.Caption = "计费说明";
-            this.colBillingDescription.FieldName = "colBillingDescription";
-            this.colBillingDescription.Name = "colBillingDescription";
-            this.colBillingDescription.OptionsFilter.AllowFilter = false;
-            this.colBillingDescription.UnboundType = DevExpress.Data.UnboundColumnType.String;
-            this.colBillingDescription.Visible = true;
-            this.colBillingDescription.VisibleIndex = 6;
+            this.btnForceDelete.Location = new System.Drawing.Point(383, 43);
+            this.btnForceDelete.Name = "btnForceDelete";
+            this.btnForceDelete.Size = new System.Drawing.Size(90, 40);
+            this.btnForceDelete.TabIndex = 4;
+            this.btnForceDelete.Text = "强制删除合同";
+            this.btnForceDelete.Click += new System.EventHandler(this.btnForceDelete_Click);
             // 
             // ContractForm
             // 
@@ -303,5 +314,6 @@
         private DevExpress.XtraEditors.SimpleButton btnDelete;
         private DevExpress.XtraEditors.SimpleButton btnEdit;
         private DevExpress.XtraGrid.Columns.GridColumn colBillingDescription;
+        private DevExpress.XtraEditors.SimpleButton btnForceDelete;
     }
 }

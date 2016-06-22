@@ -40,10 +40,12 @@ namespace Phoebe.FormClient
             if (this.currentUser.Rank > 800)
             {
                 this.btnDelete.Visible = true;
+                this.btnForceDelete.Visible = true;
             }
             else
             {
                 this.btnDelete.Visible = false;
+                this.btnForceDelete.Visible = false;
             }
         }
         #endregion //Function
@@ -159,6 +161,37 @@ namespace Phoebe.FormClient
                 var contract = this.bsContract[rowIndex] as Contract;
 
                 ErrorCode result = BusinessFactory<ContractBusiness>.Instance.Delete(contract);
+                if (result == ErrorCode.Success)
+                {
+                    MessageUtil.ShowInfo("删除合同成功");
+                }
+                else
+                {
+                    MessageUtil.ShowWarning("删除合同失败：" + result.DisplayName());
+                }
+
+                LoadData();
+            }
+        }
+
+
+        private void btnForceDelete_Click(object sender, EventArgs e)
+        {
+            if (this.dgvContract.SelectedRowsCount == 0)
+            {
+                MessageUtil.ShowClaim("未选中记录");
+                return;
+            }
+
+            if (MessageUtil.ConfirmYesNo("是否确认强制删除选中合同") == DialogResult.Yes)
+            {
+                int rowIndex = this.dgvContract.GetFocusedDataSourceRowIndex();
+                if (rowIndex < 0 || rowIndex >= this.bsContract.Count)
+                    return;
+
+                var contract = this.bsContract[rowIndex] as Contract;
+
+                ErrorCode result = BusinessFactory<ContractBusiness>.Instance.ForceDelete(contract);
                 if (result == ErrorCode.Success)
                 {
                     MessageUtil.ShowInfo("删除合同成功");

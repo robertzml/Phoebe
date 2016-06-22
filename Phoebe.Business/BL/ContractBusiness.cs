@@ -91,6 +91,19 @@ namespace Phoebe.Business
             var result = this.dal.Delete(entity);
             return result;
         }
+
+        /// <summary>
+        /// 强制删除合同
+        /// </summary>
+        /// <param name="entity">合同对象</param>
+        /// <returns></returns>
+        public ErrorCode ForceDelete(Contract entity)
+        {
+            var trans = new TransactionRepository();
+            var result = trans.ContractForceDeleteTrans(entity);
+
+            return result;
+        }
         #endregion //Method
     }
 }

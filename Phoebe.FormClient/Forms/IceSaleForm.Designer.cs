@@ -59,7 +59,7 @@
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
             this.btnSell = new DevExpress.XtraEditors.SimpleButton();
             this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
-            this.iceList = new Phoebe.FormClient.IceSaleGridControl();
+            this.iceList = new Phoebe.FormClient.IceSaleGrid();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
@@ -497,7 +497,7 @@
         private DevExpress.XtraEditors.GroupControl groupControl2;
         private DevExpress.XtraEditors.SimpleButton btnSell;
         private DevExpress.XtraEditors.GroupControl groupControl3;
-        private IceSaleGridControl iceList;
+        private IceSaleGrid iceList;
         private DevExpress.XtraLayout.LayoutControl layoutControl1;
         private DevExpress.XtraEditors.TextEdit txtCompleteWeight;
         private DevExpress.XtraEditors.TextEdit txtCompleteCount;

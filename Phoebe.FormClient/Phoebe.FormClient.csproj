@@ -84,6 +84,12 @@
     <Reference Include="UIAutomationClient" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\ContractGrid.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ContractGrid.Designer.cs">
+      <DependentUpon>ContractGrid.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\CargoGrid.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -252,11 +258,11 @@
     <Compile Include="Forms\IceStockForm.Designer.cs">
       <DependentUpon>IceStockForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\IceGridControl.cs">
+    <Compile Include="Controls\IceGrid.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\IceGridControl.Designer.cs">
-      <DependentUpon>IceGridControl.cs</DependentUpon>
+    <Compile Include="Controls\IceGrid.Designer.cs">
+      <DependentUpon>IceGrid.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\IceSaleForm.cs">
       <SubType>Form</SubType>
@@ -270,11 +276,11 @@
     <Compile Include="Forms\IceSellForm.Designer.cs">
       <DependentUpon>IceSellForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\IceSaleGridControl.cs">
+    <Compile Include="Controls\IceSaleGrid.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\IceSaleGridControl.Designer.cs">
-      <DependentUpon>IceSaleGridControl.cs</DependentUpon>
+    <Compile Include="Controls\IceSaleGrid.Designer.cs">
+      <DependentUpon>IceSaleGrid.cs</DependentUpon>
     </Compile>
     <Compile Include="Report\Payment.cs">
       <SubType>Component</SubType>
@@ -474,11 +480,14 @@
       <DependentUpon>UscCustomerInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils\ModelTranslate.cs" />
+    <EmbeddedResource Include="Controls\ContractGrid.resx">
+      <DependentUpon>ContractGrid.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\CargoGrid.resx">
       <DependentUpon>CargoGrid.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\IceGridControl.resx">
-      <DependentUpon>IceGridControl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\IceGrid.resx">
+      <DependentUpon>IceGrid.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\CargoStoreForm.resx">
       <DependentUpon>CargoStoreForm.cs</DependentUpon>
@@ -627,8 +636,8 @@
     <EmbeddedResource Include="Forms\UserGroupForm.resx">
       <DependentUpon>UserGroupForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\IceSaleGridControl.resx">
-      <DependentUpon>IceSaleGridControl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\IceSaleGrid.resx">
+      <DependentUpon>IceSaleGrid.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
