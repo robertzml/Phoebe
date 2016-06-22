@@ -610,7 +610,40 @@ namespace Phoebe.Business.DAL
 
                 return ErrorCode.Success;
             }
-            catch (Exception e)
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+        }
+
+        /// <summary>
+        /// 冰块销售添加业务
+        /// </summary>
+        /// <param name="iceSale">冰块销售对象</param>
+        /// <param name="iceFlow">冰块流水对象</param>
+        /// <returns></returns>
+        public ErrorCode IceSaleAddTrans(IceSale iceSale, IceFlow iceFlow)
+        {
+            try
+            {
+                //set ice store
+                var store = this.context.IceStores.Single(r => r.Type == iceFlow.IceType);
+                store.Count -= iceFlow.FlowCount;
+                store.Weight -= iceFlow.FlowWeight;
+
+                if (store.Count < 0)
+                    return ErrorCode.IceOutCountOverflow;
+                if (store.Weight < 0)
+                    return ErrorCode.IceOutWeightOverflow;
+
+                this.context.Entry(store).State = EntityState.Modified;
+                this.context.IceFlows.Add(iceFlow);
+                this.context.IceSales.Add(iceSale);
+                this.context.SaveChanges();
+
+                return ErrorCode.Success;
+            }
+            catch(Exception)
             {
                 return ErrorCode.Exception;
             }

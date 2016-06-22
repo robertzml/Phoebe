@@ -22,10 +22,13 @@ namespace Phoebe.Model
         public int SaleCount { get; set; }
         public decimal SaleWeight { get; set; }
         public decimal SaleFee { get; set; }
+        public int UserId { get; set; }
+        public System.DateTime CreateTime { get; set; }
         public string Remark { get; set; }
         public int Status { get; set; }
     
         public virtual Customer Customer { get; set; }
         public virtual IceFlow IceFlow { get; set; }
+        public virtual User User { get; set; }
     }
 }

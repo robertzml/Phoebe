@@ -12,12 +12,12 @@ namespace Phoebe.FormClient
     using Phoebe.Model;
 
     /// <summary>
-    /// 冰块流水表格控件
+    /// 冰块销售表格控件
     /// </summary>
-    public partial class IceGridControl : UserControl
+    public partial class IceSaleGridControl : UserControl
     {
         #region Constructor
-        public IceGridControl()
+        public IceSaleGridControl()
         {
             InitializeComponent();
         }
@@ -29,7 +29,7 @@ namespace Phoebe.FormClient
         /// </summary>
         public void Clear()
         {
-            this.bsIceFlow.Clear();
+            this.bsIceSale.Clear();
         }
         #endregion //Method
 
@@ -42,21 +42,21 @@ namespace Phoebe.FormClient
         private void dgvIce_CustomColumnDisplayText(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs e)
         {
             int rowIndex = e.ListSourceRowIndex;
-            if (rowIndex < 0 || rowIndex >= this.bsIceFlow.Count)
+            if (rowIndex < 0 || rowIndex >= this.bsIceSale.Count)
                 return;
 
-            var iceFlow = this.bsIceFlow[rowIndex] as IceFlow;
-            if (e.Column.FieldName == "FlowType")
+            var iceSale = this.bsIceSale[rowIndex] as IceSale;
+            if (e.Column.FieldName == "CustomerId")
             {
-                e.DisplayText = ((IceFlowType)iceFlow.FlowType).DisplayName();
+                e.DisplayText = iceSale.Customer.Name;
             }
             else if (e.Column.FieldName == "IceType")
             {
-                e.DisplayText = ((IceType)iceFlow.IceType).DisplayName();
+                e.DisplayText = ((IceType)iceSale.IceType).DisplayName();
             }
             else if (e.Column.FieldName == "UserId")
             {
-                e.DisplayText = iceFlow.User.Name;
+                e.DisplayText = iceSale.User.Name;
             }
         }
         #endregion //Event
@@ -66,16 +66,16 @@ namespace Phoebe.FormClient
         /// 数据源
         /// </summary>
         [Description("数据源")]
-        public List<IceFlow> DataSource
+        public List<IceSale> DataSource
         {
             get
             {
-                return this.bsIceFlow.DataSource as List<IceFlow>;
+                return this.bsIceSale.DataSource as List<IceSale>;
             }
             set
             {
                 this.dgvIce.BeginDataUpdate();
-                this.bsIceFlow.DataSource = value;
+                this.bsIceSale.DataSource = value;
                 this.dgvIce.EndDataUpdate();
             }
         }

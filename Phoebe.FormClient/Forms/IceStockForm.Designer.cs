@@ -168,6 +168,11 @@
             this.spFlowWeight.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.spFlowWeight.Properties.Mask.EditMask = "n3";
+            this.spFlowWeight.Properties.MaxValue = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
             this.spFlowWeight.Size = new System.Drawing.Size(262, 20);
             this.spFlowWeight.StyleController = this.layoutControl1;
             this.spFlowWeight.TabIndex = 7;
@@ -187,6 +192,11 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.spFlowCount.Properties.IsFloatValue = false;
             this.spFlowCount.Properties.Mask.EditMask = "N00";
+            this.spFlowCount.Properties.MaxValue = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
             this.spFlowCount.Size = new System.Drawing.Size(262, 20);
             this.spFlowCount.StyleController = this.layoutControl1;
             this.spFlowCount.TabIndex = 6;

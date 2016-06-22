@@ -30,9 +30,13 @@ namespace Phoebe.Business.DAL
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// 查找所有记录
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<IceSale> FindAll()
         {
-            throw new NotImplementedException();
+            return this.context.IceSales;
         }
 
         public ErrorCode Create(IceSale entity)

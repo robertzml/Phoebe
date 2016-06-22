@@ -213,12 +213,12 @@
             // 
             // txtFragmentCount
             // 
-            this.txtFragmentCount.Location = new System.Drawing.Point(274, 41);
+            this.txtFragmentCount.Location = new System.Drawing.Point(269, 41);
             this.txtFragmentCount.Name = "txtFragmentCount";
             this.txtFragmentCount.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
             this.txtFragmentCount.Properties.Appearance.Options.UseBackColor = true;
             this.txtFragmentCount.Properties.ReadOnly = true;
-            this.txtFragmentCount.Size = new System.Drawing.Size(127, 20);
+            this.txtFragmentCount.Size = new System.Drawing.Size(132, 20);
             this.txtFragmentCount.StyleController = this.layoutControl1;
             this.txtFragmentCount.TabIndex = 8;
             // 
@@ -230,7 +230,7 @@
             this.textEdit4.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
             this.textEdit4.Properties.Appearance.Options.UseBackColor = true;
             this.textEdit4.Properties.ReadOnly = true;
-            this.textEdit4.Size = new System.Drawing.Size(121, 20);
+            this.textEdit4.Size = new System.Drawing.Size(116, 20);
             this.textEdit4.StyleController = this.layoutControl1;
             this.textEdit4.TabIndex = 7;
             // 
@@ -247,12 +247,12 @@
             // 
             // txtCompleteCount
             // 
-            this.txtCompleteCount.Location = new System.Drawing.Point(274, 17);
+            this.txtCompleteCount.Location = new System.Drawing.Point(269, 17);
             this.txtCompleteCount.Name = "txtCompleteCount";
             this.txtCompleteCount.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
             this.txtCompleteCount.Properties.Appearance.Options.UseBackColor = true;
             this.txtCompleteCount.Properties.ReadOnly = true;
-            this.txtCompleteCount.Size = new System.Drawing.Size(127, 20);
+            this.txtCompleteCount.Size = new System.Drawing.Size(132, 20);
             this.txtCompleteCount.StyleController = this.layoutControl1;
             this.txtCompleteCount.TabIndex = 5;
             // 
@@ -264,7 +264,7 @@
             this.textEdit1.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
             this.textEdit1.Properties.Appearance.Options.UseBackColor = true;
             this.textEdit1.Properties.ReadOnly = true;
-            this.textEdit1.Size = new System.Drawing.Size(121, 20);
+            this.textEdit1.Size = new System.Drawing.Size(116, 20);
             this.textEdit1.StyleController = this.layoutControl1;
             this.textEdit1.TabIndex = 4;
             // 
@@ -300,7 +300,7 @@
             this.layoutControlItem1.Control = this.textEdit1;
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(191, 24);
+            this.layoutControlItem1.Size = new System.Drawing.Size(186, 24);
             this.layoutControlItem1.Text = "冰块类型";
             this.layoutControlItem1.TextSize = new System.Drawing.Size(63, 14);
             // 
@@ -309,25 +309,25 @@
             this.layoutControlItem4.Control = this.textEdit4;
             this.layoutControlItem4.Location = new System.Drawing.Point(0, 24);
             this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(191, 24);
+            this.layoutControlItem4.Size = new System.Drawing.Size(186, 24);
             this.layoutControlItem4.Text = "冰块类型";
             this.layoutControlItem4.TextSize = new System.Drawing.Size(63, 14);
             // 
             // layoutControlItem5
             // 
             this.layoutControlItem5.Control = this.txtFragmentCount;
-            this.layoutControlItem5.Location = new System.Drawing.Point(191, 24);
+            this.layoutControlItem5.Location = new System.Drawing.Point(186, 24);
             this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(197, 24);
+            this.layoutControlItem5.Size = new System.Drawing.Size(202, 24);
             this.layoutControlItem5.Text = "在库数量";
             this.layoutControlItem5.TextSize = new System.Drawing.Size(63, 14);
             // 
             // layoutControlItem2
             // 
             this.layoutControlItem2.Control = this.txtCompleteCount;
-            this.layoutControlItem2.Location = new System.Drawing.Point(191, 0);
+            this.layoutControlItem2.Location = new System.Drawing.Point(186, 0);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(197, 24);
+            this.layoutControlItem2.Size = new System.Drawing.Size(202, 24);
             this.layoutControlItem2.Text = "在库数量";
             this.layoutControlItem2.TextSize = new System.Drawing.Size(63, 14);
             // 
@@ -413,7 +413,7 @@
             // 
             this.btnCompleteMakeOut.Location = new System.Drawing.Point(278, 52);
             this.btnCompleteMakeOut.Name = "btnCompleteMakeOut";
-            this.btnCompleteMakeOut.Size = new System.Drawing.Size(99, 41);
+            this.btnCompleteMakeOut.Size = new System.Drawing.Size(100, 40);
             this.btnCompleteMakeOut.TabIndex = 3;
             this.btnCompleteMakeOut.Text = "整冰制冰出库";
             this.btnCompleteMakeOut.Click += new System.EventHandler(this.btnCompleteMakeOut_Click);
@@ -422,7 +422,7 @@
             // 
             this.btnFragmentStockIn.Location = new System.Drawing.Point(155, 52);
             this.btnFragmentStockIn.Name = "btnFragmentStockIn";
-            this.btnFragmentStockIn.Size = new System.Drawing.Size(99, 41);
+            this.btnFragmentStockIn.Size = new System.Drawing.Size(100, 40);
             this.btnFragmentStockIn.TabIndex = 2;
             this.btnFragmentStockIn.Text = "碎冰入库";
             this.btnFragmentStockIn.Click += new System.EventHandler(this.btnFragmentStockIn_Click);
@@ -431,7 +431,7 @@
             // 
             this.btnCompleteStockIn.Location = new System.Drawing.Point(32, 52);
             this.btnCompleteStockIn.Name = "btnCompleteStockIn";
-            this.btnCompleteStockIn.Size = new System.Drawing.Size(99, 41);
+            this.btnCompleteStockIn.Size = new System.Drawing.Size(100, 40);
             this.btnCompleteStockIn.TabIndex = 1;
             this.btnCompleteStockIn.Text = "整冰入库";
             this.btnCompleteStockIn.Click += new System.EventHandler(this.btnCompleteStockIn_Click);

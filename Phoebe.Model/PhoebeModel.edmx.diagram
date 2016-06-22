@@ -53,11 +53,12 @@
         <AssociationConnector Association="Phoebe.Model.FK_Payment_Customer" />
         <AssociationConnector Association="Phoebe.Model.FK_Payment_User" />
         <EntityTypeShape EntityType="Phoebe.Model.IceFlow" Width="1.5" PointX="15" PointY="12" />
-        <EntityTypeShape EntityType="Phoebe.Model.IceSale" Width="1.5" PointX="16.75" PointY="16.625" />
-        <AssociationConnector Association="Phoebe.Model.FK_IceSale_Customer" />
         <AssociationConnector Association="Phoebe.Model.FK_IceFlow_User" />
-        <AssociationConnector Association="Phoebe.Model.FK_IceSale_IceFlow" />
         <EntityTypeShape EntityType="Phoebe.Model.IceStore" Width="1.5" PointX="12.5" PointY="9.125" />
+        <EntityTypeShape EntityType="Phoebe.Model.IceSale" Width="1.5" PointX="19.5" PointY="16.375" />
+        <AssociationConnector Association="Phoebe.Model.FK_IceSale_Customer" />
+        <AssociationConnector Association="Phoebe.Model.FK_IceSale_IceFlow" />
+        <AssociationConnector Association="Phoebe.Model.FK_IceSale_User" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

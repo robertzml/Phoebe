@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 
 namespace Phoebe.Business
-{ 
+{
     using Phoebe.Base;
     using Phoebe.Model;
     using Phoebe.Business.DAL;
@@ -34,7 +34,45 @@ namespace Phoebe.Business
         #endregion //Constructor
 
         #region Method
+        /// <summary>
+        /// 添加销售
+        /// </summary>
+        /// <param name="entity">冰块销售对象</param>
+        /// <returns></returns>
+        public override ErrorCode Create(IceSale entity)
+        {
+            //check store count
+            var store = BusinessFactory<IceStoreBusiness>.Instance.GetByType((IceType)entity.IceType);
+            if (entity.SaleCount > store.Count)
+                return ErrorCode.IceOutCountOverflow;
+            if (entity.SaleWeight > store.Weight)
+                return ErrorCode.IceOutWeightOverflow;
 
+            //generate ice flow
+            IceFlow iceFlow = new IceFlow();
+            iceFlow.Id = Guid.NewGuid();
+            if (entity.IceType == (int)IceType.Complete)
+                iceFlow.FlowType = (int)IceFlowType.CompleteSaleOut;
+            else
+                iceFlow.FlowType = (int)IceFlowType.FragmentSaleOut;
+            iceFlow.IceType = entity.IceType;
+            iceFlow.FlowCount = entity.SaleCount;
+            iceFlow.FlowWeight = entity.SaleWeight;
+            iceFlow.FlowTime = entity.SaleTime;
+            iceFlow.UserId = entity.UserId;
+            iceFlow.CreateTime = entity.CreateTime;
+            iceFlow.Remark = entity.Remark;
+            iceFlow.Status = (int)EntityStatus.Normal;
+
+            entity.Id = Guid.NewGuid();
+            entity.FlowId = iceFlow.Id;
+            entity.Status = (int)EntityStatus.Normal;
+
+            var trans = new TransactionRepository();
+            var result = trans.IceSaleAddTrans(entity, iceFlow);
+
+            return result;
+        }
         #endregion //Method
     }
 }
