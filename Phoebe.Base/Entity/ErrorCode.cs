@@ -249,6 +249,18 @@ namespace Phoebe.Base
         /// </summary>
         [Display(Name = "冰块出库重量超出")]
         IceOutWeightOverflow = 101,
+
+        /// <summary>
+        /// 冰块删除数量超出
+        /// </summary>
+        [Display(Name = "冰块删除数量超出")]
+        IceDeleteCountOverflow = 102,
+
+        /// <summary>
+        /// 冰块删除重量超出
+        /// </summary>
+        [Display(Name = "冰块删除重量超出")]
+        IceDeleteWeightOverflow = 103,
         #endregion //Ice
     }
 }

@@ -154,6 +154,8 @@
             this.dpTime.Location = new System.Drawing.Point(78, 132);
             this.dpTime.Name = "dpTime";
             this.dpTime.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
+            this.dpTime.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow;
+            this.dpTime.Properties.Appearance.Options.UseBackColor = true;
             this.dpTime.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dpTime.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -237,6 +239,8 @@
             // 
             this.cmbIceType.Location = new System.Drawing.Point(78, 36);
             this.cmbIceType.Name = "cmbIceType";
+            this.cmbIceType.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow;
+            this.cmbIceType.Properties.Appearance.Options.UseBackColor = true;
             this.cmbIceType.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cmbIceType.Size = new System.Drawing.Size(297, 20);

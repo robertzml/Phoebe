@@ -25,6 +25,23 @@ namespace Phoebe.FormClient
         }
         #endregion //Constructor
 
+        #region Function
+        /// <summary>
+        /// 载入冰块库存
+        /// </summary>
+        private void LoadStores()
+        {
+            var stores = BusinessFactory<IceStoreBusiness>.Instance.FindAll();
+
+            var complete = stores.Single(r => r.Type == (int)IceType.Complete);
+            this.txtCompleteCount.Text = complete.Count.ToString();
+            this.txtCompleteWeight.Text = complete.Weight.ToString();
+
+            var fragment = stores.Single(r => r.Type == (int)IceType.Fragment);
+            this.txtFragmentCount.Text = fragment.Count.ToString();
+            this.txtFragmentWeight.Text = fragment.Weight.ToString();
+        }
+        #endregion //Function
 
         #region Event
         /// <summary>
@@ -34,6 +51,11 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void IceSaleForm_Load(object sender, EventArgs e)
         {
+            LoadStores();
+
+            this.dpFrom.DateTime = DateTime.Now.AddMonths(-1).Date;
+            this.dpTo.DateTime = DateTime.Now.Date;
+
             this.bsCustomer.DataSource = BusinessFactory<CustomerBusiness>.Instance.FindAll();
             this.lkuCustomer.CustomDisplayText += new DevExpress.XtraEditors.Controls.CustomDisplayTextEventHandler(EventUtil.LkuCustomer_CustomDisplayText);
         }
@@ -45,8 +67,23 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            var data = BusinessFactory<IceSaleBusiness>.Instance.FindAll();
-            this.iceList.DataSource = data;
+            if (this.dpFrom.DateTime > this.dpTo.DateTime)
+            {
+                MessageUtil.ShowClaim("结束日期早于开始日期");
+                return;
+            }
+
+            if (this.lkuCustomer.EditValue == null)
+            {
+                var data = BusinessFactory<IceSaleBusiness>.Instance.Get(this.dpFrom.DateTime, this.dpTo.DateTime);
+                this.iceList.DataSource = data;
+            }
+            else
+            {
+                int customerId = Convert.ToInt32(this.lkuCustomer.EditValue);
+                var data = BusinessFactory<IceSaleBusiness>.Instance.Get(this.dpFrom.DateTime, this.dpTo.DateTime).Where(r => r.CustomerId == customerId);
+                this.iceList.DataSource = data.ToList();
+            }
         }
 
         /// <summary>
@@ -57,6 +94,7 @@ namespace Phoebe.FormClient
         private void btnSell_Click(object sender, EventArgs e)
         {
             ChildFormManage.ShowDialogForm(typeof(IceSellForm));
+            LoadStores();
         }
         #endregion //Event
     }

@@ -648,6 +648,46 @@ namespace Phoebe.Business.DAL
                 return ErrorCode.Exception;
             }
         }
+
+        /// <summary>
+        /// 删除冰块流水记录
+        /// </summary>
+        /// <param name="iceFlow">冰块流水记录</param>
+        /// <returns></returns>
+        public ErrorCode IceFlowDeleteTrans(IceFlow iceFlow)
+        {
+            try
+            {
+                var store = this.context.IceStores.Single(r => r.Type == iceFlow.IceType);
+                IceFlowType flowType = (IceFlowType)iceFlow.FlowType;
+                if (flowType == IceFlowType.CompleteStockIn || flowType == IceFlowType.FragmentStockIn)
+                {
+                    store.Count -= iceFlow.FlowCount;
+                    store.Weight -= iceFlow.FlowWeight;
+
+                    if (store.Count < 0)
+                        return ErrorCode.IceDeleteCountOverflow;
+                    if (store.Weight < 0)
+                        return ErrorCode.IceDeleteWeightOverflow;
+                }
+                else if (flowType == IceFlowType.CompleteMakeOut || flowType == IceFlowType.CompleteSaleOut || flowType == IceFlowType.FragmentSaleOut)
+                {
+                    store.Count += iceFlow.FlowCount;
+                    store.Weight += iceFlow.FlowWeight;
+                }
+
+                this.context.Entry(store).State = EntityState.Modified;
+                this.context.IceFlows.Remove(iceFlow);
+
+                this.context.SaveChanges();
+
+                return ErrorCode.Success;
+            }
+            catch(Exception)
+            {
+                return ErrorCode.Exception;
+            }
+        }
         #endregion //IceTrans
     }
 }

@@ -31,6 +31,19 @@ namespace Phoebe.FormClient
         {
             this.bsIceFlow.Clear();
         }
+
+        /// <summary>
+        /// 获取选中数据
+        /// </summary>
+        /// <returns></returns>
+        public IceFlow GetCurrentSelect()
+        {
+            int rowIndex = this.dgvIce.GetFocusedDataSourceRowIndex();
+            if (rowIndex < 0 || rowIndex >= this.bsIceFlow.Count)
+                return null;
+            else
+                return this.bsIceFlow[rowIndex] as IceFlow;
+        }
         #endregion //Method
 
         #region Event

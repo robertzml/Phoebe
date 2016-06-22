@@ -83,6 +83,28 @@ namespace Phoebe.Business
             var result = trans.IceFlowAddTrans(entity);
             return result;
         }
+
+        /// <summary>
+        /// 删除冰块流水
+        /// </summary>
+        /// <param name="entity">冰块流水</param>
+        /// <returns></returns>
+        public override ErrorCode Delete(IceFlow entity)
+        {
+            if (entity.FlowType == (int)IceFlowType.CompleteStockIn || entity.FlowType == (int)IceFlowType.FragmentStockIn)
+            {
+                var store = BusinessFactory<IceStoreBusiness>.Instance.GetByType((IceType)entity.IceType);
+                if (entity.FlowCount > store.Count)
+                    return ErrorCode.IceDeleteCountOverflow;
+                if (entity.FlowWeight > store.Weight)
+                    return ErrorCode.IceDeleteWeightOverflow;
+            }
+
+            var trans = new TransactionRepository();
+            var result = trans.IceFlowDeleteTrans(entity);
+
+            return result;
+        }
         #endregion //Method
     }
 }

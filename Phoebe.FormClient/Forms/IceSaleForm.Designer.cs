@@ -37,11 +37,11 @@
             this.bsCustomer = new System.Windows.Forms.BindingSource(this.components);
             this.dpTo = new DevExpress.XtraEditors.DateEdit();
             this.dpFrom = new DevExpress.XtraEditors.DateEdit();
-            this.textEdit6 = new DevExpress.XtraEditors.TextEdit();
-            this.textEdit5 = new DevExpress.XtraEditors.TextEdit();
+            this.txtFragmentWeight = new DevExpress.XtraEditors.TextEdit();
+            this.txtFragmentCount = new DevExpress.XtraEditors.TextEdit();
             this.textEdit4 = new DevExpress.XtraEditors.TextEdit();
-            this.textEdit3 = new DevExpress.XtraEditors.TextEdit();
-            this.textEdit2 = new DevExpress.XtraEditors.TextEdit();
+            this.txtCompleteWeight = new DevExpress.XtraEditors.TextEdit();
+            this.txtCompleteCount = new DevExpress.XtraEditors.TextEdit();
             this.textEdit1 = new DevExpress.XtraEditors.TextEdit();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
@@ -71,11 +71,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.dpTo.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dpFrom.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dpFrom.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit6.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit5.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtFragmentWeight.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtFragmentCount.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit4.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit3.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCompleteWeight.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCompleteCount.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).BeginInit();
@@ -110,7 +110,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 200F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1017, 606);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1006, 606);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // groupControl1
@@ -119,7 +119,7 @@
             this.groupControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl1.Location = new System.Drawing.Point(3, 3);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(604, 194);
+            this.groupControl1.Size = new System.Drawing.Size(597, 194);
             this.groupControl1.TabIndex = 0;
             this.groupControl1.Text = "查询";
             // 
@@ -129,25 +129,25 @@
             this.layoutControl1.Controls.Add(this.lkuCustomer);
             this.layoutControl1.Controls.Add(this.dpTo);
             this.layoutControl1.Controls.Add(this.dpFrom);
-            this.layoutControl1.Controls.Add(this.textEdit6);
-            this.layoutControl1.Controls.Add(this.textEdit5);
+            this.layoutControl1.Controls.Add(this.txtFragmentWeight);
+            this.layoutControl1.Controls.Add(this.txtFragmentCount);
             this.layoutControl1.Controls.Add(this.textEdit4);
-            this.layoutControl1.Controls.Add(this.textEdit3);
-            this.layoutControl1.Controls.Add(this.textEdit2);
+            this.layoutControl1.Controls.Add(this.txtCompleteWeight);
+            this.layoutControl1.Controls.Add(this.txtCompleteCount);
             this.layoutControl1.Controls.Add(this.textEdit1);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(2, 21);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.layoutControlGroup1;
-            this.layoutControl1.Size = new System.Drawing.Size(600, 171);
+            this.layoutControl1.Size = new System.Drawing.Size(593, 171);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(386, 113);
+            this.btnSearch.Location = new System.Drawing.Point(387, 113);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(197, 22);
+            this.btnSearch.Size = new System.Drawing.Size(189, 22);
             this.btnSearch.StyleController = this.layoutControl1;
             this.btnSearch.TabIndex = 13;
             this.btnSearch.Text = "查询";
@@ -155,8 +155,9 @@
             // 
             // lkuCustomer
             // 
-            this.lkuCustomer.Location = new System.Drawing.Point(452, 89);
+            this.lkuCustomer.Location = new System.Drawing.Point(453, 89);
             this.lkuCustomer.Name = "lkuCustomer";
+            this.lkuCustomer.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.True;
             this.lkuCustomer.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.lkuCustomer.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
@@ -168,7 +169,7 @@
             this.lkuCustomer.Properties.NullText = "请选择客户";
             this.lkuCustomer.Properties.ShowFooter = false;
             this.lkuCustomer.Properties.ValueMember = "Id";
-            this.lkuCustomer.Size = new System.Drawing.Size(131, 20);
+            this.lkuCustomer.Size = new System.Drawing.Size(123, 20);
             this.lkuCustomer.StyleController = this.layoutControl1;
             this.lkuCustomer.TabIndex = 12;
             // 
@@ -179,7 +180,7 @@
             // dpTo
             // 
             this.dpTo.EditValue = null;
-            this.dpTo.Location = new System.Drawing.Point(249, 89);
+            this.dpTo.Location = new System.Drawing.Point(261, 89);
             this.dpTo.Name = "dpTo";
             this.dpTo.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.dpTo.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -187,7 +188,7 @@
             this.dpTo.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dpTo.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.dpTo.Size = new System.Drawing.Size(133, 20);
+            this.dpTo.Size = new System.Drawing.Size(122, 20);
             this.dpTo.StyleController = this.layoutControl1;
             this.dpTo.TabIndex = 11;
             // 
@@ -202,73 +203,75 @@
             this.dpFrom.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dpFrom.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.dpFrom.Size = new System.Drawing.Size(96, 20);
+            this.dpFrom.Size = new System.Drawing.Size(108, 20);
             this.dpFrom.StyleController = this.layoutControl1;
             this.dpFrom.TabIndex = 10;
             // 
-            // textEdit6
+            // txtFragmentWeight
             // 
-            this.textEdit6.Location = new System.Drawing.Point(452, 41);
-            this.textEdit6.Name = "textEdit6";
-            this.textEdit6.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
-            this.textEdit6.Properties.Appearance.Options.UseBackColor = true;
-            this.textEdit6.Properties.ReadOnly = true;
-            this.textEdit6.Size = new System.Drawing.Size(131, 20);
-            this.textEdit6.StyleController = this.layoutControl1;
-            this.textEdit6.TabIndex = 9;
+            this.txtFragmentWeight.Location = new System.Drawing.Point(453, 41);
+            this.txtFragmentWeight.Name = "txtFragmentWeight";
+            this.txtFragmentWeight.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
+            this.txtFragmentWeight.Properties.Appearance.Options.UseBackColor = true;
+            this.txtFragmentWeight.Properties.ReadOnly = true;
+            this.txtFragmentWeight.Size = new System.Drawing.Size(123, 20);
+            this.txtFragmentWeight.StyleController = this.layoutControl1;
+            this.txtFragmentWeight.TabIndex = 9;
             // 
-            // textEdit5
+            // txtFragmentCount
             // 
-            this.textEdit5.Location = new System.Drawing.Point(250, 41);
-            this.textEdit5.Name = "textEdit5";
-            this.textEdit5.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
-            this.textEdit5.Properties.Appearance.Options.UseBackColor = true;
-            this.textEdit5.Properties.ReadOnly = true;
-            this.textEdit5.Size = new System.Drawing.Size(132, 20);
-            this.textEdit5.StyleController = this.layoutControl1;
-            this.textEdit5.TabIndex = 8;
+            this.txtFragmentCount.Location = new System.Drawing.Point(258, 41);
+            this.txtFragmentCount.Name = "txtFragmentCount";
+            this.txtFragmentCount.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
+            this.txtFragmentCount.Properties.Appearance.Options.UseBackColor = true;
+            this.txtFragmentCount.Properties.ReadOnly = true;
+            this.txtFragmentCount.Size = new System.Drawing.Size(125, 20);
+            this.txtFragmentCount.StyleController = this.layoutControl1;
+            this.txtFragmentCount.TabIndex = 8;
             // 
             // textEdit4
             // 
+            this.textEdit4.EditValue = "碎冰";
             this.textEdit4.Location = new System.Drawing.Point(83, 41);
             this.textEdit4.Name = "textEdit4";
             this.textEdit4.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
             this.textEdit4.Properties.Appearance.Options.UseBackColor = true;
             this.textEdit4.Properties.ReadOnly = true;
-            this.textEdit4.Size = new System.Drawing.Size(97, 20);
+            this.textEdit4.Size = new System.Drawing.Size(105, 20);
             this.textEdit4.StyleController = this.layoutControl1;
             this.textEdit4.TabIndex = 7;
             // 
-            // textEdit3
+            // txtCompleteWeight
             // 
-            this.textEdit3.Location = new System.Drawing.Point(452, 17);
-            this.textEdit3.Name = "textEdit3";
-            this.textEdit3.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
-            this.textEdit3.Properties.Appearance.Options.UseBackColor = true;
-            this.textEdit3.Properties.ReadOnly = true;
-            this.textEdit3.Size = new System.Drawing.Size(131, 20);
-            this.textEdit3.StyleController = this.layoutControl1;
-            this.textEdit3.TabIndex = 6;
+            this.txtCompleteWeight.Location = new System.Drawing.Point(453, 17);
+            this.txtCompleteWeight.Name = "txtCompleteWeight";
+            this.txtCompleteWeight.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
+            this.txtCompleteWeight.Properties.Appearance.Options.UseBackColor = true;
+            this.txtCompleteWeight.Properties.ReadOnly = true;
+            this.txtCompleteWeight.Size = new System.Drawing.Size(123, 20);
+            this.txtCompleteWeight.StyleController = this.layoutControl1;
+            this.txtCompleteWeight.TabIndex = 6;
             // 
-            // textEdit2
+            // txtCompleteCount
             // 
-            this.textEdit2.Location = new System.Drawing.Point(250, 17);
-            this.textEdit2.Name = "textEdit2";
-            this.textEdit2.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
-            this.textEdit2.Properties.Appearance.Options.UseBackColor = true;
-            this.textEdit2.Properties.ReadOnly = true;
-            this.textEdit2.Size = new System.Drawing.Size(132, 20);
-            this.textEdit2.StyleController = this.layoutControl1;
-            this.textEdit2.TabIndex = 5;
+            this.txtCompleteCount.Location = new System.Drawing.Point(258, 17);
+            this.txtCompleteCount.Name = "txtCompleteCount";
+            this.txtCompleteCount.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
+            this.txtCompleteCount.Properties.Appearance.Options.UseBackColor = true;
+            this.txtCompleteCount.Properties.ReadOnly = true;
+            this.txtCompleteCount.Size = new System.Drawing.Size(125, 20);
+            this.txtCompleteCount.StyleController = this.layoutControl1;
+            this.txtCompleteCount.TabIndex = 5;
             // 
             // textEdit1
             // 
+            this.textEdit1.EditValue = "整冰";
             this.textEdit1.Location = new System.Drawing.Point(83, 17);
             this.textEdit1.Name = "textEdit1";
             this.textEdit1.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
             this.textEdit1.Properties.Appearance.Options.UseBackColor = true;
             this.textEdit1.Properties.ReadOnly = true;
-            this.textEdit1.Size = new System.Drawing.Size(97, 20);
+            this.textEdit1.Size = new System.Drawing.Size(105, 20);
             this.textEdit1.StyleController = this.layoutControl1;
             this.textEdit1.TabIndex = 4;
             // 
@@ -282,7 +285,7 @@
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "layoutControlGroup1";
             this.layoutControlGroup1.Padding = new DevExpress.XtraLayout.Utils.Padding(3, 3, 3, 3);
-            this.layoutControlGroup1.Size = new System.Drawing.Size(600, 171);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(593, 171);
             this.layoutControlGroup1.TextVisible = false;
             // 
             // layoutControlGroup2
@@ -296,7 +299,7 @@
             this.layoutControlItem6});
             this.layoutControlGroup2.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup2.Name = "layoutControlGroup2";
-            this.layoutControlGroup2.Size = new System.Drawing.Size(594, 72);
+            this.layoutControlGroup2.Size = new System.Drawing.Size(587, 72);
             this.layoutControlGroup2.TextVisible = false;
             // 
             // layoutControlItem1
@@ -304,7 +307,7 @@
             this.layoutControlItem1.Control = this.textEdit1;
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(167, 24);
+            this.layoutControlItem1.Size = new System.Drawing.Size(175, 24);
             this.layoutControlItem1.Text = "冰块类型";
             this.layoutControlItem1.TextSize = new System.Drawing.Size(63, 14);
             // 
@@ -313,43 +316,43 @@
             this.layoutControlItem4.Control = this.textEdit4;
             this.layoutControlItem4.Location = new System.Drawing.Point(0, 24);
             this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(167, 24);
+            this.layoutControlItem4.Size = new System.Drawing.Size(175, 24);
             this.layoutControlItem4.Text = "冰块类型";
             this.layoutControlItem4.TextSize = new System.Drawing.Size(63, 14);
             // 
             // layoutControlItem5
             // 
-            this.layoutControlItem5.Control = this.textEdit5;
-            this.layoutControlItem5.Location = new System.Drawing.Point(167, 24);
+            this.layoutControlItem5.Control = this.txtFragmentCount;
+            this.layoutControlItem5.Location = new System.Drawing.Point(175, 24);
             this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(202, 24);
+            this.layoutControlItem5.Size = new System.Drawing.Size(195, 24);
             this.layoutControlItem5.Text = "在库数量";
             this.layoutControlItem5.TextSize = new System.Drawing.Size(63, 14);
             // 
             // layoutControlItem2
             // 
-            this.layoutControlItem2.Control = this.textEdit2;
-            this.layoutControlItem2.Location = new System.Drawing.Point(167, 0);
+            this.layoutControlItem2.Control = this.txtCompleteCount;
+            this.layoutControlItem2.Location = new System.Drawing.Point(175, 0);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(202, 24);
+            this.layoutControlItem2.Size = new System.Drawing.Size(195, 24);
             this.layoutControlItem2.Text = "在库数量";
             this.layoutControlItem2.TextSize = new System.Drawing.Size(63, 14);
             // 
             // layoutControlItem3
             // 
-            this.layoutControlItem3.Control = this.textEdit3;
-            this.layoutControlItem3.Location = new System.Drawing.Point(369, 0);
+            this.layoutControlItem3.Control = this.txtCompleteWeight;
+            this.layoutControlItem3.Location = new System.Drawing.Point(370, 0);
             this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(201, 24);
+            this.layoutControlItem3.Size = new System.Drawing.Size(193, 24);
             this.layoutControlItem3.Text = "在库重量(t)";
             this.layoutControlItem3.TextSize = new System.Drawing.Size(63, 14);
             // 
             // layoutControlItem6
             // 
-            this.layoutControlItem6.Control = this.textEdit6;
-            this.layoutControlItem6.Location = new System.Drawing.Point(369, 24);
+            this.layoutControlItem6.Control = this.txtFragmentWeight;
+            this.layoutControlItem6.Location = new System.Drawing.Point(370, 24);
             this.layoutControlItem6.Name = "layoutControlItem6";
-            this.layoutControlItem6.Size = new System.Drawing.Size(201, 24);
+            this.layoutControlItem6.Size = new System.Drawing.Size(193, 24);
             this.layoutControlItem6.Text = "在库重量(t)";
             this.layoutControlItem6.TextSize = new System.Drawing.Size(63, 14);
             // 
@@ -362,7 +365,7 @@
             this.layoutControlItem10});
             this.layoutControlGroup3.Location = new System.Drawing.Point(0, 72);
             this.layoutControlGroup3.Name = "layoutControlGroup3";
-            this.layoutControlGroup3.Size = new System.Drawing.Size(594, 93);
+            this.layoutControlGroup3.Size = new System.Drawing.Size(587, 93);
             this.layoutControlGroup3.TextVisible = false;
             // 
             // layoutControlItem7
@@ -370,34 +373,34 @@
             this.layoutControlItem7.Control = this.dpFrom;
             this.layoutControlItem7.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem7.Name = "layoutControlItem7";
-            this.layoutControlItem7.Size = new System.Drawing.Size(166, 69);
+            this.layoutControlItem7.Size = new System.Drawing.Size(178, 69);
             this.layoutControlItem7.Text = "开始日期";
             this.layoutControlItem7.TextSize = new System.Drawing.Size(63, 14);
             // 
             // layoutControlItem8
             // 
             this.layoutControlItem8.Control = this.dpTo;
-            this.layoutControlItem8.Location = new System.Drawing.Point(166, 0);
+            this.layoutControlItem8.Location = new System.Drawing.Point(178, 0);
             this.layoutControlItem8.Name = "layoutControlItem8";
-            this.layoutControlItem8.Size = new System.Drawing.Size(203, 69);
+            this.layoutControlItem8.Size = new System.Drawing.Size(192, 69);
             this.layoutControlItem8.Text = "结束日期";
             this.layoutControlItem8.TextSize = new System.Drawing.Size(63, 14);
             // 
             // layoutControlItem9
             // 
             this.layoutControlItem9.Control = this.lkuCustomer;
-            this.layoutControlItem9.Location = new System.Drawing.Point(369, 0);
+            this.layoutControlItem9.Location = new System.Drawing.Point(370, 0);
             this.layoutControlItem9.Name = "layoutControlItem9";
-            this.layoutControlItem9.Size = new System.Drawing.Size(201, 24);
+            this.layoutControlItem9.Size = new System.Drawing.Size(193, 24);
             this.layoutControlItem9.Text = "客户选择";
             this.layoutControlItem9.TextSize = new System.Drawing.Size(63, 14);
             // 
             // layoutControlItem10
             // 
             this.layoutControlItem10.Control = this.btnSearch;
-            this.layoutControlItem10.Location = new System.Drawing.Point(369, 24);
+            this.layoutControlItem10.Location = new System.Drawing.Point(370, 24);
             this.layoutControlItem10.Name = "layoutControlItem10";
-            this.layoutControlItem10.Size = new System.Drawing.Size(201, 45);
+            this.layoutControlItem10.Size = new System.Drawing.Size(193, 45);
             this.layoutControlItem10.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem10.TextVisible = false;
             // 
@@ -405,9 +408,9 @@
             // 
             this.groupControl2.Controls.Add(this.btnSell);
             this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl2.Location = new System.Drawing.Point(613, 3);
+            this.groupControl2.Location = new System.Drawing.Point(606, 3);
             this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(401, 194);
+            this.groupControl2.Size = new System.Drawing.Size(397, 194);
             this.groupControl2.TabIndex = 1;
             this.groupControl2.Text = "操作";
             // 
@@ -427,7 +430,7 @@
             this.groupControl3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl3.Location = new System.Drawing.Point(3, 203);
             this.groupControl3.Name = "groupControl3";
-            this.groupControl3.Size = new System.Drawing.Size(1011, 400);
+            this.groupControl3.Size = new System.Drawing.Size(1000, 400);
             this.groupControl3.TabIndex = 2;
             this.groupControl3.Text = "销售记录";
             // 
@@ -437,14 +440,14 @@
             this.iceList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.iceList.Location = new System.Drawing.Point(2, 21);
             this.iceList.Name = "iceList";
-            this.iceList.Size = new System.Drawing.Size(1007, 377);
+            this.iceList.Size = new System.Drawing.Size(996, 377);
             this.iceList.TabIndex = 0;
             // 
             // IceSaleForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1017, 606);
+            this.ClientSize = new System.Drawing.Size(1006, 606);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "IceSaleForm";
             this.Text = "冰块销售";
@@ -460,11 +463,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.dpTo.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dpFrom.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dpFrom.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit6.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit5.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtFragmentWeight.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtFragmentCount.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit4.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit3.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCompleteWeight.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCompleteCount.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).EndInit();
@@ -496,15 +499,15 @@
         private DevExpress.XtraEditors.GroupControl groupControl3;
         private IceSaleGridControl iceList;
         private DevExpress.XtraLayout.LayoutControl layoutControl1;
-        private DevExpress.XtraEditors.TextEdit textEdit3;
-        private DevExpress.XtraEditors.TextEdit textEdit2;
+        private DevExpress.XtraEditors.TextEdit txtCompleteWeight;
+        private DevExpress.XtraEditors.TextEdit txtCompleteCount;
         private DevExpress.XtraEditors.TextEdit textEdit1;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup1;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
-        private DevExpress.XtraEditors.TextEdit textEdit6;
-        private DevExpress.XtraEditors.TextEdit textEdit5;
+        private DevExpress.XtraEditors.TextEdit txtFragmentWeight;
+        private DevExpress.XtraEditors.TextEdit txtFragmentCount;
         private DevExpress.XtraEditors.TextEdit textEdit4;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;

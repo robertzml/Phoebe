@@ -35,6 +35,18 @@ namespace Phoebe.Business
 
         #region Method
         /// <summary>
+        /// 按时间段获取销售记录
+        /// </summary>
+        /// <param name="from">开始日期</param>
+        /// <param name="to">结束日期</param>
+        /// <returns></returns>
+        public List<IceSale> Get(DateTime from, DateTime to)
+        {
+            var data = this.dal.Find(r => r.SaleTime >= from && r.SaleTime <= to).OrderByDescending(r => r.SaleTime);
+            return data.ToList();
+        }
+
+        /// <summary>
         /// 添加销售
         /// </summary>
         /// <param name="entity">冰块销售对象</param>

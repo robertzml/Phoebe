@@ -145,6 +145,8 @@
             this.dpFlowTime.Location = new System.Drawing.Point(78, 108);
             this.dpFlowTime.Name = "dpFlowTime";
             this.dpFlowTime.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
+            this.dpFlowTime.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow;
+            this.dpFlowTime.Properties.Appearance.Options.UseBackColor = true;
             this.dpFlowTime.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dpFlowTime.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
