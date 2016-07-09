@@ -28,7 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.barManager1 = new DevExpress.XtraBars.BarManager();
+            this.components = new System.ComponentModel.Container();
+            this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.mainMenu = new DevExpress.XtraBars.Bar();
             this.menuCustomer = new DevExpress.XtraBars.BarSubItem();
             this.menuCustomerList = new DevExpress.XtraBars.BarButtonItem();
@@ -73,7 +74,9 @@
             this.barCustomerList = new DevExpress.XtraBars.BarButtonItem();
             this.barHeaderItem1 = new DevExpress.XtraBars.BarHeaderItem();
             this.barStaticItem2 = new DevExpress.XtraBars.BarStaticItem();
-            this.tabMdiManager = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager();
+            this.tabMdiManager = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
+            this.menuReport = new DevExpress.XtraBars.BarSubItem();
+            this.menuStockFlowReport = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabMdiManager)).BeginInit();
             this.SuspendLayout();
@@ -126,9 +129,11 @@
             this.menuCargoStore,
             this.menuIce,
             this.menuIceStore,
-            this.menuIceSale});
+            this.menuIceSale,
+            this.menuReport,
+            this.menuStockFlowReport});
             this.barManager1.MainMenu = this.mainMenu;
-            this.barManager1.MaxItemId = 41;
+            this.barManager1.MaxItemId = 43;
             this.barManager1.StatusBar = this.bar3;
             // 
             // mainMenu
@@ -145,6 +150,7 @@
             new DevExpress.XtraBars.LinkPersistInfo(this.menuStore),
             new DevExpress.XtraBars.LinkPersistInfo(this.menuIce),
             new DevExpress.XtraBars.LinkPersistInfo(this.menuSettle),
+            new DevExpress.XtraBars.LinkPersistInfo(this.menuReport),
             new DevExpress.XtraBars.LinkPersistInfo(this.menuUser),
             new DevExpress.XtraBars.LinkPersistInfo(this.barMdiList)});
             this.mainMenu.OptionsBar.AllowQuickCustomization = false;
@@ -488,6 +494,21 @@
             this.tabMdiManager.MdiParent = this;
             this.tabMdiManager.PinPageButtonShowMode = DevExpress.XtraTab.PinPageButtonShowMode.InActiveTabPageHeader;
             // 
+            // menuReport
+            // 
+            this.menuReport.Caption = "报表管理";
+            this.menuReport.Id = 41;
+            this.menuReport.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.menuStockFlowReport)});
+            this.menuReport.Name = "menuReport";
+            // 
+            // menuStockFlowReport
+            // 
+            this.menuStockFlowReport.Caption = "出入库报表";
+            this.menuStockFlowReport.Id = 42;
+            this.menuStockFlowReport.Name = "menuStockFlowReport";
+            this.menuStockFlowReport.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuStockFlowReport_ItemClick);
+            // 
             // MainForm
             // 
             this.AllowMdiBar = true;
@@ -557,6 +578,8 @@
         private DevExpress.XtraBars.BarSubItem menuIce;
         private DevExpress.XtraBars.BarButtonItem menuIceStore;
         private DevExpress.XtraBars.BarButtonItem menuIceSale;
+        private DevExpress.XtraBars.BarSubItem menuReport;
+        private DevExpress.XtraBars.BarButtonItem menuStockFlowReport;
     }
 }
 

@@ -300,6 +300,12 @@
     <Compile Include="Report\StockOut.Designer.cs">
       <DependentUpon>StockOut.cs</DependentUpon>
     </Compile>
+    <Compile Include="Statistic\StockFlowReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Statistic\StockFlowReportForm.Designer.cs">
+      <DependentUpon>StockFlowReportForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="TestForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -668,6 +674,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Report\StockOut.resx">
       <DependentUpon>StockOut.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Statistic\StockFlowReportForm.resx">
+      <DependentUpon>StockFlowReportForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TestForm.resx">
       <DependentUpon>TestForm.cs</DependentUpon>

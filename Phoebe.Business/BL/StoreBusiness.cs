@@ -443,6 +443,31 @@ namespace Phoebe.Business
                 return ErrorCode.Exception;
             }
         }
+
+        /// <summary>
+        /// 获取入库记录
+        /// </summary>
+        /// <param name="start">开始日期</param>
+        /// <param name="end">结束日期</param>
+        /// <param name="customerId">客户ID</param>
+        /// <returns></returns>
+        public List<StockFlow> GetFlowIn(DateTime start, DateTime end, int customerId)
+        {
+            List<StockFlow> data = new List<StockFlow>();
+            if (customerId == 0)
+            {
+                // find stock in
+                var siDetails = RepositoryFactory<StockInDetailsRepository>.Instance.Find(r => r.StockIn.InTime >= start && r.StockIn.InTime <= end && r.Status == (int)EntityStatus.StockIn);
+                foreach (var item in siDetails)
+                {
+                    var flow = SetStockFlow(item.Store, item.Id, item.StockIn.FlowNumber, 0, item.Count, item.InWeight, item.InVolume, item.StockIn.InTime, StockFlowType.StockIn);
+                    data.Add(flow);
+                }
+            }
+
+
+            return data;
+        }
         #endregion //Method
     }
 }
