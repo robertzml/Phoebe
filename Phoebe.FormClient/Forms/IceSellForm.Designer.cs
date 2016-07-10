@@ -49,6 +49,8 @@
             this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.spUnitPrice = new DevExpress.XtraEditors.SpinEdit();
+            this.layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.plFill)).BeginInit();
             this.plFill.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.plBottom)).BeginInit();
@@ -76,6 +78,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spUnitPrice.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).BeginInit();
             this.SuspendLayout();
             // 
             // plFill
@@ -113,6 +117,7 @@
             // 
             // layoutControl1
             // 
+            this.layoutControl1.Controls.Add(this.spUnitPrice);
             this.layoutControl1.Controls.Add(this.txtRemark);
             this.layoutControl1.Controls.Add(this.txtUser);
             this.layoutControl1.Controls.Add(this.dpTime);
@@ -131,15 +136,15 @@
             // 
             // txtRemark
             // 
-            this.txtRemark.Location = new System.Drawing.Point(78, 180);
+            this.txtRemark.Location = new System.Drawing.Point(78, 204);
             this.txtRemark.Name = "txtRemark";
-            this.txtRemark.Size = new System.Drawing.Size(297, 100);
+            this.txtRemark.Size = new System.Drawing.Size(297, 76);
             this.txtRemark.StyleController = this.layoutControl1;
             this.txtRemark.TabIndex = 11;
             // 
             // txtUser
             // 
-            this.txtUser.Location = new System.Drawing.Point(78, 156);
+            this.txtUser.Location = new System.Drawing.Point(78, 180);
             this.txtUser.Name = "txtUser";
             this.txtUser.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
             this.txtUser.Properties.Appearance.Options.UseBackColor = true;
@@ -151,7 +156,7 @@
             // dpTime
             // 
             this.dpTime.EditValue = null;
-            this.dpTime.Location = new System.Drawing.Point(78, 132);
+            this.dpTime.Location = new System.Drawing.Point(78, 156);
             this.dpTime.Name = "dpTime";
             this.dpTime.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.dpTime.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow;
@@ -172,9 +177,9 @@
             0,
             0,
             0});
-            this.spFee.Location = new System.Drawing.Point(78, 108);
+            this.spFee.Location = new System.Drawing.Point(78, 132);
             this.spFee.Name = "spFee";
-            this.spFee.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow;
+            this.spFee.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
             this.spFee.Properties.Appearance.Options.UseBackColor = true;
             this.spFee.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -184,6 +189,7 @@
             0,
             0,
             0});
+            this.spFee.Properties.ReadOnly = true;
             this.spFee.Size = new System.Drawing.Size(297, 20);
             this.spFee.StyleController = this.layoutControl1;
             this.spFee.TabIndex = 8;
@@ -234,6 +240,7 @@
             this.spCount.Size = new System.Drawing.Size(297, 20);
             this.spCount.StyleController = this.layoutControl1;
             this.spCount.TabIndex = 6;
+            this.spCount.EditValueChanged += new System.EventHandler(this.spCount_EditValueChanged);
             // 
             // cmbIceType
             // 
@@ -284,7 +291,8 @@
             this.layoutControlItem5,
             this.layoutControlItem6,
             this.layoutControlItem7,
-            this.layoutControlItem8});
+            this.layoutControlItem8,
+            this.layoutControlItem9});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "layoutControlGroup1";
             this.layoutControlGroup1.Size = new System.Drawing.Size(387, 292);
@@ -329,16 +337,16 @@
             // layoutControlItem5
             // 
             this.layoutControlItem5.Control = this.spFee;
-            this.layoutControlItem5.Location = new System.Drawing.Point(0, 96);
+            this.layoutControlItem5.Location = new System.Drawing.Point(0, 120);
             this.layoutControlItem5.Name = "layoutControlItem5";
             this.layoutControlItem5.Size = new System.Drawing.Size(367, 24);
-            this.layoutControlItem5.Text = "金额(元)";
+            this.layoutControlItem5.Text = "总价(元)";
             this.layoutControlItem5.TextSize = new System.Drawing.Size(63, 14);
             // 
             // layoutControlItem6
             // 
             this.layoutControlItem6.Control = this.dpTime;
-            this.layoutControlItem6.Location = new System.Drawing.Point(0, 120);
+            this.layoutControlItem6.Location = new System.Drawing.Point(0, 144);
             this.layoutControlItem6.Name = "layoutControlItem6";
             this.layoutControlItem6.Size = new System.Drawing.Size(367, 24);
             this.layoutControlItem6.Text = "售出日期";
@@ -347,7 +355,7 @@
             // layoutControlItem7
             // 
             this.layoutControlItem7.Control = this.txtUser;
-            this.layoutControlItem7.Location = new System.Drawing.Point(0, 144);
+            this.layoutControlItem7.Location = new System.Drawing.Point(0, 168);
             this.layoutControlItem7.Name = "layoutControlItem7";
             this.layoutControlItem7.Size = new System.Drawing.Size(367, 24);
             this.layoutControlItem7.Text = "操作员";
@@ -356,11 +364,44 @@
             // layoutControlItem8
             // 
             this.layoutControlItem8.Control = this.txtRemark;
-            this.layoutControlItem8.Location = new System.Drawing.Point(0, 168);
+            this.layoutControlItem8.Location = new System.Drawing.Point(0, 192);
             this.layoutControlItem8.Name = "layoutControlItem8";
-            this.layoutControlItem8.Size = new System.Drawing.Size(367, 104);
+            this.layoutControlItem8.Size = new System.Drawing.Size(367, 80);
             this.layoutControlItem8.Text = "备注";
             this.layoutControlItem8.TextSize = new System.Drawing.Size(63, 14);
+            // 
+            // spUnitPrice
+            // 
+            this.spUnitPrice.EditValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.spUnitPrice.Location = new System.Drawing.Point(78, 108);
+            this.spUnitPrice.Name = "spUnitPrice";
+            this.spUnitPrice.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow;
+            this.spUnitPrice.Properties.Appearance.Options.UseBackColor = true;
+            this.spUnitPrice.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.spUnitPrice.Properties.Mask.EditMask = "n2";
+            this.spUnitPrice.Properties.MaxValue = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.spUnitPrice.Size = new System.Drawing.Size(297, 20);
+            this.spUnitPrice.StyleController = this.layoutControl1;
+            this.spUnitPrice.TabIndex = 12;
+            this.spUnitPrice.EditValueChanged += new System.EventHandler(this.spUnitPrice_EditValueChanged);
+            // 
+            // layoutControlItem9
+            // 
+            this.layoutControlItem9.Control = this.spUnitPrice;
+            this.layoutControlItem9.Location = new System.Drawing.Point(0, 96);
+            this.layoutControlItem9.Name = "layoutControlItem9";
+            this.layoutControlItem9.Size = new System.Drawing.Size(367, 24);
+            this.layoutControlItem9.Text = "单价(元)";
+            this.layoutControlItem9.TextSize = new System.Drawing.Size(63, 14);
             // 
             // IceSellForm
             // 
@@ -397,6 +438,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spUnitPrice.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -423,5 +466,7 @@
         private DevExpress.XtraEditors.MemoEdit txtRemark;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem8;
         private System.Windows.Forms.BindingSource bsCustomer;
+        private DevExpress.XtraEditors.SpinEdit spUnitPrice;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem9;
     }
 }

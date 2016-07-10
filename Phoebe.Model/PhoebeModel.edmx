@@ -107,7 +107,8 @@
           <Property Name="IceType" Type="int" Nullable="false" />
           <Property Name="SaleCount" Type="int" Nullable="false" />
           <Property Name="SaleWeight" Type="decimal" Precision="18" Scale="3" Nullable="false" />
-          <Property Name="SaleFee" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="SaleUnitPrice" Type="decimal" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="SaleFee" Type="decimal" Precision="18" Scale="3" Nullable="false" />
           <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="CreateTime" Type="datetime" Nullable="false" />
           <Property Name="Remark" Type="nvarchar" MaxLength="500" />
@@ -1491,7 +1492,7 @@
             <End Role="User" EntitySet="Users" />
             <End Role="IceSale" EntitySet="IceSales" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="SettlementDetail">
           <Key>
             <PropertyRef Name="Id" />
@@ -1786,7 +1787,8 @@
           <Property Name="IceType" Type="Int32" Nullable="false" />
           <Property Name="SaleCount" Type="Int32" Nullable="false" />
           <Property Name="SaleWeight" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
-          <Property Name="SaleFee" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="SaleUnitPrice" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
+          <Property Name="SaleFee" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
@@ -1833,7 +1835,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -2149,6 +2151,7 @@
                 <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="SaleFee" ColumnName="SaleFee" />
+                <ScalarProperty Name="SaleUnitPrice" ColumnName="SaleUnitPrice" />
                 <ScalarProperty Name="SaleWeight" ColumnName="SaleWeight" />
                 <ScalarProperty Name="SaleCount" ColumnName="SaleCount" />
                 <ScalarProperty Name="IceType" ColumnName="IceType" />

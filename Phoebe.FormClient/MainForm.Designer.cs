@@ -57,6 +57,8 @@
             this.menuSettleList = new DevExpress.XtraBars.BarButtonItem();
             this.menuPayment = new DevExpress.XtraBars.BarButtonItem();
             this.menuDebt = new DevExpress.XtraBars.BarButtonItem();
+            this.menuReport = new DevExpress.XtraBars.BarSubItem();
+            this.menuStockFlowReport = new DevExpress.XtraBars.BarButtonItem();
             this.menuUser = new DevExpress.XtraBars.BarSubItem();
             this.menuUserList = new DevExpress.XtraBars.BarButtonItem();
             this.menuUserGroupList = new DevExpress.XtraBars.BarButtonItem();
@@ -75,8 +77,7 @@
             this.barHeaderItem1 = new DevExpress.XtraBars.BarHeaderItem();
             this.barStaticItem2 = new DevExpress.XtraBars.BarStaticItem();
             this.tabMdiManager = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
-            this.menuReport = new DevExpress.XtraBars.BarSubItem();
-            this.menuStockFlowReport = new DevExpress.XtraBars.BarButtonItem();
+            this.menuStockInventoryReport = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabMdiManager)).BeginInit();
             this.SuspendLayout();
@@ -131,9 +132,10 @@
             this.menuIceStore,
             this.menuIceSale,
             this.menuReport,
-            this.menuStockFlowReport});
+            this.menuStockFlowReport,
+            this.menuStockInventoryReport});
             this.barManager1.MainMenu = this.mainMenu;
-            this.barManager1.MaxItemId = 43;
+            this.barManager1.MaxItemId = 44;
             this.barManager1.StatusBar = this.bar3;
             // 
             // mainMenu
@@ -360,6 +362,22 @@
             this.menuDebt.Name = "menuDebt";
             this.menuDebt.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuDebt_ItemClick);
             // 
+            // menuReport
+            // 
+            this.menuReport.Caption = "报表管理";
+            this.menuReport.Id = 41;
+            this.menuReport.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.menuStockFlowReport),
+            new DevExpress.XtraBars.LinkPersistInfo(this.menuStockInventoryReport)});
+            this.menuReport.Name = "menuReport";
+            // 
+            // menuStockFlowReport
+            // 
+            this.menuStockFlowReport.Caption = "出入库报表";
+            this.menuStockFlowReport.Id = 42;
+            this.menuStockFlowReport.Name = "menuStockFlowReport";
+            this.menuStockFlowReport.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuStockFlowReport_ItemClick);
+            // 
             // menuUser
             // 
             this.menuUser.Caption = "用户管理";
@@ -494,20 +512,12 @@
             this.tabMdiManager.MdiParent = this;
             this.tabMdiManager.PinPageButtonShowMode = DevExpress.XtraTab.PinPageButtonShowMode.InActiveTabPageHeader;
             // 
-            // menuReport
+            // menuStockInventoryReport
             // 
-            this.menuReport.Caption = "报表管理";
-            this.menuReport.Id = 41;
-            this.menuReport.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(this.menuStockFlowReport)});
-            this.menuReport.Name = "menuReport";
-            // 
-            // menuStockFlowReport
-            // 
-            this.menuStockFlowReport.Caption = "出入库报表";
-            this.menuStockFlowReport.Id = 42;
-            this.menuStockFlowReport.Name = "menuStockFlowReport";
-            this.menuStockFlowReport.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuStockFlowReport_ItemClick);
+            this.menuStockInventoryReport.Caption = "库存盘点报表";
+            this.menuStockInventoryReport.Id = 43;
+            this.menuStockInventoryReport.Name = "menuStockInventoryReport";
+            this.menuStockInventoryReport.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuStockInventoryReport_ItemClick);
             // 
             // MainForm
             // 
@@ -580,6 +590,7 @@
         private DevExpress.XtraBars.BarButtonItem menuIceSale;
         private DevExpress.XtraBars.BarSubItem menuReport;
         private DevExpress.XtraBars.BarButtonItem menuStockFlowReport;
+        private DevExpress.XtraBars.BarButtonItem menuStockInventoryReport;
     }
 }
 

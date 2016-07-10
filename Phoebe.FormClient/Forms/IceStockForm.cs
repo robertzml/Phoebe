@@ -90,7 +90,7 @@ namespace Phoebe.FormClient
                 MessageUtil.ShowInfo("流水数量必须大于0");
                 return;
             }
-            if (this.spFlowWeight.Value <= 0)
+            if (this.spFlowWeight.Value < 0)
             {
                 MessageUtil.ShowInfo("流水重量必须大于0");
                 return;

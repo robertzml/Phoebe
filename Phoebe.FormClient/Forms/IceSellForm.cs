@@ -37,10 +37,24 @@ namespace Phoebe.FormClient
             iceSale.SaleTime = this.dpTime.DateTime.Date;
             iceSale.SaleCount = Convert.ToInt32(this.spCount.Value);
             iceSale.SaleWeight = this.spWeight.Value;
+            iceSale.SaleUnitPrice = this.spUnitPrice.Value;
             iceSale.SaleFee = this.spFee.Value;
             iceSale.UserId = this.currentUser.Id;
             iceSale.CreateTime = DateTime.Now;
             iceSale.Remark = this.txtRemark.Text;
+        }
+
+        /// <summary>
+        /// 计算总价
+        /// </summary>
+        /// <returns></returns>
+        private decimal CalculateFee()
+        {
+            decimal unit = this.spUnitPrice.Value;
+            decimal count = this.spCount.Value;
+
+            var total = unit * count;
+            return total;
         }
         #endregion //Function
 
@@ -64,6 +78,28 @@ namespace Phoebe.FormClient
         }
 
         /// <summary>
+        /// 数量改变
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void spCount_EditValueChanged(object sender, EventArgs e)
+        {
+            var total = CalculateFee();
+            this.spFee.Value = total;
+        }
+
+        /// <summary>
+        /// 单价改变
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void spUnitPrice_EditValueChanged(object sender, EventArgs e)
+        {
+            var total = CalculateFee();
+            this.spFee.Value = total;
+        }
+
+        /// <summary>
         /// 保存
         /// </summary>
         /// <param name="sender"></param>
@@ -80,7 +116,7 @@ namespace Phoebe.FormClient
                 MessageUtil.ShowInfo("售出数量必须大于0");
                 return;
             }
-            if (this.spWeight.Value <= 0)
+            if (this.spWeight.Value < 0)
             {
                 MessageUtil.ShowInfo("售出重量必须大于0");
                 return;
@@ -100,6 +136,7 @@ namespace Phoebe.FormClient
                 MessageUtil.ShowError("添加冰块销售失败：" + result.DisplayName());
             }
         }
+
         #endregion //Event
     }
 }

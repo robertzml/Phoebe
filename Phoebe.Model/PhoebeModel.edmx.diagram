@@ -55,7 +55,7 @@
         <EntityTypeShape EntityType="Phoebe.Model.IceFlow" Width="1.5" PointX="15" PointY="12" />
         <AssociationConnector Association="Phoebe.Model.FK_IceFlow_User" />
         <EntityTypeShape EntityType="Phoebe.Model.IceStore" Width="1.5" PointX="12.5" PointY="9.125" />
-        <EntityTypeShape EntityType="Phoebe.Model.IceSale" Width="1.5" PointX="19.5" PointY="16.375" />
+        <EntityTypeShape EntityType="Phoebe.Model.IceSale" Width="1.5" PointX="14.875" PointY="16.5" />
         <AssociationConnector Association="Phoebe.Model.FK_IceSale_Customer" />
         <AssociationConnector Association="Phoebe.Model.FK_IceSale_IceFlow" />
         <AssociationConnector Association="Phoebe.Model.FK_IceSale_User" />

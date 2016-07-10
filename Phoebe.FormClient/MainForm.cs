@@ -247,6 +247,16 @@ namespace Phoebe.FormClient
         }
 
         /// <summary>
+        /// 报表管理 - 库存盘点报表
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void menuStockInventoryReport_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            ChildFormManage.LoadMdiForm(this, typeof(StockInventoryReportForm));
+        }
+
+        /// <summary>
         /// 用户管理 - 用户列表
         /// </summary>
         /// <param name="sender"></param>

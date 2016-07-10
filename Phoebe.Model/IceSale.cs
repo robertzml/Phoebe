@@ -21,6 +21,7 @@ namespace Phoebe.Model
         public int IceType { get; set; }
         public int SaleCount { get; set; }
         public decimal SaleWeight { get; set; }
+        public decimal SaleUnitPrice { get; set; }
         public decimal SaleFee { get; set; }
         public int UserId { get; set; }
         public System.DateTime CreateTime { get; set; }
