@@ -684,6 +684,7 @@
     <None Include="packages.config" />
     <None Include="Properties\DataSources\Phoebe.Model.Billing.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.Cargo.datasource" />
+    <None Include="Properties\DataSources\Phoebe.Model.Category.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.ColdSettlement.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.Contract.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.Customer.datasource" />

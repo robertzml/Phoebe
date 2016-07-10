@@ -33,5 +33,22 @@ namespace Phoebe.FormClient
 
             e.DisplayText = string.Format("{0} - {1}", number, name);
         }
+
+        /// <summary>
+        /// 格式化分类列表
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public static void LkuCategory_CustomDisplayText(object sender, CustomDisplayTextEventArgs e)
+        {
+            var lku = sender as LookUpEdit;
+            if (lku.EditValue == null)
+                return;
+
+            string number = lku.GetColumnValue("Number").ToString();
+            string name = lku.GetColumnValue("Name").ToString();
+
+            e.DisplayText = string.Format("{0} - {1}", number, name);
+        }
     }
 }

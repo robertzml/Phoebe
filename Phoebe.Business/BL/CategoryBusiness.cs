@@ -35,6 +35,16 @@ namespace Phoebe.Business
 
         #region Method
         /// <summary>
+        /// 获取所有分类
+        /// </summary>
+        /// <returns></returns>
+        public List<Category> GetAll()
+        {
+            var data = this.dal.FindAll().OrderBy(r => r.Hierarchy).ToList();
+            return data;
+        }
+
+        /// <summary>
         /// 获取一级分类
         /// </summary>
         /// <returns></returns>
@@ -153,7 +163,7 @@ namespace Phoebe.Business
                 var result = this.dal.Create(entity);
                 return result;
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return ErrorCode.Exception;
             }

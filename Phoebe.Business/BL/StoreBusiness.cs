@@ -464,7 +464,50 @@ namespace Phoebe.Business
                     data.Add(flow);
                 }
             }
+            else
+            {
+                // find stock in
+                var siDetails = RepositoryFactory<StockInDetailsRepository>.Instance.Find(r => r.StockIn.Contract.CustomerId == customerId && r.StockIn.InTime >= start && r.StockIn.InTime <= end && r.Status == (int)EntityStatus.StockIn);
+                foreach (var item in siDetails)
+                {
+                    var flow = SetStockFlow(item.Store, item.Id, item.StockIn.FlowNumber, 0, item.Count, item.InWeight, item.InVolume, item.StockIn.InTime, StockFlowType.StockIn);
+                    data.Add(flow);
+                }
+            }
 
+            return data;
+        }
+
+        /// <summary>
+        /// 获取出库记录
+        /// </summary>
+        /// <param name="start">开始日期</param>
+        /// <param name="end">结束日期</param>
+        /// <param name="customerId">客户ID</param>
+        /// <returns></returns>
+        public List<StockFlow> GetFlowOut(DateTime start, DateTime end, int customerId)
+        {
+            List<StockFlow> data = new List<StockFlow>();
+            if (customerId == 0)
+            {
+                // find stock out
+                var soDetails = RepositoryFactory<StockOutDetailsRepository>.Instance.Find(r => r.StockOut.OutTime >= start && r.StockOut.OutTime <= end && r.Status == (int)EntityStatus.StockOut);
+                foreach (var item in soDetails)
+                {
+                    var flow = SetStockFlow(item.Store, item.Id, item.StockOut.FlowNumber, item.StoreCount, item.Count, item.OutWeight, item.OutVolume, item.StockOut.OutTime, StockFlowType.StockOut);
+                    data.Add(flow);
+                }
+            }
+            else
+            {
+                // find stock out
+                var soDetails = RepositoryFactory<StockOutDetailsRepository>.Instance.Find(r => r.StockOut.Contract.CustomerId == customerId && r.StockOut.OutTime >= start && r.StockOut.OutTime <= end && r.Status == (int)EntityStatus.StockOut);
+                foreach (var item in soDetails)
+                {
+                    var flow = SetStockFlow(item.Store, item.Id, item.StockOut.FlowNumber, item.StoreCount, item.Count, item.OutWeight, item.OutVolume, item.StockOut.OutTime, StockFlowType.StockOut);
+                    data.Add(flow);
+                }
+            }
 
             return data;
         }

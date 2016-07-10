@@ -74,7 +74,7 @@ namespace Phoebe.Business.DAL
 
                 return ErrorCode.Success;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return ErrorCode.Exception;
             }
