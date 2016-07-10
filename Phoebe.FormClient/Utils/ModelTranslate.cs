@@ -176,6 +176,9 @@ namespace Phoebe.FormClient
             report.FlowNumber = stockOut.FlowNumber;
             report.UserName = stockOut.User.Name;
 
+            var debt = BusinessFactory<SettlementBusiness>.Instance.GetDebt(stockOut.Contract.CustomerId);
+            report.DebtFee = Math.Round(debt.DebtFee, 2);
+
             report.Details = new List<Model.Report.RStockOutDetailsModel>();
             foreach (var item in stockOut.StockOutDetails)
             {

@@ -145,6 +145,63 @@ namespace Phoebe.Business
 
             return receipt;
         }
+
+        /// <summary>
+        /// 获取客户实时欠费
+        /// </summary>
+        /// <param name="customerId">客户ID</param>
+        /// <returns></returns>
+        public Receipt GetDebt(int customerId)
+        {
+            Receipt receipt = new Receipt();
+
+            var contracts = BusinessFactory<ContractBusiness>.Instance.GetByCustomer(customerId);
+            if (contracts.Count == 0)
+            {
+                return receipt;
+            }
+
+            DateTime start = contracts.Min(r => r.SignDate);
+            DateTime end = DateTime.Now.Date;
+
+            var customer = BusinessFactory<CustomerBusiness>.Instance.FindById(customerId);
+            if (customer == null)
+                return null;
+
+            receipt.CustomerId = customerId;
+            receipt.CustomerName = customer.Name;
+            receipt.SettleFee = 0;
+            receipt.UnSettleFee = 0;
+
+            var settles = this.dal.Find(r => r.CustomerId == customerId).OrderByDescending(r => r.EndTime);
+            if (settles.Count() != 0)
+            {
+                receipt.SettleFee = settles.Sum(r => r.DueFee);
+
+                var last = settles.First();
+                start = last.EndTime.AddDays(1);
+            }
+
+            // get base fee
+            var billings = BusinessFactory<BillingBusiness>.Instance.GetByCustomer(customerId, start, end);
+            if (billings.Count() > 0)
+                receipt.UnSettleFee = billings.Sum(r => r.TotalPrice);
+
+            // get cold fee         
+            var colds = BusinessFactory<BillingBusiness>.Instance.CalculateColdFee(customerId, start, end);
+            if (colds.Count > 0)
+                receipt.UnSettleFee += colds.Sum(r => r.ColdFee);
+
+            // get paid fee
+            var payments = BusinessFactory<PaymentBusiness>.Instance.GetByCustomer(customerId);
+            if (payments.Count() != 0)
+                receipt.PaidFee = payments.Sum(r => r.PaidFee);
+
+
+            receipt.DebtFee = receipt.SettleFee + receipt.UnSettleFee - receipt.PaidFee;
+
+            return receipt;
+        }
         #endregion //Method
     }
 }

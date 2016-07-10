@@ -32,6 +32,7 @@ namespace Phoebe.FormClient.Report
             this.CustomerName.Value = model.CustomerName;
             this.OutTime.Value = model.OutTime;
             this.FlowNumber.Value = model.FlowNumber;
+            this.DebtFee.Value = model.DebtFee;
             this.User.Value = model.UserName;
         }
         #endregion //Function

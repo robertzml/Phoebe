@@ -107,6 +107,8 @@
             this.xrTableCell34 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell35 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell36 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.xrLabel15 = new DevExpress.XtraReports.UI.XRLabel();
+            this.DebtFee = new DevExpress.XtraReports.Parameters.Parameter();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dsStockOut)).BeginInit();
@@ -285,7 +287,7 @@
             // BottomMargin
             // 
             this.BottomMargin.Dpi = 254F;
-            this.BottomMargin.HeightF = 80F;
+            this.BottomMargin.HeightF = 87.8958F;
             this.BottomMargin.Name = "BottomMargin";
             this.BottomMargin.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 254F);
             this.BottomMargin.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
@@ -678,6 +680,7 @@
             // 
             this.pageFooterBand1.Borders = DevExpress.XtraPrinting.BorderSide.None;
             this.pageFooterBand1.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+            this.xrLabel15,
             this.xrLabel14,
             this.xrLine1,
             this.xrLabel13,
@@ -692,14 +695,14 @@
             // xrLabel14
             // 
             this.xrLabel14.Dpi = 254F;
-            this.xrLabel14.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.xrLabel14.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold);
             this.xrLabel14.LocationFloat = new DevExpress.Utils.PointFloat(0F, 31.58003F);
             this.xrLabel14.Name = "xrLabel14";
             this.xrLabel14.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
-            this.xrLabel14.SizeF = new System.Drawing.SizeF(391.5833F, 58.42F);
+            this.xrLabel14.SizeF = new System.Drawing.SizeF(137.5833F, 58.42F);
             this.xrLabel14.StylePriority.UseFont = false;
             this.xrLabel14.StylePriority.UseTextAlignment = false;
-            this.xrLabel14.Text = "备注：此单视为欠条";
+            this.xrLabel14.Text = "欠费：";
             this.xrLabel14.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
             // 
             // xrLine1
@@ -716,7 +719,7 @@
             new DevExpress.XtraReports.UI.XRBinding(this.User, "Text", "")});
             this.xrLabel13.Dpi = 254F;
             this.xrLabel13.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.xrLabel13.LocationFloat = new DevExpress.Utils.PointFloat(629.0734F, 31.58003F);
+            this.xrLabel13.LocationFloat = new DevExpress.Utils.PointFloat(675.2608F, 31.58003F);
             this.xrLabel13.Name = "xrLabel13";
             this.xrLabel13.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
             this.xrLabel13.SizeF = new System.Drawing.SizeF(304.2708F, 58.42F);
@@ -748,7 +751,7 @@
             // 
             this.xrLabel5.Dpi = 254F;
             this.xrLabel5.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.xrLabel5.LocationFloat = new DevExpress.Utils.PointFloat(1037.771F, 31.58003F);
+            this.xrLabel5.LocationFloat = new DevExpress.Utils.PointFloat(1085.689F, 31.58003F);
             this.xrLabel5.Name = "xrLabel5";
             this.xrLabel5.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
             this.xrLabel5.SizeF = new System.Drawing.SizeF(254F, 58.42F);
@@ -761,7 +764,7 @@
             // 
             this.xrLabel4.Dpi = 254F;
             this.xrLabel4.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.xrLabel4.LocationFloat = new DevExpress.Utils.PointFloat(449.1567F, 31.58003F);
+            this.xrLabel4.LocationFloat = new DevExpress.Utils.PointFloat(495.3441F, 31.58003F);
             this.xrLabel4.Name = "xrLabel4";
             this.xrLabel4.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
             this.xrLabel4.SizeF = new System.Drawing.SizeF(179.9167F, 58.42F);
@@ -957,7 +960,28 @@
             // 
             this.xrTableCell36.Dpi = 254F;
             this.xrTableCell36.Name = "xrTableCell36";
+            this.xrTableCell36.Text = "此单视为欠条";
             this.xrTableCell36.Weight = 1.07291698205697D;
+            // 
+            // xrLabel15
+            // 
+            this.xrLabel15.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
+            new DevExpress.XtraReports.UI.XRBinding(this.DebtFee, "Text", "{0}元")});
+            this.xrLabel15.Dpi = 254F;
+            this.xrLabel15.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.xrLabel15.LocationFloat = new DevExpress.Utils.PointFloat(137.5833F, 31.58003F);
+            this.xrLabel15.Name = "xrLabel15";
+            this.xrLabel15.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
+            this.xrLabel15.SizeF = new System.Drawing.SizeF(283.1042F, 58.42F);
+            this.xrLabel15.StylePriority.UseFont = false;
+            // 
+            // DebtFee
+            // 
+            this.DebtFee.Description = "欠费";
+            this.DebtFee.Name = "DebtFee";
+            this.DebtFee.Type = typeof(decimal);
+            this.DebtFee.ValueInfo = "0";
+            this.DebtFee.Visible = false;
             // 
             // StockOut
             // 
@@ -973,7 +997,7 @@
             this.dsStockOut});
             this.DataSource = this.dsStockOut;
             this.Dpi = 254F;
-            this.Margins = new System.Drawing.Printing.Margins(40, 100, 50, 80);
+            this.Margins = new System.Drawing.Printing.Margins(40, 100, 50, 88);
             this.PageHeight = 935;
             this.PageWidth = 2350;
             this.PaperKind = System.Drawing.Printing.PaperKind.Custom;
@@ -981,7 +1005,8 @@
             this.CustomerName,
             this.OutTime,
             this.FlowNumber,
-            this.User});
+            this.User,
+            this.DebtFee});
             this.ReportUnit = DevExpress.XtraReports.UI.ReportUnit.TenthsOfAMillimeter;
             this.ShowPrintMarginsWarning = false;
             this.StyleSheet.AddRange(new DevExpress.XtraReports.UI.XRControlStyle[] {
@@ -989,6 +1014,7 @@
             this.FieldCaption,
             this.PageInfo,
             this.DataField});
+            this.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
             this.Version = "15.1";
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).EndInit();
@@ -1075,5 +1101,7 @@
         private DevExpress.XtraReports.Parameters.Parameter User;
         private DevExpress.XtraReports.UI.XRLine xrLine1;
         private DevExpress.XtraReports.UI.XRLabel xrLabel14;
+        private DevExpress.XtraReports.UI.XRLabel xrLabel15;
+        private DevExpress.XtraReports.Parameters.Parameter DebtFee;
     }
 }
