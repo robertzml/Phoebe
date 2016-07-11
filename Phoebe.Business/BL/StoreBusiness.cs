@@ -123,9 +123,81 @@ namespace Phoebe.Business
 
             return stockFlow;
         }
+
+        /// <summary>
+        /// 设置盘点期初数据
+        /// </summary>
+        /// <param name="data">数据</param>
+        /// <param name="start">期初库存</param>
+        /// <param name="endTime">期末时间</param>
+        /// <returns></returns>
+        private Inventory SetInventoryStart(List<Inventory> data, Storage start, DateTime endTime)
+        {
+            var inv = data.SingleOrDefault(r => r.CustomerId == start.CustomerId && r.CategoryId == start.CategoryId);
+
+            if (inv == null)
+            {
+                Inventory inventory = new Inventory();
+                inventory.CustomerId = start.CustomerId;
+                inventory.CustomerNumber = start.CustomerNumber;
+                inventory.CustomerName = start.CustomerName;
+                inventory.CategoryId = start.CategoryId;
+                inventory.CategoryNumber = start.CategoryNumber;
+                inventory.CategoryName = start.CategoryName;
+                inventory.StartTime = start.StorageDate;
+                inventory.StartCount = start.Count;
+                inventory.StartWeight = start.StoreWeight;
+                inventory.EndTime = endTime;
+
+                return inventory;
+            }
+            else
+            {
+                inv.StartCount += start.Count;
+                inv.StartWeight += start.StoreWeight;
+
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// 设置盘点期末数据
+        /// </summary>
+        /// <param name="data">数据</param>
+        /// <param name="end">期末库存</param>
+        /// <param name="StartTime">期初时间</param>
+        public Inventory SetInventoryEnd(List<Inventory> data, Storage end, DateTime startTime)
+        {
+            var inv = data.SingleOrDefault(r => r.CustomerId == end.CustomerId && r.CategoryId == end.CategoryId);
+
+            if (inv == null)
+            {
+                Inventory inventory = new Inventory();
+                inventory.CustomerId = end.CustomerId;
+                inventory.CustomerNumber = end.CustomerNumber;
+                inventory.CustomerName = end.CustomerName;
+                inventory.CategoryId = end.CategoryId;
+                inventory.CategoryNumber = end.CategoryNumber;
+                inventory.CategoryName = end.CategoryName;
+                inventory.StartTime = startTime;
+                inventory.EndTime = end.StorageDate;
+                inventory.EndCount = end.Count;
+                inventory.EndWeight = end.StoreWeight;
+
+                return inventory;
+            }
+            else
+            {
+                inv.EndCount += end.Count;
+                inv.EndWeight += end.StoreWeight;
+
+                return null;
+            }
+        }
         #endregion //Function
 
         #region Method
+        #region Store
         /// <summary>
         /// 按条件查询库存
         /// </summary>
@@ -226,7 +298,9 @@ namespace Phoebe.Business
             var data = this.dal.Find(r => r.CargoId == cargoId && r.Status == (int)EntityStatus.StoreIn);
             return data.Sum(r => r.StoreCount);
         }
+        #endregion //Store
 
+        #region Storage
         /// <summary>
         /// 获取合同指定日库存
         /// </summary>
@@ -287,7 +361,9 @@ namespace Phoebe.Business
 
             return data;
         }
+        #endregion //Storage
 
+        #region Stock Flow
         /// <summary>
         /// 获取合同日流水
         /// </summary>
@@ -511,6 +587,50 @@ namespace Phoebe.Business
 
             return data;
         }
+        #endregion //Stock Flow
+
+        #region Inventory
+        /// <summary>
+        /// 获取库存盘点
+        /// </summary>
+        /// <param name="startTime">开始日期</param>
+        /// <param name="endTime">结束日期</param>
+        /// <param name="customerId">客户ID</param>
+        /// <returns></returns>
+        public List<Inventory> GetInventory(DateTime startTime, DateTime endTime, int customerId)
+        {
+            List<Inventory> data = new List<Inventory>();
+
+            var customer = BusinessFactory<CustomerBusiness>.Instance.FindById(customerId);
+            var contracts = BusinessFactory<ContractBusiness>.Instance.GetByCustomer(customerId);
+
+            foreach (var contract in contracts)
+            {
+                var startStorages = GetInDay(contract.Id, startTime);
+                var endStorages = GetInDay(contract.Id, endTime);
+
+                foreach (var storage in startStorages)
+                {
+                    var inv = SetInventoryStart(data, storage, endTime);
+                    if (inv != null)
+                    {
+                        data.Add(inv);
+                    }
+                }
+
+                foreach (var storage in endStorages)
+                {
+                    var inv = SetInventoryEnd(data, storage, startTime);
+                    if (inv != null)
+                    {
+                        data.Add(inv);
+                    }
+                }
+            }
+
+            return data;
+        }
+        #endregion //Inventory
         #endregion //Method
     }
 }

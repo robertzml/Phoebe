@@ -282,6 +282,12 @@
     <Compile Include="Controls\IceSaleGrid.Designer.cs">
       <DependentUpon>IceSaleGrid.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\InventoryGrid.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\InventoryGrid.Designer.cs">
+      <DependentUpon>InventoryGrid.cs</DependentUpon>
+    </Compile>
     <Compile Include="Report\Payment.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -501,6 +507,9 @@
     <EmbeddedResource Include="Controls\IceGrid.resx">
       <DependentUpon>IceGrid.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\InventoryGrid.resx">
+      <DependentUpon>InventoryGrid.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\CargoStoreForm.resx">
       <DependentUpon>CargoStoreForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -700,6 +709,7 @@
     <None Include="Properties\DataSources\Phoebe.Model.DailyColdRecord.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.IceFlow.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.IceSale.datasource" />
+    <None Include="Properties\DataSources\Phoebe.Model.Inventory.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.Payment.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.Settlement.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.StockFlow.datasource" />

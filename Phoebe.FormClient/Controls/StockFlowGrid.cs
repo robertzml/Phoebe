@@ -36,13 +36,13 @@ namespace Phoebe.FormClient
         /// 获取选中数据
         /// </summary>
         /// <returns></returns>
-        public Store GetCurrentSelect()
+        public StockFlow GetCurrentSelect()
         {
             int rowIndex = this.dgvStockFlow.GetFocusedDataSourceRowIndex();
             if (rowIndex < 0 || rowIndex >= this.bsStockFlow.Count)
                 return null;
             else
-                return this.bsStockFlow[rowIndex] as Store;
+                return this.bsStockFlow[rowIndex] as StockFlow;
         }
 
         /// <summary>
