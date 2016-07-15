@@ -39,6 +39,7 @@
             this.colIceType = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colSaleCount = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colSaleWeight = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colSaleUnitPrice = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colSaleFee = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colUserId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCreateTime = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -75,6 +76,7 @@
             this.colIceType,
             this.colSaleCount,
             this.colSaleWeight,
+            this.colSaleUnitPrice,
             this.colSaleFee,
             this.colUserId,
             this.colCreateTime,
@@ -154,6 +156,14 @@
             this.colSaleWeight.Visible = true;
             this.colSaleWeight.VisibleIndex = 4;
             // 
+            // colSaleUnitPrice
+            // 
+            this.colSaleUnitPrice.Caption = "单价";
+            this.colSaleUnitPrice.FieldName = "SaleUnitPrice";
+            this.colSaleUnitPrice.Name = "colSaleUnitPrice";
+            this.colSaleUnitPrice.Visible = true;
+            this.colSaleUnitPrice.VisibleIndex = 5;
+            // 
             // colSaleFee
             // 
             this.colSaleFee.Caption = "售出金额(元)";
@@ -164,7 +174,7 @@
             this.colSaleFee.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "SaleFee", "合计={0:0.00}")});
             this.colSaleFee.Visible = true;
-            this.colSaleFee.VisibleIndex = 5;
+            this.colSaleFee.VisibleIndex = 6;
             // 
             // colUserId
             // 
@@ -175,7 +185,7 @@
             this.colUserId.FilterMode = DevExpress.XtraGrid.ColumnFilterMode.DisplayText;
             this.colUserId.Name = "colUserId";
             this.colUserId.Visible = true;
-            this.colUserId.VisibleIndex = 6;
+            this.colUserId.VisibleIndex = 7;
             // 
             // colCreateTime
             // 
@@ -185,7 +195,7 @@
             this.colCreateTime.FieldName = "CreateTime";
             this.colCreateTime.Name = "colCreateTime";
             this.colCreateTime.Visible = true;
-            this.colCreateTime.VisibleIndex = 7;
+            this.colCreateTime.VisibleIndex = 8;
             // 
             // colRemark
             // 
@@ -194,19 +204,19 @@
             this.colRemark.Name = "colRemark";
             this.colRemark.OptionsFilter.AllowFilter = false;
             this.colRemark.Visible = true;
-            this.colRemark.VisibleIndex = 8;
+            this.colRemark.VisibleIndex = 9;
             // 
             // colStatus
             // 
             this.colStatus.FieldName = "Status";
             this.colStatus.Name = "colStatus";
             // 
-            // IceSaleGridControl
+            // IceSaleGrid
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.dgcIce);
-            this.Name = "IceSaleGridControl";
+            this.Name = "IceSaleGrid";
             this.Size = new System.Drawing.Size(770, 396);
             ((System.ComponentModel.ISupportInitialize)(this.dgcIce)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsIceSale)).EndInit();
@@ -232,5 +242,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn colCreateTime;
         private DevExpress.XtraGrid.Columns.GridColumn colRemark;
         private DevExpress.XtraGrid.Columns.GridColumn colStatus;
+        private DevExpress.XtraGrid.Columns.GridColumn colSaleUnitPrice;
     }
 }
