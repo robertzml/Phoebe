@@ -252,12 +252,6 @@
     <Compile Include="Forms\IceStoreForm.Designer.cs">
       <DependentUpon>IceStoreForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\IceStockForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\IceStockForm.Designer.cs">
-      <DependentUpon>IceStockForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\IceGrid.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -287,6 +281,18 @@
     </Compile>
     <Compile Include="Controls\InventoryGrid.Designer.cs">
       <DependentUpon>InventoryGrid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\IceStockForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\IceStockForm.Designer.cs">
+      <DependentUpon>IceStockForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\IceStockGrid.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\IceStockGrid.Designer.cs">
+      <DependentUpon>IceStockGrid.cs</DependentUpon>
     </Compile>
     <Compile Include="Report\Payment.cs">
       <SubType>Component</SubType>
@@ -507,6 +513,9 @@
     <EmbeddedResource Include="Controls\IceGrid.resx">
       <DependentUpon>IceGrid.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\IceStockGrid.resx">
+      <DependentUpon>IceStockGrid.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\InventoryGrid.resx">
       <DependentUpon>InventoryGrid.cs</DependentUpon>
     </EmbeddedResource>
@@ -615,9 +624,6 @@
     <EmbeddedResource Include="Forms\IceSellForm.resx">
       <DependentUpon>IceSellForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\IceStockForm.resx">
-      <DependentUpon>IceStockForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\IceStoreForm.resx">
       <DependentUpon>IceStoreForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -659,6 +665,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\IceSaleGrid.resx">
       <DependentUpon>IceSaleGrid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\IceStockForm.resx">
+      <DependentUpon>IceStockForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>

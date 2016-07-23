@@ -46,6 +46,18 @@ namespace Phoebe.Business
         }
 
         /// <summary>
+        /// 获取客户相关合同
+        /// </summary>
+        /// <param name="customerId">客户Id</param>
+        /// <param name="type">合同类型</param>
+        /// <returns></returns>
+        public List<Contract> GetByCustomer(int customerId, ContractType type)
+        {
+            Expression<Func<Contract, bool>> predicate = r => r.CustomerId == customerId && r.Type == (int)type;
+            return this.dal.Find(predicate).ToList();
+        }
+
+        /// <summary>
         /// 添加合同
         /// </summary>
         /// <param name="entity">合同对象</param>

@@ -92,7 +92,7 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void btnCompleteStockIn_Click(object sender, EventArgs e)
         {
-            ChildFormManage.ShowDialogForm(typeof(IceStockForm), new object[] { IceFlowType.CompleteStockIn, IceType.Complete });
+            //ChildFormManage.ShowDialogForm(typeof(IceStockForm), new object[] { IceFlowType.CompleteStockIn, IceType.Complete });
 
             LoadStores();
         }
@@ -104,7 +104,7 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void btnFragmentStockIn_Click(object sender, EventArgs e)
         {
-            ChildFormManage.ShowDialogForm(typeof(IceStockForm), new object[] { IceFlowType.FragmentStockIn, IceType.Fragment });
+            //ChildFormManage.ShowDialogForm(typeof(IceStockForm), new object[] { IceFlowType.FragmentStockIn, IceType.Fragment });
 
             LoadStores();
         }
@@ -116,7 +116,7 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void btnCompleteMakeOut_Click(object sender, EventArgs e)
         {
-            ChildFormManage.ShowDialogForm(typeof(IceStockForm), new object[] { IceFlowType.CompleteMakeOut, IceType.Complete });
+            //ChildFormManage.ShowDialogForm(typeof(IceStockForm), new object[] { IceFlowType.CompleteMakeOut, IceType.Complete });
 
             LoadStores();
         }

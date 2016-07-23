@@ -167,6 +167,16 @@ namespace Phoebe.FormClient
         }
 
         /// <summary>
+        /// 冰块管理 - 冰块操作
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void menuIceStock_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            ChildFormManage.LoadMdiForm(this, typeof(IceStockForm));
+        }
+
+        /// <summary>
         /// 冰块管理 - 冰块库存
         /// </summary>
         /// <param name="sender"></param>

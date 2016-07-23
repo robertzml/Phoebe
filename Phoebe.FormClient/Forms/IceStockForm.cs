@@ -8,58 +8,64 @@ using System.Windows.Forms;
 
 namespace Phoebe.FormClient
 {
+    using DevExpress.XtraEditors.Controls;
     using Phoebe.Base;
     using Phoebe.Business;
     using Phoebe.Common;
     using Phoebe.Model;
 
     /// <summary>
-    /// 冰块出入库窗体
+    /// 冰块操作窗体
     /// </summary>
-    public partial class IceStockForm : BaseSingleForm
+    public partial class IceStockForm : BaseForm
     {
-        #region Field
-        /// <summary>
-        /// 流水类型
-        /// </summary>
-        private IceFlowType flowType;
-
-        /// <summary>
-        /// 冰块类型
-        /// </summary>
-        private IceType iceType;
-        #endregion //Field
-
         #region Constructor
-        /// <summary>
-        /// 冰块出入库窗体
-        /// </summary>
-        /// <param name="flowType">冰块流水类型</param>
-        /// <param name="iceType">冰块类型</param>
-        public IceStockForm(IceFlowType flowType, IceType iceType)
+        public IceStockForm()
         {
             InitializeComponent();
-
-            this.flowType = flowType;
-            this.iceType = iceType;
         }
         #endregion //Constructor
 
         #region Function
         /// <summary>
-        /// 设置实体
+        /// 初始化窗体控件
         /// </summary>
-        /// <param name="iceFlow"></param>
-        private void SetEntity(IceFlow iceFlow)
+        private void InitControls()
         {
-            iceFlow.FlowType = (int)this.flowType;
-            iceFlow.IceType = (int)this.iceType;
-            iceFlow.FlowCount = Convert.ToInt32(this.spFlowCount.Value);
-            iceFlow.FlowWeight = this.spFlowWeight.Value;
-            iceFlow.FlowTime = this.dpFlowTime.DateTime.Date;
-            iceFlow.UserId = this.currentUser.Id;
-            iceFlow.CreateTime = DateTime.Now;
-            iceFlow.Remark = this.txtRemark.Text;
+            this.dpTime.DateTime = DateTime.Now.Date;
+            this.txtUser.Text = this.currentUser.Name;
+
+            this.lkuCustomer.EditValue = null;
+            this.txtRemark.Text = "";
+        }
+
+        /// <summary>
+        /// 更新合同选择
+        /// </summary>
+        /// <param name="customerId">客户Id</param>
+        private void UpdateContractList(int customerId)
+        {
+            this.cmbContract.Properties.Items.Clear();
+            if (customerId == 0)
+            {
+                this.cmbContract.EditValue = null;
+                return;
+            }
+
+            var contracts = BusinessFactory<ContractBusiness>.Instance.GetByCustomer(customerId, ContractType.Ice);
+            foreach (var item in contracts)
+            {
+                ImageComboBoxItem i = new ImageComboBoxItem();
+                i.Description = item.Name;
+                i.Value = item.Id;
+
+                this.cmbContract.Properties.Items.Add(i);
+            }
+
+            if (contracts.Count > 0)
+                this.cmbContract.EditValue = contracts[0].Id;
+            else
+                this.cmbContract.EditValue = null;
         }
         #endregion //Function
 
@@ -71,45 +77,65 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void IceStockForm_Load(object sender, EventArgs e)
         {
-            this.Text = flowType.DisplayName();
-            this.dpFlowTime.DateTime = DateTime.Now.Date;
-            this.txtFlowType.Text = flowType.DisplayName();
-            this.txtIceType.Text = iceType.DisplayName();
-            this.txtUser.Text = this.currentUser.Name;
+            this.bsCustomer.DataSource = BusinessFactory<CustomerBusiness>.Instance.FindAll();
+            this.lkuCustomer.CustomDisplayText += new DevExpress.XtraEditors.Controls.CustomDisplayTextEventHandler(EventUtil.LkuCustomer_CustomDisplayText);
+
+            InitControls();
         }
 
         /// <summary>
-        /// 保存
+        /// 新建
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnConfirm_Click(object sender, EventArgs e)
+        private void tsbNew_Click(object sender, EventArgs e)
         {
-            if (this.spFlowCount.Value <= 0)
-            {
-                MessageUtil.ShowInfo("流水数量必须大于0");
-                return;
-            }
-            if (this.spFlowWeight.Value < 0)
-            {
-                MessageUtil.ShowInfo("流水重量必须大于0");
-                return;
-            }
+            InitControls();
 
-            IceFlow iceFlow = new IceFlow();
-            SetEntity(iceFlow);
+            this.isList.DataSource = new List<IceFlow>();
+        }
 
-            var result = BusinessFactory<IceFlowBusiness>.Instance.Create(iceFlow);
-            if (result == ErrorCode.Success)
+        /// <summary>
+        /// 业务类型选择
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cmbType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int type = this.cmbType.SelectedIndex;
+            this.isList.Clear();
+            if (type == 0 || type == 2)
             {
-                MessageUtil.ShowInfo("添加冰块流水成功");
-                this.Close();
+                IceFlow flow = new IceFlow
+                {
+                    IceType = (int)IceType.Complete
+                };
+                this.isList.AddNew(flow);
             }
-            else
+            else if (type == 1)
             {
-                MessageUtil.ShowError("添加冰块流水失败：" + result.DisplayName());
+                IceFlow flow = new IceFlow
+                {
+                    IceType = (int)IceType.Fragment
+                };
+                this.isList.AddNew(flow);
             }
         }
+
+        /// <summary>
+        /// 客户选择
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void lkuCustomer_EditValueChanged(object sender, EventArgs e)
+        {
+            if (this.lkuCustomer.EditValue == null)
+                UpdateContractList(0);
+            else
+                UpdateContractList(Convert.ToInt32(this.lkuCustomer.EditValue));
+        }
         #endregion //Event
+
+
     }
 }

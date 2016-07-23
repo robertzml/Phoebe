@@ -59,6 +59,7 @@
             this.menuDebt = new DevExpress.XtraBars.BarButtonItem();
             this.menuReport = new DevExpress.XtraBars.BarSubItem();
             this.menuStockFlowReport = new DevExpress.XtraBars.BarButtonItem();
+            this.menuStockInventoryReport = new DevExpress.XtraBars.BarButtonItem();
             this.menuUser = new DevExpress.XtraBars.BarSubItem();
             this.menuUserList = new DevExpress.XtraBars.BarButtonItem();
             this.menuUserGroupList = new DevExpress.XtraBars.BarButtonItem();
@@ -77,7 +78,7 @@
             this.barHeaderItem1 = new DevExpress.XtraBars.BarHeaderItem();
             this.barStaticItem2 = new DevExpress.XtraBars.BarStaticItem();
             this.tabMdiManager = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
-            this.menuStockInventoryReport = new DevExpress.XtraBars.BarButtonItem();
+            this.menuIceStock = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabMdiManager)).BeginInit();
             this.SuspendLayout();
@@ -133,9 +134,10 @@
             this.menuIceSale,
             this.menuReport,
             this.menuStockFlowReport,
-            this.menuStockInventoryReport});
+            this.menuStockInventoryReport,
+            this.menuIceStock});
             this.barManager1.MainMenu = this.mainMenu;
-            this.barManager1.MaxItemId = 44;
+            this.barManager1.MaxItemId = 45;
             this.barManager1.StatusBar = this.bar3;
             // 
             // mainMenu
@@ -297,6 +299,7 @@
             this.menuIce.Caption = "冰块管理";
             this.menuIce.Id = 37;
             this.menuIce.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.menuIceStock),
             new DevExpress.XtraBars.LinkPersistInfo(this.menuIceStore),
             new DevExpress.XtraBars.LinkPersistInfo(this.menuIceSale)});
             this.menuIce.Name = "menuIce";
@@ -377,6 +380,13 @@
             this.menuStockFlowReport.Id = 42;
             this.menuStockFlowReport.Name = "menuStockFlowReport";
             this.menuStockFlowReport.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuStockFlowReport_ItemClick);
+            // 
+            // menuStockInventoryReport
+            // 
+            this.menuStockInventoryReport.Caption = "库存盘点报表";
+            this.menuStockInventoryReport.Id = 43;
+            this.menuStockInventoryReport.Name = "menuStockInventoryReport";
+            this.menuStockInventoryReport.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuStockInventoryReport_ItemClick);
             // 
             // menuUser
             // 
@@ -512,12 +522,12 @@
             this.tabMdiManager.MdiParent = this;
             this.tabMdiManager.PinPageButtonShowMode = DevExpress.XtraTab.PinPageButtonShowMode.InActiveTabPageHeader;
             // 
-            // menuStockInventoryReport
+            // menuIceStock
             // 
-            this.menuStockInventoryReport.Caption = "库存盘点报表";
-            this.menuStockInventoryReport.Id = 43;
-            this.menuStockInventoryReport.Name = "menuStockInventoryReport";
-            this.menuStockInventoryReport.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuStockInventoryReport_ItemClick);
+            this.menuIceStock.Caption = "冰块操作";
+            this.menuIceStock.Id = 44;
+            this.menuIceStock.Name = "menuIceStock";
+            this.menuIceStock.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuIceStock_ItemClick);
             // 
             // MainForm
             // 
@@ -591,6 +601,7 @@
         private DevExpress.XtraBars.BarSubItem menuReport;
         private DevExpress.XtraBars.BarButtonItem menuStockFlowReport;
         private DevExpress.XtraBars.BarButtonItem menuStockInventoryReport;
+        private DevExpress.XtraBars.BarButtonItem menuIceStock;
     }
 }
 
