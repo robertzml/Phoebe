@@ -31,8 +31,8 @@ namespace Phoebe.Model
         public int Status { get; set; }
     
         public virtual Category Category { get; set; }
-        public virtual Contract Contract { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Store> Stores { get; set; }
+        public virtual Contract Contract { get; set; }
     }
 }

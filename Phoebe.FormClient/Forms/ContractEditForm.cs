@@ -50,6 +50,7 @@ namespace Phoebe.FormClient
             this.txtCustomerNumber.Text = contract.Customer.Number;
             this.txtCustomerName.Text = contract.Customer.Name;
             this.dpSignDate.DateTime = contract.SignDate.Date;
+            this.txtType.Text = ((ContractType)contract.Type).DisplayName();
             this.txtBillingType.Text = ((BillingType)contract.BillingType).DisplayName();
             this.chkIsTiming.Checked = contract.IsTiming;
             this.txtRemark.Text = contract.Remark;

@@ -23,6 +23,36 @@ namespace Phoebe.Model
     }
 
     /// <summary>
+    /// 合同类型
+    /// </summary>
+    public enum ContractType
+    {
+        /// <summary>
+        /// 计时冷藏合同
+        /// </summary>
+        [Display(Name = "计时冷藏合同")]
+        TimingCold = 1,
+
+        /// <summary>
+        /// 非计时冷藏合同
+        /// </summary>
+        [Display(Name = "非计时冷藏合同")]
+        UntimingCold = 2,
+
+        /// <summary>
+        /// 速冻合同
+        /// </summary>
+        [Display(Name = "速冻合同")]
+        Freeze = 3,
+
+        /// <summary>
+        /// 冰块合同
+        /// </summary>
+        [Display(Name = "冰块合同")]
+        Ice = 4
+    }
+
+    /// <summary>
     /// 计费方式
     /// </summary>
     public enum BillingType

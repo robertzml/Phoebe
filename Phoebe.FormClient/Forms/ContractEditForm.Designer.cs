@@ -47,6 +47,8 @@
             this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.txtType = new DevExpress.XtraEditors.TextEdit();
             ((System.ComponentModel.ISupportInitialize)(this.plFill)).BeginInit();
             this.plFill.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.plBottom)).BeginInit();
@@ -73,6 +75,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtType.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // plFill
@@ -117,6 +121,7 @@
             this.layoutControl1.Controls.Add(this.txtCustomerNumber);
             this.layoutControl1.Controls.Add(this.txtName);
             this.layoutControl1.Controls.Add(this.txtNumber);
+            this.layoutControl1.Controls.Add(this.txtType);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(2, 21);
             this.layoutControl1.Name = "layoutControl1";
@@ -127,15 +132,15 @@
             // 
             // txtRemark
             // 
-            this.txtRemark.Location = new System.Drawing.Point(63, 155);
+            this.txtRemark.Location = new System.Drawing.Point(63, 179);
             this.txtRemark.Name = "txtRemark";
-            this.txtRemark.Size = new System.Drawing.Size(251, 95);
+            this.txtRemark.Size = new System.Drawing.Size(251, 71);
             this.txtRemark.StyleController = this.layoutControl1;
             this.txtRemark.TabIndex = 11;
             // 
             // chkIsTiming
             // 
-            this.chkIsTiming.Location = new System.Drawing.Point(63, 132);
+            this.chkIsTiming.Location = new System.Drawing.Point(63, 156);
             this.chkIsTiming.Name = "chkIsTiming";
             this.chkIsTiming.Properties.Caption = "是";
             this.chkIsTiming.Properties.ReadOnly = true;
@@ -145,7 +150,7 @@
             // 
             // txtBillingType
             // 
-            this.txtBillingType.Location = new System.Drawing.Point(63, 108);
+            this.txtBillingType.Location = new System.Drawing.Point(63, 132);
             this.txtBillingType.Name = "txtBillingType";
             this.txtBillingType.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
             this.txtBillingType.Properties.Appearance.Options.UseBackColor = true;
@@ -224,7 +229,8 @@
             this.layoutControlItem5,
             this.layoutControlItem6,
             this.layoutControlItem7,
-            this.layoutControlItem8});
+            this.layoutControlItem8,
+            this.layoutControlItem9});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "layoutControlGroup1";
             this.layoutControlGroup1.Size = new System.Drawing.Size(326, 262);
@@ -278,7 +284,7 @@
             // layoutControlItem6
             // 
             this.layoutControlItem6.Control = this.txtBillingType;
-            this.layoutControlItem6.Location = new System.Drawing.Point(0, 96);
+            this.layoutControlItem6.Location = new System.Drawing.Point(0, 120);
             this.layoutControlItem6.Name = "layoutControlItem6";
             this.layoutControlItem6.Size = new System.Drawing.Size(306, 24);
             this.layoutControlItem6.Text = "计费方式";
@@ -287,7 +293,7 @@
             // layoutControlItem7
             // 
             this.layoutControlItem7.Control = this.chkIsTiming;
-            this.layoutControlItem7.Location = new System.Drawing.Point(0, 120);
+            this.layoutControlItem7.Location = new System.Drawing.Point(0, 144);
             this.layoutControlItem7.Name = "layoutControlItem7";
             this.layoutControlItem7.Size = new System.Drawing.Size(306, 23);
             this.layoutControlItem7.Text = "是否计时";
@@ -296,11 +302,31 @@
             // layoutControlItem8
             // 
             this.layoutControlItem8.Control = this.txtRemark;
-            this.layoutControlItem8.Location = new System.Drawing.Point(0, 143);
+            this.layoutControlItem8.Location = new System.Drawing.Point(0, 167);
             this.layoutControlItem8.Name = "layoutControlItem8";
-            this.layoutControlItem8.Size = new System.Drawing.Size(306, 99);
+            this.layoutControlItem8.Size = new System.Drawing.Size(306, 75);
             this.layoutControlItem8.Text = "备注";
             this.layoutControlItem8.TextSize = new System.Drawing.Size(48, 14);
+            // 
+            // layoutControlItem9
+            // 
+            this.layoutControlItem9.Control = this.txtType;
+            this.layoutControlItem9.Location = new System.Drawing.Point(0, 96);
+            this.layoutControlItem9.Name = "layoutControlItem9";
+            this.layoutControlItem9.Size = new System.Drawing.Size(306, 24);
+            this.layoutControlItem9.Text = "合同类型";
+            this.layoutControlItem9.TextSize = new System.Drawing.Size(48, 14);
+            // 
+            // txtType
+            // 
+            this.txtType.Location = new System.Drawing.Point(63, 108);
+            this.txtType.Name = "txtType";
+            this.txtType.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
+            this.txtType.Properties.Appearance.Options.UseBackColor = true;
+            this.txtType.Properties.ReadOnly = true;
+            this.txtType.Size = new System.Drawing.Size(251, 20);
+            this.txtType.StyleController = this.layoutControl1;
+            this.txtType.TabIndex = 12;
             // 
             // ContractEditForm
             // 
@@ -336,6 +362,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtType.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -361,5 +389,7 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem7;
         private DevExpress.XtraEditors.MemoEdit txtRemark;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem8;
+        private DevExpress.XtraEditors.TextEdit txtType;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem9;
     }
 }

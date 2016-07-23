@@ -24,7 +24,7 @@ namespace Phoebe.Model
         public int Status { get; set; }
     
         public virtual Billing Billing { get; set; }
-        public virtual Contract Contract { get; set; }
         public virtual Settlement Settlement { get; set; }
+        public virtual Contract Contract { get; set; }
     }
 }

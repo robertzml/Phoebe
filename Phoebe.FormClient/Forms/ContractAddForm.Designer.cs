@@ -47,6 +47,8 @@
             this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.cmbType = new DevExpress.XtraEditors.ImageComboBoxEdit();
+            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.plFill)).BeginInit();
             this.plFill.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.plBottom)).BeginInit();
@@ -72,6 +74,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbType.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             this.SuspendLayout();
             // 
             // plFill
@@ -109,6 +113,7 @@
             // 
             // layoutControl1
             // 
+            this.layoutControl1.Controls.Add(this.cmbType);
             this.layoutControl1.Controls.Add(this.lkuCustomer);
             this.layoutControl1.Controls.Add(this.txtRemark);
             this.layoutControl1.Controls.Add(this.cmbBillingType);
@@ -143,7 +148,7 @@
             this.lkuCustomer.Properties.ValueMember = "Id";
             this.lkuCustomer.Size = new System.Drawing.Size(328, 20);
             this.lkuCustomer.StyleController = this.layoutControl1;
-            this.lkuCustomer.TabIndex = 17;
+            this.lkuCustomer.TabIndex = 2;
             // 
             // bsCustomer
             // 
@@ -151,15 +156,15 @@
             // 
             // txtRemark
             // 
-            this.txtRemark.Location = new System.Drawing.Point(63, 155);
+            this.txtRemark.Location = new System.Drawing.Point(63, 179);
             this.txtRemark.Name = "txtRemark";
-            this.txtRemark.Size = new System.Drawing.Size(328, 142);
+            this.txtRemark.Size = new System.Drawing.Size(328, 118);
             this.txtRemark.StyleController = this.layoutControl1;
-            this.txtRemark.TabIndex = 6;
+            this.txtRemark.TabIndex = 7;
             // 
             // cmbBillingType
             // 
-            this.cmbBillingType.Location = new System.Drawing.Point(63, 108);
+            this.cmbBillingType.Location = new System.Drawing.Point(63, 132);
             this.cmbBillingType.Name = "cmbBillingType";
             this.cmbBillingType.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow;
             this.cmbBillingType.Properties.Appearance.Options.UseBackColor = true;
@@ -167,17 +172,17 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cmbBillingType.Size = new System.Drawing.Size(328, 20);
             this.cmbBillingType.StyleController = this.layoutControl1;
-            this.cmbBillingType.TabIndex = 4;
+            this.cmbBillingType.TabIndex = 5;
             // 
             // ckbIsTiming
             // 
             this.ckbIsTiming.EditValue = true;
-            this.ckbIsTiming.Location = new System.Drawing.Point(63, 132);
+            this.ckbIsTiming.Location = new System.Drawing.Point(63, 156);
             this.ckbIsTiming.Name = "ckbIsTiming";
             this.ckbIsTiming.Properties.Caption = "是";
             this.ckbIsTiming.Size = new System.Drawing.Size(328, 19);
             this.ckbIsTiming.StyleController = this.layoutControl1;
-            this.ckbIsTiming.TabIndex = 5;
+            this.ckbIsTiming.TabIndex = 6;
             // 
             // txtSignDate
             // 
@@ -226,7 +231,8 @@
             this.layoutControlItem5,
             this.layoutControlItem6,
             this.layoutControlItem7,
-            this.layoutControlItem8});
+            this.layoutControlItem8,
+            this.layoutControlItem3});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "layoutControlGroup1";
             this.layoutControlGroup1.Size = new System.Drawing.Size(403, 309);
@@ -262,7 +268,7 @@
             // layoutControlItem5
             // 
             this.layoutControlItem5.Control = this.cmbBillingType;
-            this.layoutControlItem5.Location = new System.Drawing.Point(0, 96);
+            this.layoutControlItem5.Location = new System.Drawing.Point(0, 120);
             this.layoutControlItem5.Name = "layoutControlItem5";
             this.layoutControlItem5.Size = new System.Drawing.Size(383, 24);
             this.layoutControlItem5.Text = "计费方式";
@@ -271,7 +277,7 @@
             // layoutControlItem6
             // 
             this.layoutControlItem6.Control = this.ckbIsTiming;
-            this.layoutControlItem6.Location = new System.Drawing.Point(0, 120);
+            this.layoutControlItem6.Location = new System.Drawing.Point(0, 144);
             this.layoutControlItem6.Name = "layoutControlItem6";
             this.layoutControlItem6.Size = new System.Drawing.Size(383, 23);
             this.layoutControlItem6.Text = "是否计时";
@@ -280,9 +286,9 @@
             // layoutControlItem7
             // 
             this.layoutControlItem7.Control = this.txtRemark;
-            this.layoutControlItem7.Location = new System.Drawing.Point(0, 143);
+            this.layoutControlItem7.Location = new System.Drawing.Point(0, 167);
             this.layoutControlItem7.Name = "layoutControlItem7";
-            this.layoutControlItem7.Size = new System.Drawing.Size(383, 146);
+            this.layoutControlItem7.Size = new System.Drawing.Size(383, 122);
             this.layoutControlItem7.Text = "备注";
             this.layoutControlItem7.TextSize = new System.Drawing.Size(48, 14);
             // 
@@ -294,6 +300,27 @@
             this.layoutControlItem8.Size = new System.Drawing.Size(383, 24);
             this.layoutControlItem8.Text = "客户选择";
             this.layoutControlItem8.TextSize = new System.Drawing.Size(48, 14);
+            // 
+            // cmbType
+            // 
+            this.cmbType.Location = new System.Drawing.Point(63, 108);
+            this.cmbType.Name = "cmbType";
+            this.cmbType.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow;
+            this.cmbType.Properties.Appearance.Options.UseBackColor = true;
+            this.cmbType.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cmbType.Size = new System.Drawing.Size(328, 20);
+            this.cmbType.StyleController = this.layoutControl1;
+            this.cmbType.TabIndex = 4;
+            // 
+            // layoutControlItem3
+            // 
+            this.layoutControlItem3.Control = this.cmbType;
+            this.layoutControlItem3.Location = new System.Drawing.Point(0, 96);
+            this.layoutControlItem3.Name = "layoutControlItem3";
+            this.layoutControlItem3.Size = new System.Drawing.Size(383, 24);
+            this.layoutControlItem3.Text = "合同类型";
+            this.layoutControlItem3.TextSize = new System.Drawing.Size(48, 14);
             // 
             // ContractAddForm
             // 
@@ -328,6 +355,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbType.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -352,5 +381,7 @@
         private DevExpress.XtraEditors.LookUpEdit lkuCustomer;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem8;
         private System.Windows.Forms.BindingSource bsCustomer;
+        private DevExpress.XtraEditors.ImageComboBoxEdit cmbType;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
     }
 }

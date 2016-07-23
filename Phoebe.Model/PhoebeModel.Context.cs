@@ -28,7 +28,6 @@ namespace Phoebe.Model
         public virtual DbSet<Billing> Billings { get; set; }
         public virtual DbSet<Cargo> Cargoes { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
-        public virtual DbSet<Contract> Contracts { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<StockIn> StockIns { get; set; }
         public virtual DbSet<StockInDetail> StockInDetails { get; set; }
@@ -45,5 +44,6 @@ namespace Phoebe.Model
         public virtual DbSet<IceFlow> IceFlows { get; set; }
         public virtual DbSet<IceStore> IceStores { get; set; }
         public virtual DbSet<IceSale> IceSales { get; set; }
+        public virtual DbSet<Contract> Contracts { get; set; }
     }
 }

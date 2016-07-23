@@ -30,6 +30,7 @@ namespace Phoebe.FormClient
         private void LoadData()
         {
             this.bsContract.DataSource = BusinessFactory<ContractBusiness>.Instance.FindAll();
+            this.ctList.DataSource = BusinessFactory<ContractBusiness>.Instance.FindAll();
         }
 
         /// <summary>
@@ -129,11 +130,10 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            int rowIndex = this.dgvContract.GetFocusedDataSourceRowIndex();
-            if (rowIndex < 0 || rowIndex >= this.bsContract.Count)
+            var contract = this.ctList.GetCurrentSelect();
+            if (contract == null)
                 return;
 
-            var contract = this.bsContract[rowIndex] as Contract;
             ChildFormManage.ShowDialogForm(typeof(ContractEditForm), new object[] { contract.Id });
 
             LoadData();
@@ -146,7 +146,8 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (this.dgvContract.SelectedRowsCount == 0)
+            var contract = this.ctList.GetCurrentSelect();
+            if (contract == null)
             {
                 MessageUtil.ShowClaim("未选中记录");
                 return;
@@ -154,12 +155,6 @@ namespace Phoebe.FormClient
 
             if (MessageUtil.ConfirmYesNo("是否确认删除选中合同") == DialogResult.Yes)
             {
-                int rowIndex = this.dgvContract.GetFocusedDataSourceRowIndex();
-                if (rowIndex < 0 || rowIndex >= this.bsContract.Count)
-                    return;
-
-                var contract = this.bsContract[rowIndex] as Contract;
-
                 ErrorCode result = BusinessFactory<ContractBusiness>.Instance.Delete(contract);
                 if (result == ErrorCode.Success)
                 {
@@ -174,10 +169,15 @@ namespace Phoebe.FormClient
             }
         }
 
-
+        /// <summary>
+        /// 强制删除合同
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnForceDelete_Click(object sender, EventArgs e)
         {
-            if (this.dgvContract.SelectedRowsCount == 0)
+            var contract = this.ctList.GetCurrentSelect();
+            if (contract == null)
             {
                 MessageUtil.ShowClaim("未选中记录");
                 return;
@@ -185,12 +185,6 @@ namespace Phoebe.FormClient
 
             if (MessageUtil.ConfirmYesNo("是否确认强制删除选中合同") == DialogResult.Yes)
             {
-                int rowIndex = this.dgvContract.GetFocusedDataSourceRowIndex();
-                if (rowIndex < 0 || rowIndex >= this.bsContract.Count)
-                    return;
-
-                var contract = this.bsContract[rowIndex] as Contract;
-
                 ErrorCode result = BusinessFactory<ContractBusiness>.Instance.ForceDelete(contract);
                 if (result == ErrorCode.Success)
                 {

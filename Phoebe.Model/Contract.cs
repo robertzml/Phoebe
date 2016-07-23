@@ -19,16 +19,17 @@ namespace Phoebe.Model
         {
             this.Billings = new HashSet<Billing>();
             this.Cargoes = new HashSet<Cargo>();
+            this.SettlementDetails = new HashSet<SettlementDetail>();
             this.StockIns = new HashSet<StockIn>();
             this.StockMoves = new HashSet<StockMove>();
             this.StockOuts = new HashSet<StockOut>();
-            this.SettlementDetails = new HashSet<SettlementDetail>();
         }
     
         public int Id { get; set; }
         public string Number { get; set; }
         public string Name { get; set; }
         public int CustomerId { get; set; }
+        public int Type { get; set; }
         public System.DateTime SignDate { get; set; }
         public Nullable<System.DateTime> CloseDate { get; set; }
         public int BillingType { get; set; }
@@ -44,12 +45,12 @@ namespace Phoebe.Model
         public virtual Customer Customer { get; set; }
         public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SettlementDetail> SettlementDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StockIn> StockIns { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StockMove> StockMoves { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StockOut> StockOuts { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SettlementDetail> SettlementDetails { get; set; }
     }
 }
