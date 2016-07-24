@@ -33,6 +33,29 @@ namespace Phoebe.Business
         }
         #endregion //Constructor
 
+        #region Function
+        /// <summary>
+        /// 获取最新流水单号
+        /// </summary>
+        /// <param name="flowTime">流水时间</param>
+        /// <returns></returns>
+        private string GetLastFlowNumber(DateTime flowTime)
+        {
+            Expression<Func<IceFlow, bool>> predicate = r => r.FlowTime == flowTime;
+            var data = this.dal.Find(predicate).OrderByDescending(r => r.FlowNumber);
+
+            if (data.Count() == 0)
+                return string.Format("{0}{1}{2}0001",
+                    flowTime.Year, flowTime.Month.ToString().PadLeft(2, '0'), flowTime.Day.ToString().PadLeft(2, '0'));
+            else
+            {
+                int newNumber = Convert.ToInt32(data.First().FlowNumber.Substring(8)) + 1;
+                return string.Format("{0}{1}{2}{3}", flowTime.Year, flowTime.Month.ToString().PadLeft(2, '0'),
+                    flowTime.Day.ToString().PadLeft(2, '0'), newNumber.ToString().PadLeft(4, '0'));
+            }
+        }
+        #endregion //Function
+
         #region Method
         /// <summary>
         /// 按时间段获取流水

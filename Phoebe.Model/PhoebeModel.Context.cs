@@ -41,9 +41,9 @@ namespace Phoebe.Model
         public virtual DbSet<Settlement> Settlements { get; set; }
         public virtual DbSet<Store> Stores { get; set; }
         public virtual DbSet<Payment> Payments { get; set; }
-        public virtual DbSet<IceFlow> IceFlows { get; set; }
         public virtual DbSet<IceStore> IceStores { get; set; }
-        public virtual DbSet<IceSale> IceSales { get; set; }
         public virtual DbSet<Contract> Contracts { get; set; }
+        public virtual DbSet<IceFlow> IceFlows { get; set; }
+        public virtual DbSet<IceSale> IceSales { get; set; }
     }
 }

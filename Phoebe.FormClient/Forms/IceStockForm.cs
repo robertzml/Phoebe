@@ -33,7 +33,7 @@ namespace Phoebe.FormClient
         private void InitControls()
         {
             this.dpTime.DateTime = DateTime.Now.Date;
-            this.txtUser.Text = this.currentUser.Name;
+            this.txtFlowNumber.Text = this.currentUser.Name;
 
             this.lkuCustomer.EditValue = null;
             this.txtRemark.Text = "";
@@ -92,7 +92,17 @@ namespace Phoebe.FormClient
         {
             InitControls();
 
-            this.isList.DataSource = new List<IceFlow>();
+            this.irList.DataSource = new List<IceRecord>();
+        }
+
+        /// <summary>
+        /// 保存
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tsbSave_Click(object sender, EventArgs e)
+        {
+
         }
 
         /// <summary>
@@ -103,22 +113,22 @@ namespace Phoebe.FormClient
         private void cmbType_SelectedIndexChanged(object sender, EventArgs e)
         {
             int type = this.cmbType.SelectedIndex;
-            this.isList.Clear();
+            this.irList.Clear();
             if (type == 0 || type == 2)
             {
-                IceFlow flow = new IceFlow
+                IceRecord record = new IceRecord
                 {
                     IceType = (int)IceType.Complete
                 };
-                this.isList.AddNew(flow);
+                this.irList.AddNew(record);
             }
             else if (type == 1)
             {
-                IceFlow flow = new IceFlow
+                IceRecord record = new IceRecord
                 {
                     IceType = (int)IceType.Fragment
                 };
-                this.isList.AddNew(flow);
+                this.irList.AddNew(record);
             }
         }
 
@@ -135,7 +145,6 @@ namespace Phoebe.FormClient
                 UpdateContractList(Convert.ToInt32(this.lkuCustomer.EditValue));
         }
         #endregion //Event
-
 
     }
 }

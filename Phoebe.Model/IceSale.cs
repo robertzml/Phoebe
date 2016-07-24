@@ -17,6 +17,7 @@ namespace Phoebe.Model
         public System.Guid Id { get; set; }
         public int CustomerId { get; set; }
         public System.Guid FlowId { get; set; }
+        public string FlowNumber { get; set; }
         public System.DateTime SaleTime { get; set; }
         public int IceType { get; set; }
         public int SaleCount { get; set; }
