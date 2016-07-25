@@ -58,6 +58,31 @@ namespace Phoebe.Business
 
         #region Method
         /// <summary>
+        /// 获取入库月份分组
+        /// </summary>
+        /// <returns></returns>
+        /// <remarks>
+        /// 用于树形导航分组
+        /// </remarks>
+        public string[] GetMonthGroup()
+        {
+            var data = this.dal.FindAll().GroupBy(r => r.MonthTime).Select(g => g.Key).OrderByDescending(s => s);
+            return data.ToArray();
+        }
+
+        /// <summary>
+        /// 按月度获取入库记录
+        /// </summary>
+        /// <param name="monthTime">月份</param>
+        /// <returns></returns>
+        public List<IceFlow> GetByMonth(string monthTime)
+        {
+            Expression<Func<IceFlow, bool>> predicate = r => r.MonthTime == monthTime;
+            var data = this.dal.Find(predicate).OrderByDescending(r => r.FlowNumber);
+            return data.ToList();
+        }
+
+        /// <summary>
         /// 按时间段获取流水
         /// </summary>
         /// <param name="from">开始日期</param>
@@ -90,6 +115,8 @@ namespace Phoebe.Business
         public override ErrorCode Create(IceFlow entity)
         {
             entity.Id = Guid.NewGuid();
+            entity.FlowNumber = GetLastFlowNumber(entity.FlowTime);
+            entity.MonthTime = entity.FlowTime.Year.ToString() + entity.FlowTime.Month.ToString().PadLeft(2, '0');
             entity.Status = 0;
 
             //check store count

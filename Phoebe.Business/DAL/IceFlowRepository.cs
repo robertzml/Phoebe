@@ -15,9 +15,14 @@ namespace Phoebe.Business.DAL
     public class IceFlowRepository : SqlDataAccess<PhoebeContext>, IBaseDataAccess<IceFlow>
     {
         #region Method
+        /// <summary>
+        /// 根据ID查找
+        /// </summary>
+        /// <param name="id">ID</param>
+        /// <returns></returns>
         public IceFlow FindById(object id)
         {
-            throw new NotImplementedException();
+            return this.context.IceFlows.Find(id);
         }
 
         public IceFlow FindOne(Expression<Func<IceFlow, bool>> predicate)

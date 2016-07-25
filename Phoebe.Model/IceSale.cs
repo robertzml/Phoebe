@@ -30,7 +30,7 @@ namespace Phoebe.Model
         public int Status { get; set; }
     
         public virtual Customer Customer { get; set; }
-        public virtual IceFlow IceFlow { get; set; }
         public virtual User User { get; set; }
+        public virtual IceFlow IceFlow { get; set; }
     }
 }

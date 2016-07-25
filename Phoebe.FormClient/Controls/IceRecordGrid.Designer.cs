@@ -90,6 +90,7 @@
             this.colIceType.Caption = "冰块类型";
             this.colIceType.FieldName = "IceType";
             this.colIceType.Name = "colIceType";
+            this.colIceType.OptionsColumn.AllowEdit = false;
             this.colIceType.Visible = true;
             this.colIceType.VisibleIndex = 0;
             // 

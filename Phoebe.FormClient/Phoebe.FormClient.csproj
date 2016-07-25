@@ -895,7 +895,9 @@
     <None Include="Resources\BOSale_32x32.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\phoebe.ico" />
+    <None Include="Resources\Top10Items_16x16.png" />
+    <None Include="Resources\Top_16x16.png" />
+    <None Include="Resources\Bottom10Items_16x16.png" />
     <None Include="Resources\phoebe_128x128.ico" />
     <None Include="Resources\phoebe_64x64.ico" />
     <None Include="Resources\phoebe_36x36.ico" />

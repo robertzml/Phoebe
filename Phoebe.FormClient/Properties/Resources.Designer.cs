@@ -243,6 +243,16 @@ namespace Phoebe.FormClient.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap Bottom10Items_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("Bottom10Items_16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap Cancel_16x16 {
             get {
                 object obj = ResourceManager.GetObject("Cancel_16x16", resourceCulture);
@@ -466,6 +476,26 @@ namespace Phoebe.FormClient.Properties {
         internal static System.Drawing.Bitmap Save_32x32 {
             get {
                 object obj = ResourceManager.GetObject("Save_32x32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap Top_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("Top_16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap Top10Items_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("Top10Items_16x16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

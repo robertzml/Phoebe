@@ -19,6 +19,18 @@ namespace Phoebe.FormClient
     /// </summary>
     public partial class IceStockForm : BaseForm
     {
+        #region Field
+        /// <summary>
+        /// 当前冰块流水ID
+        /// </summary>
+        private Guid currentFlowId;
+
+        /// <summary>
+        /// 界面流程状态
+        /// </summary>
+        private IceStockFormState formState;
+        #endregion //Field
+
         #region Constructor
         public IceStockForm()
         {
@@ -30,43 +42,143 @@ namespace Phoebe.FormClient
         /// <summary>
         /// 初始化窗体控件
         /// </summary>
-        private void InitControls()
+        private void InitNew()
         {
-            this.dpTime.DateTime = DateTime.Now.Date;
-            this.txtFlowNumber.Text = this.currentUser.Name;
+            this.gpInfo.Visible = true;
+            this.gpIce.Visible = true;
 
-            this.lkuCustomer.EditValue = null;
-            this.txtRemark.Text = "";
+            this.dpTime.DateTime = DateTime.Now.Date;
+            this.cmbType.SelectedIndex = -1;
+            this.txtUser.Text = this.currentUser.Name;            
+            this.txtRemark.Text = "";          
+            this.irList.DataSource = new List<IceRecord>();
+
+            this.dpTime.Properties.ReadOnly = false;
+            this.cmbType.ReadOnly = false;
+            this.txtRemark.Properties.ReadOnly = false;
+            this.irList.SetEditable(true);
+        }
+
+        /// <summary>
+        /// 初始化查看
+        /// </summary>
+        /// <param name="iceFlow">冰块流水</param>
+        private void InitView(IceFlow iceFlow)
+        {
+            this.gpInfo.Visible = true;
+            this.gpIce.Visible = true;
+
+            this.dpTime.DateTime = iceFlow.FlowTime;
+            this.cmbType.SelectedIndex = (int)iceFlow.FlowType - 1;
+            this.txtFlowNumber.Text = iceFlow.FlowNumber;
+            this.txtUser.Text = iceFlow.User.Name;
+            this.txtRemark.Text = iceFlow.Remark;
+
+            List<IceRecord> records = new List<IceRecord>();
+            IceRecord ir = new IceRecord
+            {
+                IceType = iceFlow.IceType,
+                FlowCount = iceFlow.FlowCount,
+                FlowWeight = iceFlow.FlowWeight             
+            };
+            records.Add(ir);
+
+            this.irList.DataSource = records;
+
+            this.dpTime.Properties.ReadOnly = true;
+            this.cmbType.ReadOnly = true;
+            this.txtRemark.Properties.ReadOnly = true;
+            this.irList.SetEditable(false);
+        }
+
+        /// <summary>
+        /// 更新票据列表
+        /// </summary>
+        /// <param name="month"></param>
+        private void UpdateTree(string month = "")
+        {
+            this.tvIce.BeginUpdate();
+            this.tvIce.Nodes.Clear();
+
+            var months = BusinessFactory<IceFlowBusiness>.Instance.GetMonthGroup();
+            for (int i = 0; i < months.Length; i++)
+            {
+                TreeNode node = new TreeNode();
+                node.Name = months[i];
+                node.Text = months[i];
+                node.ImageIndex = 0;
+                node.Nodes.Add("");
+                this.tvIce.Nodes.Add(node);
+            }
+
+            if (month != "")
+            {
+                var find = this.tvIce.Nodes.Find(month, false);
+                if (find.Count() != 0)
+                {
+                    find[0].Expand();
+                }
+            }
+            //this.lastMonth = month;
+            this.tvIce.EndUpdate();
+        }
+
+        /// <summary>
+        /// 更新工具栏状态
+        /// </summary>
+        private void UpdateToolbar()
+        {
+            switch(this.formState)
+            {
+                case IceStockFormState.Empty:
+                    this.tsbNew.Enabled = true;
+                    this.tsbSave.Enabled = false;
+                    this.tsbDelete.Enabled = false;
+                    this.tsbPrint.Enabled = false;
+                    break;
+                case IceStockFormState.Add:
+                    this.tsbNew.Enabled = true;
+                    this.tsbSave.Enabled = true;
+                    this.tsbDelete.Enabled = false;
+                    this.tsbPrint.Enabled = false;
+                    break;
+                case IceStockFormState.View:
+                    this.tsbNew.Enabled = true;
+                    this.tsbSave.Enabled = false;
+                    this.tsbDelete.Enabled = true;
+                    this.tsbPrint.Enabled = true;
+                    break;
+            }
         }
 
         /// <summary>
         /// 更新合同选择
         /// </summary>
         /// <param name="customerId">客户Id</param>
-        private void UpdateContractList(int customerId)
-        {
-            this.cmbContract.Properties.Items.Clear();
-            if (customerId == 0)
-            {
-                this.cmbContract.EditValue = null;
-                return;
-            }
+        //private void UpdateContractList(int customerId)
+        //{
+        //    this.cmbContract.Properties.Items.Clear();
+        //    if (customerId == 0)
+        //    {
+        //        this.cmbContract.EditValue = null;
+        //        return;
+        //    }
 
-            var contracts = BusinessFactory<ContractBusiness>.Instance.GetByCustomer(customerId, ContractType.Ice);
-            foreach (var item in contracts)
-            {
-                ImageComboBoxItem i = new ImageComboBoxItem();
-                i.Description = item.Name;
-                i.Value = item.Id;
+        //    var contracts = BusinessFactory<ContractBusiness>.Instance.GetByCustomer(customerId, ContractType.Ice);
+        //    foreach (var item in contracts)
+        //    {
+        //        ImageComboBoxItem i = new ImageComboBoxItem();
+        //        i.Description = item.Name;
+        //        i.Value = item.Id;
 
-                this.cmbContract.Properties.Items.Add(i);
-            }
+        //        this.cmbContract.Properties.Items.Add(i);
+        //    }
 
-            if (contracts.Count > 0)
-                this.cmbContract.EditValue = contracts[0].Id;
-            else
-                this.cmbContract.EditValue = null;
-        }
+        //    if (contracts.Count > 0)
+        //        this.cmbContract.EditValue = contracts[0].Id;
+        //    else
+        //        this.cmbContract.EditValue = null;
+        //}
         #endregion //Function
 
         #region Event
@@ -77,10 +189,60 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void IceStockForm_Load(object sender, EventArgs e)
         {
-            this.bsCustomer.DataSource = BusinessFactory<CustomerBusiness>.Instance.FindAll();
-            this.lkuCustomer.CustomDisplayText += new DevExpress.XtraEditors.Controls.CustomDisplayTextEventHandler(EventUtil.LkuCustomer_CustomDisplayText);
+            this.currentFlowId = Guid.Empty;
+            this.formState = IceStockFormState.Empty;
 
-            InitControls();
+            UpdateTree();
+            UpdateToolbar();
+  
+            this.gpInfo.Visible = false;
+            this.gpIce.Visible = false;
+        }
+
+        /// <summary>
+        /// 树形菜单载入
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tvIce_BeforeExpand(object sender, TreeViewCancelEventArgs e)
+        {
+            var data = BusinessFactory<IceFlowBusiness>.Instance.GetByMonth(e.Node.Name);
+            e.Node.Nodes.Clear();
+            foreach (var item in data)
+            {
+                TreeNode node = new TreeNode();
+                node.Name = item.Id.ToString();
+                node.Text = item.FlowNumber;
+                node.Tag = item.FlowType;
+                if (item.FlowType == (int)IceFlowType.CompleteStockIn)
+                    node.ImageIndex = 1;
+                else if (item.FlowType == (int)IceFlowType.FragmentStockIn)
+                    node.ImageIndex = 2;
+                else if (item.FlowType == (int)IceFlowType.CompleteMakeOut)
+                    node.ImageIndex = 3;
+                e.Node.Nodes.Add(node);
+            }
+        }
+
+        /// <summary>
+        /// 选择历史单据
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tvIce_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            if (e.Node.Level == 0)
+            {
+                e.Node.SelectedImageIndex = 0;
+                return;
+            }
+
+            this.currentFlowId = new Guid(e.Node.Name);
+            this.formState = IceStockFormState.View;
+
+            var iceFlow = BusinessFactory<IceFlowBusiness>.Instance.FindById(this.currentFlowId);
+            InitView(iceFlow);
+            UpdateToolbar();
         }
 
         /// <summary>
@@ -90,9 +252,10 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void tsbNew_Click(object sender, EventArgs e)
         {
-            InitControls();
+            this.formState = IceStockFormState.Add;
+            UpdateToolbar();
 
-            this.irList.DataSource = new List<IceRecord>();
+            InitNew();
         }
 
         /// <summary>
@@ -101,6 +264,73 @@ namespace Phoebe.FormClient
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void tsbSave_Click(object sender, EventArgs e)
+        {
+            if (this.cmbType.SelectedIndex == -1)
+            {
+                MessageUtil.ShowClaim("请选择业务类型");
+                return;
+            }
+
+            this.irList.CloseEditor();
+
+            IceFlow iceFlow = new IceFlow();
+            iceFlow.FlowTime = this.dpTime.DateTime.Date;
+            iceFlow.UserId = this.currentUser.Id;
+            iceFlow.CreateTime = DateTime.Now;
+            iceFlow.Remark = this.txtRemark.Text;
+            switch (this.cmbType.SelectedIndex)
+            {
+                case 0:
+                    iceFlow.FlowType = (int)IceFlowType.CompleteStockIn;
+                    iceFlow.IceType = (int)IceType.Complete;
+                    break;
+                case 1:
+                    iceFlow.FlowType = (int)IceFlowType.FragmentStockIn;
+                    iceFlow.IceType = (int)IceType.Fragment;
+                    break;
+                case 2:
+                    iceFlow.FlowType = (int)IceFlowType.CompleteMakeOut;
+                    iceFlow.IceType = (int)IceType.Complete;
+                    break;
+            }
+
+            var record = this.irList.DataSource.First();
+            iceFlow.FlowCount = record.FlowCount;
+            iceFlow.FlowWeight = record.FlowWeight;
+
+            if (iceFlow.FlowCount <= 0)
+            {
+                MessageUtil.ShowInfo("流水数量必须大于0");
+                return;
+            }
+
+            var result = BusinessFactory<IceFlowBusiness>.Instance.Create(iceFlow);
+            if (result == ErrorCode.Success)
+            {
+                MessageUtil.ShowInfo("添加冰块流水成功");
+            }
+            else
+            {
+                MessageUtil.ShowError("添加冰块流水失败：" + result.DisplayName());
+            }
+        }
+
+        /// <summary>
+        /// 删除
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tsbDelete_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// 打印
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tsbPrint_Click(object sender, EventArgs e)
         {
 
         }
@@ -112,6 +342,9 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void cmbType_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (this.formState != IceStockFormState.Add)
+                return;
+
             int type = this.cmbType.SelectedIndex;
             this.irList.Clear();
             if (type == 0 || type == 2)
@@ -139,12 +372,32 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void lkuCustomer_EditValueChanged(object sender, EventArgs e)
         {
-            if (this.lkuCustomer.EditValue == null)
-                UpdateContractList(0);
-            else
-                UpdateContractList(Convert.ToInt32(this.lkuCustomer.EditValue));
+            //if (this.lkuCustomer.EditValue == null)
+            //    UpdateContractList(0);
+            //else
+            //    UpdateContractList(Convert.ToInt32(this.lkuCustomer.EditValue));
         }
         #endregion //Event
 
+        /// <summary>
+        /// 冰块界面模式
+        /// </summary>
+        internal enum IceStockFormState
+        {
+            /// <summary>
+            /// 空
+            /// </summary>
+            Empty = 0,
+
+            /// <summary>
+            /// 新增模式
+            /// </summary>
+            Add = 1,
+
+            /// <summary>
+            /// 查看模式
+            /// </summary>
+            View = 2
+        }
     }
 }

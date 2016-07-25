@@ -241,4 +241,13 @@
   <data name="phoebe_64x64" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\phoebe_64x64.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Bottom10Items_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Bottom10Items_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Top10Items_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Top10Items_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Top_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Top_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

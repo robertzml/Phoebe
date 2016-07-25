@@ -66,6 +66,31 @@ namespace Phoebe.FormClient
             this.bsIceRecord.Add(record);
             this.bsIceRecord.ResetBindings(false);
         }
+
+        /// <summary>
+        /// 更新列表绑定数据显示
+        /// </summary>
+        public void UpdateBindingData()
+        {
+            this.bsIceRecord.ResetBindings(false);
+        }
+
+        /// <summary>
+        /// 完成编辑
+        /// </summary>
+        public void CloseEditor()
+        {
+            this.dgvIce.CloseEditor();
+        }
+
+        /// <summary>
+        /// 设置是否能编辑
+        /// </summary>
+        /// <param name="editable">能否编辑</param>
+        public void SetEditable(bool editable)
+        {
+            this.dgvIce.OptionsBehavior.Editable = editable;
+        }
         #endregion //Method
 
         #region Event
@@ -77,7 +102,8 @@ namespace Phoebe.FormClient
         private void IceRecordGrid_Load(object sender, EventArgs e)
         {
             this.colSaleUnitPrice.Visible = this.isSale;
-
+            this.colSaleFee.Visible = this.isSale;
+            this.colRemark.Visible = this.isSale;
         }
 
         /// <summary>

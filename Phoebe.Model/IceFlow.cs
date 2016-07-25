@@ -23,6 +23,7 @@ namespace Phoebe.Model
         public System.Guid Id { get; set; }
         public int FlowType { get; set; }
         public int IceType { get; set; }
+        public string MonthTime { get; set; }
         public string FlowNumber { get; set; }
         public int FlowCount { get; set; }
         public decimal FlowWeight { get; set; }

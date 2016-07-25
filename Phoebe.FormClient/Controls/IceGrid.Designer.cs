@@ -182,12 +182,12 @@
             this.colStatus.FieldName = "Status";
             this.colStatus.Name = "colStatus";
             // 
-            // IceGridControl
+            // IceGrid
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.dgcIce);
-            this.Name = "IceGridControl";
+            this.Name = "IceGrid";
             this.Size = new System.Drawing.Size(751, 445);
             ((System.ComponentModel.ISupportInitialize)(this.dgcIce)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsIceFlow)).EndInit();
