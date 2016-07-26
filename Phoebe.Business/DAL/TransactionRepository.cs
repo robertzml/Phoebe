@@ -52,7 +52,7 @@ namespace Phoebe.Business.DAL
                 if (stockMoves.Count() != 0)
                 {
                     this.context.StockMoves.RemoveRange(stockMoves);
-                }                
+                }
 
                 //delte the stores
                 var stores = this.context.Stores.Where(r => r.Cargo.ContractId == contract.Id);
@@ -667,8 +667,6 @@ namespace Phoebe.Business.DAL
 
                     if (store.Count < 0)
                         return ErrorCode.IceOutCountOverflow;
-                    if (store.Weight < 0)
-                        return ErrorCode.IceOutWeightOverflow;
                 }
 
                 this.context.Entry(store).State = EntityState.Modified;
@@ -710,7 +708,7 @@ namespace Phoebe.Business.DAL
 
                 return ErrorCode.Success;
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return ErrorCode.Exception;
             }
@@ -734,8 +732,6 @@ namespace Phoebe.Business.DAL
 
                     if (store.Count < 0)
                         return ErrorCode.IceDeleteCountOverflow;
-                    if (store.Weight < 0)
-                        return ErrorCode.IceDeleteWeightOverflow;
                 }
                 else if (flowType == IceFlowType.CompleteMakeOut || flowType == IceFlowType.CompleteSaleOut || flowType == IceFlowType.FragmentSaleOut)
                 {
@@ -750,7 +746,7 @@ namespace Phoebe.Business.DAL
 
                 return ErrorCode.Success;
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return ErrorCode.Exception;
             }

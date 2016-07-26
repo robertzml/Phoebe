@@ -58,7 +58,7 @@ namespace Phoebe.Business
 
         #region Method
         /// <summary>
-        /// 获取入库月份分组
+        /// 获取月份分组
         /// </summary>
         /// <returns></returns>
         /// <remarks>
@@ -71,13 +71,40 @@ namespace Phoebe.Business
         }
 
         /// <summary>
-        /// 按月度获取入库记录
+        /// 获取冰块销售月份分组
+        /// </summary>
+        /// <returns></returns>
+        /// <remarks>
+        /// 用于树形导航分组
+        /// </remarks>
+        public string[] GetSaleMonthGroup()
+        {
+            var data = this.dal.FindAll().Where(r => r.FlowType == (int)IceFlowType.CompleteSaleOut || r.FlowType == (int)IceFlowType.FragmentSaleOut)
+                .GroupBy(s => s.MonthTime).Select(g => g.Key).OrderByDescending(t => t);
+            return data.ToArray();
+        }
+
+        /// <summary>
+        /// 按月度获取记录
         /// </summary>
         /// <param name="monthTime">月份</param>
         /// <returns></returns>
         public List<IceFlow> GetByMonth(string monthTime)
         {
             Expression<Func<IceFlow, bool>> predicate = r => r.MonthTime == monthTime;
+            var data = this.dal.Find(predicate).OrderByDescending(r => r.FlowNumber);
+            return data.ToList();
+        }
+
+        /// <summary>
+        /// 按月度获取冰块销售记录
+        /// </summary>
+        /// <param name="monthTime">月份</param>
+        /// <returns></returns>
+        public List<IceFlow> GetSaleByMonth(string monthTime)
+        {
+            Expression<Func<IceFlow, bool>> predicate = r => r.MonthTime == monthTime && 
+                (r.FlowType == (int)IceFlowType.CompleteSaleOut || r.FlowType == (int)IceFlowType.FragmentSaleOut);
             var data = this.dal.Find(predicate).OrderByDescending(r => r.FlowNumber);
             return data.ToList();
         }
@@ -125,8 +152,6 @@ namespace Phoebe.Business
                 var store = BusinessFactory<IceStoreBusiness>.Instance.GetByType((IceType)entity.IceType);
                 if (entity.FlowCount > store.Count)
                     return ErrorCode.IceOutCountOverflow;
-                if (entity.FlowWeight > store.Weight)
-                    return ErrorCode.IceOutWeightOverflow;
             }
 
             var trans = new TransactionRepository();

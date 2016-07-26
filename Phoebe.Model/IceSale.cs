@@ -15,7 +15,7 @@ namespace Phoebe.Model
     public partial class IceSale
     {
         public System.Guid Id { get; set; }
-        public int CustomerId { get; set; }
+        public int ContractId { get; set; }
         public System.Guid FlowId { get; set; }
         public string FlowNumber { get; set; }
         public System.DateTime SaleTime { get; set; }
@@ -29,8 +29,8 @@ namespace Phoebe.Model
         public string Remark { get; set; }
         public int Status { get; set; }
     
-        public virtual Customer Customer { get; set; }
-        public virtual User User { get; set; }
+        public virtual Contract Contract { get; set; }
         public virtual IceFlow IceFlow { get; set; }
+        public virtual User User { get; set; }
     }
 }

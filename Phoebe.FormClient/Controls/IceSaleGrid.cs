@@ -46,11 +46,11 @@ namespace Phoebe.FormClient
                 return;
 
             var iceSale = this.bsIceSale[rowIndex] as IceSale;
-            if (e.Column.FieldName == "CustomerId")
-            {
-                e.DisplayText = iceSale.Customer.Name;
-            }
-            else if (e.Column.FieldName == "IceType")
+            //if (e.Column.FieldName == "CustomerId")
+            //{
+            //    e.DisplayText = iceSale.Customer.Name;
+            //}
+            if (e.Column.FieldName == "IceType")
             {
                 e.DisplayText = ((IceType)iceSale.IceType).DisplayName();
             }

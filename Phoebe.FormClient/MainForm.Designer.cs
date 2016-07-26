@@ -49,6 +49,7 @@
             this.menuStoreSnapshot = new DevExpress.XtraBars.BarButtonItem();
             this.menuStoreTrace = new DevExpress.XtraBars.BarButtonItem();
             this.menuIce = new DevExpress.XtraBars.BarSubItem();
+            this.menuIceStock = new DevExpress.XtraBars.BarButtonItem();
             this.menuIceStore = new DevExpress.XtraBars.BarButtonItem();
             this.menuIceSale = new DevExpress.XtraBars.BarButtonItem();
             this.menuSettle = new DevExpress.XtraBars.BarSubItem();
@@ -78,7 +79,7 @@
             this.barHeaderItem1 = new DevExpress.XtraBars.BarHeaderItem();
             this.barStaticItem2 = new DevExpress.XtraBars.BarStaticItem();
             this.tabMdiManager = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
-            this.menuIceStock = new DevExpress.XtraBars.BarButtonItem();
+            this.menuIceSell = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabMdiManager)).BeginInit();
             this.SuspendLayout();
@@ -135,9 +136,10 @@
             this.menuReport,
             this.menuStockFlowReport,
             this.menuStockInventoryReport,
-            this.menuIceStock});
+            this.menuIceStock,
+            this.menuIceSell});
             this.barManager1.MainMenu = this.mainMenu;
-            this.barManager1.MaxItemId = 45;
+            this.barManager1.MaxItemId = 46;
             this.barManager1.StatusBar = this.bar3;
             // 
             // mainMenu
@@ -301,8 +303,16 @@
             this.menuIce.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(this.menuIceStock),
             new DevExpress.XtraBars.LinkPersistInfo(this.menuIceStore),
+            new DevExpress.XtraBars.LinkPersistInfo(this.menuIceSell),
             new DevExpress.XtraBars.LinkPersistInfo(this.menuIceSale)});
             this.menuIce.Name = "menuIce";
+            // 
+            // menuIceStock
+            // 
+            this.menuIceStock.Caption = "冰块操作";
+            this.menuIceStock.Id = 44;
+            this.menuIceStock.Name = "menuIceStock";
+            this.menuIceStock.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuIceStock_ItemClick);
             // 
             // menuIceStore
             // 
@@ -313,7 +323,7 @@
             // 
             // menuIceSale
             // 
-            this.menuIceSale.Caption = "冰块销售";
+            this.menuIceSale.Caption = "销售记录";
             this.menuIceSale.Id = 40;
             this.menuIceSale.Name = "menuIceSale";
             this.menuIceSale.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuIceSale_ItemClick);
@@ -522,12 +532,12 @@
             this.tabMdiManager.MdiParent = this;
             this.tabMdiManager.PinPageButtonShowMode = DevExpress.XtraTab.PinPageButtonShowMode.InActiveTabPageHeader;
             // 
-            // menuIceStock
+            // menuIceSell
             // 
-            this.menuIceStock.Caption = "冰块操作";
-            this.menuIceStock.Id = 44;
-            this.menuIceStock.Name = "menuIceStock";
-            this.menuIceStock.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuIceStock_ItemClick);
+            this.menuIceSell.Caption = "冰块销售";
+            this.menuIceSell.Id = 45;
+            this.menuIceSell.Name = "menuIceSell";
+            this.menuIceSell.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuIceSell_ItemClick);
             // 
             // MainForm
             // 
@@ -602,6 +612,7 @@
         private DevExpress.XtraBars.BarButtonItem menuStockFlowReport;
         private DevExpress.XtraBars.BarButtonItem menuStockInventoryReport;
         private DevExpress.XtraBars.BarButtonItem menuIceStock;
+        private DevExpress.XtraBars.BarButtonItem menuIceSell;
     }
 }
 

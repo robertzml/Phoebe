@@ -81,8 +81,8 @@ namespace Phoebe.FormClient
             else
             {
                 int customerId = Convert.ToInt32(this.lkuCustomer.EditValue);
-                var data = BusinessFactory<IceSaleBusiness>.Instance.Get(this.dpFrom.DateTime, this.dpTo.DateTime).Where(r => r.CustomerId == customerId);
-                this.iceList.DataSource = data.ToList();
+                //var data = BusinessFactory<IceSaleBusiness>.Instance.Get(this.dpFrom.DateTime, this.dpTo.DateTime).Where(r => r.CustomerId == customerId);
+                //this.iceList.DataSource = data.ToList();
             }
         }
 

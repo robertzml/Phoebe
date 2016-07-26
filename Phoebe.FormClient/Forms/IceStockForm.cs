@@ -40,7 +40,7 @@ namespace Phoebe.FormClient
 
         #region Function
         /// <summary>
-        /// 初始化窗体控件
+        /// 初始化新建
         /// </summary>
         private void InitNew()
         {
@@ -151,35 +151,6 @@ namespace Phoebe.FormClient
                     break;
             }
         }
-
-        /// <summary>
-        /// 更新合同选择
-        /// </summary>
-        /// <param name="customerId">客户Id</param>
-        //private void UpdateContractList(int customerId)
-        //{
-        //    this.cmbContract.Properties.Items.Clear();
-        //    if (customerId == 0)
-        //    {
-        //        this.cmbContract.EditValue = null;
-        //        return;
-        //    }
-
-        //    var contracts = BusinessFactory<ContractBusiness>.Instance.GetByCustomer(customerId, ContractType.Ice);
-        //    foreach (var item in contracts)
-        //    {
-        //        ImageComboBoxItem i = new ImageComboBoxItem();
-        //        i.Description = item.Name;
-        //        i.Value = item.Id;
-
-        //        this.cmbContract.Properties.Items.Add(i);
-        //    }
-
-        //    if (contracts.Count > 0)
-        //        this.cmbContract.EditValue = contracts[0].Id;
-        //    else
-        //        this.cmbContract.EditValue = null;
-        //}
         #endregion //Function
 
         #region Event
@@ -399,19 +370,6 @@ namespace Phoebe.FormClient
                 };
                 this.irList.AddNew(record);
             }
-        }
-
-        /// <summary>
-        /// 客户选择
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void lkuCustomer_EditValueChanged(object sender, EventArgs e)
-        {
-            //if (this.lkuCustomer.EditValue == null)
-            //    UpdateContractList(0);
-            //else
-            //    UpdateContractList(Convert.ToInt32(this.lkuCustomer.EditValue));
         }
         #endregion //Event
 

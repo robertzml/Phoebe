@@ -191,6 +191,16 @@ namespace Phoebe.FormClient
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        private void menuIceSell_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            ChildFormManage.LoadMdiForm(this, typeof(IceSellForm));
+        }
+
+        /// <summary>
+        /// 冰块管理 - 销售记录
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void menuIceSale_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             ChildFormManage.LoadMdiForm(this, typeof(IceSaleForm));
