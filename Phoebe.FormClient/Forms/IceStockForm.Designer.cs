@@ -34,8 +34,11 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tsbNew = new System.Windows.Forms.ToolStripButton();
             this.tsbSave = new System.Windows.Forms.ToolStripButton();
+            this.tsbDelete = new System.Windows.Forms.ToolStripButton();
+            this.tsbPrint = new System.Windows.Forms.ToolStripButton();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.tvIce = new System.Windows.Forms.TreeView();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.gpInfo = new DevExpress.XtraEditors.GroupControl();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.txtUser = new DevExpress.XtraEditors.TextEdit();
@@ -51,9 +54,6 @@
             this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
             this.gpIce = new DevExpress.XtraEditors.GroupControl();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.tsbDelete = new System.Windows.Forms.ToolStripButton();
-            this.tsbPrint = new System.Windows.Forms.ToolStripButton();
             this.irList = new Phoebe.FormClient.IceRecordGrid();
             this.tableLayoutPanel1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -130,6 +130,24 @@
             this.tsbSave.Text = "保存";
             this.tsbSave.Click += new System.EventHandler(this.tsbSave_Click);
             // 
+            // tsbDelete
+            // 
+            this.tsbDelete.Image = global::Phoebe.FormClient.Properties.Resources.Remove_16x16;
+            this.tsbDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbDelete.Name = "tsbDelete";
+            this.tsbDelete.Size = new System.Drawing.Size(52, 22);
+            this.tsbDelete.Text = "删除";
+            this.tsbDelete.Click += new System.EventHandler(this.tsbDelete_Click);
+            // 
+            // tsbPrint
+            // 
+            this.tsbPrint.Image = global::Phoebe.FormClient.Properties.Resources.Print_16x16;
+            this.tsbPrint.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbPrint.Name = "tsbPrint";
+            this.tsbPrint.Size = new System.Drawing.Size(52, 22);
+            this.tsbPrint.Text = "打印";
+            this.tsbPrint.Click += new System.EventHandler(this.tsbPrint_Click);
+            // 
             // groupControl1
             // 
             this.groupControl1.Controls.Add(this.tvIce);
@@ -153,6 +171,16 @@
             this.tvIce.TabIndex = 0;
             this.tvIce.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.tvIce_BeforeExpand);
             this.tvIce.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvIce_AfterSelect);
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "BOProduct_16x16.png");
+            this.imageList1.Images.SetKeyName(1, "Top10Items_16x16.png");
+            this.imageList1.Images.SetKeyName(2, "Top_16x16.png");
+            this.imageList1.Images.SetKeyName(3, "Bottom10Items_16x16.png");
+            this.imageList1.Images.SetKeyName(4, "ConditionalFormatting_16x16.png");
             // 
             // gpInfo
             // 
@@ -321,34 +349,6 @@
             this.gpIce.Size = new System.Drawing.Size(737, 307);
             this.gpIce.TabIndex = 2;
             this.gpIce.Text = "冰块信息";
-            // 
-            // imageList1
-            // 
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "BOProduct_16x16.png");
-            this.imageList1.Images.SetKeyName(1, "Top10Items_16x16.png");
-            this.imageList1.Images.SetKeyName(2, "Top_16x16.png");
-            this.imageList1.Images.SetKeyName(3, "Bottom10Items_16x16.png");
-            this.imageList1.Images.SetKeyName(4, "ConditionalFormatting_16x16.png");
-            // 
-            // tsbDelete
-            // 
-            this.tsbDelete.Image = global::Phoebe.FormClient.Properties.Resources.Remove_16x16;
-            this.tsbDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbDelete.Name = "tsbDelete";
-            this.tsbDelete.Size = new System.Drawing.Size(52, 22);
-            this.tsbDelete.Text = "删除";
-            this.tsbDelete.Click += new System.EventHandler(this.tsbDelete_Click);
-            // 
-            // tsbPrint
-            // 
-            this.tsbPrint.Image = global::Phoebe.FormClient.Properties.Resources.Print_16x16;
-            this.tsbPrint.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbPrint.Name = "tsbPrint";
-            this.tsbPrint.Size = new System.Drawing.Size(52, 22);
-            this.tsbPrint.Text = "打印";
-            this.tsbPrint.Click += new System.EventHandler(this.tsbPrint_Click);
             // 
             // irList
             // 

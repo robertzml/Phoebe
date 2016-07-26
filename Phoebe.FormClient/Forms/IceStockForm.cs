@@ -49,8 +49,9 @@ namespace Phoebe.FormClient
 
             this.dpTime.DateTime = DateTime.Now.Date;
             this.cmbType.SelectedIndex = -1;
-            this.txtUser.Text = this.currentUser.Name;            
-            this.txtRemark.Text = "";          
+            this.txtFlowNumber.Text = "";
+            this.txtUser.Text = this.currentUser.Name;
+            this.txtRemark.Text = "";
             this.irList.DataSource = new List<IceRecord>();
 
             this.dpTime.Properties.ReadOnly = false;
@@ -79,7 +80,7 @@ namespace Phoebe.FormClient
             {
                 IceType = iceFlow.IceType,
                 FlowCount = iceFlow.FlowCount,
-                FlowWeight = iceFlow.FlowWeight             
+                FlowWeight = iceFlow.FlowWeight
             };
             records.Add(ir);
 
@@ -128,7 +129,7 @@ namespace Phoebe.FormClient
         /// </summary>
         private void UpdateToolbar()
         {
-            switch(this.formState)
+            switch (this.formState)
             {
                 case IceStockFormState.Empty:
                     this.tsbNew.Enabled = true;
@@ -194,7 +195,7 @@ namespace Phoebe.FormClient
 
             UpdateTree();
             UpdateToolbar();
-  
+
             this.gpInfo.Visible = false;
             this.gpIce.Visible = false;
         }
@@ -308,6 +309,12 @@ namespace Phoebe.FormClient
             if (result == ErrorCode.Success)
             {
                 MessageUtil.ShowInfo("添加冰块流水成功");
+
+                this.currentFlowId = iceFlow.Id;
+                this.formState = IceStockFormState.View;
+                UpdateTree(iceFlow.MonthTime);
+                UpdateToolbar();
+                InitView(iceFlow);
             }
             else
             {
@@ -322,7 +329,36 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void tsbDelete_Click(object sender, EventArgs e)
         {
+            if (this.currentFlowId == Guid.Empty)
+            {
+                MessageUtil.ShowClaim("当前未选中单据");
+                return;
+            }
 
+            if (MessageUtil.ConfirmYesNo("是否确认删除选中记录") == DialogResult.Yes)
+            {
+                var iceFlow = BusinessFactory<IceFlowBusiness>.Instance.FindById(this.currentFlowId);
+                string month = iceFlow.MonthTime;
+
+                var result = BusinessFactory<IceFlowBusiness>.Instance.Delete(iceFlow);
+                if (result == ErrorCode.Success)
+                {
+                    MessageUtil.ShowInfo("删除冰块流水成功");
+
+                    this.currentFlowId = Guid.Empty;
+                    this.formState = IceStockFormState.Empty;
+
+                    UpdateTree(month);
+                    UpdateToolbar();
+
+                    this.gpInfo.Visible = false;
+                    this.gpIce.Visible = false;
+                }
+                else
+                {
+                    MessageUtil.ShowError("删除冰块流水失败：" + result.DisplayName());
+                }
+            }
         }
 
         /// <summary>
