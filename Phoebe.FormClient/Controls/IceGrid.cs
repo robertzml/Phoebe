@@ -63,10 +63,10 @@ namespace Phoebe.FormClient
             {
                 e.DisplayText = ((IceFlowType)iceFlow.FlowType).DisplayName();
             }
-            else if (e.Column.FieldName == "IceType")
-            {
-                e.DisplayText = ((IceType)iceFlow.IceType).DisplayName();
-            }
+            //else if (e.Column.FieldName == "IceType")
+            //{
+            //    e.DisplayText = ((IceType)iceFlow.IceType).DisplayName();
+            //}
             else if (e.Column.FieldName == "UserId")
             {
                 e.DisplayText = iceFlow.User.Name;

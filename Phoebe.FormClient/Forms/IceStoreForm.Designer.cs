@@ -60,7 +60,6 @@
             this.btnFragmentStockIn = new DevExpress.XtraEditors.SimpleButton();
             this.btnCompleteStockIn = new DevExpress.XtraEditors.SimpleButton();
             this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
-            this.iceList = new Phoebe.FormClient.IceGrid();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
@@ -93,7 +92,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
             this.groupControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).BeginInit();
-            this.groupControl3.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -169,7 +167,7 @@
             this.cmbFlowType.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.cmbFlowType.Size = new System.Drawing.Size(112, 20);
             this.cmbFlowType.StyleController = this.layoutControl1;
-            this.cmbFlowType.TabIndex = 12;
+            this.cmbFlowType.TabIndex = 9;
             // 
             // dpTo
             // 
@@ -184,7 +182,7 @@
             this.dpTo.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.dpTo.Size = new System.Drawing.Size(133, 20);
             this.dpTo.StyleController = this.layoutControl1;
-            this.dpTo.TabIndex = 11;
+            this.dpTo.TabIndex = 8;
             // 
             // dpFrom
             // 
@@ -199,7 +197,7 @@
             this.dpFrom.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.dpFrom.Size = new System.Drawing.Size(108, 20);
             this.dpFrom.StyleController = this.layoutControl1;
-            this.dpFrom.TabIndex = 10;
+            this.dpFrom.TabIndex = 7;
             // 
             // txtFragmentWeight
             // 
@@ -210,7 +208,7 @@
             this.txtFragmentWeight.Properties.ReadOnly = true;
             this.txtFragmentWeight.Size = new System.Drawing.Size(113, 20);
             this.txtFragmentWeight.StyleController = this.layoutControl1;
-            this.txtFragmentWeight.TabIndex = 9;
+            this.txtFragmentWeight.TabIndex = 6;
             // 
             // txtFragmentCount
             // 
@@ -221,7 +219,7 @@
             this.txtFragmentCount.Properties.ReadOnly = true;
             this.txtFragmentCount.Size = new System.Drawing.Size(132, 20);
             this.txtFragmentCount.StyleController = this.layoutControl1;
-            this.txtFragmentCount.TabIndex = 8;
+            this.txtFragmentCount.TabIndex = 5;
             // 
             // textEdit4
             // 
@@ -233,7 +231,7 @@
             this.textEdit4.Properties.ReadOnly = true;
             this.textEdit4.Size = new System.Drawing.Size(108, 20);
             this.textEdit4.StyleController = this.layoutControl1;
-            this.textEdit4.TabIndex = 7;
+            this.textEdit4.TabIndex = 4;
             // 
             // txtCompleteWeight
             // 
@@ -244,7 +242,7 @@
             this.txtCompleteWeight.Properties.ReadOnly = true;
             this.txtCompleteWeight.Size = new System.Drawing.Size(113, 20);
             this.txtCompleteWeight.StyleController = this.layoutControl1;
-            this.txtCompleteWeight.TabIndex = 6;
+            this.txtCompleteWeight.TabIndex = 3;
             // 
             // txtCompleteCount
             // 
@@ -255,7 +253,7 @@
             this.txtCompleteCount.Properties.ReadOnly = true;
             this.txtCompleteCount.Size = new System.Drawing.Size(132, 20);
             this.txtCompleteCount.StyleController = this.layoutControl1;
-            this.txtCompleteCount.TabIndex = 5;
+            this.txtCompleteCount.TabIndex = 2;
             // 
             // textEdit1
             // 
@@ -267,7 +265,7 @@
             this.textEdit1.Properties.ReadOnly = true;
             this.textEdit1.Size = new System.Drawing.Size(108, 20);
             this.textEdit1.StyleController = this.layoutControl1;
-            this.textEdit1.TabIndex = 4;
+            this.textEdit1.TabIndex = 0;
             // 
             // layoutControlGroup1
             // 
@@ -450,22 +448,12 @@
             // groupControl3
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.groupControl3, 2);
-            this.groupControl3.Controls.Add(this.iceList);
             this.groupControl3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl3.Location = new System.Drawing.Point(3, 203);
             this.groupControl3.Name = "groupControl3";
             this.groupControl3.Size = new System.Drawing.Size(1000, 379);
             this.groupControl3.TabIndex = 2;
             this.groupControl3.Text = "流水记录";
-            // 
-            // iceList
-            // 
-            this.iceList.DataSource = null;
-            this.iceList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.iceList.Location = new System.Drawing.Point(2, 21);
-            this.iceList.Name = "iceList";
-            this.iceList.Size = new System.Drawing.Size(996, 356);
-            this.iceList.TabIndex = 0;
             // 
             // IceStoreForm
             // 
@@ -508,7 +496,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
             this.groupControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).EndInit();
-            this.groupControl3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -542,7 +529,6 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem9;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem10;
         private DevExpress.XtraEditors.GroupControl groupControl3;
-        private IceGrid iceList;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup3;
         private DevExpress.XtraEditors.SimpleButton btnCompleteStockIn;
         private DevExpress.XtraEditors.SimpleButton btnFragmentStockIn;

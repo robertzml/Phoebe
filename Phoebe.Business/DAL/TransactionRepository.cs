@@ -646,24 +646,25 @@ namespace Phoebe.Business.DAL
         /// <summary>
         /// 冰块流水添加业务
         /// </summary>
+        /// <param name="iceStock">出入库</param>
         /// <param name="iceFlow">冰块流水</param>
         /// <returns></returns>
-        public ErrorCode IceFlowAddTrans(IceFlow iceFlow)
+        public ErrorCode IceStockAddTrans(IceStock iceStock, IceFlow iceFlow)
         {
             try
             {
-                var store = this.context.IceStores.Single(r => r.Type == iceFlow.IceType);
+                var store = this.context.IceStores.Single(r => r.Type == iceStock.IceType);
 
                 IceFlowType flowType = (IceFlowType)iceFlow.FlowType;
                 if (flowType == IceFlowType.CompleteStockIn || flowType == IceFlowType.FragmentStockIn)
                 {
-                    store.Count += iceFlow.FlowCount;
-                    store.Weight += iceFlow.FlowWeight;
+                    store.Count += iceStock.FlowCount;
+                    store.Weight += iceStock.FlowWeight;
                 }
-                else if (flowType == IceFlowType.CompleteMakeOut || flowType == IceFlowType.CompleteSaleOut || flowType == IceFlowType.FragmentSaleOut)
+                else if (flowType == IceFlowType.CompleteMakeOut)
                 {
-                    store.Count -= iceFlow.FlowCount;
-                    store.Weight -= iceFlow.FlowWeight;
+                    store.Count -= iceStock.FlowCount;
+                    store.Weight -= iceStock.FlowWeight;
 
                     if (store.Count < 0)
                         return ErrorCode.IceOutCountOverflow;
@@ -671,6 +672,7 @@ namespace Phoebe.Business.DAL
 
                 this.context.Entry(store).State = EntityState.Modified;
                 this.context.IceFlows.Add(iceFlow);
+                this.context.IceStocks.Add(iceStock);
                 this.context.SaveChanges();
 
                 return ErrorCode.Success;
@@ -692,19 +694,19 @@ namespace Phoebe.Business.DAL
             try
             {
                 //set ice store
-                var store = this.context.IceStores.Single(r => r.Type == iceFlow.IceType);
-                store.Count -= iceFlow.FlowCount;
-                store.Weight -= iceFlow.FlowWeight;
+                //var store = this.context.IceStores.Single(r => r.Type == iceFlow.IceType);
+                //store.Count -= iceFlow.FlowCount;
+                //store.Weight -= iceFlow.FlowWeight;
 
-                if (store.Count < 0)
-                    return ErrorCode.IceOutCountOverflow;
-                if (store.Weight < 0)
-                    return ErrorCode.IceOutWeightOverflow;
+                //if (store.Count < 0)
+                //    return ErrorCode.IceOutCountOverflow;
+                //if (store.Weight < 0)
+                //    return ErrorCode.IceOutWeightOverflow;
 
-                this.context.Entry(store).State = EntityState.Modified;
-                this.context.IceFlows.Add(iceFlow);
-                this.context.IceSales.Add(iceSale);
-                this.context.SaveChanges();
+                //this.context.Entry(store).State = EntityState.Modified;
+                //this.context.IceFlows.Add(iceFlow);
+                //this.context.IceSales.Add(iceSale);
+                //this.context.SaveChanges();
 
                 return ErrorCode.Success;
             }
@@ -723,28 +725,47 @@ namespace Phoebe.Business.DAL
         {
             try
             {
-                var store = this.context.IceStores.Single(r => r.Type == iceFlow.IceType);
                 IceFlowType flowType = (IceFlowType)iceFlow.FlowType;
                 if (flowType == IceFlowType.CompleteStockIn || flowType == IceFlowType.FragmentStockIn)
                 {
-                    store.Count -= iceFlow.FlowCount;
-                    store.Weight -= iceFlow.FlowWeight;
+                    var iceStock = this.context.IceStocks.SingleOrDefault(r => r.FlowId == iceFlow.Id);
+                    var store = this.context.IceStores.Single(r => r.Type == iceStock.IceType);
+
+                    store.Count -= iceStock.FlowCount;
+                    store.Weight -= iceStock.FlowWeight;
 
                     if (store.Count < 0)
                         return ErrorCode.IceDeleteCountOverflow;
+
+                    this.context.Entry(store).State = EntityState.Modified;
+                    this.context.IceFlows.Remove(iceFlow);
+
+                    this.context.SaveChanges();
+
+                    return ErrorCode.Success;
                 }
-                else if (flowType == IceFlowType.CompleteMakeOut || flowType == IceFlowType.CompleteSaleOut || flowType == IceFlowType.FragmentSaleOut)
+                else if (flowType == IceFlowType.CompleteMakeOut)
                 {
-                    store.Count += iceFlow.FlowCount;
-                    store.Weight += iceFlow.FlowWeight;
+                    var iceStock = this.context.IceStocks.SingleOrDefault(r => r.FlowId == iceFlow.Id);
+                    var store = this.context.IceStores.Single(r => r.Type == iceStock.IceType);
+
+                    store.Count += iceStock.FlowCount;
+                    store.Weight += iceStock.FlowWeight;
+
+
+                    this.context.Entry(store).State = EntityState.Modified;
+                    this.context.IceFlows.Remove(iceFlow);
+
+                    this.context.SaveChanges();
+
+                    return ErrorCode.Success;
+                }
+                else if (flowType == IceFlowType.CompleteSaleOut || flowType == IceFlowType.FragmentSaleOut)
+                {
+
                 }
 
-                this.context.Entry(store).State = EntityState.Modified;
-                this.context.IceFlows.Remove(iceFlow);
-
-                this.context.SaveChanges();
-
-                return ErrorCode.Success;
+                return ErrorCode.NotImplement;
             }
             catch (Exception)
             {

@@ -12,25 +12,16 @@ namespace Phoebe.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class IceSale
+    public partial class IceStock
     {
         public System.Guid Id { get; set; }
-        public int ContractId { get; set; }
         public System.Guid FlowId { get; set; }
-        public string FlowNumber { get; set; }
-        public System.DateTime SaleTime { get; set; }
         public int IceType { get; set; }
-        public int SaleCount { get; set; }
-        public decimal SaleWeight { get; set; }
-        public decimal SaleUnitPrice { get; set; }
-        public decimal SaleFee { get; set; }
-        public int UserId { get; set; }
-        public System.DateTime CreateTime { get; set; }
+        public int FlowCount { get; set; }
+        public decimal FlowWeight { get; set; }
         public string Remark { get; set; }
         public int Status { get; set; }
     
-        public virtual Contract Contract { get; set; }
-        public virtual User User { get; set; }
         public virtual IceFlow IceFlow { get; set; }
     }
 }

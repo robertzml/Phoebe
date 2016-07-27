@@ -103,7 +103,6 @@ namespace Phoebe.FormClient
         {
             this.colSaleUnitPrice.Visible = this.isSale;
             this.colSaleFee.Visible = this.isSale;
-            this.colRemark.Visible = this.isSale;
         }
 
         /// <summary>

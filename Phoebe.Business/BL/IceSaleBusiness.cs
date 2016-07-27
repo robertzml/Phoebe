@@ -60,30 +60,32 @@ namespace Phoebe.Business
             if (entity.SaleWeight > store.Weight)
                 return ErrorCode.IceOutWeightOverflow;
 
+            return ErrorCode.NotImplement;
+
             //generate ice flow
-            IceFlow iceFlow = new IceFlow();
-            iceFlow.Id = Guid.NewGuid();
-            if (entity.IceType == (int)IceType.Complete)
-                iceFlow.FlowType = (int)IceFlowType.CompleteSaleOut;
-            else
-                iceFlow.FlowType = (int)IceFlowType.FragmentSaleOut;
-            iceFlow.IceType = entity.IceType;
-            iceFlow.FlowCount = entity.SaleCount;
-            iceFlow.FlowWeight = entity.SaleWeight;
-            iceFlow.FlowTime = entity.SaleTime;
-            iceFlow.UserId = entity.UserId;
-            iceFlow.CreateTime = entity.CreateTime;
-            iceFlow.Remark = entity.Remark;
-            iceFlow.Status = (int)EntityStatus.Normal;
+            //IceFlow iceFlow = new IceFlow();
+            //iceFlow.Id = Guid.NewGuid();
+            //if (entity.IceType == (int)IceType.Complete)
+            //    iceFlow.FlowType = (int)IceFlowType.CompleteSaleOut;
+            //else
+            //    iceFlow.FlowType = (int)IceFlowType.FragmentSaleOut;
+            //iceFlow.IceType = entity.IceType;
+            //iceFlow.FlowCount = entity.SaleCount;
+            //iceFlow.FlowWeight = entity.SaleWeight;
+            //iceFlow.FlowTime = entity.SaleTime;
+            //iceFlow.UserId = entity.UserId;
+            //iceFlow.CreateTime = entity.CreateTime;
+            //iceFlow.Remark = entity.Remark;
+            //iceFlow.Status = (int)EntityStatus.Normal;
 
-            entity.Id = Guid.NewGuid();
-            entity.FlowId = iceFlow.Id;
-            entity.Status = (int)EntityStatus.Normal;
+            //entity.Id = Guid.NewGuid();
+            //entity.FlowId = iceFlow.Id;
+            //entity.Status = (int)EntityStatus.Normal;
 
-            var trans = new TransactionRepository();
-            var result = trans.IceSaleAddTrans(entity, iceFlow);
+            //var trans = new TransactionRepository();
+            //var result = trans.IceSaleAddTrans(entity, iceFlow);
 
-            return result;
+            //return result;
         }
         #endregion //Method
     }

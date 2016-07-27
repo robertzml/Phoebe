@@ -85,6 +85,9 @@
     <Compile Include="IceSale.cs">
       <DependentUpon>PhoebeModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="IceStock.cs">
+      <DependentUpon>PhoebeModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="IceStore.cs">
       <DependentUpon>PhoebeModel.tt</DependentUpon>
     </Compile>

@@ -72,17 +72,17 @@ namespace Phoebe.FormClient
                 return;
             }
 
-            if (this.cmbFlowType.SelectedIndex == 0)
-            {
-                var data = BusinessFactory<IceFlowBusiness>.Instance.Get(this.dpFrom.DateTime, this.dpTo.DateTime);
-                this.iceList.DataSource = data;
-            }
-            else
-            {
-                IceFlowType flowType = (IceFlowType)this.cmbFlowType.SelectedIndex;
-                var data = BusinessFactory<IceFlowBusiness>.Instance.Get(this.dpFrom.DateTime, this.dpTo.DateTime, flowType);
-                this.iceList.DataSource = data;
-            }
+            //if (this.cmbFlowType.SelectedIndex == 0)
+            //{
+            //    var data = BusinessFactory<IceFlowBusiness>.Instance.Get(this.dpFrom.DateTime, this.dpTo.DateTime);
+            //    this.iceList.DataSource = data;
+            //}
+            //else
+            //{
+            //    IceFlowType flowType = (IceFlowType)this.cmbFlowType.SelectedIndex;
+            //    var data = BusinessFactory<IceFlowBusiness>.Instance.Get(this.dpFrom.DateTime, this.dpTo.DateTime, flowType);
+            //    this.iceList.DataSource = data;
+            //}
         }
 
         /// <summary>
@@ -128,40 +128,40 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void btnDeleteFlow_Click(object sender, EventArgs e)
         {
-            var iceFlow = this.iceList.GetCurrentSelect();
-            if (iceFlow == null)
-            {
-                MessageUtil.ShowClaim("未选择记录");
-                return;
-            }
+            //var iceFlow = this.iceList.GetCurrentSelect();
+            //if (iceFlow == null)
+            //{
+            //    MessageUtil.ShowClaim("未选择记录");
+            //    return;
+            //}
 
-            if (MessageUtil.ConfirmYesNo("是否确认删除选中记录") == DialogResult.Yes)
-            {
-                var result = BusinessFactory<IceFlowBusiness>.Instance.Delete(iceFlow);
-                if (result == ErrorCode.Success)
-                {
-                    MessageUtil.ShowInfo("删除冰块流水成功");
+            //if (MessageUtil.ConfirmYesNo("是否确认删除选中记录") == DialogResult.Yes)
+            //{
+            //    var result = BusinessFactory<IceFlowBusiness>.Instance.Delete(iceFlow);
+            //    if (result == ErrorCode.Success)
+            //    {
+            //        MessageUtil.ShowInfo("删除冰块流水成功");
 
-                    this.iceList.Clear();
-                    LoadStores();
+            //        this.iceList.Clear();
+            //        LoadStores();
 
-                    if (this.cmbFlowType.SelectedIndex == 0)
-                    {
-                        var data = BusinessFactory<IceFlowBusiness>.Instance.Get(this.dpFrom.DateTime, this.dpTo.DateTime);
-                        this.iceList.DataSource = data;
-                    }
-                    else
-                    {
-                        IceFlowType flowType = (IceFlowType)this.cmbFlowType.SelectedIndex;
-                        var data = BusinessFactory<IceFlowBusiness>.Instance.Get(this.dpFrom.DateTime, this.dpTo.DateTime, flowType);
-                        this.iceList.DataSource = data;
-                    }
-                }
-                else
-                {
-                    MessageUtil.ShowError("删除冰块流水失败：" + result.DisplayName());
-                }
-            }
+            //        if (this.cmbFlowType.SelectedIndex == 0)
+            //        {
+            //            var data = BusinessFactory<IceFlowBusiness>.Instance.Get(this.dpFrom.DateTime, this.dpTo.DateTime);
+            //            this.iceList.DataSource = data;
+            //        }
+            //        else
+            //        {
+            //            IceFlowType flowType = (IceFlowType)this.cmbFlowType.SelectedIndex;
+            //            var data = BusinessFactory<IceFlowBusiness>.Instance.Get(this.dpFrom.DateTime, this.dpTo.DateTime, flowType);
+            //            this.iceList.DataSource = data;
+            //        }
+            //    }
+            //    else
+            //    {
+            //        MessageUtil.ShowError("删除冰块流水失败：" + result.DisplayName());
+            //    }
+            //}
         }
         #endregion //Event
     }

@@ -63,9 +63,14 @@ namespace Phoebe.FormClient
         /// <summary>
         /// 初始化查看
         /// </summary>
-        /// <param name="iceFlow">冰块流水</param>
-        private void InitView(IceFlow iceFlow)
+        private void InitView()
         {
+            if (this.currentFlowId == Guid.Empty)
+                return;
+
+            var iceFlow = BusinessFactory<IceFlowBusiness>.Instance.FindById(this.currentFlowId);
+            var iceStock = BusinessFactory<IceStockBusiness>.Instance.GetByFlow(this.currentFlowId);
+
             this.gpInfo.Visible = true;
             this.gpIce.Visible = true;
 
@@ -75,12 +80,14 @@ namespace Phoebe.FormClient
             this.txtUser.Text = iceFlow.User.Name;
             this.txtRemark.Text = iceFlow.Remark;
 
+
             List<IceRecord> records = new List<IceRecord>();
             IceRecord ir = new IceRecord
             {
-                IceType = iceFlow.IceType,
-                FlowCount = iceFlow.FlowCount,
-                FlowWeight = iceFlow.FlowWeight
+                IceType = iceStock.IceType,
+                FlowCount = iceStock.FlowCount,
+                FlowWeight = iceStock.FlowWeight,
+                Remark = iceStock.Remark
             };
             records.Add(ir);
 
@@ -212,8 +219,7 @@ namespace Phoebe.FormClient
             this.currentFlowId = new Guid(e.Node.Name);
             this.formState = IceStockFormState.View;
 
-            var iceFlow = BusinessFactory<IceFlowBusiness>.Instance.FindById(this.currentFlowId);
-            InitView(iceFlow);
+            InitView();
             UpdateToolbar();
         }
 
@@ -250,33 +256,34 @@ namespace Phoebe.FormClient
             iceFlow.UserId = this.currentUser.Id;
             iceFlow.CreateTime = DateTime.Now;
             iceFlow.Remark = this.txtRemark.Text;
+
             switch (this.cmbType.SelectedIndex)
             {
                 case 0:
                     iceFlow.FlowType = (int)IceFlowType.CompleteStockIn;
-                    iceFlow.IceType = (int)IceType.Complete;
                     break;
                 case 1:
                     iceFlow.FlowType = (int)IceFlowType.FragmentStockIn;
-                    iceFlow.IceType = (int)IceType.Fragment;
                     break;
                 case 2:
                     iceFlow.FlowType = (int)IceFlowType.CompleteMakeOut;
-                    iceFlow.IceType = (int)IceType.Complete;
                     break;
             }
 
+            IceStock iceStock = new IceStock();
             var record = this.irList.DataSource.First();
-            iceFlow.FlowCount = record.FlowCount;
-            iceFlow.FlowWeight = record.FlowWeight;
+            iceStock.IceType = record.IceType;
+            iceStock.FlowCount = record.FlowCount;
+            iceStock.FlowWeight = record.FlowWeight;
+            iceStock.Remark = record.Remark;
 
-            if (iceFlow.FlowCount <= 0)
+            if (iceStock.FlowCount <= 0)
             {
                 MessageUtil.ShowInfo("流水数量必须大于0");
                 return;
             }
 
-            var result = BusinessFactory<IceFlowBusiness>.Instance.Create(iceFlow);
+            var result = BusinessFactory<IceStockBusiness>.Instance.Create(iceStock, iceFlow);
             if (result == ErrorCode.Success)
             {
                 MessageUtil.ShowInfo("添加冰块流水成功");
@@ -285,7 +292,7 @@ namespace Phoebe.FormClient
                 this.formState = IceStockFormState.View;
                 UpdateTree(iceFlow.MonthTime);
                 UpdateToolbar();
-                InitView(iceFlow);
+                InitView();
             }
             else
             {

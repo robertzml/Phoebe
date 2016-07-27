@@ -63,6 +63,7 @@
     <Compile Include="BL\CategoryBusiness.cs" />
     <Compile Include="BL\IceFlowBusiness.cs" />
     <Compile Include="BL\IceSaleBusiness.cs" />
+    <Compile Include="BL\IceStockBusiness.cs" />
     <Compile Include="BL\IceStoreBusiness.cs" />
     <Compile Include="BL\PaymentBusiness.cs" />
     <Compile Include="BL\SettlementBusiness.cs" />
@@ -76,6 +77,7 @@
     <Compile Include="DAL\CategoryRepository.cs" />
     <Compile Include="DAL\IceFlowRepository.cs" />
     <Compile Include="DAL\IceSaleRepository.cs" />
+    <Compile Include="DAL\IceStockRepository.cs" />
     <Compile Include="DAL\IceStoreRepository.cs" />
     <Compile Include="DAL\PaymentRepository.cs" />
     <Compile Include="DAL\RepositoryFactory.cs" />

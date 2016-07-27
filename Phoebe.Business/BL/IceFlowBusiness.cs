@@ -34,26 +34,7 @@ namespace Phoebe.Business
         #endregion //Constructor
 
         #region Function
-        /// <summary>
-        /// 获取最新流水单号
-        /// </summary>
-        /// <param name="flowTime">流水时间</param>
-        /// <returns></returns>
-        private string GetLastFlowNumber(DateTime flowTime)
-        {
-            Expression<Func<IceFlow, bool>> predicate = r => r.FlowTime == flowTime;
-            var data = this.dal.Find(predicate).OrderByDescending(r => r.FlowNumber);
-
-            if (data.Count() == 0)
-                return string.Format("{0}{1}{2}0001",
-                    flowTime.Year, flowTime.Month.ToString().PadLeft(2, '0'), flowTime.Day.ToString().PadLeft(2, '0'));
-            else
-            {
-                int newNumber = Convert.ToInt32(data.First().FlowNumber.Substring(8)) + 1;
-                return string.Format("{0}{1}{2}{3}", flowTime.Year, flowTime.Month.ToString().PadLeft(2, '0'),
-                    flowTime.Day.ToString().PadLeft(2, '0'), newNumber.ToString().PadLeft(4, '0'));
-            }
-        }
+        
         #endregion //Function
 
         #region Method
@@ -110,6 +91,27 @@ namespace Phoebe.Business
         }
 
         /// <summary>
+        /// 获取最新流水单号
+        /// </summary>
+        /// <param name="flowTime">流水时间</param>
+        /// <returns></returns>
+        public string GetLastFlowNumber(DateTime flowTime)
+        {
+            Expression<Func<IceFlow, bool>> predicate = r => r.FlowTime == flowTime;
+            var data = this.dal.Find(predicate).OrderByDescending(r => r.FlowNumber);
+
+            if (data.Count() == 0)
+                return string.Format("{0}{1}{2}0001",
+                    flowTime.Year, flowTime.Month.ToString().PadLeft(2, '0'), flowTime.Day.ToString().PadLeft(2, '0'));
+            else
+            {
+                int newNumber = Convert.ToInt32(data.First().FlowNumber.Substring(8)) + 1;
+                return string.Format("{0}{1}{2}{3}", flowTime.Year, flowTime.Month.ToString().PadLeft(2, '0'),
+                    flowTime.Day.ToString().PadLeft(2, '0'), newNumber.ToString().PadLeft(4, '0'));
+            }
+        }
+
+        /// <summary>
         /// 按时间段获取流水
         /// </summary>
         /// <param name="from">开始日期</param>
@@ -141,22 +143,24 @@ namespace Phoebe.Business
         /// <returns></returns>
         public override ErrorCode Create(IceFlow entity)
         {
-            entity.Id = Guid.NewGuid();
-            entity.FlowNumber = GetLastFlowNumber(entity.FlowTime);
-            entity.MonthTime = entity.FlowTime.Year.ToString() + entity.FlowTime.Month.ToString().PadLeft(2, '0');
-            entity.Status = 0;
+            return ErrorCode.NotImplement;
 
-            //check store count
-            if (entity.FlowType == (int)IceFlowType.CompleteMakeOut)
-            {
-                var store = BusinessFactory<IceStoreBusiness>.Instance.GetByType((IceType)entity.IceType);
-                if (entity.FlowCount > store.Count)
-                    return ErrorCode.IceOutCountOverflow;
-            }
+            //entity.Id = Guid.NewGuid();
+            //entity.FlowNumber = GetLastFlowNumber(entity.FlowTime);
+            //entity.MonthTime = entity.FlowTime.Year.ToString() + entity.FlowTime.Month.ToString().PadLeft(2, '0');
+            //entity.Status = 0;
 
-            var trans = new TransactionRepository();
-            var result = trans.IceFlowAddTrans(entity);
-            return result;
+            ////check store count
+            //if (entity.FlowType == (int)IceFlowType.CompleteMakeOut)
+            //{
+            //    //var store = BusinessFactory<IceStoreBusiness>.Instance.GetByType((IceType)entity.IceType);
+            //    //if (entity.FlowCount > store.Count)
+            //    //    return ErrorCode.IceOutCountOverflow;
+            //}
+
+            //var trans = new TransactionRepository();
+            //var result = trans.IceFlowAddTrans(entity);
+            //return result;
         }
 
         /// <summary>
@@ -166,13 +170,15 @@ namespace Phoebe.Business
         /// <returns></returns>
         public override ErrorCode Delete(IceFlow entity)
         {
-            if (entity.FlowType == (int)IceFlowType.CompleteStockIn || entity.FlowType == (int)IceFlowType.FragmentStockIn)
+            IceFlowType flowType = (IceFlowType)entity.FlowType;
+
+            if (flowType == IceFlowType.CompleteStockIn || flowType == IceFlowType.FragmentStockIn)
             {
-                var store = BusinessFactory<IceStoreBusiness>.Instance.GetByType((IceType)entity.IceType);
-                if (entity.FlowCount > store.Count)
-                    return ErrorCode.IceDeleteCountOverflow;
-                if (entity.FlowWeight > store.Weight)
-                    return ErrorCode.IceDeleteWeightOverflow;
+                var iceStock = BusinessFactory<IceStockBusiness>.Instance.GetByFlow(entity.Id);
+                var store = BusinessFactory<IceStoreBusiness>.Instance.GetByType((IceType)iceStock.IceType);
+
+                if (store.Count < iceStock.FlowCount)
+                    return ErrorCode.IceOutCountOverflow;
             }
 
             var trans = new TransactionRepository();

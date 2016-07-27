@@ -18,23 +18,25 @@ namespace Phoebe.Model
         public IceFlow()
         {
             this.IceSales = new HashSet<IceSale>();
+            this.IceStocks = new HashSet<IceStock>();
         }
     
         public System.Guid Id { get; set; }
         public int FlowType { get; set; }
-        public int IceType { get; set; }
         public string MonthTime { get; set; }
         public string FlowNumber { get; set; }
-        public int FlowCount { get; set; }
-        public decimal FlowWeight { get; set; }
         public System.DateTime FlowTime { get; set; }
+        public Nullable<int> ContractId { get; set; }
         public int UserId { get; set; }
         public System.DateTime CreateTime { get; set; }
         public string Remark { get; set; }
         public int Status { get; set; }
     
+        public virtual Contract Contract { get; set; }
         public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<IceSale> IceSales { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<IceStock> IceStocks { get; set; }
     }
 }

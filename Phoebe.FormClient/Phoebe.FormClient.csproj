@@ -282,12 +282,6 @@
     <Compile Include="Forms\IceStockForm.Designer.cs">
       <DependentUpon>IceStockForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\IceStockGrid.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\IceStockGrid.Designer.cs">
-      <DependentUpon>IceStockGrid.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\IceRecordGrid.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -521,9 +515,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\IceRecordGrid.resx">
       <DependentUpon>IceRecordGrid.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\IceStockGrid.resx">
-      <DependentUpon>IceStockGrid.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\InventoryGrid.resx">
       <DependentUpon>InventoryGrid.cs</DependentUpon>
