@@ -42,50 +42,40 @@ namespace Phoebe.Business
         /// <returns></returns>
         public List<IceSale> Get(DateTime from, DateTime to)
         {
-            var data = this.dal.Find(r => r.SaleTime >= from && r.SaleTime <= to).OrderByDescending(r => r.SaleTime);
-            return data.ToList();
+            //var data = this.dal.Find(r => r.SaleTime >= from && r.SaleTime <= to).OrderByDescending(r => r.SaleTime);
+            //return data.ToList();
+            return null;
         }
 
         /// <summary>
         /// 添加销售
         /// </summary>
-        /// <param name="entity">冰块销售对象</param>
+        /// <param name="iceSales">冰块销售对象</param>
+        /// <param name="iceFlow">冰块流水</param>
         /// <returns></returns>
-        public override ErrorCode Create(IceSale entity)
+        public ErrorCode Create(List<IceSale> iceSales, IceFlow iceFlow)
         {
-            //check store count
-            var store = BusinessFactory<IceStoreBusiness>.Instance.GetByType((IceType)entity.IceType);
-            if (entity.SaleCount > store.Count)
-                return ErrorCode.IceOutCountOverflow;
-            if (entity.SaleWeight > store.Weight)
-                return ErrorCode.IceOutWeightOverflow;
+            iceFlow.Id = Guid.NewGuid();
+            iceFlow.FlowNumber = BusinessFactory<IceFlowBusiness>.Instance.GetLastFlowNumber(iceFlow.FlowTime);
+            iceFlow.MonthTime = iceFlow.FlowTime.Year.ToString() + iceFlow.FlowTime.Month.ToString().PadLeft(2, '0');
+            iceFlow.Status = 0;
 
-            return ErrorCode.NotImplement;
+            foreach (var item in iceSales)
+            {
+                item.Id = Guid.NewGuid();
+                item.FlowId = iceFlow.Id;
+                item.Status = 0;
 
-            //generate ice flow
-            //IceFlow iceFlow = new IceFlow();
-            //iceFlow.Id = Guid.NewGuid();
-            //if (entity.IceType == (int)IceType.Complete)
-            //    iceFlow.FlowType = (int)IceFlowType.CompleteSaleOut;
-            //else
-            //    iceFlow.FlowType = (int)IceFlowType.FragmentSaleOut;
-            //iceFlow.IceType = entity.IceType;
-            //iceFlow.FlowCount = entity.SaleCount;
-            //iceFlow.FlowWeight = entity.SaleWeight;
-            //iceFlow.FlowTime = entity.SaleTime;
-            //iceFlow.UserId = entity.UserId;
-            //iceFlow.CreateTime = entity.CreateTime;
-            //iceFlow.Remark = entity.Remark;
-            //iceFlow.Status = (int)EntityStatus.Normal;
+                //check store count
+                var store = BusinessFactory<IceStoreBusiness>.Instance.GetByType((IceType)item.IceType);
+                if (item.SaleCount > store.Count)
+                    return ErrorCode.IceOutCountOverflow;
+            }
 
-            //entity.Id = Guid.NewGuid();
-            //entity.FlowId = iceFlow.Id;
-            //entity.Status = (int)EntityStatus.Normal;
+            TransactionRepository trans = new TransactionRepository();
+            var result = trans.IceSaleAddTrans(iceSales, iceFlow);
 
-            //var trans = new TransactionRepository();
-            //var result = trans.IceSaleAddTrans(entity, iceFlow);
-
-            //return result;
+            return result;
         }
         #endregion //Method
     }

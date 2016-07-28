@@ -137,18 +137,59 @@ namespace Phoebe.FormClient
             this.gpInfo.Visible = true;
             this.gpIce.Visible = true;
 
-            this.dpTime.DateTime = DateTime.Now.Date;
-            this.cmbType.SelectedIndex = -1;
+            this.dpTime.DateTime = DateTime.Now.Date;           
             this.txtFlowNumber.Text = "";
             this.txtUser.Text = this.currentUser.Name;
             this.txtRemark.Text = "";
             this.irList.DataSource = new List<IceRecord>();
 
-            this.dpTime.Properties.ReadOnly = false;
-            this.cmbType.ReadOnly = false;
+            IceRecord record1 = new IceRecord
+            {
+                IceType = (int)IceType.Complete
+            };
+            IceRecord record2 = new IceRecord
+            {
+                IceType = (int)IceType.Fragment
+            };
+
+            this.irList.AddNew(record1);
+            this.irList.AddNew(record2);
+
+            this.dpTime.Properties.ReadOnly = false;         
             this.txtRemark.Properties.ReadOnly = false;
             this.irList.SetEditable(true);
         }
+
+        /// <summary>
+        /// 初始化查看
+        /// </summary>
+        private void InitView()
+        {
+            if (this.currentFlowId == Guid.Empty)
+                return;
+
+            var iceFlow = BusinessFactory<IceFlowBusiness>.Instance.FindById(this.currentFlowId);
+           
+            this.gpInfo.Visible = true;
+            this.gpIce.Visible = true;
+
+            this.dpTime.DateTime = iceFlow.FlowTime;
+           
+            this.txtFlowNumber.Text = iceFlow.FlowNumber;
+            this.txtUser.Text = iceFlow.User.Name;
+            this.txtRemark.Text = iceFlow.Remark;
+
+
+            List<IceRecord> records = new List<IceRecord>();
+            
+
+            this.irList.DataSource = records;
+
+            this.dpTime.Properties.ReadOnly = true;
+            this.txtRemark.Properties.ReadOnly = true;
+            this.irList.SetEditable(false);
+        }
+
         #endregion //Function
 
         #region Event
@@ -192,11 +233,6 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void tsbSave_Click(object sender, EventArgs e)
         {
-            if (this.cmbType.SelectedIndex == -1)
-            {
-                MessageUtil.ShowClaim("请选择业务类型");
-                return;
-            }
             if (this.lkuCustomer.EditValue == null)
             {
                 MessageUtil.ShowClaim("请选择客户");
@@ -210,12 +246,57 @@ namespace Phoebe.FormClient
 
             this.irList.CloseEditor();
 
+            if (irList.DataSource.Any(r => r.FlowCount < 0))
+            {
+                MessageUtil.ShowClaim("销售数量必须大于0");
+                return;
+            }
+
             IceFlow iceFlow = new IceFlow();
-            iceFlow.FlowTime = this.dpTime.DateTime.Date;
+            iceFlow.FlowType = (int)IceFlowType.IceSale;
+            iceFlow.FlowTime = this.dpTime.DateTime.Date;            
             iceFlow.UserId = this.currentUser.Id;
             iceFlow.CreateTime = DateTime.Now;
             iceFlow.Remark = this.txtRemark.Text;
-         
+
+            List<IceSale> sales = new List<IceSale>();
+            foreach(var item in this.irList.DataSource)
+            {
+                if (item.FlowCount <= 0)
+                    continue;
+
+                IceSale sale = new IceSale();
+                sale.IceType = item.IceType;
+                sale.SaleCount = item.FlowCount;
+                sale.SaleWeight = item.FlowWeight;
+                sale.SaleUnitPrice = item.SaleUnitPrice;
+                sale.SaleFee = item.SaleFee;
+                sale.Remark = item.Remark;
+
+                sales.Add(sale);
+            }
+
+            if (sales.Count  == 0)
+            {
+                MessageUtil.ShowClaim("销售数量不能全为0");
+                return;
+            }
+
+            var result = BusinessFactory<IceSaleBusiness>.Instance.Create(sales, iceFlow);
+            if (result == ErrorCode.Success)
+            {
+                MessageUtil.ShowInfo("添加冰块销售成功");
+
+                this.currentFlowId = iceFlow.Id;
+                this.formState = IceSellFormState.View;
+                UpdateTree(iceFlow.MonthTime);
+                UpdateToolbar();
+                InitView();
+            }
+            else
+            {
+                MessageUtil.ShowError("添加冰块流水失败：" + result.DisplayName());
+            }
         }
 
         private void tsbDelete_Click(object sender, EventArgs e)

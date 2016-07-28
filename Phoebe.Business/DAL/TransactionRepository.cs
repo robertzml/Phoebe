@@ -663,11 +663,11 @@ namespace Phoebe.Business.DAL
                 }
                 else if (flowType == IceFlowType.CompleteMakeOut)
                 {
+                    if (store.Count < iceStock.FlowCount)
+                        return ErrorCode.IceOutCountOverflow;
+
                     store.Count -= iceStock.FlowCount;
                     store.Weight -= iceStock.FlowWeight;
-
-                    if (store.Count < 0)
-                        return ErrorCode.IceOutCountOverflow;
                 }
 
                 this.context.Entry(store).State = EntityState.Modified;
@@ -686,27 +686,29 @@ namespace Phoebe.Business.DAL
         /// <summary>
         /// 冰块销售添加业务
         /// </summary>
-        /// <param name="iceSale">冰块销售对象</param>
+        /// <param name="iceSales">冰块销售对象</param>
         /// <param name="iceFlow">冰块流水对象</param>
         /// <returns></returns>
-        public ErrorCode IceSaleAddTrans(IceSale iceSale, IceFlow iceFlow)
+        public ErrorCode IceSaleAddTrans(List<IceSale> iceSales, IceFlow iceFlow)
         {
             try
             {
                 //set ice store
-                //var store = this.context.IceStores.Single(r => r.Type == iceFlow.IceType);
-                //store.Count -= iceFlow.FlowCount;
-                //store.Weight -= iceFlow.FlowWeight;
+                foreach (var item in iceSales)
+                {
+                    var store = this.context.IceStores.Single(r => r.Type == item.IceType);
+                    if (store.Count < item.SaleCount)
+                        return ErrorCode.IceOutCountOverflow;
 
-                //if (store.Count < 0)
-                //    return ErrorCode.IceOutCountOverflow;
-                //if (store.Weight < 0)
-                //    return ErrorCode.IceOutWeightOverflow;
+                    store.Count -= item.SaleCount;
+                    store.Weight -= item.SaleWeight;
 
-                //this.context.Entry(store).State = EntityState.Modified;
-                //this.context.IceFlows.Add(iceFlow);
-                //this.context.IceSales.Add(iceSale);
-                //this.context.SaveChanges();
+                    this.context.Entry(store).State = EntityState.Modified;
+                }
+
+                this.context.IceFlows.Add(iceFlow);
+                this.context.IceSales.AddRange(iceSales);
+                this.context.SaveChanges();
 
                 return ErrorCode.Success;
             }
@@ -760,7 +762,7 @@ namespace Phoebe.Business.DAL
 
                     return ErrorCode.Success;
                 }
-                else if (flowType == IceFlowType.CompleteSaleOut || flowType == IceFlowType.FragmentSaleOut)
+                else if (flowType == IceFlowType.IceSale)
                 {
 
                 }

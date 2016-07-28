@@ -24,7 +24,6 @@ namespace Phoebe.Model
             this.Stores = new HashSet<Store>();
             this.Payments = new HashSet<Payment>();
             this.Contracts = new HashSet<Contract>();
-            this.IceSales = new HashSet<IceSale>();
             this.IceFlows = new HashSet<IceFlow>();
         }
     
@@ -53,8 +52,6 @@ namespace Phoebe.Model
         public virtual ICollection<Payment> Payments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Contract> Contracts { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<IceSale> IceSales { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<IceFlow> IceFlows { get; set; }
     }

@@ -54,10 +54,10 @@ namespace Phoebe.FormClient
             {
                 e.DisplayText = ((IceType)iceSale.IceType).DisplayName();
             }
-            else if (e.Column.FieldName == "UserId")
-            {
-                e.DisplayText = iceSale.User.Name;
-            }
+            //else if (e.Column.FieldName == "UserId")
+            //{
+            //    e.DisplayText = iceSale.User.Name;
+            //}
         }
         #endregion //Event
 

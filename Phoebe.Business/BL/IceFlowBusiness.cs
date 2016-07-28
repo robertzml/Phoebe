@@ -34,7 +34,7 @@ namespace Phoebe.Business
         #endregion //Constructor
 
         #region Function
-        
+
         #endregion //Function
 
         #region Method
@@ -47,7 +47,8 @@ namespace Phoebe.Business
         /// </remarks>
         public string[] GetMonthGroup()
         {
-            var data = this.dal.FindAll().GroupBy(r => r.MonthTime).Select(g => g.Key).OrderByDescending(s => s);
+            var data = this.dal.FindAll().Where(r => r.FlowType == (int)IceFlowType.CompleteStockIn || r.FlowType == (int)IceFlowType.FragmentStockIn || r.FlowType == (int)IceFlowType.CompleteMakeOut)
+                .GroupBy(r => r.MonthTime).Select(g => g.Key).OrderByDescending(s => s);
             return data.ToArray();
         }
 
@@ -60,7 +61,7 @@ namespace Phoebe.Business
         /// </remarks>
         public string[] GetSaleMonthGroup()
         {
-            var data = this.dal.FindAll().Where(r => r.FlowType == (int)IceFlowType.CompleteSaleOut || r.FlowType == (int)IceFlowType.FragmentSaleOut)
+            var data = this.dal.FindAll().Where(r => r.FlowType == (int)IceFlowType.IceSale)
                 .GroupBy(s => s.MonthTime).Select(g => g.Key).OrderByDescending(t => t);
             return data.ToArray();
         }
@@ -72,7 +73,8 @@ namespace Phoebe.Business
         /// <returns></returns>
         public List<IceFlow> GetByMonth(string monthTime)
         {
-            Expression<Func<IceFlow, bool>> predicate = r => r.MonthTime == monthTime;
+            Expression<Func<IceFlow, bool>> predicate = r => r.MonthTime == monthTime &&
+                (r.FlowType == (int)IceFlowType.CompleteStockIn || r.FlowType == (int)IceFlowType.FragmentStockIn || r.FlowType == (int)IceFlowType.CompleteMakeOut);
             var data = this.dal.Find(predicate).OrderByDescending(r => r.FlowNumber);
             return data.ToList();
         }
@@ -84,8 +86,7 @@ namespace Phoebe.Business
         /// <returns></returns>
         public List<IceFlow> GetSaleByMonth(string monthTime)
         {
-            Expression<Func<IceFlow, bool>> predicate = r => r.MonthTime == monthTime && 
-                (r.FlowType == (int)IceFlowType.CompleteSaleOut || r.FlowType == (int)IceFlowType.FragmentSaleOut);
+            Expression<Func<IceFlow, bool>> predicate = r => r.MonthTime == monthTime && r.FlowType == (int)IceFlowType.IceSale;
             var data = this.dal.Find(predicate).OrderByDescending(r => r.FlowNumber);
             return data.ToList();
         }

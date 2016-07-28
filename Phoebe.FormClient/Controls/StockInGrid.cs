@@ -151,13 +151,13 @@ namespace Phoebe.FormClient
 
                 if (this.isEqualWeight)
                 {
-                    double unitWeight = Convert.ToDouble(this.dgvStockIn.GetRowCellValue(e.RowHandle, "UnitWeight"));
-                    double totalWeight = count * unitWeight / 1000;
+                    decimal unitWeight = Convert.ToDecimal(this.dgvStockIn.GetRowCellValue(e.RowHandle, "UnitWeight"));
+                    decimal totalWeight = count * unitWeight / 1000;
                     this.dgvStockIn.SetRowCellValue(e.RowHandle, "InWeight", totalWeight);
                 }
 
-                double unitVolume = Convert.ToDouble(this.dgvStockIn.GetRowCellValue(e.RowHandle, "UnitVolume"));
-                double totalVolume = count * unitVolume;
+                decimal unitVolume = Convert.ToDecimal(this.dgvStockIn.GetRowCellValue(e.RowHandle, "UnitVolume"));
+                decimal totalVolume = count * unitVolume;
                 this.dgvStockIn.SetRowCellValue(e.RowHandle, "InVolume", totalVolume);
             }
             else if (e.Column.Name == "colUnitWeight")
@@ -165,22 +165,22 @@ namespace Phoebe.FormClient
                 if (!this.isEqualWeight)
                     return;
 
-                double unitWeight = 0;
-                if (!double.TryParse(e.Value.ToString(), out unitWeight))
+                decimal unitWeight = 0;
+                if (!decimal.TryParse(e.Value.ToString(), out unitWeight))
                     return;
 
                 int count = Convert.ToInt32(this.dgvStockIn.GetRowCellValue(e.RowHandle, "InCount"));
-                double totalWeight = count * unitWeight / 1000;
+                decimal totalWeight = count * unitWeight / 1000;
                 this.dgvStockIn.SetRowCellValue(e.RowHandle, "InWeight", totalWeight);
             }
             else if (e.Column.Name == "colUnitVolume")
             {
-                double unitVolume = 0;
-                if (!double.TryParse(e.Value.ToString(), out unitVolume))
+                decimal unitVolume = 0;
+                if (!decimal.TryParse(e.Value.ToString(), out unitVolume))
                     return;
 
                 int count = Convert.ToInt32(this.dgvStockIn.GetRowCellValue(e.RowHandle, "InCount"));
-                double totalVolume = count * unitVolume;
+                decimal totalVolume = count * unitVolume;
                 this.dgvStockIn.SetRowCellValue(e.RowHandle, "InVolume", totalVolume);
             }
         }

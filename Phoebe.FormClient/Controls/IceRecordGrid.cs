@@ -122,6 +122,35 @@ namespace Phoebe.FormClient
                 e.DisplayText = ((IceType)iceRecord.IceType).DisplayName();
             }
         }
+
+        /// <summary>
+        /// 单元格更改事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dgvIce_CellValueChanging(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
+        {
+            if (e.Column.Name == "colFlowCount")
+            {
+                int count = 0;
+                if (!Int32.TryParse(e.Value.ToString(), out count))
+                    return;
+
+                decimal unitPrice = Convert.ToDecimal(this.dgvIce.GetRowCellValue(e.RowHandle, "SaleUnitPrice"));
+                decimal totalPrice = count * unitPrice;
+                this.dgvIce.SetRowCellValue(e.RowHandle, "SaleFee", totalPrice);
+            }
+            else if (e.Column.Name == "colSaleUnitPrice")
+            {
+                decimal unitPrice = 0;
+                if (!decimal.TryParse(e.Value.ToString(), out unitPrice))
+                    return;
+
+                int count = Convert.ToInt32(this.dgvIce.GetRowCellValue(e.RowHandle, "FlowCount"));
+                decimal totalFee = count * unitPrice;
+                this.dgvIce.SetRowCellValue(e.RowHandle, "SaleFee", totalFee);
+            }
+        }
         #endregion //Event
 
         #region Property

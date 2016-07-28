@@ -17,8 +17,8 @@ namespace Phoebe.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public IceFlow()
         {
-            this.IceSales = new HashSet<IceSale>();
             this.IceStocks = new HashSet<IceStock>();
+            this.IceSales = new HashSet<IceSale>();
         }
     
         public System.Guid Id { get; set; }
@@ -35,8 +35,8 @@ namespace Phoebe.Model
         public virtual Contract Contract { get; set; }
         public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<IceSale> IceSales { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<IceStock> IceStocks { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<IceSale> IceSales { get; set; }
     }
 }

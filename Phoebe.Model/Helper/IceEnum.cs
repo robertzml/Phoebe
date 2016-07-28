@@ -46,15 +46,9 @@ namespace Phoebe.Model
         CompleteMakeOut = 3,
 
         /// <summary>
-        /// 整冰销售出库
+        /// 冰块销售
         /// </summary>
-        [Display(Name = "整冰销售出库")]
-        CompleteSaleOut = 4,
-
-        /// <summary>
-        /// 碎冰销售出库
-        /// </summary>
-        [Display(Name = "碎冰销售出库")]
-        FragmentSaleOut = 5,
+        [Display(Name = "冰块销售")]
+        IceSale = 4
     }
 }

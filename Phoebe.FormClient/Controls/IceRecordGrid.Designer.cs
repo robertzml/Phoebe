@@ -81,6 +81,7 @@
             this.dgvIce.OptionsMenu.EnableGroupPanelMenu = false;
             this.dgvIce.OptionsView.ShowFooter = true;
             this.dgvIce.OptionsView.ShowGroupPanel = false;
+            this.dgvIce.CellValueChanging += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.dgvIce_CellValueChanging);
             this.dgvIce.CustomColumnDisplayText += new DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventHandler(this.dgvIce_CustomColumnDisplayText);
             // 
             // colIceType
@@ -128,7 +129,7 @@
             // 
             // colSaleFee
             // 
-            this.colSaleFee.Caption = "销售金额";
+            this.colSaleFee.Caption = "销售金额(元)";
             this.colSaleFee.FieldName = "SaleFee";
             this.colSaleFee.Name = "colSaleFee";
             this.colSaleFee.OptionsColumn.ReadOnly = true;
