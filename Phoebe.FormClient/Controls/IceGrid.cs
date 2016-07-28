@@ -63,14 +63,35 @@ namespace Phoebe.FormClient
             {
                 e.DisplayText = ((IceFlowType)iceFlow.FlowType).DisplayName();
             }
-            //else if (e.Column.FieldName == "IceType")
-            //{
-            //    e.DisplayText = ((IceType)iceFlow.IceType).DisplayName();
-            //}
             else if (e.Column.FieldName == "UserId")
             {
                 e.DisplayText = iceFlow.User.Name;
             }
+        }
+
+        /// <summary>
+        /// 自定义数据显示
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dgvIce_CustomUnboundColumnData(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDataEventArgs e)
+        {
+            int rowIndex = e.ListSourceRowIndex;
+            if (rowIndex < 0 || rowIndex >= this.bsIceFlow.Count)
+                return;
+
+            var iceFlow = this.bsIceFlow[rowIndex] as IceFlow;
+            if (iceFlow.FlowType == (int)IceFlowType.IceSale)
+                return;
+
+            var iceStock = iceFlow.IceStocks.First();
+
+            if (e.Column.FieldName == "colIceType" && e.IsGetData)
+                e.Value = ((IceType)iceStock.IceType).DisplayName();
+            if (e.Column.FieldName == "colFlowCount" && e.IsGetData)
+                e.Value = iceStock.FlowCount;
+            if (e.Column.FieldName == "colFlowWeight" && e.IsGetData)
+                e.Value = iceStock.FlowWeight;
         }
         #endregion //Event
 

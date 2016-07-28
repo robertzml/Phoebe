@@ -754,7 +754,6 @@ namespace Phoebe.Business.DAL
                     store.Count += iceStock.FlowCount;
                     store.Weight += iceStock.FlowWeight;
 
-
                     this.context.Entry(store).State = EntityState.Modified;
                     this.context.IceFlows.Remove(iceFlow);
 
@@ -764,7 +763,21 @@ namespace Phoebe.Business.DAL
                 }
                 else if (flowType == IceFlowType.IceSale)
                 {
+                    var iceSales = this.context.IceSales.Where(r => r.FlowId == iceFlow.Id);
+                    foreach (var item in iceSales)
+                    {
+                        var store = this.context.IceStores.Single(r => r.Type == item.IceType);
 
+                        store.Count += item.SaleCount;
+                        store.Weight += item.SaleWeight;
+
+                        this.context.Entry(store).State = EntityState.Modified;
+                    }
+
+                    this.context.IceSales.RemoveRange(iceSales);
+
+                    this.context.SaveChanges();
+                    return ErrorCode.Success;
                 }
 
                 return ErrorCode.NotImplement;

@@ -39,7 +39,6 @@
             this.txtUser = new DevExpress.XtraEditors.TextEdit();
             this.cmbContract = new DevExpress.XtraEditors.ImageComboBoxEdit();
             this.lkuCustomer = new DevExpress.XtraEditors.LookUpEdit();
-            this.bsCustomer = new System.Windows.Forms.BindingSource(this.components);
             this.txtFlowNumber = new DevExpress.XtraEditors.TextEdit();
             this.dpTime = new DevExpress.XtraEditors.DateEdit();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
@@ -51,13 +50,14 @@
             this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.gpIce = new DevExpress.XtraEditors.GroupControl();
-            this.irList = new Phoebe.FormClient.IceRecordGrid();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tsbNew = new System.Windows.Forms.ToolStripButton();
             this.tsbSave = new System.Windows.Forms.ToolStripButton();
             this.tsbDelete = new System.Windows.Forms.ToolStripButton();
             this.tsbPrint = new System.Windows.Forms.ToolStripButton();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.bsCustomer = new System.Windows.Forms.BindingSource(this.components);
+            this.irList = new Phoebe.FormClient.IceRecordGrid();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
@@ -69,7 +69,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtUser.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbContract.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lkuCustomer.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsCustomer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFlowNumber.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dpTime.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dpTime.Properties)).BeginInit();
@@ -84,6 +83,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gpIce)).BeginInit();
             this.gpIce.SuspendLayout();
             this.toolStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bsCustomer)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -119,10 +119,15 @@
             // tvIce
             // 
             this.tvIce.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tvIce.ImageIndex = 0;
+            this.tvIce.ImageList = this.imageList1;
             this.tvIce.Location = new System.Drawing.Point(2, 21);
             this.tvIce.Name = "tvIce";
+            this.tvIce.SelectedImageIndex = 2;
             this.tvIce.Size = new System.Drawing.Size(190, 545);
             this.tvIce.TabIndex = 0;
+            this.tvIce.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.tvIce_BeforeExpand);
+            this.tvIce.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvIce_AfterSelect);
             // 
             // gpInfo
             // 
@@ -202,10 +207,6 @@
             this.lkuCustomer.StyleController = this.layoutControl1;
             this.lkuCustomer.TabIndex = 7;
             this.lkuCustomer.EditValueChanged += new System.EventHandler(this.lkuCustomer_EditValueChanged);
-            // 
-            // bsCustomer
-            // 
-            this.bsCustomer.DataSource = typeof(Phoebe.Model.Customer);
             // 
             // txtFlowNumber
             // 
@@ -324,17 +325,6 @@
             this.gpIce.TabIndex = 2;
             this.gpIce.Text = "冰块信息";
             // 
-            // irList
-            // 
-            this.irList.DataSource = null;
-            this.irList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.irList.Editable = true;
-            this.irList.IsSale = true;
-            this.irList.Location = new System.Drawing.Point(2, 21);
-            this.irList.Name = "irList";
-            this.irList.Size = new System.Drawing.Size(662, 320);
-            this.irList.TabIndex = 0;
-            // 
             // toolStrip1
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -389,10 +379,23 @@
             this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             this.imageList1.Images.SetKeyName(0, "BOProduct_16x16.png");
-            this.imageList1.Images.SetKeyName(1, "Top10Items_16x16.png");
-            this.imageList1.Images.SetKeyName(2, "Top_16x16.png");
-            this.imageList1.Images.SetKeyName(3, "Bottom10Items_16x16.png");
-            this.imageList1.Images.SetKeyName(4, "ConditionalFormatting_16x16.png");
+            this.imageList1.Images.SetKeyName(1, "Bottom10Items_16x16.png");
+            this.imageList1.Images.SetKeyName(2, "ConditionalFormatting_16x16.png");
+            // 
+            // bsCustomer
+            // 
+            this.bsCustomer.DataSource = typeof(Phoebe.Model.Customer);
+            // 
+            // irList
+            // 
+            this.irList.DataSource = null;
+            this.irList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.irList.Editable = true;
+            this.irList.IsSale = true;
+            this.irList.Location = new System.Drawing.Point(2, 21);
+            this.irList.Name = "irList";
+            this.irList.Size = new System.Drawing.Size(662, 320);
+            this.irList.TabIndex = 0;
             // 
             // IceSellForm
             // 
@@ -415,7 +418,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtUser.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbContract.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lkuCustomer.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsCustomer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFlowNumber.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dpTime.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dpTime.Properties)).EndInit();
@@ -431,6 +433,7 @@
             this.gpIce.ResumeLayout(false);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bsCustomer)).EndInit();
             this.ResumeLayout(false);
 
         }

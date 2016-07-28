@@ -48,6 +48,17 @@ namespace Phoebe.Business
         }
 
         /// <summary>
+        /// 根据流水获取销售记录
+        /// </summary>
+        /// <param name="flowId">流水ID</param>
+        /// <returns></returns>
+        public List<IceSale> GetByFlow(Guid flowId)
+        {
+            var data = this.dal.Find(r => r.FlowId == flowId);
+            return data.ToList();
+        }
+
+        /// <summary>
         /// 添加销售
         /// </summary>
         /// <param name="iceSales">冰块销售对象</param>

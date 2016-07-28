@@ -55,11 +55,8 @@
             this.layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
-            this.btnDeleteFlow = new DevExpress.XtraEditors.SimpleButton();
-            this.btnCompleteMakeOut = new DevExpress.XtraEditors.SimpleButton();
-            this.btnFragmentStockIn = new DevExpress.XtraEditors.SimpleButton();
-            this.btnCompleteStockIn = new DevExpress.XtraEditors.SimpleButton();
             this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
+            this.iceList = new Phoebe.FormClient.IceGrid();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
@@ -90,8 +87,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
-            this.groupControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).BeginInit();
+            this.groupControl3.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -161,9 +158,7 @@
             "全部",
             "整冰入库",
             "碎冰入库",
-            "整冰制冰出库",
-            "整冰销售出库",
-            "碎冰销售出库"});
+            "整冰制冰出库"});
             this.cmbFlowType.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.cmbFlowType.Size = new System.Drawing.Size(112, 20);
             this.cmbFlowType.StyleController = this.layoutControl1;
@@ -398,10 +393,6 @@
             // 
             // groupControl2
             // 
-            this.groupControl2.Controls.Add(this.btnDeleteFlow);
-            this.groupControl2.Controls.Add(this.btnCompleteMakeOut);
-            this.groupControl2.Controls.Add(this.btnFragmentStockIn);
-            this.groupControl2.Controls.Add(this.btnCompleteStockIn);
             this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl2.Location = new System.Drawing.Point(606, 3);
             this.groupControl2.Name = "groupControl2";
@@ -409,51 +400,25 @@
             this.groupControl2.TabIndex = 1;
             this.groupControl2.Text = "操作";
             // 
-            // btnDeleteFlow
-            // 
-            this.btnDeleteFlow.Location = new System.Drawing.Point(32, 125);
-            this.btnDeleteFlow.Name = "btnDeleteFlow";
-            this.btnDeleteFlow.Size = new System.Drawing.Size(100, 40);
-            this.btnDeleteFlow.TabIndex = 4;
-            this.btnDeleteFlow.Text = "删除流水记录";
-            this.btnDeleteFlow.Click += new System.EventHandler(this.btnDeleteFlow_Click);
-            // 
-            // btnCompleteMakeOut
-            // 
-            this.btnCompleteMakeOut.Location = new System.Drawing.Point(278, 52);
-            this.btnCompleteMakeOut.Name = "btnCompleteMakeOut";
-            this.btnCompleteMakeOut.Size = new System.Drawing.Size(100, 40);
-            this.btnCompleteMakeOut.TabIndex = 3;
-            this.btnCompleteMakeOut.Text = "整冰制冰出库";
-            this.btnCompleteMakeOut.Click += new System.EventHandler(this.btnCompleteMakeOut_Click);
-            // 
-            // btnFragmentStockIn
-            // 
-            this.btnFragmentStockIn.Location = new System.Drawing.Point(155, 52);
-            this.btnFragmentStockIn.Name = "btnFragmentStockIn";
-            this.btnFragmentStockIn.Size = new System.Drawing.Size(100, 40);
-            this.btnFragmentStockIn.TabIndex = 2;
-            this.btnFragmentStockIn.Text = "碎冰入库";
-            this.btnFragmentStockIn.Click += new System.EventHandler(this.btnFragmentStockIn_Click);
-            // 
-            // btnCompleteStockIn
-            // 
-            this.btnCompleteStockIn.Location = new System.Drawing.Point(32, 52);
-            this.btnCompleteStockIn.Name = "btnCompleteStockIn";
-            this.btnCompleteStockIn.Size = new System.Drawing.Size(100, 40);
-            this.btnCompleteStockIn.TabIndex = 1;
-            this.btnCompleteStockIn.Text = "整冰入库";
-            this.btnCompleteStockIn.Click += new System.EventHandler(this.btnCompleteStockIn_Click);
-            // 
             // groupControl3
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.groupControl3, 2);
+            this.groupControl3.Controls.Add(this.iceList);
             this.groupControl3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl3.Location = new System.Drawing.Point(3, 203);
             this.groupControl3.Name = "groupControl3";
             this.groupControl3.Size = new System.Drawing.Size(1000, 379);
             this.groupControl3.TabIndex = 2;
             this.groupControl3.Text = "流水记录";
+            // 
+            // iceList
+            // 
+            this.iceList.DataSource = null;
+            this.iceList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.iceList.Location = new System.Drawing.Point(2, 21);
+            this.iceList.Name = "iceList";
+            this.iceList.Size = new System.Drawing.Size(996, 356);
+            this.iceList.TabIndex = 0;
             // 
             // IceStoreForm
             // 
@@ -494,8 +459,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
-            this.groupControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).EndInit();
+            this.groupControl3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -530,9 +495,6 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem10;
         private DevExpress.XtraEditors.GroupControl groupControl3;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup3;
-        private DevExpress.XtraEditors.SimpleButton btnCompleteStockIn;
-        private DevExpress.XtraEditors.SimpleButton btnFragmentStockIn;
-        private DevExpress.XtraEditors.SimpleButton btnCompleteMakeOut;
-        private DevExpress.XtraEditors.SimpleButton btnDeleteFlow;
+        private IceGrid iceList;
     }
 }

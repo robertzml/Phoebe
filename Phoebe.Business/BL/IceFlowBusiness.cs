@@ -138,33 +138,6 @@ namespace Phoebe.Business
         }
 
         /// <summary>
-        /// 新增流水
-        /// </summary>
-        /// <param name="entity">流水对象</param>
-        /// <returns></returns>
-        public override ErrorCode Create(IceFlow entity)
-        {
-            return ErrorCode.NotImplement;
-
-            //entity.Id = Guid.NewGuid();
-            //entity.FlowNumber = GetLastFlowNumber(entity.FlowTime);
-            //entity.MonthTime = entity.FlowTime.Year.ToString() + entity.FlowTime.Month.ToString().PadLeft(2, '0');
-            //entity.Status = 0;
-
-            ////check store count
-            //if (entity.FlowType == (int)IceFlowType.CompleteMakeOut)
-            //{
-            //    //var store = BusinessFactory<IceStoreBusiness>.Instance.GetByType((IceType)entity.IceType);
-            //    //if (entity.FlowCount > store.Count)
-            //    //    return ErrorCode.IceOutCountOverflow;
-            //}
-
-            //var trans = new TransactionRepository();
-            //var result = trans.IceFlowAddTrans(entity);
-            //return result;
-        }
-
-        /// <summary>
         /// 删除冰块流水
         /// </summary>
         /// <param name="entity">冰块流水</param>

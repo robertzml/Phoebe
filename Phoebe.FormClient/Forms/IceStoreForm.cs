@@ -72,96 +72,17 @@ namespace Phoebe.FormClient
                 return;
             }
 
-            //if (this.cmbFlowType.SelectedIndex == 0)
-            //{
-            //    var data = BusinessFactory<IceFlowBusiness>.Instance.Get(this.dpFrom.DateTime, this.dpTo.DateTime);
-            //    this.iceList.DataSource = data;
-            //}
-            //else
-            //{
-            //    IceFlowType flowType = (IceFlowType)this.cmbFlowType.SelectedIndex;
-            //    var data = BusinessFactory<IceFlowBusiness>.Instance.Get(this.dpFrom.DateTime, this.dpTo.DateTime, flowType);
-            //    this.iceList.DataSource = data;
-            //}
-        }
-
-        /// <summary>
-        /// 整冰入库
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnCompleteStockIn_Click(object sender, EventArgs e)
-        {
-            //ChildFormManage.ShowDialogForm(typeof(IceStockForm), new object[] { IceFlowType.CompleteStockIn, IceType.Complete });
-
-            LoadStores();
-        }
-
-        /// <summary>
-        /// 碎冰入库
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnFragmentStockIn_Click(object sender, EventArgs e)
-        {
-            //ChildFormManage.ShowDialogForm(typeof(IceStockForm), new object[] { IceFlowType.FragmentStockIn, IceType.Fragment });
-
-            LoadStores();
-        }
-
-        /// <summary>
-        /// 整冰制冰出库
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnCompleteMakeOut_Click(object sender, EventArgs e)
-        {
-            //ChildFormManage.ShowDialogForm(typeof(IceStockForm), new object[] { IceFlowType.CompleteMakeOut, IceType.Complete });
-
-            LoadStores();
-        }
-
-        /// <summary>
-        /// 删除流水记录
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnDeleteFlow_Click(object sender, EventArgs e)
-        {
-            //var iceFlow = this.iceList.GetCurrentSelect();
-            //if (iceFlow == null)
-            //{
-            //    MessageUtil.ShowClaim("未选择记录");
-            //    return;
-            //}
-
-            //if (MessageUtil.ConfirmYesNo("是否确认删除选中记录") == DialogResult.Yes)
-            //{
-            //    var result = BusinessFactory<IceFlowBusiness>.Instance.Delete(iceFlow);
-            //    if (result == ErrorCode.Success)
-            //    {
-            //        MessageUtil.ShowInfo("删除冰块流水成功");
-
-            //        this.iceList.Clear();
-            //        LoadStores();
-
-            //        if (this.cmbFlowType.SelectedIndex == 0)
-            //        {
-            //            var data = BusinessFactory<IceFlowBusiness>.Instance.Get(this.dpFrom.DateTime, this.dpTo.DateTime);
-            //            this.iceList.DataSource = data;
-            //        }
-            //        else
-            //        {
-            //            IceFlowType flowType = (IceFlowType)this.cmbFlowType.SelectedIndex;
-            //            var data = BusinessFactory<IceFlowBusiness>.Instance.Get(this.dpFrom.DateTime, this.dpTo.DateTime, flowType);
-            //            this.iceList.DataSource = data;
-            //        }
-            //    }
-            //    else
-            //    {
-            //        MessageUtil.ShowError("删除冰块流水失败：" + result.DisplayName());
-            //    }
-            //}
+            if (this.cmbFlowType.SelectedIndex == 0)
+            {
+                var data = BusinessFactory<IceFlowBusiness>.Instance.Get(this.dpFrom.DateTime, this.dpTo.DateTime);
+                this.iceList.DataSource = data;
+            }
+            else
+            {
+                IceFlowType flowType = (IceFlowType)this.cmbFlowType.SelectedIndex;
+                var data = BusinessFactory<IceFlowBusiness>.Instance.Get(this.dpFrom.DateTime, this.dpTo.DateTime, flowType);
+                this.iceList.DataSource = data;
+            }
         }
         #endregion //Event
     }

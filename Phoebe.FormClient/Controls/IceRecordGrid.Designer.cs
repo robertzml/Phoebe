@@ -130,9 +130,13 @@
             // colSaleFee
             // 
             this.colSaleFee.Caption = "销售金额(元)";
+            this.colSaleFee.DisplayFormat.FormatString = "0.##";
+            this.colSaleFee.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colSaleFee.FieldName = "SaleFee";
             this.colSaleFee.Name = "colSaleFee";
             this.colSaleFee.OptionsColumn.ReadOnly = true;
+            this.colSaleFee.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "SaleFee", "合计={0:0.##}")});
             this.colSaleFee.Visible = true;
             this.colSaleFee.VisibleIndex = 4;
             // 

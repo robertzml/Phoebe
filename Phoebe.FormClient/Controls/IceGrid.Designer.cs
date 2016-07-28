@@ -35,10 +35,13 @@
             this.colId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colFlowType = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colFlowTime = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colFlowCount = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colUserId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCreateTime = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colRemark = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colStatus = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colIceType = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colFlowWeight = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgcIce)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsIceFlow)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvIce)).BeginInit();
@@ -66,6 +69,9 @@
             this.colId,
             this.colFlowType,
             this.colFlowTime,
+            this.colIceType,
+            this.colFlowCount,
+            this.colFlowWeight,
             this.colUserId,
             this.colCreateTime,
             this.colRemark,
@@ -82,6 +88,7 @@
             this.dgvIce.OptionsView.EnableAppearanceOddRow = true;
             this.dgvIce.OptionsView.ShowFooter = true;
             this.dgvIce.OptionsView.ShowGroupPanel = false;
+            this.dgvIce.CustomUnboundColumnData += new DevExpress.XtraGrid.Views.Base.CustomColumnDataEventHandler(this.dgvIce_CustomUnboundColumnData);
             this.dgvIce.CustomColumnDisplayText += new DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventHandler(this.dgvIce_CustomColumnDisplayText);
             // 
             // colId
@@ -108,6 +115,15 @@
             this.colFlowTime.Visible = true;
             this.colFlowTime.VisibleIndex = 1;
             // 
+            // colFlowCount
+            // 
+            this.colFlowCount.Caption = "流水数量";
+            this.colFlowCount.FieldName = "colFlowCount";
+            this.colFlowCount.Name = "colFlowCount";
+            this.colFlowCount.UnboundType = DevExpress.Data.UnboundColumnType.Integer;
+            this.colFlowCount.Visible = true;
+            this.colFlowCount.VisibleIndex = 3;
+            // 
             // colUserId
             // 
             this.colUserId.AppearanceCell.Options.UseTextOptions = true;
@@ -117,7 +133,7 @@
             this.colUserId.FilterMode = DevExpress.XtraGrid.ColumnFilterMode.DisplayText;
             this.colUserId.Name = "colUserId";
             this.colUserId.Visible = true;
-            this.colUserId.VisibleIndex = 2;
+            this.colUserId.VisibleIndex = 5;
             // 
             // colCreateTime
             // 
@@ -127,7 +143,7 @@
             this.colCreateTime.FieldName = "CreateTime";
             this.colCreateTime.Name = "colCreateTime";
             this.colCreateTime.Visible = true;
-            this.colCreateTime.VisibleIndex = 3;
+            this.colCreateTime.VisibleIndex = 6;
             // 
             // colRemark
             // 
@@ -136,12 +152,30 @@
             this.colRemark.Name = "colRemark";
             this.colRemark.OptionsFilter.AllowFilter = false;
             this.colRemark.Visible = true;
-            this.colRemark.VisibleIndex = 4;
+            this.colRemark.VisibleIndex = 7;
             // 
             // colStatus
             // 
             this.colStatus.FieldName = "Status";
             this.colStatus.Name = "colStatus";
+            // 
+            // colIceType
+            // 
+            this.colIceType.Caption = "冰块类型";
+            this.colIceType.FieldName = "colIceType";
+            this.colIceType.Name = "colIceType";
+            this.colIceType.UnboundType = DevExpress.Data.UnboundColumnType.String;
+            this.colIceType.Visible = true;
+            this.colIceType.VisibleIndex = 2;
+            // 
+            // colFlowWeight
+            // 
+            this.colFlowWeight.Caption = "流水重量(t)";
+            this.colFlowWeight.FieldName = "colFlowWeight";
+            this.colFlowWeight.Name = "colFlowWeight";
+            this.colFlowWeight.UnboundType = DevExpress.Data.UnboundColumnType.Decimal;
+            this.colFlowWeight.Visible = true;
+            this.colFlowWeight.VisibleIndex = 4;
             // 
             // IceGrid
             // 
@@ -169,5 +203,8 @@
         private DevExpress.XtraGrid.Columns.GridColumn colCreateTime;
         private DevExpress.XtraGrid.Columns.GridColumn colRemark;
         private DevExpress.XtraGrid.Columns.GridColumn colStatus;
+        private DevExpress.XtraGrid.Columns.GridColumn colFlowCount;
+        private DevExpress.XtraGrid.Columns.GridColumn colIceType;
+        private DevExpress.XtraGrid.Columns.GridColumn colFlowWeight;
     }
 }

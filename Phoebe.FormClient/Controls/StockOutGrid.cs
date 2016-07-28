@@ -140,13 +140,13 @@ namespace Phoebe.FormClient
 
                 if (this.isEqualWeight)
                 {
-                    double unitWeight = Convert.ToDouble(this.dgvStockOut.GetRowCellValue(e.RowHandle, "UnitWeight"));
-                    double totalWeight = count * unitWeight / 1000;
+                    decimal unitWeight = Convert.ToDecimal(this.dgvStockOut.GetRowCellValue(e.RowHandle, "UnitWeight"));
+                    decimal totalWeight = count * unitWeight / 1000;
                     this.dgvStockOut.SetRowCellValue(e.RowHandle, "OutWeight", totalWeight);
                 }
 
-                double unitVolume = Convert.ToDouble(this.dgvStockOut.GetRowCellValue(e.RowHandle, "UnitVolume"));
-                double totalVolume = count * unitVolume;
+                decimal unitVolume = Convert.ToDecimal(this.dgvStockOut.GetRowCellValue(e.RowHandle, "UnitVolume"));
+                decimal totalVolume = count * unitVolume;
                 this.dgvStockOut.SetRowCellValue(e.RowHandle, "OutVolume", totalVolume);
             }
         }
