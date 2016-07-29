@@ -50,7 +50,7 @@ namespace Phoebe.FormClient
             this.txtCustomerNumber.Text = contract.Customer.Number;
             this.txtCustomerName.Text = contract.Customer.Name;
             this.dpSignDate.DateTime = contract.SignDate.Date;
-            this.txtType.Text = ((ContractType)contract.Type).DisplayName();
+            this.cmbType.EditValue = (ContractType)contract.Type;
             this.txtBillingType.Text = ((BillingType)contract.BillingType).DisplayName();
             this.chkIsTiming.Checked = contract.IsTiming;
             this.txtRemark.Text = contract.Remark;
@@ -65,6 +65,7 @@ namespace Phoebe.FormClient
             contract.Number = this.txtNumber.Text.Trim();
             contract.Name = this.txtName.Text.Trim();
             contract.SignDate = this.dpSignDate.DateTime.Date;
+            contract.Type = (int)this.cmbType.EditValue;
             contract.Remark = this.txtRemark.Text;
         }
         #endregion //Function
@@ -77,6 +78,7 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void ContractEditForm_Load(object sender, EventArgs e)
         {
+            this.cmbType.Properties.Items.AddEnum(typeof(ContractType));
             this.bindContract = BusinessFactory<ContractBusiness>.Instance.FindById(this.contractId);
             SetControl(this.bindContract);
         }
@@ -101,6 +103,11 @@ namespace Phoebe.FormClient
             if (this.dpSignDate.EditValue == null)
             {
                 MessageUtil.ShowClaim("请选择签订日期");
+                return;
+            }
+            if (this.cmbType.EditValue == null)
+            {
+                MessageUtil.ShowClaim("请选择合同类型");
                 return;
             }
 

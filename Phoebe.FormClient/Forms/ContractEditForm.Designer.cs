@@ -48,7 +48,7 @@
             this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.txtType = new DevExpress.XtraEditors.TextEdit();
+            this.cmbType = new DevExpress.XtraEditors.ImageComboBoxEdit();
             ((System.ComponentModel.ISupportInitialize)(this.plFill)).BeginInit();
             this.plFill.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.plBottom)).BeginInit();
@@ -76,7 +76,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtType.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbType.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // plFill
@@ -121,7 +121,7 @@
             this.layoutControl1.Controls.Add(this.txtCustomerNumber);
             this.layoutControl1.Controls.Add(this.txtName);
             this.layoutControl1.Controls.Add(this.txtNumber);
-            this.layoutControl1.Controls.Add(this.txtType);
+            this.layoutControl1.Controls.Add(this.cmbType);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(2, 21);
             this.layoutControl1.Name = "layoutControl1";
@@ -310,23 +310,24 @@
             // 
             // layoutControlItem9
             // 
-            this.layoutControlItem9.Control = this.txtType;
+            this.layoutControlItem9.Control = this.cmbType;
             this.layoutControlItem9.Location = new System.Drawing.Point(0, 96);
             this.layoutControlItem9.Name = "layoutControlItem9";
             this.layoutControlItem9.Size = new System.Drawing.Size(306, 24);
             this.layoutControlItem9.Text = "合同类型";
             this.layoutControlItem9.TextSize = new System.Drawing.Size(48, 14);
             // 
-            // txtType
+            // cmbType
             // 
-            this.txtType.Location = new System.Drawing.Point(63, 108);
-            this.txtType.Name = "txtType";
-            this.txtType.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
-            this.txtType.Properties.Appearance.Options.UseBackColor = true;
-            this.txtType.Properties.ReadOnly = true;
-            this.txtType.Size = new System.Drawing.Size(251, 20);
-            this.txtType.StyleController = this.layoutControl1;
-            this.txtType.TabIndex = 12;
+            this.cmbType.Location = new System.Drawing.Point(63, 108);
+            this.cmbType.Name = "cmbType";
+            this.cmbType.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow;
+            this.cmbType.Properties.Appearance.Options.UseBackColor = true;
+            this.cmbType.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cmbType.Size = new System.Drawing.Size(251, 20);
+            this.cmbType.StyleController = this.layoutControl1;
+            this.cmbType.TabIndex = 12;
             // 
             // ContractEditForm
             // 
@@ -363,7 +364,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtType.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbType.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -389,7 +390,7 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem7;
         private DevExpress.XtraEditors.MemoEdit txtRemark;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem8;
-        private DevExpress.XtraEditors.TextEdit txtType;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem9;
+        private DevExpress.XtraEditors.ImageComboBoxEdit cmbType;
     }
 }

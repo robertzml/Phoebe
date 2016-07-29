@@ -36,8 +36,8 @@ namespace Phoebe.FormClient
         /// </returns>
         private decimal CalculateFee()
         {
-            decimal dueFee = this.nmSumFee.Value * this.nmDiscount.Value / 100 - this.nmRemission.Value;
-            this.txtDueFee.Text = Math.Round(dueFee, 2).ToString();
+            decimal dueFee = this.nmSumFee.Value * (this.nmDiscount.Value / 100) - this.nmRemission.Value;
+            this.txtDueFee.Text = Math.Round(dueFee, 2, MidpointRounding.AwayFromZero).ToString();
 
             return dueFee;
         }

@@ -944,7 +944,7 @@
             this.ClientSize = new System.Drawing.Size(939, 593);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "SettleForm";
-            this.Text = "结算管理";
+            this.Text = "费用结算";
             this.Load += new System.EventHandler(this.SettleForm_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
