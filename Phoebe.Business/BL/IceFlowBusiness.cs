@@ -138,6 +138,20 @@ namespace Phoebe.Business
         }
 
         /// <summary>
+        /// 按时间段获取出入库流水
+        /// </summary>
+        /// <param name="from">开始日期</param>
+        /// <param name="to">结束日期</param>
+        /// <returns></returns>
+        public List<IceFlow> GetStock(DateTime from, DateTime to)
+        {
+            var data = this.dal.Find(r => r.FlowTime >= from && r.FlowTime <= to &&
+                (r.FlowType == (int)IceFlowType.CompleteStockIn) || r.FlowType == (int)IceFlowType.FragmentStockIn || r.FlowType == (int)IceFlowType.CompleteMakeOut)
+                .OrderByDescending(r => r.FlowTime);
+            return data.ToList();
+        }
+
+        /// <summary>
         /// 删除冰块流水
         /// </summary>
         /// <param name="entity">冰块流水</param>

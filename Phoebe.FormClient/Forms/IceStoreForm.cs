@@ -60,6 +60,16 @@ namespace Phoebe.FormClient
         }
 
         /// <summary>
+        /// 刷新
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            LoadStores();
+        }
+
+        /// <summary>
         /// 查询
         /// </summary>
         /// <param name="sender"></param>
@@ -74,7 +84,7 @@ namespace Phoebe.FormClient
 
             if (this.cmbFlowType.SelectedIndex == 0)
             {
-                var data = BusinessFactory<IceFlowBusiness>.Instance.Get(this.dpFrom.DateTime, this.dpTo.DateTime);
+                var data = BusinessFactory<IceFlowBusiness>.Instance.GetStock(this.dpFrom.DateTime, this.dpTo.DateTime);
                 this.iceList.DataSource = data;
             }
             else

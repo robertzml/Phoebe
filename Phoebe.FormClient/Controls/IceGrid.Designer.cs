@@ -35,13 +35,13 @@
             this.colId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colFlowType = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colFlowTime = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colIceType = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colFlowCount = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colFlowWeight = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colUserId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCreateTime = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colRemark = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colStatus = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colIceType = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colFlowWeight = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgcIce)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsIceFlow)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvIce)).BeginInit();
@@ -115,6 +115,15 @@
             this.colFlowTime.Visible = true;
             this.colFlowTime.VisibleIndex = 1;
             // 
+            // colIceType
+            // 
+            this.colIceType.Caption = "冰块类型";
+            this.colIceType.FieldName = "colIceType";
+            this.colIceType.Name = "colIceType";
+            this.colIceType.UnboundType = DevExpress.Data.UnboundColumnType.String;
+            this.colIceType.Visible = true;
+            this.colIceType.VisibleIndex = 2;
+            // 
             // colFlowCount
             // 
             this.colFlowCount.Caption = "流水数量";
@@ -123,6 +132,17 @@
             this.colFlowCount.UnboundType = DevExpress.Data.UnboundColumnType.Integer;
             this.colFlowCount.Visible = true;
             this.colFlowCount.VisibleIndex = 3;
+            // 
+            // colFlowWeight
+            // 
+            this.colFlowWeight.Caption = "流水重量(t)";
+            this.colFlowWeight.DisplayFormat.FormatString = "0.000";
+            this.colFlowWeight.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.colFlowWeight.FieldName = "colFlowWeight";
+            this.colFlowWeight.Name = "colFlowWeight";
+            this.colFlowWeight.UnboundType = DevExpress.Data.UnboundColumnType.Decimal;
+            this.colFlowWeight.Visible = true;
+            this.colFlowWeight.VisibleIndex = 4;
             // 
             // colUserId
             // 
@@ -158,24 +178,6 @@
             // 
             this.colStatus.FieldName = "Status";
             this.colStatus.Name = "colStatus";
-            // 
-            // colIceType
-            // 
-            this.colIceType.Caption = "冰块类型";
-            this.colIceType.FieldName = "colIceType";
-            this.colIceType.Name = "colIceType";
-            this.colIceType.UnboundType = DevExpress.Data.UnboundColumnType.String;
-            this.colIceType.Visible = true;
-            this.colIceType.VisibleIndex = 2;
-            // 
-            // colFlowWeight
-            // 
-            this.colFlowWeight.Caption = "流水重量(t)";
-            this.colFlowWeight.FieldName = "colFlowWeight";
-            this.colFlowWeight.Name = "colFlowWeight";
-            this.colFlowWeight.UnboundType = DevExpress.Data.UnboundColumnType.Decimal;
-            this.colFlowWeight.Visible = true;
-            this.colFlowWeight.VisibleIndex = 4;
             // 
             // IceGrid
             // 

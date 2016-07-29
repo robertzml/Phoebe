@@ -50,9 +50,8 @@
             this.menuStoreTrace = new DevExpress.XtraBars.BarButtonItem();
             this.menuIce = new DevExpress.XtraBars.BarSubItem();
             this.menuIceStock = new DevExpress.XtraBars.BarButtonItem();
-            this.menuIceStore = new DevExpress.XtraBars.BarButtonItem();
             this.menuIceSell = new DevExpress.XtraBars.BarButtonItem();
-            this.menuIceSale = new DevExpress.XtraBars.BarButtonItem();
+            this.menuIceStore = new DevExpress.XtraBars.BarButtonItem();
             this.menuSettle = new DevExpress.XtraBars.BarSubItem();
             this.menuColdPrice = new DevExpress.XtraBars.BarButtonItem();
             this.menuSettlement = new DevExpress.XtraBars.BarButtonItem();
@@ -132,7 +131,6 @@
             this.menuCargoStore,
             this.menuIce,
             this.menuIceStore,
-            this.menuIceSale,
             this.menuReport,
             this.menuStockFlowReport,
             this.menuStockInventoryReport,
@@ -303,8 +301,7 @@
             this.menuIce.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(this.menuIceStock),
             new DevExpress.XtraBars.LinkPersistInfo(this.menuIceSell),
-            new DevExpress.XtraBars.LinkPersistInfo(this.menuIceStore),
-            new DevExpress.XtraBars.LinkPersistInfo(this.menuIceSale)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.menuIceStore)});
             this.menuIce.Name = "menuIce";
             // 
             // menuIceStock
@@ -314,13 +311,6 @@
             this.menuIceStock.Name = "menuIceStock";
             this.menuIceStock.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuIceStock_ItemClick);
             // 
-            // menuIceStore
-            // 
-            this.menuIceStore.Caption = "操作记录";
-            this.menuIceStore.Id = 38;
-            this.menuIceStore.Name = "menuIceStore";
-            this.menuIceStore.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuIceStore_ItemClick);
-            // 
             // menuIceSell
             // 
             this.menuIceSell.Caption = "冰块销售";
@@ -328,12 +318,12 @@
             this.menuIceSell.Name = "menuIceSell";
             this.menuIceSell.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuIceSell_ItemClick);
             // 
-            // menuIceSale
+            // menuIceStore
             // 
-            this.menuIceSale.Caption = "销售记录";
-            this.menuIceSale.Id = 40;
-            this.menuIceSale.Name = "menuIceSale";
-            this.menuIceSale.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuIceSale_ItemClick);
+            this.menuIceStore.Caption = "冰块库存";
+            this.menuIceStore.Id = 38;
+            this.menuIceStore.Name = "menuIceStore";
+            this.menuIceStore.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuIceStore_ItemClick);
             // 
             // menuSettle
             // 
@@ -607,7 +597,6 @@
         private DevExpress.XtraBars.BarButtonItem menuCargoStore;
         private DevExpress.XtraBars.BarSubItem menuIce;
         private DevExpress.XtraBars.BarButtonItem menuIceStore;
-        private DevExpress.XtraBars.BarButtonItem menuIceSale;
         private DevExpress.XtraBars.BarSubItem menuReport;
         private DevExpress.XtraBars.BarButtonItem menuStockFlowReport;
         private DevExpress.XtraBars.BarButtonItem menuStockInventoryReport;
