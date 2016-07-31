@@ -35,13 +35,28 @@ namespace Phoebe.Business
 
         #region Method
         /// <summary>
-        /// 获取客户相关合同
+        /// 获取客户所有合同
         /// </summary>
         /// <param name="customerId">客户Id</param>
         /// <returns></returns>
         public List<Contract> GetByCustomer(int customerId)
         {
             Expression<Func<Contract, bool>> predicate = r => r.CustomerId == customerId;
+            return this.dal.Find(predicate).ToList();
+        }
+
+        /// <summary>
+        /// 获取客户冷库合同
+        /// </summary>
+        /// <param name="customerId">客户Id</param>
+        /// <returns></returns>
+        /// <remarks>
+        /// 指冷库租赁相关合同
+        /// </remarks>
+        public List<Contract> GetByCustomer2(int customerId)
+        {
+            Expression<Func<Contract, bool>> predicate = r => r.CustomerId == customerId &&
+                (r.Type == (int)ContractType.TimingCold || r.Type == (int)ContractType.UntimingCold || r.Type == (int)ContractType.Freeze);
             return this.dal.Find(predicate).ToList();
         }
 
@@ -63,7 +78,7 @@ namespace Phoebe.Business
         /// <param name="entity">合同对象</param>
         /// <returns></returns>
         public override ErrorCode Create(Contract entity)
-        { 
+        {
             if (this.dal.Find(r => r.Number == entity.Number).Count() > 0)
                 return ErrorCode.DuplicateNumber;
 

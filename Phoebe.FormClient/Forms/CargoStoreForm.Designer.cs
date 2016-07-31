@@ -32,6 +32,7 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.btnFindStore = new DevExpress.XtraEditors.SimpleButton();
             this.btnFindCargo = new DevExpress.XtraEditors.SimpleButton();
             this.cmbContract = new DevExpress.XtraEditors.ImageComboBoxEdit();
             this.lkuCustomer = new DevExpress.XtraEditors.LookUpEdit();
@@ -40,11 +41,10 @@
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
-            this.btnFindStore = new DevExpress.XtraEditors.SimpleButton();
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
+            this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
             this.cgList = new Phoebe.FormClient.CargoGrid();
+            this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
             this.sgList = new Phoebe.FormClient.StoreGrid();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
@@ -58,9 +58,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
             this.groupControl2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).BeginInit();
             this.groupControl3.SuspendLayout();
             this.SuspendLayout();
@@ -105,6 +105,16 @@
             this.layoutControl1.Size = new System.Drawing.Size(952, 111);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
+            // 
+            // btnFindStore
+            // 
+            this.btnFindStore.Location = new System.Drawing.Point(745, 36);
+            this.btnFindStore.Name = "btnFindStore";
+            this.btnFindStore.Size = new System.Drawing.Size(195, 22);
+            this.btnFindStore.StyleController = this.layoutControl1;
+            this.btnFindStore.TabIndex = 7;
+            this.btnFindStore.Text = "查询库存";
+            this.btnFindStore.Click += new System.EventHandler(this.btnFindStore_Click);
             // 
             // btnFindCargo
             // 
@@ -193,26 +203,6 @@
             this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem3.TextVisible = false;
             // 
-            // groupControl2
-            // 
-            this.groupControl2.Controls.Add(this.cgList);
-            this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl2.Location = new System.Drawing.Point(3, 143);
-            this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(956, 212);
-            this.groupControl2.TabIndex = 1;
-            this.groupControl2.Text = "货品列表";
-            // 
-            // btnFindStore
-            // 
-            this.btnFindStore.Location = new System.Drawing.Point(745, 36);
-            this.btnFindStore.Name = "btnFindStore";
-            this.btnFindStore.Size = new System.Drawing.Size(195, 22);
-            this.btnFindStore.StyleController = this.layoutControl1;
-            this.btnFindStore.TabIndex = 7;
-            this.btnFindStore.Text = "查询库存";
-            this.btnFindStore.Click += new System.EventHandler(this.btnFindStore_Click);
-            // 
             // layoutControlItem4
             // 
             this.layoutControlItem4.Control = this.btnFindStore;
@@ -222,15 +212,15 @@
             this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem4.TextVisible = false;
             // 
-            // groupControl3
+            // groupControl2
             // 
-            this.groupControl3.Controls.Add(this.sgList);
-            this.groupControl3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl3.Location = new System.Drawing.Point(3, 361);
-            this.groupControl3.Name = "groupControl3";
-            this.groupControl3.Size = new System.Drawing.Size(956, 213);
-            this.groupControl3.TabIndex = 2;
-            this.groupControl3.Text = "库存信息";
+            this.groupControl2.Controls.Add(this.cgList);
+            this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupControl2.Location = new System.Drawing.Point(3, 143);
+            this.groupControl2.Name = "groupControl2";
+            this.groupControl2.Size = new System.Drawing.Size(956, 212);
+            this.groupControl2.TabIndex = 1;
+            this.groupControl2.Text = "货品列表";
             // 
             // cgList
             // 
@@ -243,6 +233,16 @@
             this.cgList.ShowFooter = false;
             this.cgList.Size = new System.Drawing.Size(952, 189);
             this.cgList.TabIndex = 0;
+            // 
+            // groupControl3
+            // 
+            this.groupControl3.Controls.Add(this.sgList);
+            this.groupControl3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupControl3.Location = new System.Drawing.Point(3, 361);
+            this.groupControl3.Name = "groupControl3";
+            this.groupControl3.Size = new System.Drawing.Size(956, 213);
+            this.groupControl3.TabIndex = 2;
+            this.groupControl3.Text = "库存信息";
             // 
             // sgList
             // 
@@ -281,9 +281,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
             this.groupControl2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).EndInit();
             this.groupControl3.ResumeLayout(false);
             this.ResumeLayout(false);

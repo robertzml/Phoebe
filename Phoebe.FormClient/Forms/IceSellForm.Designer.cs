@@ -33,31 +33,31 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.tvIce = new System.Windows.Forms.TreeView();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.gpInfo = new DevExpress.XtraEditors.GroupControl();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.txtRemark = new DevExpress.XtraEditors.TextEdit();
             this.txtUser = new DevExpress.XtraEditors.TextEdit();
             this.cmbContract = new DevExpress.XtraEditors.ImageComboBoxEdit();
             this.lkuCustomer = new DevExpress.XtraEditors.LookUpEdit();
+            this.bsCustomer = new System.Windows.Forms.BindingSource(this.components);
             this.txtFlowNumber = new DevExpress.XtraEditors.TextEdit();
             this.dpTime = new DevExpress.XtraEditors.DateEdit();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
+            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
             this.gpIce = new DevExpress.XtraEditors.GroupControl();
+            this.irList = new Phoebe.FormClient.IceRecordGrid();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tsbNew = new System.Windows.Forms.ToolStripButton();
             this.tsbSave = new System.Windows.Forms.ToolStripButton();
             this.tsbDelete = new System.Windows.Forms.ToolStripButton();
             this.tsbPrint = new System.Windows.Forms.ToolStripButton();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.bsCustomer = new System.Windows.Forms.BindingSource(this.components);
-            this.irList = new Phoebe.FormClient.IceRecordGrid();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
@@ -69,21 +69,21 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtUser.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbContract.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lkuCustomer.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsCustomer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFlowNumber.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dpTime.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dpTime.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gpIce)).BeginInit();
             this.gpIce.SuspendLayout();
             this.toolStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bsCustomer)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -129,6 +129,14 @@
             this.tvIce.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.tvIce_BeforeExpand);
             this.tvIce.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvIce_AfterSelect);
             // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "BOProduct_16x16.png");
+            this.imageList1.Images.SetKeyName(1, "Bottom10Items_16x16.png");
+            this.imageList1.Images.SetKeyName(2, "ConditionalFormatting_16x16.png");
+            // 
             // gpInfo
             // 
             this.gpInfo.Controls.Add(this.layoutControl1);
@@ -150,6 +158,7 @@
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(2, 21);
             this.layoutControl1.Name = "layoutControl1";
+            this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(959, 26, 250, 350);
             this.layoutControl1.Root = this.layoutControlGroup1;
             this.layoutControl1.Size = new System.Drawing.Size(662, 171);
             this.layoutControl1.TabIndex = 0;
@@ -208,6 +217,10 @@
             this.lkuCustomer.TabIndex = 7;
             this.lkuCustomer.EditValueChanged += new System.EventHandler(this.lkuCustomer_EditValueChanged);
             // 
+            // bsCustomer
+            // 
+            this.bsCustomer.DataSource = typeof(Phoebe.Model.Customer);
+            // 
             // txtFlowNumber
             // 
             this.txtFlowNumber.Location = new System.Drawing.Point(283, 12);
@@ -249,7 +262,7 @@
             this.layoutControlItem3,
             this.layoutControlItem7});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlGroup1.Name = "layoutControlGroup1";
+            this.layoutControlGroup1.Name = "Root";
             this.layoutControlGroup1.Size = new System.Drawing.Size(662, 171);
             this.layoutControlGroup1.TextVisible = false;
             // 
@@ -261,15 +274,6 @@
             this.layoutControlItem1.Size = new System.Drawing.Size(220, 24);
             this.layoutControlItem1.Text = "业务日期";
             this.layoutControlItem1.TextSize = new System.Drawing.Size(48, 14);
-            // 
-            // layoutControlItem3
-            // 
-            this.layoutControlItem3.Control = this.txtFlowNumber;
-            this.layoutControlItem3.Location = new System.Drawing.Point(220, 0);
-            this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(210, 24);
-            this.layoutControlItem3.Text = "流水编号";
-            this.layoutControlItem3.TextSize = new System.Drawing.Size(48, 14);
             // 
             // layoutControlItem4
             // 
@@ -298,6 +302,23 @@
             this.layoutControlItem6.Text = "业务员";
             this.layoutControlItem6.TextSize = new System.Drawing.Size(48, 14);
             // 
+            // emptySpaceItem1
+            // 
+            this.emptySpaceItem1.AllowHotTrack = false;
+            this.emptySpaceItem1.Location = new System.Drawing.Point(0, 48);
+            this.emptySpaceItem1.Name = "emptySpaceItem1";
+            this.emptySpaceItem1.Size = new System.Drawing.Size(642, 103);
+            this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
+            // 
+            // layoutControlItem3
+            // 
+            this.layoutControlItem3.Control = this.txtFlowNumber;
+            this.layoutControlItem3.Location = new System.Drawing.Point(220, 0);
+            this.layoutControlItem3.Name = "layoutControlItem3";
+            this.layoutControlItem3.Size = new System.Drawing.Size(210, 24);
+            this.layoutControlItem3.Text = "流水编号";
+            this.layoutControlItem3.TextSize = new System.Drawing.Size(48, 14);
+            // 
             // layoutControlItem7
             // 
             this.layoutControlItem7.Control = this.txtRemark;
@@ -306,14 +327,6 @@
             this.layoutControlItem7.Size = new System.Drawing.Size(212, 24);
             this.layoutControlItem7.Text = "备注";
             this.layoutControlItem7.TextSize = new System.Drawing.Size(48, 14);
-            // 
-            // emptySpaceItem1
-            // 
-            this.emptySpaceItem1.AllowHotTrack = false;
-            this.emptySpaceItem1.Location = new System.Drawing.Point(0, 48);
-            this.emptySpaceItem1.Name = "emptySpaceItem1";
-            this.emptySpaceItem1.Size = new System.Drawing.Size(642, 103);
-            this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
             // 
             // gpIce
             // 
@@ -324,6 +337,17 @@
             this.gpIce.Size = new System.Drawing.Size(666, 343);
             this.gpIce.TabIndex = 2;
             this.gpIce.Text = "冰块信息";
+            // 
+            // irList
+            // 
+            this.irList.DataSource = null;
+            this.irList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.irList.Editable = true;
+            this.irList.IsSale = true;
+            this.irList.Location = new System.Drawing.Point(2, 21);
+            this.irList.Name = "irList";
+            this.irList.Size = new System.Drawing.Size(662, 320);
+            this.irList.TabIndex = 0;
             // 
             // toolStrip1
             // 
@@ -374,29 +398,6 @@
             this.tsbPrint.Text = "打印";
             this.tsbPrint.Click += new System.EventHandler(this.tsbPrint_Click);
             // 
-            // imageList1
-            // 
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "BOProduct_16x16.png");
-            this.imageList1.Images.SetKeyName(1, "Bottom10Items_16x16.png");
-            this.imageList1.Images.SetKeyName(2, "ConditionalFormatting_16x16.png");
-            // 
-            // bsCustomer
-            // 
-            this.bsCustomer.DataSource = typeof(Phoebe.Model.Customer);
-            // 
-            // irList
-            // 
-            this.irList.DataSource = null;
-            this.irList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.irList.Editable = true;
-            this.irList.IsSale = true;
-            this.irList.Location = new System.Drawing.Point(2, 21);
-            this.irList.Name = "irList";
-            this.irList.Size = new System.Drawing.Size(662, 320);
-            this.irList.TabIndex = 0;
-            // 
             // IceSellForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -418,22 +419,22 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtUser.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbContract.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lkuCustomer.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsCustomer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFlowNumber.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dpTime.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dpTime.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gpIce)).EndInit();
             this.gpIce.ResumeLayout(false);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bsCustomer)).EndInit();
             this.ResumeLayout(false);
 
         }
