@@ -195,7 +195,7 @@ namespace Phoebe.FormClient
 
             this.Cursor = Cursors.WaitCursor;
 
-            var flow = BusinessFactory<StoreBusiness>.Instance.GetStoreFlow(store.Id).OrderBy(r => r.FlowDate).ToList();
+            var flow = BusinessFactory<StoreBusiness>.Instance.GetStoreFlow(store.Id).OrderBy(r => r.FlowNumber).ToList();
             this.sfgList.DataSource = flow;
 
             this.Cursor = Cursors.Default;

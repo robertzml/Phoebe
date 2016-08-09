@@ -100,6 +100,7 @@ namespace Phoebe.FormClient
         public ErrorCode Save(out string errorMessage)
         {
             errorMessage = "";
+            this.sogList.CloseEditor();
 
             // check input data and format digit
             if (this.sogList.DataSource.Count == 0)

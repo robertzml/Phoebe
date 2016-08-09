@@ -507,7 +507,7 @@ namespace Phoebe.Business
                 if (store.Status == (int)EntityStatus.StoreReady || store.Status == (int)EntityStatus.StoreMoveReady)
                     return ErrorCode.Error;
 
-                var flows = GetStoreFlow(id).OrderBy(r => r.FlowDate);
+                var flows = GetStoreFlow(id).OrderBy(r => r.FlowNumber);
 
                 TransactionRepository trans = new TransactionRepository();
                 var result = trans.StoreFixTrans(store, flows);
