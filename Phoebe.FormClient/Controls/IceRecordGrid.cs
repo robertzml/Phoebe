@@ -139,6 +139,20 @@ namespace Phoebe.FormClient
                 decimal unitPrice = Convert.ToDecimal(this.dgvIce.GetRowCellValue(e.RowHandle, "SaleUnitPrice"));
                 decimal totalPrice = count * unitPrice;
                 this.dgvIce.SetRowCellValue(e.RowHandle, "SaleFee", totalPrice);
+
+                decimal unitWeight = Convert.ToDecimal(this.dgvIce.GetRowCellValue(e.RowHandle, "UnitWeight"));
+                decimal totalWeight = count * unitWeight;
+                this.dgvIce.SetRowCellValue(e.RowHandle, "FlowWeight", totalWeight);
+            }
+            else if (e.Column.Name == "colUnitWeight")
+            {
+                decimal unitWeight = 0;
+                if (!decimal.TryParse(e.Value.ToString(), out unitWeight))
+                    return;
+
+                int count = Convert.ToInt32(this.dgvIce.GetRowCellValue(e.RowHandle, "FlowCount"));
+                decimal totalWeight = count * unitWeight;
+                this.dgvIce.SetRowCellValue(e.RowHandle, "FlowWeight", totalWeight);
             }
             else if (e.Column.Name == "colSaleUnitPrice")
             {

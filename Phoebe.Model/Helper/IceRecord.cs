@@ -21,7 +21,12 @@ namespace Phoebe.Model
         public int FlowCount { get; set; }
 
         /// <summary>
-        /// 流水重量
+        /// 单位重量(kg)
+        /// </summary>
+        public decimal UnitWeight { get; set; }
+
+        /// <summary>
+        /// 流水重量(kg)
         /// </summary>
         public decimal FlowWeight { get; set; }
 

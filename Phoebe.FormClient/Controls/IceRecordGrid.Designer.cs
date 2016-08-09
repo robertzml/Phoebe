@@ -34,6 +34,7 @@
             this.dgvIce = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colIceType = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colFlowCount = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colUnitWeight = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colFlowWeight = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colSaleUnitPrice = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colSaleFee = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -64,6 +65,7 @@
             this.dgvIce.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colIceType,
             this.colFlowCount,
+            this.colUnitWeight,
             this.colFlowWeight,
             this.colSaleUnitPrice,
             this.colSaleFee,
@@ -105,17 +107,28 @@
             this.colFlowCount.Visible = true;
             this.colFlowCount.VisibleIndex = 1;
             // 
+            // colUnitWeight
+            // 
+            this.colUnitWeight.Caption = "单位重量(kg)";
+            this.colUnitWeight.DisplayFormat.FormatString = "0.00";
+            this.colUnitWeight.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.colUnitWeight.FieldName = "UnitWeight";
+            this.colUnitWeight.Name = "colUnitWeight";
+            this.colUnitWeight.Visible = true;
+            this.colUnitWeight.VisibleIndex = 2;
+            // 
             // colFlowWeight
             // 
-            this.colFlowWeight.Caption = "流水重量(t)";
+            this.colFlowWeight.Caption = "流水重量(kg)";
             this.colFlowWeight.DisplayFormat.FormatString = "0.000";
             this.colFlowWeight.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colFlowWeight.FieldName = "FlowWeight";
             this.colFlowWeight.Name = "colFlowWeight";
+            this.colFlowWeight.OptionsColumn.ReadOnly = true;
             this.colFlowWeight.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "FlowWeight", "合计={0:0.000}")});
             this.colFlowWeight.Visible = true;
-            this.colFlowWeight.VisibleIndex = 2;
+            this.colFlowWeight.VisibleIndex = 3;
             // 
             // colSaleUnitPrice
             // 
@@ -125,7 +138,7 @@
             this.colSaleUnitPrice.FieldName = "SaleUnitPrice";
             this.colSaleUnitPrice.Name = "colSaleUnitPrice";
             this.colSaleUnitPrice.Visible = true;
-            this.colSaleUnitPrice.VisibleIndex = 3;
+            this.colSaleUnitPrice.VisibleIndex = 4;
             // 
             // colSaleFee
             // 
@@ -138,7 +151,7 @@
             this.colSaleFee.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "SaleFee", "合计={0:0.##}")});
             this.colSaleFee.Visible = true;
-            this.colSaleFee.VisibleIndex = 4;
+            this.colSaleFee.VisibleIndex = 5;
             // 
             // colRemark
             // 
@@ -146,7 +159,7 @@
             this.colRemark.FieldName = "Remark";
             this.colRemark.Name = "colRemark";
             this.colRemark.Visible = true;
-            this.colRemark.VisibleIndex = 5;
+            this.colRemark.VisibleIndex = 6;
             // 
             // IceRecordGrid
             // 
@@ -174,5 +187,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn colSaleUnitPrice;
         private DevExpress.XtraGrid.Columns.GridColumn colSaleFee;
         private DevExpress.XtraGrid.Columns.GridColumn colRemark;
+        private DevExpress.XtraGrid.Columns.GridColumn colUnitWeight;
     }
 }

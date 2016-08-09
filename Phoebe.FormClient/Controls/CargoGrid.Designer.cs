@@ -148,6 +148,8 @@
             // 
             // colContractId
             // 
+            this.colContractId.AppearanceCell.Options.UseTextOptions = true;
+            this.colContractId.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             this.colContractId.AppearanceHeader.Options.UseTextOptions = true;
             this.colContractId.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             this.colContractId.Caption = "合同名称";

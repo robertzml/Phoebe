@@ -86,6 +86,7 @@ namespace Phoebe.FormClient
             {
                 IceType = iceStock.IceType,
                 FlowCount = iceStock.FlowCount,
+                UnitWeight = iceStock.UnitWeight,
                 FlowWeight = iceStock.FlowWeight,
                 Remark = iceStock.Remark
             };
@@ -274,6 +275,7 @@ namespace Phoebe.FormClient
             var record = this.irList.DataSource.First();
             iceStock.IceType = record.IceType;
             iceStock.FlowCount = record.FlowCount;
+            iceStock.UnitWeight = record.UnitWeight;
             iceStock.FlowWeight = record.FlowWeight;
             iceStock.Remark = record.Remark;
 

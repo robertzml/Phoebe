@@ -18,6 +18,7 @@ namespace Phoebe.Model
         public System.Guid FlowId { get; set; }
         public int IceType { get; set; }
         public int FlowCount { get; set; }
+        public decimal UnitWeight { get; set; }
         public decimal FlowWeight { get; set; }
         public string Remark { get; set; }
         public int Status { get; set; }

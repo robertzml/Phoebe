@@ -30,7 +30,7 @@ namespace Phoebe.Model
         public string Number { get; set; }
         public string Name { get; set; }
         public int CustomerId { get; set; }
-        public int Type { get; set; }
+        public Nullable<int> Type { get; set; }
         public System.DateTime SignDate { get; set; }
         public Nullable<System.DateTime> CloseDate { get; set; }
         public int BillingType { get; set; }

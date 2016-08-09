@@ -58,7 +58,7 @@
           <Property Name="Number" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="CustomerId" Type="int" Nullable="false" />
-          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="Type" Type="int" />
           <Property Name="SignDate" Type="datetime" Nullable="false" />
           <Property Name="CloseDate" Type="datetime" />
           <Property Name="BillingType" Type="int" Nullable="false" />
@@ -105,6 +105,7 @@
           <Property Name="FlowId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="IceType" Type="int" Nullable="false" />
           <Property Name="SaleCount" Type="int" Nullable="false" />
+          <Property Name="UnitWeight" Type="decimal" Precision="18" Scale="3" Nullable="false" />
           <Property Name="SaleWeight" Type="decimal" Precision="18" Scale="3" Nullable="false" />
           <Property Name="SaleUnitPrice" Type="decimal" Precision="18" Scale="3" Nullable="false" />
           <Property Name="SaleFee" Type="decimal" Precision="18" Scale="3" Nullable="false" />
@@ -119,6 +120,7 @@
           <Property Name="FlowId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="IceType" Type="int" Nullable="false" />
           <Property Name="FlowCount" Type="int" Nullable="false" />
+          <Property Name="UnitWeight" Type="decimal" Precision="18" Scale="3" Nullable="false" />
           <Property Name="FlowWeight" Type="decimal" Precision="18" Scale="3" Nullable="false" />
           <Property Name="Remark" Type="nvarchar" MaxLength="500" />
           <Property Name="Status" Type="int" Nullable="false" />
@@ -1377,7 +1379,6 @@
             <End Role="StockOut" EntitySet="StockOuts" />
           </AssociationSet>
           <EntitySet Name="IceFlows" EntityType="Phoebe.Model.IceFlow" />
-          <EntitySet Name="IceStocks" EntityType="Phoebe.Model.IceStock" />
           <AssociationSet Name="FK_IceFlow_Contract" Association="Phoebe.Model.FK_IceFlow_Contract">
             <End Role="Contract" EntitySet="Contracts" />
             <End Role="IceFlow" EntitySet="IceFlows" />
@@ -1386,14 +1387,15 @@
             <End Role="User" EntitySet="Users" />
             <End Role="IceFlow" EntitySet="IceFlows" />
           </AssociationSet>
-          <AssociationSet Name="FK_IceStock_IceFlow" Association="Phoebe.Model.FK_IceStock_IceFlow">
-            <End Role="IceFlow" EntitySet="IceFlows" />
-            <End Role="IceStock" EntitySet="IceStocks" />
-          </AssociationSet>
           <EntitySet Name="IceSales" EntityType="Phoebe.Model.IceSale" />
+          <EntitySet Name="IceStocks" EntityType="Phoebe.Model.IceStock" />
           <AssociationSet Name="FK_IceSale_IceFlow" Association="Phoebe.Model.FK_IceSale_IceFlow">
             <End Role="IceFlow" EntitySet="IceFlows" />
             <End Role="IceSale" EntitySet="IceSales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IceStock_IceFlow" Association="Phoebe.Model.FK_IceStock_IceFlow">
+            <End Role="IceFlow" EntitySet="IceFlows" />
+            <End Role="IceStock" EntitySet="IceStocks" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="SettlementDetail">
@@ -1646,7 +1648,7 @@
           <Property Name="Number" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CustomerId" Type="Int32" Nullable="false" />
-          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="Type" Type="Int32" />
           <Property Name="SignDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CloseDate" Type="DateTime" Precision="3" />
           <Property Name="BillingType" Type="Int32" Nullable="false" />
@@ -1776,21 +1778,8 @@
           <Property Name="Status" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Contract" Relationship="Phoebe.Model.FK_IceFlow_Contract" FromRole="IceFlow" ToRole="Contract" />
           <NavigationProperty Name="User" Relationship="Phoebe.Model.FK_IceFlow_User" FromRole="IceFlow" ToRole="User" />
-          <NavigationProperty Name="IceStocks" Relationship="Phoebe.Model.FK_IceStock_IceFlow" FromRole="IceFlow" ToRole="IceStock" />
           <NavigationProperty Name="IceSales" Relationship="Phoebe.Model.FK_IceSale_IceFlow" FromRole="IceFlow" ToRole="IceSale" />
-        </EntityType>
-        <EntityType Name="IceStock">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="FlowId" Type="Guid" Nullable="false" />
-          <Property Name="IceType" Type="Int32" Nullable="false" />
-          <Property Name="FlowCount" Type="Int32" Nullable="false" />
-          <Property Name="FlowWeight" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
-          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="IceFlow" Relationship="Phoebe.Model.FK_IceStock_IceFlow" FromRole="IceStock" ToRole="IceFlow" />
+          <NavigationProperty Name="IceStocks" Relationship="Phoebe.Model.FK_IceStock_IceFlow" FromRole="IceFlow" ToRole="IceStock" />
         </EntityType>
         <Association Name="FK_IceFlow_Contract">
           <End Type="Phoebe.Model.Contract" Role="Contract" Multiplicity="0..1" />
@@ -1816,20 +1805,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_IceStock_IceFlow">
-          <End Type="Phoebe.Model.IceFlow" Role="IceFlow" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="Phoebe.Model.IceStock" Role="IceStock" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="IceFlow">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="IceStock">
-              <PropertyRef Name="FlowId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="IceSale">
           <Key>
             <PropertyRef Name="Id" />
@@ -1838,12 +1813,27 @@
           <Property Name="FlowId" Type="Guid" Nullable="false" />
           <Property Name="IceType" Type="Int32" Nullable="false" />
           <Property Name="SaleCount" Type="Int32" Nullable="false" />
+          <Property Name="UnitWeight" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
           <Property Name="SaleWeight" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
           <Property Name="SaleUnitPrice" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
           <Property Name="SaleFee" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
           <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" Nullable="false" />
           <NavigationProperty Name="IceFlow" Relationship="Phoebe.Model.FK_IceSale_IceFlow" FromRole="IceSale" ToRole="IceFlow" />
+        </EntityType>
+        <EntityType Name="IceStock">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="FlowId" Type="Guid" Nullable="false" />
+          <Property Name="IceType" Type="Int32" Nullable="false" />
+          <Property Name="FlowCount" Type="Int32" Nullable="false" />
+          <Property Name="UnitWeight" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
+          <Property Name="FlowWeight" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
+          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="IceFlow" Relationship="Phoebe.Model.FK_IceStock_IceFlow" FromRole="IceStock" ToRole="IceFlow" />
         </EntityType>
         <Association Name="FK_IceSale_IceFlow">
           <End Type="Phoebe.Model.IceFlow" Role="IceFlow" Multiplicity="1">
@@ -1855,6 +1845,20 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="IceSale">
+              <PropertyRef Name="FlowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IceStock_IceFlow">
+          <End Type="Phoebe.Model.IceFlow" Role="IceFlow" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Phoebe.Model.IceStock" Role="IceStock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IceFlow">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="IceStock">
               <PropertyRef Name="FlowId" />
             </Dependent>
           </ReferentialConstraint>
@@ -2168,19 +2172,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="IceStocks">
-            <EntityTypeMapping TypeName="Phoebe.Model.IceStock">
-              <MappingFragment StoreEntitySet="IceStock">
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Remark" ColumnName="Remark" />
-                <ScalarProperty Name="FlowWeight" ColumnName="FlowWeight" />
-                <ScalarProperty Name="FlowCount" ColumnName="FlowCount" />
-                <ScalarProperty Name="IceType" ColumnName="IceType" />
-                <ScalarProperty Name="FlowId" ColumnName="FlowId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="IceSales">
             <EntityTypeMapping TypeName="Phoebe.Model.IceSale">
               <MappingFragment StoreEntitySet="IceSale">
@@ -2189,7 +2180,22 @@
                 <ScalarProperty Name="SaleFee" ColumnName="SaleFee" />
                 <ScalarProperty Name="SaleUnitPrice" ColumnName="SaleUnitPrice" />
                 <ScalarProperty Name="SaleWeight" ColumnName="SaleWeight" />
+                <ScalarProperty Name="UnitWeight" ColumnName="UnitWeight" />
                 <ScalarProperty Name="SaleCount" ColumnName="SaleCount" />
+                <ScalarProperty Name="IceType" ColumnName="IceType" />
+                <ScalarProperty Name="FlowId" ColumnName="FlowId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IceStocks">
+            <EntityTypeMapping TypeName="Phoebe.Model.IceStock">
+              <MappingFragment StoreEntitySet="IceStock">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="FlowWeight" ColumnName="FlowWeight" />
+                <ScalarProperty Name="UnitWeight" ColumnName="UnitWeight" />
+                <ScalarProperty Name="FlowCount" ColumnName="FlowCount" />
                 <ScalarProperty Name="IceType" ColumnName="IceType" />
                 <ScalarProperty Name="FlowId" ColumnName="FlowId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />

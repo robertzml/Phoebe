@@ -190,6 +190,7 @@ namespace Phoebe.FormClient
                 {
                     IceType = item.IceType,
                     FlowCount = item.SaleCount,
+                    UnitWeight = item.UnitWeight,
                     FlowWeight = item.SaleWeight,
                     SaleUnitPrice = item.SaleUnitPrice,
                     SaleFee = item.SaleFee,
@@ -327,6 +328,7 @@ namespace Phoebe.FormClient
                 IceSale sale = new IceSale();
                 sale.IceType = item.IceType;
                 sale.SaleCount = item.FlowCount;
+                sale.UnitWeight = item.UnitWeight;
                 sale.SaleWeight = item.FlowWeight;
                 sale.SaleUnitPrice = item.SaleUnitPrice;
                 sale.SaleFee = item.SaleFee;
