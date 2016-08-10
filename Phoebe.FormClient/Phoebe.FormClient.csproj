@@ -292,6 +292,12 @@
     <Compile Include="Forms\IceSellForm.Designer.cs">
       <DependentUpon>IceSellForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Report\IceSale.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\IceSale.Designer.cs">
+      <DependentUpon>IceSale.cs</DependentUpon>
+    </Compile>
     <Compile Include="Report\Payment.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -684,6 +690,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\StockMoveViewControl.resx">
       <DependentUpon>StockMoveViewControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\IceSale.resx">
+      <DependentUpon>IceSale.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\Payment.resx">
       <DependentUpon>Payment.cs</DependentUpon>

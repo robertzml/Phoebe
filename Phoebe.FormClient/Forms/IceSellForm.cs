@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 namespace Phoebe.FormClient
 {
+    using DevExpress.XtraReports.UI;
     using DevExpress.XtraEditors.Controls;
     using Phoebe.Base;
     using Phoebe.Business;
@@ -399,9 +400,28 @@ namespace Phoebe.FormClient
             }
         }
 
+        /// <summary>
+        /// 打印
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void tsbPrint_Click(object sender, EventArgs e)
         {
+            if (this.currentFlowId == Guid.Empty)
+            {
+                MessageUtil.ShowClaim("当前未选中单据");
+                return;
+            }
 
+            var iceFlow = BusinessFactory<IceFlowBusiness>.Instance.FindById(this.currentFlowId);
+            var iceSales = BusinessFactory<IceSaleBusiness>.Instance.GetByFlow(this.currentFlowId);
+
+            var model = ModelTranslate.IceSaleToReport(iceFlow, iceSales);
+
+            Report.IceSale report = new Report.IceSale(model);
+
+            ReportPrintTool tool = new ReportPrintTool(report);
+            tool.ShowPreview();
         }
 
         /// <summary>

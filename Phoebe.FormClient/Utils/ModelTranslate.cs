@@ -298,5 +298,24 @@ namespace Phoebe.FormClient
 
             return report;
         }
+
+        /// <summary>
+        /// 冰块销售单转报表模型
+        /// </summary>
+        /// <param name="iceFlow">冰块流水</param>
+        /// <param name="iceSales">冰块销售</param>
+        /// <returns></returns>
+        public static Phoebe.Model.Report.RIceSaleModel IceSaleToReport(IceFlow iceFlow, List<IceSale> iceSales)
+        {
+            Phoebe.Model.Report.RIceSaleModel report = new Model.Report.RIceSaleModel();
+            report.CustomerName = iceFlow.Contract.Customer.Name;
+            report.SaleTime = iceFlow.FlowTime;
+            report.FlowNumber = iceFlow.FlowNumber;
+            report.UserName = iceFlow.User.Name;
+            report.Remark = iceFlow.Remark;
+            report.IceSales = iceSales;
+
+            return report;
+        }
     }
 }

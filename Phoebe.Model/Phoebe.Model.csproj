@@ -109,6 +109,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PhoebeModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Report\RIceSaleModel.cs" />
     <Compile Include="Report\RPaymentModel.cs" />
     <Compile Include="Report\RStockInDetailsModel.cs" />
     <Compile Include="Report\RStockInModel.cs" />
