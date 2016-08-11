@@ -38,6 +38,6 @@ namespace Phoebe.Model.Report
         /// <summary>
         /// 销售记录
         /// </summary>
-        public List<IceSale> IceSales { get; set; }
+        public List<RIceSaleDetailsModel> IceSales { get; set; }
     }
 }

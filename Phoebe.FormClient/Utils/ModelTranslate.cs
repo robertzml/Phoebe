@@ -313,7 +313,21 @@ namespace Phoebe.FormClient
             report.FlowNumber = iceFlow.FlowNumber;
             report.UserName = iceFlow.User.Name;
             report.Remark = iceFlow.Remark;
-            report.IceSales = iceSales;
+            report.IceSales = new List<Model.Report.RIceSaleDetailsModel>();
+
+            foreach(var item in iceSales)
+            {
+                Model.Report.RIceSaleDetailsModel m = new Model.Report.RIceSaleDetailsModel();
+                m.IceType = ((IceType)item.IceType).DisplayName();
+                m.SaleCount = item.SaleCount;
+                m.UnitWeight = item.UnitWeight;
+                m.SaleWeight = item.SaleWeight;
+                m.SaleUnitPrice = item.SaleUnitPrice;
+                m.SaleFee = item.SaleFee;
+                m.Remark = item.Remark;
+
+                report.IceSales.Add(m);
+            }
 
             return report;
         }

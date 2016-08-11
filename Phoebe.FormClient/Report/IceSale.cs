@@ -32,7 +32,7 @@ namespace Phoebe.FormClient.Report
             this.DataSource = model.IceSales;
             this.CustomerName.Value = model.CustomerName;
             this.SaleTime.Value = model.SaleTime;
-            this.FlowNumber.Value = model.FlowNumber;          
+            this.FlowNumber.Value = model.FlowNumber;
             this.User.Value = model.UserName;
         }
         #endregion //Function
