@@ -182,7 +182,7 @@ namespace Phoebe.Business
         /// <returns></returns>
         public List<Billing> GetByCustomer(int customerId, DateTime start, DateTime end)
         {
-            var data = this.dal.Find(r => r.StockIn.InTime >= start && r.StockIn.InTime <= end && r.Status == 0 && r.Contract.CustomerId == customerId);
+            var data = this.dal.Find(r => r.StockIn.InTime >= start && r.StockIn.InTime <= end && r.Status == (int)EntityStatus.Normal && r.Contract.CustomerId == customerId);
             return data.ToList();
         }
 
@@ -194,6 +194,19 @@ namespace Phoebe.Business
         public List<Billing> GetByContract(int contractId)
         {
             return this.dal.Find(r => r.ContractId == contractId).ToList();
+        }
+
+        /// <summary>
+        /// 获取合同的计费信息
+        /// </summary>
+        /// <param name="contractId">合同ID</param>
+        /// <param name="start">开始日期</param>
+        /// <param name="end">结束日期</param>
+        /// <returns></returns>
+        public List<Billing> GetByContract(int contractId, DateTime start, DateTime end)
+        {
+            var data = this.dal.Find(r => r.StockIn.InTime >= start && r.StockIn.InTime <= end && r.Status == (int)EntityStatus.Normal && r.ContractId == contractId);
+            return data.ToList();
         }
 
         /// <summary>

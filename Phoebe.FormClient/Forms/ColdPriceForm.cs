@@ -39,7 +39,8 @@ namespace Phoebe.FormClient
         /// <param name="customerId">客户Id</param>
         private void UpdateContractList(int customerId)
         {
-            var contracts = BusinessFactory<ContractBusiness>.Instance.GetByCustomer2(customerId);
+            var contracts = BusinessFactory<ContractBusiness>.Instance.GetByCustomer(customerId, ContractType.TimingCold);
+            //var contracts = BusinessFactory<ContractBusiness>.Instance.GetByCustomer2(customerId);
 
             this.cmbContract.Properties.Items.Clear();
             foreach (var item in contracts)

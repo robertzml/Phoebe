@@ -28,12 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.lkuCustomer = new DevExpress.XtraEditors.LookUpEdit();
-            this.bsCustomer = new System.Windows.Forms.BindingSource(this.components);
+            this.bsCustomer = new System.Windows.Forms.BindingSource();
             this.btnSettle = new DevExpress.XtraEditors.SimpleButton();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.txtLastTo = new DevExpress.XtraEditors.TextEdit();
@@ -51,7 +50,7 @@
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
             this.dgcBilling = new DevExpress.XtraGrid.GridControl();
-            this.bsBilling = new System.Windows.Forms.BindingSource(this.components);
+            this.bsBilling = new System.Windows.Forms.BindingSource();
             this.dgvBilling = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colStockInId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colContractId = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -69,7 +68,7 @@
             this.colStatus = new DevExpress.XtraGrid.Columns.GridColumn();
             this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
             this.dgcCold = new DevExpress.XtraGrid.GridControl();
-            this.bsCold = new System.Windows.Forms.BindingSource(this.components);
+            this.bsCold = new System.Windows.Forms.BindingSource();
             this.dgvCold = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colContractId1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colContractName = new DevExpress.XtraGrid.Columns.GridColumn();

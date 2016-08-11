@@ -55,7 +55,11 @@
     <Compile Include="Billing\BillingUnitVolume.cs" />
     <Compile Include="Billing\BillingUnitWeight.cs" />
     <Compile Include="Billing\BillingVariousWeight.cs" />
+    <Compile Include="Billing\FreezeContract.cs" />
     <Compile Include="Billing\IBillingProcess.cs" />
+    <Compile Include="Billing\IContract.cs" />
+    <Compile Include="Billing\TimingColdContract.cs" />
+    <Compile Include="Billing\UntimingColdContract.cs" />
     <Compile Include="BL\BillingBusiness.cs" />
     <Compile Include="BL\CargoBusiness.cs" />
     <Compile Include="BL\CustomerBusiness.cs" />

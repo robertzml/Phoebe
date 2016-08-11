@@ -67,11 +67,13 @@
     <Compile Include="Customer.cs">
       <DependentUpon>PhoebeModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Helper\BaseSettlement.cs" />
     <Compile Include="Helper\ColdSettlement.cs" />
     <Compile Include="Helper\DailyColdRecord.cs" />
     <Compile Include="Helper\IceEnum.cs" />
     <Compile Include="Helper\IceRecord.cs" />
     <Compile Include="Helper\Inventory.cs" />
+    <Compile Include="Helper\MiscSettlement.cs" />
     <Compile Include="Helper\PhoebeEnum.cs" />
     <Compile Include="Helper\Receipt.cs" />
     <Compile Include="Helper\StockFlow.cs" />

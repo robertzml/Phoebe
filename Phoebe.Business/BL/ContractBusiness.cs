@@ -70,7 +70,7 @@ namespace Phoebe.Business
         {
             Expression<Func<Contract, bool>> predicate = r => r.CustomerId == customerId && r.Type == (int)type;
             return this.dal.Find(predicate).ToList();
-        }
+        }        
 
         /// <summary>
         /// 添加合同
