@@ -55,6 +55,7 @@
     <Compile Include="Billing\BillingUnitVolume.cs" />
     <Compile Include="Billing\BillingUnitWeight.cs" />
     <Compile Include="Billing\BillingVariousWeight.cs" />
+    <Compile Include="Billing\ContractFactory.cs" />
     <Compile Include="Billing\FreezeContract.cs" />
     <Compile Include="Billing\IBillingProcess.cs" />
     <Compile Include="Billing\IContract.cs" />

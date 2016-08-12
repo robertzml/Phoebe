@@ -70,6 +70,18 @@ namespace Phoebe.Business
         {
             throw new NotImplementedException();
         }
+
+        /// <summary>
+        /// 获取合同日冷藏费记录 
+        /// </summary>
+        /// <param name="contractId">合同ID</param>
+        /// <param name="start">开始日期</param>
+        /// <param name="end">结束日期</param>
+        /// <returns></returns>
+        public List<DailyColdRecord> GetColdRecord(int contractId, DateTime start, DateTime end)
+        {
+            throw new NotImplementedException();
+        }
         #endregion //Method
     }
 }
