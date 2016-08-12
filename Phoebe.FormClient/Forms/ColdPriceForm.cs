@@ -167,13 +167,16 @@ namespace Phoebe.FormClient
             int contractId = Convert.ToInt32(this.cmbContract.EditValue);
             var contract = BusinessFactory<ContractBusiness>.Instance.FindById(contractId);
 
-            if (contract.Type != (int)ContractType.TimingCold || contract.Type != (int)ContractType.UntimingCold)
+            if (contract.Type != (int)ContractType.TimingCold && contract.Type != (int)ContractType.UntimingCold)
             {
                 MessageUtil.ShowClaim("该类合同无冷藏费");
                 return;
             }
-            
-            var records = BusinessFactory<BillingBusiness>.Instance.GetContractColdRecord(contractId, this.dpFrom.DateTime.Date, this.dpTo.DateTime.Date);
+
+            //var records = BusinessFactory<BillingBusiness>.Instance.GetContractColdRecord(contractId, this.dpFrom.DateTime.Date, this.dpTo.DateTime.Date);
+            var contractBill = ContractFactory.Create((ContractType)contract.Type);
+            var records = contractBill.GetColdRecord(contractId, this.dpFrom.DateTime.Date, this.dpTo.DateTime.Date);
+
             this.bsDailyColdRecord.DataSource = records;
 
             this.Cursor = Cursors.Default;

@@ -62,56 +62,56 @@ namespace Phoebe.Business
         /// <param name="date">日期</param>
         /// <param name="billingProcess">计费处理</param>
         /// <returns></returns>
-        private List<DailyColdRecord> GetDailyColdRecord(Contract contract, DateTime date, IBillingProcess billingProcess)
-        {
-            List<DailyColdRecord> records = new List<DailyColdRecord>();
+        //private List<DailyColdRecord> GetDailyColdRecord(Contract contract, DateTime date, IBillingProcess billingProcess)
+        //{
+        //    List<DailyColdRecord> records = new List<DailyColdRecord>();
 
-            var flows = BusinessFactory<StoreBusiness>.Instance.GetDayFlow(contract.Id, date, false);
-            var storages = BusinessFactory<StoreBusiness>.Instance.GetInDay(contract.Id, date);
+        //    var flows = BusinessFactory<StoreBusiness>.Instance.GetDayFlow(contract.Id, date, false);
+        //    var storages = BusinessFactory<StoreBusiness>.Instance.GetInDay(contract.Id, date);
 
-            foreach (var flow in flows)
-            {
-                DailyColdRecord frecord = new DailyColdRecord();
-                frecord.RecordDate = date;
-                frecord.CategoryNumber = flow.CategoryNumber;
-                frecord.CategoryName = flow.CategoryName;
-                frecord.Count = flow.FlowCount;
+        //    foreach (var flow in flows)
+        //    {
+        //        DailyColdRecord frecord = new DailyColdRecord();
+        //        frecord.RecordDate = date;
+        //        frecord.CategoryNumber = flow.CategoryNumber;
+        //        frecord.CategoryName = flow.CategoryName;
+        //        frecord.Count = flow.FlowCount;
 
-                frecord.UnitMeter = billingProcess.GetUnitMeter(flow);
-                frecord.FlowMeter = billingProcess.GetFlowMeter(flow);
-                frecord.FlowType = flow.Type;
+        //        frecord.UnitMeter = billingProcess.GetUnitMeter(flow);
+        //        frecord.FlowMeter = billingProcess.GetFlowMeter(flow);
+        //        frecord.FlowType = flow.Type;
 
-                if (!contract.IsTiming && flow.Type == StockFlowType.StockIn)
-                {
-                    frecord.DailyFee = billingProcess.CalculateDailyFee(frecord.FlowMeter, flow.UnitPrice);
-                }
-                records.Add(frecord);
-            }
+        //        if (!contract.IsTiming && flow.Type == StockFlowType.StockIn)
+        //        {
+        //            frecord.DailyFee = billingProcess.CalculateDailyFee(frecord.FlowMeter, flow.UnitPrice);
+        //        }
+        //        records.Add(frecord);
+        //    }
 
-            DailyColdRecord record;
-            if (flows.Count != 0)
-                record = records.Last();
-            else
-            {
-                record = new DailyColdRecord();
-                record.RecordDate = date;
-                record.FlowType = StockFlowType.None;
-            }
+        //    DailyColdRecord record;
+        //    if (flows.Count != 0)
+        //        record = records.Last();
+        //    else
+        //    {
+        //        record = new DailyColdRecord();
+        //        record.RecordDate = date;
+        //        record.FlowType = StockFlowType.None;
+        //    }
 
-            foreach (var storage in storages)
-            {
-                decimal totalMeter = billingProcess.GetStoreMeter(storage);
+        //    foreach (var storage in storages)
+        //    {
+        //        decimal totalMeter = billingProcess.GetStoreMeter(storage);
 
-                record.TotalMeter += totalMeter;
-                if (contract.IsTiming)
-                    record.DailyFee += billingProcess.CalculateDailyFee(totalMeter, storage.UnitPrice);
-            }
+        //        record.TotalMeter += totalMeter;
+        //        if (contract.IsTiming)
+        //            record.DailyFee += billingProcess.CalculateDailyFee(totalMeter, storage.UnitPrice);
+        //    }
 
-            if (flows.Count == 0)
-                records.Add(record);
+        //    if (flows.Count == 0)
+        //        records.Add(record);
 
-            return records;
-        }
+        //    return records;
+        //}
 
         /// <summary>
         /// 计算合同冷藏费
@@ -216,37 +216,37 @@ namespace Phoebe.Business
         /// <param name="start">开始日期</param>
         /// <param name="end">结束日期</param>
         /// <returns></returns>
-        public List<DailyColdRecord> GetContractColdRecord(int contractId, DateTime start, DateTime end)
-        {
-            List<DailyColdRecord> records = new List<DailyColdRecord>();
-            var contract = BusinessFactory<ContractBusiness>.Instance.FindById(contractId);
-            if (contract == null)
-                return records;
+        //public List<DailyColdRecord> GetContractColdRecord(int contractId, DateTime start, DateTime end)
+        //{
+        //    List<DailyColdRecord> records = new List<DailyColdRecord>();
+        //    var contract = BusinessFactory<ContractBusiness>.Instance.FindById(contractId);
+        //    if (contract == null)
+        //        return records;
 
-            IBillingProcess billingProcess = BillingFactory.Create((BillingType)contract.BillingType);
+        //    IBillingProcess billingProcess = BillingFactory.Create((BillingType)contract.BillingType);
 
-            decimal totalFee = 0;
-            for (DateTime step = start.Date; step <= end; step = step.AddDays(1))
-            {
-                var record = GetDailyColdRecord(contract, step, billingProcess);
+        //    decimal totalFee = 0;
+        //    for (DateTime step = start.Date; step <= end; step = step.AddDays(1))
+        //    {
+        //        var record = GetDailyColdRecord(contract, step, billingProcess);
 
-                if (contract.IsTiming)
-                {
-                    var last = record.Last();
-                    totalFee += last.DailyFee;
-                    last.TotalFee = totalFee;
-                }
-                else
-                {
-                    var last = record.Last();
-                    totalFee += record.Sum(r => r.DailyFee);
-                    last.TotalFee = totalFee;
-                }
-                records.AddRange(record);
-            }
+        //        if (contract.IsTiming)
+        //        {
+        //            var last = record.Last();
+        //            totalFee += last.DailyFee;
+        //            last.TotalFee = totalFee;
+        //        }
+        //        else
+        //        {
+        //            var last = record.Last();
+        //            totalFee += record.Sum(r => r.DailyFee);
+        //            last.TotalFee = totalFee;
+        //        }
+        //        records.AddRange(record);
+        //    }
 
-            return records;
-        }
+        //    return records;
+        //}
 
         /// <summary>
         /// 按客户获取基本费用
