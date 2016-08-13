@@ -32,9 +32,9 @@ namespace Phoebe.Business
                 case ContractType.Freeze:
                     contract = new FreezeContract();
                     break;
-                //case ContractType.Ice:
-                //    contract = new IceCon();
-                //    break;
+                case ContractType.Ice:
+                    contract = new IceContract();
+                    break;
             }
             return contract;
         }

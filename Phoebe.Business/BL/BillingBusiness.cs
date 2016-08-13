@@ -255,13 +255,13 @@ namespace Phoebe.Business
         /// <param name="start">开始日期</param>
         /// <param name="end">结束日期</param>
         /// <returns></returns>
-        public List<Billing> CalculateBaseFee(int customerId, DateTime start, DateTime end)
-        {
-            var billings = this.dal.Find(r => r.Status == (int)EntityStatus.Normal && r.StockIn.InTime >= start && r.StockIn.InTime <= end &&
-                r.Contract.CustomerId == customerId);
+        //public List<Billing> CalculateBaseFee(int customerId, DateTime start, DateTime end)
+        //{
+        //    var billings = this.dal.Find(r => r.Status == (int)EntityStatus.Normal && r.StockIn.InTime >= start && r.StockIn.InTime <= end &&
+        //        r.Contract.CustomerId == customerId);
 
-            return billings.ToList();
-        }
+        //    return billings.ToList();
+        //}
 
         /// <summary>
         /// 按客户获取冷藏费用

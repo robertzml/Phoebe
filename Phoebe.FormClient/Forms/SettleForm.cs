@@ -69,9 +69,9 @@ namespace Phoebe.FormClient
         /// <param name="details"></param>
         private void SetDetails(Guid settlementId, List<SettlementDetail> details)
         {
-            for (int i = 0; i < this.bsBilling.Count; i++)
+            for (int i = 0; i < this.bsGrid.DataSource.Count; i++)
             {
-                var billing = this.bsBilling[i] as Billing;
+                var billing = this.bsGrid.DataSource[i] as BaseSettlement;
 
                 SettlementDetail detail = new SettlementDetail();
                 detail.Id = Guid.NewGuid();
@@ -87,9 +87,9 @@ namespace Phoebe.FormClient
                 details.Add(detail);
             }
 
-            for (int i = 0; i < this.bsCold.Count; i++)
+            for (int i = 0; i < this.csGrid.DataSource.Count; i++)
             {
-                var cold = this.bsCold[i] as ColdSettlement;
+                var cold = this.csGrid.DataSource[i] as ColdSettlement;
 
                 SettlementDetail detail = new SettlementDetail();
                 detail.Id = Guid.NewGuid();
@@ -176,13 +176,31 @@ namespace Phoebe.FormClient
 
             int customerId = Convert.ToInt32(this.lkuCustomer.EditValue);
 
-            var billings = BusinessFactory<BillingBusiness>.Instance.CalculateBaseFee(customerId, this.dpFrom.DateTime.Date, this.dpTo.DateTime.Date);
-            this.bsBilling.DataSource = billings;
+            var contracts = BusinessFactory<ContractBusiness>.Instance.GetByCustomer(customerId);
 
-            var colds = BusinessFactory<BillingBusiness>.Instance.CalculateColdFee(customerId, this.dpFrom.DateTime.Date, this.dpTo.DateTime.Date);
-            this.bsCold.DataSource = colds;
+            List<BaseSettlement> baseSettlement = new List<BaseSettlement>();
+            List<ColdSettlement> coldSettlement = new List<ColdSettlement>();
 
-            decimal totalPrice = billings.Sum(r => r.TotalPrice) + colds.Sum(r => r.ColdFee);
+            foreach (var contract in contracts)
+            {
+                var contractBill = ContractFactory.Create((ContractType)contract.Type);
+
+                var baseBill = contractBill.GetBaseFee(contract.Id, this.dpFrom.DateTime.Date, this.dpTo.DateTime.Date);
+                if (baseBill != null)
+                    baseSettlement.AddRange(baseBill);
+
+                var coldBill = contractBill.GetColdFee(contract.Id, this.dpFrom.DateTime.Date, this.dpTo.DateTime.Date);
+                if (coldBill != null)
+                    coldSettlement.Add(coldBill);
+            }
+
+            //var billings = BusinessFactory<BillingBusiness>.Instance.CalculateBaseFee(customerId, this.dpFrom.DateTime.Date, this.dpTo.DateTime.Date);
+            this.bsGrid.DataSource = baseSettlement;
+
+            //var colds = BusinessFactory<BillingBusiness>.Instance.CalculateColdFee(customerId, this.dpFrom.DateTime.Date, this.dpTo.DateTime.Date);
+            this.csGrid.DataSource = coldSettlement;
+
+            decimal totalPrice = baseSettlement.Sum(r => r.TotalPrice) + coldSettlement.Sum(r => r.ColdFee);
             this.nmSumFee.Value = totalPrice;
 
             this.nmDiscount.Value = 100;
@@ -194,25 +212,6 @@ namespace Phoebe.FormClient
             this.btnSave.Enabled = true;
 
             this.Cursor = Cursors.Default;
-        }
-
-        /// <summary>
-        /// 基本费用格式化数据显示
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void dgvBilling_CustomColumnDisplayText(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs e)
-        {
-            int rowIndex = e.ListSourceRowIndex;
-            if (rowIndex < 0 || rowIndex >= this.bsBilling.Count)
-                return;
-
-            var billing = this.bsBilling[rowIndex] as Billing;
-
-            if (e.Column.FieldName == "ContractId")
-            {
-                e.DisplayText = billing.Contract.Name;
-            }
         }
 
         /// <summary>

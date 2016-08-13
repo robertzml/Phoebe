@@ -22,6 +22,11 @@ namespace Phoebe.Model
         public string ContractName { get; set; }
 
         /// <summary>
+        /// 费用名称
+        /// </summary>
+        public string FeeName { get; set; }
+
+        /// <summary>
         /// 开始日期
         /// </summary>
         public DateTime StartTime { get; set; }

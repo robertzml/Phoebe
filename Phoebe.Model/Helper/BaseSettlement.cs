@@ -21,9 +21,19 @@ namespace Phoebe.Model
         public string ContractName { get; set; }
 
         /// <summary>
+        /// 入库单ID
+        /// </summary>
+        public Guid StockInId { get; set; }
+
+        /// <summary>
         /// 产生日期
         /// </summary>
         public DateTime TakeTime { get; set; }
+
+        /// <summary>
+        /// 冷藏费单价
+        /// </summary>
+        public decimal UnitPrice { get; set; }
 
         /// <summary>
         /// 装卸费单价

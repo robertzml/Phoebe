@@ -114,7 +114,9 @@ namespace Phoebe.Business
                 BaseSettlement bs = new BaseSettlement();
                 bs.ContractId = contractId;
                 bs.ContractName = item.Contract.Name;
+                bs.StockInId = item.StockInId;
                 bs.TakeTime = item.StockIn.InTime;
+                bs.UnitPrice = item.UnitPrice;
                 bs.HandlingUnitPrice = item.HandlingUnitPrice;
                 bs.HandlingPrice = item.HandlingPrice;
                 bs.FreezeUnitPrice = item.FreezeUnitPrice;

@@ -30,6 +30,7 @@ namespace Phoebe.Business
                 BaseSettlement bs = new BaseSettlement();
                 bs.ContractId = contractId;
                 bs.ContractName = item.Contract.Name;
+                bs.StockInId = item.StockInId;
                 bs.TakeTime = item.StockIn.InTime;
                 bs.HandlingUnitPrice = item.HandlingUnitPrice;
                 bs.HandlingPrice = item.HandlingPrice;
@@ -57,7 +58,7 @@ namespace Phoebe.Business
         /// <returns></returns>
         public ColdSettlement GetColdFee(int contractId, DateTime start, DateTime end)
         {
-            throw new NotImplementedException();
+            return null;
         }
 
         /// <summary>
@@ -68,7 +69,7 @@ namespace Phoebe.Business
         /// <param name="end">结束日期</param>
         public MiscSettlement GetMisc(int contractId, DateTime start, DateTime end)
         {
-            throw new NotImplementedException();
+            return null;
         }
 
         /// <summary>

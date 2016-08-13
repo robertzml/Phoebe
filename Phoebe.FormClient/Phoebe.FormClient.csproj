@@ -88,6 +88,18 @@
     <Reference Include="UIAutomationClient" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\ColdSettlementGrid.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ColdSettlementGrid.Designer.cs">
+      <DependentUpon>ColdSettlementGrid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BaseSettlementGrid.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\BaseSettlementGrid.Designer.cs">
+      <DependentUpon>BaseSettlementGrid.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ContractGrid.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -508,6 +520,12 @@
       <DependentUpon>UscCustomerInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils\ModelTranslate.cs" />
+    <EmbeddedResource Include="Controls\ColdSettlementGrid.resx">
+      <DependentUpon>ColdSettlementGrid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\BaseSettlementGrid.resx">
+      <DependentUpon>BaseSettlementGrid.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\ContractGrid.resx">
       <DependentUpon>ContractGrid.cs</DependentUpon>
     </EmbeddedResource>
@@ -713,6 +731,7 @@
       <DependentUpon>TestForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\Phoebe.Model.BaseSettlement.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.Billing.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.Cargo.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.Category.datasource" />
