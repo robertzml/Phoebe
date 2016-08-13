@@ -100,6 +100,8 @@ namespace Phoebe.FormClient
 
             if (e.Column.FieldName == "colBillingDescription" && e.IsGetData)
                 e.Value = ((BillingType)contract.BillingType).DisplayDescription();
+            if (e.Column.FieldName == "colCustomerNumber" && e.IsGetData)
+                e.Value = contract.Customer.Number;
         }
         #endregion //Event
 

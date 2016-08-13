@@ -135,7 +135,6 @@ namespace Phoebe.FormClient
 
                 this.txtBillingType.Text = ((BillingType)contract.BillingType).DisplayName();
                 this.txtContractType.Text = ((ContractType)contract.Type).DisplayName();
-                this.txtIsTiming.Text = contract.IsTiming ? "是" : "否";
                 SetColumnHeader((BillingType)contract.BillingType);
             }
         }

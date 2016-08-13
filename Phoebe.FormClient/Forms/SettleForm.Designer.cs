@@ -33,6 +33,7 @@
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.lkuCustomer = new DevExpress.XtraEditors.LookUpEdit();
+            this.bsCustomer = new System.Windows.Forms.BindingSource(this.components);
             this.btnSettle = new DevExpress.XtraEditors.SimpleButton();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.txtLastTo = new DevExpress.XtraEditors.TextEdit();
@@ -49,7 +50,9 @@
             this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
+            this.bsGrid = new Phoebe.FormClient.BaseSettlementGrid();
             this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
+            this.csGrid = new Phoebe.FormClient.ColdSettlementGrid();
             this.groupControl4 = new DevExpress.XtraEditors.GroupControl();
             this.layoutControl2 = new DevExpress.XtraLayout.LayoutControl();
             this.txtRemark = new DevExpress.XtraEditors.TextEdit();
@@ -70,16 +73,15 @@
             this.layoutControlItem15 = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.layoutControlItem16 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.bsCustomer = new System.Windows.Forms.BindingSource(this.components);
-            this.bsGrid = new Phoebe.FormClient.BaseSettlementGrid();
-            this.csGrid = new Phoebe.FormClient.ColdSettlementGrid();
             this.groupControl5 = new DevExpress.XtraEditors.GroupControl();
+            this.msGrid = new Phoebe.FormClient.MiscSettlementControl();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lkuCustomer.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsCustomer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLastTo.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLastFrom.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dpTo.Properties.CalendarTimeProperties)).BeginInit();
@@ -120,8 +122,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem15)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem16)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsCustomer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl5)).BeginInit();
+            this.groupControl5.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -196,6 +198,10 @@
             this.lkuCustomer.StyleController = this.layoutControl1;
             this.lkuCustomer.TabIndex = 12;
             this.lkuCustomer.EditValueChanged += new System.EventHandler(this.lkuCustomer_EditValueChanged);
+            // 
+            // bsCustomer
+            // 
+            this.bsCustomer.DataSource = typeof(Phoebe.Model.Customer);
             // 
             // btnSettle
             // 
@@ -371,6 +377,16 @@
             this.groupControl2.TabIndex = 1;
             this.groupControl2.Text = "基本费用";
             // 
+            // bsGrid
+            // 
+            this.bsGrid.DataSource = null;
+            this.bsGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.bsGrid.Location = new System.Drawing.Point(2, 25);
+            this.bsGrid.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.bsGrid.Name = "bsGrid";
+            this.bsGrid.Size = new System.Drawing.Size(1063, 115);
+            this.bsGrid.TabIndex = 0;
+            // 
             // groupControl3
             // 
             this.groupControl3.Controls.Add(this.csGrid);
@@ -381,6 +397,16 @@
             this.groupControl3.Size = new System.Drawing.Size(1067, 137);
             this.groupControl3.TabIndex = 2;
             this.groupControl3.Text = "冷藏费用";
+            // 
+            // csGrid
+            // 
+            this.csGrid.DataSource = null;
+            this.csGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.csGrid.Location = new System.Drawing.Point(2, 25);
+            this.csGrid.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.csGrid.Name = "csGrid";
+            this.csGrid.Size = new System.Drawing.Size(1063, 110);
+            this.csGrid.TabIndex = 0;
             // 
             // groupControl4
             // 
@@ -646,38 +672,25 @@
             this.layoutControlItem16.Text = "备注";
             this.layoutControlItem16.TextSize = new System.Drawing.Size(60, 18);
             // 
-            // bsCustomer
-            // 
-            this.bsCustomer.DataSource = typeof(Phoebe.Model.Customer);
-            // 
-            // bsGrid
-            // 
-            this.bsGrid.DataSource = null;
-            this.bsGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.bsGrid.Location = new System.Drawing.Point(2, 25);
-            this.bsGrid.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.bsGrid.Name = "bsGrid";
-            this.bsGrid.Size = new System.Drawing.Size(1063, 115);
-            this.bsGrid.TabIndex = 0;
-            // 
-            // csGrid
-            // 
-            this.csGrid.DataSource = null;
-            this.csGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.csGrid.Location = new System.Drawing.Point(2, 25);
-            this.csGrid.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.csGrid.Name = "csGrid";
-            this.csGrid.Size = new System.Drawing.Size(1063, 110);
-            this.csGrid.TabIndex = 0;
-            // 
             // groupControl5
             // 
+            this.groupControl5.Controls.Add(this.msGrid);
             this.groupControl5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl5.Location = new System.Drawing.Point(3, 618);
             this.groupControl5.Name = "groupControl5";
             this.groupControl5.Size = new System.Drawing.Size(1067, 141);
             this.groupControl5.TabIndex = 4;
             this.groupControl5.Text = "杂项费用";
+            // 
+            // msGrid
+            // 
+            this.msGrid.DataSource = null;
+            this.msGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.msGrid.Location = new System.Drawing.Point(2, 25);
+            this.msGrid.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.msGrid.Name = "msGrid";
+            this.msGrid.Size = new System.Drawing.Size(1063, 114);
+            this.msGrid.TabIndex = 0;
             // 
             // SettleForm
             // 
@@ -695,6 +708,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.lkuCustomer.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsCustomer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLastTo.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLastFrom.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dpTo.Properties.CalendarTimeProperties)).EndInit();
@@ -735,8 +749,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem15)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem16)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsCustomer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl5)).EndInit();
+            this.groupControl5.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -788,5 +802,6 @@
         private BaseSettlementGrid bsGrid;
         private ColdSettlementGrid csGrid;
         private DevExpress.XtraEditors.GroupControl groupControl5;
+        private MiscSettlementControl msGrid;
     }
 }

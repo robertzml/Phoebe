@@ -158,9 +158,15 @@ namespace Phoebe.Business
             return settle;
         }
 
-        public MiscSettlement GetMisc(int contractId, DateTime start, DateTime end)
+        /// <summary>
+        /// 获取杂项费用
+        /// </summary>
+        /// <param name="contractId">合同ID</param>
+        /// <param name="start">开始日期</param>
+        /// <param name="end">结束日期</param>
+        public MiscSettlement GetMiscFee(int contractId, DateTime start, DateTime end)
         {
-            throw new NotImplementedException();
+            return null;
         }
 
         /// <summary>

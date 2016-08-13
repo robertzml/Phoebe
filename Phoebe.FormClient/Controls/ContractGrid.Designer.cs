@@ -45,6 +45,7 @@
             this.colUserId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colRemark = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colStatus = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colCustomerNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgcContract)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsContract)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvContract)).BeginInit();
@@ -54,10 +55,12 @@
             // 
             this.dgcContract.DataSource = this.bsContract;
             this.dgcContract.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgcContract.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dgcContract.Location = new System.Drawing.Point(0, 0);
             this.dgcContract.MainView = this.dgvContract;
+            this.dgcContract.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dgcContract.Name = "dgcContract";
-            this.dgcContract.Size = new System.Drawing.Size(704, 412);
+            this.dgcContract.Size = new System.Drawing.Size(939, 515);
             this.dgcContract.TabIndex = 0;
             this.dgcContract.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.dgvContract});
@@ -72,6 +75,7 @@
             this.colId,
             this.colNumber,
             this.colName,
+            this.colCustomerNumber,
             this.colCustomerId,
             this.colSignDate,
             this.colCloseDate,
@@ -124,7 +128,7 @@
             this.colCustomerId.FilterMode = DevExpress.XtraGrid.ColumnFilterMode.DisplayText;
             this.colCustomerId.Name = "colCustomerId";
             this.colCustomerId.Visible = true;
-            this.colCustomerId.VisibleIndex = 2;
+            this.colCustomerId.VisibleIndex = 3;
             // 
             // colSignDate
             // 
@@ -132,7 +136,7 @@
             this.colSignDate.FieldName = "SignDate";
             this.colSignDate.Name = "colSignDate";
             this.colSignDate.Visible = true;
-            this.colSignDate.VisibleIndex = 3;
+            this.colSignDate.VisibleIndex = 4;
             // 
             // colCloseDate
             // 
@@ -140,7 +144,7 @@
             this.colCloseDate.FieldName = "CloseDate";
             this.colCloseDate.Name = "colCloseDate";
             this.colCloseDate.Visible = true;
-            this.colCloseDate.VisibleIndex = 4;
+            this.colCloseDate.VisibleIndex = 5;
             // 
             // colType
             // 
@@ -151,7 +155,7 @@
             this.colType.FilterMode = DevExpress.XtraGrid.ColumnFilterMode.DisplayText;
             this.colType.Name = "colType";
             this.colType.Visible = true;
-            this.colType.VisibleIndex = 5;
+            this.colType.VisibleIndex = 6;
             // 
             // colBillingType
             // 
@@ -162,7 +166,7 @@
             this.colBillingType.FilterMode = DevExpress.XtraGrid.ColumnFilterMode.DisplayText;
             this.colBillingType.Name = "colBillingType";
             this.colBillingType.Visible = true;
-            this.colBillingType.VisibleIndex = 6;
+            this.colBillingType.VisibleIndex = 7;
             // 
             // colBillingDescription
             // 
@@ -172,7 +176,7 @@
             this.colBillingDescription.OptionsFilter.AllowFilter = false;
             this.colBillingDescription.UnboundType = DevExpress.Data.UnboundColumnType.String;
             this.colBillingDescription.Visible = true;
-            this.colBillingDescription.VisibleIndex = 8;
+            this.colBillingDescription.VisibleIndex = 9;
             // 
             // colIsTiming
             // 
@@ -180,7 +184,7 @@
             this.colIsTiming.FieldName = "IsTiming";
             this.colIsTiming.Name = "colIsTiming";
             this.colIsTiming.Visible = true;
-            this.colIsTiming.VisibleIndex = 7;
+            this.colIsTiming.VisibleIndex = 8;
             // 
             // colUserId
             // 
@@ -191,7 +195,7 @@
             this.colUserId.FilterMode = DevExpress.XtraGrid.ColumnFilterMode.DisplayText;
             this.colUserId.Name = "colUserId";
             this.colUserId.Visible = true;
-            this.colUserId.VisibleIndex = 9;
+            this.colUserId.VisibleIndex = 10;
             // 
             // colRemark
             // 
@@ -199,7 +203,7 @@
             this.colRemark.FieldName = "Remark";
             this.colRemark.Name = "colRemark";
             this.colRemark.Visible = true;
-            this.colRemark.VisibleIndex = 10;
+            this.colRemark.VisibleIndex = 11;
             // 
             // colStatus
             // 
@@ -210,15 +214,25 @@
             this.colStatus.FilterMode = DevExpress.XtraGrid.ColumnFilterMode.DisplayText;
             this.colStatus.Name = "colStatus";
             this.colStatus.Visible = true;
-            this.colStatus.VisibleIndex = 11;
+            this.colStatus.VisibleIndex = 12;
+            // 
+            // colCustomerNumber
+            // 
+            this.colCustomerNumber.Caption = "客户编号";
+            this.colCustomerNumber.FieldName = "colCustomerNumber";
+            this.colCustomerNumber.Name = "colCustomerNumber";
+            this.colCustomerNumber.UnboundType = DevExpress.Data.UnboundColumnType.String;
+            this.colCustomerNumber.Visible = true;
+            this.colCustomerNumber.VisibleIndex = 2;
             // 
             // ContractGrid
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.dgcContract);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "ContractGrid";
-            this.Size = new System.Drawing.Size(704, 412);
+            this.Size = new System.Drawing.Size(939, 515);
             ((System.ComponentModel.ISupportInitialize)(this.dgcContract)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsContract)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvContract)).EndInit();
@@ -244,5 +258,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn colStatus;
         private DevExpress.XtraGrid.Columns.GridColumn colType;
         private DevExpress.XtraGrid.Columns.GridColumn colBillingDescription;
+        private DevExpress.XtraGrid.Columns.GridColumn colCustomerNumber;
     }
 }

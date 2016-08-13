@@ -38,7 +38,7 @@ namespace Phoebe.Business
         /// <param name="start">开始日期</param>
         /// <param name="end">结束日期</param>
         /// <returns></returns>
-        MiscSettlement GetMisc(int contractId, DateTime start, DateTime end);
+        MiscSettlement GetMiscFee(int contractId, DateTime start, DateTime end);
 
         /// <summary>
         /// 获取合同日冷藏费记录 

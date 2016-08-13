@@ -161,9 +161,9 @@ namespace Phoebe.Business
         /// <param name="contractId">合同ID</param>
         /// <param name="start">开始日期</param>
         /// <param name="end">结束日期</param>
-        public MiscSettlement GetMisc(int contractId, DateTime start, DateTime end)
+        public MiscSettlement GetMiscFee(int contractId, DateTime start, DateTime end)
         {
-            throw new NotImplementedException();
+            return null;
         }
 
         /// <summary>

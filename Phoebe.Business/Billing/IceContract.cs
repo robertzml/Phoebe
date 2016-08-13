@@ -13,6 +13,13 @@ namespace Phoebe.Business
     /// </summary>
     public class IceContract : IContract
     {
+        #region Field
+        /// <summary>
+        /// 费用名称
+        /// </summary>
+        private string feeName = "冰块费用";
+        #endregion //Field
+
         #region Method
         /// <summary>
         /// 获取基本费用
@@ -55,11 +62,19 @@ namespace Phoebe.Business
         /// <param name="contractId">合同ID</param>
         /// <param name="start">开始日期</param>
         /// <param name="end">结束日期</param>
-        public MiscSettlement GetMisc(int contractId, DateTime start, DateTime end)
+        public MiscSettlement GetMiscFee(int contractId, DateTime start, DateTime end)
         {
             MiscSettlement settle = new MiscSettlement();
 
-            
+            var contract = BusinessFactory<ContractBusiness>.Instance.FindById(contractId);
+            var sales = BusinessFactory<IceSaleBusiness>.Instance.GetByContract(contractId, start, end);
+
+            settle.ContractId = contractId;
+            settle.ContractName = contract.Name;
+            settle.StartTime = start;
+            settle.EndTime = end;
+            settle.FeeName = this.feeName;
+            settle.TotalFee = sales.Sum(r => r.SaleFee);
 
             return settle;
         }

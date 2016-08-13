@@ -125,21 +125,45 @@ namespace Phoebe.Business
                 start = last.EndTime.AddDays(1);
             }
 
+            var contracts = BusinessFactory<ContractBusiness>.Instance.GetByCustomer(customerId);
+
+            List<BaseSettlement> baseSettlement = new List<BaseSettlement>();
+            List<ColdSettlement> coldSettlement = new List<ColdSettlement>();
+            List<MiscSettlement> miscSettlement = new List<MiscSettlement>();
+
+            foreach (var contract in contracts)
+            {
+                var contractBill = ContractFactory.Create((ContractType)contract.Type);
+
+                var baseBill = contractBill.GetBaseFee(contract.Id, start, end);
+                if (baseBill != null)
+                    baseSettlement.AddRange(baseBill);
+
+                var coldBill = contractBill.GetColdFee(contract.Id, start, end);
+                if (coldBill != null)
+                    coldSettlement.Add(coldBill);
+
+                var miscBill = contractBill.GetMiscFee(contract.Id, start, end);
+                if (miscBill != null)
+                    miscSettlement.Add(miscBill);
+            }
+
             // get base fee
-            var billings = BusinessFactory<BillingBusiness>.Instance.GetByCustomer(customerId, start, end);
-            if (billings.Count() > 0)
-                receipt.UnSettleFee = billings.Sum(r => r.TotalPrice);
+            if (baseSettlement.Count > 0)
+                receipt.UnSettleFee = baseSettlement.Sum(r => r.TotalPrice);
 
-            // get cold fee         
-            var colds = BusinessFactory<BillingBusiness>.Instance.CalculateColdFee(customerId, start, end);
-            if (colds.Count > 0)
-                receipt.UnSettleFee += colds.Sum(r => r.ColdFee);
+            // get cold fee
+            if (coldSettlement.Count > 0)
+                receipt.UnSettleFee += coldSettlement.Sum(r => r.ColdFee);
 
+            // get misc fee
+            if (miscSettlement.Count > 0)
+                receipt.UnSettleFee += miscSettlement.Sum(r => r.TotalFee);
+            
             // get paid fee
             var payments = BusinessFactory<PaymentBusiness>.Instance.GetByCustomer(customerId);
             if (payments.Count() != 0)
                 receipt.PaidFee = payments.Sum(r => r.PaidFee);
-
 
             receipt.DebtFee = receipt.SettleFee + receipt.UnSettleFee - receipt.PaidFee;
 
@@ -182,21 +206,43 @@ namespace Phoebe.Business
                 start = last.EndTime.AddDays(1);
             }
 
-            // get base fee
-            var billings = BusinessFactory<BillingBusiness>.Instance.GetByCustomer(customerId, start, end);
-            if (billings.Count() > 0)
-                receipt.UnSettleFee = billings.Sum(r => r.TotalPrice);
+            List<BaseSettlement> baseSettlement = new List<BaseSettlement>();
+            List<ColdSettlement> coldSettlement = new List<ColdSettlement>();
+            List<MiscSettlement> miscSettlement = new List<MiscSettlement>();
 
-            // get cold fee         
-            var colds = BusinessFactory<BillingBusiness>.Instance.CalculateColdFee(customerId, start, end);
-            if (colds.Count > 0)
-                receipt.UnSettleFee += colds.Sum(r => r.ColdFee);
+            foreach (var contract in contracts)
+            {
+                var contractBill = ContractFactory.Create((ContractType)contract.Type);
+
+                var baseBill = contractBill.GetBaseFee(contract.Id, start, end);
+                if (baseBill != null)
+                    baseSettlement.AddRange(baseBill);
+
+                var coldBill = contractBill.GetColdFee(contract.Id, start, end);
+                if (coldBill != null)
+                    coldSettlement.Add(coldBill);
+
+                var miscBill = contractBill.GetMiscFee(contract.Id, start, end);
+                if (miscBill != null)
+                    miscSettlement.Add(miscBill);
+            }
+
+            // get base fee
+            if (baseSettlement.Count > 0)
+                receipt.UnSettleFee = baseSettlement.Sum(r => r.TotalPrice);
+
+            // get cold fee
+            if (coldSettlement.Count > 0)
+                receipt.UnSettleFee += coldSettlement.Sum(r => r.ColdFee);
+
+            // get misc fee
+            if (miscSettlement.Count > 0)
+                receipt.UnSettleFee += miscSettlement.Sum(r => r.TotalFee);            
 
             // get paid fee
             var payments = BusinessFactory<PaymentBusiness>.Instance.GetByCustomer(customerId);
             if (payments.Count() != 0)
                 receipt.PaidFee = payments.Sum(r => r.PaidFee);
-
 
             receipt.DebtFee = receipt.SettleFee + receipt.UnSettleFee - receipt.PaidFee;
 

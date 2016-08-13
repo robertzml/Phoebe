@@ -104,6 +104,24 @@ namespace Phoebe.FormClient
 
                 details.Add(detail);
             }
+
+            for (int i = 0; i < this.msGrid.DataSource.Count; i++)
+            {
+                var misc = this.msGrid.DataSource[i] as MiscSettlement;
+
+                SettlementDetail detail = new SettlementDetail();
+                detail.Id = Guid.NewGuid();
+                detail.SettlementId = settlementId;
+                detail.ContractId = misc.ContractId;
+                detail.ExpenseType = (int)ExpenseType.Misc;
+                detail.SumFee = misc.TotalFee;
+                detail.Status = (int)EntityStatus.Settled;
+
+                if (detail.SumFee == 0)
+                    continue;
+
+                details.Add(detail);
+            }
         }
         #endregion //Function
 
@@ -180,6 +198,7 @@ namespace Phoebe.FormClient
 
             List<BaseSettlement> baseSettlement = new List<BaseSettlement>();
             List<ColdSettlement> coldSettlement = new List<ColdSettlement>();
+            List<MiscSettlement> miscSettlement = new List<MiscSettlement>();
 
             foreach (var contract in contracts)
             {
@@ -192,16 +211,18 @@ namespace Phoebe.FormClient
                 var coldBill = contractBill.GetColdFee(contract.Id, this.dpFrom.DateTime.Date, this.dpTo.DateTime.Date);
                 if (coldBill != null)
                     coldSettlement.Add(coldBill);
+
+                var miscBill = contractBill.GetMiscFee(contract.Id, this.dpFrom.DateTime.Date, this.dpTo.DateTime.Date);
+                if (miscBill != null)
+                    miscSettlement.Add(miscBill);
             }
 
-            //var billings = BusinessFactory<BillingBusiness>.Instance.CalculateBaseFee(customerId, this.dpFrom.DateTime.Date, this.dpTo.DateTime.Date);
             this.bsGrid.DataSource = baseSettlement;
-
-            //var colds = BusinessFactory<BillingBusiness>.Instance.CalculateColdFee(customerId, this.dpFrom.DateTime.Date, this.dpTo.DateTime.Date);
             this.csGrid.DataSource = coldSettlement;
+            this.msGrid.DataSource = miscSettlement;
 
-            decimal totalPrice = baseSettlement.Sum(r => r.TotalPrice) + coldSettlement.Sum(r => r.ColdFee);
-            this.nmSumFee.Value = totalPrice;
+            decimal totalPrice = baseSettlement.Sum(r => r.TotalPrice) + coldSettlement.Sum(r => r.ColdFee) + miscSettlement.Sum(r => r.TotalFee);
+            this.nmSumFee.Value = Math.Round(totalPrice, 2, MidpointRounding.AwayFromZero);
 
             this.nmDiscount.Value = 100;
             this.nmRemission.Value = 0;

@@ -304,6 +304,12 @@
     <Compile Include="Forms\IceSellForm.Designer.cs">
       <DependentUpon>IceSellForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\MiscSettlementControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\MiscSettlementControl.Designer.cs">
+      <DependentUpon>MiscSettlementControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Report\IceSale.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -709,6 +715,9 @@
     <EmbeddedResource Include="Controls\StockMoveViewControl.resx">
       <DependentUpon>StockMoveViewControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\MiscSettlementControl.resx">
+      <DependentUpon>MiscSettlementControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Report\IceSale.resx">
       <DependentUpon>IceSale.cs</DependentUpon>
     </EmbeddedResource>
@@ -743,6 +752,7 @@
     <None Include="Properties\DataSources\Phoebe.Model.IceRecord.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.IceSale.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.Inventory.datasource" />
+    <None Include="Properties\DataSources\Phoebe.Model.MiscSettlement.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.Payment.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.Settlement.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.StockFlow.datasource" />

@@ -35,19 +35,6 @@ namespace Phoebe.Business
 
         #region Method
         /// <summary>
-        /// 按时间段获取销售记录
-        /// </summary>
-        /// <param name="from">开始日期</param>
-        /// <param name="to">结束日期</param>
-        /// <returns></returns>
-        public List<IceSale> Get(DateTime from, DateTime to)
-        {
-            //var data = this.dal.Find(r => r.SaleTime >= from && r.SaleTime <= to).OrderByDescending(r => r.SaleTime);
-            //return data.ToList();
-            return null;
-        }
-
-        /// <summary>
         /// 根据流水获取销售记录
         /// </summary>
         /// <param name="flowId">流水ID</param>
@@ -55,6 +42,19 @@ namespace Phoebe.Business
         public List<IceSale> GetByFlow(Guid flowId)
         {
             var data = this.dal.Find(r => r.FlowId == flowId);
+            return data.ToList();
+        }
+
+        /// <summary>
+        /// 根据合同获取销售记录
+        /// </summary>
+        /// <param name="contractId">合同ID</param>
+        /// <param name="start">开始日期</param>
+        /// <param name="end">结束日期</param>
+        /// <returns></returns>
+        public List<IceSale> GetByContract(int contractId, DateTime start, DateTime end)
+        {
+            var data = this.dal.Find(r => r.IceFlow.ContractId == contractId && r.IceFlow.FlowTime >= start && r.IceFlow.FlowTime <= end);
             return data.ToList();
         }
 

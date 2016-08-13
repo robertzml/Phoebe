@@ -163,7 +163,13 @@ namespace Phoebe.Model
         /// 冷藏费用
         /// </summary>
         [Display(Name = "冷藏费用")]
-        Cold = 2
+        Cold = 2,
+
+        /// <summary>
+        /// 杂项费用
+        /// </summary>
+        [Display(Name = "杂项费用")]
+        Misc = 3
     }
 
     /// <summary>

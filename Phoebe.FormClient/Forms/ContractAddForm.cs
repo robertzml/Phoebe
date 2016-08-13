@@ -39,8 +39,7 @@ namespace Phoebe.FormClient
             contract.CustomerId = Convert.ToInt32(this.lkuCustomer.EditValue);
             contract.SignDate = this.txtSignDate.DateTime.Date;
             contract.Type = (int)this.cmbType.EditValue;
-            contract.BillingType = (int)this.cmbBillingType.EditValue;
-            contract.IsTiming = this.ckbIsTiming.Checked;
+            contract.BillingType = (int)this.cmbBillingType.EditValue;           
             contract.UserId = this.currentUser.Id;
             contract.Remark = this.txtRemark.Text;
         }

@@ -52,7 +52,6 @@ namespace Phoebe.FormClient
             this.dpSignDate.DateTime = contract.SignDate.Date;
             this.cmbType.EditValue = (ContractType)contract.Type;
             this.txtBillingType.Text = ((BillingType)contract.BillingType).DisplayName();
-            this.chkIsTiming.Checked = contract.IsTiming;
             this.txtRemark.Text = contract.Remark;
         }
 

@@ -32,12 +32,12 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.txtContractType = new DevExpress.XtraEditors.TextEdit();
             this.lkuCustomer = new DevExpress.XtraEditors.LookUpEdit();
             this.bsCustomer = new System.Windows.Forms.BindingSource(this.components);
             this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
             this.dpTo = new DevExpress.XtraEditors.DateEdit();
             this.dpFrom = new DevExpress.XtraEditors.DateEdit();
-            this.txtIsTiming = new DevExpress.XtraEditors.TextEdit();
             this.txtBillingType = new DevExpress.XtraEditors.TextEdit();
             this.cmbContract = new DevExpress.XtraEditors.ImageComboBoxEdit();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
@@ -47,7 +47,7 @@
             this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
             this.dgcCold = new DevExpress.XtraGrid.GridControl();
             this.bsDailyColdRecord = new System.Windows.Forms.BindingSource(this.components);
@@ -63,20 +63,18 @@
             this.colTotalFee = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colFlowType = new DevExpress.XtraGrid.Columns.GridColumn();
             this.bsContract = new System.Windows.Forms.BindingSource(this.components);
-            this.txtContractType = new DevExpress.XtraEditors.TextEdit();
-            this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtContractType.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lkuCustomer.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsCustomer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dpTo.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dpTo.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dpFrom.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dpFrom.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtIsTiming.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtBillingType.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbContract.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
@@ -86,15 +84,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
             this.groupControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgcCold)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsDailyColdRecord)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCold)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsContract)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtContractType.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -131,7 +127,6 @@
             this.layoutControl1.Controls.Add(this.btnSearch);
             this.layoutControl1.Controls.Add(this.dpTo);
             this.layoutControl1.Controls.Add(this.dpFrom);
-            this.layoutControl1.Controls.Add(this.txtIsTiming);
             this.layoutControl1.Controls.Add(this.txtBillingType);
             this.layoutControl1.Controls.Add(this.cmbContract);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -142,6 +137,17 @@
             this.layoutControl1.Size = new System.Drawing.Size(1038, 119);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
+            // 
+            // txtContractType
+            // 
+            this.txtContractType.Location = new System.Drawing.Point(695, 14);
+            this.txtContractType.Name = "txtContractType";
+            this.txtContractType.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
+            this.txtContractType.Properties.Appearance.Options.UseBackColor = true;
+            this.txtContractType.Properties.ReadOnly = true;
+            this.txtContractType.Size = new System.Drawing.Size(131, 24);
+            this.txtContractType.StyleController = this.layoutControl1;
+            this.txtContractType.TabIndex = 16;
             // 
             // lkuCustomer
             // 
@@ -209,17 +215,6 @@
             this.dpFrom.StyleController = this.layoutControl1;
             this.dpFrom.TabIndex = 12;
             // 
-            // txtIsTiming
-            // 
-            this.txtIsTiming.Location = new System.Drawing.Point(77, 70);
-            this.txtIsTiming.Name = "txtIsTiming";
-            this.txtIsTiming.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
-            this.txtIsTiming.Properties.Appearance.Options.UseBackColor = true;
-            this.txtIsTiming.Properties.ReadOnly = true;
-            this.txtIsTiming.Size = new System.Drawing.Size(230, 24);
-            this.txtIsTiming.StyleController = this.layoutControl1;
-            this.txtIsTiming.TabIndex = 11;
-            // 
             // txtBillingType
             // 
             this.txtBillingType.Location = new System.Drawing.Point(893, 14);
@@ -255,7 +250,6 @@
             this.layoutControlItem6,
             this.layoutControlItem8,
             this.layoutControlItem1,
-            this.layoutControlItem4,
             this.layoutControlItem2});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "layoutControlGroup1";
@@ -285,7 +279,7 @@
             this.layoutControlItem5.Control = this.dpFrom;
             this.layoutControlItem5.Location = new System.Drawing.Point(0, 28);
             this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(297, 28);
+            this.layoutControlItem5.Size = new System.Drawing.Size(297, 67);
             this.layoutControlItem5.Text = "开始日期";
             this.layoutControlItem5.TextSize = new System.Drawing.Size(60, 18);
             // 
@@ -316,14 +310,14 @@
             this.layoutControlItem1.Text = "客户选择";
             this.layoutControlItem1.TextSize = new System.Drawing.Size(60, 18);
             // 
-            // layoutControlItem4
+            // layoutControlItem2
             // 
-            this.layoutControlItem4.Control = this.txtIsTiming;
-            this.layoutControlItem4.Location = new System.Drawing.Point(0, 56);
-            this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(297, 39);
-            this.layoutControlItem4.Text = "是否计时";
-            this.layoutControlItem4.TextSize = new System.Drawing.Size(60, 18);
+            this.layoutControlItem2.Control = this.txtContractType;
+            this.layoutControlItem2.Location = new System.Drawing.Point(618, 0);
+            this.layoutControlItem2.Name = "layoutControlItem2";
+            this.layoutControlItem2.Size = new System.Drawing.Size(198, 28);
+            this.layoutControlItem2.Text = "合同类型";
+            this.layoutControlItem2.TextSize = new System.Drawing.Size(60, 18);
             // 
             // groupControl2
             // 
@@ -474,26 +468,6 @@
             // 
             this.bsContract.DataSource = typeof(Phoebe.Model.Contract);
             // 
-            // txtContractType
-            // 
-            this.txtContractType.Location = new System.Drawing.Point(695, 14);
-            this.txtContractType.Name = "txtContractType";
-            this.txtContractType.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
-            this.txtContractType.Properties.Appearance.Options.UseBackColor = true;
-            this.txtContractType.Properties.ReadOnly = true;
-            this.txtContractType.Size = new System.Drawing.Size(131, 24);
-            this.txtContractType.StyleController = this.layoutControl1;
-            this.txtContractType.TabIndex = 16;
-            // 
-            // layoutControlItem2
-            // 
-            this.layoutControlItem2.Control = this.txtContractType;
-            this.layoutControlItem2.Location = new System.Drawing.Point(618, 0);
-            this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(198, 28);
-            this.layoutControlItem2.Text = "合同类型";
-            this.layoutControlItem2.TextSize = new System.Drawing.Size(60, 18);
-            // 
             // ColdPriceForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
@@ -509,13 +483,13 @@
             this.groupControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.txtContractType.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lkuCustomer.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsCustomer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dpTo.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dpTo.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dpFrom.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dpFrom.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtIsTiming.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtBillingType.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbContract.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
@@ -525,15 +499,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
             this.groupControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgcCold)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsDailyColdRecord)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCold)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsContract)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtContractType.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -566,8 +538,6 @@
         private DevExpress.XtraEditors.SimpleButton btnSearch;
         private DevExpress.XtraEditors.DateEdit dpTo;
         private DevExpress.XtraEditors.DateEdit dpFrom;
-        private DevExpress.XtraEditors.TextEdit txtIsTiming;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem8;
