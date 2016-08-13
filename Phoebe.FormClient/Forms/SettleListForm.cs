@@ -32,7 +32,7 @@ namespace Phoebe.FormClient
         private void LoadData()
         {
             var data = BusinessFactory<SettlementBusiness>.Instance.FindAll();
-            this.bsSettlement.DataSource = data;
+            this.stList.DataSource = data;
         }
         #endregion //Function
 
@@ -48,36 +48,14 @@ namespace Phoebe.FormClient
         }
 
         /// <summary>
-        /// 格式化数据显示
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void dgvSettlement_CustomColumnDisplayText(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs e)
-        {
-            int rowIndex = e.ListSourceRowIndex;
-            if (rowIndex < 0 || rowIndex >= this.bsSettlement.Count)
-                return;
-
-            if (e.Column.FieldName == "CustomerId")
-            {
-                var settlement = this.bsSettlement[rowIndex] as Settlement;
-                e.DisplayText = settlement.Customer.Name;
-            }
-            else if (e.Column.FieldName == "UserId")
-            {
-                var settlement = this.bsSettlement[rowIndex] as Settlement;
-                e.DisplayText = settlement.User.Name;
-            }
-        }
-
-        /// <summary>
         /// 删除结算
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (this.dgvSettlement.SelectedRowsCount == 0)
+            var settlement = this.stList.GetCurrentSelect();
+            if (settlement == null)
             {
                 MessageUtil.ShowClaim("未选择记录");
                 return;
@@ -85,12 +63,6 @@ namespace Phoebe.FormClient
 
             if (MessageUtil.ConfirmYesNo("是否确认删除选中结算") == DialogResult.Yes)
             {
-                int rowIndex = this.dgvSettlement.GetFocusedDataSourceRowIndex();
-                if (rowIndex < 0 || rowIndex >= this.bsSettlement.Count)
-                    return;
-
-                var settlement = this.bsSettlement[rowIndex] as Settlement;
-
                 ErrorCode result = BusinessFactory<SettlementBusiness>.Instance.Delete(settlement);
                 if (result == ErrorCode.Success)
                 {

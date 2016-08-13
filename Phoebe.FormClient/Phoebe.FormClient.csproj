@@ -310,6 +310,12 @@
     <Compile Include="Controls\MiscSettlementControl.Designer.cs">
       <DependentUpon>MiscSettlementControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\PaymentGrid.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\PaymentGrid.Designer.cs">
+      <DependentUpon>PaymentGrid.cs</DependentUpon>
+    </Compile>
     <Compile Include="Report\IceSale.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -333,6 +339,12 @@
     </Compile>
     <Compile Include="Report\StockOut.Designer.cs">
       <DependentUpon>StockOut.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SettlementGrid.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\SettlementGrid.Designer.cs">
+      <DependentUpon>SettlementGrid.cs</DependentUpon>
     </Compile>
     <Compile Include="Statistic\StockFlowReportForm.cs">
       <SubType>Form</SubType>
@@ -718,6 +730,9 @@
     <EmbeddedResource Include="Controls\MiscSettlementControl.resx">
       <DependentUpon>MiscSettlementControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\PaymentGrid.resx">
+      <DependentUpon>PaymentGrid.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Report\IceSale.resx">
       <DependentUpon>IceSale.cs</DependentUpon>
     </EmbeddedResource>
@@ -729,6 +744,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Report\StockOut.resx">
       <DependentUpon>StockOut.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\SettlementGrid.resx">
+      <DependentUpon>SettlementGrid.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Statistic\StockFlowReportForm.resx">
       <DependentUpon>StockFlowReportForm.cs</DependentUpon>

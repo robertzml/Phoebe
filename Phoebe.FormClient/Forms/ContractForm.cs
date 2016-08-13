@@ -29,7 +29,6 @@ namespace Phoebe.FormClient
         /// </summary>
         private void LoadData()
         {
-            this.bsContract.DataSource = BusinessFactory<ContractBusiness>.Instance.FindAll();
             this.ctList.DataSource = BusinessFactory<ContractBusiness>.Instance.FindAll();
         }
 
@@ -60,56 +59,6 @@ namespace Phoebe.FormClient
         private void ContractForm_Load(object sender, EventArgs e)
         {
             LoadData();
-        }
-
-        /// <summary>
-        /// 格式化数据显示
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void dgvContract_CustomColumnDisplayText(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs e)
-        {
-            int rowIndex = e.ListSourceRowIndex;
-            if (rowIndex < 0 || rowIndex >= this.bsContract.Count)
-                return;
-
-            if (e.Column.FieldName == "CustomerId")
-            {
-                var contract = this.bsContract[rowIndex] as Contract;
-                e.DisplayText = contract.Customer.Name;
-            }
-            else if (e.Column.FieldName == "BillingType")
-            {
-                var type = (BillingType)e.Value;
-                e.DisplayText = type.DisplayName();
-            }
-            else if (e.Column.FieldName == "UserId")
-            {
-                var contract = this.bsContract[rowIndex] as Contract;
-                e.DisplayText = contract.User.Name;
-            }
-            else if (e.Column.FieldName == "Status")
-            {
-                var status = (EntityStatus)e.Value;
-                e.DisplayText = status.DisplayName();
-            }
-        }
-
-        /// <summary>
-        /// 自定义数据显示
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void dgvContract_CustomUnboundColumnData(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDataEventArgs e)
-        {
-            int rowIndex = e.ListSourceRowIndex;
-            if (rowIndex < 0 || rowIndex >= this.bsContract.Count)
-                return;
-
-            var contract = this.bsContract[rowIndex] as Contract;
-
-            if (e.Column.FieldName == "colBillingDescription" && e.IsGetData)
-                e.Value = ((BillingType)contract.BillingType).DisplayDescription();
         }
 
         /// <summary>

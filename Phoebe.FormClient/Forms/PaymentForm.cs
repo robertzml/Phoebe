@@ -33,7 +33,7 @@ namespace Phoebe.FormClient
         private void LoadData()
         {
             var data = BusinessFactory<PaymentBusiness>.Instance.FindAll();
-            this.bsPayment.DataSource = data;
+            this.pyList.DataSource = data;
         }
 
         /// <summary>
@@ -64,34 +64,6 @@ namespace Phoebe.FormClient
         }
 
         /// <summary>
-        /// 格式化数据显示
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void dgvPayment_CustomColumnDisplayText(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs e)
-        {
-            int rowIndex = e.ListSourceRowIndex;
-            if (rowIndex < 0 || rowIndex >= this.bsPayment.Count)
-                return;
-
-            if (e.Column.FieldName == "CustomerId")
-            {
-                var payment = this.bsPayment[rowIndex] as Payment;
-                e.DisplayText = payment.Customer.Name;
-            }
-            else if (e.Column.FieldName == "PaidType")
-            {
-                var payment = this.bsPayment[rowIndex] as Payment;
-                e.DisplayText = ((PaymentType)payment.PaidType).DisplayName();
-            }
-            else if (e.Column.FieldName == "UserId")
-            {
-                var payment = this.bsPayment[rowIndex] as Payment;
-                e.DisplayText = payment.User.Name;
-            }
-        }
-
-        /// <summary>
         /// 客户缴费
         /// </summary>
         /// <param name="sender"></param>
@@ -102,7 +74,6 @@ namespace Phoebe.FormClient
             LoadData();
         }
 
-
         /// <summary>
         /// 删除缴费
         /// </summary>
@@ -110,7 +81,8 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (this.dgvPayment.SelectedRowsCount == 0)
+            var payment = this.pyList.GetCurrentSelect();
+            if (payment == null)
             {
                 MessageUtil.ShowClaim("未选中记录");
                 return;
@@ -118,12 +90,6 @@ namespace Phoebe.FormClient
 
             if (MessageUtil.ConfirmYesNo("是否确认删除选中缴费记录") == DialogResult.Yes)
             {
-                int rowIndex = this.dgvPayment.GetFocusedDataSourceRowIndex();
-                if (rowIndex < 0 || rowIndex >= this.bsPayment.Count)
-                    return;
-
-                var payment = this.bsPayment[rowIndex] as Payment;
-
                 ErrorCode result = BusinessFactory<PaymentBusiness>.Instance.Delete(payment);
                 if (result == ErrorCode.Success)
                 {
@@ -137,7 +103,7 @@ namespace Phoebe.FormClient
                 LoadData();
             }
         }
-        
+
         /// <summary>
         /// 打印收据
         /// </summary>
@@ -145,17 +111,13 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void btnPrint_Click(object sender, EventArgs e)
         {
-            if (this.dgvPayment.SelectedRowsCount == 0)
+            var payment = this.pyList.GetCurrentSelect();
+            if (payment == null)
             {
                 MessageUtil.ShowClaim("未选中记录");
                 return;
             }
 
-            int rowIndex = this.dgvPayment.GetFocusedDataSourceRowIndex();
-            if (rowIndex < 0 || rowIndex >= this.bsPayment.Count)
-                return;
-
-            var payment = this.bsPayment[rowIndex] as Payment;
             var model = ModelTranslate.PaymentToReport(payment);
 
             Report.Payment report = new Report.Payment(model);

@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.btnForceDelete = new DevExpress.XtraEditors.SimpleButton();
             this.btnDelete = new DevExpress.XtraEditors.SimpleButton();
@@ -36,12 +35,10 @@
             this.btnAdd = new DevExpress.XtraEditors.SimpleButton();
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
             this.ctList = new Phoebe.FormClient.ContractGrid();
-            this.bsContract = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
             this.groupControl2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bsContract)).BeginInit();
             this.SuspendLayout();
             // 
             // groupControl1
@@ -52,43 +49,48 @@
             this.groupControl1.Controls.Add(this.btnAdd);
             this.groupControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupControl1.Location = new System.Drawing.Point(0, 0);
+            this.groupControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(931, 110);
+            this.groupControl1.Size = new System.Drawing.Size(1064, 141);
             this.groupControl1.TabIndex = 0;
             this.groupControl1.Text = "操作";
             // 
             // btnForceDelete
             // 
-            this.btnForceDelete.Location = new System.Drawing.Point(383, 43);
+            this.btnForceDelete.Location = new System.Drawing.Point(438, 55);
+            this.btnForceDelete.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnForceDelete.Name = "btnForceDelete";
-            this.btnForceDelete.Size = new System.Drawing.Size(90, 40);
+            this.btnForceDelete.Size = new System.Drawing.Size(103, 51);
             this.btnForceDelete.TabIndex = 4;
             this.btnForceDelete.Text = "强制删除合同";
             this.btnForceDelete.Click += new System.EventHandler(this.btnForceDelete_Click);
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(266, 43);
+            this.btnDelete.Location = new System.Drawing.Point(304, 55);
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(90, 40);
+            this.btnDelete.Size = new System.Drawing.Size(103, 51);
             this.btnDelete.TabIndex = 3;
             this.btnDelete.Text = "删除合同";
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnEdit
             // 
-            this.btnEdit.Location = new System.Drawing.Point(149, 43);
+            this.btnEdit.Location = new System.Drawing.Point(170, 55);
+            this.btnEdit.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(90, 40);
+            this.btnEdit.Size = new System.Drawing.Size(103, 51);
             this.btnEdit.TabIndex = 2;
             this.btnEdit.Text = "编辑合同";
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(32, 43);
+            this.btnAdd.Location = new System.Drawing.Point(37, 55);
+            this.btnAdd.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(90, 40);
+            this.btnAdd.Size = new System.Drawing.Size(103, 51);
             this.btnAdd.TabIndex = 1;
             this.btnAdd.Text = "添加合同";
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
@@ -97,9 +99,10 @@
             // 
             this.groupControl2.Controls.Add(this.ctList);
             this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl2.Location = new System.Drawing.Point(0, 110);
+            this.groupControl2.Location = new System.Drawing.Point(0, 141);
+            this.groupControl2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(931, 425);
+            this.groupControl2.Size = new System.Drawing.Size(1064, 547);
             this.groupControl2.TabIndex = 1;
             this.groupControl2.Text = "合同列表";
             // 
@@ -107,22 +110,20 @@
             // 
             this.ctList.DataSource = null;
             this.ctList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ctList.Location = new System.Drawing.Point(2, 21);
+            this.ctList.Location = new System.Drawing.Point(2, 25);
+            this.ctList.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.ctList.Name = "ctList";
-            this.ctList.Size = new System.Drawing.Size(927, 402);
+            this.ctList.Size = new System.Drawing.Size(1060, 520);
             this.ctList.TabIndex = 1;
-            // 
-            // bsContract
-            // 
-            this.bsContract.DataSource = typeof(Phoebe.Model.Contract);
             // 
             // ContractForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(931, 535);
+            this.ClientSize = new System.Drawing.Size(1064, 688);
             this.Controls.Add(this.groupControl2);
             this.Controls.Add(this.groupControl1);
+            this.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.Name = "ContractForm";
             this.Text = "合同列表";
             this.Load += new System.EventHandler(this.ContractForm_Load);
@@ -130,7 +131,6 @@
             this.groupControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
             this.groupControl2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.bsContract)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -139,7 +139,6 @@
 
         private DevExpress.XtraEditors.GroupControl groupControl1;
         private DevExpress.XtraEditors.GroupControl groupControl2;
-        private System.Windows.Forms.BindingSource bsContract;
         private DevExpress.XtraEditors.SimpleButton btnAdd;
         private DevExpress.XtraEditors.SimpleButton btnDelete;
         private DevExpress.XtraEditors.SimpleButton btnEdit;
