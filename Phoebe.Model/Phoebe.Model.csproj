@@ -72,6 +72,7 @@
     <Compile Include="Helper\DailyColdRecord.cs" />
     <Compile Include="Helper\IceEnum.cs" />
     <Compile Include="Helper\IceRecord.cs" />
+    <Compile Include="Helper\IceStoreFlow.cs" />
     <Compile Include="Helper\Inventory.cs" />
     <Compile Include="Helper\MiscSettlement.cs" />
     <Compile Include="Helper\PhoebeEnum.cs" />

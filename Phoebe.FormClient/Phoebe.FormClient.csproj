@@ -268,12 +268,6 @@
     <Compile Include="Forms\IceStoreForm.Designer.cs">
       <DependentUpon>IceStoreForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\IceGrid.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\IceGrid.Designer.cs">
-      <DependentUpon>IceGrid.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\IceSaleGrid.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -315,6 +309,12 @@
     </Compile>
     <Compile Include="Controls\PaymentGrid.Designer.cs">
       <DependentUpon>PaymentGrid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\IceStoreFlowGrid.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\IceStoreFlowGrid.Designer.cs">
+      <DependentUpon>IceStoreFlowGrid.cs</DependentUpon>
     </Compile>
     <Compile Include="Report\IceSale.cs">
       <SubType>Component</SubType>
@@ -550,11 +550,11 @@
     <EmbeddedResource Include="Controls\CargoGrid.resx">
       <DependentUpon>CargoGrid.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\IceGrid.resx">
-      <DependentUpon>IceGrid.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Controls\IceRecordGrid.resx">
       <DependentUpon>IceRecordGrid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\IceStoreFlowGrid.resx">
+      <DependentUpon>IceStoreFlowGrid.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\InventoryGrid.resx">
       <DependentUpon>InventoryGrid.cs</DependentUpon>
@@ -769,6 +769,7 @@
     <None Include="Properties\DataSources\Phoebe.Model.IceFlow.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.IceRecord.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.IceSale.datasource" />
+    <None Include="Properties\DataSources\Phoebe.Model.IceStoreFlow.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.Inventory.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.MiscSettlement.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.Payment.datasource" />

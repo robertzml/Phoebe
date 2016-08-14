@@ -62,7 +62,6 @@
             this.colDailyFee = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colTotalFee = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colFlowType = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.bsContract = new System.Windows.Forms.BindingSource(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
@@ -90,7 +89,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgcCold)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsDailyColdRecord)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCold)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsContract)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -464,10 +462,6 @@
             this.colFlowType.Visible = true;
             this.colFlowType.VisibleIndex = 2;
             // 
-            // bsContract
-            // 
-            this.bsContract.DataSource = typeof(Phoebe.Model.Contract);
-            // 
             // ColdPriceForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
@@ -505,7 +499,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgcCold)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsDailyColdRecord)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCold)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsContract)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -516,7 +509,6 @@
         private DevExpress.XtraEditors.GroupControl groupControl1;
         private DevExpress.XtraLayout.LayoutControl layoutControl1;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup1;
-        private System.Windows.Forms.BindingSource bsContract;
         private DevExpress.XtraEditors.GroupControl groupControl2;
         private DevExpress.XtraGrid.GridControl dgcCold;
         private System.Windows.Forms.BindingSource bsDailyColdRecord;
