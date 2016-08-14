@@ -743,7 +743,6 @@ namespace Phoebe.Business.DAL
                     this.context.IceFlows.Remove(iceFlow);
 
                     this.context.SaveChanges();
-
                     return ErrorCode.Success;
                 }
                 else if (flowType == IceFlowType.CompleteMakeOut)
@@ -758,7 +757,6 @@ namespace Phoebe.Business.DAL
                     this.context.IceFlows.Remove(iceFlow);
 
                     this.context.SaveChanges();
-
                     return ErrorCode.Success;
                 }
                 else if (flowType == IceFlowType.IceSale)
@@ -774,8 +772,8 @@ namespace Phoebe.Business.DAL
                         this.context.Entry(store).State = EntityState.Modified;
                     }
 
-                    this.context.IceSales.RemoveRange(iceSales);
-
+                    this.context.IceFlows.Remove(iceFlow);
+                   
                     this.context.SaveChanges();
                     return ErrorCode.Success;
                 }

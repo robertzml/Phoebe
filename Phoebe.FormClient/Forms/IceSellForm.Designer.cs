@@ -351,7 +351,7 @@
             this.irList.Editable = true;
             this.irList.IsSale = true;
             this.irList.Location = new System.Drawing.Point(2, 25);
-            this.irList.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.irList.Margin = new System.Windows.Forms.Padding(5);
             this.irList.Name = "irList";
             this.irList.Size = new System.Drawing.Size(758, 414);
             this.irList.TabIndex = 0;

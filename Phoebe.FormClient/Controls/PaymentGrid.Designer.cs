@@ -34,6 +34,7 @@
             this.dgvPayment = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colTicketNumber = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colCustomerNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCustomerId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colPaidFee = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colPaidTime = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -41,7 +42,6 @@
             this.colUserId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colRemark = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colStatus = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colCustomerNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgcPayment)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsPayment)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPayment)).BeginInit();
@@ -102,12 +102,22 @@
             this.colTicketNumber.Visible = true;
             this.colTicketNumber.VisibleIndex = 0;
             // 
+            // colCustomerNumber
+            // 
+            this.colCustomerNumber.Caption = "客户编码";
+            this.colCustomerNumber.FieldName = "colCustomerNumber";
+            this.colCustomerNumber.Name = "colCustomerNumber";
+            this.colCustomerNumber.UnboundType = DevExpress.Data.UnboundColumnType.String;
+            this.colCustomerNumber.Visible = true;
+            this.colCustomerNumber.VisibleIndex = 1;
+            // 
             // colCustomerId
             // 
             this.colCustomerId.AppearanceCell.Options.UseTextOptions = true;
             this.colCustomerId.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             this.colCustomerId.Caption = "客户名称";
             this.colCustomerId.FieldName = "CustomerId";
+            this.colCustomerId.FilterMode = DevExpress.XtraGrid.ColumnFilterMode.DisplayText;
             this.colCustomerId.Name = "colCustomerId";
             this.colCustomerId.Visible = true;
             this.colCustomerId.VisibleIndex = 2;
@@ -130,8 +140,11 @@
             // 
             // colPaidType
             // 
+            this.colPaidType.AppearanceCell.Options.UseTextOptions = true;
+            this.colPaidType.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             this.colPaidType.Caption = "缴费方式";
             this.colPaidType.FieldName = "PaidType";
+            this.colPaidType.FilterMode = DevExpress.XtraGrid.ColumnFilterMode.DisplayText;
             this.colPaidType.Name = "colPaidType";
             this.colPaidType.Visible = true;
             this.colPaidType.VisibleIndex = 5;
@@ -142,6 +155,7 @@
             this.colUserId.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             this.colUserId.Caption = "收款人";
             this.colUserId.FieldName = "UserId";
+            this.colUserId.FilterMode = DevExpress.XtraGrid.ColumnFilterMode.DisplayText;
             this.colUserId.Name = "colUserId";
             this.colUserId.Visible = true;
             this.colUserId.VisibleIndex = 6;
@@ -151,6 +165,7 @@
             this.colRemark.Caption = "备注";
             this.colRemark.FieldName = "Remark";
             this.colRemark.Name = "colRemark";
+            this.colRemark.OptionsFilter.AllowFilter = false;
             this.colRemark.Visible = true;
             this.colRemark.VisibleIndex = 7;
             // 
@@ -158,15 +173,6 @@
             // 
             this.colStatus.FieldName = "Status";
             this.colStatus.Name = "colStatus";
-            // 
-            // colCustomerNumber
-            // 
-            this.colCustomerNumber.Caption = "客户编码";
-            this.colCustomerNumber.FieldName = "colCustomerNumber";
-            this.colCustomerNumber.Name = "colCustomerNumber";
-            this.colCustomerNumber.UnboundType = DevExpress.Data.UnboundColumnType.String;
-            this.colCustomerNumber.Visible = true;
-            this.colCustomerNumber.VisibleIndex = 1;
             // 
             // PaymentGrid
             // 

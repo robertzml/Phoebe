@@ -140,6 +140,7 @@ namespace Phoebe.FormClient
 
             this.dpTime.DateTime = DateTime.Now.Date;
             this.txtFlowNumber.Text = "";
+            this.lkuCustomer.EditValue = null;
             this.txtUser.Text = this.currentUser.Name;
             this.txtRemark.Text = "";
             this.irList.DataSource = new List<IceRecord>();
@@ -155,6 +156,8 @@ namespace Phoebe.FormClient
 
             this.irList.AddNew(record1);
             this.irList.AddNew(record2);
+
+            UpdateContractList(0);
 
             this.dpTime.Properties.ReadOnly = false;
             this.txtRemark.Properties.ReadOnly = false;
