@@ -52,6 +52,7 @@
             this.menuIceStock = new DevExpress.XtraBars.BarButtonItem();
             this.menuIceSell = new DevExpress.XtraBars.BarButtonItem();
             this.menuIceStore = new DevExpress.XtraBars.BarButtonItem();
+            this.menuIceSaleRecord = new DevExpress.XtraBars.BarButtonItem();
             this.menuSettle = new DevExpress.XtraBars.BarSubItem();
             this.menuColdPrice = new DevExpress.XtraBars.BarButtonItem();
             this.menuSettlement = new DevExpress.XtraBars.BarButtonItem();
@@ -135,9 +136,10 @@
             this.menuStockFlowReport,
             this.menuStockInventoryReport,
             this.menuIceStock,
-            this.menuIceSell});
+            this.menuIceSell,
+            this.menuIceSaleRecord});
             this.barManager1.MainMenu = this.mainMenu;
-            this.barManager1.MaxItemId = 46;
+            this.barManager1.MaxItemId = 47;
             this.barManager1.StatusBar = this.bar3;
             // 
             // mainMenu
@@ -301,7 +303,8 @@
             this.menuIce.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(this.menuIceStock),
             new DevExpress.XtraBars.LinkPersistInfo(this.menuIceSell),
-            new DevExpress.XtraBars.LinkPersistInfo(this.menuIceStore)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.menuIceStore),
+            new DevExpress.XtraBars.LinkPersistInfo(this.menuIceSaleRecord)});
             this.menuIce.Name = "menuIce";
             // 
             // menuIceStock
@@ -324,6 +327,13 @@
             this.menuIceStore.Id = 38;
             this.menuIceStore.Name = "menuIceStore";
             this.menuIceStore.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuIceStore_ItemClick);
+            // 
+            // menuIceSaleRecord
+            // 
+            this.menuIceSaleRecord.Caption = "销售记录";
+            this.menuIceSaleRecord.Id = 46;
+            this.menuIceSaleRecord.Name = "menuIceSaleRecord";
+            this.menuIceSaleRecord.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuIceSaleRecord_ItemClick);
             // 
             // menuSettle
             // 
@@ -602,6 +612,7 @@
         private DevExpress.XtraBars.BarButtonItem menuStockInventoryReport;
         private DevExpress.XtraBars.BarButtonItem menuIceStock;
         private DevExpress.XtraBars.BarButtonItem menuIceSell;
+        private DevExpress.XtraBars.BarButtonItem menuIceSaleRecord;
     }
 }
 

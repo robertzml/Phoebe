@@ -46,18 +46,31 @@ namespace Phoebe.FormClient
                 return;
 
             var iceSale = this.bsIceSale[rowIndex] as IceSale;
-            //if (e.Column.FieldName == "CustomerId")
-            //{
-            //    e.DisplayText = iceSale.Customer.Name;
-            //}
             if (e.Column.FieldName == "IceType")
             {
                 e.DisplayText = ((IceType)iceSale.IceType).DisplayName();
             }
-            //else if (e.Column.FieldName == "UserId")
-            //{
-            //    e.DisplayText = iceSale.User.Name;
-            //}
+        }
+
+        /// <summary>
+        /// 自定义数据显示
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dgvIce_CustomUnboundColumnData(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDataEventArgs e)
+        {
+            int rowIndex = e.ListSourceRowIndex;
+            if (rowIndex < 0 || rowIndex >= this.bsIceSale.Count)
+                return;
+
+            var iceSale = this.bsIceSale[rowIndex] as IceSale;
+
+            if (e.Column.FieldName == "colCustomerNumber" && e.IsGetData)
+                e.Value = iceSale.IceFlow.Contract.Customer.Number;
+            if (e.Column.FieldName == "colCustomerName" && e.IsGetData)
+                e.Value = iceSale.IceFlow.Contract.Customer.Name;
+            if (e.Column.FieldName == "colUser" && e.IsGetData)
+                e.Value = iceSale.IceFlow.User.Name;
         }
         #endregion //Event
 

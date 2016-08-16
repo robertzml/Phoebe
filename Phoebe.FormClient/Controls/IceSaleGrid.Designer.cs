@@ -33,14 +33,19 @@
             this.bsIceSale = new System.Windows.Forms.BindingSource(this.components);
             this.dgvIce = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colId = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colFlowTime = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colFlowId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colIceType = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colSaleCount = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colUnitWeight = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colSaleWeight = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colSaleUnitPrice = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colSaleFee = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colRemark = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colStatus = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colCustomerName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colUser = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colCustomerNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgcIce)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsIceSale)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvIce)).BeginInit();
@@ -67,11 +72,16 @@
             this.dgvIce.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colId,
             this.colFlowId,
+            this.colCustomerNumber,
+            this.colCustomerName,
+            this.colFlowTime,
             this.colIceType,
             this.colSaleCount,
+            this.colUnitWeight,
             this.colSaleWeight,
             this.colSaleUnitPrice,
             this.colSaleFee,
+            this.colUser,
             this.colRemark,
             this.colStatus});
             this.dgvIce.GridControl = this.dgcIce;
@@ -84,12 +94,21 @@
             this.dgvIce.OptionsView.EnableAppearanceOddRow = true;
             this.dgvIce.OptionsView.ShowFooter = true;
             this.dgvIce.OptionsView.ShowGroupPanel = false;
+            this.dgvIce.CustomUnboundColumnData += new DevExpress.XtraGrid.Views.Base.CustomColumnDataEventHandler(this.dgvIce_CustomUnboundColumnData);
             this.dgvIce.CustomColumnDisplayText += new DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventHandler(this.dgvIce_CustomColumnDisplayText);
             // 
             // colId
             // 
             this.colId.FieldName = "Id";
             this.colId.Name = "colId";
+            // 
+            // colFlowTime
+            // 
+            this.colFlowTime.Caption = "售出日期";
+            this.colFlowTime.FieldName = "IceFlow.FlowTime";
+            this.colFlowTime.Name = "colFlowTime";
+            this.colFlowTime.Visible = true;
+            this.colFlowTime.VisibleIndex = 2;
             // 
             // colFlowId
             // 
@@ -105,7 +124,7 @@
             this.colIceType.FilterMode = DevExpress.XtraGrid.ColumnFilterMode.DisplayText;
             this.colIceType.Name = "colIceType";
             this.colIceType.Visible = true;
-            this.colIceType.VisibleIndex = 0;
+            this.colIceType.VisibleIndex = 3;
             // 
             // colSaleCount
             // 
@@ -115,11 +134,19 @@
             this.colSaleCount.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "SaleCount", "合计={0:0.##}")});
             this.colSaleCount.Visible = true;
-            this.colSaleCount.VisibleIndex = 1;
+            this.colSaleCount.VisibleIndex = 4;
+            // 
+            // colUnitWeight
+            // 
+            this.colUnitWeight.Caption = "单位重量(kg)";
+            this.colUnitWeight.FieldName = "UnitWeight";
+            this.colUnitWeight.Name = "colUnitWeight";
+            this.colUnitWeight.Visible = true;
+            this.colUnitWeight.VisibleIndex = 5;
             // 
             // colSaleWeight
             // 
-            this.colSaleWeight.Caption = "售出重量(t)";
+            this.colSaleWeight.Caption = "售出重量(kg)";
             this.colSaleWeight.DisplayFormat.FormatString = "0.000";
             this.colSaleWeight.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colSaleWeight.FieldName = "SaleWeight";
@@ -127,15 +154,15 @@
             this.colSaleWeight.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "SaleWeight", "合计={0:0.000}")});
             this.colSaleWeight.Visible = true;
-            this.colSaleWeight.VisibleIndex = 2;
+            this.colSaleWeight.VisibleIndex = 6;
             // 
             // colSaleUnitPrice
             // 
-            this.colSaleUnitPrice.Caption = "单价";
+            this.colSaleUnitPrice.Caption = "单价(元/袋)";
             this.colSaleUnitPrice.FieldName = "SaleUnitPrice";
             this.colSaleUnitPrice.Name = "colSaleUnitPrice";
             this.colSaleUnitPrice.Visible = true;
-            this.colSaleUnitPrice.VisibleIndex = 3;
+            this.colSaleUnitPrice.VisibleIndex = 7;
             // 
             // colSaleFee
             // 
@@ -147,7 +174,7 @@
             this.colSaleFee.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "SaleFee", "合计={0:0.00}")});
             this.colSaleFee.Visible = true;
-            this.colSaleFee.VisibleIndex = 4;
+            this.colSaleFee.VisibleIndex = 8;
             // 
             // colRemark
             // 
@@ -156,12 +183,39 @@
             this.colRemark.Name = "colRemark";
             this.colRemark.OptionsFilter.AllowFilter = false;
             this.colRemark.Visible = true;
-            this.colRemark.VisibleIndex = 5;
+            this.colRemark.VisibleIndex = 10;
             // 
             // colStatus
             // 
             this.colStatus.FieldName = "Status";
             this.colStatus.Name = "colStatus";
+            // 
+            // colCustomerName
+            // 
+            this.colCustomerName.Caption = "客户名称";
+            this.colCustomerName.FieldName = "colCustomerName";
+            this.colCustomerName.Name = "colCustomerName";
+            this.colCustomerName.UnboundType = DevExpress.Data.UnboundColumnType.String;
+            this.colCustomerName.Visible = true;
+            this.colCustomerName.VisibleIndex = 1;
+            // 
+            // colUser
+            // 
+            this.colUser.Caption = "操作人";
+            this.colUser.FieldName = "colUser";
+            this.colUser.Name = "colUser";
+            this.colUser.UnboundType = DevExpress.Data.UnboundColumnType.String;
+            this.colUser.Visible = true;
+            this.colUser.VisibleIndex = 9;
+            // 
+            // colCustomerNumber
+            // 
+            this.colCustomerNumber.Caption = "客户编号";
+            this.colCustomerNumber.FieldName = "colCustomerNumber";
+            this.colCustomerNumber.Name = "colCustomerNumber";
+            this.colCustomerNumber.UnboundType = DevExpress.Data.UnboundColumnType.String;
+            this.colCustomerNumber.Visible = true;
+            this.colCustomerNumber.VisibleIndex = 0;
             // 
             // IceSaleGrid
             // 
@@ -191,5 +245,10 @@
         private DevExpress.XtraGrid.Columns.GridColumn colRemark;
         private DevExpress.XtraGrid.Columns.GridColumn colStatus;
         private DevExpress.XtraGrid.Columns.GridColumn colSaleUnitPrice;
+        private DevExpress.XtraGrid.Columns.GridColumn colFlowTime;
+        private DevExpress.XtraGrid.Columns.GridColumn colUnitWeight;
+        private DevExpress.XtraGrid.Columns.GridColumn colCustomerNumber;
+        private DevExpress.XtraGrid.Columns.GridColumn colCustomerName;
+        private DevExpress.XtraGrid.Columns.GridColumn colUser;
     }
 }

@@ -197,6 +197,16 @@ namespace Phoebe.FormClient
         }
 
         /// <summary>
+        /// 冰块管理 - 销售记录
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void menuIceSaleRecord_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            ChildFormManage.LoadMdiForm(this, typeof(IceSaleRecordForm));
+        }
+
+        /// <summary>
         /// 结算管理 - 冷藏费清单
         /// </summary>
         /// <param name="sender"></param>

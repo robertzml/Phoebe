@@ -316,6 +316,12 @@
     <Compile Include="Controls\IceStoreFlowGrid.Designer.cs">
       <DependentUpon>IceStoreFlowGrid.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\IceSaleRecordForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\IceSaleRecordForm.Designer.cs">
+      <DependentUpon>IceSaleRecordForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Report\IceSale.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -657,6 +663,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\DebtForm.resx">
       <DependentUpon>DebtForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\IceSaleRecordForm.resx">
+      <DependentUpon>IceSaleRecordForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\IceSellForm.resx">
       <DependentUpon>IceSellForm.cs</DependentUpon>
