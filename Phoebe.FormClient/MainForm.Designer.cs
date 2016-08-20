@@ -80,6 +80,7 @@
             this.barHeaderItem1 = new DevExpress.XtraBars.BarHeaderItem();
             this.barStaticItem2 = new DevExpress.XtraBars.BarStaticItem();
             this.tabMdiManager = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
+            this.menuDailyFeeReport = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabMdiManager)).BeginInit();
             this.SuspendLayout();
@@ -137,9 +138,10 @@
             this.menuStockInventoryReport,
             this.menuIceStock,
             this.menuIceSell,
-            this.menuIceSaleRecord});
+            this.menuIceSaleRecord,
+            this.menuDailyFeeReport});
             this.barManager1.MainMenu = this.mainMenu;
-            this.barManager1.MaxItemId = 47;
+            this.barManager1.MaxItemId = 48;
             this.barManager1.StatusBar = this.bar3;
             // 
             // mainMenu
@@ -388,7 +390,8 @@
             this.menuReport.Id = 41;
             this.menuReport.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(this.menuStockFlowReport),
-            new DevExpress.XtraBars.LinkPersistInfo(this.menuStockInventoryReport)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.menuStockInventoryReport),
+            new DevExpress.XtraBars.LinkPersistInfo(this.menuDailyFeeReport)});
             this.menuReport.Name = "menuReport";
             // 
             // menuStockFlowReport
@@ -539,6 +542,13 @@
             this.tabMdiManager.MdiParent = this;
             this.tabMdiManager.PinPageButtonShowMode = DevExpress.XtraTab.PinPageButtonShowMode.InActiveTabPageHeader;
             // 
+            // menuDailyFeeReport
+            // 
+            this.menuDailyFeeReport.Caption = "费用日报表";
+            this.menuDailyFeeReport.Id = 47;
+            this.menuDailyFeeReport.Name = "menuDailyFeeReport";
+            this.menuDailyFeeReport.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuDailyFeeReport_ItemClick);
+            // 
             // MainForm
             // 
             this.AllowMdiBar = true;
@@ -613,6 +623,7 @@
         private DevExpress.XtraBars.BarButtonItem menuIceStock;
         private DevExpress.XtraBars.BarButtonItem menuIceSell;
         private DevExpress.XtraBars.BarButtonItem menuIceSaleRecord;
+        private DevExpress.XtraBars.BarButtonItem menuDailyFeeReport;
     }
 }
 

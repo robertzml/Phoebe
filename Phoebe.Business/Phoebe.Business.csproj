@@ -73,6 +73,7 @@
     <Compile Include="BL\IceStoreBusiness.cs" />
     <Compile Include="BL\PaymentBusiness.cs" />
     <Compile Include="BL\SettlementBusiness.cs" />
+    <Compile Include="BL\StatisticBusiness.cs" />
     <Compile Include="BL\StockInBusiness.cs" />
     <Compile Include="BL\StockMoveBusiness.cs" />
     <Compile Include="BL\StockOutBusiness.cs" />

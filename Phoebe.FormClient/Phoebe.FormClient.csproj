@@ -112,6 +112,18 @@
     <Compile Include="Controls\CargoGrid.Designer.cs">
       <DependentUpon>CargoGrid.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\DailyFeeGrid.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\DailyFeeGrid.Designer.cs">
+      <DependentUpon>DailyFeeGrid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Statistic\DailyFeeReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Statistic\DailyFeeReportForm.Designer.cs">
+      <DependentUpon>DailyFeeReportForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\CargoStoreForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -565,6 +577,9 @@
     <EmbeddedResource Include="Controls\InventoryGrid.resx">
       <DependentUpon>InventoryGrid.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\DailyFeeGrid.resx">
+      <DependentUpon>DailyFeeGrid.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\CargoStoreForm.resx">
       <DependentUpon>CargoStoreForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -757,6 +772,9 @@
     <EmbeddedResource Include="Controls\SettlementGrid.resx">
       <DependentUpon>SettlementGrid.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Statistic\DailyFeeReportForm.resx">
+      <DependentUpon>DailyFeeReportForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Statistic\StockFlowReportForm.resx">
       <DependentUpon>StockFlowReportForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -775,6 +793,7 @@
     <None Include="Properties\DataSources\Phoebe.Model.Contract.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.Customer.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.DailyColdRecord.datasource" />
+    <None Include="Properties\DataSources\Phoebe.Model.DailyFee.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.IceFlow.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.IceRecord.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.IceSale.datasource" />
