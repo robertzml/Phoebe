@@ -119,6 +119,7 @@
             this.btnPrint.StyleController = this.layoutControl1;
             this.btnPrint.TabIndex = 6;
             this.btnPrint.Text = "打印";
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
             // btnQuery
             // 

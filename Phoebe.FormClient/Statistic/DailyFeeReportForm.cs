@@ -54,6 +54,16 @@ namespace Phoebe.FormClient
 
             this.Cursor = Cursors.Default;
         }
+
+        /// <summary>
+        /// 打印
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            this.dfList.PrintPriview();
+        }
         #endregion //Event
     }
 }

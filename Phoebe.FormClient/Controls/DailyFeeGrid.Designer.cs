@@ -81,6 +81,7 @@
             this.dgvDaily.OptionsView.EnableAppearanceOddRow = true;
             this.dgvDaily.OptionsView.ShowFooter = true;
             this.dgvDaily.OptionsView.ShowGroupPanel = false;
+            this.dgvDaily.PrintInitialize += new DevExpress.XtraGrid.Views.Base.PrintInitializeEventHandler(this.dgvDaily_PrintInitialize);
             // 
             // colCustomerId
             // 
