@@ -56,14 +56,14 @@
             this.sfgList = new Phoebe.FormClient.StockFlowGrid();
             this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
             this.layoutControl2 = new DevExpress.XtraLayout.LayoutControl();
-            this.layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.txtInCount = new DevExpress.XtraEditors.TextEdit();
-            this.layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.txtInWeight = new DevExpress.XtraEditors.TextEdit();
-            this.layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.txtOutCount = new DevExpress.XtraEditors.TextEdit();
-            this.layoutControlItem11 = new DevExpress.XtraLayout.LayoutControlItem();
             this.txtOutWeight = new DevExpress.XtraEditors.TextEdit();
+            this.txtOutCount = new DevExpress.XtraEditors.TextEdit();
+            this.txtInWeight = new DevExpress.XtraEditors.TextEdit();
+            this.txtInCount = new DevExpress.XtraEditors.TextEdit();
+            this.layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem11 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem12 = new DevExpress.XtraLayout.LayoutControlItem();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
@@ -96,14 +96,14 @@
             this.groupControl3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl2)).BeginInit();
             this.layoutControl2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtInCount.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtInWeight.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtOutCount.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtOutWeight.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtOutCount.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtInWeight.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtInCount.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem12)).BeginInit();
             this.SuspendLayout();
             // 
@@ -420,6 +420,50 @@
             this.layoutControl2.TabIndex = 0;
             this.layoutControl2.Text = "layoutControl2";
             // 
+            // txtOutWeight
+            // 
+            this.txtOutWeight.Location = new System.Drawing.Point(723, 12);
+            this.txtOutWeight.Name = "txtOutWeight";
+            this.txtOutWeight.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
+            this.txtOutWeight.Properties.Appearance.Options.UseBackColor = true;
+            this.txtOutWeight.Properties.ReadOnly = true;
+            this.txtOutWeight.Size = new System.Drawing.Size(179, 20);
+            this.txtOutWeight.StyleController = this.layoutControl2;
+            this.txtOutWeight.TabIndex = 7;
+            // 
+            // txtOutCount
+            // 
+            this.txtOutCount.Location = new System.Drawing.Point(507, 12);
+            this.txtOutCount.Name = "txtOutCount";
+            this.txtOutCount.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
+            this.txtOutCount.Properties.Appearance.Options.UseBackColor = true;
+            this.txtOutCount.Properties.ReadOnly = true;
+            this.txtOutCount.Size = new System.Drawing.Size(161, 20);
+            this.txtOutCount.StyleController = this.layoutControl2;
+            this.txtOutCount.TabIndex = 6;
+            // 
+            // txtInWeight
+            // 
+            this.txtInWeight.Location = new System.Drawing.Point(279, 12);
+            this.txtInWeight.Name = "txtInWeight";
+            this.txtInWeight.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
+            this.txtInWeight.Properties.Appearance.Options.UseBackColor = true;
+            this.txtInWeight.Properties.ReadOnly = true;
+            this.txtInWeight.Size = new System.Drawing.Size(173, 20);
+            this.txtInWeight.StyleController = this.layoutControl2;
+            this.txtInWeight.TabIndex = 5;
+            // 
+            // txtInCount
+            // 
+            this.txtInCount.Location = new System.Drawing.Point(63, 12);
+            this.txtInCount.Name = "txtInCount";
+            this.txtInCount.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
+            this.txtInCount.Properties.Appearance.Options.UseBackColor = true;
+            this.txtInCount.Properties.ReadOnly = true;
+            this.txtInCount.Size = new System.Drawing.Size(161, 20);
+            this.txtInCount.StyleController = this.layoutControl2;
+            this.txtInCount.TabIndex = 4;
+            // 
             // layoutControlGroup2
             // 
             this.layoutControlGroup2.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
@@ -434,17 +478,6 @@
             this.layoutControlGroup2.Size = new System.Drawing.Size(914, 51);
             this.layoutControlGroup2.TextVisible = false;
             // 
-            // txtInCount
-            // 
-            this.txtInCount.Location = new System.Drawing.Point(64, 12);
-            this.txtInCount.Name = "txtInCount";
-            this.txtInCount.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
-            this.txtInCount.Properties.Appearance.Options.UseBackColor = true;
-            this.txtInCount.Properties.ReadOnly = true;
-            this.txtInCount.Size = new System.Drawing.Size(160, 20);
-            this.txtInCount.StyleController = this.layoutControl2;
-            this.txtInCount.TabIndex = 4;
-            // 
             // layoutControlItem9
             // 
             this.layoutControlItem9.Control = this.txtInCount;
@@ -453,17 +486,6 @@
             this.layoutControlItem9.Size = new System.Drawing.Size(216, 31);
             this.layoutControlItem9.Text = "入库数量";
             this.layoutControlItem9.TextSize = new System.Drawing.Size(48, 14);
-            // 
-            // txtInWeight
-            // 
-            this.txtInWeight.Location = new System.Drawing.Point(280, 12);
-            this.txtInWeight.Name = "txtInWeight";
-            this.txtInWeight.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
-            this.txtInWeight.Properties.Appearance.Options.UseBackColor = true;
-            this.txtInWeight.Properties.ReadOnly = true;
-            this.txtInWeight.Size = new System.Drawing.Size(172, 20);
-            this.txtInWeight.StyleController = this.layoutControl2;
-            this.txtInWeight.TabIndex = 5;
             // 
             // layoutControlItem10
             // 
@@ -474,17 +496,6 @@
             this.layoutControlItem10.Text = "入库重量";
             this.layoutControlItem10.TextSize = new System.Drawing.Size(48, 14);
             // 
-            // txtOutCount
-            // 
-            this.txtOutCount.Location = new System.Drawing.Point(508, 12);
-            this.txtOutCount.Name = "txtOutCount";
-            this.txtOutCount.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
-            this.txtOutCount.Properties.Appearance.Options.UseBackColor = true;
-            this.txtOutCount.Properties.ReadOnly = true;
-            this.txtOutCount.Size = new System.Drawing.Size(160, 20);
-            this.txtOutCount.StyleController = this.layoutControl2;
-            this.txtOutCount.TabIndex = 6;
-            // 
             // layoutControlItem11
             // 
             this.layoutControlItem11.Control = this.txtOutCount;
@@ -493,17 +504,6 @@
             this.layoutControlItem11.Size = new System.Drawing.Size(216, 31);
             this.layoutControlItem11.Text = "出库数量";
             this.layoutControlItem11.TextSize = new System.Drawing.Size(48, 14);
-            // 
-            // txtOutWeight
-            // 
-            this.txtOutWeight.Location = new System.Drawing.Point(724, 12);
-            this.txtOutWeight.Name = "txtOutWeight";
-            this.txtOutWeight.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
-            this.txtOutWeight.Properties.Appearance.Options.UseBackColor = true;
-            this.txtOutWeight.Properties.ReadOnly = true;
-            this.txtOutWeight.Size = new System.Drawing.Size(178, 20);
-            this.txtOutWeight.StyleController = this.layoutControl2;
-            this.txtOutWeight.TabIndex = 7;
             // 
             // layoutControlItem12
             // 
@@ -554,14 +554,14 @@
             this.groupControl3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl2)).EndInit();
             this.layoutControl2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtInCount.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtInWeight.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtOutCount.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtOutWeight.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtOutCount.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtInWeight.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtInCount.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem12)).EndInit();
             this.ResumeLayout(false);
 

@@ -41,6 +41,16 @@ namespace Phoebe.Model
         public string CategoryName { get; set; }
 
         /// <summary>
+        /// 单位重量
+        /// </summary>
+        public decimal UnitWeight { get; set; } 
+
+        /// <summary>
+        /// 单位体积
+        /// </summary>
+        public decimal UnitVolume { get; set; }
+
+        /// <summary>
         /// 期初时间
         /// </summary>
         public DateTime StartTime { get; set; }

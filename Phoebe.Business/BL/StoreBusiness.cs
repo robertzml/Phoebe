@@ -133,7 +133,8 @@ namespace Phoebe.Business
         /// <returns></returns>
         private Inventory SetInventoryStart(List<Inventory> data, Storage start, DateTime endTime)
         {
-            var inv = data.SingleOrDefault(r => r.CustomerId == start.CustomerId && r.CategoryId == start.CategoryId);
+            var inv = data.SingleOrDefault(r => r.CustomerId == start.CustomerId && r.CategoryId == start.CategoryId && 
+                r.UnitWeight == start.UnitWeight && r.UnitVolume == start.UnitVolume);
 
             if (inv == null)
             {
@@ -144,6 +145,8 @@ namespace Phoebe.Business
                 inventory.CategoryId = start.CategoryId;
                 inventory.CategoryNumber = start.CategoryNumber;
                 inventory.CategoryName = start.CategoryName;
+                inventory.UnitWeight = start.UnitWeight;
+                inventory.UnitVolume = start.UnitVolume;
                 inventory.StartTime = start.StorageDate;
                 inventory.StartCount = start.Count;
                 inventory.StartWeight = start.StoreWeight;
@@ -168,7 +171,8 @@ namespace Phoebe.Business
         /// <param name="StartTime">期初时间</param>
         public Inventory SetInventoryEnd(List<Inventory> data, Storage end, DateTime startTime)
         {
-            var inv = data.SingleOrDefault(r => r.CustomerId == end.CustomerId && r.CategoryId == end.CategoryId);
+            var inv = data.SingleOrDefault(r => r.CustomerId == end.CustomerId && r.CategoryId == end.CategoryId &&
+                r.UnitWeight == end.UnitWeight && r.UnitVolume == end.UnitVolume);
 
             if (inv == null)
             {
@@ -179,6 +183,8 @@ namespace Phoebe.Business
                 inventory.CategoryId = end.CategoryId;
                 inventory.CategoryNumber = end.CategoryNumber;
                 inventory.CategoryName = end.CategoryName;
+                inventory.UnitWeight = end.UnitWeight;
+                inventory.UnitVolume = end.UnitVolume;
                 inventory.StartTime = startTime;
                 inventory.EndTime = end.StorageDate;
                 inventory.EndCount = end.Count;

@@ -36,11 +36,15 @@ namespace Phoebe.FormClient
             this.bsCustomer.DataSource = BusinessFactory<CustomerBusiness>.Instance.FindAll();
             this.lkuCustomer.CustomDisplayText += new DevExpress.XtraEditors.Controls.CustomDisplayTextEventHandler(EventUtil.LkuCustomer_CustomDisplayText);
 
-            this.dpFrom.DateTime = DateTime.Now.AddDays(1 - DateTime.Now.Day);
+            this.dpFrom.DateTime = DateTime.Now.AddDays(1 - DateTime.Now.Day).Date;
             this.dpTo.DateTime = DateTime.Now.Date;
         }
 
-
+        /// <summary>
+        /// 查询
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSearch_Click(object sender, EventArgs e)
         {
             if (this.lkuCustomer.EditValue == null)
@@ -58,6 +62,16 @@ namespace Phoebe.FormClient
             var data = BusinessFactory<StoreBusiness>.Instance.GetInventory(this.dpFrom.DateTime.Date, this.dpTo.DateTime.Date, (int)this.lkuCustomer.EditValue);
 
             this.ingList.DataSource = data;
+        }
+
+        /// <summary>
+        /// 打印
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            this.ingList.PrintPriview();
         }
         #endregion //Event
     }

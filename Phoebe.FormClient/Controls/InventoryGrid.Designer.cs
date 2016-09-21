@@ -28,13 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.dgcInventory = new DevExpress.XtraGrid.GridControl();
-            this.bsInventory = new System.Windows.Forms.BindingSource();
+            this.bsInventory = new System.Windows.Forms.BindingSource(this.components);
             this.dgvInventory = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colCustomerNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCustomerName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCategoryNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCategoryName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colUnitWeight = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colUnitVolume = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colStartTime = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colStartCount = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colStartWeight = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -69,6 +72,8 @@
             this.colCustomerName,
             this.colCategoryNumber,
             this.colCategoryName,
+            this.colUnitWeight,
+            this.colUnitVolume,
             this.colStartTime,
             this.colStartCount,
             this.colStartWeight,
@@ -86,6 +91,7 @@
             this.dgvInventory.OptionsView.EnableAppearanceOddRow = true;
             this.dgvInventory.OptionsView.ShowFooter = true;
             this.dgvInventory.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(this.dgvInventory_CustomDrawRowIndicator);
+            this.dgvInventory.PrintInitialize += new DevExpress.XtraGrid.Views.Base.PrintInitializeEventHandler(this.dgvInventory_PrintInitialize);
             // 
             // colCustomerNumber
             // 
@@ -119,13 +125,33 @@
             this.colCategoryName.Visible = true;
             this.colCategoryName.VisibleIndex = 3;
             // 
+            // colUnitWeight
+            // 
+            this.colUnitWeight.Caption = "单位重量(kg)";
+            this.colUnitWeight.DisplayFormat.FormatString = "0.000";
+            this.colUnitWeight.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.colUnitWeight.FieldName = "UnitWeight";
+            this.colUnitWeight.Name = "colUnitWeight";
+            this.colUnitWeight.Visible = true;
+            this.colUnitWeight.VisibleIndex = 4;
+            // 
+            // colUnitVolume
+            // 
+            this.colUnitVolume.Caption = "单位体积(立方)";
+            this.colUnitVolume.DisplayFormat.FormatString = "0.000";
+            this.colUnitVolume.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.colUnitVolume.FieldName = "UnitVolume";
+            this.colUnitVolume.Name = "colUnitVolume";
+            this.colUnitVolume.Visible = true;
+            this.colUnitVolume.VisibleIndex = 5;
+            // 
             // colStartTime
             // 
             this.colStartTime.Caption = "期初时间";
             this.colStartTime.FieldName = "StartTime";
             this.colStartTime.Name = "colStartTime";
             this.colStartTime.Visible = true;
-            this.colStartTime.VisibleIndex = 4;
+            this.colStartTime.VisibleIndex = 6;
             // 
             // colStartCount
             // 
@@ -135,7 +161,7 @@
             this.colStartCount.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "StartCount", "合计={0:0.##}")});
             this.colStartCount.Visible = true;
-            this.colStartCount.VisibleIndex = 5;
+            this.colStartCount.VisibleIndex = 7;
             // 
             // colStartWeight
             // 
@@ -147,7 +173,7 @@
             this.colStartWeight.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "StartWeight", "合计={0:0.0000}")});
             this.colStartWeight.Visible = true;
-            this.colStartWeight.VisibleIndex = 6;
+            this.colStartWeight.VisibleIndex = 8;
             // 
             // colEndTime
             // 
@@ -155,7 +181,7 @@
             this.colEndTime.FieldName = "EndTime";
             this.colEndTime.Name = "colEndTime";
             this.colEndTime.Visible = true;
-            this.colEndTime.VisibleIndex = 7;
+            this.colEndTime.VisibleIndex = 9;
             // 
             // colEndCount
             // 
@@ -165,7 +191,7 @@
             this.colEndCount.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "EndCount", "合计={0:0.##}")});
             this.colEndCount.Visible = true;
-            this.colEndCount.VisibleIndex = 8;
+            this.colEndCount.VisibleIndex = 10;
             // 
             // colEndWeight
             // 
@@ -177,7 +203,7 @@
             this.colEndWeight.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "EndWeight", "合计={0:0.0000}")});
             this.colEndWeight.Visible = true;
-            this.colEndWeight.VisibleIndex = 9;
+            this.colEndWeight.VisibleIndex = 11;
             // 
             // InventoryGrid
             // 
@@ -208,5 +234,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn colEndTime;
         private DevExpress.XtraGrid.Columns.GridColumn colEndCount;
         private DevExpress.XtraGrid.Columns.GridColumn colEndWeight;
+        private DevExpress.XtraGrid.Columns.GridColumn colUnitWeight;
+        private DevExpress.XtraGrid.Columns.GridColumn colUnitVolume;
     }
 }

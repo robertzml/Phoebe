@@ -40,7 +40,7 @@ namespace Phoebe.FormClient
             this.bsCategory.DataSource = BusinessFactory<CategoryBusiness>.Instance.GetAll();
             this.lkuCategory.CustomDisplayText += new DevExpress.XtraEditors.Controls.CustomDisplayTextEventHandler(EventUtil.LkuCategory_CustomDisplayText);
 
-            this.dpFrom.DateTime = DateTime.Now.AddDays(-7).Date;
+            this.dpFrom.DateTime = DateTime.Now.AddDays(1 - DateTime.Now.Day).Date;
             this.dpTo.DateTime = DateTime.Now.Date;
         }
 

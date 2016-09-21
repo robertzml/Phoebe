@@ -64,7 +64,7 @@ namespace Phoebe.Base
         /// 名称重复
         /// </summary>
         [Display(Name = "名称重复")]
-        DuplicateName = 11,
+        DuplicateName = 9,
 
         /// <summary>
         /// 编号重复
