@@ -82,6 +82,19 @@ namespace Phoebe.Business
 
             return data;
         }
+
+        /// <summary>
+        /// 获取指定日在库库存
+        /// </summary>
+        /// <param name="date">日期</param>
+        /// <returns></returns>
+        public List<Storage> GetDailyStorage(DateTime date)
+        {
+            List<Storage> data;
+
+            data = BusinessFactory<StoreBusiness>.Instance.GetInDay(date);
+            return data;
+        }
         #endregion //Method
     }
 }

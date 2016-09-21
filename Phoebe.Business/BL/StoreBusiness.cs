@@ -308,6 +308,66 @@ namespace Phoebe.Business
 
         #region Storage
         /// <summary>
+        /// 获取指定日所有库存
+        /// </summary>
+        /// <param name="date">日期</param>
+        /// <returns></returns>
+        public List<Storage> GetInDay(DateTime date)
+        {
+            List<Storage> data = new List<Storage>();
+
+            //find store
+            var stores = this.dal.Find(r => r.MoveTime <= date && (r.OutTime == null || r.OutTime > date));
+            if (stores.Count() == 0)
+                return data;
+
+            foreach (var store in stores)
+            {
+                // find in
+                if (store.Source == (int)SourceType.StockIn) //from stock in
+                {
+                    var si = RepositoryFactory<StockInDetailsRepository>.Instance.FindOne(r => r.StoreId == store.Id);
+                    var storage = SetStorage(store, date, si.Count, si.InWeight, si.InVolume);
+                    data.Add(storage);
+                }
+                else //from stock move
+                {
+                    var sm = RepositoryFactory<StockMoveDetailsRepository>.Instance.FindOne(r => r.NewStoreId == store.Id);
+                    var storage = SetStorage(store, date, sm.Count, sm.MoveWeight, sm.MoveVolume);
+                    data.Add(storage);
+                }
+
+                //find stock out
+                var stockOutDetails = RepositoryFactory<StockOutDetailsRepository>.Instance.Find(r => r.StoreId == store.Id && r.Status == (int)EntityStatus.StockOut && r.StockOut.OutTime <= date);
+                foreach (var item in stockOutDetails)
+                {
+                    var s = data.SingleOrDefault(r => r.StoreId == item.StoreId);
+                    if (s != null)
+                    {
+                        s.Count -= item.Count;
+                        s.StoreWeight -= item.OutWeight;
+                        s.StoreVolume -= item.OutVolume;
+                    }
+                }
+
+                //find stock move out
+                var smOuts = RepositoryFactory<StockMoveDetailsRepository>.Instance.Find(r => r.SourceStoreId == store.Id && r.Status == (int)EntityStatus.StockMove && r.StockMove.MoveTime <= date);
+                foreach (var item in smOuts)
+                {
+                    var s = data.SingleOrDefault(r => r.StoreId == item.SourceStoreId);
+                    if (s != null)
+                    {
+                        s.Count -= item.Count;
+                        s.StoreWeight -= item.MoveWeight;
+                        s.StoreVolume -= item.MoveVolume;
+                    }
+                }
+            }
+
+            return data;
+        }
+
+        /// <summary>
         /// 获取合同指定日库存
         /// </summary>
         /// <param name="contractId">合同ID</param>

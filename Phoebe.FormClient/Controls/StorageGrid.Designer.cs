@@ -109,6 +109,7 @@
             this.dgvStorage.OptionsView.EnableAppearanceOddRow = true;
             this.dgvStorage.OptionsView.ShowFooter = true;
             this.dgvStorage.OptionsView.ShowGroupPanel = false;
+            this.dgvStorage.PrintInitialize += new DevExpress.XtraGrid.Views.Base.PrintInitializeEventHandler(this.dgvStorage_PrintInitialize);
             // 
             // colStorageDate
             // 
