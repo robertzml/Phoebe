@@ -61,8 +61,10 @@
             this.menuDebt = new DevExpress.XtraBars.BarButtonItem();
             this.menuReport = new DevExpress.XtraBars.BarSubItem();
             this.menuStockFlowReport = new DevExpress.XtraBars.BarButtonItem();
-            this.menuStockInventoryReport = new DevExpress.XtraBars.BarButtonItem();
             this.menuDailyFeeReport = new DevExpress.XtraBars.BarButtonItem();
+            this.menuPeriodFeeReport = new DevExpress.XtraBars.BarButtonItem();
+            this.menuDailyStorageReport = new DevExpress.XtraBars.BarButtonItem();
+            this.menuStockInventoryReport = new DevExpress.XtraBars.BarButtonItem();
             this.menuUser = new DevExpress.XtraBars.BarSubItem();
             this.menuUserList = new DevExpress.XtraBars.BarButtonItem();
             this.menuUserGroupList = new DevExpress.XtraBars.BarButtonItem();
@@ -81,7 +83,7 @@
             this.barHeaderItem1 = new DevExpress.XtraBars.BarHeaderItem();
             this.barStaticItem2 = new DevExpress.XtraBars.BarStaticItem();
             this.tabMdiManager = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
-            this.menuDailyStorageReport = new DevExpress.XtraBars.BarButtonItem();
+            this.menuCustomerCargoReport = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabMdiManager)).BeginInit();
             this.SuspendLayout();
@@ -141,9 +143,11 @@
             this.menuIceSell,
             this.menuIceSaleRecord,
             this.menuDailyFeeReport,
-            this.menuDailyStorageReport});
+            this.menuDailyStorageReport,
+            this.menuPeriodFeeReport,
+            this.menuCustomerCargoReport});
             this.barManager1.MainMenu = this.mainMenu;
-            this.barManager1.MaxItemId = 49;
+            this.barManager1.MaxItemId = 51;
             this.barManager1.StatusBar = this.bar3;
             // 
             // mainMenu
@@ -393,8 +397,10 @@
             this.menuReport.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(this.menuStockFlowReport),
             new DevExpress.XtraBars.LinkPersistInfo(this.menuDailyFeeReport),
+            new DevExpress.XtraBars.LinkPersistInfo(this.menuPeriodFeeReport),
             new DevExpress.XtraBars.LinkPersistInfo(this.menuDailyStorageReport),
-            new DevExpress.XtraBars.LinkPersistInfo(this.menuStockInventoryReport)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.menuStockInventoryReport),
+            new DevExpress.XtraBars.LinkPersistInfo(this.menuCustomerCargoReport)});
             this.menuReport.Name = "menuReport";
             // 
             // menuStockFlowReport
@@ -404,19 +410,33 @@
             this.menuStockFlowReport.Name = "menuStockFlowReport";
             this.menuStockFlowReport.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuStockFlowReport_ItemClick);
             // 
-            // menuStockInventoryReport
-            // 
-            this.menuStockInventoryReport.Caption = "库存盘点报表";
-            this.menuStockInventoryReport.Id = 43;
-            this.menuStockInventoryReport.Name = "menuStockInventoryReport";
-            this.menuStockInventoryReport.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuStockInventoryReport_ItemClick);
-            // 
             // menuDailyFeeReport
             // 
             this.menuDailyFeeReport.Caption = "费用日报表";
             this.menuDailyFeeReport.Id = 47;
             this.menuDailyFeeReport.Name = "menuDailyFeeReport";
             this.menuDailyFeeReport.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuDailyFeeReport_ItemClick);
+            // 
+            // menuPeriodFeeReport
+            // 
+            this.menuPeriodFeeReport.Caption = "费用期报表";
+            this.menuPeriodFeeReport.Id = 49;
+            this.menuPeriodFeeReport.Name = "menuPeriodFeeReport";
+            this.menuPeriodFeeReport.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuPeriodFeeReport_ItemClick);
+            // 
+            // menuDailyStorageReport
+            // 
+            this.menuDailyStorageReport.Caption = "库存日报表";
+            this.menuDailyStorageReport.Id = 48;
+            this.menuDailyStorageReport.Name = "menuDailyStorageReport";
+            this.menuDailyStorageReport.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuDailyStorageReport_ItemClick);
+            // 
+            // menuStockInventoryReport
+            // 
+            this.menuStockInventoryReport.Caption = "库存盘点报表";
+            this.menuStockInventoryReport.Id = 43;
+            this.menuStockInventoryReport.Name = "menuStockInventoryReport";
+            this.menuStockInventoryReport.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuStockInventoryReport_ItemClick);
             // 
             // menuUser
             // 
@@ -552,12 +572,12 @@
             this.tabMdiManager.MdiParent = this;
             this.tabMdiManager.PinPageButtonShowMode = DevExpress.XtraTab.PinPageButtonShowMode.InActiveTabPageHeader;
             // 
-            // menuDailyStorageReport
+            // menuCustomerCargoReport
             // 
-            this.menuDailyStorageReport.Caption = "库存日报表";
-            this.menuDailyStorageReport.Id = 48;
-            this.menuDailyStorageReport.Name = "menuDailyStorageReport";
-            this.menuDailyStorageReport.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuDailyStorageReport_ItemClick);
+            this.menuCustomerCargoReport.Caption = "客户库存报表";
+            this.menuCustomerCargoReport.Id = 50;
+            this.menuCustomerCargoReport.Name = "menuCustomerCargoReport";
+            this.menuCustomerCargoReport.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuCustomerCargoReport_ItemClick);
             // 
             // MainForm
             // 
@@ -635,6 +655,8 @@
         private DevExpress.XtraBars.BarButtonItem menuIceSaleRecord;
         private DevExpress.XtraBars.BarButtonItem menuDailyFeeReport;
         private DevExpress.XtraBars.BarButtonItem menuDailyStorageReport;
+        private DevExpress.XtraBars.BarButtonItem menuPeriodFeeReport;
+        private DevExpress.XtraBars.BarButtonItem menuCustomerCargoReport;
     }
 }
 

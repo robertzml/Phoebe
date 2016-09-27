@@ -76,6 +76,7 @@
     <Compile Include="Helper\IceStoreFlow.cs" />
     <Compile Include="Helper\Inventory.cs" />
     <Compile Include="Helper\MiscSettlement.cs" />
+    <Compile Include="Helper\PeriodFee.cs" />
     <Compile Include="Helper\PhoebeEnum.cs" />
     <Compile Include="Helper\Receipt.cs" />
     <Compile Include="Helper\StockFlow.cs" />

@@ -118,6 +118,24 @@
     <Compile Include="Controls\DailyFeeGrid.Designer.cs">
       <DependentUpon>DailyFeeGrid.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\PeriodFeeGrid.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\PeriodFeeGrid.Designer.cs">
+      <DependentUpon>PeriodFeeGrid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Statistic\CustomerCargoReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Statistic\CustomerCargoReportForm.Designer.cs">
+      <DependentUpon>CustomerCargoReportForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Statistic\PeriodFeeReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Statistic\PeriodFeeReportForm.Designer.cs">
+      <DependentUpon>PeriodFeeReportForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Statistic\DailyStorageReportForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -586,6 +604,12 @@
     <EmbeddedResource Include="Controls\DailyFeeGrid.resx">
       <DependentUpon>DailyFeeGrid.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\PeriodFeeGrid.resx">
+      <DependentUpon>PeriodFeeGrid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Statistic\CustomerCargoReportForm.resx">
+      <DependentUpon>CustomerCargoReportForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Statistic\DailyStorageReportForm.resx">
       <DependentUpon>DailyStorageReportForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -784,6 +808,9 @@
     <EmbeddedResource Include="Statistic\DailyFeeReportForm.resx">
       <DependentUpon>DailyFeeReportForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Statistic\PeriodFeeReportForm.resx">
+      <DependentUpon>PeriodFeeReportForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Statistic\StockFlowReportForm.resx">
       <DependentUpon>StockFlowReportForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -810,6 +837,7 @@
     <None Include="Properties\DataSources\Phoebe.Model.Inventory.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.MiscSettlement.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.Payment.datasource" />
+    <None Include="Properties\DataSources\Phoebe.Model.PeriodFee.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.Settlement.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.StockFlow.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.StockInModel.datasource" />

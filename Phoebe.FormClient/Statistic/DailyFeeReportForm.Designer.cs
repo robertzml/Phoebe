@@ -194,6 +194,7 @@
             // 
             this.dfList.DataSource = null;
             this.dfList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dfList.FeeDate = new System.DateTime(2016, 9, 27, 0, 0, 0, 0);
             this.dfList.Location = new System.Drawing.Point(2, 21);
             this.dfList.Name = "dfList";
             this.dfList.Size = new System.Drawing.Size(823, 324);

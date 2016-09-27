@@ -84,6 +84,77 @@ namespace Phoebe.Business
         }
 
         /// <summary>
+        /// 获取费用期报表
+        /// </summary>
+        /// <param name="start">开始日期</param>
+        /// <param name="end">结束日期</param>
+        /// <returns></returns>
+        public List<PeriodFee> GetPeriodFee(DateTime start, DateTime end)
+        {
+            List<PeriodFee> data = new List<PeriodFee>();
+
+            var customers = BusinessFactory<CustomerBusiness>.Instance.FindAll();
+
+            foreach (var customer in customers)
+            {
+                var dailyFee = GetCustomerPeriodFee(customer.Id, start, end);
+
+                if (dailyFee.TotalFee == 0)
+                    continue;
+
+                data.Add(dailyFee);
+            }
+
+            return data;
+        }
+
+        /// <summary>
+        /// 获取客户费用期报表
+        /// </summary>
+        /// <param name="customerId">客户ID</param>
+        /// <param name="start">开始日期</param>
+        /// <param name="end">结束日期</param>
+        /// <returns></returns>
+        public PeriodFee GetCustomerPeriodFee(int customerId, DateTime start, DateTime end)
+        {
+            PeriodFee data = new PeriodFee();
+
+            var customer = BusinessFactory<CustomerBusiness>.Instance.FindById(customerId);
+
+            data.CustomerId = customerId;
+            data.CustomerNumber = customer.Number;
+            data.CustomerName = customer.Name;
+            data.Start = start;
+            data.End = end;
+            data.BaseFee = 0;
+            data.ColdFee = 0;
+            data.MiscFee = 0;
+
+            var contracts = BusinessFactory<ContractBusiness>.Instance.GetByCustomer(customerId);
+
+            foreach (var contract in contracts)
+            {
+                var contractBill = ContractFactory.Create((ContractType)contract.Type);
+
+                var baseSettle = contractBill.GetBaseFee(contract.Id, start, end);
+                if (baseSettle != null)
+                    data.BaseFee += baseSettle.Sum(r => r.TotalPrice);
+
+                var coldSettle = contractBill.GetColdFee(contract.Id, start, end);
+                if (coldSettle != null)
+                    data.ColdFee += coldSettle.ColdFee;
+
+                var miscSettle = contractBill.GetMiscFee(contract.Id, start, end);
+                if (miscSettle != null)
+                    data.MiscFee += miscSettle.TotalFee;
+            }
+
+            data.TotalFee = data.BaseFee + data.ColdFee + data.MiscFee;
+
+            return data;
+        }
+
+        /// <summary>
         /// 获取指定日在库库存
         /// </summary>
         /// <param name="date">日期</param>
@@ -93,6 +164,26 @@ namespace Phoebe.Business
             List<Storage> data;
 
             data = BusinessFactory<StoreBusiness>.Instance.GetInDay(date);
+            return data;
+        }
+
+        /// <summary>
+        /// 获取指定日客户在库库存
+        /// </summary>
+        /// <param name="date">日期</param>
+        /// <returns></returns>
+        public List<Storage> GetDailyStorage(DateTime date, int customerId)
+        {
+            List<Storage> data = new List<Storage>();
+
+            var contracts = BusinessFactory<ContractBusiness>.Instance.GetByCustomer2(customerId);
+
+            foreach (var contract in contracts)
+            {
+                var item = BusinessFactory<StoreBusiness>.Instance.GetInDay(contract.Id, date);
+                data.AddRange(item);
+            }
+
             return data;
         }
         #endregion //Method

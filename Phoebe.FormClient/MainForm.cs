@@ -286,6 +286,17 @@ namespace Phoebe.FormClient
             ChildFormManage.LoadMdiForm(this, typeof(DailyFeeReportForm));
         }
 
+
+        /// <summary>
+        /// 报表管理 - 费用期报表
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void menuPeriodFeeReport_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            ChildFormManage.LoadMdiForm(this, typeof(PeriodFeeReportForm));
+        }
+
         /// <summary>
         /// 报表管理 - 库存日报表
         /// </summary>
@@ -294,6 +305,16 @@ namespace Phoebe.FormClient
         private void menuDailyStorageReport_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             ChildFormManage.LoadMdiForm(this, typeof(DailyStorageReportForm));
+        }
+
+        /// <summary>
+        /// 报表管理 - 客户货品报表
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void menuCustomerCargoReport_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            ChildFormManage.LoadMdiForm(this, typeof(CustomerCargoReportForm));
         }
 
         /// <summary>
@@ -325,7 +346,6 @@ namespace Phoebe.FormClient
         {
             ChildFormManage.ShowDialogForm(typeof(ChangePasswordForm));
         }
-
 
         private void menuTest_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {

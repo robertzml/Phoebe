@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -15,23 +14,26 @@ namespace Phoebe.FormClient
     using Phoebe.Model;
 
     /// <summary>
-    /// 费用日报表表格控件
+    /// 费用期报表表格控件
     /// </summary>
-    public partial class DailyFeeGrid : UserControl
+    public partial class PeriodFeeGrid : UserControl
     {
         #region Field
         /// <summary>
-        /// 费用日期
+        /// 费用开始日期
         /// </summary>
-        private DateTime feeDate;
+        private DateTime startDate;
+
+        /// <summary>
+        /// 费用结束日期
+        /// </summary>
+        private DateTime endDate;
         #endregion //Field
 
         #region Constructor
-        public DailyFeeGrid()
+        public PeriodFeeGrid()
         {
             InitializeComponent();
-
-            this.feeDate = DateTime.Now.Date;
         }
         #endregion //Constructor
 
@@ -41,20 +43,20 @@ namespace Phoebe.FormClient
         /// </summary>
         public void Clear()
         {
-            this.bsDailyFee.Clear();
+            this.bsFee.Clear();
         }
 
         /// <summary>
         /// 获取选中数据
         /// </summary>
         /// <returns></returns>
-        public DailyFee GetCurrentSelect()
+        public PeriodFee GetCurrentSelect()
         {
-            int rowIndex = this.dgvDaily.GetFocusedDataSourceRowIndex();
-            if (rowIndex < 0 || rowIndex >= this.bsDailyFee.Count)
+            int rowIndex = this.dgvFee.GetFocusedDataSourceRowIndex();
+            if (rowIndex < 0 || rowIndex >= this.bsFee.Count)
                 return null;
             else
-                return this.bsDailyFee[rowIndex] as DailyFee;
+                return this.bsFee[rowIndex] as PeriodFee;
         }
 
         /// <summary>
@@ -62,19 +64,19 @@ namespace Phoebe.FormClient
         /// </summary>
         public void PrintPriview()
         {
-            if (!this.dgcDaily.IsPrintingAvailable)
+            if (!this.dgcFee.IsPrintingAvailable)
             {
                 MessageUtil.ShowClaim("打印程序出错");
                 return;
             }
 
             // Open the Preview window.
-            this.dgvDaily.ShowPrintPreview();
+            this.dgvFee.ShowPrintPreview();
         }
         #endregion //Method
 
         #region Event
-        private void dgvDaily_PrintInitialize(object sender, DevExpress.XtraGrid.Views.Base.PrintInitializeEventArgs e)
+        private void dgvFee_PrintInitialize(object sender, DevExpress.XtraGrid.Views.Base.PrintInitializeEventArgs e)
         {
             PrintingSystemBase pb = e.PrintingSystem as PrintingSystemBase;
             pb.PageSettings.PaperKind = System.Drawing.Printing.PaperKind.A4;
@@ -85,13 +87,13 @@ namespace Phoebe.FormClient
             phf.Header.Content.Clear();
 
             // Add custom information to the link's header.
-            phf.Header.Content.AddRange(new string[] { "", "费用日报表", this.feeDate.ToShortDateString() });
+            phf.Header.Content.AddRange(new string[] { "", "费用期报表", this.startDate.ToShortDateString() + " - " + this.endDate.ToShortDateString() });
             phf.Header.Font = new System.Drawing.Font(phf.Header.Font.FontFamily, 16);
             phf.Header.LineAlignment = BrickAlignment.Near;
 
             phf.Footer.Content.Clear();
             phf.Footer.Content.AddRange(new string[] { "", "", "打印时间:" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") });
-            
+
             phf.Footer.LineAlignment = BrickAlignment.Far;
         }
         #endregion //Event
@@ -101,32 +103,48 @@ namespace Phoebe.FormClient
         /// 数据源
         /// </summary>
         [Description("数据源")]
-        public List<DailyFee> DataSource
+        public List<PeriodFee> DataSource
         {
             get
             {
-                return this.bsDailyFee.DataSource as List<DailyFee>;
+                return this.bsFee.DataSource as List<PeriodFee>;
             }
             set
             {
-                this.dgvDaily.BeginDataUpdate();
-                this.bsDailyFee.DataSource = value;
-                this.dgvDaily.EndDataUpdate();
+                this.dgvFee.BeginDataUpdate();
+                this.bsFee.DataSource = value;
+                this.dgvFee.EndDataUpdate();
             }
         }
 
         /// <summary>
-        /// 费用日期
+        /// 费用开始日期
         /// </summary>
-        public DateTime FeeDate
+        public DateTime StartDate
         {
             get
             {
-                return this.feeDate;
+                return this.startDate;
             }
             set
             {
-                this.feeDate = value;
+                this.startDate = value;
+            }
+
+        }
+
+        /// <summary>
+        /// 费用结束日期
+        /// </summary>
+        public DateTime EndDate
+        {
+            get
+            {
+                return this.endDate;
+            }
+            set
+            {
+                this.endDate = value;
             }
         }
         #endregion //Property

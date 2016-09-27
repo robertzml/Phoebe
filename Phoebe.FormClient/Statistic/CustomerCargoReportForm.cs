@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Phoebe.FormClient
@@ -16,12 +14,12 @@ namespace Phoebe.FormClient
     using Phoebe.Model;
 
     /// <summary>
-    /// 费用日报表
+    /// 客户货品报表窗体
     /// </summary>
-    public partial class DailyFeeReportForm : BaseForm
+    public partial class CustomerCargoReportForm : BaseForm
     {
         #region Constructor
-        public DailyFeeReportForm()
+        public CustomerCargoReportForm()
         {
             InitializeComponent();
         }
@@ -33,9 +31,12 @@ namespace Phoebe.FormClient
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void DailyFeeReportForm_Load(object sender, EventArgs e)
+        private void CustomerCargoReportForm_Load(object sender, EventArgs e)
         {
-            this.dpSelect.DateTime = DateTime.Now.Date;
+            this.bsCustomer.DataSource = BusinessFactory<CustomerBusiness>.Instance.FindAll();
+            this.lkuCustomer.CustomDisplayText += new DevExpress.XtraEditors.Controls.CustomDisplayTextEventHandler(EventUtil.LkuCustomer_CustomDisplayText);
+
+            this.dpDate.DateTime = DateTime.Now.Date;
         }
 
         /// <summary>
@@ -45,13 +46,19 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void btnQuery_Click(object sender, EventArgs e)
         {
-            var date = this.dpSelect.DateTime.Date;
+            if (this.lkuCustomer.EditValue == null)
+            {
+                MessageUtil.ShowClaim("请选择客户");
+                return;
+            }
+
+            var date = this.dpDate.DateTime.Date;
+            int customerId = (int)this.lkuCustomer.EditValue;
 
             this.Cursor = Cursors.WaitCursor;
 
-            var data = BusinessFactory<StatisticBusiness>.Instance.GetDailyFee(date);
-            this.dfList.DataSource = data;
-            this.dfList.FeeDate = date;
+            var data = BusinessFactory<StatisticBusiness>.Instance.GetDailyStorage(date, customerId);
+            this.stList.DataSource = data;
 
             this.Cursor = Cursors.Default;
         }
@@ -63,7 +70,7 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void btnPrint_Click(object sender, EventArgs e)
         {
-            this.dfList.PrintPriview();
+            this.stList.PrintPriview();
         }
         #endregion //Event
     }
