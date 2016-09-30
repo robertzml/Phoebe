@@ -97,7 +97,7 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void ColdPriceForm_Load(object sender, EventArgs e)
         {
-            this.dpFrom.DateTime = DateTime.Now.Date;
+            this.dpFrom.DateTime = DateTime.Now.AddDays(1 - DateTime.Now.Day).Date;
             this.dpTo.DateTime = DateTime.Now.Date;
 
             this.bsCustomer.DataSource = BusinessFactory<CustomerBusiness>.Instance.FindAll();

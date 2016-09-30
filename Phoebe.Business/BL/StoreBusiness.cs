@@ -317,7 +317,7 @@ namespace Phoebe.Business
             List<Storage> data = new List<Storage>();
 
             //find store
-            var stores = this.dal.Find(r => r.MoveTime <= date && (r.OutTime == null || r.OutTime > date));
+            var stores = this.dal.Find(r => r.MoveTime <= date && (r.OutTime == null || r.OutTime > date) && r.Status != (int)EntityStatus.StoreReady && r.Status != (int)EntityStatus.StoreMoveReady);
             if (stores.Count() == 0)
                 return data;
 
@@ -378,7 +378,7 @@ namespace Phoebe.Business
             List<Storage> data = new List<Storage>();
 
             //find store
-            var stores = this.dal.Find(r => r.Cargo.ContractId == contractId && r.MoveTime <= date && (r.OutTime == null || r.OutTime > date));
+            var stores = this.dal.Find(r => r.Cargo.ContractId == contractId && r.MoveTime <= date && (r.OutTime == null || r.OutTime > date) && r.Status != (int)EntityStatus.StoreReady && r.Status != (int)EntityStatus.StoreMoveReady);
             if (stores.Count() == 0)
                 return data;
 
