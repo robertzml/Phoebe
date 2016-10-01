@@ -32,7 +32,13 @@ namespace Phoebe.FormClient
         /// </summary>
         private void LoadData()
         {
-            var data = BusinessFactory<PaymentBusiness>.Instance.FindAll();
+            if (this.dpFrom.DateTime > this.dpTo.DateTime)
+            {
+                MessageUtil.ShowClaim("开始日期不能晚于结束日期");
+                return;
+            }
+
+            var data = BusinessFactory<PaymentBusiness>.Instance.Get(this.dpFrom.DateTime.Date, this.dpTo.DateTime.Date);
             this.pyList.DataSource = data;
         }
 
@@ -60,6 +66,8 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void PaymentForm_Load(object sender, EventArgs e)
         {
+            this.dpFrom.DateTime = DateTime.Now.AddDays(1 - DateTime.Now.Day).Date;
+            this.dpTo.DateTime = DateTime.Now.Date;
             LoadData();
         }
 
@@ -124,6 +132,16 @@ namespace Phoebe.FormClient
 
             ReportPrintTool tool = new ReportPrintTool(report);
             tool.ShowPreview();
+        }
+
+        /// <summary>
+        /// 查询
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnQuery_Click(object sender, EventArgs e)
+        {
+            LoadData();
         }
         #endregion //Event
     }

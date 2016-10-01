@@ -51,10 +51,12 @@
             // 
             this.dgcPayment.DataSource = this.bsPayment;
             this.dgcPayment.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgcPayment.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dgcPayment.Location = new System.Drawing.Point(0, 0);
             this.dgcPayment.MainView = this.dgvPayment;
+            this.dgcPayment.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dgcPayment.Name = "dgcPayment";
-            this.dgcPayment.Size = new System.Drawing.Size(688, 456);
+            this.dgcPayment.Size = new System.Drawing.Size(750, 395);
             this.dgcPayment.TabIndex = 0;
             this.dgcPayment.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.dgvPayment});
@@ -85,6 +87,7 @@
             this.dgvPayment.OptionsFind.AlwaysVisible = true;
             this.dgvPayment.OptionsView.EnableAppearanceEvenRow = true;
             this.dgvPayment.OptionsView.EnableAppearanceOddRow = true;
+            this.dgvPayment.OptionsView.ShowFooter = true;
             this.dgvPayment.OptionsView.ShowGroupPanel = false;
             this.dgvPayment.CustomUnboundColumnData += new DevExpress.XtraGrid.Views.Base.CustomColumnDataEventHandler(this.dgvPayment_CustomUnboundColumnData);
             this.dgvPayment.CustomColumnDisplayText += new DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventHandler(this.dgvPayment_CustomColumnDisplayText);
@@ -127,6 +130,8 @@
             this.colPaidFee.Caption = "缴费金额(元)";
             this.colPaidFee.FieldName = "PaidFee";
             this.colPaidFee.Name = "colPaidFee";
+            this.colPaidFee.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "PaidFee", "合计={0:0.##}")});
             this.colPaidFee.Visible = true;
             this.colPaidFee.VisibleIndex = 3;
             // 
@@ -176,11 +181,12 @@
             // 
             // PaymentGrid
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.dgcPayment);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "PaymentGrid";
-            this.Size = new System.Drawing.Size(688, 456);
+            this.Size = new System.Drawing.Size(750, 395);
             ((System.ComponentModel.ISupportInitialize)(this.dgcPayment)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsPayment)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPayment)).EndInit();

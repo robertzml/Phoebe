@@ -68,6 +68,18 @@ namespace Phoebe.Business
         }
 
         /// <summary>
+        /// 查询时间段内缴费
+        /// </summary>
+        /// <param name="start">开始日期</param>
+        /// <param name="end">结束日期</param>
+        /// <returns></returns>
+        public List<Payment> Get(DateTime start, DateTime end)
+        {
+            var payments = this.dal.Find(r => r.PaidTime >= start && r.PaidTime <= end);
+            return payments.ToList();
+        }
+
+        /// <summary>
         /// 添加缴费
         /// </summary>
         /// <param name="entity">缴费对象</param>
