@@ -63,6 +63,7 @@ namespace Phoebe.Business
             storage.CategoryName = store.Cargo.Category.Name;
             storage.Specification = store.Specification;
 
+            storage.TotalCount = count;
             storage.Count = count;
             storage.UnitWeight = store.Cargo.UnitWeight;
             storage.StoreWeight = weight;

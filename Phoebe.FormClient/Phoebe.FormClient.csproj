@@ -88,6 +88,12 @@
     <Reference Include="UIAutomationClient" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\CargoStoreGrid.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\CargoStoreGrid.Designer.cs">
+      <DependentUpon>CargoStoreGrid.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ColdSettlementGrid.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -580,6 +586,9 @@
       <DependentUpon>UscCustomerInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils\ModelTranslate.cs" />
+    <EmbeddedResource Include="Controls\CargoStoreGrid.resx">
+      <DependentUpon>CargoStoreGrid.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\ColdSettlementGrid.resx">
       <DependentUpon>ColdSettlementGrid.cs</DependentUpon>
     </EmbeddedResource>
@@ -824,6 +833,7 @@
     <None Include="Properties\DataSources\Phoebe.Model.BaseSettlement.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.Billing.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.Cargo.datasource" />
+    <None Include="Properties\DataSources\Phoebe.Model.CargoStore.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.Category.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.ColdSettlement.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.Contract.datasource" />

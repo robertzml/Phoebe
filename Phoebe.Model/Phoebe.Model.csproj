@@ -68,6 +68,7 @@
       <DependentUpon>PhoebeModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Helper\BaseSettlement.cs" />
+    <Compile Include="Helper\CargoStore.cs" />
     <Compile Include="Helper\ColdSettlement.cs" />
     <Compile Include="Helper\DailyColdRecord.cs" />
     <Compile Include="Helper\DailyFee.cs" />

@@ -1,6 +1,6 @@
 ﻿namespace Phoebe.FormClient
 {
-    partial class StorageGrid
+    partial class CargoStoreGrid
     {
         /// <summary> 
         /// 必需的设计器变量。
@@ -29,11 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.dgcStorage = new DevExpress.XtraGrid.GridControl();
-            this.bsStorage = new System.Windows.Forms.BindingSource(this.components);
-            this.dgvStorage = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.dgcCargo = new DevExpress.XtraGrid.GridControl();
+            this.bsCargo = new System.Windows.Forms.BindingSource(this.components);
+            this.dgvCargo = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colStorageDate = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colStoreId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCustomerId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCustomerNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCustomerName = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -45,41 +44,36 @@
             this.colCategoryName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colSpecification = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colTotalCount = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colCount = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colStoreCount = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colUnitWeight = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colStoreWeight = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colUnitVolume = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colStoreVolume = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colNumber = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colInTime = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colSource = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colRemark = new DevExpress.XtraGrid.Columns.GridColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.dgcStorage)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsStorage)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvStorage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgcCargo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsCargo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCargo)).BeginInit();
             this.SuspendLayout();
             // 
-            // dgcStorage
+            // dgcCargo
             // 
-            this.dgcStorage.DataSource = this.bsStorage;
-            this.dgcStorage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgcStorage.Location = new System.Drawing.Point(0, 0);
-            this.dgcStorage.MainView = this.dgvStorage;
-            this.dgcStorage.Name = "dgcStorage";
-            this.dgcStorage.Size = new System.Drawing.Size(714, 370);
-            this.dgcStorage.TabIndex = 0;
-            this.dgcStorage.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.dgvStorage});
+            this.dgcCargo.DataSource = this.bsCargo;
+            this.dgcCargo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgcCargo.Location = new System.Drawing.Point(0, 0);
+            this.dgcCargo.MainView = this.dgvCargo;
+            this.dgcCargo.Name = "dgcCargo";
+            this.dgcCargo.Size = new System.Drawing.Size(601, 377);
+            this.dgcCargo.TabIndex = 0;
+            this.dgcCargo.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.dgvCargo});
             // 
-            // bsStorage
+            // bsCargo
             // 
-            this.bsStorage.DataSource = typeof(Phoebe.Model.Storage);
+            this.bsCargo.DataSource = typeof(Phoebe.Model.CargoStore);
             // 
-            // dgvStorage
+            // dgvCargo
             // 
-            this.dgvStorage.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.dgvCargo.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colStorageDate,
-            this.colStoreId,
             this.colCustomerId,
             this.colCustomerNumber,
             this.colCustomerName,
@@ -91,40 +85,31 @@
             this.colCategoryName,
             this.colSpecification,
             this.colTotalCount,
-            this.colCount,
+            this.colStoreCount,
             this.colUnitWeight,
             this.colStoreWeight,
             this.colUnitVolume,
-            this.colStoreVolume,
-            this.colNumber,
-            this.colInTime,
-            this.colSource,
-            this.colRemark});
-            this.dgvStorage.GridControl = this.dgcStorage;
-            this.dgvStorage.Name = "dgvStorage";
-            this.dgvStorage.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
-            this.dgvStorage.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
-            this.dgvStorage.OptionsBehavior.Editable = false;
-            this.dgvStorage.OptionsCustomization.AllowGroup = false;
-            this.dgvStorage.OptionsMenu.EnableGroupPanelMenu = false;
-            this.dgvStorage.OptionsView.EnableAppearanceEvenRow = true;
-            this.dgvStorage.OptionsView.EnableAppearanceOddRow = true;
-            this.dgvStorage.OptionsView.ShowFooter = true;
-            this.dgvStorage.OptionsView.ShowGroupPanel = false;
-            this.dgvStorage.PrintInitialize += new DevExpress.XtraGrid.Views.Base.PrintInitializeEventHandler(this.dgvStorage_PrintInitialize);
+            this.colStoreVolume});
+            this.dgvCargo.GridControl = this.dgcCargo;
+            this.dgvCargo.Name = "dgvCargo";
+            this.dgvCargo.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
+            this.dgvCargo.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
+            this.dgvCargo.OptionsBehavior.Editable = false;
+            this.dgvCargo.OptionsCustomization.AllowGroup = false;
+            this.dgvCargo.OptionsMenu.EnableGroupPanelMenu = false;
+            this.dgvCargo.OptionsView.EnableAppearanceEvenRow = true;
+            this.dgvCargo.OptionsView.EnableAppearanceOddRow = true;
+            this.dgvCargo.OptionsView.ShowFooter = true;
+            this.dgvCargo.OptionsView.ShowGroupPanel = false;
+            this.dgvCargo.PrintInitialize += new DevExpress.XtraGrid.Views.Base.PrintInitializeEventHandler(this.dgvCargo_PrintInitialize);
             // 
             // colStorageDate
             // 
-            this.colStorageDate.Caption = "库存日期";
+            this.colStorageDate.Caption = "日期";
             this.colStorageDate.FieldName = "StorageDate";
             this.colStorageDate.Name = "colStorageDate";
             this.colStorageDate.Visible = true;
             this.colStorageDate.VisibleIndex = 0;
-            // 
-            // colStoreId
-            // 
-            this.colStoreId.FieldName = "StoreId";
-            this.colStoreId.Name = "colStoreId";
             // 
             // colCustomerId
             // 
@@ -133,7 +118,7 @@
             // 
             // colCustomerNumber
             // 
-            this.colCustomerNumber.Caption = "客户代码";
+            this.colCustomerNumber.Caption = "客户编号";
             this.colCustomerNumber.FieldName = "CustomerNumber";
             this.colCustomerNumber.Name = "colCustomerNumber";
             this.colCustomerNumber.Visible = true;
@@ -141,7 +126,7 @@
             // 
             // colCustomerName
             // 
-            this.colCustomerName.Caption = "客户姓名";
+            this.colCustomerName.Caption = "客户名称";
             this.colCustomerName.FieldName = "CustomerName";
             this.colCustomerName.Name = "colCustomerName";
             this.colCustomerName.Visible = true;
@@ -172,7 +157,7 @@
             // 
             // colCategoryNumber
             // 
-            this.colCategoryNumber.Caption = "类别编码";
+            this.colCategoryNumber.Caption = "分类编号";
             this.colCategoryNumber.FieldName = "CategoryNumber";
             this.colCategoryNumber.Name = "colCategoryNumber";
             this.colCategoryNumber.Visible = true;
@@ -180,7 +165,7 @@
             // 
             // colCategoryName
             // 
-            this.colCategoryName.Caption = "类别名称";
+            this.colCategoryName.Caption = "分类名称";
             this.colCategoryName.FieldName = "CategoryName";
             this.colCategoryName.Name = "colCategoryName";
             this.colCategoryName.Visible = true;
@@ -204,15 +189,15 @@
             this.colTotalCount.Visible = true;
             this.colTotalCount.VisibleIndex = 7;
             // 
-            // colCount
+            // colStoreCount
             // 
-            this.colCount.Caption = "在库数量";
-            this.colCount.FieldName = "Count";
-            this.colCount.Name = "colCount";
-            this.colCount.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "Count", "合计={0:0.##}")});
-            this.colCount.Visible = true;
-            this.colCount.VisibleIndex = 8;
+            this.colStoreCount.Caption = "在库数量";
+            this.colStoreCount.FieldName = "StoreCount";
+            this.colStoreCount.Name = "colStoreCount";
+            this.colStoreCount.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "StoreCount", "合计={0:0.##}")});
+            this.colStoreCount.Visible = true;
+            this.colStoreCount.VisibleIndex = 8;
             // 
             // colUnitWeight
             // 
@@ -258,59 +243,26 @@
             this.colStoreVolume.Visible = true;
             this.colStoreVolume.VisibleIndex = 12;
             // 
-            // colNumber
-            // 
-            this.colNumber.Caption = "库位编号";
-            this.colNumber.FieldName = "Number";
-            this.colNumber.Name = "colNumber";
-            this.colNumber.Visible = true;
-            this.colNumber.VisibleIndex = 13;
-            // 
-            // colInTime
-            // 
-            this.colInTime.Caption = "入库时间";
-            this.colInTime.FieldName = "InTime";
-            this.colInTime.Name = "colInTime";
-            this.colInTime.Visible = true;
-            this.colInTime.VisibleIndex = 14;
-            // 
-            // colSource
-            // 
-            this.colSource.Caption = "来源";
-            this.colSource.FieldName = "Source";
-            this.colSource.Name = "colSource";
-            this.colSource.Visible = true;
-            this.colSource.VisibleIndex = 15;
-            // 
-            // colRemark
-            // 
-            this.colRemark.Caption = "备注";
-            this.colRemark.FieldName = "Remark";
-            this.colRemark.Name = "colRemark";
-            this.colRemark.Visible = true;
-            this.colRemark.VisibleIndex = 16;
-            // 
-            // StorageGrid
+            // CargoStoreGrid
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.dgcStorage);
-            this.Name = "StorageGrid";
-            this.Size = new System.Drawing.Size(714, 370);
-            ((System.ComponentModel.ISupportInitialize)(this.dgcStorage)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsStorage)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvStorage)).EndInit();
+            this.Controls.Add(this.dgcCargo);
+            this.Name = "CargoStoreGrid";
+            this.Size = new System.Drawing.Size(601, 377);
+            ((System.ComponentModel.ISupportInitialize)(this.dgcCargo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsCargo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCargo)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private DevExpress.XtraGrid.GridControl dgcStorage;
-        private DevExpress.XtraGrid.Views.Grid.GridView dgvStorage;
-        private System.Windows.Forms.BindingSource bsStorage;
+        private DevExpress.XtraGrid.GridControl dgcCargo;
+        private DevExpress.XtraGrid.Views.Grid.GridView dgvCargo;
+        private System.Windows.Forms.BindingSource bsCargo;
         private DevExpress.XtraGrid.Columns.GridColumn colStorageDate;
-        private DevExpress.XtraGrid.Columns.GridColumn colStoreId;
         private DevExpress.XtraGrid.Columns.GridColumn colCustomerId;
         private DevExpress.XtraGrid.Columns.GridColumn colCustomerNumber;
         private DevExpress.XtraGrid.Columns.GridColumn colCustomerName;
@@ -321,15 +273,11 @@
         private DevExpress.XtraGrid.Columns.GridColumn colCategoryNumber;
         private DevExpress.XtraGrid.Columns.GridColumn colCategoryName;
         private DevExpress.XtraGrid.Columns.GridColumn colSpecification;
-        private DevExpress.XtraGrid.Columns.GridColumn colCount;
+        private DevExpress.XtraGrid.Columns.GridColumn colTotalCount;
+        private DevExpress.XtraGrid.Columns.GridColumn colStoreCount;
         private DevExpress.XtraGrid.Columns.GridColumn colUnitWeight;
         private DevExpress.XtraGrid.Columns.GridColumn colStoreWeight;
         private DevExpress.XtraGrid.Columns.GridColumn colUnitVolume;
         private DevExpress.XtraGrid.Columns.GridColumn colStoreVolume;
-        private DevExpress.XtraGrid.Columns.GridColumn colNumber;
-        private DevExpress.XtraGrid.Columns.GridColumn colInTime;
-        private DevExpress.XtraGrid.Columns.GridColumn colSource;
-        private DevExpress.XtraGrid.Columns.GridColumn colRemark;
-        private DevExpress.XtraGrid.Columns.GridColumn colTotalCount;
     }
 }

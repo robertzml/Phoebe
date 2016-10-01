@@ -57,8 +57,8 @@ namespace Phoebe.FormClient
 
             this.Cursor = Cursors.WaitCursor;
 
-            var data = BusinessFactory<StatisticBusiness>.Instance.GetDailyStorage(date, customerId);
-            this.stList.DataSource = data;
+            var data = BusinessFactory<StatisticBusiness>.Instance.GetCargoStore(customerId, date);
+            this.sgList.DataSource = data;
 
             this.Cursor = Cursors.Default;
         }
@@ -70,7 +70,8 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void btnPrint_Click(object sender, EventArgs e)
         {
-            this.stList.PrintPriview();
+            this.sgList.StorageDate = this.dpDate.DateTime.Date;
+            this.sgList.PrintPriview();
         }
         #endregion //Event
     }

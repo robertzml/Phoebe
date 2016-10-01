@@ -6,19 +6,14 @@ using System.Text;
 namespace Phoebe.Model
 {
     /// <summary>
-    /// 库存记录类，表示指定日库存记录
+    /// 货品库存类
     /// </summary>
-    public class Storage
+    public class CargoStore
     {
         /// <summary>
         /// 库存日期
         /// </summary>
         public DateTime StorageDate { get; set; }
-
-        /// <summary>
-        /// 库存ID
-        /// </summary>
-        public System.Guid StoreId { get; set; }
 
         /// <summary>
         /// 客户ID
@@ -78,7 +73,7 @@ namespace Phoebe.Model
         /// <summary>
         /// 在库数量
         /// </summary>
-        public int Count { get; set; }
+        public int StoreCount { get; set; }
 
         /// <summary>
         /// 单位重量(kg)
@@ -99,30 +94,5 @@ namespace Phoebe.Model
         /// 在库体积(立方)
         /// </summary>
         public decimal StoreVolume { get; set; }
-
-        /// <summary>
-        /// 库位编号
-        /// </summary>
-        public string Number { get; set; }
-
-        /// <summary>
-        /// 入库时间
-        /// </summary>
-        public System.DateTime InTime { get; set; }
-
-        /// <summary>
-        /// 来源
-        /// </summary>
-        public SourceType Source { get; set; }
-
-        /// <summary>
-        /// 冷藏费单价
-        /// </summary>
-        public decimal UnitPrice { get; set; }
-
-        /// <summary>
-        /// 备注
-        /// </summary>
-        public string Remark { get; set; }
     }
 }

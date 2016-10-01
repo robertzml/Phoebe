@@ -44,7 +44,7 @@
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
-            this.stList = new Phoebe.FormClient.StorageGrid();
+            this.sgList = new Phoebe.FormClient.CargoStoreGrid();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
@@ -223,7 +223,7 @@
             // 
             // groupControl2
             // 
-            this.groupControl2.Controls.Add(this.stList);
+            this.groupControl2.Controls.Add(this.sgList);
             this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl2.Location = new System.Drawing.Point(3, 163);
             this.groupControl2.Name = "groupControl2";
@@ -231,14 +231,15 @@
             this.groupControl2.TabIndex = 1;
             this.groupControl2.Text = "报表记录";
             // 
-            // stList
+            // sgList
             // 
-            this.stList.DataSource = null;
-            this.stList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.stList.Location = new System.Drawing.Point(2, 21);
-            this.stList.Name = "stList";
-            this.stList.Size = new System.Drawing.Size(783, 276);
-            this.stList.TabIndex = 0;
+            this.sgList.DataSource = null;
+            this.sgList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.sgList.Location = new System.Drawing.Point(2, 21);
+            this.sgList.Name = "sgList";
+            this.sgList.Size = new System.Drawing.Size(783, 276);
+            this.sgList.StorageDate = new System.DateTime(((long)(0)));
+            this.sgList.TabIndex = 0;
             // 
             // CustomerCargoReportForm
             // 
@@ -285,8 +286,8 @@
         private System.Windows.Forms.BindingSource bsCustomer;
         private DevExpress.XtraEditors.SimpleButton btnQuery;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
-        private StorageGrid stList;
         private DevExpress.XtraEditors.SimpleButton btnPrint;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
+        private CargoStoreGrid sgList;
     }
 }

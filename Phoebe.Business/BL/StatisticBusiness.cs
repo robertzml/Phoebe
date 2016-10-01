@@ -171,6 +171,7 @@ namespace Phoebe.Business
         /// 获取指定日客户在库库存
         /// </summary>
         /// <param name="date">日期</param>
+        /// <param name="customerId">客户ID</param>
         /// <returns></returns>
         public List<Storage> GetDailyStorage(DateTime date, int customerId)
         {
@@ -182,6 +183,57 @@ namespace Phoebe.Business
             {
                 var item = BusinessFactory<StoreBusiness>.Instance.GetInDay(contract.Id, date);
                 data.AddRange(item);
+            }
+
+            return data;
+        }
+
+        /// <summary>
+        /// 获取指定日客户货品库存
+        /// </summary>
+        /// <param name="customerId">客户ID</param>
+        /// <param name="date">日期</param>
+        /// <returns></returns>
+        public List<CargoStore> GetCargoStore(int customerId, DateTime date)
+        {
+            List<CargoStore> data = new List<CargoStore>();
+
+            var storages = GetDailyStorage(date, customerId);
+            foreach (var item in storages)
+            {
+                if (data.Any(r => r.CargoId == item.CargoId))
+                {
+                    var s = data.Single(r => r.CargoId == item.CargoId);
+                    s.TotalCount += item.TotalCount;
+                    s.StoreCount += item.Count;
+                    s.StoreWeight += item.StoreWeight;
+                    s.StoreVolume += item.StoreVolume;
+                }
+                else
+                {
+                    CargoStore cs = new CargoStore
+                    {
+                        StorageDate = item.StorageDate,
+                        CustomerId = item.CustomerId,
+                        CustomerNumber = item.CustomerNumber,
+                        CustomerName = item.CustomerName,
+                        ContractId = item.ContractId,
+                        ContractName = item.ContractName,
+                        CargoId = item.CargoId,
+                        CategoryId = item.CategoryId,
+                        CategoryNumber = item.CategoryNumber,
+                        CategoryName = item.CategoryName,
+                        Specification = item.Specification,
+                        TotalCount = item.TotalCount,
+                        StoreCount = item.Count,
+                        UnitWeight = item.UnitWeight,
+                        StoreWeight = item.StoreWeight,
+                        UnitVolume = item.UnitVolume,
+                        StoreVolume = item.StoreVolume
+                    };
+
+                    data.Add(cs);
+                }
             }
 
             return data;
