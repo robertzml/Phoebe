@@ -65,6 +65,23 @@ namespace Phoebe.FormClient
         {
             this.dfList.PrintPriview();
         }
+
+        /// <summary>
+        /// 显示详情
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnDetails_Click(object sender, EventArgs e)
+        {
+            var select = this.dfList.GetCurrentSelect();
+            if (select == null)
+            {
+                MessageUtil.ShowClaim("未选中记录");
+                return;
+            }
+
+            ChildFormManage.ShowDialogForm(typeof(FeeDetailsForm), new object[] { select.CustomerId, select.Date, select.Date });
+        }
         #endregion //Event
     }
 }

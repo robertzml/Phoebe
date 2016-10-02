@@ -130,6 +130,12 @@
     <Compile Include="Controls\PeriodFeeGrid.Designer.cs">
       <DependentUpon>PeriodFeeGrid.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FeeDetailsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FeeDetailsForm.Designer.cs">
+      <DependentUpon>FeeDetailsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Statistic\CustomerCargoReportForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -615,6 +621,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\PeriodFeeGrid.resx">
       <DependentUpon>PeriodFeeGrid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FeeDetailsForm.resx">
+      <DependentUpon>FeeDetailsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Statistic\CustomerCargoReportForm.resx">
       <DependentUpon>CustomerCargoReportForm.cs</DependentUpon>
