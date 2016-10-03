@@ -59,5 +59,10 @@ namespace Phoebe.Model
         /// 出入库类型
         /// </summary>
         public StockFlowType FlowType { get; set; }
+
+        /// <summary>
+        /// 装卸费(元)
+        /// </summary>
+        public decimal HandlingFee { get; set; }
     }
 }

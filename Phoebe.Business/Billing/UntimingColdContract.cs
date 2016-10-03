@@ -28,6 +28,7 @@ namespace Phoebe.Business
             var flows = BusinessFactory<StoreBusiness>.Instance.GetDayFlow(contract.Id, date, false);
             var storages = BusinessFactory<StoreBusiness>.Instance.GetInDay(contract.Id, date);
 
+            string existFlowNumber = "";
             foreach (var flow in flows)
             {
                 DailyColdRecord frecord = new DailyColdRecord();
@@ -43,6 +44,12 @@ namespace Phoebe.Business
                 if (flow.Type == StockFlowType.StockIn)
                 {
                     frecord.DailyFee = billingProcess.CalculateDailyFee(frecord.FlowMeter, flow.UnitPrice);
+                    if (flow.FlowNumber != existFlowNumber)
+                    {
+                        var stockIn = BusinessFactory<StockInBusiness>.Instance.GetByFlowNumber(flow.FlowNumber);
+                        frecord.HandlingFee = stockIn.Billing.HandlingPrice;
+                        existFlowNumber = flow.FlowNumber;
+                    }
                 }
                 records.Add(frecord);
             }

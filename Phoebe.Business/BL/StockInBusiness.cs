@@ -104,6 +104,16 @@ namespace Phoebe.Business
             return data.ToList();
         }
 
+        /// <summary>
+        /// 根据流水号查询入库单
+        /// </summary>
+        /// <param name="flowNumber">流水号</param>
+        /// <returns></returns>
+        public StockIn GetByFlowNumber(string flowNumber)
+        {
+            var data = this.dal.FindOne(r => r.FlowNumber == flowNumber);
+            return data;
+        }
 
         [Obsolete]
         public override ErrorCode Create(StockIn entity)
