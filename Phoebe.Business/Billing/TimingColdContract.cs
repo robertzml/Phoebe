@@ -6,6 +6,7 @@ using System.Text;
 namespace Phoebe.Business
 {
     using Phoebe.Base;
+    using Phoebe.Business.DAL;
     using Phoebe.Model;
 
     /// <summary>
@@ -101,6 +102,58 @@ namespace Phoebe.Business
 
             return totalFee;
         }
+
+        /// <summary>
+        /// 计算合同冷藏费
+        /// </summary>
+        /// <param name="contract">合同</param>
+        /// <param name="start">开始日期</param>
+        /// <param name="end">结束日期</param>
+        /// <param name="billingProcess">计费处理</param>
+        /// <returns></returns>
+        /// <remarks>
+        /// 利用乘法计算费用
+        /// </remarks>
+        private decimal CalculateColdFee2(Contract contract, DateTime start, DateTime end, IBillingProcess billingProcess)
+        {
+            decimal totalFee = 0;
+            int days = end.Subtract(start).Days + 1;
+
+            var startStorages = BusinessFactory<StoreBusiness>.Instance.GetInDay(contract.Id, start.AddDays(-1));
+            foreach (var storage in startStorages)
+            {
+                decimal totalMeter = billingProcess.GetStoreMeter(storage);
+                totalFee += billingProcess.CalculatePeriodFee(totalMeter, storage.UnitPrice, days);
+            }
+
+            var stockIns = RepositoryFactory<StockInDetailsRepository>.Instance.Find(r => r.StockIn.ContractId == contract.Id && r.StockIn.InTime >= start && r.StockIn.InTime <= end && r.Status == (int)EntityStatus.StockIn);
+            foreach (var item in stockIns)
+            {
+                Storage storage = new Storage();
+                storage.Count = item.Count;
+                storage.StoreWeight = item.InWeight;
+                storage.StoreVolume = item.InVolume;
+
+                int day = end.Subtract(item.StockIn.InTime).Days + 1;
+                decimal totalMeter = billingProcess.GetStoreMeter(storage);
+                totalFee += billingProcess.CalculatePeriodFee(totalMeter, item.Store.UnitPrice, day);
+            }
+
+            var stockOuts = RepositoryFactory<StockOutDetailsRepository>.Instance.Find(r => r.StockOut.ContractId == contract.Id && r.StockOut.OutTime >= start && r.StockOut.OutTime <= end && r.Status == (int)EntityStatus.StockOut);
+            foreach (var item in stockOuts)
+            {
+                Storage storage = new Storage();
+                storage.Count = item.Count;
+                storage.StoreWeight = item.OutWeight;
+                storage.StoreVolume = item.OutVolume;
+
+                int day = end.Subtract(item.StockOut.OutTime).Days + 1;
+                decimal totalMeter = billingProcess.GetStoreMeter(storage);
+                totalFee -= billingProcess.CalculatePeriodFee(totalMeter, item.Store.UnitPrice, day);
+            }
+
+            return totalFee;
+        }
         #endregion //Function
 
         #region Method
@@ -159,7 +212,7 @@ namespace Phoebe.Business
             settle.EndTime = end;
             settle.ContractId = contract.Id;
             settle.ContractName = contract.Name;
-            settle.ColdFee = CalculateColdFee(contract, start, end, billingProcess);
+            settle.ColdFee = CalculateColdFee2(contract, start, end, billingProcess);
 
             return settle;
         }

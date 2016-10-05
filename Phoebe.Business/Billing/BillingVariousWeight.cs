@@ -75,6 +75,18 @@ namespace Phoebe.Business
         {
             return totalMeter * unitPrice;
         }
+
+        /// <summary>
+        /// 计算货品周期冷藏费
+        /// </summary>
+        /// <param name="totalMeter">日总计量</param>
+        /// <param name="unitPrice">单价</param>
+        /// <param name="days">天数</param>
+        /// <returns></returns>
+        public decimal CalculatePeriodFee(decimal totalMeter, decimal unitPrice, int days)
+        {
+            return totalMeter * unitPrice * days;
+        }
         #endregion //Method
     }
 }

@@ -43,7 +43,6 @@ namespace Phoebe.Business
         /// <param name="count">数量</param>
         /// <param name="weight">在库重量</param>
         /// <param name="volume">在库体积</param>
-        /// <param name="source">来源</param>
         /// <returns></returns>
         private Storage SetStorage(Store store, DateTime date, int count, decimal weight, decimal volume)
         {
