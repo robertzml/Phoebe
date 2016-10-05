@@ -64,15 +64,15 @@ namespace Phoebe.FormClient
             DateTime start = contracts.Min(r => r.SignDate);
             DateTime end = DateTime.Now.Date;
 
-            var receipt = BusinessFactory<SettlementBusiness>.Instance.GetDebt(customer.Id, start, end);
+            var debt = BusinessFactory<SettlementBusiness>.Instance.GetDebt(customer.Id, start, end);
 
             this.txtStartTime.Text = start.ToShortDateString();
             this.txtEndTime.Text = end.ToShortDateString();
-            this.txtSettleFee.Text = receipt.SettleFee.ToString("f2") + " 元";
-            this.txtUnSettleFee.Text = receipt.UnSettleFee.ToString("f2") + " 元";
-            this.txtSumFee.Text = (receipt.SettleFee + receipt.UnSettleFee).ToString("f2") + "元";
-            this.txtPaidFee.Text = receipt.PaidFee.ToString("f2") + " 元";
-            this.txtDebt.Text = receipt.DebtFee.ToString("f2") + " 元";
+            this.txtSettleFee.Text = debt.SettleFee.ToString("f2") + " 元";
+            this.txtUnSettleFee.Text = debt.UnSettleFee.ToString("f2") + " 元";
+            this.txtSumFee.Text = debt.SumFee.ToString("f2") + "元";
+            this.txtPaidFee.Text = debt.PaidFee.ToString("f2") + " 元";
+            this.txtDebt.Text = debt.DebtFee.ToString("f2") + " 元";
 
             this.Cursor = Cursors.Default;
         }

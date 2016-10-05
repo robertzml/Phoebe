@@ -72,6 +72,7 @@
     <Compile Include="Helper\ColdSettlement.cs" />
     <Compile Include="Helper\DailyColdRecord.cs" />
     <Compile Include="Helper\DailyFee.cs" />
+    <Compile Include="Helper\Debt.cs" />
     <Compile Include="Helper\IceEnum.cs" />
     <Compile Include="Helper\IceRecord.cs" />
     <Compile Include="Helper\IceStoreFlow.cs" />

@@ -103,23 +103,26 @@ namespace Phoebe.Business
         /// <param name="start">开始日期</param>
         /// <param name="end">结束日期</param>
         /// <returns></returns>
-        public Receipt GetDebt(int customerId, DateTime start, DateTime end)
+        public Debt GetDebt(int customerId, DateTime start, DateTime end)
         {
-            Receipt receipt = new Receipt();
+            Debt debt = new Debt();
 
             var customer = BusinessFactory<CustomerBusiness>.Instance.FindById(customerId);
             if (customer == null)
                 return null;
 
-            receipt.CustomerId = customerId;
-            receipt.CustomerName = customer.Name;
-            receipt.SettleFee = 0;
-            receipt.UnSettleFee = 0;
+            debt.CustomerId = customerId;
+            debt.CustomerNumber = customer.Number;
+            debt.CustomerName = customer.Name;
+            debt.StartTime = start;
+            debt.EndTime = end;
+            debt.SettleFee = 0;
+            debt.UnSettleFee = 0;
 
             var settles = this.dal.Find(r => r.CustomerId == customerId).OrderByDescending(r => r.EndTime);
             if (settles.Count() != 0)
             {
-                receipt.SettleFee = settles.Sum(r => r.DueFee);
+                debt.SettleFee = settles.Sum(r => r.DueFee);
 
                 var last = settles.First();
                 start = last.EndTime.AddDays(1);
@@ -150,24 +153,25 @@ namespace Phoebe.Business
 
             // get base fee
             if (baseSettlement.Count > 0)
-                receipt.UnSettleFee = baseSettlement.Sum(r => r.TotalPrice);
+                debt.UnSettleFee = baseSettlement.Sum(r => r.TotalPrice);
 
             // get cold fee
             if (coldSettlement.Count > 0)
-                receipt.UnSettleFee += coldSettlement.Sum(r => r.ColdFee);
+                debt.UnSettleFee += coldSettlement.Sum(r => r.ColdFee);
 
             // get misc fee
             if (miscSettlement.Count > 0)
-                receipt.UnSettleFee += miscSettlement.Sum(r => r.TotalFee);
-            
+                debt.UnSettleFee += miscSettlement.Sum(r => r.TotalFee);
+
             // get paid fee
             var payments = BusinessFactory<PaymentBusiness>.Instance.GetByCustomer(customerId);
             if (payments.Count() != 0)
-                receipt.PaidFee = payments.Sum(r => r.PaidFee);
+                debt.PaidFee = payments.Sum(r => r.PaidFee);
 
-            receipt.DebtFee = receipt.SettleFee + receipt.UnSettleFee - receipt.PaidFee;
+            debt.SumFee = debt.SettleFee + debt.UnSettleFee;
+            debt.DebtFee = debt.SumFee - debt.PaidFee;
 
-            return receipt;
+            return debt;
         }
 
         /// <summary>
@@ -175,32 +179,36 @@ namespace Phoebe.Business
         /// </summary>
         /// <param name="customerId">客户ID</param>
         /// <returns></returns>
-        public Receipt GetDebt(int customerId)
+        public Debt GetDebt(int customerId)
         {
-            Receipt receipt = new Receipt();
-
-            var contracts = BusinessFactory<ContractBusiness>.Instance.GetByCustomer(customerId);
-            if (contracts.Count == 0)
-            {
-                return receipt;
-            }
-
-            DateTime start = contracts.Min(r => r.SignDate);
-            DateTime end = DateTime.Now.Date;
+            Debt debt = new Debt();
 
             var customer = BusinessFactory<CustomerBusiness>.Instance.FindById(customerId);
             if (customer == null)
                 return null;
 
-            receipt.CustomerId = customerId;
-            receipt.CustomerName = customer.Name;
-            receipt.SettleFee = 0;
-            receipt.UnSettleFee = 0;
+            debt.CustomerId = customerId;
+            debt.CustomerNumber = customer.Number;
+            debt.CustomerName = customer.Name;
+
+            var contracts = BusinessFactory<ContractBusiness>.Instance.GetByCustomer(customerId);
+            if (contracts.Count == 0)
+            {
+                return debt;
+            }
+
+            DateTime start = contracts.Min(r => r.SignDate);
+            DateTime end = DateTime.Now.Date;
+
+            debt.StartTime = start;
+            debt.EndTime = end;
+            debt.SettleFee = 0;
+            debt.UnSettleFee = 0;
 
             var settles = this.dal.Find(r => r.CustomerId == customerId).OrderByDescending(r => r.EndTime);
             if (settles.Count() != 0)
             {
-                receipt.SettleFee = settles.Sum(r => r.DueFee);
+                debt.SettleFee = settles.Sum(r => r.DueFee);
 
                 var last = settles.First();
                 start = last.EndTime.AddDays(1);
@@ -229,24 +237,25 @@ namespace Phoebe.Business
 
             // get base fee
             if (baseSettlement.Count > 0)
-                receipt.UnSettleFee = baseSettlement.Sum(r => r.TotalPrice);
+                debt.UnSettleFee = baseSettlement.Sum(r => r.TotalPrice);
 
             // get cold fee
             if (coldSettlement.Count > 0)
-                receipt.UnSettleFee += coldSettlement.Sum(r => r.ColdFee);
+                debt.UnSettleFee += coldSettlement.Sum(r => r.ColdFee);
 
             // get misc fee
             if (miscSettlement.Count > 0)
-                receipt.UnSettleFee += miscSettlement.Sum(r => r.TotalFee);            
+                debt.UnSettleFee += miscSettlement.Sum(r => r.TotalFee);
 
             // get paid fee
             var payments = BusinessFactory<PaymentBusiness>.Instance.GetByCustomer(customerId);
             if (payments.Count() != 0)
-                receipt.PaidFee = payments.Sum(r => r.PaidFee);
+                debt.PaidFee = payments.Sum(r => r.PaidFee);
 
-            receipt.DebtFee = receipt.SettleFee + receipt.UnSettleFee - receipt.PaidFee;
+            debt.SumFee = debt.SettleFee + debt.UnSettleFee;
+            debt.DebtFee = debt.SumFee - debt.PaidFee;
 
-            return receipt;
+            return debt;
         }
         #endregion //Method
     }

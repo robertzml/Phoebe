@@ -318,6 +318,16 @@ namespace Phoebe.FormClient
         }
 
         /// <summary>
+        /// 报表管理 - 实时欠费报表
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void menuDebtReport_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            ChildFormManage.LoadMdiForm(this, typeof(DebtReportForm));
+        }
+
+        /// <summary>
         /// 用户管理 - 用户列表
         /// </summary>
         /// <param name="sender"></param>

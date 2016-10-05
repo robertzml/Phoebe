@@ -130,6 +130,18 @@
     <Compile Include="Controls\PeriodFeeGrid.Designer.cs">
       <DependentUpon>PeriodFeeGrid.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\DebtGrid.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\DebtGrid.Designer.cs">
+      <DependentUpon>DebtGrid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Statistic\DebtReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Statistic\DebtReportForm.Designer.cs">
+      <DependentUpon>DebtReportForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FeeDetailsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -622,6 +634,9 @@
     <EmbeddedResource Include="Controls\PeriodFeeGrid.resx">
       <DependentUpon>PeriodFeeGrid.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\DebtGrid.resx">
+      <DependentUpon>DebtGrid.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FeeDetailsForm.resx">
       <DependentUpon>FeeDetailsForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -826,6 +841,9 @@
     <EmbeddedResource Include="Statistic\DailyFeeReportForm.resx">
       <DependentUpon>DailyFeeReportForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Statistic\DebtReportForm.resx">
+      <DependentUpon>DebtReportForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Statistic\PeriodFeeReportForm.resx">
       <DependentUpon>PeriodFeeReportForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -849,6 +867,7 @@
     <None Include="Properties\DataSources\Phoebe.Model.Customer.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.DailyColdRecord.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.DailyFee.datasource" />
+    <None Include="Properties\DataSources\Phoebe.Model.Debt.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.IceFlow.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.IceRecord.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.IceSale.datasource" />

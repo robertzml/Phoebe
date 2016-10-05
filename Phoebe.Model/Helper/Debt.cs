@@ -6,14 +6,19 @@ using System.Text;
 namespace Phoebe.Model
 {
     /// <summary>
-    /// 实时对账模型类
+    /// 实时欠费模型
     /// </summary>
-    class Receipt
+    public class Debt
     {
         /// <summary>
         /// 客户ID
         /// </summary>
         public int CustomerId { get; set; }
+
+        /// <summary>
+        /// 客户代码
+        /// </summary>
+        public string CustomerNumber { get; set; }
 
         /// <summary>
         /// 客户名称
@@ -39,6 +44,11 @@ namespace Phoebe.Model
         /// 未结算费用
         /// </summary>
         public decimal UnSettleFee { get; set; }
+
+        /// <summary>
+        /// 费用合计
+        /// </summary>
+        public decimal SumFee { get; set; }
 
         /// <summary>
         /// 实付款
