@@ -238,6 +238,16 @@ namespace Phoebe.Business
 
             return data;
         }
+
+        public void GetTotalCargoStore(DateTime date)
+        {
+            var storages  = BusinessFactory<StoreBusiness>.Instance.GetInDay(date);
+            foreach(var item in storages)
+            {
+
+            }
+
+        }
         #endregion //Method
     }
 }

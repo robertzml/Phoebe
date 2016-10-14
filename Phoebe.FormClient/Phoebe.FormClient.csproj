@@ -430,6 +430,12 @@
     <Compile Include="TestForm.Designer.cs">
       <DependentUpon>TestForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Statistic\TotalStorageReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Statistic\TotalStorageReportForm.Designer.cs">
+      <DependentUpon>TotalStorageReportForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utils\EventUtil.cs" />
     <Compile Include="Utils\GlobalControl.cs" />
     <Compile Include="Utils\FormConstant.cs" />
@@ -852,6 +858,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Statistic\StockInventoryReportForm.resx">
       <DependentUpon>StockInventoryReportForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Statistic\TotalStorageReportForm.resx">
+      <DependentUpon>TotalStorageReportForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TestForm.resx">
       <DependentUpon>TestForm.cs</DependentUpon>

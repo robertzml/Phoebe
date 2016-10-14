@@ -328,6 +328,16 @@ namespace Phoebe.FormClient
         }
 
         /// <summary>
+        /// 报表管理 - 货品总报表报表
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void menuTotalStorageReport_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            ChildFormManage.LoadMdiForm(this, typeof(TotalStorageReportForm));
+        }
+
+        /// <summary>
         /// 用户管理 - 用户列表
         /// </summary>
         /// <param name="sender"></param>
@@ -364,5 +374,6 @@ namespace Phoebe.FormClient
         #endregion //Menu Event
 
         #endregion //Event
+
     }
 }
