@@ -89,5 +89,18 @@ namespace Phoebe.FormClient
 
         #region Event
         #endregion //Event
+
+        #region Property
+        /// <summary>
+        /// 车号
+        /// </summary>
+        public string CarNumber
+        {
+            get
+            {
+                return this.txtCarNumber.Text;
+            }
+        }
+        #endregion //Property
     }
 }

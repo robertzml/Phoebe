@@ -27,6 +27,11 @@ namespace Phoebe.Model.Report
         public string FlowNumber { get; set; }
 
         /// <summary>
+        /// 车号
+        /// </summary>
+        public string CarNumber { get; set; }
+
+        /// <summary>
         /// 当前欠费
         /// </summary>
         public decimal DebtFee { get; set; }

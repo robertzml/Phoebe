@@ -34,6 +34,7 @@ namespace Phoebe.FormClient.Report
             this.CustomerName.Value = model.CustomerName;
             this.InTime.Value = model.InTime;
             this.FlowNumber.Value = model.FlowNumber;
+            this.CarNumber.Value = model.CarNumber;
             this.User.Value = model.UserName;
         }
         #endregion //Function

@@ -584,6 +584,7 @@ namespace Phoebe.FormClient
 
             var stockOut = BusinessFactory<StockOutBusiness>.Instance.FindById(this.currentStockOutId);
             var model = ModelTranslate.StockOutToReport(stockOut);
+            model.CarNumber = this.stockOutView.CarNumber;
 
             Report.StockOut report = new Report.StockOut(model);
 

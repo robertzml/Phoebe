@@ -583,6 +583,7 @@ namespace Phoebe.FormClient
 
             var stockIn = BusinessFactory<StockInBusiness>.Instance.FindById(this.currentStockInId);
             var model = ModelTranslate.StockInToReport(stockIn);
+            model.CarNumber = this.stockInView.CarNumber;
 
             Report.StockIn report = new Report.StockIn(model);
 

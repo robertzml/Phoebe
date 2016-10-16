@@ -79,6 +79,8 @@
             this.layoutControlItem19 = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.layoutControlItem20 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.txtCarNumber = new DevExpress.XtraEditors.TextEdit();
+            this.layoutControlItem21 = new DevExpress.XtraLayout.LayoutControlItem();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
             this.groupControl2.SuspendLayout();
@@ -134,6 +136,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem19)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem20)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCarNumber.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem21)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -548,6 +552,7 @@
             // 
             // layoutControl1
             // 
+            this.layoutControl1.Controls.Add(this.txtCarNumber);
             this.layoutControl1.Controls.Add(this.txtCreateTime);
             this.layoutControl1.Controls.Add(this.txtFlowNumber);
             this.layoutControl1.Controls.Add(this.txtInTime);
@@ -691,7 +696,8 @@
             this.layoutControlItem2,
             this.layoutControlItem19,
             this.emptySpaceItem1,
-            this.layoutControlItem20});
+            this.layoutControlItem20,
+            this.layoutControlItem21});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "layoutControlGroup1";
             this.layoutControlGroup1.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 5, 5, 5);
@@ -761,7 +767,8 @@
             this.layoutControlItem8.Control = this.txtRemark;
             this.layoutControlItem8.Location = new System.Drawing.Point(249, 58);
             this.layoutControlItem8.Name = "layoutControlItem8";
-            this.layoutControlItem8.Size = new System.Drawing.Size(259, 63);
+            this.layoutControlItem8.Size = new System.Drawing.Size(259, 29);
+            this.layoutControlItem8.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 5);
             this.layoutControlItem8.Text = "备注";
             this.layoutControlItem8.TextSize = new System.Drawing.Size(48, 14);
             // 
@@ -799,6 +806,23 @@
             this.layoutControlItem20.Size = new System.Drawing.Size(249, 34);
             this.layoutControlItem20.Text = "创建时间";
             this.layoutControlItem20.TextSize = new System.Drawing.Size(48, 14);
+            // 
+            // txtCarNumber
+            // 
+            this.txtCarNumber.Location = new System.Drawing.Point(307, 94);
+            this.txtCarNumber.Name = "txtCarNumber";
+            this.txtCarNumber.Size = new System.Drawing.Size(204, 20);
+            this.txtCarNumber.StyleController = this.layoutControl1;
+            this.txtCarNumber.TabIndex = 10;
+            // 
+            // layoutControlItem21
+            // 
+            this.layoutControlItem21.Control = this.txtCarNumber;
+            this.layoutControlItem21.Location = new System.Drawing.Point(249, 87);
+            this.layoutControlItem21.Name = "layoutControlItem21";
+            this.layoutControlItem21.Size = new System.Drawing.Size(259, 34);
+            this.layoutControlItem21.Text = "车号";
+            this.layoutControlItem21.TextSize = new System.Drawing.Size(48, 14);
             // 
             // StockInViewControl
             // 
@@ -862,6 +886,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem19)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem20)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCarNumber.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem21)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -919,5 +945,7 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem17;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem18;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem2;
+        private DevExpress.XtraEditors.TextEdit txtCarNumber;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem21;
     }
 }

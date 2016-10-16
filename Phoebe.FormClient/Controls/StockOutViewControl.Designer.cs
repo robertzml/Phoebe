@@ -55,6 +55,8 @@
             this.layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
             this.sogList = new Phoebe.FormClient.StockOutGrid();
+            this.txtCarNumber = new DevExpress.XtraEditors.TextEdit();
+            this.layoutControlItem11 = new DevExpress.XtraLayout.LayoutControlItem();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
@@ -84,6 +86,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
             this.groupControl2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCarNumber.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -114,6 +118,7 @@
             // 
             // layoutControl1
             // 
+            this.layoutControl1.Controls.Add(this.txtCarNumber);
             this.layoutControl1.Controls.Add(this.txtCreateTime);
             this.layoutControl1.Controls.Add(this.txtFlowNumber);
             this.layoutControl1.Controls.Add(this.txtRemark);
@@ -257,7 +262,8 @@
             this.layoutControlItem7,
             this.layoutControlItem8,
             this.layoutControlItem9,
-            this.layoutControlItem10});
+            this.layoutControlItem10,
+            this.layoutControlItem11});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "layoutControlGroup1";
             this.layoutControlGroup1.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 5, 5, 5);
@@ -343,7 +349,8 @@
             this.layoutControlItem8.Control = this.txtRemark;
             this.layoutControlItem8.Location = new System.Drawing.Point(175, 58);
             this.layoutControlItem8.Name = "layoutControlItem8";
-            this.layoutControlItem8.Size = new System.Drawing.Size(201, 63);
+            this.layoutControlItem8.Size = new System.Drawing.Size(201, 29);
+            this.layoutControlItem8.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 5);
             this.layoutControlItem8.Text = "备注";
             this.layoutControlItem8.TextSize = new System.Drawing.Size(48, 14);
             // 
@@ -388,6 +395,23 @@
             this.sogList.Size = new System.Drawing.Size(990, 411);
             this.sogList.TabIndex = 0;
             // 
+            // txtCarNumber
+            // 
+            this.txtCarNumber.Location = new System.Drawing.Point(233, 94);
+            this.txtCarNumber.Name = "txtCarNumber";
+            this.txtCarNumber.Size = new System.Drawing.Size(146, 20);
+            this.txtCarNumber.StyleController = this.layoutControl1;
+            this.txtCarNumber.TabIndex = 10;
+            // 
+            // layoutControlItem11
+            // 
+            this.layoutControlItem11.Control = this.txtCarNumber;
+            this.layoutControlItem11.Location = new System.Drawing.Point(175, 87);
+            this.layoutControlItem11.Name = "layoutControlItem11";
+            this.layoutControlItem11.Size = new System.Drawing.Size(201, 34);
+            this.layoutControlItem11.Text = "车号";
+            this.layoutControlItem11.TextSize = new System.Drawing.Size(48, 14);
+            // 
             // StockOutViewControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -424,6 +448,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
             this.groupControl2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.txtCarNumber.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -457,5 +483,7 @@
         private StockOutGrid sogList;
         private DevExpress.XtraEditors.TextEdit txtCreateTime;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem10;
+        private DevExpress.XtraEditors.TextEdit txtCarNumber;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem11;
     }
 }
