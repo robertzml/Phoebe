@@ -239,14 +239,97 @@ namespace Phoebe.Business
             return data;
         }
 
-        public void GetTotalCargoStore(DateTime date)
+        /// <summary>
+        /// 获取货品总库存
+        /// </summary>
+        /// <param name="date">日期</param>
+        /// <returns></returns>
+        public List<TotalStorage> GetTotalCargoStore(DateTime date)
         {
-            var storages  = BusinessFactory<StoreBusiness>.Instance.GetInDay(date);
-            foreach(var item in storages)
-            {
+            List<TotalStorage> data = new List<TotalStorage>();
 
+            var storages = BusinessFactory<StoreBusiness>.Instance.GetInDay(date);
+            foreach (var item in storages)
+            {
+                if (data.Any(r => r.CategoryId == item.CategoryId))
+                {
+                    var s = data.Single(r => r.CategoryId == item.CategoryId);
+                    s.StoreCount += item.Count;
+                    s.StoreWeight += item.StoreWeight;
+                    s.StoreVolume += item.StoreVolume;
+                }
+                else
+                {
+                    TotalStorage ts = new TotalStorage();
+                    ts.StorageDate = date;
+                    ts.CategoryId = item.CategoryId;
+                    ts.CategoryNumber = item.CategoryNumber;
+                    ts.CategoryName = item.CategoryName;
+                    ts.StoreCount = item.Count;
+                    ts.StoreWeight = item.StoreWeight;
+                    ts.StoreVolume = item.StoreVolume;
+
+                    data.Add(ts);
+                }
             }
 
+            return data;
+        }
+
+        /// <summary>
+        /// 获取客户费用列表
+        /// </summary>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
+        /// <returns></returns>
+        public List<CustomerFee> GetCustomerFee(DateTime start, DateTime end)
+        {
+            List<CustomerFee> data = new List<CustomerFee>();
+
+            var customers = BusinessFactory<CustomerBusiness>.Instance.FindAll();
+            foreach (var customer in customers)
+            {
+                var customerFee = new CustomerFee();
+
+                customerFee.CustomerId = customer.Id;
+                customerFee.CustomerNumber = customer.Number;
+                customerFee.CustomerName = customer.Name;
+                customerFee.StartTime = start;
+                customerFee.EndTime = end;
+
+                var contracts = BusinessFactory<ContractBusiness>.Instance.GetByCustomer(customer.Id);
+
+                DateTime beginTime = contracts.Min(r => r.SignDate);
+                DateTime lastTime = start.AddDays(-1);
+
+                //get previous debt
+                var debt = BusinessFactory<SettlementBusiness>.Instance.GetDebt(customer.Id, beginTime, lastTime);
+                customerFee.StartDebt = debt.DebtFee;
+
+                foreach (var contract in contracts)
+                {
+                    var contractBill = ContractFactory.Create((ContractType)contract.Type);
+
+                    var baseSettle = contractBill.GetBaseFee(contract.Id, start, end);
+                    if (baseSettle != null)
+                        customerFee.BaseFee += baseSettle.Sum(r => r.TotalPrice);
+
+                    var coldSettle = contractBill.GetColdFee(contract.Id, start, end);
+                    if (coldSettle != null)
+                        customerFee.ColdFee += coldSettle.ColdFee;
+
+                    var miscSettle = contractBill.GetMiscFee(contract.Id, start, end);
+                    if (miscSettle != null)
+                        customerFee.MiscFee += miscSettle.TotalFee;
+                }
+
+                customerFee.TotalFee = customerFee.BaseFee + customerFee.ColdFee + customerFee.MiscFee;
+
+
+                data.Add(customerFee);
+            }
+
+            return data;
         }
         #endregion //Method
     }

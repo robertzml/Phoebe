@@ -70,6 +70,7 @@
     <Compile Include="Helper\BaseSettlement.cs" />
     <Compile Include="Helper\CargoStore.cs" />
     <Compile Include="Helper\ColdSettlement.cs" />
+    <Compile Include="Helper\CustomerFee.cs" />
     <Compile Include="Helper\DailyColdRecord.cs" />
     <Compile Include="Helper\DailyFee.cs" />
     <Compile Include="Helper\Debt.cs" />
@@ -86,6 +87,7 @@
     <Compile Include="Helper\StockOutModel.cs" />
     <Compile Include="Helper\Storage.cs" />
     <Compile Include="Helper\StockInModel.cs" />
+    <Compile Include="Helper\TotalStorage.cs" />
     <Compile Include="IceFlow.cs">
       <DependentUpon>PhoebeModel.tt</DependentUpon>
     </Compile>

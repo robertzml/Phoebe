@@ -328,13 +328,23 @@ namespace Phoebe.FormClient
         }
 
         /// <summary>
-        /// 报表管理 - 货品总报表报表
+        /// 报表管理 - 货品总报表
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void menuTotalStorageReport_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             ChildFormManage.LoadMdiForm(this, typeof(TotalStorageReportForm));
+        }
+
+        /// <summary>
+        /// 客户费用报表
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void menuCustomerFeeReport_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            ChildFormManage.LoadMdiForm(this, typeof(CustomerFeeReportForm));
         }
 
         /// <summary>
@@ -374,6 +384,5 @@ namespace Phoebe.FormClient
         #endregion //Menu Event
 
         #endregion //Event
-
     }
 }

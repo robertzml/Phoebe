@@ -136,6 +136,18 @@
     <Compile Include="Controls\DebtGrid.Designer.cs">
       <DependentUpon>DebtGrid.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\CustomerFeeGrid.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\CustomerFeeGrid.Designer.cs">
+      <DependentUpon>CustomerFeeGrid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Statistic\CustomerFeeReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Statistic\CustomerFeeReportForm.Designer.cs">
+      <DependentUpon>CustomerFeeReportForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Statistic\DebtReportForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -436,6 +448,12 @@
     <Compile Include="Statistic\TotalStorageReportForm.Designer.cs">
       <DependentUpon>TotalStorageReportForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\TotalStorageGrid.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\TotalStorageGrid.Designer.cs">
+      <DependentUpon>TotalStorageGrid.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utils\EventUtil.cs" />
     <Compile Include="Utils\GlobalControl.cs" />
     <Compile Include="Utils\FormConstant.cs" />
@@ -625,6 +643,9 @@
     <EmbeddedResource Include="Controls\CargoGrid.resx">
       <DependentUpon>CargoGrid.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\CustomerFeeGrid.resx">
+      <DependentUpon>CustomerFeeGrid.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\IceRecordGrid.resx">
       <DependentUpon>IceRecordGrid.cs</DependentUpon>
     </EmbeddedResource>
@@ -643,11 +664,17 @@
     <EmbeddedResource Include="Controls\DebtGrid.resx">
       <DependentUpon>DebtGrid.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\TotalStorageGrid.resx">
+      <DependentUpon>TotalStorageGrid.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FeeDetailsForm.resx">
       <DependentUpon>FeeDetailsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Statistic\CustomerCargoReportForm.resx">
       <DependentUpon>CustomerCargoReportForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Statistic\CustomerFeeReportForm.resx">
+      <DependentUpon>CustomerFeeReportForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Statistic\DailyStorageReportForm.resx">
       <DependentUpon>DailyStorageReportForm.cs</DependentUpon>
@@ -874,6 +901,7 @@
     <None Include="Properties\DataSources\Phoebe.Model.ColdSettlement.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.Contract.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.Customer.datasource" />
+    <None Include="Properties\DataSources\Phoebe.Model.CustomerFee.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.DailyColdRecord.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.DailyFee.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.Debt.datasource" />
@@ -892,6 +920,7 @@
     <None Include="Properties\DataSources\Phoebe.Model.StockOutModel.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.Storage.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.Store.datasource" />
+    <None Include="Properties\DataSources\Phoebe.Model.TotalStorage.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.User.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.UserGroup.datasource" />
     <None Include="Properties\licenses.licx" />
