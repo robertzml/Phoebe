@@ -40,6 +40,7 @@
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
+            this.dtsList = new Phoebe.FormClient.TotalStorageGrid();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
@@ -53,6 +54,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
+            this.groupControl2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -102,6 +104,7 @@
             this.btnPrint.StyleController = this.layoutControl1;
             this.btnPrint.TabIndex = 6;
             this.btnPrint.Text = "打印";
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
             // btnQuery
             // 
@@ -111,6 +114,7 @@
             this.btnQuery.StyleController = this.layoutControl1;
             this.btnQuery.TabIndex = 5;
             this.btnQuery.Text = "查询";
+            this.btnQuery.Click += new System.EventHandler(this.btnQuery_Click);
             // 
             // dpTime
             // 
@@ -178,12 +182,22 @@
             // 
             // groupControl2
             // 
+            this.groupControl2.Controls.Add(this.dtsList);
             this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl2.Location = new System.Drawing.Point(3, 123);
             this.groupControl2.Name = "groupControl2";
             this.groupControl2.Size = new System.Drawing.Size(787, 339);
             this.groupControl2.TabIndex = 1;
             this.groupControl2.Text = "报表记录";
+            // 
+            // dtsList
+            // 
+            this.dtsList.DataSource = null;
+            this.dtsList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dtsList.Location = new System.Drawing.Point(2, 21);
+            this.dtsList.Name = "dtsList";
+            this.dtsList.Size = new System.Drawing.Size(783, 316);
+            this.dtsList.TabIndex = 0;
             // 
             // TotalStorageReportForm
             // 
@@ -193,6 +207,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "TotalStorageReportForm";
             this.Text = "货品总报表";
+            this.Load += new System.EventHandler(this.TotalStorageReportForm_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
             this.groupControl1.ResumeLayout(false);
@@ -206,6 +221,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
+            this.groupControl2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -224,5 +240,6 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
+        private TotalStorageGrid dtsList;
     }
 }

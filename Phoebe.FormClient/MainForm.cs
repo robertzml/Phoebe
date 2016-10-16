@@ -338,7 +338,7 @@ namespace Phoebe.FormClient
         }
 
         /// <summary>
-        /// 客户费用报表
+        /// 报表管理 - 客户费用报表
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

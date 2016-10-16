@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             this.dgcStorage = new DevExpress.XtraGrid.GridControl();
-            this.dgvStorage = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.bsStorage = new System.Windows.Forms.BindingSource(this.components);
+            this.dgvStorage = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colStorageDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCategoryId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCategoryNumber = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -40,8 +40,8 @@
             this.colStoreWeight = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colStoreVolume = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgcStorage)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvStorage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsStorage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvStorage)).BeginInit();
             this.SuspendLayout();
             // 
             // dgcStorage
@@ -51,10 +51,14 @@
             this.dgcStorage.Location = new System.Drawing.Point(0, 0);
             this.dgcStorage.MainView = this.dgvStorage;
             this.dgcStorage.Name = "dgcStorage";
-            this.dgcStorage.Size = new System.Drawing.Size(692, 475);
+            this.dgcStorage.Size = new System.Drawing.Size(720, 434);
             this.dgcStorage.TabIndex = 0;
             this.dgcStorage.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.dgvStorage});
+            // 
+            // bsStorage
+            // 
+            this.bsStorage.DataSource = typeof(Phoebe.Model.TotalStorage);
             // 
             // dgvStorage
             // 
@@ -78,10 +82,7 @@
             this.dgvStorage.OptionsView.EnableAppearanceOddRow = true;
             this.dgvStorage.OptionsView.ShowFooter = true;
             this.dgvStorage.OptionsView.ShowGroupPanel = false;
-            // 
-            // bsStorage
-            // 
-            this.bsStorage.DataSource = typeof(Phoebe.Model.TotalStorage);
+            this.dgvStorage.PrintInitialize += new DevExpress.XtraGrid.Views.Base.PrintInitializeEventHandler(this.dgvStorage_PrintInitialize);
             // 
             // colStorageDate
             // 
@@ -117,22 +118,32 @@
             this.colStoreCount.Caption = "在库数量";
             this.colStoreCount.FieldName = "StoreCount";
             this.colStoreCount.Name = "colStoreCount";
+            this.colStoreCount.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "StoreCount", "合计={0:0.##}")});
             this.colStoreCount.Visible = true;
             this.colStoreCount.VisibleIndex = 3;
             // 
             // colStoreWeight
             // 
             this.colStoreWeight.Caption = "在库重量(t)";
+            this.colStoreWeight.DisplayFormat.FormatString = "0.000";
+            this.colStoreWeight.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colStoreWeight.FieldName = "StoreWeight";
             this.colStoreWeight.Name = "colStoreWeight";
+            this.colStoreWeight.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "StoreWeight", "合计={0:0.000}")});
             this.colStoreWeight.Visible = true;
             this.colStoreWeight.VisibleIndex = 4;
             // 
             // colStoreVolume
             // 
             this.colStoreVolume.Caption = "在库体积(立方)";
+            this.colStoreVolume.DisplayFormat.FormatString = "0.000";
+            this.colStoreVolume.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colStoreVolume.FieldName = "StoreVolume";
             this.colStoreVolume.Name = "colStoreVolume";
+            this.colStoreVolume.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "StoreVolume", "合计={0:0.000}")});
             this.colStoreVolume.Visible = true;
             this.colStoreVolume.VisibleIndex = 5;
             // 
@@ -142,10 +153,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.dgcStorage);
             this.Name = "TotalStorageGrid";
-            this.Size = new System.Drawing.Size(692, 475);
+            this.Size = new System.Drawing.Size(720, 434);
             ((System.ComponentModel.ISupportInitialize)(this.dgcStorage)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvStorage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsStorage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvStorage)).EndInit();
             this.ResumeLayout(false);
 
         }

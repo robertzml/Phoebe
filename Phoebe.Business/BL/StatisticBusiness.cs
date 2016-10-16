@@ -244,7 +244,10 @@ namespace Phoebe.Business
         /// </summary>
         /// <param name="date">日期</param>
         /// <returns></returns>
-        public List<TotalStorage> GetTotalCargoStore(DateTime date)
+        /// <remarks>
+        /// 不分客户，只按货品类别分
+        /// </remarks>
+        public List<TotalStorage> GetTotalStorage(DateTime date)
         {
             List<TotalStorage> data = new List<TotalStorage>();
 
