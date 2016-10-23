@@ -137,8 +137,12 @@
             // colStartDebt
             // 
             this.colStartDebt.Caption = "期初欠款(元)";
+            this.colStartDebt.DisplayFormat.FormatString = "0.00";
+            this.colStartDebt.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colStartDebt.FieldName = "StartDebt";
             this.colStartDebt.Name = "colStartDebt";
+            this.colStartDebt.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "StartDebt", "合计={0:0.00}")});
             this.colStartDebt.Visible = true;
             this.colStartDebt.VisibleIndex = 4;
             // 
@@ -209,8 +213,12 @@
             // colEndDebt
             // 
             this.colEndDebt.Caption = "期末欠款(元)";
+            this.colEndDebt.DisplayFormat.FormatString = "0.00";
+            this.colEndDebt.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colEndDebt.FieldName = "EndDebt";
             this.colEndDebt.Name = "colEndDebt";
+            this.colEndDebt.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "EndDebt", "合计={0:0.00}")});
             this.colEndDebt.Visible = true;
             this.colEndDebt.VisibleIndex = 11;
             // 

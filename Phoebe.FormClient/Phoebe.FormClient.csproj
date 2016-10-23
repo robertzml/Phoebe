@@ -142,6 +142,12 @@
     <Compile Include="Controls\CustomerFeeGrid.Designer.cs">
       <DependentUpon>CustomerFeeGrid.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dashboard\UscCustomerPayment.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Dashboard\UscCustomerPayment.Designer.cs">
+      <DependentUpon>UscCustomerPayment.cs</DependentUpon>
+    </Compile>
     <Compile Include="Statistic\CustomerFeeReportForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -666,6 +672,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\TotalStorageGrid.resx">
       <DependentUpon>TotalStorageGrid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dashboard\UscCustomerPayment.resx">
+      <DependentUpon>UscCustomerPayment.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FeeDetailsForm.resx">
       <DependentUpon>FeeDetailsForm.cs</DependentUpon>

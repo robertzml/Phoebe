@@ -119,7 +119,7 @@ namespace Phoebe.Business
             debt.SettleFee = 0;
             debt.UnSettleFee = 0;
 
-            var settles = this.dal.Find(r => r.CustomerId == customerId).OrderByDescending(r => r.EndTime);
+            var settles = this.dal.Find(r => r.CustomerId == customerId && r.EndTime <= end).OrderByDescending(r => r.EndTime);
             if (settles.Count() != 0)
             {
                 debt.SettleFee = settles.Sum(r => r.DueFee);
@@ -134,21 +134,24 @@ namespace Phoebe.Business
             List<ColdSettlement> coldSettlement = new List<ColdSettlement>();
             List<MiscSettlement> miscSettlement = new List<MiscSettlement>();
 
-            foreach (var contract in contracts)
+            if (start <= end)
             {
-                var contractBill = ContractFactory.Create((ContractType)contract.Type);
+                foreach (var contract in contracts)
+                {
+                    var contractBill = ContractFactory.Create((ContractType)contract.Type);
 
-                var baseBill = contractBill.GetBaseFee(contract.Id, start, end);
-                if (baseBill != null)
-                    baseSettlement.AddRange(baseBill);
+                    var baseBill = contractBill.GetBaseFee(contract.Id, start, end);
+                    if (baseBill != null)
+                        baseSettlement.AddRange(baseBill);
 
-                var coldBill = contractBill.GetColdFee(contract.Id, start, end);
-                if (coldBill != null)
-                    coldSettlement.Add(coldBill);
+                    var coldBill = contractBill.GetColdFee(contract.Id, start, end);
+                    if (coldBill != null)
+                        coldSettlement.Add(coldBill);
 
-                var miscBill = contractBill.GetMiscFee(contract.Id, start, end);
-                if (miscBill != null)
-                    miscSettlement.Add(miscBill);
+                    var miscBill = contractBill.GetMiscFee(contract.Id, start, end);
+                    if (miscBill != null)
+                        miscSettlement.Add(miscBill);
+                }
             }
 
             // get base fee
@@ -164,7 +167,7 @@ namespace Phoebe.Business
                 debt.UnSettleFee += miscSettlement.Sum(r => r.TotalFee);
 
             // get paid fee
-            var payments = BusinessFactory<PaymentBusiness>.Instance.GetByCustomer(customerId);
+            var payments = BusinessFactory<PaymentBusiness>.Instance.GetByCustomer(customerId).Where(r => r.PaidTime <= end);
             if (payments.Count() != 0)
                 debt.PaidFee = payments.Sum(r => r.PaidFee);
 

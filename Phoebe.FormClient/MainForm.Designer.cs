@@ -512,7 +512,6 @@
             this.menuTest.Caption = "测试窗体";
             this.menuTest.Id = 34;
             this.menuTest.Name = "menuTest";
-            this.menuTest.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             this.menuTest.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuTest_ItemClick);
             // 
             // barMdiList

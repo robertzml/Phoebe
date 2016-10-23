@@ -33,6 +33,9 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void CustomerFeeReportForm_Load(object sender, EventArgs e)
         {
+            this.bsCustomer.DataSource = BusinessFactory<CustomerBusiness>.Instance.FindAll();
+            this.lkuCustomer.CustomDisplayText += new DevExpress.XtraEditors.Controls.CustomDisplayTextEventHandler(EventUtil.LkuCustomer_CustomDisplayText);
+
             this.dpFrom.DateTime = DateTime.Now.AddDays(1 - DateTime.Now.Day).Date;
             this.dpTo.DateTime = DateTime.Now.Date;
         }
@@ -55,12 +58,24 @@ namespace Phoebe.FormClient
             var from = this.dpFrom.DateTime.Date;
             var to = this.dpTo.DateTime.Date;
 
-            var data = BusinessFactory<StatisticBusiness>.Instance.GetCustomerFee(from, to);
-            this.cfgList.DataSource = data;
+            if (this.lkuCustomer.EditValue == null)
+            {
+                var data = BusinessFactory<StatisticBusiness>.Instance.GetCustomerFee(from, to);
+                this.cfgList.DataSource = data;
+            }
+            else
+            {
+                int customerId = Convert.ToInt32(this.lkuCustomer.EditValue);
 
+                var data = BusinessFactory<StatisticBusiness>.Instance.GetCustomerFee(customerId, from, to);
+
+                List<CustomerFee> list = new List<CustomerFee>();
+                list.Add(data);
+
+                this.cfgList.DataSource = list;
+            }
             this.Cursor = Cursors.Default;
         }
         #endregion //Event
-
     }
 }

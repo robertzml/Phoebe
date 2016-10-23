@@ -25,6 +25,8 @@ namespace Phoebe.FormClient
         private void TestForm_Load(object sender, EventArgs e)
         {
             //this.customerLookUpEdit1.Properties.DataSource = BusinessFactory<CustomerBusiness>.Instance.FindAll();
+
+            this.radioGroup1.EditValue = 1;
         }
     }
 }

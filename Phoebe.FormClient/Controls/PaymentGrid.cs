@@ -17,6 +17,13 @@ namespace Phoebe.FormClient
     /// </summary>
     public partial class PaymentGrid : UserControl
     {
+        #region Field
+        /// <summary>
+        /// 是否允许查找
+        /// </summary>
+        private bool enableFind = true;
+        #endregion //Field
+
         #region Constructor
         public PaymentGrid()
         {
@@ -48,6 +55,17 @@ namespace Phoebe.FormClient
         #endregion //Method
 
         #region Event
+        /// <summary>
+        /// 控件载入
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void PaymentGrid_Load(object sender, EventArgs e)
+        {
+            this.dgvPayment.OptionsFind.AllowFindPanel = this.enableFind;
+            this.dgvPayment.OptionsFind.AlwaysVisible = this.enableFind;
+        }
+
         /// <summary>
         /// 格式化数据显示
         /// </summary>
@@ -110,6 +128,22 @@ namespace Phoebe.FormClient
                 this.dgvPayment.BeginDataUpdate();
                 this.bsPayment.DataSource = value;
                 this.dgvPayment.EndDataUpdate();
+            }
+        }
+
+        /// <summary>
+        /// 是否允许查找
+        /// </summary>
+        [Description("是否允许查找")]
+        public bool EnableFind
+        {
+            get
+            {
+                return this.enableFind;
+            }
+            set
+            {
+                this.enableFind = value;
             }
         }
         #endregion //Property

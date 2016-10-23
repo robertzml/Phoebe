@@ -51,10 +51,10 @@
             // 
             this.dgcPayment.DataSource = this.bsPayment;
             this.dgcPayment.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgcPayment.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dgcPayment.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2);
             this.dgcPayment.Location = new System.Drawing.Point(0, 0);
             this.dgcPayment.MainView = this.dgvPayment;
-            this.dgcPayment.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dgcPayment.Margin = new System.Windows.Forms.Padding(2);
             this.dgcPayment.Name = "dgcPayment";
             this.dgcPayment.Size = new System.Drawing.Size(750, 395);
             this.dgcPayment.TabIndex = 0;
@@ -184,9 +184,10 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.dgcPayment);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "PaymentGrid";
             this.Size = new System.Drawing.Size(750, 395);
+            this.Load += new System.EventHandler(this.PaymentGrid_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgcPayment)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsPayment)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPayment)).EndInit();

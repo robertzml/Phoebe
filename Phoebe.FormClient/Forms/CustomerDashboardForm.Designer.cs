@@ -37,6 +37,7 @@
             this.aceStoreIn = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             this.aceStoreOut = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             this.aceFlows = new DevExpress.XtraBars.Navigation.AccordionControlElement();
+            this.acePayment = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.layoutControl2 = new DevExpress.XtraLayout.LayoutControl();
             this.clcCustomer = new Phoebe.FormClient.CustomerListControl();
@@ -108,7 +109,8 @@
             this.accordionControlElement2.Elements.AddRange(new DevExpress.XtraBars.Navigation.AccordionControlElement[] {
             this.aceStoreIn,
             this.aceStoreOut,
-            this.aceFlows});
+            this.aceFlows,
+            this.acePayment});
             this.accordionControlElement2.Expanded = true;
             this.accordionControlElement2.Image = ((System.Drawing.Image)(resources.GetObject("accordionControlElement2.Image")));
             this.accordionControlElement2.Text = "库存";
@@ -130,6 +132,12 @@
             this.aceFlows.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
             this.aceFlows.Tag = "UscCustomerFlow";
             this.aceFlows.Text = "流水记录";
+            // 
+            // acePayment
+            // 
+            this.acePayment.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
+            this.acePayment.Tag = "UscCustomerPayment";
+            this.acePayment.Text = "缴费记录";
             // 
             // panelControl1
             // 
@@ -332,5 +340,6 @@
         private DevExpress.XtraBars.Navigation.AccordionControlElement aceStoreIn;
         private DevExpress.XtraBars.Navigation.AccordionControlElement aceFlows;
         private DevExpress.XtraBars.Navigation.AccordionControlElement aceStoreOut;
+        private DevExpress.XtraBars.Navigation.AccordionControlElement acePayment;
     }
 }

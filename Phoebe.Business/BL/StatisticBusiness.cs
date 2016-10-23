@@ -292,47 +292,80 @@ namespace Phoebe.Business
             var customers = BusinessFactory<CustomerBusiness>.Instance.FindAll();
             foreach (var customer in customers)
             {
-                var customerFee = new CustomerFee();
-
-                customerFee.CustomerId = customer.Id;
-                customerFee.CustomerNumber = customer.Number;
-                customerFee.CustomerName = customer.Name;
-                customerFee.StartTime = start;
-                customerFee.EndTime = end;
-
-                var contracts = BusinessFactory<ContractBusiness>.Instance.GetByCustomer(customer.Id);
-
-                DateTime beginTime = contracts.Min(r => r.SignDate);
-                DateTime lastTime = start.AddDays(-1);
-
-                //get previous debt
-                var debt = BusinessFactory<SettlementBusiness>.Instance.GetDebt(customer.Id, beginTime, lastTime);
-                customerFee.StartDebt = debt.DebtFee;
-
-                foreach (var contract in contracts)
-                {
-                    var contractBill = ContractFactory.Create((ContractType)contract.Type);
-
-                    var baseSettle = contractBill.GetBaseFee(contract.Id, start, end);
-                    if (baseSettle != null)
-                        customerFee.BaseFee += baseSettle.Sum(r => r.TotalPrice);
-
-                    var coldSettle = contractBill.GetColdFee(contract.Id, start, end);
-                    if (coldSettle != null)
-                        customerFee.ColdFee += coldSettle.ColdFee;
-
-                    var miscSettle = contractBill.GetMiscFee(contract.Id, start, end);
-                    if (miscSettle != null)
-                        customerFee.MiscFee += miscSettle.TotalFee;
-                }
-
-                customerFee.TotalFee = customerFee.BaseFee + customerFee.ColdFee + customerFee.MiscFee;
-
+                var customerFee = GetCustomerFee(customer.Id, start, end);
 
                 data.Add(customerFee);
             }
 
             return data;
+        }
+
+        /// <summary>
+        /// 获取客户费用结算
+        /// </summary>
+        /// <param name="customerId">客户ID</param>
+        /// <param name="start">开始日期</param>
+        /// <param name="end">结束日期</param>
+        /// <returns></returns>
+        public CustomerFee GetCustomerFee(int customerId, DateTime start, DateTime end)
+        {
+            var customerFee = new CustomerFee();
+
+            var customer = BusinessFactory<CustomerBusiness>.Instance.FindById(customerId);
+
+            customerFee.CustomerId = customer.Id;
+            customerFee.CustomerNumber = customer.Number;
+            customerFee.CustomerName = customer.Name;
+            customerFee.StartTime = start;
+            customerFee.EndTime = end;
+
+            var contracts = BusinessFactory<ContractBusiness>.Instance.GetByCustomer(customer.Id);
+
+            if (contracts.Count == 0)
+                return customerFee;
+
+            DateTime beginTime = contracts.Min(r => r.SignDate);
+            DateTime lastTime = start.AddDays(-1);
+
+            //get previous debt
+            var debt = BusinessFactory<SettlementBusiness>.Instance.GetDebt(customer.Id, beginTime, lastTime);
+            customerFee.StartDebt = debt.DebtFee;
+
+            //get current fee
+            foreach (var contract in contracts)
+            {
+                var contractBill = ContractFactory.Create((ContractType)contract.Type);
+
+                var baseSettle = contractBill.GetBaseFee(contract.Id, start, end);
+                if (baseSettle != null)
+                    customerFee.BaseFee += baseSettle.Sum(r => r.TotalPrice);
+
+                var coldSettle = contractBill.GetColdFee(contract.Id, start, end);
+                if (coldSettle != null)
+                    customerFee.ColdFee += coldSettle.ColdFee;
+
+                var miscSettle = contractBill.GetMiscFee(contract.Id, start, end);
+                if (miscSettle != null)
+                    customerFee.MiscFee += miscSettle.TotalFee;
+            }
+
+            customerFee.TotalFee = customerFee.StartDebt + customerFee.BaseFee + customerFee.ColdFee + customerFee.MiscFee;
+
+            // get paid fee
+            var payments = BusinessFactory<PaymentBusiness>.Instance.GetByCustomer(customerId).Where(r => r.PaidTime >= start && r.PaidTime <= end);
+            if (payments.Count() != 0)
+                customerFee.ReceiveFee = payments.Sum(r => r.PaidFee);
+
+            // get current debt
+            //var currSettle = RepositoryFactory<SettlementRepository>.Instance.Find(r => r.CustomerId == customerId && r.EndTime >= start && r.EndTime <= end);
+            //if (currSettle.Count() != 0)
+            //{
+            //    customerFee.Discount = currSettle.Sum(r => r.Remission);
+            //}
+
+            customerFee.EndDebt = customerFee.TotalFee - customerFee.ReceiveFee - customerFee.Discount;
+
+            return customerFee;
         }
         #endregion //Method
     }
