@@ -96,6 +96,7 @@
             this.dgvFee.OptionsView.EnableAppearanceOddRow = true;
             this.dgvFee.OptionsView.ShowFooter = true;
             this.dgvFee.OptionsView.ShowGroupPanel = false;
+            this.dgvFee.PrintInitialize += new DevExpress.XtraGrid.Views.Base.PrintInitializeEventHandler(this.dgvFee_PrintInitialize);
             // 
             // colCustomerId
             // 

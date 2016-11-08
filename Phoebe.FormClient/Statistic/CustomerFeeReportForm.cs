@@ -58,6 +58,9 @@ namespace Phoebe.FormClient
             var from = this.dpFrom.DateTime.Date;
             var to = this.dpTo.DateTime.Date;
 
+            this.cfgList.StartDate = from;
+            this.cfgList.EndDate = to;
+
             if (this.lkuCustomer.EditValue == null)
             {
                 var data = BusinessFactory<StatisticBusiness>.Instance.GetCustomerFee(from, to);
@@ -75,6 +78,16 @@ namespace Phoebe.FormClient
                 this.cfgList.DataSource = list;
             }
             this.Cursor = Cursors.Default;
+        }
+
+        /// <summary>
+        /// 打印
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            this.cfgList.PrintPriview();
         }
         #endregion //Event
     }
