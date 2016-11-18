@@ -606,6 +606,13 @@ namespace Phoebe.Business.DAL
                     }
                 }
 
+                if (store.StoreCount != remainCount)
+                {
+                    store.StoreCount = remainCount;
+                    store.StoreWeight = Math.Round(remainCount * store.Cargo.UnitWeight / 1000, 4);
+                    store.StoreVolume = Math.Round(remainCount * store.Cargo.UnitVolume, 4);
+                }
+
                 this.context.SaveChanges();
 
                 return ErrorCode.Success;
@@ -773,7 +780,7 @@ namespace Phoebe.Business.DAL
                     }
 
                     this.context.IceFlows.Remove(iceFlow);
-                   
+
                     this.context.SaveChanges();
                     return ErrorCode.Success;
                 }
