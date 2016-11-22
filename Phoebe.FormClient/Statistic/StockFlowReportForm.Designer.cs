@@ -65,6 +65,8 @@
             this.layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem11 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem12 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.btnPrint = new DevExpress.XtraEditors.SimpleButton();
+            this.layoutControlItem13 = new DevExpress.XtraLayout.LayoutControlItem();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
@@ -105,6 +107,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem12)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem13)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -138,6 +141,7 @@
             // 
             // layoutControl1
             // 
+            this.layoutControl1.Controls.Add(this.btnPrint);
             this.layoutControl1.Controls.Add(this.btnSearch);
             this.layoutControl1.Controls.Add(this.chkOut);
             this.layoutControl1.Controls.Add(this.chkIn);
@@ -158,7 +162,7 @@
             // 
             this.btnSearch.Location = new System.Drawing.Point(558, 36);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(344, 22);
+            this.btnSearch.Size = new System.Drawing.Size(170, 22);
             this.btnSearch.StyleController = this.layoutControl1;
             this.btnSearch.TabIndex = 11;
             this.btnSearch.Text = "查询";
@@ -285,7 +289,8 @@
             this.layoutControlItem6,
             this.layoutControlItem7,
             this.emptySpaceItem1,
-            this.layoutControlItem8});
+            this.layoutControlItem8,
+            this.layoutControlItem13});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "layoutControlGroup1";
             this.layoutControlGroup1.Size = new System.Drawing.Size(914, 111);
@@ -371,7 +376,7 @@
             this.layoutControlItem8.Control = this.btnSearch;
             this.layoutControlItem8.Location = new System.Drawing.Point(546, 24);
             this.layoutControlItem8.Name = "layoutControlItem8";
-            this.layoutControlItem8.Size = new System.Drawing.Size(348, 26);
+            this.layoutControlItem8.Size = new System.Drawing.Size(174, 26);
             this.layoutControlItem8.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem8.TextVisible = false;
             // 
@@ -514,6 +519,25 @@
             this.layoutControlItem12.Text = "出库重量";
             this.layoutControlItem12.TextSize = new System.Drawing.Size(48, 14);
             // 
+            // btnPrint
+            // 
+            this.btnPrint.Location = new System.Drawing.Point(732, 36);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(170, 22);
+            this.btnPrint.StyleController = this.layoutControl1;
+            this.btnPrint.TabIndex = 12;
+            this.btnPrint.Text = "打印";
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
+            // 
+            // layoutControlItem13
+            // 
+            this.layoutControlItem13.Control = this.btnPrint;
+            this.layoutControlItem13.Location = new System.Drawing.Point(720, 24);
+            this.layoutControlItem13.Name = "layoutControlItem13";
+            this.layoutControlItem13.Size = new System.Drawing.Size(174, 26);
+            this.layoutControlItem13.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem13.TextVisible = false;
+            // 
             // StockFlowReportForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -563,6 +587,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem12)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem13)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -605,5 +630,7 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem10;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem11;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem12;
+        private DevExpress.XtraEditors.SimpleButton btnPrint;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem13;
     }
 }

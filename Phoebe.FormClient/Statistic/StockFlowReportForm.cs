@@ -24,8 +24,7 @@ namespace Phoebe.FormClient
             InitializeComponent();
         }
         #endregion //Constructor
-
-
+        
         #region Event
         /// <summary>
         /// 窗体载入
@@ -65,6 +64,9 @@ namespace Phoebe.FormClient
 
             this.Cursor = Cursors.WaitCursor;
 
+            var from = this.dpFrom.DateTime.Date;
+            var to = this.dpTo.DateTime.Date;
+
             List<StockFlow> data = new List<StockFlow>();
 
             if (this.chkIn.Checked)
@@ -72,11 +74,11 @@ namespace Phoebe.FormClient
                 List<StockFlow> inFlow;
                 if (this.lkuCustomer.EditValue == null)
                 {
-                    inFlow = BusinessFactory<StoreBusiness>.Instance.GetFlowIn(this.dpFrom.DateTime.Date, this.dpTo.DateTime.Date, 0);
+                    inFlow = BusinessFactory<StoreBusiness>.Instance.GetFlowIn(from, to, 0);
                 }
                 else
                 {
-                    inFlow = BusinessFactory<StoreBusiness>.Instance.GetFlowIn(this.dpFrom.DateTime.Date, this.dpTo.DateTime.Date, (int)this.lkuCustomer.EditValue);
+                    inFlow = BusinessFactory<StoreBusiness>.Instance.GetFlowIn(from, to, (int)this.lkuCustomer.EditValue);
                 }
 
                 data.AddRange(inFlow);
@@ -87,11 +89,11 @@ namespace Phoebe.FormClient
                 List<StockFlow> outFlow;
                 if (this.lkuCustomer.EditValue == null)
                 {
-                    outFlow = BusinessFactory<StoreBusiness>.Instance.GetFlowOut(this.dpFrom.DateTime.Date, this.dpTo.DateTime.Date, 0);
+                    outFlow = BusinessFactory<StoreBusiness>.Instance.GetFlowOut(from, to, 0);
                 }
                 else
                 {
-                    outFlow = BusinessFactory<StoreBusiness>.Instance.GetFlowOut(this.dpFrom.DateTime.Date, this.dpTo.DateTime.Date, (int)this.lkuCustomer.EditValue);
+                    outFlow = BusinessFactory<StoreBusiness>.Instance.GetFlowOut(from, to, (int)this.lkuCustomer.EditValue);
                 }
 
                 data.AddRange(outFlow);
@@ -109,6 +111,8 @@ namespace Phoebe.FormClient
             data = data.OrderBy(r => r.FlowDate).ToList();
 
             this.sfgList.DataSource = data;
+            this.sfgList.StartDate = from;
+            this.sfgList.EndDate = to;
 
             this.txtInCount.Text = data.Where(r => r.Type == StockFlowType.StockIn).Sum(r => r.FlowCount).ToString();
             this.txtInWeight.Text = data.Where(r => r.Type == StockFlowType.StockIn).Sum(r => r.FlowWeight).ToString("f3") + " 吨";
@@ -116,6 +120,16 @@ namespace Phoebe.FormClient
             this.txtOutWeight.Text = data.Where(r => r.Type == StockFlowType.StockOut).Sum(r => r.FlowWeight).ToString("f3") + " 吨";
 
             this.Cursor = Cursors.Default;
+        }
+
+        /// <summary>
+        /// 打印
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            this.sfgList.PrintPriview();
         }
         #endregion //Event
     }

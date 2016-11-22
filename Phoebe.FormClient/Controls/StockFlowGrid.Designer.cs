@@ -108,6 +108,7 @@
             this.dgvStockFlow.OptionsView.EnableAppearanceEvenRow = true;
             this.dgvStockFlow.OptionsView.EnableAppearanceOddRow = true;
             this.dgvStockFlow.OptionsView.ShowGroupPanel = false;
+            this.dgvStockFlow.PrintInitialize += new DevExpress.XtraGrid.Views.Base.PrintInitializeEventHandler(this.dgvStockFlow_PrintInitialize);
             // 
             // colStockId
             // 
