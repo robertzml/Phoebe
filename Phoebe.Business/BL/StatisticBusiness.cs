@@ -357,11 +357,11 @@ namespace Phoebe.Business
                 customerFee.ReceiveFee = payments.Sum(r => r.PaidFee);
 
             // get current debt
-            //var currSettle = RepositoryFactory<SettlementRepository>.Instance.Find(r => r.CustomerId == customerId && r.EndTime >= start && r.EndTime <= end);
-            //if (currSettle.Count() != 0)
-            //{
-            //    customerFee.Discount = currSettle.Sum(r => r.Remission);
-            //}
+            var currSettle = RepositoryFactory<SettlementRepository>.Instance.Find(r => r.CustomerId == customerId && r.EndTime >= start && r.EndTime <= end);
+            if (currSettle.Count() != 0)
+            {
+                customerFee.Discount = currSettle.Sum(r => r.Remission);
+            }
 
             customerFee.EndDebt = customerFee.TotalFee - customerFee.ReceiveFee - customerFee.Discount;
 

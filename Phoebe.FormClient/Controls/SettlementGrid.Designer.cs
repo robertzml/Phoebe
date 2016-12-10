@@ -55,10 +55,12 @@
             // 
             this.dgcSettlement.DataSource = this.bsSettlement;
             this.dgcSettlement.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgcSettlement.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dgcSettlement.Location = new System.Drawing.Point(0, 0);
             this.dgcSettlement.MainView = this.dgvSettlement;
+            this.dgcSettlement.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dgcSettlement.Name = "dgcSettlement";
-            this.dgcSettlement.Size = new System.Drawing.Size(938, 514);
+            this.dgcSettlement.Size = new System.Drawing.Size(704, 411);
             this.dgcSettlement.TabIndex = 0;
             this.dgcSettlement.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.dgvSettlement});
@@ -219,11 +221,13 @@
             // 
             // SettlementGrid
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.dgcSettlement);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "SettlementGrid";
-            this.Size = new System.Drawing.Size(938, 514);
+            this.Size = new System.Drawing.Size(704, 411);
+            this.Load += new System.EventHandler(this.SettlementGrid_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgcSettlement)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsSettlement)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSettlement)).EndInit();

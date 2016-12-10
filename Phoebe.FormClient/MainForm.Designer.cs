@@ -456,7 +456,7 @@
             // 
             // menuCustomerCargoReport
             // 
-            this.menuCustomerCargoReport.Caption = "客户库存报表";
+            this.menuCustomerCargoReport.Caption = "客户货品报表";
             this.menuCustomerCargoReport.Id = 50;
             this.menuCustomerCargoReport.Name = "menuCustomerCargoReport";
             this.menuCustomerCargoReport.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuCustomerCargoReport_ItemClick);

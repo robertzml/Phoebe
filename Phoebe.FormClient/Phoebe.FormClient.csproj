@@ -460,6 +460,12 @@
     <Compile Include="Controls\TotalStorageGrid.Designer.cs">
       <DependentUpon>TotalStorageGrid.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dashboard\UscCustomerSettlement.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Dashboard\UscCustomerSettlement.Designer.cs">
+      <DependentUpon>UscCustomerSettlement.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utils\EventUtil.cs" />
     <Compile Include="Utils\GlobalControl.cs" />
     <Compile Include="Utils\FormConstant.cs" />
@@ -675,6 +681,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dashboard\UscCustomerPayment.resx">
       <DependentUpon>UscCustomerPayment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dashboard\UscCustomerSettlement.resx">
+      <DependentUpon>UscCustomerSettlement.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FeeDetailsForm.resx">
       <DependentUpon>FeeDetailsForm.cs</DependentUpon>

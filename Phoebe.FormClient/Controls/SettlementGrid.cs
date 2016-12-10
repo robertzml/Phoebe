@@ -17,6 +17,13 @@ namespace Phoebe.FormClient
     /// </summary>
     public partial class SettlementGrid : UserControl
     {
+        #region Field
+        /// <summary>
+        /// 是否允许查找
+        /// </summary>
+        private bool enableFind = true;
+        #endregion //Field
+
         #region Constructor
         public SettlementGrid()
         {
@@ -48,6 +55,17 @@ namespace Phoebe.FormClient
         #endregion //Method
 
         #region Event
+        /// <summary>
+        /// 控件载入
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SettlementGrid_Load(object sender, EventArgs e)
+        {
+            this.dgvSettlement.OptionsFind.AllowFindPanel = this.enableFind;
+            this.dgvSettlement.OptionsFind.AlwaysVisible = this.enableFind;
+        }
+
         /// <summary>
         /// 格式化数据显示
         /// </summary>
@@ -105,6 +123,22 @@ namespace Phoebe.FormClient
                 this.dgvSettlement.BeginDataUpdate();
                 this.bsSettlement.DataSource = value;
                 this.dgvSettlement.EndDataUpdate();
+            }
+        }
+
+        /// <summary>
+        /// 是否允许查找
+        /// </summary>
+        [Description("是否允许查找")]
+        public bool EnableFind
+        {
+            get
+            {
+                return this.enableFind;
+            }
+            set
+            {
+                this.enableFind = value;
             }
         }
         #endregion //Property

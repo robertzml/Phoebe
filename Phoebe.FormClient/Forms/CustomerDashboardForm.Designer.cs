@@ -37,6 +37,8 @@
             this.aceStoreIn = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             this.aceStoreOut = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             this.aceFlows = new DevExpress.XtraBars.Navigation.AccordionControlElement();
+            this.accordionControlElement3 = new DevExpress.XtraBars.Navigation.AccordionControlElement();
+            this.aceSettlement = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             this.acePayment = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.layoutControl2 = new DevExpress.XtraLayout.LayoutControl();
@@ -75,7 +77,8 @@
             this.accMain.Dock = System.Windows.Forms.DockStyle.Left;
             this.accMain.Elements.AddRange(new DevExpress.XtraBars.Navigation.AccordionControlElement[] {
             this.accordionControlElement1,
-            this.accordionControlElement2});
+            this.accordionControlElement2,
+            this.accordionControlElement3});
             this.accMain.Location = new System.Drawing.Point(0, 0);
             this.accMain.Name = "accMain";
             this.accMain.Size = new System.Drawing.Size(160, 538);
@@ -109,8 +112,7 @@
             this.accordionControlElement2.Elements.AddRange(new DevExpress.XtraBars.Navigation.AccordionControlElement[] {
             this.aceStoreIn,
             this.aceStoreOut,
-            this.aceFlows,
-            this.acePayment});
+            this.aceFlows});
             this.accordionControlElement2.Expanded = true;
             this.accordionControlElement2.Image = ((System.Drawing.Image)(resources.GetObject("accordionControlElement2.Image")));
             this.accordionControlElement2.Text = "库存";
@@ -132,6 +134,21 @@
             this.aceFlows.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
             this.aceFlows.Tag = "UscCustomerFlow";
             this.aceFlows.Text = "流水记录";
+            // 
+            // accordionControlElement3
+            // 
+            this.accordionControlElement3.Elements.AddRange(new DevExpress.XtraBars.Navigation.AccordionControlElement[] {
+            this.aceSettlement,
+            this.acePayment});
+            this.accordionControlElement3.Expanded = true;
+            this.accordionControlElement3.Image = ((System.Drawing.Image)(resources.GetObject("accordionControlElement3.Image")));
+            this.accordionControlElement3.Text = "费用";
+            // 
+            // aceSettlement
+            // 
+            this.aceSettlement.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
+            this.aceSettlement.Tag = "UscCustomerSettlement";
+            this.aceSettlement.Text = "结算记录";
             // 
             // acePayment
             // 
@@ -341,5 +358,7 @@
         private DevExpress.XtraBars.Navigation.AccordionControlElement aceFlows;
         private DevExpress.XtraBars.Navigation.AccordionControlElement aceStoreOut;
         private DevExpress.XtraBars.Navigation.AccordionControlElement acePayment;
+        private DevExpress.XtraBars.Navigation.AccordionControlElement accordionControlElement3;
+        private DevExpress.XtraBars.Navigation.AccordionControlElement aceSettlement;
     }
 }
