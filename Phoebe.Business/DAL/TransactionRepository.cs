@@ -603,6 +603,7 @@ namespace Phoebe.Business.DAL
                             store.Destination = (int)DestinationType.StockOut;
                         else
                             store.Destination = (int)DestinationType.StockMove;
+                        store.Status = (int)EntityStatus.StoreOut;
                     }
                 }
 
