@@ -9,23 +9,13 @@
         <EntityTypeShape EntityType="Phoebe.Model.Cargo" Width="1.5" PointX="7.75" PointY="12" IsExpanded="true" />
         <EntityTypeShape EntityType="Phoebe.Model.Category" Width="1.5" PointX="6.125" PointY="5.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Phoebe.Model.Customer" Width="1.5" PointX="1.25" PointY="14.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Phoebe.Model.StockIn" Width="1.5" PointX="6" PointY="21.875" IsExpanded="true" />
         <EntityTypeShape EntityType="Phoebe.Model.StockInDetail" Width="1.5" PointX="7.875" PointY="25.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Phoebe.Model.StockMove" Width="1.5" PointX="15.125" PointY="20.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Phoebe.Model.StockMoveDetail" Width="1.5" PointX="17.125" PointY="23.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Phoebe.Model.StockOut" Width="1.5" PointX="11.625" PointY="23.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Phoebe.Model.StockOutDetail" Width="1.5" PointX="14.25" PointY="26.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Phoebe.Model.User" Width="1.5" PointX="3" PointY="10" IsExpanded="true" />
         <EntityTypeShape EntityType="Phoebe.Model.UserGroup" Width="1.5" PointX="0.875" PointY="9" IsExpanded="true" />
-        <AssociationConnector Association="Phoebe.Model.FK_Billing_StockIn" ManuallyRouted="false" />
         <AssociationConnector Association="Phoebe.Model.FK_Cargo_Category" ManuallyRouted="false" />
         <AssociationConnector Association="Phoebe.Model.FK_Category_Category" ManuallyRouted="false" />
-        <AssociationConnector Association="Phoebe.Model.FK_StockIn_User" ManuallyRouted="false" />
-        <AssociationConnector Association="Phoebe.Model.FK_StockInDetails_StockIn" ManuallyRouted="false" />
-        <AssociationConnector Association="Phoebe.Model.FK_StockMove_User" ManuallyRouted="false" />
-        <AssociationConnector Association="Phoebe.Model.FK_StockMoveDetails_StockMove" ManuallyRouted="false" />
-        <AssociationConnector Association="Phoebe.Model.FK_StockOut_User" ManuallyRouted="false" />
-        <AssociationConnector Association="Phoebe.Model.FK_StockOutDetails_StockOut" ManuallyRouted="false" />
         <AssociationConnector Association="Phoebe.Model.FK_User_User" ManuallyRouted="false" />
         <EntityTypeShape EntityType="Phoebe.Model.SettlementDetail" Width="1.5" PointX="6.75" PointY="29.25" />
         <AssociationConnector Association="Phoebe.Model.FK_SettlementDetails_Billing" />
@@ -50,9 +40,6 @@
         <AssociationConnector Association="Phoebe.Model.FK_Contract_Customer" />
         <AssociationConnector Association="Phoebe.Model.FK_Contract_User" />
         <AssociationConnector Association="Phoebe.Model.FK_SettlementDetails_Contract" />
-        <AssociationConnector Association="Phoebe.Model.FK_StockIn_Contract" />
-        <AssociationConnector Association="Phoebe.Model.FK_StockMove_Contract" />
-        <AssociationConnector Association="Phoebe.Model.FK_StockOut_Contract" />
         <EntityTypeShape EntityType="Phoebe.Model.IceFlow" Width="1.5" PointX="14.375" PointY="13.25" />
         <AssociationConnector Association="Phoebe.Model.FK_IceFlow_Contract" />
         <AssociationConnector Association="Phoebe.Model.FK_IceFlow_User" />
@@ -60,6 +47,19 @@
         <EntityTypeShape EntityType="Phoebe.Model.IceStock" Width="1.5" PointX="17.5" PointY="11.625" />
         <AssociationConnector Association="Phoebe.Model.FK_IceSale_IceFlow" />
         <AssociationConnector Association="Phoebe.Model.FK_IceStock_IceFlow" />
+        <EntityTypeShape EntityType="Phoebe.Model.StockIn" Width="1.5" PointX="5.5" PointY="21.75" />
+        <EntityTypeShape EntityType="Phoebe.Model.StockMove" Width="1.5" PointX="14.75" PointY="21.625" />
+        <EntityTypeShape EntityType="Phoebe.Model.StockOut" Width="1.5" PointX="11.875" PointY="23.5" />
+        <AssociationConnector Association="Phoebe.Model.FK_Billing_StockIn" />
+        <AssociationConnector Association="Phoebe.Model.FK_StockIn_Contract" />
+        <AssociationConnector Association="Phoebe.Model.FK_StockMove_Contract" />
+        <AssociationConnector Association="Phoebe.Model.FK_StockOut_Contract" />
+        <AssociationConnector Association="Phoebe.Model.FK_StockIn_User" />
+        <AssociationConnector Association="Phoebe.Model.FK_StockInDetails_StockIn" />
+        <AssociationConnector Association="Phoebe.Model.FK_StockMove_User" />
+        <AssociationConnector Association="Phoebe.Model.FK_StockMoveDetails_StockMove" />
+        <AssociationConnector Association="Phoebe.Model.FK_StockOut_User" />
+        <AssociationConnector Association="Phoebe.Model.FK_StockOutDetails_StockOut" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

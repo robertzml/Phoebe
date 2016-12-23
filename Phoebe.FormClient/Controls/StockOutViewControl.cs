@@ -59,6 +59,7 @@ namespace Phoebe.FormClient
             this.txtRemark.Text = stockOut.Remark;
             this.txtFlowNumber.Text = stockOut.FlowNumber;
             this.txtCreateTime.Text = stockOut.CreateTime.ToDateTimeString();
+            this.txtConfirmTime.Text = stockOut.ConfirmTime.ToDateTimeString();
         }
 
         /// <summary>

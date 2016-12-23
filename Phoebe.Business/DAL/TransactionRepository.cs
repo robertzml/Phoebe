@@ -126,6 +126,7 @@ namespace Phoebe.Business.DAL
             try
             {
                 stockIn.Status = (int)EntityStatus.StockIn;
+                stockIn.ConfirmTime = DateTime.Now;
                 stockIn.Billing.Status = (int)EntityStatus.Normal;
 
                 foreach (var item in stockIn.StockInDetails)
@@ -278,6 +279,7 @@ namespace Phoebe.Business.DAL
             try
             {
                 stockOut.Status = (int)EntityStatus.StockOut;
+                stockOut.ConfirmTime = DateTime.Now;
 
                 // change store count and status
                 foreach (var item in stockOut.StockOutDetails)
@@ -422,6 +424,7 @@ namespace Phoebe.Business.DAL
             try
             {
                 stockMove.Status = (int)EntityStatus.StockMove;
+                stockMove.ConfirmTime = DateTime.Now;
 
                 // change store count and status
                 foreach (var item in stockMove.StockMoveDetails)

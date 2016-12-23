@@ -29,11 +29,8 @@ namespace Phoebe.Model
         public virtual DbSet<Cargo> Cargoes { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
-        public virtual DbSet<StockIn> StockIns { get; set; }
         public virtual DbSet<StockInDetail> StockInDetails { get; set; }
-        public virtual DbSet<StockMove> StockMoves { get; set; }
         public virtual DbSet<StockMoveDetail> StockMoveDetails { get; set; }
-        public virtual DbSet<StockOut> StockOuts { get; set; }
         public virtual DbSet<StockOutDetail> StockOutDetails { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserGroup> UserGroups { get; set; }
@@ -46,5 +43,8 @@ namespace Phoebe.Model
         public virtual DbSet<IceFlow> IceFlows { get; set; }
         public virtual DbSet<IceSale> IceSales { get; set; }
         public virtual DbSet<IceStock> IceStocks { get; set; }
+        public virtual DbSet<StockIn> StockIns { get; set; }
+        public virtual DbSet<StockMove> StockMoves { get; set; }
+        public virtual DbSet<StockOut> StockOuts { get; set; }
     }
 }
