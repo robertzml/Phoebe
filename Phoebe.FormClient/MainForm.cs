@@ -167,6 +167,16 @@ namespace Phoebe.FormClient
         }
 
         /// <summary>
+        /// 库存管理 - 库存检查
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void menuStoreCheck_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            ChildFormManage.LoadMdiForm(this, typeof(StoreCheckForm));
+        }
+
+        /// <summary>
         /// 冰块管理 - 冰块操作
         /// </summary>
         /// <param name="sender"></param>
@@ -384,5 +394,6 @@ namespace Phoebe.FormClient
         #endregion //Menu Event
 
         #endregion //Event
+
     }
 }

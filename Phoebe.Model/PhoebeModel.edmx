@@ -250,7 +250,7 @@
           <Property Name="FlowNumber" Type="char" MaxLength="12" Nullable="false" />
           <Property Name="ContractId" Type="int" Nullable="false" />
           <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
           <Property Name="ConfirmTime" Type="datetime" />
           <Property Name="Remark" Type="nvarchar" MaxLength="500" />
           <Property Name="Status" Type="int" Nullable="false" />
@@ -1215,7 +1215,6 @@
           </AssociationSet>
           <EntitySet Name="StockIns" EntityType="Phoebe.Model.StockIn" />
           <EntitySet Name="StockMoves" EntityType="Phoebe.Model.StockMove" />
-          <EntitySet Name="StockOuts" EntityType="Phoebe.Model.StockOut" />
           <AssociationSet Name="FK_Billing_StockIn" Association="Phoebe.Model.FK_Billing_StockIn">
             <End Role="StockIn" EntitySet="StockIns" />
             <End Role="Billing" EntitySet="Billings" />
@@ -1227,10 +1226,6 @@
           <AssociationSet Name="FK_StockMove_Contract" Association="Phoebe.Model.FK_StockMove_Contract">
             <End Role="Contract" EntitySet="Contracts" />
             <End Role="StockMove" EntitySet="StockMoves" />
-          </AssociationSet>
-          <AssociationSet Name="FK_StockOut_Contract" Association="Phoebe.Model.FK_StockOut_Contract">
-            <End Role="Contract" EntitySet="Contracts" />
-            <End Role="StockOut" EntitySet="StockOuts" />
           </AssociationSet>
           <AssociationSet Name="FK_StockIn_User" Association="Phoebe.Model.FK_StockIn_User">
             <End Role="User" EntitySet="Users" />
@@ -1247,6 +1242,11 @@
           <AssociationSet Name="FK_StockMoveDetails_StockMove" Association="Phoebe.Model.FK_StockMoveDetails_StockMove">
             <End Role="StockMove" EntitySet="StockMoves" />
             <End Role="StockMoveDetail" EntitySet="StockMoveDetails" />
+          </AssociationSet>
+          <EntitySet Name="StockOuts" EntityType="Phoebe.Model.StockOut" />
+          <AssociationSet Name="FK_StockOut_Contract" Association="Phoebe.Model.FK_StockOut_Contract">
+            <End Role="Contract" EntitySet="Contracts" />
+            <End Role="StockOut" EntitySet="StockOuts" />
           </AssociationSet>
           <AssociationSet Name="FK_StockOut_User" Association="Phoebe.Model.FK_StockOut_User">
             <End Role="User" EntitySet="Users" />
@@ -1723,24 +1723,6 @@
           <NavigationProperty Name="User" Relationship="Phoebe.Model.FK_StockMove_User" FromRole="StockMove" ToRole="User" />
           <NavigationProperty Name="StockMoveDetails" Relationship="Phoebe.Model.FK_StockMoveDetails_StockMove" FromRole="StockMove" ToRole="StockMoveDetail" />
         </EntityType>
-        <EntityType Name="StockOut">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="OutTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="MonthTime" Type="String" Nullable="false" MaxLength="6" FixedLength="true" Unicode="false" />
-          <Property Name="FlowNumber" Type="String" Nullable="false" MaxLength="12" FixedLength="true" Unicode="false" />
-          <Property Name="ContractId" Type="Int32" Nullable="false" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="CreateTime" Type="DateTime" Precision="3" />
-          <Property Name="ConfirmTime" Type="DateTime" Precision="3" />
-          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Contract" Relationship="Phoebe.Model.FK_StockOut_Contract" FromRole="StockOut" ToRole="Contract" />
-          <NavigationProperty Name="User" Relationship="Phoebe.Model.FK_StockOut_User" FromRole="StockOut" ToRole="User" />
-          <NavigationProperty Name="StockOutDetails" Relationship="Phoebe.Model.FK_StockOutDetails_StockOut" FromRole="StockOut" ToRole="StockOutDetail" />
-        </EntityType>
         <Association Name="FK_Billing_StockIn">
           <End Type="Phoebe.Model.StockIn" Role="StockIn" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -1775,18 +1757,6 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="StockMove">
-              <PropertyRef Name="ContractId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_StockOut_Contract">
-          <End Type="Phoebe.Model.Contract" Role="Contract" Multiplicity="1" />
-          <End Type="Phoebe.Model.StockOut" Role="StockOut" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Contract">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="StockOut">
               <PropertyRef Name="ContractId" />
             </Dependent>
           </ReferentialConstraint>
@@ -1840,6 +1810,36 @@
             </Principal>
             <Dependent Role="StockMoveDetail">
               <PropertyRef Name="StockMoveId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="StockOut">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="OutTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="MonthTime" Type="String" Nullable="false" MaxLength="6" FixedLength="true" Unicode="false" />
+          <Property Name="FlowNumber" Type="String" Nullable="false" MaxLength="12" FixedLength="true" Unicode="false" />
+          <Property Name="ContractId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ConfirmTime" Type="DateTime" Precision="3" />
+          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Contract" Relationship="Phoebe.Model.FK_StockOut_Contract" FromRole="StockOut" ToRole="Contract" />
+          <NavigationProperty Name="User" Relationship="Phoebe.Model.FK_StockOut_User" FromRole="StockOut" ToRole="User" />
+          <NavigationProperty Name="StockOutDetails" Relationship="Phoebe.Model.FK_StockOutDetails_StockOut" FromRole="StockOut" ToRole="StockOutDetail" />
+        </EntityType>
+        <Association Name="FK_StockOut_Contract">
+          <End Type="Phoebe.Model.Contract" Role="Contract" Multiplicity="1" />
+          <End Type="Phoebe.Model.StockOut" Role="StockOut" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contract">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StockOut">
+              <PropertyRef Name="ContractId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>

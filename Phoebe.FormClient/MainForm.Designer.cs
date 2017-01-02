@@ -87,6 +87,7 @@
             this.barHeaderItem1 = new DevExpress.XtraBars.BarHeaderItem();
             this.barStaticItem2 = new DevExpress.XtraBars.BarStaticItem();
             this.tabMdiManager = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
+            this.menuStoreCheck = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabMdiManager)).BeginInit();
             this.SuspendLayout();
@@ -151,9 +152,10 @@
             this.menuCustomerCargoReport,
             this.menuDebtReport,
             this.menuTotalStorageReport,
-            this.menuCustomerFeeReport});
+            this.menuCustomerFeeReport,
+            this.menuStoreCheck});
             this.barManager1.MainMenu = this.mainMenu;
-            this.barManager1.MaxItemId = 54;
+            this.barManager1.MaxItemId = 55;
             this.barManager1.StatusBar = this.bar3;
             // 
             // mainMenu
@@ -286,7 +288,8 @@
             this.menuStore.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(this.menuStoreList),
             new DevExpress.XtraBars.LinkPersistInfo(this.menuStoreSnapshot),
-            new DevExpress.XtraBars.LinkPersistInfo(this.menuStoreTrace)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.menuStoreTrace),
+            new DevExpress.XtraBars.LinkPersistInfo(this.menuStoreCheck)});
             this.menuStore.Name = "menuStore";
             // 
             // menuStoreList
@@ -555,28 +558,32 @@
             this.barDockControlTop.CausesValidation = false;
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
-            this.barDockControlTop.Size = new System.Drawing.Size(1038, 24);
+            this.barDockControlTop.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.barDockControlTop.Size = new System.Drawing.Size(1186, 27);
             // 
             // barDockControlBottom
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 575);
-            this.barDockControlBottom.Size = new System.Drawing.Size(1038, 27);
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 744);
+            this.barDockControlBottom.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.barDockControlBottom.Size = new System.Drawing.Size(1186, 30);
             // 
             // barDockControlLeft
             // 
             this.barDockControlLeft.CausesValidation = false;
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
-            this.barDockControlLeft.Location = new System.Drawing.Point(0, 24);
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 551);
+            this.barDockControlLeft.Location = new System.Drawing.Point(0, 27);
+            this.barDockControlLeft.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 717);
             // 
             // barDockControlRight
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(1038, 24);
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 551);
+            this.barDockControlRight.Location = new System.Drawing.Point(1186, 27);
+            this.barDockControlRight.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 717);
             // 
             // barSubItem2
             // 
@@ -608,17 +615,25 @@
             this.tabMdiManager.MdiParent = this;
             this.tabMdiManager.PinPageButtonShowMode = DevExpress.XtraTab.PinPageButtonShowMode.InActiveTabPageHeader;
             // 
+            // menuStoreCheck
+            // 
+            this.menuStoreCheck.Caption = "库存检查";
+            this.menuStoreCheck.Id = 54;
+            this.menuStoreCheck.Name = "menuStoreCheck";
+            this.menuStoreCheck.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuStoreCheck_ItemClick);
+            // 
             // MainForm
             // 
             this.AllowMdiBar = true;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1038, 602);
+            this.ClientSize = new System.Drawing.Size(1186, 774);
             this.Controls.Add(this.barDockControlLeft);
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
             this.IsMdiContainer = true;
+            this.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.Name = "MainForm";
             this.Text = "华润冷链管理系统";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -689,6 +704,7 @@
         private DevExpress.XtraBars.BarButtonItem menuDebtReport;
         private DevExpress.XtraBars.BarButtonItem menuTotalStorageReport;
         private DevExpress.XtraBars.BarButtonItem menuCustomerFeeReport;
+        private DevExpress.XtraBars.BarButtonItem menuStoreCheck;
     }
 }
 

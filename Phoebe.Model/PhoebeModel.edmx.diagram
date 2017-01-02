@@ -49,15 +49,15 @@
         <AssociationConnector Association="Phoebe.Model.FK_IceStock_IceFlow" />
         <EntityTypeShape EntityType="Phoebe.Model.StockIn" Width="1.5" PointX="5.5" PointY="21.75" />
         <EntityTypeShape EntityType="Phoebe.Model.StockMove" Width="1.5" PointX="14.75" PointY="21.625" />
-        <EntityTypeShape EntityType="Phoebe.Model.StockOut" Width="1.5" PointX="11.875" PointY="23.5" />
         <AssociationConnector Association="Phoebe.Model.FK_Billing_StockIn" />
         <AssociationConnector Association="Phoebe.Model.FK_StockIn_Contract" />
         <AssociationConnector Association="Phoebe.Model.FK_StockMove_Contract" />
-        <AssociationConnector Association="Phoebe.Model.FK_StockOut_Contract" />
         <AssociationConnector Association="Phoebe.Model.FK_StockIn_User" />
         <AssociationConnector Association="Phoebe.Model.FK_StockInDetails_StockIn" />
         <AssociationConnector Association="Phoebe.Model.FK_StockMove_User" />
         <AssociationConnector Association="Phoebe.Model.FK_StockMoveDetails_StockMove" />
+        <EntityTypeShape EntityType="Phoebe.Model.StockOut" Width="1.5" PointX="11.625" PointY="24.5" />
+        <AssociationConnector Association="Phoebe.Model.FK_StockOut_Contract" />
         <AssociationConnector Association="Phoebe.Model.FK_StockOut_User" />
         <AssociationConnector Association="Phoebe.Model.FK_StockOutDetails_StockOut" />
       </Diagram>

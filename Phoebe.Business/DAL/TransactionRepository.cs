@@ -617,6 +617,13 @@ namespace Phoebe.Business.DAL
                     store.StoreVolume = Math.Round(remainCount * store.Cargo.UnitVolume, 4);
                 }
 
+                if (store.StoreCount > 0)
+                {
+                    store.Status = (int)EntityStatus.StoreIn;
+                    store.Destination = null;
+                    store.OutTime = null;
+                }
+
                 this.context.SaveChanges();
 
                 return ErrorCode.Success;

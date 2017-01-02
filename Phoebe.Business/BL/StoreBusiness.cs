@@ -133,7 +133,7 @@ namespace Phoebe.Business
         /// <returns></returns>
         private Inventory SetInventoryStart(List<Inventory> data, Storage start, DateTime endTime)
         {
-            var inv = data.SingleOrDefault(r => r.CustomerId == start.CustomerId && r.CategoryId == start.CategoryId && 
+            var inv = data.SingleOrDefault(r => r.CustomerId == start.CustomerId && r.CategoryId == start.CategoryId &&
                 r.UnitWeight == start.UnitWeight && r.UnitVolume == start.UnitVolume);
 
             if (inv == null)
@@ -652,6 +652,51 @@ namespace Phoebe.Business
             }
 
             return data;
+        }
+
+        /// <summary>
+        /// 检查库存状态
+        /// </summary>
+        /// <param name="customerId">客户ID</param>
+        /// <returns></returns>
+        /// <remarks>
+        /// 库存数量和库存状态是否一致
+        /// </remarks>
+        public List<Store> CheckStoreStatus(int customerId)
+        {
+            List<Store> errorStores = new List<Store>();
+
+            var stores = GetByCustomer(customerId);
+
+            foreach (var item in stores)
+            {
+                if (item.Status == (int)EntityStatus.StoreIn && item.StoreCount <= 0)
+                    errorStores.Add(item);
+
+                if (item.Status == (int)EntityStatus.StoreOut && item.StoreCount > 0)
+                    errorStores.Add(item);
+            }
+
+            return errorStores;
+        }
+
+        public List<Store> CheckFlowCount(int customerId)
+        {
+            List<Store> errorStores = new List<Store>();
+
+            var stores = GetByCustomer(customerId);
+
+            foreach(var item in stores)
+            {
+                var flows = GetStoreFlow(item.Id);
+
+                var outCount = -flows.Where(r => r.Type == StockFlowType.StockOut).Sum(r => r.FlowCount);
+
+                if (item.TotalCount - outCount != item.StoreCount)
+                    errorStores.Add(item);
+            }
+
+            return errorStores;
         }
         #endregion //Stock Flow
 
