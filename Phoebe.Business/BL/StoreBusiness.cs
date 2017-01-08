@@ -680,20 +680,38 @@ namespace Phoebe.Business
             return errorStores;
         }
 
+        /// <summary>
+        /// 检查流水数量是否正确
+        /// </summary>
+        /// <param name="customerId">客户ID</param>
+        /// <returns></returns>
+        /// <remarks>
+        /// 出库数量与在库数量对比
+        /// </remarks>
         public List<Store> CheckFlowCount(int customerId)
         {
             List<Store> errorStores = new List<Store>();
 
             var stores = GetByCustomer(customerId);
 
-            foreach(var item in stores)
+            foreach (var item in stores)
             {
-                var flows = GetStoreFlow(item.Id);
+                var so = RepositoryFactory<StockOutDetailsRepository>.Instance.Find(r => r.StoreId == item.Id && r.Status == (int)EntityStatus.StockOut);
+                var outCount = so.Sum(r => r.Count);
 
-                var outCount = -flows.Where(r => r.Type == StockFlowType.StockOut).Sum(r => r.FlowCount);
+                var smo = RepositoryFactory<StockMoveDetailsRepository>.Instance.Find(r => r.SourceStoreId == item.Id && r.Status == (int)EntityStatus.StockMove);
+                var moveCount = smo.Sum(r => r.Count);
 
-                if (item.TotalCount - outCount != item.StoreCount)
+                if (item.TotalCount - outCount - moveCount != item.StoreCount)
                     errorStores.Add(item);
+
+                //var flows = GetStoreFlow(item.Id);
+
+                //var outCount = -flows.Where(r => r.Type == StockFlowType.StockOut).Sum(r => r.FlowCount);
+                //var moveCount = -flows.Where(r => r.Type == StockFlowType.StockMoveOut).Sum(r => r.FlowCount);
+
+                //if (item.TotalCount - outCount - moveCount != item.StoreCount)
+                //    errorStores.Add(item);
             }
 
             return errorStores;

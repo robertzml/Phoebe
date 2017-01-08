@@ -59,6 +59,10 @@ namespace Phoebe.FormClient
 
                 this.stgList.DataSource = stores;
             }
+            else
+            {
+                MessageUtil.ShowClaim("请选择客户");
+            }
         }
 
 
@@ -69,6 +73,11 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void btnStartCheck_Click(object sender, EventArgs e)
         {
+            this.Cursor = Cursors.WaitCursor;
+
+            this.stgList.Clear();
+            this.sfgList.Clear();
+
             if (this.lkuCustomer.EditValue != null)
             {
                 int customerId = Convert.ToInt32(this.lkuCustomer.EditValue);
@@ -78,8 +87,7 @@ namespace Phoebe.FormClient
                     var stores = BusinessFactory<StoreBusiness>.Instance.CheckStoreStatus(customerId);
                     this.stgList.DataSource = stores;
                 }
-
-                if (this.chkFlowCount.Checked)
+                else if (this.chkFlowCount.Checked)
                 {
                     var stores = BusinessFactory<StoreBusiness>.Instance.CheckFlowCount(customerId);
                     this.stgList.DataSource = stores;
@@ -98,11 +106,17 @@ namespace Phoebe.FormClient
                         var err = BusinessFactory<StoreBusiness>.Instance.CheckStoreStatus(item.Id);
                         errorStores.AddRange(err);
                     }
+                    else if (this.chkFlowCount.Checked)
+                    {
+                        var err = BusinessFactory<StoreBusiness>.Instance.CheckFlowCount(item.Id);
+                        errorStores.AddRange(err);
+                    }
                 }
 
                 this.stgList.DataSource = errorStores;
             }
 
+            this.Cursor = Cursors.Default;
         }
         
         /// <summary>
