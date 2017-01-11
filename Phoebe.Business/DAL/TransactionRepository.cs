@@ -633,6 +633,31 @@ namespace Phoebe.Business.DAL
                 return ErrorCode.Exception;
             }
         }
+
+        /// <summary>
+        /// 删除流水记录事务
+        /// </summary>
+        /// <param name="stockId">库存操作ID</param>
+        /// <returns></returns>
+        /// <remarks>
+        /// 删除一条出库详细记录，ID为StockOutDetails的Id
+        /// </remarks>
+        public ErrorCode StockFlowDeleteTrans(Guid stockId)
+        {
+            try
+            {
+                var sod = this.context.StockOutDetails.Find(stockId);
+
+                this.context.StockOutDetails.Remove(sod);
+                this.context.SaveChanges();
+
+                return ErrorCode.Success;
+            }
+            catch(Exception)
+            {
+                return ErrorCode.Exception;
+            }
+        }
         #endregion //Store Trans
 
         #region Settlement Trans

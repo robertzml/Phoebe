@@ -118,7 +118,7 @@ namespace Phoebe.FormClient
 
             this.Cursor = Cursors.Default;
         }
-        
+
         /// <summary>
         /// 显示流水
         /// </summary>
@@ -139,6 +139,59 @@ namespace Phoebe.FormClient
             this.sfgList.DataSource = flow;
 
             this.Cursor = Cursors.Default;
+        }
+
+        /// <summary>
+        /// 删除流水
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnDeleteFlow_Click(object sender, EventArgs e)
+        {
+            var flow = this.sfgList.GetCurrentSelect();
+            if (flow == null)
+            {
+                MessageUtil.ShowClaim("未选择流水记录");
+                return;
+            }
+
+            var result = BusinessFactory<StoreBusiness>.Instance.DeleteStockFlow(flow);
+            if (result == ErrorCode.Success)
+            {
+                MessageUtil.ShowInfo("删除流水记录成功");
+            }
+            else
+            {
+                MessageUtil.ShowWarning("删除流水失败：" + result.DisplayName());
+            }
+        }
+
+        /// <summary>
+        /// 修正流水
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnFixFlow_Click(object sender, EventArgs e)
+        {
+            var store = this.stgList.GetCurrentSelect();
+            if (store == null)
+            {
+                MessageUtil.ShowClaim("未选择记录");
+                return;
+            }
+
+            ErrorCode result = BusinessFactory<StoreBusiness>.Instance.FixStore(store.Id);
+            if (result == ErrorCode.Success)
+            {
+                var flow = BusinessFactory<StoreBusiness>.Instance.GetStoreFlow(store.Id).OrderBy(r => r.FlowDate).ToList();
+                this.sfgList.DataSource = flow;
+
+                MessageUtil.ShowInfo("流水修正成功");
+            }
+            else
+            {
+                MessageUtil.ShowWarning("流水修正失败：" + result.DisplayName());
+            }
         }
         #endregion //Event
     }

@@ -716,6 +716,18 @@ namespace Phoebe.Business
 
             return errorStores;
         }
+
+        public ErrorCode DeleteStockFlow(StockFlow stockFlow)
+        {
+            if (stockFlow.Type != StockFlowType.StockOut)            
+                return ErrorCode.Error;
+
+
+            TransactionRepository trans = new TransactionRepository();
+            var result = trans.StockFlowDeleteTrans(stockFlow.StockId);
+
+            return result;
+        }
         #endregion //Stock Flow
 
         #region Inventory

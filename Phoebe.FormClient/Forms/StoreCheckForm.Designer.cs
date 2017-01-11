@@ -32,6 +32,7 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.btnShowStores = new DevExpress.XtraEditors.SimpleButton();
             this.chkStoreOut = new DevExpress.XtraEditors.CheckEdit();
             this.chkStoreIn = new DevExpress.XtraEditors.CheckEdit();
             this.lkuCustomer = new DevExpress.XtraEditors.LookUpEdit();
@@ -40,16 +41,17 @@
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
             this.btnShowFlow = new DevExpress.XtraEditors.SimpleButton();
-            this.btnShowStores = new DevExpress.XtraEditors.SimpleButton();
             this.btnStartCheck = new DevExpress.XtraEditors.SimpleButton();
             this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
             this.groupControl4 = new DevExpress.XtraEditors.GroupControl();
             this.chkFlowCount = new DevExpress.XtraEditors.CheckEdit();
             this.chkStoreStatus = new DevExpress.XtraEditors.CheckEdit();
             this.groupControl5 = new DevExpress.XtraEditors.GroupControl();
-            this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.btnDeleteFlow = new DevExpress.XtraEditors.SimpleButton();
+            this.btnFixFlow = new DevExpress.XtraEditors.SimpleButton();
             this.stgList = new Phoebe.FormClient.StoreGrid();
             this.sfgList = new Phoebe.FormClient.StockFlowGrid();
             this.tableLayoutPanel1.SuspendLayout();
@@ -65,6 +67,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
             this.groupControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).BeginInit();
@@ -75,7 +78,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.chkStoreStatus.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl5)).BeginInit();
             this.groupControl5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -125,6 +127,17 @@
             this.layoutControl1.Size = new System.Drawing.Size(276, 97);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
+            // 
+            // btnShowStores
+            // 
+            this.btnShowStores.Location = new System.Drawing.Point(12, 59);
+            this.btnShowStores.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnShowStores.Name = "btnShowStores";
+            this.btnShowStores.Size = new System.Drawing.Size(252, 22);
+            this.btnShowStores.StyleController = this.layoutControl1;
+            this.btnShowStores.TabIndex = 1;
+            this.btnShowStores.Text = "列出库存";
+            this.btnShowStores.Click += new System.EventHandler(this.btnShowStores_Click);
             // 
             // chkStoreOut
             // 
@@ -209,8 +222,19 @@
             this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem3.TextVisible = false;
             // 
+            // layoutControlItem4
+            // 
+            this.layoutControlItem4.Control = this.btnShowStores;
+            this.layoutControlItem4.Location = new System.Drawing.Point(0, 47);
+            this.layoutControlItem4.Name = "layoutControlItem4";
+            this.layoutControlItem4.Size = new System.Drawing.Size(256, 30);
+            this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem4.TextVisible = false;
+            // 
             // groupControl2
             // 
+            this.groupControl2.Controls.Add(this.btnFixFlow);
+            this.groupControl2.Controls.Add(this.btnDeleteFlow);
             this.groupControl2.Controls.Add(this.btnShowFlow);
             this.groupControl2.Controls.Add(this.btnStartCheck);
             this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -223,7 +247,7 @@
             // 
             // btnShowFlow
             // 
-            this.btnShowFlow.Location = new System.Drawing.Point(136, 46);
+            this.btnShowFlow.Location = new System.Drawing.Point(25, 72);
             this.btnShowFlow.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnShowFlow.Name = "btnShowFlow";
             this.btnShowFlow.Size = new System.Drawing.Size(81, 30);
@@ -231,20 +255,9 @@
             this.btnShowFlow.Text = "显示流水";
             this.btnShowFlow.Click += new System.EventHandler(this.btnShowFlow_Click);
             // 
-            // btnShowStores
-            // 
-            this.btnShowStores.Location = new System.Drawing.Point(12, 59);
-            this.btnShowStores.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnShowStores.Name = "btnShowStores";
-            this.btnShowStores.Size = new System.Drawing.Size(252, 22);
-            this.btnShowStores.StyleController = this.layoutControl1;
-            this.btnShowStores.TabIndex = 1;
-            this.btnShowStores.Text = "列出库存";
-            this.btnShowStores.Click += new System.EventHandler(this.btnShowStores_Click);
-            // 
             // btnStartCheck
             // 
-            this.btnStartCheck.Location = new System.Drawing.Point(27, 46);
+            this.btnStartCheck.Location = new System.Drawing.Point(25, 36);
             this.btnStartCheck.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnStartCheck.Name = "btnStartCheck";
             this.btnStartCheck.Size = new System.Drawing.Size(81, 30);
@@ -296,24 +309,33 @@
             // 
             // groupControl5
             // 
-            this.tableLayoutPanel1.SetColumnSpan(this.groupControl5, 2);
+            this.tableLayoutPanel1.SetColumnSpan(this.groupControl5, 3);
             this.groupControl5.Controls.Add(this.sfgList);
             this.groupControl5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl5.Location = new System.Drawing.Point(3, 336);
             this.groupControl5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupControl5.Name = "groupControl5";
-            this.groupControl5.Size = new System.Drawing.Size(566, 207);
+            this.groupControl5.Size = new System.Drawing.Size(948, 207);
             this.groupControl5.TabIndex = 4;
             this.groupControl5.Text = "流水记录";
             // 
-            // layoutControlItem4
+            // btnDeleteFlow
             // 
-            this.layoutControlItem4.Control = this.btnShowStores;
-            this.layoutControlItem4.Location = new System.Drawing.Point(0, 47);
-            this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(256, 30);
-            this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem4.TextVisible = false;
+            this.btnDeleteFlow.Location = new System.Drawing.Point(159, 36);
+            this.btnDeleteFlow.Name = "btnDeleteFlow";
+            this.btnDeleteFlow.Size = new System.Drawing.Size(81, 30);
+            this.btnDeleteFlow.TabIndex = 3;
+            this.btnDeleteFlow.Text = "删除流水";
+            this.btnDeleteFlow.Click += new System.EventHandler(this.btnDeleteFlow_Click);
+            // 
+            // btnFixFlow
+            // 
+            this.btnFixFlow.Location = new System.Drawing.Point(159, 72);
+            this.btnFixFlow.Name = "btnFixFlow";
+            this.btnFixFlow.Size = new System.Drawing.Size(81, 30);
+            this.btnFixFlow.TabIndex = 4;
+            this.btnFixFlow.Text = "修正流水";
+            this.btnFixFlow.Click += new System.EventHandler(this.btnFixFlow_Click);
             // 
             // stgList
             // 
@@ -340,7 +362,7 @@
             this.sfgList.Location = new System.Drawing.Point(2, 21);
             this.sfgList.Margin = new System.Windows.Forms.Padding(4);
             this.sfgList.Name = "sfgList";
-            this.sfgList.Size = new System.Drawing.Size(562, 184);
+            this.sfgList.Size = new System.Drawing.Size(944, 184);
             this.sfgList.StartDate = new System.DateTime(((long)(0)));
             this.sfgList.TabIndex = 0;
             // 
@@ -367,6 +389,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
             this.groupControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).EndInit();
@@ -377,7 +400,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.chkStoreStatus.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl5)).EndInit();
             this.groupControl5.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -407,5 +429,7 @@
         private StockFlowGrid sfgList;
         private DevExpress.XtraEditors.CheckEdit chkFlowCount;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
+        private DevExpress.XtraEditors.SimpleButton btnDeleteFlow;
+        private DevExpress.XtraEditors.SimpleButton btnFixFlow;
     }
 }
