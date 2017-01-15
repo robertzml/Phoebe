@@ -155,14 +155,17 @@ namespace Phoebe.FormClient
                 return;
             }
 
-            var result = BusinessFactory<StoreBusiness>.Instance.DeleteStockFlow(flow);
-            if (result == ErrorCode.Success)
+            if (MessageUtil.ConfirmYesNo("是否确认删除该流水记录，删除后无法恢复。") == DialogResult.Yes)
             {
-                MessageUtil.ShowInfo("删除流水记录成功");
-            }
-            else
-            {
-                MessageUtil.ShowWarning("删除流水失败：" + result.DisplayName());
+                var result = BusinessFactory<StoreBusiness>.Instance.DeleteStockFlow(flow);
+                if (result == ErrorCode.Success)
+                {
+                    MessageUtil.ShowInfo("删除流水记录成功");
+                }
+                else
+                {
+                    MessageUtil.ShowWarning("删除流水失败：" + result.DisplayName());
+                }
             }
         }
 
