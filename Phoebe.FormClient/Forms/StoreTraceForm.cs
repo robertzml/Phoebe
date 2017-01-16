@@ -228,6 +228,34 @@ namespace Phoebe.FormClient
                 MessageUtil.ShowWarning("流水修正失败：" + result.DisplayName());
             }
         }
+        
+        /// <summary>
+        /// 删除流水
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnDeleteFlow_Click(object sender, EventArgs e)
+        {
+            var flow = this.sfgList.GetCurrentSelect();
+            if (flow == null)
+            {
+                MessageUtil.ShowClaim("未选择流水记录");
+                return;
+            }
+
+            if (MessageUtil.ConfirmYesNo("是否确认删除该流水记录，删除后无法恢复。") == DialogResult.Yes)
+            {
+                var result = BusinessFactory<StoreBusiness>.Instance.DeleteStockFlow(flow);
+                if (result == ErrorCode.Success)
+                {
+                    MessageUtil.ShowInfo("删除流水记录成功");
+                }
+                else
+                {
+                    MessageUtil.ShowWarning("删除流水失败：" + result.DisplayName());
+                }
+            }
+        }
         #endregion //Event
     }
 }

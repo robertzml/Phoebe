@@ -696,6 +696,12 @@ namespace Phoebe.Business
 
             foreach (var item in stores)
             {
+                if (item.StoreCount < 0)
+                {
+                    errorStores.Add(item);
+                    continue;
+                }
+
                 var so = RepositoryFactory<StockOutDetailsRepository>.Instance.Find(r => r.StoreId == item.Id && r.Status == (int)EntityStatus.StockOut);
                 var outCount = so.Sum(r => r.Count);
 
@@ -704,19 +710,17 @@ namespace Phoebe.Business
 
                 if (item.TotalCount - outCount - moveCount != item.StoreCount)
                     errorStores.Add(item);
-
-                //var flows = GetStoreFlow(item.Id);
-
-                //var outCount = -flows.Where(r => r.Type == StockFlowType.StockOut).Sum(r => r.FlowCount);
-                //var moveCount = -flows.Where(r => r.Type == StockFlowType.StockMoveOut).Sum(r => r.FlowCount);
-
-                //if (item.TotalCount - outCount - moveCount != item.StoreCount)
-                //    errorStores.Add(item);
             }
 
             return errorStores;
         }
 
+        /// <summary>
+        /// 删除库存流水
+        /// </summary>
+        /// <param name="stockFlow">流水记录</param>
+        /// <remarks>删除的是出库详细记录</remarks>
+        /// <returns></returns>
         public ErrorCode DeleteStockFlow(StockFlow stockFlow)
         {
             if (stockFlow.Type != StockFlowType.StockOut)            
