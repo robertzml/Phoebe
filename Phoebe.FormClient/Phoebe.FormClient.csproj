@@ -59,6 +59,7 @@
     <Reference Include="DevExpress.XtraPrinting.v15.1, Version=15.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraReports.v15.1, Version=15.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraReports.v15.1.Extensions, Version=15.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraTreeList.v15.1, Version=15.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -88,6 +89,18 @@
     <Reference Include="UIAutomationClient" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\CustomerStorageGrid.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\CustomerStorageGrid.Designer.cs">
+      <DependentUpon>CustomerStorageGrid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Statistic\CargoSubReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Statistic\CargoSubReportForm.Designer.cs">
+      <DependentUpon>CargoSubReportForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\CargoStoreGrid.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -646,6 +659,12 @@
       <DependentUpon>UscCustomerInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils\ModelTranslate.cs" />
+    <EmbeddedResource Include="Controls\CustomerStorageGrid.resx">
+      <DependentUpon>CustomerStorageGrid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Statistic\CargoSubReportForm.resx">
+      <DependentUpon>CargoSubReportForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\CargoStoreGrid.resx">
       <DependentUpon>CargoStoreGrid.cs</DependentUpon>
     </EmbeddedResource>
@@ -929,6 +948,7 @@
     <None Include="Properties\DataSources\Phoebe.Model.Contract.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.Customer.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.CustomerFee.datasource" />
+    <None Include="Properties\DataSources\Phoebe.Model.CustomerStorage.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.DailyColdRecord.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.DailyFee.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.Debt.datasource" />

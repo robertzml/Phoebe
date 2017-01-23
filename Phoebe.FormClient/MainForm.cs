@@ -267,6 +267,16 @@ namespace Phoebe.FormClient
         }
 
         /// <summary>
+        /// 报表管理 - 货品分项报表
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void menuCargoSubReport_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            ChildFormManage.LoadMdiForm(this, typeof(CargoSubReportForm));
+        }
+
+        /// <summary>
         /// 报表管理 - 出入库报表
         /// </summary>
         /// <param name="sender"></param>
@@ -394,6 +404,5 @@ namespace Phoebe.FormClient
         #endregion //Menu Event
 
         #endregion //Event
-
     }
 }

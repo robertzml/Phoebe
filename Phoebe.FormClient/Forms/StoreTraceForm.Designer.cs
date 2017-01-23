@@ -32,6 +32,7 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.btnDeleteFlow = new DevExpress.XtraEditors.SimpleButton();
             this.lkuCustomer = new DevExpress.XtraEditors.LookUpEdit();
             this.bsCustomer = new System.Windows.Forms.BindingSource(this.components);
             this.btnFix = new DevExpress.XtraEditors.SimpleButton();
@@ -53,13 +54,12 @@
             this.layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
             this.sgList = new Phoebe.FormClient.StoreGrid();
             this.clcCategory = new Phoebe.FormClient.CategoryListControl();
             this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
             this.sfgList = new Phoebe.FormClient.StockFlowGrid();
-            this.btnDeleteFlow = new DevExpress.XtraEditors.SimpleButton();
-            this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
@@ -81,11 +81,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
             this.groupControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).BeginInit();
             this.groupControl3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -139,6 +139,16 @@
             this.layoutControl1.Size = new System.Drawing.Size(769, 171);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
+            // 
+            // btnDeleteFlow
+            // 
+            this.btnDeleteFlow.Location = new System.Drawing.Point(507, 91);
+            this.btnDeleteFlow.Name = "btnDeleteFlow";
+            this.btnDeleteFlow.Size = new System.Drawing.Size(250, 22);
+            this.btnDeleteFlow.StyleController = this.layoutControl1;
+            this.btnDeleteFlow.TabIndex = 14;
+            this.btnDeleteFlow.Text = "删除流水";
+            this.btnDeleteFlow.Click += new System.EventHandler(this.btnDeleteFlow_Click);
             // 
             // lkuCustomer
             // 
@@ -359,6 +369,15 @@
             this.layoutControlItem1.Text = "客户选择";
             this.layoutControlItem1.TextSize = new System.Drawing.Size(48, 14);
             // 
+            // layoutControlItem2
+            // 
+            this.layoutControlItem2.Control = this.btnDeleteFlow;
+            this.layoutControlItem2.Location = new System.Drawing.Point(495, 79);
+            this.layoutControlItem2.Name = "layoutControlItem2";
+            this.layoutControlItem2.Size = new System.Drawing.Size(254, 72);
+            this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem2.TextVisible = false;
+            // 
             // groupControl2
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.groupControl2, 3);
@@ -379,7 +398,7 @@
             this.sgList.EnableFind = false;
             this.sgList.EnableGroup = false;
             this.sgList.Location = new System.Drawing.Point(2, 21);
-            this.sgList.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.sgList.Margin = new System.Windows.Forms.Padding(4);
             this.sgList.Name = "sgList";
             this.sgList.ShowContract = false;
             this.sgList.ShowCustomer = false;
@@ -391,7 +410,7 @@
             // 
             this.clcCategory.Dock = System.Windows.Forms.DockStyle.Fill;
             this.clcCategory.Location = new System.Drawing.Point(783, 4);
-            this.clcCategory.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.clcCategory.Margin = new System.Windows.Forms.Padding(4);
             this.clcCategory.Name = "clcCategory";
             this.clcCategory.Size = new System.Drawing.Size(192, 192);
             this.clcCategory.TabIndex = 3;
@@ -414,30 +433,11 @@
             this.sfgList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.sfgList.EndDate = new System.DateTime(((long)(0)));
             this.sfgList.Location = new System.Drawing.Point(2, 21);
-            this.sfgList.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.sfgList.Margin = new System.Windows.Forms.Padding(4);
             this.sfgList.Name = "sfgList";
             this.sfgList.Size = new System.Drawing.Size(969, 176);
             this.sfgList.StartDate = new System.DateTime(((long)(0)));
             this.sfgList.TabIndex = 0;
-            // 
-            // btnDeleteFlow
-            // 
-            this.btnDeleteFlow.Location = new System.Drawing.Point(507, 91);
-            this.btnDeleteFlow.Name = "btnDeleteFlow";
-            this.btnDeleteFlow.Size = new System.Drawing.Size(250, 22);
-            this.btnDeleteFlow.StyleController = this.layoutControl1;
-            this.btnDeleteFlow.TabIndex = 14;
-            this.btnDeleteFlow.Text = "删除流水";
-            this.btnDeleteFlow.Click += new System.EventHandler(this.btnDeleteFlow_Click);
-            // 
-            // layoutControlItem2
-            // 
-            this.layoutControlItem2.Control = this.btnDeleteFlow;
-            this.layoutControlItem2.Location = new System.Drawing.Point(495, 79);
-            this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(254, 72);
-            this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem2.TextVisible = false;
             // 
             // StoreTraceForm
             // 
@@ -470,11 +470,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
             this.groupControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).EndInit();
             this.groupControl3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             this.ResumeLayout(false);
 
         }

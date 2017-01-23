@@ -224,7 +224,7 @@
             this.cgList.EnableFind = true;
             this.cgList.EnableGroup = false;
             this.cgList.Location = new System.Drawing.Point(2, 21);
-            this.cgList.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cgList.Margin = new System.Windows.Forms.Padding(4);
             this.cgList.Name = "cgList";
             this.cgList.ShowFooter = false;
             this.cgList.Size = new System.Drawing.Size(946, 401);

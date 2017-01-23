@@ -71,6 +71,7 @@
     <Compile Include="Helper\CargoStore.cs" />
     <Compile Include="Helper\ColdSettlement.cs" />
     <Compile Include="Helper\CustomerFee.cs" />
+    <Compile Include="Helper\CustomerStorage.cs" />
     <Compile Include="Helper\DailyColdRecord.cs" />
     <Compile Include="Helper\DailyFee.cs" />
     <Compile Include="Helper\Debt.cs" />

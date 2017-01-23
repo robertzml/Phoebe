@@ -280,6 +280,60 @@ namespace Phoebe.Business
         }
 
         /// <summary>
+        /// 获取货品客户库存
+        /// </summary>
+        /// <param name="categoryId">分类ID</param>
+        /// <param name="date">日期</param>
+        /// <param name="hasChild">是否包含子分类</param>
+        /// <returns></returns>
+        public List<CustomerStorage> GetCargoSub(int categoryId, DateTime date, bool hasChild)
+        {
+            var category = BusinessFactory<CategoryBusiness>.Instance.FindById(categoryId);
+            var filterCategory = BusinessFactory<CategoryBusiness>.Instance.GetByParent(category.Number);
+
+            var storages = BusinessFactory<StoreBusiness>.Instance.GetInDay(date);
+
+            if (hasChild)
+                storages = storages.Where(r => filterCategory.Select(s => s.Id).Contains(r.CategoryId)).ToList();
+            else
+                storages = storages.Where(r => r.CategoryId == categoryId).ToList();
+
+            List<CustomerStorage> data = new List<CustomerStorage>();
+            foreach (var item in storages)
+            {
+                if (data.Any(r => r.CustomerId == item.CustomerId && r.CategoryId == item.CategoryId))
+                {
+                    var s = data.Single(r => r.CustomerId == item.CustomerId && r.CategoryId == item.CategoryId);
+
+                    s.StoreCount += item.Count;
+                    s.StoreWeight += item.StoreWeight;
+                    s.StoreVolume += item.StoreVolume;
+                }
+                else
+                {
+                    CustomerStorage cs = new CustomerStorage();
+                    cs.StorageDate = date;
+                    cs.CategoryId = item.CategoryId;
+                    cs.CategoryName = item.CategoryName;
+                    cs.CategoryNumber = item.CategoryNumber;
+                    cs.CustomerId = item.CustomerId;
+                    cs.CustomerName = item.CustomerName;
+                    cs.CustomerNumber = item.CustomerNumber;
+                    cs.Specification = item.Specification;
+                    cs.UnitWeight = item.UnitWeight;
+                    cs.UnitVolume = item.UnitVolume;
+                    cs.StoreCount = item.Count;
+                    cs.StoreWeight = item.StoreWeight;
+                    cs.StoreVolume = item.StoreVolume;
+
+                    data.Add(cs);
+                }
+            }
+
+            return data;
+        }
+
+        /// <summary>
         /// 获取客户费用列表
         /// </summary>
         /// <param name="start"></param>
