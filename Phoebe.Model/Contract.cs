@@ -19,8 +19,8 @@ namespace Phoebe.Model
         {
             this.Billings = new HashSet<Billing>();
             this.Cargoes = new HashSet<Cargo>();
-            this.SettlementDetails = new HashSet<SettlementDetail>();
             this.IceFlows = new HashSet<IceFlow>();
+            this.SettlementDetails = new HashSet<SettlementDetail>();
             this.StockIns = new HashSet<StockIn>();
             this.StockMoves = new HashSet<StockMove>();
             this.StockOuts = new HashSet<StockOut>();
@@ -34,7 +34,9 @@ namespace Phoebe.Model
         public System.DateTime SignDate { get; set; }
         public Nullable<System.DateTime> CloseDate { get; set; }
         public int BillingType { get; set; }
-        public bool IsTiming { get; set; }
+        public string Parameter1 { get; set; }
+        public string Parameter2 { get; set; }
+        public string Parameter3 { get; set; }
         public int UserId { get; set; }
         public string Remark { get; set; }
         public int Status { get; set; }
@@ -46,9 +48,9 @@ namespace Phoebe.Model
         public virtual Customer Customer { get; set; }
         public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SettlementDetail> SettlementDetails { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<IceFlow> IceFlows { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SettlementDetail> SettlementDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StockIn> StockIns { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

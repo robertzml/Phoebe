@@ -49,7 +49,13 @@ namespace Phoebe.Model
         /// 冰块合同
         /// </summary>
         [Display(Name = "冰块合同")]
-        Ice = 4
+        Ice = 4,
+
+        /// <summary>
+        /// 最短时间合同
+        /// </summary>
+        [Display(Name = "最短时间合同")]
+        MinDuration = 5
     }
 
     /// <summary>

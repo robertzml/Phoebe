@@ -50,9 +50,18 @@ namespace Phoebe.FormClient
             this.txtCustomerNumber.Text = contract.Customer.Number;
             this.txtCustomerName.Text = contract.Customer.Name;
             this.dpSignDate.DateTime = contract.SignDate.Date;
-            this.cmbType.EditValue = (ContractType)contract.Type;
+            this.txtType.Text = ((ContractType)contract.Type).DisplayName();
             this.txtBillingType.Text = ((BillingType)contract.BillingType).DisplayName();
             this.txtRemark.Text = contract.Remark;
+
+            switch ((ContractType)contract.Type)
+            {
+                case ContractType.MinDuration:
+                    this.lblParameter1.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                    this.lblParameter1.Text = "最短天数";
+                    this.txtParameter1.Text = contract.Parameter1;
+                    break;
+            }
         }
 
         /// <summary>
@@ -64,8 +73,50 @@ namespace Phoebe.FormClient
             contract.Number = this.txtNumber.Text.Trim();
             contract.Name = this.txtName.Text.Trim();
             contract.SignDate = this.dpSignDate.DateTime.Date;
-            contract.Type = (int)this.cmbType.EditValue;
             contract.Remark = this.txtRemark.Text;
+            contract.Parameter1 = this.txtParameter1.Text == "" ? null : this.txtParameter1.Text;
+            contract.Parameter2 = this.txtParameter2.Text == "" ? null : this.txtParameter2.Text;
+            contract.Parameter3 = this.txtParameter3.Text == "" ? null : this.txtParameter3.Text;
+        }
+
+        /// <summary>
+        /// 检查输入
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        private bool CheckInput(out string message)
+        {
+            message = "";
+            if (this.txtNumber.Text.Trim() == "" || this.txtName.Text.Trim() == "")
+            {
+                message = "合同编号名称不能为空";
+                return false;
+            }
+            if (this.dpSignDate.EditValue == null)
+            {
+                message = "请选择签订日期";
+                return false;
+            }
+
+            switch ((ContractType)this.bindContract.Type)
+            {
+                case ContractType.MinDuration:
+                    if (this.txtParameter1.Text.Trim() == "")
+                    {
+                        message = "请输入最小天数";
+                        return false;
+                    }
+
+                    int temp;
+                    if (!Int32.TryParse(this.txtParameter1.Text, out temp))
+                    {
+                        message = "请输入整数";
+                        return false;
+                    }
+                    break;
+            }
+
+            return true;
         }
         #endregion //Function
 
@@ -77,7 +128,6 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void ContractEditForm_Load(object sender, EventArgs e)
         {
-            this.cmbType.Properties.Items.AddEnum(typeof(ContractType));
             this.bindContract = BusinessFactory<ContractBusiness>.Instance.FindById(this.contractId);
             SetControl(this.bindContract);
         }
@@ -89,24 +139,10 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void btnConfirm_Click(object sender, EventArgs e)
         {
-            if (this.txtNumber.Text.Trim() == "" || this.txtName.Text.Trim() == "")
+            string message;
+            if (!CheckInput(out message))
             {
-                MessageUtil.ShowClaim("合同编号名称不能为空");
-                return;
-            }
-            if (this.txtCustomerNumber.Text == "")
-            {
-                MessageUtil.ShowClaim("客户代码不能为空");
-                return;
-            }
-            if (this.dpSignDate.EditValue == null)
-            {
-                MessageUtil.ShowClaim("请选择签订日期");
-                return;
-            }
-            if (this.cmbType.EditValue == null)
-            {
-                MessageUtil.ShowClaim("请选择合同类型");
+                MessageUtil.ShowClaim(message);
                 return;
             }
 
