@@ -41,10 +41,12 @@ namespace Phoebe.FormClient
         {
             var contracts1 = BusinessFactory<ContractBusiness>.Instance.GetByCustomer(customerId, ContractType.TimingCold);
             var contracts2 = BusinessFactory<ContractBusiness>.Instance.GetByCustomer(customerId, ContractType.UntimingCold);
+            var contracts3 = BusinessFactory<ContractBusiness>.Instance.GetByCustomer(customerId, ContractType.MinDuration);
 
             List<Contract> contracts = new List<Contract>();
             contracts.AddRange(contracts1);
             contracts.AddRange(contracts2);
+            contracts.AddRange(contracts3);
 
             this.cmbContract.Properties.Items.Clear();
             foreach (var item in contracts)
@@ -167,12 +169,12 @@ namespace Phoebe.FormClient
             int contractId = Convert.ToInt32(this.cmbContract.EditValue);
             var contract = BusinessFactory<ContractBusiness>.Instance.FindById(contractId);
 
-            if (contract.Type != (int)ContractType.TimingCold && contract.Type != (int)ContractType.UntimingCold)
+            if (contract.Type != (int)ContractType.TimingCold && contract.Type != (int)ContractType.UntimingCold && contract.Type != (int)ContractType.MinDuration)
             {
                 MessageUtil.ShowClaim("该类合同无冷藏费");
                 return;
             }
-         
+
             var contractBill = ContractFactory.Create((ContractType)contract.Type);
             var records = contractBill.GetColdRecord(contractId, this.dpFrom.DateTime.Date, this.dpTo.DateTime.Date);
 

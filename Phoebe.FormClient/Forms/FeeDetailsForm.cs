@@ -74,9 +74,8 @@ namespace Phoebe.FormClient
 
                 var miscBill = contractBill.GetMiscFee(contract.Id, this.start.Date, this.end.Date);
                 if (miscBill != null)
-                    miscSettlement.Add(miscBill);
+                    miscSettlement.AddRange(miscBill);
             }
-
 
             this.bsGrid.DataSource = baseSettlement;
             this.csGrid.DataSource = coldSettlement;

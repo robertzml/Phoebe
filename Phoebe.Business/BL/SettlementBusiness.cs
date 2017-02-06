@@ -150,7 +150,7 @@ namespace Phoebe.Business
 
                     var miscBill = contractBill.GetMiscFee(contract.Id, start, end);
                     if (miscBill != null)
-                        miscSettlement.Add(miscBill);
+                        miscSettlement.AddRange(miscBill);
                 }
             }
 
@@ -235,7 +235,7 @@ namespace Phoebe.Business
 
                 var miscBill = contractBill.GetMiscFee(contract.Id, start, end);
                 if (miscBill != null)
-                    miscSettlement.Add(miscBill);
+                    miscSettlement.AddRange(miscBill);
             }
 
             // get base fee

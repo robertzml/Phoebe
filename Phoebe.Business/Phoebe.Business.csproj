@@ -60,6 +60,7 @@
     <Compile Include="Billing\IBillingProcess.cs" />
     <Compile Include="Billing\IceContract.cs" />
     <Compile Include="Billing\IContract.cs" />
+    <Compile Include="Billing\MinDurationContract.cs" />
     <Compile Include="Billing\TimingColdContract.cs" />
     <Compile Include="Billing\UntimingColdContract.cs" />
     <Compile Include="BL\BillingBusiness.cs" />

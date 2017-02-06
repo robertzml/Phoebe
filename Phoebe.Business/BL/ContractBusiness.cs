@@ -56,7 +56,7 @@ namespace Phoebe.Business
         public List<Contract> GetByCustomer2(int customerId)
         {
             Expression<Func<Contract, bool>> predicate = r => r.CustomerId == customerId &&
-                (r.Type == (int)ContractType.TimingCold || r.Type == (int)ContractType.UntimingCold || r.Type == (int)ContractType.Freeze);
+                (r.Type == (int)ContractType.TimingCold || r.Type == (int)ContractType.UntimingCold || r.Type == (int)ContractType.Freeze || r.Type == (int)ContractType.MinDuration);
             return this.dal.Find(predicate).ToList();
         }
 

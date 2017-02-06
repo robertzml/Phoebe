@@ -214,7 +214,7 @@ namespace Phoebe.FormClient
 
                 var miscBill = contractBill.GetMiscFee(contract.Id, this.dpFrom.DateTime.Date, this.dpTo.DateTime.Date);
                 if (miscBill != null)
-                    miscSettlement.Add(miscBill);
+                    miscSettlement.AddRange(miscBill);
             }
 
             this.bsGrid.DataSource = baseSettlement;

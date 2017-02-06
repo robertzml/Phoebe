@@ -10,9 +10,9 @@ namespace Phoebe.Business
     using Phoebe.Model;
 
     /// <summary>
-    /// 计时冷藏合同
+    /// 最短时间合同
     /// </summary>
-    public class TimingColdContract : IContract
+    public class MinDurationContract : IContract
     {
         #region Function
         /// <summary>
@@ -75,32 +75,6 @@ namespace Phoebe.Business
                 records.Add(record);
 
             return records;
-        }
-
-        /// <summary>
-        /// 计算合同冷藏费
-        /// </summary>
-        /// <param name="contract">合同</param>
-        /// <param name="start">开始日期</param>
-        /// <param name="end">结束日期</param>
-        /// <param name="billingProcess">计费处理</param>
-        /// <returns></returns>
-        private decimal CalculateColdFee(Contract contract, DateTime start, DateTime end, IBillingProcess billingProcess)
-        {
-            decimal totalFee = 0;
-
-            for (DateTime step = start.Date; step <= end; step = step.AddDays(1))
-            {
-                var storages = BusinessFactory<StoreBusiness>.Instance.GetInDay(contract.Id, step);
-
-                foreach (var storage in storages)
-                {
-                    decimal totalMeter = billingProcess.GetStoreMeter(storage);
-                    totalFee += billingProcess.CalculateDailyFee(totalMeter, storage.UnitPrice);
-                }
-            }
-
-            return totalFee;
         }
 
         /// <summary>

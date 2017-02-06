@@ -35,6 +35,9 @@ namespace Phoebe.Business
                 case ContractType.Ice:
                     contract = new IceContract();
                     break;
+                case ContractType.MinDuration:
+                    contract = new MinDurationContract();
+                    break;
             }
             return contract;
         }

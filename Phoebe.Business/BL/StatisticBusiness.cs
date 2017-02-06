@@ -75,7 +75,7 @@ namespace Phoebe.Business
 
                 var miscSettle = contractBill.GetMiscFee(contract.Id, date, date);
                 if (miscSettle != null)
-                    data.MiscFee += miscSettle.TotalFee;
+                    data.MiscFee += miscSettle.Sum(r => r.TotalFee);
             }
 
             data.TotalFee = data.BaseFee + data.ColdFee + data.MiscFee;
@@ -146,7 +146,7 @@ namespace Phoebe.Business
 
                 var miscSettle = contractBill.GetMiscFee(contract.Id, start, end);
                 if (miscSettle != null)
-                    data.MiscFee += miscSettle.TotalFee;
+                    data.MiscFee += miscSettle.Sum(r => r.TotalFee);
             }
 
             data.TotalFee = data.BaseFee + data.ColdFee + data.MiscFee;
@@ -400,7 +400,7 @@ namespace Phoebe.Business
 
                 var miscSettle = contractBill.GetMiscFee(contract.Id, start, end);
                 if (miscSettle != null)
-                    customerFee.MiscFee += miscSettle.TotalFee;
+                    customerFee.MiscFee += miscSettle.Sum(r => r.TotalFee);
             }
 
             customerFee.TotalFee = customerFee.StartDebt + customerFee.BaseFee + customerFee.ColdFee + customerFee.MiscFee;
