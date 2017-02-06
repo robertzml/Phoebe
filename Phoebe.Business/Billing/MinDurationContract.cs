@@ -14,6 +14,10 @@ namespace Phoebe.Business
     /// </summary>
     public class MinDurationContract : IContract
     {
+        #region Field
+        private string feeName = "最短时间费用";
+        #endregion //Field
+
         #region Function
         /// <summary>
         /// 获取合同日冷藏费记录
@@ -199,7 +203,48 @@ namespace Phoebe.Business
         /// <param name="end">结束日期</param>
         public List<MiscSettlement> GetMiscFee(int contractId, DateTime start, DateTime end)
         {
-            return null;
+            List<MiscSettlement> data = new List<MiscSettlement>();
+
+            var contract = BusinessFactory<ContractBusiness>.Instance.FindById(contractId);
+
+            int minDays = Convert.ToInt32(contract.Parameter1);
+
+            // get stock out
+            var stockOuts = RepositoryFactory<StockOutDetailsRepository>.Instance.Find(r => r.StockOut.ContractId == contractId && r.StockOut.OutTime >= start && r.StockOut.OutTime <= end && r.Status == (int)EntityStatus.StockOut);
+
+            foreach (var item in stockOuts)
+            {
+                var store = item.Store;
+
+                var siDetail = RepositoryFactory<StockInDetailsRepository>.Instance.FindOne(r => r.StoreId == store.Id);
+
+                int days = item.StockOut.OutTime.Subtract(siDetail.StockIn.InTime).Days;                
+
+                if (days < minDays)
+                {
+                    IBillingProcess billingProcess = BillingFactory.Create((BillingType)contract.BillingType);
+
+                    MiscSettlement settle = new MiscSettlement();
+                    settle.ContractId = contractId;
+                    settle.ContractName = contract.Name;
+                    settle.StartTime = start;
+                    settle.EndTime = end;
+                    settle.FeeName = this.feeName;
+                    settle.Remark = string.Format("出库单号:{0}", item.StockOut.FlowNumber);
+
+                    StockFlow flow = new StockFlow();
+                    flow.FlowCount = item.Count;
+                    flow.FlowWeight = item.OutWeight;
+                    flow.FlowVolume = item.OutVolume;
+
+                    decimal totalMeter = billingProcess.GetFlowMeter(flow);
+                    settle.TotalFee = billingProcess.CalculatePeriodFee(totalMeter, store.UnitPrice, minDays - days);
+
+                    data.Add(settle);
+                }
+            }
+
+            return data;
         }
 
         /// <summary>

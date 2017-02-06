@@ -30,30 +30,37 @@
         {
             this.components = new System.ComponentModel.Container();
             this.dgcMisc = new DevExpress.XtraGrid.GridControl();
-            this.dgvMisc = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.bsMisc = new System.Windows.Forms.BindingSource(this.components);
+            this.dgvMisc = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colContractId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colContractName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colFeeName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colStartTime = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colEndTime = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colTotalFee = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colRemark = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgcMisc)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvMisc)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsMisc)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMisc)).BeginInit();
             this.SuspendLayout();
             // 
             // dgcMisc
             // 
             this.dgcMisc.DataSource = this.bsMisc;
             this.dgcMisc.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgcMisc.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dgcMisc.Location = new System.Drawing.Point(0, 0);
             this.dgcMisc.MainView = this.dgvMisc;
+            this.dgcMisc.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dgcMisc.Name = "dgcMisc";
-            this.dgcMisc.Size = new System.Drawing.Size(802, 365);
+            this.dgcMisc.Size = new System.Drawing.Size(602, 292);
             this.dgcMisc.TabIndex = 0;
             this.dgcMisc.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.dgvMisc});
+            // 
+            // bsMisc
+            // 
+            this.bsMisc.DataSource = typeof(Phoebe.Model.MiscSettlement);
             // 
             // dgvMisc
             // 
@@ -63,7 +70,8 @@
             this.colFeeName,
             this.colStartTime,
             this.colEndTime,
-            this.colTotalFee});
+            this.colTotalFee,
+            this.colRemark});
             this.dgvMisc.GridControl = this.dgcMisc;
             this.dgvMisc.Name = "dgvMisc";
             this.dgvMisc.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
@@ -74,10 +82,6 @@
             this.dgvMisc.OptionsView.EnableAppearanceOddRow = true;
             this.dgvMisc.OptionsView.ShowFooter = true;
             this.dgvMisc.OptionsView.ShowGroupPanel = false;
-            // 
-            // bsMisc
-            // 
-            this.bsMisc.DataSource = typeof(Phoebe.Model.MiscSettlement);
             // 
             // colContractId
             // 
@@ -128,16 +132,25 @@
             this.colTotalFee.Visible = true;
             this.colTotalFee.VisibleIndex = 4;
             // 
+            // colRemark
+            // 
+            this.colRemark.Caption = "备注";
+            this.colRemark.FieldName = "Remark";
+            this.colRemark.Name = "colRemark";
+            this.colRemark.Visible = true;
+            this.colRemark.VisibleIndex = 5;
+            // 
             // MiscSettlementControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.dgcMisc);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "MiscSettlementControl";
-            this.Size = new System.Drawing.Size(802, 365);
+            this.Size = new System.Drawing.Size(602, 292);
             ((System.ComponentModel.ISupportInitialize)(this.dgcMisc)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvMisc)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsMisc)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMisc)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -153,5 +166,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn colStartTime;
         private DevExpress.XtraGrid.Columns.GridColumn colEndTime;
         private DevExpress.XtraGrid.Columns.GridColumn colTotalFee;
+        private DevExpress.XtraGrid.Columns.GridColumn colRemark;
     }
 }

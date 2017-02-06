@@ -40,5 +40,10 @@ namespace Phoebe.Model
         /// 费用合计
         /// </summary>
         public decimal TotalFee { get; set; }
+
+        /// <summary>
+        /// 备注
+        /// </summary>
+        public string Remark { get; set; }
     }
 }
