@@ -116,6 +116,7 @@ namespace Phoebe.FormClient
                 detail.ExpenseType = (int)ExpenseType.Misc;
                 detail.SumFee = misc.TotalFee;
                 detail.Status = (int)EntityStatus.Settled;
+                detail.Remark = misc.Remark;
 
                 if (detail.SumFee == 0)
                     continue;
