@@ -64,27 +64,25 @@
             // 
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 23F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Controls.Add(this.groupControl1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.groupControl2, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 206F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 160F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(952, 660);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(833, 513);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // groupControl1
             // 
             this.groupControl1.Controls.Add(this.layoutControl1);
             this.groupControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl1.Location = new System.Drawing.Point(3, 4);
-            this.groupControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.groupControl1.Location = new System.Drawing.Point(3, 3);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(946, 198);
+            this.groupControl1.Size = new System.Drawing.Size(827, 154);
             this.groupControl1.TabIndex = 0;
             this.groupControl1.Text = "选择";
             // 
@@ -95,19 +93,18 @@
             this.layoutControl1.Controls.Add(this.btnPrint);
             this.layoutControl1.Controls.Add(this.btnQuery);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.layoutControl1.Location = new System.Drawing.Point(2, 25);
-            this.layoutControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.layoutControl1.Location = new System.Drawing.Point(2, 21);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.layoutControlGroup1;
-            this.layoutControl1.Size = new System.Drawing.Size(942, 171);
+            this.layoutControl1.Size = new System.Drawing.Size(823, 131);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
             // btnDetails
             // 
-            this.btnDetails.Location = new System.Drawing.Point(301, 42);
+            this.btnDetails.Location = new System.Drawing.Point(263, 36);
             this.btnDetails.Name = "btnDetails";
-            this.btnDetails.Size = new System.Drawing.Size(150, 27);
+            this.btnDetails.Size = new System.Drawing.Size(131, 22);
             this.btnDetails.StyleController = this.layoutControl1;
             this.btnDetails.TabIndex = 8;
             this.btnDetails.Text = "显示详情";
@@ -116,7 +113,7 @@
             // dpSelect
             // 
             this.dpSelect.EditValue = null;
-            this.dpSelect.Location = new System.Drawing.Point(77, 14);
+            this.dpSelect.Location = new System.Drawing.Point(63, 12);
             this.dpSelect.Name = "dpSelect";
             this.dpSelect.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.dpSelect.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -124,15 +121,15 @@
             this.dpSelect.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dpSelect.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.dpSelect.Size = new System.Drawing.Size(374, 24);
+            this.dpSelect.Size = new System.Drawing.Size(331, 20);
             this.dpSelect.StyleController = this.layoutControl1;
             this.dpSelect.TabIndex = 7;
             // 
             // btnPrint
             // 
-            this.btnPrint.Location = new System.Drawing.Point(156, 42);
+            this.btnPrint.Location = new System.Drawing.Point(136, 36);
             this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(141, 27);
+            this.btnPrint.Size = new System.Drawing.Size(123, 22);
             this.btnPrint.StyleController = this.layoutControl1;
             this.btnPrint.TabIndex = 6;
             this.btnPrint.Text = "打印";
@@ -140,9 +137,9 @@
             // 
             // btnQuery
             // 
-            this.btnQuery.Location = new System.Drawing.Point(14, 42);
+            this.btnQuery.Location = new System.Drawing.Point(12, 36);
             this.btnQuery.Name = "btnQuery";
-            this.btnQuery.Size = new System.Drawing.Size(138, 27);
+            this.btnQuery.Size = new System.Drawing.Size(120, 22);
             this.btnQuery.StyleController = this.layoutControl1;
             this.btnQuery.TabIndex = 5;
             this.btnQuery.Text = "查询";
@@ -160,24 +157,24 @@
             this.layoutControlItem4});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "layoutControlGroup1";
-            this.layoutControlGroup1.Size = new System.Drawing.Size(942, 171);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(823, 131);
             this.layoutControlGroup1.TextVisible = false;
             // 
             // layoutControlItem2
             // 
             this.layoutControlItem2.Control = this.btnQuery;
-            this.layoutControlItem2.Location = new System.Drawing.Point(0, 28);
+            this.layoutControlItem2.Location = new System.Drawing.Point(0, 24);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(142, 119);
+            this.layoutControlItem2.Size = new System.Drawing.Size(124, 87);
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextVisible = false;
             // 
             // layoutControlItem3
             // 
             this.layoutControlItem3.Control = this.btnPrint;
-            this.layoutControlItem3.Location = new System.Drawing.Point(142, 28);
+            this.layoutControlItem3.Location = new System.Drawing.Point(124, 24);
             this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(145, 119);
+            this.layoutControlItem3.Size = new System.Drawing.Size(127, 87);
             this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem3.TextVisible = false;
             // 
@@ -186,24 +183,24 @@
             this.layoutControlItem1.Control = this.dpSelect;
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(441, 28);
+            this.layoutControlItem1.Size = new System.Drawing.Size(386, 24);
             this.layoutControlItem1.Text = "日期选择";
-            this.layoutControlItem1.TextSize = new System.Drawing.Size(60, 18);
+            this.layoutControlItem1.TextSize = new System.Drawing.Size(48, 14);
             // 
             // emptySpaceItem1
             // 
             this.emptySpaceItem1.AllowHotTrack = false;
-            this.emptySpaceItem1.Location = new System.Drawing.Point(441, 0);
+            this.emptySpaceItem1.Location = new System.Drawing.Point(386, 0);
             this.emptySpaceItem1.Name = "emptySpaceItem1";
-            this.emptySpaceItem1.Size = new System.Drawing.Size(477, 147);
+            this.emptySpaceItem1.Size = new System.Drawing.Size(417, 111);
             this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
             // 
             // layoutControlItem4
             // 
             this.layoutControlItem4.Control = this.btnDetails;
-            this.layoutControlItem4.Location = new System.Drawing.Point(287, 28);
+            this.layoutControlItem4.Location = new System.Drawing.Point(251, 24);
             this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(154, 119);
+            this.layoutControlItem4.Size = new System.Drawing.Size(135, 87);
             this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem4.TextVisible = false;
             // 
@@ -211,10 +208,9 @@
             // 
             this.groupControl2.Controls.Add(this.dfList);
             this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl2.Location = new System.Drawing.Point(3, 210);
-            this.groupControl2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.groupControl2.Location = new System.Drawing.Point(3, 163);
             this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(946, 446);
+            this.groupControl2.Size = new System.Drawing.Size(827, 347);
             this.groupControl2.TabIndex = 1;
             this.groupControl2.Text = "报表记录";
             // 
@@ -223,19 +219,19 @@
             this.dfList.DataSource = null;
             this.dfList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dfList.FeeDate = new System.DateTime(2016, 9, 27, 0, 0, 0, 0);
-            this.dfList.Location = new System.Drawing.Point(2, 25);
-            this.dfList.Margin = new System.Windows.Forms.Padding(5);
+            this.dfList.Location = new System.Drawing.Point(2, 21);
+            this.dfList.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dfList.Name = "dfList";
-            this.dfList.Size = new System.Drawing.Size(942, 419);
+            this.dfList.Size = new System.Drawing.Size(823, 324);
             this.dfList.TabIndex = 0;
             // 
             // DailyFeeReportForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(952, 660);
+            this.ClientSize = new System.Drawing.Size(833, 513);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "DailyFeeReportForm";
             this.Text = "费用日报表";
             this.Load += new System.EventHandler(this.DailyFeeReportForm_Load);

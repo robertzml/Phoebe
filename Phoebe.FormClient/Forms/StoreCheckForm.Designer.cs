@@ -43,17 +43,18 @@
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
+            this.btnFixFlow = new DevExpress.XtraEditors.SimpleButton();
+            this.btnDeleteFlow = new DevExpress.XtraEditors.SimpleButton();
             this.btnShowFlow = new DevExpress.XtraEditors.SimpleButton();
             this.btnStartCheck = new DevExpress.XtraEditors.SimpleButton();
             this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
+            this.stgList = new Phoebe.FormClient.StoreGrid();
             this.groupControl4 = new DevExpress.XtraEditors.GroupControl();
             this.chkFlowCount = new DevExpress.XtraEditors.CheckEdit();
             this.chkStoreStatus = new DevExpress.XtraEditors.CheckEdit();
             this.groupControl5 = new DevExpress.XtraEditors.GroupControl();
-            this.btnDeleteFlow = new DevExpress.XtraEditors.SimpleButton();
-            this.btnFixFlow = new DevExpress.XtraEditors.SimpleButton();
-            this.stgList = new Phoebe.FormClient.StoreGrid();
             this.sfgList = new Phoebe.FormClient.StockFlowGrid();
+            this.chkOrder = new DevExpress.XtraEditors.CheckEdit();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
@@ -78,6 +79,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.chkStoreStatus.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl5)).BeginInit();
             this.groupControl5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chkOrder.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -245,6 +247,24 @@
             this.groupControl2.TabIndex = 1;
             this.groupControl2.Text = "操作";
             // 
+            // btnFixFlow
+            // 
+            this.btnFixFlow.Location = new System.Drawing.Point(159, 72);
+            this.btnFixFlow.Name = "btnFixFlow";
+            this.btnFixFlow.Size = new System.Drawing.Size(81, 30);
+            this.btnFixFlow.TabIndex = 4;
+            this.btnFixFlow.Text = "修正流水";
+            this.btnFixFlow.Click += new System.EventHandler(this.btnFixFlow_Click);
+            // 
+            // btnDeleteFlow
+            // 
+            this.btnDeleteFlow.Location = new System.Drawing.Point(159, 36);
+            this.btnDeleteFlow.Name = "btnDeleteFlow";
+            this.btnDeleteFlow.Size = new System.Drawing.Size(81, 30);
+            this.btnDeleteFlow.TabIndex = 3;
+            this.btnDeleteFlow.Text = "删除流水";
+            this.btnDeleteFlow.Click += new System.EventHandler(this.btnDeleteFlow_Click);
+            // 
             // btnShowFlow
             // 
             this.btnShowFlow.Location = new System.Drawing.Point(25, 72);
@@ -277,8 +297,26 @@
             this.groupControl3.TabIndex = 2;
             this.groupControl3.Text = "库存记录";
             // 
+            // stgList
+            // 
+            this.stgList.DataSource = null;
+            this.stgList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.stgList.EnableColumn = true;
+            this.stgList.EnableFilter = false;
+            this.stgList.EnableFind = false;
+            this.stgList.EnableGroup = false;
+            this.stgList.Location = new System.Drawing.Point(2, 21);
+            this.stgList.Margin = new System.Windows.Forms.Padding(4);
+            this.stgList.Name = "stgList";
+            this.stgList.ShowContract = true;
+            this.stgList.ShowCustomer = true;
+            this.stgList.ShowFooter = false;
+            this.stgList.Size = new System.Drawing.Size(944, 183);
+            this.stgList.TabIndex = 0;
+            // 
             // groupControl4
             // 
+            this.groupControl4.Controls.Add(this.chkOrder);
             this.groupControl4.Controls.Add(this.chkFlowCount);
             this.groupControl4.Controls.Add(this.chkStoreStatus);
             this.groupControl4.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -319,41 +357,6 @@
             this.groupControl5.TabIndex = 4;
             this.groupControl5.Text = "流水记录";
             // 
-            // btnDeleteFlow
-            // 
-            this.btnDeleteFlow.Location = new System.Drawing.Point(159, 36);
-            this.btnDeleteFlow.Name = "btnDeleteFlow";
-            this.btnDeleteFlow.Size = new System.Drawing.Size(81, 30);
-            this.btnDeleteFlow.TabIndex = 3;
-            this.btnDeleteFlow.Text = "删除流水";
-            this.btnDeleteFlow.Click += new System.EventHandler(this.btnDeleteFlow_Click);
-            // 
-            // btnFixFlow
-            // 
-            this.btnFixFlow.Location = new System.Drawing.Point(159, 72);
-            this.btnFixFlow.Name = "btnFixFlow";
-            this.btnFixFlow.Size = new System.Drawing.Size(81, 30);
-            this.btnFixFlow.TabIndex = 4;
-            this.btnFixFlow.Text = "修正流水";
-            this.btnFixFlow.Click += new System.EventHandler(this.btnFixFlow_Click);
-            // 
-            // stgList
-            // 
-            this.stgList.DataSource = null;
-            this.stgList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.stgList.EnableColumn = true;
-            this.stgList.EnableFilter = false;
-            this.stgList.EnableFind = false;
-            this.stgList.EnableGroup = false;
-            this.stgList.Location = new System.Drawing.Point(2, 21);
-            this.stgList.Margin = new System.Windows.Forms.Padding(4);
-            this.stgList.Name = "stgList";
-            this.stgList.ShowContract = true;
-            this.stgList.ShowCustomer = true;
-            this.stgList.ShowFooter = false;
-            this.stgList.Size = new System.Drawing.Size(944, 183);
-            this.stgList.TabIndex = 0;
-            // 
             // sfgList
             // 
             this.sfgList.DataSource = null;
@@ -365,6 +368,14 @@
             this.sfgList.Size = new System.Drawing.Size(944, 184);
             this.sfgList.StartDate = new System.DateTime(((long)(0)));
             this.sfgList.TabIndex = 0;
+            // 
+            // chkOrder
+            // 
+            this.chkOrder.Location = new System.Drawing.Point(144, 34);
+            this.chkOrder.Name = "chkOrder";
+            this.chkOrder.Properties.Caption = "流水顺序";
+            this.chkOrder.Size = new System.Drawing.Size(75, 19);
+            this.chkOrder.TabIndex = 7;
             // 
             // StoreCheckForm
             // 
@@ -400,6 +411,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.chkStoreStatus.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl5)).EndInit();
             this.groupControl5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.chkOrder.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -431,5 +443,6 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
         private DevExpress.XtraEditors.SimpleButton btnDeleteFlow;
         private DevExpress.XtraEditors.SimpleButton btnFixFlow;
+        private DevExpress.XtraEditors.CheckEdit chkOrder;
     }
 }

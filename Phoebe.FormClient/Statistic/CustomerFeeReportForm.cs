@@ -89,6 +89,23 @@ namespace Phoebe.FormClient
         {
             this.cfgList.PrintPriview();
         }
+
+        /// <summary>
+        /// 显示详情
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnShow_Click(object sender, EventArgs e)
+        {
+            var select = this.cfgList.GetCurrentSelect();
+            if (select == null)
+            {
+                MessageUtil.ShowClaim("未选中记录");
+                return;
+            }
+
+            ChildFormManage.ShowDialogForm(typeof(FeeDetailsForm), new object[] { select.CustomerId, select.StartTime, select.EndTime });
+        }
         #endregion //Event
     }
 }

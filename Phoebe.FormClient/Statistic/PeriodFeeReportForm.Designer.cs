@@ -251,7 +251,7 @@
             this.dgfList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgfList.EndDate = new System.DateTime(((long)(0)));
             this.dgfList.Location = new System.Drawing.Point(2, 21);
-            this.dgfList.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgfList.Margin = new System.Windows.Forms.Padding(4);
             this.dgfList.Name = "dgfList";
             this.dgfList.Size = new System.Drawing.Size(929, 395);
             this.dgfList.StartDate = new System.DateTime(((long)(0)));

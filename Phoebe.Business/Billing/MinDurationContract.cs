@@ -218,7 +218,7 @@ namespace Phoebe.Business
 
                 var siDetail = RepositoryFactory<StockInDetailsRepository>.Instance.FindOne(r => r.StoreId == store.Id);
 
-                int days = item.StockOut.OutTime.Subtract(siDetail.StockIn.InTime).Days;                
+                int days = item.StockOut.OutTime.Subtract(siDetail.StockIn.InTime).Days;
 
                 if (days < minDays)
                 {
@@ -227,8 +227,8 @@ namespace Phoebe.Business
                     MiscSettlement settle = new MiscSettlement();
                     settle.ContractId = contractId;
                     settle.ContractName = contract.Name;
-                    settle.StartTime = start;
-                    settle.EndTime = end;
+                    settle.StartTime = item.StockOut.OutTime.AddDays(1);
+                    settle.EndTime = siDetail.StockIn.InTime.AddDays(minDays);
                     settle.FeeName = this.feeName;
                     settle.Remark = string.Format("出库单号:{0}", item.StockOut.FlowNumber);
 

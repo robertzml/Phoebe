@@ -92,6 +92,11 @@ namespace Phoebe.FormClient
                     var stores = BusinessFactory<StoreBusiness>.Instance.CheckFlowCount(customerId);
                     this.stgList.DataSource = stores;
                 }
+                else if (this.chkOrder.Checked)
+                {
+                    var stores = BusinessFactory<StoreBusiness>.Instance.CheckFlowOrder(customerId);
+                    this.stgList.DataSource = stores;
+                }
             }
             else
             {
@@ -109,6 +114,11 @@ namespace Phoebe.FormClient
                     else if (this.chkFlowCount.Checked)
                     {
                         var err = BusinessFactory<StoreBusiness>.Instance.CheckFlowCount(item.Id);
+                        errorStores.AddRange(err);
+                    }
+                    else if (this.chkOrder.Checked)
+                    {
+                        var err = BusinessFactory<StoreBusiness>.Instance.CheckFlowOrder(item.Id);
                         errorStores.AddRange(err);
                     }
                 }

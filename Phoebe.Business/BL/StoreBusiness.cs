@@ -716,6 +716,31 @@ namespace Phoebe.Business
         }
 
         /// <summary>
+        /// 检查流水顺序
+        /// </summary>
+        /// <param name="customerId">客户ID</param>
+        /// <returns></returns>
+        public List<Store> CheckFlowOrder(int customerId)
+        {
+            List<Store> errorStores = new List<Store>();
+
+            var stores = GetByCustomer(customerId);
+
+            foreach (var item in stores)
+            {
+                var so = RepositoryFactory<StockOutDetailsRepository>.Instance.Find(r => r.StoreId == item.Id && r.Status == (int)EntityStatus.StockOut).OrderBy(r => r.StockOut.FlowNumber).ToList();
+
+                for (int i = 0; i < so.Count - 1; i++)
+                {
+                    if (so[i].StoreCount <= so[i + 1].StoreCount)
+                        errorStores.Add(item);
+                }
+            }
+
+            return errorStores;
+        }
+
+        /// <summary>
         /// 删除库存流水
         /// </summary>
         /// <param name="stockFlow">流水记录</param>
@@ -723,7 +748,7 @@ namespace Phoebe.Business
         /// <returns></returns>
         public ErrorCode DeleteStockFlow(StockFlow stockFlow)
         {
-            if (stockFlow.Type != StockFlowType.StockOut)            
+            if (stockFlow.Type != StockFlowType.StockOut)
                 return ErrorCode.Error;
 
 

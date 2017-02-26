@@ -36,7 +36,7 @@ namespace Phoebe.FormClient
             this.dpFrom.DateTime = DateTime.Now.AddDays(1 - DateTime.Now.Day).Date;
             this.dpTo.DateTime = DateTime.Now.Date;
         }
-       
+
         /// <summary>
         /// 查询
         /// </summary>
@@ -62,7 +62,7 @@ namespace Phoebe.FormClient
 
             this.Cursor = Cursors.Default;
         }
-        
+
         /// <summary>
         /// 打印
         /// </summary>
@@ -72,7 +72,7 @@ namespace Phoebe.FormClient
         {
             this.dgfList.PrintPriview();
         }
-        
+
         /// <summary>
         /// 显示详情
         /// </summary>
