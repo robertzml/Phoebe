@@ -371,7 +371,7 @@
             this.xrLabel3.SizeF = new System.Drawing.SizeF(333.375F, 58.42F);
             this.xrLabel3.StylePriority.UseFont = false;
             this.xrLabel3.StylePriority.UseTextAlignment = false;
-            this.xrLabel3.Text = "电话:0513-88350502";
+            this.xrLabel3.Text = "电话:0513-88850502";
             this.xrLabel3.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
             // 
             // xrLabel2
