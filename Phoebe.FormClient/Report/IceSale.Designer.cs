@@ -672,7 +672,7 @@
             this.xrLabel1.StylePriority.UseFont = false;
             this.xrLabel1.StylePriority.UseForeColor = false;
             this.xrLabel1.StylePriority.UseTextAlignment = false;
-            this.xrLabel1.Text = "海安县华润食品有限公司冰块销售单";
+            this.xrLabel1.Text = "海安润思达食品有限公司冰块销售单";
             this.xrLabel1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
             // 
             // Title

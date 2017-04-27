@@ -360,7 +360,7 @@
             this.xrLabel17.StyleName = "Title";
             this.xrLabel17.StylePriority.UseFont = false;
             this.xrLabel17.StylePriority.UseForeColor = false;
-            this.xrLabel17.Text = "海安县华润食品有限公司冷链入库单";
+            this.xrLabel17.Text = "海安润思达食品有限公司冷链入库单";
             // 
             // Title
             // 

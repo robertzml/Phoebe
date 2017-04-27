@@ -818,7 +818,7 @@
             this.xrLabel1.StyleName = "Title";
             this.xrLabel1.StylePriority.UseFont = false;
             this.xrLabel1.StylePriority.UseForeColor = false;
-            this.xrLabel1.Text = "海安县华润食品有限公司冷链出库单";
+            this.xrLabel1.Text = "海安润思达食品有限公司冷链出库单";
             // 
             // Title
             // 
