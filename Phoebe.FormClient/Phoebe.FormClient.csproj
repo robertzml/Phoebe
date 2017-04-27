@@ -95,6 +95,12 @@
     <Compile Include="Controls\CustomerStorageGrid.Designer.cs">
       <DependentUpon>CustomerStorageGrid.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\CustomerLookup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\CustomerLookup.Designer.cs">
+      <DependentUpon>CustomerLookup.cs</DependentUpon>
+    </Compile>
     <Compile Include="Statistic\CargoSubReportForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -659,6 +665,9 @@
       <DependentUpon>UscCustomerInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils\ModelTranslate.cs" />
+    <EmbeddedResource Include="Controls\CustomerLookup.resx">
+      <DependentUpon>CustomerLookup.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\CustomerStorageGrid.resx">
       <DependentUpon>CustomerStorageGrid.cs</DependentUpon>
     </EmbeddedResource>
