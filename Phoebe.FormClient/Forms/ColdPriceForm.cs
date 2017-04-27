@@ -103,8 +103,6 @@ namespace Phoebe.FormClient
             this.dpTo.DateTime = DateTime.Now.Date;
 
             this.customerLookup.Init();
-            //this.bsCustomer.DataSource = BusinessFactory<CustomerBusiness>.Instance.FindAll();
-            //this.lkuCustomer.CustomDisplayText += new DevExpress.XtraEditors.Controls.CustomDisplayTextEventHandler(EventUtil.LkuCustomer_CustomDisplayText);
         }
 
         /// <summary>

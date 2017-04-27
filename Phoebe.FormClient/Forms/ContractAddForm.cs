@@ -36,7 +36,7 @@ namespace Phoebe.FormClient
         {
             contract.Number = this.txtNumber.Text.Trim();
             contract.Name = this.txtName.Text.Trim();
-            contract.CustomerId = Convert.ToInt32(this.lkuCustomer.EditValue);
+            contract.CustomerId = this.customerLookup.GetSelectedId();
             contract.SignDate = this.txtSignDate.DateTime.Date;
             contract.Type = (int)this.cmbType.EditValue;
             contract.BillingType = (int)this.cmbBillingType.EditValue;
@@ -60,7 +60,7 @@ namespace Phoebe.FormClient
                 message = "合同编号名称不能为空";
                 return false;
             }
-            if (this.lkuCustomer.EditValue == null)
+            if (this.customerLookup.GetSelectedId() == 0)
             {
                 message = "请选择客户";
                 return false;
@@ -115,8 +115,7 @@ namespace Phoebe.FormClient
             this.cmbType.Properties.Items.AddEnum(typeof(ContractType));
             this.cmbBillingType.Properties.Items.AddEnum(typeof(BillingType));
 
-            this.bsCustomer.DataSource = BusinessFactory<CustomerBusiness>.Instance.FindAll();
-            this.lkuCustomer.CustomDisplayText += new DevExpress.XtraEditors.Controls.CustomDisplayTextEventHandler(EventUtil.LkuCustomer_CustomDisplayText);
+            this.customerLookup.Init();
         }
 
         /// <summary>

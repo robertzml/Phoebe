@@ -35,8 +35,7 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void StoreCheckForm_Load(object sender, EventArgs e)
         {
-            this.bsCustomer.DataSource = BusinessFactory<CustomerBusiness>.Instance.FindAll();
-            this.lkuCustomer.CustomDisplayText += new DevExpress.XtraEditors.Controls.CustomDisplayTextEventHandler(EventUtil.LkuCustomer_CustomDisplayText);
+            this.customerLookup.Init();
         }
 
         /// <summary>
@@ -46,9 +45,9 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void btnShowStores_Click(object sender, EventArgs e)
         {
-            if (this.lkuCustomer.EditValue != null)
+            if (this.customerLookup.GetSelectedId() != 0)
             {
-                int customerId = Convert.ToInt32(this.lkuCustomer.EditValue);
+                int customerId = this.customerLookup.GetSelectedId();
 
                 var stores = BusinessFactory<StoreBusiness>.Instance.GetByCustomer(customerId);
 
@@ -78,9 +77,9 @@ namespace Phoebe.FormClient
             this.stgList.Clear();
             this.sfgList.Clear();
 
-            if (this.lkuCustomer.EditValue != null)
+            if (this.customerLookup.GetSelectedId() != 0)
             {
-                int customerId = Convert.ToInt32(this.lkuCustomer.EditValue);
+                int customerId = this.customerLookup.GetSelectedId();
 
                 if (this.chkStoreStatus.Checked)
                 {

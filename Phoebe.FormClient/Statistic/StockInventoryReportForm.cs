@@ -33,8 +33,7 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void StockInventoryReportForm_Load(object sender, EventArgs e)
         {
-            this.bsCustomer.DataSource = BusinessFactory<CustomerBusiness>.Instance.FindAll();
-            this.lkuCustomer.CustomDisplayText += new DevExpress.XtraEditors.Controls.CustomDisplayTextEventHandler(EventUtil.LkuCustomer_CustomDisplayText);
+            this.customerLookup.Init();
 
             this.dpFrom.DateTime = DateTime.Now.AddDays(1 - DateTime.Now.Day).Date;
             this.dpTo.DateTime = DateTime.Now.Date;
@@ -47,7 +46,7 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            if (this.lkuCustomer.EditValue == null)
+            if (this.customerLookup.GetSelectedId() == 0)
             {
                 MessageUtil.ShowClaim("请选择客户");
                 return;
@@ -59,7 +58,7 @@ namespace Phoebe.FormClient
                 return;
             }
 
-            var data = BusinessFactory<StoreBusiness>.Instance.GetInventory(this.dpFrom.DateTime.Date, this.dpTo.DateTime.Date, (int)this.lkuCustomer.EditValue);
+            var data = BusinessFactory<StoreBusiness>.Instance.GetInventory(this.dpFrom.DateTime.Date, this.dpTo.DateTime.Date, this.customerLookup.GetSelectedId());
 
             this.ingList.DataSource = data;
         }

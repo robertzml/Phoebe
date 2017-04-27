@@ -31,7 +31,7 @@ namespace Phoebe.FormClient
         #region Function
         private void SetEntity(Payment payment)
         {
-            payment.CustomerId = Convert.ToInt32(this.lkuCustomer.EditValue);
+            payment.CustomerId = this.customerLookup.GetSelectedId();
             payment.PaidFee = this.nmPaidFee.Value;
             payment.PaidTime = this.dpPaidTime.DateTime.Date;
             payment.PaidType = (int)this.cmbType.EditValue;
@@ -53,8 +53,7 @@ namespace Phoebe.FormClient
 
             this.cmbType.Properties.Items.AddEnum(typeof(PaymentType));
 
-            this.bsCustomer.DataSource = BusinessFactory<CustomerBusiness>.Instance.FindAll();
-            this.lkuCustomer.CustomDisplayText += new DevExpress.XtraEditors.Controls.CustomDisplayTextEventHandler(EventUtil.LkuCustomer_CustomDisplayText);
+            this.customerLookup.Init();
         }
 
         /// <summary>
@@ -64,7 +63,7 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void btnConfirm_Click(object sender, EventArgs e)
         {
-            if (this.lkuCustomer.EditValue == null)
+            if (this.customerLookup.GetSelectedId() == 0)
             {
                 MessageUtil.ShowClaim("请选择客户");
                 return;

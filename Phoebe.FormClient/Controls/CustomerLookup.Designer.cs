@@ -47,6 +47,8 @@
             this.sluCustomer.Location = new System.Drawing.Point(0, 0);
             this.sluCustomer.Name = "sluCustomer";
             this.sluCustomer.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.True;
+            this.sluCustomer.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow;
+            this.sluCustomer.Properties.Appearance.Options.UseBackColor = true;
             this.sluCustomer.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
             this.sluCustomer.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});

@@ -76,9 +76,8 @@ namespace Phoebe.FormClient
         {
             this.categoryList = BusinessFactory<CategoryBusiness>.Instance.GetLeafCategory();
             this.clcCategory.SetDataSource(categoryList);
-             
-            this.bsCustomer.DataSource = BusinessFactory<CustomerBusiness>.Instance.FindAll();
-            this.lkuCustomer.CustomDisplayText += new DevExpress.XtraEditors.Controls.CustomDisplayTextEventHandler(EventUtil.LkuCustomer_CustomDisplayText);
+
+            this.customerLookup.Init();
         }
 
         /// <summary>
@@ -86,14 +85,15 @@ namespace Phoebe.FormClient
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void lkuCustomer_EditValueChanged(object sender, EventArgs e)
+        private void customerLookup_CustomerSelect(object sender, EventArgs e)
         {
-            if (this.lkuCustomer.EditValue == null)
+            int id = this.customerLookup.GetSelectedId();
+            if (id == 0)
                 UpdateContractList(0);
             else
-                UpdateContractList(Convert.ToInt32(this.lkuCustomer.EditValue));
+                UpdateContractList(id);
         }
-     
+
         /// <summary>
         /// 分类代码输入
         /// </summary>
@@ -137,7 +137,7 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            if (this.lkuCustomer.EditValue == null)
+            if (this.customerLookup.GetSelectedId() == 0)
             {
                 MessageUtil.ShowClaim("请选择客户");
                 return;
@@ -151,7 +151,7 @@ namespace Phoebe.FormClient
             else
                 storeStatus = EntityStatus.StoreOut;
 
-            int customerId = Convert.ToInt32(this.lkuCustomer.EditValue);
+            int customerId = this.customerLookup.GetSelectedId();
 
             List<Store> data = new List<Store>();
             data = BusinessFactory<StoreBusiness>.Instance.GetByCustomer(customerId, storeStatus);
@@ -228,7 +228,7 @@ namespace Phoebe.FormClient
                 MessageUtil.ShowWarning("流水修正失败：" + result.DisplayName());
             }
         }
-        
+
         /// <summary>
         /// 删除流水
         /// </summary>

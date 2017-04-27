@@ -56,8 +56,7 @@ namespace Phoebe.FormClient
             this.txtUser.Text = this.currentUser.Name;
             this.dpOutTime.DateTime = DateTime.Now;
 
-            this.bsCustomer.DataSource = BusinessFactory<CustomerBusiness>.Instance.FindAll();
-            this.lkuCustomer.CustomDisplayText += new DevExpress.XtraEditors.Controls.CustomDisplayTextEventHandler(EventUtil.LkuCustomer_CustomDisplayText);
+            this.customerLookup.Init();
 
             this.categoryList = BusinessFactory<CategoryBusiness>.Instance.GetLeafCategory();
             this.clcCategory.SetDataSource(this.categoryList);
@@ -108,7 +107,7 @@ namespace Phoebe.FormClient
             this.sogList.CloseEditor();
 
             // check input data and format digit
-            if (this.lkuCustomer.EditValue == null)
+            if (this.customerLookup.GetSelectedId() == 0)
             {
                 errorMessage = "请选择客户";
                 return ErrorCode.Error;
@@ -173,12 +172,13 @@ namespace Phoebe.FormClient
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void lkuCustomer_EditValueChanged(object sender, EventArgs e)
+        private void customerLookup_CustomerSelect(object sender, EventArgs e)
         {
-            if (this.lkuCustomer.EditValue == null)
+            int id = this.customerLookup.GetSelectedId();
+            if (id == 0)
                 UpdateContractList(0);
             else
-                UpdateContractList(Convert.ToInt32(this.lkuCustomer.EditValue));
+                UpdateContractList(id);
         }
 
         /// <summary>

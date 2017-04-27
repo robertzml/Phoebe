@@ -66,6 +66,24 @@ namespace Phoebe.FormClient
                 return dep.Id;
             }
         }
+
+        //设置选中客户
+        public void SetSelectedId(int id)
+        {
+            if (id == 0)
+                this.sluCustomer.EditValue = null;
+            else
+                this.sluCustomer.EditValue = id;
+        }
+
+        /// <summary>
+        /// 设置只读
+        /// </summary>
+        /// <param name="isReadonly"></param>
+        public void SetReadonly(bool isReadonly)
+        {
+            this.sluCustomer.ReadOnly = isReadonly;
+        }
         #endregion //Method
 
         #region Delegate

@@ -50,8 +50,7 @@ namespace Phoebe.FormClient
             this.txtUser.Text = this.currentUser.Name;
             this.dpInTime.EditValue = DateTime.Now;
 
-            this.bsCustomer.DataSource = BusinessFactory<CustomerBusiness>.Instance.FindAll();
-            this.lkuCustomer.CustomDisplayText += new DevExpress.XtraEditors.Controls.CustomDisplayTextEventHandler(EventUtil.LkuCustomer_CustomDisplayText);
+            this.customerLookup.Init();
 
             this.clcCategory.SetDataSource(BusinessFactory<CategoryBusiness>.Instance.GetLeafCategory());
 
@@ -102,7 +101,7 @@ namespace Phoebe.FormClient
             this.sigList.CloseEditor();
 
             // check input data
-            if (this.lkuCustomer.EditValue == null)
+            if (this.customerLookup.GetSelectedId() == 0)
             {
                 errorMessage = "请选择客户";
                 return ErrorCode.Error;
@@ -201,12 +200,13 @@ namespace Phoebe.FormClient
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void lkuCustomer_EditValueChanged(object sender, EventArgs e)
+        private void customerLookup_CustomerSelect(object sender, EventArgs e)
         {
-            if (this.lkuCustomer.EditValue == null)
+            int id = this.customerLookup.GetSelectedId();
+            if (id == 0)
                 UpdateContractList(0);
             else
-                UpdateContractList(Convert.ToInt32(this.lkuCustomer.EditValue));
+                UpdateContractList(id);
         }
 
         /// <summary>
@@ -282,5 +282,6 @@ namespace Phoebe.FormClient
             this.clcCategory.UpdateView(e.Value.ToString());
         }
         #endregion //Event
+
     }
 }

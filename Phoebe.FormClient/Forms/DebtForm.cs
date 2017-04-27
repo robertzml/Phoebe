@@ -33,8 +33,7 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void DebtForm_Load(object sender, EventArgs e)
         {
-            this.bsCustomer.DataSource = BusinessFactory<CustomerBusiness>.Instance.FindAll();
-            this.lkuCustomer.CustomDisplayText += new DevExpress.XtraEditors.Controls.CustomDisplayTextEventHandler(EventUtil.LkuCustomer_CustomDisplayText);
+            this.customerLookup.Init();
         }
 
         /// <summary>
@@ -44,13 +43,13 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            if (this.lkuCustomer.EditValue == null)
+            if (this.customerLookup.GetSelectedId() == 0)
             {
                 MessageUtil.ShowClaim("请选择客户");
                 return;
             }
 
-            var customer = BusinessFactory<CustomerBusiness>.Instance.FindById(this.lkuCustomer.EditValue);
+            var customer = BusinessFactory<CustomerBusiness>.Instance.FindById(this.customerLookup.GetSelectedId());
 
             var contracts = BusinessFactory<ContractBusiness>.Instance.GetByCustomer(customer.Id);
             if (contracts.Count == 0)

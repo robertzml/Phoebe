@@ -66,8 +66,7 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void CargoForm_Load(object sender, EventArgs e)
         {
-            this.bsCustomer.DataSource = BusinessFactory<CustomerBusiness>.Instance.FindAll();
-            this.lkuCustomer.CustomDisplayText += new DevExpress.XtraEditors.Controls.CustomDisplayTextEventHandler(EventUtil.LkuCustomer_CustomDisplayText);
+            this.customerLookup.Init();
         }
 
         /// <summary>
@@ -75,12 +74,13 @@ namespace Phoebe.FormClient
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void lkuCustomer_EditValueChanged(object sender, EventArgs e)
+        private void customerLookup_CustomerSelect(object sender, EventArgs e)
         {
-            if (this.lkuCustomer.EditValue == null)
+            int id = this.customerLookup.GetSelectedId();
+            if (id == 0)
                 UpdateContractList(0);
             else
-                UpdateContractList(Convert.ToInt32(this.lkuCustomer.EditValue));
+                UpdateContractList(id);
         }
 
         /// <summary>
@@ -90,13 +90,13 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            if (this.lkuCustomer.EditValue == null)
+            if (this.customerLookup.GetSelectedId() == 0)
             {
                 MessageUtil.ShowClaim("请选择客户");
                 return;
             }
 
-            int customerId = Convert.ToInt32(this.lkuCustomer.EditValue);
+            int customerId = this.customerLookup.GetSelectedId();
             var data = BusinessFactory<CargoBusiness>.Instance.GetByCustomer(customerId);
 
             if (this.cmbContract.EditValue != null && (int)this.cmbContract.EditValue != 0)

@@ -138,7 +138,7 @@ namespace Phoebe.FormClient
 
             this.dpTime.DateTime = DateTime.Now.Date;
             this.txtFlowNumber.Text = "";
-            this.lkuCustomer.EditValue = null;
+            this.customerLookup.SetSelectedId(0);
             this.txtUser.Text = this.currentUser.Name;
             this.txtRemark.Text = "";
             this.irList.DataSource = new List<IceRecord>();
@@ -159,7 +159,7 @@ namespace Phoebe.FormClient
 
             this.dpTime.Properties.ReadOnly = false;
             this.txtRemark.Properties.ReadOnly = false;
-            this.lkuCustomer.ReadOnly = false;
+            this.customerLookup.SetReadonly(false);
             this.cmbContract.ReadOnly = false;
             this.irList.SetEditable(true);
         }
@@ -182,7 +182,7 @@ namespace Phoebe.FormClient
             this.txtFlowNumber.Text = iceFlow.FlowNumber;
             this.txtUser.Text = iceFlow.User.Name;
             this.txtRemark.Text = iceFlow.Remark;
-            this.lkuCustomer.EditValue = iceFlow.Contract.CustomerId;
+            this.customerLookup.SetSelectedId(iceFlow.Contract.CustomerId);
             this.cmbContract.EditValue = iceFlow.ContractId;
 
             List<IceRecord> records = new List<IceRecord>();
@@ -206,7 +206,7 @@ namespace Phoebe.FormClient
 
             this.dpTime.Properties.ReadOnly = true;
             this.txtRemark.Properties.ReadOnly = true;
-            this.lkuCustomer.ReadOnly = true;
+            this.customerLookup.SetReadonly(true);
             this.cmbContract.ReadOnly = true;
             this.irList.SetEditable(false);
         }
@@ -220,8 +220,7 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void IceSellForm_Load(object sender, EventArgs e)
         {
-            this.bsCustomer.DataSource = BusinessFactory<CustomerBusiness>.Instance.FindAll();
-            this.lkuCustomer.CustomDisplayText += new DevExpress.XtraEditors.Controls.CustomDisplayTextEventHandler(EventUtil.LkuCustomer_CustomDisplayText);
+            this.customerLookup.Init();
 
             this.currentFlowId = Guid.Empty;
             this.formState = IceSellFormState.Empty;
@@ -294,7 +293,7 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void tsbSave_Click(object sender, EventArgs e)
         {
-            if (this.lkuCustomer.EditValue == null)
+            if (this.customerLookup.GetSelectedId() == 0)
             {
                 MessageUtil.ShowClaim("请选择客户");
                 return;
@@ -430,12 +429,13 @@ namespace Phoebe.FormClient
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void lkuCustomer_EditValueChanged(object sender, EventArgs e)
+        private void customerLookup_CustomerSelect(object sender, EventArgs e)
         {
-            if (this.lkuCustomer.EditValue == null)
+            int cid = this.customerLookup.GetSelectedId();
+            if (cid == 0)
                 UpdateContractList(0);
             else
-                UpdateContractList(Convert.ToInt32(this.lkuCustomer.EditValue));
+                UpdateContractList(cid);
         }
         #endregion //Event
 

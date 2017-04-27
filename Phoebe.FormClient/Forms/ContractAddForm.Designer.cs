@@ -28,11 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.customerLookup = new Phoebe.FormClient.CustomerLookup();
+            this.txtParameter3 = new DevExpress.XtraEditors.TextEdit();
+            this.txtParameter2 = new DevExpress.XtraEditors.TextEdit();
+            this.txtParameter1 = new DevExpress.XtraEditors.TextEdit();
             this.cmbType = new DevExpress.XtraEditors.ImageComboBoxEdit();
-            this.lkuCustomer = new DevExpress.XtraEditors.LookUpEdit();
             this.txtRemark = new DevExpress.XtraEditors.MemoEdit();
             this.cmbBillingType = new DevExpress.XtraEditors.ImageComboBoxEdit();
             this.txtSignDate = new DevExpress.XtraEditors.DateEdit();
@@ -44,15 +46,11 @@
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.bsCustomer = new System.Windows.Forms.BindingSource(this.components);
-            this.txtParameter1 = new DevExpress.XtraEditors.TextEdit();
             this.lblParameter1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.txtParameter2 = new DevExpress.XtraEditors.TextEdit();
             this.lblParameter2 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.txtParameter3 = new DevExpress.XtraEditors.TextEdit();
             this.lblParameter3 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.plFill)).BeginInit();
             this.plFill.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.plBottom)).BeginInit();
@@ -61,8 +59,10 @@
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtParameter3.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtParameter2.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtParameter1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbType.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lkuCustomer.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRemark.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbBillingType.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSignDate.Properties.CalendarTimeProperties)).BeginInit();
@@ -75,15 +75,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsCustomer)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtParameter1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblParameter1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtParameter2.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblParameter2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtParameter3.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblParameter3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
             this.SuspendLayout();
             // 
             // plFill
@@ -125,11 +121,11 @@
             // 
             // layoutControl1
             // 
+            this.layoutControl1.Controls.Add(this.customerLookup);
             this.layoutControl1.Controls.Add(this.txtParameter3);
             this.layoutControl1.Controls.Add(this.txtParameter2);
             this.layoutControl1.Controls.Add(this.txtParameter1);
             this.layoutControl1.Controls.Add(this.cmbType);
-            this.layoutControl1.Controls.Add(this.lkuCustomer);
             this.layoutControl1.Controls.Add(this.txtRemark);
             this.layoutControl1.Controls.Add(this.cmbBillingType);
             this.layoutControl1.Controls.Add(this.txtSignDate);
@@ -143,6 +139,37 @@
             this.layoutControl1.TabIndex = 17;
             this.layoutControl1.Text = "layoutControl1";
             // 
+            // customerLookup
+            // 
+            this.customerLookup.Location = new System.Drawing.Point(63, 60);
+            this.customerLookup.Name = "customerLookup";
+            this.customerLookup.Size = new System.Drawing.Size(328, 20);
+            this.customerLookup.TabIndex = 11;
+            // 
+            // txtParameter3
+            // 
+            this.txtParameter3.Location = new System.Drawing.Point(63, 204);
+            this.txtParameter3.Name = "txtParameter3";
+            this.txtParameter3.Size = new System.Drawing.Size(328, 20);
+            this.txtParameter3.StyleController = this.layoutControl1;
+            this.txtParameter3.TabIndex = 10;
+            // 
+            // txtParameter2
+            // 
+            this.txtParameter2.Location = new System.Drawing.Point(63, 180);
+            this.txtParameter2.Name = "txtParameter2";
+            this.txtParameter2.Size = new System.Drawing.Size(328, 20);
+            this.txtParameter2.StyleController = this.layoutControl1;
+            this.txtParameter2.TabIndex = 9;
+            // 
+            // txtParameter1
+            // 
+            this.txtParameter1.Location = new System.Drawing.Point(63, 156);
+            this.txtParameter1.Name = "txtParameter1";
+            this.txtParameter1.Size = new System.Drawing.Size(328, 20);
+            this.txtParameter1.StyleController = this.layoutControl1;
+            this.txtParameter1.TabIndex = 8;
+            // 
             // cmbType
             // 
             this.cmbType.Location = new System.Drawing.Point(63, 108);
@@ -155,27 +182,6 @@
             this.cmbType.StyleController = this.layoutControl1;
             this.cmbType.TabIndex = 4;
             this.cmbType.SelectedIndexChanged += new System.EventHandler(this.cmbType_SelectedIndexChanged);
-            // 
-            // lkuCustomer
-            // 
-            this.lkuCustomer.Location = new System.Drawing.Point(63, 60);
-            this.lkuCustomer.Name = "lkuCustomer";
-            this.lkuCustomer.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow;
-            this.lkuCustomer.Properties.Appearance.Options.UseBackColor = true;
-            this.lkuCustomer.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.lkuCustomer.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Number", "编号", 53, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near, DevExpress.Data.ColumnSortOrder.Ascending),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "姓名", 41, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near)});
-            this.lkuCustomer.Properties.DataSource = this.bsCustomer;
-            this.lkuCustomer.Properties.DisplayMember = "Number";
-            this.lkuCustomer.Properties.DropDownRows = 10;
-            this.lkuCustomer.Properties.NullText = "请选择客户";
-            this.lkuCustomer.Properties.ShowFooter = false;
-            this.lkuCustomer.Properties.ValueMember = "Id";
-            this.lkuCustomer.Size = new System.Drawing.Size(328, 20);
-            this.lkuCustomer.StyleController = this.layoutControl1;
-            this.lkuCustomer.TabIndex = 2;
             // 
             // txtRemark
             // 
@@ -243,11 +249,11 @@
             this.layoutControlItem4,
             this.layoutControlItem5,
             this.layoutControlItem7,
-            this.layoutControlItem8,
             this.layoutControlItem3,
             this.lblParameter1,
             this.lblParameter2,
-            this.lblParameter3});
+            this.lblParameter3,
+            this.layoutControlItem6});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "layoutControlGroup1";
             this.layoutControlGroup1.Size = new System.Drawing.Size(403, 309);
@@ -298,15 +304,6 @@
             this.layoutControlItem7.Text = "备注";
             this.layoutControlItem7.TextSize = new System.Drawing.Size(48, 14);
             // 
-            // layoutControlItem8
-            // 
-            this.layoutControlItem8.Control = this.lkuCustomer;
-            this.layoutControlItem8.Location = new System.Drawing.Point(0, 48);
-            this.layoutControlItem8.Name = "layoutControlItem8";
-            this.layoutControlItem8.Size = new System.Drawing.Size(383, 24);
-            this.layoutControlItem8.Text = "客户选择";
-            this.layoutControlItem8.TextSize = new System.Drawing.Size(48, 14);
-            // 
             // layoutControlItem3
             // 
             this.layoutControlItem3.Control = this.cmbType;
@@ -315,18 +312,6 @@
             this.layoutControlItem3.Size = new System.Drawing.Size(383, 24);
             this.layoutControlItem3.Text = "合同类型";
             this.layoutControlItem3.TextSize = new System.Drawing.Size(48, 14);
-            // 
-            // bsCustomer
-            // 
-            this.bsCustomer.DataSource = typeof(Phoebe.Model.Customer);
-            // 
-            // txtParameter1
-            // 
-            this.txtParameter1.Location = new System.Drawing.Point(63, 156);
-            this.txtParameter1.Name = "txtParameter1";
-            this.txtParameter1.Size = new System.Drawing.Size(328, 20);
-            this.txtParameter1.StyleController = this.layoutControl1;
-            this.txtParameter1.TabIndex = 8;
             // 
             // lblParameter1
             // 
@@ -338,14 +323,6 @@
             this.lblParameter1.TextSize = new System.Drawing.Size(48, 14);
             this.lblParameter1.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             // 
-            // txtParameter2
-            // 
-            this.txtParameter2.Location = new System.Drawing.Point(63, 180);
-            this.txtParameter2.Name = "txtParameter2";
-            this.txtParameter2.Size = new System.Drawing.Size(328, 20);
-            this.txtParameter2.StyleController = this.layoutControl1;
-            this.txtParameter2.TabIndex = 9;
-            // 
             // lblParameter2
             // 
             this.lblParameter2.Control = this.txtParameter2;
@@ -356,14 +333,6 @@
             this.lblParameter2.TextSize = new System.Drawing.Size(48, 14);
             this.lblParameter2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             // 
-            // txtParameter3
-            // 
-            this.txtParameter3.Location = new System.Drawing.Point(63, 204);
-            this.txtParameter3.Name = "txtParameter3";
-            this.txtParameter3.Size = new System.Drawing.Size(328, 20);
-            this.txtParameter3.StyleController = this.layoutControl1;
-            this.txtParameter3.TabIndex = 10;
-            // 
             // lblParameter3
             // 
             this.lblParameter3.Control = this.txtParameter3;
@@ -373,6 +342,15 @@
             this.lblParameter3.Text = "参数3";
             this.lblParameter3.TextSize = new System.Drawing.Size(48, 14);
             this.lblParameter3.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            // 
+            // layoutControlItem6
+            // 
+            this.layoutControlItem6.Control = this.customerLookup;
+            this.layoutControlItem6.Location = new System.Drawing.Point(0, 48);
+            this.layoutControlItem6.Name = "layoutControlItem6";
+            this.layoutControlItem6.Size = new System.Drawing.Size(383, 24);
+            this.layoutControlItem6.Text = "客户选择";
+            this.layoutControlItem6.TextSize = new System.Drawing.Size(48, 14);
             // 
             // ContractAddForm
             // 
@@ -391,8 +369,10 @@
             this.groupControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.txtParameter3.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtParameter2.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtParameter1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbType.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lkuCustomer.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRemark.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbBillingType.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSignDate.Properties.CalendarTimeProperties)).EndInit();
@@ -405,15 +385,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsCustomer)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtParameter1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblParameter1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtParameter2.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblParameter2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtParameter3.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblParameter3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -433,9 +409,6 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem7;
-        private DevExpress.XtraEditors.LookUpEdit lkuCustomer;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem8;
-        private System.Windows.Forms.BindingSource bsCustomer;
         private DevExpress.XtraEditors.ImageComboBoxEdit cmbType;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
         private DevExpress.XtraEditors.TextEdit txtParameter3;
@@ -444,5 +417,7 @@
         private DevExpress.XtraLayout.LayoutControlItem lblParameter1;
         private DevExpress.XtraLayout.LayoutControlItem lblParameter2;
         private DevExpress.XtraLayout.LayoutControlItem lblParameter3;
+        private CustomerLookup customerLookup;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
     }
 }

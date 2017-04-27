@@ -451,6 +451,7 @@
             this.isfList.DataSource = null;
             this.isfList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.isfList.Location = new System.Drawing.Point(2, 21);
+            this.isfList.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.isfList.Name = "isfList";
             this.isfList.Size = new System.Drawing.Size(996, 400);
             this.isfList.TabIndex = 0;

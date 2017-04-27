@@ -24,7 +24,7 @@ namespace Phoebe.FormClient
             InitializeComponent();
         }
         #endregion //Constructor
-        
+
         #region Event
         /// <summary>
         /// 窗体载入
@@ -33,8 +33,7 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void StockFlowReportForm_Load(object sender, EventArgs e)
         {
-            this.bsCustomer.DataSource = BusinessFactory<CustomerBusiness>.Instance.FindAll();
-            this.lkuCustomer.CustomDisplayText += new DevExpress.XtraEditors.Controls.CustomDisplayTextEventHandler(EventUtil.LkuCustomer_CustomDisplayText);
+            this.customerLookup.Init();
 
             this.bsCategory.DataSource = BusinessFactory<CategoryBusiness>.Instance.GetAll();
             this.lkuCategory.CustomDisplayText += new DevExpress.XtraEditors.Controls.CustomDisplayTextEventHandler(EventUtil.LkuCategory_CustomDisplayText);
@@ -72,13 +71,13 @@ namespace Phoebe.FormClient
             if (this.chkIn.Checked)
             {
                 List<StockFlow> inFlow;
-                if (this.lkuCustomer.EditValue == null)
+                if (this.customerLookup.GetSelectedId() == 0)
                 {
                     inFlow = BusinessFactory<StoreBusiness>.Instance.GetFlowIn(from, to, 0);
                 }
                 else
                 {
-                    inFlow = BusinessFactory<StoreBusiness>.Instance.GetFlowIn(from, to, (int)this.lkuCustomer.EditValue);
+                    inFlow = BusinessFactory<StoreBusiness>.Instance.GetFlowIn(from, to, this.customerLookup.GetSelectedId());
                 }
 
                 data.AddRange(inFlow);
@@ -87,13 +86,13 @@ namespace Phoebe.FormClient
             if (this.chkOut.Checked)
             {
                 List<StockFlow> outFlow;
-                if (this.lkuCustomer.EditValue == null)
+                if (this.customerLookup.GetSelectedId() == 0)
                 {
                     outFlow = BusinessFactory<StoreBusiness>.Instance.GetFlowOut(from, to, 0);
                 }
                 else
                 {
-                    outFlow = BusinessFactory<StoreBusiness>.Instance.GetFlowOut(from, to, (int)this.lkuCustomer.EditValue);
+                    outFlow = BusinessFactory<StoreBusiness>.Instance.GetFlowOut(from, to, this.customerLookup.GetSelectedId());
                 }
 
                 data.AddRange(outFlow);

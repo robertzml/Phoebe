@@ -62,6 +62,7 @@
             this.menuDebt = new DevExpress.XtraBars.BarButtonItem();
             this.menuReport = new DevExpress.XtraBars.BarSubItem();
             this.menuTotalStorageReport = new DevExpress.XtraBars.BarButtonItem();
+            this.menuCargoSubReport = new DevExpress.XtraBars.BarButtonItem();
             this.menuStockFlowReport = new DevExpress.XtraBars.BarButtonItem();
             this.menuDailyFeeReport = new DevExpress.XtraBars.BarButtonItem();
             this.menuPeriodFeeReport = new DevExpress.XtraBars.BarButtonItem();
@@ -88,7 +89,6 @@
             this.barHeaderItem1 = new DevExpress.XtraBars.BarHeaderItem();
             this.barStaticItem2 = new DevExpress.XtraBars.BarStaticItem();
             this.tabMdiManager = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
-            this.menuCargoSubReport = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabMdiManager)).BeginInit();
             this.SuspendLayout();
@@ -432,6 +432,13 @@
             this.menuTotalStorageReport.Name = "menuTotalStorageReport";
             this.menuTotalStorageReport.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuTotalStorageReport_ItemClick);
             // 
+            // menuCargoSubReport
+            // 
+            this.menuCargoSubReport.Caption = "货品分项报表";
+            this.menuCargoSubReport.Id = 55;
+            this.menuCargoSubReport.Name = "menuCargoSubReport";
+            this.menuCargoSubReport.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuCargoSubReport_ItemClick);
+            // 
             // menuStockFlowReport
             // 
             this.menuStockFlowReport.Caption = "出入库报表";
@@ -525,6 +532,7 @@
             this.menuTest.Caption = "测试窗体";
             this.menuTest.Id = 34;
             this.menuTest.Name = "menuTest";
+            this.menuTest.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             this.menuTest.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuTest_ItemClick);
             // 
             // barMdiList
@@ -620,13 +628,6 @@
             this.tabMdiManager.ClosePageButtonShowMode = DevExpress.XtraTab.ClosePageButtonShowMode.InAllTabPageHeaders;
             this.tabMdiManager.MdiParent = this;
             this.tabMdiManager.PinPageButtonShowMode = DevExpress.XtraTab.PinPageButtonShowMode.InActiveTabPageHeader;
-            // 
-            // menuCargoSubReport
-            // 
-            this.menuCargoSubReport.Caption = "货品分项报表";
-            this.menuCargoSubReport.Id = 55;
-            this.menuCargoSubReport.Name = "menuCargoSubReport";
-            this.menuCargoSubReport.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuCargoSubReport_ItemClick);
             // 
             // MainForm
             // 

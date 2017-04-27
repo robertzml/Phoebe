@@ -70,8 +70,7 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void StoreForm_Load(object sender, EventArgs e)
         {
-            this.bsCustomer.DataSource = BusinessFactory<CustomerBusiness>.Instance.FindAll();
-            this.lkuCustomer.CustomDisplayText += new DevExpress.XtraEditors.Controls.CustomDisplayTextEventHandler(EventUtil.LkuCustomer_CustomDisplayText);
+            this.customerLookup.Init();
 
             this.categoryList = BusinessFactory<CategoryBusiness>.Instance.FindAll();
             this.clcCategory.SetDataSource(categoryList);
@@ -82,12 +81,13 @@ namespace Phoebe.FormClient
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void lkuCustomer_EditValueChanged(object sender, EventArgs e)
+        private void customerLookup_CustomerSelect(object sender, EventArgs e)
         {
-            if (this.lkuCustomer.EditValue == null)
+            int id = this.customerLookup.GetSelectedId();
+            if (id == 0)
                 UpdateContractList(0);
             else
-                UpdateContractList(Convert.ToInt32(this.lkuCustomer.EditValue));
+                UpdateContractList(id);
         }
 
         /// <summary>
@@ -135,9 +135,10 @@ namespace Phoebe.FormClient
         {
             this.Cursor = Cursors.WaitCursor;
             List<Func<Store, bool>> filter = new List<Func<Store, bool>>();
-            if (this.lkuCustomer.EditValue != null)
+            if (this.customerLookup.GetSelectedId() == 0)
             {
-                filter.Add(r => r.Cargo.Contract.CustomerId == Convert.ToInt32(this.lkuCustomer.EditValue));
+                int cid = this.customerLookup.GetSelectedId();
+                filter.Add(r => r.Cargo.Contract.CustomerId == cid);
             }
 
             var category = BusinessFactory<CategoryBusiness>.Instance.GetByParent(this.txtCategoryNumber.Text);

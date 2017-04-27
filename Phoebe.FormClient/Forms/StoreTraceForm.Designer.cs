@@ -28,13 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.btnDeleteFlow = new DevExpress.XtraEditors.SimpleButton();
-            this.lkuCustomer = new DevExpress.XtraEditors.LookUpEdit();
-            this.bsCustomer = new System.Windows.Forms.BindingSource(this.components);
             this.btnFix = new DevExpress.XtraEditors.SimpleButton();
             this.btnTrace = new DevExpress.XtraEditors.SimpleButton();
             this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
@@ -53,20 +50,19 @@
             this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
             this.sgList = new Phoebe.FormClient.StoreGrid();
             this.clcCategory = new Phoebe.FormClient.CategoryListControl();
             this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
             this.sfgList = new Phoebe.FormClient.StockFlowGrid();
+            this.customerLookup = new Phoebe.FormClient.CustomerLookup();
+            this.layoutControlItem11 = new DevExpress.XtraLayout.LayoutControlItem();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.lkuCustomer.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsCustomer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCategoryName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCategoryNumber.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbContract.Properties)).BeginInit();
@@ -80,12 +76,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
             this.groupControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).BeginInit();
             this.groupControl3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -122,8 +118,8 @@
             // 
             // layoutControl1
             // 
+            this.layoutControl1.Controls.Add(this.customerLookup);
             this.layoutControl1.Controls.Add(this.btnDeleteFlow);
-            this.layoutControl1.Controls.Add(this.lkuCustomer);
             this.layoutControl1.Controls.Add(this.btnFix);
             this.layoutControl1.Controls.Add(this.btnTrace);
             this.layoutControl1.Controls.Add(this.btnSearch);
@@ -149,32 +145,6 @@
             this.btnDeleteFlow.TabIndex = 14;
             this.btnDeleteFlow.Text = "删除流水";
             this.btnDeleteFlow.Click += new System.EventHandler(this.btnDeleteFlow_Click);
-            // 
-            // lkuCustomer
-            // 
-            this.lkuCustomer.Location = new System.Drawing.Point(63, 12);
-            this.lkuCustomer.Name = "lkuCustomer";
-            this.lkuCustomer.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow;
-            this.lkuCustomer.Properties.Appearance.Options.UseBackColor = true;
-            this.lkuCustomer.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.lkuCustomer.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Number", "编号", 53, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near, DevExpress.Data.ColumnSortOrder.Ascending),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "姓名", 41, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near)});
-            this.lkuCustomer.Properties.DataSource = this.bsCustomer;
-            this.lkuCustomer.Properties.DisplayMember = "Number";
-            this.lkuCustomer.Properties.DropDownRows = 10;
-            this.lkuCustomer.Properties.NullText = "请选择客户";
-            this.lkuCustomer.Properties.ShowFooter = false;
-            this.lkuCustomer.Properties.ValueMember = "Id";
-            this.lkuCustomer.Size = new System.Drawing.Size(440, 20);
-            this.lkuCustomer.StyleController = this.layoutControl1;
-            this.lkuCustomer.TabIndex = 13;
-            this.lkuCustomer.EditValueChanged += new System.EventHandler(this.lkuCustomer_EditValueChanged);
-            // 
-            // bsCustomer
-            // 
-            this.bsCustomer.DataSource = typeof(Phoebe.Model.Customer);
             // 
             // btnFix
             // 
@@ -271,8 +241,8 @@
             this.layoutControlItem8,
             this.layoutControlItem9,
             this.layoutControlItem10,
-            this.layoutControlItem1,
-            this.layoutControlItem2});
+            this.layoutControlItem2,
+            this.layoutControlItem11});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "layoutControlGroup1";
             this.layoutControlGroup1.Size = new System.Drawing.Size(769, 171);
@@ -360,15 +330,6 @@
             this.layoutControlItem10.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem10.TextVisible = false;
             // 
-            // layoutControlItem1
-            // 
-            this.layoutControlItem1.Control = this.lkuCustomer;
-            this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(495, 24);
-            this.layoutControlItem1.Text = "客户选择";
-            this.layoutControlItem1.TextSize = new System.Drawing.Size(48, 14);
-            // 
             // layoutControlItem2
             // 
             this.layoutControlItem2.Control = this.btnDeleteFlow;
@@ -439,6 +400,23 @@
             this.sfgList.StartDate = new System.DateTime(((long)(0)));
             this.sfgList.TabIndex = 0;
             // 
+            // customerLookup
+            // 
+            this.customerLookup.Location = new System.Drawing.Point(63, 12);
+            this.customerLookup.Name = "customerLookup";
+            this.customerLookup.Size = new System.Drawing.Size(440, 20);
+            this.customerLookup.TabIndex = 15;
+            this.customerLookup.CustomerSelect += new System.EventHandler(this.customerLookup_CustomerSelect);
+            // 
+            // layoutControlItem11
+            // 
+            this.layoutControlItem11.Control = this.customerLookup;
+            this.layoutControlItem11.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem11.Name = "layoutControlItem11";
+            this.layoutControlItem11.Size = new System.Drawing.Size(495, 24);
+            this.layoutControlItem11.Text = "客户选择";
+            this.layoutControlItem11.TextSize = new System.Drawing.Size(48, 14);
+            // 
             // StoreTraceForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -454,8 +432,6 @@
             this.groupControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.lkuCustomer.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsCustomer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCategoryName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCategoryNumber.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbContract.Properties)).EndInit();
@@ -469,12 +445,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
             this.groupControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).EndInit();
             this.groupControl3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -507,10 +483,9 @@
         private DevExpress.XtraEditors.GroupControl groupControl3;
         private DevExpress.XtraEditors.SimpleButton btnFix;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem10;
-        private DevExpress.XtraEditors.LookUpEdit lkuCustomer;
-        private System.Windows.Forms.BindingSource bsCustomer;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraEditors.SimpleButton btnDeleteFlow;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
+        private CustomerLookup customerLookup;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem11;
     }
 }

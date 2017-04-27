@@ -33,8 +33,7 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void CustomerCargoReportForm_Load(object sender, EventArgs e)
         {
-            this.bsCustomer.DataSource = BusinessFactory<CustomerBusiness>.Instance.FindAll();
-            this.lkuCustomer.CustomDisplayText += new DevExpress.XtraEditors.Controls.CustomDisplayTextEventHandler(EventUtil.LkuCustomer_CustomDisplayText);
+            this.customerLookup.Init();
 
             this.dpDate.DateTime = DateTime.Now.Date;
         }
@@ -46,14 +45,14 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void btnQuery_Click(object sender, EventArgs e)
         {
-            if (this.lkuCustomer.EditValue == null)
+            if (this.customerLookup.GetSelectedId() == 0)
             {
                 MessageUtil.ShowClaim("请选择客户");
                 return;
             }
 
             var date = this.dpDate.DateTime.Date;
-            int customerId = (int)this.lkuCustomer.EditValue;
+            int customerId = this.customerLookup.GetSelectedId();
 
             this.Cursor = Cursors.WaitCursor;
 

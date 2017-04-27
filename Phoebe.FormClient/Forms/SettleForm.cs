@@ -49,7 +49,7 @@ namespace Phoebe.FormClient
         private void SetEntity(Settlement settlement)
         {
             settlement.Id = Guid.NewGuid();
-            settlement.CustomerId = Convert.ToInt32(this.lkuCustomer.EditValue);
+            settlement.CustomerId = this.customerLookup.GetSelectedId();
             settlement.StartTime = this.dpFrom.DateTime.Date;
             settlement.EndTime = this.dpTo.DateTime.Date;
             settlement.SumFee = this.nmSumFee.Value;
@@ -138,8 +138,7 @@ namespace Phoebe.FormClient
             this.dpTo.DateTime = DateTime.Now.Date;
             this.dpSettleTime.DateTime = DateTime.Now.Date;
 
-            this.bsCustomer.DataSource = BusinessFactory<CustomerBusiness>.Instance.FindAll();
-            this.lkuCustomer.CustomDisplayText += new DevExpress.XtraEditors.Controls.CustomDisplayTextEventHandler(EventUtil.LkuCustomer_CustomDisplayText);
+            this.customerLookup.Init();
         }
 
         /// <summary>
@@ -147,16 +146,16 @@ namespace Phoebe.FormClient
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void lkuCustomer_EditValueChanged(object sender, EventArgs e)
+        private void customerLookup_CustomerSelect(object sender, EventArgs e)
         {
-            if (this.lkuCustomer.EditValue == null)
+            if (this.customerLookup.GetSelectedId() == 0)
             {
                 this.txtLastFrom.Text = "";
                 this.txtLastTo.Text = "";
             }
             else
             {
-                int customerId = Convert.ToInt32(this.lkuCustomer.EditValue);
+                int customerId = this.customerLookup.GetSelectedId();
                 var last = BusinessFactory<SettlementBusiness>.Instance.GetLast(customerId);
                 if (last == null)
                 {
@@ -179,7 +178,7 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void btnSettle_Click(object sender, EventArgs e)
         {
-            if (this.lkuCustomer.EditValue == null)
+            if (this.customerLookup.GetSelectedId() == 0)
             {
                 MessageUtil.ShowClaim("请选择客户");
                 return;
@@ -193,7 +192,7 @@ namespace Phoebe.FormClient
 
             this.Cursor = Cursors.WaitCursor;
 
-            int customerId = Convert.ToInt32(this.lkuCustomer.EditValue);
+            int customerId = Convert.ToInt32(this.customerLookup.GetSelectedId());
 
             var contracts = BusinessFactory<ContractBusiness>.Instance.GetByCustomer(customerId);
 
@@ -263,7 +262,7 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (this.lkuCustomer.EditValue == null)
+            if (this.customerLookup.GetSelectedId() == 0)
             {
                 MessageUtil.ShowClaim("请选择客户");
                 return;
