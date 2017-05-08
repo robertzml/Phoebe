@@ -115,6 +115,16 @@ namespace Phoebe.Business
             return data;
         }
 
+        /// <summary>
+        /// 根据库存获取入库记录ID
+        /// </summary>
+        /// <param name="storeId">库存ID</param>
+        /// <returns></returns>
+        public StockInDetail GetByStore(Guid storeId)
+        {
+            return RepositoryFactory<StockInDetailsRepository>.Instance.FindOne(r => r.StoreId == storeId);
+        }
+
         [Obsolete]
         public override ErrorCode Create(StockIn entity)
         {

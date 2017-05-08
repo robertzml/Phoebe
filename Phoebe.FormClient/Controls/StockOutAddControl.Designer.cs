@@ -31,6 +31,7 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.customerLookup = new Phoebe.FormClient.CustomerLookup();
             this.txtRemark = new DevExpress.XtraEditors.TextEdit();
             this.txtBillingType = new DevExpress.XtraEditors.TextEdit();
             this.cmbContract = new DevExpress.XtraEditors.ImageComboBoxEdit();
@@ -44,6 +45,7 @@
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
             this.layoutControl2 = new DevExpress.XtraLayout.LayoutControl();
             this.btnRemoveFrom = new DevExpress.XtraEditors.SimpleButton();
@@ -71,8 +73,6 @@
             this.groupControl5 = new DevExpress.XtraEditors.GroupControl();
             this.sogList = new Phoebe.FormClient.StockOutGrid();
             this.clcCategory = new Phoebe.FormClient.CategoryListControl();
-            this.customerLookup = new Phoebe.FormClient.CustomerLookup();
-            this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
@@ -92,6 +92,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).BeginInit();
             this.groupControl3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl2)).BeginInit();
@@ -117,7 +118,6 @@
             this.groupControl4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl5)).BeginInit();
             this.groupControl5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -167,6 +167,14 @@
             this.layoutControl1.Size = new System.Drawing.Size(690, 131);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
+            // 
+            // customerLookup
+            // 
+            this.customerLookup.Location = new System.Drawing.Point(58, 36);
+            this.customerLookup.Name = "customerLookup";
+            this.customerLookup.Size = new System.Drawing.Size(269, 20);
+            this.customerLookup.TabIndex = 9;
+            this.customerLookup.CustomerSelect += new System.EventHandler(this.customerLookup_CustomerSelect);
             // 
             // txtRemark
             // 
@@ -308,6 +316,16 @@
             this.layoutControlItem8.Size = new System.Drawing.Size(324, 63);
             this.layoutControlItem8.Text = "备注";
             this.layoutControlItem8.TextSize = new System.Drawing.Size(48, 14);
+            // 
+            // layoutControlItem5
+            // 
+            this.layoutControlItem5.Control = this.customerLookup;
+            this.layoutControlItem5.Location = new System.Drawing.Point(0, 29);
+            this.layoutControlItem5.Name = "layoutControlItem5";
+            this.layoutControlItem5.Size = new System.Drawing.Size(324, 29);
+            this.layoutControlItem5.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 5);
+            this.layoutControlItem5.Text = "客户选择";
+            this.layoutControlItem5.TextSize = new System.Drawing.Size(48, 14);
             // 
             // groupControl3
             // 
@@ -596,24 +614,6 @@
             this.clcCategory.TabIndex = 5;
             this.clcCategory.CategoryItemSelected += new Phoebe.FormClient.CategoryListControl.ItemSelectHandle(this.clcCategory_CategoryItemSelected);
             // 
-            // customerLookup
-            // 
-            this.customerLookup.Location = new System.Drawing.Point(58, 36);
-            this.customerLookup.Name = "customerLookup";
-            this.customerLookup.Size = new System.Drawing.Size(269, 20);
-            this.customerLookup.TabIndex = 9;
-            this.customerLookup.CustomerSelect += new System.EventHandler(this.customerLookup_CustomerSelect);
-            // 
-            // layoutControlItem5
-            // 
-            this.layoutControlItem5.Control = this.customerLookup;
-            this.layoutControlItem5.Location = new System.Drawing.Point(0, 29);
-            this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(324, 29);
-            this.layoutControlItem5.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 5);
-            this.layoutControlItem5.Text = "客户选择";
-            this.layoutControlItem5.TextSize = new System.Drawing.Size(48, 14);
-            // 
             // StockOutAddControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -640,6 +640,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).EndInit();
             this.groupControl3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl2)).EndInit();
@@ -665,7 +666,6 @@
             this.groupControl4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl5)).EndInit();
             this.groupControl5.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
             this.ResumeLayout(false);
 
         }

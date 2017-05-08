@@ -122,6 +122,11 @@ namespace Phoebe.Model
         public int ShelfLife { get; set; }
 
         /// <summary>
+        /// 入库备注
+        /// </summary>
+        public string StockInRemark { get; set; }
+
+        /// <summary>
         /// 备注 
         /// </summary>
         public string Remark { get; set; }

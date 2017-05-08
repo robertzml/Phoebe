@@ -115,6 +115,10 @@ namespace Phoebe.FormClient
                 model.OriginPlace = item.OriginPlace;
                 model.ShelfLife = item.ShelfLife;
 
+                var siDetail = BusinessFactory<StockInBusiness>.Instance.GetByStore(item.Id);
+                if (siDetail != null)
+                    model.StockInRemark = siDetail.Remark;
+
                 data.Add(model);
             }
 

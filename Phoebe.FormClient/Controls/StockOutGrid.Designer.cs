@@ -56,6 +56,7 @@
             this.colShelfLife = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colRemark = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colStatus = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colStockInRemark = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgcStockOut)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsStockOut)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStockOut)).BeginInit();
@@ -102,6 +103,7 @@
             this.colMoveTime,
             this.colOriginPlace,
             this.colShelfLife,
+            this.colStockInRemark,
             this.colRemark,
             this.colStatus});
             this.dgvStockOut.GridControl = this.dgcStockOut;
@@ -307,12 +309,21 @@
             this.colRemark.Name = "colRemark";
             this.colRemark.OptionsColumn.AllowSort = DevExpress.Utils.DefaultBoolean.False;
             this.colRemark.Visible = true;
-            this.colRemark.VisibleIndex = 15;
+            this.colRemark.VisibleIndex = 16;
             // 
             // colStatus
             // 
             this.colStatus.FieldName = "Status";
             this.colStatus.Name = "colStatus";
+            // 
+            // colStockInRemark
+            // 
+            this.colStockInRemark.Caption = "入库备注";
+            this.colStockInRemark.FieldName = "StockInRemark";
+            this.colStockInRemark.Name = "colStockInRemark";
+            this.colStockInRemark.OptionsColumn.AllowEdit = false;
+            this.colStockInRemark.Visible = true;
+            this.colStockInRemark.VisibleIndex = 15;
             // 
             // StockOutGrid
             // 
@@ -359,5 +370,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn colStatus;
         private DevExpress.XtraGrid.Columns.GridColumn colTotalCount;
         private DevExpress.XtraGrid.Columns.GridColumn colMoveTime;
+        private DevExpress.XtraGrid.Columns.GridColumn colStockInRemark;
     }
 }
