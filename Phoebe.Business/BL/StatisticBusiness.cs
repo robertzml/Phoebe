@@ -421,6 +421,45 @@ namespace Phoebe.Business
 
             return customerFee;
         }
+
+        /// <summary>
+        /// 获取客户库存汇总
+        /// </summary>
+        /// <param name="date">日期</param>
+        /// <returns></returns>
+        public List<CustomerTotalStorage> GetCustomerTotalStorage(DateTime date)
+        {
+            List<CustomerTotalStorage> data = new List<CustomerTotalStorage>();
+
+            StoreBusiness storeBusiness = new StoreBusiness();
+            List<Storage> storage = storeBusiness.GetInDay(date);
+
+            foreach(var item in storage)
+            {
+                var find = data.Find(r => r.CustomerId == item.CustomerId);
+                if (find == null)
+                {
+                    CustomerTotalStorage ts = new CustomerTotalStorage();
+                    ts.CustomerId = item.CustomerId;
+                    ts.CustomerName = item.CustomerName;
+                    ts.CustomerNumber = item.CustomerNumber;
+                    ts.StorageDate = date;
+                    ts.StoreCount = item.Count;
+                    ts.StoreWeight = item.StoreWeight;
+                    ts.StoreVolume = item.StoreVolume;
+
+                    data.Add(ts);
+                }
+                else
+                {
+                    find.StoreCount += item.Count;
+                    find.StoreWeight += item.StoreWeight;
+                    find.StoreVolume += item.StoreVolume;
+                }
+            }
+
+            return data;
+        }
         #endregion //Method
     }
 }

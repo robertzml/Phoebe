@@ -89,6 +89,7 @@
             this.barHeaderItem1 = new DevExpress.XtraBars.BarHeaderItem();
             this.barStaticItem2 = new DevExpress.XtraBars.BarStaticItem();
             this.tabMdiManager = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
+            this.menuCustomerTotalReport = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabMdiManager)).BeginInit();
             this.SuspendLayout();
@@ -155,9 +156,10 @@
             this.menuTotalStorageReport,
             this.menuCustomerFeeReport,
             this.menuStoreCheck,
-            this.menuCargoSubReport});
+            this.menuCargoSubReport,
+            this.menuCustomerTotalReport});
             this.barManager1.MainMenu = this.mainMenu;
-            this.barManager1.MaxItemId = 56;
+            this.barManager1.MaxItemId = 57;
             this.barManager1.StatusBar = this.bar3;
             // 
             // mainMenu
@@ -422,6 +424,7 @@
             new DevExpress.XtraBars.LinkPersistInfo(this.menuStockInventoryReport),
             new DevExpress.XtraBars.LinkPersistInfo(this.menuCustomerCargoReport),
             new DevExpress.XtraBars.LinkPersistInfo(this.menuCustomerFeeReport),
+            new DevExpress.XtraBars.LinkPersistInfo(this.menuCustomerTotalReport),
             new DevExpress.XtraBars.LinkPersistInfo(this.menuDebtReport)});
             this.menuReport.Name = "menuReport";
             // 
@@ -629,6 +632,13 @@
             this.tabMdiManager.MdiParent = this;
             this.tabMdiManager.PinPageButtonShowMode = DevExpress.XtraTab.PinPageButtonShowMode.InActiveTabPageHeader;
             // 
+            // menuCustomerTotalReport
+            // 
+            this.menuCustomerTotalReport.Caption = "客户汇总报表";
+            this.menuCustomerTotalReport.Id = 56;
+            this.menuCustomerTotalReport.Name = "menuCustomerTotalReport";
+            this.menuCustomerTotalReport.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuCustomerTotalReport_ItemClick);
+            // 
             // MainForm
             // 
             this.AllowMdiBar = true;
@@ -713,6 +723,7 @@
         private DevExpress.XtraBars.BarButtonItem menuCustomerFeeReport;
         private DevExpress.XtraBars.BarButtonItem menuStoreCheck;
         private DevExpress.XtraBars.BarButtonItem menuCargoSubReport;
+        private DevExpress.XtraBars.BarButtonItem menuCustomerTotalReport;
     }
 }
 

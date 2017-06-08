@@ -101,6 +101,18 @@
     <Compile Include="Controls\CustomerLookup.Designer.cs">
       <DependentUpon>CustomerLookup.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\CustomerTotalStorageGrid.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\CustomerTotalStorageGrid.Designer.cs">
+      <DependentUpon>CustomerTotalStorageGrid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Statistic\CustomerDailyReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Statistic\CustomerDailyReportForm.Designer.cs">
+      <DependentUpon>CustomerDailyReportForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Statistic\CargoSubReportForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -671,6 +683,9 @@
     <EmbeddedResource Include="Controls\CustomerStorageGrid.resx">
       <DependentUpon>CustomerStorageGrid.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\CustomerTotalStorageGrid.resx">
+      <DependentUpon>CustomerTotalStorageGrid.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Statistic\CargoSubReportForm.resx">
       <DependentUpon>CargoSubReportForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -727,6 +742,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Statistic\CustomerCargoReportForm.resx">
       <DependentUpon>CustomerCargoReportForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Statistic\CustomerDailyReportForm.resx">
+      <DependentUpon>CustomerDailyReportForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Statistic\CustomerFeeReportForm.resx">
       <DependentUpon>CustomerFeeReportForm.cs</DependentUpon>
@@ -958,6 +976,7 @@
     <None Include="Properties\DataSources\Phoebe.Model.Customer.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.CustomerFee.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.CustomerStorage.datasource" />
+    <None Include="Properties\DataSources\Phoebe.Model.CustomerTotalStorage.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.DailyColdRecord.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.DailyFee.datasource" />
     <None Include="Properties\DataSources\Phoebe.Model.Debt.datasource" />
