@@ -87,6 +87,34 @@ namespace Phoebe.FormClient
 
             this.lvCategory.EndUpdate();
         }
+
+        /// <summary>
+        /// 搜索分类名称
+        /// </summary>
+        /// <param name="name">分类名称</param>
+        public void SearchName(string name)
+        {
+            this.lvCategory.BeginUpdate();
+
+            IEnumerable<Category> categories;
+            if (string.IsNullOrEmpty(name))
+                categories = this.categoryList.OrderBy(r => r.Number);
+            else
+                categories = this.categoryList.Where(r => r.Name.Contains(name)).OrderBy(r => r.Number);
+
+            this.lvCategory.Items.Clear();
+            foreach (var item in categories)
+            {
+                ListViewItem lvi = new ListViewItem(item.Number);
+                lvi.Tag = item.Id;
+
+                lvi.SubItems.Add(item.Name);
+
+                this.lvCategory.Items.Add(lvi);
+            }
+
+            this.lvCategory.EndUpdate();
+        }
         #endregion //Method
 
         #region Event
@@ -161,6 +189,5 @@ namespace Phoebe.FormClient
         [Description("选择类别")]
         public event ItemSelectHandle CategoryItemSelected;
         #endregion //Delegate
-
     }
 }

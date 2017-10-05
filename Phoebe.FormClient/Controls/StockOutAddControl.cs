@@ -233,6 +233,27 @@ namespace Phoebe.FormClient
         }
 
         /// <summary>
+        /// 分类名称输入
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtCategoryName_EditValueChanged(object sender, EventArgs e)
+        {
+            string name = this.txtCategoryName.EditValue.ToString();
+            this.clcCategory.SearchName(name);
+
+            var category = this.categoryList.SingleOrDefault(r => r.Name == name);
+            if (category != null)
+            {
+                this.txtCategoryNumber.Text = category.Number;
+            }
+            else
+            {
+                this.txtCategoryNumber.Text = "";
+            }
+        }
+
+        /// <summary>
         /// 选择分类
         /// </summary>
         /// <param name="sender"></param>
@@ -240,10 +261,12 @@ namespace Phoebe.FormClient
         private void clcCategory_CategoryItemSelected(object sender, EventArgs e)
         {
             this.txtCategoryNumber.EditValueChanged -= txtCategoryNumber_EditValueChanged;
+            this.txtCategoryName.EditValueChanged -= txtCategoryName_EditValueChanged;
 
             this.txtCategoryNumber.Text = this.clcCategory.SelectedNumber;
             this.txtCategoryName.Text = this.clcCategory.SelectedName;
 
+            this.txtCategoryName.EditValueChanged += txtCategoryName_EditValueChanged;
             this.txtCategoryNumber.EditValueChanged += txtCategoryNumber_EditValueChanged;
         }
 
