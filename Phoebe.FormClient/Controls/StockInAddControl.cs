@@ -56,6 +56,7 @@ namespace Phoebe.FormClient
 
             this.sigList.DataSource = new List<StockInModel>();
             this.sigList.SetCategoryList(BusinessFactory<CategoryBusiness>.Instance.GetLeafCategory());
+            this.sigList.InitSearch();
         }
         #endregion //Constructor
 

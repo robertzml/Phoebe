@@ -38,6 +38,10 @@
             this.colContractId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCargoId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCategoryId = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colSearch = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repoSearch = new DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit();
+            this.bsCategory = new System.Windows.Forms.BindingSource(this.components);
+            this.repositoryItemSearchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colCategoryNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCategoryName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colSpecification = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -55,6 +59,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgcStockIn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsStockIn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStockIn)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repoSearch)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsCategory)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemSearchLookUpEdit1View)).BeginInit();
             this.SuspendLayout();
             // 
             // dgcStockIn
@@ -64,6 +71,8 @@
             this.dgcStockIn.Location = new System.Drawing.Point(0, 0);
             this.dgcStockIn.MainView = this.dgvStockIn;
             this.dgcStockIn.Name = "dgcStockIn";
+            this.dgcStockIn.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.repoSearch});
             this.dgcStockIn.Size = new System.Drawing.Size(666, 338);
             this.dgcStockIn.TabIndex = 0;
             this.dgcStockIn.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -82,6 +91,7 @@
             this.colContractId,
             this.colCargoId,
             this.colCategoryId,
+            this.colSearch,
             this.colCategoryNumber,
             this.colCategoryName,
             this.colSpecification,
@@ -111,6 +121,7 @@
             this.dgvStockIn.OptionsView.ShowGroupExpandCollapseButtons = false;
             this.dgvStockIn.OptionsView.ShowGroupPanel = false;
             this.dgvStockIn.CellValueChanging += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.dgvStockIn_CellValueChanging);
+            this.dgvStockIn.CustomUnboundColumnData += new DevExpress.XtraGrid.Views.Base.CustomColumnDataEventHandler(this.dgvStockIn_CustomUnboundColumnData);
             // 
             // colId
             // 
@@ -142,13 +153,47 @@
             this.colCategoryId.FieldName = "CategoryId";
             this.colCategoryId.Name = "colCategoryId";
             // 
+            // colSearch
+            // 
+            this.colSearch.Caption = "搜索";
+            this.colSearch.ColumnEdit = this.repoSearch;
+            this.colSearch.FieldName = "colSearch";
+            this.colSearch.Name = "colSearch";
+            this.colSearch.UnboundType = DevExpress.Data.UnboundColumnType.Integer;
+            this.colSearch.Visible = true;
+            this.colSearch.VisibleIndex = 0;
+            // 
+            // repoSearch
+            // 
+            this.repoSearch.AutoHeight = false;
+            this.repoSearch.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repoSearch.DataSource = this.bsCategory;
+            this.repoSearch.DisplayMember = "Name";
+            this.repoSearch.Name = "repoSearch";
+            this.repoSearch.NullText = "请选择";
+            this.repoSearch.ValueMember = "Id";
+            this.repoSearch.View = this.repositoryItemSearchLookUpEdit1View;
+            // 
+            // bsCategory
+            // 
+            this.bsCategory.DataSource = typeof(Phoebe.Model.Category);
+            // 
+            // repositoryItemSearchLookUpEdit1View
+            // 
+            this.repositoryItemSearchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.repositoryItemSearchLookUpEdit1View.Name = "repositoryItemSearchLookUpEdit1View";
+            this.repositoryItemSearchLookUpEdit1View.OptionsFind.ShowClearButton = false;
+            this.repositoryItemSearchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.repositoryItemSearchLookUpEdit1View.OptionsView.ShowGroupPanel = false;
+            // 
             // colCategoryNumber
             // 
             this.colCategoryNumber.Caption = "类别编码";
             this.colCategoryNumber.FieldName = "CategoryNumber";
             this.colCategoryNumber.Name = "colCategoryNumber";
             this.colCategoryNumber.Visible = true;
-            this.colCategoryNumber.VisibleIndex = 0;
+            this.colCategoryNumber.VisibleIndex = 1;
             // 
             // colCategoryName
             // 
@@ -156,7 +201,7 @@
             this.colCategoryName.FieldName = "CategoryName";
             this.colCategoryName.Name = "colCategoryName";
             this.colCategoryName.Visible = true;
-            this.colCategoryName.VisibleIndex = 1;
+            this.colCategoryName.VisibleIndex = 2;
             // 
             // colSpecification
             // 
@@ -164,7 +209,7 @@
             this.colSpecification.FieldName = "Specification";
             this.colSpecification.Name = "colSpecification";
             this.colSpecification.Visible = true;
-            this.colSpecification.VisibleIndex = 2;
+            this.colSpecification.VisibleIndex = 3;
             // 
             // colInCount
             // 
@@ -174,7 +219,7 @@
             this.colInCount.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "InCount", "合计={0:0.##}")});
             this.colInCount.Visible = true;
-            this.colInCount.VisibleIndex = 3;
+            this.colInCount.VisibleIndex = 4;
             // 
             // colGroupType
             // 
@@ -189,7 +234,7 @@
             this.colUnitWeight.FieldName = "UnitWeight";
             this.colUnitWeight.Name = "colUnitWeight";
             this.colUnitWeight.Visible = true;
-            this.colUnitWeight.VisibleIndex = 4;
+            this.colUnitWeight.VisibleIndex = 5;
             // 
             // colInWeight
             // 
@@ -202,7 +247,7 @@
             this.colInWeight.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "InWeight", "合计={0:0.####}")});
             this.colInWeight.Visible = true;
-            this.colInWeight.VisibleIndex = 5;
+            this.colInWeight.VisibleIndex = 6;
             // 
             // colUnitVolume
             // 
@@ -212,7 +257,7 @@
             this.colUnitVolume.FieldName = "UnitVolume";
             this.colUnitVolume.Name = "colUnitVolume";
             this.colUnitVolume.Visible = true;
-            this.colUnitVolume.VisibleIndex = 6;
+            this.colUnitVolume.VisibleIndex = 7;
             // 
             // colInVolume
             // 
@@ -225,7 +270,7 @@
             this.colInVolume.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "InVolume", "合计={0:0.####}")});
             this.colInVolume.Visible = true;
-            this.colInVolume.VisibleIndex = 7;
+            this.colInVolume.VisibleIndex = 8;
             // 
             // colWarehouseNumber
             // 
@@ -233,7 +278,7 @@
             this.colWarehouseNumber.FieldName = "WarehouseNumber";
             this.colWarehouseNumber.Name = "colWarehouseNumber";
             this.colWarehouseNumber.Visible = true;
-            this.colWarehouseNumber.VisibleIndex = 8;
+            this.colWarehouseNumber.VisibleIndex = 9;
             // 
             // colOriginPlace
             // 
@@ -241,7 +286,7 @@
             this.colOriginPlace.FieldName = "OriginPlace";
             this.colOriginPlace.Name = "colOriginPlace";
             this.colOriginPlace.Visible = true;
-            this.colOriginPlace.VisibleIndex = 9;
+            this.colOriginPlace.VisibleIndex = 10;
             // 
             // colShelfLife
             // 
@@ -249,7 +294,7 @@
             this.colShelfLife.FieldName = "ShelfLife";
             this.colShelfLife.Name = "colShelfLife";
             this.colShelfLife.Visible = true;
-            this.colShelfLife.VisibleIndex = 10;
+            this.colShelfLife.VisibleIndex = 11;
             // 
             // colRemark
             // 
@@ -257,7 +302,7 @@
             this.colRemark.FieldName = "Remark";
             this.colRemark.Name = "colRemark";
             this.colRemark.Visible = true;
-            this.colRemark.VisibleIndex = 11;
+            this.colRemark.VisibleIndex = 12;
             // 
             // colStatus
             // 
@@ -275,6 +320,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgcStockIn)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsStockIn)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStockIn)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repoSearch)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsCategory)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemSearchLookUpEdit1View)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -304,5 +352,9 @@
         private DevExpress.XtraGrid.Columns.GridColumn colShelfLife;
         private DevExpress.XtraGrid.Columns.GridColumn colRemark;
         private DevExpress.XtraGrid.Columns.GridColumn colStatus;
+        private DevExpress.XtraGrid.Columns.GridColumn colSearch;
+        private DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit repoSearch;
+        private DevExpress.XtraGrid.Views.Grid.GridView repositoryItemSearchLookUpEdit1View;
+        private System.Windows.Forms.BindingSource bsCategory;
     }
 }

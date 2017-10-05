@@ -100,6 +100,7 @@ namespace Phoebe.FormClient
             this.sigList.DataSource = data;
             this.sigList.SetCategoryList(BusinessFactory<CategoryBusiness>.Instance.GetLeafCategory());
             this.sigList.SetEqualWeight(this.isEqualWeight);
+            this.sigList.InitSearch();
         }
         #endregion //Function
 

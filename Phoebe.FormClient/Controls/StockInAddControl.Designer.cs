@@ -57,8 +57,11 @@
             this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
             this.btnRemoveRow = new DevExpress.XtraEditors.SimpleButton();
             this.btnAddRow = new DevExpress.XtraEditors.SimpleButton();
+            this.sigList = new Phoebe.FormClient.StockInGrid();
+            this.clcCategory = new Phoebe.FormClient.CategoryListControl();
             this.groupControl4 = new DevExpress.XtraEditors.GroupControl();
             this.layoutControl3 = new DevExpress.XtraLayout.LayoutControl();
+            this.customerLookup = new Phoebe.FormClient.CustomerLookup();
             this.txtRemark = new DevExpress.XtraEditors.TextEdit();
             this.txtStatus = new DevExpress.XtraEditors.TextEdit();
             this.txtBillingType = new DevExpress.XtraEditors.TextEdit();
@@ -72,9 +75,6 @@
             this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.sigList = new Phoebe.FormClient.StockInGrid();
-            this.clcCategory = new Phoebe.FormClient.CategoryListControl();
-            this.customerLookup = new Phoebe.FormClient.CustomerLookup();
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
@@ -542,6 +542,26 @@
             this.btnAddRow.Text = "添加记录";
             this.btnAddRow.Click += new System.EventHandler(this.btnAddRow_Click);
             // 
+            // sigList
+            // 
+            this.sigList.DataSource = null;
+            this.sigList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.sigList.Editable = true;
+            this.sigList.Location = new System.Drawing.Point(2, 21);
+            this.sigList.Name = "sigList";
+            this.sigList.Size = new System.Drawing.Size(1090, 275);
+            this.sigList.TabIndex = 0;
+            this.sigList.CellValueChanged += new Phoebe.FormClient.StockInGrid.CellChangedHandle(this.sigList_CellValueChanged);
+            // 
+            // clcCategory
+            // 
+            this.clcCategory.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.clcCategory.Location = new System.Drawing.Point(903, 3);
+            this.clcCategory.Name = "clcCategory";
+            this.tableLayoutPanel1.SetRowSpan(this.clcCategory, 2);
+            this.clcCategory.Size = new System.Drawing.Size(194, 314);
+            this.clcCategory.TabIndex = 4;
+            // 
             // groupControl4
             // 
             this.groupControl4.Controls.Add(this.layoutControl3);
@@ -568,6 +588,14 @@
             this.layoutControl3.Size = new System.Drawing.Size(890, 131);
             this.layoutControl3.TabIndex = 0;
             this.layoutControl3.Text = "layoutControl3";
+            // 
+            // customerLookup
+            // 
+            this.customerLookup.Location = new System.Drawing.Point(58, 36);
+            this.customerLookup.Name = "customerLookup";
+            this.customerLookup.Size = new System.Drawing.Size(247, 20);
+            this.customerLookup.TabIndex = 9;
+            this.customerLookup.CustomerSelect += new System.EventHandler(this.customerLookup_CustomerSelect);
             // 
             // txtRemark
             // 
@@ -712,34 +740,6 @@
             this.layoutControlItem8.Size = new System.Drawing.Size(302, 63);
             this.layoutControlItem8.Text = "备注";
             this.layoutControlItem8.TextSize = new System.Drawing.Size(48, 14);
-            // 
-            // sigList
-            // 
-            this.sigList.DataSource = null;
-            this.sigList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.sigList.Editable = true;
-            this.sigList.Location = new System.Drawing.Point(2, 21);
-            this.sigList.Name = "sigList";
-            this.sigList.Size = new System.Drawing.Size(1090, 275);
-            this.sigList.TabIndex = 0;
-            this.sigList.CellValueChanged += new Phoebe.FormClient.StockInGrid.CellChangedHandle(this.sigList_CellValueChanged);
-            // 
-            // clcCategory
-            // 
-            this.clcCategory.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.clcCategory.Location = new System.Drawing.Point(903, 3);
-            this.clcCategory.Name = "clcCategory";
-            this.tableLayoutPanel1.SetRowSpan(this.clcCategory, 2);
-            this.clcCategory.Size = new System.Drawing.Size(194, 314);
-            this.clcCategory.TabIndex = 4;
-            // 
-            // customerLookup
-            // 
-            this.customerLookup.Location = new System.Drawing.Point(58, 36);
-            this.customerLookup.Name = "customerLookup";
-            this.customerLookup.Size = new System.Drawing.Size(247, 20);
-            this.customerLookup.TabIndex = 9;
-            this.customerLookup.CustomerSelect += new System.EventHandler(this.customerLookup_CustomerSelect);
             // 
             // layoutControlItem4
             // 

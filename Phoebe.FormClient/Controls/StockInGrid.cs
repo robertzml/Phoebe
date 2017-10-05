@@ -102,6 +102,45 @@ namespace Phoebe.FormClient
         {
             this.dgvStockIn.CloseEditor();
         }
+
+        /// <summary>
+        /// 初始化分类搜索
+        /// </summary>
+        public void InitSearch()
+        {
+            var colCId = new DevExpress.XtraGrid.Columns.GridColumn();
+            var colCNumber = new DevExpress.XtraGrid.Columns.GridColumn();
+            var colCName = new DevExpress.XtraGrid.Columns.GridColumn();
+            // 
+            // colId
+            // 
+            colCId.FieldName = "Id";
+            colCId.Name = "colId";
+            // 
+            // colNumber
+            // 
+            colCNumber.Caption = "分类编号";
+            colCNumber.FieldName = "Number";
+            colCNumber.Name = "colNumber";
+            colCNumber.Visible = true;
+            colCNumber.VisibleIndex = 0;
+            // 
+            // colName
+            // 
+            colCName.Caption = "分类名称";
+            colCName.FieldName = "Name";
+            colCName.Name = "colName";
+            colCName.Visible = true;
+            colCName.VisibleIndex = 1;
+
+            this.repositoryItemSearchLookUpEdit1View.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            colCId,
+            colCNumber,
+            colCName
+            });
+
+            this.bsCategory.DataSource = this.categoryList;
+        }
         #endregion //Method
 
         #region Event
@@ -127,8 +166,8 @@ namespace Phoebe.FormClient
                 string number = e.Value.ToString();
                 if (CellValueChanged != null)
                 {
-                    DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs arg = new DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs(e.RowHandle, e.Column, number);                    
-                    CellValueChanged(sender,arg);
+                    DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs arg = new DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs(e.RowHandle, e.Column, number);
+                    CellValueChanged(sender, arg);
                 }
 
                 var category = this.categoryList.SingleOrDefault(r => r.Number == number);
@@ -182,6 +221,37 @@ namespace Phoebe.FormClient
                 int count = Convert.ToInt32(this.dgvStockIn.GetRowCellValue(e.RowHandle, "InCount"));
                 decimal totalVolume = count * unitVolume;
                 this.dgvStockIn.SetRowCellValue(e.RowHandle, "InVolume", totalVolume);
+            }
+        }
+
+        /// <summary>
+        /// 自定义数据显示
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dgvStockIn_CustomUnboundColumnData(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDataEventArgs e)
+        {
+            int rowIndex = e.ListSourceRowIndex;
+            if (rowIndex < 0 || rowIndex >= this.bsStockIn.Count)
+                return;
+
+            var stockIn = this.bsStockIn[rowIndex] as StockInModel;
+
+            if (e.Column.FieldName == "colSearch")
+            {
+                if (e.IsGetData)
+                    e.Value = stockIn.CategoryId;
+                else if (e.IsSetData)
+                {
+                    if (e.Value != null && !string.IsNullOrEmpty(e.Value.ToString()))
+                    {
+                        stockIn.CategoryId = Convert.ToInt32(e.Value);
+                        var cate = this.categoryList.Single(r => r.Id == (int)e.Value);
+
+                        stockIn.CategoryNumber = cate.Number;
+                        stockIn.CategoryName = cate.Name;
+                    }
+                }
             }
         }
         #endregion //Event
