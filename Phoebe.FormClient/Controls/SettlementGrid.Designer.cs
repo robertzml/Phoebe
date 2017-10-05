@@ -55,10 +55,10 @@
             // 
             this.dgcSettlement.DataSource = this.bsSettlement;
             this.dgcSettlement.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgcSettlement.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dgcSettlement.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2);
             this.dgcSettlement.Location = new System.Drawing.Point(0, 0);
             this.dgcSettlement.MainView = this.dgvSettlement;
-            this.dgcSettlement.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dgcSettlement.Margin = new System.Windows.Forms.Padding(2);
             this.dgcSettlement.Name = "dgcSettlement";
             this.dgcSettlement.Size = new System.Drawing.Size(704, 411);
             this.dgcSettlement.TabIndex = 0;
@@ -95,6 +95,7 @@
             this.dgvSettlement.OptionsFind.AlwaysVisible = true;
             this.dgvSettlement.OptionsView.EnableAppearanceEvenRow = true;
             this.dgvSettlement.OptionsView.EnableAppearanceOddRow = true;
+            this.dgvSettlement.OptionsView.ShowFooter = true;
             this.dgvSettlement.OptionsView.ShowGroupPanel = false;
             this.dgvSettlement.CustomUnboundColumnData += new DevExpress.XtraGrid.Views.Base.CustomColumnDataEventHandler(this.dgvSettlement_CustomUnboundColumnData);
             this.dgvSettlement.CustomColumnDisplayText += new DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventHandler(this.dgvSettlement_CustomColumnDisplayText);
@@ -155,6 +156,8 @@
             this.colSumFee.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colSumFee.FieldName = "SumFee";
             this.colSumFee.Name = "colSumFee";
+            this.colSumFee.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "SumFee", "合计={0:0.##}")});
             this.colSumFee.Visible = true;
             this.colSumFee.VisibleIndex = 5;
             // 
@@ -173,6 +176,8 @@
             this.colRemission.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colRemission.FieldName = "Remission";
             this.colRemission.Name = "colRemission";
+            this.colRemission.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "Remission", "合计={0:0.##}")});
             this.colRemission.Visible = true;
             this.colRemission.VisibleIndex = 7;
             // 
@@ -183,6 +188,8 @@
             this.colDueFee.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colDueFee.FieldName = "DueFee";
             this.colDueFee.Name = "colDueFee";
+            this.colDueFee.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "DueFee", "合计={0:0.##}")});
             this.colDueFee.Visible = true;
             this.colDueFee.VisibleIndex = 8;
             // 
@@ -224,7 +231,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.dgcSettlement);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "SettlementGrid";
             this.Size = new System.Drawing.Size(704, 411);
             this.Load += new System.EventHandler(this.SettlementGrid_Load);
