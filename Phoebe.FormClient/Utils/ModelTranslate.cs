@@ -304,6 +304,32 @@ namespace Phoebe.FormClient
         }
 
         /// <summary>
+        /// 客户费用模型转换
+        /// </summary>
+        /// <param name="fee">客户费用记录</param>
+        /// <returns></returns>
+        public static Phoebe.Model.Report.RCustomerFeeModel CustomerFeeToReport(CustomerFee fee)
+        {
+            Phoebe.Model.Report.RCustomerFeeModel report = new Model.Report.RCustomerFeeModel();
+            report.CustomerId = fee.CustomerId;
+            report.CustomerName = fee.CustomerName;
+            report.CustomerNumber = fee.CustomerNumber;
+            report.StartTime = fee.StartTime;
+            report.EndTime = fee.EndTime;
+            report.StartDebt = fee.StartDebt;
+            report.BaseFee = fee.BaseFee;
+            report.ColdFee = fee.ColdFee;
+            report.MiscFee = fee.MiscFee;
+            report.TotalFee = fee.TotalFee;
+            report.ReceiveFee = fee.ReceiveFee;
+            report.Discount = fee.Discount;
+            report.EndDebt = fee.EndDebt;
+            report.Remark = fee.Remark;
+
+            return report;
+        }
+
+        /// <summary>
         /// 冰块销售单转报表模型
         /// </summary>
         /// <param name="iceFlow">冰块流水</param>
@@ -319,7 +345,7 @@ namespace Phoebe.FormClient
             report.Remark = iceFlow.Remark;
             report.IceSales = new List<Model.Report.RIceSaleDetailsModel>();
 
-            foreach(var item in iceSales)
+            foreach (var item in iceSales)
             {
                 Model.Report.RIceSaleDetailsModel m = new Model.Report.RIceSaleDetailsModel();
                 m.IceType = ((IceType)item.IceType).DisplayName();

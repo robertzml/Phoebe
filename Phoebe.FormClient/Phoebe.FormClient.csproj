@@ -107,6 +107,12 @@
     <Compile Include="Controls\CustomerTotalStorageGrid.Designer.cs">
       <DependentUpon>CustomerTotalStorageGrid.cs</DependentUpon>
     </Compile>
+    <Compile Include="Report\CustomerFee.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\CustomerFee.Designer.cs">
+      <DependentUpon>CustomerFee.cs</DependentUpon>
+    </Compile>
     <Compile Include="Statistic\CustomerDailyReportForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -685,6 +691,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\CustomerTotalStorageGrid.resx">
       <DependentUpon>CustomerTotalStorageGrid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\CustomerFee.resx">
+      <DependentUpon>CustomerFee.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Statistic\CargoSubReportForm.resx">
       <DependentUpon>CargoSubReportForm.cs</DependentUpon>

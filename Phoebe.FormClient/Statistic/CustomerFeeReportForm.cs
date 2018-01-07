@@ -8,6 +8,7 @@ using System.Windows.Forms;
 
 namespace Phoebe.FormClient
 {
+    using DevExpress.XtraReports.UI;
     using Phoebe.Base;
     using Phoebe.Business;
     using Phoebe.Common;
@@ -86,7 +87,20 @@ namespace Phoebe.FormClient
         /// <param name="e"></param>
         private void btnPrint_Click(object sender, EventArgs e)
         {
-            this.cfgList.PrintPriview();
+            //this.cfgList.PrintPriview();
+            var fee = this.cfgList.GetCurrentSelect();
+            if (fee == null)
+            {
+                MessageUtil.ShowClaim("未选中记录");
+                return;
+            }
+
+            var model = ModelTranslate.CustomerFeeToReport(fee);
+
+            Report.CustomerFee report = new Report.CustomerFee(model);
+
+            ReportPrintTool tool = new ReportPrintTool(report);
+            tool.ShowPreview();
         }
 
         /// <summary>

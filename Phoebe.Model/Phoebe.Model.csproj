@@ -120,6 +120,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PhoebeModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Report\RCustomerFeeModel.cs" />
     <Compile Include="Report\RIceSaleDetailsModel.cs" />
     <Compile Include="Report\RIceSaleModel.cs" />
     <Compile Include="Report\RPaymentModel.cs" />

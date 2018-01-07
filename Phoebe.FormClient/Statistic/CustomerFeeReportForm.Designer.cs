@@ -81,7 +81,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 120F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(793, 465);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(940, 495);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // groupControl1
@@ -90,7 +90,7 @@
             this.groupControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl1.Location = new System.Drawing.Point(3, 3);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(787, 114);
+            this.groupControl1.Size = new System.Drawing.Size(934, 114);
             this.groupControl1.TabIndex = 0;
             this.groupControl1.Text = "选择";
             // 
@@ -106,7 +106,7 @@
             this.layoutControl1.Location = new System.Drawing.Point(2, 21);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.layoutControlGroup1;
-            this.layoutControl1.Size = new System.Drawing.Size(783, 91);
+            this.layoutControl1.Size = new System.Drawing.Size(930, 91);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
@@ -114,14 +114,14 @@
             // 
             this.customerLookup.Location = new System.Drawing.Point(63, 12);
             this.customerLookup.Name = "customerLookup";
-            this.customerLookup.Size = new System.Drawing.Size(179, 20);
+            this.customerLookup.Size = new System.Drawing.Size(224, 20);
             this.customerLookup.TabIndex = 10;
             // 
             // btnShow
             // 
-            this.btnShow.Location = new System.Drawing.Point(498, 36);
+            this.btnShow.Location = new System.Drawing.Point(592, 36);
             this.btnShow.Name = "btnShow";
-            this.btnShow.Size = new System.Drawing.Size(158, 22);
+            this.btnShow.Size = new System.Drawing.Size(189, 22);
             this.btnShow.StyleController = this.layoutControl1;
             this.btnShow.TabIndex = 9;
             this.btnShow.Text = "显示详情";
@@ -129,9 +129,9 @@
             // 
             // btnPrint
             // 
-            this.btnPrint.Location = new System.Drawing.Point(246, 36);
+            this.btnPrint.Location = new System.Drawing.Point(291, 36);
             this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(248, 22);
+            this.btnPrint.Size = new System.Drawing.Size(297, 22);
             this.btnPrint.StyleController = this.layoutControl1;
             this.btnPrint.TabIndex = 7;
             this.btnPrint.Text = "打印";
@@ -141,7 +141,7 @@
             // 
             this.btnQuery.Location = new System.Drawing.Point(12, 36);
             this.btnQuery.Name = "btnQuery";
-            this.btnQuery.Size = new System.Drawing.Size(230, 22);
+            this.btnQuery.Size = new System.Drawing.Size(275, 22);
             this.btnQuery.StyleController = this.layoutControl1;
             this.btnQuery.TabIndex = 6;
             this.btnQuery.Text = "查询";
@@ -150,7 +150,7 @@
             // dpTo
             // 
             this.dpTo.EditValue = null;
-            this.dpTo.Location = new System.Drawing.Point(549, 12);
+            this.dpTo.Location = new System.Drawing.Point(643, 12);
             this.dpTo.Name = "dpTo";
             this.dpTo.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.dpTo.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -158,14 +158,14 @@
             this.dpTo.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dpTo.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.dpTo.Size = new System.Drawing.Size(107, 20);
+            this.dpTo.Size = new System.Drawing.Size(138, 20);
             this.dpTo.StyleController = this.layoutControl1;
             this.dpTo.TabIndex = 5;
             // 
             // dpFrom
             // 
             this.dpFrom.EditValue = null;
-            this.dpFrom.Location = new System.Drawing.Point(297, 12);
+            this.dpFrom.Location = new System.Drawing.Point(342, 12);
             this.dpFrom.Name = "dpFrom";
             this.dpFrom.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.dpFrom.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -173,7 +173,7 @@
             this.dpFrom.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dpFrom.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.dpFrom.Size = new System.Drawing.Size(197, 20);
+            this.dpFrom.Size = new System.Drawing.Size(246, 20);
             this.dpFrom.StyleController = this.layoutControl1;
             this.dpFrom.TabIndex = 4;
             // 
@@ -191,41 +191,41 @@
             this.layoutControlItem7});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "layoutControlGroup1";
-            this.layoutControlGroup1.Size = new System.Drawing.Size(783, 91);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(930, 91);
             this.layoutControlGroup1.TextVisible = false;
             // 
             // layoutControlItem1
             // 
             this.layoutControlItem1.Control = this.dpFrom;
-            this.layoutControlItem1.Location = new System.Drawing.Point(234, 0);
+            this.layoutControlItem1.Location = new System.Drawing.Point(279, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(252, 24);
+            this.layoutControlItem1.Size = new System.Drawing.Size(301, 24);
             this.layoutControlItem1.Text = "开始日期";
             this.layoutControlItem1.TextSize = new System.Drawing.Size(48, 14);
             // 
             // layoutControlItem2
             // 
             this.layoutControlItem2.Control = this.dpTo;
-            this.layoutControlItem2.Location = new System.Drawing.Point(486, 0);
+            this.layoutControlItem2.Location = new System.Drawing.Point(580, 0);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(162, 24);
+            this.layoutControlItem2.Size = new System.Drawing.Size(193, 24);
             this.layoutControlItem2.Text = "结束日期";
             this.layoutControlItem2.TextSize = new System.Drawing.Size(48, 14);
             // 
             // emptySpaceItem1
             // 
             this.emptySpaceItem1.AllowHotTrack = false;
-            this.emptySpaceItem1.Location = new System.Drawing.Point(648, 0);
+            this.emptySpaceItem1.Location = new System.Drawing.Point(773, 0);
             this.emptySpaceItem1.Name = "emptySpaceItem1";
-            this.emptySpaceItem1.Size = new System.Drawing.Size(115, 71);
+            this.emptySpaceItem1.Size = new System.Drawing.Size(137, 71);
             this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
             // 
             // layoutControlItem4
             // 
             this.layoutControlItem4.Control = this.btnPrint;
-            this.layoutControlItem4.Location = new System.Drawing.Point(234, 24);
+            this.layoutControlItem4.Location = new System.Drawing.Point(279, 24);
             this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(252, 47);
+            this.layoutControlItem4.Size = new System.Drawing.Size(301, 47);
             this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem4.TextVisible = false;
             // 
@@ -234,16 +234,16 @@
             this.layoutControlItem3.Control = this.btnQuery;
             this.layoutControlItem3.Location = new System.Drawing.Point(0, 24);
             this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(234, 47);
+            this.layoutControlItem3.Size = new System.Drawing.Size(279, 47);
             this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem3.TextVisible = false;
             // 
             // layoutControlItem6
             // 
             this.layoutControlItem6.Control = this.btnShow;
-            this.layoutControlItem6.Location = new System.Drawing.Point(486, 24);
+            this.layoutControlItem6.Location = new System.Drawing.Point(580, 24);
             this.layoutControlItem6.Name = "layoutControlItem6";
-            this.layoutControlItem6.Size = new System.Drawing.Size(162, 47);
+            this.layoutControlItem6.Size = new System.Drawing.Size(193, 47);
             this.layoutControlItem6.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem6.TextVisible = false;
             // 
@@ -252,7 +252,7 @@
             this.layoutControlItem7.Control = this.customerLookup;
             this.layoutControlItem7.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem7.Name = "layoutControlItem7";
-            this.layoutControlItem7.Size = new System.Drawing.Size(234, 24);
+            this.layoutControlItem7.Size = new System.Drawing.Size(279, 24);
             this.layoutControlItem7.Text = "客户选择";
             this.layoutControlItem7.TextSize = new System.Drawing.Size(48, 14);
             // 
@@ -262,7 +262,7 @@
             this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl2.Location = new System.Drawing.Point(3, 123);
             this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(787, 339);
+            this.groupControl2.Size = new System.Drawing.Size(934, 369);
             this.groupControl2.TabIndex = 1;
             this.groupControl2.Text = "报表记录";
             // 
@@ -273,7 +273,7 @@
             this.cfgList.EndDate = new System.DateTime(((long)(0)));
             this.cfgList.Location = new System.Drawing.Point(2, 21);
             this.cfgList.Name = "cfgList";
-            this.cfgList.Size = new System.Drawing.Size(783, 316);
+            this.cfgList.Size = new System.Drawing.Size(930, 346);
             this.cfgList.StartDate = new System.DateTime(((long)(0)));
             this.cfgList.TabIndex = 0;
             // 
@@ -281,7 +281,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(793, 465);
+            this.ClientSize = new System.Drawing.Size(940, 495);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "CustomerFeeReportForm";
             this.Text = "客户费用报表";
