@@ -31,7 +31,6 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
-            this.customerLookup = new Phoebe.FormClient.CustomerLookup();
             this.btnShow = new DevExpress.XtraEditors.SimpleButton();
             this.btnPrint = new DevExpress.XtraEditors.SimpleButton();
             this.btnQuery = new DevExpress.XtraEditors.SimpleButton();
@@ -44,9 +43,14 @@
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
+            this.btnPrint2 = new DevExpress.XtraEditors.SimpleButton();
+            this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.customerLookup = new Phoebe.FormClient.CustomerLookup();
+            this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
             this.cfgList = new Phoebe.FormClient.CustomerFeeGrid();
+            this.btnExport = new DevExpress.XtraEditors.SimpleButton();
+            this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
@@ -63,9 +67,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
             this.groupControl2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -96,6 +102,8 @@
             // 
             // layoutControl1
             // 
+            this.layoutControl1.Controls.Add(this.btnExport);
+            this.layoutControl1.Controls.Add(this.btnPrint2);
             this.layoutControl1.Controls.Add(this.customerLookup);
             this.layoutControl1.Controls.Add(this.btnShow);
             this.layoutControl1.Controls.Add(this.btnPrint);
@@ -110,18 +118,11 @@
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
-            // customerLookup
-            // 
-            this.customerLookup.Location = new System.Drawing.Point(63, 12);
-            this.customerLookup.Name = "customerLookup";
-            this.customerLookup.Size = new System.Drawing.Size(224, 20);
-            this.customerLookup.TabIndex = 10;
-            // 
             // btnShow
             // 
             this.btnShow.Location = new System.Drawing.Point(592, 36);
             this.btnShow.Name = "btnShow";
-            this.btnShow.Size = new System.Drawing.Size(189, 22);
+            this.btnShow.Size = new System.Drawing.Size(113, 22);
             this.btnShow.StyleController = this.layoutControl1;
             this.btnShow.TabIndex = 9;
             this.btnShow.Text = "显示详情";
@@ -129,12 +130,12 @@
             // 
             // btnPrint
             // 
-            this.btnPrint.Location = new System.Drawing.Point(291, 36);
+            this.btnPrint.Location = new System.Drawing.Point(441, 36);
             this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(297, 22);
+            this.btnPrint.Size = new System.Drawing.Size(147, 22);
             this.btnPrint.StyleController = this.layoutControl1;
             this.btnPrint.TabIndex = 7;
-            this.btnPrint.Text = "打印";
+            this.btnPrint.Text = "打印三联单";
             this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
             // btnQuery
@@ -158,7 +159,7 @@
             this.dpTo.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dpTo.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.dpTo.Size = new System.Drawing.Size(138, 20);
+            this.dpTo.Size = new System.Drawing.Size(186, 20);
             this.dpTo.StyleController = this.layoutControl1;
             this.dpTo.TabIndex = 5;
             // 
@@ -188,7 +189,9 @@
             this.layoutControlItem4,
             this.layoutControlItem3,
             this.layoutControlItem6,
-            this.layoutControlItem7});
+            this.layoutControlItem7,
+            this.layoutControlItem5,
+            this.layoutControlItem8});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "layoutControlGroup1";
             this.layoutControlGroup1.Size = new System.Drawing.Size(930, 91);
@@ -208,24 +211,24 @@
             this.layoutControlItem2.Control = this.dpTo;
             this.layoutControlItem2.Location = new System.Drawing.Point(580, 0);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(193, 24);
+            this.layoutControlItem2.Size = new System.Drawing.Size(241, 24);
             this.layoutControlItem2.Text = "结束日期";
             this.layoutControlItem2.TextSize = new System.Drawing.Size(48, 14);
             // 
             // emptySpaceItem1
             // 
             this.emptySpaceItem1.AllowHotTrack = false;
-            this.emptySpaceItem1.Location = new System.Drawing.Point(773, 0);
+            this.emptySpaceItem1.Location = new System.Drawing.Point(821, 0);
             this.emptySpaceItem1.Name = "emptySpaceItem1";
-            this.emptySpaceItem1.Size = new System.Drawing.Size(137, 71);
+            this.emptySpaceItem1.Size = new System.Drawing.Size(89, 71);
             this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
             // 
             // layoutControlItem4
             // 
             this.layoutControlItem4.Control = this.btnPrint;
-            this.layoutControlItem4.Location = new System.Drawing.Point(279, 24);
+            this.layoutControlItem4.Location = new System.Drawing.Point(429, 24);
             this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(301, 47);
+            this.layoutControlItem4.Size = new System.Drawing.Size(151, 47);
             this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem4.TextVisible = false;
             // 
@@ -243,18 +246,9 @@
             this.layoutControlItem6.Control = this.btnShow;
             this.layoutControlItem6.Location = new System.Drawing.Point(580, 24);
             this.layoutControlItem6.Name = "layoutControlItem6";
-            this.layoutControlItem6.Size = new System.Drawing.Size(193, 47);
+            this.layoutControlItem6.Size = new System.Drawing.Size(117, 47);
             this.layoutControlItem6.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem6.TextVisible = false;
-            // 
-            // layoutControlItem7
-            // 
-            this.layoutControlItem7.Control = this.customerLookup;
-            this.layoutControlItem7.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem7.Name = "layoutControlItem7";
-            this.layoutControlItem7.Size = new System.Drawing.Size(279, 24);
-            this.layoutControlItem7.Text = "客户选择";
-            this.layoutControlItem7.TextSize = new System.Drawing.Size(48, 14);
             // 
             // groupControl2
             // 
@@ -266,6 +260,41 @@
             this.groupControl2.TabIndex = 1;
             this.groupControl2.Text = "报表记录";
             // 
+            // btnPrint2
+            // 
+            this.btnPrint2.Location = new System.Drawing.Point(291, 36);
+            this.btnPrint2.Name = "btnPrint2";
+            this.btnPrint2.Size = new System.Drawing.Size(146, 22);
+            this.btnPrint2.StyleController = this.layoutControl1;
+            this.btnPrint2.TabIndex = 11;
+            this.btnPrint2.Text = "打印";
+            this.btnPrint2.Click += new System.EventHandler(this.btnPrint2_Click);
+            // 
+            // layoutControlItem5
+            // 
+            this.layoutControlItem5.Control = this.btnPrint2;
+            this.layoutControlItem5.Location = new System.Drawing.Point(279, 24);
+            this.layoutControlItem5.Name = "layoutControlItem5";
+            this.layoutControlItem5.Size = new System.Drawing.Size(150, 47);
+            this.layoutControlItem5.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem5.TextVisible = false;
+            // 
+            // customerLookup
+            // 
+            this.customerLookup.Location = new System.Drawing.Point(63, 12);
+            this.customerLookup.Name = "customerLookup";
+            this.customerLookup.Size = new System.Drawing.Size(224, 20);
+            this.customerLookup.TabIndex = 10;
+            // 
+            // layoutControlItem7
+            // 
+            this.layoutControlItem7.Control = this.customerLookup;
+            this.layoutControlItem7.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem7.Name = "layoutControlItem7";
+            this.layoutControlItem7.Size = new System.Drawing.Size(279, 24);
+            this.layoutControlItem7.Text = "客户选择";
+            this.layoutControlItem7.TextSize = new System.Drawing.Size(48, 14);
+            // 
             // cfgList
             // 
             this.cfgList.DataSource = null;
@@ -276,6 +305,25 @@
             this.cfgList.Size = new System.Drawing.Size(930, 346);
             this.cfgList.StartDate = new System.DateTime(((long)(0)));
             this.cfgList.TabIndex = 0;
+            // 
+            // btnExport
+            // 
+            this.btnExport.Location = new System.Drawing.Point(709, 36);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(120, 22);
+            this.btnExport.StyleController = this.layoutControl1;
+            this.btnExport.TabIndex = 12;
+            this.btnExport.Text = "导出Excel";
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
+            // 
+            // layoutControlItem8
+            // 
+            this.layoutControlItem8.Control = this.btnExport;
+            this.layoutControlItem8.Location = new System.Drawing.Point(697, 24);
+            this.layoutControlItem8.Name = "layoutControlItem8";
+            this.layoutControlItem8.Size = new System.Drawing.Size(124, 47);
+            this.layoutControlItem8.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem8.TextVisible = false;
             // 
             // CustomerFeeReportForm
             // 
@@ -302,9 +350,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
             this.groupControl2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -330,5 +380,9 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
         private CustomerLookup customerLookup;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem7;
+        private DevExpress.XtraEditors.SimpleButton btnPrint2;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
+        private DevExpress.XtraEditors.SimpleButton btnExport;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem8;
     }
 }

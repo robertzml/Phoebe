@@ -81,13 +81,12 @@ namespace Phoebe.FormClient
         }
 
         /// <summary>
-        /// 打印
+        /// 打印三联单
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnPrint_Click(object sender, EventArgs e)
         {
-            //this.cfgList.PrintPriview();
             var fee = this.cfgList.GetCurrentSelect();
             if (fee == null)
             {
@@ -101,6 +100,26 @@ namespace Phoebe.FormClient
 
             ReportPrintTool tool = new ReportPrintTool(report);
             tool.ShowPreview();
+        }
+
+        /// <summary>
+        /// 打印
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnPrint2_Click(object sender, EventArgs e)
+        {
+            this.cfgList.PrintPriview();
+        }
+
+        /// <summary>
+        /// 导出
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            this.cfgList.ExportToExcel();
         }
 
         /// <summary>
@@ -119,6 +138,8 @@ namespace Phoebe.FormClient
 
             ChildFormManage.ShowDialogForm(typeof(FeeDetailsForm), new object[] { select.CustomerId, select.StartTime, select.EndTime });
         }
+
         #endregion //Event
+
     }
 }

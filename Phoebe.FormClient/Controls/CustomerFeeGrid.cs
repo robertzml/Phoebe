@@ -72,6 +72,21 @@ namespace Phoebe.FormClient
             // Open the Preview window.
             this.dgvFee.ShowPrintPreview();
         }
+
+        /// <summary>
+        /// 导出Excel
+        /// </summary>
+        public void ExportToExcel()
+        {
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.Filter = "Excel files (*.xlsx)|*.xlsx";
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                XlsxExportOptionsEx op = new XlsxExportOptionsEx();
+                op.ExportType = DevExpress.Export.ExportType.DataAware;
+                this.dgvFee.ExportToXlsx(dialog.FileName, op);
+            }
+        }
         #endregion //Method
 
         #region Event
