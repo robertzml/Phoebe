@@ -117,35 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="barManager1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 18</value>
+  <metadata name="contextMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>116, 17</value>
   </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAABILAAASCwAAAAAAAAAA
-        AAD///8A////AP///wD///8A////ADSKKFoygRiVMoMamzSMK13///8A////AP///wD///8A////AP//
-        /wD///8A////AP///wD///8A////AP///wAziCSxMX8U/zKCGfc0jCqj////AP///wD///8A////AP//
-        /wD///8A////AP///wA1kjY1NIspI////wD///8AMoUdqjKAFf8yhBy4M4klff///wD///8A////AP//
-        /wD///8A////AP///wD///8ANpY9XjSOL/8ziCN/MoQcIDF/FKoxfxT/MoMcrjKEHIwyghpLMoManzKD
-        Gt8zhR84////AP///wD///8A////AP///wA2lz9jNZE0/zOJJf8ygRb/MX8U/zKDG4QzhR7mM4ci/zSM
-        K/80iyn/MoMb+TKDG1A0ji8E////AP///wD///8A////ADeZQx81kTWbMoUd6jF/FP8ygxuWM4glzzSP
-        MLw1kzh2NI8wIzKDGuYxfxT/NIsoeP///wD///8A////AP///wD///8A////ADKCGbAxfhL/MoMbvTOI
-        JIP///8A////AP///wAygRfkMX8U/zSLKJL///8A////AP///wD///8A////ADOFHhwxfxP4MX8S/zKE
-        HJkziCTNNIoomjSLKXwziSWmMoEY9zKAFf80iymF////AP///wD///8ANZAzFTOGIVIyghj/MoAV/zKA
-        Ff8ygxywM4gjgTSLKF80jSyXM4kmTzKBGNYygBT/NIsohf///wD///8A////ADaUOo80jCz/M4chzzKC
-        GKkygBX/MoMboDOJJbE0jzCNNZI2gzSNLIAygRjjMX8U/zSLKIb///8A////AP///wA3mkQWNpY+hzSP
-        MLgyhBy9MX4S/zKCGZw0iynFNpQ6ZDaWPjQ0ji5gMoIY9jKBF/80jS2L////AP///wD///8A////AP//
-        /wA1kTVEM4Uf6jF+Ev8ygBbAM4gkaf///wD///8A////ADKCGPcziCT/NZM4gf///wD///8A////AP//
-        /wD///8A////ADKDGpkyghj/M4Ue/zOGIKv///8AMoMbKTKCGdwziSX/NZM3tTaZQyL///8A////AP//
-        /wA1kjVzM4kleDKEHFwyhB3/NIsq/zWPMZE0jSzoM4kl0jOGIP80iij/NZQ5wzeZRAf///8A////AP//
-        /wD///8ANpc/VDWQM+M0jCv/NY8x+TaVPGY2l0AjNpY9lTaUOnw1kjfxNpU8lP///wD///8A////AP//
-        /wD///8A////AP///wA2mUJJNphAjzaYQmL///8AN5pFEDeaRTT///8AN5pEUjeaRRD///8A////AP//
-        /wD///8A+H8AAPh/AACYfwAAgAcAAMABAADgAQAA+HEAAPABAADAAQAAwAEAAMABAADwcQAA+EEAAMAD
-        AADADwAA4k8AAA==
-</value>
-  </data>
-  <metadata name="tabMdiManager.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>148, 18</value>
+  <metadata name="bsEntity.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
   </metadata>
 </root>

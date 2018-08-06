@@ -10,11 +10,60 @@ using System.Windows.Forms;
 
 namespace Phoebe.ClientDx
 {
-    public partial class MainForm : Form
+    using Poseidon.Winform.Base;
+
+    /// <summary>
+    /// 主窗体
+    /// </summary>
+    public partial class MainForm : DevExpress.XtraEditors.XtraForm
     {
+        #region Constructor
         public MainForm()
         {
             InitializeComponent();
+
+            DevExpress.LookAndFeel.UserLookAndFeel.Default.SetSkinStyle("Office 2013");
         }
+        #endregion //Constructor
+
+        #region Function        
+        /// <summary>
+        /// 初始化界面控件
+        /// </summary>
+        private void InitControls()
+        {
+            this.barUserName.Caption = GlobalAction.CurrentUser.Name;
+        }
+        #endregion //Function
+
+        #region Event
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            InitControls();
+        }
+
+        #region User Menu Event
+        /// <summary>
+        /// 用户列表
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void barButtonItem1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            ChildFormManage.LoadMdiForm(this, typeof(FrmUserList));
+        }
+
+        /// <summary>
+        /// 用户组列表
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void menuUserGroupList_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            ChildFormManage.LoadMdiForm(this, typeof(FrmUserGroupList));
+        }
+        #endregion //User Menu Event
+
+        #endregion //Event
     }
 }

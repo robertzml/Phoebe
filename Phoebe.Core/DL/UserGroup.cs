@@ -19,7 +19,7 @@ namespace Phoebe.Core.DL
         /// 代号
         /// </summary>
         [Display(Name = "代号")]
-        public string Titile { get; set; }
+        public string Title { get; set; }
 
         /// <summary>
         /// 级别

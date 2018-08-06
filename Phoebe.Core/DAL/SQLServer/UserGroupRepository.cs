@@ -45,7 +45,7 @@ namespace Phoebe.Core.DAL.SQLServer
             UserGroup entity = new UserGroup();
             entity.Id = Convert.ToInt32(row["Id"]);
             entity.Name = row["Name"].ToString();
-            entity.Titile = row["Title"].ToString();
+            entity.Title = row["Title"].ToString();
             entity.Rank = Convert.ToInt32(row["Rank"]);
             entity.Remark = row["Remark"].ToString();
             entity.Status = Convert.ToInt32(row["Status"]);
@@ -63,7 +63,7 @@ namespace Phoebe.Core.DAL.SQLServer
             Hashtable table = new Hashtable();
             table.Add("Id", entity.Id);
             table.Add("Name", entity.Name);
-            table.Add("Title", entity.Titile);
+            table.Add("Title", entity.Title);
             table.Add("Rank", entity.Rank);
             table.Add("Remark", entity.Remark);
             table.Add("Status", entity.Status);

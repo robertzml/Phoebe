@@ -92,6 +92,23 @@ namespace Phoebe.Core.BL
             var user = this.baseDal.FindOneByField("UserName", username);
             return user;
         }
+
+        /// <summary>
+        /// 获取所有用户
+        /// </summary>
+        /// <param name="isRoot">是否Root</param>
+        /// <returns></returns>
+        public List<User> FindAll(bool isRoot)
+        {
+            if (isRoot)
+            {
+                return this.baseDal.FindAll().ToList();
+            }
+            else
+            {
+                return this.baseDal.FindAll().Where(r => r.Id != 1).ToList();
+            }
+        }
         #endregion //CRUD
     }
 }
