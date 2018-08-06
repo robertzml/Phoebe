@@ -33,6 +33,10 @@
     <Reference Include="Poseidon.Base">
       <HintPath>..\Assembly\Poseidon.Base.dll</HintPath>
     </Reference>
+    <Reference Include="Poseidon.Common, Version=1.1.6753.29701, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Assembly\Poseidon.Common.dll</HintPath>
+    </Reference>
     <Reference Include="Poseidon.Data">
       <HintPath>..\Assembly\Poseidon.Data.dll</HintPath>
     </Reference>

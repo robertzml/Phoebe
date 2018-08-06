@@ -196,3 +196,5 @@ FakesAssemblies/
 *.opt
 /Phoebe.FormClient/Properties/licenses.licx
 /Phoebe.Control/Properties/licenses.licx
+/Assembly
+/Phoebe.ClientDx/Properties/licenses.licx

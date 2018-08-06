@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // 有关程序集的一般信息由以下
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("Phoebe.Core")]
+[assembly: AssemblyTitle("Phoebe.ClientDx")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Phoebe.Core")]
+[assembly: AssemblyProduct("Phoebe.ClientDx")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 如果此项目向 COM 公开，则下列 GUID 用于类型库的 ID
-[assembly: Guid("2be38017-bf09-4d59-974b-565f06d32f58")]
+[assembly: Guid("69920494-da85-4121-9616-5e4538101de8")]
 
 // 程序集的版本信息由下列四个值组成: 
 //
