@@ -33,6 +33,7 @@ namespace Phoebe.ClientDx
         private void InitControls()
         {
             this.barUserName.Caption = GlobalAction.CurrentUser.Name;
+            this.barUserGroup.Caption = GlobalAction.CurrentUser.UserGroupTitle;
         }
         #endregion //Function
 

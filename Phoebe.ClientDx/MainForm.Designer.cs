@@ -32,6 +32,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.mainMenu = new DevExpress.XtraBars.Bar();
+            this.menuCustomer = new DevExpress.XtraBars.BarSubItem();
+            this.menuCustomerList = new DevExpress.XtraBars.BarButtonItem();
             this.menuUser = new DevExpress.XtraBars.BarSubItem();
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             this.menuUserGroupList = new DevExpress.XtraBars.BarButtonItem();
@@ -43,8 +45,8 @@
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.tabMdiManager = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
-            this.menuCustomer = new DevExpress.XtraBars.BarSubItem();
-            this.menuCustomerList = new DevExpress.XtraBars.BarButtonItem();
+            this.barStaticItem2 = new DevExpress.XtraBars.BarStaticItem();
+            this.barUserGroup = new DevExpress.XtraBars.BarStaticItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabMdiManager)).BeginInit();
             this.SuspendLayout();
@@ -66,9 +68,11 @@
             this.barButtonItem1,
             this.menuUserGroupList,
             this.menuCustomer,
-            this.menuCustomerList});
+            this.menuCustomerList,
+            this.barStaticItem2,
+            this.barUserGroup});
             this.barManager1.MainMenu = this.mainMenu;
-            this.barManager1.MaxItemId = 8;
+            this.barManager1.MaxItemId = 10;
             this.barManager1.StatusBar = this.bar3;
             // 
             // mainMenu
@@ -85,6 +89,21 @@
             this.mainMenu.OptionsBar.MultiLine = true;
             this.mainMenu.OptionsBar.UseWholeRow = true;
             this.mainMenu.Text = "Main menu";
+            // 
+            // menuCustomer
+            // 
+            this.menuCustomer.Caption = "客户管理";
+            this.menuCustomer.Id = 6;
+            this.menuCustomer.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.menuCustomerList)});
+            this.menuCustomer.Name = "menuCustomer";
+            // 
+            // menuCustomerList
+            // 
+            this.menuCustomerList.Caption = "客户列表";
+            this.menuCustomerList.Id = 7;
+            this.menuCustomerList.Name = "menuCustomerList";
+            this.menuCustomerList.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuCustomerList_ItemClick);
             // 
             // menuUser
             // 
@@ -118,7 +137,9 @@
             this.bar3.DockStyle = DevExpress.XtraBars.BarDockStyle.Bottom;
             this.bar3.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(this.barStaticItem1),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barUserName)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.barUserName),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barStaticItem2),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barUserGroup)});
             this.bar3.OptionsBar.AllowQuickCustomization = false;
             this.bar3.OptionsBar.DrawDragBorder = false;
             this.bar3.OptionsBar.UseWholeRow = true;
@@ -173,20 +194,20 @@
             this.tabMdiManager.MdiParent = this;
             this.tabMdiManager.PinPageButtonShowMode = DevExpress.XtraTab.PinPageButtonShowMode.InActiveTabPageHeader;
             // 
-            // menuCustomer
+            // barStaticItem2
             // 
-            this.menuCustomer.Caption = "客户管理";
-            this.menuCustomer.Id = 6;
-            this.menuCustomer.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(this.menuCustomerList)});
-            this.menuCustomer.Name = "menuCustomer";
+            this.barStaticItem2.Border = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.barStaticItem2.Caption = "用户组:";
+            this.barStaticItem2.Id = 8;
+            this.barStaticItem2.Name = "barStaticItem2";
+            this.barStaticItem2.TextAlignment = System.Drawing.StringAlignment.Near;
             // 
-            // menuCustomerList
+            // barUserGroup
             // 
-            this.menuCustomerList.Caption = "客户列表";
-            this.menuCustomerList.Id = 7;
-            this.menuCustomerList.Name = "menuCustomerList";
-            this.menuCustomerList.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.menuCustomerList_ItemClick);
+            this.barUserGroup.Border = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.barUserGroup.Id = 9;
+            this.barUserGroup.Name = "barUserGroup";
+            this.barUserGroup.TextAlignment = System.Drawing.StringAlignment.Near;
             // 
             // MainForm
             // 
@@ -225,6 +246,8 @@
         private DevExpress.XtraTabbedMdi.XtraTabbedMdiManager tabMdiManager;
         private DevExpress.XtraBars.BarSubItem menuCustomer;
         private DevExpress.XtraBars.BarButtonItem menuCustomerList;
+        private DevExpress.XtraBars.BarStaticItem barStaticItem2;
+        private DevExpress.XtraBars.BarStaticItem barUserGroup;
     }
 }
 
