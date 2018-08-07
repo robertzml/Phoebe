@@ -79,64 +79,64 @@
             this.colNumber.FieldName = "Number";
             this.colNumber.Name = "colNumber";
             this.colNumber.Visible = true;
-            this.colNumber.VisibleIndex = 2;
+            this.colNumber.VisibleIndex = 1;
             // 
             // colAddress
             // 
             this.colAddress.FieldName = "Address";
             this.colAddress.Name = "colAddress";
             this.colAddress.Visible = true;
-            this.colAddress.VisibleIndex = 3;
+            this.colAddress.VisibleIndex = 2;
             // 
             // colTelephone
             // 
             this.colTelephone.FieldName = "Telephone";
             this.colTelephone.Name = "colTelephone";
             this.colTelephone.Visible = true;
-            this.colTelephone.VisibleIndex = 4;
+            this.colTelephone.VisibleIndex = 3;
             // 
             // colContact
             // 
             this.colContact.FieldName = "Contact";
             this.colContact.Name = "colContact";
             this.colContact.Visible = true;
-            this.colContact.VisibleIndex = 5;
+            this.colContact.VisibleIndex = 4;
             // 
             // colContactTelephone
             // 
             this.colContactTelephone.FieldName = "ContactTelephone";
             this.colContactTelephone.Name = "colContactTelephone";
             this.colContactTelephone.Visible = true;
-            this.colContactTelephone.VisibleIndex = 6;
+            this.colContactTelephone.VisibleIndex = 5;
             // 
             // colType
             // 
+            this.colType.AppearanceCell.Options.UseTextOptions = true;
+            this.colType.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             this.colType.FieldName = "Type";
             this.colType.FilterMode = DevExpress.XtraGrid.ColumnFilterMode.DisplayText;
             this.colType.Name = "colType";
             this.colType.Visible = true;
-            this.colType.VisibleIndex = 7;
+            this.colType.VisibleIndex = 6;
             // 
             // colId
             // 
             this.colId.FieldName = "Id";
             this.colId.Name = "colId";
-            this.colId.Visible = true;
-            this.colId.VisibleIndex = 0;
             // 
             // colName
             // 
             this.colName.FieldName = "Name";
             this.colName.Name = "colName";
             this.colName.Visible = true;
-            this.colName.VisibleIndex = 1;
+            this.colName.VisibleIndex = 0;
             // 
             // colRemark
             // 
             this.colRemark.FieldName = "Remark";
             this.colRemark.Name = "colRemark";
             this.colRemark.Visible = true;
-            this.colRemark.VisibleIndex = 8;
+            this.colRemark.VisibleIndex = 7;
             // 
             // colStatus
             // 

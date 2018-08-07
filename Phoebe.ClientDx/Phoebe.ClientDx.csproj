@@ -70,6 +70,18 @@
     <Reference Include="UIAutomationClient" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Customer\FrmCustomerAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Customer\FrmCustomerAdd.Designer.cs">
+      <DependentUpon>FrmCustomerAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Customer\FrmCustomerEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Customer\FrmCustomerEdit.Designer.cs">
+      <DependentUpon>FrmCustomerEdit.cs</DependentUpon>
+    </Compile>
     <Compile Include="Grid\CustomerGrid.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -133,6 +145,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Customer\FrmCustomerAdd.resx">
+      <DependentUpon>FrmCustomerAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Customer\FrmCustomerEdit.resx">
+      <DependentUpon>FrmCustomerEdit.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Customer\FrmCustomerList.resx">
       <DependentUpon>FrmCustomerList.cs</DependentUpon>
     </EmbeddedResource>

@@ -67,7 +67,23 @@ namespace Phoebe.ClientDx
         /// <param name="e"></param>
         private void btnAdd_Click(object sender, EventArgs e)
         {
+            ChildFormManage.ShowDialogForm(typeof(FrmCustomerAdd));
+            LoadData();
+        }
 
+        /// <summary>
+        /// 编辑客户
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            var data = this.customerGrid.GetCurrentSelect();
+            if (data == null)
+                return;
+
+            ChildFormManage.ShowDialogForm(typeof(FrmCustomerEdit), new object[] { data.Id });
+            LoadData();
         }
         #endregion //Event
     }

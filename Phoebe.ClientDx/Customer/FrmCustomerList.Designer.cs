@@ -84,6 +84,7 @@
             this.btnEdit.Size = new System.Drawing.Size(90, 40);
             this.btnEdit.TabIndex = 4;
             this.btnEdit.Text = "编辑客户";
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // btnAdd
             // 
