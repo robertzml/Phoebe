@@ -44,5 +44,48 @@ namespace Phoebe.ClientDx
             this.userGrid.DataSource = data;
         }
         #endregion //Function
+
+        #region Event
+        /// <summary>
+        /// 添加用户
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            ChildFormManage.ShowDialogForm(typeof(FrmUserAdd));
+            LoadUsers();
+        }
+
+        /// <summary>
+        /// 禁用用户
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnDisable_Click(object sender, EventArgs e)
+        {
+            var user = this.userGrid.GetCurrentSelect();
+            if (user != null)
+            {
+                BusinessFactory<UserBusiness>.Instance.Disable(user.Id);
+                LoadUsers();
+            }
+        }
+
+        /// <summary>
+        /// 启用用户
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnEnable_Click(object sender, EventArgs e)
+        {
+            var user = this.userGrid.GetCurrentSelect();
+            if (user != null)
+            {
+                BusinessFactory<UserBusiness>.Instance.Enable(user.Id);
+                LoadUsers();
+            }
+        }
+        #endregion //Event
     }
 }

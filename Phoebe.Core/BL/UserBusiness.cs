@@ -17,6 +17,18 @@ namespace Phoebe.Core.BL
     /// </summary>
     public class UserBusiness : AbstractBusiness<User, int>, IBaseBL<User, int>
     {
+        #region Field
+        /// <summary>
+        /// 用户注册初始化时间
+        /// </summary>
+        private DateTime initialTime = new DateTime(2015, 1, 1);
+
+        /// <summary>
+        /// Root用户组ID
+        /// </summary>
+        private static int rootGroupId = 1;
+        #endregion //Field
+
         #region Constructor
         /// <summary>
         /// 用户业务类
@@ -26,7 +38,7 @@ namespace Phoebe.Core.BL
             this.baseDal = RepositoryFactory<IUserRepository>.Instance;
         }
         #endregion //Constructor
-      
+
         #region Function
         /// <summary>
         /// 更新登录时间
@@ -79,9 +91,53 @@ namespace Phoebe.Core.BL
 
             return true;
         }
+
+        /// <summary>
+        /// 启用用户
+        /// </summary>
+        /// <param name="id">用户ID</param>
+        public void Enable(int id)
+        {
+            var user = this.baseDal.FindById(id);
+            if (user == null || id == 1)
+                return;
+
+            user.Status = (int)EntityStatus.Normal;
+            this.baseDal.Update(user);
+        }
+
+        /// <summary>
+        /// 禁用用户
+        /// </summary>
+        /// <param name="id">用户ID</param>
+        public void Disable(int id)
+        {
+            var user = this.baseDal.FindById(id);
+            if (user == null || id == 1)
+                return;
+
+            user.Status = (int)EntityStatus.Disabled;
+            this.baseDal.Update(user);
+        }
         #endregion //Method
 
         #region CRUD
+        public override User Create(User entity)
+        {
+            if (entity.UserGroupId == rootGroupId)
+                throw new PoseidonException(ErrorCode.NoPrivilege);
+
+            var find = this.baseDal.FindListByField("UserName", entity.UserName);
+            if (find.Count() > 0)
+                throw new PoseidonException(ErrorCode.DuplicateName);
+
+            entity.LastLoginTime = initialTime;
+            entity.CurrentLoginTime = initialTime;
+            entity.Status = 0;
+
+            return base.Create(entity);
+        }
+
         /// <summary>
         /// 根据用户名获取用户
         /// </summary>

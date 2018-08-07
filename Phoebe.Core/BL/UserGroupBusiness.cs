@@ -16,6 +16,13 @@ namespace Phoebe.Core.BL
     /// </summary>
     public class UserGroupBusiness : AbstractBusiness<UserGroup, int>, IBaseBL<UserGroup, int>
     {
+        #region Field
+        /// <summary>
+        /// Root用户组ID
+        /// </summary>
+        private static int rootGroupId = 1;
+        #endregion //Field
+
         #region Constructor
         /// <summary>
         /// 用户组业务类
@@ -25,5 +32,24 @@ namespace Phoebe.Core.BL
             this.baseDal = RepositoryFactory<IUserGroupRepository>.Instance;
         }
         #endregion //Constructor
+
+        #region Method
+        /// <summary>
+        /// 获取用户组
+        /// </summary>
+        /// <param name="isRoot">是否Root</param>
+        /// <returns></returns>
+        public List<UserGroup> GetAll(bool isRoot)
+        {
+            if (isRoot)
+            {
+                return this.baseDal.FindAll().ToList();
+            }
+            else
+            {
+                return this.baseDal.FindAll().Where(r => r.Id != rootGroupId).ToList();
+            }
+        }
+        #endregion //Method
     }
 }
