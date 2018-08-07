@@ -42,6 +42,18 @@ namespace Phoebe.ClientDx
             InitControls();
         }
 
+        #region Customer Menu Event
+        /// <summary>
+        /// 客户列表
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void menuCustomerList_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            ChildFormManage.LoadMdiForm(this, typeof(FrmCustomerList));
+        }
+        #endregion //Customer Menu Event
+
         #region User Menu Event
         /// <summary>
         /// 用户列表

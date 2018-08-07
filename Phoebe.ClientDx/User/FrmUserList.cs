@@ -12,6 +12,7 @@ namespace Phoebe.ClientDx
 {
     using Poseidon.Base.Framework;
     using Poseidon.Winform.Base;
+    using Phoebe.Base;
     using Phoebe.Core.BL;
     using Phoebe.Core.DL;
 
@@ -33,6 +34,24 @@ namespace Phoebe.ClientDx
             this.userGrid.Init();
             LoadUsers();
             base.InitForm();
+        }
+
+        protected override void CheckPrivilege()
+        {
+            var u = this.currentUser as PhoebeLoginUser;
+            if (u.UserGroupName == "Root" || u.UserGroupName == "Administrator")
+            {
+                this.btnEnable.Visible = true;
+                this.btnDisable.Visible = true;
+                this.btnAdd.Visible = true;
+            }
+            else
+            {
+                this.btnEnable.Visible = false;
+                this.btnDisable.Visible = false;
+                this.btnAdd.Visible = false;
+            }
+            base.CheckPrivilege();
         }
 
         /// <summary>

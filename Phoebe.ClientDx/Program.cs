@@ -30,7 +30,7 @@ namespace Phoebe.ClientDx
             LoginForm login = new LoginForm();
             if (login.ShowDialog() == DialogResult.OK)
             {
-                GlobalAction.CurrentUser = GlobalAction.ConvertToLoginUser(login.User);
+                GlobalAction.CurrentUser = GlobalAction.ConvertToLoginUser(login.User, login.UserGroup);
                 Cache.Instance.Add("CurrentUser", GlobalAction.CurrentUser); //缓存用户信息
                 Logger.Instance.Debug("用户登录成功");
 

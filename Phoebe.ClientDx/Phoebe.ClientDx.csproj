@@ -70,6 +70,18 @@
     <Reference Include="UIAutomationClient" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Grid\CustomerGrid.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Grid\CustomerGrid.Designer.cs">
+      <DependentUpon>CustomerGrid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Customer\FrmCustomerList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Customer\FrmCustomerList.Designer.cs">
+      <DependentUpon>FrmCustomerList.cs</DependentUpon>
+    </Compile>
     <Compile Include="User\FrmUserAdd.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -121,6 +133,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Customer\FrmCustomerList.resx">
+      <DependentUpon>FrmCustomerList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Grid\CustomerGrid.resx">
+      <DependentUpon>CustomerGrid.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Grid\UserGrid.resx">
       <DependentUpon>UserGrid.cs</DependentUpon>
     </EmbeddedResource>
@@ -145,6 +163,7 @@
     <EmbeddedResource Include="User\FrmUserList.resx">
       <DependentUpon>FrmUserList.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Properties\DataSources\Phoebe.Core.DL.Customer.datasource" />
     <None Include="Properties\DataSources\Phoebe.Core.DL.User.datasource" />
     <None Include="Properties\DataSources\Phoebe.Core.DL.UserGroup.datasource" />
     <None Include="Properties\licenses.licx" />
@@ -173,6 +192,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Phoebe.Base\Phoebe.Base.csproj">
+      <Project>{a21d0259-8d70-4dc1-a615-cc2a64db19cf}</Project>
+      <Name>Phoebe.Base</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Phoebe.Core\Phoebe.Core.csproj">
       <Project>{2be38017-bf09-4d59-974b-565f06d32f58}</Project>
       <Name>Phoebe.Core</Name>

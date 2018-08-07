@@ -25,6 +25,11 @@ namespace Phoebe.ClientDx
         /// 用户
         /// </summary>
         private User user;
+
+        /// <summary>
+        /// 当前用户组
+        /// </summary>
+        private UserGroup userGroup;
         #endregion //Field
 
         #region Constructor
@@ -61,6 +66,8 @@ namespace Phoebe.ClientDx
             if (result)
             {
                 this.user = BusinessFactory<UserBusiness>.Instance.FindByUserName(userName);
+                this.userGroup = BusinessFactory<UserGroupBusiness>.Instance.FindById(user.UserGroupId);
+
                 this.DialogResult = System.Windows.Forms.DialogResult.OK;
                 this.Close();
             }
@@ -82,6 +89,17 @@ namespace Phoebe.ClientDx
             get
             {
                 return this.user;
+            }
+        }
+
+        /// <summary>
+        /// 当前用户组
+        /// </summary>
+        public UserGroup UserGroup
+        {
+            get
+            {
+                return this.userGroup;
             }
         }
         #endregion //Property

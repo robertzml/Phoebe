@@ -1,6 +1,6 @@
 ﻿namespace Phoebe.ClientDx
 {
-    partial class FrmUserList
+    partial class FrmCustomerList
     {
         /// <summary>
         /// Required designer variable.
@@ -28,14 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmUserList));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
+            this.btnDelete = new DevExpress.XtraEditors.SimpleButton();
+            this.btnEdit = new DevExpress.XtraEditors.SimpleButton();
             this.btnAdd = new DevExpress.XtraEditors.SimpleButton();
-            this.btnEnable = new DevExpress.XtraEditors.SimpleButton();
-            this.btnDisable = new DevExpress.XtraEditors.SimpleButton();
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
-            this.userGrid = new Phoebe.ClientDx.UserGrid();
+            this.customerGrid = new Phoebe.ClientDx.CustomerGrid();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
@@ -55,90 +54,87 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(731, 427);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(760, 486);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // groupControl1
             // 
-            this.groupControl1.Controls.Add(this.btnDisable);
-            this.groupControl1.Controls.Add(this.btnEnable);
+            this.groupControl1.Controls.Add(this.btnDelete);
+            this.groupControl1.Controls.Add(this.btnEdit);
             this.groupControl1.Controls.Add(this.btnAdd);
             this.groupControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl1.Location = new System.Drawing.Point(3, 3);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(725, 94);
+            this.groupControl1.Size = new System.Drawing.Size(754, 94);
             this.groupControl1.TabIndex = 0;
             this.groupControl1.Text = "操作";
             // 
+            // btnDelete
+            // 
+            this.btnDelete.Location = new System.Drawing.Point(262, 34);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(90, 40);
+            this.btnDelete.TabIndex = 5;
+            this.btnDelete.Text = "删除客户";
+            // 
+            // btnEdit
+            // 
+            this.btnEdit.Location = new System.Drawing.Point(141, 34);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(90, 40);
+            this.btnEdit.TabIndex = 4;
+            this.btnEdit.Text = "编辑客户";
+            // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(261, 33);
+            this.btnAdd.Location = new System.Drawing.Point(20, 34);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(90, 40);
-            this.btnAdd.TabIndex = 6;
-            this.btnAdd.Text = "添加用户";
+            this.btnAdd.TabIndex = 3;
+            this.btnAdd.Text = "添加客户";
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
-            // 
-            // btnEnable
-            // 
-            this.btnEnable.Location = new System.Drawing.Point(19, 33);
-            this.btnEnable.Name = "btnEnable";
-            this.btnEnable.Size = new System.Drawing.Size(90, 40);
-            this.btnEnable.TabIndex = 5;
-            this.btnEnable.Text = "启用";
-            this.btnEnable.Click += new System.EventHandler(this.btnEnable_Click);
-            // 
-            // btnDisable
-            // 
-            this.btnDisable.Location = new System.Drawing.Point(140, 33);
-            this.btnDisable.Name = "btnDisable";
-            this.btnDisable.Size = new System.Drawing.Size(90, 40);
-            this.btnDisable.TabIndex = 4;
-            this.btnDisable.Text = "禁用";
-            this.btnDisable.Click += new System.EventHandler(this.btnDisable_Click);
             // 
             // groupControl2
             // 
-            this.groupControl2.Controls.Add(this.userGrid);
+            this.groupControl2.Controls.Add(this.customerGrid);
             this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl2.Location = new System.Drawing.Point(3, 103);
             this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(725, 321);
+            this.groupControl2.Size = new System.Drawing.Size(754, 380);
             this.groupControl2.TabIndex = 1;
-            this.groupControl2.Text = "用户列表";
+            this.groupControl2.Text = "客户列表";
             // 
-            // userGrid
+            // customerGrid
             // 
-            this.userGrid.AllowFilter = true;
-            this.userGrid.AllowGroup = false;
-            this.userGrid.AllowSort = false;
-            this.userGrid.DataSource = null;
-            this.userGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.userGrid.Editable = false;
-            this.userGrid.EnableMasterView = false;
-            this.userGrid.EnableMultiSelect = false;
-            this.userGrid.Location = new System.Drawing.Point(2, 21);
-            this.userGrid.Name = "userGrid";
-            this.userGrid.ShowAddMenu = false;
-            this.userGrid.ShowDeleteMenu = false;
-            this.userGrid.ShowEditMenu = false;
-            this.userGrid.ShowFindPanel = false;
-            this.userGrid.ShowFooter = false;
-            this.userGrid.ShowLineNumber = true;
-            this.userGrid.ShowMenu = false;
-            this.userGrid.ShowNavigator = false;
-            this.userGrid.Size = new System.Drawing.Size(721, 298);
-            this.userGrid.TabIndex = 0;
+            this.customerGrid.AllowFilter = true;
+            this.customerGrid.AllowGroup = true;
+            this.customerGrid.AllowSort = true;
+            this.customerGrid.DataSource = null;
+            this.customerGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.customerGrid.Editable = false;
+            this.customerGrid.EnableMasterView = false;
+            this.customerGrid.EnableMultiSelect = true;
+            this.customerGrid.Location = new System.Drawing.Point(2, 21);
+            this.customerGrid.Name = "customerGrid";
+            this.customerGrid.ShowAddMenu = false;
+            this.customerGrid.ShowDeleteMenu = false;
+            this.customerGrid.ShowEditMenu = false;
+            this.customerGrid.ShowFindPanel = true;
+            this.customerGrid.ShowFooter = false;
+            this.customerGrid.ShowLineNumber = true;
+            this.customerGrid.ShowMenu = false;
+            this.customerGrid.ShowNavigator = false;
+            this.customerGrid.Size = new System.Drawing.Size(750, 357);
+            this.customerGrid.TabIndex = 0;
             // 
-            // FrmUserList
+            // FrmCustomerList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(731, 427);
+            this.ClientSize = new System.Drawing.Size(760, 486);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "FrmUserList";
-            this.Text = "用户列表";
+            this.Name = "FrmCustomerList";
+            this.Text = "客户列表";
             this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
             this.groupControl1.ResumeLayout(false);
@@ -153,9 +149,9 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private DevExpress.XtraEditors.GroupControl groupControl1;
         private DevExpress.XtraEditors.GroupControl groupControl2;
-        private UserGrid userGrid;
+        private CustomerGrid customerGrid;
+        private DevExpress.XtraEditors.SimpleButton btnDelete;
+        private DevExpress.XtraEditors.SimpleButton btnEdit;
         private DevExpress.XtraEditors.SimpleButton btnAdd;
-        private DevExpress.XtraEditors.SimpleButton btnEnable;
-        private DevExpress.XtraEditors.SimpleButton btnDisable;
     }
 }

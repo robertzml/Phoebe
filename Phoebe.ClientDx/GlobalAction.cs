@@ -9,13 +9,14 @@ namespace Phoebe.ClientDx
     using Poseidon.Base.Framework;
     using Poseidon.Base.System;
     using Poseidon.Common;
+    using Phoebe.Base;
     using Phoebe.Core.BL;
     using Phoebe.Core.DL;
 
     public static class GlobalAction
     {
         #region Field
-        public static LoginUser CurrentUser = null;
+        public static PhoebeLoginUser CurrentUser = null;
         #endregion //Field
 
         #region Method
@@ -71,13 +72,18 @@ namespace Phoebe.ClientDx
         /// 设置登录用户
         /// </summary>
         /// <param name="user">用户信息</param>
-        public static LoginUser ConvertToLoginUser(User user)
+        /// <param name="userGroup">用户组信息</param>
+        public static PhoebeLoginUser ConvertToLoginUser(User user, UserGroup userGroup)
         {
-            LoginUser lu = new LoginUser
+            PhoebeLoginUser lu = new PhoebeLoginUser
             {
                 Id = user.Id.ToString(),
                 UserName = user.UserName,
                 Name = user.Name,
+                UserGroupId = userGroup.Id,
+                UserGroupName = userGroup.Name,
+                UserGroupTitle = userGroup.Title,
+                Rank = userGroup.Rank,
                 LastLoginTime = user.LastLoginTime,
                 CurrentLoginTime = user.CurrentLoginTime,
                 Remark = user.Remark,
