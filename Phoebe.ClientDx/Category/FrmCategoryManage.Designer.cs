@@ -82,7 +82,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 140F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(983, 630);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(983, 507);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // groupControl1
@@ -92,7 +92,7 @@
             this.groupControl1.Location = new System.Drawing.Point(3, 3);
             this.groupControl1.Name = "groupControl1";
             this.tableLayoutPanel1.SetRowSpan(this.groupControl1, 2);
-            this.groupControl1.Size = new System.Drawing.Size(294, 624);
+            this.groupControl1.Size = new System.Drawing.Size(294, 501);
             this.groupControl1.TabIndex = 0;
             this.groupControl1.Text = "分类列表";
             // 
@@ -101,7 +101,7 @@
             this.categoryTree.Dock = System.Windows.Forms.DockStyle.Fill;
             this.categoryTree.Location = new System.Drawing.Point(2, 21);
             this.categoryTree.Name = "categoryTree";
-            this.categoryTree.Size = new System.Drawing.Size(290, 601);
+            this.categoryTree.Size = new System.Drawing.Size(290, 478);
             this.categoryTree.TabIndex = 0;
             this.categoryTree.CategorySelected += new System.Action<object, System.EventArgs>(this.categoryTree_CategorySelected);
             // 
@@ -126,6 +126,7 @@
             this.btnDelete.Size = new System.Drawing.Size(98, 42);
             this.btnDelete.TabIndex = 4;
             this.btnDelete.Text = "删除分类";
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnEdit
             // 
@@ -143,6 +144,7 @@
             this.btnAddThird.Size = new System.Drawing.Size(98, 42);
             this.btnAddThird.TabIndex = 2;
             this.btnAddThird.Text = "添加三级分类";
+            this.btnAddThird.Click += new System.EventHandler(this.btnAddThird_Click);
             // 
             // btnAddSecond
             // 
@@ -151,6 +153,7 @@
             this.btnAddSecond.Size = new System.Drawing.Size(98, 42);
             this.btnAddSecond.TabIndex = 1;
             this.btnAddSecond.Text = "添加二级分类";
+            this.btnAddSecond.Click += new System.EventHandler(this.btnAddSecond_Click);
             // 
             // btnAddFirst
             // 
@@ -159,6 +162,7 @@
             this.btnAddFirst.Size = new System.Drawing.Size(98, 42);
             this.btnAddFirst.TabIndex = 0;
             this.btnAddFirst.Text = "添加一级分类";
+            this.btnAddFirst.Click += new System.EventHandler(this.btnAddFirst_Click);
             // 
             // groupControl3
             // 
@@ -166,7 +170,7 @@
             this.groupControl3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl3.Location = new System.Drawing.Point(303, 143);
             this.groupControl3.Name = "groupControl3";
-            this.groupControl3.Size = new System.Drawing.Size(677, 484);
+            this.groupControl3.Size = new System.Drawing.Size(677, 361);
             this.groupControl3.TabIndex = 2;
             this.groupControl3.Text = "类别信息";
             // 
@@ -180,7 +184,7 @@
             this.layoutControl1.Location = new System.Drawing.Point(2, 21);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.layoutControlGroup1;
-            this.layoutControl1.Size = new System.Drawing.Size(673, 461);
+            this.layoutControl1.Size = new System.Drawing.Size(673, 338);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
@@ -191,7 +195,7 @@
             this.txtRemark.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
             this.txtRemark.Properties.Appearance.Options.UseBackColor = true;
             this.txtRemark.Properties.ReadOnly = true;
-            this.txtRemark.Size = new System.Drawing.Size(622, 365);
+            this.txtRemark.Size = new System.Drawing.Size(622, 242);
             this.txtRemark.StyleController = this.layoutControl1;
             this.txtRemark.TabIndex = 7;
             // 
@@ -238,7 +242,7 @@
             this.layoutControlItem2,
             this.layoutControlItem4});
             this.layoutControlGroup1.Name = "layoutControlGroup1";
-            this.layoutControlGroup1.Size = new System.Drawing.Size(673, 461);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(673, 338);
             this.layoutControlGroup1.TextVisible = false;
             // 
             // layoutControlItem1
@@ -273,7 +277,7 @@
             this.layoutControlItem4.Control = this.txtRemark;
             this.layoutControlItem4.Location = new System.Drawing.Point(0, 72);
             this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(653, 369);
+            this.layoutControlItem4.Size = new System.Drawing.Size(653, 246);
             this.layoutControlItem4.Text = "备注";
             this.layoutControlItem4.TextSize = new System.Drawing.Size(24, 14);
             // 
@@ -281,7 +285,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(983, 630);
+            this.ClientSize = new System.Drawing.Size(983, 507);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "FrmCategoryManage";
             this.Text = "类别管理";

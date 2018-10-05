@@ -66,7 +66,40 @@ namespace Phoebe.ClientDx
                 DisplayInfo(category);
             }
         }
-       
+
+        /// <summary>
+        /// 添加一级分类
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnAddFirst_Click(object sender, EventArgs e)
+        {
+            ChildFormManage.ShowDialogForm(typeof(FrmCategoryAdd), new object[] { 1 });
+            this.categoryTree.RefreshData();
+        }
+
+        /// <summary>
+        /// 添加二级分类
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnAddSecond_Click(object sender, EventArgs e)
+        {
+            ChildFormManage.ShowDialogForm(typeof(FrmCategoryAdd), new object[] { 2 });
+            this.categoryTree.RefreshData();
+        }
+
+        /// <summary>
+        /// 添加三级分类
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnAddThird_Click(object sender, EventArgs e)
+        {
+            ChildFormManage.ShowDialogForm(typeof(FrmCategoryAdd), new object[] { 3 });
+            this.categoryTree.RefreshData();
+        }
+
         /// <summary>
         /// 编辑类别
         /// </summary>
@@ -80,6 +113,32 @@ namespace Phoebe.ClientDx
 
             ChildFormManage.ShowDialogForm(typeof(FrmCategoryEdit), new object[] { category.Id });
             this.categoryTree.RefreshData();
+        }
+
+        /// <summary>
+        /// 删除类别
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            var category = this.categoryTree.GetCurrentSelect();
+            if (category == null)
+                return;
+
+            if (MessageUtil.ConfirmYesNo("是否确认删除选中分类: " + category.Name) == DialogResult.Yes)
+            {
+                bool result = BusinessFactory<CategoryBusiness>.Instance.Delete(category);
+                if (result)
+                {
+                    MessageUtil.ShowInfo("删除分类成功");
+                    this.categoryTree.RefreshData();
+                }
+                else
+                {
+                    MessageUtil.ShowError("删除分类失败：分类有子级或分类下有货品");
+                }
+            }
         }
         #endregion //Event
     }
