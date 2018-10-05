@@ -46,7 +46,7 @@ namespace Phoebe.Core.DAL.SQLServer
             entity.Id = Convert.ToInt32(row["Id"]);
             entity.Name = row["Name"].ToString();
             entity.Number = row["Number"].ToString();
-            if (row["ParentId"] == null)
+            if (row["ParentId"] == DBNull.Value)
                 entity.ParentId = null;
             else
                 entity.ParentId = Convert.ToInt32(row["ParentId"]);

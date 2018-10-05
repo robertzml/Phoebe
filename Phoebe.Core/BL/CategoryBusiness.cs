@@ -26,5 +26,23 @@ namespace Phoebe.Core.BL
             this.baseDal = RepositoryFactory<ICategoryRepository>.Instance;
         }
         #endregion //Constructor
+
+        #region CRUD
+        /// <summary>
+        /// 编辑分类
+        /// </summary>
+        /// <param name="entity">分类对象</param>
+        /// <returns></returns>
+        public override bool Update(Category entity)
+        {
+            var data = this.baseDal.FindOneByField("Number", entity.Number);
+            if (data.Id != entity.Id)
+            {
+                throw new PoseidonException(ErrorCode.DuplicateNumber);
+            }
+
+            return base.Update(entity);
+        }
+        #endregion //CRUD
     }
 }

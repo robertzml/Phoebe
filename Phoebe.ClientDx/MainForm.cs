@@ -55,6 +55,18 @@ namespace Phoebe.ClientDx
         }
         #endregion //Customer Menu Event
 
+        #region Cargo Menu Event
+        /// <summary>
+        /// 类别管理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void menuCategory_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            ChildFormManage.LoadMdiForm(this, typeof(FrmCategoryManage));
+        }
+        #endregion //Cargo Menu Event
+
         #region User Menu Event
         /// <summary>
         /// 用户列表
