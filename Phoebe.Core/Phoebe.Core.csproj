@@ -52,18 +52,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BL\CategoryBusiness.cs" />
+    <Compile Include="BL\ContractBusiness.cs" />
     <Compile Include="BL\CustomerBusiness.cs" />
     <Compile Include="BL\UserBusiness.cs" />
     <Compile Include="BL\UserGroupBusiness.cs" />
     <Compile Include="DAL\SQLServer\CategoryRepository.cs" />
+    <Compile Include="DAL\SQLServer\ContractRepository.cs" />
     <Compile Include="DAL\SQLServer\CustomerRepository.cs" />
     <Compile Include="DAL\SQLServer\UserGroupRepository.cs" />
     <Compile Include="DAL\SQLServer\UserRepository.cs" />
     <Compile Include="DL\Category.cs" />
+    <Compile Include="DL\Contract.cs" />
     <Compile Include="DL\Customer.cs" />
     <Compile Include="DL\User.cs" />
     <Compile Include="DL\UserGroup.cs" />
     <Compile Include="IDAL\ICategoryRepository.cs" />
+    <Compile Include="IDAL\IContractRepository.cs" />
     <Compile Include="IDAL\ICustomerRepository.cs" />
     <Compile Include="IDAL\IUserGroupRepository.cs" />
     <Compile Include="IDAL\IUserRepository.cs" />
