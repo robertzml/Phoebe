@@ -55,7 +55,8 @@ namespace Phoebe.ClientDx
         /// <param name="e"></param>
         private void btnAdd_Click(object sender, EventArgs e)
         {
-
+            ChildFormManage.ShowDialogForm(typeof(FrmContractAdd));
+            LoadData();
         }
         #endregion //Event
     }

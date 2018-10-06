@@ -82,6 +82,18 @@
     <Compile Include="Category\FrmCategoryAdd.Designer.cs">
       <DependentUpon>FrmCategoryAdd.cs</DependentUpon>
     </Compile>
+    <Compile Include="Contract\FrmContractAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Contract\FrmContractAdd.Designer.cs">
+      <DependentUpon>FrmContractAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Component\CustomerLookup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Component\CustomerLookup.Designer.cs">
+      <DependentUpon>CustomerLookup.cs</DependentUpon>
+    </Compile>
     <Compile Include="Grid\ContractGrid.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -186,6 +198,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Category\FrmCategoryEdit.resx">
       <DependentUpon>FrmCategoryEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Component\CustomerLookup.resx">
+      <DependentUpon>CustomerLookup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Contract\FrmContractAdd.resx">
+      <DependentUpon>FrmContractAdd.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Contract\FrmContractList.resx">
       <DependentUpon>FrmContractList.cs</DependentUpon>

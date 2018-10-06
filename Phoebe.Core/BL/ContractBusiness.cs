@@ -26,5 +26,38 @@ namespace Phoebe.Core.BL
             this.baseDal = RepositoryFactory<IContractRepository>.Instance;
         }
         #endregion //Constructor
+
+        #region CRUD
+        /// <summary>
+        /// 添加合同
+        /// </summary>
+        /// <param name="entity">合同对象</param>
+        /// <returns></returns>
+        public override Contract Create(Contract entity)
+        {
+            if (this.baseDal.Count("Number", entity.Number) > 0)
+                throw new PoseidonException(ErrorCode.DuplicateNumber);
+
+            entity.Status = 0;
+
+            return base.Create(entity);
+        }
+
+        /// <summary>
+        /// 编辑合同
+        /// </summary>
+        /// <param name="entity">合同实体</param>
+        /// <returns></returns>
+        public override bool Update(Contract entity)
+        {
+            var data = this.baseDal.FindOneByField("Number", entity.Number);
+            if (data.Id != entity.Id)
+            {
+                throw new PoseidonException(ErrorCode.DuplicateNumber);
+            }
+
+            return base.Update(entity);
+        }
+        #endregion //CRUD
     }
 }
