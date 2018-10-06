@@ -35,7 +35,13 @@ namespace Phoebe.Core.BL
         /// <returns></returns>
         public IEnumerable<Cargo> GetByCustomer(int customerId)
         {
-            return this.baseDal.FindListByField("CustomerId", customerId);
+            ContractBusiness contractBusiness = new ContractBusiness();
+            var contracts = contractBusiness.GetByCustomer(customerId);
+
+            
+
+            return null;
+            //return this.baseDal.FindListByField("CustomerId", customerId);
         }
         #endregion //Method
     }

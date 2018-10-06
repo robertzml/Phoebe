@@ -65,8 +65,8 @@ namespace Phoebe.ClientDx
                 return 0;
             else
             {
-                var dep = this.sluCustomer.GetSelectedDataRow() as Customer;
-                return dep.Id;
+                var cus = this.sluCustomer.GetSelectedDataRow() as Customer;
+                return cus.Id;
             }
         }
 
@@ -79,6 +79,14 @@ namespace Phoebe.ClientDx
                 this.sluCustomer.EditValue = id;
         }
         #endregion //Method
+
+        #region Delegate
+        /// <summary>
+        /// 客户选择事件
+        /// </summary>
+        [Description("客户选择事件")]
+        public event EventHandler CustomerSelect;
+        #endregion //Delegate
 
         #region Event
         /// <summary>
@@ -97,6 +105,16 @@ namespace Phoebe.ClientDx
                 return;
 
             e.DisplayText = string.Format("{0} - {1}", customer.Number, customer.Name);
+        }
+
+        /// <summary>
+        /// 客户选择
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void sluCustomer_EditValueChanged(object sender, EventArgs e)
+        {
+            CustomerSelect?.Invoke(sender, e);
         }
         #endregion //Event
     }

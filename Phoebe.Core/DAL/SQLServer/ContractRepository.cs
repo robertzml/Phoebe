@@ -1,18 +1,14 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace Phoebe.Core.DAL.SQLServer
 {
-    using Poseidon.Base.Framework;
-    using Poseidon.Data;
     using Phoebe.Core.DL;
     using Phoebe.Core.IDAL;
-    using System.Collections;
-    using System.Data;
-    using System.Data.SqlClient;
+    using Poseidon.Data;
 
     /// <summary>
     /// 合同对象数据访问类

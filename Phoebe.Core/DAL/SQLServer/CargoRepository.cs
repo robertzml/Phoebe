@@ -81,5 +81,9 @@ namespace Phoebe.Core.DAL.SQLServer
             return table;
         }
         #endregion //Function
+
+        #region Method
+        
+        #endregion //Method
     }
 }

@@ -77,6 +77,16 @@ namespace Phoebe.ClientDx
         {
             ChildFormManage.LoadMdiForm(this, typeof(FrmCategoryManage));
         }
+
+        /// <summary>
+        /// 货品列表
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void menuCargoList_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            ChildFormManage.LoadMdiForm(this, typeof(FrmCargoList));
+        }
         #endregion //Cargo Menu Event
 
         #region User Menu Event

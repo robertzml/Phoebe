@@ -11,6 +11,7 @@ namespace Phoebe.Core.BL
     using Poseidon.Common;
     using Phoebe.Core.IDAL;
     using Phoebe.Core.DL;
+    using Phoebe.Core.Utility;
 
     /// <summary>
     /// 合同业务类
@@ -26,6 +27,36 @@ namespace Phoebe.Core.BL
             this.baseDal = RepositoryFactory<IContractRepository>.Instance;
         }
         #endregion //Constructor
+
+        #region Method
+        /// <summary>
+        /// 获取客户所有合同
+        /// </summary>
+        /// <param name="customerId">客户Id</param>
+        /// <returns></returns>
+        public IEnumerable<Contract> GetByCustomer(int customerId)
+        {
+            return this.baseDal.FindListByField("CustomerId", customerId);
+        }
+
+        /// <summary>
+        /// 获取客户冷库合同
+        /// </summary>
+        /// <param name="customerId">客户Id</param>
+        /// <returns></returns>
+        /// <remarks>
+        /// 指冷库租赁相关合同
+        /// </remarks>
+        public IEnumerable<Contract> GetColdByCustomer(int customerId)
+        {
+            var data = this.baseDal.FindListByField("CustomerId", customerId);
+            var filter = data.Where(r =>
+                r.Type == (int)ContractType.TimingCold || r.Type == (int)ContractType.UntimingCold ||
+                r.Type == (int)ContractType.Freeze || r.Type == (int)ContractType.MinDuration);
+
+            return filter;
+        }
+        #endregion //Method
 
         #region CRUD
         /// <summary>

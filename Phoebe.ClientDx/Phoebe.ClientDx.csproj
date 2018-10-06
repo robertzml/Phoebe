@@ -70,6 +70,12 @@
     <Reference Include="UIAutomationClient" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Grid\CargoGrid.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Grid\CargoGrid.Designer.cs">
+      <DependentUpon>CargoGrid.cs</DependentUpon>
+    </Compile>
     <Compile Include="Category\FrmCategoryEdit.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -99,6 +105,12 @@
     </Compile>
     <Compile Include="Contract\FrmContractEdit.Designer.cs">
       <DependentUpon>FrmContractEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Cargo\FrmCargoList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Cargo\FrmCargoList.Designer.cs">
+      <DependentUpon>FrmCargoList.cs</DependentUpon>
     </Compile>
     <Compile Include="Grid\ContractGrid.cs">
       <SubType>UserControl</SubType>
@@ -199,6 +211,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Cargo\FrmCargoList.resx">
+      <DependentUpon>FrmCargoList.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Category\FrmCategoryAdd.resx">
       <DependentUpon>FrmCategoryAdd.cs</DependentUpon>
     </EmbeddedResource>
@@ -229,6 +244,9 @@
     <EmbeddedResource Include="Category\FrmCategoryManage.resx">
       <DependentUpon>FrmCategoryManage.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Grid\CargoGrid.resx">
+      <DependentUpon>CargoGrid.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Grid\CategoryTree.resx">
       <DependentUpon>CategoryTree.cs</DependentUpon>
     </EmbeddedResource>
@@ -253,6 +271,7 @@
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Properties\DataSources\Phoebe.Core.DL.Cargo.datasource" />
     <None Include="Properties\DataSources\Phoebe.Core.DL.Category.datasource" />
     <None Include="Properties\DataSources\Phoebe.Core.DL.Contract.datasource" />
     <None Include="Properties\licenses.licx" />

@@ -103,7 +103,7 @@
             this.categoryTree.Name = "categoryTree";
             this.categoryTree.Size = new System.Drawing.Size(290, 478);
             this.categoryTree.TabIndex = 0;
-            this.categoryTree.CategorySelected += new System.Action<object, System.EventArgs>(this.categoryTree_CategorySelected);
+            this.categoryTree.CategorySelected += new System.EventHandler(this.categoryTree_CategorySelected);
             // 
             // groupControl2
             // 

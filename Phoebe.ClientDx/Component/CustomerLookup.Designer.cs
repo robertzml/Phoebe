@@ -57,6 +57,7 @@
             this.sluCustomer.Properties.ValueMember = "Id";
             this.sluCustomer.Size = new System.Drawing.Size(302, 20);
             this.sluCustomer.TabIndex = 0;
+            this.sluCustomer.EditValueChanged += new System.EventHandler(this.sluCustomer_EditValueChanged);
             this.sluCustomer.CustomDisplayText += new DevExpress.XtraEditors.Controls.CustomDisplayTextEventHandler(this.sluCustomer_CustomDisplayText);
             // 
             // bsCustomer

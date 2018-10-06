@@ -70,7 +70,7 @@ namespace Phoebe.ClientDx
         /// 类别选择事件
         /// </summary>
         [Description("类别选择事件")]
-        public event Action<object, EventArgs> CategorySelected;
+        public event EventHandler CategorySelected;
         #endregion //Delegate
 
         #region Event
