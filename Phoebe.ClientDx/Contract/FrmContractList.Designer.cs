@@ -32,10 +32,10 @@
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.btnAdd = new DevExpress.XtraEditors.SimpleButton();
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
-            this.contractGrid = new Phoebe.ClientDx.ContractGrid();
             this.btnEdit = new DevExpress.XtraEditors.SimpleButton();
             this.btnDelete = new DevExpress.XtraEditors.SimpleButton();
             this.btnForceDelete = new DevExpress.XtraEditors.SimpleButton();
+            this.contractGrid = new Phoebe.ClientDx.ContractGrid();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
@@ -90,6 +90,32 @@
             this.groupControl2.TabIndex = 1;
             this.groupControl2.Text = "合同列表";
             // 
+            // btnEdit
+            // 
+            this.btnEdit.Location = new System.Drawing.Point(169, 38);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(97, 34);
+            this.btnEdit.TabIndex = 1;
+            this.btnEdit.Text = "编辑合同";
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.Location = new System.Drawing.Point(302, 38);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(97, 34);
+            this.btnDelete.TabIndex = 2;
+            this.btnDelete.Text = "删除合同";
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // btnForceDelete
+            // 
+            this.btnForceDelete.Location = new System.Drawing.Point(435, 38);
+            this.btnForceDelete.Name = "btnForceDelete";
+            this.btnForceDelete.Size = new System.Drawing.Size(97, 34);
+            this.btnForceDelete.TabIndex = 3;
+            this.btnForceDelete.Text = "强制删除合同";
+            // 
             // contractGrid
             // 
             this.contractGrid.AllowFilter = true;
@@ -112,30 +138,6 @@
             this.contractGrid.ShowNavigator = false;
             this.contractGrid.Size = new System.Drawing.Size(882, 413);
             this.contractGrid.TabIndex = 0;
-            // 
-            // btnEdit
-            // 
-            this.btnEdit.Location = new System.Drawing.Point(169, 38);
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(97, 34);
-            this.btnEdit.TabIndex = 1;
-            this.btnEdit.Text = "编辑合同";
-            // 
-            // btnDelete
-            // 
-            this.btnDelete.Location = new System.Drawing.Point(302, 38);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(97, 34);
-            this.btnDelete.TabIndex = 2;
-            this.btnDelete.Text = "删除合同";
-            // 
-            // btnForceDelete
-            // 
-            this.btnForceDelete.Location = new System.Drawing.Point(435, 38);
-            this.btnForceDelete.Name = "btnForceDelete";
-            this.btnForceDelete.Size = new System.Drawing.Size(97, 34);
-            this.btnForceDelete.TabIndex = 3;
-            this.btnForceDelete.Text = "强制删除合同";
             // 
             // FrmContractList
             // 

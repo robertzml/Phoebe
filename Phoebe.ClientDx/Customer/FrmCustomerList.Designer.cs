@@ -71,26 +71,26 @@
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(262, 34);
+            this.btnDelete.Location = new System.Drawing.Point(261, 37);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(90, 40);
+            this.btnDelete.Size = new System.Drawing.Size(97, 34);
             this.btnDelete.TabIndex = 5;
             this.btnDelete.Text = "删除客户";
             // 
             // btnEdit
             // 
-            this.btnEdit.Location = new System.Drawing.Point(141, 34);
+            this.btnEdit.Location = new System.Drawing.Point(141, 37);
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(90, 40);
+            this.btnEdit.Size = new System.Drawing.Size(97, 34);
             this.btnEdit.TabIndex = 4;
             this.btnEdit.Text = "编辑客户";
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(20, 34);
+            this.btnAdd.Location = new System.Drawing.Point(21, 37);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(90, 40);
+            this.btnAdd.Size = new System.Drawing.Size(97, 34);
             this.btnAdd.TabIndex = 3;
             this.btnAdd.Text = "添加客户";
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);

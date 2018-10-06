@@ -58,6 +58,23 @@ namespace Phoebe.Core.BL
 
             return base.Update(entity);
         }
+
+        /// <summary>
+        /// 删除合同
+        /// </summary>
+        /// <param name="entity">合同对象</param>
+        /// <returns></returns>
+        public override bool Delete(Contract entity)
+        {
+            //if (BusinessFactory<BillingBusiness>.Instance.GetByContract(entity.Id).Count > 0)
+            //    return ErrorCode.ContractHasStore;
+
+            //if (BusinessFactory<CargoBusiness>.Instance.GetByContract(entity.Id).Count > 0)
+            //    return ErrorCode.ContractHasCargo;
+
+            var result = this.baseDal.Delete(entity);
+            return result;
+        }
         #endregion //CRUD
     }
 }
