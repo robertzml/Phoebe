@@ -82,6 +82,18 @@
     <Compile Include="Category\FrmCategoryAdd.Designer.cs">
       <DependentUpon>FrmCategoryAdd.cs</DependentUpon>
     </Compile>
+    <Compile Include="Grid\ContractGrid.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Grid\ContractGrid.Designer.cs">
+      <DependentUpon>ContractGrid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Contract\FrmContractList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Contract\FrmContractList.Designer.cs">
+      <DependentUpon>FrmContractList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Grid\CategoryTree.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -175,6 +187,9 @@
     <EmbeddedResource Include="Category\FrmCategoryEdit.resx">
       <DependentUpon>FrmCategoryEdit.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Contract\FrmContractList.resx">
+      <DependentUpon>FrmContractList.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Customer\FrmCustomerAdd.resx">
       <DependentUpon>FrmCustomerAdd.cs</DependentUpon>
     </EmbeddedResource>
@@ -189,6 +204,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Grid\CategoryTree.resx">
       <DependentUpon>CategoryTree.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Grid\ContractGrid.resx">
+      <DependentUpon>ContractGrid.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Grid\CustomerGrid.resx">
       <DependentUpon>CustomerGrid.cs</DependentUpon>
@@ -209,6 +227,7 @@
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\DataSources\Phoebe.Core.DL.Category.datasource" />
+    <None Include="Properties\DataSources\Phoebe.Core.DL.Contract.datasource" />
     <None Include="Properties\licenses.licx" />
     <EmbeddedResource Include="User\FrmUserAdd.resx">
       <DependentUpon>FrmUserAdd.cs</DependentUpon>
