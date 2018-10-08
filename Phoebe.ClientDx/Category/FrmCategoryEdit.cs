@@ -107,10 +107,17 @@ namespace Phoebe.ClientDx
                 Category entity = BusinessFactory<CategoryBusiness>.Instance.FindById(this.currentCategory.Id);
                 SetEntity(entity);
 
-                BusinessFactory<CategoryBusiness>.Instance.Update(entity);
+                var result = BusinessFactory<CategoryBusiness>.Instance.Update(entity);
 
-                MessageUtil.ShowInfo("编辑类别成功");
-                this.Close();
+                if (result.success)
+                {
+                    MessageUtil.ShowInfo("编辑类别成功");
+                    this.Close();
+                }
+                else
+                {
+                    MessageUtil.ShowClaim("编辑类别失败: " + result.errorMessage);
+                }
             }
             catch (PoseidonException pe)
             {

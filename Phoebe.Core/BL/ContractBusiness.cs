@@ -79,7 +79,7 @@ namespace Phoebe.Core.BL
         /// </summary>
         /// <param name="entity">合同实体</param>
         /// <returns></returns>
-        public override bool Update(Contract entity)
+        public override (bool success, string errorMessage) Update(Contract entity)
         {
             var data = this.baseDal.FindOneByField("Number", entity.Number);
             if (data.Id != entity.Id)
@@ -95,7 +95,7 @@ namespace Phoebe.Core.BL
         /// </summary>
         /// <param name="entity">合同对象</param>
         /// <returns></returns>
-        public override bool Delete(Contract entity)
+        public override (bool success, string errorMessage) Delete(Contract entity)
         {
             //if (BusinessFactory<BillingBusiness>.Instance.GetByContract(entity.Id).Count > 0)
             //    return ErrorCode.ContractHasStore;

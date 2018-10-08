@@ -128,8 +128,8 @@ namespace Phoebe.ClientDx
 
             if (MessageUtil.ConfirmYesNo("是否确认删除选中分类: " + category.Name) == DialogResult.Yes)
             {
-                bool result = BusinessFactory<CategoryBusiness>.Instance.Delete(category);
-                if (result)
+                var result = BusinessFactory<CategoryBusiness>.Instance.Delete(category);
+                if (result.success)
                 {
                     MessageUtil.ShowInfo("删除分类成功");
                     this.categoryTree.RefreshData();

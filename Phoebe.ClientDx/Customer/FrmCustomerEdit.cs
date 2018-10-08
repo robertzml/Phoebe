@@ -129,10 +129,17 @@ namespace Phoebe.ClientDx
                 Customer entity = BusinessFactory<CustomerBusiness>.Instance.FindById(this.currentCustomer.Id);
                 SetEntity(entity);
 
-                BusinessFactory<CustomerBusiness>.Instance.Update(entity);
+                var result = BusinessFactory<CustomerBusiness>.Instance.Update(entity);
 
-                MessageUtil.ShowInfo("编辑客户成功");
-                this.Close();
+                if (result.success)
+                {
+                    MessageUtil.ShowInfo("编辑客户成功");
+                    this.Close();
+                }
+                else
+                {
+                    MessageUtil.ShowClaim("编辑客户失败: " + result.errorMessage);
+                }
             }
             catch (PoseidonException pe)
             {

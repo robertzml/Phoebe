@@ -150,10 +150,17 @@ namespace Phoebe.ClientDx
                 Contract entity = BusinessFactory<ContractBusiness>.Instance.FindById(currentContract.Id);
                 SetEntity(entity);
 
-                BusinessFactory<ContractBusiness>.Instance.Update(entity);
+                var result = BusinessFactory<ContractBusiness>.Instance.Update(entity);
 
-                MessageUtil.ShowInfo("编辑合同成功");
-                this.Close();
+                if (result.success)
+                {
+                    MessageUtil.ShowInfo("编辑合同成功");
+                    this.Close();
+                }
+                else
+                {
+                    MessageUtil.ShowClaim("编辑合同失败: " + result.errorMessage);
+                }
             }
             catch (PoseidonException pe)
             {

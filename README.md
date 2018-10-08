@@ -15,3 +15,7 @@ v3.0
 
 v4.0
 基于Poseidon来架构系统
+
+v4.1
+基于.net framework 4.7.2.
+升级到devexpress 17.2

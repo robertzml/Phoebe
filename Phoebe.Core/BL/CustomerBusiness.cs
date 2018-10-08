@@ -62,7 +62,7 @@ namespace Phoebe.Core.BL
         /// </summary>
         /// <param name="entity">实体对象</param>
         /// <returns></returns>
-        public override bool Update(Customer entity)
+        public override (bool success, string errorMessage) Update(Customer entity)
         {
             var data = this.baseDal.FindOneByField("Number", entity.Number);
             if (data.Id != entity.Id)

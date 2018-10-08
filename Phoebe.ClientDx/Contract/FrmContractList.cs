@@ -106,8 +106,8 @@ namespace Phoebe.ClientDx
 
             if (MessageUtil.ConfirmYesNo("是否确认删除选中合同") == DialogResult.Yes)
             {
-                bool result = BusinessFactory<ContractBusiness>.Instance.Delete(data);
-                if (result)
+                var result = BusinessFactory<ContractBusiness>.Instance.Delete(data);
+                if (result.success)
                 {
                     MessageUtil.ShowInfo("删除合同成功");
                 }

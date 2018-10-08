@@ -69,7 +69,7 @@ namespace Phoebe.Core.BL
         /// </summary>
         /// <param name="entity">分类对象</param>
         /// <returns></returns>
-        public override bool Update(Category entity)
+        public override (bool success, string errorMessage) Update(Category entity)
         {
             var data = this.baseDal.FindOneByField("Number", entity.Number);
             if (data.Id != entity.Id)
@@ -85,10 +85,10 @@ namespace Phoebe.Core.BL
         /// </summary>
         /// <param name="entity">分类对象</param>
         /// <returns></returns>
-        public override bool Delete(Category entity)
+        public override (bool success, string errorMessage) Delete(Category entity)
         {
             if (this.baseDal.Count("ParentId", entity.Id) > 0)  //分类有子级
-                return false;
+                return (false, "分类有子级");
 
             //if (RepositoryFactory<CargoRepository>.Instance.Find(r => r.CategoryId == entity.Id).Count() > 0)
             //    return ErrorCode.CategoryHasCargo;       
