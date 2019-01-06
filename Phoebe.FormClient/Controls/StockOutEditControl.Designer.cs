@@ -78,6 +78,8 @@
             this.clcCategory = new Phoebe.FormClient.CategoryListControl();
             this.groupControl4 = new DevExpress.XtraEditors.GroupControl();
             this.sogList = new Phoebe.FormClient.StockOutGrid();
+            this.txtDebt = new DevExpress.XtraEditors.TextEdit();
+            this.layoutControlItem13 = new DevExpress.XtraLayout.LayoutControlItem();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).BeginInit();
             this.groupControl3.SuspendLayout();
@@ -128,6 +130,8 @@
             this.groupControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).BeginInit();
             this.groupControl4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDebt.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem13)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -394,6 +398,7 @@
             // 
             // layoutControl1
             // 
+            this.layoutControl1.Controls.Add(this.txtDebt);
             this.layoutControl1.Controls.Add(this.txtFlowNumber);
             this.layoutControl1.Controls.Add(this.txtRemark);
             this.layoutControl1.Controls.Add(this.txtBillingType);
@@ -523,7 +528,8 @@
             this.layoutControlItem6,
             this.layoutControlItem7,
             this.layoutControlItem8,
-            this.layoutControlItem9});
+            this.layoutControlItem9,
+            this.layoutControlItem13});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "layoutControlGroup1";
             this.layoutControlGroup1.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 5, 5, 5);
@@ -599,7 +605,8 @@
             this.layoutControlItem7.Control = this.txtBillingType;
             this.layoutControlItem7.Location = new System.Drawing.Point(0, 58);
             this.layoutControlItem7.Name = "layoutControlItem7";
-            this.layoutControlItem7.Size = new System.Drawing.Size(195, 63);
+            this.layoutControlItem7.Size = new System.Drawing.Size(195, 29);
+            this.layoutControlItem7.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 5);
             this.layoutControlItem7.Text = "计费方式";
             this.layoutControlItem7.TextSize = new System.Drawing.Size(48, 14);
             // 
@@ -676,6 +683,26 @@
             this.sogList.Size = new System.Drawing.Size(690, 191);
             this.sogList.TabIndex = 0;
             // 
+            // txtDebt
+            // 
+            this.txtDebt.Location = new System.Drawing.Point(58, 94);
+            this.txtDebt.Name = "txtDebt";
+            this.txtDebt.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
+            this.txtDebt.Properties.Appearance.Options.UseBackColor = true;
+            this.txtDebt.Properties.ReadOnly = true;
+            this.txtDebt.Size = new System.Drawing.Size(140, 20);
+            this.txtDebt.StyleController = this.layoutControl1;
+            this.txtDebt.TabIndex = 9;
+            // 
+            // layoutControlItem13
+            // 
+            this.layoutControlItem13.Control = this.txtDebt;
+            this.layoutControlItem13.Location = new System.Drawing.Point(0, 87);
+            this.layoutControlItem13.Name = "layoutControlItem13";
+            this.layoutControlItem13.Size = new System.Drawing.Size(195, 34);
+            this.layoutControlItem13.Text = "当前欠费";
+            this.layoutControlItem13.TextSize = new System.Drawing.Size(48, 14);
+            // 
             // StockOutEditControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -733,6 +760,8 @@
             this.groupControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).EndInit();
             this.groupControl4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.txtDebt.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem13)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -789,5 +818,7 @@
         private CategoryListControl clcCategory;
         private DevExpress.XtraEditors.GroupControl groupControl4;
         private StockOutGrid sogList;
+        private DevExpress.XtraEditors.TextEdit txtDebt;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem13;
     }
 }

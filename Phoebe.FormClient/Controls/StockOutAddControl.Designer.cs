@@ -68,6 +68,8 @@
             this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.groupControl4 = new DevExpress.XtraEditors.GroupControl();
             this.groupControl5 = new DevExpress.XtraEditors.GroupControl();
+            this.txtDebt = new DevExpress.XtraEditors.TextEdit();
+            this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             this.customerLookup = new Phoebe.FormClient.CustomerLookup();
             this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             this.sogFilter = new Phoebe.FormClient.StockOutGrid();
@@ -117,6 +119,8 @@
             this.groupControl4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl5)).BeginInit();
             this.groupControl5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDebt.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
             this.SuspendLayout();
             // 
@@ -153,6 +157,7 @@
             // 
             // layoutControl1
             // 
+            this.layoutControl1.Controls.Add(this.txtDebt);
             this.layoutControl1.Controls.Add(this.customerLookup);
             this.layoutControl1.Controls.Add(this.txtRemark);
             this.layoutControl1.Controls.Add(this.txtBillingType);
@@ -247,7 +252,8 @@
             this.layoutControlItem3,
             this.layoutControlItem7,
             this.layoutControlItem8,
-            this.layoutControlItem5});
+            this.layoutControlItem5,
+            this.layoutControlItem4});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "layoutControlGroup1";
             this.layoutControlGroup1.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 5, 5, 5);
@@ -278,7 +284,8 @@
             this.layoutControlItem6.Control = this.cmbContract;
             this.layoutControlItem6.Location = new System.Drawing.Point(324, 29);
             this.layoutControlItem6.Name = "layoutControlItem6";
-            this.layoutControlItem6.Size = new System.Drawing.Size(175, 92);
+            this.layoutControlItem6.Size = new System.Drawing.Size(175, 29);
+            this.layoutControlItem6.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 5);
             this.layoutControlItem6.Text = "所属合同";
             this.layoutControlItem6.TextSize = new System.Drawing.Size(48, 14);
             // 
@@ -561,6 +568,26 @@
             this.groupControl5.TabIndex = 4;
             this.groupControl5.Text = "出库列表";
             // 
+            // txtDebt
+            // 
+            this.txtDebt.Location = new System.Drawing.Point(382, 65);
+            this.txtDebt.Name = "txtDebt";
+            this.txtDebt.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
+            this.txtDebt.Properties.Appearance.Options.UseBackColor = true;
+            this.txtDebt.Properties.ReadOnly = true;
+            this.txtDebt.Size = new System.Drawing.Size(120, 20);
+            this.txtDebt.StyleController = this.layoutControl1;
+            this.txtDebt.TabIndex = 10;
+            // 
+            // layoutControlItem4
+            // 
+            this.layoutControlItem4.Control = this.txtDebt;
+            this.layoutControlItem4.Location = new System.Drawing.Point(324, 58);
+            this.layoutControlItem4.Name = "layoutControlItem4";
+            this.layoutControlItem4.Size = new System.Drawing.Size(175, 63);
+            this.layoutControlItem4.Text = "当前欠费";
+            this.layoutControlItem4.TextSize = new System.Drawing.Size(48, 14);
+            // 
             // customerLookup
             // 
             this.customerLookup.Location = new System.Drawing.Point(58, 36);
@@ -665,6 +692,8 @@
             this.groupControl4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl5)).EndInit();
             this.groupControl5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.txtDebt.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
             this.ResumeLayout(false);
 
@@ -717,5 +746,7 @@
         private StockOutGrid sogList;
         private CustomerLookup customerLookup;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
+        private DevExpress.XtraEditors.TextEdit txtDebt;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
     }
 }

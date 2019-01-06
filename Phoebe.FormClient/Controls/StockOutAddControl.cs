@@ -89,6 +89,34 @@ namespace Phoebe.FormClient
             else
                 this.cmbContract.EditValue = null;
         }
+
+        /// <summary>
+        /// 获取客户当前欠费
+        /// </summary>
+        /// <param name="customerId">客户ID</param>
+        private void LoadCustomerDebt(int customerId)
+        {
+            if (customerId == 0)
+            {
+                this.txtDebt.Text = "";
+                return;
+            }
+
+            var customer = BusinessFactory<CustomerBusiness>.Instance.FindById(customerId);
+
+            var contracts = BusinessFactory<ContractBusiness>.Instance.GetByCustomer(customer.Id);
+            if (contracts.Count == 0)
+            {
+                this.txtDebt.Text = "";
+                return;
+            }
+
+            DateTime start = contracts.Min(r => r.SignDate);
+            DateTime end = DateTime.Now.Date;
+
+            var debt = BusinessFactory<SettlementBusiness>.Instance.GetDebt(customer.Id, start, end);
+            this.txtDebt.Text = debt.DebtFee.ToString("f2") + " 元";
+        }
         #endregion //Function
 
         #region Method
@@ -176,9 +204,15 @@ namespace Phoebe.FormClient
         {
             int id = this.customerLookup.GetSelectedId();
             if (id == 0)
+            {
                 UpdateContractList(0);
+                LoadCustomerDebt(id);
+            }
             else
+            {
                 UpdateContractList(id);
+                LoadCustomerDebt(id);
+            }
         }
 
         /// <summary>
