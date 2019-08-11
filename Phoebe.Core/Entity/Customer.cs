@@ -16,15 +16,22 @@ namespace Phoebe.Core.Entity
         /// <summary>
         /// ID
         /// </summary>
+        [SugarColumn(ColumnName = "ID", IsPrimaryKey = true, IsIdentity = true)]
         [Display(Name = "ID")]
         public int Id { get; set; }
+
+        /// <summary>
+        /// 客户名称
+        /// </summary>
+        [Display(Name = "客户名称")]
+        public string Name { get; set; }
 
         /// <summary>
         /// 代码
         /// </summary>
         [Display(Name = "代码")]
         public string Number { get; set; }
-
+        
         /// <summary>
         /// 地址
         /// </summary>
