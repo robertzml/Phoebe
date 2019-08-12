@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
+using Phoebe.Base.Framework;
 using SqlSugar;
 
 namespace Phoebe.Core.Entity
@@ -10,7 +11,7 @@ namespace Phoebe.Core.Entity
     /// 客户类
     /// </summary>
     [SugarTable("Customer")]
-    public class Customer
+    public class Customer : IBaseEntity<int>
     {
         #region Property
         /// <summary>

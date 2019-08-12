@@ -2,17 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
-    <Version>4.2.0</Version>
-    <Authors>zml</Authors>
-    <Company>jndx</Company>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="sqlSugarCore" Version="5.0.0.9" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Phoebe.Base\Phoebe.Base.csproj" />
   </ItemGroup>
 
 </Project>

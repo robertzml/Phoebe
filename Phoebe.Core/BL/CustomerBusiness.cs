@@ -2,18 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Phoebe.Base.Framework;
 using Phoebe.Core.Entity;
 
 namespace Phoebe.Core.BL
 {
-    public class CustomerBusiness : BaseBusiness
+    /// <summary>
+    /// 客户业务类
+    /// </summary>
+    public class CustomerBusiness : AbstractBusiness<Customer, int>, IBaseBL<Customer, int>
     {
         #region Method
-        public List<Customer> FindAll()
-        {
-            var db = GetInstance();
-            return db.Queryable<Customer>().ToList();
-        }
         #endregion //Method
     }
 }
