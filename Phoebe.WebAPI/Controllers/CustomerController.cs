@@ -12,10 +12,18 @@ namespace Phoebe.WebAPI.Controllers
     [ApiController]
     public class CustomerController : ControllerBase
     {
+        #region Action
         public ActionResult<List<Customer>> List()
         {
             CustomerBusiness customerBusiness = new CustomerBusiness();
             return customerBusiness.FindAll();
         }
+
+        public ActionResult<Customer> Get(int id)
+        {
+            CustomerBusiness customerBusiness = new CustomerBusiness();
+            return customerBusiness.FindById(id);
+        }
+        #endregion //Action
     }
 }
