@@ -35,7 +35,7 @@ namespace Phoebe.Base.Framework
         public T FindById(Tkey id)
         {
             var db = GetInstance();
-            return db.Queryable<T>().Single(r => r.Id.Equals(id));
+            return db.Queryable<T>().Where("Id = @id", new { id = id }).First();
         }
 
         /// <summary>
