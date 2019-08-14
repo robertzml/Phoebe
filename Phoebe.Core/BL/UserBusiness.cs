@@ -49,10 +49,10 @@ namespace Phoebe.Core.BL
         /// <param name="username">用户名</param>
         /// <param name="password">密码</param>
         /// <returns></returns>
-        public (bool success, string errorMessage) Login(string username, string password)
+        public (bool success, string errorMessage) Login(string userName, string password)
         {
             var db = GetInstance();
-            var user = db.Queryable<User>().Single(r => r.UserName == username);
+            var user = db.Queryable<User>().Single(r => r.UserName == userName);
 
             if (user == null)
                 return (false, "用户不存在");
@@ -71,12 +71,12 @@ namespace Phoebe.Core.BL
         /// <summary>
         /// 根据用户名获取用户
         /// </summary>
-        /// <param name="username">登录名</param>
+        /// <param name="userName">登录名</param>
         /// <returns></returns>
-        public User FindByUserName(string username)
+        public User FindByUserName(string userName)
         {
             var db = GetInstance();
-            return db.Queryable<User>().Single(r => r.UserName == username);
+            return db.Queryable<User>().Single(r => r.UserName == userName);
         }
         #endregion //Method
     }
