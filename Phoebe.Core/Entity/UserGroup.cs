@@ -18,7 +18,7 @@ namespace Phoebe.Core.Entity
         /// <summary>
         /// ID
         /// </summary>
-        [SugarColumn(ColumnName = "ID", IsPrimaryKey = true, IsIdentity = true)]
+        [SugarColumn(ColumnName = "Id", IsPrimaryKey = true, IsIdentity = true)]
         [Display(Name = "ID")]
         public int Id { get; set; }
 

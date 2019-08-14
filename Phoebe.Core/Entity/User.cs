@@ -8,11 +8,7 @@ namespace Phoebe.Core.Entity
     using Phoebe.Base.Framework;
     using SqlSugar;
 
-    /// <summary>
-    /// 客户类
-    /// </summary>
-    [SugarTable("Customer")]
-    public class Customer : IBaseEntity<int>
+    public class User : IBaseEntity<int>
     {
         #region Property
         /// <summary>
@@ -23,46 +19,34 @@ namespace Phoebe.Core.Entity
         public int Id { get; set; }
 
         /// <summary>
-        /// 客户名称
+        /// 用户名
         /// </summary>
-        [Display(Name = "客户名称")]
-        public string Name { get; set; }
+        [Display(Name = "用户名")]
+        public string UserName { get; set; }
 
         /// <summary>
-        /// 代码
+        /// 密码
         /// </summary>
-        [Display(Name = "代码")]
-        public string Number { get; set; }
-        
-        /// <summary>
-        /// 地址
-        /// </summary>
-        [Display(Name = "地址")]
-        public string Address { get; set; }
+        [Display(Name = "密码")]
+        public string Password { get; set; }
 
         /// <summary>
-        /// 电话
+        /// 用户组ID
         /// </summary>
-        [Display(Name = "电话")]
-        public string Telephone { get; set; }
+        [Display(Name = "用户组ID")]
+        public int UserGroupId { get; set; }
 
         /// <summary>
-        /// 联系人
+        /// 上次登录时间
         /// </summary>
-        [Display(Name = "联系人")]
-        public string Contact { get; set; }
+        [Display(Name = "上次登录时间")]
+        public DateTime LastLoginTime { get; set; }
 
         /// <summary>
-        /// 联系人电话
+        /// 本次登录时间
         /// </summary>
-        [Display(Name = "联系人电话")]
-        public string ContactTelephone { get; set; }
-
-        /// <summary>
-        /// 客户类型
-        /// </summary>
-        [Display(Name = "客户类型")]
-        public int Type { get; set; }
+        [Display(Name = "本次登录时间")]
+        public DateTime CurrentLoginTime { get; set; }
 
         /// <summary>
         /// 备注

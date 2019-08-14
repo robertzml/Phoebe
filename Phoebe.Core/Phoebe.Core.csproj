@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Phoebe.Base\Phoebe.Base.csproj" />
+    <ProjectReference Include="..\Phoebe.Common\Phoebe.Common.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 namespace Phoebe.Core.BL
@@ -9,11 +8,9 @@ namespace Phoebe.Core.BL
     using Phoebe.Core.Entity;
 
     /// <summary>
-    /// 客户业务类
+    /// 用户组业务类
     /// </summary>
-    public class CustomerBusiness : AbstractBusiness<Customer, int>, IBaseBL<Customer, int>
+    public class UserGroupBusiness : AbstractBusiness<UserGroup, int>, IBaseBL<UserGroup, int>
     {
-        #region Method
-        #endregion //Method
     }
 }

@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Phoebe.Base", "Phoebe.Base\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Phoebe.Test", "Phoebe.Test\Phoebe.Test.csproj", "{F2D64303-157C-44DE-9655-F3DB067073B8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Phoebe.Common", "Phoebe.Common\Phoebe.Common.csproj", "{ECAD7228-28C1-4553-A2B9-EA6A0F5C872C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{F2D64303-157C-44DE-9655-F3DB067073B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F2D64303-157C-44DE-9655-F3DB067073B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F2D64303-157C-44DE-9655-F3DB067073B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECAD7228-28C1-4553-A2B9-EA6A0F5C872C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECAD7228-28C1-4553-A2B9-EA6A0F5C872C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECAD7228-28C1-4553-A2B9-EA6A0F5C872C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECAD7228-28C1-4553-A2B9-EA6A0F5C872C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
