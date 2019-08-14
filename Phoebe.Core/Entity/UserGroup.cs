@@ -9,10 +9,10 @@ namespace Phoebe.Core.Entity
     using SqlSugar;
 
     /// <summary>
-    /// 客户类
+    /// 用户组表
     /// </summary>
-    [SugarTable("Customer")]
-    public class Customer : IBaseEntity<int>
+    [SugarTable("UserGroup")]
+    public class UserGroup : IBaseEntity<int>
     {
         #region Property
         /// <summary>
@@ -23,46 +23,22 @@ namespace Phoebe.Core.Entity
         public int Id { get; set; }
 
         /// <summary>
-        /// 客户名称
-        /// </summary>
-        [Display(Name = "客户名称")]
-        public string Name { get; set; }
-
-        /// <summary>
         /// 代码
         /// </summary>
         [Display(Name = "代码")]
-        public string Number { get; set; }
-        
-        /// <summary>
-        /// 地址
-        /// </summary>
-        [Display(Name = "地址")]
-        public string Address { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
-        /// 电话
+        /// 名称
         /// </summary>
-        [Display(Name = "电话")]
-        public string Telephone { get; set; }
+        [Display(Name = "名称")]
+        public string Title { get; set; }
 
         /// <summary>
-        /// 联系人
+        /// 级别
         /// </summary>
-        [Display(Name = "联系人")]
-        public string Contact { get; set; }
-
-        /// <summary>
-        /// 联系人电话
-        /// </summary>
-        [Display(Name = "联系人电话")]
-        public string ContactTelephone { get; set; }
-
-        /// <summary>
-        /// 客户类型
-        /// </summary>
-        [Display(Name = "客户类型")]
-        public int Type { get; set; }
+        [Display(Name = "级别")]
+        public int Rank { get; set; }
 
         /// <summary>
         /// 备注

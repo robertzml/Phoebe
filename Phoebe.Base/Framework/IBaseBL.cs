@@ -9,7 +9,7 @@ namespace Phoebe.Base.Framework
     /// </summary>
     /// <typeparam name="T">实体类型</typeparam>
     /// <typeparam name="Tkey">主键类型</typeparam>
-    public interface IBaseBL<T, Tkey> where T : IBaseEntity<Tkey>
+    public interface IBaseBL<T, Tkey> where T : IBaseEntity<Tkey> 
     {
         /// <summary>
         /// 根据ID查找对象
@@ -49,15 +49,6 @@ namespace Phoebe.Base.Framework
         long Count();
 
         /// <summary>
-        /// 根据条件查找记录数量
-        /// </summary>
-        /// <typeparam name="Tvalue">值类型</typeparam>
-        /// <param name="field">字段名称</param>
-        /// <param name="value">值</param>
-        /// <returns></returns>
-        long Count<Tvalue>(string field, Tvalue value);
-
-        /// <summary>
         /// 创建对象
         /// </summary>
         /// <param name="entity">实体对象</param>
@@ -70,13 +61,6 @@ namespace Phoebe.Base.Framework
         /// <param name="entity">实体对象</param>
         /// <returns></returns>
         (bool success, string errorMessage) Update(T entity);
-
-        /// <summary>
-        /// 删除对象
-        /// </summary>
-        /// <param name="entity">实体对象</param>
-        /// <returns></returns>
-        (bool success, string errorMessage) Delete(T entity);
 
         /// <summary>
         /// 根据ID删除对象

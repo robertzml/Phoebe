@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using SqlSugar;
 
@@ -10,7 +12,8 @@ namespace Phoebe.Base.Framework
     /// </summary>
     /// <typeparam name="T">实体类型</typeparam>
     /// <typeparam name="Tkey">主键类型</typeparam>
-    public abstract class AbstractBusiness<T, Tkey> : IBaseBL<T, Tkey> where T : IBaseEntity<Tkey>
+    public abstract class AbstractBusiness<T, Tkey> : IBaseBL<T, Tkey>
+        where T : class, IBaseEntity<Tkey>, new()
     {
         #region Function
         protected SqlSugarClient GetInstance()
@@ -35,7 +38,7 @@ namespace Phoebe.Base.Framework
         public T FindById(Tkey id)
         {
             var db = GetInstance();
-            return db.Queryable<T>().Where("Id = @id", new { id = id }).First();
+            return db.Queryable<T>().InSingle(id);
         }
 
         /// <summary>
@@ -78,19 +81,8 @@ namespace Phoebe.Base.Framework
         /// <returns></returns>
         public long Count()
         {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// 根据条件查找记录数量
-        /// </summary>
-        /// <typeparam name="Tvalue">值类型</typeparam>
-        /// <param name="field">字段名称</param>
-        /// <param name="value">值</param>
-        /// <returns></returns>
-        public long Count<Tvalue>(string field, Tvalue value)
-        {
-            throw new NotImplementedException();
+            var db = GetInstance();
+            return db.Queryable<T>().Count();
         }
 
         /// <summary>
@@ -100,7 +92,8 @@ namespace Phoebe.Base.Framework
         /// <returns></returns>
         public T Create(T entity)
         {
-            throw new NotImplementedException();
+            var db = GetInstance();
+            return db.Insertable(entity).ExecuteReturnEntity();
         }
 
         /// <summary>
@@ -110,17 +103,19 @@ namespace Phoebe.Base.Framework
         /// <returns></returns>
         public (bool success, string errorMessage) Update(T entity)
         {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// 删除对象
-        /// </summary>
-        /// <param name="entity">实体对象</param>
-        /// <returns></returns>
-        public (bool success, string errorMessage) Delete(T entity)
-        {
-            throw new NotImplementedException();
+            try
+            {
+                var db = GetInstance();
+                var result = db.Updateable(entity).ExecuteCommand();
+                if (result == 1)
+                    return (true, "");
+                else
+                    return (false, "未更新对象");
+            }
+            catch (Exception e)
+            {
+                return (false, e.Message);
+            }
         }
 
         /// <summary>
@@ -130,7 +125,23 @@ namespace Phoebe.Base.Framework
         /// <returns></returns>
         public (bool success, string errorMessage) Delete(Tkey id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var db = GetInstance();
+                var result = db.Deleteable<T>().In(id).ExecuteCommand();
+                if (result == 1)
+                {
+                    return (true, "");
+                }
+                else
+                {
+                    return (false, "未删除对象");
+                }
+            }
+            catch (Exception e)
+            {
+                return (false, e.Message);
+            }
         }
         #endregion //Method
     }
