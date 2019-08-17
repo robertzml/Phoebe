@@ -35,7 +35,7 @@ namespace Phoebe.Base.Framework
         /// </summary>
         /// <param name="id">ID</param>
         /// <returns></returns>
-        public T FindById(Tkey id)
+        public virtual T FindById(Tkey id)
         {
             var db = GetInstance();
             return db.Queryable<T>().InSingle(id);
@@ -48,7 +48,7 @@ namespace Phoebe.Base.Framework
         /// <param name="field">字段名称</param>
         /// <param name="value">值</param>
         /// <returns></returns>
-        public T FindOneByField<Tvalue>(string field, Tvalue value)
+        public virtual T FindOneByField<Tvalue>(string field, Tvalue value)
         {
             throw new NotImplementedException();
         }
@@ -57,7 +57,7 @@ namespace Phoebe.Base.Framework
         /// 查找所有对象
         /// </summary>
         /// <returns></returns>
-        public List<T> FindAll()
+        public virtual List<T> FindAll()
         {
             var db = GetInstance();
             return db.Queryable<T>().ToList();
@@ -70,7 +70,7 @@ namespace Phoebe.Base.Framework
         /// <param name="field">字段名称</param>
         /// <param name="value">值</param>
         /// <returns></returns>
-        public List<T> FindListByField<Tvalue>(string field, Tvalue value)
+        public virtual List<T> FindListByField<Tvalue>(string field, Tvalue value)
         {
             throw new NotImplementedException();
         }
@@ -79,7 +79,7 @@ namespace Phoebe.Base.Framework
         /// 查找所有记录数量
         /// </summary>
         /// <returns></returns>
-        public long Count()
+        public virtual long Count()
         {
             var db = GetInstance();
             return db.Queryable<T>().Count();
@@ -90,10 +90,18 @@ namespace Phoebe.Base.Framework
         /// </summary>
         /// <param name="entity">实体对象</param>
         /// <returns></returns>
-        public T Create(T entity)
+        public virtual (bool success, string errorMessage, T t) Create(T entity)
         {
-            var db = GetInstance();
-            return db.Insertable(entity).ExecuteReturnEntity();
+            try
+            {
+                var db = GetInstance();
+                var t = db.Insertable(entity).ExecuteReturnEntity();
+                return (true, "", t);
+            }
+            catch (Exception e)
+            {
+                return (false, e.Message, null);
+            }
         }
 
         /// <summary>
@@ -101,7 +109,7 @@ namespace Phoebe.Base.Framework
         /// </summary>
         /// <param name="entity">实体对象</param>
         /// <returns></returns>
-        public (bool success, string errorMessage) Update(T entity)
+        public virtual (bool success, string errorMessage) Update(T entity)
         {
             try
             {
@@ -123,7 +131,7 @@ namespace Phoebe.Base.Framework
         /// </summary>
         /// <param name="id">ID</param>
         /// <returns></returns>
-        public (bool success, string errorMessage) Delete(Tkey id)
+        public virtual (bool success, string errorMessage) Delete(Tkey id)
         {
             try
             {

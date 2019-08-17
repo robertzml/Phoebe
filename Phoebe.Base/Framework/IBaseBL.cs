@@ -9,7 +9,7 @@ namespace Phoebe.Base.Framework
     /// </summary>
     /// <typeparam name="T">实体类型</typeparam>
     /// <typeparam name="Tkey">主键类型</typeparam>
-    public interface IBaseBL<T, Tkey> where T : IBaseEntity<Tkey> 
+    public interface IBaseBL<T, Tkey> where T : IBaseEntity<Tkey>
     {
         /// <summary>
         /// 根据ID查找对象
@@ -53,7 +53,7 @@ namespace Phoebe.Base.Framework
         /// </summary>
         /// <param name="entity">实体对象</param>
         /// <returns></returns>
-        T Create(T entity);
+        (bool success, string errorMessage, T t) Create(T entity);
 
         /// <summary>
         /// 编辑对象

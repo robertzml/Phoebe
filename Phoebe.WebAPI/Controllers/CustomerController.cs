@@ -30,10 +30,38 @@ namespace Phoebe.WebAPI.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
+        [HttpGet]
         public ActionResult<Customer> Get(int id)
         {
             CustomerBusiness customerBusiness = new CustomerBusiness();
             return customerBusiness.FindById(id);
+        }
+
+        /// <summary>
+        /// 添加客户
+        /// </summary>
+        /// <param name="customer"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ActionResult<ResponseData>> Create(Customer customer)
+        {
+            CustomerBusiness customerBusiness = new CustomerBusiness();
+
+            var task = Task.Run(() =>
+            {
+                var result = customerBusiness.Create(customer);
+
+                ResponseData data = new ResponseData
+                {
+                    Status = result.success ? 0 : 1,
+                    ErrorMessage = result.errorMessage,
+                    Entity = result.t
+                };
+
+                return data;
+            });
+
+            return await task;
         }
 
         /// <summary>
