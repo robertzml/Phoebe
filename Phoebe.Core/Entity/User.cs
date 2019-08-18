@@ -37,6 +37,12 @@ namespace Phoebe.Core.Entity
         public int UserGroupId { get; set; }
 
         /// <summary>
+        /// 姓名
+        /// </summary>
+        [Display(Name = "姓名")]
+        public string Name { get; set; }
+
+        /// <summary>
         /// 上次登录时间
         /// </summary>
         [Display(Name = "上次登录时间")]

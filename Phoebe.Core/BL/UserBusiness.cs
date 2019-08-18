@@ -5,6 +5,7 @@ using System.Text;
 namespace Phoebe.Core.BL
 {
     using Phoebe.Base.Framework;
+    using Phoebe.Base.System;
     using Phoebe.Core.Entity;
     using Phoebe.Common;
     using SqlSugar;
@@ -66,6 +67,37 @@ namespace Phoebe.Core.BL
             UpdateLoginTime(user, user.CurrentLoginTime, DateTime.Now);
 
             return (true, "");
+        }
+
+        /// <summary>
+        /// 启用用户
+        /// </summary>
+        /// <param name="id">用户ID</param>
+        public void Enable(int id)
+        {
+            var db = GetInstance();
+            var user = db.Queryable<User>().InSingle(id);
+            if (user == null || id == 1)
+                return;
+
+            user.Status = (int)EntityStatus.Normal;
+
+            db.Updateable(user).ExecuteCommand();
+        }
+
+        /// <summary>
+        /// 禁用用户
+        /// </summary>
+        /// <param name="id">用户ID</param>
+        public void Disable(int id)
+        {
+            var db = GetInstance();
+            var user = db.Queryable<User>().InSingle(id);
+            if (user == null || id == 1)
+                return;
+
+            user.Status = (int)EntityStatus.Disabled;
+            db.Updateable(user).ExecuteCommand();
         }
 
         /// <summary>
