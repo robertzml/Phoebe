@@ -11,6 +11,7 @@ namespace Phoebe.Core.Entity
     /// <summary>
     /// 类别类
     /// </summary>
+    [SugarTable("Category")]
     public class Category : IBaseEntity<int>
     {
         #region Property
@@ -36,8 +37,9 @@ namespace Phoebe.Core.Entity
         /// <summary>
         /// 上级ID
         /// </summary>
+        [SugarColumn(IsNullable = true)]
         [Display(Name = "上级ID")]
-        public Nullable<int> ParentId { get; set; }
+        public int? ParentId { get; set; }
 
         /// <summary>
         /// 层级

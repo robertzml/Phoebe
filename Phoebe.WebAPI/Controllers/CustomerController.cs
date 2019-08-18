@@ -10,6 +10,9 @@ namespace Phoebe.WebAPI.Controllers
     using Phoebe.Core.Entity;
     using Phoebe.WebAPI.Model;
 
+    /// <summary>
+    /// 客户控制器
+    /// </summary>
     [Route("api/[controller]/[action]")]
     [ApiController]
     public class CustomerController : ControllerBase
@@ -19,6 +22,7 @@ namespace Phoebe.WebAPI.Controllers
         /// 客户列表
         /// </summary>
         /// <returns></returns>
+        [HttpGet]
         public ActionResult<List<Customer>> List()
         {
             CustomerBusiness customerBusiness = new CustomerBusiness();
