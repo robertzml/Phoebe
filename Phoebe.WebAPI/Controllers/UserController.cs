@@ -22,16 +22,18 @@ namespace Phoebe.WebAPI.Controllers
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <returns></returns>
+        [HttpPost]
         public ActionResult<ResponseData> Login(string userName, string password)
         {
             var userBusiness = new UserBusiness();
             var result = userBusiness.Login(userName, password);
 
-            ResponseData data = new ResponseData();
-            data.Status = result.success ? 0 : 1;
-            data.ErrorMessage = result.errorMessage;
-            data.Entity = null;
-
+            ResponseData data = new ResponseData
+            {
+                Status = result.success ? 0 : 1,
+                ErrorMessage = result.errorMessage,
+                Entity = null
+            };
             return data;
         }
 
