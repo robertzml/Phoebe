@@ -21,7 +21,7 @@ namespace Phoebe.Test.BL
         public void TestFindAll()
         {
             var count = this.customerBusiness.FindAll().Count;
-            Assert.AreEqual(273, count);            
+            Assert.AreEqual(274, count);            
         }
 
         [TestCase(1)]

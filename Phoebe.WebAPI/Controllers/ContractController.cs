@@ -9,6 +9,7 @@ namespace Phoebe.WebAPI.Controllers
 {
     using Phoebe.Core.BL;
     using Phoebe.Core.Entity;
+    using Phoebe.Core.View;
     using Phoebe.WebAPI.Model;
 
     /// <summary>
@@ -24,10 +25,10 @@ namespace Phoebe.WebAPI.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult<List<Contract>> List()
+        public ActionResult<List<ContractView>> List()
         {
-            ContractBusiness contractBusiness = new ContractBusiness();
-            return contractBusiness.FindAll();
+            ContractViewBusiness contractViewBusiness = new ContractViewBusiness();
+            return contractViewBusiness.FindAll();
         }
 
         /// <summary>

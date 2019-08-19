@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace Phoebe.Core.Entity
+namespace Phoebe.Core.View
 {
     using Phoebe.Base.Framework;
     using SqlSugar;
 
-    [SugarTable("Contract")]
-    public class Contract : IBaseEntity<int>
+    [SugarTable("ContractView")]
+    public class ContractView : IBaseEntity<int>
     {
         #region Property
         /// <summary>
         /// ID
         /// </summary>
-        [SugarColumn(ColumnName = "Id", IsPrimaryKey = true, IsIdentity = true)]
+        [SugarColumn(ColumnName = "Id", IsPrimaryKey = true)]
         [Display(Name = "ID")]
         public int Id { get; set; }
 
@@ -36,6 +36,18 @@ namespace Phoebe.Core.Entity
         /// </summary>
         [Display(Name = "客户ID")]
         public int CustomerId { get; set; }
+
+        /// <summary>
+        /// 客户编号
+        /// </summary>
+        [Display(Name = "客户编号")]
+        public string CustomerNumber { get; set; }
+
+        /// <summary>
+        /// 客户名称
+        /// </summary>
+        [Display(Name = "客户名称")]
+        public string CustomerName { get; set; }
 
         /// <summary>
         /// 合同类型
