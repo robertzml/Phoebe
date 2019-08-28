@@ -37,10 +37,10 @@ namespace Phoebe.WebAPI.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult<Contract> Get(int id)
+        public ActionResult<ContractView> Get(int id)
         {
-            ContractBusiness contractBusiness = new ContractBusiness();
-            return contractBusiness.FindById(id);
+            ContractViewBusiness contractViewBusiness = new ContractViewBusiness();
+            return contractViewBusiness.FindById(id);
         }
         #endregion //Action
     }
