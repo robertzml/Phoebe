@@ -20,7 +20,7 @@ namespace Phoebe.WebAPI.Controllers
     {
         #region Action
         /// <summary>
-        /// 合同列表
+        /// 仓库列表
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -28,6 +28,33 @@ namespace Phoebe.WebAPI.Controllers
         {
             WarehouseBusiness warehouseBusiness = new WarehouseBusiness();
             return warehouseBusiness.FindAll();
+        }
+
+        /// <summary>
+        /// 添加仓库
+        /// </summary>
+        /// <param name="customer"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ActionResult<ResponseData>> Create(Warehouse warehouse)
+        {
+            WarehouseBusiness warehouseBusiness = new WarehouseBusiness();
+
+            var task = Task.Run(() =>
+            {
+                var result = warehouseBusiness.Create(warehouse);
+
+                ResponseData data = new ResponseData
+                {
+                    Status = result.success ? 0 : 1,
+                    ErrorMessage = result.errorMessage,
+                    Entity = result.t
+                };
+
+                return data;
+            });
+
+            return await task;
         }
         #endregion //Action
     }
