@@ -29,6 +29,23 @@ namespace Phoebe.Core.BL
 
             return base.Create(entity);
         }
+
+        /// <summary>
+        /// 编辑仓库
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public override (bool success, string errorMessage) Update(Warehouse entity)
+        {
+            var db = GetInstance();
+            var count = db.Queryable<Warehouse>().Count(r => r.Id != entity.Id && r.Number == entity.Number);
+            if (count > 0)
+            {
+                return (false, "编码重复");
+            }
+
+            return base.Update(entity);
+        }
         #endregion //Business
     }
 }
