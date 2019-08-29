@@ -8,20 +8,20 @@ namespace Phoebe.Core.BL
     using Phoebe.Core.Entity;
 
     /// <summary>
-    /// 仓库业务表
+    /// 货架业务类
     /// </summary>
-    public class WarehouseBusiness : AbstractBusiness<Warehouse, int>, IBaseBL<Warehouse, int>
+    public class ShelfBusiness : AbstractBusiness<Shelf, int>, IBaseBL<Shelf, int>
     {
         #region Method
         /// <summary>
-        /// 创建仓库
+        /// 创建货架
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public override (bool success, string errorMessage, Warehouse t) Create(Warehouse entity)
+        public override (bool success, string errorMessage, Shelf t) Create(Shelf entity)
         {
             var db = GetInstance();
-            var count = db.Queryable<Warehouse>().Count(r => r.Number == entity.Number);
+            var count = db.Queryable<Shelf>().Count(r => r.Number == entity.Number);
             if (count > 0)
             {
                 return (false, "编号重复", null);
@@ -31,14 +31,14 @@ namespace Phoebe.Core.BL
         }
 
         /// <summary>
-        /// 编辑仓库
+        /// 编辑货架
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public override (bool success, string errorMessage) Update(Warehouse entity)
+        public override (bool success, string errorMessage) Update(Shelf entity)
         {
             var db = GetInstance();
-            var count = db.Queryable<Warehouse>().Count(r => r.Id != entity.Id && r.Number == entity.Number);
+            var count = db.Queryable<Shelf>().Count(r => r.Id != entity.Id && r.Number == entity.Number);
             if (count > 0)
             {
                 return (false, "编号重复");
@@ -46,6 +46,6 @@ namespace Phoebe.Core.BL
 
             return base.Update(entity);
         }
-        #endregion //Business
+        #endregion //Method
     }
 }
