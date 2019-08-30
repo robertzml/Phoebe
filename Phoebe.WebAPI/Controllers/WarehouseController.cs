@@ -45,7 +45,7 @@ namespace Phoebe.WebAPI.Controllers
         /// <summary>
         /// 添加仓库
         /// </summary>
-        /// <param name="customer"></param>
+        /// <param name="warehouse"></param>
         /// <returns></returns>
         [HttpPost]
         public async Task<ActionResult<ResponseData>> Create(Warehouse warehouse)
@@ -72,7 +72,7 @@ namespace Phoebe.WebAPI.Controllers
         /// <summary>
         /// 编辑仓库
         /// </summary>
-        /// <param name="customer"></param>
+        /// <param name="warehouse"></param>
         /// <returns></returns>
         [HttpPost]
         public async Task<ActionResult<ResponseData>> Update(Warehouse warehouse)

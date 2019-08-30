@@ -26,7 +26,7 @@ namespace Phoebe.Core.Entity
         /// 所属仓库
         /// </summary>
         [Display(Name = "所属仓库")]
-        public string WarehouseId { get; set; }
+        public int WarehouseId { get; set; }
 
         /// <summary>
         /// 编号
