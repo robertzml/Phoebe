@@ -14,6 +14,17 @@ namespace Phoebe.Core.BL
     {
         #region Method
         /// <summary>
+        /// 按类型获取仓库
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public List<Warehouse> FindByType(int type)
+        {
+            var db = GetInstance();
+            return db.Queryable<Warehouse>().Where(r => r.Type == type).ToList();
+        }
+
+        /// <summary>
         /// 创建仓库
         /// </summary>
         /// <param name="entity"></param>

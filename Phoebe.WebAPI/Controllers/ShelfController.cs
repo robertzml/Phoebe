@@ -25,13 +25,20 @@ namespace Phoebe.WebAPI.Controllers
         /// <param name="warehouseId">所属仓库</param>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult<List<Shelf>> List(int warehouseId)
+        public ActionResult<List<Shelf>> List(int? warehouseId)
         {
             ShelfBusiness shelfBusiness = new ShelfBusiness();
-            if (warehouseId == 0)
-                return shelfBusiness.FindAll();
+            if (warehouseId.HasValue)
+            {
+                if (warehouseId.Value == 0)
+                    return shelfBusiness.FindAll();
+                else
+                    return shelfBusiness.FindByWarehouse(warehouseId.Value);
+            }
             else
-                return shelfBusiness.FindByWarehouse(warehouseId);
+            {
+                return shelfBusiness.FindAll();
+            }
         }
 
         /// <summary>

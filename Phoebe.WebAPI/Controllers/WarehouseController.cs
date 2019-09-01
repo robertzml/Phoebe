@@ -24,10 +24,18 @@ namespace Phoebe.WebAPI.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult<List<Warehouse>> List()
+        public ActionResult<List<Warehouse>> List(int? type)
         {
             WarehouseBusiness warehouseBusiness = new WarehouseBusiness();
-            return warehouseBusiness.FindAll();
+
+            if (type.HasValue)
+            {
+                return warehouseBusiness.FindByType(type.Value);
+            }
+            else
+            {
+                return warehouseBusiness.FindAll();
+            }
         }
 
         /// <summary>
