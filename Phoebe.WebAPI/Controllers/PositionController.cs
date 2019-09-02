@@ -32,6 +32,33 @@ namespace Phoebe.WebAPI.Controllers
         }
 
         /// <summary>
+        /// 查找仓位
+        /// </summary>
+        /// <param name="shelfId"></param>
+        /// <param name="row"></param>
+        /// <param name="layer"></param>
+        /// <param name="depth"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult<Position> Find(int shelfId, int row, int layer, int depth)
+        {
+            PositionBusiness positionBusiness = new PositionBusiness();
+            return positionBusiness.Find(shelfId, row, layer, depth);
+        }
+
+        /// <summary>
+        /// 仓位数量
+        /// </summary>
+        /// <param name="shelfId"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult<int> Count(int shelfId)
+        {
+            PositionBusiness positionBusiness = new PositionBusiness();
+            return positionBusiness.Count(shelfId);
+        }
+
+        /// <summary>
         /// 生成仓位
         /// </summary>
         /// <param name="shelfId"></param>
