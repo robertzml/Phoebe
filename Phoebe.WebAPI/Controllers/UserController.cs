@@ -27,13 +27,24 @@ namespace Phoebe.WebAPI.Controllers
         {
             var userBusiness = new UserBusiness();
             var result = userBusiness.Login(userName, password);
-
+                       
             ResponseData data = new ResponseData
             {
                 Status = result.success ? 0 : 1,
-                ErrorMessage = result.errorMessage,
-                Entity = null
+                ErrorMessage = result.errorMessage               
             };
+
+            if (result.success)
+            {
+                var user = userBusiness.FindByUserName(userName);
+                user.Password = "";
+                data.Entity = user;
+            }
+            else
+            {
+                data.Entity = null;
+            }
+
             return data;
         }
 

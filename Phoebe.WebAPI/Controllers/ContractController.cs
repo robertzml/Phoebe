@@ -42,6 +42,59 @@ namespace Phoebe.WebAPI.Controllers
             ContractViewBusiness contractViewBusiness = new ContractViewBusiness();
             return contractViewBusiness.FindById(id);
         }
+
+        /// <summary>
+        /// 添加合同
+        /// </summary>
+        /// <param name="contract"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ActionResult<ResponseData>> Create(Contract contract)
+        {
+            ContractBusiness contractBusiness = new ContractBusiness();
+
+            var task = Task.Run(() =>
+            {
+                var result = contractBusiness.Create(contract);
+
+                ResponseData data = new ResponseData
+                {
+                    Status = result.success ? 0 : 1,
+                    ErrorMessage = result.errorMessage,
+                    Entity = result.t
+                };
+
+                return data;
+            });
+
+            return await task;
+        }
+
+        /// <summary>
+        /// 编辑合同
+        /// </summary>
+        /// <param name="contract"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ActionResult<ResponseData>> Update(Contract contract)
+        {
+            ContractBusiness contractBusiness = new ContractBusiness();
+
+            var task = Task.Run(() =>
+            {
+                var result = contractBusiness.Update(contract);
+
+                ResponseData data = new ResponseData
+                {
+                    Status = result.success ? 0 : 1,
+                    ErrorMessage = result.errorMessage
+                };
+
+                return data;
+            });
+
+            return await task;
+        }
         #endregion //Action
     }
 }

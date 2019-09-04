@@ -12,5 +12,40 @@ namespace Phoebe.Core.BL
     /// </summary>
     public class ContractBusiness : AbstractBusiness<Contract, int>, IBaseBL<Contract, int>
     {
+        #region Method
+        /// <summary>
+        /// 创建合同
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public override (bool success, string errorMessage, Contract t) Create(Contract entity)
+        {
+            var db = GetInstance();
+            var count = db.Queryable<Contract>().Count(r => r.Number == entity.Number);
+            if (count > 0)
+            {
+                return (false, "编码重复", null);
+            }
+
+            return base.Create(entity);
+        }
+
+        /// <summary>
+        /// 编辑合同
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public override (bool success, string errorMessage) Update(Contract entity)
+        {
+            var db = GetInstance();
+            var count = db.Queryable<Contract>().Count(r => r.Id != entity.Id && r.Number == entity.Number);
+            if (count > 0)
+            {
+                return (false, "编码重复");
+            }
+
+            return base.Update(entity);
+        }
+        #endregion //Method
     }
 }
