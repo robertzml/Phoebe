@@ -69,6 +69,32 @@ namespace Phoebe.WebAPI.Controllers
 
             return await task;
         }
+
+        /// <summary>
+        /// 编辑编号模板
+        /// </summary>
+        /// <param name="sequence"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ActionResult<ResponseData>> Update(SequenceTemplate sequence)
+        {
+            SequenceTemplateBusiness sequenceBusiness = new SequenceTemplateBusiness();
+
+            var task = Task.Run(() =>
+            {
+                var result = sequenceBusiness.Update(sequence);
+
+                ResponseData data = new ResponseData
+                {
+                    Status = result.success ? 0 : 1,
+                    ErrorMessage = result.errorMessage
+                };
+
+                return data;
+            });
+
+            return await task;
+        }
         #endregion //Action
     }
 }
