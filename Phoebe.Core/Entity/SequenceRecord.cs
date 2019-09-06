@@ -40,7 +40,7 @@ namespace Phoebe.Core.Entity
         /// </summary>
         [SugarColumn(ColumnName = "CurrentDate")]
         [Display(Name = "当前日期")]
-        public DateTime? CurrentDate { get; set; }
+        public string CurrentDate { get; set; }
 
         /// <summary>
         /// 当前编号
