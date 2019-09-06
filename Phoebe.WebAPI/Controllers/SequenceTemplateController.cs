@@ -95,6 +95,19 @@ namespace Phoebe.WebAPI.Controllers
 
             return await task;
         }
+
+        /// <summary>
+        /// 获取编号
+        /// </summary>
+        /// <param name="tableName"></param>
+        /// <param name="dt"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult<string> GetNext(string tableName, DateTime dt)
+        {
+            SequenceRecordBusiness recordBusiness = new SequenceRecordBusiness();
+            return recordBusiness.GetNextSequence(tableName, dt);
+        }
         #endregion //Action
     }
 }

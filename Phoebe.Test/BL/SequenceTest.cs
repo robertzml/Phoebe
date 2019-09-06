@@ -22,7 +22,7 @@ namespace Phoebe.Test.BL
         public void TestGetNextSequence()
         {
             var seq = this.sequenceRecordBusiness.GetNextSequence("Contract", new DateTime(2019, 1, 1), null);
-            Assert.AreEqual("HT-2019-0003", seq.number);
+            Assert.AreEqual("HT-2019-0003", seq);
         }
 
         [Test]

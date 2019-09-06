@@ -6,8 +6,12 @@ using System.Text;
 namespace Phoebe.Core.Entity
 {
     using Phoebe.Base.Framework;
+    using Phoebe.Core.Utility;
     using SqlSugar;
-
+   
+    /// <summary>
+    /// 合同类
+    /// </summary>
     [SugarTable("Contract")]
     public class Contract : IBaseEntity<int>
     {

@@ -4,6 +4,7 @@ using System.Text;
 
 namespace Phoebe.Core.BL
 {
+    using SqlSugar;
     using Phoebe.Base.Framework;
     using Phoebe.Core.Entity;
 
@@ -21,13 +22,32 @@ namespace Phoebe.Core.BL
         public override (bool success, string errorMessage, Contract t) Create(Contract entity)
         {
             var db = GetInstance();
-            var count = db.Queryable<Contract>().Count(r => r.Number == entity.Number);
-            if (count > 0)
-            {
-                return (false, "编码重复", null);
-            }
 
-            return base.Create(entity);
+            try
+            {
+                db.Ado.BeginTran();
+
+                SequenceRecordBusiness sequenceBusiness = new SequenceRecordBusiness();
+                var number = sequenceBusiness.GetNextSequence(db, "Contract", entity.SignDate);
+                if (!string.IsNullOrEmpty(number))
+                    entity.Number = number;
+
+                var count = db.Queryable<Contract>().Count(r => r.Number == entity.Number);
+                if (count > 0)
+                {
+                    return (false, "编码重复", null);
+                }
+
+                var t = db.Insertable(entity).ExecuteReturnEntity();
+
+                db.Ado.CommitTran();
+                return (true, "", t);
+            }
+            catch (Exception e)
+            {
+                db.Ado.RollbackTran();
+                return (false, e.Message, null);
+            }
         }
 
         /// <summary>
