@@ -25,10 +25,18 @@ namespace Phoebe.WebAPI.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult<List<ContractView>> List()
+        public ActionResult<List<ContractView>> List(int? customerId)
         {
             ContractViewBusiness contractViewBusiness = new ContractViewBusiness();
-            return contractViewBusiness.FindAll();
+            if (customerId.HasValue)
+            {
+                if (customerId.Value == 0)
+                    return contractViewBusiness.FindAll();
+                else
+                    return contractViewBusiness.FindByCustomer(customerId.Value);
+            }
+            else
+                return contractViewBusiness.FindAll();
         }
 
         /// <summary>

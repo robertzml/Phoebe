@@ -15,6 +15,17 @@ namespace Phoebe.Core.BL
     {
         #region Method
         /// <summary>
+        /// 按客户获取
+        /// </summary>
+        /// <param name="customerId"></param>
+        /// <returns></returns>
+        public List<Contract> FindByCustomer(int customerId)
+        {
+            var db = GetInstance();
+            return db.Queryable<Contract>().Where(r => r.CustomerId == customerId).ToList();
+        }
+
+        /// <summary>
         /// 创建合同
         /// </summary>
         /// <param name="entity"></param>
