@@ -3,15 +3,13 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace Phoebe.Core.Entity
+namespace Phoebe.Core.View
 {
     using Phoebe.Base.Framework;
     using SqlSugar;
 
-    /// <summary>
-    /// 入库类
-    /// </summary>
-    public class StockIn : IBaseEntity<string>
+    [SugarTable("StockInView")]
+    public class StockInView : IBaseEntity<string>
     {
         #region Property
         /// <summary>
@@ -92,6 +90,30 @@ namespace Phoebe.Core.Entity
         /// </summary>
         [Display(Name = "状态")]
         public int Status { get; set; }
+
+        /// <summary>
+        /// 客户编号
+        /// </summary>
+        [Display(Name = "客户编号")]
+        public string CustomerNumber { get; set; }
+
+        /// <summary>
+        /// 客户名称
+        /// </summary>
+        [Display(Name = "客户名称")]
+        public string CustomerName { get; set; }
+
+        /// <summary>
+        /// 合同编号
+        /// </summary>
+        [Display(Name = "合同编号")]
+        public string ContractNumber { get; set; }
+
+        /// <summary>
+        /// 合同名称
+        /// </summary>
+        [Display(Name = "合同名称")]
+        public string ContractName { get; set; }
         #endregion //Property
     }
 }
