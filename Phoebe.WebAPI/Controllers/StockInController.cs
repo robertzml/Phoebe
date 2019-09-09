@@ -50,8 +50,21 @@ namespace Phoebe.WebAPI.Controllers
             }
         }
 
+
         /// <summary>
-        /// 添加合同
+        /// 获取入库
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult<StockInView> Get(string id)
+        {
+            StockInViewBusiness stockInViewBusiness = new StockInViewBusiness();
+            return stockInViewBusiness.FindById(id);
+        }
+
+        /// <summary>
+        /// 添加入库
         /// </summary>
         /// <param name="stockIn"></param>
         /// <returns></returns>

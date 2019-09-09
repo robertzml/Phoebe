@@ -114,6 +114,24 @@ namespace Phoebe.Core.View
         /// </summary>
         [Display(Name = "合同名称")]
         public string ContractName { get; set; }
+
+        /// <summary>
+        /// 合同类型
+        /// </summary>
+        [Display(Name = "合同类型")]
+        public int ContractType { get; set; }
+
+        /// <summary>
+        /// 计费方式
+        /// </summary>
+        [Display(Name = "计费方式")]
+        public int BillingType { get; set; }
+
+        /// <summary>
+        /// 冷藏费单价
+        /// </summary>
+        [Display(Name = "冷藏费单价")]
+        public decimal UnitPrice { get; set; }
         #endregion //Property
     }
 }

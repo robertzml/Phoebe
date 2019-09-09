@@ -4,6 +4,7 @@ using System.Text;
 
 namespace Phoebe.Core.BL
 {
+    using SqlSugar;
     using Phoebe.Base.Framework;
     using Phoebe.Base.System;
     using Phoebe.Core.View;
@@ -25,7 +26,11 @@ namespace Phoebe.Core.BL
         public string[] GetMonthGroup()
         {
             var db = GetInstance();
-            var data = db.Queryable<StockInView>().GroupBy(r => new { r.MonthTime }).Select(r => r.MonthTime).ToList();
+            var data = db.Queryable<StockInView>()
+                .GroupBy(r => new { r.MonthTime })
+                .OrderBy(r => r.MonthTime, OrderByType.Desc)
+                .Select(r => r.MonthTime)                
+                .ToList();
 
             return data.ToArray();
         }
@@ -38,7 +43,10 @@ namespace Phoebe.Core.BL
         public List<StockInView> FindByMonth(string monthTime)
         {
             var db = GetInstance();
-            return db.Queryable<StockInView>().Where(r => r.MonthTime == monthTime).ToList();
+            return db.Queryable<StockInView>()
+                .Where(r => r.MonthTime == monthTime)
+                .OrderBy(r => r.FlowNumber, OrderByType.Desc)
+                .ToList();
         }
         #endregion //Method
     }
