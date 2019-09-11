@@ -89,6 +89,33 @@ namespace Phoebe.WebAPI.Controllers
 
             return await task;
         }
+
+        /// <summary>
+        /// 添加入库任务
+        /// </summary>
+        /// <param name="inTask"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ActionResult<ResponseData>> AddTask(StockInTask inTask)
+        {
+            StockInTaskBusiness taskBusiness = new StockInTaskBusiness();
+
+            var task = Task.Run(() =>
+            {
+                var result = taskBusiness.Create(inTask);
+
+                ResponseData data = new ResponseData
+                {
+                    Status = result.success ? 0 : 1,
+                    ErrorMessage = result.errorMessage,
+                    Entity = result.t
+                };
+
+                return data;
+            });
+
+            return await task;
+        }
         #endregion //Action
     }
 }

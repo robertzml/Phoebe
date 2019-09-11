@@ -34,16 +34,46 @@ namespace Phoebe.Core.Entity
         public string StoreId { get; set; }
 
         /// <summary>
+        /// 类别ID
+        /// </summary>
+        [Display(Name = "类别ID")]
+        public int CategoryId { get; set; }
+
+        /// <summary>
         /// 入库数量
         /// </summary>
         [Display(Name = "入库数量")]
         public int InCount { get; set; }
 
         /// <summary>
+        /// 单位重量
+        /// </summary>
+        [Display(Name = "单位重量")]
+        public decimal UnitWeight { get; set; }
+
+        /// <summary>
         /// 入库重量
         /// </summary>
         [Display(Name = "入库重量")]
         public decimal InWeight { get; set; }
+
+        /// <summary>
+        /// 规格
+        /// </summary>
+        [Display(Name = "规格")]
+        public string Specification { get; set; }
+
+        /// <summary>
+        /// 产地
+        /// </summary>
+        [Display(Name = "产地")]
+        public string OriginPlace { get; set; }
+
+        /// <summary>
+        /// 保质期
+        /// </summary>
+        [Display(Name = "保质期")]
+        public int Durability { get; set; }
 
         /// <summary>
         /// 任务码
