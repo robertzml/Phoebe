@@ -50,7 +50,6 @@ namespace Phoebe.WebAPI.Controllers
             }
         }
 
-
         /// <summary>
         /// 获取入库
         /// </summary>
@@ -88,6 +87,19 @@ namespace Phoebe.WebAPI.Controllers
             });
 
             return await task;
+        }
+
+        /// <summary>
+        /// 获取入库任务列表
+        /// </summary>
+        /// <param name="stockInId">入库单ID</param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult<List<StockInTask>> TaskList(string stockInId)
+        {
+            StockInTaskBusiness taskBusiness = new StockInTaskBusiness();
+
+            return taskBusiness.FindList(stockInId);
         }
 
         /// <summary>

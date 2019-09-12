@@ -15,6 +15,17 @@ namespace Phoebe.Core.BL
     {
         #region Method
         /// <summary>
+        /// 获取入库任务列表
+        /// </summary>
+        /// <param name="stockInId">入库单ID</param>
+        /// <returns></returns>
+        public List<StockInTask> FindList(string stockInId)
+        {
+            var db = GetInstance();
+            return db.Queryable<StockInTask>().Where(r => r.StockInId == stockInId).ToList();
+        }
+
+        /// <summary>
         /// 添加入库任务
         /// </summary>
         /// <param name="entity"></param>
