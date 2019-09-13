@@ -44,6 +44,7 @@ namespace Phoebe.Core.BL
                 entity.TaskCode = recordBusiness.GetNextSequence(db, "StockInTask", stockIn.InTime);
 
                 entity.Id = Guid.NewGuid().ToString();
+                entity.CreateTIme = DateTime.Now;
                 entity.Status = (int)EntityStatus.StockInCheck;
 
                 var t = db.Insertable(entity).ExecuteReturnEntity();

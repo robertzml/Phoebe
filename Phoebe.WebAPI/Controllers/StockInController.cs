@@ -98,8 +98,19 @@ namespace Phoebe.WebAPI.Controllers
         public ActionResult<List<StockInTask>> TaskList(string stockInId)
         {
             StockInTaskBusiness taskBusiness = new StockInTaskBusiness();
-
             return taskBusiness.FindList(stockInId);
+        }
+
+        /// <summary>
+        /// 获取入库任务
+        /// </summary>
+        /// <param name="taskId"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult<StockInTaskView> GetTask(string taskId)
+        {
+            StockInTaskViewBusiness taskViewBusiness = new StockInTaskViewBusiness();
+            return taskViewBusiness.FindById(taskId);
         }
 
         /// <summary>
@@ -121,6 +132,32 @@ namespace Phoebe.WebAPI.Controllers
                     Status = result.success ? 0 : 1,
                     ErrorMessage = result.errorMessage,
                     Entity = result.t
+                };
+
+                return data;
+            });
+
+            return await task;
+        }
+
+        /// <summary>
+        /// 编辑入库任务
+        /// </summary>
+        /// <param name="inTask"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ActionResult<ResponseData>> EditTask(StockInTask inTask)
+        {
+            StockInTaskBusiness taskBusiness = new StockInTaskBusiness();
+
+            var task = Task.Run(() =>
+            {
+                var result = taskBusiness.Update(inTask);
+
+                ResponseData data = new ResponseData
+                {
+                    Status = result.success ? 0 : 1,
+                    ErrorMessage = result.errorMessage
                 };
 
                 return data;

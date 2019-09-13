@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace Phoebe.Core.Entity
+namespace Phoebe.Core.View
 {
     using Phoebe.Base.Framework;
     using SqlSugar;
 
     /// <summary>
-    /// 入库任务类
+    /// 入库任务视图类
     /// </summary>
-    public class StockInTask : IBaseEntity<string>
+    public class StockInTaskView : IBaseEntity<string>
     {
         #region Property
         /// <summary>
@@ -152,6 +152,48 @@ namespace Phoebe.Core.Entity
         /// </summary>
         [Display(Name = "状态")]
         public int Status { get; set; }
+
+        /// <summary>
+        /// 入库时间
+        /// </summary>
+        [Display(Name = "入库时间")]
+        public DateTime InTime { get; set; }
+
+        /// <summary>
+        /// 流水单号
+        /// </summary>
+        [Display(Name = "流水单号")]
+        public string FlowNumber { get; set; }
+
+        /// <summary>
+        /// 入库类型
+        /// </summary>
+        [Display(Name = "入库类型")]
+        public int Type { get; set; }
+
+        /// <summary>
+        /// 类别名称
+        /// </summary>
+        [Display(Name = "类别名称")]
+        public string CategoryName { get; set; }
+
+        /// <summary>
+        /// 类别代码
+        /// </summary>
+        [Display(Name = "类别代码")]
+        public string CategoryNumber { get; set; }
+
+        /// <summary>
+        /// 仓库名称
+        /// </summary>
+        [Display(Name = "仓库名称")]
+        public string WarehouseName { get; set; }
+
+        /// <summary>
+        /// 仓库编号
+        /// </summary>
+        [Display(Name = "仓库编号")]
+        public string WarehouseNumber { get; set; }
         #endregion //Method
     }
 }
