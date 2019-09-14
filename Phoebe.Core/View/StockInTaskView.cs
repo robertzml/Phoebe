@@ -212,6 +212,36 @@ namespace Phoebe.Core.View
         /// </summary>
         [Display(Name = "仓库编号")]
         public string WarehouseNumber { get; set; }
+
+        /// <summary>
+        /// 排数
+        /// </summary>
+        [Display(Name = "排数")]
+        public int Row { get; set; }
+
+        /// <summary>
+        /// 层数
+        /// </summary>
+        [Display(Name = "层数")]
+        public int Layer { get; set; }
+
+        /// <summary>
+        /// 进数
+        /// </summary>
+        [Display(Name = "进数")]
+        public int Depth { get; set; }
+
+        /// <summary>
+        /// 编号
+        /// </summary>
+        [Display(Name = "编号")]
+        public string PositionNumber { get; set; }
+
+        /// <summary>
+        /// 副编号
+        /// </summary>
+        [Display(Name = "副编号")]
+        public string PositionViceNumber { get; set; }
         #endregion //Method
     }
 }
