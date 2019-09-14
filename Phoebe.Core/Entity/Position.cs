@@ -65,6 +65,18 @@ namespace Phoebe.Core.Entity
         public string ViceNumber { get; set; }
 
         /// <summary>
+        /// 主货架码
+        /// </summary>
+        [Display(Name = "主货架码")]
+        public string ShelfCode { get; set; }
+
+        /// <summary>
+        /// 副货架码
+        /// </summary>
+        [Display(Name = "副货架码")]
+        public string ViceShelfCode { get; set; }
+
+        /// <summary>
         /// 是否空闲
         /// </summary>
         [Display(Name = "是否空闲")]

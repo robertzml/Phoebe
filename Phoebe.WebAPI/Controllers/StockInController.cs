@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Phoebe.WebAPI.Controllers
 {
+    using Phoebe.Base.System;
     using Phoebe.Core.BL;
     using Phoebe.Core.Entity;
     using Phoebe.Core.View;
@@ -19,7 +20,7 @@ namespace Phoebe.WebAPI.Controllers
     [ApiController]
     public class StockInController : ControllerBase
     {
-        #region Action
+        #region Common
         /// <summary>
         /// 获取月度分组
         /// </summary>
@@ -30,7 +31,9 @@ namespace Phoebe.WebAPI.Controllers
             StockInViewBusiness stockInViewBusiness = new StockInViewBusiness();
             return stockInViewBusiness.GetMonthGroup();
         }
+        #endregion //Common
 
+        #region Stock In
         /// <summary>
         /// 获取入库列表
         /// </summary>
@@ -88,17 +91,19 @@ namespace Phoebe.WebAPI.Controllers
 
             return await task;
         }
+        #endregion //Stock In
 
+        #region Stock In Task
         /// <summary>
         /// 获取入库任务列表
         /// </summary>
         /// <param name="stockInId">入库单ID</param>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult<List<StockInTask>> TaskList(string stockInId)
+        public ActionResult<List<StockInTaskView>> TaskList(string stockInId)
         {
-            StockInTaskBusiness taskBusiness = new StockInTaskBusiness();
-            return taskBusiness.FindList(stockInId);
+            StockInTaskViewBusiness taskViewBusiness = new StockInTaskViewBusiness();
+            return taskViewBusiness.FindList(stockInId);
         }
 
         /// <summary>
@@ -125,7 +130,7 @@ namespace Phoebe.WebAPI.Controllers
 
             var task = Task.Run(() =>
             {
-                var result = taskBusiness.Create(inTask);
+                var result = taskBusiness.Create(inTask); //清点
 
                 ResponseData data = new ResponseData
                 {
@@ -165,6 +170,53 @@ namespace Phoebe.WebAPI.Controllers
 
             return await task;
         }
-        #endregion //Action
+
+        /// <summary>
+        /// 任务处理
+        /// </summary>
+        /// <param name="inTask"></param>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ActionResult<ResponseData>> HandleTask(StockInTask inTask)
+        {
+            StockInTaskBusiness taskBusiness = new StockInTaskBusiness();
+
+            var task = Task.Run(() =>
+            {
+                ResponseData data = new ResponseData();
+                if (inTask.Status == (int)EntityStatus.StockInReceive) // 接单
+                {
+                    var result = taskBusiness.Receive(inTask);
+
+                    data.Status = result.success ? 0 : 1;
+                    data.ErrorMessage = result.errorMessage;
+                }
+                else if (inTask.Status == (int)EntityStatus.StockInEnter) // 上架
+                {
+                    var result = taskBusiness.Enter(inTask);
+
+                    data.Status = result.success ? 0 : 1;
+                    data.ErrorMessage = result.errorMessage;
+                }
+                else if (inTask.Status == (int)EntityStatus.StockInFinish) // 完成
+                {
+                    var result = taskBusiness.Finish(inTask);
+
+                    data.Status = result.success ? 0 : 1;
+                    data.ErrorMessage = result.errorMessage;
+                }
+                else
+                {
+                    data.Status = 1;
+                    data.ErrorMessage = "请求错误";
+                }
+
+                return data;
+            });
+
+            return await task;
+        }
+        #endregion //Stock In Task
     }
 }

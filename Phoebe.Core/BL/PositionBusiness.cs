@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Phoebe.Core.BL
 {
+    using SqlSugar;
     using Phoebe.Base.Framework;
     using Phoebe.Core.Entity;
     using Phoebe.Core.Utility;
@@ -37,6 +39,63 @@ namespace Phoebe.Core.BL
         {
             var db = GetInstance();
             return db.Queryable<Position>().Single(r => r.ShelfId == shelfId && r.Row == row && r.Layer == layer && r.Depth == depth);
+        }
+
+        /// <summary>
+        /// 根据货架码查找空仓位
+        /// </summary>
+        /// <param name="db"></param>
+        /// <param name="shelfCode">货架码</param>
+        /// <returns></returns>
+        public Position FindEmpty(SqlSugarClient db, string shelfCode)
+        {
+            bool vice = false;
+            var data = db.Queryable<Position>().Where(r => r.ShelfCode == shelfCode).OrderBy(r => r.Depth).ToList();
+            if (data.Count == 0)
+            {
+                data = db.Queryable<Position>().Where(r => r.ViceShelfCode == shelfCode).OrderBy(r => r.Depth).ToList();
+                vice = true;
+            }
+
+            if (data.Count == 0)
+                return null;
+
+            if (vice)
+            {
+                var shelf = db.Queryable<Shelf>().Single(r => r.Id == data[0].ShelfId);
+
+                var find = data.FindLastIndex(r => r.IsEmpty == false);
+                if (find == -1)
+                {
+                    return data.First();
+                }
+                else
+                {
+                    if (find == shelf.Depth - 1)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        return data[find + 1];
+                    }
+                }
+            }
+            else
+            {
+                var find = data.FindIndex(r => r.IsEmpty == false);
+                if (find == -1)
+                {
+                    return data.Last();
+                }
+                else
+                {
+                    if (find > 0)
+                        return data[find - 1];
+                    else
+                        return null;
+                }
+            }
         }
 
         /// <summary>
@@ -90,6 +149,8 @@ namespace Phoebe.Core.BL
                                 position.Number = string.Format("{0}-{1}{2}-{3:D2}-{4}-{5:D2}",
                                     warehouse.Number, shelf.Number, shelf.EntranceNumber, row, layer, depth);
                                 position.ViceNumber = "";
+
+                                position.ShelfCode = position.Number.Substring(0, 12);
                             }
                             else if (shelf.Entrance == 2)
                             {
@@ -99,6 +160,9 @@ namespace Phoebe.Core.BL
 
                                 position.ViceNumber = string.Format("{0}-{1}{2}-{3:D2}-{4}-{5:D2}",
                                     warehouse.Number, shelf.Number, en[1], row, layer, shelf.Depth - depth + 1);
+
+                                position.ShelfCode = position.Number.Substring(0, 12);
+                                position.ViceShelfCode = position.ViceNumber.Substring(0, 12);
                             }
 
                             position.IsEmpty = true;

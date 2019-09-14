@@ -10,5 +10,17 @@ namespace Phoebe.Core.BL
 
     public class StockInTaskViewBusiness : AbstractBusiness<StockInTaskView, string>, IBaseBL<StockInTaskView, string>
     {
+        #region Method
+        /// <summary>
+        /// 获取入库任务列表
+        /// </summary>
+        /// <param name="stockInId">入库单ID</param>
+        /// <returns></returns>
+        public List<StockInTaskView> FindList(string stockInId)
+        {
+            var db = GetInstance();
+            return db.Queryable<StockInTaskView>().Where(r => r.StockInId == stockInId).ToList();
+        }
+        #endregion //Method
     }
 }

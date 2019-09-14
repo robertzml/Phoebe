@@ -124,16 +124,34 @@ namespace Phoebe.Core.View
         public string UserName { get; set; }
 
         /// <summary>
+        /// 接单人ID
+        /// </summary>
+        [Display(Name = "接单人ID")]
+        public int ReceiveUserId { get; set; }
+
+        /// <summary>
+        /// 接单人
+        /// </summary>
+        [Display(Name = "接单人")]
+        public string ReceiveUserName { get; set; }
+
+        /// <summary>
         /// 创建时间
         /// </summary>
         [Display(Name = "创建时间")]
-        public DateTime CreateTIme { get; set; }
+        public DateTime CreateTime { get; set; }
 
         /// <summary>
         /// 接单时间
         /// </summary>
         [Display(Name = "接单时间")]
         public DateTime? ReceiveTime { get; set; }
+
+        /// <summary>
+        /// 上架时间
+        /// </summary>
+        [Display(Name = "上架时间")]
+        public DateTime? EnterTime { get; set; }
 
         /// <summary>
         /// 完成时间

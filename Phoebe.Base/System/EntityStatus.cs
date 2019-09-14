@@ -54,7 +54,25 @@ namespace Phoebe.Base.System
         /// 72:已清点
         /// </summary>
         [Display(Name = "已清点")]
-        StockInCheck = 72
+        StockInCheck = 72,
+
+        /// <summary>
+        /// 73:已接单
+        /// </summary>
+        [Display(Name = "已接单")]
+        StockInReceive = 73,
+
+        /// <summary>
+        /// 74:已上架
+        /// </summary>
+        [Display(Name = "已上架")]
+        StockInEnter = 74,
+
+        /// <summary>
+        /// 75:已入库
+        /// </summary>
+        [Display(Name = "已入库")]
+        StockInFinish = 75
         #endregion //Stock In
     }
 }
