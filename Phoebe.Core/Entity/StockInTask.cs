@@ -11,6 +11,7 @@ namespace Phoebe.Core.Entity
     /// <summary>
     /// 入库任务类
     /// </summary>
+    [SugarTable("StockInTask")]
     public class StockInTask : IBaseEntity<string>
     {
         #region Property

@@ -9,10 +9,10 @@ namespace Phoebe.Core.Entity
     using SqlSugar;
 
     /// <summary>
-    /// 入库类
+    /// 货品类
     /// </summary>
-    [SugarTable("StockIn")]
-    public class StockIn : IBaseEntity<string>
+    [SugarTable("Cargo")]
+    public class Cargo : IBaseEntity<string>
     {
         #region Property
         /// <summary>
@@ -23,28 +23,22 @@ namespace Phoebe.Core.Entity
         public string Id { get; set; }
 
         /// <summary>
-        /// 入库时间
+        /// 类别ID
         /// </summary>
-        [Display(Name = "入库时间")]
-        public DateTime InTime { get; set; }
+        [Display(Name = "类别ID")]
+        public int CategoryId { get; set; }
 
         /// <summary>
-        /// 入库月份
+        /// 分组方式
         /// </summary>
-        [Display(Name = "入库月份")]
-        public string MonthTime { get; set; }
+        [Display(Name = "分组方式")]
+        public int GroupType { get; set; }
 
         /// <summary>
-        /// 流水单号
+        /// 单位重量
         /// </summary>
-        [Display(Name = "流水单号")]
-        public string FlowNumber { get; set; }
-
-        /// <summary>
-        /// 入库类型
-        /// </summary>
-        [Display(Name = "入库类型")]
-        public int Type { get; set; }
+        [Display(Name = "单位重量")]
+        public decimal UnitWeight { get; set; }
 
         /// <summary>
         /// 所属客户
@@ -59,28 +53,10 @@ namespace Phoebe.Core.Entity
         public int ContractId { get; set; }
 
         /// <summary>
-        /// 操作人ID
+        /// 登记时间
         /// </summary>
-        [Display(Name = "操作人ID")]
-        public int UserId { get; set; }
-
-        /// <summary>
-        /// 操作人
-        /// </summary>
-        [Display(Name = "操作人")]
-        public string UserName { get; set; }
-
-        /// <summary>
-        /// 创建时间
-        /// </summary>
-        [Display(Name = "创建时间")]
-        public DateTime CreateTime { get; set; }
-
-        /// <summary>
-        /// 确认时间
-        /// </summary>
-        [Display(Name = "确认时间")]
-        public DateTime? ConfirmTime { get; set; }
+        [Display(Name = "登记时间")]
+        public DateTime RegisterTime { get; set; }
 
         /// <summary>
         /// 备注
