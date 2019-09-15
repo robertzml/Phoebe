@@ -29,12 +29,6 @@ namespace Phoebe.Core.Entity
         public int CategoryId { get; set; }
 
         /// <summary>
-        /// 分组方式
-        /// </summary>
-        [Display(Name = "分组方式")]
-        public int GroupType { get; set; }
-
-        /// <summary>
         /// 单位重量
         /// </summary>
         [Display(Name = "单位重量")]

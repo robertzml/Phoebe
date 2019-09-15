@@ -101,11 +101,12 @@ namespace Phoebe.Core.BL
                     return (false, "该任务无法上架");
                 }
 
-                task.ShelfCode = entity.ShelfCode;
+                // find stock in
+                var stockIn = db.Queryable<StockIn>().InSingle(entity.StockInId);
 
                 // find position
                 PositionBusiness positionBusiness = new PositionBusiness();
-                var position = positionBusiness.FindEmpty(db, task.ShelfCode);
+                var position = positionBusiness.FindEmpty(db, entity.ShelfCode);
                 if (position == null)
                 {
                     return (false, "无空仓位");
@@ -115,11 +116,17 @@ namespace Phoebe.Core.BL
                 position.IsEmpty = false;
                 db.Updateable(position).ExecuteCommand();
 
+                // update stock in task
+                task.ShelfCode = entity.ShelfCode;
                 task.PositionId = position.Id;
                 task.EnterTime = DateTime.Now;
                 task.Status = (int)EntityStatus.StockInEnter;
 
                 db.Updateable(task).ExecuteCommand();
+
+                // add cargo
+                CargoBusiness cargoBusiness = new CargoBusiness();
+                var cargo = cargoBusiness.Create(db, null, task);
 
                 db.Ado.CommitTran();
                 return (true, "");

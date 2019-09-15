@@ -43,6 +43,32 @@ namespace Phoebe.Base.System
         Closed = 4,
         #endregion //System
 
+        #region Store
+        /// <summary>
+        /// 61:在库
+        /// </summary>
+        [Display(Name = "在库")]
+        StoreIn = 61,
+
+        /// <summary>
+        /// 62:出库
+        /// </summary>
+        [Display(Name = "出库")]
+        StoreOut = 62,
+
+        /// <summary>
+        /// 63:准备入库
+        /// </summary>
+        [Display(Name = "准备入库")]
+        StoreReady = 63,
+
+        /// <summary>
+        /// 64:准备移入
+        /// </summary>
+        [Display(Name = "准备移入")]
+        StoreMoveReady = 64,
+        #endregion //Store
+
         #region Stock In
         /// <summary>
         /// 71:待入库
