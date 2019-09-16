@@ -24,9 +24,10 @@ namespace Phoebe.WebAPI.Controllers
         /// 货品列表
         /// </summary>
         /// <param name="customerId"></param>
+        /// <param name="contractId"></param>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult<List<CargoView>> List(int? customerId)
+        public ActionResult<List<CargoView>> List(int? customerId, int? contractId)
         {
             CargoViewBusiness cargoViewBusiness = new CargoViewBusiness();
             if (customerId.HasValue)
@@ -34,7 +35,12 @@ namespace Phoebe.WebAPI.Controllers
                 if (customerId.Value == 0)
                     return cargoViewBusiness.FindAll();
                 else
-                    return cargoViewBusiness.FindByCustomer(customerId.Value);
+                {
+                    var cid = 0;
+                    if (contractId.HasValue)
+                        cid = contractId.Value;
+                    return cargoViewBusiness.FindByCustomer(customerId.Value, cid);
+                }
             }
             else
                 return cargoViewBusiness.FindAll();
