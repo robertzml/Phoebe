@@ -116,17 +116,23 @@ namespace Phoebe.Core.BL
                 position.IsEmpty = false;
                 db.Updateable(position).ExecuteCommand();
 
-                // update stock in task
+                // set task info
                 task.ShelfCode = entity.ShelfCode;
                 task.PositionId = position.Id;
                 task.EnterTime = DateTime.Now;
-                task.Status = (int)EntityStatus.StockInEnter;
-
-                db.Updateable(task).ExecuteCommand();
+                task.Status = (int)EntityStatus.StockInEnter;                                
 
                 // add cargo
                 CargoBusiness cargoBusiness = new CargoBusiness();
-                var cargo = cargoBusiness.Create(db, null, task);
+                var cargo = cargoBusiness.Create(db, stockIn, task);
+
+                // add store
+                StoreBusiness storeBusiness = new StoreBusiness();
+                var store = storeBusiness.Create(db, stockIn, task, cargo.t);
+
+                // update task
+                task.StoreId = store.t.Id;
+                db.Updateable(task).ExecuteCommand();
 
                 db.Ado.CommitTran();
                 return (true, "");
@@ -162,6 +168,12 @@ namespace Phoebe.Core.BL
                 task.Status = (int)EntityStatus.StockInFinish;
 
                 db.Updateable(task).ExecuteCommand();
+
+                // update store status
+                var store = db.Queryable<Store>().Single(r => r.Id == entity.StoreId);
+                store.Status = (int)EntityStatus.StoreIn;
+
+                db.Updateable(store).ExecuteCommand();
 
                 db.Ado.CommitTran();
                 return (true, "");
