@@ -34,6 +34,7 @@ namespace Phoebe.Core.BL
             store.CategoryId = task.CategoryId;
             store.WarehouseId = task.WarehouseId;
             store.PositionId = task.PositionId;
+            store.TrayCode = task.TrayCode;
             store.TotalCount = task.InCount;
             store.StoreCount = task.InCount;
             store.TotalWeight = task.InWeight;

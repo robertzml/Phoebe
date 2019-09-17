@@ -59,6 +59,12 @@ namespace Phoebe.Core.View
         public int PositionId { get; set; }
 
         /// <summary>
+        /// 托盘码
+        /// </summary>
+        [Display(Name = "托盘码")]
+        public string TrayCode { get; set; }
+
+        /// <summary>
         /// 总数量
         /// </summary>
         [Display(Name = "总数量")]
