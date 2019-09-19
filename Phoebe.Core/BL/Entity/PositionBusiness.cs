@@ -32,6 +32,18 @@ namespace Phoebe.Core.BL
         /// </summary>
         /// <param name="shelfId"></param>
         /// <param name="row"></param>
+        /// <returns></returns>
+        public List<Position> FindList(int shelfId, int row)
+        {
+            var db = GetInstance();
+            return db.Queryable<Position>().Where(r => r.ShelfId == shelfId && r.Row == row).OrderBy(r => r.Number).ToList();
+        }
+
+        /// <summary>
+        /// 查找仓位
+        /// </summary>
+        /// <param name="shelfId"></param>
+        /// <param name="row"></param>
         /// <param name="layer"></param>
         /// <param name="depth"></param>
         /// <returns></returns>
