@@ -11,7 +11,7 @@ namespace Phoebe.Core.View
     /// <summary>
     /// 库存视图类
     /// </summary>
-    [SugarTable("CargoView")]
+    [SugarTable("StoreView")]
     public class StoreView : IBaseEntity<string>
     {
         #region Property
