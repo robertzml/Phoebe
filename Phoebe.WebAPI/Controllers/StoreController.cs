@@ -31,6 +31,19 @@ namespace Phoebe.WebAPI.Controllers
             StoreViewBusiness storeViewBusiness = new StoreViewBusiness();
             return storeViewBusiness.FindStoreIn(positionId);
         }
+
+        /// <summary>
+        /// 按合同查找库存
+        /// </summary>
+        /// <param name="contractId"></param>
+        /// <param name="isStoreIn"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public List<StoreView> FindByContract(int contractId, bool isStoreIn)
+        {
+            StoreViewBusiness storeViewBusiness = new StoreViewBusiness();
+            return storeViewBusiness.FindByContract(contractId, isStoreIn);
+        }
         #endregion //Action
     }
 }
