@@ -98,7 +98,15 @@ namespace Phoebe.Base.System
         /// 75:已入库
         /// </summary>
         [Display(Name = "已入库")]
-        StockInFinish = 75
+        StockInFinish = 75,
         #endregion //Stock In
+
+        #region Stock Out
+        /// <summary>
+        /// 81:待出库
+        /// </summary>
+        [Display(Name = "待出库")]
+        StockOutReady = 81,
+        #endregion //Stock Out
     }
 }
