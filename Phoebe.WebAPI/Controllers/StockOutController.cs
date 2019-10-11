@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Phoebe.WebAPI.Controllers
 {
@@ -61,27 +63,27 @@ namespace Phoebe.WebAPI.Controllers
         /// <param name="stockOut"
         /// <param name="tasks"></param>
         /// <returns></returns>
-        //[HttpPost]
-        //public async Task<ActionResult<ResponseData>> AddTasks(StockOut stockOut, List<StockOutTask> tasks)
-        //{
-        //    StockOutBusiness stockOutBusiness = new StockOutBusiness();
+        [HttpPost]
+        public async Task<ActionResult<ResponseData>> Create(StockOutCreateModel model)
+        {
+            StockOutBusiness stockOutBusiness = new StockOutBusiness();
 
-        //    var task = Task.Run(() =>
-        //    {
-        //        var result = stockOutBusiness.Create(stockOut, tasks);
+            var task = Task.Run(() =>
+            {
+                var result = stockOutBusiness.Create(model.stockOut, model.tasks);
 
-        //        ResponseData data = new ResponseData
-        //        {
-        //            Status = result.success ? 0 : 1,
-        //            ErrorMessage = result.errorMessage,
-        //            Entity = result.t
-        //        };
+                ResponseData data = new ResponseData
+                {
+                    Status = result.success ? 0 : 1,
+                    ErrorMessage = result.errorMessage,
+                    Entity = result.t
+                };
 
-        //        return data;
-        //    });
+                return data;
+            });
 
-        //    return await task;
-        //}
+            return await task;
+        }
         #endregion //Stock Out Task
     }
 }
