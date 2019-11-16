@@ -25,6 +25,7 @@ namespace Phoebe.Core.Entity
         /// <summary>
         /// 入库时间
         /// </summary>
+        [Required]
         [Display(Name = "入库时间")]
         public DateTime InTime { get; set; }
 
@@ -49,6 +50,7 @@ namespace Phoebe.Core.Entity
         /// <summary>
         /// 所属客户
         /// </summary>
+        [Required]
         [Display(Name = "所属客户")]
         public int CustomerId { get; set; }
 

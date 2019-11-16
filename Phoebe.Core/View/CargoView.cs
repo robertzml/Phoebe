@@ -29,6 +29,12 @@ namespace Phoebe.Core.View
         public int CategoryId { get; set; }
 
         /// <summary>
+        /// 货品名称
+        /// </summary>
+        [Display(Name = "货品名称")]
+        public string Name { get; set; }
+
+        /// <summary>
         /// 单位重量
         /// </summary>
         [Display(Name = "单位重量")]

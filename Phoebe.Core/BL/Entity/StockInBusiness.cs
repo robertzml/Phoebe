@@ -22,11 +22,11 @@ namespace Phoebe.Core.BL
             {
                 db.Ado.BeginTran();
 
-                SequenceRecordBusiness recordBusiness = new SequenceRecordBusiness();
-                entity.FlowNumber = recordBusiness.GetNextSequence(db, "StockIn", entity.InTime);
+                SequenceRecordBusiness recordBusiness = new SequenceRecordBusiness();               
 
                 entity.Id = Guid.NewGuid().ToString();
                 entity.MonthTime = entity.InTime.Year.ToString() + entity.InTime.Month.ToString().PadLeft(2, '0');
+                entity.FlowNumber = recordBusiness.GetNextSequence(db, "StockIn", entity.InTime);
                 entity.CreateTime = DateTime.Now;
                 entity.Status = (int)EntityStatus.StockInReady;
 

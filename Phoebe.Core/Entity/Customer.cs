@@ -25,6 +25,7 @@ namespace Phoebe.Core.Entity
         /// <summary>
         /// 客户名称
         /// </summary>
+        [Required]
         [Display(Name = "客户名称")]
         public string Name { get; set; }
 
