@@ -140,7 +140,7 @@ namespace Phoebe.Core.Entity
         /// 创建时间
         /// </summary>
         [Display(Name = "创建时间")]
-        public DateTime CreateTIme { get; set; }
+        public DateTime CreateTime { get; set; }
 
         /// <summary>
         /// 接单时间
