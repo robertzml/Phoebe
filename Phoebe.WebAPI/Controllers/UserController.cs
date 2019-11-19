@@ -98,6 +98,43 @@ namespace Phoebe.WebAPI.Controllers
             var userBusiness = new UserBusiness();
             return userBusiness.FindByUserName(userName);
         }
+
+        /// <summary>
+        /// 获取用户
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult<User> GetById(int id)
+        {
+            var userBusiness = new UserBusiness();
+            return userBusiness.FindById(id);
+        }
+
+        /// <summary>
+        /// 编辑用户
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ActionResult<ResponseData>> Update(User user)
+        {
+            var userBusiness = new UserBusiness();
+
+            var task = Task.Run(() =>
+            {
+                var result = userBusiness.Update(user);
+
+                ResponseData data = new ResponseData
+                {
+                    Status = result.success ? 0 : 1,
+                    ErrorMessage = result.errorMessage
+                };
+
+                return data;
+            });
+
+            return await task;
+        }
         #endregion //Action
     }
 }
