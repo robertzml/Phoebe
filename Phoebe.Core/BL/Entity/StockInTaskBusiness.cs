@@ -48,6 +48,21 @@ namespace Phoebe.Core.BL
         }
 
         /// <summary>
+        /// 根据托盘码查找任务
+        /// </summary>
+        /// <param name="trayCode">托盘码</param>
+        /// <param name="status">状态</param>
+        /// <returns></returns>
+        public List<StockInTask> FindByTray(string trayCode, EntityStatus status)
+        {
+            var db = GetInstance();
+
+            var data = db.Queryable<StockInTask>().Where(r => r.TrayCode == trayCode && r.Status == (int)status);
+
+            return data.ToList();
+        }
+
+        /// <summary>
         /// 接单
         /// </summary>
         /// <param name="entity"></param>
@@ -120,7 +135,7 @@ namespace Phoebe.Core.BL
                 task.ShelfCode = entity.ShelfCode;
                 task.PositionId = position.Id;
                 task.EnterTime = DateTime.Now;
-                task.Status = (int)EntityStatus.StockInEnter;                                
+                task.Status = (int)EntityStatus.StockInEnter;
 
                 // add cargo
                 CargoBusiness cargoBusiness = new CargoBusiness();

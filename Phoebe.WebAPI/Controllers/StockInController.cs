@@ -172,10 +172,36 @@ namespace Phoebe.WebAPI.Controllers
         }
 
         /// <summary>
+        /// 根据托盘码查找入库任务
+        /// </summary>
+        /// <param name="trayCode"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<ActionResult<ResponseData>> FindTask(string trayCode)
+        {
+            StockInTaskBusiness taskBusiness = new StockInTaskBusiness();
+
+            var task = Task.Run(() =>
+            {
+                var result = taskBusiness.FindByTray(trayCode, EntityStatus.StockInCheck);
+
+                ResponseData data = new ResponseData
+                {
+                    Entity = result,
+                    Status = 0,
+                    ErrorMessage = ""
+                };
+
+                return data;
+            });
+
+            return await task;
+        }
+
+        /// <summary>
         /// 任务处理
         /// </summary>
         /// <param name="inTask"></param>
-        /// <param name="type"></param>
         /// <returns></returns>
         [HttpPost]
         public async Task<ActionResult<ResponseData>> HandleTask(StockInTask inTask)
