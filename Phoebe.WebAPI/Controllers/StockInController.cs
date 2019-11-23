@@ -177,20 +177,30 @@ namespace Phoebe.WebAPI.Controllers
         /// <param name="trayCode"></param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<ActionResult<ResponseData>> FindTask(string trayCode)
+        public ActionResult<List<StockInTaskView>> FindTask(string trayCode)
+        {
+            StockInTaskViewBusiness taskViewBusiness = new StockInTaskViewBusiness();
+            return taskViewBusiness.FindByTray(trayCode, EntityStatus.StockInCheck);
+        }
+
+        /// <summary>
+        /// 入库接单
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ActionResult<ResponseData>> ReceiveTask(StockInReceiveModel model)
         {
             StockInTaskBusiness taskBusiness = new StockInTaskBusiness();
 
             var task = Task.Run(() =>
             {
-                var result = taskBusiness.FindByTray(trayCode, EntityStatus.StockInCheck);
+                ResponseData data = new ResponseData();
 
-                ResponseData data = new ResponseData
-                {
-                    Entity = result,
-                    Status = 0,
-                    ErrorMessage = ""
-                };
+                var result = taskBusiness.Receive(model.TrayCode, model.UserId);
+
+                data.Status = result.success ? 0 : 1;
+                data.ErrorMessage = result.errorMessage;
 
                 return data;
             });
