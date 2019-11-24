@@ -312,6 +312,49 @@ namespace Phoebe.Core.BL
                 return (false, e.Message);
             }
         }
+
+        /// <summary>
+        /// 入库完成
+        /// </summary>
+        /// <param name="taskId"></param>
+        /// <param name="cargoId"></param>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public (bool success, string errorMessage) Finish(string taskId, string cargoId, int userId)
+        {
+            var db = GetInstance();
+
+            try
+            {
+                db.Ado.BeginTran();
+
+                var task = db.Queryable<StockInTask>().Single(r => r.Id == taskId);
+
+                if (task.Status != (int)EntityStatus.StockInEnter)
+                {
+                    return (false, "该任务无法完成");
+                }
+
+                // update task
+                task.FinishTime = DateTime.Now;
+                task.Status = (int)EntityStatus.StockInFinish;
+                db.Updateable(task).ExecuteCommand();
+
+                // update store status
+                var store = db.Queryable<Store>().Single(r => r.Id == task.StoreId);
+                store.CargoId = cargoId;
+                store.Status = (int)EntityStatus.StoreIn;
+                db.Updateable(store).ExecuteCommand();
+
+                db.Ado.CommitTran();
+                return (true, "");
+            }
+            catch (Exception e)
+            {
+                db.Ado.RollbackTran();
+                return (false, e.Message);
+            }
+        }
         #endregion //Method
     }
 }

@@ -24,10 +24,9 @@ namespace Phoebe.WebAPI.Controllers
         /// 货品列表
         /// </summary>
         /// <param name="customerId"></param>
-        /// <param name="contractId"></param>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult<List<CargoView>> List(int? customerId, int? contractId)
+        public ActionResult<List<CargoView>> List(int? customerId)
         {
             CargoViewBusiness cargoViewBusiness = new CargoViewBusiness();
             if (customerId.HasValue)
@@ -35,15 +34,37 @@ namespace Phoebe.WebAPI.Controllers
                 if (customerId.Value == 0)
                     return cargoViewBusiness.FindAll();
                 else
-                {
-                    var cid = 0;
-                    if (contractId.HasValue)
-                        cid = contractId.Value;
-                    return cargoViewBusiness.FindByCustomer(customerId.Value, cid);
-                }
+                    return cargoViewBusiness.FindByCustomer(customerId.Value);
             }
             else
                 return cargoViewBusiness.FindAll();
+        }
+
+        /// <summary>
+        /// 添加货物
+        /// </summary>
+        /// <param name="cargo"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ActionResult<ResponseData>> Create(Cargo cargo)
+        {
+            CargoBusiness cargoBusiness = new CargoBusiness();
+
+            var task = Task.Run(() =>
+            {
+                var result = cargoBusiness.Create(cargo);
+
+                ResponseData data = new ResponseData
+                {
+                    Status = result.success ? 0 : 1,
+                    ErrorMessage = result.errorMessage,
+                    Entity = result.t
+                };
+
+                return data;
+            });
+
+            return await task;
         }
         #endregion //Action
     }

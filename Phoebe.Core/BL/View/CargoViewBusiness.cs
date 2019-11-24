@@ -17,14 +17,11 @@ namespace Phoebe.Core.BL
         /// <param name="customerId"></param>
         /// <param name="contractId"></param>
         /// <returns></returns>
-        public List<CargoView> FindByCustomer(int customerId, int contractId = 0)
+        public List<CargoView> FindByCustomer(int customerId)
         {
             var db = GetInstance();
 
-            if (contractId == 0)
-                return db.Queryable<CargoView>().Where(r => r.CustomerId == customerId).ToList();
-            else
-                return db.Queryable<CargoView>().Where(r => r.CustomerId == customerId && r.ContractId == contractId).ToList();
+            return db.Queryable<CargoView>().Where(r => r.CustomerId == customerId).ToList();
         }
         #endregion //Method
     }

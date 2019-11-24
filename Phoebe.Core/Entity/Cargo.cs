@@ -23,22 +23,10 @@ namespace Phoebe.Core.Entity
         public string Id { get; set; }
 
         /// <summary>
-        /// 类别ID
-        /// </summary>
-        [Display(Name = "类别ID")]
-        public int CategoryId { get; set; }
-
-        /// <summary>
         /// 货品名称
         /// </summary>
         [Display(Name = "货品名称")]
         public string Name { get; set; }
-
-        /// <summary>
-        /// 单位重量
-        /// </summary>
-        [Display(Name = "单位重量")]
-        public decimal UnitWeight { get; set; }
 
         /// <summary>
         /// 所属客户
@@ -47,10 +35,16 @@ namespace Phoebe.Core.Entity
         public int CustomerId { get; set; }
 
         /// <summary>
-        /// 所属合同
+        /// 类别ID
         /// </summary>
-        [Display(Name = "所属合同")]
-        public int ContractId { get; set; }
+        [Display(Name = "类别ID")]
+        public int CategoryId { get; set; }
+
+        /// <summary>
+        /// 单位重量
+        /// </summary>
+        [Display(Name = "单位重量")]
+        public decimal UnitWeight { get; set; }
 
         /// <summary>
         /// 登记时间

@@ -28,15 +28,14 @@ namespace Phoebe.Core.BL
         {
             Cargo cargo = new Cargo();
             cargo.Id = Guid.NewGuid().ToString();
-            cargo.CategoryId = task.CategoryId;
-            cargo.ContractId = stockIn.ContractId;
+            cargo.CategoryId = task.CategoryId;           
             cargo.CustomerId = stockIn.CustomerId;
             cargo.UnitWeight = task.UnitWeight;
             cargo.RegisterTime = DateTime.Now;
             cargo.Status = 0;
 
             var exist = db.Queryable<Cargo>()
-                .Where(r => r.ContractId == cargo.ContractId && r.CategoryId == cargo.CategoryId && r.UnitWeight == cargo.UnitWeight)
+                .Where(r => r.CategoryId == cargo.CategoryId && r.UnitWeight == cargo.UnitWeight)
                 .ToList();
             if (exist.Count() == 0)
             {
