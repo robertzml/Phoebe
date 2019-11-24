@@ -14,7 +14,19 @@ namespace Phoebe.WebAPI.Model
     {
         public string TrayCode;
 
-        public string UserId;
+        public int UserId;
+    }
+
+    /// <summary>
+    /// 入库上架模型
+    /// </summary>
+    public class StockInEnterModel
+    {
+        public string TrayCode;
+
+        public string ShelfCode;
+
+        public int UserId;
     }
 
     /// <summary>
