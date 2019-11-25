@@ -246,44 +246,23 @@ namespace Phoebe.WebAPI.Controllers
         }
 
         /// <summary>
-        /// 任务处理
+        /// 入库确认
         /// </summary>
-        /// <param name="inTask"></param>
+        /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<ActionResult<ResponseData>> HandleTask(StockInTask inTask)
+        public async Task<ActionResult<ResponseData>> FinishTask(StockInFinishModel model)
         {
             StockInTaskBusiness taskBusiness = new StockInTaskBusiness();
 
             var task = Task.Run(() =>
             {
                 ResponseData data = new ResponseData();
-                if (inTask.Status == (int)EntityStatus.StockInReceive) // 接单
-                {
-                    var result = taskBusiness.Receive(inTask);
 
-                    data.Status = result.success ? 0 : 1;
-                    data.ErrorMessage = result.errorMessage;
-                }
-                else if (inTask.Status == (int)EntityStatus.StockInEnter) // 上架
-                {
-                    var result = taskBusiness.Enter(inTask);
+                var result = taskBusiness.Finish(model.TaskId, model.CargoId, model.UserId, model.Remark);
 
-                    data.Status = result.success ? 0 : 1;
-                    data.ErrorMessage = result.errorMessage;
-                }
-                else if (inTask.Status == (int)EntityStatus.StockInFinish) // 完成
-                {
-                    var result = taskBusiness.Finish(inTask);
-
-                    data.Status = result.success ? 0 : 1;
-                    data.ErrorMessage = result.errorMessage;
-                }
-                else
-                {
-                    data.Status = 1;
-                    data.ErrorMessage = "请求错误";
-                }
+                data.Status = result.success ? 0 : 1;
+                data.ErrorMessage = result.errorMessage;
 
                 return data;
             });

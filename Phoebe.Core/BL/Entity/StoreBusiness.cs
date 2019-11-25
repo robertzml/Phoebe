@@ -72,6 +72,7 @@ namespace Phoebe.Core.BL
             store.StoreWeight = task.InWeight;
             store.StockInTaskId = task.Id;
             store.InTime = stockIn.InTime;
+            store.MoveTime = stockIn.InTime;
             store.Source = 1;
             store.Destination = 0;
             store.Status = (int)EntityStatus.StoreReady;

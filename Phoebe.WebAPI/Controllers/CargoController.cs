@@ -41,6 +41,21 @@ namespace Phoebe.WebAPI.Controllers
         }
 
         /// <summary>
+        /// 货品列表
+        /// </summary>
+        /// <param name="customerNumber"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult<List<CargoView>> ListByNumber(string customerNumber)
+        {
+            CargoViewBusiness cargoViewBusiness = new CargoViewBusiness();
+            if (string.IsNullOrEmpty(customerNumber))
+                return cargoViewBusiness.FindAll();
+            else
+                return cargoViewBusiness.FindByCustomerNumber(customerNumber);
+        }
+
+        /// <summary>
         /// 添加货物
         /// </summary>
         /// <param name="cargo"></param>

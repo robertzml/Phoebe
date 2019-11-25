@@ -242,6 +242,36 @@ namespace Phoebe.Core.View
         /// </summary>
         [Display(Name = "副编号")]
         public string PositionViceNumber { get; set; }
+
+        /// <summary>
+        /// 客户ID
+        /// </summary>
+        [Display(Name = "客户ID")]
+        public int CustomerId { get; set; }
+
+        /// <summary>
+        /// 客户名称
+        /// </summary>
+        [Display(Name = "客户名称")]
+        public string CustomerName { get; set; }
+
+        /// <summary>
+        /// 客户编号
+        /// </summary>
+        [Display(Name = "客户编号")]
+        public string CustomerNumber { get; set; }
+
+        /// <summary>
+        /// 合同名称
+        /// </summary>
+        [Display(Name = "合同名称")]
+        public string ContractName { get; set; }
+
+        /// <summary>
+        /// 合同编号
+        /// </summary>
+        [Display(Name = "合同编号")]
+        public string ContractNumber { get; set; }
         #endregion //Method
     }
 }

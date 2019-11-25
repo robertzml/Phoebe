@@ -30,6 +30,20 @@ namespace Phoebe.WebAPI.Model
     }
 
     /// <summary>
+    /// 入库确认模型
+    /// </summary>
+    public class StockInFinishModel
+    {
+        public string TaskId;
+
+        public string CargoId;
+
+        public int UserId;
+
+        public string Remark;
+    }
+
+    /// <summary>
     /// 出库添加模型
     /// </summary>
     public class StockOutCreateModel

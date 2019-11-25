@@ -15,13 +15,24 @@ namespace Phoebe.Core.BL
         /// 按客户获取货物
         /// </summary>
         /// <param name="customerId"></param>
-        /// <param name="contractId"></param>
         /// <returns></returns>
         public List<CargoView> FindByCustomer(int customerId)
         {
             var db = GetInstance();
 
             return db.Queryable<CargoView>().Where(r => r.CustomerId == customerId).ToList();
+        }
+
+        /// <summary>
+        /// 按客户获取货物
+        /// </summary>
+        /// <param name="customerNumber"></param>
+        /// <returns></returns>
+        public List<CargoView> FindByCustomerNumber(string customerNumber)
+        {
+            var db = GetInstance();
+
+            return db.Queryable<CargoView>().Where(r => r.CustomerNumber == customerNumber).ToList();
         }
         #endregion //Method
     }
