@@ -107,6 +107,68 @@ namespace Phoebe.Base.System
         /// </summary>
         [Display(Name = "待出库")]
         StockOutReady = 81,
+
+        /// <summary>
+        /// 82:已接单
+        /// </summary>
+        [Display(Name = "已接单")]
+        StockOutReceive = 82,
+
+        /// <summary>
+        /// 83:已下架
+        /// </summary>
+        [Display(Name = "已下架")]
+        StockOutLeave = 83,
+
+        /// <summary>
+        /// 84:已清点
+        /// </summary>
+        [Display(Name = "已清点")]
+        StockOutCheck = 84,
+
+        /// <summary>
+        /// 85:已出库
+        /// </summary>
+        [Display(Name = "已出库")]
+        StockOutFinish = 85,
         #endregion //Stock Out
+
+        #region Stock Move
+        /// <summary>
+        /// 91:准备移库
+        /// </summary>
+        [Display(Name = "准备移库")]
+        StockMoveReady = 91,
+
+        /// <summary>
+        /// 92:已接单
+        /// </summary>
+        [Display(Name = "已接单")]
+        StockMoveReceive = 92,
+
+        /// <summary>
+        /// 93:已下架
+        /// </summary>
+        [Display(Name = "已下架")]
+        StockMoveLeave = 93,
+
+        /// <summary>
+        /// 94:已清点
+        /// </summary>
+        [Display(Name = "已清点")]
+        StockMoveCheck = 94,
+
+        /// <summary>
+        /// 95:已上架
+        /// </summary>
+        [Display(Name = "已上架")]
+        StockMoveEnter = 95,
+
+        /// <summary>
+        /// 96:已移库
+        /// </summary>
+        [Display(Name = "已移库")]
+        StockMoveFinish = 96,
+        #endregion //Stock Move
     }
 }

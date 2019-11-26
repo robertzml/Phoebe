@@ -36,7 +36,7 @@ namespace Phoebe.Core.BL
                 {
                     item.StockOutId = item.Id;
                     var store = db.Queryable<Store>().InSingle(item.StoreId);
-                    item.CategoryId = store.CategoryId;
+                    //item.CategoryId = store.CategoryId;
 
                     item.Status = (int)EntityStatus.StockOutReady;
                 }
