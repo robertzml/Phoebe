@@ -215,6 +215,12 @@ namespace Phoebe.Core.View
         public string CategoryNumber { get; set; }
 
         /// <summary>
+        /// 货品名称
+        /// </summary>
+        [Display(Name = "货品名称")]
+        public string CargoName { get; set; }
+
+        /// <summary>
         /// 仓库名称
         /// </summary>
         [Display(Name = "仓库名称")]

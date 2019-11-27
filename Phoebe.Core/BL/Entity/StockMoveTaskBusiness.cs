@@ -14,5 +14,13 @@ namespace Phoebe.Core.BL.Entity
     /// </summary>
     public class StockMoveTaskBusiness : AbstractBusiness<StockMoveTask, string>, IBaseBL<StockMoveTask, string>
     {
+        #region Method
+        public List<StockMoveTask> GetByStockOut(int positionId)
+        {
+            List<StockMoveTask> data = new List<StockMoveTask>();
+
+            return data;
+        }
+        #endregion //Method
     }
 }

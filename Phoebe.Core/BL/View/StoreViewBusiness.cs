@@ -21,11 +21,11 @@ namespace Phoebe.Core.BL
         /// </summary>
         /// <param name="positionId"></param>
         /// <returns></returns>
-        public StoreView FindStoreIn(int positionId)
+        public List<StoreView> FindStoreIn(int positionId)
         {
             var db = GetInstance();
-            var data = db.Queryable<StoreView>().Single(r => r.PositionId == positionId && r.Status == (int)EntityStatus.StoreIn);
-            return data;
+            var data = db.Queryable<StoreView>().Where(r => r.PositionId == positionId && r.Status == (int)EntityStatus.StoreIn);
+            return data.ToList();
         }
 
         /// <summary>

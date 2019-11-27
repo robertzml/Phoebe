@@ -26,7 +26,7 @@ namespace Phoebe.WebAPI.Controllers
         /// <param name="positionId"></param>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult<StoreView> FindStoreIn(int positionId)
+        public ActionResult<List<StoreView>> FindStoreIn(int positionId)
         {
             StoreViewBusiness storeViewBusiness = new StoreViewBusiness();
             return storeViewBusiness.FindStoreIn(positionId);
