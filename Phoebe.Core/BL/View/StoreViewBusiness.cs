@@ -34,7 +34,7 @@ namespace Phoebe.Core.BL
         /// <param name="contractId">合同ID</param>
         /// <param name="isStoreIn">是否限定在库</param>
         /// <returns></returns>
-        public List<StoreView> FindByContract(int contractId,  bool isStoreIn)
+        public List<StoreView> FindByContract(int contractId, bool isStoreIn)
         {
             var db = GetInstance();
             if (isStoreIn)
@@ -45,6 +45,49 @@ namespace Phoebe.Core.BL
             else
             {
                 var data = db.Queryable<StoreView>().Where(r => r.ContractId == contractId).ToList();
+                return data;
+            }
+        }
+
+        /// <summary>
+        /// 按货品查找库存
+        /// </summary>
+        /// <param name="cargoId">货品ID</param>
+        /// <param name="isStoreIn">是否限定在库</param>
+        /// <returns></returns>
+        public List<StoreView> FindByCargo(string cargoId, bool isStoreIn)
+        {
+            var db = GetInstance();
+            if (isStoreIn)
+            {
+                var data = db.Queryable<StoreView>().Where(r => r.CargoId == cargoId && r.Status == (int)EntityStatus.StoreIn).ToList();
+                return data;
+            }
+            else
+            {
+                var data = db.Queryable<StoreView>().Where(r => r.CargoId == cargoId).ToList();
+                return data;
+            }
+        }
+
+        /// <summary>
+        /// 按货品查找库存
+        /// </summary>
+        /// <param name="contractId">合同ID</param>
+        /// <param name="cargoId">货品ID</param>
+        /// <param name="isStoreIn">是否限定在库</param>
+        /// <returns></returns>
+        public List<StoreView> FindByCargo(int contractId, string cargoId, bool isStoreIn)
+        {
+            var db = GetInstance();
+            if (isStoreIn)
+            {
+                var data = db.Queryable<StoreView>().Where(r => r.ContractId == contractId && r.CargoId == cargoId && r.Status == (int)EntityStatus.StoreIn).ToList();
+                return data;
+            }
+            else
+            {
+                var data = db.Queryable<StoreView>().Where(r => r.ContractId == contractId && r.CargoId == cargoId).ToList();
                 return data;
             }
         }

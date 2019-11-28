@@ -15,6 +15,33 @@ namespace Phoebe.Core.BL
     public class StockOutBusiness : AbstractBusiness<StockOut, string>, IBaseBL<StockOut, string>
     {
         #region Method
+        public override (bool success, string errorMessage, StockOut t) Create(StockOut entity)
+        {
+            var db = GetInstance();
+            try
+            {
+                db.Ado.BeginTran();
+
+                SequenceRecordBusiness recordBusiness = new SequenceRecordBusiness();
+
+                entity.Id = Guid.NewGuid().ToString();
+                entity.MonthTime = entity.OutTime.Year.ToString() + entity.OutTime.Month.ToString().PadLeft(2, '0');
+                entity.FlowNumber = recordBusiness.GetNextSequence(db, "StockOut", entity.OutTime);
+                entity.CreateTime = DateTime.Now;
+                entity.Status = (int)EntityStatus.StockOutReady;
+
+                var t = db.Insertable(entity).ExecuteReturnEntity();
+
+                db.Ado.CommitTran();
+                return (true, "", t);
+            }
+            catch (Exception e)
+            {
+                db.Ado.RollbackTran();
+                return (false, e.Message, null);
+            }
+        }
+
         public (bool success, string errorMessage, StockOut t) Create(StockOut entity, List<StockOutTask> tasks)
         {
             var db = GetInstance();

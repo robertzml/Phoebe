@@ -54,6 +54,33 @@ namespace Phoebe.WebAPI.Controllers
                 return stockOutViewBusiness.FindByMonth(monthTime);
             }
         }
+
+        /// <summary>
+        /// 添加出库
+        /// </summary>
+        /// <param name="stockOut"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ActionResult<ResponseData>> Create(StockOut stockOut)
+        {
+            StockOutBusiness stockOutBusiness = new StockOutBusiness();
+
+            var task = Task.Run(() =>
+            {
+                var result = stockOutBusiness.Create(stockOut);
+
+                ResponseData data = new ResponseData
+                {
+                    Status = result.success ? 0 : 1,
+                    ErrorMessage = result.errorMessage,
+                    Entity = result.t
+                };
+
+                return data;
+            });
+
+            return await task;
+        }
         #endregion //Stock Out
 
         #region Stock Out Task
@@ -64,7 +91,7 @@ namespace Phoebe.WebAPI.Controllers
         /// <param name="tasks"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<ActionResult<ResponseData>> Create(StockOutCreateModel model)
+        public async Task<ActionResult<ResponseData>> CreateTask(StockOutCreateModel model)
         {
             StockOutBusiness stockOutBusiness = new StockOutBusiness();
 
