@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Phoebe.Core.BL.Entity
+namespace Phoebe.Core.BL
 {
     using Phoebe.Base.Framework;
     using Phoebe.Base.System;

@@ -9,10 +9,10 @@ namespace Phoebe.Core.Entity
     using SqlSugar;
 
     /// <summary>
-    /// 移库任务类
+    /// 移出任务类
     /// </summary>
-    [SugarTable("StockMoveTask")]
-    public class StockMoveTask : IBaseEntity<string>
+    [SugarTable("StockMoveOutTask")]
+    public class StockMoveOutTask : IBaseEntity<string>
     {
         #region Property
         /// <summary>
@@ -35,39 +35,39 @@ namespace Phoebe.Core.Entity
         public int Type { get; set; }
 
         /// <summary>
-        /// 原库存ID
+        /// 库存ID
         /// </summary>
-        [Display(Name = "原库存ID")]
-        public string OldStoreId { get; set; }
+        [Display(Name = "库存ID")]
+        public string StoreId { get; set; }
 
         /// <summary>
-        /// 新库存ID
+        /// 移库任务ID
         /// </summary>
-        [Display(Name = "新库存ID")]
-        public string NewStoreId { get; set; }
+        [Display(Name = "移库任务ID")]
+        public string StockOutTaskId { get; set; }
 
         /// <summary>
-        /// 库存数量
+        /// 在库数量
         /// </summary>
-        [Display(Name = "库存数量")]
+        [Display(Name = "在库数量")]
         public int StoreCount { get; set; }
 
         /// <summary>
-        /// 移库数量
+        /// 移出数量
         /// </summary>
-        [Display(Name = "移库数量")]
+        [Display(Name = "移出数量")]
         public int MoveCount { get; set; }
 
         /// <summary>
-        /// 库存重量
+        /// 在库重量
         /// </summary>
-        [Display(Name = "库存重量")]
+        [Display(Name = "在库重量")]
         public decimal StoreWeight { get; set; }
 
         /// <summary>
-        /// 移库重量
+        /// 移出重量
         /// </summary>
-        [Display(Name = "移库重量")]
+        [Display(Name = "移出重量")]
         public decimal MoveWeight { get; set; }
 
         /// <summary>
@@ -75,12 +75,6 @@ namespace Phoebe.Core.Entity
         /// </summary>
         [Display(Name = "任务码")]
         public string TaskCode { get; set; }
-
-        /// <summary>
-        /// 货架码
-        /// </summary>
-        [Display(Name = "货架码")]
-        public string ShelfCode { get; set; }
 
         /// <summary>
         /// 托盘码
@@ -119,12 +113,6 @@ namespace Phoebe.Core.Entity
         public DateTime CreateTIme { get; set; }
 
         /// <summary>
-        /// 清点时间
-        /// </summary>
-        [Display(Name = "清点时间")]
-        public DateTime? CheckTime { get; set; }
-
-        /// <summary>
         /// 接单时间
         /// </summary>
         [Display(Name = "接单时间")]
@@ -137,16 +125,10 @@ namespace Phoebe.Core.Entity
         public DateTime? OutTime { get; set; }
 
         /// <summary>
-        /// 移入时间
+        /// 清点时间
         /// </summary>
-        [Display(Name = "移入时间")]
-        public DateTime? InTime { get; set; }
-
-        /// <summary>
-        /// 完成时间
-        /// </summary>
-        [Display(Name = "完成时间")]
-        public DateTime? FinishTime { get; set; }
+        [Display(Name = "清点时间")]
+        public DateTime? CheckTime { get; set; }
 
         /// <summary>
         /// 备注
