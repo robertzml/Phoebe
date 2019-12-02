@@ -62,7 +62,7 @@ namespace Phoebe.Core.BL
                 foreach(var item in tasks)
                 {
                     item.StockOutId = item.Id;
-                    var store = db.Queryable<Store>().InSingle(item.StoreId);
+                    //var store = db.Queryable<Store>().InSingle(item.StoreId);
                     //item.CategoryId = store.CategoryId;
 
                     item.Status = (int)EntityStatus.StockOutReady;

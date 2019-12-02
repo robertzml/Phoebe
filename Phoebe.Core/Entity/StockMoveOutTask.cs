@@ -41,9 +41,15 @@ namespace Phoebe.Core.Entity
         public string StoreId { get; set; }
 
         /// <summary>
-        /// 移库任务ID
+        /// 入库任务ID
         /// </summary>
-        [Display(Name = "移库任务ID")]
+        [Display(Name = "入库任务ID")]
+        public string StockInTaskId { get; set; }
+
+        /// <summary>
+        /// 出库任务ID
+        /// </summary>
+        [Display(Name = "出库任务ID")]
         public string StockOutTaskId { get; set; }
 
         /// <summary>
@@ -83,16 +89,34 @@ namespace Phoebe.Core.Entity
         public string TrayCode { get; set; }
 
         /// <summary>
+        /// 仓位ID
+        /// </summary>
+        [Display(Name = "仓位ID")]
+        public int PositionId { get; set; }
+
+        /// <summary>
+        /// 仓库ID
+        /// </summary>
+        [Display(Name = "仓库ID")]
+        public int WarehouseId { get; set; }
+
+        /// <summary>
+        /// 存放位置
+        /// </summary>
+        [Display(Name = "存放位置")]
+        public string Place { get; set; }
+
+        /// <summary>
         /// 清点人ID
         /// </summary>
         [Display(Name = "清点人ID")]
-        public int UserId { get; set; }
+        public int CheckUserId { get; set; }
 
         /// <summary>
         /// 清点人
         /// </summary>
         [Display(Name = "清点人")]
-        public string UserName { get; set; }
+        public string CheckUserName { get; set; }
 
         /// <summary>
         /// 接单人ID

@@ -29,10 +29,10 @@ namespace Phoebe.Core.Entity
         public string StockOutId { get; set; }
 
         /// <summary>
-        /// 库存ID
+        /// 货品ID
         /// </summary>
-        [Display(Name = "库存ID")]
-        public string StoreId { get; set; }
+        [Display(Name = "货品ID")]
+        public string CargoId { get; set; }
 
         /// <summary>
         /// 库存数量
@@ -65,82 +65,22 @@ namespace Phoebe.Core.Entity
         public string TaskCode { get; set; }
 
         /// <summary>
-        /// 货架码
+        /// 创建人ID
         /// </summary>
-        [Display(Name = "货架码")]
-        public string ShelfCode { get; set; }
-
-        /// <summary>
-        /// 托盘码
-        /// </summary>
-        [Display(Name = "托盘码")]
-        public string TrayCode { get; set; }
-
-        /// <summary>
-        /// 仓位ID
-        /// </summary>
-        [Display(Name = "仓位ID")]
-        public int PositionId { get; set; }
-
-        /// <summary>
-        /// 仓库ID
-        /// </summary>
-        [Display(Name = "仓库ID")]
-        public int WarehouseId { get; set; }
-
-        /// <summary>
-        /// 存放位置
-        /// </summary>
-        [Display(Name = "存放位置")]
-        public string Place { get; set; }
-
-        /// <summary>
-        /// 清点人ID
-        /// </summary>
-        [Display(Name = "清点人ID")]
+        [Display(Name = "创建人ID")]
         public int UserId { get; set; }
 
         /// <summary>
-        /// 清点人
+        /// 创建人
         /// </summary>
-        [Display(Name = "清点人")]
+        [Display(Name = "创建人")]
         public string UserName { get; set; }
-
-        /// <summary>
-        /// 接单人ID
-        /// </summary>
-        [Display(Name = "接单人ID")]
-        public int ReceiveUserId { get; set; }
-
-        /// <summary>
-        /// 接单人
-        /// </summary>
-        [Display(Name = "接单人")]
-        public string ReceiveUserName { get; set; }
 
         /// <summary>
         /// 创建时间
         /// </summary>
         [Display(Name = "创建时间")]
         public DateTime CreateTIme { get; set; }
-
-        /// <summary>
-        /// 清点时间
-        /// </summary>
-        [Display(Name = "清点时间")]
-        public DateTime? CheckTime { get; set; }
-
-        /// <summary>
-        /// 接单时间
-        /// </summary>
-        [Display(Name = "接单时间")]
-        public DateTime? ReceiveTime { get; set; }
-
-        /// <summary>
-        /// 下架时间
-        /// </summary>
-        [Display(Name = "下架时间")]
-        public DateTime? LeaveTime { get; set; }
 
         /// <summary>
         /// 完成时间
