@@ -32,9 +32,10 @@ namespace Phoebe.Core.Entity
         /// <summary>
         /// 代码
         /// </summary>
+        [Required]
         [Display(Name = "代码")]
         public string Number { get; set; }
-        
+
         /// <summary>
         /// 地址
         /// </summary>
@@ -58,6 +59,12 @@ namespace Phoebe.Core.Entity
         /// </summary>
         [Display(Name = "联系人电话")]
         public string ContactTelephone { get; set; }
+
+        /// <summary>
+        /// 身份证号
+        /// </summary>
+        [Display(Name = "身份证号")]
+        public string IdentityCard { get; set; }
 
         /// <summary>
         /// 客户类型
