@@ -76,10 +76,12 @@ namespace Phoebe.Core.BL
         /// <param name="contractId">合同ID</param>
         /// <param name="cargoId">货品ID</param>
         /// <param name="isStoreIn">是否限定在库</param>
+        /// <param name="db">数据库连接</param>
         /// <returns></returns>
-        public List<StoreView> FindByCargo(int contractId, string cargoId, bool isStoreIn)
+        public List<StoreView> FindByCargo(int contractId, string cargoId, bool isStoreIn, SqlSugarClient db = null)
         {
-            var db = GetInstance();
+            if (db == null)
+                db = GetInstance();
             if (isStoreIn)
             {
                 var data = db.Queryable<StoreView>().Where(r => r.ContractId == contractId && r.CargoId == cargoId && r.Status == (int)EntityStatus.StoreIn).ToList();

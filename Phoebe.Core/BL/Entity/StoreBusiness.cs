@@ -28,7 +28,7 @@ namespace Phoebe.Core.BL
             Store store = new Store();
             store.Id = Guid.NewGuid().ToString();
             store.CustomerId = stockIn.CustomerId;
-            store.ContractId = stockIn.ContractId;            
+            store.ContractId = stockIn.ContractId;
             store.CategoryId = task.CategoryId;
             store.WarehouseId = task.WarehouseId;
             store.PositionId = task.PositionId;
