@@ -25,6 +25,7 @@ namespace Phoebe.Core.Entity
         /// <summary>
         /// 名称
         /// </summary>
+        [Required]
         [SugarColumn(ColumnName = "Name")]
         [Display(Name = "名称")]
         public string Name { get; set; }
@@ -32,6 +33,7 @@ namespace Phoebe.Core.Entity
         /// <summary>
         /// 表名
         /// </summary>
+        [Required]
         [SugarColumn(ColumnName = "TableName")]
         [Display(Name = "表名")]
         public string TableName { get; set; }
@@ -39,6 +41,7 @@ namespace Phoebe.Core.Entity
         /// <summary>
         /// 字段名
         /// </summary>
+        [Required]
         [SugarColumn(ColumnName = "FieldName")]
         [Display(Name = "字段名")]
         public string FieldName { get; set; }
@@ -46,6 +49,7 @@ namespace Phoebe.Core.Entity
         /// <summary>
         /// 格式
         /// </summary>
+        [Required]
         [SugarColumn(ColumnName = "Format")]
         [Display(Name = "格式")]
         public string Format { get; set; }

@@ -28,15 +28,8 @@ namespace Phoebe.Core.BL
                 db.Ado.BeginTran();
 
                 SequenceRecordBusiness sequenceBusiness = new SequenceRecordBusiness();
-                var number = sequenceBusiness.GetNextSequence(db, "Contract", entity.SignDate);
-                if (!string.IsNullOrEmpty(number))
-                    entity.Number = number;
-
-                var count = db.Queryable<Contract>().Count(r => r.Number == entity.Number);
-                if (count > 0)
-                {
-                    return (false, "编码重复", null);
-                }
+                entity.Number = sequenceBusiness.GetNextSequence(db, "Contract", entity.SignDate);
+                entity.Status = 0;
 
                 var t = db.Insertable(entity).ExecuteReturnEntity();
 
@@ -57,13 +50,6 @@ namespace Phoebe.Core.BL
         /// <returns></returns>
         public override (bool success, string errorMessage) Update(Contract entity)
         {
-            var db = GetInstance();
-            var count = db.Queryable<Contract>().Count(r => r.Id != entity.Id && r.Number == entity.Number);
-            if (count > 0)
-            {
-                return (false, "编码重复");
-            }
-
             return base.Update(entity);
         }
         #endregion //Method

@@ -8,7 +8,7 @@ namespace Phoebe.Core.Entity
     using Phoebe.Base.Framework;
     using Phoebe.Core.Utility;
     using SqlSugar;
-   
+
     /// <summary>
     /// 合同类
     /// </summary>
@@ -32,12 +32,14 @@ namespace Phoebe.Core.Entity
         /// <summary>
         /// 合同名称
         /// </summary>
+        [Required]
         [Display(Name = "合同名称")]
         public string Name { get; set; }
 
         /// <summary>
         /// 客户ID
         /// </summary>
+        [Required]
         [Display(Name = "客户ID")]
         public int CustomerId { get; set; }
 

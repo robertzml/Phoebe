@@ -129,6 +129,7 @@ namespace Phoebe.Core.BL
         /// <param name="dt">日期</param>
         /// <param name="extParams">额外参数</param>
         /// <returns></returns>
+        /// <remarks>获取时即递增</remarks>
         public string GetNextSequence(string tableName, DateTime? dt, params string[] extParams)
         {
             var db = GetInstance();
