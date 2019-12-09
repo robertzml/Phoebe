@@ -38,34 +38,20 @@ namespace Phoebe.Core.BL
         }
 
         /// <summary>
-        /// 根据入库任务添加货品
+        /// 编辑货品
         /// </summary>
-        /// <param name="db"></param>
-        /// <param name="stockIn">入库单</param>
-        /// <param name="task">入库任务</param>
+        /// <param name="entity"></param>
         /// <returns></returns>
-        public (bool success, string errorMessage, Cargo t) Create(SqlSugarClient db, StockIn stockIn, StockInTask task)
+        public override (bool success, string errorMessage) Update(Cargo entity)
         {
-            Cargo cargo = new Cargo();
-            cargo.Id = Guid.NewGuid().ToString();
-            cargo.CategoryId = task.CategoryId;
-            cargo.CustomerId = stockIn.CustomerId;
-            cargo.UnitWeight = task.UnitWeight;
-            cargo.RegisterTime = DateTime.Now;
-            cargo.Status = 0;
+            var db = GetInstance();
+            var count = db.Queryable<Cargo>().Count(r => r.Id != entity.Id && r.CustomerId == entity.CustomerId && r.Name == entity.Name);
+            if (count > 0)
+            {
+                return (false, "名称重复");
+            }
 
-            var exist = db.Queryable<Cargo>()
-                .Where(r => r.CategoryId == cargo.CategoryId && r.UnitWeight == cargo.UnitWeight)
-                .ToList();
-            if (exist.Count() == 0)
-            {
-                var t = db.Insertable(cargo).ExecuteReturnEntity();
-                return (true, "", t);
-            }
-            else
-            {
-                return (true, "", exist.First());
-            }
+            return base.Update(entity);
         }
         #endregion //Method
     }

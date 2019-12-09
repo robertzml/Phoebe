@@ -25,12 +25,14 @@ namespace Phoebe.Core.Entity
         /// <summary>
         /// 货品名称
         /// </summary>
+        [Required]
         [Display(Name = "货品名称")]
         public string Name { get; set; }
 
         /// <summary>
         /// 所属客户
         /// </summary>
+        [Required]
         [Display(Name = "所属客户")]
         public int CustomerId { get; set; }
 

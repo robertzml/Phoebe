@@ -56,6 +56,19 @@ namespace Phoebe.WebAPI.Controllers
         }
 
         /// <summary>
+        /// 货品信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult<CargoView> Get(string id)
+        {
+            CargoViewBusiness cargoViewBusiness = new CargoViewBusiness();
+            return cargoViewBusiness.FindById(id);
+        }
+
+
+        /// <summary>
         /// 添加货物
         /// </summary>
         /// <param name="cargo"></param>
