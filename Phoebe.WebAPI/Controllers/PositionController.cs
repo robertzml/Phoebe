@@ -58,6 +58,18 @@ namespace Phoebe.WebAPI.Controllers
         }
 
         /// <summary>
+        /// 查找仓位
+        /// </summary>
+        /// <param name="id">仓位ID</param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult<Position> Get(int id)
+        {
+            PositionBusiness positionBusiness = new PositionBusiness();
+            return positionBusiness.FindById(id);
+        }
+
+        /// <summary>
         /// 仓位数量
         /// </summary>
         /// <param name="shelfId"></param>
@@ -88,6 +100,32 @@ namespace Phoebe.WebAPI.Controllers
                     Status = result.success ? 0 : 1,
                     ErrorMessage = result.errorMessage,
                     Entity = null
+                };
+
+                return data;
+            });
+
+            return await task;
+        }
+
+        /// <summary>
+        /// 编辑
+        /// </summary>
+        /// <param name="position"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ActionResult<ResponseData>> Update(Position position)
+        {
+            PositionBusiness positionBusiness = new PositionBusiness();
+
+            var task = Task.Run(() =>
+            {
+                var result = positionBusiness.Update(position);
+
+                ResponseData data = new ResponseData
+                {
+                    Status = result.success ? 0 : 1,
+                    ErrorMessage = result.errorMessage
                 };
 
                 return data;
