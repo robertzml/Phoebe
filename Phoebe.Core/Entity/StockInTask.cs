@@ -29,16 +29,16 @@ namespace Phoebe.Core.Entity
         public string StockInId { get; set; }
 
         /// <summary>
-        /// 库存ID
+        /// 任务码
         /// </summary>
-        [Display(Name = "库存ID")]
-        public string StoreId { get; set; }
+        [Display(Name = "任务码")]
+        public string TaskCode { get; set; }
 
         /// <summary>
-        /// 类别ID
+        /// 货品ID
         /// </summary>
-        [Display(Name = "类别ID")]
-        public int CategoryId { get; set; }
+        [Display(Name = "货品ID")]
+        public string CargoId { get; set; }
 
         /// <summary>
         /// 入库数量
@@ -77,82 +77,22 @@ namespace Phoebe.Core.Entity
         public int Durability { get; set; }
 
         /// <summary>
-        /// 任务码
+        /// 创建人ID
         /// </summary>
-        [Display(Name = "任务码")]
-        public string TaskCode { get; set; }
-
-        /// <summary>
-        /// 货架码
-        /// </summary>
-        [Display(Name = "货架码")]
-        public string ShelfCode { get; set; }
-
-        /// <summary>
-        /// 托盘码
-        /// </summary>
-        [Display(Name = "托盘码")]
-        public string TrayCode { get; set; }
-
-        /// <summary>
-        /// 仓位ID
-        /// </summary>
-        [Display(Name = "仓位ID")]
-        public int PositionId { get; set; }
-
-        /// <summary>
-        /// 仓库ID
-        /// </summary>
-        [Display(Name = "仓库ID")]
-        public int WarehouseId { get; set; }
-
-        /// <summary>
-        /// 存放位置
-        /// </summary>
-        [Display(Name = "存放位置")]
-        public string Place { get; set; }
-
-        /// <summary>
-        /// 操作人ID
-        /// </summary>
-        [Display(Name = "操作人ID")]
+        [Display(Name = "创建人ID")]
         public int UserId { get; set; }
 
         /// <summary>
-        /// 操作人
+        /// 创建人
         /// </summary>
-        [Display(Name = "操作人")]
+        [Display(Name = "创建人")]
         public string UserName { get; set; }
-
-        /// <summary>
-        /// 接单人ID
-        /// </summary>
-        [Display(Name = "接单人ID")]
-        public int ReceiveUserId { get; set; }
-
-        /// <summary>
-        /// 接单人
-        /// </summary>
-        [Display(Name = "接单人")]
-        public string ReceiveUserName { get; set; }
 
         /// <summary>
         /// 创建时间
         /// </summary>
         [Display(Name = "创建时间")]
         public DateTime CreateTime { get; set; }
-
-        /// <summary>
-        /// 接单时间
-        /// </summary>
-        [Display(Name = "接单时间")]
-        public DateTime? ReceiveTime { get; set; }
-
-        /// <summary>
-        /// 上架时间
-        /// </summary>
-        [Display(Name = "上架时间")]
-        public DateTime? EnterTime { get; set; }
 
         /// <summary>
         /// 完成时间
