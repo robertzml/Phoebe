@@ -30,11 +30,12 @@ namespace Phoebe.Core.BL
         /// <returns></returns>
         public List<StockInTaskView> FindByTray(string trayCode, EntityStatus status)
         {
-            var db = GetInstance();
+            //var db = GetInstance();
 
-            var data = db.Queryable<StockInTaskView>().Where(r => r.TrayCode == trayCode && r.Status == (int)status);
+            //var data = db.Queryable<StockInTaskView>().Where(r => r.TrayCode == trayCode && r.Status == (int)status);
 
-            return data.ToList();
+            //return data.ToList();
+            return null;
         }
 
         /// <summary>
@@ -44,11 +45,12 @@ namespace Phoebe.Core.BL
         /// <returns></returns>
         public List<StockInTaskView> FindCurrentReceive(int userId)
         {
-            var db = GetInstance();
+            //var db = GetInstance();
 
-            var data = db.Queryable<StockInTaskView>().Where(r => r.ReceiveUserId == userId && r.Status == (int)EntityStatus.StockInReceive);
+            //var data = db.Queryable<StockInTaskView>().Where(r => r.ReceiveUserId == userId && r.Status == (int)EntityStatus.StockInReceive);
 
-            return data.ToList();
+            //return data.ToList();
+            return null;
         }
         #endregion //Method
     }

@@ -34,7 +34,7 @@ namespace Phoebe.Core.BL
                 entity.TaskCode = recordBusiness.GetNextSequence(db, "StockInTask", stockIn.InTime);
 
                 entity.Id = Guid.NewGuid().ToString();
-                entity.InWeight = entity.InCount * entity.UnitWeight;
+                //entity.InWeight = entity.InCount * entity.UnitWeight;
                 entity.CreateTime = DateTime.Now;
                 entity.Status = (int)EntityStatus.StockInReady;
 
