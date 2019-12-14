@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace Phoebe.Core
+namespace Phoebe.Core.Entity
 {
     using Phoebe.Base.Framework;
     using SqlSugar;
 
     /// <summary>
-    /// 移入任务类
+    /// 搬运入库任务类
     /// </summary>
-    [SugarTable("StockMoveInTask")]
-    public class StockMoveInTask : IBaseEntity<string>
+    [SugarTable("CarryInTask")]
+    public class CarryInTask : IBaseEntity<string>
     {
         #region Property
         /// <summary>
@@ -23,15 +23,9 @@ namespace Phoebe.Core
         public string Id { get; set; }
 
         /// <summary>
-        /// 仓库类型
+        /// 搬运类型
         /// </summary>
-        [Display(Name = "仓库类型")]
-        public int WarehouseType { get; set; }
-
-        /// <summary>
-        /// 移库类型
-        /// </summary>
-        [Display(Name = "移库类型")]
+        [Display(Name = "搬运类型")]
         public int Type { get; set; }
 
         /// <summary>
@@ -41,21 +35,27 @@ namespace Phoebe.Core
         public string StoreId { get; set; }
 
         /// <summary>
-        /// 移出任务ID
+        /// 入库任务ID
         /// </summary>
-        [Display(Name = "移出任务ID")]
-        public string StockMoveOutTaskId { get; set; }
+        [Display(Name = "入库任务ID")]
+        public string StockInTaskId { get; set; }
 
         /// <summary>
-        /// 移入数量
+        /// 出库任务ID
         /// </summary>
-        [Display(Name = "移入数量")]
+        [Display(Name = "出库任务ID")]
+        public string StockOutTaskId { get; set; }
+
+        /// <summary>
+        /// 入库数量
+        /// </summary>
+        [Display(Name = "入库数量")]
         public int MoveCount { get; set; }
 
         /// <summary>
-        /// 移入重量
+        /// 入库重量
         /// </summary>
-        [Display(Name = "移入重量")]
+        [Display(Name = "入库重量")]
         public decimal MoveWeight { get; set; }
 
         /// <summary>
@@ -65,22 +65,46 @@ namespace Phoebe.Core
         public string TaskCode { get; set; }
 
         /// <summary>
+        /// 货架码
+        /// </summary>
+        [Display(Name = "货架码")]
+        public string ShelfCode { get; set; }
+
+        /// <summary>
         /// 托盘码
         /// </summary>
         [Display(Name = "托盘码")]
         public string TrayCode { get; set; }
 
         /// <summary>
+        /// 仓位ID
+        /// </summary>
+        [Display(Name = "仓位ID")]
+        public int PositionId { get; set; }
+
+        /// <summary>
+        /// 仓库ID
+        /// </summary>
+        [Display(Name = "仓库ID")]
+        public int WarehouseId { get; set; }
+
+        /// <summary>
+        /// 存放位置
+        /// </summary>
+        [Display(Name = "存放位置")]
+        public string Place { get; set; }
+
+        /// <summary>
         /// 清点人ID
         /// </summary>
         [Display(Name = "清点人ID")]
-        public int UserId { get; set; }
+        public int CheckUserId { get; set; }
 
         /// <summary>
         /// 清点人
         /// </summary>
         [Display(Name = "清点人")]
-        public string UserName { get; set; }
+        public string CheckUserName { get; set; }
 
         /// <summary>
         /// 接单人ID
@@ -98,13 +122,7 @@ namespace Phoebe.Core
         /// 创建时间
         /// </summary>
         [Display(Name = "创建时间")]
-        public DateTime CreateTIme { get; set; }
-
-        /// <summary>
-        /// 接单时间
-        /// </summary>
-        [Display(Name = "接单时间")]
-        public DateTime? ReceiveTime { get; set; }
+        public DateTime CreateTime { get; set; }
 
         /// <summary>
         /// 清点时间
@@ -113,10 +131,22 @@ namespace Phoebe.Core
         public DateTime? CheckTime { get; set; }
 
         /// <summary>
+        /// 接单时间
+        /// </summary>
+        [Display(Name = "接单时间")]
+        public DateTime? ReceiveTime { get; set; }
+
+        /// <summary>
         /// 移入时间
         /// </summary>
         [Display(Name = "移入时间")]
         public DateTime? InTime { get; set; }
+
+        /// <summary>
+        /// 完成时间
+        /// </summary>
+        [Display(Name = "完成时间")]
+        public DateTime? FinishTime { get; set; }
 
         /// <summary>
         /// 备注
