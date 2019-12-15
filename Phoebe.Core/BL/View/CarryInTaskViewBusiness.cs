@@ -23,7 +23,19 @@ namespace Phoebe.Core.BL
 
             var data = db.Queryable<CarryInTaskView>().Where(r => r.TrayCode == trayCode && r.Status == (int)status);
 
-            return data.ToList();           
+            return data.ToList();
+        }
+
+        /// <summary>
+        /// 根据入库任务查找
+        /// </summary>
+        /// <param name="stockInTaskId"></param>
+        /// <returns></returns>
+        public List<CarryInTaskView> FindByStockInTask(string stockInTaskId)
+        {
+            var db = GetInstance();
+            var data = db.Queryable<CarryInTaskView>().Where(r => r.StockInTaskId == stockInTaskId);
+            return data.ToList();
         }
         #endregion //Method
     }

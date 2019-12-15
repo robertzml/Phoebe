@@ -165,7 +165,6 @@ namespace Phoebe.Core.View
         [Display(Name = "入库任务码")]
         public string StockInTaskCode { get; set; }
 
-
         /// <summary>
         /// 入库数量
         /// </summary>

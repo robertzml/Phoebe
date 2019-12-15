@@ -41,6 +41,29 @@ namespace Phoebe.WebAPI.Controllers
 
             return await task;
         }
+
+        /// <summary>
+        /// 根据入库任务查找
+        /// </summary>
+        /// <param name="taskId"></param>
+        /// <returns></returns>
+        public ActionResult<List<CarryInTaskView>> FindByStockInTask(string taskId)
+        {
+            CarryInTaskViewBusiness carryInTaskViewBusiness = new CarryInTaskViewBusiness();
+            return carryInTaskViewBusiness.FindByStockInTask(taskId);
+        }
+
+        /// <summary>
+        /// 根据托盘码查找入库任务
+        /// </summary>
+        /// <param name="trayCode"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult<List<CarryInTaskView>> FindByTray(string trayCode)
+        {
+            CarryInTaskViewBusiness carryInTaskViewBusiness = new CarryInTaskViewBusiness();
+            return carryInTaskViewBusiness.FindByTray(trayCode, EntityStatus.StockInCheck);
+        }
         #endregion //Action
     }
 }
