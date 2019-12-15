@@ -18,6 +18,16 @@ namespace Phoebe.WebAPI.Model
     }
 
     /// <summary>
+    /// 搬运入库接单模型
+    /// </summary>
+    public class CarryInReceiveModel
+    {
+        public string TrayCode;
+
+        public int UserId;
+    }
+
+    /// <summary>
     /// 入库上架模型
     /// </summary>
     public class StockInEnterModel

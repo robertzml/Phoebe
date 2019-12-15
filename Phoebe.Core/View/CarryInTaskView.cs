@@ -200,6 +200,48 @@ namespace Phoebe.Core.View
         /// </summary>
         [Display(Name = "保质期")]
         public int Durability { get; set; }
+
+        /// <summary>
+        /// 货品名称
+        /// </summary>
+        [Display(Name = "货品名称")]
+        public string CargoName { get; set; }
+
+        /// <summary>
+        /// 类别名称
+        /// </summary>
+        [Display(Name = "类别名称")]
+        public string CategoryName { get; set; }
+
+        /// <summary>
+        /// 类别代码
+        /// </summary>
+        [Display(Name = "类别代码")]
+        public string CategoryNumber { get; set; }
+
+        /// <summary>
+        /// 客户名称
+        /// </summary>
+        [Display(Name = "客户名称")]
+        public string CustomerName { get; set; }
+
+        /// <summary>
+        /// 客户编号
+        /// </summary>
+        [Display(Name = "客户编号")]
+        public string CustomerNumber { get; set; }
+
+        /// <summary>
+        /// 合同名称
+        /// </summary>
+        [Display(Name = "合同名称")]
+        public string ContractName { get; set; }
+
+        /// <summary>
+        /// 合同编号
+        /// </summary>
+        [Display(Name = "合同编号")]
+        public string ContractNumber { get; set; }
         #endregion //Property
     }
 }

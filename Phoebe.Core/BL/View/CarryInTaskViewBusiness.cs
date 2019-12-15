@@ -37,6 +37,20 @@ namespace Phoebe.Core.BL
             var data = db.Queryable<CarryInTaskView>().Where(r => r.StockInTaskId == stockInTaskId);
             return data.ToList();
         }
+
+        /// <summary>
+        /// 获取用户当前接单任务
+        /// </summary>
+        /// <param name="userId">用户ID</param>
+        /// <returns></returns>
+        public List<CarryInTaskView> FindCurrentReceive(int userId)
+        {
+            var db = GetInstance();
+
+            var data = db.Queryable<CarryInTaskView>().Where(r => r.ReceiveUserId == userId && r.Status == (int)EntityStatus.StockInReceive);
+
+            return data.ToList();
+        }
         #endregion //Method
     }
 }

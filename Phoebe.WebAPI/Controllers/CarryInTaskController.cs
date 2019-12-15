@@ -64,6 +64,43 @@ namespace Phoebe.WebAPI.Controllers
             CarryInTaskViewBusiness carryInTaskViewBusiness = new CarryInTaskViewBusiness();
             return carryInTaskViewBusiness.FindByTray(trayCode, EntityStatus.StockInCheck);
         }
+
+        /// <summary>
+        /// 查找用户当前接单任务
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult<List<CarryInTaskView>> FindCurrentReceive(int userId)
+        {
+            CarryInTaskViewBusiness carryInTaskViewBusiness = new CarryInTaskViewBusiness();
+            return carryInTaskViewBusiness.FindCurrentReceive(userId);
+        }
+
+        /// <summary>
+        /// 入库接单
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ActionResult<ResponseData>> ReceiveTask(CarryInReceiveModel model)
+        {
+            CarryInTaskBusiness taskBusiness = new CarryInTaskBusiness();
+
+            var task = Task.Run(() =>
+            {
+                ResponseData data = new ResponseData();
+
+                var result = taskBusiness.Receive(model.TrayCode, model.UserId);
+
+                data.Status = result.success ? 0 : 1;
+                data.ErrorMessage = result.errorMessage;
+
+                return data;
+            });
+
+            return await task;
+        }
         #endregion //Action
     }
 }

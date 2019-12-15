@@ -172,55 +172,6 @@ namespace Phoebe.WebAPI.Controllers
         }
 
         /// <summary>
-        /// 根据托盘码查找入库任务
-        /// </summary>
-        /// <param name="trayCode"></param>
-        /// <returns></returns>
-        [HttpGet]
-        public ActionResult<List<StockInTaskView>> FindTask(string trayCode)
-        {
-            StockInTaskViewBusiness taskViewBusiness = new StockInTaskViewBusiness();
-            return taskViewBusiness.FindByTray(trayCode, EntityStatus.StockInCheck);
-        }
-
-        /// <summary>
-        /// 查找用户当前接单任务
-        /// </summary>
-        /// <param name="userId"></param>
-        /// <returns></returns>
-        [HttpGet]
-        public ActionResult<List<StockInTaskView>> FindCurrentReceive(int userId)
-        {
-            StockInTaskViewBusiness taskViewBusiness = new StockInTaskViewBusiness();
-            return taskViewBusiness.FindCurrentReceive(userId);
-        }
-
-        /// <summary>
-        /// 入库接单
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public async Task<ActionResult<ResponseData>> ReceiveTask(StockInReceiveModel model)
-        {
-            StockInTaskBusiness taskBusiness = new StockInTaskBusiness();
-
-            var task = Task.Run(() =>
-            {
-                ResponseData data = new ResponseData();
-
-                var result = taskBusiness.Receive(model.TrayCode, model.UserId);
-
-                data.Status = result.success ? 0 : 1;
-                data.ErrorMessage = result.errorMessage;
-
-                return data;
-            });
-
-            return await task;
-        }
-
-        /// <summary>
         /// 入库上架
         /// </summary>
         /// <param name="model"></param>

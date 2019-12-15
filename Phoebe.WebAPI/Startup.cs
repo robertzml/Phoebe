@@ -33,7 +33,7 @@ namespace Phoebe.WebAPI
                 options.AddPolicy(MyAllowSpecificOrigins,
                 builder =>
                 {
-                    builder.WithOrigins().AllowAnyOrigin().AllowAnyHeader();
+                    builder.WithOrigins().AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
                 });
             });
         }
