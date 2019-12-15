@@ -172,31 +172,6 @@ namespace Phoebe.WebAPI.Controllers
         }
 
         /// <summary>
-        /// 入库上架
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public async Task<ActionResult<ResponseData>> EnterTask(StockInEnterModel model)
-        {
-            StockInTaskBusiness taskBusiness = new StockInTaskBusiness();
-
-            var task = Task.Run(() =>
-            {
-                ResponseData data = new ResponseData();
-
-                var result = taskBusiness.Enter(model.TrayCode, model.ShelfCode, model.UserId);
-
-                data.Status = result.success ? 0 : 1;
-                data.ErrorMessage = result.errorMessage;
-
-                return data;
-            });
-
-            return await task;
-        }
-
-        /// <summary>
         /// 入库确认
         /// </summary>
         /// <param name="model"></param>

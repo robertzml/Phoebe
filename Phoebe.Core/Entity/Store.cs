@@ -41,12 +41,6 @@ namespace Phoebe.Core.Entity
         public string CargoId { get; set; }
 
         /// <summary>
-        /// 类别ID
-        /// </summary>
-        [Display(Name = "类别ID")]
-        public int CategoryId { get; set; }
-
-        /// <summary>
         /// 仓库ID
         /// </summary>
         [Display(Name = "仓库ID")]
@@ -95,12 +89,6 @@ namespace Phoebe.Core.Entity
         public string StockInTaskId { get; set; }
 
         /// <summary>
-        /// 移库任务ID
-        /// </summary>
-        [Display(Name = "移库任务ID")]
-        public string StockMoveTaskId { get; set; }
-
-        /// <summary>
         /// 入库时间
         /// </summary>
         [Display(Name = "入库时间")]
@@ -113,22 +101,16 @@ namespace Phoebe.Core.Entity
         public DateTime? OutTime { get; set; }
 
         /// <summary>
-        /// 移入时间
+        /// 搬运入库任务ID
         /// </summary>
-        [Display(Name = "移入时间")]
-        public DateTime MoveTime { get; set; }
+        [Display(Name = "搬运入库任务ID")]
+        public string CarryInTaskId { get; set; }
 
         /// <summary>
-        /// 来源
+        /// 搬运出库任务ID
         /// </summary>
-        [Display(Name = "来源")]
-        public int Source { get; set; }
-
-        /// <summary>
-        /// 目的地
-        /// </summary>
-        [Display(Name = "目的地")]
-        public int Destination { get; set; }
+        [Display(Name = "搬运出库任务ID")]
+        public string CarryOutTaskId { get; set; }
 
         /// <summary>
         /// 备注

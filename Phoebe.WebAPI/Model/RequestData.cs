@@ -8,16 +8,6 @@ namespace Phoebe.WebAPI.Model
     using Phoebe.Core.Entity;
 
     /// <summary>
-    /// 入库接收模型
-    /// </summary>
-    public class StockInReceiveModel
-    {
-        public string TrayCode;
-
-        public int UserId;
-    }
-
-    /// <summary>
     /// 搬运入库接单模型
     /// </summary>
     public class CarryInReceiveModel
@@ -30,7 +20,7 @@ namespace Phoebe.WebAPI.Model
     /// <summary>
     /// 入库上架模型
     /// </summary>
-    public class StockInEnterModel
+    public class CarryInEnterModel
     {
         public string TrayCode;
 

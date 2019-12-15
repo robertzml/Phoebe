@@ -101,6 +101,33 @@ namespace Phoebe.WebAPI.Controllers
 
             return await task;
         }
+
+
+        /// <summary>
+        /// 入库上架
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ActionResult<ResponseData>> EnterTask(CarryInEnterModel model)
+        {
+            CarryInTaskBusiness taskBusiness = new CarryInTaskBusiness();
+
+            var task = Task.Run(() =>
+            {
+                ResponseData data = new ResponseData();
+
+                var result = taskBusiness.Enter(model.TrayCode, model.ShelfCode, model.UserId);
+
+                data.Status = result.success ? 0 : 1;
+                data.ErrorMessage = result.errorMessage;
+
+                return data;
+            });
+
+            return await task;
+        }
+
         #endregion //Action
     }
 }

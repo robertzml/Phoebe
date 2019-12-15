@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Phoebe.Core.BL
@@ -7,6 +8,7 @@ namespace Phoebe.Core.BL
     using Phoebe.Base.Framework;
     using Phoebe.Base.System;
     using Phoebe.Core.Entity;
+    using Phoebe.Core.View;
     using Phoebe.Core.Utility;
 
     /// <summary>
@@ -77,6 +79,72 @@ namespace Phoebe.Core.BL
                     task.Status = (int)EntityStatus.StockInReceive;
 
                     db.Updateable(task).ExecuteCommand();
+                }
+
+                db.Ado.CommitTran();
+                return (true, "");
+            }
+            catch (Exception e)
+            {
+                db.Ado.RollbackTran();
+                return (false, e.Message);
+            }
+        }
+
+        /// <summary>
+        /// 上架
+        /// </summary>
+        /// <param name="trayCode">托盘码</param>
+        /// <param name="shelfCode">货架码</param>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public (bool success, string errorMessage) Enter(string trayCode, string shelfCode, int userId)
+        {
+            var db = GetInstance();
+
+            try
+            {
+                db.Ado.BeginTran();
+
+                var tasks = db.Queryable<CarryInTask>().Where(r => r.TrayCode == trayCode && r.Status == (int)EntityStatus.StockInReceive).ToList();
+                if (tasks.Count == 0)
+                    return (false, "该托盘无入库任务");
+
+                var user = db.Queryable<User>().InSingle(userId);
+                if (tasks.All(r => r.ReceiveUserId != user.Id))
+                    return (false, "非本用户任务");
+
+                // find position
+                PositionBusiness positionBusiness = new PositionBusiness();
+                var position = positionBusiness.FindEmpty(db, shelfCode);
+                if (position == null)
+                {
+                    return (false, "无空仓位");
+                }
+
+                // update position
+                position.IsEmpty = false;
+                db.Updateable(position).ExecuteCommand();
+
+                foreach (var carryTask in tasks)
+                {
+                    // set task info
+                    carryTask.ShelfCode = shelfCode;
+                    carryTask.WarehouseId = position.WarehouseId;
+                    carryTask.PositionId = position.Id;
+                    carryTask.InTime = DateTime.Now;
+                    carryTask.Status = (int)EntityStatus.StockInEnter;
+
+                    // find stock in task
+                    var stockInTask = db.Queryable<StockInTaskView>().InSingle(carryTask.StockInTaskId);
+
+                    // add store
+                    StoreBusiness storeBusiness = new StoreBusiness();
+                    var store = storeBusiness.Create(db, stockInTask, carryTask);
+
+                    // update task
+                    carryTask.StoreId = store.t.Id;
+                    db.Updateable(carryTask).ExecuteCommand();
                 }
 
                 db.Ado.CommitTran();
