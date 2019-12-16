@@ -61,7 +61,7 @@ namespace Phoebe.Core.BL
         /// <returns></returns>
         public Position FindEmpty(SqlSugarClient db, string shelfCode)
         {
-            bool vice = false;
+            bool vice = false; //是否副货架码
             var data = db.Queryable<Position>().Where(r => r.ShelfCode == shelfCode).OrderBy(r => r.Depth).ToList();
             if (data.Count == 0)
             {

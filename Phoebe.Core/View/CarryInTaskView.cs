@@ -139,7 +139,7 @@ namespace Phoebe.Core.View
         /// 移入时间
         /// </summary>
         [Display(Name = "移入时间")]
-        public DateTime? InTime { get; set; }
+        public DateTime? MoveTime { get; set; }
 
         /// <summary>
         /// 完成时间
@@ -200,6 +200,18 @@ namespace Phoebe.Core.View
         /// </summary>
         [Display(Name = "保质期")]
         public int Durability { get; set; }
+
+        /// <summary>
+        /// 入库时间
+        /// </summary>
+        [Display(Name = "入库时间")]
+        public DateTime StockInTime { get; set; }
+
+        /// <summary>
+        /// 入库流水号
+        /// </summary>
+        [Display(Name = "入库流水号")]
+        public string StockInFlowNumber { get; set; }
 
         /// <summary>
         /// 货品名称

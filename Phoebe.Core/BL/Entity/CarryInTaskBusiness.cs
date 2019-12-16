@@ -132,7 +132,7 @@ namespace Phoebe.Core.BL
                     carryTask.ShelfCode = shelfCode;
                     carryTask.WarehouseId = position.WarehouseId;
                     carryTask.PositionId = position.Id;
-                    carryTask.InTime = DateTime.Now;
+                    carryTask.MoveTime = DateTime.Now;
                     carryTask.Status = (int)EntityStatus.StockInEnter;
 
                     // find stock in task

@@ -140,7 +140,7 @@ namespace Phoebe.Core.Entity
         /// 移入时间
         /// </summary>
         [Display(Name = "移入时间")]
-        public DateTime? InTime { get; set; }
+        public DateTime? MoveTime { get; set; }
 
         /// <summary>
         /// 完成时间
