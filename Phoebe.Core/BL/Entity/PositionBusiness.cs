@@ -7,6 +7,7 @@ namespace Phoebe.Core.BL
 {
     using SqlSugar;
     using Phoebe.Base.Framework;
+    using Phoebe.Base.System;
     using Phoebe.Core.Entity;
     using Phoebe.Core.Utility;
 
@@ -59,14 +60,16 @@ namespace Phoebe.Core.BL
         /// <param name="db"></param>
         /// <param name="shelfCode">货架码</param>
         /// <returns></returns>
-        public Position FindEmpty(SqlSugarClient db, string shelfCode)
+        public Position FindAvailable(SqlSugarClient db, string shelfCode)
         {
             bool vice = false; //是否副货架码
             var data = db.Queryable<Position>().Where(r => r.ShelfCode == shelfCode).OrderBy(r => r.Depth).ToList();
             if (data.Count == 0)
             {
-                data = db.Queryable<Position>().Where(r => r.ViceShelfCode == shelfCode).OrderBy(r => r.Depth).ToList();
                 vice = true;
+
+                data = db.Queryable<Position>().Where(r => r.ViceShelfCode == shelfCode).OrderBy(r => r.Depth).ToList();
+
             }
 
             if (data.Count == 0)
@@ -76,7 +79,7 @@ namespace Phoebe.Core.BL
             {
                 var shelf = db.Queryable<Shelf>().Single(r => r.Id == data[0].ShelfId);
 
-                var find = data.FindLastIndex(r => r.IsEmpty == false);
+                var find = data.FindLastIndex(r => r.Status != (int)EntityStatus.Available);
                 if (find == -1)
                 {
                     return data.First();
@@ -95,7 +98,7 @@ namespace Phoebe.Core.BL
             }
             else
             {
-                var find = data.FindIndex(r => r.IsEmpty == false);
+                var find = data.FindIndex(r => r.Status != (int)EntityStatus.Available);
                 if (find == -1)
                 {
                     return data.Last();
@@ -177,9 +180,8 @@ namespace Phoebe.Core.BL
                                 position.ViceShelfCode = position.ViceNumber.Substring(0, 12);
                             }
 
-                            position.IsEmpty = true;
                             position.Remark = "";
-                            position.Status = 0;
+                            position.Status = (int)EntityStatus.Available;
 
                             db.Insertable(position).ExecuteCommand();
                         }

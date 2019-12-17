@@ -116,14 +116,14 @@ namespace Phoebe.Core.BL
 
                 // find position
                 PositionBusiness positionBusiness = new PositionBusiness();
-                var position = positionBusiness.FindEmpty(db, shelfCode);
+                var position = positionBusiness.FindAvailable(db, shelfCode);
                 if (position == null)
                 {
                     return (false, "无空仓位");
                 }
 
                 // update position
-                position.IsEmpty = false;
+                position.Status = (int)EntityStatus.Occupy;               
                 db.Updateable(position).ExecuteCommand();
 
                 foreach (var carryTask in tasks)

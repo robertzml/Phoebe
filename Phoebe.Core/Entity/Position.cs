@@ -77,12 +77,6 @@ namespace Phoebe.Core.Entity
         public string ViceShelfCode { get; set; }
 
         /// <summary>
-        /// 是否空闲
-        /// </summary>
-        [Display(Name = "是否空闲")]
-        public bool IsEmpty { get; set; }
-
-        /// <summary>
         /// 备注
         /// </summary>
         [Display(Name = "备注")]

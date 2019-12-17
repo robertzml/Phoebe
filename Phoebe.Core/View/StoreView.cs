@@ -406,7 +406,6 @@ namespace Phoebe.Core.View
         [Display(Name = "副编号")]
         public string VicePositionNumber { get; set; }
 
-
         /// <summary>
         /// 仓库名称
         /// </summary>

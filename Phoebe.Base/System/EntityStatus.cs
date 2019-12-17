@@ -43,6 +43,20 @@ namespace Phoebe.Base.System
         Closed = 4,
         #endregion //System
 
+        #region Position
+        /// <summary>
+        /// 仓位可用
+        /// </summary>
+        [Display(Name = "可用")]
+        Available = 31,
+
+        /// <summary>
+        /// 仓位占用
+        /// </summary>
+        [Display(Name = "占用")]
+        Occupy = 32,
+        #endregion //Position
+
         #region Store
         /// <summary>
         /// 61:在库
