@@ -18,7 +18,7 @@ namespace Phoebe.WebAPI.Model
     }
 
     /// <summary>
-    /// 入库上架模型
+    /// 搬运入库上架模型
     /// </summary>
     public class CarryInEnterModel
     {
@@ -30,13 +30,11 @@ namespace Phoebe.WebAPI.Model
     }
 
     /// <summary>
-    /// 入库确认模型
+    /// 搬运入库确认模型
     /// </summary>
-    public class StockInFinishModel
+    public class CarryInFinishModel
     {
         public string TaskId;
-
-        public string CargoId;
 
         public int UserId;
 

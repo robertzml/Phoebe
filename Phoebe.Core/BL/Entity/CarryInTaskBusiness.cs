@@ -123,7 +123,7 @@ namespace Phoebe.Core.BL
                 }
 
                 // update position
-                position.Status = (int)EntityStatus.Occupy;               
+                position.Status = (int)EntityStatus.Occupy;
                 db.Updateable(position).ExecuteCommand();
 
                 foreach (var carryTask in tasks)
@@ -146,6 +146,50 @@ namespace Phoebe.Core.BL
                     carryTask.StoreId = store.t.Id;
                     db.Updateable(carryTask).ExecuteCommand();
                 }
+
+                db.Ado.CommitTran();
+                return (true, "");
+            }
+            catch (Exception e)
+            {
+                db.Ado.RollbackTran();
+                return (false, e.Message);
+            }
+        }
+
+
+        /// <summary>
+        /// 入库完成
+        /// </summary>
+        /// <param name="taskId"></param>
+        /// <param name="userId"></param>
+        /// <param name="remark"></param>
+        /// <returns></returns>
+        public (bool success, string errorMessage) Finish(string taskId, int userId, string remark)
+        {
+            var db = GetInstance();
+
+            try
+            {
+                db.Ado.BeginTran();
+
+                var task = db.Queryable<CarryInTask>().Single(r => r.Id == taskId);
+
+                if (task.Status != (int)EntityStatus.StockInEnter)
+                {
+                    return (false, "该任务无法完成");
+                }
+
+                // update task
+                task.FinishTime = DateTime.Now;
+                task.Status = (int)EntityStatus.StockInFinish;
+                db.Updateable(task).ExecuteCommand();
+
+                // update store status
+                var store = db.Queryable<Store>().Single(r => r.Id == task.StoreId);
+                store.Remark = remark;
+                store.Status = (int)EntityStatus.StoreIn;
+                db.Updateable(store).ExecuteCommand();
 
                 db.Ado.CommitTran();
                 return (true, "");
