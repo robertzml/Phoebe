@@ -82,12 +82,6 @@ namespace Phoebe.Core.View
         public int PositionId { get; set; }
 
         /// <summary>
-        /// 仓库ID
-        /// </summary>
-        [Display(Name = "仓库ID")]
-        public int WarehouseId { get; set; }
-
-        /// <summary>
         /// 存放位置
         /// </summary>
         [Display(Name = "存放位置")]
@@ -254,6 +248,66 @@ namespace Phoebe.Core.View
         /// </summary>
         [Display(Name = "合同编号")]
         public string ContractNumber { get; set; }
+
+        /// <summary>
+        /// 仓库ID
+        /// </summary>
+        [Display(Name = "仓库ID")]
+        public int WarehouseId { get; set; }
+
+        /// <summary>
+        /// 所属货架
+        /// </summary>
+        [Display(Name = "所属货架")]
+        public int ShelfId { get; set; }
+
+        /// <summary>
+        /// 排数
+        /// </summary>
+        [Display(Name = "排数")]
+        public int Row { get; set; }
+
+        /// <summary>
+        /// 层数
+        /// </summary>
+        [Display(Name = "层数")]
+        public int Layer { get; set; }
+
+        /// <summary>
+        /// 进数
+        /// </summary>
+        [Display(Name = "进数")]
+        public int Depth { get; set; }
+
+        /// <summary>
+        /// 编号
+        /// </summary>
+        [Display(Name = "编号")]
+        public string PositionNumber { get; set; }
+
+        /// <summary>
+        /// 副编号
+        /// </summary>
+        [Display(Name = "副编号")]
+        public string VicePositionNumber { get; set; }
+
+        /// <summary>
+        /// 仓库名称
+        /// </summary>
+        [Display(Name = "仓库名称")]
+        public string WarehouseName { get; set; }
+
+        /// <summary>
+        /// 仓库编号
+        /// </summary>
+        [Display(Name = "仓库编号")]
+        public string WarehouseNumber { get; set; }
+
+        /// <summary>
+        /// 仓库类型
+        /// </summary>
+        [Display(Name = "仓库类型")]
+        public string WarehouseType { get; set; }
         #endregion //Property
     }
 }

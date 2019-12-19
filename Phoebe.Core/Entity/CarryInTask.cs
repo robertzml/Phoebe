@@ -83,12 +83,6 @@ namespace Phoebe.Core.Entity
         public int PositionId { get; set; }
 
         /// <summary>
-        /// 仓库ID
-        /// </summary>
-        [Display(Name = "仓库ID")]
-        public int WarehouseId { get; set; }
-
-        /// <summary>
         /// 存放位置
         /// </summary>
         [Display(Name = "存放位置")]

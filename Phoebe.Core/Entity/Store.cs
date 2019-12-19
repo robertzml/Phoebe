@@ -41,12 +41,6 @@ namespace Phoebe.Core.Entity
         public string CargoId { get; set; }
 
         /// <summary>
-        /// 仓库ID
-        /// </summary>
-        [Display(Name = "仓库ID")]
-        public int WarehouseId { get; set; }
-
-        /// <summary>
         /// 仓位ID
         /// </summary>
         [Display(Name = "仓位ID")]

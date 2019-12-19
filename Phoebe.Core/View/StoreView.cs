@@ -38,13 +38,7 @@ namespace Phoebe.Core.View
         /// 所属货品
         /// </summary>
         [Display(Name = "所属货品")]
-        public string CargoId { get; set; }
-
-        /// <summary>
-        /// 仓库ID
-        /// </summary>
-        [Display(Name = "仓库ID")]
-        public int WarehouseId { get; set; }
+        public string CargoId { get; set; }      
 
         /// <summary>
         /// 仓位ID
@@ -323,52 +317,10 @@ namespace Phoebe.Core.View
         public string ContractNumber { get; set; }
 
         /// <summary>
-        /// 合同类型
+        /// 仓库ID
         /// </summary>
-        [Display(Name = "合同类型")]
-        public int ContractType { get; set; }
-
-        /// <summary>
-        /// 签订日期
-        /// </summary>
-        [Display(Name = "签订日期")]
-        public DateTime SignDate { get; set; }
-
-        /// <summary>
-        /// 关闭日期
-        /// </summary>
-        [Display(Name = "关闭日期")]
-        public DateTime? CloseDate { get; set; }
-
-        /// <summary>
-        /// 计费方式
-        /// </summary>
-        [Display(Name = "计费方式")]
-        public int BillingType { get; set; }
-
-        /// <summary>
-        /// 冷藏费单价
-        /// </summary>
-        [Display(Name = "冷藏费单价")]
-        public decimal UnitPrice { get; set; }
-
-        /// <summary>
-        /// 参数1
-        /// </summary>
-        [Display(Name = "参数1")]
-        public string Parameter1 { get; set; }
-
-        /// <summary>
-        /// 参数2
-        /// </summary>
-        [Display(Name = "参数2")]
-        public string Parameter2 { get; set; }
-
-        /// <summary>
-        /// 参数3
-        /// </summary>
-        [Display(Name = "参数3")]
-        public string Parameter3 { get; set; }
+        [Display(Name = "仓库ID")]
+        public int WarehouseId { get; set; }
 
         /// <summary>
         /// 所属货架
@@ -423,6 +375,54 @@ namespace Phoebe.Core.View
         /// </summary>
         [Display(Name = "仓库类型")]
         public string WarehouseType { get; set; }
+
+        /// <summary>
+        /// 合同类型
+        /// </summary>
+        [Display(Name = "合同类型")]
+        public int ContractType { get; set; }
+
+        /// <summary>
+        /// 签订日期
+        /// </summary>
+        [Display(Name = "签订日期")]
+        public DateTime SignDate { get; set; }
+
+        /// <summary>
+        /// 关闭日期
+        /// </summary>
+        [Display(Name = "关闭日期")]
+        public DateTime? CloseDate { get; set; }
+
+        /// <summary>
+        /// 计费方式
+        /// </summary>
+        [Display(Name = "计费方式")]
+        public int BillingType { get; set; }
+
+        /// <summary>
+        /// 冷藏费单价
+        /// </summary>
+        [Display(Name = "冷藏费单价")]
+        public decimal UnitPrice { get; set; }
+
+        /// <summary>
+        /// 参数1
+        /// </summary>
+        [Display(Name = "参数1")]
+        public string Parameter1 { get; set; }
+
+        /// <summary>
+        /// 参数2
+        /// </summary>
+        [Display(Name = "参数2")]
+        public string Parameter2 { get; set; }
+
+        /// <summary>
+        /// 参数3
+        /// </summary>
+        [Display(Name = "参数3")]
+        public string Parameter3 { get; set; }
         #endregion //Property
     }
 }

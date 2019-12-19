@@ -31,8 +31,7 @@ namespace Phoebe.Core.BL
             store.CustomerId = stockInTask.CustomerId;
             store.ContractId = stockInTask.ContractId;
             store.CargoId = stockInTask.CargoId;
-           
-            store.WarehouseId = task.WarehouseId;
+
             store.PositionId = task.PositionId;
             store.TrayCode = task.TrayCode;
 
@@ -44,7 +43,7 @@ namespace Phoebe.Core.BL
             store.StockInTaskId = stockInTask.Id;
             store.InTime = stockInTask.InTime;
             store.CarryInTaskId = task.Id;
-          
+
             store.Status = (int)EntityStatus.StoreReady;
 
             var t = db.Insertable(store).ExecuteReturnEntity();
