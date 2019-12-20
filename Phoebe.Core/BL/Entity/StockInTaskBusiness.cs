@@ -56,25 +56,32 @@ namespace Phoebe.Core.BL
         /// <returns></returns>
         public (bool success, string errorMessage) Confirm(string stockInTaskId)
         {
-            var db = GetInstance();
-
-            var task = db.Queryable<StockInTask>().InSingle(stockInTaskId);
-            var carryIn = db.Queryable<CarryInTask>().Where(r => r.StockInTaskId == stockInTaskId).ToList();
-            if (carryIn.All(r => r.Status == (int)EntityStatus.StockInFinish))
+            try
             {
-                task.InCount = carryIn.Sum(r => r.MoveCount);
-                task.InWeight = carryIn.Sum(r => r.MoveWeight);
+                var db = GetInstance();
 
-                task.FinishTime = DateTime.Now;
-                task.Status = (int)EntityStatus.StockInFinish;
+                var task = db.Queryable<StockInTask>().InSingle(stockInTaskId);
+                var carryIn = db.Queryable<CarryInTask>().Where(r => r.StockInTaskId == stockInTaskId).ToList();
+                if (carryIn.All(r => r.Status == (int)EntityStatus.StockInFinish))
+                {
+                    task.InCount = carryIn.Sum(r => r.MoveCount);
+                    task.InWeight = carryIn.Sum(r => r.MoveWeight);
 
-                db.Updateable(task).ExecuteCommand();
+                    task.FinishTime = DateTime.Now;
+                    task.Status = (int)EntityStatus.StockInFinish;
 
-                return (true, "");
+                    db.Updateable(task).ExecuteCommand();
+
+                    return (true, "");
+                }
+                else
+                {
+                    return (false, "有搬运入库任务未完成");
+                }
             }
-            else
+            catch(Exception e)
             {
-                return (false, "有搬运入库任务未完成");
+                return (false, e.Message);
             }
         }
         #endregion //Method

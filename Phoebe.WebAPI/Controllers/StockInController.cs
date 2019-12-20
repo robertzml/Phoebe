@@ -91,6 +91,32 @@ namespace Phoebe.WebAPI.Controllers
 
             return await task;
         }
+
+        /// <summary>
+        /// 确认入库
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ActionResult<ResponseData>> Confirm(string id)
+        {
+            StockInBusiness stockInBusiness = new StockInBusiness();
+
+            var task = Task.Run(() =>
+            {
+                var result = stockInBusiness.Confirm(id);
+
+                ResponseData data = new ResponseData
+                {
+                    Status = result.success ? 0 : 1,
+                    ErrorMessage = result.errorMessage
+                };
+
+                return data;
+            });
+
+            return await task;
+        }
         #endregion //Stock In
 
         #region Stock In Task
