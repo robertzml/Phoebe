@@ -29,6 +29,12 @@ namespace Phoebe.Core.Entity
         public string StockOutId { get; set; }
 
         /// <summary>
+        /// 任务码
+        /// </summary>
+        [Display(Name = "任务码")]
+        public string TaskCode { get; set; }
+
+        /// <summary>
         /// 货品ID
         /// </summary>
         [Display(Name = "货品ID")]
@@ -56,13 +62,7 @@ namespace Phoebe.Core.Entity
         /// 出库重量
         /// </summary>
         [Display(Name = "出库重量")]
-        public decimal OutWeight { get; set; }
-
-        /// <summary>
-        /// 任务码
-        /// </summary>
-        [Display(Name = "任务码")]
-        public string TaskCode { get; set; }
+        public decimal OutWeight { get; set; }      
 
         /// <summary>
         /// 创建人ID

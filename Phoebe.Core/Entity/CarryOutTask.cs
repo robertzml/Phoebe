@@ -11,8 +11,8 @@ namespace Phoebe.Core.Entity
     /// <summary>
     /// 移出任务类
     /// </summary>
-    [SugarTable("StockMoveOutTask")]
-    public class StockMoveOutTask : IBaseEntity<string>
+    [SugarTable("CarryOutTask")]
+    public class CarryOutTask : IBaseEntity<string>
     {
         #region Property
         /// <summary>
@@ -23,15 +23,9 @@ namespace Phoebe.Core.Entity
         public string Id { get; set; }
 
         /// <summary>
-        /// 仓库类型
+        /// 搬运类型
         /// </summary>
-        [Display(Name = "仓库类型")]
-        public int WarehouseType { get; set; }
-
-        /// <summary>
-        /// 移库类型
-        /// </summary>
-        [Display(Name = "移库类型")]
+        [Display(Name = "搬运类型")]
         public int Type { get; set; }
 
         /// <summary>
@@ -83,6 +77,12 @@ namespace Phoebe.Core.Entity
         public string TaskCode { get; set; }
 
         /// <summary>
+        /// 货架码
+        /// </summary>
+        [Display(Name = "货架码")]
+        public string ShelfCode { get; set; }
+
+        /// <summary>
         /// 托盘码
         /// </summary>
         [Display(Name = "托盘码")]
@@ -93,12 +93,6 @@ namespace Phoebe.Core.Entity
         /// </summary>
         [Display(Name = "仓位ID")]
         public int PositionId { get; set; }
-
-        /// <summary>
-        /// 仓库ID
-        /// </summary>
-        [Display(Name = "仓库ID")]
-        public int WarehouseId { get; set; }
 
         /// <summary>
         /// 存放位置
@@ -146,13 +140,19 @@ namespace Phoebe.Core.Entity
         /// 移出时间
         /// </summary>
         [Display(Name = "移出时间")]
-        public DateTime? OutTime { get; set; }
+        public DateTime? MoveTime { get; set; }
 
         /// <summary>
         /// 清点时间
         /// </summary>
         [Display(Name = "清点时间")]
         public DateTime? CheckTime { get; set; }
+
+        /// <summary>
+        /// 完成时间
+        /// </summary>
+        [Display(Name = "完成时间")]
+        public DateTime? FinishTime { get; set; }
 
         /// <summary>
         /// 备注

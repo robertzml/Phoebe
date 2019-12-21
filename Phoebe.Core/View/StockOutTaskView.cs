@@ -9,10 +9,10 @@ namespace Phoebe.Core.View
     using SqlSugar;
 
     /// <summary>
-    /// 入库任务视图类
+    /// 出库任务视图类
     /// </summary>
-    [SugarTable("StockInTaskView")]
-    public class StockInTaskView : IBaseEntity<string>
+    [SugarTable("StockOutTaskView")]
+    public class StockOutTaskView : IBaseEntity<string>
     {
         #region Property
         /// <summary>
@@ -23,10 +23,10 @@ namespace Phoebe.Core.View
         public string Id { get; set; }
 
         /// <summary>
-        /// 入库ID
+        /// 出库ID
         /// </summary>
-        [Display(Name = "入库ID")]
-        public string StockInId { get; set; }
+        [Display(Name = "出库ID")]
+        public string StockOutId { get; set; }
 
         /// <summary>
         /// 任务码
@@ -41,40 +41,28 @@ namespace Phoebe.Core.View
         public string CargoId { get; set; }
 
         /// <summary>
-        /// 入库数量
+        /// 库存数量
         /// </summary>
-        [Display(Name = "入库数量")]
-        public int InCount { get; set; }
+        [Display(Name = "库存数量")]
+        public int StoreCount { get; set; }
 
         /// <summary>
-        /// 单位重量
+        /// 出库数量
         /// </summary>
-        [Display(Name = "单位重量")]
-        public decimal UnitWeight { get; set; }
+        [Display(Name = "出库数量")]
+        public int OutCount { get; set; }
 
         /// <summary>
-        /// 入库重量
+        /// 库存重量
         /// </summary>
-        [Display(Name = "入库重量")]
-        public decimal InWeight { get; set; }
+        [Display(Name = "库存重量")]
+        public decimal StoreWeight { get; set; }
 
         /// <summary>
-        /// 规格
+        /// 出库重量
         /// </summary>
-        [Display(Name = "规格")]
-        public string Specification { get; set; }
-
-        /// <summary>
-        /// 产地
-        /// </summary>
-        [Display(Name = "产地")]
-        public string OriginPlace { get; set; }
-
-        /// <summary>
-        /// 保质期
-        /// </summary>
-        [Display(Name = "保质期")]
-        public int Durability { get; set; }
+        [Display(Name = "出库重量")]
+        public decimal OutWeight { get; set; }
 
         /// <summary>
         /// 创建人ID
@@ -92,7 +80,7 @@ namespace Phoebe.Core.View
         /// 创建时间
         /// </summary>
         [Display(Name = "创建时间")]
-        public DateTime CreateTime { get; set; }
+        public DateTime CreateTIme { get; set; }
 
         /// <summary>
         /// 完成时间
@@ -113,10 +101,16 @@ namespace Phoebe.Core.View
         public int Status { get; set; }
 
         /// <summary>
-        /// 入库时间
+        /// 出库时间
         /// </summary>
-        [Display(Name = "入库时间")]
-        public DateTime InTime { get; set; }
+        [Display(Name = "出库时间")]
+        public DateTime OutTime { get; set; }
+
+        /// <summary>
+        /// 入库月份
+        /// </summary>
+        [Display(Name = "入库月份")]
+        public string MonthTime { get; set; }
 
         /// <summary>
         /// 流水单号
@@ -128,13 +122,73 @@ namespace Phoebe.Core.View
         /// 入库类型
         /// </summary>
         [Display(Name = "入库类型")]
-        public int Type { get; set; }
+        public int StockOutType { get; set; }
+
+        /// <summary>
+        /// 所属客户
+        /// </summary>
+        [Display(Name = "所属客户")]
+        public int CustomerId { get; set; }
+
+        /// <summary>
+        /// 所属合同
+        /// </summary>
+        [Display(Name = "所属合同")]
+        public int ContractId { get; set; }
+
+        /// <summary>
+        /// 客户编号
+        /// </summary>
+        [Display(Name = "客户编号")]
+        public string CustomerNumber { get; set; }
+
+        /// <summary>
+        /// 客户名称
+        /// </summary>
+        [Display(Name = "客户名称")]
+        public string CustomerName { get; set; }
+
+        /// <summary>
+        /// 合同编号
+        /// </summary>
+        [Display(Name = "合同编号")]
+        public string ContractNumber { get; set; }
+
+        /// <summary>
+        /// 合同名称
+        /// </summary>
+        [Display(Name = "合同名称")]
+        public string ContractName { get; set; }
+
+        /// <summary>
+        /// 合同类型
+        /// </summary>
+        [Display(Name = "合同类型")]
+        public int ContractType { get; set; }
+
+        /// <summary>
+        /// 计费方式
+        /// </summary>
+        [Display(Name = "计费方式")]
+        public int BillingType { get; set; }
+
+        /// <summary>
+        /// 冷藏费单价
+        /// </summary>
+        [Display(Name = "冷藏费单价")]
+        public decimal UnitPrice { get; set; }
 
         /// <summary>
         /// 货品名称
         /// </summary>
         [Display(Name = "货品名称")]
         public string CargoName { get; set; }
+
+        /// <summary>
+        /// 单位重量
+        /// </summary>
+        [Display(Name = "单位重量")]
+        public decimal UnitWeight { get; set; }
 
         /// <summary>
         /// 类别名称
@@ -147,42 +201,6 @@ namespace Phoebe.Core.View
         /// </summary>
         [Display(Name = "类别代码")]
         public string CategoryNumber { get; set; }
-
-        /// <summary>
-        /// 客户ID
-        /// </summary>
-        [Display(Name = "客户ID")]
-        public int CustomerId { get; set; }
-
-        /// <summary>
-        /// 客户名称
-        /// </summary>
-        [Display(Name = "客户名称")]
-        public string CustomerName { get; set; }
-
-        /// <summary>
-        /// 客户编号
-        /// </summary>
-        [Display(Name = "客户编号")]
-        public string CustomerNumber { get; set; }
-
-        /// <summary>
-        /// 合同ID
-        /// </summary>
-        [Display(Name = "合同ID")]
-        public int ContractId { get; set; }
-
-        /// <summary>
-        /// 合同名称
-        /// </summary>
-        [Display(Name = "合同名称")]
-        public string ContractName { get; set; }
-
-        /// <summary>
-        /// 合同编号
-        /// </summary>
-        [Display(Name = "合同编号")]
-        public string ContractNumber { get; set; }
-        #endregion //Method
+        #endregion //Property
     }
 }

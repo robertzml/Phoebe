@@ -12,7 +12,7 @@ namespace Phoebe.Core.BL
     /// <summary>
     /// 移出任务业务类
     /// </summary>
-    public class StockMoveOutTaskBusiness : AbstractBusiness<StockMoveOutTask, string>, IBaseBL<StockMoveOutTask, string>
+    public class StockMoveOutTaskBusiness : AbstractBusiness<CarryOutTask, string>, IBaseBL<CarryOutTask, string>
     { 
     }
 }
