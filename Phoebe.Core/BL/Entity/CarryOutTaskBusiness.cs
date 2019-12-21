@@ -10,9 +10,9 @@ namespace Phoebe.Core.BL
     using Phoebe.Core.Utility;
 
     /// <summary>
-    /// 移出任务业务类
+    /// 搬运出库任务业务类
     /// </summary>
-    public class StockMoveOutTaskBusiness : AbstractBusiness<CarryOutTask, string>, IBaseBL<CarryOutTask, string>
+    public class CarryOutTaskBusiness : AbstractBusiness<CarryOutTask, string>, IBaseBL<CarryOutTask, string>
     { 
     }
 }
