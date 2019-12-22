@@ -81,23 +81,35 @@ namespace Phoebe.WebAPI.Controllers
 
             return await task;
         }
+
+        /// <summary>
+        /// 获取出库
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult<StockOutView> Get(string id)
+        {
+            StockOutViewBusiness stockOutViewBusiness = new StockOutViewBusiness();
+            return stockOutViewBusiness.FindById(id);
+        }
         #endregion //Stock Out
 
         #region Stock Out Task
         /// <summary>
         /// 添加出库任务
         /// </summary>
-        /// <param name="stockOut"
+        /// <param name="stockOut"></param>
         /// <param name="tasks"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<ActionResult<ResponseData>> CreateTask(StockOutCreateModel model)
+        public async Task<ActionResult<ResponseData>> AddTask(StockOutTask outTask)
         {
-            StockOutBusiness stockOutBusiness = new StockOutBusiness();
+            StockOutTaskBusiness stockOutTaskBusiness = new StockOutTaskBusiness();
 
             var task = Task.Run(() =>
             {
-                var result = stockOutBusiness.Create(model.stockOut, model.tasks);
+                var result = stockOutTaskBusiness.Create(outTask);
 
                 ResponseData data = new ResponseData
                 {

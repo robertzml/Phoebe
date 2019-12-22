@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Phoebe.Core.BL.Entity
+namespace Phoebe.Core.BL
 {
     using Phoebe.Base.Framework;
     using Phoebe.Base.System;
@@ -34,6 +34,9 @@ namespace Phoebe.Core.BL.Entity
 
                 SequenceRecordBusiness recordBusiness = new SequenceRecordBusiness();
                 entity.TaskCode = recordBusiness.GetNextSequence(db, "StockOutTask", stockOut.OutTime);
+
+                entity.CreateTime = DateTime.Now;
+                entity.Status = (int)EntityStatus.StockOutReady;
 
                 var t = db.Insertable(entity).ExecuteReturnEntity();
 

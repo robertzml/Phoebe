@@ -10,5 +10,17 @@ namespace Phoebe.Core.BL
 
     public class StockOutTaskViewBusiness : AbstractBusiness<StockOutTaskView, string>, IBaseBL<StockOutTaskView, string>
     {
+        #region Method
+        /// <summary>
+        /// 获取出库任务列表
+        /// </summary>
+        /// <param name="stockOutId">出库单ID</param>
+        /// <returns></returns>
+        public List<StockOutTaskView> FindList(string stockOutId)
+        {
+            var db = GetInstance();
+            return db.Queryable<StockOutTaskView>().Where(r => r.StockOutId == stockOutId).ToList();
+        }
+        #endregion //Method
     }
 }
