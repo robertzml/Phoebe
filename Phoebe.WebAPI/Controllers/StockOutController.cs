@@ -97,6 +97,18 @@ namespace Phoebe.WebAPI.Controllers
 
         #region Stock Out Task
         /// <summary>
+        /// 获取出库任务列表
+        /// </summary>
+        /// <param name="stockOutId">出库单ID</param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult<List<StockOutTaskView>> TaskList(string stockOutId)
+        {
+            StockOutTaskViewBusiness taskViewBusiness = new StockOutTaskViewBusiness();
+            return taskViewBusiness.FindList(stockOutId);
+        }
+
+        /// <summary>
         /// 添加出库任务
         /// </summary>
         /// <param name="stockOut"></param>
