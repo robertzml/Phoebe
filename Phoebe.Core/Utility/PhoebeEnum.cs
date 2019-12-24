@@ -6,6 +6,30 @@ using System.Text;
 namespace Phoebe.Core.Utility
 {
     /// <summary>
+    /// 仓库类型
+    /// </summary>
+    public enum WarehouseType
+    {
+        /// <summary>
+        /// 普通库
+        /// </summary>
+        [Display(Name = "普通库")]
+        Normal = 1,
+
+        /// <summary>
+        /// 仓位库
+        /// </summary>
+        [Display(Name = "仓位库")]
+        Position = 2,
+
+        /// <summary>
+        /// 急冻库
+        /// </summary>
+        [Display(Name = "急冻库")]
+        Freeze = 3
+    }
+
+    /// <summary>
     /// 货架类型
     /// </summary>
     public enum ShelfType
@@ -44,6 +68,24 @@ namespace Phoebe.Core.Utility
         /// 仓位库入库
         /// </summary>
         [Display(Name = "仓位库入库")]
+        Position = 2
+    }
+
+    /// <summary>
+    /// 出库类型
+    /// </summary>
+    public enum StockOutType
+    {
+        /// <summary>
+        /// 普通库出库
+        /// </summary>
+        [Display(Name = "普通库出库")]
+        Normal = 1,
+
+        /// <summary>
+        /// 仓位库出库
+        /// </summary>
+        [Display(Name = "仓位库出库")]
         Position = 2
     }
 }

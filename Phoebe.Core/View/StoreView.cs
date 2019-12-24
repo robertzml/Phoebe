@@ -38,7 +38,7 @@ namespace Phoebe.Core.View
         /// 所属货品
         /// </summary>
         [Display(Name = "所属货品")]
-        public string CargoId { get; set; }      
+        public string CargoId { get; set; }
 
         /// <summary>
         /// 仓位ID
@@ -374,7 +374,7 @@ namespace Phoebe.Core.View
         /// 仓库类型
         /// </summary>
         [Display(Name = "仓库类型")]
-        public string WarehouseType { get; set; }
+        public int WarehouseType { get; set; }
 
         /// <summary>
         /// 合同类型
@@ -423,6 +423,18 @@ namespace Phoebe.Core.View
         /// </summary>
         [Display(Name = "参数3")]
         public string Parameter3 { get; set; }
+
+        /// <summary>
+        /// 货架编号
+        /// </summary>
+        [Display(Name = "货架编号")]
+        public string ShelfNumber { get; set; }
+
+        /// <summary>
+        /// 货架类型
+        /// </summary>
+        [Display(Name = "货架类型")]
+        public int ShelfType { get; set; }
         #endregion //Property
     }
 }

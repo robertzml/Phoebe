@@ -93,6 +93,40 @@ namespace Phoebe.Core.BL
                 return data;
             }
         }
+
+        /// <summary>
+        /// 按出库单查找库存
+        /// 出库单规定了出库类型：普通库或者仓位库
+        /// </summary>
+        /// <param name="stockOutId">出库单ID</param>
+        /// <param name="cargoId">货品ID</param>
+        /// <returns></returns>
+        public List<StoreView> FindByStockOut(string stockOutId, string cargoId)
+        {
+            StockOutViewBusiness stockOutViewBusiness = new StockOutViewBusiness();
+            var stockOut = stockOutViewBusiness.FindById(stockOutId);
+
+            var db = GetInstance();
+
+            if (stockOut.Type == (int)StockOutType.Normal)
+            {
+                var data = db.Queryable<StoreView>().Where(r => r.WarehouseType == (int)WarehouseType.Normal
+                    && r.ContractId == stockOut.ContractId && r.CargoId == cargoId
+                    && r.Status == (int)EntityStatus.StoreIn).ToList();
+
+                return data;
+            }
+            else if (stockOut.Type == (int)StockOutType.Position)
+            {
+                var data = db.Queryable<StoreView>().Where(r => r.WarehouseType == (int)WarehouseType.Position
+                   && r.ContractId == stockOut.ContractId && r.CargoId == cargoId
+                   && r.Status == (int)EntityStatus.StoreIn).ToList();
+
+                return data;
+            }
+            else
+                return new List<StoreView>();
+        }
         #endregion //Method
     }
 }

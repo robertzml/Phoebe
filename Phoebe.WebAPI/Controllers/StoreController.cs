@@ -51,10 +51,24 @@ namespace Phoebe.WebAPI.Controllers
         /// <param name="contractId">合同ID</param>
         /// <param name="cargoId">货品ID</param>
         /// <returns></returns>
+        [HttpGet]
         public List<StoreView> FindByCargo(int contractId, string cargoId)
         {
             StoreViewBusiness storeViewBusiness = new StoreViewBusiness();
             return storeViewBusiness.FindByCargo(contractId, cargoId, true);
+        }
+
+        /// <summary>
+        /// 按出库单和货品查找
+        /// </summary>
+        /// <param name="stockOutId">出库单ID</param>
+        /// <param name="cargoId">货品ID</param>
+        /// <returns></returns>
+        [HttpGet]
+        public List<StoreView> FindByStockOut(string stockOutId, string cargoId)
+        {
+            StoreViewBusiness storeViewBusiness = new StoreViewBusiness();
+            return storeViewBusiness.FindByStockOut(stockOutId, cargoId);
         }
         #endregion //Action
     }
