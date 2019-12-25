@@ -28,9 +28,15 @@ namespace Phoebe.Core.BL
                     
                 StoreViewBusiness svBusiness = new StoreViewBusiness();
                 var stores = svBusiness.FindByCargo(stockOut.ContractId, entity.CargoId, true, db);
-                
+
+                entity.Id = Guid.NewGuid().ToString();
                 entity.StoreCount = stores.Sum(r => r.StoreCount);
                 entity.StoreWeight = stores.Sum(r => r.StoreWeight);
+
+                if (entity.OutCount > entity.StoreCount)
+                    return (false, "出库数量大于在库数量", null);
+                if (entity.OutWeight > entity.StoreWeight)
+                    return (false, "出库重量大于在库重量", null);
 
                 SequenceRecordBusiness recordBusiness = new SequenceRecordBusiness();
                 entity.TaskCode = recordBusiness.GetNextSequence(db, "StockOutTask", stockOut.OutTime);
