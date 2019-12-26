@@ -56,6 +56,18 @@ namespace Phoebe.WebAPI.Controllers
         }
 
         /// <summary>
+        /// 获取出库列表
+        /// </summary>
+        /// <param name="outTime"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult<List<StockOutView>> ListByTime(DateTime outTime)
+        {
+            StockOutViewBusiness stockOutViewBusiness = new StockOutViewBusiness();
+            return stockOutViewBusiness.FindByTime(outTime);
+        }
+
+        /// <summary>
         /// 添加出库
         /// </summary>
         /// <param name="stockOut"></param>
