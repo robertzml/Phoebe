@@ -88,4 +88,22 @@ namespace Phoebe.Core.Utility
         [Display(Name = "仓位库出库")]
         Position = 2
     }
+
+    /// <summary>
+    /// 搬运出库类型
+    /// </summary>
+    public enum CarryOutTaskType
+    {
+        /// <summary>
+        /// 出库搬运
+        /// </summary>
+        [Display(Name = "出库搬运")]
+        Out = 1,
+
+        /// <summary>
+        /// 临时搬运
+        /// </summary>
+        [Display(Name = "临时搬运")]
+        Temp = 2
+    }
 }
