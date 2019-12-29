@@ -43,6 +43,20 @@ namespace Phoebe.WebAPI.Controllers
         }
 
         /// <summary>
+        /// 仓位列表
+        /// </summary>
+        /// <param name="shelfId"></param>
+        /// <param name="row"></param>
+        /// <param name="layer"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult<List<Position>> ListInLayer(int shelfId, int row, int layer)
+        {
+            PositionBusiness positionBusiness = new PositionBusiness();
+            return positionBusiness.FindList(shelfId, row, layer);
+        }
+
+        /// <summary>
         /// 查找仓位
         /// </summary>
         /// <param name="shelfId"></param>
