@@ -21,7 +21,31 @@ namespace Phoebe.WebAPI.Controllers
     public class CarryOutTaskController : ControllerBase
     {
         #region Action
+        /// <summary>
+        /// 提交出库
+        /// </summary>
+        /// <param name="tasks"></param>
+        /// <returns></returns>
+        public async Task<ActionResult<ResponseData>> Create(List<CarryOutTask> tasks)
+        {
+            CarryOutTaskBusiness carryOutTaskBusiness = new CarryOutTaskBusiness();
 
+            var task = Task.Run(() =>
+            {
+                var result = carryOutTaskBusiness.Create(tasks);
+
+                ResponseData data = new ResponseData
+                {
+                    Status = result.success ? 0 : 1,
+                    ErrorMessage = result.errorMessage,
+                    Entity = null
+                };
+
+                return data;
+            });
+
+            return await task;
+        }
         #endregion //Action
     }
 }

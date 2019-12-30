@@ -9,6 +9,7 @@ namespace Phoebe.Core.BL
     using Phoebe.Base.Framework;
     using Phoebe.Base.System;
     using Phoebe.Core.Entity;
+    using Phoebe.Core.View;
     using Phoebe.Core.Utility;
 
     /// <summary>
@@ -54,30 +55,48 @@ namespace Phoebe.Core.BL
             {
                 db.Ado.BeginTran();
 
-                // find the shelfs that should carry tray out
-                var shelfCodes = data.Select(r => r.ShelfCode).Distinct();
-                foreach(var shelfCode in shelfCodes)
+                SequenceRecordBusiness recordBusiness = new SequenceRecordBusiness();
+                var now = DateTime.Now;
+
+                foreach (var item in data)
                 {
-                    var vice = false;
-                    var positions = db.Queryable<Position>().Where(r => r.ShelfCode == shelfCode).ToList();
-                    
-                    if (positions.Count == 0) // from vice side
-                    {
-                        positions = db.Queryable<Position>().Where(r => r.ViceShelfCode == shelfCode).ToList();
-                        vice = true;
-                    }
+                    item.Id = Guid.NewGuid().ToString();
+                    item.Type = (int)CarryOutTaskType.Out;
+                    item.CreateTime = now;
+                    item.TaskCode = recordBusiness.GetNextSequence(db, "CarryOutTask", item.CreateTime);
 
-                    var shelf = db.Queryable<Shelf>().InSingle(positions.First().ShelfId);
+                    var store = db.Queryable<StoreView>().InSingle(item.StoreId);
+                    item.PositionId = store.PositionId;
+                    item.Place = store.Place;
+                    item.Status = (int)EntityStatus.StockOutReady;
 
-                    if (vice)
-                    {
-                        var tasks = data.Where(r => r.ShelfCode == shelfCode).ToList();
-                        for (int i = 0; i < shelf.Depth; i++)
-                        {
-
-                        }
-                    }
+                    db.Insertable(item).ExecuteReturnEntity();
                 }
+
+                // find the shelfs that should carry tray out
+                //var shelfCodes = data.Select(r => r.ShelfCode).Distinct();
+                //foreach(var shelfCode in shelfCodes)
+                //{
+                //    var vice = false;
+                //    var positions = db.Queryable<Position>().Where(r => r.ShelfCode == shelfCode).ToList();
+                    
+                //    if (positions.Count == 0) // from vice side
+                //    {
+                //        positions = db.Queryable<Position>().Where(r => r.ViceShelfCode == shelfCode).ToList();
+                //        vice = true;
+                //    }
+
+                //    var shelf = db.Queryable<Shelf>().InSingle(positions.First().ShelfId);
+
+                //    if (vice)
+                //    {
+                //        var tasks = data.Where(r => r.ShelfCode == shelfCode).ToList();
+                //        for (int i = 0; i < shelf.Depth; i++)
+                //        {
+
+                //        }
+                //    }
+                //}
 
 
                 db.Ado.CommitTran();
