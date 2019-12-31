@@ -92,9 +92,9 @@ namespace Phoebe.Core.View
         public int Status { get; set; }
 
         /// <summary>
-        /// 客户编号
+        /// 客户代码
         /// </summary>
-        [Display(Name = "客户编号")]
+        [Display(Name = "客户代码")]
         public string CustomerNumber { get; set; }
 
         /// <summary>

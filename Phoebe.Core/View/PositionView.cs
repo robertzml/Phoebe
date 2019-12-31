@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace Phoebe.Core.Entity
+namespace Phoebe.Core.View
 {
     using Phoebe.Base.Framework;
     using SqlSugar;
 
     /// <summary>
-    /// 仓位类
+    /// 仓位视图类
     /// </summary>
-    [SugarTable("Position")]
-    public class Position : IBaseEntity<int>
+    [SugarTable("PositionView")]
+    public class PositionView : IBaseEntity<int>
     {
         #region Property
         /// <summary>
@@ -89,6 +89,42 @@ namespace Phoebe.Core.Entity
         public int Status { get; set; }
 
         /// <summary>
+        /// 货架编号
+        /// </summary>
+        [Display(Name = "货架编号")]
+        public string ShelfNumber { get; set; }
+
+        /// <summary>
+        /// 货架类型
+        /// </summary>
+        [Display(Name = "货架类型")]
+        public int ShelfType { get; set; }
+
+        /// <summary>
+        /// 货架入口数
+        /// </summary>
+        [Display(Name = "货架入口数")]
+        public int Entrance { get; set; }
+
+        /// <summary>
+        /// 最大排数
+        /// </summary>
+        [Display(Name = "最大排数")]
+        public int MaxRow { get; set; }
+
+        /// <summary>
+        /// 最大层数
+        /// </summary>
+        [Display(Name = "最大层数")]
+        public int MaxLayer { get; set; }
+
+        /// <summary>
+        /// 最大进数
+        /// </summary>
+        [Display(Name = "最大进数")]
+        public int MaxDepth { get; set; }
+
+        /// <summary>
         /// 仓库名称
         /// </summary>
         [Display(Name = "仓库名称")]
@@ -99,6 +135,12 @@ namespace Phoebe.Core.Entity
         /// </summary>
         [Display(Name = "仓库编号")]
         public string WarehouseNumber { get; set; }
+
+        /// <summary>
+        /// 仓库类型
+        /// </summary>
+        [Display(Name = "仓库类型")]
+        public int WarehouseType { get; set; }
         #endregion //Property
     }
 }

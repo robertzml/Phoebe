@@ -128,25 +128,7 @@ namespace Phoebe.Core.View
         /// 入库类型
         /// </summary>
         [Display(Name = "入库类型")]
-        public int Type { get; set; }
-
-        /// <summary>
-        /// 货品名称
-        /// </summary>
-        [Display(Name = "货品名称")]
-        public string CargoName { get; set; }
-
-        /// <summary>
-        /// 类别名称
-        /// </summary>
-        [Display(Name = "类别名称")]
-        public string CategoryName { get; set; }
-
-        /// <summary>
-        /// 类别代码
-        /// </summary>
-        [Display(Name = "类别代码")]
-        public string CategoryNumber { get; set; }
+        public int StockInType { get; set; }
 
         /// <summary>
         /// 客户ID
@@ -183,6 +165,30 @@ namespace Phoebe.Core.View
         /// </summary>
         [Display(Name = "合同编号")]
         public string ContractNumber { get; set; }
+
+        /// <summary>
+        /// 合同类型
+        /// </summary>
+        [Display(Name = "合同类型")]
+        public int ContractType { get; set; }
+
+        /// <summary>
+        /// 货品名称
+        /// </summary>
+        [Display(Name = "货品名称")]
+        public string CargoName { get; set; }
+
+        /// <summary>
+        /// 类别名称
+        /// </summary>
+        [Display(Name = "类别名称")]
+        public string CategoryName { get; set; }
+
+        /// <summary>
+        /// 类别代码
+        /// </summary>
+        [Display(Name = "类别代码")]
+        public string CategoryNumber { get; set; }
         #endregion //Method
     }
 }
