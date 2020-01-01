@@ -46,6 +46,27 @@ namespace Phoebe.WebAPI.Controllers
 
             return await task;
         }
+
+        /// <summary>
+        /// 根据出库任务查找
+        /// </summary>
+        /// <param name="taskId"></param>
+        /// <returns></returns>
+        public ActionResult<List<CarryOutTaskView>> FindByStockOutTask(string taskId)
+        {
+            CarryOutTaskViewBusiness carryOutTaskViewBusiness = new CarryOutTaskViewBusiness();
+            return carryOutTaskViewBusiness.FindByStockOutTask(taskId);
+        }
+
+        /// <summary>
+        /// 获取出库任务
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult<List<CarryOutTaskView>> ListToDo()
+        {
+            CarryOutTaskViewBusiness carryOutTaskViewBusiness = new CarryOutTaskViewBusiness();
+            return carryOutTaskViewBusiness.ListToDo();
+        }
         #endregion //Action
     }
 }

@@ -47,6 +47,10 @@ namespace Phoebe.Core.BL
                 task.MoveWeight = store.StoreWeight;
                 task.Place = store.Place;
             }
+            else
+            {
+                return null;
+            }
 
             if (viceShelf)
                 task.ShelfCode = position.ViceShelfCode;
@@ -131,7 +135,8 @@ namespace Phoebe.Core.BL
                                 continue;
 
                             var tempTask = GenerateTempOutTask(stockOutTask, pos, false, db);
-                            tempOutTasks.Add(tempTask);
+                            if (tempTask != null)
+                                tempOutTasks.Add(tempTask);
                         }
                     }
                     else if (currentPos.ViceShelfCode == carryOuTask.ShelfCode)
@@ -143,7 +148,8 @@ namespace Phoebe.Core.BL
                                 continue;
 
                             var tempTask = GenerateTempOutTask(stockOutTask, pos, false, db);
-                            tempOutTasks.Add(tempTask);
+                            if (tempTask != null)
+                                tempOutTasks.Add(tempTask);
                         }
                     }
                     else

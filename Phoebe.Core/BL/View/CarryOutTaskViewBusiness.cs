@@ -10,5 +10,29 @@ namespace Phoebe.Core.BL
 
     public class CarryOutTaskViewBusiness : AbstractBusiness<CarryOutTaskView, string>, IBaseBL<CarryOutTaskView, string>
     {
+        #region Method
+        /// <summary>
+        /// 根据出库任务查找
+        /// </summary>
+        /// <param name="stockOutTaskId"></param>
+        /// <returns></returns>
+        public List<CarryOutTaskView> FindByStockOutTask(string stockOutTaskId)
+        {
+            var db = GetInstance();
+            var data = db.Queryable<CarryOutTaskView>().Where(r => r.StockOutTaskId == stockOutTaskId);
+            return data.ToList();
+        }
+
+        /// <summary>
+        /// 获取待办出库搬运任务
+        /// </summary>
+        /// <returns></returns>
+        public List<CarryOutTaskView> ListToDo()
+        {
+            var db = GetInstance();
+            var data = db.Queryable<CarryOutTaskView>().Where(r => r.Status == (int)EntityStatus.StockOutReady);
+            return data.ToList();
+        }
+        #endregion //Method
     }
 }
