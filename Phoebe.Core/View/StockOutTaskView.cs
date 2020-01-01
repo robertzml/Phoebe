@@ -107,12 +107,6 @@ namespace Phoebe.Core.View
         public DateTime OutTime { get; set; }
 
         /// <summary>
-        /// 入库月份
-        /// </summary>
-        [Display(Name = "入库月份")]
-        public string MonthTime { get; set; }
-
-        /// <summary>
         /// 流水单号
         /// </summary>
         [Display(Name = "流水单号")]
@@ -165,18 +159,6 @@ namespace Phoebe.Core.View
         /// </summary>
         [Display(Name = "合同类型")]
         public int ContractType { get; set; }
-
-        /// <summary>
-        /// 计费方式
-        /// </summary>
-        [Display(Name = "计费方式")]
-        public int BillingType { get; set; }
-
-        /// <summary>
-        /// 冷藏费单价
-        /// </summary>
-        [Display(Name = "冷藏费单价")]
-        public decimal UnitPrice { get; set; }
 
         /// <summary>
         /// 货品名称

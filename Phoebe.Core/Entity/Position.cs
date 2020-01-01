@@ -86,19 +86,7 @@ namespace Phoebe.Core.Entity
         /// 状态
         /// </summary>
         [Display(Name = "状态")]
-        public int Status { get; set; }
-
-        /// <summary>
-        /// 仓库名称
-        /// </summary>
-        [Display(Name = "仓库名称")]
-        public string WarehouseName { get; set; }
-
-        /// <summary>
-        /// 仓库编号
-        /// </summary>
-        [Display(Name = "仓库编号")]
-        public string WarehouseNumber { get; set; }
+        public int Status { get; set; }      
         #endregion //Property
     }
 }

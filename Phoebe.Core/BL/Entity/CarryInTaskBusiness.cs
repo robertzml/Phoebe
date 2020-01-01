@@ -64,7 +64,7 @@ namespace Phoebe.Core.BL
 
                 var user = db.Queryable<User>().InSingle(userId);
 
-                //检查用户情况
+                // 检查用户情况
                 var exists = db.Queryable<CarryInTask>().Count(r => r.ReceiveUserId == user.Id && r.Status == (int)EntityStatus.StockInReceive);
                 if (exists != 0)
                     return (false, "用户还有入库任务未完成");

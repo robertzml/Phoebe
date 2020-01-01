@@ -44,7 +44,7 @@ namespace Phoebe.Core.BL
             store.InTime = stockInTask.InTime;
             store.CarryInTaskId = task.Id;
 
-            store.Status = (int)EntityStatus.StoreReady;
+            store.Status = (int)EntityStatus.CarryInReady;
 
             var t = db.Insertable(store).ExecuteReturnEntity();
             return (true, "", t);

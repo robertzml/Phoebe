@@ -18,7 +18,15 @@ namespace Phoebe.Core.BL
     public class CarryOutTaskBusiness : AbstractBusiness<CarryOutTask, string>, IBaseBL<CarryOutTask, string>
     {
         #region Function
-        private bool AddTempTask(CarryOutTask outTask, Position position, SqlSugarClient db = null)
+        /// <summary>
+        /// 生成临时搬运出库任务
+        /// </summary>
+        /// <param name="outTask"></param>
+        /// <param name="position"></param>
+        /// <param name="viceShelf"></param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        private CarryOutTask GenerateTempOutTask(StockOutTaskView outTask, PositionView position, bool viceShelf, SqlSugarClient db = null)
         {
             if (db == null)
                 db = GetInstance();
@@ -26,10 +34,10 @@ namespace Phoebe.Core.BL
             CarryOutTask task = new CarryOutTask();
             task.Id = Guid.NewGuid().ToString();
             task.Type = (int)CarryOutTaskType.Temp;
-            task.StockOutTaskId = outTask.StockOutTaskId;
+            task.StockOutTaskId = outTask.Id;
 
             // find store
-            var store = db.Queryable<Store>().Single(r => r.PositionId == position.Id && r.Status == (int)EntityStatus.StoreIn);
+            var store = db.Queryable<StoreView>().Single(r => r.PositionId == position.Id && r.Status == (int)EntityStatus.StoreIn);
             if (store != null)
             {
                 task.StoreId = store.Id;
@@ -37,16 +45,44 @@ namespace Phoebe.Core.BL
                 task.MoveCount = store.StoreCount;
                 task.StoreWeight = store.StoreWeight;
                 task.MoveWeight = store.StoreWeight;
+                task.Place = store.Place;
             }
-            else
-                return false;
 
-            return true;
+            if (viceShelf)
+                task.ShelfCode = position.ViceShelfCode;
+            else
+                task.ShelfCode = position.ShelfCode;
+            task.PositionId = position.Id;
+
+            task.CreateTime = DateTime.Now;
+            task.Status = (int)EntityStatus.StockOutReady;
+
+            return task;
+        }
+
+        private CarryInTask GenerateTempInTask(CarryOutTask outTask, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            CarryInTask task = new CarryInTask();
+            task.Id = Guid.NewGuid().ToString();
+            task.CreateTime = DateTime.Now;
+            task.CheckTime = DateTime.Now;
+            //task.TaskCode = recordBusiness.GetNextSequence(db, "CarryInTask", entity.CreateTime);
+            task.Status = (int)EntityStatus.StockInCheck;
+
+            return null;
         }
         #endregion //Function
 
-
         #region Method
+        /// <summary>
+        /// 批量添加搬运出库任务
+        /// 指同一出库任务下的搬运任务，并且生成相关临时搬运出库任务
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         public (bool success, string errorMessage) Create(List<CarryOutTask> data)
         {
             var db = GetInstance();
@@ -58,6 +94,9 @@ namespace Phoebe.Core.BL
                 SequenceRecordBusiness recordBusiness = new SequenceRecordBusiness();
                 var now = DateTime.Now;
 
+                var stockOutTask = db.Queryable<StockOutTaskView>().InSingle(data.First().StockOutTaskId);
+
+                // 设置出库的搬运任务信息
                 foreach (var item in data)
                 {
                     item.Id = Guid.NewGuid().ToString();
@@ -73,36 +112,56 @@ namespace Phoebe.Core.BL
                     db.Insertable(item).ExecuteReturnEntity();
                 }
 
-                // find the shelfs that should carry tray out
-                //var shelfCodes = data.Select(r => r.ShelfCode).Distinct();
-                //foreach(var shelfCode in shelfCodes)
-                //{
-                //    var vice = false;
-                //    var positions = db.Queryable<Position>().Where(r => r.ShelfCode == shelfCode).ToList();
-                    
-                //    if (positions.Count == 0) // from vice side
-                //    {
-                //        positions = db.Queryable<Position>().Where(r => r.ViceShelfCode == shelfCode).ToList();
-                //        vice = true;
-                //    }
+                List<CarryOutTask> tempOutTasks = new List<CarryOutTask>();
+                foreach (var carryOuTask in data)
+                {
+                    // 搬运出库任务的仓位
+                    var currentPos = db.Queryable<PositionView>().InSingle(carryOuTask.PositionId);
 
-                //    var shelf = db.Queryable<Shelf>().InSingle(positions.First().ShelfId);
+                    // 找到该货物同一排的所有仓位
+                    var positions = db.Queryable<PositionView>()
+                        .Where(r => r.ShelfId == currentPos.ShelfId && r.Row == currentPos.Row && r.Layer == currentPos.Layer).ToList();
 
-                //    if (vice)
-                //    {
-                //        var tasks = data.Where(r => r.ShelfCode == shelfCode).ToList();
-                //        for (int i = 0; i < shelf.Depth; i++)
-                //        {
+                    if (currentPos.ShelfCode == carryOuTask.ShelfCode)
+                    {
+                        var outPos = positions.Where(r => r.Depth < currentPos.Depth).ToList();
+                        foreach (var pos in outPos)
+                        {
+                            if (tempOutTasks.Any(r => r.PositionId == pos.Id))
+                                continue;
 
-                //        }
-                //    }
-                //}
+                            var tempTask = GenerateTempOutTask(stockOutTask, pos, false, db);
+                            tempOutTasks.Add(tempTask);
+                        }
+                    }
+                    else if (currentPos.ViceShelfCode == carryOuTask.ShelfCode)
+                    {
+                        var outPos = positions.Where(r => r.Depth > currentPos.Depth).ToList();
+                        foreach (var pos in outPos)
+                        {
+                            if (tempOutTasks.Any(r => r.PositionId == pos.Id))
+                                continue;
 
+                            var tempTask = GenerateTempOutTask(stockOutTask, pos, false, db);
+                            tempOutTasks.Add(tempTask);
+                        }
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+
+                foreach (var item in tempOutTasks)
+                {
+                    item.TaskCode = recordBusiness.GetNextSequence(db, "CarryOutTask", item.CreateTime);
+                    db.Insertable(item).ExecuteReturnEntity();
+                }
 
                 db.Ado.CommitTran();
                 return (true, "");
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 db.Ado.RollbackTran();
                 return (false, e.Message);

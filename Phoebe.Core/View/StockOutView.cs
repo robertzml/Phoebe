@@ -26,9 +26,9 @@ namespace Phoebe.Core.View
         public DateTime OutTime { get; set; }
 
         /// <summary>
-        /// 入库月份
+        /// 出库月份
         /// </summary>
-        [Display(Name = "入库月份")]
+        [Display(Name = "出库月份")]
         public string MonthTime { get; set; }
 
         /// <summary>
