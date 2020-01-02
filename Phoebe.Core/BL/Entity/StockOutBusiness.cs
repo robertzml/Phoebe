@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Phoebe.Core.BL
@@ -39,6 +40,39 @@ namespace Phoebe.Core.BL
             {
                 db.Ado.RollbackTran();
                 return (false, e.Message, null);
+            }
+        }
+
+        /// <summary>
+        /// 确认出库单
+        /// </summary>
+        /// <param name="id">出库单ID</param>
+        /// <returns></returns>
+        public (bool success, string errorMessage) Confirm(string id)
+        {
+            try
+            {
+                var db = GetInstance();
+
+                var stockOut = db.Queryable<StockOut>().InSingle(id);
+                var tasks = db.Queryable<StockOutTask>().Where(r => r.StockOutId == id).ToList();
+
+                if (tasks.All(r => r.Status == (int)EntityStatus.StockOutFinish))
+                {
+                    stockOut.ConfirmTime = DateTime.Now;
+                    stockOut.Status = (int)EntityStatus.StockOutFinish;
+
+                    db.Updateable(stockOut).ExecuteCommand();
+                    return (true, "");
+                }
+                else
+                {
+                    return (false, "有出库货物未完成");
+                }
+            }
+            catch (Exception e)
+            {
+                return (false, e.Message);
             }
         }
         #endregion //Method

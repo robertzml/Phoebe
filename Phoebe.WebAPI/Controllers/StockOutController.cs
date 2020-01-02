@@ -105,6 +105,32 @@ namespace Phoebe.WebAPI.Controllers
             StockOutViewBusiness stockOutViewBusiness = new StockOutViewBusiness();
             return stockOutViewBusiness.FindById(id);
         }
+
+        /// <summary>
+        /// 确认出库
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ActionResult<ResponseData>> Confirm(string id)
+        {
+            StockOutBusiness stockOutBusiness = new StockOutBusiness();
+
+            var task = Task.Run(() =>
+            {
+                var result = stockOutBusiness.Confirm(id);
+
+                ResponseData data = new ResponseData
+                {
+                    Status = result.success ? 0 : 1,
+                    ErrorMessage = result.errorMessage
+                };
+
+                return data;
+            });
+
+            return await task;
+        }
         #endregion //Stock Out
 
         #region Stock Out Task
@@ -140,6 +166,31 @@ namespace Phoebe.WebAPI.Controllers
                     Status = result.success ? 0 : 1,
                     ErrorMessage = result.errorMessage,
                     Entity = result.t
+                };
+
+                return data;
+            });
+
+            return await task;
+        }
+
+        /// <summary>
+        /// 完成出库任务
+        /// </summary>
+        /// <param name="taskId"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ActionResult<ResponseData>> FinishTask(string taskId)
+        {
+            StockOutTaskBusiness taskBusiness = new StockOutTaskBusiness();
+
+            var task = Task.Run(() =>
+            {
+                var result = taskBusiness.Confirm(taskId);
+                ResponseData data = new ResponseData
+                {
+                    Status = result.success ? 0 : 1,
+                    ErrorMessage = result.errorMessage
                 };
 
                 return data;

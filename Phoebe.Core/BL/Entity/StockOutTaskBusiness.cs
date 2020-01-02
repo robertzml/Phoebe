@@ -53,9 +53,43 @@ namespace Phoebe.Core.BL
             {
                 db.Ado.RollbackTran();
                 return (false, e.Message, null);
-            }
+            }            
+        }
 
-            
+        /// <summary>
+        /// 确认出库任务
+        /// </summary>
+        /// <param name="stockOutTaskId"></param>
+        /// <returns></returns>
+        public (bool success, string errorMessage) Confirm(string stockOutTaskId)
+        {
+            try
+            {
+                var db = GetInstance();
+
+                var task = db.Queryable<StockOutTask>().InSingle(stockOutTaskId);
+                var carryOut = db.Queryable<CarryOutTask>().Where(r => r.StockOutTaskId == stockOutTaskId).ToList();
+                if (carryOut.All(r => r.Status == (int)EntityStatus.StockOutFinish))
+                {
+                    //task.InCount = carryIn.Sum(r => r.MoveCount);
+                    //task.InWeight = carryIn.Sum(r => r.MoveWeight);
+
+                    task.FinishTime = DateTime.Now;
+                    task.Status = (int)EntityStatus.StockOutFinish;
+
+                    db.Updateable(task).ExecuteCommand();
+
+                    return (true, "");
+                }
+                else
+                {
+                    return (false, "有搬运出库任务未完成");
+                }
+            }
+            catch (Exception e)
+            {
+                return (false, e.Message);
+            }
         }
         #endregion //Method
     }

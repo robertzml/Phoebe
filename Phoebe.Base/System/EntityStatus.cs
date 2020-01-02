@@ -74,13 +74,13 @@ namespace Phoebe.Base.System
         /// 63:准备移入
         /// </summary>
         [Display(Name = "准备移入")]
-        CarryInReady = 63,
+        StoreInReady = 63,
 
         /// <summary>
         /// 64:准备移出
         /// </summary>
         [Display(Name = "准备移出")]
-        CarryOutReady = 64,
+        StoreOutReady = 64,
         #endregion //Store
 
         #region Stock In

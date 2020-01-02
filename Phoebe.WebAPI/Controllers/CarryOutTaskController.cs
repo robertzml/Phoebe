@@ -67,6 +67,94 @@ namespace Phoebe.WebAPI.Controllers
             CarryOutTaskViewBusiness carryOutTaskViewBusiness = new CarryOutTaskViewBusiness();
             return carryOutTaskViewBusiness.ListToDo();
         }
+
+
+        /// <summary>
+        /// 查找用户当前接单任务
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult<List<CarryOutTaskView>> FindCurrentReceive(int userId)
+        {
+            CarryOutTaskViewBusiness carryOutTaskViewBusiness = new CarryOutTaskViewBusiness();
+            return carryOutTaskViewBusiness.FindCurrentReceive(userId);
+        }
+
+        /// <summary>
+        /// 出库接单
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ActionResult<ResponseData>> ReceiveTask(CarryOutReceiveModel model)
+        {
+            CarryOutTaskBusiness taskBusiness = new CarryOutTaskBusiness();
+
+            var task = Task.Run(() =>
+            {
+                ResponseData data = new ResponseData();
+
+                var result = taskBusiness.Receive(model.TaskCode, model.UserId);
+
+                data.Status = result.success ? 0 : 1;
+                data.ErrorMessage = result.errorMessage;
+
+                return data;
+            });
+
+            return await task;
+        }
+
+        /// <summary>
+        /// 出库下架
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ActionResult<ResponseData>> LeaveTask(CarryOutLeaveModel model)
+        {
+            CarryOutTaskBusiness taskBusiness = new CarryOutTaskBusiness();
+
+            var task = Task.Run(() =>
+            {
+                ResponseData data = new ResponseData();
+
+                var result = taskBusiness.Leave(model.TaskCode, model.TrayCode, model.ShelfCode, model.UserId);
+
+                data.Status = result.success ? 0 : 1;
+                data.ErrorMessage = result.errorMessage;
+
+                return data;
+            });
+
+            return await task;
+        }
+
+        /// <summary>
+        /// 出库确认
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ActionResult<ResponseData>> FinishTask(CarryOutFinishModel model)
+        {
+            CarryOutTaskBusiness taskBusiness = new CarryOutTaskBusiness();
+
+            var task = Task.Run(() =>
+            {
+                ResponseData data = new ResponseData();
+
+                var result = taskBusiness.Finish(model.TaskId, model.UserId, model.Remark);
+
+                data.Status = result.success ? 0 : 1;
+                data.ErrorMessage = result.errorMessage;
+
+                return data;
+            });
+
+            return await task;
+        }
         #endregion //Action
     }
 }

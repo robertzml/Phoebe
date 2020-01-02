@@ -50,4 +50,40 @@ namespace Phoebe.WebAPI.Model
 
         public List<StockOutTask> tasks;
     }
+
+    /// <summary>
+    /// 搬运出库接单模型
+    /// </summary>
+    public class CarryOutReceiveModel
+    {
+        public string TaskCode;
+
+        public int UserId;
+    }
+
+    /// <summary>
+    /// 搬运出库下架模型
+    /// </summary>
+    public class CarryOutLeaveModel
+    {
+        public string TaskCode;
+
+        public string TrayCode;
+
+        public string ShelfCode;
+
+        public int UserId;
+    }
+
+    /// <summary>
+    /// 搬运出库确认模型
+    /// </summary>
+    public class CarryOutFinishModel
+    {
+        public string TaskId;
+
+        public int UserId;
+
+        public string Remark;
+    }
 }

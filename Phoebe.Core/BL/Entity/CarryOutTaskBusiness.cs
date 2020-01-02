@@ -173,6 +173,148 @@ namespace Phoebe.Core.BL
                 return (false, e.Message);
             }
         }
+
+        /// <summary>
+        /// 出库接单
+        /// </summary>
+        /// <param name="taskCode">任务码</param>
+        /// <param name="userId">用户ID</param>
+        /// <returns></returns>
+        public (bool success, string errorMessage) Receive(string taskCode, int userId)
+        {
+            var db = GetInstance();
+
+            try
+            {
+                db.Ado.BeginTran();
+
+                var task = db.Queryable<CarryOutTask>().Single(r => r.TaskCode == taskCode && r.Status == (int)EntityStatus.StockOutReady);
+                if (task == null)
+                    return (false, "未找到搬运出库任务");
+
+                var user = db.Queryable<User>().InSingle(userId);
+
+                // 检查用户情况
+                var exists = db.Queryable<CarryOutTask>().Count(r => r.ReceiveUserId == user.Id && r.Status == (int)EntityStatus.StockOutReceive);
+                if (exists != 0)
+                    return (false, "用户还有出库任务未完成");
+
+                // 更新任务状态
+                task.ReceiveUserId = user.Id;
+                task.ReceiveUserName = user.Name;
+                task.ReceiveTime = DateTime.Now;
+                task.Status = (int)EntityStatus.StockOutReceive;
+
+                db.Updateable(task).ExecuteCommand();
+
+
+                db.Ado.CommitTran();
+                return (true, "");
+            }
+            catch (Exception e)
+            {
+                db.Ado.RollbackTran();
+                return (false, e.Message);
+            }
+        }
+
+        /// <summary>
+        /// 下架
+        /// </summary>
+        /// <param name="taskCode">任务码</param>
+        /// <param name="trayCode">托盘码</param>
+        /// <param name="shelfCode">货架码</param>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public (bool success, string errorMessage) Leave(string taskCode, string trayCode, string shelfCode, int userId)
+        {
+            var db = GetInstance();
+
+            try
+            {
+                db.Ado.BeginTran();
+
+                var task = db.Queryable<CarryOutTask>().Single(r => r.TaskCode == taskCode && r.Status == (int)EntityStatus.StockOutReceive);
+                if (task == null)
+                    return (false, "该任务不存在");
+
+                if (task.TrayCode != trayCode || task.ShelfCode != shelfCode)
+                    return (false, "托盘或货架不一致");
+
+                var user = db.Queryable<User>().InSingle(userId);
+                if (task.ReceiveUserId != user.Id)
+                    return (false, "非本用户任务");
+
+                // find position
+                var position = db.Queryable<Position>().InSingle(task.PositionId);
+
+                // update position
+                position.Status = (int)EntityStatus.Available;
+                db.Updateable(position).ExecuteCommand();
+
+                // set task info                   
+                task.MoveTime = DateTime.Now;
+                task.Status = (int)EntityStatus.StockOutLeave;
+                db.Updateable(task).ExecuteCommand();
+
+                db.Ado.CommitTran();
+                return (true, "");
+            }
+            catch (Exception e)
+            {
+                db.Ado.RollbackTran();
+                return (false, e.Message);
+            }
+        }
+
+        /// <summary>
+        /// 出库完成
+        /// 清点和完成一起
+        /// </summary>
+        /// <param name="taskId"></param>
+        /// <param name="userId"></param>
+        /// <param name="remark"></param>
+        /// <returns></returns>
+        public (bool success, string errorMessage) Finish(string taskId, int userId, string remark)
+        {
+            var db = GetInstance();
+
+            try
+            {
+                db.Ado.BeginTran();
+
+                var task = db.Queryable<CarryOutTask>().Single(r => r.Id == taskId);
+
+                if (task.Status != (int)EntityStatus.StockOutLeave)
+                {
+                    return (false, "该任务无法完成");
+                }
+
+                var user = db.Queryable<User>().InSingle(userId);
+
+                // update task
+                var now = DateTime.Now;
+                task.CheckTime = now;
+                task.CheckUserId = userId;
+                task.CheckUserName = user.Name;
+                task.FinishTime = now;                
+                task.Status = (int)EntityStatus.StockOutFinish;
+                db.Updateable(task).ExecuteCommand();
+
+                // update store status
+                var store = db.Queryable<Store>().Single(r => r.Id == task.StoreId);                
+                store.Status = (int)EntityStatus.StoreOut;
+                db.Updateable(store).ExecuteCommand();
+
+                db.Ado.CommitTran();
+                return (true, "");
+            }
+            catch (Exception e)
+            {
+                db.Ado.RollbackTran();
+                return (false, e.Message);
+            }
+        }
         #endregion //Method
     }
 }
