@@ -20,7 +20,7 @@ namespace Phoebe.Base.Framework
         {
             SqlSugarClient db = new SqlSugarClient(new ConnectionConfig()
             {
-                ConnectionString = "Server=localhost;Database=phoebe4;User=uphoebe;Password=uphoebe123456;",
+                ConnectionString = @"Server=localhost;Database=phoebe4;User=uphoebe;Password=uphoebe123456;",
                 DbType = DbType.SqlServer,
                 IsAutoCloseConnection = true,
                 InitKeyType = InitKeyType.Attribute
