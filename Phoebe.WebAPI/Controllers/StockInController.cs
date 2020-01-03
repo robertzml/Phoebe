@@ -54,6 +54,18 @@ namespace Phoebe.WebAPI.Controllers
         }
 
         /// <summary>
+        /// 获取入库列表
+        /// </summary>
+        /// <param name="inTime"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult<List<StockInView>> ListByTime(DateTime inTime)
+        {
+            StockInViewBusiness stockInViewBusiness = new StockInViewBusiness();
+            return stockInViewBusiness.FindByTime(inTime);
+        }
+
+        /// <summary>
         /// 获取入库
         /// </summary>
         /// <param name="id"></param>
