@@ -9,6 +9,7 @@ namespace Phoebe.WebAPI.Controllers
 {
     using Phoebe.Core.BL;
     using Phoebe.Core.Entity;
+    using Phoebe.Core.View;
     using Phoebe.WebAPI.Model;
 
     /// <summary>
@@ -50,10 +51,10 @@ namespace Phoebe.WebAPI.Controllers
         /// <param name="layer"></param>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult<List<Position>> ListInLayer(int shelfId, int row, int layer)
+        public ActionResult<List<PositionView>> ListInLayer(int shelfId, int row, int layer)
         {
-            PositionBusiness positionBusiness = new PositionBusiness();
-            return positionBusiness.FindList(shelfId, row, layer);
+            PositionViewBusiness positionViewBusiness = new PositionViewBusiness();
+            return positionViewBusiness.FindList(shelfId, row, layer);
         }
 
         /// <summary>
@@ -65,10 +66,10 @@ namespace Phoebe.WebAPI.Controllers
         /// <param name="depth"></param>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult<Position> Find(int shelfId, int row, int layer, int depth)
+        public ActionResult<PositionView> Find(int shelfId, int row, int layer, int depth)
         {
-            PositionBusiness positionBusiness = new PositionBusiness();
-            return positionBusiness.Find(shelfId, row, layer, depth);
+            PositionViewBusiness positionViewBusiness = new PositionViewBusiness();
+            return positionViewBusiness.Find(shelfId, row, layer, depth);
         }
 
         /// <summary>
@@ -77,10 +78,10 @@ namespace Phoebe.WebAPI.Controllers
         /// <param name="id">仓位ID</param>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult<Position> Get(int id)
+        public ActionResult<PositionView> Get(int id)
         {
-            PositionBusiness positionBusiness = new PositionBusiness();
-            return positionBusiness.FindById(id);
+            PositionViewBusiness positionViewBusiness = new PositionViewBusiness();
+            return positionViewBusiness.FindById(id);
         }
 
         /// <summary>

@@ -41,33 +41,6 @@ namespace Phoebe.Core.BL
         }
 
         /// <summary>
-        /// 查找仓位
-        /// </summary>
-        /// <param name="shelfId"></param>
-        /// <param name="row"></param>
-        /// <param name="layer"></param>
-        /// <returns></returns>
-        public List<Position> FindList(int shelfId, int row, int layer)
-        {
-            var db = GetInstance();
-            return db.Queryable<Position>().Where(r => r.ShelfId == shelfId && r.Row == row && r.Layer == layer).OrderBy(r => r.Number).ToList();
-        }
-
-        /// <summary>
-        /// 查找仓位
-        /// </summary>
-        /// <param name="shelfId"></param>
-        /// <param name="row"></param>
-        /// <param name="layer"></param>
-        /// <param name="depth"></param>
-        /// <returns></returns>
-        public Position Find(int shelfId, int row, int layer, int depth)
-        {
-            var db = GetInstance();
-            return db.Queryable<Position>().Single(r => r.ShelfId == shelfId && r.Row == row && r.Layer == layer && r.Depth == depth);
-        }
-
-        /// <summary>
         /// 根据货架码查找空仓位
         /// </summary>
         /// <param name="db"></param>

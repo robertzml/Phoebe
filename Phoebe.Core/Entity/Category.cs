@@ -25,12 +25,14 @@ namespace Phoebe.Core.Entity
         /// <summary>
         /// 名称
         /// </summary>
+        [Required]
         [Display(Name = "名称")]
         public string Name { get; set; }
 
         /// <summary>
         /// 代码
         /// </summary>
+        [Required]
         [Display(Name = "代码")]
         public string Number { get; set; }
 

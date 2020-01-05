@@ -94,6 +94,32 @@ namespace Phoebe.WebAPI.Controllers
 
             return await task;
         }
+
+        /// <summary>
+        /// 编辑货品
+        /// </summary>
+        /// <param name="cargo"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ActionResult<ResponseData>> Update(Cargo cargo)
+        {
+            CargoBusiness cargoBusiness = new CargoBusiness();
+
+            var task = Task.Run(() =>
+            {
+                var result = cargoBusiness.Update(cargo);
+
+                ResponseData data = new ResponseData
+                {
+                    Status = result.success ? 0 : 1,
+                    ErrorMessage = result.errorMessage
+                };
+
+                return data;
+            });
+
+            return await task;
+        }
         #endregion //Action
     }
 }
