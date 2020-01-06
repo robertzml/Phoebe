@@ -7,6 +7,8 @@ using SqlSugar;
 
 namespace Phoebe.Base.Framework
 {
+    using Phoebe.Common;
+
     /// <summary>
     /// 抽象业务类
     /// </summary>
@@ -18,9 +20,11 @@ namespace Phoebe.Base.Framework
         #region Function
         protected SqlSugarClient GetInstance()
         {
+            var cs = Cache.Instance.Get("ConnectionString").ToString();
+
             SqlSugarClient db = new SqlSugarClient(new ConnectionConfig()
             {
-                ConnectionString = @"Server=localhost;Database=phoebe4;User=uphoebe;Password=uphoebe123456;",
+                ConnectionString = cs,
                 DbType = DbType.SqlServer,
                 IsAutoCloseConnection = true,
                 InitKeyType = InitKeyType.Attribute
