@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Threading;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -144,6 +145,18 @@ namespace Phoebe.WebAPI.Controllers
         {
             StockOutTaskViewBusiness taskViewBusiness = new StockOutTaskViewBusiness();
             return taskViewBusiness.FindList(stockOutId);
+        }
+
+        /// <summary>
+        /// 获取出库任务
+        /// </summary>
+        /// <param name="taskId"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult<StockOutTaskView> GetTask(string taskId)
+        {
+            StockOutTaskViewBusiness taskViewBusiness = new StockOutTaskViewBusiness();
+            return taskViewBusiness.FindById(taskId);
         }
 
         /// <summary>
