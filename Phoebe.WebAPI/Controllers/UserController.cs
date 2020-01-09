@@ -111,6 +111,32 @@ namespace Phoebe.WebAPI.Controllers
         }
 
         /// <summary>
+        /// 添加用户
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ActionResult<ResponseData>> Create(User user)
+        {
+            var userBusiness = new UserBusiness();
+
+            var task = Task.Run(() =>
+            {
+                var result = userBusiness.Create(user);
+
+                ResponseData data = new ResponseData
+                {
+                    Status = result.success ? 0 : 1,
+                    ErrorMessage = result.errorMessage
+                };
+
+                return data;
+            });
+
+            return await task;
+        }
+
+        /// <summary>
         /// 编辑用户
         /// </summary>
         /// <param name="user"></param>

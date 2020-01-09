@@ -21,6 +21,7 @@ namespace Phoebe.Core.Entity
         /// <summary>
         /// 用户名
         /// </summary>
+        [Required]
         [Display(Name = "用户名")]
         public string UserName { get; set; }
 
@@ -39,6 +40,7 @@ namespace Phoebe.Core.Entity
         /// <summary>
         /// 姓名
         /// </summary>
+        [Required]
         [Display(Name = "姓名")]
         public string Name { get; set; }
 

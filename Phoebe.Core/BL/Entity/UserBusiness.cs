@@ -70,6 +70,25 @@ namespace Phoebe.Core.BL
         }
 
         /// <summary>
+        /// 创建用户
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public override (bool success, string errorMessage, User t) Create(User entity)
+        {
+            if (entity.UserGroupId == 1)
+            {
+                return (false, "无法创建超级管理员", null);
+            }
+
+            entity.Password = Hasher.SHA1Encrypt(entity.Password);
+            entity.LastLoginTime = DateTime.Now;
+            entity.CurrentLoginTime = DateTime.Now;
+            entity.Status = 0;
+            return base.Create(entity);
+        }
+
+        /// <summary>
         /// 启用用户
         /// </summary>
         /// <param name="id">用户ID</param>
