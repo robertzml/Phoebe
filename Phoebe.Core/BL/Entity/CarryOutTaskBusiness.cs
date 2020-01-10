@@ -45,6 +45,8 @@ namespace Phoebe.Core.BL
                 task.MoveCount = store.StoreCount;
                 task.StoreWeight = store.StoreWeight;
                 task.MoveWeight = store.StoreWeight;
+                task.TrayCode = store.TrayCode;
+                task.PositionId = store.PositionId;
                 task.Place = store.Place;
             }
             else
@@ -55,8 +57,7 @@ namespace Phoebe.Core.BL
             if (viceShelf)
                 task.ShelfCode = position.ViceShelfCode;
             else
-                task.ShelfCode = position.ShelfCode;
-            task.PositionId = position.Id;
+                task.ShelfCode = position.ShelfCode;         
 
             task.CreateTime = DateTime.Now;
             task.Status = (int)EntityStatus.StockOutReady;
@@ -116,6 +117,7 @@ namespace Phoebe.Core.BL
                     db.Insertable(item).ExecuteReturnEntity();
                 }
 
+                // 检查是否有需要临时搬运的任务
                 List<CarryOutTask> tempOutTasks = new List<CarryOutTask>();
                 foreach (var carryOuTask in data)
                 {
@@ -147,7 +149,7 @@ namespace Phoebe.Core.BL
                             if (tempOutTasks.Any(r => r.PositionId == pos.Id))
                                 continue;
 
-                            var tempTask = GenerateTempOutTask(stockOutTask, pos, false, db);
+                            var tempTask = GenerateTempOutTask(stockOutTask, pos, true, db);
                             if (tempTask != null)
                                 tempOutTasks.Add(tempTask);
                         }
@@ -158,10 +160,25 @@ namespace Phoebe.Core.BL
                     }
                 }
 
+                // 添加临时搬运出库任务
                 foreach (var item in tempOutTasks)
-                {
+                {                    
                     item.TaskCode = recordBusiness.GetNextSequence(db, "CarryOutTask", item.CreateTime);
-                    db.Insertable(item).ExecuteReturnEntity();
+                    db.Insertable(item).ExecuteCommand();
+                }
+
+                // 设置库存状态
+                foreach(var item in data)
+                {
+                    var store = db.Queryable<Store>().Single(r => r.Id == item.StoreId);
+                    store.Status = (int)EntityStatus.StoreOutReady;
+                    db.Updateable(store).ExecuteCommand();
+                }
+                foreach(var item in tempOutTasks)
+                {
+                    var store = db.Queryable<Store>().Single(r => r.Id == item.StoreId);
+                    store.Status = (int)EntityStatus.StoreOutReady;
+                    db.Updateable(store).ExecuteCommand();
                 }
 
                 db.Ado.CommitTran();
