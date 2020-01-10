@@ -119,118 +119,22 @@ namespace Phoebe.Core.View
         public int Status { get; set; }
 
         /// <summary>
-        /// 搬运类型
+        /// 货品名称
         /// </summary>
-        [Display(Name = "搬运类型")]
-        public int CarryInTaskType { get; set; }
+        [Display(Name = "货品名称")]
+        public string CargoName { get; set; }
 
         /// <summary>
-        /// 搬运数量
+        /// 类别名称
         /// </summary>
-        [Display(Name = "搬运数量")]
-        public int MoveCount { get; set; }
+        [Display(Name = "类别名称")]
+        public string CategoryName { get; set; }
 
         /// <summary>
-        /// 搬运重量
+        /// 类别代码
         /// </summary>
-        [Display(Name = "搬运重量")]
-        public decimal MoveWeight { get; set; }
-
-        /// <summary>
-        /// 搬运任务码
-        /// </summary>
-        [Display(Name = "搬运任务码")]
-        public string CarryInTaskCode { get; set; }
-
-        /// <summary>
-        /// 货架码
-        /// </summary>
-        [Display(Name = "货架码")]
-        public string ShelfCode { get; set; }
-
-        /// <summary>
-        /// 托盘码
-        /// </summary>
-        [Display(Name = "托盘码")]
-        public string CarryInTaskTrayCode { get; set; }
-
-        /// <summary>
-        /// 存放位置
-        /// </summary>
-        [Display(Name = "存放位置")]
-        public string Place { get; set; }
-
-        /// <summary>
-        /// 清点人ID
-        /// </summary>
-        [Display(Name = "清点人ID")]
-        public int CarryInCheckUserId { get; set; }
-
-        /// <summary>
-        /// 清点人
-        /// </summary>
-        [Display(Name = "清点人")]
-        public string CarryInCheckUserName { get; set; }
-
-        /// <summary>
-        /// 接单人ID
-        /// </summary>
-        [Display(Name = "接单人ID")]
-        public int CarryInReceiveUserId { get; set; }
-
-        /// <summary>
-        /// 接单人
-        /// </summary>
-        [Display(Name = "接单人")]
-        public string CarryInReceiveUserName { get; set; }
-
-        /// <summary>
-        /// 创建时间
-        /// </summary>
-        [Display(Name = "创建时间")]
-        public DateTime CarryInCreateTime { get; set; }
-
-        /// <summary>
-        /// 清点时间
-        /// </summary>
-        [Display(Name = "清点时间")]
-        public DateTime? CarryInCheckTime { get; set; }
-
-        /// <summary>
-        /// 接单时间
-        /// </summary>
-        [Display(Name = "接单时间")]
-        public DateTime? CarryInReceiveTime { get; set; }
-
-        /// <summary>
-        /// 移入时间
-        /// </summary>
-        [Display(Name = "移入时间")]
-        public DateTime? CarryInMoveTime { get; set; }
-
-        /// <summary>
-        /// 完成时间
-        /// </summary>
-        [Display(Name = "完成时间")]
-        public DateTime? CarryInFinishTime { get; set; }
-
-        /// <summary>
-        /// 备注
-        /// </summary>
-        [Display(Name = "备注")]
-        public string CarryInRemark { get; set; }
-
-        /// <summary>
-        /// 状态
-        /// </summary>
-        [Display(Name = "状态")]
-        public int CarryInStatus { get; set; }
-
-        /// <summary>
-        /// 入库任务码
-        /// </summary>
-        [Display(Name = "入库任务码")]
-        public string StockInTaskCode { get; set; }
+        [Display(Name = "类别代码")]
+        public string CategoryNumber { get; set; }
 
         /// <summary>
         /// 入库数量
@@ -269,30 +173,6 @@ namespace Phoebe.Core.View
         public int Durability { get; set; }
 
         /// <summary>
-        /// 入库流水号
-        /// </summary>
-        [Display(Name = "入库流水号")]
-        public string StockInFlowNumber { get; set; }
-
-        /// <summary>
-        /// 货品名称
-        /// </summary>
-        [Display(Name = "货品名称")]
-        public string CargoName { get; set; }
-
-        /// <summary>
-        /// 类别名称
-        /// </summary>
-        [Display(Name = "类别名称")]
-        public string CategoryName { get; set; }
-
-        /// <summary>
-        /// 类别代码
-        /// </summary>
-        [Display(Name = "类别代码")]
-        public string CategoryNumber { get; set; }
-
-        /// <summary>
         /// 客户名称
         /// </summary>
         [Display(Name = "客户名称")]
@@ -315,6 +195,18 @@ namespace Phoebe.Core.View
         /// </summary>
         [Display(Name = "合同编号")]
         public string ContractNumber { get; set; }
+
+        /// <summary>
+        /// 存放位置
+        /// </summary>
+        [Display(Name = "存放位置")]
+        public string Place { get; set; }
+
+        /// <summary>
+        /// 货架码
+        /// </summary>
+        [Display(Name = "货架码")]
+        public string ShelfCode { get; set; }
 
         /// <summary>
         /// 仓库ID
@@ -377,10 +269,16 @@ namespace Phoebe.Core.View
         public int WarehouseType { get; set; }
 
         /// <summary>
-        /// 合同类型
+        /// 货架编号
         /// </summary>
-        [Display(Name = "合同类型")]
-        public int ContractType { get; set; }
+        [Display(Name = "货架编号")]
+        public string ShelfNumber { get; set; }
+
+        /// <summary>
+        /// 货架类型
+        /// </summary>
+        [Display(Name = "货架类型")]
+        public int ShelfType { get; set; }
 
         /// <summary>
         /// 签订日期
@@ -393,6 +291,11 @@ namespace Phoebe.Core.View
         /// </summary>
         [Display(Name = "关闭日期")]
         public DateTime? CloseDate { get; set; }
+        /// <summary>
+        /// 合同类型
+        /// </summary>
+        [Display(Name = "合同类型")]
+        public int ContractType { get; set; }
 
         /// <summary>
         /// 计费方式
@@ -423,18 +326,6 @@ namespace Phoebe.Core.View
         /// </summary>
         [Display(Name = "参数3")]
         public string Parameter3 { get; set; }
-
-        /// <summary>
-        /// 货架编号
-        /// </summary>
-        [Display(Name = "货架编号")]
-        public string ShelfNumber { get; set; }
-
-        /// <summary>
-        /// 货架类型
-        /// </summary>
-        [Display(Name = "货架类型")]
-        public int ShelfType { get; set; }
         #endregion //Property
     }
 }
