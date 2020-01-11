@@ -59,15 +59,14 @@ namespace Phoebe.WebAPI.Controllers
         }
 
         /// <summary>
-        /// 获取出库任务
+        /// 获取出库任务仓位码
         /// </summary>
         /// <returns></returns>
-        public ActionResult<List<CarryOutTaskView>> ListToDo()
+        public ActionResult<List<string>> ListToOut()
         {
             CarryOutTaskViewBusiness carryOutTaskViewBusiness = new CarryOutTaskViewBusiness();
-            return carryOutTaskViewBusiness.ListToDo();
+            return carryOutTaskViewBusiness.ListToOut();
         }
-
 
         /// <summary>
         /// 查找用户当前接单任务

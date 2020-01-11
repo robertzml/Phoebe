@@ -19,50 +19,72 @@ namespace Phoebe.Core.BL
     {
         #region Function
         /// <summary>
-        /// 生成临时搬运出库任务
+        /// 设置临时搬运出库任务
         /// </summary>
-        /// <param name="outTask"></param>
-        /// <param name="position"></param>
-        /// <param name="viceShelf"></param>
-        /// <param name="db"></param>
+        /// <remarks>
+        /// 根据库存记录生成，一条库存记录对应一条搬运任务。
+        /// 一个仓位上可能有多条库存记录
+        /// </remarks>
+        /// <param name="store">库存记录</param>
         /// <returns></returns>
-        private CarryOutTask GenerateTempOutTask(StockOutTaskView outTask, PositionView position, bool viceShelf, SqlSugarClient db = null)
-        {
-            if (db == null)
-                db = GetInstance();
-
+        private CarryOutTask SetTempOutTaskInfo(StoreView store)
+        {           
             CarryOutTask task = new CarryOutTask();
             task.Id = Guid.NewGuid().ToString();
             task.Type = (int)CarryOutTaskType.Temp;
-            task.StockOutTaskId = outTask.Id;
 
-            // find store
-            var store = db.Queryable<StoreView>().Single(r => r.PositionId == position.Id && r.Status == (int)EntityStatus.StoreIn);
-            if (store != null)
-            {
-                task.StoreId = store.Id;
-                task.StoreCount = store.StoreCount;
-                task.MoveCount = store.StoreCount;
-                task.StoreWeight = store.StoreWeight;
-                task.MoveWeight = store.StoreWeight;
-                task.TrayCode = store.TrayCode;
-                task.PositionId = store.PositionId;
-                task.Place = store.Place;
-            }
-            else
-            {
-                return null;
-            }
-
-            if (viceShelf)
-                task.ShelfCode = position.ViceShelfCode;
-            else
-                task.ShelfCode = position.ShelfCode;         
+            task.StoreId = store.Id;
+            task.StoreCount = store.StoreCount;
+            task.MoveCount = store.StoreCount;
+            task.StoreWeight = store.StoreWeight;
+            task.MoveWeight = store.StoreWeight;
+            task.TrayCode = store.TrayCode;
+            task.PositionId = store.PositionId;
+            task.Place = store.Place;
 
             task.CreateTime = DateTime.Now;
             task.Status = (int)EntityStatus.StockOutReady;
 
             return task;
+        }
+
+        /// <summary>
+        /// 生成临时搬运出库任务
+        /// </summary>
+        /// <param name="outTask">出库任务</param>
+        /// <param name="position">仓位</param>
+        /// <param name="viceShelf">取货货架口</param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        private List<CarryOutTask> GenerateTempOutTask(StockOutTaskView outTask, PositionView position, bool viceShelf, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            List<CarryOutTask> data = new List<CarryOutTask>();
+
+            // 查找仓位上库存记录
+            var stores = db.Queryable<StoreView>().Where(r => r.PositionId == position.Id && r.Status == (int)EntityStatus.StoreIn).ToList();
+            foreach (var store in stores)
+            {
+                CarryOutTask task = SetTempOutTaskInfo(store);
+                task.StockOutTaskId = outTask.Id;
+
+                if (viceShelf)
+                {
+                    task.ShelfCode = position.ViceShelfCode;
+                    task.PositionNumber = position.ViceNumber;
+                }
+                else
+                {
+                    task.ShelfCode = position.ShelfCode;
+                    task.PositionNumber = position.Number;
+                }
+
+                data.Add(task);
+            }
+
+            return data;
         }
 
         private CarryInTask GenerateTempInTask(CarryOutTask outTask, SqlSugarClient db = null)
@@ -100,6 +122,7 @@ namespace Phoebe.Core.BL
                 var now = DateTime.Now;
 
                 var stockOutTask = db.Queryable<StockOutTaskView>().InSingle(data.First().StockOutTaskId);
+                List<CarryOutTask> tempOutTasks = new List<CarryOutTask>();
 
                 // 设置出库的搬运任务信息
                 foreach (var item in data)
@@ -109,16 +132,47 @@ namespace Phoebe.Core.BL
                     item.CreateTime = now;
                     item.TaskCode = recordBusiness.GetNextSequence(db, "CarryOutTask", item.CreateTime);
 
-                    var store = db.Queryable<StoreView>().InSingle(item.StoreId);
-                    item.PositionId = store.PositionId;
-                    item.Place = store.Place;
-                    item.Status = (int)EntityStatus.StockOutReady;
+                    // 检查出库搬运任务托盘上是否有其它货物
+                    var stores = db.Queryable<StoreView>().Where(r => r.PositionId == item.PositionId && r.Status == (int)EntityStatus.StoreIn).ToList();
+                    foreach(var store in stores)
+                    {
+                        if (store.Id == item.StoreId)
+                        {
+                            if (store.ShelfCode == item.ShelfCode)
+                            {
+                                item.PositionNumber = store.PositionNumber;
+                            }
+                            else
+                            {
+                                item.PositionNumber = store.VicePositionNumber;
+                            }
 
-                    db.Insertable(item).ExecuteReturnEntity();
+                            item.Place = store.Place;
+                            item.Status = (int)EntityStatus.StockOutReady;
+
+                            db.Insertable(item).ExecuteReturnEntity();
+                        }
+                        else
+                        {
+                            var temp = SetTempOutTaskInfo(store);
+                            temp.StockOutTaskId = stockOutTask.Id;
+                            temp.ShelfCode = item.ShelfCode;
+
+                            if (store.ShelfCode == temp.ShelfCode)
+                            {
+                                temp.PositionNumber = store.PositionNumber;
+                            }
+                            else
+                            {
+                                temp.PositionNumber = store.VicePositionNumber;
+                            }
+
+                            tempOutTasks.Add(temp);
+                        }
+                    }
                 }
 
                 // 检查是否有需要临时搬运的任务
-                List<CarryOutTask> tempOutTasks = new List<CarryOutTask>();
                 foreach (var carryOuTask in data)
                 {
                     // 搬运出库任务的仓位
@@ -138,7 +192,7 @@ namespace Phoebe.Core.BL
 
                             var tempTask = GenerateTempOutTask(stockOutTask, pos, false, db);
                             if (tempTask != null)
-                                tempOutTasks.Add(tempTask);
+                                tempOutTasks.AddRange(tempTask);
                         }
                     }
                     else if (currentPos.ViceShelfCode == carryOuTask.ShelfCode)
@@ -151,7 +205,7 @@ namespace Phoebe.Core.BL
 
                             var tempTask = GenerateTempOutTask(stockOutTask, pos, true, db);
                             if (tempTask != null)
-                                tempOutTasks.Add(tempTask);
+                                tempOutTasks.AddRange(tempTask);
                         }
                     }
                     else

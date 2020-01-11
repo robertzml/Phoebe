@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Phoebe.Core.BL
@@ -32,6 +33,21 @@ namespace Phoebe.Core.BL
             var db = GetInstance();
             var data = db.Queryable<CarryOutTaskView>().Where(r => r.Status == (int)EntityStatus.StockOutReady);
             return data.ToList();
+        }
+
+        /// <summary>
+        /// 获取待办出库搬运任务
+        /// </summary>
+        /// <returns>
+        /// 待出库的仓位码
+        /// </returns>
+        public List<string> ListToOut()
+        {
+            var db = GetInstance();
+            var data = db.Queryable<CarryOutTaskView>().Where(r => r.Status == (int)EntityStatus.StockOutReady).ToList();
+
+            var positionNumbers = data.Select(r => r.PositionNumber).Distinct().ToList();
+            return positionNumbers;
         }
 
 

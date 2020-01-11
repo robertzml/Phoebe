@@ -95,6 +95,12 @@ namespace Phoebe.Core.Entity
         public int PositionId { get; set; }
 
         /// <summary>
+        /// 仓位码
+        /// </summary>
+        [Display(Name = "仓位码")]
+        public string PositionNumber { get; set; }
+
+        /// <summary>
         /// 存放位置
         /// </summary>
         [Display(Name = "存放位置")]
