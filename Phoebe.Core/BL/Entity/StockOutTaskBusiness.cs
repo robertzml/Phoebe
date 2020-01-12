@@ -68,6 +68,13 @@ namespace Phoebe.Core.BL
                 var db = GetInstance();
 
                 var task = db.Queryable<StockOutTask>().InSingle(stockOutTaskId);
+
+                var carryIn = db.Queryable<CarryInTask>().Where(r => r.StockOutTaskId == stockOutTaskId).ToList();
+                if (carryIn.Any(r => r.Status != (int)EntityStatus.StockInFinish))
+                {
+                    return (false, "有搬运入库任务未完成");
+                }
+
                 var carryOut = db.Queryable<CarryOutTask>().Where(r => r.StockOutTaskId == stockOutTaskId).ToList();
                 if (carryOut.All(r => r.Status == (int)EntityStatus.StockOutFinish))
                 {

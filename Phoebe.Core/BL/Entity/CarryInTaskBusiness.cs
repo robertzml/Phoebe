@@ -216,8 +216,12 @@ namespace Phoebe.Core.BL
             task.MoveWeight = carryOutTask.StoreWeight - carryOutTask.MoveWeight;
 
             task.TrayCode = carryOutTask.TrayCode;
+
+            task.CheckUserId = carryOutTask.ReceiveUserId;
+            task.CheckUserName = carryOutTask.CheckUserName;
             task.CreateTime = DateTime.Now;
-            task.Status = (int)EntityStatus.StockInReady;
+            task.CheckTime = DateTime.Now;
+            task.Status = (int)EntityStatus.StockInCheck;
 
             return task;
         }

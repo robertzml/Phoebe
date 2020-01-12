@@ -39,6 +39,18 @@ namespace Phoebe.Core.BL
         }
 
         /// <summary>
+        /// 根据出库任务查找
+        /// </summary>
+        /// <param name="stockOutTaskId"></param>
+        /// <returns></returns>
+        public List<CarryInTaskView> FindByStockOutTask(string stockOutTaskId)
+        {
+            var db = GetInstance();
+            var data = db.Queryable<CarryInTaskView>().Where(r => r.StockOutTaskId == stockOutTaskId);
+            return data.ToList();
+        }
+
+        /// <summary>
         /// 获取用户当前接单任务
         /// </summary>
         /// <param name="userId">用户ID</param>
