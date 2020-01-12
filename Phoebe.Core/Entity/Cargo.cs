@@ -49,6 +49,12 @@ namespace Phoebe.Core.Entity
         public decimal UnitWeight { get; set; }
 
         /// <summary>
+        /// 规格
+        /// </summary>
+        [Display(Name = "规格")]
+        public string Specification { get; set; }
+
+        /// <summary>
         /// 登记时间
         /// </summary>
         [Display(Name = "登记时间")]

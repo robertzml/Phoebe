@@ -161,6 +161,12 @@ namespace Phoebe.Core.View
         public string Specification { get; set; }
 
         /// <summary>
+        /// 批次
+        /// </summary>
+        [Display(Name = "批次")]
+        public string Batch { get; set; }
+
+        /// <summary>
         /// 产地
         /// </summary>
         [Display(Name = "产地")]

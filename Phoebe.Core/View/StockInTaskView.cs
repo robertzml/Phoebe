@@ -59,10 +59,10 @@ namespace Phoebe.Core.View
         public decimal InWeight { get; set; }
 
         /// <summary>
-        /// 规格
+        /// 批次
         /// </summary>
-        [Display(Name = "规格")]
-        public string Specification { get; set; }
+        [Display(Name = "批次")]
+        public string Batch { get; set; }
 
         /// <summary>
         /// 产地
@@ -189,6 +189,12 @@ namespace Phoebe.Core.View
         /// </summary>
         [Display(Name = "类别代码")]
         public string CategoryNumber { get; set; }
+
+        /// <summary>
+        /// 规格
+        /// </summary>
+        [Display(Name = "规格")]
+        public string Specification { get; set; }
         #endregion //Method
     }
 }

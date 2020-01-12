@@ -27,6 +27,7 @@ namespace Phoebe.Core.BL
                 SequenceRecordBusiness recordBusiness = new SequenceRecordBusiness();
 
                 entity.Id = Guid.NewGuid().ToString();
+                entity.Type = (int)CarryInTaskType.In;
                 entity.CreateTime = DateTime.Now;
                 entity.CheckTime = DateTime.Now;
                 entity.TaskCode = recordBusiness.GetNextSequence(db, "CarryInTask", entity.CreateTime);
