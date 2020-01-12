@@ -56,7 +56,7 @@ namespace Phoebe.WebAPI.Model
     /// </summary>
     public class CarryOutReceiveModel
     {
-        public string TaskCode;
+        public string TrayCode;
 
         public int UserId;
     }

@@ -198,6 +198,29 @@ namespace Phoebe.Core.BL
                 return (false, e.Message);
             }
         }
+
+        /// <summary>
+        /// 生成临时搬运入库任务
+        /// 由搬运出库任务生成
+        /// </summary>
+        /// <param name="carryOutTask">搬运出库任务</param>
+        /// <returns></returns>
+        public static CarryInTask SetTempInTask(CarryOutTask carryOutTask)
+        {
+            CarryInTask task = new CarryInTask();
+            task.Id = Guid.NewGuid().ToString();
+            task.Type = (int)CarryInTaskType.Temp;
+
+            task.StockOutTaskId = carryOutTask.StockOutTaskId;
+            task.MoveCount = carryOutTask.StoreCount - carryOutTask.MoveCount;
+            task.MoveWeight = carryOutTask.StoreWeight - carryOutTask.MoveWeight;
+
+            task.TrayCode = carryOutTask.TrayCode;
+            task.CreateTime = DateTime.Now;
+            task.Status = (int)EntityStatus.StockInReady;
+
+            return task;
+        }
         #endregion //Method
     }
 }

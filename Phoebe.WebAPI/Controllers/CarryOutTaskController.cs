@@ -69,6 +69,17 @@ namespace Phoebe.WebAPI.Controllers
         }
 
         /// <summary>
+        /// 获取待办出库搬运任务
+        /// </summary>
+        /// <param name="positionNumber">仓位码</param>
+        /// <returns></returns>
+        public ActionResult<List<CarryOutTaskView>> FindByPosition(string positionNumber)
+        {
+            CarryOutTaskViewBusiness carryOutTaskViewBusiness = new CarryOutTaskViewBusiness();
+            return carryOutTaskViewBusiness.FindByPosition(positionNumber);
+        }
+
+        /// <summary>
         /// 查找用户当前接单任务
         /// </summary>
         /// <param name="userId"></param>
@@ -94,7 +105,7 @@ namespace Phoebe.WebAPI.Controllers
             {
                 ResponseData data = new ResponseData();
 
-                var result = taskBusiness.Receive(model.TaskCode, model.UserId);
+                var result = taskBusiness.Receive(model.TrayCode, model.UserId);
 
                 data.Status = result.success ? 0 : 1;
                 data.ErrorMessage = result.errorMessage;

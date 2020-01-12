@@ -50,6 +50,18 @@ namespace Phoebe.Core.BL
             return positionNumbers;
         }
 
+        /// <summary>
+        /// 获取待办出库搬运任务
+        /// </summary>
+        /// <param name="positionNumber">仓位码</param>
+        /// <returns></returns>
+        public List<CarryOutTaskView> FindByPosition(string positionNumber)
+        {
+            var db = GetInstance();
+            var data = db.Queryable<CarryOutTaskView>().Where(r => r.PositionNumber == positionNumber && r.Status == (int)EntityStatus.StockOutReady).ToList();
+            return data;
+        }
+
 
         /// <summary>
         /// 获取用户当前接单任务

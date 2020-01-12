@@ -90,6 +90,24 @@ namespace Phoebe.Core.Utility
     }
 
     /// <summary>
+    /// 搬运入库类型
+    /// </summary>
+    public enum CarryInTaskType
+    {
+        /// <summary>
+        /// 入库搬运
+        /// </summary>
+        [Display(Name = "入库搬运")]
+        In = 1,
+
+        /// <summary>
+        /// 临时搬运
+        /// </summary>
+        [Display(Name = "临时搬运")]
+        Temp = 2
+    }
+
+    /// <summary>
     /// 搬运出库类型
     /// </summary>
     public enum CarryOutTaskType
