@@ -394,8 +394,12 @@ namespace Phoebe.Core.BL
                     db.Insertable(inTask).ExecuteCommand();
                 }
 
-                // update store status
+                var stockOutTask = db.Queryable<StockOutTaskView>().InSingle(task.StockOutTaskId);
+
+                // 更新库存状态
                 var store = db.Queryable<Store>().Single(r => r.Id == task.StoreId);
+                store.CarryOutTaskId = task.Id;
+                store.OutTime = stockOutTask.OutTime;
                 store.Status = (int)EntityStatus.StoreOut;
                 db.Updateable(store).ExecuteCommand();
 

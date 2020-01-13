@@ -77,12 +77,6 @@ namespace Phoebe.Core.View
         public decimal StoreWeight { get; set; }
 
         /// <summary>
-        /// 入库任务ID
-        /// </summary>
-        [Display(Name = "入库任务ID")]
-        public string StockInTaskId { get; set; }
-
-        /// <summary>
         /// 入库时间
         /// </summary>
         [Display(Name = "入库时间")]
@@ -105,6 +99,12 @@ namespace Phoebe.Core.View
         /// </summary>
         [Display(Name = "搬运出库任务ID")]
         public string CarryOutTaskId { get; set; }
+
+        /// <summary>
+        /// 创建时间
+        /// </summary>
+        [Display(Name = "创建时间")]
+        public DateTime CreateTime { get; set; }
 
         /// <summary>
         /// 备注

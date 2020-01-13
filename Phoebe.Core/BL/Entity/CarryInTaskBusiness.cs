@@ -134,16 +134,29 @@ namespace Phoebe.Core.BL
                     carryTask.PositionId = position.Id;
                     carryTask.MoveTime = DateTime.Now;
                     carryTask.Status = (int)EntityStatus.StockInEnter;
+                                       
+                    if (!string.IsNullOrEmpty(carryTask.StockInTaskId))
+                    {
+                        // 由入库任务生成的搬运任务
+                        var stockInTask = db.Queryable<StockInTaskView>().InSingle(carryTask.StockInTaskId);
 
-                    // find stock in task
-                    var stockInTask = db.Queryable<StockInTaskView>().InSingle(carryTask.StockInTaskId);
+                        // add store
+                        StoreBusiness storeBusiness = new StoreBusiness();
+                        var store = storeBusiness.Create(db, stockInTask, carryTask);                        
+                        carryTask.StoreId = store.t.Id;
+                    }
+                    else
+                    {
+                        // 由出库任务生成的搬运任务
+                        var stockOutTask = db.Queryable<StockOutTaskView>().InSingle(carryTask.StockOutTaskId);
 
-                    // add store
-                    StoreBusiness storeBusiness = new StoreBusiness();
-                    var store = storeBusiness.Create(db, stockInTask, carryTask);
+                        // add store
+                        StoreBusiness storeBusiness = new StoreBusiness();
+                        var store = storeBusiness.Create(db, stockOutTask, carryTask);
+                        carryTask.StoreId = store.t.Id;
+                    }
 
                     // update task
-                    carryTask.StoreId = store.t.Id;
                     db.Updateable(carryTask).ExecuteCommand();
                 }
 
@@ -219,7 +232,7 @@ namespace Phoebe.Core.BL
             task.TrayCode = carryOutTask.TrayCode;
 
             task.CheckUserId = carryOutTask.ReceiveUserId;
-            task.CheckUserName = carryOutTask.CheckUserName;
+            task.CheckUserName = carryOutTask.ReceiveUserName;
             task.CreateTime = DateTime.Now;
             task.CheckTime = DateTime.Now;
             task.Status = (int)EntityStatus.StockInCheck;
