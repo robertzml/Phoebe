@@ -183,6 +183,12 @@ namespace Phoebe.Core.View
         /// </summary>
         [Display(Name = "类别代码")]
         public string CategoryNumber { get; set; }
+
+        /// <summary>
+        /// 规格
+        /// </summary>
+        [Display(Name = "规格")]
+        public string Specification { get; set; }
         #endregion //Property
     }
 }

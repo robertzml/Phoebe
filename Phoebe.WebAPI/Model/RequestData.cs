@@ -66,8 +66,6 @@ namespace Phoebe.WebAPI.Model
     /// </summary>
     public class CarryOutLeaveModel
     {
-        public string TaskCode;
-
         public string TrayCode;
 
         public string ShelfCode;
@@ -81,6 +79,10 @@ namespace Phoebe.WebAPI.Model
     public class CarryOutFinishModel
     {
         public string TaskId;
+
+        public int MoveCount;
+
+        public decimal MoveWeight;
 
         public int UserId;
 

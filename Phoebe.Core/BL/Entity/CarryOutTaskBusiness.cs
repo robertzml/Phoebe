@@ -28,7 +28,7 @@ namespace Phoebe.Core.BL
         /// <param name="store">库存记录</param>
         /// <returns></returns>
         private CarryOutTask SetTempOutTaskInfo(StoreView store)
-        {           
+        {
             CarryOutTask task = new CarryOutTask();
             task.Id = Guid.NewGuid().ToString();
             task.Type = (int)CarryOutTaskType.Temp;
@@ -85,7 +85,7 @@ namespace Phoebe.Core.BL
             }
 
             return data;
-        }      
+        }
         #endregion //Function
 
         #region Method
@@ -119,7 +119,7 @@ namespace Phoebe.Core.BL
 
                     // 检查出库搬运任务托盘上是否有其它货物
                     var stores = db.Queryable<StoreView>().Where(r => r.PositionId == item.PositionId && r.Status == (int)EntityStatus.StoreIn).ToList();
-                    foreach(var store in stores)
+                    foreach (var store in stores)
                     {
                         if (store.Id == item.StoreId)
                         {
@@ -201,19 +201,19 @@ namespace Phoebe.Core.BL
 
                 // 添加临时搬运出库任务
                 foreach (var item in tempOutTasks)
-                {                    
+                {
                     item.TaskCode = recordBusiness.GetNextSequence(db, "CarryOutTask", item.CreateTime);
                     db.Insertable(item).ExecuteCommand();
                 }
 
                 // 设置库存状态
-                foreach(var item in data)
+                foreach (var item in data)
                 {
                     var store = db.Queryable<Store>().Single(r => r.Id == item.StoreId);
                     store.Status = (int)EntityStatus.StoreOutReady;
                     db.Updateable(store).ExecuteCommand();
                 }
-                foreach(var item in tempOutTasks)
+                foreach (var item in tempOutTasks)
                 {
                     var store = db.Queryable<Store>().Single(r => r.Id == item.StoreId);
                     store.Status = (int)EntityStatus.StoreOutReady;
@@ -280,12 +280,11 @@ namespace Phoebe.Core.BL
         /// <summary>
         /// 下架
         /// </summary>
-        /// <param name="taskCode">任务码</param>
         /// <param name="trayCode">托盘码</param>
         /// <param name="shelfCode">货架码</param>
         /// <param name="userId"></param>
         /// <returns></returns>
-        public (bool success, string errorMessage) Leave(string taskCode, string trayCode, string shelfCode, int userId)
+        public (bool success, string errorMessage) Leave(string trayCode, string shelfCode, int userId)
         {
             var db = GetInstance();
 
@@ -293,36 +292,45 @@ namespace Phoebe.Core.BL
             {
                 db.Ado.BeginTran();
 
-                var task = db.Queryable<CarryOutTask>().Single(r => r.TaskCode == taskCode && r.Status == (int)EntityStatus.StockOutReceive);
-                if (task == null)
-                    return (false, "该任务不存在");
-
-                if (task.TrayCode != trayCode || task.ShelfCode != shelfCode)
-                    return (false, "托盘或货架不一致");
+                var tasks = db.Queryable<CarryOutTask>().Where(r => r.TrayCode == trayCode && r.Status == (int)EntityStatus.StockOutReceive).ToList();
+                if (tasks.Count == 0)
+                    return (false, "该托盘无出库任务");
 
                 var user = db.Queryable<User>().InSingle(userId);
-                if (task.ReceiveUserId != user.Id)
-                    return (false, "非本用户任务");
+
+                // 检查状态
+                foreach (var task in tasks)
+                {
+                    if (task.ReceiveUserId != user.Id)
+                        return (false, "非本用户任务");
+
+                    if (task.TrayCode != trayCode || task.ShelfCode != shelfCode)
+                        return (false, "托盘或货架不一致");
+                }
 
                 // find position
-                var position = db.Queryable<Position>().InSingle(task.PositionId);
+                var position = db.Queryable<Position>().InSingle(tasks[0].PositionId);
 
                 // update position
                 position.Status = (int)EntityStatus.Available;
                 db.Updateable(position).ExecuteCommand();
 
-                // set task info                   
-                task.MoveTime = DateTime.Now;
-                task.Status = (int)EntityStatus.StockOutLeave;
-                db.Updateable(task).ExecuteCommand();
-
-                if (task.Type == (int)CarryOutTaskType.Temp)
+                // 更新搬运出库任务状态
+                foreach (var task in tasks)
                 {
-                    SequenceRecordBusiness recordBusiness = new SequenceRecordBusiness();
-                    var inTask = CarryInTaskBusiness.SetTempInTask(task);
-                    inTask.TaskCode = recordBusiness.GetNextSequence(db, "CarryInTask", inTask.CreateTime);
+                    task.MoveTime = DateTime.Now;
+                    task.Status = (int)EntityStatus.StockOutLeave;
+                    db.Updateable(task).ExecuteCommand();
 
-                    db.Insertable(inTask).ExecuteCommand();
+                    // 生成临时出库任务对应临时入库任务
+                    if (task.Type == (int)CarryOutTaskType.Temp)
+                    {
+                        SequenceRecordBusiness recordBusiness = new SequenceRecordBusiness();
+                        var inTask = CarryInTaskBusiness.SetTempInTask(task);
+                        inTask.TaskCode = recordBusiness.GetNextSequence(db, "CarryInTask", inTask.CreateTime);
+
+                        db.Insertable(inTask).ExecuteCommand();
+                    }
                 }
 
                 db.Ado.CommitTran();
@@ -343,7 +351,7 @@ namespace Phoebe.Core.BL
         /// <param name="userId"></param>
         /// <param name="remark"></param>
         /// <returns></returns>
-        public (bool success, string errorMessage) Finish(string taskId, int userId, string remark)
+        public (bool success, string errorMessage) Finish(string taskId, int userId, int moveCount, decimal moveWeight, string remark)
         {
             var db = GetInstance();
 
@@ -362,15 +370,32 @@ namespace Phoebe.Core.BL
 
                 // update task
                 var now = DateTime.Now;
+                task.MoveCount = moveCount;
+                task.MoveWeight = moveWeight;
                 task.CheckTime = now;
                 task.CheckUserId = userId;
                 task.CheckUserName = user.Name;
-                task.FinishTime = now;                
+                task.FinishTime = now;
+                if (task.Remark == null)
+                    task.Remark = remark;
+                else
+                    task.Remark += remark;
+
                 task.Status = (int)EntityStatus.StockOutFinish;
                 db.Updateable(task).ExecuteCommand();
 
+                // 非全出则创建搬回的入库任务
+                if (task.Type == (int)CarryOutTaskType.Out && task.StoreCount > task.MoveCount)
+                {
+                    SequenceRecordBusiness recordBusiness = new SequenceRecordBusiness();
+                    var inTask = CarryInTaskBusiness.SetTempInTask(task);
+                    inTask.TaskCode = recordBusiness.GetNextSequence(db, "CarryInTask", inTask.CreateTime);
+
+                    db.Insertable(inTask).ExecuteCommand();
+                }
+
                 // update store status
-                var store = db.Queryable<Store>().Single(r => r.Id == task.StoreId);                
+                var store = db.Queryable<Store>().Single(r => r.Id == task.StoreId);
                 store.Status = (int)EntityStatus.StoreOut;
                 db.Updateable(store).ExecuteCommand();
 

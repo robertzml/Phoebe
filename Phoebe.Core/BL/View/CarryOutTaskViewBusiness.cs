@@ -62,7 +62,6 @@ namespace Phoebe.Core.BL
             return data;
         }
 
-
         /// <summary>
         /// 获取用户当前接单任务
         /// </summary>
@@ -71,7 +70,6 @@ namespace Phoebe.Core.BL
         public List<CarryOutTaskView> FindCurrentReceive(int userId)
         {
             var db = GetInstance();
-
             var data = db.Queryable<CarryOutTaskView>().Where(r => r.ReceiveUserId == userId && r.Status == (int)EntityStatus.StockOutReceive);
 
             return data.ToList();
