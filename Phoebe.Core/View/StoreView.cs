@@ -77,6 +77,24 @@ namespace Phoebe.Core.View
         public decimal StoreWeight { get; set; }
 
         /// <summary>
+        /// 批次
+        /// </summary>
+        [Display(Name = "批次")]
+        public string Batch { get; set; }
+
+        /// <summary>
+        /// 产地
+        /// </summary>
+        [Display(Name = "产地")]
+        public string OriginPlace { get; set; }
+
+        /// <summary>
+        /// 保质期
+        /// </summary>
+        [Display(Name = "保质期")]
+        public int Durability { get; set; }
+
+        /// <summary>
         /// 入库时间
         /// </summary>
         [Display(Name = "入库时间")]
@@ -125,6 +143,18 @@ namespace Phoebe.Core.View
         public string CargoName { get; set; }
 
         /// <summary>
+        /// 单位重量
+        /// </summary>
+        [Display(Name = "单位重量")]
+        public decimal UnitWeight { get; set; }
+
+        /// <summary>
+        /// 规格
+        /// </summary>
+        [Display(Name = "规格")]
+        public string Specification { get; set; }
+
+        /// <summary>
         /// 类别名称
         /// </summary>
         [Display(Name = "类别名称")]
@@ -135,48 +165,6 @@ namespace Phoebe.Core.View
         /// </summary>
         [Display(Name = "类别代码")]
         public string CategoryNumber { get; set; }
-
-        /// <summary>
-        /// 入库数量
-        /// </summary>
-        [Display(Name = "入库数量")]
-        public int InCount { get; set; }
-
-        /// <summary>
-        /// 单位重量
-        /// </summary>
-        [Display(Name = "单位重量")]
-        public decimal UnitWeight { get; set; }
-
-        /// <summary>
-        /// 入库重量
-        /// </summary>
-        [Display(Name = "入库重量")]
-        public decimal InWeight { get; set; }
-
-        /// <summary>
-        /// 规格
-        /// </summary>
-        [Display(Name = "规格")]
-        public string Specification { get; set; }
-
-        /// <summary>
-        /// 批次
-        /// </summary>
-        [Display(Name = "批次")]
-        public string Batch { get; set; }
-
-        /// <summary>
-        /// 产地
-        /// </summary>
-        [Display(Name = "产地")]
-        public string OriginPlace { get; set; }
-
-        /// <summary>
-        /// 保质期
-        /// </summary>
-        [Display(Name = "保质期")]
-        public int Durability { get; set; }
 
         /// <summary>
         /// 客户名称
@@ -203,16 +191,52 @@ namespace Phoebe.Core.View
         public string ContractNumber { get; set; }
 
         /// <summary>
-        /// 存放位置
+        /// 合同类型
         /// </summary>
-        [Display(Name = "存放位置")]
-        public string Place { get; set; }
+        [Display(Name = "合同类型")]
+        public int ContractType { get; set; }
 
         /// <summary>
-        /// 货架码
+        /// 签订日期
         /// </summary>
-        [Display(Name = "货架码")]
-        public string ShelfCode { get; set; }
+        [Display(Name = "签订日期")]
+        public DateTime SignDate { get; set; }
+
+        /// <summary>
+        /// 关闭日期
+        /// </summary>
+        [Display(Name = "关闭日期")]
+        public DateTime? CloseDate { get; set; }
+
+        /// <summary>
+        /// 计费方式
+        /// </summary>
+        [Display(Name = "计费方式")]
+        public int BillingType { get; set; }
+
+        /// <summary>
+        /// 冷藏费单价
+        /// </summary>
+        [Display(Name = "冷藏费单价")]
+        public decimal UnitPrice { get; set; }
+
+        /// <summary>
+        /// 参数1
+        /// </summary>
+        [Display(Name = "参数1")]
+        public string Parameter1 { get; set; }
+
+        /// <summary>
+        /// 参数2
+        /// </summary>
+        [Display(Name = "参数2")]
+        public string Parameter2 { get; set; }
+
+        /// <summary>
+        /// 参数3
+        /// </summary>
+        [Display(Name = "参数3")]
+        public string Parameter3 { get; set; }
 
         /// <summary>
         /// 仓库ID
@@ -287,51 +311,16 @@ namespace Phoebe.Core.View
         public int ShelfType { get; set; }
 
         /// <summary>
-        /// 签订日期
+        /// 存放位置
         /// </summary>
-        [Display(Name = "签订日期")]
-        public DateTime SignDate { get; set; }
+        [Display(Name = "存放位置")]
+        public string Place { get; set; }
 
         /// <summary>
-        /// 关闭日期
+        /// 货架码
         /// </summary>
-        [Display(Name = "关闭日期")]
-        public DateTime? CloseDate { get; set; }
-        /// <summary>
-        /// 合同类型
-        /// </summary>
-        [Display(Name = "合同类型")]
-        public int ContractType { get; set; }
-
-        /// <summary>
-        /// 计费方式
-        /// </summary>
-        [Display(Name = "计费方式")]
-        public int BillingType { get; set; }
-
-        /// <summary>
-        /// 冷藏费单价
-        /// </summary>
-        [Display(Name = "冷藏费单价")]
-        public decimal UnitPrice { get; set; }
-
-        /// <summary>
-        /// 参数1
-        /// </summary>
-        [Display(Name = "参数1")]
-        public string Parameter1 { get; set; }
-
-        /// <summary>
-        /// 参数2
-        /// </summary>
-        [Display(Name = "参数2")]
-        public string Parameter2 { get; set; }
-
-        /// <summary>
-        /// 参数3
-        /// </summary>
-        [Display(Name = "参数3")]
-        public string Parameter3 { get; set; }
+        [Display(Name = "货架码")]
+        public string ShelfCode { get; set; }
         #endregion //Property
     }
 }

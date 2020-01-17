@@ -29,6 +29,24 @@ namespace Phoebe.Core.Entity
         public int Type { get; set; }
 
         /// <summary>
+        /// 所属客户
+        /// </summary>
+        [Display(Name = "所属客户")]
+        public int CustomerId { get; set; }
+
+        /// <summary>
+        /// 所属合同
+        /// </summary>
+        [Display(Name = "所属合同")]
+        public int ContractId { get; set; }
+
+        /// <summary>
+        /// 货品ID
+        /// </summary>
+        [Display(Name = "货品ID")]
+        public string CargoId { get; set; }
+
+        /// <summary>
         /// 库存ID
         /// </summary>
         [Display(Name = "库存ID")]

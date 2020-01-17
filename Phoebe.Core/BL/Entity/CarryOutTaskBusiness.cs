@@ -33,6 +33,10 @@ namespace Phoebe.Core.BL
             task.Id = Guid.NewGuid().ToString();
             task.Type = (int)CarryOutTaskType.Temp;
 
+            task.CustomerId = store.CustomerId;
+            task.ContractId = store.ContractId;
+            task.CargoId = store.CargoId;
+
             task.StoreId = store.Id;
             task.StoreCount = store.StoreCount;
             task.MoveCount = 0;
@@ -44,6 +48,7 @@ namespace Phoebe.Core.BL
 
             task.CreateTime = DateTime.Now;
             task.Status = (int)EntityStatus.StockOutReady;
+            task.Remark = "";
 
             return task;
         }
@@ -114,6 +119,9 @@ namespace Phoebe.Core.BL
                 {
                     item.Id = Guid.NewGuid().ToString();
                     item.Type = (int)CarryOutTaskType.Out;
+                    item.CustomerId = stockOutTask.CustomerId;
+                    item.ContractId = stockOutTask.ContractId;
+                    item.CargoId = stockOutTask.CargoId;
                     item.CreateTime = now;
                     item.TaskCode = recordBusiness.GetNextSequence(db, "CarryOutTask", item.CreateTime);
 

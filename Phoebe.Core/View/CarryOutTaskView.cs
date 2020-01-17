@@ -29,6 +29,24 @@ namespace Phoebe.Core.View
         public int Type { get; set; }
 
         /// <summary>
+        /// 所属客户
+        /// </summary>
+        [Display(Name = "所属客户")]
+        public int CustomerId { get; set; }
+
+        /// <summary>
+        /// 所属合同
+        /// </summary>
+        [Display(Name = "所属合同")]
+        public int ContractId { get; set; }
+
+        /// <summary>
+        /// 货品ID
+        /// </summary>
+        [Display(Name = "货品ID")]
+        public string CargoId { get; set; }
+
+        /// <summary>
         /// 库存ID
         /// </summary>
         [Display(Name = "库存ID")]
@@ -173,34 +191,22 @@ namespace Phoebe.Core.View
         public int Status { get; set; }
 
         /// <summary>
-        /// 出库任务码
+        /// 货品名称
         /// </summary>
-        [Display(Name = "出库任务码")]
-        public string StockOutTaskCode { get; set; }
+        [Display(Name = "货品名称")]
+        public string CargoName { get; set; }
 
         /// <summary>
-        /// 货品ID
+        /// 单位重量
         /// </summary>
-        [Display(Name = "货品ID")]
-        public string CargoId { get; set; }
+        [Display(Name = "单位重量")]
+        public decimal UnitWeight { get; set; }
 
         /// <summary>
-        /// 出库时间
+        /// 规格
         /// </summary>
-        [Display(Name = "出库时间")]
-        public DateTime StockOutTime { get; set; }
-
-        /// <summary>
-        /// 流水单号
-        /// </summary>
-        [Display(Name = "流水单号")]
-        public string StockOutFlowNumber { get; set; }
-
-        /// <summary>
-        /// 出库类型
-        /// </summary>
-        [Display(Name = "出库类型")]
-        public int StockOutType { get; set; }
+        [Display(Name = "规格")]
+        public string Specification { get; set; }
 
         /// <summary>
         /// 客户编号
@@ -215,30 +221,6 @@ namespace Phoebe.Core.View
         public string CustomerName { get; set; }
 
         /// <summary>
-        /// 合同编号
-        /// </summary>
-        [Display(Name = "合同编号")]
-        public string ContractNumber { get; set; }
-
-        /// <summary>
-        /// 合同名称
-        /// </summary>
-        [Display(Name = "合同名称")]
-        public string ContractName { get; set; }
-
-        /// <summary>
-        /// 货品名称
-        /// </summary>
-        [Display(Name = "货品名称")]
-        public string CargoName { get; set; }
-
-        /// <summary>
-        /// 单位重量
-        /// </summary>
-        [Display(Name = "单位重量")]
-        public decimal UnitWeight { get; set; }
-
-        /// <summary>
         /// 类别名称
         /// </summary>
         [Display(Name = "类别名称")]
@@ -251,28 +233,28 @@ namespace Phoebe.Core.View
         public string CategoryNumber { get; set; }
 
         /// <summary>
+        /// 合同编号
+        /// </summary>
+        [Display(Name = "合同编号")]
+        public string ContractNumber { get; set; }
+
+        /// <summary>
+        /// 合同名称
+        /// </summary>
+        [Display(Name = "合同名称")]
+        public string ContractName { get; set; }
+
+        /// <summary>
         /// 入库时间
         /// </summary>
         [Display(Name = "入库时间")]
         public DateTime InTime { get; set; }
 
         /// <summary>
-        /// 入库数量
+        /// 批次
         /// </summary>
-        [Display(Name = "入库数量")]
-        public int InCount { get; set; }
-
-        /// <summary>
-        /// 入库重量
-        /// </summary>
-        [Display(Name = "入库重量")]
-        public decimal InWeight { get; set; }
-
-        /// <summary>
-        /// 规格
-        /// </summary>
-        [Display(Name = "规格")]
-        public string Specification { get; set; }
+        [Display(Name = "批次")]
+        public string Batch { get; set; }
 
         /// <summary>
         /// 产地
@@ -333,6 +315,12 @@ namespace Phoebe.Core.View
         /// </summary>
         [Display(Name = "仓库类型")]
         public int WarehouseType { get; set; }
+
+        /// <summary>
+        /// 货架编号
+        /// </summary>
+        [Display(Name = "货架编号")]
+        public string ShelfNumber { get; set; }
 
         /// <summary>
         /// 货架类型

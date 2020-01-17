@@ -77,6 +77,24 @@ namespace Phoebe.Core.Entity
         public decimal StoreWeight { get; set; }
 
         /// <summary>
+        /// 批次
+        /// </summary>
+        [Display(Name = "批次")]
+        public string Batch { get; set; }
+
+        /// <summary>
+        /// 产地
+        /// </summary>
+        [Display(Name = "产地")]
+        public string OriginPlace { get; set; }
+
+        /// <summary>
+        /// 保质期
+        /// </summary>
+        [Display(Name = "保质期")]
+        public int Durability { get; set; }
+
+        /// <summary>
         /// 入库时间
         /// </summary>
         [Display(Name = "入库时间")]

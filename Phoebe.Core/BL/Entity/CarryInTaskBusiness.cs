@@ -17,7 +17,18 @@ namespace Phoebe.Core.BL
     public class CarryInTaskBusiness : AbstractBusiness<CarryInTask, string>, IBaseBL<CarryInTask, string>
     {
         #region Method
-        public override (bool success, string errorMessage, CarryInTask t) Create(CarryInTask entity)
+        /// <summary>
+        /// 由入库创建搬运入库任务
+        /// </summary>
+        /// <param name="stockInTaskId"></param>
+        /// <param name="trayCode"></param>
+        /// <param name="moveCount"></param>
+        /// <param name="moveWeight"></param>
+        /// <param name="checkUserId"></param>
+        /// <param name="remark"></param>
+        /// <returns></returns>
+        public (bool success, string errorMessage, CarryInTask t) Create(string stockInTaskId, string trayCode,
+            int moveCount, decimal moveWeight, int checkUserId, string remark)
         {
             var db = GetInstance();
             try
@@ -26,12 +37,29 @@ namespace Phoebe.Core.BL
 
                 SequenceRecordBusiness recordBusiness = new SequenceRecordBusiness();
 
+                var stockInTask = db.Queryable<StockInTaskView>().InSingle(stockInTaskId);
+                var checkUser = db.Queryable<User>().InSingle(checkUserId);
+
+                CarryInTask entity = new CarryInTask();
                 entity.Id = Guid.NewGuid().ToString();
                 entity.Type = (int)CarryInTaskType.In;
+                entity.CustomerId = stockInTask.CustomerId;
+                entity.ContractId = stockInTask.ContractId;
+                entity.CargoId = stockInTask.CargoId;
+                entity.StockInTaskId = stockInTaskId;
+
+                entity.MoveCount = moveCount;
+                entity.MoveWeight = moveWeight;
+
+                entity.TaskCode = recordBusiness.GetNextSequence(db, "CarryInTask", entity.CreateTime);
+                entity.TrayCode = trayCode;
+
                 entity.CreateTime = DateTime.Now;
                 entity.CheckTime = DateTime.Now;
-                entity.TaskCode = recordBusiness.GetNextSequence(db, "CarryInTask", entity.CreateTime);
+                entity.CheckUserName = checkUser.Name;
+
                 entity.Status = (int)EntityStatus.StockInCheck;
+                entity.Remark = remark;
 
                 var t = db.Insertable(entity).ExecuteReturnEntity();
 
@@ -134,7 +162,7 @@ namespace Phoebe.Core.BL
                     carryTask.PositionId = position.Id;
                     carryTask.MoveTime = DateTime.Now;
                     carryTask.Status = (int)EntityStatus.StockInEnter;
-                                       
+
                     if (!string.IsNullOrEmpty(carryTask.StockInTaskId))
                     {
                         // 由入库任务生成的搬运任务
@@ -142,7 +170,7 @@ namespace Phoebe.Core.BL
 
                         // add store
                         StoreBusiness storeBusiness = new StoreBusiness();
-                        var store = storeBusiness.Create(db, stockInTask, carryTask);                        
+                        var store = storeBusiness.Create(db, stockInTask, carryTask);
                         carryTask.StoreId = store.t.Id;
                     }
                     else
@@ -224,6 +252,11 @@ namespace Phoebe.Core.BL
             CarryInTask task = new CarryInTask();
             task.Id = Guid.NewGuid().ToString();
             task.Type = (int)CarryInTaskType.Temp;
+            task.CustomerId = carryOutTask.CustomerId;
+            task.ContractId = carryOutTask.ContractId;
+            task.CargoId = carryOutTask.CargoId;
+
+            task.StoreId = carryOutTask.StoreId; // 暂时保存原库存ID
 
             task.StockOutTaskId = carryOutTask.StockOutTaskId;
             task.MoveCount = carryOutTask.StoreCount - carryOutTask.MoveCount;

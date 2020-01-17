@@ -1,19 +1,43 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Phoebe.WebAPI.Model
 {
-    using Phoebe.Core.Entity;
+    /// <summary>
+    /// 搬运入库新增模型
+    /// </summary>
+    public class CarryInCreateModel
+    {
+        [Required]
+        public string StockInTaskId;
+
+        [Required]
+        public string TrayCode;
+
+        [Required]
+        public int MoveCount;
+
+        [Required]
+        public decimal MoveWeight;
+
+        [Required]
+        public int CheckUserId;
+
+        public string Remark;
+    }
 
     /// <summary>
     /// 搬运入库接单模型
     /// </summary>
     public class CarryInReceiveModel
     {
+        [Required]
         public string TrayCode;
 
+        [Required]
         public int UserId;
     }
 
@@ -22,10 +46,13 @@ namespace Phoebe.WebAPI.Model
     /// </summary>
     public class CarryInEnterModel
     {
+        [Required]
         public string TrayCode;
 
+        [Required]
         public string ShelfCode;
 
+        [Required]
         public int UserId;
     }
 
@@ -34,21 +61,13 @@ namespace Phoebe.WebAPI.Model
     /// </summary>
     public class CarryInFinishModel
     {
+        [Required]
         public string TaskId;
 
+        [Required]
         public int UserId;
 
         public string Remark;
-    }
-
-    /// <summary>
-    /// 出库添加模型
-    /// </summary>
-    public class StockOutCreateModel
-    {
-        public StockOut stockOut;
-
-        public List<StockOutTask> tasks;
     }
 
     /// <summary>
@@ -56,8 +75,10 @@ namespace Phoebe.WebAPI.Model
     /// </summary>
     public class CarryOutReceiveModel
     {
+        [Required]
         public string TrayCode;
 
+        [Required]
         public int UserId;
     }
 
@@ -66,10 +87,13 @@ namespace Phoebe.WebAPI.Model
     /// </summary>
     public class CarryOutLeaveModel
     {
+        [Required]
         public string TrayCode;
 
+        [Required]
         public string ShelfCode;
 
+        [Required]
         public int UserId;
     }
 
@@ -78,12 +102,16 @@ namespace Phoebe.WebAPI.Model
     /// </summary>
     public class CarryOutFinishModel
     {
+        [Required]
         public string TaskId;
 
+        [Required]
         public int MoveCount;
 
+        [Required]
         public decimal MoveWeight;
 
+        [Required]
         public int UserId;
 
         public string Remark;

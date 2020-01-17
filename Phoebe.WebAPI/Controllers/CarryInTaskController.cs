@@ -21,13 +21,13 @@ namespace Phoebe.WebAPI.Controllers
     public class CarryInTaskController : ControllerBase
     {
         #region Action
-        public async Task<ActionResult<ResponseData>> Create(CarryInTask carryInTask)
+        public async Task<ActionResult<ResponseData>> Create(CarryInCreateModel model)
         {
             CarryInTaskBusiness carryInTaskBusiness = new CarryInTaskBusiness();
 
             var task = Task.Run(() =>
             {
-                var result = carryInTaskBusiness.Create(carryInTask);
+                var result = carryInTaskBusiness.Create(model.StockInTaskId, model.TrayCode, model.MoveCount, model.MoveWeight, model.CheckUserId, model.Remark);
 
                 ResponseData data = new ResponseData
                 {

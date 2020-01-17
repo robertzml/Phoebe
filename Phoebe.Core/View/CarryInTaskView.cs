@@ -28,6 +28,24 @@ namespace Phoebe.Core.View
         public int Type { get; set; }
 
         /// <summary>
+        /// 所属客户
+        /// </summary>
+        [Display(Name = "所属客户")]
+        public int CustomerId { get; set; }
+
+        /// <summary>
+        /// 所属合同
+        /// </summary>
+        [Display(Name = "所属合同")]
+        public int ContractId { get; set; }
+
+        /// <summary>
+        /// 货品ID
+        /// </summary>
+        [Display(Name = "货品ID")]
+        public string CargoId { get; set; }
+
+        /// <summary>
         /// 库存ID
         /// </summary>
         [Display(Name = "库存ID")]
@@ -154,16 +172,10 @@ namespace Phoebe.Core.View
         public int Status { get; set; }
 
         /// <summary>
-        /// 入库任务码
+        /// 货品名称
         /// </summary>
-        [Display(Name = "入库任务码")]
-        public string StockInTaskCode { get; set; }
-
-        /// <summary>
-        /// 入库数量
-        /// </summary>
-        [Display(Name = "入库数量")]
-        public int InCount { get; set; }
+        [Display(Name = "货品名称")]
+        public string CargoName { get; set; }
 
         /// <summary>
         /// 单位重量
@@ -172,52 +184,10 @@ namespace Phoebe.Core.View
         public decimal UnitWeight { get; set; }
 
         /// <summary>
-        /// 入库重量
-        /// </summary>
-        [Display(Name = "入库重量")]
-        public decimal InWeight { get; set; }
-
-        /// <summary>
         /// 规格
         /// </summary>
         [Display(Name = "规格")]
         public string Specification { get; set; }
-
-        /// <summary>
-        /// 批次
-        /// </summary>
-        [Display(Name = "批次")]
-        public string Batch { get; set; }
-
-        /// <summary>
-        /// 产地
-        /// </summary>
-        [Display(Name = "产地")]
-        public string OriginPlace { get; set; }
-
-        /// <summary>
-        /// 保质期
-        /// </summary>
-        [Display(Name = "保质期")]
-        public int Durability { get; set; }
-
-        /// <summary>
-        /// 入库时间
-        /// </summary>
-        [Display(Name = "入库时间")]
-        public DateTime StockInTime { get; set; }
-
-        /// <summary>
-        /// 入库流水号
-        /// </summary>
-        [Display(Name = "入库流水号")]
-        public string StockInFlowNumber { get; set; }
-
-        /// <summary>
-        /// 货品名称
-        /// </summary>
-        [Display(Name = "货品名称")]
-        public string CargoName { get; set; }
 
         /// <summary>
         /// 类别名称
