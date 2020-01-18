@@ -162,6 +162,32 @@ namespace Phoebe.WebAPI.Controllers
 
             return await task;
         }
+
+        /// <summary>
+        /// 删除搬运入库任务
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ActionResult<ResponseData>> Delete(string id)
+        {
+            CarryInTaskBusiness taskBusiness = new CarryInTaskBusiness();
+
+            var task = Task.Run(() =>
+            {
+                var result = taskBusiness.Delete(id);
+
+                ResponseData data = new ResponseData
+                {
+                    Status = result.success ? 0 : 1,
+                    ErrorMessage = result.errorMessage
+                };
+
+                return data;
+            });
+
+            return await task;
+        }
         #endregion //Action
     }
 }

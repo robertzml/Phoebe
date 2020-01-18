@@ -79,8 +79,45 @@ namespace Phoebe.Core.BL
                     return (false, "有搬运入库任务未完成");
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
+                return (false, e.Message);
+            }
+        }
+
+        /// <summary>
+        /// 删除入库任务
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public override (bool success, string errorMessage) Delete(string id)
+        {
+            var db = GetInstance();
+
+            try
+            {
+                db.Ado.BeginTran();
+
+                var carryIn = db.Queryable<CarryInTask>().Where(r => r.StockInTaskId == id).ToList();
+                if (carryIn.Count > 0)
+                {
+                    return (false, "入库任务含有搬运入库，无法删除");
+                }
+
+                var carryOut = db.Queryable<CarryOutTask>().Where(r => r.StockInTaskId == id).ToList();
+                if (carryOut.Count > 0)
+                {
+                    return (false, "入库任务含有搬运出库，无法删除");
+                }
+
+                db.Deleteable<StockInTask>().In(id).ExecuteCommand();
+
+                db.Ado.CommitTran();
+                return (true, "");
+            }
+            catch (Exception e)
+            {
+                db.Ado.RollbackTran();
                 return (false, e.Message);
             }
         }

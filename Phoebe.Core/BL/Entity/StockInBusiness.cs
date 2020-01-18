@@ -75,6 +75,37 @@ namespace Phoebe.Core.BL
                 return (false, e.Message);
             }
         }
+
+        /// <summary>
+        /// 删除入库单
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public override (bool success, string errorMessage) Delete(string id)
+        {
+            var db = GetInstance();
+
+            try
+            {
+                db.Ado.BeginTran();
+
+                var tasks = db.Queryable<StockInTask>().Where(r => r.StockInId == id).ToList();
+                if (tasks.Count > 0)
+                {
+                    return (false, "入库单含有入库任务，无法删除");
+                }
+
+                db.Deleteable<StockIn>().In(id).ExecuteCommand();
+
+                db.Ado.CommitTran();
+                return (true, "");
+            }
+            catch (Exception e)
+            {
+                db.Ado.RollbackTran();
+                return (false, e.Message);
+            }
+        }
         #endregion //Method
     }
 }

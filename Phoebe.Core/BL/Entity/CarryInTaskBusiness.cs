@@ -242,6 +242,37 @@ namespace Phoebe.Core.BL
         }
 
         /// <summary>
+        /// 删除搬运入库
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public override (bool success, string errorMessage) Delete(string id)
+        {
+            var db = GetInstance();
+
+            try
+            {
+                db.Ado.BeginTran();
+
+                var carryIn = db.Queryable<CarryInTask>().InSingle(id);
+                if (carryIn.Status != (int)EntityStatus.StockInCheck)
+                {
+                    return (false, "仅能删除已清点状态的搬运入库任务");
+                }
+
+                db.Deleteable<CarryInTask>().In(id).ExecuteCommand();
+
+                db.Ado.CommitTran();
+                return (true, "");
+            }
+            catch (Exception e)
+            {
+                db.Ado.RollbackTran();
+                return (false, e.Message);
+            }
+        }
+
+        /// <summary>
         /// 生成临时搬运入库任务
         /// 由搬运出库任务生成
         /// </summary>
