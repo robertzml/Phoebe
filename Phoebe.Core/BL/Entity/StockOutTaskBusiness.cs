@@ -25,7 +25,7 @@ namespace Phoebe.Core.BL
                 db.Ado.BeginTran();
 
                 var stockOut = db.Queryable<StockOut>().InSingle(entity.StockOutId);
-                    
+
                 StoreViewBusiness svBusiness = new StoreViewBusiness();
                 var stores = svBusiness.FindByCargo(stockOut.ContractId, entity.CargoId, true, db);
 
@@ -53,7 +53,7 @@ namespace Phoebe.Core.BL
             {
                 db.Ado.RollbackTran();
                 return (false, e.Message, null);
-            }            
+            }
         }
 
         /// <summary>
@@ -78,8 +78,8 @@ namespace Phoebe.Core.BL
                 var carryOut = db.Queryable<CarryOutTask>().Where(r => r.StockOutTaskId == stockOutTaskId).ToList();
                 if (carryOut.All(r => r.Status == (int)EntityStatus.StockOutFinish))
                 {
-                    //task.InCount = carryIn.Sum(r => r.MoveCount);
-                    //task.InWeight = carryIn.Sum(r => r.MoveWeight);
+                    task.OutCount = carryOut.Sum(r => r.MoveCount);
+                    task.OutWeight = carryOut.Sum(r => r.MoveWeight);
 
                     task.FinishTime = DateTime.Now;
                     task.Status = (int)EntityStatus.StockOutFinish;
@@ -95,6 +95,43 @@ namespace Phoebe.Core.BL
             }
             catch (Exception e)
             {
+                return (false, e.Message);
+            }
+        }
+
+        /// <summary>
+        /// 删除出库任务
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public override (bool success, string errorMessage) Delete(string id)
+        {
+            var db = GetInstance();
+
+            try
+            {
+                db.Ado.BeginTran();
+
+                var carryIn = db.Queryable<CarryInTask>().Where(r => r.StockOutTaskId == id).ToList();
+                if (carryIn.Count > 0)
+                {
+                    return (false, "出库任务含有搬运入库，无法删除");
+                }
+
+                var carryOut = db.Queryable<CarryOutTask>().Where(r => r.StockOutTaskId == id).ToList();
+                if (carryOut.Count > 0)
+                {
+                    return (false, "出库任务含有搬运出库，无法删除");
+                }
+
+                db.Deleteable<StockOutTask>().In(id).ExecuteCommand();
+
+                db.Ado.CommitTran();
+                return (true, "");
+            }
+            catch (Exception e)
+            {
+                db.Ado.RollbackTran();
                 return (false, e.Message);
             }
         }

@@ -132,6 +132,32 @@ namespace Phoebe.WebAPI.Controllers
 
             return await task;
         }
+
+        /// <summary>
+        /// 删除出库单
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ActionResult<ResponseData>> Delete(string id)
+        {
+            StockOutBusiness stockOutBusiness = new StockOutBusiness();
+
+            var task = Task.Run(() =>
+            {
+                var result = stockOutBusiness.Delete(id);
+
+                ResponseData data = new ResponseData
+                {
+                    Status = result.success ? 0 : 1,
+                    ErrorMessage = result.errorMessage
+                };
+
+                return data;
+            });
+
+            return await task;
+        }
         #endregion //Stock Out
 
         #region Stock Out Task
@@ -200,6 +226,31 @@ namespace Phoebe.WebAPI.Controllers
             var task = Task.Run(() =>
             {
                 var result = taskBusiness.Confirm(taskId);
+                ResponseData data = new ResponseData
+                {
+                    Status = result.success ? 0 : 1,
+                    ErrorMessage = result.errorMessage
+                };
+
+                return data;
+            });
+
+            return await task;
+        }
+
+        /// <summary>
+        /// 删除入库任务
+        /// </summary>
+        /// <param name="taskId"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ActionResult<ResponseData>> DeleteTask(string taskId)
+        {
+            StockOutTaskBusiness taskBusiness = new StockOutTaskBusiness();
+
+            var task = Task.Run(() =>
+            {
+                var result = taskBusiness.Delete(taskId);
                 ResponseData data = new ResponseData
                 {
                     Status = result.success ? 0 : 1,

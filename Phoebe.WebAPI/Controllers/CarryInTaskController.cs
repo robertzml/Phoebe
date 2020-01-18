@@ -164,6 +164,31 @@ namespace Phoebe.WebAPI.Controllers
         }
 
         /// <summary>
+        /// 取消接单
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ActionResult<ResponseData>> UnReceiveTask(CarryInReceiveModel model)
+        {
+            CarryInTaskBusiness taskBusiness = new CarryInTaskBusiness();
+
+            var task = Task.Run(() =>
+            {
+                ResponseData data = new ResponseData();
+
+                var result = taskBusiness.UnReceive(model.TrayCode, model.UserId);
+
+                data.Status = result.success ? 0 : 1;
+                data.ErrorMessage = result.errorMessage;
+
+                return data;
+            });
+
+            return await task;
+        }
+
+        /// <summary>
         /// 删除搬运入库任务
         /// </summary>
         /// <param name="id"></param>

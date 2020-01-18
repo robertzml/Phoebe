@@ -242,6 +242,52 @@ namespace Phoebe.Core.BL
         }
 
         /// <summary>
+        /// 取消接单
+        /// </summary>
+        /// <param name="trayCode"></param>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public (bool success, string errorMessage) UnReceive(string trayCode, int userId)
+        {
+            var db = GetInstance();
+
+            try
+            {
+                db.Ado.BeginTran();
+
+                var tasks = db.Queryable<CarryInTask>().Where(r => r.TrayCode == trayCode && r.Status == (int)EntityStatus.StockInReceive).ToList();
+                if (tasks.Count == 0)
+                    return (false, "该托盘无已接单搬运入库任务");
+
+                // 检查用户情况
+                if (tasks.Any(r => r.ReceiveUserId != userId))
+                {
+                    return (false, "非本人任务，无法取消接单");
+                }
+
+                // 更新任务状态
+                var now = DateTime.Now;
+                foreach (var task in tasks)
+                {
+                    task.ReceiveUserId = 0;
+                    task.ReceiveUserName = "";
+                    task.ReceiveTime = null;
+                    task.Status = (int)EntityStatus.StockInCheck;
+
+                    db.Updateable(task).ExecuteCommand();
+                }
+
+                db.Ado.CommitTran();
+                return (true, "");
+            }
+            catch (Exception e)
+            {
+                db.Ado.RollbackTran();
+                return (false, e.Message);
+            }
+        }
+
+        /// <summary>
         /// 删除搬运入库
         /// </summary>
         /// <param name="id"></param>

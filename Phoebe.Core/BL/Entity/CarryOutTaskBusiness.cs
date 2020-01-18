@@ -420,6 +420,42 @@ namespace Phoebe.Core.BL
                 return (false, e.Message);
             }
         }
+
+        /// <summary>
+        /// 删除搬运出库
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public override (bool success, string errorMessage) Delete(string id)
+        {
+            var db = GetInstance();
+
+            try
+            {
+                db.Ado.BeginTran();
+
+                var carryOut = db.Queryable<CarryOutTask>().InSingle(id);
+                if (carryOut.Status != (int)EntityStatus.StockOutReady)
+                {
+                    return (false, "仅能删除待出库状态的搬运入库任务");
+                }
+
+                var store = db.Queryable<Store>().Single(r => r.Id == carryOut.StoreId);
+                store.Status = (int)EntityStatus.StoreIn;
+
+                db.Updateable(store).ExecuteCommand();
+
+                db.Deleteable<CarryOutTask>().In(id).ExecuteCommand();
+
+                db.Ado.CommitTran();
+                return (true, "");
+            }
+            catch (Exception e)
+            {
+                db.Ado.RollbackTran();
+                return (false, e.Message);
+            }
+        }
         #endregion //Method
     }
 }
