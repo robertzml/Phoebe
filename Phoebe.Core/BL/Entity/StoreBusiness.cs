@@ -86,6 +86,7 @@ namespace Phoebe.Core.BL
             store.Batch = oldStore.Batch;
             store.OriginPlace = oldStore.OriginPlace;
             store.Durability = oldStore.Durability;
+            store.PrevStoreId = oldStore.Id;
 
             store.InTime = stockOutTask.OutTime;            
             store.CarryInTaskId = task.Id;

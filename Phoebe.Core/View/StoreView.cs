@@ -107,6 +107,12 @@ namespace Phoebe.Core.View
         public DateTime? OutTime { get; set; }
 
         /// <summary>
+        /// 前序库存ID
+        /// </summary>
+        [Display(Name = "前序库存ID")]
+        public string PrevStoreId { get; set; }
+
+        /// <summary>
         /// 搬运入库任务ID
         /// </summary>
         [Display(Name = "搬运入库任务ID")]
