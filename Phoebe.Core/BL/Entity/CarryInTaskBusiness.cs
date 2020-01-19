@@ -51,10 +51,11 @@ namespace Phoebe.Core.BL
                 entity.MoveCount = moveCount;
                 entity.MoveWeight = moveWeight;
 
+                entity.CreateTime = DateTime.Now;
+
                 entity.TaskCode = recordBusiness.GetNextSequence(db, "CarryInTask", entity.CreateTime);
                 entity.TrayCode = trayCode;
 
-                entity.CreateTime = DateTime.Now;
                 entity.CheckTime = DateTime.Now;
                 entity.CheckUserName = checkUser.Name;
 
