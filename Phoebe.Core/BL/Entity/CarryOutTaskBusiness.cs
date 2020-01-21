@@ -56,12 +56,12 @@ namespace Phoebe.Core.BL
         /// <summary>
         /// 生成临时搬运出库任务
         /// </summary>
-        /// <param name="outTask">出库任务</param>
         /// <param name="position">仓位</param>
+        /// <param name="outTask">出库任务</param>
         /// <param name="viceShelf">取货货架口</param>
         /// <param name="db"></param>
         /// <returns></returns>
-        private List<CarryOutTask> GenerateTempOutTask(StockOutTaskView outTask, PositionView position, bool viceShelf, SqlSugarClient db = null)
+        private List<CarryOutTask> HandlePosition(PositionView position, StockOutTaskView outTask, bool viceShelf, SqlSugarClient db = null)
         {
             if (db == null)
                 db = GetInstance();
@@ -108,74 +108,82 @@ namespace Phoebe.Core.BL
             {
                 db.Ado.BeginTran();
 
+                if (data.Count == 0)
+                {
+                    return (false, "无搬运任务");
+                }
+
                 SequenceRecordBusiness recordBusiness = new SequenceRecordBusiness();
                 var now = DateTime.Now;
 
                 var stockOutTask = db.Queryable<StockOutTaskView>().InSingle(data.First().StockOutTaskId);
                 List<CarryOutTask> tempOutTasks = new List<CarryOutTask>();
 
-                // 设置出库的搬运任务信息
-                foreach (var item in data)
+                // 处理正常出库的任务
+                foreach (var task in data)
                 {
-                    item.Id = Guid.NewGuid().ToString();
-                    item.Type = (int)CarryOutTaskType.Out;
-                    item.CustomerId = stockOutTask.CustomerId;
-                    item.ContractId = stockOutTask.ContractId;
-                    item.CargoId = stockOutTask.CargoId;
-                    item.CreateTime = now;
-                    item.TaskCode = recordBusiness.GetNextSequence(db, "CarryOutTask", item.CreateTime);
+                    // 设置搬运出库任务信息
+                    task.Id = Guid.NewGuid().ToString();
+                    task.Type = (int)CarryOutTaskType.Out;
+                    task.CustomerId = stockOutTask.CustomerId;
+                    task.ContractId = stockOutTask.ContractId;
+                    task.CargoId = stockOutTask.CargoId;
+                    task.StockOutTaskId = stockOutTask.Id;
+                    task.CreateTime = now;
+                    task.TaskCode = recordBusiness.GetNextSequence(db, "CarryOutTask", task.CreateTime);
+                    task.Status = (int)EntityStatus.StockOutReady;
 
-                    // 检查出库搬运任务托盘上是否有其它货物
-                    var stores = db.Queryable<StoreView>().Where(r => r.PositionId == item.PositionId && r.Status == (int)EntityStatus.StoreIn).ToList();
-                    foreach (var store in stores)
+                    var store = db.Queryable<StoreView>().InSingle(task.StoreId);
+                    if (store.ShelfCode == task.ShelfCode)
                     {
-                        if (store.Id == item.StoreId)
-                        {
-                            if (store.ShelfCode == item.ShelfCode)
-                            {
-                                item.PositionNumber = store.PositionNumber;
-                            }
-                            else
-                            {
-                                item.PositionNumber = store.VicePositionNumber;
-                            }
-
-                            item.Place = store.Place;
-                            item.Status = (int)EntityStatus.StockOutReady;
-
-                            db.Insertable(item).ExecuteReturnEntity();
-                        }
-                        else
-                        {
-                            var temp = SetTempOutTaskInfo(store);
-                            temp.StockOutTaskId = stockOutTask.Id;
-                            temp.ShelfCode = item.ShelfCode;
-
-                            if (store.ShelfCode == temp.ShelfCode)
-                            {
-                                temp.PositionNumber = store.PositionNumber;
-                            }
-                            else
-                            {
-                                temp.PositionNumber = store.VicePositionNumber;
-                            }
-
-                            tempOutTasks.Add(temp);
-                        }
+                        task.PositionNumber = store.PositionNumber;
                     }
+                    else
+                    {
+                        task.PositionNumber = store.VicePositionNumber;
+                    }
+
+                    task.Place = store.Place;
+
+                    // 插入搬运出库任务
+                    db.Insertable(task).ExecuteCommand();
                 }
 
-                // 检查是否有需要临时搬运的任务
-                foreach (var carryOuTask in data)
+                // 处理临时搬运出库任务
+                foreach (var task in data)
                 {
+                    // 同一仓位检查
+                    // 检查出库搬运任务托盘上是否有其它货物
+                    var stores = db.Queryable<StoreView>().Where(r => r.PositionId == task.PositionId &&
+                        r.Id != task.StoreId && r.Status == (int)EntityStatus.StoreIn).ToList();
+
+                    foreach (var store in stores)
+                    {
+                        // 检查是否在其他搬运任务中
+                        if (data.Any(r => r.StoreId == store.Id))
+                        {
+                            continue;
+                        }
+
+                        // 设定同一托盘临时搬运任务
+                        var temp = SetTempOutTaskInfo(store);
+                        temp.StockOutTaskId = stockOutTask.Id;
+                        temp.ShelfCode = task.ShelfCode;
+                        temp.PositionNumber = task.PositionNumber;
+
+                        tempOutTasks.Add(temp);
+                    }
+
+
+                    // 前方仓位检查
                     // 搬运出库任务的仓位
-                    var currentPos = db.Queryable<PositionView>().InSingle(carryOuTask.PositionId);
+                    var currentPos = db.Queryable<PositionView>().InSingle(task.PositionId);
 
                     // 找到该货物同一排的所有仓位
                     var positions = db.Queryable<PositionView>()
                         .Where(r => r.ShelfId == currentPos.ShelfId && r.Row == currentPos.Row && r.Layer == currentPos.Layer).ToList();
 
-                    if (currentPos.ShelfCode == carryOuTask.ShelfCode)
+                    if (currentPos.ShelfCode == task.ShelfCode) // X方向
                     {
                         var outPos = positions.Where(r => r.Depth < currentPos.Depth).ToList();
                         foreach (var pos in outPos)
@@ -183,12 +191,12 @@ namespace Phoebe.Core.BL
                             if (tempOutTasks.Any(r => r.PositionId == pos.Id))
                                 continue;
 
-                            var tempTask = GenerateTempOutTask(stockOutTask, pos, false, db);
+                            var tempTask = HandlePosition(pos, stockOutTask, false, db);
                             if (tempTask != null)
                                 tempOutTasks.AddRange(tempTask);
                         }
                     }
-                    else if (currentPos.ViceShelfCode == carryOuTask.ShelfCode)
+                    else if (currentPos.ViceShelfCode == task.ShelfCode) // Y方向
                     {
                         var outPos = positions.Where(r => r.Depth > currentPos.Depth).ToList();
                         foreach (var pos in outPos)
@@ -196,7 +204,7 @@ namespace Phoebe.Core.BL
                             if (tempOutTasks.Any(r => r.PositionId == pos.Id))
                                 continue;
 
-                            var tempTask = GenerateTempOutTask(stockOutTask, pos, true, db);
+                            var tempTask = HandlePosition(pos, stockOutTask, true, db);
                             if (tempTask != null)
                                 tempOutTasks.AddRange(tempTask);
                         }
@@ -210,6 +218,11 @@ namespace Phoebe.Core.BL
                 // 添加临时搬运出库任务
                 foreach (var item in tempOutTasks)
                 {
+                    if(data.FindIndex(r => r.StoreId == item.StoreId) != -1)
+                    {
+                        continue;
+                    }
+
                     item.TaskCode = recordBusiness.GetNextSequence(db, "CarryOutTask", item.CreateTime);
                     db.Insertable(item).ExecuteCommand();
                 }
