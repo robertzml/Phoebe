@@ -37,20 +37,12 @@ namespace Phoebe.WebAPI.Controllers
         /// <summary>
         /// 获取入库列表
         /// </summary>
-        /// <param name="monthTime"></param>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult<List<StockInView>> List(string monthTime)
+        public ActionResult<List<StockInView>> List()
         {
             StockInViewBusiness stockInViewBusiness = new StockInViewBusiness();
-            if (string.IsNullOrEmpty(monthTime))
-            {
-                return stockInViewBusiness.FindAll();
-            }
-            else
-            {
-                return stockInViewBusiness.FindByMonth(monthTime);
-            }
+            return stockInViewBusiness.FindAll().OrderByDescending(r => r.FlowNumber).ToList();
         }
 
         /// <summary>

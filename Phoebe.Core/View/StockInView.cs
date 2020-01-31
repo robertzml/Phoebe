@@ -56,6 +56,12 @@ namespace Phoebe.Core.View
         public int ContractId { get; set; }
 
         /// <summary>
+        /// 车牌号
+        /// </summary>
+        [Display(Name = "车牌号")]
+        public string VehicleNumber { get; set; }
+
+        /// <summary>
         /// 操作人ID
         /// </summary>
         [Display(Name = "操作人ID")]
