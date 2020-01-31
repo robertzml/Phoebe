@@ -58,6 +58,17 @@ namespace Phoebe.WebAPI.Controllers
         }
 
         /// <summary>
+        /// 获取未完成入库单
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult<List<StockInView>> ListUnfinish()
+        {
+            StockInViewBusiness stockInViewBusiness = new StockInViewBusiness();
+            return stockInViewBusiness.FindUnfinish();
+        }
+
+        /// <summary>
         /// 获取入库
         /// </summary>
         /// <param name="id"></param>

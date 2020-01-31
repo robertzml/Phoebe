@@ -65,6 +65,22 @@ namespace Phoebe.Core.BL
                 .OrderBy(r => r.FlowNumber, OrderByType.Desc)
                 .ToList();
         }
+
+        /// <summary>
+        /// 获取未完成入库单
+        /// </summary>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        public List<StockInView> FindUnfinish(SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            return db.Queryable<StockInView>()
+                .Where(r => r.Status != (int)EntityStatus.StockInFinish)
+                .OrderBy(r => r.FlowNumber, OrderByType.Desc)
+                .ToList();
+        }
         #endregion //Method
     }
 }
