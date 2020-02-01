@@ -108,6 +108,33 @@ namespace Phoebe.WebAPI.Controllers
         }
 
         /// <summary>
+        /// 编辑入库
+        /// </summary>
+        /// <param name="stockIn"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ActionResult<ResponseData>> Update(StockIn stockIn)
+        {
+            StockInBusiness stockInBusiness = new StockInBusiness();
+
+            var task = Task.Run(() =>
+            {
+                var result = stockInBusiness.Update(stockIn);
+
+                ResponseData data = new ResponseData
+                {
+                    Status = result.success ? 0 : 1,
+                    ErrorMessage = result.errorMessage,
+                    Entity = null
+                };
+
+                return data;
+            });
+
+            return await task;
+        }
+
+        /// <summary>
         /// 确认入库
         /// </summary>
         /// <param name="id"></param>

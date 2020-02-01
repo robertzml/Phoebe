@@ -44,6 +44,46 @@ namespace Phoebe.Core.BL
         }
 
         /// <summary>
+        /// 编辑入库单
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public override (bool success, string errorMessage) Update(StockIn entity)
+        {
+            var db = GetInstance();
+            try
+            {
+                db.Ado.BeginTran();
+
+                var stockIn = db.Queryable<StockIn>().InSingle(entity.Id);
+
+                if (stockIn.InTime != entity.InTime)
+                {
+                    SequenceRecordBusiness recordBusiness = new SequenceRecordBusiness();
+
+                    stockIn.InTime = entity.InTime;
+                    stockIn.MonthTime = stockIn.InTime.Year.ToString() + stockIn.InTime.Month.ToString().PadLeft(2, '0');
+                    stockIn.FlowNumber = recordBusiness.GetNextSequence(db, "StockIn", stockIn.InTime);
+                }
+
+                stockIn.Type = entity.Type;
+                stockIn.ContractId = entity.ContractId;
+                stockIn.VehicleNumber = entity.VehicleNumber;
+                stockIn.Remark = entity.Remark;
+
+                var t = db.Updateable(stockIn).ExecuteCommand();
+
+                db.Ado.CommitTran();
+                return (true, "");
+            }
+            catch (Exception e)
+            {
+                db.Ado.RollbackTran();
+                return (false, e.Message);
+            }
+        }
+
+        /// <summary>
         /// 确认入库单
         /// </summary>
         /// <param name="id">入库单ID</param>
