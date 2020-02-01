@@ -35,6 +35,12 @@ namespace Phoebe.Core.BL
             {
                 db.Ado.BeginTran();
 
+                var trayUse = db.Queryable<StoreView>().Where(r => r.TrayCode == trayCode && (r.Status == (int)EntityStatus.StoreIn || r.Status == (int)EntityStatus.StoreInReady));
+                if (trayUse.Count() > 0)
+                {
+                    return (false, "托盘已使用", null);
+                }
+
                 SequenceRecordBusiness recordBusiness = new SequenceRecordBusiness();
 
                 var stockInTask = db.Queryable<StockInTaskView>().InSingle(stockInTaskId);
