@@ -63,19 +63,48 @@ namespace Phoebe.Core.BL
         /// <summary>
         /// 更新分类
         /// </summary>
-        /// <param name="entity"></param>
+        /// <param name="category"></param>
         /// <returns></returns>
-        public override (bool success, string errorMessage) Update(Category entity)
+        public override (bool success, string errorMessage) Update(Category category)
         {
             var db = GetInstance();
 
-            var count = db.Queryable<Category>().Count(r => r.Id != entity.Id && r.Number == entity.Number);
+            var count = db.Queryable<Category>().Count(r => r.Id != category.Id && r.Number == category.Number);
             if (count > 0)
             {
                 return (false, "编码重复");
             }
 
+            var entity = db.Queryable<Category>().InSingle(category.Id);
+            entity.Name = category.Name;
+            entity.Number = category.Number;
+            entity.Remark = category.Remark;
+
             return base.Update(entity);
+        }
+
+        /// <summary>
+        /// 删除分类
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public override (bool success, string errorMessage) Delete(int id)
+        {
+            var db = GetInstance();
+
+            var lower = db.Queryable<Category>().Count(r => r.ParentId == id);
+            if (lower > 0)
+            {
+                return (false, "仅能删除无子类别的分类");
+            }
+
+            var cargos = db.Queryable<Cargo>().Count(r => r.CategoryId == id);
+            if (cargos > 0)
+            {
+                return (false, "有货品使用该类别");
+            }
+
+            return base.Delete(id);
         }
         #endregion //Method
     }

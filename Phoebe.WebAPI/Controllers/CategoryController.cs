@@ -90,12 +90,33 @@ namespace Phoebe.WebAPI.Controllers
 
             var task = Task.Run(() =>
             {
-                var info = categoryBusiness.FindById(category.Id);
-                info.Name = category.Name;
-                info.Number = category.Number;
-                info.Remark = category.Remark;
+                var result = categoryBusiness.Update(category);
 
-                var result = categoryBusiness.Update(info);
+                ResponseData data = new ResponseData
+                {
+                    Status = result.success ? 0 : 1,
+                    ErrorMessage = result.errorMessage
+                };
+
+                return data;
+            });
+
+            return await task;
+        }
+
+        /// <summary>
+        /// 删除分类
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ActionResult<ResponseData>> Delete(int id)
+        {
+            CategoryBusiness categoryBusiness = new CategoryBusiness();
+
+            var task = Task.Run(() =>
+            {
+                var result = categoryBusiness.Delete(id);
 
                 ResponseData data = new ResponseData
                 {
