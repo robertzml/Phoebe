@@ -117,6 +117,16 @@ namespace Phoebe.Core.BL
         }
 
         /// <summary>
+        /// 撤回入库单
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public (bool success, string errorMessage) Recall(string id)
+        {
+            return (false, "");
+        }
+
+        /// <summary>
         /// 删除入库单
         /// </summary>
         /// <param name="id"></param>

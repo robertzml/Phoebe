@@ -67,6 +67,15 @@ namespace Phoebe.WebAPI.Model
         [Required]
         public int UserId;
 
+        [Required]
+        public string TrayCode;
+
+        [Required]
+        public int MoveCount;
+
+        [Required]
+        public decimal MoveWeight;
+
         public string Remark;
     }
 

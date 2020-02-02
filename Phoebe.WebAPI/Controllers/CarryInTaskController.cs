@@ -43,6 +43,18 @@ namespace Phoebe.WebAPI.Controllers
         }
 
         /// <summary>
+        /// 获取搬运入库任务
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult<CarryInTaskView> Get(string id)
+        {
+            CarryInTaskViewBusiness carryInTaskViewBusiness = new CarryInTaskViewBusiness();
+            return carryInTaskViewBusiness.FindById(id);
+        }
+
+        /// <summary>
         /// 根据入库任务查找
         /// </summary>
         /// <param name="taskId"></param>
@@ -152,7 +164,7 @@ namespace Phoebe.WebAPI.Controllers
             {
                 ResponseData data = new ResponseData();
 
-                var result = taskBusiness.Finish(model.TaskId, model.UserId, model.Remark);
+                var result = taskBusiness.Finish(model.TaskId, model.UserId, model.TrayCode, model.MoveCount, model.MoveWeight, model.Remark);
 
                 data.Status = result.success ? 0 : 1;
                 data.ErrorMessage = result.errorMessage;

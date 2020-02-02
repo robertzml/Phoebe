@@ -62,6 +62,11 @@ namespace Phoebe.Core.BL
 
                 var task = db.Queryable<StockInTask>().InSingle(stockInTaskId);
                 var carryIn = db.Queryable<CarryInTask>().Where(r => r.StockInTaskId == stockInTaskId).ToList();
+                if (carryIn.Count == 0)
+                {
+                    return (false, "缺少搬运入库任务");
+                }
+
                 if (carryIn.All(r => r.Status == (int)EntityStatus.StockInFinish))
                 {
                     task.InCount = carryIn.Sum(r => r.MoveCount);
