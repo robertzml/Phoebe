@@ -161,6 +161,32 @@ namespace Phoebe.WebAPI.Controllers
         }
 
         /// <summary>
+        /// 撤回入库
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ActionResult<ResponseData>> Revert(string id)
+        {
+            StockInBusiness stockInBusiness = new StockInBusiness();
+
+            var task = Task.Run(() =>
+            {
+                var result = stockInBusiness.Revert(id);
+
+                ResponseData data = new ResponseData
+                {
+                    Status = result.success ? 0 : 1,
+                    ErrorMessage = result.errorMessage
+                };
+
+                return data;
+            });
+
+            return await task;
+        }
+
+        /// <summary>
         /// 删除入库单
         /// </summary>
         /// <param name="id"></param>
@@ -245,7 +271,7 @@ namespace Phoebe.WebAPI.Controllers
         /// <param name="inTask"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<ActionResult<ResponseData>> EditTask(StockInTask inTask)
+        public async Task<ActionResult<ResponseData>> UpdateTask(StockInTask inTask)
         {
             StockInTaskBusiness taskBusiness = new StockInTaskBusiness();
 

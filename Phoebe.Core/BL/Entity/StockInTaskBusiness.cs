@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Phoebe.Core.BL
 {
+    using SqlSugar;
     using Phoebe.Base.Framework;
     using Phoebe.Base.System;
     using Phoebe.Core.Entity;
@@ -86,6 +87,62 @@ namespace Phoebe.Core.BL
             }
             catch (Exception e)
             {
+                return (false, e.Message);
+            }
+        }
+
+        /// <summary>
+        /// 更新入库任务
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public override (bool success, string errorMessage) Update(StockInTask inTask)
+        {
+            var db = GetInstance();
+
+            try
+            {
+                db.Ado.BeginTran();
+
+                var entity = db.Queryable<StockInTask>().InSingle(inTask.Id);
+
+                if (entity.Status == (int)EntityStatus.StockInFinish)
+                {
+                    return (false, "无法编辑已确认入库任务单");
+                }
+
+                if (entity.CargoId != inTask.CargoId)
+                {
+                    entity.CargoId = inTask.CargoId;
+                    entity.UnitWeight = inTask.UnitWeight;
+
+                    var carryIns = db.Queryable<CarryInTask>().Where(r => r.StockInTaskId == inTask.Id).ToList();
+
+                    foreach (var carryIn in carryIns)
+                    {
+                        carryIn.MoveWeight = inTask.UnitWeight * carryIn.MoveCount / 1000;
+                        db.Updateable(carryIn).ExecuteCommand();
+
+                        var store = db.Queryable<Store>().Single(r => r.CarryInTaskId == carryIn.Id);
+                        store.StoreWeight = carryIn.MoveWeight;
+                        store.TotalWeight = carryIn.MoveWeight;
+                        db.Updateable(store).ExecuteCommand();
+                    }
+                }
+
+                entity.Batch = inTask.Batch;
+                entity.OriginPlace = inTask.OriginPlace;
+                entity.Durability = inTask.Durability;
+                entity.Remark = inTask.Remark;
+
+                db.Updateable(entity).ExecuteCommand();
+
+                db.Ado.CommitTran();
+                return (true, "");
+            }
+            catch (Exception e)
+            {
+                db.Ado.RollbackTran();
                 return (false, e.Message);
             }
         }

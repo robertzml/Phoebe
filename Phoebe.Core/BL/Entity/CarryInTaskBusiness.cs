@@ -164,7 +164,7 @@ namespace Phoebe.Core.BL
 
                 foreach (var carryTask in tasks)
                 {
-                    // set task info
+                    // 设置搬运入库任务
                     carryTask.ShelfCode = shelfCode;
                     carryTask.PositionId = position.Id;
                     carryTask.MoveTime = DateTime.Now;
@@ -175,7 +175,7 @@ namespace Phoebe.Core.BL
                         // 由入库任务生成的搬运任务
                         var stockInTask = db.Queryable<StockInTaskView>().InSingle(carryTask.StockInTaskId);
 
-                        // add store
+                        // 添加库存记录
                         StoreBusiness storeBusiness = new StoreBusiness();
                         var store = storeBusiness.Create(db, stockInTask, carryTask);
                         carryTask.StoreId = store.t.Id;
@@ -185,7 +185,7 @@ namespace Phoebe.Core.BL
                         // 由出库任务生成的搬运任务
                         var stockOutTask = db.Queryable<StockOutTaskView>().InSingle(carryTask.StockOutTaskId);
 
-                        // add store
+                        // 添加库存记录
                         StoreBusiness storeBusiness = new StoreBusiness();
                         var store = storeBusiness.Create(db, stockOutTask, carryTask);
                         carryTask.StoreId = store.t.Id;

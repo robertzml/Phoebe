@@ -121,9 +121,60 @@ namespace Phoebe.Core.BL
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public (bool success, string errorMessage) Recall(string id)
+        public (bool success, string errorMessage) Revert(string id)
         {
-            return (false, "");
+            var db = GetInstance();
+
+            try
+            {
+                db.Ado.BeginTran();
+
+                var stockIn = db.Queryable<StockIn>().InSingle(id);
+
+                if (stockIn.Status != (int)EntityStatus.StockInFinish)
+                {
+                    return (false, "仅已确认入库单能撤回");
+                }
+
+                var tasks = db.Queryable<StockInTask>().Where(r => r.StockInId == id).ToList();
+                foreach (var task in tasks)
+                {
+                    task.Status = (int)EntityStatus.StockInReady;
+
+                    // 撤回搬运入库任务和库存记录
+                    var carryIns = db.Queryable<CarryInTask>().Where(r => r.StockInTaskId == task.Id).ToList();
+                    foreach (var carryIn in carryIns)
+                    {
+                        var store = db.Queryable<Store>().Single(r => r.CarryInTaskId == carryIn.Id);
+
+                        var carryOut = db.Queryable<CarryOutTask>().Count(r => r.StoreId == store.Id);
+                        if (carryOut > 0)
+                        {
+                            return (false, "该入库单有库存记录已出库，无法撤回");
+                        }
+
+                        store.Status = (int)EntityStatus.StoreInReady;
+                        db.Updateable(store).ExecuteCommand();
+
+                        carryIn.Status = (int)EntityStatus.StockInEnter;
+                        db.Updateable(carryIn).ExecuteCommand();
+                    }
+
+                    db.Updateable(task).ExecuteCommand();
+                }
+
+                // 撤回入库单
+                stockIn.Status = (int)EntityStatus.StockInReady;
+                db.Updateable(stockIn).ExecuteCommand();
+
+                db.Ado.CommitTran();
+                return (true, "");
+            }
+            catch (Exception e)
+            {
+                db.Ado.RollbackTran();
+                return (false, e.Message);
+            }
         }
 
         /// <summary>
