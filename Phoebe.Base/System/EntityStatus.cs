@@ -184,5 +184,19 @@ namespace Phoebe.Base.System
         [Display(Name = "已移库")]
         StockMoveFinish = 96,
         #endregion //Stock Move
+
+        #region Fee
+        /// <summary>
+        /// 开始计费
+        /// </summary>
+        [Display(Name = "开始计费")]
+        FeeStart = 101,
+
+        /// <summary>
+        /// 计费完成
+        /// </summary>
+        [Display(Name = "计费完成")]
+        FeeEnd = 102
+        #endregion //Fee
     }
 }

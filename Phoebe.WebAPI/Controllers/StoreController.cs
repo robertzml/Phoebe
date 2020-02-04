@@ -21,6 +21,17 @@ namespace Phoebe.WebAPI.Controllers
     {
         #region Action
         /// <summary>
+        /// 获取所有库存
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult<List<StoreView>> List()
+        {
+            StoreViewBusiness storeViewBusiness = new StoreViewBusiness();
+            return storeViewBusiness.FindAll();
+        }
+
+        /// <summary>
         /// 查找在库库存
         /// </summary>
         /// <param name="positionId"></param>
