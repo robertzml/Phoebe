@@ -21,7 +21,7 @@ namespace Phoebe.Core.BL
         /// <param name="store">库存记录</param>
         /// <param name="db"></param>
         /// <returns></returns>
-        public (bool success, string errorMessage) Create(Store store, SqlSugarClient db = null)
+        public (bool success, string errorMessage) Start(Store store, SqlSugarClient db = null)
         {
             if (db == null)
                 db = GetInstance();
@@ -39,6 +39,31 @@ namespace Phoebe.Core.BL
             entity.UnitPrice = contract.UnitPrice;
 
             db.Insertable(entity).ExecuteCommand();
+            return (true, "");
+        }
+
+        /// <summary>
+        /// 结束计费
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="store"></param>
+        /// <param name="endDate"></param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        public (bool success, string errorMessage) End(string id, Store store, DateTime endDate, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            var entity = db.Queryable<ColdFee>().InSingle(id);
+
+            entity.EndDate = endDate;
+            entity.Days = endDate.Subtract(entity.StartDate).Days;
+            entity.Amount =  entity.Days * entity.UnitPrice * store.StoreWeight;
+            entity.Status = (int)EntityStatus.FeeEnd;
+
+            db.Updateable(entity).ExecuteCommand();
+
             return (true, "");
         }
         #endregion //Method

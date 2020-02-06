@@ -47,13 +47,12 @@ namespace Phoebe.WebAPI.Controllers
         /// 按合同查找库存
         /// </summary>
         /// <param name="contractId"></param>
-        /// <param name="isStoreIn"></param>
         /// <returns></returns>
         [HttpGet]
-        public List<StoreView> FindByContract(int contractId, bool isStoreIn)
+        public List<StoreView> FindByContract(int contractId)
         {
             StoreViewBusiness storeViewBusiness = new StoreViewBusiness();
-            return storeViewBusiness.FindByContract(contractId, isStoreIn);
+            return storeViewBusiness.FindByContract(contractId);
         }
 
         /// <summary>
@@ -80,6 +79,18 @@ namespace Phoebe.WebAPI.Controllers
         {
             StoreViewBusiness storeViewBusiness = new StoreViewBusiness();
             return storeViewBusiness.FindByStockOut(stockOutId, cargoId);
+        }
+
+        /// <summary>
+        /// 库存信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult<StoreView> Get(string id)
+        {
+            StoreViewBusiness storeViewBusiness = new StoreViewBusiness();
+            return storeViewBusiness.FindById(id);
         }
         #endregion //Action
     }

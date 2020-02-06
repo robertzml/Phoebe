@@ -177,8 +177,12 @@ namespace Phoebe.Core.BL
 
                         // 添加库存记录
                         StoreBusiness storeBusiness = new StoreBusiness();
-                        var store = storeBusiness.Create(db, stockInTask, carryTask);
+                        var store = storeBusiness.Create(stockInTask, carryTask, db);
                         carryTask.StoreId = store.t.Id;
+
+                        // 添加冷藏费记录
+                        ColdFeeBusiness coldFeeBusiness = new ColdFeeBusiness();
+                        coldFeeBusiness.Start(store.t, db);
                     }
                     else
                     {

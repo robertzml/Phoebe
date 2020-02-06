@@ -20,12 +20,15 @@ namespace Phoebe.Core.BL
         /// <summary>
         /// 由入库任务生成库存记录
         /// </summary>
-        /// <param name="db"></param>
         /// <param name="stockInTask"></param>
         /// <param name="task"></param>
+        /// <param name="db"></param>
         /// <returns></returns>
-        public (bool success, string errorMessage, Store t) Create(SqlSugarClient db, StockInTaskView stockInTask, CarryInTask task)
+        public (bool success, string errorMessage, Store t) Create(StockInTaskView stockInTask, CarryInTask task, SqlSugarClient db = null)
         {
+            if (db == null)
+                db = GetInstance();
+
             Store store = new Store();
             store.Id = Guid.NewGuid().ToString();
             store.CustomerId = stockInTask.CustomerId;

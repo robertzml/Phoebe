@@ -20,21 +20,12 @@ namespace Phoebe.Core.BL
         /// 按合同获取库存记录
         /// </summary>
         /// <param name="contractId">合同ID</param>
-        /// <param name="isStoreIn">是否限定在库</param>
         /// <returns></returns>
-        public List<StoreView> FindByContract(int contractId, bool isStoreIn)
+        public List<StoreView> FindByContract(int contractId)
         {
             var db = GetInstance();
-            if (isStoreIn)
-            {
-                var data = db.Queryable<StoreView>().Where(r => r.ContractId == contractId && r.Status == (int)EntityStatus.StoreIn).ToList();
-                return data;
-            }
-            else
-            {
-                var data = db.Queryable<StoreView>().Where(r => r.ContractId == contractId).ToList();
-                return data;
-            }
+            var data = db.Queryable<StoreView>().Where(r => r.ContractId == contractId).ToList();
+            return data;
         }
 
         /// <summary>
