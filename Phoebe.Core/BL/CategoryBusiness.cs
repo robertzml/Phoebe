@@ -9,7 +9,7 @@ namespace Phoebe.Core.BL
     using Phoebe.Core.Entity;
 
     /// <summary>
-    /// 类别业务类
+    /// 分类业务类
     /// </summary>
     public class CategoryBusiness : AbstractBusiness<Category, int>, IBaseBL<Category, int>
     {
@@ -30,9 +30,10 @@ namespace Phoebe.Core.BL
         /// 获取一级分类
         /// </summary>
         /// <returns></returns>
-        public List<Category> GetFirstCategory()
+        public List<Category> GetFirstCategory(SqlSugarClient db = null)
         {
-            var db = GetInstance();
+            if (db == null)
+                db = GetInstance();
             return db.Queryable<Category>().Where(r => r.Hierarchy == 1).OrderBy(s => s.Number).ToList();
         }
 
@@ -41,9 +42,11 @@ namespace Phoebe.Core.BL
         /// </summary>
         /// <param name="parentId">所属父分类ID</param>
         /// <returns></returns>
-        public List<Category> GetChildCategory(int parentId)
+        public List<Category> GetChildCategory(int parentId, SqlSugarClient db = null)
         {
-            var db = GetInstance();
+            if (db == null)
+                db = GetInstance();
+
             return db.Queryable<Category>().Where(r => r.ParentId == parentId).OrderBy(s => s.Number).ToList();
         }
 

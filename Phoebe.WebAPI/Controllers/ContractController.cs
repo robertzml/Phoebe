@@ -21,7 +21,7 @@ namespace Phoebe.WebAPI.Controllers
     [ApiController]
     public class ContractController : ControllerBase
     {
-        #region Action
+        #region Query
         /// <summary>
         /// 合同列表
         /// </summary>
@@ -52,7 +52,9 @@ namespace Phoebe.WebAPI.Controllers
             ContractViewBusiness contractViewBusiness = new ContractViewBusiness();
             return contractViewBusiness.FindById(id);
         }
+        #endregion //Query
 
+        #region Action
         /// <summary>
         /// 添加合同
         /// </summary>

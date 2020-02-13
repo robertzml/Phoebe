@@ -17,7 +17,7 @@ namespace Phoebe.WebAPI.Controllers
     [ApiController]
     public class CategoryController : ControllerBase
     {
-        #region Action
+        #region Query
         /// <summary>
         /// 获取所有分类
         /// </summary>
@@ -43,7 +43,6 @@ namespace Phoebe.WebAPI.Controllers
             return categoryBusiness.GetChildCategory(parentId);
         }
 
-
         /// <summary>
         /// 获取分类
         /// </summary>
@@ -55,7 +54,9 @@ namespace Phoebe.WebAPI.Controllers
             CategoryBusiness categoryBusiness = new CategoryBusiness();
             return categoryBusiness.FindById(id);
         }
+        #endregion //Query
 
+        #region Action
         [HttpPost]
         public async Task<ActionResult<ResponseData>> Create(Category category)
         {
