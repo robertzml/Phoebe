@@ -19,9 +19,10 @@ namespace Phoebe.Core.BL
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public override (bool success, string errorMessage, Contract t) Create(Contract entity)
+        public override (bool success, string errorMessage, Contract t) Create(Contract entity, SqlSugarClient db = null)
         {
-            var db = GetInstance();
+            if (db == null)
+                db = GetInstance();
 
             try
             {
@@ -41,16 +42,6 @@ namespace Phoebe.Core.BL
                 db.Ado.RollbackTran();
                 return (false, e.Message, null);
             }
-        }
-
-        /// <summary>
-        /// 编辑合同
-        /// </summary>
-        /// <param name="entity"></param>
-        /// <returns></returns>
-        public override (bool success, string errorMessage) Update(Contract entity)
-        {
-            return base.Update(entity);
         }
         #endregion //Method
     }

@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Phoebe.Core.BL
 {
+    using SqlSugar;
     using Phoebe.Base.Framework;
     using Phoebe.Core.Entity;
 
@@ -19,16 +20,18 @@ namespace Phoebe.Core.BL
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public override (bool success, string errorMessage, Customer t) Create(Customer entity)
+        public override (bool success, string errorMessage, Customer t) Create(Customer entity, SqlSugarClient db = null)
         {
-            var db = GetInstance();
+            if (db == null)
+                db = GetInstance();
+
             var count = db.Queryable<Customer>().Count(r => r.Number == entity.Number);
             if (count > 0)
             {
                 return (false, "编码重复", null);
             }
 
-            return base.Create(entity);
+            return base.Create(entity, db);
         }
 
         /// <summary>
@@ -36,16 +39,18 @@ namespace Phoebe.Core.BL
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public override (bool success, string errorMessage) Update(Customer entity)
+        public override (bool success, string errorMessage) Update(Customer entity, SqlSugarClient db = null)
         {
-            var db = GetInstance();
+            if (db == null)
+                db = GetInstance();
+
             var count = db.Queryable<Customer>().Count(r => r.Id != entity.Id && r.Number == entity.Number);
             if (count > 0)
             {
                 return (false, "编码重复");
             }
 
-            return base.Update(entity);
+            return base.Update(entity, db);
         }
         #endregion //Method
     }

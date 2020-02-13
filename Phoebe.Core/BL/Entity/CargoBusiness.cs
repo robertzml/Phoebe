@@ -22,9 +22,11 @@ namespace Phoebe.Core.BL
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public override (bool success, string errorMessage, Cargo t) Create(Cargo entity)
+        public override (bool success, string errorMessage, Cargo t) Create(Cargo entity, SqlSugarClient db = null)
         {
-            var db = GetInstance();
+            if (db == null)
+                db = GetInstance();
+
             var count = db.Queryable<Cargo>().Count(r => r.CustomerId == entity.CustomerId && r.Name == entity.Name);
             if (count > 0)
             {
@@ -34,7 +36,7 @@ namespace Phoebe.Core.BL
             entity.Id = Guid.NewGuid().ToString();
             entity.RegisterTime = DateTime.Now;
             entity.Status = 0;
-            return base.Create(entity);
+            return base.Create(entity, db);
         }
 
         /// <summary>
@@ -42,11 +44,13 @@ namespace Phoebe.Core.BL
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public override (bool success, string errorMessage) Update(Cargo entity)
+        public override (bool success, string errorMessage) Update(Cargo entity, SqlSugarClient db = null)
         {
             try
             {
-                var db = GetInstance();
+                if (db == null)
+                    db = GetInstance();
+
                 var count = db.Queryable<Cargo>().Count(r => r.Id != entity.Id && r.CustomerId == entity.CustomerId && r.Name == entity.Name);
                 if (count > 0)
                 {

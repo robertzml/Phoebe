@@ -4,6 +4,7 @@ using System.Text;
 
 namespace Phoebe.Core.BL
 {
+    using SqlSugar;
     using Phoebe.Base.Framework;
     using Phoebe.Core.Entity;
 
@@ -17,9 +18,11 @@ namespace Phoebe.Core.BL
         /// 获取所有分类
         /// </summary>
         /// <returns></returns>
-        public override List<Category> FindAll()
+        public override List<Category> FindAll(SqlSugarClient db = null)
         {
-            var db = GetInstance();
+            if (db == null)
+                db = GetInstance();
+
             return db.Queryable<Category>().OrderBy(r => r.Number).ToList();
         }
 
@@ -49,15 +52,17 @@ namespace Phoebe.Core.BL
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public override (bool success, string errorMessage, Category t) Create(Category entity)
+        public override (bool success, string errorMessage, Category t) Create(Category entity, SqlSugarClient db = null)
         {
-            var db = GetInstance();
+            if (db == null)
+                db = GetInstance();
+
             var count = db.Queryable<Category>().Count(r => r.Number == entity.Number);
             if (count > 0)
             {
                 return (false, "编码重复", null);
             }
-            return base.Create(entity);
+            return base.Create(entity, db);
         }
 
         /// <summary>
@@ -65,9 +70,10 @@ namespace Phoebe.Core.BL
         /// </summary>
         /// <param name="category"></param>
         /// <returns></returns>
-        public override (bool success, string errorMessage) Update(Category category)
+        public override (bool success, string errorMessage) Update(Category category, SqlSugarClient db = null)
         {
-            var db = GetInstance();
+            if (db == null)
+                db = GetInstance();
 
             var count = db.Queryable<Category>().Count(r => r.Id != category.Id && r.Number == category.Number);
             if (count > 0)
@@ -80,7 +86,7 @@ namespace Phoebe.Core.BL
             entity.Number = category.Number;
             entity.Remark = category.Remark;
 
-            return base.Update(entity);
+            return base.Update(entity, db);
         }
 
         /// <summary>
@@ -88,9 +94,10 @@ namespace Phoebe.Core.BL
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public override (bool success, string errorMessage) Delete(int id)
+        public override (bool success, string errorMessage) Delete(int id, SqlSugarClient db = null)
         {
-            var db = GetInstance();
+            if (db == null)
+                db = GetInstance();
 
             var lower = db.Queryable<Category>().Count(r => r.ParentId == id);
             if (lower > 0)
@@ -104,7 +111,7 @@ namespace Phoebe.Core.BL
                 return (false, "有货品使用该类别");
             }
 
-            return base.Delete(id);
+            return base.Delete(id, db);
         }
         #endregion //Method
     }

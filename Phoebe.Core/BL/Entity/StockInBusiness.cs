@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Phoebe.Core.BL
 {
+    using SqlSugar;
     using Phoebe.Base.Framework;
     using Phoebe.Base.System;
     using Phoebe.Core.Entity;
@@ -16,31 +17,23 @@ namespace Phoebe.Core.BL
     public class StockInBusiness : AbstractBusiness<StockIn, string>, IBaseBL<StockIn, string>
     {
         #region Method
-        public override (bool success, string errorMessage, StockIn t) Create(StockIn entity)
+        public (bool success, string errorMessage, StockIn t) Insert(StockIn entity, SqlSugarClient db = null)
         {
-            var db = GetInstance();
-            try
-            {
-                db.Ado.BeginTran();
+            if (db == null)
+                db = GetInstance();
 
-                SequenceRecordBusiness recordBusiness = new SequenceRecordBusiness();
+            SequenceRecordBusiness recordBusiness = new SequenceRecordBusiness();
 
-                entity.Id = Guid.NewGuid().ToString();
-                entity.MonthTime = entity.InTime.Year.ToString() + entity.InTime.Month.ToString().PadLeft(2, '0');
-                entity.FlowNumber = recordBusiness.GetNextSequence(db, "StockIn", entity.InTime);
-                entity.CreateTime = DateTime.Now;
-                entity.Status = (int)EntityStatus.StockInReady;
+            entity.Id = Guid.NewGuid().ToString();
+            entity.MonthTime = entity.InTime.Year.ToString() + entity.InTime.Month.ToString().PadLeft(2, '0');
+            entity.FlowNumber = recordBusiness.GetNextSequence(db, "StockIn", entity.InTime);
+            entity.CreateTime = DateTime.Now;
+            entity.Status = (int)EntityStatus.StockInReady;
 
-                var t = db.Insertable(entity).ExecuteReturnEntity();
+            var t = db.Insertable(entity).ExecuteReturnEntity();
 
-                db.Ado.CommitTran();
-                return (true, "", t);
-            }
-            catch (Exception e)
-            {
-                db.Ado.RollbackTran();
-                return (false, e.Message, null);
-            }
+
+            return (true, "", t);
         }
 
         /// <summary>
@@ -48,9 +41,11 @@ namespace Phoebe.Core.BL
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public override (bool success, string errorMessage) Update(StockIn entity)
+        public override (bool success, string errorMessage) Update(StockIn entity, SqlSugarClient db = null)
         {
-            var db = GetInstance();
+            if (db == null)
+                db = GetInstance();
+
             try
             {
                 db.Ado.BeginTran();
@@ -182,9 +177,10 @@ namespace Phoebe.Core.BL
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public override (bool success, string errorMessage) Delete(string id)
+        public override (bool success, string errorMessage) Delete(string id, SqlSugarClient db = null)
         {
-            var db = GetInstance();
+            if (db == null)
+                db = GetInstance();
 
             try
             {

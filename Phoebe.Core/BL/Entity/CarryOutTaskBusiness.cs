@@ -218,7 +218,7 @@ namespace Phoebe.Core.BL
                 // 添加临时搬运出库任务
                 foreach (var item in tempOutTasks)
                 {
-                    if(data.FindIndex(r => r.StoreId == item.StoreId) != -1)
+                    if (data.FindIndex(r => r.StoreId == item.StoreId) != -1)
                     {
                         continue;
                     }
@@ -439,9 +439,10 @@ namespace Phoebe.Core.BL
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public override (bool success, string errorMessage) Delete(string id)
+        public override (bool success, string errorMessage) Delete(string id, SqlSugarClient db = null)
         {
-            var db = GetInstance();
+            if (db == null)
+                db = GetInstance();
 
             try
             {

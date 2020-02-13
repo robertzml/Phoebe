@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Phoebe.WebAPI.Controllers
 {
     using Phoebe.Base.System;
+    using Phoebe.Core.Service;
     using Phoebe.Core.BL;
     using Phoebe.Core.Entity;
     using Phoebe.Core.View;
@@ -88,11 +89,11 @@ namespace Phoebe.WebAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<ResponseData>> Create(StockIn stockIn)
         {
-            StockInBusiness stockInBusiness = new StockInBusiness();
+            StockInService stockInService = new StockInService();           
 
             var task = Task.Run(() =>
             {
-                var result = stockInBusiness.Create(stockIn);
+                var result = stockInService.AddReceipt(stockIn);
 
                 ResponseData data = new ResponseData
                 {

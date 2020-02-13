@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Phoebe.Core.BL
 {
+    using SqlSugar;
     using Phoebe.Base.Framework;
     using Phoebe.Base.System;
     using Phoebe.Core.Entity;
@@ -319,9 +320,10 @@ namespace Phoebe.Core.BL
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public override (bool success, string errorMessage) Delete(string id)
+        public override (bool success, string errorMessage) Delete(string id, SqlSugarClient db = null)
         {
-            var db = GetInstance();
+            if (db == null)
+                db = GetInstance();
 
             try
             {

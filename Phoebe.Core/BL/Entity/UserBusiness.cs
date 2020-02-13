@@ -74,7 +74,7 @@ namespace Phoebe.Core.BL
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public override (bool success, string errorMessage, User t) Create(User entity)
+        public override (bool success, string errorMessage, User t) Create(User entity, SqlSugarClient db = null)
         {
             if (entity.UserGroupId == 1)
             {
@@ -85,7 +85,8 @@ namespace Phoebe.Core.BL
             entity.LastLoginTime = DateTime.Now;
             entity.CurrentLoginTime = DateTime.Now;
             entity.Status = 0;
-            return base.Create(entity);
+
+            return base.Create(entity, db);
         }
 
         /// <summary>

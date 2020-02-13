@@ -39,9 +39,10 @@ namespace Phoebe.Base.Framework
         /// </summary>
         /// <param name="id">ID</param>
         /// <returns></returns>
-        public virtual T FindById(Tkey id)
+        public virtual T FindById(Tkey id, SqlSugarClient db = null)
         {
-            var db = GetInstance();
+            if (db == null)
+                db = GetInstance();
             return db.Queryable<T>().InSingle(id);
         }
 
@@ -52,7 +53,7 @@ namespace Phoebe.Base.Framework
         /// <param name="field">字段名称</param>
         /// <param name="value">值</param>
         /// <returns></returns>
-        public virtual T FindOneByField<Tvalue>(string field, Tvalue value)
+        public virtual T FindOneByField<Tvalue>(string field, Tvalue value, SqlSugarClient db = null)
         {
             throw new NotImplementedException();
         }
@@ -61,9 +62,10 @@ namespace Phoebe.Base.Framework
         /// 查找所有对象
         /// </summary>
         /// <returns></returns>
-        public virtual List<T> FindAll()
+        public virtual List<T> FindAll(SqlSugarClient db = null)
         {
-            var db = GetInstance();
+            if (db == null)
+                db = GetInstance();
             return db.Queryable<T>().ToList();
         }
 
@@ -74,7 +76,7 @@ namespace Phoebe.Base.Framework
         /// <param name="field">字段名称</param>
         /// <param name="value">值</param>
         /// <returns></returns>
-        public virtual List<T> FindListByField<Tvalue>(string field, Tvalue value)
+        public virtual List<T> FindListByField<Tvalue>(string field, Tvalue value, SqlSugarClient db = null)
         {
             throw new NotImplementedException();
         }
@@ -83,9 +85,10 @@ namespace Phoebe.Base.Framework
         /// 查找所有记录数量
         /// </summary>
         /// <returns></returns>
-        public virtual long Count()
+        public virtual long Count(SqlSugarClient db = null)
         {
-            var db = GetInstance();
+            if (db == null)
+                db = GetInstance();
             return db.Queryable<T>().Count();
         }
 
@@ -94,11 +97,13 @@ namespace Phoebe.Base.Framework
         /// </summary>
         /// <param name="entity">实体对象</param>
         /// <returns></returns>
-        public virtual (bool success, string errorMessage, T t) Create(T entity)
+        public virtual (bool success, string errorMessage, T t) Create(T entity, SqlSugarClient db = null)
         {
             try
             {
-                var db = GetInstance();
+                if (db == null)
+                    db = GetInstance();
+
                 var t = db.Insertable(entity).ExecuteReturnEntity();
                 return (true, "", t);
             }
@@ -113,11 +118,13 @@ namespace Phoebe.Base.Framework
         /// </summary>
         /// <param name="entity">实体对象</param>
         /// <returns></returns>
-        public virtual (bool success, string errorMessage) Update(T entity)
+        public virtual (bool success, string errorMessage) Update(T entity, SqlSugarClient db = null)
         {
             try
             {
-                var db = GetInstance();
+                if (db == null)
+                    db = GetInstance();
+
                 var result = db.Updateable(entity).ExecuteCommand();
                 if (result == 1)
                     return (true, "");
@@ -135,11 +142,13 @@ namespace Phoebe.Base.Framework
         /// </summary>
         /// <param name="id">ID</param>
         /// <returns></returns>
-        public virtual (bool success, string errorMessage) Delete(Tkey id)
+        public virtual (bool success, string errorMessage) Delete(Tkey id, SqlSugarClient db = null)
         {
             try
             {
-                var db = GetInstance();
+                if (db == null)
+                    db = GetInstance();
+
                 var result = db.Deleteable<T>().In(id).ExecuteCommand();
                 if (result == 1)
                 {
