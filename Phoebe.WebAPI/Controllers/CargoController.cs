@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Phoebe.WebAPI.Controllers
 {
     using Phoebe.Core.BL;
+    using Phoebe.Core.DL;
     using Phoebe.Core.Entity;
     using Phoebe.Core.View;
     using Phoebe.WebAPI.Model;
@@ -19,7 +20,7 @@ namespace Phoebe.WebAPI.Controllers
     [ApiController]
     public class CargoController : ControllerBase
     {
-        #region Action
+        #region Query
         /// <summary>
         /// 货品列表
         /// </summary>
@@ -66,8 +67,9 @@ namespace Phoebe.WebAPI.Controllers
             CargoViewBusiness cargoViewBusiness = new CargoViewBusiness();
             return cargoViewBusiness.FindById(id);
         }
+        #endregion //Query
 
-
+        #region Action
         /// <summary>
         /// 添加货物
         /// </summary>
