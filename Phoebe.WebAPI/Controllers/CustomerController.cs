@@ -17,7 +17,7 @@ namespace Phoebe.WebAPI.Controllers
     [ApiController]
     public class CustomerController : ControllerBase
     {
-        #region Action
+        #region Query
         /// <summary>
         /// 客户列表
         /// </summary>
@@ -40,7 +40,9 @@ namespace Phoebe.WebAPI.Controllers
             CustomerBusiness customerBusiness = new CustomerBusiness();
             return customerBusiness.FindById(id);
         }
+        #endregion //Query
 
+        #region Action
         /// <summary>
         /// 添加客户
         /// </summary>

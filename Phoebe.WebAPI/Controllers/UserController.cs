@@ -15,6 +15,42 @@ namespace Phoebe.WebAPI.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
+        #region Query
+        /// <summary>
+        /// 获取所有用户
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult<List<User>> List()
+        {
+            var userBusiness = new UserBusiness();
+            var data = userBusiness.FindAll();
+            data.ForEach(r => r.Password = "");
+            return data;
+        }
+
+        /// <summary>
+        /// 获取用户
+        /// </summary>
+        /// <param name="userName">用户名</param>
+        /// <returns></returns>
+        public ActionResult<User> Get(string userName)
+        {
+            var userBusiness = new UserBusiness();
+            return userBusiness.FindByUserName(userName);
+        }
+
+        /// <summary>
+        /// 获取用户
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult<User> GetById(int id)
+        {
+            var userBusiness = new UserBusiness();
+            return userBusiness.FindById(id);
+        }
+        #endregion //Query
+
         #region Action
         /// <summary>
         /// 用户登录
@@ -27,11 +63,11 @@ namespace Phoebe.WebAPI.Controllers
         {
             var userBusiness = new UserBusiness();
             var result = userBusiness.Login(userName, password);
-                       
+
             ResponseData data = new ResponseData
             {
                 Status = result.success ? 0 : 1,
-                ErrorMessage = result.errorMessage               
+                ErrorMessage = result.errorMessage
             };
 
             if (result.success)
@@ -74,40 +110,6 @@ namespace Phoebe.WebAPI.Controllers
                 Entity = null
             };
             return data;
-        }
-
-        /// <summary>
-        /// 获取所有用户
-        /// </summary>
-        /// <returns></returns>
-        public ActionResult<List<User>> List()
-        {
-            var userBusiness = new UserBusiness();
-            var data= userBusiness.FindAll();
-            data.ForEach(r => r.Password = "");
-            return data;
-        }
-
-        /// <summary>
-        /// 获取用户
-        /// </summary>
-        /// <param name="userName">用户名</param>
-        /// <returns></returns>
-        public ActionResult<User> Get(string userName)
-        {
-            var userBusiness = new UserBusiness();
-            return userBusiness.FindByUserName(userName);
-        }
-
-        /// <summary>
-        /// 获取用户
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public ActionResult<User> GetById(int id)
-        {
-            var userBusiness = new UserBusiness();
-            return userBusiness.FindById(id);
         }
 
         /// <summary>
