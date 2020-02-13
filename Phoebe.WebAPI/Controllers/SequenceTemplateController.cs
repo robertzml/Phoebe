@@ -18,7 +18,7 @@ namespace Phoebe.WebAPI.Controllers
     [ApiController]
     public class SequenceTemplateController : ControllerBase
     {
-        #region Action
+        #region Query
         /// <summary>
         /// 编号模板列表
         /// </summary>
@@ -41,7 +41,9 @@ namespace Phoebe.WebAPI.Controllers
             SequenceTemplateBusiness sequenceBusiness = new SequenceTemplateBusiness();
             return sequenceBusiness.FindById(id);
         }
+        #endregion //Query
 
+        #region Action
         /// <summary>
         /// 添加编号模板
         /// </summary>
@@ -94,19 +96,6 @@ namespace Phoebe.WebAPI.Controllers
             });
 
             return await task;
-        }
-
-        /// <summary>
-        /// 获取编号
-        /// </summary>
-        /// <param name="tableName"></param>
-        /// <param name="dt"></param>
-        /// <returns></returns>
-        [HttpGet]
-        public ActionResult<string> GetNext(string tableName, DateTime dt)
-        {
-            SequenceRecordBusiness recordBusiness = new SequenceRecordBusiness();
-            return recordBusiness.GetNextSequence(tableName, dt);
         }
         #endregion //Action
     }

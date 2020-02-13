@@ -15,9 +15,6 @@ namespace Phoebe.Core.BL
     public class SequenceRecordBusiness : AbstractBusiness<SequenceRecord, string>, IBaseBL<SequenceRecord, string>
     {
         #region Function
-        #endregion //Function
-
-        #region Method
         /// <summary>
         /// 格式化编号
         /// </summary>
@@ -26,7 +23,7 @@ namespace Phoebe.Core.BL
         /// <param name="dt"></param>
         /// <param name="extParams"></param>
         /// <returns></returns>
-        public string FormatSequence(string format, int seq, DateTime? dt, params string[] extParams)
+        private string FormatSequence(string format, int seq, DateTime? dt, params string[] extParams)
         {
             string str = "";
             List<object> parameters = new List<object>();
@@ -47,7 +44,9 @@ namespace Phoebe.Core.BL
 
             return str;
         }
+        #endregion //Function
 
+        #region Method
         /// <summary>
         /// 生成下一个序列号
         /// </summary>
