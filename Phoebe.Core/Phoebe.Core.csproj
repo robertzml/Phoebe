@@ -5,6 +5,7 @@
     <Version>4.2.0</Version>
     <Authors>zml</Authors>
     <Company>jndx</Company>
+    <RunAnalyzersDuringLiveAnalysis>true</RunAnalyzersDuringLiveAnalysis>
   </PropertyGroup>
 
   <ItemGroup>

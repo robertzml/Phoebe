@@ -10,6 +10,7 @@ namespace Phoebe.WebAPI.Controllers
     using Phoebe.Base.System;
     using Phoebe.Core.Service;
     using Phoebe.Core.BL;
+    using Phoebe.Core.DL;
     using Phoebe.Core.Entity;
     using Phoebe.Core.View;
     using Phoebe.WebAPI.Model;
@@ -44,6 +45,18 @@ namespace Phoebe.WebAPI.Controllers
         {
             StockInViewBusiness stockInViewBusiness = new StockInViewBusiness();
             return stockInViewBusiness.FindAll().OrderByDescending(r => r.FlowNumber).ToList();
+        }
+
+        /// <summary>
+        /// 按月度获取入库列表
+        /// </summary>
+        /// <param name="monthTime"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult<List<StockInView>> ListByMonth(string monthTime)
+        {
+            StockInViewBusiness stockInViewBusiness = new StockInViewBusiness();
+            return stockInViewBusiness.FindByMonth(monthTime);
         }
 
         /// <summary>
@@ -89,7 +102,7 @@ namespace Phoebe.WebAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<ResponseData>> Create(StockIn stockIn)
         {
-            StockInService stockInService = new StockInService();           
+            StockInService stockInService = new StockInService();
 
             var task = Task.Run(() =>
             {
@@ -116,11 +129,11 @@ namespace Phoebe.WebAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<ResponseData>> Update(StockIn stockIn)
         {
-            StockInBusiness stockInBusiness = new StockInBusiness();
+            StockInService stockInService = new StockInService();
 
             var task = Task.Run(() =>
             {
-                var result = stockInBusiness.Update(stockIn);
+                var result = stockInService.UpdateReceipt(stockIn);
 
                 ResponseData data = new ResponseData
                 {

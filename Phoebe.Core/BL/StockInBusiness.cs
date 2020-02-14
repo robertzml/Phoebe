@@ -17,7 +17,7 @@ namespace Phoebe.Core.BL
     public class StockInBusiness : AbstractBusiness<StockIn, string>, IBaseBL<StockIn, string>
     {
         #region Method
-        public (bool success, string errorMessage, StockIn t) Insert(StockIn entity, SqlSugarClient db = null)
+        public override (bool success, string errorMessage, StockIn t) Create(StockIn entity, SqlSugarClient db = null)
         {
             if (db == null)
                 db = GetInstance();
@@ -32,7 +32,6 @@ namespace Phoebe.Core.BL
 
             var t = db.Insertable(entity).ExecuteReturnEntity();
 
-
             return (true, "", t);
         }
 
@@ -46,36 +45,25 @@ namespace Phoebe.Core.BL
             if (db == null)
                 db = GetInstance();
 
-            try
+            var stockIn = db.Queryable<StockIn>().InSingle(entity.Id);
+
+            if (stockIn.InTime != entity.InTime)
             {
-                db.Ado.BeginTran();
+                SequenceRecordBusiness recordBusiness = new SequenceRecordBusiness();
 
-                var stockIn = db.Queryable<StockIn>().InSingle(entity.Id);
-
-                if (stockIn.InTime != entity.InTime)
-                {
-                    SequenceRecordBusiness recordBusiness = new SequenceRecordBusiness();
-
-                    stockIn.InTime = entity.InTime;
-                    stockIn.MonthTime = stockIn.InTime.Year.ToString() + stockIn.InTime.Month.ToString().PadLeft(2, '0');
-                    stockIn.FlowNumber = recordBusiness.GetNextSequence(db, "StockIn", stockIn.InTime);
-                }
-
-                stockIn.Type = entity.Type;
-                stockIn.ContractId = entity.ContractId;
-                stockIn.VehicleNumber = entity.VehicleNumber;
-                stockIn.Remark = entity.Remark;
-
-                var t = db.Updateable(stockIn).ExecuteCommand();
-
-                db.Ado.CommitTran();
-                return (true, "");
+                stockIn.InTime = entity.InTime;
+                stockIn.MonthTime = stockIn.InTime.Year.ToString() + stockIn.InTime.Month.ToString().PadLeft(2, '0');
+                stockIn.FlowNumber = recordBusiness.GetNextSequence(db, "StockIn", stockIn.InTime);
             }
-            catch (Exception e)
-            {
-                db.Ado.RollbackTran();
-                return (false, e.Message);
-            }
+
+            stockIn.Type = entity.Type;
+            stockIn.ContractId = entity.ContractId;
+            stockIn.VehicleNumber = entity.VehicleNumber;
+            stockIn.Remark = entity.Remark;
+
+            db.Updateable(stockIn).ExecuteCommand();
+
+            return (true, "");
         }
 
         /// <summary>

@@ -21,34 +21,22 @@ namespace Phoebe.Core.BL
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public override (bool success, string errorMessage, StockInTask t) Create(StockInTask entity, SqlSugarClient db = null)
+        public (bool success, string errorMessage, StockInTask t) Create(StockInTask entity, DateTime inTime, SqlSugarClient db = null)
         {
             if (db == null)
-                db = GetInstance();
+                db = GetInstance();         
 
-            try
-            {
-                db.Ado.BeginTran();
+            SequenceRecordBusiness recordBusiness = new SequenceRecordBusiness();
+            entity.TaskCode = recordBusiness.GetNextSequence(db, "StockInTask", inTime);
 
-                var stockIn = db.Queryable<StockIn>().Single(r => r.Id == entity.StockInId);
+            entity.Id = Guid.NewGuid().ToString();
+            //entity.InWeight = entity.InCount * entity.UnitWeight;
+            entity.CreateTime = DateTime.Now;
+            entity.Status = (int)EntityStatus.StockInReady;
 
-                SequenceRecordBusiness recordBusiness = new SequenceRecordBusiness();
-                entity.TaskCode = recordBusiness.GetNextSequence(db, "StockInTask", stockIn.InTime);
+            var t = db.Insertable(entity).ExecuteReturnEntity();
 
-                entity.Id = Guid.NewGuid().ToString();
-                //entity.InWeight = entity.InCount * entity.UnitWeight;
-                entity.CreateTime = DateTime.Now;
-                entity.Status = (int)EntityStatus.StockInReady;
-
-                var t = db.Insertable(entity).ExecuteReturnEntity();
-                db.Ado.CommitTran();
-                return (true, "", t);
-            }
-            catch (Exception e)
-            {
-                db.Ado.RollbackTran();
-                return (false, e.Message, null);
-            }
+            return (true, "", t);
         }
 
         /// <summary>
