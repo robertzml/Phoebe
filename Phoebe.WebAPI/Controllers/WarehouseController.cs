@@ -18,7 +18,7 @@ namespace Phoebe.WebAPI.Controllers
     [ApiController]
     public class WarehouseController : ControllerBase
     {
-        #region Action
+        #region Query
         /// <summary>
         /// 仓库列表
         /// </summary>
@@ -49,7 +49,9 @@ namespace Phoebe.WebAPI.Controllers
             WarehouseBusiness warehouseBusiness = new WarehouseBusiness();
             return warehouseBusiness.FindById(id);
         }
+        #endregion //Query
 
+        #region Action
         /// <summary>
         /// 添加仓库
         /// </summary>

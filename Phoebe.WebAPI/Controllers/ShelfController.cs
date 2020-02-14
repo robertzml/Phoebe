@@ -18,7 +18,7 @@ namespace Phoebe.WebAPI.Controllers
     [ApiController]
     public class ShelfController : ControllerBase
     {
-        #region Action
+        #region Query
         /// <summary>
         /// 货架列表
         /// </summary>
@@ -52,7 +52,9 @@ namespace Phoebe.WebAPI.Controllers
             ShelfBusiness shelfBusiness = new ShelfBusiness();
             return shelfBusiness.FindById(id);
         }
+        #endregion //Query
 
+        #region Action
         /// <summary>
         /// 添加货架
         /// </summary>

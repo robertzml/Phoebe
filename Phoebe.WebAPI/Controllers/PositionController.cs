@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Phoebe.WebAPI.Controllers
 {
     using Phoebe.Core.BL;
+    using Phoebe.Core.DL;
     using Phoebe.Core.Entity;
     using Phoebe.Core.View;
     using Phoebe.WebAPI.Model;
@@ -19,7 +20,7 @@ namespace Phoebe.WebAPI.Controllers
     [ApiController]
     public class PositionController : ControllerBase
     {
-        #region Action
+        #region Query
         /// <summary>
         /// 仓位列表
         /// </summary>
@@ -95,7 +96,9 @@ namespace Phoebe.WebAPI.Controllers
             PositionBusiness positionBusiness = new PositionBusiness();
             return positionBusiness.Count(shelfId);
         }
+        #endregion //Query
 
+        #region Action
         /// <summary>
         /// 生成仓位
         /// </summary>

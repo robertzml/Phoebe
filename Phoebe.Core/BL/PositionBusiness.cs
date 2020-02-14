@@ -22,9 +22,11 @@ namespace Phoebe.Core.BL
         /// </summary>
         /// <param name="shelfId">货架ID</param>
         /// <returns></returns>
-        public List<Position> FindByShelf(int shelfId)
+        public List<Position> FindByShelf(int shelfId, SqlSugarClient db = null)
         {
-            var db = GetInstance();
+            if (db == null)
+                db = GetInstance();
+
             return db.Queryable<Position>().Where(r => r.ShelfId == shelfId).ToList();
         }
 
@@ -34,19 +36,21 @@ namespace Phoebe.Core.BL
         /// <param name="shelfId"></param>
         /// <param name="row"></param>
         /// <returns></returns>
-        public List<Position> FindList(int shelfId, int row)
+        public List<Position> FindList(int shelfId, int row, SqlSugarClient db = null)
         {
-            var db = GetInstance();
+            if (db == null)
+                db = GetInstance();
+
             return db.Queryable<Position>().Where(r => r.ShelfId == shelfId && r.Row == row).OrderBy(r => r.Number).ToList();
         }
 
         /// <summary>
         /// 根据货架码查找空仓位
         /// </summary>
-        /// <param name="db"></param>
         /// <param name="shelfCode">货架码</param>
+        /// <param name="db"></param>
         /// <returns></returns>
-        public Position FindAvailable(SqlSugarClient db, string shelfCode)
+        public Position FindAvailable(string shelfCode, SqlSugarClient db)
         {
             bool vice = false; //是否副货架码
             var data = db.Queryable<Position>().Where(r => r.ShelfCode == shelfCode).OrderBy(r => r.Depth).ToList();
@@ -104,9 +108,11 @@ namespace Phoebe.Core.BL
         /// </summary>
         /// <param name="shelfId"></param>
         /// <returns></returns>
-        public int Count(int shelfId)
+        public int Count(int shelfId, SqlSugarClient db = null)
         {
-            var db = GetInstance();
+            if (db == null)
+                db = GetInstance();
+
             return db.Queryable<Position>().Count(r => r.ShelfId == shelfId);
         }
 
@@ -115,11 +121,12 @@ namespace Phoebe.Core.BL
         /// </summary>
         /// <param name="shelfId">货架ID</param>
         /// <returns></returns>
-        public (bool success, string errorMessage) Generate(int shelfId)
+        public (bool success, string errorMessage) Generate(int shelfId, SqlSugarClient db = null)
         {
             try
             {
-                var db = GetInstance();
+                if (db == null)
+                    db = GetInstance();
 
                 var shelf = db.Queryable<Shelf>().InSingle(shelfId);
                 if (shelf == null)

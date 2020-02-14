@@ -4,6 +4,7 @@ using System.Text;
 
 namespace Phoebe.Core.BL
 {
+    using SqlSugar;
     using Phoebe.Base.Framework;
     using Phoebe.Core.Entity;
 
@@ -18,9 +19,11 @@ namespace Phoebe.Core.BL
         /// </summary>
         /// <param name="warehouseId">仓库ID</param>
         /// <returns></returns>
-        public List<Shelf> FindByWarehouse(int warehouseId)
+        public List<Shelf> FindByWarehouse(int warehouseId, SqlSugarClient db = null)
         {
-            var db = GetInstance();
+            if (db == null)
+                db = GetInstance();
+
             return db.Queryable<Shelf>().Where(r => r.WarehouseId == warehouseId).ToList();
         }
         #endregion //Method

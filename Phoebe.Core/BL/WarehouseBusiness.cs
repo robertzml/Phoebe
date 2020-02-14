@@ -19,9 +19,11 @@ namespace Phoebe.Core.BL
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        public List<Warehouse> FindByType(int type)
+        public List<Warehouse> FindByType(int type, SqlSugarClient db = null)
         {
-            var db = GetInstance();
+            if (db == null)
+                db = GetInstance();
+
             return db.Queryable<Warehouse>().Where(r => r.Type == type).ToList();
         }
 
@@ -34,6 +36,7 @@ namespace Phoebe.Core.BL
         {
             if (db == null)
                 db = GetInstance();
+
             var count = db.Queryable<Warehouse>().Count(r => r.Number == entity.Number);
             if (count > 0)
             {
@@ -52,6 +55,7 @@ namespace Phoebe.Core.BL
         {
             if (db == null)
                 db = GetInstance();
+
             var count = db.Queryable<Warehouse>().Count(r => r.Id != entity.Id && r.Number == entity.Number);
             if (count > 0)
             {

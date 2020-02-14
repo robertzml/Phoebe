@@ -153,7 +153,7 @@ namespace Phoebe.Core.BL
 
                 // find position
                 PositionBusiness positionBusiness = new PositionBusiness();
-                var position = positionBusiness.FindAvailable(db, shelfCode);
+                var position = positionBusiness.FindAvailable(shelfCode, db);
                 if (position == null)
                 {
                     return (false, "无空仓位");
