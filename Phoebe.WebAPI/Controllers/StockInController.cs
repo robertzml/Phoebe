@@ -35,7 +35,7 @@ namespace Phoebe.WebAPI.Controllers
         }
         #endregion //Common
 
-        #region Stock In
+        #region Stock In Query
         /// <summary>
         /// 获取入库列表
         /// </summary>
@@ -93,7 +93,9 @@ namespace Phoebe.WebAPI.Controllers
             StockInViewBusiness stockInViewBusiness = new StockInViewBusiness();
             return stockInViewBusiness.FindById(id);
         }
+        #endregion //Stock In Query
 
+        #region Stock In Action
         /// <summary>
         /// 添加入库
         /// </summary>
@@ -225,9 +227,9 @@ namespace Phoebe.WebAPI.Controllers
 
             return await task;
         }
-        #endregion //Stock In
+        #endregion //Stock In Action
 
-        #region Stock In Task
+        #region Stock In Task Query
         /// <summary>
         /// 获取入库任务列表
         /// </summary>
@@ -251,7 +253,9 @@ namespace Phoebe.WebAPI.Controllers
             StockInTaskViewBusiness taskViewBusiness = new StockInTaskViewBusiness();
             return taskViewBusiness.FindById(taskId);
         }
+        #endregion //Stock In Task Query
 
+        #region Stock In Task Action
         /// <summary>
         /// 添加入库任务
         /// </summary>
@@ -260,11 +264,11 @@ namespace Phoebe.WebAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<ResponseData>> AddTask(StockInTask inTask)
         {
-            StockInTaskBusiness taskBusiness = new StockInTaskBusiness();
+            StockInService stockInService = new StockInService();
 
             var task = Task.Run(() =>
             {
-                var result = taskBusiness.Create(inTask); //清点
+                var result = stockInService.AddTask(inTask); //清点
 
                 ResponseData data = new ResponseData
                 {
@@ -354,6 +358,6 @@ namespace Phoebe.WebAPI.Controllers
 
             return await task;
         }
-        #endregion //Stock In Task
+        #endregion //Stock In Task Action
     }
 }
