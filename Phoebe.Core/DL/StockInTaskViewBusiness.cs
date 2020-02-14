@@ -4,6 +4,7 @@ using System.Text;
 
 namespace Phoebe.Core.DL
 {
+    using SqlSugar;
     using Phoebe.Base.Framework;
     using Phoebe.Base.System;
     using Phoebe.Core.View;
@@ -16,9 +17,10 @@ namespace Phoebe.Core.DL
         /// </summary>
         /// <param name="stockInId">入库单ID</param>
         /// <returns></returns>
-        public List<StockInTaskView> FindList(string stockInId)
+        public List<StockInTaskView> FindList(string stockInId, SqlSugarClient db = null)
         {
-            var db = GetInstance();
+            if (db == null)
+                db = GetInstance();
             return db.Queryable<StockInTaskView>().Where(r => r.StockInId == stockInId).ToList();
         }
         #endregion //Method

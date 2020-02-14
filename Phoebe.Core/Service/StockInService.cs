@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Phoebe.Core.Service
@@ -8,13 +9,14 @@ namespace Phoebe.Core.Service
     using Phoebe.Base.System;
     using Phoebe.Core.Entity;
     using Phoebe.Core.BL;
+    using Phoebe.Core.DL;
 
     /// <summary>
     /// 入库业务类
     /// </summary>
     public class StockInService : AbstractService
     {
-        #region Service
+        #region Stock In Service
         /// <summary>
         /// 添加入库单
         /// </summary>
@@ -66,6 +68,44 @@ namespace Phoebe.Core.Service
         }
 
         /// <summary>
+        /// 确认入库单
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public (bool success, string errorMessage) ConfirmReceipt(string id)
+        {
+            var db = GetInstance();
+            try
+            {
+                db.Ado.BeginTran();
+
+                StockInTaskViewBusiness stockInTaskViewBusiness = new StockInTaskViewBusiness();
+
+                var tasks = stockInTaskViewBusiness.FindList(id, db);
+
+                if (tasks.All(r => r.Status == (int)EntityStatus.StockInFinish))
+                {
+                    StockInBusiness stockInBusiness = new StockInBusiness();
+                    stockInBusiness.Confirm(id);
+
+                    db.Ado.CommitTran();
+                    return (true, "");
+                }
+                else
+                {
+                    return (false, "有入库货物未完成");
+                }
+            }
+            catch (Exception e)
+            {
+                db.Ado.RollbackTran();
+                return (false, e.Message);
+            }
+        }
+        #endregion //Stock In Service
+
+        #region Stock In Task Service
+        /// <summary>
         /// 添加入库任务单
         /// </summary>
         /// <param name="task"></param>
@@ -92,6 +132,6 @@ namespace Phoebe.Core.Service
                 return (false, e.Message, null);
             }
         }
-        #endregion //Service
+        #endregion //Stock In Task Service
     }
 }

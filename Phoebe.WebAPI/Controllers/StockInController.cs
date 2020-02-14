@@ -156,11 +156,11 @@ namespace Phoebe.WebAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<ResponseData>> Confirm(string id)
         {
-            StockInBusiness stockInBusiness = new StockInBusiness();
+            StockInService stockInService = new StockInService();
 
             var task = Task.Run(() =>
             {
-                var result = stockInBusiness.Confirm(id);
+                var result = stockInService.ConfirmReceipt(id);
 
                 ResponseData data = new ResponseData
                 {

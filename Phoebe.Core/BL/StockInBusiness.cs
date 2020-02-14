@@ -17,6 +17,12 @@ namespace Phoebe.Core.BL
     public class StockInBusiness : AbstractBusiness<StockIn, string>, IBaseBL<StockIn, string>
     {
         #region Method
+        /// <summary>
+        /// 添加入库单
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="db"></param>
+        /// <returns></returns>
         public override (bool success, string errorMessage, StockIn t) Create(StockIn entity, SqlSugarClient db = null)
         {
             if (db == null)
@@ -71,32 +77,17 @@ namespace Phoebe.Core.BL
         /// </summary>
         /// <param name="id">入库单ID</param>
         /// <returns></returns>
-        public (bool success, string errorMessage) Confirm(string id)
+        public (bool success, string errorMessage) Confirm(string id, SqlSugarClient db = null)
         {
-            try
-            {
-                var db = GetInstance();
+            if (db == null)
+                db = GetInstance();
 
-                var stockIn = db.Queryable<StockIn>().InSingle(id);
-                var tasks = db.Queryable<StockInTask>().Where(r => r.StockInId == id).ToList();
+            var stockIn = db.Queryable<StockIn>().InSingle(id);
+            stockIn.ConfirmTime = DateTime.Now;
+            stockIn.Status = (int)EntityStatus.StockInFinish;
 
-                if (tasks.All(r => r.Status == (int)EntityStatus.StockInFinish))
-                {
-                    stockIn.ConfirmTime = DateTime.Now;
-                    stockIn.Status = (int)EntityStatus.StockInFinish;
-
-                    db.Updateable(stockIn).ExecuteCommand();
-                    return (true, "");
-                }
-                else
-                {
-                    return (false, "有入库货物未完成");
-                }
-            }
-            catch (Exception e)
-            {
-                return (false, e.Message);
-            }
+            db.Updateable(stockIn).ExecuteCommand();
+            return (true, "");
         }
 
         /// <summary>
