@@ -210,11 +210,11 @@ namespace Phoebe.WebAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<ResponseData>> Delete(string id)
         {
-            StockInBusiness stockInBusiness = new StockInBusiness();
+            StockInService stockInService = new StockInService();
 
             var task = Task.Run(() =>
             {
-                var result = stockInBusiness.Delete(id);
+                var result = stockInService.DeleteReceipt(id);
 
                 ResponseData data = new ResponseData
                 {
@@ -228,6 +228,48 @@ namespace Phoebe.WebAPI.Controllers
             return await task;
         }
         #endregion //Stock In Action
+
+        #region Billing Query
+        /// <summary>
+        /// 获取入库计费
+        /// </summary>
+        /// <param name="stockInId">入库单ID</param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult<List<InBillingView>> GetBillings(string stockInId)
+        {
+            InBillingViewBusiness inBillingViewBusiness = new InBillingViewBusiness();
+            return inBillingViewBusiness.FindByStockIn(stockInId);
+        }
+        #endregion //Billing Query
+
+        #region Billing Action
+        /// <summary>
+        /// 设置入库费用
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ActionResult<ResponseData>> SetBilling(List<InBilling> entity)
+        {
+            StockInService stockInService = new StockInService();
+
+            var task = Task.Run(() =>
+            {
+                var result = stockInService.SetBilling(entity);
+
+                ResponseData data = new ResponseData
+                {
+                    Status = result.success ? 0 : 1,
+                    ErrorMessage = result.errorMessage
+                };
+
+                return data;
+            });
+
+            return await task;
+        }
+        #endregion //Billing Action
 
         #region Stock In Task Query
         /// <summary>

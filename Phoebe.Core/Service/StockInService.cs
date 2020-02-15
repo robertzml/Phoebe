@@ -195,6 +195,39 @@ namespace Phoebe.Core.Service
         }
         #endregion //Stock In Service
 
+        #region Billing Service
+        /// <summary>
+        /// 设置入库计费
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public (bool success, string errorMessage) SetBilling(List<InBilling> data)
+        {
+            var db = GetInstance();
+            try
+            {
+                db.Ado.BeginTran();
+
+                InBillingBusiness inBillingBusiness = new InBillingBusiness();
+                foreach(var item in data)
+                {
+                    if (item.Amount == 0)
+                        continue;
+
+                    inBillingBusiness.Save(item, db);
+                }
+
+                db.Ado.CommitTran();
+                return (true, "");
+            }
+            catch (Exception e)
+            {
+                db.Ado.RollbackTran();
+                return (false, e.Message);
+            }
+        }
+        #endregion //Billing Service
+
         #region Stock In Task Service
         /// <summary>
         /// 添加入库任务单

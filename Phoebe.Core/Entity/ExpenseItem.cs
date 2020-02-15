@@ -25,6 +25,7 @@ namespace Phoebe.Core.Entity
         /// <summary>
         /// 代码
         /// </summary>
+        [Required]
         [Display(Name = "代码")]
         public string Code { get; set; }
 
