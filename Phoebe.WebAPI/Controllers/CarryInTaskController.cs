@@ -90,11 +90,11 @@ namespace Phoebe.WebAPI.Controllers
         /// <returns></returns>
         public async Task<ActionResult<ResponseData>> Create(CarryInTask model)
         {
-            StockInService stockInService = new StockInService();
+            CarryInService carryInService = new CarryInService();
 
             var task = Task.Run(() =>
             {
-                var result = stockInService.AddCarryIn(model);
+                var result = carryInService.AddTask(model);
 
                 ResponseData data = new ResponseData
                 {
@@ -117,13 +117,13 @@ namespace Phoebe.WebAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<ResponseData>> ReceiveTask(CarryInReceiveModel model)
         {
-            CarryInTaskBusiness taskBusiness = new CarryInTaskBusiness();
+            CarryInService carryInService = new CarryInService();
 
             var task = Task.Run(() =>
             {
                 ResponseData data = new ResponseData();
 
-                var result = taskBusiness.Receive(model.TrayCode, model.UserId);
+                var result = carryInService.ReceiveTask(model.TrayCode, model.UserId);
 
                 data.Status = result.success ? 0 : 1;
                 data.ErrorMessage = result.errorMessage;
@@ -217,11 +217,11 @@ namespace Phoebe.WebAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<ResponseData>> Delete(string id)
         {
-            StockInService stockInService = new StockInService();
+            CarryInService carryInService = new CarryInService();
 
             var task = Task.Run(() =>
             {
-                var result = stockInService.DeleteCarryIn(id);
+                var result = carryInService.DeleteTask(id);
 
                 ResponseData data = new ResponseData
                 {
