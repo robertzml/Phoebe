@@ -19,66 +19,33 @@ namespace Phoebe.Core.BL
     {
         #region Method
         /// <summary>
-        /// 由入库创建搬运入库任务
+        /// 由入库单添加搬运入库任务
         /// </summary>
-        /// <param name="stockInTaskId"></param>
-        /// <param name="trayCode"></param>
-        /// <param name="moveCount"></param>
-        /// <param name="moveWeight"></param>
-        /// <param name="checkUserId"></param>
-        /// <param name="remark"></param>
+        /// <param name="entity"></param>
+        /// <param name="db"></param>
         /// <returns></returns>
-        public (bool success, string errorMessage, CarryInTask t) Create(string stockInTaskId, string trayCode,
-            int moveCount, decimal moveWeight, int checkUserId, string remark)
+        public (bool success, string errorMessage, CarryInTask t) CreateByStockIn(CarryInTask entity, SqlSugarClient db = null)
         {
-            var db = GetInstance();
-            try
-            {
-                db.Ado.BeginTran();
+            if (db == null)
+                db = GetInstance();
 
-                var trayUse = db.Queryable<StoreView>().Where(r => r.TrayCode == trayCode && (r.Status == (int)EntityStatus.StoreIn || r.Status == (int)EntityStatus.StoreInReady));
-                if (trayUse.Count() > 0)
-                {
-                    return (false, "托盘已使用", null);
-                }
+            SequenceRecordBusiness recordBusiness = new SequenceRecordBusiness();
+            var stockInTask = db.Queryable<StockInTaskView>().InSingle(entity.StockInTaskId);
+            var checkUser = db.Queryable<User>().InSingle(entity.CheckUserId);
 
-                SequenceRecordBusiness recordBusiness = new SequenceRecordBusiness();
+            entity.Id = Guid.NewGuid().ToString();
+            entity.CustomerId = stockInTask.CustomerId;
+            entity.ContractId = stockInTask.ContractId;
+            entity.CargoId = stockInTask.CargoId;
 
-                var stockInTask = db.Queryable<StockInTaskView>().InSingle(stockInTaskId);
-                var checkUser = db.Queryable<User>().InSingle(checkUserId);
+            entity.CreateTime = DateTime.Now;
+            entity.TaskCode = recordBusiness.GetNextSequence(db, "CarryInTask", entity.CreateTime);
+            entity.CheckTime = DateTime.Now;
+            entity.CheckUserName = checkUser.Name;
 
-                CarryInTask entity = new CarryInTask();
-                entity.Id = Guid.NewGuid().ToString();
-                entity.Type = (int)CarryInTaskType.In;
-                entity.CustomerId = stockInTask.CustomerId;
-                entity.ContractId = stockInTask.ContractId;
-                entity.CargoId = stockInTask.CargoId;
-                entity.StockInTaskId = stockInTaskId;
+            entity.Status = (int)EntityStatus.StockInCheck;
 
-                entity.MoveCount = moveCount;
-                entity.MoveWeight = moveWeight;
-
-                entity.CreateTime = DateTime.Now;
-
-                entity.TaskCode = recordBusiness.GetNextSequence(db, "CarryInTask", entity.CreateTime);
-                entity.TrayCode = trayCode;
-
-                entity.CheckTime = DateTime.Now;
-                entity.CheckUserName = checkUser.Name;
-
-                entity.Status = (int)EntityStatus.StockInCheck;
-                entity.Remark = remark;
-
-                var t = db.Insertable(entity).ExecuteReturnEntity();
-
-                db.Ado.CommitTran();
-                return (true, "", t);
-            }
-            catch (Exception e)
-            {
-                db.Ado.RollbackTran();
-                return (false, e.Message, null);
-            }
+            return base.Create(entity, db);
         }
 
         /// <summary>
@@ -325,26 +292,13 @@ namespace Phoebe.Core.BL
             if (db == null)
                 db = GetInstance();
 
-            try
+            var carryIn = db.Queryable<CarryInTask>().InSingle(id);
+            if (carryIn.Status != (int)EntityStatus.StockInCheck)
             {
-                db.Ado.BeginTran();
-
-                var carryIn = db.Queryable<CarryInTask>().InSingle(id);
-                if (carryIn.Status != (int)EntityStatus.StockInCheck)
-                {
-                    return (false, "仅能删除已清点状态的搬运入库任务");
-                }
-
-                db.Deleteable<CarryInTask>().In(id).ExecuteCommand();
-
-                db.Ado.CommitTran();
-                return (true, "");
+                return (false, "仅能删除已清点状态的搬运入库任务");
             }
-            catch (Exception e)
-            {
-                db.Ado.RollbackTran();
-                return (false, e.Message);
-            }
+
+            return base.Delete(id, db);
         }
 
         /// <summary>

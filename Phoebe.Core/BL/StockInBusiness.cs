@@ -150,6 +150,26 @@ namespace Phoebe.Core.BL
                 return (false, e.Message);
             }
         }
+
+        /// <summary>
+        /// 删除入库单
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        public override (bool success, string errorMessage) Delete(string id, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            var carryIn = db.Queryable<CarryInTask>().InSingle(id);
+            if (carryIn.Status != (int)EntityStatus.StockInReady)
+            {
+                return (false, "仅能删除待入库状态的入库单");
+            }
+
+            return base.Delete(id, db);
+        }
         #endregion //Method
     }
 }

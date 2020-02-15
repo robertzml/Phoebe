@@ -10,6 +10,8 @@ namespace Phoebe.Core.Service
     using Phoebe.Core.Entity;
     using Phoebe.Core.BL;
     using Phoebe.Core.DL;
+    using Phoebe.Core.View;
+    using Phoebe.Core.Utility;
 
     /// <summary>
     /// 入库业务类
@@ -88,10 +90,10 @@ namespace Phoebe.Core.Service
                 }
 
                 StockInBusiness stockInBusiness = new StockInBusiness();
-                stockInBusiness.Delete(id);
+                var result = stockInBusiness.Delete(id);
 
                 db.Ado.CommitTran();
-                return (true, "");
+                return (result.success, result.errorMessage);
             }
             catch (Exception e)
             {
@@ -118,10 +120,10 @@ namespace Phoebe.Core.Service
                 if (tasks.All(r => r.Status == (int)EntityStatus.StockInFinish))
                 {
                     StockInBusiness stockInBusiness = new StockInBusiness();
-                    stockInBusiness.Confirm(id);
+                    var result = stockInBusiness.Confirm(id);
 
                     db.Ado.CommitTran();
-                    return (true, "");
+                    return (result.success, result.errorMessage);
                 }
                 else
                 {
@@ -209,7 +211,7 @@ namespace Phoebe.Core.Service
                 db.Ado.BeginTran();
 
                 InBillingBusiness inBillingBusiness = new InBillingBusiness();
-                foreach(var item in data)
+                foreach (var item in data)
                 {
                     if (item.Amount == 0)
                         continue;
@@ -257,5 +259,70 @@ namespace Phoebe.Core.Service
             }
         }
         #endregion //Stock In Task Service
+
+        #region Carry In Service
+        /// <summary>
+        /// 添加搬运入库任务
+        /// </summary>
+        /// <param name="carryInTask"></param>
+        /// <returns></returns>
+        public (bool success, string errorMessage) AddCarryIn(CarryInTask carryInTask)
+        {
+            var db = GetInstance();
+
+            try
+            {
+                db.Ado.BeginTran();
+
+                // 检查托盘是否在架上
+                var trayUse = db.Queryable<StoreView>().Where(r => r.TrayCode == carryInTask.TrayCode
+                    && (r.Status == (int)EntityStatus.StoreIn || r.Status == (int)EntityStatus.StoreInReady));
+                if (trayUse.Count() > 0)
+                {
+                    return (false, "托盘已使用");
+                }
+
+                CarryInTaskBusiness carryInTaskBusiness = new CarryInTaskBusiness();
+                carryInTask.Type = (int)CarryInTaskType.In;
+
+                var result = carryInTaskBusiness.CreateByStockIn(carryInTask, db);
+
+                db.Ado.CommitTran();
+                return (result.success, result.errorMessage);
+            }
+            catch (Exception e)
+            {
+                db.Ado.RollbackTran();
+                return (false, e.Message);
+            }
+        }
+
+        /// <summary>
+        /// 删除搬运入库单
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public (bool success, string errorMessage) DeleteCarryIn(string id)
+        {
+            var db = GetInstance();
+
+            try
+            {
+                db.Ado.BeginTran();
+
+                CarryInTaskBusiness taskBusiness = new CarryInTaskBusiness();
+
+                var result = taskBusiness.Delete(id, db);
+
+                db.Ado.CommitTran();
+                return (result.success, result.errorMessage);
+            }
+            catch (Exception e)
+            {
+                db.Ado.RollbackTran();
+                return (false, e.Message);
+            }
+        }
+        #endregion //Carry In Service
     }
 }

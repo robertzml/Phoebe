@@ -9,7 +9,9 @@ namespace Phoebe.WebAPI.Controllers
 {
     using Phoebe.Base.System;
     using Phoebe.Core.BL;
+    using Phoebe.Core.DL;
     using Phoebe.Core.Entity;
+    using Phoebe.Core.Service;
     using Phoebe.Core.View;
     using Phoebe.WebAPI.Model;
 
@@ -20,28 +22,7 @@ namespace Phoebe.WebAPI.Controllers
     [ApiController]
     public class CarryInTaskController : ControllerBase
     {
-        #region Action
-        public async Task<ActionResult<ResponseData>> Create(CarryInCreateModel model)
-        {
-            CarryInTaskBusiness carryInTaskBusiness = new CarryInTaskBusiness();
-
-            var task = Task.Run(() =>
-            {
-                var result = carryInTaskBusiness.Create(model.StockInTaskId, model.TrayCode, model.MoveCount, model.MoveWeight, model.CheckUserId, model.Remark);
-
-                ResponseData data = new ResponseData
-                {
-                    Status = result.success ? 0 : 1,
-                    ErrorMessage = result.errorMessage,
-                    Entity = result.t
-                };
-
-                return data;
-            });
-
-            return await task;
-        }
-
+        #region Query
         /// <summary>
         /// 获取搬运入库任务
         /// </summary>
@@ -98,6 +79,34 @@ namespace Phoebe.WebAPI.Controllers
         {
             CarryInTaskViewBusiness carryInTaskViewBusiness = new CarryInTaskViewBusiness();
             return carryInTaskViewBusiness.FindCurrentReceive(userId);
+        }
+        #endregion //Action
+
+        #region Action
+        /// <summary>
+        /// 添加搬运入库
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public async Task<ActionResult<ResponseData>> Create(CarryInTask model)
+        {
+            StockInService stockInService = new StockInService();
+
+            var task = Task.Run(() =>
+            {
+                var result = stockInService.AddCarryIn(model);
+
+                ResponseData data = new ResponseData
+                {
+                    Status = result.success ? 0 : 1,
+                    ErrorMessage = result.errorMessage,
+                    Entity = null
+                };
+
+                return data;
+            });
+
+            return await task;
         }
 
         /// <summary>
@@ -208,11 +217,11 @@ namespace Phoebe.WebAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<ResponseData>> Delete(string id)
         {
-            CarryInTaskBusiness taskBusiness = new CarryInTaskBusiness();
+            StockInService stockInService = new StockInService();
 
             var task = Task.Run(() =>
             {
-                var result = taskBusiness.Delete(id);
+                var result = stockInService.DeleteCarryIn(id);
 
                 ResponseData data = new ResponseData
                 {

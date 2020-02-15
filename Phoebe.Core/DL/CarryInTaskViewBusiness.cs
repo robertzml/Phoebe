@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Phoebe.Core.BL
+namespace Phoebe.Core.DL
 {
+    using SqlSugar;
     using Phoebe.Base.Framework;
     using Phoebe.Base.System;
     using Phoebe.Core.View;
@@ -17,12 +18,12 @@ namespace Phoebe.Core.BL
         /// <param name="trayCode">托盘码</param>
         /// <param name="status">状态</param>
         /// <returns></returns>
-        public List<CarryInTaskView> FindByTray(string trayCode, EntityStatus status)
+        public List<CarryInTaskView> FindByTray(string trayCode, EntityStatus status, SqlSugarClient db = null)
         {
-            var db = GetInstance();
+            if (db == null)
+                db = GetInstance();
 
             var data = db.Queryable<CarryInTaskView>().Where(r => r.TrayCode == trayCode && r.Status == (int)status);
-
             return data.ToList();
         }
 
@@ -31,9 +32,11 @@ namespace Phoebe.Core.BL
         /// </summary>
         /// <param name="stockInTaskId"></param>
         /// <returns></returns>
-        public List<CarryInTaskView> FindByStockInTask(string stockInTaskId)
+        public List<CarryInTaskView> FindByStockInTask(string stockInTaskId, SqlSugarClient db = null)
         {
-            var db = GetInstance();
+            if (db == null)
+                db = GetInstance();
+
             var data = db.Queryable<CarryInTaskView>().Where(r => r.StockInTaskId == stockInTaskId);
             return data.ToList();
         }
@@ -43,9 +46,11 @@ namespace Phoebe.Core.BL
         /// </summary>
         /// <param name="stockOutTaskId"></param>
         /// <returns></returns>
-        public List<CarryInTaskView> FindByStockOutTask(string stockOutTaskId)
+        public List<CarryInTaskView> FindByStockOutTask(string stockOutTaskId, SqlSugarClient db = null)
         {
-            var db = GetInstance();
+            if (db == null)
+                db = GetInstance();
+
             var data = db.Queryable<CarryInTaskView>().Where(r => r.StockOutTaskId == stockOutTaskId);
             return data.ToList();
         }
@@ -55,12 +60,12 @@ namespace Phoebe.Core.BL
         /// </summary>
         /// <param name="userId">用户ID</param>
         /// <returns></returns>
-        public List<CarryInTaskView> FindCurrentReceive(int userId)
+        public List<CarryInTaskView> FindCurrentReceive(int userId, SqlSugarClient db = null)
         {
-            var db = GetInstance();
+            if (db == null)
+                db = GetInstance();
 
             var data = db.Queryable<CarryInTaskView>().Where(r => r.ReceiveUserId == userId && r.Status == (int)EntityStatus.StockInReceive);
-
             return data.ToList();
         }
         #endregion //Method
