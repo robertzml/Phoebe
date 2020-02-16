@@ -44,40 +44,22 @@ namespace Phoebe.Core.BL
         /// </summary>
         /// <param name="stockInTaskId"></param>
         /// <returns></returns>
-        public (bool success, string errorMessage) Confirm(string stockInTaskId)
+        public (bool success, string errorMessage) Finish(string id, int inCount, decimal inWeight, SqlSugarClient db = null)
         {
-            try
-            {
-                var db = GetInstance();
+            if (db == null)
+                db = GetInstance();
 
-                var task = db.Queryable<StockInTask>().InSingle(stockInTaskId);
-                var carryIn = db.Queryable<CarryInTask>().Where(r => r.StockInTaskId == stockInTaskId).ToList();
-                if (carryIn.Count == 0)
-                {
-                    return (false, "缺少搬运入库任务");
-                }
+            var task = db.Queryable<StockInTask>().InSingle(id);
 
-                if (carryIn.All(r => r.Status == (int)EntityStatus.StockInFinish))
-                {
-                    task.InCount = carryIn.Sum(r => r.MoveCount);
-                    task.InWeight = carryIn.Sum(r => r.MoveWeight);
+            task.InCount = inCount;
+            task.InWeight = inWeight;
 
-                    task.FinishTime = DateTime.Now;
-                    task.Status = (int)EntityStatus.StockInFinish;
+            task.FinishTime = DateTime.Now;
+            task.Status = (int)EntityStatus.StockInFinish;
 
-                    db.Updateable(task).ExecuteCommand();
+            db.Updateable(task).ExecuteCommand();
 
-                    return (true, "");
-                }
-                else
-                {
-                    return (false, "有搬运入库任务未完成");
-                }
-            }
-            catch (Exception e)
-            {
-                return (false, e.Message);
-            }
+            return (true, "");
         }
 
         /// <summary>

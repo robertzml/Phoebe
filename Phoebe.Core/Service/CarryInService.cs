@@ -176,6 +176,16 @@ namespace Phoebe.Core.Service
             }
         }
 
+        /// <summary>
+        /// 完成搬运入库任务
+        /// </summary>
+        /// <param name="taskId"></param>
+        /// <param name="userId"></param>
+        /// <param name="trayCode"></param>
+        /// <param name="moveCount"></param>
+        /// <param name="moveWeight"></param>
+        /// <param name="remark"></param>
+        /// <returns></returns>
         public (bool success, string errorMessage) Finish(string taskId, int userId, string trayCode, int moveCount, decimal moveWeight, string remark)
         {
             var db = GetInstance();
@@ -239,6 +249,47 @@ namespace Phoebe.Core.Service
 
                 db.Ado.CommitTran();
                 return (result.success, result.errorMessage);
+            }
+            catch (Exception e)
+            {
+                db.Ado.RollbackTran();
+                return (false, e.Message);
+            }
+        }
+
+        /// <summary>
+        /// 取消接单
+        /// </summary>
+        /// <param name="trayCode"></param>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public (bool success, string errorMessage) UnReceive(string trayCode, int userId)
+        {
+            var db = GetInstance();
+
+            try
+            {
+                db.Ado.BeginTran();
+
+                CarryInTaskBusiness carryInTaskBusiness = new CarryInTaskBusiness();
+                var tasks = db.Queryable<CarryInTask>().Where(r => r.TrayCode == trayCode && r.Status == (int)EntityStatus.StockInReceive).ToList();
+                if (tasks.Count == 0)
+                    return (false, "该托盘无已接单搬运入库任务");
+
+                // 检查用户情况
+                if (tasks.Any(r => r.ReceiveUserId != userId))
+                {
+                    return (false, "非本人任务，无法取消接单");
+                }
+
+                // 更新任务状态
+                foreach (var task in tasks)
+                {
+                    carryInTaskBusiness.UnReceive(task, db);
+                }
+
+                db.Ado.CommitTran();
+                return (true, "");
             }
             catch (Exception e)
             {

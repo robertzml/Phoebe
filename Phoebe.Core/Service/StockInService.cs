@@ -258,6 +258,41 @@ namespace Phoebe.Core.Service
                 return (false, e.Message, null);
             }
         }
+
+        /// <summary>
+        /// 确认入库任务
+        /// </summary>
+        /// <param name="stockInTaskId"></param>
+        /// <returns></returns>
+        public (bool success, string errorMessage) FinishTask(string stockInTaskId)
+        {
+            try
+            {
+                var db = GetInstance();
+
+                var carryIn = db.Queryable<CarryInTask>().Where(r => r.StockInTaskId == stockInTaskId).ToList();
+                if (carryIn.Count == 0)
+                {
+                    return (false, "缺少搬运入库任务");
+                }
+
+                if (carryIn.All(r => r.Status == (int)EntityStatus.StockInFinish))
+                {
+                    StockInTaskBusiness stockInTaskBusiness = new StockInTaskBusiness();
+                    stockInTaskBusiness.Finish(stockInTaskId, carryIn.Sum(r => r.MoveCount), carryIn.Sum(r => r.MoveWeight), db);
+
+                    return (true, "");
+                }
+                else
+                {
+                    return (false, "有搬运入库任务未完成");
+                }
+            }
+            catch (Exception e)
+            {
+                return (false, e.Message);
+            }
+        }
         #endregion //Stock In Task Service
     }
 }
