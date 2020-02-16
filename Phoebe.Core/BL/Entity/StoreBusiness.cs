@@ -22,9 +22,10 @@ namespace Phoebe.Core.BL
         /// </summary>
         /// <param name="stockInTask"></param>
         /// <param name="task"></param>
+        /// <param name="positionId"></param>
         /// <param name="db"></param>
         /// <returns></returns>
-        public (bool success, string errorMessage, Store t) Create(StockInTaskView stockInTask, CarryInTask task, SqlSugarClient db = null)
+        public (bool success, string errorMessage, Store t) CreateByStockIn(StockInTaskView stockInTask, CarryInTask task, int positionId, SqlSugarClient db = null)
         {
             if (db == null)
                 db = GetInstance();
@@ -35,7 +36,7 @@ namespace Phoebe.Core.BL
             store.ContractId = stockInTask.ContractId;
             store.CargoId = stockInTask.CargoId;
 
-            store.PositionId = task.PositionId;
+            store.PositionId = positionId;
             store.TrayCode = task.TrayCode;
 
             store.TotalCount = task.MoveCount;
@@ -53,8 +54,7 @@ namespace Phoebe.Core.BL
             store.CreateTime = DateTime.Now;
             store.Status = (int)EntityStatus.StoreInReady;
 
-            var t = db.Insertable(store).ExecuteReturnEntity();
-            return (true, "", t);
+            return base.Create(store, db);
         }
 
         /// <summary>
@@ -68,8 +68,11 @@ namespace Phoebe.Core.BL
         /// 旧库存记录保存在CarryInTask 的库存ID中，生成新库存记录后更新
         /// </remarks>
         /// <returns></returns>
-        public (bool success, string errorMessage, Store t) Create(SqlSugarClient db, StockOutTaskView stockOutTask, CarryInTask task)
+        public (bool success, string errorMessage, Store t) CreateByStockOut(StockOutTaskView stockOutTask, CarryInTask task, SqlSugarClient db = null)
         {
+            if (db == null)
+                db = GetInstance();
+
             Store store = new Store();
             store.Id = Guid.NewGuid().ToString();
             store.CustomerId = task.CustomerId;

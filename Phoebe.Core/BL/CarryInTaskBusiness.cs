@@ -71,83 +71,24 @@ namespace Phoebe.Core.BL
         /// <summary>
         /// 上架
         /// </summary>
-        /// <param name="trayCode">托盘码</param>
+        /// <param name="task">入库任务</param>
         /// <param name="shelfCode">货架码</param>
-        /// <param name="userId"></param>
+        /// <param name="positionId">仓位ID</param>
+        /// <param name="storeId">库存ID</param>
+        /// <param name="db"></param>
         /// <returns></returns>
-        public (bool success, string errorMessage) Enter(string trayCode, string shelfCode, int userId)
+        public (bool success, string errorMessage) Enter(CarryInTask task, string shelfCode, int positionId, string storeId, SqlSugarClient db = null)
         {
-            var db = GetInstance();
+            if (db == null)
+                db = GetInstance();
 
-            try
-            {
-                db.Ado.BeginTran();
+            task.ShelfCode = shelfCode;
+            task.PositionId = positionId;
+            task.StoreId = storeId;
+            task.MoveTime = DateTime.Now;
+            task.Status = (int)EntityStatus.StockInEnter;
 
-                var tasks = db.Queryable<CarryInTask>().Where(r => r.TrayCode == trayCode && r.Status == (int)EntityStatus.StockInReceive).ToList();
-                if (tasks.Count == 0)
-                    return (false, "该托盘无入库任务");
-
-                var user = db.Queryable<User>().InSingle(userId);
-                if (tasks.All(r => r.ReceiveUserId != user.Id))
-                    return (false, "非本用户任务");
-
-                // find position
-                PositionBusiness positionBusiness = new PositionBusiness();
-                var position = positionBusiness.FindAvailable(shelfCode, db);
-                if (position == null)
-                {
-                    return (false, "无空仓位");
-                }
-
-                // update position
-                position.Status = (int)EntityStatus.Occupy;
-                db.Updateable(position).ExecuteCommand();
-
-                foreach (var carryTask in tasks)
-                {
-                    // 设置搬运入库任务
-                    carryTask.ShelfCode = shelfCode;
-                    carryTask.PositionId = position.Id;
-                    carryTask.MoveTime = DateTime.Now;
-                    carryTask.Status = (int)EntityStatus.StockInEnter;
-
-                    if (!string.IsNullOrEmpty(carryTask.StockInTaskId))
-                    {
-                        // 由入库任务生成的搬运任务
-                        var stockInTask = db.Queryable<StockInTaskView>().InSingle(carryTask.StockInTaskId);
-
-                        // 添加库存记录
-                        StoreBusiness storeBusiness = new StoreBusiness();
-                        var store = storeBusiness.Create(stockInTask, carryTask, db);
-                        carryTask.StoreId = store.t.Id;
-
-                        // 添加冷藏费记录
-                        ColdFeeBusiness coldFeeBusiness = new ColdFeeBusiness();
-                        coldFeeBusiness.Start(store.t, db);
-                    }
-                    else
-                    {
-                        // 由出库任务生成的搬运任务
-                        var stockOutTask = db.Queryable<StockOutTaskView>().InSingle(carryTask.StockOutTaskId);
-
-                        // 添加库存记录
-                        StoreBusiness storeBusiness = new StoreBusiness();
-                        var store = storeBusiness.Create(db, stockOutTask, carryTask);
-                        carryTask.StoreId = store.t.Id;
-                    }
-
-                    // update task
-                    db.Updateable(carryTask).ExecuteCommand();
-                }
-
-                db.Ado.CommitTran();
-                return (true, "");
-            }
-            catch (Exception e)
-            {
-                db.Ado.RollbackTran();
-                return (false, e.Message);
-            }
+            return base.Update(task, db);
         }
 
         /// <summary>
