@@ -65,7 +65,9 @@ namespace Phoebe.Core.BL
             task.ReceiveTime = DateTime.Now;
             task.Status = (int)EntityStatus.StockInReceive;
 
-            return base.Update(task, db);
+            db.Updateable(task).ExecuteCommand();
+
+            return (true, "");
         }
 
         /// <summary>
@@ -88,66 +90,34 @@ namespace Phoebe.Core.BL
             task.MoveTime = DateTime.Now;
             task.Status = (int)EntityStatus.StockInEnter;
 
-            return base.Update(task, db);
+            db.Updateable(task).ExecuteCommand();
+
+            return (true, "");
         }
 
         /// <summary>
         /// 入库完成
         /// </summary>
-        /// <param name="taskId"></param>
-        /// <param name="userId"></param>
+        /// <param name="id"></param>
         /// <param name="trayCode"></param>
         /// <param name="moveCount"></param>
         /// <param name="moveWeight"></param>
-        /// <param name="remark"></param>
+        /// <param name="db"></param>
         /// <returns></returns>
-        public (bool success, string errorMessage) Finish(string taskId, int userId, string trayCode, int moveCount, decimal moveWeight, string remark)
+        public (bool success, string errorMessage) Finish(CarryInTask task, string trayCode, int moveCount, decimal moveWeight, SqlSugarClient db = null)
         {
-            var db = GetInstance();
+            if (db == null)
+                db = GetInstance();
 
-            try
-            {
-                db.Ado.BeginTran();
+            task.TrayCode = trayCode;
+            task.MoveCount = moveCount;
+            task.MoveWeight = moveWeight;
+            task.FinishTime = DateTime.Now;
+            task.Status = (int)EntityStatus.StockInFinish;
 
-                var task = db.Queryable<CarryInTask>().Single(r => r.Id == taskId);
+            db.Updateable(task).ExecuteCommand();
 
-                if (task.Status != (int)EntityStatus.StockInEnter)
-                {
-                    return (false, "该任务无法完成");
-                }
-
-                if (trayCode != task.TrayCode)
-                {
-                    var exist = db.Queryable<Store>().Where(r => r.TrayCode == trayCode && (r.Status == (int)EntityStatus.StoreIn || r.Status == (int)EntityStatus.StoreInReady));
-                    if (exist.Count() > 0)
-                    {
-                        return (false, "托盘已在库中");
-                    }
-                }
-
-                // update task
-                task.TrayCode = trayCode;
-                task.MoveCount = moveCount;
-                task.MoveWeight = moveWeight;
-                task.FinishTime = DateTime.Now;
-                task.Status = (int)EntityStatus.StockInFinish;
-                db.Updateable(task).ExecuteCommand();
-
-                // update store status
-                var store = db.Queryable<Store>().Single(r => r.Id == task.StoreId);
-                store.TrayCode = trayCode;
-                store.Remark = remark;
-                store.Status = (int)EntityStatus.StoreIn;
-                db.Updateable(store).ExecuteCommand();
-
-                db.Ado.CommitTran();
-                return (true, "");
-            }
-            catch (Exception e)
-            {
-                db.Ado.RollbackTran();
-                return (false, e.Message);
-            }
+            return (true, "");
         }
 
         /// <summary>

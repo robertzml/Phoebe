@@ -54,7 +54,8 @@ namespace Phoebe.Core.BL
             store.CreateTime = DateTime.Now;
             store.Status = (int)EntityStatus.StoreInReady;
 
-            return base.Create(store, db);
+            var t = db.Insertable(store).ExecuteReturnEntity();
+            return (true, "", t);
         }
 
         /// <summary>
@@ -102,6 +103,39 @@ namespace Phoebe.Core.BL
 
             var t = db.Insertable(store).ExecuteReturnEntity();
             return (true, "", t);
+        }
+       
+        /// <summary>
+        /// 库存记录确认
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="trayCode"></param>
+        /// <param name="storeCount"></param>
+        /// <param name="storeWeight"></param>
+        /// <param name="remark"></param>
+        /// <param name="db"></param>
+        /// <remarks>
+        /// 可更新托盘码、库存数量、库存重量
+        /// </remarks>
+        /// <returns></returns>
+        public (bool success, string errorMessage) Finish(string id, string trayCode, int storeCount, decimal storeWeight, string remark, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            var store = db.Queryable<Store>().Single(r => r.Id == id);
+            store.TrayCode = trayCode;
+
+            store.TotalCount = storeCount;            
+            store.StoreCount = storeCount;
+            store.TotalWeight = storeWeight;
+            store.StoreWeight = storeWeight;
+
+            store.Remark = remark;
+            store.Status = (int)EntityStatus.StoreIn;
+
+            db.Updateable(store).ExecuteCommand();
+            return (true, "");
         }
         #endregion //Method
     }

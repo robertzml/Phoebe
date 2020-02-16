@@ -167,13 +167,13 @@ namespace Phoebe.WebAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<ResponseData>> FinishTask(CarryInFinishModel model)
         {
-            CarryInTaskBusiness taskBusiness = new CarryInTaskBusiness();
+            CarryInService carryInService = new CarryInService();
 
             var task = Task.Run(() =>
             {
                 ResponseData data = new ResponseData();
 
-                var result = taskBusiness.Finish(model.TaskId, model.UserId, model.TrayCode, model.MoveCount, model.MoveWeight, model.Remark);
+                var result = carryInService.Finish(model.TaskId, model.UserId, model.TrayCode, model.MoveCount, model.MoveWeight, model.Remark);
 
                 data.Status = result.success ? 0 : 1;
                 data.ErrorMessage = result.errorMessage;

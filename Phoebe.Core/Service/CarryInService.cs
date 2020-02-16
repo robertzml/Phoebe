@@ -133,7 +133,7 @@ namespace Phoebe.Core.Service
                 // 更新仓位状态
                 position.Status = (int)EntityStatus.Occupy;
                 db.Updateable(position).ExecuteCommand();
-                                
+
                 foreach (var carryTask in tasks)
                 {
                     if (string.IsNullOrEmpty(carryTask.StockInTaskId))
@@ -143,7 +143,7 @@ namespace Phoebe.Core.Service
 
                         // 添加库存记录
                         StoreBusiness storeBusiness = new StoreBusiness();
-                        var store = storeBusiness.CreateByStockOut(stockOutTask, carryTask, db);                        
+                        var store = storeBusiness.CreateByStockOut(stockOutTask, carryTask, db);
 
                         // 更新搬运入库任务
                         carryInTaskBusiness.Enter(carryTask, shelfCode, position.Id, store.t.Id, db);
@@ -155,7 +155,7 @@ namespace Phoebe.Core.Service
 
                         // 添加库存记录
                         StoreBusiness storeBusiness = new StoreBusiness();
-                        var store = storeBusiness.CreateByStockIn(stockInTask, carryTask, position.Id, db);                       
+                        var store = storeBusiness.CreateByStockIn(stockInTask, carryTask, position.Id, db);
 
                         // 添加冷藏费记录
                         ColdFeeBusiness coldFeeBusiness = new ColdFeeBusiness();
@@ -165,6 +165,50 @@ namespace Phoebe.Core.Service
                         carryInTaskBusiness.Enter(carryTask, shelfCode, position.Id, store.t.Id, db);
                     }
                 }
+
+                db.Ado.CommitTran();
+                return (true, "");
+            }
+            catch (Exception e)
+            {
+                db.Ado.RollbackTran();
+                return (false, e.Message);
+            }
+        }
+
+        public (bool success, string errorMessage) Finish(string taskId, int userId, string trayCode, int moveCount, decimal moveWeight, string remark)
+        {
+            var db = GetInstance();
+
+            try
+            {
+                db.Ado.BeginTran();
+
+                // 检查搬运入库任务
+                CarryInTaskBusiness carryInTaskBusiness = new CarryInTaskBusiness();
+                var task = carryInTaskBusiness.FindById(taskId);
+
+                if (task.Status != (int)EntityStatus.StockInEnter)
+                {
+                    return (false, "该任务无法完成");
+                }
+
+                if (trayCode != task.TrayCode)
+                {
+                    var exist = db.Queryable<Store>().Where(r => r.TrayCode == trayCode &&
+                        (r.Status == (int)EntityStatus.StoreIn || r.Status == (int)EntityStatus.StoreInReady));
+                    if (exist.Count() > 0)
+                    {
+                        return (false, "托盘已在库中");
+                    }
+                }
+
+                // 确认搬运入库任务
+                carryInTaskBusiness.Finish(task, trayCode, moveCount, moveCount, db);
+
+                // 确认库存记录
+                StoreBusiness storeBusiness = new StoreBusiness();
+                storeBusiness.Finish(task.StoreId, trayCode, moveCount, moveWeight, remark, db);
 
                 db.Ado.CommitTran();
                 return (true, "");
