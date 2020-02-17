@@ -22,15 +22,15 @@ namespace Phoebe.Core.BL
         /// 由入库单添加搬运入库任务
         /// </summary>
         /// <param name="entity"></param>
+        /// <param name="stockInTask">入库任务对象</param>
         /// <param name="db"></param>
         /// <returns></returns>
-        public (bool success, string errorMessage, CarryInTask t) CreateByStockIn(CarryInTask entity, SqlSugarClient db = null)
+        public (bool success, string errorMessage, CarryInTask t) CreateByStockIn(CarryInTask entity, StockInTaskView stockInTask, SqlSugarClient db = null)
         {
             if (db == null)
                 db = GetInstance();
 
             SequenceRecordBusiness recordBusiness = new SequenceRecordBusiness();
-            var stockInTask = db.Queryable<StockInTaskView>().InSingle(entity.StockInTaskId);
             var checkUser = db.Queryable<User>().InSingle(entity.CheckUserId);
 
             entity.Id = Guid.NewGuid().ToString();
@@ -45,7 +45,8 @@ namespace Phoebe.Core.BL
 
             entity.Status = (int)EntityStatus.StockInCheck;
 
-            return base.Create(entity, db);
+            var t = db.Insertable(entity).ExecuteReturnEntity();
+            return (true, "", t);
         }
 
         /// <summary>
@@ -158,6 +159,23 @@ namespace Phoebe.Core.BL
             }
 
             return base.Delete(id, db);
+        }
+
+        /// <summary>
+        /// 撤回搬运入库任务
+        /// </summary>
+        /// <param name="carryIn"></param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        public (bool success, string errorMessage) Revert(CarryInTask carryIn, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            carryIn.Status = (int)EntityStatus.StockInEnter;
+            db.Updateable(carryIn).ExecuteCommand();
+
+            return (true, "");
         }
 
         /// <summary>

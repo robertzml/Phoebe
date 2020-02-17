@@ -137,6 +137,11 @@ namespace Phoebe.Core.Service
             }
         }
 
+        /// <summary>
+        /// 撤回入库单
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public (bool success, string errorMessage) RevertReceipt(string id)
         {
             var db = GetInstance();
@@ -152,13 +157,12 @@ namespace Phoebe.Core.Service
                     return (false, "仅已确认入库单能撤回");
                 }
 
-                StockInTaskViewBusiness stockInTaskViewBusiness = new StockInTaskViewBusiness();
-                var tasks = stockInTaskViewBusiness.FindList(id, db);
-
+                StoreBusiness storeBusiness = new StoreBusiness();
+                CarryInTaskBusiness carryInTaskBusiness = new CarryInTaskBusiness();
+                StockInTaskBusiness stockInTaskBusiness = new StockInTaskBusiness();
+                var tasks = db.Queryable<StockInTask>().Where(r => r.StockInId == stockIn.Id).ToList();
                 foreach (var task in tasks)
                 {
-                    task.Status = (int)EntityStatus.StockInReady;
-
                     // 撤回搬运入库任务和库存记录
                     var carryIns = db.Queryable<CarryInTask>().Where(r => r.StockInTaskId == task.Id).ToList();
                     foreach (var carryIn in carryIns)
@@ -171,23 +175,22 @@ namespace Phoebe.Core.Service
                             return (false, "该入库单有库存记录已出库，无法撤回");
                         }
 
-                        store.Status = (int)EntityStatus.StoreInReady;
-                        db.Updateable(store).ExecuteCommand();
+                        // 撤回库存记录
+                        storeBusiness.Revert(store, db);
 
-                        carryIn.Status = (int)EntityStatus.StockInEnter;
-                        db.Updateable(carryIn).ExecuteCommand();
+                        // 撤回搬运入库任务
+                        carryInTaskBusiness.Revert(carryIn, db);
                     }
 
-                    db.Updateable(task).ExecuteCommand();
+                    // 撤回入库任务
+                    stockInTaskBusiness.Revert(task, db);
                 }
 
                 // 撤回入库单
-                stockIn.Status = (int)EntityStatus.StockInReady;
-                db.Updateable(stockIn).ExecuteCommand();
+                stockInBusiness.Revert(stockIn, db);
 
                 db.Ado.CommitTran();
                 return (true, "");
-
             }
             catch (Exception e)
             {
@@ -266,9 +269,11 @@ namespace Phoebe.Core.Service
         /// <returns></returns>
         public (bool success, string errorMessage) FinishTask(string stockInTaskId)
         {
+            var db = GetInstance();
+
             try
             {
-                var db = GetInstance();
+                db.Ado.BeginTran();
 
                 var carryIn = db.Queryable<CarryInTask>().Where(r => r.StockInTaskId == stockInTaskId).ToList();
                 if (carryIn.Count == 0)
@@ -281,6 +286,7 @@ namespace Phoebe.Core.Service
                     StockInTaskBusiness stockInTaskBusiness = new StockInTaskBusiness();
                     stockInTaskBusiness.Finish(stockInTaskId, carryIn.Sum(r => r.MoveCount), carryIn.Sum(r => r.MoveWeight), db);
 
+                    db.Ado.CommitTran();
                     return (true, "");
                 }
                 else
@@ -290,6 +296,101 @@ namespace Phoebe.Core.Service
             }
             catch (Exception e)
             {
+                db.Ado.RollbackTran();
+                return (false, e.Message);
+            }
+        }
+
+        /// <summary>
+        /// 更新入库任务
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public (bool success, string errorMessage) UpdateTask(StockInTask inTask)
+        {
+            var db = GetInstance();
+
+            try
+            {
+                db.Ado.BeginTran();
+
+                var entity = db.Queryable<StockInTask>().InSingle(inTask.Id);
+
+                if (entity.Status == (int)EntityStatus.StockInFinish)
+                {
+                    return (false, "无法编辑已确认入库任务单");
+                }
+
+                if (entity.CargoId != inTask.CargoId)
+                {
+                    entity.CargoId = inTask.CargoId;
+                    entity.UnitWeight = inTask.UnitWeight;
+
+                    var carryIns = db.Queryable<CarryInTask>().Where(r => r.StockInTaskId == inTask.Id).ToList();
+
+                    foreach (var carryIn in carryIns)
+                    {
+                        carryIn.MoveWeight = inTask.UnitWeight * carryIn.MoveCount / 1000;
+                        db.Updateable(carryIn).ExecuteCommand();
+
+                        var store = db.Queryable<Store>().Single(r => r.CarryInTaskId == carryIn.Id);
+                        store.StoreWeight = carryIn.MoveWeight;
+                        store.TotalWeight = carryIn.MoveWeight;
+                        db.Updateable(store).ExecuteCommand();
+                    }
+                }
+
+                entity.Batch = inTask.Batch;
+                entity.OriginPlace = inTask.OriginPlace;
+                entity.Durability = inTask.Durability;
+                entity.Remark = inTask.Remark;
+
+                db.Updateable(entity).ExecuteCommand();
+
+                db.Ado.CommitTran();
+                return (true, "");
+            }
+            catch (Exception e)
+            {
+                db.Ado.RollbackTran();
+                return (false, e.Message);
+            }
+        }
+
+        /// <summary>
+        /// 删除入库任务
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public (bool success, string errorMessage) DeleteTask(string id)
+        {
+            var db = GetInstance();
+
+            try
+            {
+                db.Ado.BeginTran();
+
+                var carryIn = db.Queryable<CarryInTask>().Where(r => r.StockInTaskId == id).ToList();
+                if (carryIn.Count > 0)
+                {
+                    return (false, "入库任务含有搬运入库，无法删除");
+                }
+
+                var carryOut = db.Queryable<CarryOutTask>().Where(r => r.StockInTaskId == id).ToList();
+                if (carryOut.Count > 0)
+                {
+                    return (false, "入库任务含有搬运出库，无法删除");
+                }
+
+                StockInTaskBusiness stockInTaskBusiness = new StockInTaskBusiness();
+                var result = stockInTaskBusiness.Delete(id);
+
+                db.Ado.CommitTran();
+                return (result.success, result.errorMessage);
+            }
+            catch (Exception e)
+            {
+                db.Ado.RollbackTran();
                 return (false, e.Message);
             }
         }

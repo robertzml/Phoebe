@@ -184,11 +184,11 @@ namespace Phoebe.WebAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<ResponseData>> Revert(string id)
         {
-            StockInBusiness stockInBusiness = new StockInBusiness();
+            StockInService stockInService = new StockInService();
 
             var task = Task.Run(() =>
             {
-                var result = stockInBusiness.Revert(id);
+                var result = stockInService.RevertReceipt(id);
 
                 ResponseData data = new ResponseData
                 {
@@ -333,11 +333,11 @@ namespace Phoebe.WebAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<ResponseData>> UpdateTask(StockInTask inTask)
         {
-            StockInTaskBusiness taskBusiness = new StockInTaskBusiness();
+            StockInService stockInService = new StockInService();
 
             var task = Task.Run(() =>
             {
-                var result = taskBusiness.Update(inTask);
+                var result = stockInService.UpdateTask(inTask);
 
                 ResponseData data = new ResponseData
                 {
@@ -384,11 +384,11 @@ namespace Phoebe.WebAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<ResponseData>> DeleteTask(string taskId)
         {
-            StockInTaskBusiness taskBusiness = new StockInTaskBusiness();
+            StockInService stockInService = new StockInService();
 
             var task = Task.Run(() =>
             {
-                var result = taskBusiness.Delete(taskId);
+                var result = stockInService.DeleteTask(taskId);
                 ResponseData data = new ResponseData
                 {
                     Status = result.success ? 0 : 1,

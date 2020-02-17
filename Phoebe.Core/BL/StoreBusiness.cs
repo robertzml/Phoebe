@@ -137,6 +137,23 @@ namespace Phoebe.Core.BL
             db.Updateable(store).ExecuteCommand();
             return (true, "");
         }
+
+        /// <summary>
+        /// 撤回库存记录
+        /// </summary>
+        /// <param name="store"></param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        public (bool success, string errorMessage) Revert(Store store, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            store.Status = (int)EntityStatus.StoreInReady;
+            db.Updateable(store).ExecuteCommand();
+
+            return (true, "");
+        }
         #endregion //Method
     }
 }

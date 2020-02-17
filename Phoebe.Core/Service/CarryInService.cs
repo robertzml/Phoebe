@@ -40,10 +40,13 @@ namespace Phoebe.Core.Service
                     return (false, "托盘已使用");
                 }
 
-                CarryInTaskBusiness carryInTaskBusiness = new CarryInTaskBusiness();
-                carryInTask.Type = (int)CarryInTaskType.In;
+                StockInTaskViewBusiness stockInTaskViewBusiness = new StockInTaskViewBusiness();
+                var stockInTask = db.Queryable<StockInTaskView>().InSingle(carryInTask.StockInTaskId);
 
-                var result = carryInTaskBusiness.CreateByStockIn(carryInTask, db);
+                CarryInTaskBusiness carryInTaskBusiness = new CarryInTaskBusiness();
+                carryInTask.Type = (int)CarryInTaskType.In;              
+
+                var result = carryInTaskBusiness.CreateByStockIn(carryInTask, stockInTask, db);
 
                 db.Ado.CommitTran();
                 return (result.success, result.errorMessage);

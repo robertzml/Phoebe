@@ -24,7 +24,7 @@ namespace Phoebe.Core.BL
         public (bool success, string errorMessage, StockInTask t) Create(StockInTask entity, DateTime inTime, SqlSugarClient db = null)
         {
             if (db == null)
-                db = GetInstance();         
+                db = GetInstance();
 
             SequenceRecordBusiness recordBusiness = new SequenceRecordBusiness();
             entity.TaskCode = recordBusiness.GetNextSequence(db, "StockInTask", inTime);
@@ -63,63 +63,6 @@ namespace Phoebe.Core.BL
         }
 
         /// <summary>
-        /// 更新入库任务
-        /// </summary>
-        /// <param name="entity"></param>
-        /// <returns></returns>
-        public override (bool success, string errorMessage) Update(StockInTask inTask, SqlSugarClient db = null)
-        {
-            if (db == null)
-                db = GetInstance();
-
-            try
-            {
-                db.Ado.BeginTran();
-
-                var entity = db.Queryable<StockInTask>().InSingle(inTask.Id);
-
-                if (entity.Status == (int)EntityStatus.StockInFinish)
-                {
-                    return (false, "无法编辑已确认入库任务单");
-                }
-
-                if (entity.CargoId != inTask.CargoId)
-                {
-                    entity.CargoId = inTask.CargoId;
-                    entity.UnitWeight = inTask.UnitWeight;
-
-                    var carryIns = db.Queryable<CarryInTask>().Where(r => r.StockInTaskId == inTask.Id).ToList();
-
-                    foreach (var carryIn in carryIns)
-                    {
-                        carryIn.MoveWeight = inTask.UnitWeight * carryIn.MoveCount / 1000;
-                        db.Updateable(carryIn).ExecuteCommand();
-
-                        var store = db.Queryable<Store>().Single(r => r.CarryInTaskId == carryIn.Id);
-                        store.StoreWeight = carryIn.MoveWeight;
-                        store.TotalWeight = carryIn.MoveWeight;
-                        db.Updateable(store).ExecuteCommand();
-                    }
-                }
-
-                entity.Batch = inTask.Batch;
-                entity.OriginPlace = inTask.OriginPlace;
-                entity.Durability = inTask.Durability;
-                entity.Remark = inTask.Remark;
-
-                db.Updateable(entity).ExecuteCommand();
-
-                db.Ado.CommitTran();
-                return (true, "");
-            }
-            catch (Exception e)
-            {
-                db.Ado.RollbackTran();
-                return (false, e.Message);
-            }
-        }
-
-        /// <summary>
         /// 删除入库任务
         /// </summary>
         /// <param name="id"></param>
@@ -129,32 +72,32 @@ namespace Phoebe.Core.BL
             if (db == null)
                 db = GetInstance();
 
-            try
+            var stockInTask = db.Queryable<StockInTask>().InSingle(id);
+            if (stockInTask.Status != (int)EntityStatus.StockInReady)
             {
-                db.Ado.BeginTran();
-
-                var carryIn = db.Queryable<CarryInTask>().Where(r => r.StockInTaskId == id).ToList();
-                if (carryIn.Count > 0)
-                {
-                    return (false, "入库任务含有搬运入库，无法删除");
-                }
-
-                var carryOut = db.Queryable<CarryOutTask>().Where(r => r.StockInTaskId == id).ToList();
-                if (carryOut.Count > 0)
-                {
-                    return (false, "入库任务含有搬运出库，无法删除");
-                }
-
-                db.Deleteable<StockInTask>().In(id).ExecuteCommand();
-
-                db.Ado.CommitTran();
-                return (true, "");
+                return (false, "仅能删除待入库状态的入库任务单");
             }
-            catch (Exception e)
-            {
-                db.Ado.RollbackTran();
-                return (false, e.Message);
-            }
+
+            db.Deleteable<StockInTask>().In(id).ExecuteCommand();
+
+            return (true, "");
+        }
+
+        /// <summary>
+        /// 撤回入库任务
+        /// </summary>
+        /// <param name="task"></param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        public (bool success, string errorMessage) Revert(StockInTask task, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            task.Status = (int)EntityStatus.StockInReady;
+            db.Updateable(task).ExecuteCommand();
+
+            return (true, "");
         }
         #endregion //Method
     }

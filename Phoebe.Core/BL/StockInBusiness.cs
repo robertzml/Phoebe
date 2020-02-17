@@ -95,60 +95,16 @@ namespace Phoebe.Core.BL
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public (bool success, string errorMessage) Revert(string id)
+        public (bool success, string errorMessage) Revert(StockIn stockIn, SqlSugarClient db = null)
         {
-            var db = GetInstance();
+            if (db == null)
+                db = GetInstance();
 
-            try
-            {
-                db.Ado.BeginTran();
+            // 撤回入库单
+            stockIn.Status = (int)EntityStatus.StockInReady;
+            db.Updateable(stockIn).ExecuteCommand();
 
-                var stockIn = db.Queryable<StockIn>().InSingle(id);
-
-                if (stockIn.Status != (int)EntityStatus.StockInFinish)
-                {
-                    return (false, "仅已确认入库单能撤回");
-                }
-
-                var tasks = db.Queryable<StockInTask>().Where(r => r.StockInId == id).ToList();
-                foreach (var task in tasks)
-                {
-                    task.Status = (int)EntityStatus.StockInReady;
-
-                    // 撤回搬运入库任务和库存记录
-                    var carryIns = db.Queryable<CarryInTask>().Where(r => r.StockInTaskId == task.Id).ToList();
-                    foreach (var carryIn in carryIns)
-                    {
-                        var store = db.Queryable<Store>().Single(r => r.CarryInTaskId == carryIn.Id);
-
-                        var carryOut = db.Queryable<CarryOutTask>().Count(r => r.StoreId == store.Id);
-                        if (carryOut > 0)
-                        {
-                            return (false, "该入库单有库存记录已出库，无法撤回");
-                        }
-
-                        store.Status = (int)EntityStatus.StoreInReady;
-                        db.Updateable(store).ExecuteCommand();
-
-                        carryIn.Status = (int)EntityStatus.StockInEnter;
-                        db.Updateable(carryIn).ExecuteCommand();
-                    }
-
-                    db.Updateable(task).ExecuteCommand();
-                }
-
-                // 撤回入库单
-                stockIn.Status = (int)EntityStatus.StockInReady;
-                db.Updateable(stockIn).ExecuteCommand();
-
-                db.Ado.CommitTran();
-                return (true, "");
-            }
-            catch (Exception e)
-            {
-                db.Ado.RollbackTran();
-                return (false, e.Message);
-            }
+            return (true, "");
         }
 
         /// <summary>
@@ -162,13 +118,15 @@ namespace Phoebe.Core.BL
             if (db == null)
                 db = GetInstance();
 
-            var carryIn = db.Queryable<CarryInTask>().InSingle(id);
-            if (carryIn.Status != (int)EntityStatus.StockInReady)
+            var stockIn = db.Queryable<StockIn>().InSingle(id);
+            if (stockIn.Status != (int)EntityStatus.StockInReady)
             {
                 return (false, "仅能删除待入库状态的入库单");
             }
 
-            return base.Delete(id, db);
+            db.Deleteable<StockIn>().In(id).ExecuteCommand();
+
+            return (true, "");
         }
         #endregion //Method
     }
