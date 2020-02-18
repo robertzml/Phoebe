@@ -40,7 +40,20 @@ namespace Phoebe.Core.BL
             return (true, "");
         }
 
-        
+        /// <summary>
+        /// 删除入库费用
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        public override (bool success, string errorMessage) Delete(string id, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            db.Deleteable<InBilling>().In(id).ExecuteCommand();
+            return (true, "");
+        }
         #endregion //Method
     }
 }

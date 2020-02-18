@@ -42,7 +42,10 @@ namespace Phoebe.Core.BL
         /// <summary>
         /// 确认入库任务
         /// </summary>
-        /// <param name="stockInTaskId"></param>
+        /// <param name="id">入库任务</param>
+        /// <param name="inCount"></param>
+        /// <param name="inWeight"></param>
+        /// <param name="db"></param>
         /// <returns></returns>
         public (bool success, string errorMessage) Finish(string id, int inCount, decimal inWeight, SqlSugarClient db = null)
         {

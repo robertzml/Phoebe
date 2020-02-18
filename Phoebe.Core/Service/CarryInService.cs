@@ -146,7 +146,7 @@ namespace Phoebe.Core.Service
 
                         // 添加库存记录
                         StoreBusiness storeBusiness = new StoreBusiness();
-                        var store = storeBusiness.CreateByStockOut(stockOutTask, carryTask, db);
+                        var store = storeBusiness.CreateByStockOut(stockOutTask, carryTask, position.Id, db);
 
                         // 更新搬运入库任务
                         carryInTaskBusiness.Enter(carryTask, shelfCode, position.Id, store.t.Id, db);

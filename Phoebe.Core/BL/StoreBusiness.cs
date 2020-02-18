@@ -70,18 +70,18 @@ namespace Phoebe.Core.BL
         /// 旧库存记录保存在CarryInTask 的库存ID中，生成新库存记录后更新
         /// </remarks>
         /// <returns></returns>
-        public (bool success, string errorMessage, Store t) CreateByStockOut(StockOutTaskView stockOutTask, CarryInTask task, SqlSugarClient db = null)
+        public (bool success, string errorMessage, Store t) CreateByStockOut(StockOutTaskView stockOutTask, CarryInTask task, int positionId, SqlSugarClient db = null)
         {
             if (db == null)
                 db = GetInstance();
 
             Store store = new Store();
             store.Id = Guid.NewGuid().ToString();
-            store.CustomerId = task.CustomerId;
-            store.ContractId = task.ContractId;
-            store.CargoId = task.CargoId;
+            store.CustomerId = stockOutTask.CustomerId;
+            store.ContractId = stockOutTask.ContractId;
+            store.CargoId = stockOutTask.CargoId;
 
-            store.PositionId = task.PositionId;
+            store.PositionId = positionId;
             store.TrayCode = task.TrayCode;
 
             store.TotalCount = task.MoveCount;

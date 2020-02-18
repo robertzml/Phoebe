@@ -37,24 +37,28 @@ namespace Phoebe.WebAPI.Controllers
         }
         #endregion //Common
 
-        #region Stock Out
+        #region Stock Out Query
         /// <summary>
         /// 获取出库列表
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult<List<StockOutView>> List()
+        {
+            StockOutViewBusiness stockOutViewBusiness = new StockOutViewBusiness();
+            return stockOutViewBusiness.FindAll().OrderByDescending(r => r.FlowNumber).ToList();
+        }
+
+        /// <summary>
+        /// 按月度获取出库列表
         /// </summary>
         /// <param name="monthTime"></param>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult<List<StockOutView>> List(string monthTime)
+        public ActionResult<List<StockOutView>> ListByMonth(string monthTime)
         {
             StockOutViewBusiness stockOutViewBusiness = new StockOutViewBusiness();
-            if (string.IsNullOrEmpty(monthTime))
-            {
-                return stockOutViewBusiness.FindAll();
-            }
-            else
-            {
-                return stockOutViewBusiness.FindByMonth(monthTime);
-            }
+            return stockOutViewBusiness.FindByMonth(monthTime);
         }
 
         /// <summary>
@@ -69,6 +73,20 @@ namespace Phoebe.WebAPI.Controllers
             return stockOutViewBusiness.FindByTime(outTime);
         }
 
+        /// <summary>
+        /// 获取出库
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult<StockOutView> Get(string id)
+        {
+            StockOutViewBusiness stockOutViewBusiness = new StockOutViewBusiness();
+            return stockOutViewBusiness.FindById(id);
+        }
+        #endregion //Stock Out Query
+
+        #region Stock Out Action
         /// <summary>
         /// 添加出库
         /// </summary>
@@ -94,18 +112,6 @@ namespace Phoebe.WebAPI.Controllers
             });
 
             return await task;
-        }
-
-        /// <summary>
-        /// 获取出库
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        [HttpGet]
-        public ActionResult<StockOutView> Get(string id)
-        {
-            StockOutViewBusiness stockOutViewBusiness = new StockOutViewBusiness();
-            return stockOutViewBusiness.FindById(id);
         }
 
         /// <summary>
@@ -159,7 +165,7 @@ namespace Phoebe.WebAPI.Controllers
 
             return await task;
         }
-        #endregion //Stock Out
+        #endregion //Stock Out Action
 
         #region Stock Out Task
         /// <summary>

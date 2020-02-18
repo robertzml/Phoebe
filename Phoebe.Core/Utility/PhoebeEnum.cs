@@ -68,7 +68,13 @@ namespace Phoebe.Core.Utility
         /// 仓位库入库
         /// </summary>
         [Display(Name = "仓位库入库")]
-        Position = 2
+        Position = 2,
+
+        /// <summary>
+        /// 冷冻库入库
+        /// </summary>
+        [Display(Name = "冷冻库入库")]
+        Freeze = 3
     }
 
     /// <summary>

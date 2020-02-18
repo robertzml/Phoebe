@@ -89,6 +89,14 @@ namespace Phoebe.Core.Service
                     return (false, "入库单含有入库任务，无法删除");
                 }
 
+                // 删除入库费用
+                InBillingBusiness inBillingBusiness = new InBillingBusiness();
+                var billings = db.Queryable<InBilling>().Where(r => r.StockInId == id).ToList();
+                foreach (var item in billings)
+                {
+                    inBillingBusiness.Delete(item.Id, db);
+                }
+
                 StockInBusiness stockInBusiness = new StockInBusiness();
                 var result = stockInBusiness.Delete(id);
 
@@ -275,24 +283,32 @@ namespace Phoebe.Core.Service
             {
                 db.Ado.BeginTran();
 
-                var carryIn = db.Queryable<CarryInTask>().Where(r => r.StockInTaskId == stockInTaskId).ToList();
-                if (carryIn.Count == 0)
+                var task = db.Queryable<StockInTaskView>().InSingle(stockInTaskId);
+                int inCount = task.InCount;
+                decimal inWeight = task.InWeight;
+
+                if (task.StockInType == (int)StockInType.Position)   // 仓位库入库检查搬运任务
                 {
-                    return (false, "缺少搬运入库任务");
+                    var carryIn = db.Queryable<CarryInTask>().Where(r => r.StockInTaskId == stockInTaskId).ToList();
+                    if (carryIn.Count == 0)
+                    {
+                        return (false, "缺少搬运入库任务");
+                    }
+
+                    if (carryIn.Any(r => r.Status != (int)EntityStatus.StockInFinish))
+                    {
+                        return (false, "有搬运入库任务未完成");
+                    }
+
+                    inCount = carryIn.Sum(r => r.MoveCount);
+                    inWeight = carryIn.Sum(r => r.MoveWeight);
                 }
 
-                if (carryIn.All(r => r.Status == (int)EntityStatus.StockInFinish))
-                {
-                    StockInTaskBusiness stockInTaskBusiness = new StockInTaskBusiness();
-                    stockInTaskBusiness.Finish(stockInTaskId, carryIn.Sum(r => r.MoveCount), carryIn.Sum(r => r.MoveWeight), db);
+                StockInTaskBusiness stockInTaskBusiness = new StockInTaskBusiness();
+                stockInTaskBusiness.Finish(stockInTaskId, inCount, inWeight, db);
 
-                    db.Ado.CommitTran();
-                    return (true, "");
-                }
-                else
-                {
-                    return (false, "有搬运入库任务未完成");
-                }
+                db.Ado.CommitTran();
+                return (true, "");
             }
             catch (Exception e)
             {
