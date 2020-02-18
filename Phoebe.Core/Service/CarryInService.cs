@@ -217,7 +217,7 @@ namespace Phoebe.Core.Service
                 }
 
                 // 确认搬运入库任务
-                carryInTaskBusiness.Finish(task, trayCode, moveCount, moveCount, db);
+                carryInTaskBusiness.Finish(task, trayCode, moveCount, moveWeight, db);
 
                 // 确认库存记录
                 StoreBusiness storeBusiness = new StoreBusiness();
@@ -246,12 +246,14 @@ namespace Phoebe.Core.Service
             {
                 db.Ado.BeginTran();
 
-                CarryInTaskBusiness taskBusiness = new CarryInTaskBusiness();
+                // 删除对应库存记录               
 
-                var result = taskBusiness.Delete(id, db);
+                // 删除搬运入库
+                CarryInTaskBusiness taskBusiness = new CarryInTaskBusiness();
+                taskBusiness.Delete(id, db);
 
                 db.Ado.CommitTran();
-                return (result.success, result.errorMessage);
+                return (true, "");
             }
             catch (Exception e)
             {

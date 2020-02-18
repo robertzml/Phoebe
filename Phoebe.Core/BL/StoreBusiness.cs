@@ -49,6 +49,7 @@ namespace Phoebe.Core.BL
             store.Durability = stockInTask.Durability;
 
             store.InTime = stockInTask.InTime;
+            store.StockInId = stockInTask.StockInId;
             store.CarryInTaskId = task.Id;
 
             store.CreateTime = DateTime.Now;
@@ -93,9 +94,10 @@ namespace Phoebe.Core.BL
             store.Batch = oldStore.Batch;
             store.OriginPlace = oldStore.OriginPlace;
             store.Durability = oldStore.Durability;
+            store.StockInId = oldStore.StockInId;
             store.PrevStoreId = oldStore.Id;
 
-            store.InTime = stockOutTask.OutTime;            
+            store.InTime = stockOutTask.OutTime;
             store.CarryInTaskId = task.Id;
 
             store.CreateTime = DateTime.Now;
@@ -104,7 +106,7 @@ namespace Phoebe.Core.BL
             var t = db.Insertable(store).ExecuteReturnEntity();
             return (true, "", t);
         }
-       
+
         /// <summary>
         /// 库存记录确认
         /// </summary>
@@ -126,7 +128,7 @@ namespace Phoebe.Core.BL
             var store = db.Queryable<Store>().Single(r => r.Id == id);
             store.TrayCode = trayCode;
 
-            store.TotalCount = storeCount;            
+            store.TotalCount = storeCount;
             store.StoreCount = storeCount;
             store.TotalWeight = storeWeight;
             store.StoreWeight = storeWeight;
@@ -151,6 +153,24 @@ namespace Phoebe.Core.BL
 
             store.Status = (int)EntityStatus.StoreInReady;
             db.Updateable(store).ExecuteCommand();
+
+            return (true, "");
+        }
+
+        /// <summary>
+        /// 删除搬运入库对应库存记录
+        /// </summary>
+        /// <param name="carryInId"></param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        public (bool success, string errorMessage) DeleteByCarryIn(string carryInId, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            var store = db.Queryable<Store>().Single(r => r.CarryInTaskId == carryInId);
+            if (store != null)
+                db.Deleteable<Store>().In(store.Id).ExecuteCommand();
 
             return (true, "");
         }

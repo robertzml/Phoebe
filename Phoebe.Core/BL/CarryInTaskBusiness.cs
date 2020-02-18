@@ -158,7 +158,8 @@ namespace Phoebe.Core.BL
                 return (false, "仅能删除已清点状态的搬运入库任务");
             }
 
-            return base.Delete(id, db);
+            db.Deleteable<CarryInTask>().In(id).ExecuteCommand();
+            return (true, "");
         }
 
         /// <summary>

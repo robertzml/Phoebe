@@ -59,12 +59,37 @@ namespace Phoebe.Core.BL
 
             entity.EndDate = endDate;
             entity.Days = endDate.Subtract(entity.StartDate).Days;
-            entity.Amount =  entity.Days * entity.UnitPrice * store.StoreWeight;
+            entity.Amount = entity.Days * entity.UnitPrice * store.StoreWeight;
             entity.Status = (int)EntityStatus.FeeEnd;
 
             db.Updateable(entity).ExecuteCommand();
 
             return (true, "");
+        }
+
+        /// <summary>
+        /// 获取库存冷藏费
+        /// </summary>
+        /// <param name="storeId"></param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        public ColdFee FindByStore(string storeId, DateTime current, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            var data = db.Queryable<ColdFee>().Single(r => r.StoreId == storeId);
+            if (current > data.EndDate)
+            {
+                return data;
+            }
+            else
+            {
+                data.Days = current.Subtract(data.StartDate).Days;
+                data.Amount = data.UnitPrice * data.Count * data.Days;
+
+                return data;
+            }
         }
         #endregion //Method
     }

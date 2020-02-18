@@ -65,6 +65,12 @@ namespace Phoebe.Core.Entity
         public decimal UnitPrice { get; set; }
 
         /// <summary>
+        /// 数量
+        /// </summary>
+        [Display(Name = "数量")]
+        public decimal Count { get; set; }
+
+        /// <summary>
         /// 费用
         /// </summary>
         [Display(Name = "费用")]
