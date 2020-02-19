@@ -18,45 +18,33 @@ namespace Phoebe.Core.BL
     public class StockOutTaskBusiness : AbstractBusiness<StockOutTask, string>, IBaseBL<StockOutTask, string>
     {
         #region Method
-        public override (bool success, string errorMessage, StockOutTask t) Create(StockOutTask entity, SqlSugarClient db = null)
+        /// <summary>
+        /// 添加出库任务
+        /// </summary>
+        /// <param name="entity">出库任务</param>
+        /// <param name="storeCount">在库数量</param>
+        /// <param name="storeWeight">在库重量</param>
+        /// <param name="outTime">出库时间</param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        public (bool success, string errorMessage, StockOutTask t) Create(StockOutTask entity, int storeCount, decimal storeWeight, DateTime outTime, SqlSugarClient db = null)
         {
             if (db == null)
                 db = GetInstance();
 
-            try
-            {
-                db.Ado.BeginTran();
+            entity.Id = Guid.NewGuid().ToString();
+            entity.StoreCount = storeCount;
+            entity.StoreWeight = storeWeight;
 
-                var stockOut = db.Queryable<StockOut>().InSingle(entity.StockOutId);
+            SequenceRecordBusiness recordBusiness = new SequenceRecordBusiness();
+            entity.TaskCode = recordBusiness.GetNextSequence(db, "StockOutTask", outTime);
 
-                StoreViewBusiness svBusiness = new StoreViewBusiness();
-                var stores = svBusiness.FindByCargo(stockOut.ContractId, entity.CargoId, true, db);
+            entity.CreateTime = DateTime.Now;
+            entity.Status = (int)EntityStatus.StockOutReady;
 
-                entity.Id = Guid.NewGuid().ToString();
-                entity.StoreCount = stores.Sum(r => r.StoreCount);
-                entity.StoreWeight = stores.Sum(r => r.StoreWeight);
+            var t = db.Insertable(entity).ExecuteReturnEntity();
 
-                if (entity.OutCount > entity.StoreCount)
-                    return (false, "出库数量大于在库数量", null);
-                if (entity.OutWeight > entity.StoreWeight)
-                    return (false, "出库重量大于在库重量", null);
-
-                SequenceRecordBusiness recordBusiness = new SequenceRecordBusiness();
-                entity.TaskCode = recordBusiness.GetNextSequence(db, "StockOutTask", stockOut.OutTime);
-
-                entity.CreateTime = DateTime.Now;
-                entity.Status = (int)EntityStatus.StockOutReady;
-
-                var t = db.Insertable(entity).ExecuteReturnEntity();
-
-                db.Ado.CommitTran();
-                return (true, "", t);
-            }
-            catch (Exception e)
-            {
-                db.Ado.RollbackTran();
-                return (false, e.Message, null);
-            }
+            return (true, "", t);
         }
 
         /// <summary>

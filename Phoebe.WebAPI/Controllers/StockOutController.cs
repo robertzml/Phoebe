@@ -150,11 +150,11 @@ namespace Phoebe.WebAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<ResponseData>> Confirm(string id)
         {
-            StockOutBusiness stockOutBusiness = new StockOutBusiness();
+            StockOutService stockOutService = new StockOutService();
 
             var task = Task.Run(() =>
             {
-                var result = stockOutBusiness.Confirm(id);
+                var result = stockOutService.FinishReceipt(id);
 
                 ResponseData data = new ResponseData
                 {
@@ -176,11 +176,11 @@ namespace Phoebe.WebAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<ResponseData>> Delete(string id)
         {
-            StockOutBusiness stockOutBusiness = new StockOutBusiness();
+            StockOutService stockOutService = new StockOutService();
 
             var task = Task.Run(() =>
             {
-                var result = stockOutBusiness.Delete(id);
+                var result = stockOutService.DeleteReceipt(id);
 
                 ResponseData data = new ResponseData
                 {
@@ -195,7 +195,7 @@ namespace Phoebe.WebAPI.Controllers
         }
         #endregion //Stock Out Action
 
-        #region Stock Out Task
+        #region Stock Out Task Query
         /// <summary>
         /// 获取出库任务列表
         /// </summary>
@@ -219,7 +219,9 @@ namespace Phoebe.WebAPI.Controllers
             StockOutTaskViewBusiness taskViewBusiness = new StockOutTaskViewBusiness();
             return taskViewBusiness.FindById(taskId);
         }
+        #endregion //Stock Out Task Query
 
+        #region Stock Out Task Action
         /// <summary>
         /// 添加出库任务
         /// </summary>
@@ -229,11 +231,11 @@ namespace Phoebe.WebAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<ResponseData>> AddTask(StockOutTask outTask)
         {
-            StockOutTaskBusiness stockOutTaskBusiness = new StockOutTaskBusiness();
+            StockOutService stockOutService = new StockOutService();
 
             var task = Task.Run(() =>
             {
-                var result = stockOutTaskBusiness.Create(outTask);
+                var result = stockOutService.AddTask(outTask);
 
                 ResponseData data = new ResponseData
                 {
@@ -297,6 +299,6 @@ namespace Phoebe.WebAPI.Controllers
 
             return await task;
         }
-        #endregion //Stock Out Task
+        #endregion //Stock Out Task Action
     }
 }

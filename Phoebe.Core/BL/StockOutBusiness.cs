@@ -71,32 +71,17 @@ namespace Phoebe.Core.BL
         /// </summary>
         /// <param name="id">出库单ID</param>
         /// <returns></returns>
-        public (bool success, string errorMessage) Confirm(string id)
+        public (bool success, string errorMessage) Confirm(string id, SqlSugarClient db = null)
         {
-            try
-            {
-                var db = GetInstance();
+            if (db == null)
+                db = GetInstance();
 
-                var stockOut = db.Queryable<StockOut>().InSingle(id);
-                var tasks = db.Queryable<StockOutTask>().Where(r => r.StockOutId == id).ToList();
+            var stockOut = db.Queryable<StockOut>().InSingle(id);
+            stockOut.ConfirmTime = DateTime.Now;
+            stockOut.Status = (int)EntityStatus.StockOutFinish;
 
-                if (tasks.All(r => r.Status == (int)EntityStatus.StockOutFinish))
-                {
-                    stockOut.ConfirmTime = DateTime.Now;
-                    stockOut.Status = (int)EntityStatus.StockOutFinish;
-
-                    db.Updateable(stockOut).ExecuteCommand();
-                    return (true, "");
-                }
-                else
-                {
-                    return (false, "有出库货物未完成");
-                }
-            }
-            catch (Exception e)
-            {
-                return (false, e.Message);
-            }
+            db.Updateable(stockOut).ExecuteCommand();
+            return (true, "");
         }
 
         /// <summary>
@@ -109,26 +94,14 @@ namespace Phoebe.Core.BL
             if (db == null)
                 db = GetInstance();
 
-            try
+            var stockOut = db.Queryable<StockOut>().InSingle(id);
+            if (stockOut.Status != (int)EntityStatus.StockOutReady)
             {
-                db.Ado.BeginTran();
-
-                var tasks = db.Queryable<StockOutTask>().Where(r => r.StockOutId == id).ToList();
-                if (tasks.Count > 0)
-                {
-                    return (false, "出库单含有出库任务，无法删除");
-                }
-
-                db.Deleteable<StockOut>().In(id).ExecuteCommand();
-
-                db.Ado.CommitTran();
-                return (true, "");
+                return (false, "仅能删除待出库状态的出库单");
             }
-            catch (Exception e)
-            {
-                db.Ado.RollbackTran();
-                return (false, e.Message);
-            }
+
+            db.Deleteable<StockOut>().In(id).ExecuteCommand();
+            return (true, "");
         }
         #endregion //Method
     }

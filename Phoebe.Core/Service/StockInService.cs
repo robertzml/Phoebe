@@ -98,7 +98,7 @@ namespace Phoebe.Core.Service
                 }
 
                 StockInBusiness stockInBusiness = new StockInBusiness();
-                var result = stockInBusiness.Delete(id);
+                var result = stockInBusiness.Delete(id, db);
 
                 db.Ado.CommitTran();
                 return (result.success, result.errorMessage);
@@ -128,7 +128,7 @@ namespace Phoebe.Core.Service
                 if (tasks.All(r => r.Status == (int)EntityStatus.StockInFinish))
                 {
                     StockInBusiness stockInBusiness = new StockInBusiness();
-                    var result = stockInBusiness.Confirm(id);
+                    var result = stockInBusiness.Confirm(id, db);
 
                     db.Ado.CommitTran();
                     return (result.success, result.errorMessage);
@@ -255,7 +255,7 @@ namespace Phoebe.Core.Service
                 db.Ado.BeginTran();
 
                 StockInBusiness stockInBusiness = new StockInBusiness();
-                var stockIn = stockInBusiness.FindById(task.StockInId);
+                var stockIn = stockInBusiness.FindById(task.StockInId, db);
 
                 StockInTaskBusiness stockInTaskBusiness = new StockInTaskBusiness();
                 var result = stockInTaskBusiness.Create(task, stockIn.InTime, db);
@@ -399,7 +399,7 @@ namespace Phoebe.Core.Service
                 }
 
                 StockInTaskBusiness stockInTaskBusiness = new StockInTaskBusiness();
-                var result = stockInTaskBusiness.Delete(id);
+                var result = stockInTaskBusiness.Delete(id, db);
 
                 db.Ado.CommitTran();
                 return (result.success, result.errorMessage);
