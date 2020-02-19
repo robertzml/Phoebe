@@ -21,28 +21,49 @@ namespace Phoebe.Core.BL
         {
             if (db == null)
                 db = GetInstance();
-            try
-            {
-                db.Ado.BeginTran();
 
+            SequenceRecordBusiness recordBusiness = new SequenceRecordBusiness();
+
+            entity.Id = Guid.NewGuid().ToString();
+            entity.MonthTime = entity.OutTime.Year.ToString() + entity.OutTime.Month.ToString().PadLeft(2, '0');
+            entity.FlowNumber = recordBusiness.GetNextSequence(db, "StockOut", entity.OutTime);
+            entity.CreateTime = DateTime.Now;
+            entity.Status = (int)EntityStatus.StockOutReady;
+
+            var t = db.Insertable(entity).ExecuteReturnEntity();
+
+            return (true, "", t);
+        }
+
+        /// <summary>
+        /// 编辑出库单
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public override (bool success, string errorMessage) Update(StockOut entity, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            var stockOut = db.Queryable<StockOut>().InSingle(entity.Id);
+
+            if (stockOut.OutTime != entity.OutTime)
+            {
                 SequenceRecordBusiness recordBusiness = new SequenceRecordBusiness();
 
-                entity.Id = Guid.NewGuid().ToString();
-                entity.MonthTime = entity.OutTime.Year.ToString() + entity.OutTime.Month.ToString().PadLeft(2, '0');
-                entity.FlowNumber = recordBusiness.GetNextSequence(db, "StockOut", entity.OutTime);
-                entity.CreateTime = DateTime.Now;
-                entity.Status = (int)EntityStatus.StockOutReady;
-
-                var t = db.Insertable(entity).ExecuteReturnEntity();
-
-                db.Ado.CommitTran();
-                return (true, "", t);
+                stockOut.OutTime = entity.OutTime;
+                stockOut.MonthTime = stockOut.OutTime.Year.ToString() + stockOut.OutTime.Month.ToString().PadLeft(2, '0');
+                stockOut.FlowNumber = recordBusiness.GetNextSequence(db, "StockOut", stockOut.OutTime);
             }
-            catch (Exception e)
-            {
-                db.Ado.RollbackTran();
-                return (false, e.Message, null);
-            }
+
+            stockOut.Type = entity.Type;
+            stockOut.ContractId = entity.ContractId;
+            stockOut.VehicleNumber = entity.VehicleNumber;
+            stockOut.Remark = entity.Remark;
+
+            db.Updateable(stockOut).ExecuteCommand();
+
+            return (true, "");
         }
 
         /// <summary>

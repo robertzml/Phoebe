@@ -13,6 +13,7 @@ namespace Phoebe.WebAPI.Controllers
     using Phoebe.Base.System;
     using Phoebe.Core.BL;
     using Phoebe.Core.DL;
+    using Phoebe.Core.Service;
     using Phoebe.Core.Entity;
     using Phoebe.Core.View;
     using Phoebe.WebAPI.Model;
@@ -95,17 +96,44 @@ namespace Phoebe.WebAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<ResponseData>> Create(StockOut stockOut)
         {
-            StockOutBusiness stockOutBusiness = new StockOutBusiness();
+            StockOutService stockOutService = new StockOutService();
 
             var task = Task.Run(() =>
             {
-                var result = stockOutBusiness.Create(stockOut);
+                var result = stockOutService.AddReceipt(stockOut);
 
                 ResponseData data = new ResponseData
                 {
                     Status = result.success ? 0 : 1,
                     ErrorMessage = result.errorMessage,
                     Entity = result.t
+                };
+
+                return data;
+            });
+
+            return await task;
+        }
+
+        /// <summary>
+        /// 编辑出库
+        /// </summary>
+        /// <param name="stockIn"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ActionResult<ResponseData>> Update(StockOut stockOut)
+        {
+            StockOutService stockOutService = new StockOutService();
+
+            var task = Task.Run(() =>
+            {
+                var result = stockOutService.UpdateReceipt(stockOut);
+
+                ResponseData data = new ResponseData
+                {
+                    Status = result.success ? 0 : 1,
+                    ErrorMessage = result.errorMessage,
+                    Entity = null
                 };
 
                 return data;
