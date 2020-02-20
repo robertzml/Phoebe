@@ -174,6 +174,27 @@ namespace Phoebe.Core.BL
 
             return (true, "");
         }
+        
+        /// <summary>
+        /// 库存记录下架
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="carryOutTaskId"></param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        public (bool success, string errorMessage) Leave(string id, string carryOutTaskId, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            var store = db.Queryable<Store>().InSingle(id);
+            store.CarryOutTaskId = carryOutTaskId;
+            store.OutTime = DateTime.Now; //暂定为当前时间，若重新入库，则更新
+            store.Status = (int)EntityStatus.StoreOut;
+
+            db.Updateable(store).ExecuteCommand();
+            return (true, "");
+        }
         #endregion //Method
     }
 }

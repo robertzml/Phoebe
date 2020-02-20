@@ -252,6 +252,60 @@ namespace Phoebe.Core.BL
         }
 
         /// <summary>
+        /// 由库存创建搬运出库任务
+        /// </summary>
+        /// <param name="store">库存记录</param>
+        /// <param name="shelfCode">下货货架码</param>
+        /// <param name="user">接单人</param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        /// <remarks>
+        /// 叉车工自行下架时创建的搬运出库任务，此时已经下架
+        /// </remarks>
+        public (bool success, string errorMessage, CarryOutTask t) Create(StoreView store, string shelfCode, User user, SqlSugarClient db)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            SequenceRecordBusiness recordBusiness = new SequenceRecordBusiness();
+            var now = DateTime.Now;
+
+            CarryOutTask entity = new CarryOutTask();
+            entity.Id = Guid.NewGuid().ToString();
+            entity.Type = (int)CarryOutTaskType.Temp; //先定位临时搬运
+            entity.CustomerId = store.CustomerId;
+            entity.ContractId = store.ContractId;
+            entity.CargoId = store.CargoId;
+            entity.StoreId = store.Id;
+            entity.StoreCount = store.StoreCount;
+            entity.MoveCount = 0;
+            entity.StoreWeight = store.StoreWeight;
+            entity.MoveWeight = 0;
+            entity.TaskCode = recordBusiness.GetNextSequence(db, "CarryOutTask", now);
+            entity.ShelfCode = shelfCode;
+            entity.TrayCode = store.TrayCode;
+            entity.PositionId = store.PositionId;
+
+            if (store.ShelfCode == entity.ShelfCode)
+                entity.PositionNumber = store.PositionNumber;
+            else
+                entity.PositionNumber = store.VicePositionNumber;
+
+            entity.Place = store.Place;
+
+            entity.ReceiveUserId = user.Id;
+            entity.ReceiveUserName = user.Name;
+            entity.CreateTime = now;
+            entity.ReceiveTime = now;
+            entity.MoveTime = now;
+            entity.Remark = "";
+            entity.Status = (int)EntityStatus.StockOutLeave;
+
+            var t = db.Insertable(entity).ExecuteReturnEntity();
+            return (true, "", t);
+        }
+
+        /// <summary>
         /// 出库接单
         /// </summary>
         /// <param name="trayCode">托盘码</param>

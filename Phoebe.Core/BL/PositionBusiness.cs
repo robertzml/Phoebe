@@ -31,10 +31,10 @@ namespace Phoebe.Core.BL
         }
 
         /// <summary>
-        /// 查找仓位
+        /// 按货架和排查找仓位
         /// </summary>
-        /// <param name="shelfId"></param>
-        /// <param name="row"></param>
+        /// <param name="shelfId">货架ID</param>
+        /// <param name="row">排数</param>
         /// <returns></returns>
         public List<Position> FindList(int shelfId, int row, SqlSugarClient db = null)
         {
@@ -57,9 +57,7 @@ namespace Phoebe.Core.BL
             if (data.Count == 0)
             {
                 vice = true;
-
                 data = db.Queryable<Position>().Where(r => r.ViceShelfCode == shelfCode).OrderBy(r => r.Depth).ToList();
-
             }
 
             if (data.Count == 0)
@@ -88,18 +86,68 @@ namespace Phoebe.Core.BL
             }
             else
             {
+                // 找出第一个不可用的仓位
                 var find = data.FindIndex(r => r.Status != (int)EntityStatus.Available);
-                if (find == -1)
+                if (find == -1) //仓位全部可用
                 {
                     return data.Last();
                 }
                 else
                 {
                     if (find > 0)
-                        return data[find - 1];
+                        return data[find - 1]; //返回不可用前一个仓位
                     else
-                        return null;
+                        return null; //不可用仓位为第一个，则该列放满
                 }
+            }
+        }
+
+        /// <summary>
+        /// 根据货架码获取最外侧占用的仓位
+        /// </summary>
+        /// <param name="shelfCode">货架码</param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        public Position FindOutside(string shelfCode, SqlSugarClient db)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            bool vice = false; //是否副货架码
+            var data = db.Queryable<Position>().Where(r => r.ShelfCode == shelfCode).OrderBy(r => r.Depth).ToList();
+            if (data.Count == 0)
+            {
+                vice = true;
+                data = db.Queryable<Position>().Where(r => r.ViceShelfCode == shelfCode).OrderBy(r => r.Depth).ToList();
+            }
+
+            if (data.Count == 0)
+                return null;
+
+            if (vice)
+            {
+                var shelf = db.Queryable<Shelf>().Single(r => r.Id == data[0].ShelfId);
+                var pos = data.FindLast(r => r.Status == (int)EntityStatus.Occupy); //找出第一个占用的仓位
+                if (pos == null)
+                    return null;
+
+                var disCount = data.Count(r => r.Depth > pos.Depth && r.Status == (int)EntityStatus.Disabled);
+                if (disCount > 0) //前方存在禁用仓位
+                    return null;
+
+                return pos;
+            }
+            else
+            {
+                var pos = data.Find(r => r.Status == (int)EntityStatus.Occupy);
+                if (pos == null)
+                    return null;
+
+                var disCount = data.Count(r => r.Depth < pos.Depth && r.Status == (int)EntityStatus.Disabled);
+                if (disCount > 0)
+                    return null;
+
+                return pos;
             }
         }
 
@@ -187,6 +235,24 @@ namespace Phoebe.Core.BL
             {
                 return (false, e.Message);
             }
+        }
+
+        /// <summary>
+        /// 修改仓位状态
+        /// </summary>
+        /// <param name="position">仓位</param>
+        /// <param name="status">状态</param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        public (bool success, string errorMessage) UpdateStatus(Position position, EntityStatus status, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            position.Status = (int)status;
+            db.Updateable(position).ExecuteCommand();
+
+            return (true, "");
         }
         #endregion //Method
     }

@@ -10,6 +10,7 @@ namespace Phoebe.WebAPI.Controllers
     using Phoebe.Base.System;
     using Phoebe.Core.BL;
     using Phoebe.Core.DL;
+    using Phoebe.Core.Service;
     using Phoebe.Core.Entity;
     using Phoebe.Core.View;
     using Phoebe.WebAPI.Model;
@@ -21,33 +22,7 @@ namespace Phoebe.WebAPI.Controllers
     [ApiController]
     public class CarryOutTaskController : ControllerBase
     {
-        #region Action
-        /// <summary>
-        /// 提交出库
-        /// </summary>
-        /// <param name="tasks"></param>
-        /// <returns></returns>
-        public async Task<ActionResult<ResponseData>> Create(List<CarryOutTask> tasks)
-        {
-            CarryOutTaskBusiness carryOutTaskBusiness = new CarryOutTaskBusiness();
-
-            var task = Task.Run(() =>
-            {
-                var result = carryOutTaskBusiness.Create(tasks);
-
-                ResponseData data = new ResponseData
-                {
-                    Status = result.success ? 0 : 1,
-                    ErrorMessage = result.errorMessage,
-                    Entity = null
-                };
-
-                return data;
-            });
-
-            return await task;
-        }
-
+        #region Query
         /// <summary>
         /// 根据出库任务查找
         /// </summary>
@@ -90,6 +65,34 @@ namespace Phoebe.WebAPI.Controllers
         {
             CarryOutTaskViewBusiness carryOutTaskViewBusiness = new CarryOutTaskViewBusiness();
             return carryOutTaskViewBusiness.FindCurrentReceive(userId);
+        }
+        #endregion //Query
+
+        #region Action
+        /// <summary>
+        /// 提交出库
+        /// </summary>
+        /// <param name="tasks"></param>
+        /// <returns></returns>
+        public async Task<ActionResult<ResponseData>> Create(List<CarryOutTask> tasks)
+        {
+            CarryOutTaskBusiness carryOutTaskBusiness = new CarryOutTaskBusiness();
+
+            var task = Task.Run(() =>
+            {
+                var result = carryOutTaskBusiness.Create(tasks);
+
+                ResponseData data = new ResponseData
+                {
+                    Status = result.success ? 0 : 1,
+                    ErrorMessage = result.errorMessage,
+                    Entity = null
+                };
+
+                return data;
+            });
+
+            return await task;
         }
 
         /// <summary>
@@ -135,6 +138,30 @@ namespace Phoebe.WebAPI.Controllers
 
                 data.Status = result.success ? 0 : 1;
                 data.ErrorMessage = result.errorMessage;
+
+                return data;
+            });
+
+            return await task;
+        }
+
+        /// <summary>
+        /// 出库下架-叉车工直接下架
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public async Task<ActionResult<ResponseData>> LeaveUnassignTask(CarryOutLeaveModel model)
+        {
+            CarryOutService carryOutService = new CarryOutService();
+            var task = Task.Run(() =>
+            {
+                ResponseData data = new ResponseData();
+
+                var result = carryOutService.LeaveUnassign(model.TrayCode, model.ShelfCode, model.UserId);
+
+                data.Status = result.success ? 0 : 1;
+                data.ErrorMessage = result.errorMessage;
+                data.Entity = result.stores;
 
                 return data;
             });
