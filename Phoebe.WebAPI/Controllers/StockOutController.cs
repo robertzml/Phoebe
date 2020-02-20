@@ -299,6 +299,30 @@ namespace Phoebe.WebAPI.Controllers
 
             return await task;
         }
+
+        /// <summary>
+        /// 提交出库
+        /// </summary>
+        /// <param name="data">搬运出库任务</param>
+        /// <returns></returns>
+        public async Task<ActionResult<ResponseData>> AddCarryOut(StockOutTaskAddCarryOutModel model)
+        {
+            StockOutService stockOutService = new StockOutService();
+
+            var task = Task.Run(() =>
+            {
+                var result = stockOutService.AddCarryOut(model.StockOutId, model.TrayCode, model.UserId, model.Tasks);
+                ResponseData data = new ResponseData
+                {
+                    Status = result.success ? 0 : 1,
+                    ErrorMessage = result.errorMessage
+                };
+
+                return data;
+            });
+
+            return await task;
+        }
         #endregion //Stock Out Task Action
     }
 }

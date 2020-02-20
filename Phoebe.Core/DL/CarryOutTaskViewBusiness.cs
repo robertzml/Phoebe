@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Phoebe.Core.DL
 {
+    using SqlSugar;
     using Phoebe.Base.Framework;
     using Phoebe.Base.System;
     using Phoebe.Core.View;
@@ -72,6 +73,20 @@ namespace Phoebe.Core.DL
             var db = GetInstance();
             var data = db.Queryable<CarryOutTaskView>().Where(r => r.ReceiveUserId == userId && r.Status == (int)EntityStatus.StockOutReceive);
 
+            return data.ToList();
+        }
+
+        /// <summary>
+        /// 根据托盘码获取当前搬运出库任务
+        /// </summary>
+        /// <param name="trayCode">托盘码</param>
+        /// <returns></returns>
+        public List<CarryOutTaskView> FindByTray(string trayCode, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            var data = db.Queryable<CarryOutTaskView>().Where(r => r.TrayCode == trayCode && r.Status == (int)EntityStatus.StockOutLeave);
             return data.ToList();
         }
         #endregion //Method

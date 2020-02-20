@@ -17,6 +17,12 @@ namespace Phoebe.Core.BL
     public class StockOutBusiness : AbstractBusiness<StockOut, string>, IBaseBL<StockOut, string>
     {
         #region Method
+        /// <summary>
+        /// 创建出库单
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="db"></param>
+        /// <returns></returns>
         public override (bool success, string errorMessage, StockOut t) Create(StockOut entity, SqlSugarClient db = null)
         {
             if (db == null)

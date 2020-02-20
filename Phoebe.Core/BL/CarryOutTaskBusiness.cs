@@ -419,6 +419,67 @@ namespace Phoebe.Core.BL
         }
 
         /// <summary>
+        /// 搬运出库清点
+        /// </summary>
+        /// <param name="id">搬运出库ID</param>
+        /// <param name="stockOutTaskId">出库任务ID</param>
+        /// <param name="moveCount"></param>
+        /// <param name="moveWeight"></param>
+        /// <param name="remark"></param>
+        /// <param name="user">清点人</param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        /// <remarks>
+        /// 仓管选择搬运出库任务，设定出库数量、重量
+        /// </remarks>
+        public (bool success, string errorMessage) Check(string id, string stockOutTaskId, int moveCount, decimal moveWeight, string remark, User user, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            var task = db.Queryable<CarryOutTask>().InSingle(id);
+
+            task.Type = (int)CarryOutTaskType.Out;
+            task.StockOutTaskId = stockOutTaskId;
+            task.MoveCount = moveCount;
+            task.MoveWeight = moveWeight;
+            task.Remark = remark;
+            task.CheckUserId = user.Id;
+            task.CheckUserName = user.Name;
+            task.CheckTime = DateTime.Now;
+
+            task.Status = (int)EntityStatus.StockOutCheck;
+
+            db.Updateable(task).ExecuteCommand();
+            return (true, "");
+        }
+
+        /// <summary>
+        /// 清点无需出库的搬运出库任务
+        /// </summary>
+        /// <param name="id">搬运出库ID</param>
+        /// <param name="user">清点人</param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        public (bool success, string errorMessage) CheckUnmove(string id, User user, SqlSugarClient db)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            var task = db.Queryable<CarryOutTask>().InSingle(id);
+
+            task.Type = (int)CarryOutTaskType.Temp;
+            task.CheckUserId = user.Id;
+            task.CheckUserName = user.Name;
+            task.CheckTime = DateTime.Now;
+
+            task.Status = (int)EntityStatus.StockOutCheck;
+
+            db.Updateable(task).ExecuteCommand();
+            return (true, "");
+        }
+
+        /// <summary>
         /// 出库完成
         /// 清点和完成一起
         /// </summary>

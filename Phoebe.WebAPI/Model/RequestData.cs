@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace Phoebe.WebAPI.Model
 {
+    using Phoebe.Core.Entity;
+
     /// <summary>
     /// 搬运入库新增模型
     /// </summary>
@@ -124,5 +126,23 @@ namespace Phoebe.WebAPI.Model
         public int UserId;
 
         public string Remark;
+    }
+
+    /// <summary>
+    /// 由搬运出库创建出库单模型
+    /// </summary>
+    public class StockOutTaskAddCarryOutModel
+    {
+        [Required]
+        public string StockOutId;
+
+        [Required]
+        public string TrayCode;
+
+        [Required]
+        public int UserId;
+
+        [Required]
+        public List<CarryOutTask> Tasks;
     }
 }

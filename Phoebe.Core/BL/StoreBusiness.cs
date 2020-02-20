@@ -190,7 +190,7 @@ namespace Phoebe.Core.BL
             var store = db.Queryable<Store>().InSingle(id);
             store.CarryOutTaskId = carryOutTaskId;
             store.OutTime = DateTime.Now; //暂定为当前时间，若重新入库，则更新
-            store.Status = (int)EntityStatus.StoreOut;
+            store.Status = (int)EntityStatus.StoreOutReady;
 
             db.Updateable(store).ExecuteCommand();
             return (true, "");

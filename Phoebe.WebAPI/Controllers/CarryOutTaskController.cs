@@ -66,6 +66,18 @@ namespace Phoebe.WebAPI.Controllers
             CarryOutTaskViewBusiness carryOutTaskViewBusiness = new CarryOutTaskViewBusiness();
             return carryOutTaskViewBusiness.FindCurrentReceive(userId);
         }
+
+        /// <summary>
+        /// 根据托盘码获取当前搬运出库任务
+        /// </summary>
+        /// <param name="trayCode">托盘码</param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult<List<CarryOutTaskView>> FindByTray(string trayCode)
+        {
+            CarryOutTaskViewBusiness carryOutTaskViewBusiness = new CarryOutTaskViewBusiness();
+            return carryOutTaskViewBusiness.FindByTray(trayCode);
+        }
         #endregion //Query
 
         #region Action

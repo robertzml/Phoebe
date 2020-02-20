@@ -180,6 +180,47 @@ namespace Phoebe.Core.BL
         }
 
         /// <summary>
+        /// 创建放回搬运入库任务
+        /// </summary>
+        /// <param name="carryOutTask">搬运出库任务</param>
+        /// <param name="user">清点人</param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        /// <remarks>
+        /// 托盘未完全出清，需要创建放回任务
+        /// </remarks>
+        public (bool success, string errorMessage, CarryInTask t) CreateBack(CarryOutTask carryOutTask, User user, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            CarryInTask task = new CarryInTask();
+            task.Id = Guid.NewGuid().ToString();
+            task.Type = (int)CarryInTaskType.Temp;
+            task.CustomerId = carryOutTask.CustomerId;
+            task.ContractId = carryOutTask.ContractId;
+            task.CargoId = carryOutTask.CargoId;
+
+            task.StoreId = carryOutTask.StoreId; // 暂时保存原库存ID
+
+            task.StockOutTaskId = carryOutTask.StockOutTaskId;
+            task.MoveCount = carryOutTask.StoreCount - carryOutTask.MoveCount;
+            task.MoveWeight = carryOutTask.StoreWeight - carryOutTask.MoveWeight;
+
+            task.TrayCode = carryOutTask.TrayCode;
+
+            task.CheckUserId = user.Id;
+            task.CheckUserName = user.Name;
+            task.CreateTime = DateTime.Now;
+            task.CheckTime = DateTime.Now;
+            task.Status = (int)EntityStatus.StockInCheck;
+
+            var t = db.Insertable(task).ExecuteReturnEntity();
+
+            return (true, "", t);
+        }
+
+        /// <summary>
         /// 生成临时搬运入库任务
         /// 由搬运出库任务生成
         /// </summary>
