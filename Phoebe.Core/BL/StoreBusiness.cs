@@ -20,8 +20,8 @@ namespace Phoebe.Core.BL
         /// <summary>
         /// 由入库任务生成库存记录
         /// </summary>
-        /// <param name="stockInTask"></param>
-        /// <param name="task"></param>
+        /// <param name="stockInTask">入库任务</param>
+        /// <param name="task">搬运入库任务</param>
         /// <param name="positionId"></param>
         /// <param name="db"></param>
         /// <returns></returns>
@@ -62,9 +62,10 @@ namespace Phoebe.Core.BL
         /// <summary>
         /// 由出库任务生成库存记录
         /// </summary>
+        /// <param name="stockOutTask">出库任务</param>
+        /// <param name="task">搬运入库任务</param>
+        /// <param name="positionId"></param>
         /// <param name="db"></param>
-        /// <param name="stockOutTask"></param>
-        /// <param name="task"></param>
         /// <remarks>
         /// 临时搬运入库生成的库存记录，即出库后重新上架
         /// 旧库存记录保存在CarryInTask 的库存ID中，生成新库存记录后更新
@@ -104,11 +105,16 @@ namespace Phoebe.Core.BL
             store.Status = (int)EntityStatus.StoreInReady;
 
             var t = db.Insertable(store).ExecuteReturnEntity();
+
+            // 更新旧库存出库时间等于新库存入库时间
+            oldStore.OutTime = store.InTime;
+            db.Updateable(oldStore).ExecuteCommand();
+
             return (true, "", t);
         }
 
         /// <summary>
-        /// 库存记录确认
+        /// 库存记录入库确认
         /// </summary>
         /// <param name="id"></param>
         /// <param name="trayCode"></param>
@@ -120,7 +126,7 @@ namespace Phoebe.Core.BL
         /// 可更新托盘码、库存数量、库存重量
         /// </remarks>
         /// <returns></returns>
-        public (bool success, string errorMessage) Finish(string id, string trayCode, int storeCount, decimal storeWeight, string remark, SqlSugarClient db = null)
+        public (bool success, string errorMessage) FinishIn(string id, string trayCode, int storeCount, decimal storeWeight, string remark, SqlSugarClient db = null)
         {
             if (db == null)
                 db = GetInstance();

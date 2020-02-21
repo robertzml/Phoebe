@@ -44,7 +44,7 @@ namespace Phoebe.Core.Service
                 var stockInTask = db.Queryable<StockInTaskView>().InSingle(carryInTask.StockInTaskId);
 
                 CarryInTaskBusiness carryInTaskBusiness = new CarryInTaskBusiness();
-                carryInTask.Type = (int)CarryInTaskType.In;              
+                carryInTask.Type = (int)CarryInTaskType.In;
 
                 var result = carryInTaskBusiness.CreateByStockIn(carryInTask, stockInTask, db);
 
@@ -134,39 +134,38 @@ namespace Phoebe.Core.Service
                 }
 
                 // 更新仓位状态
-                position.Status = (int)EntityStatus.Occupy;
-                db.Updateable(position).ExecuteCommand();
+                positionBusiness.UpdateStatus(position, EntityStatus.Occupy, db);
+
+                StoreBusiness storeBusiness = new StoreBusiness();
+                ColdFeeBusiness coldFeeBusiness = new ColdFeeBusiness();
 
                 foreach (var carryTask in tasks)
                 {
+                    Store store = null;
                     if (string.IsNullOrEmpty(carryTask.StockInTaskId))
                     {
                         // 由出库任务生成的搬运任务
                         var stockOutTask = db.Queryable<StockOutTaskView>().InSingle(carryTask.StockOutTaskId);
 
-                        // 添加库存记录
-                        StoreBusiness storeBusiness = new StoreBusiness();
-                        var store = storeBusiness.CreateByStockOut(stockOutTask, carryTask, position.Id, db);
-
-                        // 更新搬运入库任务
-                        carryInTaskBusiness.Enter(carryTask, shelfCode, position.Id, store.t.Id, db);
+                        // 添加库存记录                        
+                        var result = storeBusiness.CreateByStockOut(stockOutTask, carryTask, position.Id, db);
+                        store = result.t;
                     }
                     else
                     {
                         // 由入库任务生成的搬运任务
                         var stockInTask = db.Queryable<StockInTaskView>().InSingle(carryTask.StockInTaskId);
 
-                        // 添加库存记录
-                        StoreBusiness storeBusiness = new StoreBusiness();
-                        var store = storeBusiness.CreateByStockIn(stockInTask, carryTask, position.Id, db);
-
-                        // 添加冷藏费记录
-                        ColdFeeBusiness coldFeeBusiness = new ColdFeeBusiness();
-                        coldFeeBusiness.Start(store.t, db);
-
-                        // 更新搬运入库任务
-                        carryInTaskBusiness.Enter(carryTask, shelfCode, position.Id, store.t.Id, db);
+                        // 添加库存记录                      
+                        var result = storeBusiness.CreateByStockIn(stockInTask, carryTask, position.Id, db);
+                        store = result.t;
                     }
+
+                    // 添加冷藏费记录
+                    coldFeeBusiness.Start(store, db);
+
+                    // 更新搬运入库任务
+                    carryInTaskBusiness.Enter(carryTask, shelfCode, position.Id, store.Id, db);
                 }
 
                 db.Ado.CommitTran();
@@ -221,7 +220,7 @@ namespace Phoebe.Core.Service
 
                 // 确认库存记录
                 StoreBusiness storeBusiness = new StoreBusiness();
-                storeBusiness.Finish(task.StoreId, trayCode, moveCount, moveWeight, remark, db);
+                storeBusiness.FinishIn(task.StoreId, trayCode, moveCount, moveWeight, remark, db);
 
                 db.Ado.CommitTran();
                 return (true, "");
