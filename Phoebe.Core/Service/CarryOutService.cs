@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Phoebe.Core.Service
@@ -19,6 +20,55 @@ namespace Phoebe.Core.Service
     public class CarryOutService : AbstractService
     {
         #region Carry Out Service
+        /// <summary>
+        /// 指定下架任务
+        /// </summary>
+        /// <param name="tasks">搬运出库任务</param>
+        /// <returns></returns>
+        public (bool success, string errorMessage) AddTasks(List<CarryOutTask> data)
+        {
+            var db = GetInstance();
+
+            try
+            {
+                db.Ado.BeginTran();
+
+                if (data.Count == 0)
+                {
+                    return (false, "无搬运任务");
+                }
+
+                CarryOutTaskBusiness carryOutTaskBusiness = new CarryOutTaskBusiness();
+                StoreViewBusiness storeViewBusiness = new StoreViewBusiness();
+                StoreBusiness storeBusiness = new StoreBusiness();
+                StockOutTaskViewBusiness stockOutTaskViewBusiness = new StockOutTaskViewBusiness();
+
+                var stockOutTask = stockOutTaskViewBusiness.FindById(data.First().StockOutTaskId);
+                List<CarryOutTask> tempOutTasks = new List<CarryOutTask>();
+
+                // 添加搬运出库的任务
+                foreach (var task in data)
+                {
+                    // 找出对应库存
+                    var store = storeViewBusiness.FindById(task.StoreId);
+
+                    // 设置搬运出库任务信息
+                    carryOutTaskBusiness.CreateByStockOut(task, stockOutTask, store, db);
+
+                    // 设置库存状态
+                    storeBusiness.UpdateStatus(store.Id, EntityStatus.StoreOutReady, db);
+                }
+
+                db.Ado.CommitTran();
+                return (true, "");
+            }
+            catch (Exception e)
+            {
+                db.Ado.RollbackTran();
+                return (false, e.Message);
+            }
+        }
+
         /// <summary>
         /// 未指定下架
         /// </summary>
@@ -62,7 +112,7 @@ namespace Phoebe.Core.Service
                         return (false, "托盘码与当前在库托盘不一致", null);
 
                     // 由库存记录创建搬运出库任务
-                    var result = carryOutTaskBusiness.Create(store, shelfCode, user, db);
+                    var result = carryOutTaskBusiness.CreateByStore(store, shelfCode, user, db);
 
                     // 库存记录下架
                     storeBusiness.Leave(store.Id, result.t.Id, db);
@@ -144,7 +194,7 @@ namespace Phoebe.Core.Service
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public(bool success, string errorMessage) DeleteTask(string id)
+        public (bool success, string errorMessage) DeleteTask(string id)
         {
             var db = GetInstance();
 
@@ -165,7 +215,7 @@ namespace Phoebe.Core.Service
                 db.Ado.CommitTran();
                 return (true, "");
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 db.Ado.RollbackTran();
                 return (false, e.Message);

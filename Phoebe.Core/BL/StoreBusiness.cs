@@ -180,7 +180,7 @@ namespace Phoebe.Core.BL
 
             return (true, "");
         }
-        
+
         /// <summary>
         /// 库存记录下架
         /// </summary>
@@ -220,6 +220,25 @@ namespace Phoebe.Core.BL
             if (outTime.HasValue)
                 store.OutTime = outTime.Value;
             store.Status = (int)EntityStatus.StoreOut;
+
+            db.Updateable(store).ExecuteCommand();
+            return (true, "");
+        }
+
+        /// <summary>
+        /// 修改库存状态
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="status"></param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        public (bool success, string errorMessage) UpdateStatus(string id, EntityStatus status, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            var store = db.Queryable<Store>().InSingle(id);
+            store.Status = (int)status;
 
             db.Updateable(store).ExecuteCommand();
             return (true, "");

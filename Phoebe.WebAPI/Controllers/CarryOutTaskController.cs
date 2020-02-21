@@ -111,11 +111,11 @@ namespace Phoebe.WebAPI.Controllers
         /// <returns></returns>
         public async Task<ActionResult<ResponseData>> Create(List<CarryOutTask> tasks)
         {
-            CarryOutTaskBusiness carryOutTaskBusiness = new CarryOutTaskBusiness();
+            CarryOutService carryOutService = new CarryOutService();
 
             var task = Task.Run(() =>
             {
-                var result = carryOutTaskBusiness.Create(tasks);
+                var result = carryOutService.AddTasks(tasks);
 
                 ResponseData data = new ResponseData
                 {

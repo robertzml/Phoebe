@@ -250,7 +250,7 @@ namespace Phoebe.Core.BL
                 return (false, e.Message);
             }
         }
-
+               
         /// <summary>
         /// 出库接单
         /// </summary>
@@ -437,6 +437,46 @@ namespace Phoebe.Core.BL
 
         #region Method
         /// <summary>
+        /// 由出库任务创建搬运出库任务
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="stockOutTask"></param>
+        /// <param name="store"></param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        public (bool success, string errorMessage, CarryOutTask t) CreateByStockOut(CarryOutTask entity, StockOutTaskView stockOutTask, StoreView store,  SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            SequenceRecordBusiness recordBusiness = new SequenceRecordBusiness();
+            var now = DateTime.Now;
+
+            entity.Id = Guid.NewGuid().ToString();
+            entity.Type = (int)CarryOutTaskType.Out;
+            entity.CustomerId = stockOutTask.CustomerId;
+            entity.ContractId = stockOutTask.ContractId;
+            entity.CargoId = stockOutTask.CargoId;
+            entity.StockOutTaskId = stockOutTask.Id;
+            entity.CreateTime = now;
+            entity.TaskCode = recordBusiness.GetNextSequence(db, "CarryOutTask", now);
+            entity.Status = (int)EntityStatus.StockOutReady;
+          
+            if (store.ShelfCode == entity.ShelfCode)
+            {
+                entity.PositionNumber = store.PositionNumber;
+            }
+            else
+            {
+                entity.PositionNumber = store.VicePositionNumber;
+            }
+            entity.Place = store.Place;
+
+            var t = db.Insertable(entity).ExecuteReturnEntity();
+            return (true, "", t);
+        }
+
+        /// <summary>
         /// 由库存创建搬运出库任务
         /// </summary>
         /// <param name="store">库存记录</param>
@@ -447,7 +487,7 @@ namespace Phoebe.Core.BL
         /// <remarks>
         /// 叉车工自行下架时创建的搬运出库任务，此时已经下架
         /// </remarks>
-        public (bool success, string errorMessage, CarryOutTask t) Create(StoreView store, string shelfCode, User user, SqlSugarClient db)
+        public (bool success, string errorMessage, CarryOutTask t) CreateByStore(StoreView store, string shelfCode, User user, SqlSugarClient db)
         {
             if (db == null)
                 db = GetInstance();
