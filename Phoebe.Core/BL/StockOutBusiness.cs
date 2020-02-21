@@ -63,7 +63,6 @@ namespace Phoebe.Core.BL
             }
 
             stockOut.Type = entity.Type;
-            stockOut.ContractId = entity.ContractId;
             stockOut.VehicleNumber = entity.VehicleNumber;
             stockOut.Remark = entity.Remark;
 

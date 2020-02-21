@@ -117,15 +117,7 @@ namespace Phoebe.WebAPI.Model
         public string TaskId;
 
         [Required]
-        public int MoveCount;
-
-        [Required]
-        public decimal MoveWeight;
-
-        [Required]
         public int UserId;
-
-        public string Remark;
     }
 
     /// <summary>

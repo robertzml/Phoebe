@@ -24,6 +24,18 @@ namespace Phoebe.WebAPI.Controllers
     {
         #region Query
         /// <summary>
+        /// 根据ID获取搬运出库任务
+        /// </summary>
+        /// <param name="id">ID</param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult<CarryOutTaskView> Get(string id)
+        {
+            CarryOutTaskViewBusiness carryOutTaskViewBusiness = new CarryOutTaskViewBusiness();
+            return carryOutTaskViewBusiness.FindById(id);
+        }
+
+        /// <summary>
         /// 根据出库任务查找
         /// </summary>
         /// <param name="taskId"></param>
@@ -182,20 +194,20 @@ namespace Phoebe.WebAPI.Controllers
         }
 
         /// <summary>
-        /// 出库确认
+        /// 搬运出库确认
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
         public async Task<ActionResult<ResponseData>> FinishTask(CarryOutFinishModel model)
         {
-            CarryOutTaskBusiness taskBusiness = new CarryOutTaskBusiness();
+            CarryOutService carryOutService = new CarryOutService();
 
             var task = Task.Run(() =>
             {
                 ResponseData data = new ResponseData();
 
-                var result = taskBusiness.Finish(model.TaskId, model.UserId, model.MoveCount, model.MoveWeight, model.Remark);
+                var result = carryOutService.Finish(model.TaskId, model.UserId);
 
                 data.Status = result.success ? 0 : 1;
                 data.ErrorMessage = result.errorMessage;

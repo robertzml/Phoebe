@@ -189,8 +189,31 @@ namespace Phoebe.Core.BL
 
             var store = db.Queryable<Store>().InSingle(id);
             store.CarryOutTaskId = carryOutTaskId;
-            store.OutTime = DateTime.Now; //暂定为当前时间，若重新入库，则更新
+            store.OutTime = DateTime.Now.Date; //暂定为当前时间，若重新入库，则更新
             store.Status = (int)EntityStatus.StoreOutReady;
+
+            db.Updateable(store).ExecuteCommand();
+            return (true, "");
+        }
+
+        /// <summary>
+        /// 确认库存出库
+        /// </summary>
+        /// <param name="id">库存ID</param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        /// <remarks>
+        /// 出库搬运修改出库时间为出库单时间，临时搬运不修改等入库后修改
+        /// </remarks>
+        public (bool success, string errorMessage) FinishOut(string id, DateTime? outTime, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            var store = db.Queryable<Store>().InSingle(id);
+            if (outTime.HasValue)
+                store.OutTime = outTime.Value;
+            store.Status = (int)EntityStatus.StoreOut;
 
             db.Updateable(store).ExecuteCommand();
             return (true, "");

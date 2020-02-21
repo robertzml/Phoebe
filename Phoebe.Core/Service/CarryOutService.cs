@@ -80,6 +80,64 @@ namespace Phoebe.Core.Service
                 return (false, e.Message, null);
             }
         }
+
+        /// <summary>
+        /// 确认搬运出库任务
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public (bool success, string errorMessage) Finish(string id, int userId)
+        {
+            var db = GetInstance();
+
+            try
+            {
+                db.Ado.BeginTran();
+
+                // 获取搬运出库任务
+                CarryOutTaskBusiness carryOutTaskBusiness = new CarryOutTaskBusiness();
+                var task = carryOutTaskBusiness.FindById(id);
+
+                if (task.Status != (int)EntityStatus.StockOutCheck)
+                {
+                    return (false, "该任务无法完成");
+                }
+
+                // 获取确认用户
+                var user = db.Queryable<User>().InSingle(userId);
+
+                // 确认搬运出库任务
+                carryOutTaskBusiness.Finish(task, db);
+
+                // 确认库存记录已出库
+                StoreBusiness storeBusiness = new StoreBusiness();
+                if (string.IsNullOrEmpty(task.StockOutTaskId))
+                {
+                    storeBusiness.FinishOut(task.StoreId, null, db);
+                }
+                else
+                {
+                    var stockOutTask = db.Queryable<StockOutTaskView>().InSingle(task.StockOutTaskId);
+                    storeBusiness.FinishOut(task.StoreId, stockOutTask.OutTime, db);
+                }
+
+                // 临时搬运出库任务需要创建对应搬运入库任务
+                if (task.Type == (int)CarryOutTaskType.Temp)
+                {
+                    CarryInTaskBusiness carryInTaskBusiness = new CarryInTaskBusiness();
+                    carryInTaskBusiness.CreateBack(task, user, db);
+                }
+
+                db.Ado.CommitTran();
+                return (true, "");
+            }
+            catch (Exception e)
+            {
+                db.Ado.RollbackTran();
+                return (false, e.Message);
+            }
+        }
         #endregion //Carry Out Servie
     }
 }
