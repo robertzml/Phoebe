@@ -246,7 +246,7 @@ namespace Phoebe.Core.Service
             {
                 db.Ado.BeginTran();
 
-                // 删除对应库存记录               
+                // 删除对应库存记录
 
                 // 删除搬运入库
                 CarryInTaskBusiness taskBusiness = new CarryInTaskBusiness();

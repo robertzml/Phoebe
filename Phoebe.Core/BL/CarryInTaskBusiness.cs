@@ -194,12 +194,17 @@ namespace Phoebe.Core.BL
             if (db == null)
                 db = GetInstance();
 
+            var now = DateTime.Now;
+
             CarryInTask task = new CarryInTask();
             task.Id = Guid.NewGuid().ToString();
             task.Type = (int)CarryInTaskType.Temp;
             task.CustomerId = carryOutTask.CustomerId;
             task.ContractId = carryOutTask.ContractId;
             task.CargoId = carryOutTask.CargoId;
+
+            SequenceRecordBusiness recordBusiness = new SequenceRecordBusiness();
+            task.TaskCode = recordBusiness.GetNextSequence(db, "CarryInTask", now);
 
             task.StoreId = carryOutTask.StoreId; // 暂时保存原库存ID
 
@@ -211,8 +216,8 @@ namespace Phoebe.Core.BL
 
             task.CheckUserId = user.Id;
             task.CheckUserName = user.Name;
-            task.CreateTime = DateTime.Now;
-            task.CheckTime = DateTime.Now;
+            task.CreateTime = now;
+            task.CheckTime = now;
             task.Status = (int)EntityStatus.StockInCheck;
 
             var t = db.Insertable(task).ExecuteReturnEntity();

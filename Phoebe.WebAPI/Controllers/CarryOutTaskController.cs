@@ -24,6 +24,17 @@ namespace Phoebe.WebAPI.Controllers
     {
         #region Query
         /// <summary>
+        /// 获取所有搬运出库任务
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult<List<CarryOutTaskView>> List()
+        {
+            CarryOutTaskViewBusiness carryOutTaskViewBusiness = new CarryOutTaskViewBusiness();
+            return carryOutTaskViewBusiness.FindAll();
+        }
+
+        /// <summary>
         /// 根据ID获取搬运出库任务
         /// </summary>
         /// <param name="id">ID</param>
@@ -226,11 +237,11 @@ namespace Phoebe.WebAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<ResponseData>> Delete(string id)
         {
-            CarryOutTaskBusiness taskBusiness = new CarryOutTaskBusiness();
+            CarryOutService carryOutService = new CarryOutService();
 
             var task = Task.Run(() =>
             {
-                var result = taskBusiness.Delete(id);
+                var result = carryOutService.DeleteTask(id);
 
                 ResponseData data = new ResponseData
                 {

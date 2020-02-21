@@ -125,18 +125,16 @@ namespace Phoebe.Core.Service
                 StockInTaskViewBusiness stockInTaskViewBusiness = new StockInTaskViewBusiness();
                 var tasks = stockInTaskViewBusiness.FindList(id, db);
 
-                if (tasks.All(r => r.Status == (int)EntityStatus.StockInFinish))
-                {
-                    StockInBusiness stockInBusiness = new StockInBusiness();
-                    var result = stockInBusiness.Confirm(id, db);
-
-                    db.Ado.CommitTran();
-                    return (result.success, result.errorMessage);
-                }
-                else
+                if (tasks.Any(r => r.Status != (int)EntityStatus.StockInFinish))
                 {
                     return (false, "有入库货物未完成");
                 }
+
+                StockInBusiness stockInBusiness = new StockInBusiness();
+                var result = stockInBusiness.Confirm(id, db);
+
+                db.Ado.CommitTran();
+                return (result.success, result.errorMessage);
             }
             catch (Exception e)
             {

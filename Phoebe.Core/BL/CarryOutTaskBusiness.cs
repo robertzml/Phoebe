@@ -250,7 +250,7 @@ namespace Phoebe.Core.BL
                 return (false, e.Message);
             }
         }
-              
+
         /// <summary>
         /// 出库接单
         /// </summary>
@@ -363,7 +363,7 @@ namespace Phoebe.Core.BL
                 return (false, e.Message);
             }
         }
-        
+
         /// <summary>
         /// 出库完成
         /// 清点和完成一起
@@ -433,43 +433,6 @@ namespace Phoebe.Core.BL
                 return (false, e.Message);
             }
         }
-
-        /// <summary>
-        /// 删除搬运出库
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public override (bool success, string errorMessage) Delete(string id, SqlSugarClient db = null)
-        {
-            if (db == null)
-                db = GetInstance();
-
-            try
-            {
-                db.Ado.BeginTran();
-
-                var carryOut = db.Queryable<CarryOutTask>().InSingle(id);
-                if (carryOut.Status != (int)EntityStatus.StockOutReady)
-                {
-                    return (false, "仅能删除待出库状态的搬运入库任务");
-                }
-
-                var store = db.Queryable<Store>().Single(r => r.Id == carryOut.StoreId);
-                store.Status = (int)EntityStatus.StoreIn;
-
-                db.Updateable(store).ExecuteCommand();
-
-                db.Deleteable<CarryOutTask>().In(id).ExecuteCommand();
-
-                db.Ado.CommitTran();
-                return (true, "");
-            }
-            catch (Exception e)
-            {
-                db.Ado.RollbackTran();
-                return (false, e.Message);
-            }
-        }
         #endregion //Method
 
         #region Method
@@ -526,7 +489,6 @@ namespace Phoebe.Core.BL
             var t = db.Insertable(entity).ExecuteReturnEntity();
             return (true, "", t);
         }
-
 
         /// <summary>
         /// 搬运出库清点
@@ -605,6 +567,26 @@ namespace Phoebe.Core.BL
 
             db.Updateable(task).ExecuteCommand();
 
+            return (true, "");
+        }
+
+        /// <summary>
+        /// 删除搬运入库
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public override (bool success, string errorMessage) Delete(string id, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            var carryOut = db.Queryable<CarryOutTask>().InSingle(id);
+            if (carryOut.Status != (int)EntityStatus.StockOutReady)
+            {
+                return (false, "仅能删除待出库状态的搬运出库任务");
+            }
+
+            db.Deleteable<CarryOutTask>().In(id).ExecuteCommand();
             return (true, "");
         }
         #endregion //Method

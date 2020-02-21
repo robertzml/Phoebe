@@ -24,6 +24,17 @@ namespace Phoebe.WebAPI.Controllers
     {
         #region Query
         /// <summary>
+        /// 获取所有搬运出库任务
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult<List<CarryInTaskView>> List()
+        {
+            CarryInTaskViewBusiness carryInTaskViewBusiness = new CarryInTaskViewBusiness();
+            return carryInTaskViewBusiness.FindAll();
+        }
+
+        /// <summary>
         /// 获取搬运入库任务
         /// </summary>
         /// <param name="id"></param>

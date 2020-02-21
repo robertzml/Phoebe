@@ -138,6 +138,39 @@ namespace Phoebe.Core.Service
                 return (false, e.Message);
             }
         }
+
+        /// <summary>
+        /// 删除搬运出库任务
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public(bool success, string errorMessage) DeleteTask(string id)
+        {
+            var db = GetInstance();
+
+            try
+            {
+                db.Ado.BeginTran();
+
+                // 删除对应库存记录
+                //var store = db.Queryable<Store>().Single(r => r.Id == carryOut.StoreId);
+                //store.Status = (int)EntityStatus.StoreIn;
+
+                //db.Updateable(store).ExecuteCommand();
+
+                // 删除搬运入库
+                CarryOutTaskBusiness taskBusiness = new CarryOutTaskBusiness();
+                taskBusiness.Delete(id, db);
+
+                db.Ado.CommitTran();
+                return (true, "");
+            }
+            catch(Exception e)
+            {
+                db.Ado.RollbackTran();
+                return (false, e.Message);
+            }
+        }
         #endregion //Carry Out Servie
     }
 }
