@@ -258,11 +258,11 @@ namespace Phoebe.WebAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<ResponseData>> FinishTask(string taskId)
         {
-            StockOutTaskBusiness taskBusiness = new StockOutTaskBusiness();
+            StockOutService stockOutService = new StockOutService();
 
             var task = Task.Run(() =>
             {
-                var result = taskBusiness.Confirm(taskId);
+                var result = stockOutService.FinishTask(taskId);
                 ResponseData data = new ResponseData
                 {
                     Status = result.success ? 0 : 1,
@@ -283,11 +283,11 @@ namespace Phoebe.WebAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<ResponseData>> DeleteTask(string taskId)
         {
-            StockOutTaskBusiness taskBusiness = new StockOutTaskBusiness();
+            StockOutService stockOutService = new StockOutService();
 
             var task = Task.Run(() =>
             {
-                var result = taskBusiness.Delete(taskId);
+                var result = stockOutService.DeleteTask(taskId);
                 ResponseData data = new ResponseData
                 {
                     Status = result.success ? 0 : 1,

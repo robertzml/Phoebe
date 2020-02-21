@@ -71,7 +71,7 @@ namespace Phoebe.Core.BL
                   .Where(r => r.CargoId == carryOutTask.CargoId && (r.Status == (int)EntityStatus.StoreIn || r.Status == (int)EntityStatus.StoreOutReady));
 
                 var now = DateTime.Now;
-               
+
                 task = new StockOutTask();
                 task.Id = Guid.NewGuid().ToString();
                 task.StockOutId = stockOutId;
@@ -105,44 +105,27 @@ namespace Phoebe.Core.BL
         /// <summary>
         /// 确认出库任务
         /// </summary>
-        /// <param name="stockOutTaskId"></param>
+        /// <param name="id"></param>
+        /// <param name="outCount"></param>
+        /// <param name="outWeight"></param>
+        /// <param name="db"></param>
         /// <returns></returns>
-        public (bool success, string errorMessage) Confirm(string stockOutTaskId)
+        public (bool success, string errorMessage) Finish(string id, int outCount, decimal outWeight, SqlSugarClient db = null)
         {
-            try
-            {
-                var db = GetInstance();
+            if (db == null)
+                db = GetInstance();
 
-                var task = db.Queryable<StockOutTask>().InSingle(stockOutTaskId);
+            var task = db.Queryable<StockOutTask>().InSingle(id);
 
-                var carryIn = db.Queryable<CarryInTask>().Where(r => r.StockOutTaskId == stockOutTaskId).ToList();
-                if (carryIn.Any(r => r.Status != (int)EntityStatus.StockInFinish))
-                {
-                    return (false, "有搬运入库任务未完成");
-                }
+            task.OutCount = outCount;
+            task.OutWeight = outWeight;
 
-                var carryOut = db.Queryable<CarryOutTask>().Where(r => r.StockOutTaskId == stockOutTaskId).ToList();
-                if (carryOut.All(r => r.Status == (int)EntityStatus.StockOutFinish))
-                {
-                    task.OutCount = carryOut.Sum(r => r.MoveCount);
-                    task.OutWeight = carryOut.Sum(r => r.MoveWeight);
+            task.FinishTime = DateTime.Now;
+            task.Status = (int)EntityStatus.StockOutFinish;
 
-                    task.FinishTime = DateTime.Now;
-                    task.Status = (int)EntityStatus.StockOutFinish;
+            db.Updateable(task).ExecuteCommand();
 
-                    db.Updateable(task).ExecuteCommand();
-
-                    return (true, "");
-                }
-                else
-                {
-                    return (false, "有搬运出库任务未完成");
-                }
-            }
-            catch (Exception e)
-            {
-                return (false, e.Message);
-            }
+            return (true, "");
         }
 
         /// <summary>
@@ -155,32 +138,16 @@ namespace Phoebe.Core.BL
             if (db == null)
                 db = GetInstance();
 
-            try
+            var stockOutTask = db.Queryable<StockOutTask>().InSingle(id);
+            if (stockOutTask.Status != (int)EntityStatus.StockOutReady)
             {
-                db.Ado.BeginTran();
-
-                var carryIn = db.Queryable<CarryInTask>().Where(r => r.StockOutTaskId == id).ToList();
-                if (carryIn.Count > 0)
-                {
-                    return (false, "出库任务含有搬运入库，无法删除");
-                }
-
-                var carryOut = db.Queryable<CarryOutTask>().Where(r => r.StockOutTaskId == id).ToList();
-                if (carryOut.Count > 0)
-                {
-                    return (false, "出库任务含有搬运出库，无法删除");
-                }
-
-                db.Deleteable<StockOutTask>().In(id).ExecuteCommand();
-
-                db.Ado.CommitTran();
-                return (true, "");
+                return (false, "仅能删除待出库状态的出库任务单");
             }
-            catch (Exception e)
-            {
-                db.Ado.RollbackTran();
-                return (false, e.Message);
-            }
+
+            db.Deleteable<StockOutTask>().In(id).ExecuteCommand();
+
+            db.Ado.CommitTran();
+            return (true, "");
         }
         #endregion //Method
     }

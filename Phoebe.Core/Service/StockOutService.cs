@@ -242,8 +242,88 @@ namespace Phoebe.Core.Service
                 }
 
                 db.Ado.CommitTran();
-
                 return (true, "");
+            }
+            catch (Exception e)
+            {
+                db.Ado.RollbackTran();
+                return (false, e.Message);
+            }
+        }
+
+        /// <summary>
+        /// 确认出库任务
+        /// </summary>
+        /// <param name="stockOutTaskId"></param>
+        /// <returns></returns>
+        public (bool success, string errorMessage) FinishTask(string stockOutTaskId)
+        {
+            var db = GetInstance();
+
+            try
+            {
+                db.Ado.BeginTran();
+
+                var task = db.Queryable<StockOutTask>().InSingle(stockOutTaskId);
+
+                var carryIn = db.Queryable<CarryInTask>().Where(r => r.StockOutTaskId == stockOutTaskId).ToList();
+                if (carryIn.Any(r => r.Status != (int)EntityStatus.StockInFinish))
+                {
+                    return (false, "有搬运入库任务未完成");
+                }
+
+                var carryOut = db.Queryable<CarryOutTask>().Where(r => r.StockOutTaskId == stockOutTaskId).ToList();
+                if (carryOut.Any(r => r.Status != (int)EntityStatus.StockOutFinish))
+                {
+                    return (false, "有搬运出库任务未完成");
+                }
+
+                int outCount = carryOut.Sum(r => r.MoveCount);
+                decimal outWeight = carryOut.Sum(r => r.MoveWeight);
+
+                StockOutTaskBusiness stockOutTaskBusiness = new StockOutTaskBusiness();
+                stockOutTaskBusiness.Finish(stockOutTaskId, outCount, outWeight, db);
+
+                db.Ado.CommitTran();
+                return (true, "");
+            }
+            catch (Exception e)
+            {
+                db.Ado.RollbackTran();
+                return (false, e.Message);
+            }
+        }
+
+        /// <summary>
+        /// 删除出库任务
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public (bool success, string errorMessage) DeleteTask(string id)
+        {
+            var db = GetInstance();
+
+            try
+            {
+                db.Ado.BeginTran();
+
+                var carryIn = db.Queryable<CarryInTask>().Where(r => r.StockOutTaskId == id).ToList();
+                if (carryIn.Count > 0)
+                {
+                    return (false, "出库任务含有搬运入库，无法删除");
+                }
+
+                var carryOut = db.Queryable<CarryOutTask>().Where(r => r.StockOutTaskId == id).ToList();
+                if (carryOut.Count > 0)
+                {
+                    return (false, "出库任务含有搬运出库，无法删除");
+                }
+
+                StockOutTaskBusiness stockOutTaskBusiness = new StockOutTaskBusiness();
+                var result = stockOutTaskBusiness.Delete(id, db);
+
+                db.Ado.CommitTran();
+                return (result.success, result.errorMessage);
             }
             catch (Exception e)
             {
