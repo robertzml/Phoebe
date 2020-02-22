@@ -64,19 +64,6 @@ namespace Phoebe.Core.DL
         }
 
         /// <summary>
-        /// 获取用户当前接单任务
-        /// </summary>
-        /// <param name="userId">用户ID</param>
-        /// <returns></returns>
-        public List<CarryOutTaskView> FindCurrentReceive(int userId)
-        {
-            var db = GetInstance();
-            var data = db.Queryable<CarryOutTaskView>().Where(r => r.ReceiveUserId == userId && r.Status == (int)EntityStatus.StockOutReceive);
-
-            return data.ToList();
-        }
-
-        /// <summary>
         /// 根据托盘码获取当前搬运出库任务
         /// </summary>
         /// <param name="trayCode">托盘码</param>

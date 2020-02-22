@@ -126,11 +126,12 @@ namespace Phoebe.WebAPI.Controllers
         public async Task<ActionResult<ResponseData>> LeaveTask(CarryOutLeaveModel model)
         {
             CarryOutService carryOutService = new CarryOutService();
+
             var task = Task.Run(() =>
             {
                 ResponseData data = new ResponseData();
 
-                var result = carryOutService.LeaveUnassign(model.TrayCode, model.ShelfCode, model.UserId);
+                var result = carryOutService.Leave(model.TrayCode, model.ShelfCode, model.UserId);
 
                 data.Status = result.success ? 0 : 1;
                 data.ErrorMessage = result.errorMessage;

@@ -98,6 +98,24 @@ namespace Phoebe.Core.DL
         }
 
         /// <summary>
+        /// 按仓位查找库存
+        /// </summary>
+        /// <param name="positionId">仓位ID</param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        /// <remarks>
+        /// 库存状态为：在库，准备移入
+        /// </remarks>
+        public List<StoreView> FindByPosition(int positionId, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            var data = db.Queryable<StoreView>().Where(r => r.PositionId == positionId && (r.Status == (int)EntityStatus.StoreIn || r.Status == (int)EntityStatus.StoreInReady));
+            return data.ToList();
+        }
+
+        /// <summary>
         /// 按托盘码查找库存
         /// </summary>
         /// <param name="trayCode">托盘码</param>

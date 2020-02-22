@@ -21,7 +21,7 @@ namespace Phoebe.Core.Service
     {
         #region Carry Out Service
         /// <summary>
-        /// 指定下架任务
+        /// 添加下架任务
         /// </summary>
         /// <param name="tasks">搬运出库任务</param>
         /// <returns></returns>
@@ -54,9 +54,6 @@ namespace Phoebe.Core.Service
 
                     // 设置搬运出库任务信息
                     carryOutTaskBusiness.CreateByStockOut(task, stockOutTask, store, db);
-
-                    // 设置库存状态
-                    storeBusiness.UpdateStatus(store.Id, EntityStatus.StoreOutReady, db);
                 }
 
                 db.Ado.CommitTran();
@@ -70,7 +67,7 @@ namespace Phoebe.Core.Service
         }
 
         /// <summary>
-        /// 未指定下架
+        /// 出库下架
         /// </summary>
         /// <param name="trayCode">托盘码</param>
         /// <param name="shelfCode">货架码</param>
@@ -79,7 +76,7 @@ namespace Phoebe.Core.Service
         /// <remarks>
         /// 叉车工自行扫码下架
         /// </remarks>
-        public (bool success, string errorMessage, List<StoreView> stores) LeaveUnassign(string trayCode, string shelfCode, int userId)
+        public (bool success, string errorMessage, List<StoreView> stores) Leave(string trayCode, string shelfCode, int userId)
         {
             var db = GetInstance();
 
@@ -99,11 +96,12 @@ namespace Phoebe.Core.Service
                 UserBusiness userBusiness = new UserBusiness();
                 var user = userBusiness.FindById(userId, db);
 
-                // 找出仓位对应库存
                 CarryOutTaskBusiness carryOutTaskBusiness = new CarryOutTaskBusiness();
                 StoreBusiness storeBusiness = new StoreBusiness();
+
+                // 找出仓位对应库存
                 StoreViewBusiness storeViewBusiness = new StoreViewBusiness();
-                var stores = storeViewBusiness.FindByPosition(position.Id, true, db);
+                var stores = storeViewBusiness.FindByPosition(position.Id, db);
 
                 // 遍历该仓位上的库存记录
                 foreach (var store in stores)
@@ -111,11 +109,20 @@ namespace Phoebe.Core.Service
                     if (store.TrayCode != trayCode)
                         return (false, "托盘码与当前在库托盘不一致", null);
 
-                    // 由库存记录创建搬运出库任务
-                    var result = carryOutTaskBusiness.CreateByStore(store, shelfCode, user, db);
+                    var carryOut = db.Queryable<CarryOutTask>().Single(r => r.StoreId == store.Id);
+                    if (carryOut == null)
+                    {
+                        // 由库存记录创建搬运出库任务
+                        var result = carryOutTaskBusiness.CreateByStore(store, shelfCode, user, db);
+                        carryOut = result.t;
+                    }
+                    else
+                    {
+                        carryOutTaskBusiness.Leave(carryOut, shelfCode, store, user, db);
+                    }
 
                     // 库存记录下架
-                    storeBusiness.Leave(store.Id, result.t.Id, db);
+                    storeBusiness.Leave(store.Id, carryOut.Id, db);
                 }
 
                 // 更新仓位状态
