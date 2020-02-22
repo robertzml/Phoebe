@@ -276,7 +276,7 @@ namespace Phoebe.WebAPI.Controllers
         }
 
         /// <summary>
-        /// 删除入库任务
+        /// 删除出库任务
         /// </summary>
         /// <param name="taskId"></param>
         /// <returns></returns>

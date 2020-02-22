@@ -58,6 +58,17 @@ namespace Phoebe.WebAPI.Controllers
         }
 
         /// <summary>
+        /// 根据入库任务查找
+        /// </summary>
+        /// <param name="taskId"></param>
+        /// <returns></returns>
+        public ActionResult<List<CarryOutTaskView>> FindByStockInTask(string taskId)
+        {
+            CarryOutTaskViewBusiness carryOutTaskViewBusiness = new CarryOutTaskViewBusiness();
+            return carryOutTaskViewBusiness.FindByStockInTask(taskId);
+        }
+
+        /// <summary>
         /// 获取出库任务仓位码
         /// </summary>
         /// <returns></returns>

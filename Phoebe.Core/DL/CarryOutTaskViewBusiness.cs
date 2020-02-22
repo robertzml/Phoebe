@@ -26,13 +26,14 @@ namespace Phoebe.Core.DL
         }
 
         /// <summary>
-        /// 获取待办出库搬运任务
+        /// 根据入库任务查找
         /// </summary>
+        /// <param name="stockInTaskId"></param>
         /// <returns></returns>
-        public List<CarryOutTaskView> ListToDo()
+        public List<CarryOutTaskView> FindByStockInTask(string stockInTaskId)
         {
             var db = GetInstance();
-            var data = db.Queryable<CarryOutTaskView>().Where(r => r.Status == (int)EntityStatus.StockOutReady);
+            var data = db.Queryable<CarryOutTaskView>().Where(r => r.StockInTaskId == stockInTaskId);
             return data.ToList();
         }
 
