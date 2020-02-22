@@ -79,18 +79,6 @@ namespace Phoebe.WebAPI.Controllers
             CarryInTaskViewBusiness carryInTaskViewBusiness = new CarryInTaskViewBusiness();
             return carryInTaskViewBusiness.FindByTray(trayCode, EntityStatus.StockInCheck);
         }
-
-        /// <summary>
-        /// 查找用户当前接单任务
-        /// </summary>
-        /// <param name="userId"></param>
-        /// <returns></returns>
-        [HttpGet]
-        public ActionResult<List<CarryInTaskView>> FindCurrentReceive(int userId)
-        {
-            CarryInTaskViewBusiness carryInTaskViewBusiness = new CarryInTaskViewBusiness();
-            return carryInTaskViewBusiness.FindCurrentReceive(userId);
-        }
         #endregion //Action
 
         #region Action
@@ -113,31 +101,6 @@ namespace Phoebe.WebAPI.Controllers
                     ErrorMessage = result.errorMessage,
                     Entity = null
                 };
-
-                return data;
-            });
-
-            return await task;
-        }
-
-        /// <summary>
-        /// 入库接单
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public async Task<ActionResult<ResponseData>> ReceiveTask(CarryInReceiveModel model)
-        {
-            CarryInService carryInService = new CarryInService();
-
-            var task = Task.Run(() =>
-            {
-                ResponseData data = new ResponseData();
-
-                var result = carryInService.ReceiveTask(model.TrayCode, model.UserId);
-
-                data.Status = result.success ? 0 : 1;
-                data.ErrorMessage = result.errorMessage;
 
                 return data;
             });
@@ -185,31 +148,6 @@ namespace Phoebe.WebAPI.Controllers
                 ResponseData data = new ResponseData();
 
                 var result = carryInService.Finish(model.TaskId, model.UserId, model.TrayCode, model.MoveCount, model.MoveWeight, model.Remark);
-
-                data.Status = result.success ? 0 : 1;
-                data.ErrorMessage = result.errorMessage;
-
-                return data;
-            });
-
-            return await task;
-        }
-
-        /// <summary>
-        /// 取消接单
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public async Task<ActionResult<ResponseData>> UnReceiveTask(CarryInReceiveModel model)
-        {
-            CarryInService carryInService = new CarryInService();
-
-            var task = Task.Run(() =>
-            {
-                ResponseData data = new ResponseData();
-
-                var result = carryInService.UnReceive(model.TrayCode, model.UserId);
 
                 data.Status = result.success ? 0 : 1;
                 data.ErrorMessage = result.errorMessage;

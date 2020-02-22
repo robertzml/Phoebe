@@ -59,48 +59,6 @@ namespace Phoebe.Core.Service
         }
 
         /// <summary>
-        /// 搬运入库任务接单
-        /// </summary>
-        /// <param name="trayCode"></param>
-        /// <param name="userId"></param>
-        /// <returns></returns>
-        public (bool success, string errorMessage) ReceiveTask(string trayCode, int userId)
-        {
-            var db = GetInstance();
-
-            try
-            {
-                db.Ado.BeginTran();
-
-                var tasks = db.Queryable<CarryInTask>().Where(r => r.TrayCode == trayCode && r.Status == (int)EntityStatus.StockInCheck).ToList();
-                if (tasks.Count == 0)
-                    return (false, "该托盘无入库任务");
-
-                var user = db.Queryable<User>().InSingle(userId);
-
-                // 检查用户情况
-                var exists = db.Queryable<CarryInTask>().Count(r => r.ReceiveUserId == user.Id && r.Status == (int)EntityStatus.StockInReceive);
-                if (exists != 0)
-                    return (false, "用户还有入库任务未完成");
-
-                // 更新任务状态到接单
-                CarryInTaskBusiness carryInTaskBusiness = new CarryInTaskBusiness();
-                foreach (var task in tasks)
-                {
-                    carryInTaskBusiness.Receive(task, user, db);
-                }
-
-                db.Ado.CommitTran();
-                return (true, "");
-            }
-            catch (Exception e)
-            {
-                db.Ado.RollbackTran();
-                return (false, e.Message);
-            }
-        }
-
-        /// <summary>
         /// 上架
         /// </summary>
         /// <param name="trayCode">托盘码</param>
@@ -250,47 +208,6 @@ namespace Phoebe.Core.Service
                 // 删除搬运入库
                 CarryInTaskBusiness taskBusiness = new CarryInTaskBusiness();
                 taskBusiness.Delete(id, db);
-
-                db.Ado.CommitTran();
-                return (true, "");
-            }
-            catch (Exception e)
-            {
-                db.Ado.RollbackTran();
-                return (false, e.Message);
-            }
-        }
-
-        /// <summary>
-        /// 取消接单
-        /// </summary>
-        /// <param name="trayCode"></param>
-        /// <param name="userId"></param>
-        /// <returns></returns>
-        public (bool success, string errorMessage) UnReceive(string trayCode, int userId)
-        {
-            var db = GetInstance();
-
-            try
-            {
-                db.Ado.BeginTran();
-
-                CarryInTaskBusiness carryInTaskBusiness = new CarryInTaskBusiness();
-                var tasks = db.Queryable<CarryInTask>().Where(r => r.TrayCode == trayCode && r.Status == (int)EntityStatus.StockInReceive).ToList();
-                if (tasks.Count == 0)
-                    return (false, "该托盘无已接单搬运入库任务");
-
-                // 检查用户情况
-                if (tasks.Any(r => r.ReceiveUserId != userId))
-                {
-                    return (false, "非本人任务，无法取消接单");
-                }
-
-                // 更新任务状态
-                foreach (var task in tasks)
-                {
-                    carryInTaskBusiness.UnReceive(task, db);
-                }
 
                 db.Ado.CommitTran();
                 return (true, "");

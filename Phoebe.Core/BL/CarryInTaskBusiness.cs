@@ -50,28 +50,6 @@ namespace Phoebe.Core.BL
         }
 
         /// <summary>
-        /// 接单
-        /// </summary>
-        /// <param name="task"></param>
-        /// <param name="user"></param>
-        /// <param name="db"></param>
-        /// <returns></returns>
-        public (bool success, string errorMessage) Receive(CarryInTask task, User user, SqlSugarClient db = null)
-        {
-            if (db == null)
-                db = GetInstance();
-
-            task.ReceiveUserId = user.Id;
-            task.ReceiveUserName = user.Name;
-            task.ReceiveTime = DateTime.Now;
-            task.Status = (int)EntityStatus.StockInReceive;
-
-            db.Updateable(task).ExecuteCommand();
-
-            return (true, "");
-        }
-
-        /// <summary>
         /// 上架
         /// </summary>
         /// <param name="task">入库任务</param>
@@ -115,27 +93,6 @@ namespace Phoebe.Core.BL
             task.MoveWeight = moveWeight;
             task.FinishTime = DateTime.Now;
             task.Status = (int)EntityStatus.StockInFinish;
-
-            db.Updateable(task).ExecuteCommand();
-
-            return (true, "");
-        }
-
-        /// <summary>
-        /// 取消接单
-        /// </summary>
-        /// <param name="trayCode"></param>
-        /// <param name="userId"></param>
-        /// <returns></returns>
-        public (bool success, string errorMessage) UnReceive(CarryInTask task, SqlSugarClient db = null)
-        {
-            if (db == null)
-                db = GetInstance();
-
-            task.ReceiveUserId = 0;
-            task.ReceiveUserName = "";
-            task.ReceiveTime = null;
-            task.Status = (int)EntityStatus.StockInCheck;
 
             db.Updateable(task).ExecuteCommand();
 
