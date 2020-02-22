@@ -23,29 +23,79 @@ namespace Phoebe.Core.BL
         /// </summary>
         /// <param name="entity"></param>
         /// <param name="stockInTask">入库任务对象</param>
+        /// <param name="user"></param>
         /// <param name="db"></param>
         /// <returns></returns>
-        public (bool success, string errorMessage, CarryInTask t) CreateByStockIn(CarryInTask entity, StockInTaskView stockInTask, SqlSugarClient db = null)
+        public (bool success, string errorMessage, CarryInTask t) CreateByStockIn(CarryInTask entity, StockInTaskView stockInTask, User user, SqlSugarClient db = null)
         {
             if (db == null)
                 db = GetInstance();
 
             SequenceRecordBusiness recordBusiness = new SequenceRecordBusiness();
-            var checkUser = db.Queryable<User>().InSingle(entity.CheckUserId);
+            var now = DateTime.Now;           
 
             entity.Id = Guid.NewGuid().ToString();
+            entity.Type = (int)CarryInTaskType.In;
             entity.CustomerId = stockInTask.CustomerId;
             entity.ContractId = stockInTask.ContractId;
             entity.CargoId = stockInTask.CargoId;
 
-            entity.CreateTime = DateTime.Now;
-            entity.TaskCode = recordBusiness.GetNextSequence(db, "CarryInTask", entity.CreateTime);
-            entity.CheckTime = DateTime.Now;
-            entity.CheckUserName = checkUser.Name;
+            entity.CreateTime = now;
+            entity.TaskCode = recordBusiness.GetNextSequence(db, "CarryInTask", now);
+            entity.CheckTime = now;
+            entity.CheckUserId = user.Id;
+            entity.CheckUserName = user.Name;
 
             entity.Status = (int)EntityStatus.StockInCheck;
 
             var t = db.Insertable(entity).ExecuteReturnEntity();
+            return (true, "", t);
+        }
+
+        /// <summary>
+        /// 创建放回搬运入库任务
+        /// </summary>
+        /// <param name="carryOutTask">搬运出库任务</param>
+        /// <param name="user">清点人</param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        /// <remarks>
+        /// 托盘未完全出清，需要创建放回任务，或者下架后直接上架
+        /// </remarks>
+        public (bool success, string errorMessage, CarryInTask t) CreateBack(CarryOutTask carryOutTask, User user, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            var now = DateTime.Now;
+
+            CarryInTask task = new CarryInTask();
+            task.Id = Guid.NewGuid().ToString();
+            task.Type = (int)CarryInTaskType.Temp;
+            task.CustomerId = carryOutTask.CustomerId;
+            task.ContractId = carryOutTask.ContractId;
+            task.CargoId = carryOutTask.CargoId;           
+
+            task.StoreId = carryOutTask.StoreId; // 暂时保存原库存ID
+            task.StockOutTaskId = carryOutTask.StockOutTaskId;
+
+            task.MoveCount = carryOutTask.StoreCount - carryOutTask.MoveCount;
+            task.MoveWeight = carryOutTask.StoreWeight - carryOutTask.MoveWeight;
+
+            SequenceRecordBusiness recordBusiness = new SequenceRecordBusiness();
+            task.TaskCode = recordBusiness.GetNextSequence(db, "CarryInTask", now);
+            task.TrayCode = carryOutTask.TrayCode;
+
+            task.CheckUserId = user.Id;
+            task.CheckUserName = user.Name;
+            task.CreateTime = now;
+            task.CheckTime = now;
+
+            task.Status = (int)EntityStatus.StockInCheck;
+            task.Remark = "";
+
+            var t = db.Insertable(task).ExecuteReturnEntity();
+
             return (true, "", t);
         }
 
@@ -56,17 +106,24 @@ namespace Phoebe.Core.BL
         /// <param name="shelfCode">货架码</param>
         /// <param name="positionId">仓位ID</param>
         /// <param name="storeId">库存ID</param>
+        /// <param name="user"></param>
         /// <param name="db"></param>
         /// <returns></returns>
-        public (bool success, string errorMessage) Enter(CarryInTask task, string shelfCode, int positionId, string storeId, SqlSugarClient db = null)
+        public (bool success, string errorMessage) Enter(CarryInTask task, string shelfCode, int positionId, string storeId, User user, SqlSugarClient db = null)
         {
             if (db == null)
                 db = GetInstance();
 
+            var now = DateTime.Now;
+
             task.ShelfCode = shelfCode;
             task.PositionId = positionId;
             task.StoreId = storeId;
-            task.MoveTime = DateTime.Now;
+
+            task.ReceiveUserId = user.Id;
+            task.ReceiveUserName = user.Name;
+            task.ReceiveTime = now;
+            task.MoveTime = now;
             task.Status = (int)EntityStatus.StockInEnter;
 
             db.Updateable(task).ExecuteCommand();
@@ -134,84 +191,6 @@ namespace Phoebe.Core.BL
             db.Updateable(carryIn).ExecuteCommand();
 
             return (true, "");
-        }
-
-        /// <summary>
-        /// 创建放回搬运入库任务
-        /// </summary>
-        /// <param name="carryOutTask">搬运出库任务</param>
-        /// <param name="user">清点人</param>
-        /// <param name="db"></param>
-        /// <returns></returns>
-        /// <remarks>
-        /// 托盘未完全出清，需要创建放回任务
-        /// </remarks>
-        public (bool success, string errorMessage, CarryInTask t) CreateBack(CarryOutTask carryOutTask, User user, SqlSugarClient db = null)
-        {
-            if (db == null)
-                db = GetInstance();
-
-            var now = DateTime.Now;
-
-            CarryInTask task = new CarryInTask();
-            task.Id = Guid.NewGuid().ToString();
-            task.Type = (int)CarryInTaskType.Temp;
-            task.CustomerId = carryOutTask.CustomerId;
-            task.ContractId = carryOutTask.ContractId;
-            task.CargoId = carryOutTask.CargoId;
-
-            SequenceRecordBusiness recordBusiness = new SequenceRecordBusiness();
-            task.TaskCode = recordBusiness.GetNextSequence(db, "CarryInTask", now);
-
-            task.StoreId = carryOutTask.StoreId; // 暂时保存原库存ID
-
-            task.StockOutTaskId = carryOutTask.StockOutTaskId;
-            task.MoveCount = carryOutTask.StoreCount - carryOutTask.MoveCount;
-            task.MoveWeight = carryOutTask.StoreWeight - carryOutTask.MoveWeight;
-
-            task.TrayCode = carryOutTask.TrayCode;
-
-            task.CheckUserId = user.Id;
-            task.CheckUserName = user.Name;
-            task.CreateTime = now;
-            task.CheckTime = now;
-            task.Status = (int)EntityStatus.StockInCheck;
-
-            var t = db.Insertable(task).ExecuteReturnEntity();
-
-            return (true, "", t);
-        }
-
-        /// <summary>
-        /// 生成临时搬运入库任务
-        /// 由搬运出库任务生成
-        /// </summary>
-        /// <param name="carryOutTask">搬运出库任务</param>
-        /// <returns></returns>
-        public static CarryInTask SetTempInTask(CarryOutTask carryOutTask)
-        {
-            CarryInTask task = new CarryInTask();
-            task.Id = Guid.NewGuid().ToString();
-            task.Type = (int)CarryInTaskType.Temp;
-            task.CustomerId = carryOutTask.CustomerId;
-            task.ContractId = carryOutTask.ContractId;
-            task.CargoId = carryOutTask.CargoId;
-
-            task.StoreId = carryOutTask.StoreId; // 暂时保存原库存ID
-
-            task.StockOutTaskId = carryOutTask.StockOutTaskId;
-            task.MoveCount = carryOutTask.StoreCount - carryOutTask.MoveCount;
-            task.MoveWeight = carryOutTask.StoreWeight - carryOutTask.MoveWeight;
-
-            task.TrayCode = carryOutTask.TrayCode;
-
-            task.CheckUserId = carryOutTask.ReceiveUserId;
-            task.CheckUserName = carryOutTask.ReceiveUserName;
-            task.CreateTime = DateTime.Now;
-            task.CheckTime = DateTime.Now;
-            task.Status = (int)EntityStatus.StockInCheck;
-
-            return task;
         }
         #endregion //Method
     }

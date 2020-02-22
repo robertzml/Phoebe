@@ -71,16 +71,16 @@ namespace Phoebe.Core.BL
         /// 旧库存记录保存在CarryInTask 的库存ID中，生成新库存记录后更新
         /// </remarks>
         /// <returns></returns>
-        public (bool success, string errorMessage, Store t) CreateByStockOut(StockOutTaskView stockOutTask, CarryInTask task, int positionId, SqlSugarClient db = null)
+        public (bool success, string errorMessage, Store t) CreateByBack(CarryInTask task, int positionId, SqlSugarClient db = null)
         {
             if (db == null)
                 db = GetInstance();
 
             Store store = new Store();
             store.Id = Guid.NewGuid().ToString();
-            store.CustomerId = stockOutTask.CustomerId;
-            store.ContractId = stockOutTask.ContractId;
-            store.CargoId = stockOutTask.CargoId;
+            store.CustomerId = task.CustomerId;
+            store.ContractId = task.ContractId;
+            store.CargoId = task.CargoId;
 
             store.PositionId = positionId;
             store.TrayCode = task.TrayCode;
@@ -98,20 +98,16 @@ namespace Phoebe.Core.BL
             store.StockInId = oldStore.StockInId;
             store.PrevStoreId = oldStore.Id;
 
-            store.InTime = stockOutTask.OutTime;
+            store.InTime = oldStore.OutTime.Value; //库存入库时间为旧库存出库时间
             store.CarryInTaskId = task.Id;
 
             store.CreateTime = DateTime.Now;
             store.Status = (int)EntityStatus.StoreInReady;
 
-            var t = db.Insertable(store).ExecuteReturnEntity();
-
-            // 更新旧库存出库时间等于新库存入库时间
-            oldStore.OutTime = store.InTime;
-            db.Updateable(oldStore).ExecuteCommand();
+            var t = db.Insertable(store).ExecuteReturnEntity();            
 
             return (true, "", t);
-        }
+        }       
 
         /// <summary>
         /// 库存记录入库确认
@@ -195,7 +191,7 @@ namespace Phoebe.Core.BL
 
             var store = db.Queryable<Store>().InSingle(id);
             store.CarryOutTaskId = carryOutTaskId;
-            store.OutTime = DateTime.Now.Date; //暂定为当前时间，若重新入库，则更新
+            store.OutTime = DateTime.Now.Date; //库存出库时间为当前时间，若重新入库，新库存入库时间等于前一出库时间
             store.Status = (int)EntityStatus.StoreOutReady;
 
             db.Updateable(store).ExecuteCommand();

@@ -16,79 +16,7 @@ namespace Phoebe.Core.BL
     /// 搬运出库任务业务类
     /// </summary>
     public class CarryOutTaskBusiness : AbstractBusiness<CarryOutTask, string>, IBaseBL<CarryOutTask, string>
-    { 
-        #region Method
-        /// <summary>
-        /// 出库完成
-        /// 清点和完成一起
-        /// </summary>
-        /// <param name="taskId"></param>
-        /// <param name="userId"></param>
-        /// <param name="remark"></param>
-        /// <returns></returns>
-        public (bool success, string errorMessage) Finish(string taskId, int userId, int moveCount, decimal moveWeight, string remark)
-        {
-            var db = GetInstance();
-
-            try
-            {
-                db.Ado.BeginTran();
-
-                var task = db.Queryable<CarryOutTask>().Single(r => r.Id == taskId);
-
-                if (task.Status != (int)EntityStatus.StockOutLeave)
-                {
-                    return (false, "该任务无法完成");
-                }
-
-                var user = db.Queryable<User>().InSingle(userId);
-
-                // update task
-                var now = DateTime.Now;
-                task.MoveCount = moveCount;
-                task.MoveWeight = moveWeight;
-                task.CheckTime = now;
-                task.CheckUserId = userId;
-                task.CheckUserName = user.Name;
-                task.FinishTime = now;
-                if (task.Remark == null)
-                    task.Remark = remark;
-                else
-                    task.Remark += remark;
-
-                task.Status = (int)EntityStatus.StockOutFinish;
-                db.Updateable(task).ExecuteCommand();
-
-                // 非全出则创建搬回的入库任务
-                if (task.Type == (int)CarryOutTaskType.Out && task.StoreCount > task.MoveCount)
-                {
-                    SequenceRecordBusiness recordBusiness = new SequenceRecordBusiness();
-                    var inTask = CarryInTaskBusiness.SetTempInTask(task);
-                    inTask.TaskCode = recordBusiness.GetNextSequence(db, "CarryInTask", inTask.CreateTime);
-
-                    db.Insertable(inTask).ExecuteCommand();
-                }
-
-                var stockOutTask = db.Queryable<StockOutTaskView>().InSingle(task.StockOutTaskId);
-
-                // 更新库存状态
-                var store = db.Queryable<Store>().Single(r => r.Id == task.StoreId);
-                store.CarryOutTaskId = task.Id;
-                store.OutTime = stockOutTask.OutTime;
-                store.Status = (int)EntityStatus.StoreOut;
-                db.Updateable(store).ExecuteCommand();
-
-                db.Ado.CommitTran();
-                return (true, "");
-            }
-            catch (Exception e)
-            {
-                db.Ado.RollbackTran();
-                return (false, e.Message);
-            }
-        }
-        #endregion //Method
-
+    {
         #region Method
         /// <summary>
         /// 由出库任务创建搬运出库任务
@@ -218,7 +146,7 @@ namespace Phoebe.Core.BL
             db.Updateable(task).ExecuteCommand();
             return (true, "");
         }
-        
+
         /// <summary>
         /// 搬运出库清点
         /// </summary>
