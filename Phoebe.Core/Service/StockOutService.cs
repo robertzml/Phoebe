@@ -201,11 +201,12 @@ namespace Phoebe.Core.Service
                 UserBusiness userBusiness = new UserBusiness();
                 var user = userBusiness.FindById(userId);
 
-                // 获取出库单
                 StockOutTaskBusiness stockOutTaskBusiness = new StockOutTaskBusiness();
                 CarryOutTaskBusiness carryOutTaskBusiness = new CarryOutTaskBusiness();
                 CarryInTaskBusiness carryInTaskBusiness = new CarryInTaskBusiness();
                 StockOutBusiness stockOutBusiness = new StockOutBusiness();
+
+                // 获取出库单
                 var stockOut = stockOutBusiness.FindById(stockOutId);
 
                 foreach (var carryOutTask in tasks)
@@ -219,8 +220,7 @@ namespace Phoebe.Core.Service
                             return (false, "出库货物非当前合同所有");
 
                         // 创建出库任务
-                        var result = stockOutTaskBusiness.Create(stockOutId, carryOutTask, user, db);
-                        carryOutTask.StockOutTaskId = result.t.Id;
+                        var result = stockOutTaskBusiness.Create(stockOutId, carryOutTask, user, db);                       
 
                         // 更新搬运出库任务
                         carryOutTaskBusiness.Check(carryOutTask.Id, result.t.Id, carryOutTask.MoveCount, carryOutTask.MoveWeight, carryOutTask.Remark, user, db);
@@ -234,7 +234,7 @@ namespace Phoebe.Core.Service
                     else //无需出库的货物放回
                     {
                         // 更新搬运出库任务
-                        carryOutTaskBusiness.CheckUnmove(carryOutTask.Id, user, db);
+                        carryOutTaskBusiness.CheckUnmove(carryOutTask, user, db);
 
                         // 创建放回任务
                         carryInTaskBusiness.CreateBack(carryOutTask, user, db);

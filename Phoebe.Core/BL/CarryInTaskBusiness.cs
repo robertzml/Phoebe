@@ -192,6 +192,21 @@ namespace Phoebe.Core.BL
 
             return (true, "");
         }
+       
+        /// <summary>
+        /// 检查临时出库任务是否创建放回任务
+        /// </summary>
+        /// <param name="task"></param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        public bool CheckHasBack(CarryOutTask task, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            var count = db.Queryable<CarryInTask>().Count(r => r.TrayCode == task.TrayCode && r.Status != (int)EntityStatus.StockInFinish);
+            return count > 0;
+        }
         #endregion //Method
     }
 }

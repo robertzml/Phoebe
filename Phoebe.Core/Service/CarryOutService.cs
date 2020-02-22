@@ -183,7 +183,10 @@ namespace Phoebe.Core.Service
                 if (task.Type == (int)CarryOutTaskType.Temp)
                 {
                     CarryInTaskBusiness carryInTaskBusiness = new CarryInTaskBusiness();
-                    carryInTaskBusiness.CreateBack(task, user, db);
+
+                    var have = carryInTaskBusiness.CheckHasBack(task, db);
+                    if (!have)
+                        carryInTaskBusiness.CreateBack(task, user, db);
                 }
 
                 db.Ado.CommitTran();

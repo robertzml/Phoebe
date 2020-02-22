@@ -91,13 +91,6 @@ namespace Phoebe.Core.BL
 
                 db.Insertable(task).ExecuteCommand();
             }
-            else
-            {
-                task.OutCount += carryOutTask.MoveCount;
-                task.OutWeight += carryOutTask.MoveWeight;
-
-                db.Updateable(task).ExecuteCommand();
-            }
 
             return (true, "", task);
         }

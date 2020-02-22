@@ -102,6 +102,9 @@ namespace Phoebe.Core.Service
                         // 先创建放回搬运任务
                         var result = carryInTaskBusiness.CreateBack(carryOutTask, user, db);
                         carryInTasks.Add(result.t);
+
+                        // 清点搬运出库
+                        carryOutTaskBusiness.CheckUnmove(carryOutTask, user, db);
                     }
                 }
 
@@ -173,6 +176,13 @@ namespace Phoebe.Core.Service
                 if (task.Status != (int)EntityStatus.StockInEnter)
                 {
                     return (false, "该任务无法完成");
+                }
+
+                if (task.Type == (int)CarryInTaskType.Temp) // 临时搬运入库任务需先确认对应搬运出库任务
+                {
+                    var count = db.Queryable<CarryOutTask>().Count(r => r.TrayCode == trayCode && r.Status != (int)EntityStatus.StockOutFinish);
+                    if (count > 0)
+                        return (false, "临时搬运入库任务需先确认对应搬运出库任务");
                 }
 
                 if (trayCode != task.TrayCode)
