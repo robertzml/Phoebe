@@ -83,6 +83,18 @@ namespace Phoebe.WebAPI.Controllers
         }
 
         /// <summary>
+        /// 按托盘码查找库存
+        /// </summary>
+        /// <param name="trayCode">托盘码</param>
+        /// <returns></returns>
+        [HttpGet]
+        public List<StoreView> FindByTray(string trayCode)
+        {
+            StoreViewBusiness storeViewBusiness = new StoreViewBusiness();
+            return storeViewBusiness.FindByTray(trayCode);
+        }
+
+        /// <summary>
         /// 库存信息
         /// </summary>
         /// <param name="id"></param>

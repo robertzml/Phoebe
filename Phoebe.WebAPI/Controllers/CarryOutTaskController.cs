@@ -79,18 +79,6 @@ namespace Phoebe.WebAPI.Controllers
         }
 
         /// <summary>
-        /// 查找用户当前接单任务
-        /// </summary>
-        /// <param name="userId"></param>
-        /// <returns></returns>
-        [HttpGet]
-        public ActionResult<List<CarryOutTaskView>> FindCurrentReceive(int userId)
-        {
-            CarryOutTaskViewBusiness carryOutTaskViewBusiness = new CarryOutTaskViewBusiness();
-            return carryOutTaskViewBusiness.FindCurrentReceive(userId);
-        }
-
-        /// <summary>
         /// 根据托盘码获取当前搬运出库任务
         /// </summary>
         /// <param name="trayCode">托盘码</param>
@@ -131,61 +119,11 @@ namespace Phoebe.WebAPI.Controllers
         }
 
         /// <summary>
-        /// 出库接单
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public async Task<ActionResult<ResponseData>> ReceiveTask(CarryOutReceiveModel model)
-        {
-            CarryOutTaskBusiness taskBusiness = new CarryOutTaskBusiness();
-
-            var task = Task.Run(() =>
-            {
-                ResponseData data = new ResponseData();
-
-                var result = taskBusiness.Receive(model.TrayCode, model.UserId);
-
-                data.Status = result.success ? 0 : 1;
-                data.ErrorMessage = result.errorMessage;
-
-                return data;
-            });
-
-            return await task;
-        }
-
-        /// <summary>
-        /// 出库下架
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public async Task<ActionResult<ResponseData>> LeaveTask(CarryOutLeaveModel model)
-        {
-            CarryOutTaskBusiness taskBusiness = new CarryOutTaskBusiness();
-
-            var task = Task.Run(() =>
-            {
-                ResponseData data = new ResponseData();
-
-                var result = taskBusiness.Leave(model.TrayCode, model.ShelfCode, model.UserId);
-
-                data.Status = result.success ? 0 : 1;
-                data.ErrorMessage = result.errorMessage;
-
-                return data;
-            });
-
-            return await task;
-        }
-
-        /// <summary>
         /// 出库下架-叉车工直接下架
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public async Task<ActionResult<ResponseData>> LeaveUnassignTask(CarryOutLeaveModel model)
+        public async Task<ActionResult<ResponseData>> LeaveTask(CarryOutLeaveModel model)
         {
             CarryOutService carryOutService = new CarryOutService();
             var task = Task.Run(() =>

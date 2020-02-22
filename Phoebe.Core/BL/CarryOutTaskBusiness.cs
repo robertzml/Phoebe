@@ -250,7 +250,7 @@ namespace Phoebe.Core.BL
                 return (false, e.Message);
             }
         }
-               
+
         /// <summary>
         /// 出库接单
         /// </summary>
@@ -286,72 +286,6 @@ namespace Phoebe.Core.BL
                     task.Status = (int)EntityStatus.StockOutReceive;
 
                     db.Updateable(task).ExecuteCommand();
-                }
-
-                db.Ado.CommitTran();
-                return (true, "");
-            }
-            catch (Exception e)
-            {
-                db.Ado.RollbackTran();
-                return (false, e.Message);
-            }
-        }
-
-        /// <summary>
-        /// 下架
-        /// </summary>
-        /// <param name="trayCode">托盘码</param>
-        /// <param name="shelfCode">货架码</param>
-        /// <param name="userId"></param>
-        /// <returns></returns>
-        public (bool success, string errorMessage) Leave(string trayCode, string shelfCode, int userId)
-        {
-            var db = GetInstance();
-
-            try
-            {
-                db.Ado.BeginTran();
-
-                var tasks = db.Queryable<CarryOutTask>().Where(r => r.TrayCode == trayCode && r.Status == (int)EntityStatus.StockOutReceive).ToList();
-                if (tasks.Count == 0)
-                    return (false, "该托盘无出库任务");
-
-                var user = db.Queryable<User>().InSingle(userId);
-
-                // 检查状态
-                foreach (var task in tasks)
-                {
-                    if (task.ReceiveUserId != user.Id)
-                        return (false, "非本用户任务");
-
-                    if (task.TrayCode != trayCode || task.ShelfCode != shelfCode)
-                        return (false, "托盘或货架不一致");
-                }
-
-                // find position
-                var position = db.Queryable<Position>().InSingle(tasks[0].PositionId);
-
-                // update position
-                position.Status = (int)EntityStatus.Available;
-                db.Updateable(position).ExecuteCommand();
-
-                // 更新搬运出库任务状态
-                foreach (var task in tasks)
-                {
-                    task.MoveTime = DateTime.Now;
-                    task.Status = (int)EntityStatus.StockOutLeave;
-                    db.Updateable(task).ExecuteCommand();
-
-                    // 生成临时出库任务对应临时入库任务
-                    if (task.Type == (int)CarryOutTaskType.Temp)
-                    {
-                        SequenceRecordBusiness recordBusiness = new SequenceRecordBusiness();
-                        var inTask = CarryInTaskBusiness.SetTempInTask(task);
-                        inTask.TaskCode = recordBusiness.GetNextSequence(db, "CarryInTask", inTask.CreateTime);
-
-                        db.Insertable(inTask).ExecuteCommand();
-                    }
                 }
 
                 db.Ado.CommitTran();
@@ -444,7 +378,7 @@ namespace Phoebe.Core.BL
         /// <param name="store"></param>
         /// <param name="db"></param>
         /// <returns></returns>
-        public (bool success, string errorMessage, CarryOutTask t) CreateByStockOut(CarryOutTask entity, StockOutTaskView stockOutTask, StoreView store,  SqlSugarClient db = null)
+        public (bool success, string errorMessage, CarryOutTask t) CreateByStockOut(CarryOutTask entity, StockOutTaskView stockOutTask, StoreView store, SqlSugarClient db = null)
         {
             if (db == null)
                 db = GetInstance();
@@ -461,7 +395,7 @@ namespace Phoebe.Core.BL
             entity.CreateTime = now;
             entity.TaskCode = recordBusiness.GetNextSequence(db, "CarryOutTask", now);
             entity.Status = (int)EntityStatus.StockOutReady;
-          
+
             if (store.ShelfCode == entity.ShelfCode)
             {
                 entity.PositionNumber = store.PositionNumber;

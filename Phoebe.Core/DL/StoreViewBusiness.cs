@@ -98,6 +98,24 @@ namespace Phoebe.Core.DL
         }
 
         /// <summary>
+        /// 按托盘码查找库存
+        /// </summary>
+        /// <param name="trayCode">托盘码</param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        /// <remarks>
+        /// 库存状态限定为在库，准备入库，准备出库
+        /// </remarks>
+        public List<StoreView> FindByTray(string trayCode, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            var data = db.Queryable<StoreView>().Where(r => r.TrayCode == trayCode && r.Status != (int)EntityStatus.StoreOut);
+            return data.ToList();
+        }
+
+        /// <summary>
         /// 按出库单查找库存
         /// 出库单规定了出库类型：普通库或者仓位库
         /// </summary>
