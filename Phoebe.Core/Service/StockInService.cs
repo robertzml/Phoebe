@@ -408,63 +408,6 @@ namespace Phoebe.Core.Service
                 return (false, e.Message);
             }
         }
-
-        /// <summary>
-        /// 扫托盘码出库
-        /// </summary>
-        /// <param name="stockInTaskId">入库任务ID</param>
-        /// <param name="trayCode">托盘码</param>
-        /// <param name="tasks">托盘码对应的出库任务</param>
-        /// <returns></returns>
-        /// <remarks>
-        /// 叉车工先取一个有零头的托盘出来，再上货到这个托盘上
-        /// 创建一个临时搬运出库任务和临时搬运入库任务
-        /// </remarks>
-        public (bool success, string errorMessage) AddCarryOut(string stockInTaskId, string trayCode, int userId, List<CarryOutTask> tasks)
-        {
-            var db = GetInstance();
-            try
-            {
-                db.Ado.BeginTran();
-
-                // 获取清点人
-                UserBusiness userBusiness = new UserBusiness();
-                var user = userBusiness.FindById(userId);
-
-                CarryOutTaskBusiness carryOutTaskBusiness = new CarryOutTaskBusiness();
-                CarryInTaskBusiness carryInTaskBusiness = new CarryInTaskBusiness();
-
-                foreach (var carryOutTask in tasks)
-                {
-                    if (carryOutTask.TrayCode != trayCode)
-                        return (false, "托盘码与货物不一致");
-
-                    if (carryOutTask.MoveCount > 0)
-                    {
-                        return (false, "入库时不能出库");
-                    }
-                    else //无需出库的货物放回
-                    {
-                        // 关联搬运出库与当前入库任务
-                        carryOutTask.StockInTaskId = stockInTaskId;
-
-                        // 更新搬运出库任务
-                        carryOutTaskBusiness.CheckUnmove(carryOutTask, user, db);
-
-                        // 创建放回任务
-                        carryInTaskBusiness.CreateBack(carryOutTask, user, db);
-                    }
-                }
-
-                db.Ado.CommitTran();
-                return (true, "");
-            }
-            catch (Exception e)
-            {
-                db.Ado.RollbackTran();
-                return (false, e.Message);
-            }
-        }
         #endregion //Stock In Task Service
     }
 }

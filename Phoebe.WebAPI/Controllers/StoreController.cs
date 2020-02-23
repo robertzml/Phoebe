@@ -41,7 +41,7 @@ namespace Phoebe.WebAPI.Controllers
         public ActionResult<List<StoreView>> FindStoreIn(int positionId)
         {
             StoreViewBusiness storeViewBusiness = new StoreViewBusiness();
-            return storeViewBusiness.FindByPosition(positionId, true);
+            return storeViewBusiness.FindByPosition(positionId);
         }
 
         /// <summary>

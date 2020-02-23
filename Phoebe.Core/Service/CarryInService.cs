@@ -89,24 +89,25 @@ namespace Phoebe.Core.Service
                 // 检查上架任务来源
                 CarryInTaskBusiness carryInTaskBusiness = new CarryInTaskBusiness();
 
+                // 先找托盘上的搬运入库任务
                 var carryInTasks = db.Queryable<CarryInTask>().Where(r => r.TrayCode == trayCode && r.Status == (int)EntityStatus.StockInCheck).ToList();
-                if (carryInTasks.Count == 0) // 搬运出库任务上架
+
+                // 再找托盘上的搬运出库任务
+                CarryOutTaskBusiness carryOutTaskBusiness = new CarryOutTaskBusiness();
+                var carryOutTasks = db.Queryable<CarryOutTask>().Where(r => r.TrayCode == trayCode && r.Status == (int)EntityStatus.StockOutLeave).ToList();
+
+                foreach (var carryOutTask in carryOutTasks)
                 {
-                    CarryOutTaskBusiness carryOutTaskBusiness = new CarryOutTaskBusiness();
-                    var carryOutTasks = db.Queryable<CarryOutTask>().Where(r => r.TrayCode == trayCode && r.Status == (int)EntityStatus.StockOutLeave).ToList();
-                    if (carryOutTasks.Count == 0)
-                        return (false, "该托盘无入库任务");
+                    // 先创建放回搬运任务
+                    var result = carryInTaskBusiness.CreateBack(carryOutTask, user, db);
+                    carryInTasks.Add(result.t);
 
-                    foreach (var carryOutTask in carryOutTasks)
-                    {
-                        // 先创建放回搬运任务
-                        var result = carryInTaskBusiness.CreateBack(carryOutTask, user, db);
-                        carryInTasks.Add(result.t);
-
-                        // 清点搬运出库
-                        carryOutTaskBusiness.CheckUnmove(carryOutTask, user, db);
-                    }
+                    // 清点搬运出库
+                    carryOutTaskBusiness.CheckUnmove(carryOutTask, user, db);
                 }
+
+                if (carryInTasks.Count == 0)
+                    return (false, "该托盘无入库任务");
 
                 // 更新仓位状态
                 positionBusiness.UpdateStatus(position, EntityStatus.Occupy, db);
