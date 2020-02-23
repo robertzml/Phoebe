@@ -340,6 +340,7 @@ namespace Phoebe.Core.Service
                     entity.CargoId = inTask.CargoId;
                     entity.UnitWeight = inTask.UnitWeight;
 
+                    // 修改搬运入库任务对应信息
                     var carryIns = db.Queryable<CarryInTask>().Where(r => r.StockInTaskId == inTask.Id && r.Type == (int)CarryInTaskType.In).ToList();
 
                     foreach (var carryIn in carryIns)
@@ -348,9 +349,12 @@ namespace Phoebe.Core.Service
                         db.Updateable(carryIn).ExecuteCommand();
 
                         var store = db.Queryable<Store>().Single(r => r.CarryInTaskId == carryIn.Id);
-                        store.StoreWeight = carryIn.MoveWeight;
-                        store.TotalWeight = carryIn.MoveWeight;
-                        db.Updateable(store).ExecuteCommand();
+                        if (store != null)
+                        {
+                            store.StoreWeight = carryIn.MoveWeight;
+                            store.TotalWeight = carryIn.MoveWeight;
+                            db.Updateable(store).ExecuteCommand();
+                        }
                     }
                 }
 
