@@ -212,7 +212,7 @@ namespace Phoebe.Core.BL
         /// <param name="task"></param>
         /// <param name="db"></param>
         /// <returns></returns>
-        public (bool success, string errorMessage) Finish(CarryOutTask task, SqlSugarClient db)
+        public (bool success, string errorMessage) Finish(CarryOutTask task, SqlSugarClient db = null)
         {
             if (db == null)
                 db = GetInstance();

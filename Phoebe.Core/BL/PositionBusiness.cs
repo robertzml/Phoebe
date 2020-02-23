@@ -63,10 +63,12 @@ namespace Phoebe.Core.BL
             if (data.Count == 0)
                 return null;
 
+            var shelf = db.Queryable<Shelf>().Single(r => r.Id == data[0].ShelfId);
+            if (shelf.Type == (int)ShelfType.Virtual) //判断是否虚拟货架
+                return data[0];
+
             if (vice)
             {
-                var shelf = db.Queryable<Shelf>().Single(r => r.Id == data[0].ShelfId);
-
                 var find = data.FindLastIndex(r => r.Status != (int)EntityStatus.Available);
                 if (find == -1)
                 {
@@ -124,9 +126,12 @@ namespace Phoebe.Core.BL
             if (data.Count == 0)
                 return null;
 
+            var shelf = db.Queryable<Shelf>().Single(r => r.Id == data[0].ShelfId);
+            if (shelf.Type == (int)ShelfType.Virtual) //虚拟货架返回第一个仓位
+                return data[0];
+
             if (vice)
-            {
-                var shelf = db.Queryable<Shelf>().Single(r => r.Id == data[0].ShelfId);
+            {                
                 var pos = data.FindLast(r => r.Status == (int)EntityStatus.Occupy); //找出第一个占用的仓位
                 if (pos == null)
                     return null;
@@ -180,9 +185,9 @@ namespace Phoebe.Core.BL
                 if (shelf == null)
                     return (false, "未找到仓位");
 
-                if (shelf.Type != (int)ShelfType.Position)
+                if (shelf.Type != (int)ShelfType.Position && shelf.Type != (int)ShelfType.Virtual)
                 {
-                    return (false, "非仓位货架");
+                    return (false, "非仓位或虚拟货架");
                 }
 
                 var warehouse = db.Queryable<Warehouse>().InSingle(shelf.WarehouseId);

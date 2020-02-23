@@ -110,7 +110,9 @@ namespace Phoebe.Core.Service
                     return (false, "该托盘无入库任务");
 
                 // 更新仓位状态
-                positionBusiness.UpdateStatus(position, EntityStatus.Occupy, db);
+                var shelf = db.Queryable<Shelf>().Single(r => r.Id == position.ShelfId);
+                if (shelf.Type == (int)ShelfType.Position)
+                    positionBusiness.UpdateStatus(position, EntityStatus.Occupy, db);
 
                 StoreBusiness storeBusiness = new StoreBusiness();
                 ColdFeeBusiness coldFeeBusiness = new ColdFeeBusiness();
