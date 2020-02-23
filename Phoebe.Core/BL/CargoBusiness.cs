@@ -73,6 +73,35 @@ namespace Phoebe.Core.BL
                 return (false, e.Message);
             }
         }
+
+        /// <summary>
+        /// 删除货品
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        public override (bool success, string errorMessage) Delete(string id, SqlSugarClient db = null)
+        {
+            try
+            {
+                if (db == null)
+                    db = GetInstance();
+
+                var count = db.Queryable<StockInTask>().Count(r => r.CargoId == id);
+                if (count > 0)
+                    return (false, "货品已经使用，无法删除");
+
+                count = db.Queryable<Store>().Count(r => r.CargoId == id);
+                if (count > 0)
+                    return (false, "货品已经使用，无法删除");
+
+                return base.Delete(id, db);
+            }
+            catch (Exception e)
+            {
+                return (false, e.Message);
+            }
+        }
         #endregion //Method
     }
 }
