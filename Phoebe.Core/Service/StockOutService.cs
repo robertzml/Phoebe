@@ -135,6 +135,8 @@ namespace Phoebe.Core.Service
                 StockOutBusiness stockOutBusiness = new StockOutBusiness();
                 var result = stockOutBusiness.Confirm(id, db);
 
+                // 重新核对冷藏费结束时间
+
                 db.Ado.CommitTran();
                 return (result.success, result.errorMessage);
             }

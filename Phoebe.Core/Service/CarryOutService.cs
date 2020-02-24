@@ -97,6 +97,7 @@ namespace Phoebe.Core.Service
                 var user = userBusiness.FindById(userId, db);
 
                 CarryOutTaskBusiness carryOutTaskBusiness = new CarryOutTaskBusiness();
+                ColdFeeBusiness coldFeeBusiness = new ColdFeeBusiness();
                 StoreBusiness storeBusiness = new StoreBusiness();
 
                 // 找出托盘对应库存
@@ -124,6 +125,9 @@ namespace Phoebe.Core.Service
                     {
                         carryOutTaskBusiness.Leave(carryOut, shelfCode, store, user, db);
                     }
+
+                    // 结束冷藏费计算
+                    coldFeeBusiness.End(store, DateTime.Now.Date, db);
 
                     // 库存记录下架
                     storeBusiness.Leave(store.Id, carryOut.Id, db);

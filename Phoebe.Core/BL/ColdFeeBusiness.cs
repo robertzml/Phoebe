@@ -8,6 +8,7 @@ namespace Phoebe.Core.BL
     using Phoebe.Base.Framework;
     using Phoebe.Base.System;
     using Phoebe.Core.Entity;
+    using Phoebe.Core.View;
 
     /// <summary>
     /// 冷藏费业务类
@@ -46,20 +47,22 @@ namespace Phoebe.Core.BL
         /// <summary>
         /// 结束计费
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="store"></param>
-        /// <param name="endDate"></param>
+        /// <param name="store">库存记录</param>
+        /// <param name="endDate">日期</param>
         /// <param name="db"></param>
         /// <returns></returns>
-        public (bool success, string errorMessage) End(string id, Store store, DateTime endDate, SqlSugarClient db = null)
+        public (bool success, string errorMessage) End(StoreView store, DateTime endDate, SqlSugarClient db = null)
         {
             if (db == null)
                 db = GetInstance();
 
-            var entity = db.Queryable<ColdFee>().InSingle(id);
+            var entity = db.Queryable<ColdFee>().Single(r => r.StoreId == store.Id);
 
             entity.EndDate = endDate;
             entity.Days = endDate.Subtract(entity.StartDate).Days;
+            if (entity.Days == 0)
+                entity.Days = 1;
+
             entity.Amount = entity.Days * entity.UnitPrice * store.StoreWeight;
             entity.Status = (int)EntityStatus.FeeEnd;
 
