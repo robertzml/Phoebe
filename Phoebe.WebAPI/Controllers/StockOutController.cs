@@ -74,6 +74,19 @@ namespace Phoebe.WebAPI.Controllers
             return stockOutViewBusiness.FindByTime(outTime);
         }
 
+
+        /// <summary>
+        /// 获取未完成出库单
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult<List<StockOutView>> ListUnfinish()
+        {
+            StockOutViewBusiness stockOutViewBusiness = new StockOutViewBusiness();
+            return stockOutViewBusiness.FindUnfinish();
+        }
+
+
         /// <summary>
         /// 获取出库
         /// </summary>
