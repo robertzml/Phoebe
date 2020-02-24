@@ -110,7 +110,7 @@ namespace Phoebe.Core.BL
         /// <param name="shelfCode">货架码</param>
         /// <param name="db"></param>
         /// <returns></returns>
-        public Position FindOutside(string shelfCode, SqlSugarClient db)
+        public Position FindOutside(string shelfCode, SqlSugarClient db = null)
         {
             if (db == null)
                 db = GetInstance();

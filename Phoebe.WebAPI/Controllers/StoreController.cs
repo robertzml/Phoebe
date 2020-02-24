@@ -95,6 +95,18 @@ namespace Phoebe.WebAPI.Controllers
         }
 
         /// <summary>
+        /// 根据货架码获取最外侧库存
+        /// </summary>
+        /// <param name="shelfCode"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public List<StoreView> FindOutside(string shelfCode)
+        {
+            StoreViewBusiness storeViewBusiness = new StoreViewBusiness();
+            return storeViewBusiness.FindOutside(shelfCode);
+        }
+
+        /// <summary>
         /// 库存信息
         /// </summary>
         /// <param name="id"></param>

@@ -99,15 +99,19 @@ namespace Phoebe.Core.Service
                 CarryOutTaskBusiness carryOutTaskBusiness = new CarryOutTaskBusiness();
                 StoreBusiness storeBusiness = new StoreBusiness();
 
-                // 找出仓位对应库存
+                // 找出托盘对应库存
                 StoreViewBusiness storeViewBusiness = new StoreViewBusiness();
-                var stores = storeViewBusiness.FindByPosition(position.Id, db);
+                var stores = storeViewBusiness.FindByTray(trayCode, db);
+                if (stores.Count == 0)
+                    return (false, "托盘码上无库存", null);
 
-                // 遍历该仓位上的库存记录
+                // 遍历该托盘上的库存记录
                 foreach (var store in stores)
                 {
-                    if (store.TrayCode != trayCode)
-                        return (false, "托盘码与当前在库托盘不一致", null);
+                    if (store.PositionId != position.Id)
+                        return (false, "托盘码与当前货架托盘不一致", null);
+                    if (store.Status != (int)EntityStatus.StoreIn && store.Status != (int)EntityStatus.StoreInReady)
+                        return (false, "托盘上无在库库存", null);
 
                     var carryOut = db.Queryable<CarryOutTask>().Single(r => r.StoreId == store.Id);
                     if (carryOut == null)

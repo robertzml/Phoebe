@@ -7,6 +7,8 @@ namespace Phoebe.Core.DL
     using SqlSugar;
     using Phoebe.Base.Framework;
     using Phoebe.Base.System;
+    using Phoebe.Core.BL;
+    using Phoebe.Core.Entity;
     using Phoebe.Core.View;
     using Phoebe.Core.Utility;
 
@@ -107,6 +109,39 @@ namespace Phoebe.Core.DL
 
             var data = db.Queryable<StoreView>().Where(r => r.TrayCode == trayCode && r.Status != (int)EntityStatus.StoreOut);
             return data.ToList();
+        }
+
+        /// <summary>
+        /// 通过货架码获取最外侧库存
+        /// </summary>
+        /// <param name="shelfCode"></param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        /// <remarks>
+        /// 虚拟货架不返回库存记录
+        /// </remarks>
+        public List<StoreView> FindOutside(string shelfCode, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            List<StoreView> data = new List<StoreView>();
+
+            // 找出最外侧占用的仓位
+            PositionBusiness positionBusiness = new PositionBusiness();
+            var position = positionBusiness.FindOutside(shelfCode, db);
+            if (position == null)
+            {
+                return data;
+            }
+
+            var shelf = db.Queryable<Shelf>().InSingle(position.ShelfId);
+            if (shelf.Type == (int)ShelfType.Virtual)
+                return data;
+
+            data = db.Queryable<StoreView>().Where(r => r.PositionId == position.Id 
+                && (r.Status == (int)EntityStatus.StoreIn || r.Status == (int)EntityStatus.StoreInReady)).ToList();         
+            return data;
         }
 
         /// <summary>

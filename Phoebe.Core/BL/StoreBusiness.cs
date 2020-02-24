@@ -184,6 +184,9 @@ namespace Phoebe.Core.BL
         /// <param name="carryOutTaskId"></param>
         /// <param name="db"></param>
         /// <returns></returns>
+        /// <remarks>
+        /// 库存状态为准备移出
+        /// </remarks>
         public (bool success, string errorMessage) Leave(string id, string carryOutTaskId, SqlSugarClient db = null)
         {
             if (db == null)
