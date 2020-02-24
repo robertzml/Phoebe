@@ -33,6 +33,7 @@ namespace Phoebe.Core.BL
             entity.ContractId = store.ContractId;
             entity.StartDate = store.InTime;
             entity.Days = 1;
+            entity.Count = store.StoreWeight;
             entity.Status = (int)EntityStatus.FeeStart;
 
             var contract = db.Queryable<Contract>().InSingle(entity.ContractId);
@@ -64,6 +65,28 @@ namespace Phoebe.Core.BL
 
             db.Updateable(entity).ExecuteCommand();
 
+            return (true, "");
+        }
+
+        /// <summary>
+        /// 更新冷藏费记录
+        /// </summary>
+        /// <param name="storeId">库存ID</param>
+        /// <param name="count">数量</param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        public (bool success, string errorMessage) Update(string storeId, decimal count, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            var data = db.Queryable<ColdFee>().Single(r => r.StoreId == storeId);
+            if (data == null)
+                return (false, "库存未找到冷藏费记录");
+
+            data.Count = count;
+
+            db.Updateable(data).ExecuteCommand();
             return (true, "");
         }
 

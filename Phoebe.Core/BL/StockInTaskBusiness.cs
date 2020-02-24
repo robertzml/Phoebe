@@ -68,20 +68,14 @@ namespace Phoebe.Core.BL
         /// <summary>
         /// 删除入库任务
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="task"></param>
         /// <returns></returns>
-        public override (bool success, string errorMessage) Delete(string id, SqlSugarClient db = null)
+        public (bool success, string errorMessage) Delete(StockInTask task, SqlSugarClient db = null)
         {
             if (db == null)
                 db = GetInstance();
 
-            var stockInTask = db.Queryable<StockInTask>().InSingle(id);
-            if (stockInTask.Status != (int)EntityStatus.StockInReady)
-            {
-                return (false, "仅能删除待入库状态的入库任务单");
-            }
-
-            db.Deleteable<StockInTask>().In(id).ExecuteCommand();
+            db.Deleteable<StockInTask>().In(task.Id).ExecuteCommand();
 
             return (true, "");
         }

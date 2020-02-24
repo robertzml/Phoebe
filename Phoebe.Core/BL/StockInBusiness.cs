@@ -110,21 +110,15 @@ namespace Phoebe.Core.BL
         /// <summary>
         /// 删除入库单
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="entity"></param>
         /// <param name="db"></param>
         /// <returns></returns>
-        public override (bool success, string errorMessage) Delete(string id, SqlSugarClient db = null)
+        public (bool success, string errorMessage) Delete(StockIn entity, SqlSugarClient db = null)
         {
             if (db == null)
                 db = GetInstance();
 
-            var stockIn = db.Queryable<StockIn>().InSingle(id);
-            if (stockIn.Status != (int)EntityStatus.StockInReady)
-            {
-                return (false, "仅能删除待入库状态的入库单");
-            }
-
-            db.Deleteable<StockIn>().In(id).ExecuteCommand();
+            db.Deleteable<StockIn>().In(entity.Id).ExecuteCommand();
 
             return (true, "");
         }

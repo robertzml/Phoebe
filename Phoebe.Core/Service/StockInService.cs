@@ -89,6 +89,13 @@ namespace Phoebe.Core.Service
                     return (false, "入库单含有入库任务，无法删除");
                 }
 
+                StockInBusiness stockInBusiness = new StockInBusiness();
+                var stockIn = stockInBusiness.FindById(id, db);
+                if (stockIn.Status != (int)EntityStatus.StockInReady)
+                {
+                    return (false, "仅能删除待入库状态的入库单");
+                }
+
                 // 删除入库费用
                 InBillingBusiness inBillingBusiness = new InBillingBusiness();
                 var billings = db.Queryable<InBilling>().Where(r => r.StockInId == id).ToList();
@@ -97,8 +104,7 @@ namespace Phoebe.Core.Service
                     inBillingBusiness.Delete(item.Id, db);
                 }
 
-                StockInBusiness stockInBusiness = new StockInBusiness();
-                var result = stockInBusiness.Delete(id, db);
+                var result = stockInBusiness.Delete(stockIn, db);
 
                 db.Ado.CommitTran();
                 return (result.success, result.errorMessage);
@@ -166,6 +172,8 @@ namespace Phoebe.Core.Service
                 StoreBusiness storeBusiness = new StoreBusiness();
                 CarryInTaskBusiness carryInTaskBusiness = new CarryInTaskBusiness();
                 StockInTaskBusiness stockInTaskBusiness = new StockInTaskBusiness();
+
+                // 获取相关入库任务
                 var tasks = db.Queryable<StockInTask>().Where(r => r.StockInId == stockIn.Id).ToList();
                 foreach (var task in tasks)
                 {
@@ -401,7 +409,15 @@ namespace Phoebe.Core.Service
                 }
 
                 StockInTaskBusiness stockInTaskBusiness = new StockInTaskBusiness();
-                var result = stockInTaskBusiness.Delete(id, db);
+
+                var stockInTask = stockInTaskBusiness.FindById(id, db);
+                if (stockInTask.Status != (int)EntityStatus.StockInReady)
+                {
+                    return (false, "仅能删除待入库状态的入库任务单");
+                }
+
+                // 删除入库任务
+                var result = stockInTaskBusiness.Delete(stockInTask, db);
 
                 db.Ado.CommitTran();
                 return (result.success, result.errorMessage);

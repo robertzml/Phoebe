@@ -205,6 +205,10 @@ namespace Phoebe.Core.Service
                 StoreBusiness storeBusiness = new StoreBusiness();
                 storeBusiness.FinishIn(task.StoreId, trayCode, moveCount, moveWeight, remark, db);
 
+                // 修改冷藏费
+                ColdFeeBusiness coldFeeBusiness = new ColdFeeBusiness();
+                coldFeeBusiness.Update(task.StoreId, moveWeight, db);
+
                 db.Ado.CommitTran();
                 return (true, "");
             }
@@ -228,11 +232,15 @@ namespace Phoebe.Core.Service
             {
                 db.Ado.BeginTran();
 
-                // 删除对应库存记录
-
-                // 删除搬运入库
                 CarryInTaskBusiness taskBusiness = new CarryInTaskBusiness();
-                taskBusiness.Delete(id, db);
+                var carryIn = taskBusiness.FindById(id, db);
+                if (carryIn.Status != (int)EntityStatus.StockInCheck)
+                {
+                    return (false, "仅能删除已清点状态的搬运入库任务");
+                }
+
+                // 删除搬运入库               
+                taskBusiness.Delete(carryIn, db);
 
                 db.Ado.CommitTran();
                 return (true, "");
