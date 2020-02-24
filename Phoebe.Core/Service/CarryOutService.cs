@@ -212,15 +212,15 @@ namespace Phoebe.Core.Service
             {
                 db.Ado.BeginTran();
 
-                // 删除对应库存记录
-                //var store = db.Queryable<Store>().Single(r => r.Id == carryOut.StoreId);
-                //store.Status = (int)EntityStatus.StoreIn;
-
-                //db.Updateable(store).ExecuteCommand();
+                CarryOutTaskBusiness carryOutTaskBusiness = new CarryOutTaskBusiness();
+                var carryOut = carryOutTaskBusiness.FindById(id, db);
+                if (carryOut.Status != (int)EntityStatus.StockOutReady)
+                {
+                    return (false, "仅能删除待出库状态的搬运出库任务");
+                }
 
                 // 删除搬运入库
-                CarryOutTaskBusiness taskBusiness = new CarryOutTaskBusiness();
-                taskBusiness.Delete(id, db);
+                carryOutTaskBusiness.Delete(carryOut, db);
 
                 db.Ado.CommitTran();
                 return (true, "");

@@ -145,9 +145,12 @@ namespace Phoebe.Core.BL
             if (db == null)
                 db = GetInstance();
 
-            task.TrayCode = trayCode;
-            task.MoveCount = moveCount;
-            task.MoveWeight = moveWeight;
+            if (task.Type != (int)CarryInTaskType.Temp)
+            {
+                task.TrayCode = trayCode;
+                task.MoveCount = moveCount;
+                task.MoveWeight = moveWeight;
+            }
             task.FinishTime = DateTime.Now;
             task.Status = (int)EntityStatus.StockInFinish;
 

@@ -93,7 +93,14 @@ namespace Phoebe.Core.Service
 
                 // 删除出库单
                 StockOutBusiness stockOutBusiness = new StockOutBusiness();
-                var result = stockOutBusiness.Delete(id);
+
+                var stockOut = stockOutBusiness.FindById(id, db);
+                if (stockOut.Status != (int)EntityStatus.StockOutReady)
+                {
+                    return (false, "仅能删除待出库状态的出库单");
+                }
+
+                var result = stockOutBusiness.Delete(stockOut, db);
 
                 db.Ado.CommitTran();
                 return (result.success, result.errorMessage);
@@ -220,7 +227,7 @@ namespace Phoebe.Core.Service
                             return (false, "出库货物非当前合同所有");
 
                         // 创建出库任务
-                        var result = stockOutTaskBusiness.Create(stockOutId, carryOutTask, user, db);                       
+                        var result = stockOutTaskBusiness.Create(stockOutId, carryOutTask, user, db);
 
                         // 更新搬运出库任务
                         carryOutTaskBusiness.Check(carryOutTask.Id, result.t.Id, carryOutTask.MoveCount, carryOutTask.MoveWeight, carryOutTask.Remark, user, db);
@@ -320,7 +327,15 @@ namespace Phoebe.Core.Service
                 }
 
                 StockOutTaskBusiness stockOutTaskBusiness = new StockOutTaskBusiness();
-                var result = stockOutTaskBusiness.Delete(id, db);
+                var stockOutTask = stockOutTaskBusiness.FindById(id, db);
+
+                if (stockOutTask.Status != (int)EntityStatus.StockOutReady)
+                {
+                    return (false, "仅能删除待出库状态的出库任务单");
+                }
+
+                // 删除出库任务
+                var result = stockOutTaskBusiness.Delete(stockOutTask, db);
 
                 db.Ado.CommitTran();
                 return (result.success, result.errorMessage);
