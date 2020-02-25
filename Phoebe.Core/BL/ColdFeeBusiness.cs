@@ -57,11 +57,11 @@ namespace Phoebe.Core.BL
                 db = GetInstance();
 
             var entity = db.Queryable<ColdFee>().Single(r => r.StoreId == store.Id);
+            if (entity == null)
+                return (true, "无冷藏费");
 
             entity.EndDate = endDate;
-            entity.Days = endDate.Subtract(entity.StartDate).Days;
-            if (entity.Days == 0)
-                entity.Days = 1;
+            entity.Days = endDate.Subtract(entity.StartDate).Days;          
 
             entity.Amount = entity.Days * entity.UnitPrice * store.StoreWeight;
             entity.Status = (int)EntityStatus.FeeEnd;
