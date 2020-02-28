@@ -236,6 +236,9 @@ namespace Phoebe.Core.Service
 
                         if (carryOutTask.MoveCount < carryOutTask.StoreCount)
                         {
+                            if (string.IsNullOrEmpty(carryOutTask.StockOutTaskId))
+                                carryOutTask.StockOutTaskId = result.t.Id;
+
                             // 创建放回任务
                             carryInTaskBusiness.CreateBack(carryOutTask, user, db);
                         }
