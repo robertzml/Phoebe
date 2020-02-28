@@ -239,7 +239,7 @@ namespace Phoebe.Core.BL
             var store = db.Queryable<Store>().InSingle(id);
             store.Status = (int)status;
 
-            db.Updateable(store).ExecuteCommand();
+            db.Updateable(store).UpdateColumns(r => new { r.Status }).ExecuteCommand();
             return (true, "");
         }
         #endregion //Method

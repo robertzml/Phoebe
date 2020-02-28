@@ -10,6 +10,7 @@ namespace Phoebe.WebAPI.Controllers
 {
     using Phoebe.Core.BL;
     using Phoebe.Core.DL;
+    using Phoebe.Core.Service;
     using Phoebe.Core.Entity;
     using Phoebe.Core.View;
     using Phoebe.WebAPI.Model;
@@ -95,6 +96,32 @@ namespace Phoebe.WebAPI.Controllers
             var task = Task.Run(() =>
             {
                 var result = contractBusiness.Update(contract);
+
+                ResponseData data = new ResponseData
+                {
+                    Status = result.success ? 0 : 1,
+                    ErrorMessage = result.errorMessage
+                };
+
+                return data;
+            });
+
+            return await task;
+        }
+
+        /// <summary>
+        /// 强制删除合同
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ActionResult<ResponseData>> ForceDelete(int id)
+        {
+            ContractService contractService = new ContractService();
+
+            var task = Task.Run(() =>
+            {
+                var result = contractService.ForceDelete(id);
 
                 ResponseData data = new ResponseData
                 {

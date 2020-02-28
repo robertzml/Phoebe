@@ -131,7 +131,7 @@ namespace Phoebe.Core.BL
                 return data[0];
 
             if (vice)
-            {                
+            {
                 var pos = data.FindLast(r => r.Status == (int)EntityStatus.Occupy); //找出第一个占用的仓位
                 if (pos == null)
                     return null;
@@ -255,7 +255,7 @@ namespace Phoebe.Core.BL
                 db = GetInstance();
 
             position.Status = (int)status;
-            db.Updateable(position).ExecuteCommand();
+            db.Updateable(position).UpdateColumns(r => new { r.Status }).ExecuteCommand();
 
             return (true, "");
         }
