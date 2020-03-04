@@ -9,6 +9,7 @@ namespace Phoebe.Core.BL
     using Phoebe.Base.System;
     using Phoebe.Core.Entity;
     using Phoebe.Core.View;
+    using Phoebe.Core.Billing;
 
     /// <summary>
     /// 冷藏费业务类
@@ -111,8 +112,9 @@ namespace Phoebe.Core.BL
             }
             else
             {
+                IBillingProcess billingProcess = new BillingUnitWeight();
                 data.Days = current.Subtract(data.StartDate).Days;
-                data.Amount = data.UnitPrice * data.Count * data.Days;
+                data.Amount = billingProcess.CalculatePeriodFee(data.Count, data.UnitPrice, data.Days);
 
                 return data;
             }

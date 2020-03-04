@@ -130,4 +130,70 @@ namespace Phoebe.Core.Utility
         [Display(Name = "临时搬运")]
         Temp = 2
     }
+
+    /// <summary>
+    /// 合同类型
+    /// </summary>
+    public enum ContractType
+    {
+        /// <summary>
+        /// 计时冷藏合同
+        /// </summary>
+        [Display(Name = "计时冷藏合同")]
+        TimingCold = 1,
+
+        /// <summary>
+        /// 非计时冷藏合同
+        /// </summary>
+        [Display(Name = "非计时冷藏合同")]
+        UntimingCold = 2,
+
+        /// <summary>
+        /// 速冻合同
+        /// </summary>
+        [Display(Name = "速冻合同")]
+        Freeze = 3,
+
+        /// <summary>
+        /// 冰块合同
+        /// </summary>
+        [Display(Name = "冰块合同")]
+        Ice = 4        
+    }
+
+    /// <summary>
+    /// 计费方式
+    /// </summary>
+    public enum BillingType
+    {
+        /// <summary>
+        /// 件重
+        /// </summary>
+        [Display(Name = "件重", Description = "单价:元/吨")]
+        UnitWeight = 1,
+
+        /// <summary>
+        /// 计数
+        /// </summary>
+        [Display(Name = "计数", Description = "单价:元/件")]
+        Count = 2,
+
+        /// <summary>
+        /// 非等重
+        /// </summary>
+        [Display(Name = "非等重", Description = "单价:元/吨")]
+        VariousWeight = 3,
+
+        /// <summary>
+        /// 仓位
+        /// </summary>
+        [Display(Name = "仓位", Description = "单价:元/仓位")]
+        Position = 4,
+
+        /// <summary>
+        /// 板位
+        /// </summary>
+        [Display(Name = "板位", Description = "单价:元/板位")]
+        Board = 5
+    }
 }
