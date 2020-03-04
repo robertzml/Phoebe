@@ -7,6 +7,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Phoebe.WebAPI.Controllers
 {
+    using Phoebe.Core.Model;
+    using Phoebe.Core.Service;
+    using Phoebe.WebAPI.Model;
+
     /// <summary>
     /// 费用管理控制器
     /// </summary>
@@ -14,5 +18,32 @@ namespace Phoebe.WebAPI.Controllers
     [ApiController]
     public class ExpenseController : ControllerBase
     {
+        #region Action
+        /// <summary>
+        /// 获取日冷藏费记录
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ActionResult<ResponseData>> DailyColdFee(DailyColdFeeModel model)
+        {
+            ExpenseService expenseService = new ExpenseService();
+            var task = Task.Run(() =>
+            {
+                var result = expenseService.GetDailyColdFee(model.CustomerId, model.ContractId, model.StartTime, model.EndTime);
+
+                ResponseData data = new ResponseData
+                {
+                    Status = result.success ? 0 : 1,
+                    ErrorMessage = result.errorMessage,
+                    Entity = result.data
+                };
+
+                return data;
+            });
+
+            return await task;
+        }
+        #endregion //Action
     }
 }

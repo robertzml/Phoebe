@@ -155,4 +155,22 @@ namespace Phoebe.WebAPI.Model
         [Required]
         public List<CarryOutTask> Tasks;
     }
+
+    /// <summary>
+    /// 日冷藏费清单模型
+    /// </summary>
+    public class DailyColdFeeModel
+    {
+        [Required]
+        public int CustomerId;
+
+        [Required]
+        public int ContractId;
+
+        [Required]
+        public DateTime StartTime;
+
+        [Required]
+        public DateTime EndTime;
+    }
 }

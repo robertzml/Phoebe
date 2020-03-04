@@ -132,6 +132,48 @@ namespace Phoebe.Core.Utility
     }
 
     /// <summary>
+    /// 流水类型
+    /// </summary>
+    public enum StockFlowType
+    {
+        /// <summary>
+        /// 无
+        /// </summary>
+        [Display(Name = "无")]
+        None = 0,
+
+        /// <summary>
+        /// 入库
+        /// </summary>
+        [Display(Name = "入库")]
+        StockIn = 1,
+
+        /// <summary>
+        /// 出库
+        /// </summary>
+        [Display(Name = "出库")]
+        StockOut = 2,
+
+        /// <summary>
+        /// 移库
+        /// </summary>
+        [Display(Name = "移库")]
+        StockMove = 3,
+
+        /// <summary>
+        /// 移入
+        /// </summary>
+        [Display(Name = "移入")]
+        StockMoveIn = 4,
+
+        /// <summary>
+        /// 移出
+        /// </summary>
+        [Display(Name = "移出")]
+        StockMoveOut = 5
+    }
+
+    /// <summary>
     /// 合同类型
     /// </summary>
     public enum ContractType
