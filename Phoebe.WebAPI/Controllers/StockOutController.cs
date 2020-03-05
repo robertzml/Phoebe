@@ -232,6 +232,19 @@ namespace Phoebe.WebAPI.Controllers
             StockOutTaskViewBusiness taskViewBusiness = new StockOutTaskViewBusiness();
             return taskViewBusiness.FindById(taskId);
         }
+
+        /// <summary>
+        /// 按日期获取出库任务
+        /// </summary>
+        /// <param name="date"></param>
+        /// <param name="contractId"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult<List<StockOutTaskView>> FindTaskByDate(DateTime date, int contractId)
+        {
+            StockOutTaskViewBusiness taskViewBusiness = new StockOutTaskViewBusiness();
+            return taskViewBusiness.FindByDate(contractId, date);
+        }
         #endregion //Stock Out Task Query
 
         #region Stock Out Task Action

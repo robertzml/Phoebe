@@ -23,6 +23,25 @@ namespace Phoebe.Core.DL
                 db = GetInstance();
             return db.Queryable<StockOutTaskView>().Where(r => r.StockOutId == stockOutId).ToList();
         }
+
+        /// <summary>
+        /// 按日期获取出库任务
+        /// </summary>
+        /// <param name="contractId">合同ID</param>
+        /// <param name="date">日期</param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        public List<StockOutTaskView> FindByDate(int contractId, DateTime date, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            var data = db.Queryable<StockOutTaskView>()
+                .Where(r => r.ContractId == contractId && r.OutTime == date.Date && r.Status == (int)EntityStatus.StockOutFinish)
+                .ToList();
+
+            return data;
+        }
         #endregion //Method
     }
 }
