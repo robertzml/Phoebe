@@ -139,8 +139,8 @@ namespace Phoebe.Core.DL
             if (shelf.Type == (int)ShelfType.Virtual)
                 return data;
 
-            data = db.Queryable<StoreView>().Where(r => r.PositionId == position.Id 
-                && (r.Status == (int)EntityStatus.StoreIn || r.Status == (int)EntityStatus.StoreInReady)).ToList();         
+            data = db.Queryable<StoreView>().Where(r => r.PositionId == position.Id
+                && (r.Status == (int)EntityStatus.StoreIn || r.Status == (int)EntityStatus.StoreInReady)).ToList();
             return data;
         }
 
@@ -180,6 +180,49 @@ namespace Phoebe.Core.DL
         #endregion //Query
 
         #region Storage
+        /// <summary>
+        /// 获取库存记录链表
+        /// </summary>
+        /// <param name="id">库存ID</param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        public List<StoreView> GetInOrder(string id, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            List<StoreView> data = new List<StoreView>();
+
+            // 获取当前库存记录
+            var store = db.Queryable<StoreView>().InSingle(id);
+            data.Add(store);
+
+            // 查找前序记录
+            string prev = store.PrevStoreId;
+            while (!string.IsNullOrEmpty(prev))
+            {
+                var find = db.Queryable<StoreView>().InSingle(prev);
+                prev = find.PrevStoreId;
+
+                data.Insert(0, find);
+            }
+
+            string next = store.Id;
+            while (!string.IsNullOrEmpty(next))
+            {
+                var find = db.Queryable<StoreView>().Single(r => r.PrevStoreId == next);
+                if (find != null)
+                {
+                    next = find.Id;
+                    data.Add(find);
+                }
+                else
+                    next = "";
+            }
+
+            return data;
+        }
+
         /// <summary>
         /// 获取合同指定日库存
         /// </summary>

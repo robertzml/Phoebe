@@ -20,7 +20,7 @@ namespace Phoebe.WebAPI.Controllers
     [ApiController]
     public class StoreController : ControllerBase
     {
-        #region Action
+        #region Query
         /// <summary>
         /// 获取所有库存
         /// </summary>
@@ -117,6 +117,20 @@ namespace Phoebe.WebAPI.Controllers
             StoreViewBusiness storeViewBusiness = new StoreViewBusiness();
             return storeViewBusiness.FindById(id);
         }
+        #endregion //Query
+
+        #region Storage
+        /// <summary>
+        /// 获取库存记录链表
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public List<StoreView> GetInOrder(string id)
+        {
+            StoreViewBusiness storeViewBusiness = new StoreViewBusiness();
+            return storeViewBusiness.GetInOrder(id);
+        }
 
         /// <summary>
         /// 获取指定日库存
@@ -130,6 +144,6 @@ namespace Phoebe.WebAPI.Controllers
             StoreViewBusiness storeViewBusiness = new StoreViewBusiness();
             return storeViewBusiness.GetInDay(contractId, date);
         }
-        #endregion //Action
+        #endregion //Storage
     }
 }
