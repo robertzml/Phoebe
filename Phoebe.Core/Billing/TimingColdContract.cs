@@ -1,11 +1,12 @@
-﻿using Phoebe.Core.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Phoebe.Core.Billing
 {
     using SqlSugar;
+    using Phoebe.Core.Model;
     using Phoebe.Core.Entity;
     using Phoebe.Core.View;
 
@@ -14,6 +15,19 @@ namespace Phoebe.Core.Billing
     /// </summary>
     public class TimingColdContract : IContract
     {
+        #region Function
+        private DailyColdRecord coldFeeToDaily(List<ColdFee> data, DateTime date)
+        {
+            DailyColdRecord record = new DailyColdRecord();
+            record.RecordDate = date;
+
+            record.TotalMeter = data.Sum(r => r.Count);
+
+
+            return record;
+        }
+        #endregion //Function
+
         #region Override
         /// <summary>
         /// 获取合同日冷藏费记录 
@@ -27,9 +41,23 @@ namespace Phoebe.Core.Billing
             List<DailyColdRecord> records = new List<DailyColdRecord>();
 
             var contract = db.Queryable<ContractView>().In(contractId);
-        
 
-            return records;
+            var coldRecords = db.Queryable<ColdFee>()
+                .Where(r => r.ContractId == contractId && r.StartDate <= startTime && (r.EndDate == null || r.EndDate >= endTime))
+                .ToList();
+
+            decimal totalFee = 0;
+            for (DateTime step = startTime.Date; step <= endTime.Date; step = step.AddDays(1))
+            {
+                var todayRecords = coldRecords.Where(r => r.StartDate <= step && (r.EndDate == null || r.EndDate >= step)).ToList();
+
+                foreach(var item in todayRecords)
+                {
+
+                }
+            }
+
+                return records;
         }
 
         /// <summary>

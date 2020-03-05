@@ -17,7 +17,7 @@ namespace Phoebe.Core.DL
     /// </summary>
     public class StoreViewBusiness : AbstractBusiness<StoreView, string>, IBaseBL<StoreView, string>
     {
-        #region Method
+        #region Query
         /// <summary>
         /// 按合同获取库存记录
         /// </summary>
@@ -177,6 +177,28 @@ namespace Phoebe.Core.DL
             else
                 return new List<StoreView>();
         }
-        #endregion //Method
+        #endregion //Query
+
+        #region Storage
+        /// <summary>
+        /// 获取合同指定日库存
+        /// </summary>
+        /// <param name="contractId">合同ID</param>
+        /// <param name="date">日期</param>
+        /// <returns></returns>
+        public List<StoreView> GetInDay(int contractId, DateTime date, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            date = date.Date;
+
+            var stores = db.Queryable<StoreView>()
+                .Where(r => r.ContractId == contractId && r.InTime <= date && (r.OutTime == null || r.OutTime > date))
+                .ToList();
+
+            return stores;
+        }
+        #endregion //Storage
     }
 }

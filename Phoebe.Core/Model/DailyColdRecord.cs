@@ -18,14 +18,9 @@ namespace Phoebe.Core.Model
         public DateTime RecordDate { get; set; }
 
         /// <summary>
-        /// 类别编码
-        /// </summary>
-        public string CategoryNumber { get; set; }
-
-        /// <summary>
         /// 类别名称
         /// </summary>
-        public string CategoryName { get; set; }
+        public string CargoName { get; set; }
 
         /// <summary>
         /// 数量

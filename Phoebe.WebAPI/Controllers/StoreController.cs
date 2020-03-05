@@ -117,6 +117,19 @@ namespace Phoebe.WebAPI.Controllers
             StoreViewBusiness storeViewBusiness = new StoreViewBusiness();
             return storeViewBusiness.FindById(id);
         }
+
+        /// <summary>
+        /// 获取指定日库存
+        /// </summary>
+        /// <param name="contractId">合同ID</param>
+        /// <param name="date">日期</param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult<List<StoreView>> GetInDay(int contractId, DateTime date)
+        {
+            StoreViewBusiness storeViewBusiness = new StoreViewBusiness();
+            return storeViewBusiness.GetInDay(contractId, date);
+        }
         #endregion //Action
     }
 }
