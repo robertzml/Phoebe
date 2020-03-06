@@ -79,6 +79,32 @@ namespace Phoebe.WebAPI.Controllers
             CarryInTaskViewBusiness carryInTaskViewBusiness = new CarryInTaskViewBusiness();
             return carryInTaskViewBusiness.FindByTray(trayCode, EntityStatus.StockInCheck);
         }
+
+        /// <summary>
+        /// 根据库存入库时间查找
+        /// </summary>
+        /// <param name="contractId"></param>
+        /// <param name="inTime"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult<List<CarryInTaskView>> FindByInTime(int contractId, DateTime inTime)
+        {
+            CarryInTaskViewBusiness carryInTaskViewBusiness = new CarryInTaskViewBusiness();
+            return carryInTaskViewBusiness.FindByInTime(contractId, inTime);
+        }
+
+        /// <summary>
+        /// 根据库存出库时间查找
+        /// </summary>
+        /// <param name="contractId"></param>
+        /// <param name="outTime"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult<List<CarryInTaskView>> FindByOutTime(int contractId, DateTime outTime)
+        {
+            CarryInTaskViewBusiness carryInTaskViewBusiness = new CarryInTaskViewBusiness();
+            return carryInTaskViewBusiness.FindByOutTime(contractId, outTime);
+        }
         #endregion //Action
 
         #region Action

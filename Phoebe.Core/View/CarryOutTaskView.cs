@@ -188,7 +188,7 @@ namespace Phoebe.Core.View
         /// 状态
         /// </summary>
         [Display(Name = "状态")]
-        public int Status { get; set; }
+        public int Status { get; set; }   
 
         /// <summary>
         /// 货品名称
@@ -249,6 +249,12 @@ namespace Phoebe.Core.View
         /// </summary>
         [Display(Name = "入库时间")]
         public DateTime InTime { get; set; }
+
+        /// <summary>
+        /// 出库时间
+        /// </summary>
+        [Display(Name = "出库时间")]
+        public DateTime? OutTime { get; set; }
 
         /// <summary>
         /// 批次

@@ -77,6 +77,38 @@ namespace Phoebe.Core.DL
             var data = db.Queryable<CarryOutTaskView>().Where(r => r.TrayCode == trayCode && r.Status == (int)EntityStatus.StockOutLeave);
             return data.ToList();
         }
+
+        /// <summary>
+        /// 根据库存入库时间查找
+        /// </summary>
+        /// <param name="contractId">合同ID</param>
+        /// <param name="inTime">库存入库时间</param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        public List<CarryOutTaskView> FindByInTime(int contractId, DateTime inTime, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            var data = db.Queryable<CarryOutTaskView>().Where(r => r.ContractId == contractId && r.InTime == inTime);
+            return data.ToList();
+        }
+
+        /// <summary>
+        /// 根据库存出库时间查找
+        /// </summary>
+        /// <param name="contractId">合同ID</param>
+        /// <param name="outTime">库存出库时间</param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        public List<CarryOutTaskView> FindByOutTime(int contractId, DateTime outTime, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            var data = db.Queryable<CarryOutTaskView>().Where(r => r.ContractId == contractId && r.OutTime == outTime);
+            return data.ToList();
+        }
         #endregion //Method
     }
 }

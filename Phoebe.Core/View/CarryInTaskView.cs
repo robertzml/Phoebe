@@ -172,6 +172,18 @@ namespace Phoebe.Core.View
         public int Status { get; set; }
 
         /// <summary>
+        /// 入库时间
+        /// </summary>
+        [Display(Name = "入库时间")]
+        public DateTime InTime { get; set; }
+
+        /// <summary>
+        /// 出库时间
+        /// </summary>
+        [Display(Name = "出库时间")]
+        public DateTime? OutTime { get; set; }
+
+        /// <summary>
         /// 货品名称
         /// </summary>
         [Display(Name = "货品名称")]
