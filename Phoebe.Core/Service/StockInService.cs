@@ -31,6 +31,18 @@ namespace Phoebe.Core.Service
             {
                 db.Ado.BeginTran();
 
+                ContractBusiness contractBusiness = new ContractBusiness();
+                var contract = contractBusiness.FindById(stockIn.ContractId);
+
+                if (stockIn.Type == (int)StockInType.Freeze && contract.Type != (int)ContractType.Freeze)
+                {
+                    return (false, "冷冻库入库请使用冷冻合同", null);
+                }
+                if (contract.Type == (int)ContractType.Freeze && stockIn.Type != (int)StockInType.Freeze)
+                {
+                    return (false, "冷冻合同只能使用冷冻库入库", null);
+                }
+
                 StockInBusiness stockInBusiness = new StockInBusiness();
                 var result = stockInBusiness.Create(stockIn, db);
 
@@ -55,6 +67,18 @@ namespace Phoebe.Core.Service
             try
             {
                 db.Ado.BeginTran();
+
+                ContractBusiness contractBusiness = new ContractBusiness();
+                var contract = contractBusiness.FindById(stockIn.ContractId);
+
+                if (stockIn.Type == (int)StockInType.Freeze && contract.Type != (int)ContractType.Freeze)
+                {
+                    return (false, "冷冻库入库请使用冷冻合同");
+                }
+                if (contract.Type == (int)ContractType.Freeze && stockIn.Type != (int)StockInType.Freeze)
+                {
+                    return (false, "冷冻合同只能使用冷冻库入库");
+                }
 
                 StockInBusiness stockInBusiness = new StockInBusiness();
                 var result = stockInBusiness.Update(stockIn, db);
@@ -267,6 +291,12 @@ namespace Phoebe.Core.Service
 
                 StockInTaskBusiness stockInTaskBusiness = new StockInTaskBusiness();
                 var result = stockInTaskBusiness.Create(task, stockIn.InTime, db);
+
+                if (stockIn.Type == (int)StockInType.Normal) //普通库入库
+                {
+                    NormalStoreBusiness normalStoreBusiness = new NormalStoreBusiness();
+                    normalStoreBusiness.CreateByStockIn(stockIn, task, db);
+                }
 
                 db.Ado.CommitTran();
                 return (result.success, result.errorMessage, result.t);
