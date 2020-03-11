@@ -86,6 +86,19 @@ namespace Phoebe.Core.Billing
 
             return records;
         }
+
+        private decimal GetDailyColdFee(ContractView contract, DateTime date, IBillingProcess billingProcess, SqlSugarClient db)
+        {
+            // 获取每日库存记录
+            var stores = db.Queryable<StoreView>()
+               .Where(r => r.ContractId == contract.Id && r.InTime <= date && (r.OutTime == null || r.OutTime > date))
+               .ToList();
+
+            var totalMeter = billingProcess.GetTotalMeter(stores);
+            var dailyFee = billingProcess.CalculateDailyFee(totalMeter, contract.UnitPrice);
+
+            return dailyFee;
+        }
         #endregion //Function
 
         #region Override
@@ -127,9 +140,26 @@ namespace Phoebe.Core.Billing
         /// <param name="start">开始日期</param>
         /// <param name="end">结束日期</param>
         /// <returns></returns>
-        public ColdSettlement GetColdFee(int contractId, DateTime start, DateTime end)
+        public ColdSettlement GetColdFee(int contractId, DateTime start, DateTime end, SqlSugarClient db)
         {
-            throw new NotImplementedException();
+            ColdSettlement settle = new ColdSettlement();
+
+            var contract = db.Queryable<ContractView>().InSingle(contractId);
+
+            IBillingProcess billingProcess = BillingFactory.Create((BillingType)contract.BillingType);
+
+            settle.StartTime = start;
+            settle.EndTime = end;
+            settle.ContractId = contract.Id;
+            settle.ContractName = contract.Name;
+            settle.ColdFee = 0;
+
+            for (DateTime step = start.Date; step <= end.Date; step = step.AddDays(1))
+            {
+                settle.ColdFee += GetDailyColdFee(contract, step, billingProcess, db);
+            }
+
+            return settle;
         }
         #endregion //Override
     }

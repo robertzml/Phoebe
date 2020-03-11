@@ -28,6 +28,6 @@ namespace Phoebe.Core.Billing
         /// <param name="start">开始日期</param>
         /// <param name="end">结束日期</param>
         /// <returns></returns>
-        ColdSettlement GetColdFee(int contractId, DateTime start, DateTime end);
+        ColdSettlement GetColdFee(int contractId, DateTime start, DateTime end, SqlSugarClient db);
     }
 }
