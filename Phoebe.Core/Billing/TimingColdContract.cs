@@ -6,9 +6,11 @@ using System.Text;
 namespace Phoebe.Core.Billing
 {
     using SqlSugar;
+    using Phoebe.Core.DL;
     using Phoebe.Core.Model;
     using Phoebe.Core.Entity;
     using Phoebe.Core.View;
+    using Phoebe.Core.Utility;
 
     /// <summary>
     /// 计时冷藏合同
@@ -16,15 +18,71 @@ namespace Phoebe.Core.Billing
     public class TimingColdContract : IContract
     {
         #region Function
-        private DailyColdRecord coldFeeToDaily(List<ColdFee> data, DateTime date)
+        /// <summary>
+        /// 获取日冷藏费记录
+        /// </summary>
+        /// <param name="contract"></param>
+        /// <param name="date"></param>
+        /// <param name="billingProcess"></param>
+        /// <returns></returns>
+        private List<DailyColdRecord> GetDailyColdRecord(ContractView contract, DateTime date, IBillingProcess billingProcess, SqlSugarClient db)
         {
-            DailyColdRecord record = new DailyColdRecord();
-            record.RecordDate = date;
+            List<DailyColdRecord> records = new List<DailyColdRecord>();
 
-            record.TotalMeter = data.Sum(r => r.Count);
+            StockInTaskViewBusiness stockInTaskViewBusiness = new StockInTaskViewBusiness();
+            var stockInTasks = stockInTaskViewBusiness.FindByDate(contract.Id, date, db);
 
+            foreach (var item in stockInTasks)
+            {
+                DailyColdRecord r = new DailyColdRecord();
+                r.RecordDate = date;
+                r.CargoName = item.CargoName;
+                r.Count = item.InCount;
 
-            return record;
+                r.FlowMeter = billingProcess.GetFlowMeter(item);
+                r.FlowType = StockFlowType.StockIn;
+
+                records.Add(r);
+            }
+
+            StockOutTaskViewBusiness stockOutTaskViewBusiness = new StockOutTaskViewBusiness();
+            var stockOutTasks = stockOutTaskViewBusiness.FindByDate(contract.Id, date, db);
+
+            foreach (var item in stockOutTasks)
+            {
+                DailyColdRecord r = new DailyColdRecord();
+                r.RecordDate = date;
+                r.CargoName = item.CargoName;
+                r.Count = item.OutCount;
+
+                r.FlowMeter = billingProcess.GetFlowMeter(item);
+                r.FlowType = StockFlowType.StockOut;
+
+                records.Add(r);
+            }
+
+            DailyColdRecord record;
+            if (records.Count != 0)
+                record = records.Last();
+            else
+            {
+                record = new DailyColdRecord();
+                record.RecordDate = date;
+                record.FlowType = StockFlowType.None;
+            }
+
+            // 获取每日库存记录
+            var stores = db.Queryable<StoreView>()
+               .Where(r => r.ContractId == contract.Id && r.InTime <= date && (r.OutTime == null || r.OutTime > date))
+               .ToList();
+
+            record.TotalMeter = billingProcess.GetTotalMeter(stores);
+            record.DailyFee = billingProcess.CalculateDailyFee(record.TotalMeter, contract.UnitPrice);
+
+            if (records.Count == 0)
+                records.Add(record);
+
+            return records;
         }
         #endregion //Function
 
@@ -36,28 +94,28 @@ namespace Phoebe.Core.Billing
         /// <param name="start">开始日期</param>
         /// <param name="end">结束日期</param>
         /// <returns></returns>
-        public List<DailyColdRecord> GetDailyColdRecord(int contractId, DateTime startTime, DateTime endTime, SqlSugarClient db)
+        public List<DailyColdRecord> GetColdRecord(int contractId, DateTime startTime, DateTime endTime, SqlSugarClient db)
         {
             List<DailyColdRecord> records = new List<DailyColdRecord>();
 
-            var contract = db.Queryable<ContractView>().In(contractId);
+            var contract = db.Queryable<ContractView>().InSingle(contractId);
 
-            var coldRecords = db.Queryable<ColdFee>()
-                .Where(r => r.ContractId == contractId && r.StartDate <= startTime && (r.EndDate == null || r.EndDate >= endTime))
-                .ToList();
+            IBillingProcess billingProcess = BillingFactory.Create((BillingType)contract.BillingType);
 
             decimal totalFee = 0;
+
             for (DateTime step = startTime.Date; step <= endTime.Date; step = step.AddDays(1))
             {
-                var todayRecords = coldRecords.Where(r => r.StartDate <= step && (r.EndDate == null || r.EndDate >= step)).ToList();
+                var record = GetDailyColdRecord(contract, step, billingProcess, db);
 
-                foreach(var item in todayRecords)
-                {
+                var last = record.Last();
+                totalFee += last.DailyFee;
+                last.TotalFee = totalFee;
 
-                }
+                records.AddRange(record);
             }
 
-                return records;
+            return records;
         }
 
         /// <summary>

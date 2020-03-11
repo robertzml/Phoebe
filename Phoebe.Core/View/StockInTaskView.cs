@@ -77,6 +77,18 @@ namespace Phoebe.Core.View
         public int Durability { get; set; }
 
         /// <summary>
+        /// 仓库ID
+        /// </summary>
+        [Display(Name = "仓库ID")]
+        public int WarehouseId { get; set; }
+
+        /// <summary>
+        /// 存放位置
+        /// </summary>
+        [Display(Name = "存放位置")]
+        public string Place { get; set; }
+
+        /// <summary>
         /// 创建人ID
         /// </summary>
         [Display(Name = "创建人ID")]
