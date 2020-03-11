@@ -39,6 +39,7 @@ namespace Phoebe.Core.Billing
                 r.CargoName = item.CargoName;
                 r.Count = item.InCount;
 
+                r.UnitMeter = billingProcess.GetUnitMeter(item);
                 r.FlowMeter = billingProcess.GetFlowMeter(item);
                 r.FlowType = StockFlowType.StockIn;
 
@@ -55,6 +56,7 @@ namespace Phoebe.Core.Billing
                 r.CargoName = item.CargoName;
                 r.Count = item.OutCount;
 
+                r.UnitMeter = billingProcess.GetUnitMeter(item);
                 r.FlowMeter = billingProcess.GetFlowMeter(item);
                 r.FlowType = StockFlowType.StockOut;
 

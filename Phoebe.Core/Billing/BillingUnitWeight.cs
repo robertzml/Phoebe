@@ -34,15 +34,23 @@ namespace Phoebe.Core.Billing
         }
 
         /// <summary>
-        /// 计算货品周期冷藏费
+        /// 获取入库单位计量
         /// </summary>
-        /// <param name="totalMeter">日总计量</param>
-        /// <param name="unitPrice">单价</param>
-        /// <param name="days">天数</param>
+        /// <param name="task">入库任务</param>
         /// <returns></returns>
-        public decimal CalculatePeriodFee(decimal totalMeter, decimal unitPrice, int days)
+        public decimal GetUnitMeter(StockInTaskView task)
         {
-            return totalMeter * unitPrice * days;
+            return task.UnitWeight;
+        }
+
+        /// <summary>
+        /// 获取出库单位计量
+        /// </summary>
+        /// <param name="task">出库任务</param>
+        /// <returns></returns>
+        public decimal GetUnitMeter(StockOutTaskView task)
+        {
+            return task.UnitWeight;
         }
 
         /// <summary>
@@ -66,7 +74,19 @@ namespace Phoebe.Core.Billing
         /// </remarks>
         public decimal CalculateDailyFee(decimal totalMeter, decimal unitPrice)
         {
-            return totalMeter * unitPrice;
+            return Math.Round(totalMeter * unitPrice, 3);
+        }
+
+        /// <summary>
+        /// 计算货品周期冷藏费
+        /// </summary>
+        /// <param name="totalMeter">日总计量</param>
+        /// <param name="unitPrice">单价</param>
+        /// <param name="days">天数</param>
+        /// <returns></returns>
+        public decimal CalculatePeriodFee(decimal totalMeter, decimal unitPrice, int days)
+        {
+            return totalMeter * unitPrice * days;
         }
         #endregion //Override
     }
