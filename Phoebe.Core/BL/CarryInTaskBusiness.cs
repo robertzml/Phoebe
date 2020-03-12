@@ -39,6 +39,7 @@ namespace Phoebe.Core.BL
             entity.CustomerId = stockInTask.CustomerId;
             entity.ContractId = stockInTask.ContractId;
             entity.CargoId = stockInTask.CargoId;
+            entity.UnitWeight = stockInTask.UnitWeight;
 
             entity.CreateTime = now;
             entity.TaskCode = recordBusiness.GetNextSequence(db, "CarryInTask", now);
@@ -81,6 +82,7 @@ namespace Phoebe.Core.BL
 
             task.MoveCount = carryOutTask.StoreCount - carryOutTask.MoveCount;
             task.MoveWeight = carryOutTask.StoreWeight - carryOutTask.MoveWeight;
+            task.UnitWeight = carryOutTask.UnitWeight;
 
             SequenceRecordBusiness recordBusiness = new SequenceRecordBusiness();
             task.TaskCode = recordBusiness.GetNextSequence(db, "CarryInTask", now);

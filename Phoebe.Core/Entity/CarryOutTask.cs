@@ -89,6 +89,12 @@ namespace Phoebe.Core.Entity
         public decimal MoveWeight { get; set; }
 
         /// <summary>
+        /// 单位重量
+        /// </summary>
+        [Display(Name = "单位重量")]
+        public decimal UnitWeight { get; set; }
+
+        /// <summary>
         /// 任务码
         /// </summary>
         [Display(Name = "任务码")]

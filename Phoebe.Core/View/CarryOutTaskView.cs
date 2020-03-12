@@ -89,6 +89,12 @@ namespace Phoebe.Core.View
         public decimal MoveWeight { get; set; }
 
         /// <summary>
+        /// 单位重量
+        /// </summary>
+        [Display(Name = "单位重量")]
+        public decimal UnitWeight { get; set; }
+
+        /// <summary>
         /// 任务码
         /// </summary>
         [Display(Name = "任务码")]
@@ -243,12 +249,6 @@ namespace Phoebe.Core.View
         /// </summary>
         [Display(Name = "出库时间")]
         public DateTime? OutTime { get; set; }
-
-        /// <summary>
-        /// 单位重量
-        /// </summary>
-        [Display(Name = "单位重量")]
-        public decimal UnitWeight { get; set; }
 
         /// <summary>
         /// 批次

@@ -375,22 +375,27 @@ namespace Phoebe.Core.Service
                     return (false, "无法编辑已确认入库任务单");
                 }
 
-                if (entity.CargoId != inTask.CargoId)
+                if (entity.CargoId != inTask.CargoId || entity.UnitWeight != inTask.UnitWeight)
                 {
-                    entity.CargoId = inTask.CargoId;
                     entity.UnitWeight = inTask.UnitWeight;
+                    entity.InWeight = entity.InCount * entity.UnitWeight / 1000;
+                    entity.CargoId = inTask.CargoId;
 
                     // 修改搬运入库任务对应信息
                     var carryIns = db.Queryable<CarryInTask>().Where(r => r.StockInTaskId == inTask.Id && r.Type == (int)CarryInTaskType.In).ToList();
 
                     foreach (var carryIn in carryIns)
                     {
+                        carryIn.CargoId = inTask.CargoId;
+                        carryIn.UnitWeight = inTask.UnitWeight;
                         carryIn.MoveWeight = inTask.UnitWeight * carryIn.MoveCount / 1000;
                         db.Updateable(carryIn).ExecuteCommand();
 
                         var store = db.Queryable<Store>().Single(r => r.CarryInTaskId == carryIn.Id);
                         if (store != null)
                         {
+                            store.CargoId = carryIn.CargoId;
+                            store.UnitWeight = carryIn.UnitWeight;
                             store.StoreWeight = carryIn.MoveWeight;
                             db.Updateable(store).ExecuteCommand();
                         }
@@ -445,6 +450,16 @@ namespace Phoebe.Core.Service
                 if (stockInTask.Status != (int)EntityStatus.StockInReady)
                 {
                     return (false, "仅能删除待入库状态的入库任务单");
+                }
+
+                StockInBusiness stockInBusiness = new StockInBusiness();
+                var stockIn = stockInBusiness.FindById(stockInTask.StockInId, db);
+
+                // 删除普通库库存
+                if (stockIn.Type == (int)StockInType.Normal)
+                {
+                    NormalStoreBusiness normalStoreBusiness = new NormalStoreBusiness();
+                    normalStoreBusiness.DeleteByStockIn(stockInTask.Id, db);
                 }
 
                 // 删除入库任务

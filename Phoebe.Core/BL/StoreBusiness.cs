@@ -41,6 +41,7 @@ namespace Phoebe.Core.BL
 
             store.StoreCount = task.MoveCount;
             store.StoreWeight = task.MoveWeight;
+            store.UnitWeight = task.UnitWeight;
 
             store.Batch = stockInTask.Batch;
             store.OriginPlace = stockInTask.OriginPlace;
@@ -85,6 +86,7 @@ namespace Phoebe.Core.BL
 
             store.StoreCount = task.MoveCount;
             store.StoreWeight = task.MoveWeight;
+            store.UnitWeight = task.UnitWeight;
 
             Store oldStore = db.Queryable<Store>().InSingle(task.StoreId);
 

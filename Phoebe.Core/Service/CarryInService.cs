@@ -137,9 +137,6 @@ namespace Phoebe.Core.Service
                         store = result.t;
                     }
 
-                    // 添加冷藏费记录
-                    coldFeeBusiness.Start(store, db);
-
                     // 更新搬运入库任务
                     carryInTaskBusiness.Enter(carryTask, shelfCode, position.Id, store.Id, user, db);
                 }
@@ -203,11 +200,7 @@ namespace Phoebe.Core.Service
 
                 // 确认库存记录
                 StoreBusiness storeBusiness = new StoreBusiness();
-                storeBusiness.FinishIn(task.StoreId, trayCode, moveCount, moveWeight, remark, db);
-
-                // 修改冷藏费
-                ColdFeeBusiness coldFeeBusiness = new ColdFeeBusiness();
-                coldFeeBusiness.Update(task.StoreId, moveWeight, db);
+                storeBusiness.FinishIn(task.StoreId, trayCode, moveCount, moveWeight, remark, db);              
 
                 db.Ado.CommitTran();
                 return (true, "");

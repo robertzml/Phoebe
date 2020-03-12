@@ -126,9 +126,6 @@ namespace Phoebe.Core.Service
                         carryOutTaskBusiness.Leave(carryOut, shelfCode, store, user, db);
                     }
 
-                    // 结束冷藏费计算
-                    coldFeeBusiness.End(store, DateTime.Now.Date, db);
-
                     // 库存记录下架
                     storeBusiness.Leave(store.Id, carryOut.Id, db);
                 }

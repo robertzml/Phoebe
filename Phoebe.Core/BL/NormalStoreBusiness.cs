@@ -16,6 +16,13 @@ namespace Phoebe.Core.BL
     public class NormalStoreBusiness : AbstractBusiness<NormalStore, string>, IBaseBL<NormalStore, string>
     {
         #region Method
+        /// <summary>
+        /// 根据入库任务创建库存记录
+        /// </summary>
+        /// <param name="stockIn"></param>
+        /// <param name="stockInTask"></param>
+        /// <param name="db"></param>
+        /// <returns></returns>
         public (bool success, string errorMessage, NormalStore t) CreateByStockIn(StockIn stockIn, StockInTask stockInTask, SqlSugarClient db = null)
         {
             if (db == null)
@@ -32,6 +39,7 @@ namespace Phoebe.Core.BL
 
             store.StoreCount = stockInTask.InCount;
             store.StoreWeight = stockInTask.InWeight;
+            store.UnitWeight = stockInTask.UnitWeight;
 
             store.Batch = stockInTask.Batch;
             store.OriginPlace = stockInTask.OriginPlace;
@@ -47,6 +55,24 @@ namespace Phoebe.Core.BL
             var t = db.Insertable(store).ExecuteReturnEntity();
 
             return (true, "", store);
+        }
+
+        /// <summary>
+        /// 删除入库任务对应库存记录
+        /// </summary>
+        /// <param name="stockInTaskId">入库任务ID</param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        public (bool success, string errorMessage) DeleteByStockIn(string stockInTaskId, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            var store = db.Queryable<NormalStore>().Single(r => r.StockInTaskId == stockInTaskId);
+            if (store != null)
+                db.Deleteable<NormalStore>().In(store.Id).ExecuteCommand();
+
+            return (true, "");
         }
         #endregion //Method
     }
