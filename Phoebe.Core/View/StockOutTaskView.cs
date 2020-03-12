@@ -65,6 +65,12 @@ namespace Phoebe.Core.View
         public decimal OutWeight { get; set; }
 
         /// <summary>
+        /// 单位重量
+        /// </summary>
+        [Display(Name = "单位重量")]
+        public decimal UnitWeight { get; set; }
+
+        /// <summary>
         /// 创建人ID
         /// </summary>
         [Display(Name = "创建人ID")]
@@ -165,12 +171,6 @@ namespace Phoebe.Core.View
         /// </summary>
         [Display(Name = "货品名称")]
         public string CargoName { get; set; }
-
-        /// <summary>
-        /// 单位重量
-        /// </summary>
-        [Display(Name = "单位重量")]
-        public decimal UnitWeight { get; set; }
 
         /// <summary>
         /// 类别名称

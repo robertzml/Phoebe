@@ -65,6 +65,12 @@ namespace Phoebe.Core.Entity
         public decimal StoreWeight { get; set; }
 
         /// <summary>
+        /// 单位重量
+        /// </summary>
+        [Display(Name = "单位重量")]
+        public decimal UnitWeight { get; set; }
+
+        /// <summary>
         /// 批次
         /// </summary>
         [Display(Name = "批次")]

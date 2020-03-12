@@ -119,12 +119,6 @@ namespace Phoebe.Core.View
         public string PositionNumber { get; set; }
 
         /// <summary>
-        /// 存放位置
-        /// </summary>
-        [Display(Name = "存放位置")]
-        public string Place { get; set; }
-
-        /// <summary>
         /// 清点人ID
         /// </summary>
         [Display(Name = "清点人ID")]
@@ -188,19 +182,13 @@ namespace Phoebe.Core.View
         /// 状态
         /// </summary>
         [Display(Name = "状态")]
-        public int Status { get; set; }   
+        public int Status { get; set; }
 
         /// <summary>
         /// 货品名称
         /// </summary>
         [Display(Name = "货品名称")]
         public string CargoName { get; set; }
-
-        /// <summary>
-        /// 单位重量
-        /// </summary>
-        [Display(Name = "单位重量")]
-        public decimal UnitWeight { get; set; }
 
         /// <summary>
         /// 规格
@@ -255,6 +243,12 @@ namespace Phoebe.Core.View
         /// </summary>
         [Display(Name = "出库时间")]
         public DateTime? OutTime { get; set; }
+
+        /// <summary>
+        /// 单位重量
+        /// </summary>
+        [Display(Name = "单位重量")]
+        public decimal UnitWeight { get; set; }
 
         /// <summary>
         /// 批次

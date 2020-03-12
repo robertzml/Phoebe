@@ -50,13 +50,7 @@ namespace Phoebe.Core.View
         /// 托盘码
         /// </summary>
         [Display(Name = "托盘码")]
-        public string TrayCode { get; set; }
-
-        /// <summary>
-        /// 总数量
-        /// </summary>
-        [Display(Name = "总数量")]
-        public int TotalCount { get; set; }
+        public string TrayCode { get; set; }      
 
         /// <summary>
         /// 在库数量
@@ -65,16 +59,16 @@ namespace Phoebe.Core.View
         public int StoreCount { get; set; }
 
         /// <summary>
-        /// 总重量
-        /// </summary>
-        [Display(Name = "总重量")]
-        public decimal TotalWeight { get; set; }
-
-        /// <summary>
         /// 在库重量
         /// </summary>
         [Display(Name = "在库重量")]
         public decimal StoreWeight { get; set; }
+
+        /// <summary>
+        /// 单位重量
+        /// </summary>
+        [Display(Name = "单位重量")]
+        public decimal UnitWeight { get; set; }
 
         /// <summary>
         /// 批次
@@ -153,12 +147,6 @@ namespace Phoebe.Core.View
         /// </summary>
         [Display(Name = "货品名称")]
         public string CargoName { get; set; }
-
-        /// <summary>
-        /// 单位重量
-        /// </summary>
-        [Display(Name = "单位重量")]
-        public decimal UnitWeight { get; set; }
 
         /// <summary>
         /// 规格
@@ -320,13 +308,7 @@ namespace Phoebe.Core.View
         /// 货架类型
         /// </summary>
         [Display(Name = "货架类型")]
-        public int ShelfType { get; set; }
-
-        /// <summary>
-        /// 存放位置
-        /// </summary>
-        [Display(Name = "存放位置")]
-        public string Place { get; set; }
+        public int ShelfType { get; set; }  
 
         /// <summary>
         /// 货架码
