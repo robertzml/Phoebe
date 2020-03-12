@@ -62,7 +62,13 @@ namespace Phoebe.Core.Entity
         /// 出库重量
         /// </summary>
         [Display(Name = "出库重量")]
-        public decimal OutWeight { get; set; }      
+        public decimal OutWeight { get; set; }
+
+        /// <summary>
+        /// 单位重量
+        /// </summary>
+        [Display(Name = "单位重量")]
+        public decimal UnitWeight { get; set; }
 
         /// <summary>
         /// 创建人ID

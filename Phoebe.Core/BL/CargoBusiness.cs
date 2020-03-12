@@ -28,10 +28,10 @@ namespace Phoebe.Core.BL
                 db = GetInstance();
 
             var count = db.Queryable<Cargo>().Count(r => r.CustomerId == entity.CustomerId &&
-                r.Name == entity.Name && r.UnitWeight == entity.UnitWeight && r.Specification == entity.Specification);
+                r.Name == entity.Name && r.Specification == entity.Specification);
             if (count > 0)
             {
-                return (false, "名称、单位重量、规格不能完全相同", null);
+                return (false, "名称、规格不能完全相同", null);
             }
 
             entity.Id = Guid.NewGuid().ToString();
@@ -53,10 +53,10 @@ namespace Phoebe.Core.BL
                     db = GetInstance();
 
                 var count = db.Queryable<Cargo>().Count(r => r.Id != entity.Id && r.CustomerId == entity.CustomerId &&
-                    r.Name == entity.Name && r.UnitWeight == entity.UnitWeight && r.Specification == entity.Specification);
+                    r.Name == entity.Name && r.Specification == entity.Specification);
                 if (count > 0)
                 {
-                    return (false, "名称、单位重量、规格不能完全相同");
+                    return (false, "名称、规格不能完全相同");
                 }
 
                 var cargo = db.Queryable<Cargo>().InSingle(entity.Id);

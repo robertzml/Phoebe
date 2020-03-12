@@ -52,7 +52,6 @@ namespace Phoebe.Core.BL
             {
                 entity.PositionNumber = store.VicePositionNumber;
             }
-            entity.Place = store.Place;
 
             var t = db.Insertable(entity).ExecuteReturnEntity();
             return (true, "", t);
@@ -97,8 +96,6 @@ namespace Phoebe.Core.BL
                 entity.PositionNumber = store.PositionNumber;
             else
                 entity.PositionNumber = store.VicePositionNumber;
-
-            entity.Place = store.Place;
 
             entity.ReceiveUserId = user.Id;
             entity.ReceiveUserName = user.Name;

@@ -40,13 +40,7 @@ namespace Phoebe.Core.Entity
         /// 类别ID
         /// </summary>
         [Display(Name = "类别ID")]
-        public int CategoryId { get; set; }
-
-        /// <summary>
-        /// 单位重量
-        /// </summary>
-        [Display(Name = "单位重量")]
-        public decimal UnitWeight { get; set; }
+        public int CategoryId { get; set; }      
 
         /// <summary>
         /// 规格

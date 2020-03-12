@@ -392,7 +392,6 @@ namespace Phoebe.Core.Service
                         if (store != null)
                         {
                             store.StoreWeight = carryIn.MoveWeight;
-                            store.TotalWeight = carryIn.MoveWeight;
                             db.Updateable(store).ExecuteCommand();
                         }
                     }

@@ -41,12 +41,6 @@ namespace Phoebe.Core.View
         public int CategoryId { get; set; }
 
         /// <summary>
-        /// 单位重量
-        /// </summary>
-        [Display(Name = "单位重量")]
-        public decimal UnitWeight { get; set; }
-
-        /// <summary>
         /// 规格
         /// </summary>
         [Display(Name = "规格")]

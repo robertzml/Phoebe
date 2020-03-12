@@ -65,6 +65,12 @@ namespace Phoebe.Core.Entity
         public string StockOutTaskId { get; set; }
 
         /// <summary>
+        /// 单位重量
+        /// </summary>
+        [Display(Name = "单位重量")]
+        public decimal UnitWeight { get; set; }
+
+        /// <summary>
         /// 入库数量
         /// </summary>
         [Display(Name = "入库数量")]
@@ -99,12 +105,6 @@ namespace Phoebe.Core.Entity
         /// </summary>
         [Display(Name = "仓位ID")]
         public int PositionId { get; set; }
-
-        /// <summary>
-        /// 存放位置
-        /// </summary>
-        [Display(Name = "存放位置")]
-        public string Place { get; set; }
 
         /// <summary>
         /// 清点人ID

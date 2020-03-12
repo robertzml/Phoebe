@@ -39,9 +39,7 @@ namespace Phoebe.Core.BL
             store.PositionId = positionId;
             store.TrayCode = task.TrayCode;
 
-            store.TotalCount = task.MoveCount;
             store.StoreCount = task.MoveCount;
-            store.TotalWeight = task.MoveWeight;
             store.StoreWeight = task.MoveWeight;
 
             store.Batch = stockInTask.Batch;
@@ -85,9 +83,7 @@ namespace Phoebe.Core.BL
             store.PositionId = positionId;
             store.TrayCode = task.TrayCode;
 
-            store.TotalCount = task.MoveCount;
             store.StoreCount = task.MoveCount;
-            store.TotalWeight = task.MoveWeight;
             store.StoreWeight = task.MoveWeight;
 
             Store oldStore = db.Queryable<Store>().InSingle(task.StoreId);
@@ -104,10 +100,10 @@ namespace Phoebe.Core.BL
             store.CreateTime = DateTime.Now;
             store.Status = (int)EntityStatus.StoreInReady;
 
-            var t = db.Insertable(store).ExecuteReturnEntity();            
+            var t = db.Insertable(store).ExecuteReturnEntity();
 
             return (true, "", t);
-        }       
+        }
 
         /// <summary>
         /// 库存记录入库确认
@@ -130,9 +126,7 @@ namespace Phoebe.Core.BL
             var store = db.Queryable<Store>().Single(r => r.Id == id);
             store.TrayCode = trayCode;
 
-            store.TotalCount = storeCount;
             store.StoreCount = storeCount;
-            store.TotalWeight = storeWeight;
             store.StoreWeight = storeWeight;
 
             store.Remark = remark;

@@ -119,12 +119,6 @@ namespace Phoebe.Core.Entity
         public string PositionNumber { get; set; }
 
         /// <summary>
-        /// 存放位置
-        /// </summary>
-        [Display(Name = "存放位置")]
-        public string Place { get; set; }
-
-        /// <summary>
         /// 清点人ID
         /// </summary>
         [Display(Name = "清点人ID")]

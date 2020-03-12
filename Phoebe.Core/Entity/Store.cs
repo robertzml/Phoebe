@@ -50,31 +50,25 @@ namespace Phoebe.Core.Entity
         /// 托盘码
         /// </summary>
         [Display(Name = "托盘码")]
-        public string TrayCode { get; set; }
-
-        /// <summary>
-        /// 总数量
-        /// </summary>
-        [Display(Name = "总数量")]
-        public int TotalCount { get; set; }
+        public string TrayCode { get; set; }       
 
         /// <summary>
         /// 在库数量
         /// </summary>
         [Display(Name = "在库数量")]
-        public int StoreCount { get; set; }
-
-        /// <summary>
-        /// 总重量
-        /// </summary>
-        [Display(Name = "总重量")]
-        public decimal TotalWeight { get; set; }
+        public int StoreCount { get; set; }       
 
         /// <summary>
         /// 在库重量
         /// </summary>
         [Display(Name = "在库重量")]
         public decimal StoreWeight { get; set; }
+
+        /// <summary>
+        /// 单位重量
+        /// </summary>
+        [Display(Name = "单位重量")]
+        public decimal UnitWeight { get; set; }
 
         /// <summary>
         /// 批次
