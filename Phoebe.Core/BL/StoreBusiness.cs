@@ -47,6 +47,7 @@ namespace Phoebe.Core.BL
             store.OriginPlace = stockInTask.OriginPlace;
             store.Durability = stockInTask.Durability;
 
+            store.InitialTime = stockInTask.InTime;
             store.InTime = stockInTask.InTime;
             store.StockInId = stockInTask.StockInId;
             store.CarryInTaskId = task.Id;
@@ -96,6 +97,7 @@ namespace Phoebe.Core.BL
             store.StockInId = oldStore.StockInId;
             store.PrevStoreId = oldStore.Id;
 
+            store.InitialTime = oldStore.InitialTime;
             store.InTime = oldStore.OutTime.Value; //库存入库时间为旧库存出库时间
             store.CarryInTaskId = task.Id;
 

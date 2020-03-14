@@ -239,6 +239,12 @@ namespace Phoebe.Core.View
         public string ContractName { get; set; }
 
         /// <summary>
+        /// 初始时间
+        /// </summary>
+        [Display(Name = "初始时间")]
+        public DateTime InitialTime { get; set; }
+
+        /// <summary>
         /// 入库时间
         /// </summary>
         [Display(Name = "入库时间")]

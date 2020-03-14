@@ -30,8 +30,7 @@ namespace Phoebe.WebAPI.Controllers
         [HttpGet]
         public ActionResult<ColdFee> GetByStore(string storeId, DateTime current)
         {
-            ColdFeeService coldFeeService = new ColdFeeService();
-            return coldFeeService.FindByStore(storeId, current);
+            throw new NotImplementedException();
         }
         #endregion //Query
     }

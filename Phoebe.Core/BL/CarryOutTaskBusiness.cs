@@ -40,6 +40,7 @@ namespace Phoebe.Core.BL
             entity.ContractId = stockOutTask.ContractId;
             entity.CargoId = stockOutTask.CargoId;
             entity.StockOutTaskId = stockOutTask.Id;
+            entity.UnitWeight = stockOutTask.UnitWeight;
             entity.CreateTime = now;
             entity.TaskCode = recordBusiness.GetNextSequence(db, "CarryOutTask", now);
             entity.Status = (int)EntityStatus.StockOutReady;
@@ -87,6 +88,7 @@ namespace Phoebe.Core.BL
             entity.MoveCount = 0;
             entity.StoreWeight = store.StoreWeight;
             entity.MoveWeight = 0;
+            entity.UnitWeight = store.UnitWeight;
             entity.TaskCode = recordBusiness.GetNextSequence(db, "CarryOutTask", now);
             entity.ShelfCode = shelfCode;
             entity.TrayCode = store.TrayCode;
