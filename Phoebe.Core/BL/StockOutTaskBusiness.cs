@@ -61,7 +61,8 @@ namespace Phoebe.Core.BL
             if (db == null)
                 db = GetInstance();
 
-            var task = db.Queryable<StockOutTask>().Single(r => r.StockOutId == stockOutId && r.CargoId == carryOutTask.CargoId);
+            var task = db.Queryable<StockOutTask>()
+                .Single(r => r.StockOutId == stockOutId && r.CargoId == carryOutTask.CargoId && r.UnitWeight == carryOutTask.UnitWeight);
             if (task == null)
             {
                 SequenceRecordBusiness recordBusiness = new SequenceRecordBusiness();
@@ -81,6 +82,7 @@ namespace Phoebe.Core.BL
                 task.StoreWeight = stores.Sum(r => r.StoreWeight);
                 task.OutCount = carryOutTask.MoveCount;
                 task.OutWeight = carryOutTask.MoveWeight;
+                task.UnitWeight = carryOutTask.UnitWeight;
 
                 task.CreateTime = now;
                 task.UserId = user.Id;

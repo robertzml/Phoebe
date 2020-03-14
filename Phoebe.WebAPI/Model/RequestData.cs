@@ -121,6 +121,21 @@ namespace Phoebe.WebAPI.Model
     }
 
     /// <summary>
+    /// 出库单添加出库货物模型
+    /// </summary>
+    public class StockOutAddStoreModel
+    {
+        [Required]
+        public string StockOutId;
+
+        [Required]
+        public int UserId;
+
+        [Required]
+        public List<CarryOutTask> Tasks;
+    }
+
+    /// <summary>
     /// 出库单提交搬运出库模型
     /// </summary>
     public class StockOutTaskAddCarryOutModel

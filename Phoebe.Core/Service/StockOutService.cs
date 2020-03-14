@@ -189,6 +189,69 @@ namespace Phoebe.Core.Service
         }
 
         /// <summary>
+        /// 添加出库货物
+        /// </summary>
+        /// <param name="stockOutId">出库单ID</param>
+        /// <param name="tasks">搬运出库任务</param>
+        /// <param name="userId">创建人</param>
+        /// <returns></returns>
+        /// <remarks>
+        /// 管理员搜索库存记录，提交需出库的货物
+        /// </remarks>
+        public (bool success, string errorMessage) AddOutStore(string stockOutId, List<CarryOutTask> tasks, int userId)
+        {
+            var db = GetInstance();
+            try
+            {
+                db.Ado.BeginTran();
+
+                StockOutBusiness stockOutBusiness = new StockOutBusiness();
+                StockOutTaskBusiness stockOutTaskBusiness = new StockOutTaskBusiness();
+                CarryOutTaskBusiness carryOutTaskBusiness = new CarryOutTaskBusiness();
+                StoreViewBusiness storeViewBusiness = new StoreViewBusiness();
+
+                // 获取创建人
+                UserBusiness userBusiness = new UserBusiness();
+                var user = userBusiness.FindById(userId);
+
+                // 获取出库单
+                var stockOut = stockOutBusiness.FindById(stockOutId);                      
+               
+                foreach (var carryOutTask in tasks)
+                {
+                    // 查找是否已有出库任务单
+                    var stockOutTasks = db.Queryable<StockOutTask>().Where(r => r.StockOutId == stockOut.Id).ToList();
+
+                    var find = stockOutTasks.Find(r => r.CargoId == carryOutTask.CargoId && r.UnitWeight == carryOutTask.UnitWeight);
+                    if (find == null)
+                    {
+                        // 创建出库任务
+                        var result = stockOutTaskBusiness.Create(stockOutId, carryOutTask, user, db);
+                        carryOutTask.StockOutTaskId = result.t.Id;
+                    }
+                    else
+                    {
+                        carryOutTask.StockOutTaskId = find.Id;
+                    }
+
+                    // 找出对应库存
+                    var store = storeViewBusiness.FindById(carryOutTask.StoreId);
+
+                    // 设置搬运出库任务信息
+                    carryOutTaskBusiness.CreateByStockOut(carryOutTask, store, db);
+                }
+
+                db.Ado.CommitTran();
+                return (true, "");
+            }
+            catch (Exception e)
+            {
+                db.Ado.RollbackTran();
+                return (false, e.Message);
+            }
+        }
+
+        /// <summary>
         /// 扫托盘码出库
         /// </summary>
         /// <param name="stockOutId">出库单ID</param>

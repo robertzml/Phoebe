@@ -277,6 +277,32 @@ namespace Phoebe.WebAPI.Controllers
         }
 
         /// <summary>
+        /// 添加出库任务
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ActionResult<ResponseData>> AddOutStore(StockOutAddStoreModel model)
+        {
+            StockOutService stockOutService = new StockOutService();
+
+            var task = Task.Run(() =>
+            {
+                var result = stockOutService.AddOutStore(model.StockOutId, model.Tasks, model.UserId);
+
+                ResponseData data = new ResponseData
+                {
+                    Status = result.success ? 0 : 1,
+                    ErrorMessage = result.errorMessage                   
+                };
+
+                return data;
+            });
+
+            return await task;
+        }
+
+        /// <summary>
         /// 完成出库任务
         /// </summary>
         /// <param name="taskId"></param>

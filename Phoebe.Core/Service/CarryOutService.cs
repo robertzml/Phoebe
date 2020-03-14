@@ -44,7 +44,6 @@ namespace Phoebe.Core.Service
                 StockOutTaskViewBusiness stockOutTaskViewBusiness = new StockOutTaskViewBusiness();
 
                 var stockOutTask = stockOutTaskViewBusiness.FindById(data.First().StockOutTaskId);
-                List<CarryOutTask> tempOutTasks = new List<CarryOutTask>();
 
                 // 添加搬运出库的任务
                 foreach (var task in data)
