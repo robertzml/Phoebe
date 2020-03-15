@@ -103,7 +103,7 @@ namespace Phoebe.Core.Service
                     carryInTasks.Add(result.t);
 
                     // 清点搬运出库
-                    carryOutTaskBusiness.CheckUnmove(carryOutTask, user, db);
+                    carryOutTaskBusiness.CheckUnmove(carryOutTask.Id, user, db);
                 }
 
                 if (carryInTasks.Count == 0)

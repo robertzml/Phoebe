@@ -56,7 +56,7 @@ namespace Phoebe.Core.BL
         /// <param name="user">清点人</param>
         /// <param name="db"></param>
         /// <returns></returns>
-        public (bool success, string errorMessage, StockOutTask t) Create(string stockOutId, CarryOutTask carryOutTask, User user, SqlSugarClient db = null)
+        public (bool success, string errorMessage, StockOutTask task) Create(string stockOutId, CarryOutTask carryOutTask, User user, SqlSugarClient db = null)
         {
             if (db == null)
                 db = GetInstance();
@@ -92,6 +92,13 @@ namespace Phoebe.Core.BL
                 task.Status = (int)EntityStatus.StockOutReady;
 
                 db.Insertable(task).ExecuteCommand();
+            }
+            else
+            {
+                task.OutCount += carryOutTask.MoveCount;
+                task.OutWeight += carryOutTask.MoveWeight;
+
+                db.Updateable(task).ExecuteCommand();
             }
 
             return (true, "", task);

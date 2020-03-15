@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Phoebe.Core.DL
@@ -176,6 +177,38 @@ namespace Phoebe.Core.DL
             }
             else
                 return new List<StoreView>();
+        }
+
+        /// <summary>
+        /// 出库时查找库存记录
+        /// </summary>
+        /// <param name="contractId">合同ID</param>
+        /// <param name="cargoId">货品ID</param>
+        /// <returns></returns>
+        /// <remarks>
+        /// 去除已经添加的待出库库存记录
+        /// </remarks>
+        public List<StoreView> FindForStockOut(int contractId, string cargoId, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            var data = db.Queryable<StoreView>()
+                .Where(r => r.ContractId == contractId && r.CargoId == cargoId && r.Status == (int)EntityStatus.StoreIn)
+                .ToList();
+
+            // 已经添加出库的托盘不能继续添加
+            var carryOuts = db.Queryable<CarryOutTask>()
+                .Where(r => r.ContractId == contractId && r.CargoId == cargoId && 
+                    (r.Status == (int)EntityStatus.StockOutReady || r.Status == (int)EntityStatus.StockOutLeave || 
+                    r.Status == (int)EntityStatus.StockOutCheck))
+                .ToList();
+
+            var trayCodes = carryOuts.Select(r => r.TrayCode);
+
+            data = data.Where(r => !trayCodes.Contains(r.TrayCode)).ToList();
+
+            return data;
         }
         #endregion //Query
 

@@ -224,14 +224,16 @@ namespace Phoebe.Core.BL
         /// <summary>
         /// 清点无需出库的搬运出库任务
         /// </summary>
-        /// <param name="task">搬运出库</param>
+        /// <param name="id">搬运出库ID</param>
         /// <param name="user">清点人</param>
         /// <param name="db"></param>
         /// <returns></returns>
-        public (bool success, string errorMessage) CheckUnmove(CarryOutTask task, User user, SqlSugarClient db = null)
+        public (bool success, string errorMessage) CheckUnmove(string id, User user, SqlSugarClient db = null)
         {
             if (db == null)
                 db = GetInstance();
+
+            var task = db.Queryable<CarryOutTask>().InSingle(id);
 
             task.Type = (int)CarryOutTaskType.Temp;
             task.CheckUserId = user.Id;
