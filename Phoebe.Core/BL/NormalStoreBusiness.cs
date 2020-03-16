@@ -45,6 +45,7 @@ namespace Phoebe.Core.BL
             store.OriginPlace = stockInTask.OriginPlace;
             store.Durability = stockInTask.Durability;
 
+            store.InitialTime = stockIn.InTime;
             store.InTime = stockIn.InTime;
             store.StockInTaskId = stockInTask.Id;
 
