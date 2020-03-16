@@ -74,6 +74,26 @@ namespace Phoebe.Core.BL
 
             return (true, "");
         }
+
+        /// <summary>
+        /// 库存记录入库确认
+        /// </summary>
+        /// <param name="stockInTaskId">入库任务ID</param>
+        /// <param name="db"></param>
+        /// <remarks>
+        /// </remarks>
+        /// <returns></returns>
+        public (bool success, string errorMessage) FinishIn(string stockInTaskId, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            var store = db.Queryable<NormalStore>().Single(r => r.StockInTaskId == stockInTaskId);
+            store.Status = (int)EntityStatus.StoreIn;
+
+            db.Updateable(store).ExecuteCommand();
+            return (true, "");
+        }
         #endregion //Method
     }
 }

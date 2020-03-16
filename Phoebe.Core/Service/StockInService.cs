@@ -341,6 +341,11 @@ namespace Phoebe.Core.Service
                     inCount = carryIn.Sum(r => r.MoveCount);
                     inWeight = carryIn.Sum(r => r.MoveWeight);
                 }
+                else if (task.StockInType == (int)StockInType.Normal)
+                {
+                    NormalStoreBusiness normalStoreBusiness = new NormalStoreBusiness();
+                    normalStoreBusiness.FinishIn(task.Id);
+                }
 
                 StockInTaskBusiness stockInTaskBusiness = new StockInTaskBusiness();
                 stockInTaskBusiness.Finish(stockInTaskId, inCount, inWeight, db);
