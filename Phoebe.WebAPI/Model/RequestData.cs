@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace Phoebe.WebAPI.Model
 {
     using Phoebe.Core.Entity;
+    using Phoebe.Core.Model;
 
     /// <summary>
     /// 搬运入库新增模型
@@ -121,9 +122,9 @@ namespace Phoebe.WebAPI.Model
     }
 
     /// <summary>
-    /// 出库单添加出库货物模型
+    /// 出库添加仓位库出库货物
     /// </summary>
-    public class StockOutAddStoreModel
+    public class StockOutAddPositionModel
     {
         [Required]
         public string StockOutId;
@@ -133,6 +134,21 @@ namespace Phoebe.WebAPI.Model
 
         [Required]
         public List<CarryOutTask> Tasks;
+    }
+
+    /// <summary>
+    /// 出库添加普通库出库货物
+    /// </summary>
+    public class StockOutAddNormalModel
+    {
+        [Required]
+        public string StockOutId;
+
+        [Required]
+        public int UserId;
+
+        [Required]
+        public List<NormalStockOutTask> Tasks;
     }
 
     /// <summary>

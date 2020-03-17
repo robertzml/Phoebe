@@ -105,6 +105,52 @@ namespace Phoebe.Core.BL
         }
 
         /// <summary>
+        /// 添加普通库出库任务
+        /// </summary>
+        /// <param name="stockOutId">出库单ID</param>
+        /// <param name="store">库存对象</param>
+        /// <param name="outCount">出库数量</param>
+        /// <param name="outWeight">出库重量</param>
+        /// <param name="user"></param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        public (bool success, string errorMessage, StockOutTask task) CreateNormal(string stockOutId, NormalStore store, int outCount, decimal outWeight, User user, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            SequenceRecordBusiness recordBusiness = new SequenceRecordBusiness();
+
+            var now = DateTime.Now;
+
+            // 计算在库数量用
+            var stores = db.Queryable<Store>()
+              .Where(r => r.CargoId == store.CargoId && (r.Status == (int)EntityStatus.StoreIn || r.Status == (int)EntityStatus.StoreOutReady));
+
+            StockOutTask task = new StockOutTask();
+            task.Id = Guid.NewGuid().ToString();
+            task.StockOutId = stockOutId;
+            task.TaskCode = recordBusiness.GetNextSequence(db, "StockOutTask", now);
+            task.CargoId = store.CargoId;
+            task.StoreCount = stores.Sum(r => r.StoreCount);
+            task.StoreWeight = stores.Sum(r => r.StoreWeight);
+            task.OutCount = outCount;
+            task.OutWeight = outWeight;
+            task.UnitWeight = store.UnitWeight;
+
+            task.CreateTime = now;
+            task.UserId = user.Id;
+            task.UserName = user.Name;
+
+            task.Remark = "";
+            task.Status = (int)EntityStatus.StockOutReady;
+
+            db.Insertable(task).ExecuteCommand();
+
+            return (true, "", task);
+        }
+
+        /// <summary>
         /// 确认出库任务
         /// </summary>
         /// <param name="id"></param>

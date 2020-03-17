@@ -10,6 +10,7 @@ namespace Phoebe.Core.Service
     using Phoebe.Core.Entity;
     using Phoebe.Core.BL;
     using Phoebe.Core.DL;
+    using Phoebe.Core.Model;
     using Phoebe.Core.View;
     using Phoebe.Core.Utility;
 
@@ -197,6 +198,56 @@ namespace Phoebe.Core.Service
             {
                 db.Ado.RollbackTran();
                 return (false, e.Message, null);
+            }
+        }
+
+        /// <summary>
+        /// 添加普通库出库任务
+        /// </summary>
+        /// <param name="stockOutId">出库单ID</param>
+        /// <param name="tasks">出库任务</param>
+        /// <param name="userId">创建人</param>
+        /// <returns></returns>
+        public (bool success, string errorMessage) AddNormalOut(string stockOutId, List<NormalStockOutTask> tasks,  int userId)
+        {
+            var db = GetInstance();
+            try
+            {
+                db.Ado.BeginTran();
+
+                StockOutBusiness stockOutBusiness = new StockOutBusiness();
+                StockOutTaskBusiness stockOutTaskBusiness = new StockOutTaskBusiness();
+                NormalStoreBusiness normalStoreBusiness = new NormalStoreBusiness();
+
+                // 获取创建人
+                UserBusiness userBusiness = new UserBusiness();
+                var user = userBusiness.FindById(userId);
+
+                // 获取出库单
+                var stockOut = stockOutBusiness.FindById(stockOutId);
+                if (stockOut.Type != (int)StockOutType.Normal)
+                    return (false, "非普通库出库");
+
+                foreach(var item in tasks)
+                {
+                    // 获取对应库存
+                    var store = normalStoreBusiness.FindById(item.StoreId, db);
+
+                    // 检查库存状态
+
+                    // 创建出库任务
+                    var result = stockOutTaskBusiness.CreateNormal(stockOutId, store, item.OutCount, item.OutWeight, user, db);
+
+                    // 更新库存状态
+                }
+
+                db.Ado.CommitTran();
+                return (true, "");
+            }
+            catch (Exception e)
+            {
+                db.Ado.RollbackTran();
+                return (false, e.Message);
             }
         }
 
