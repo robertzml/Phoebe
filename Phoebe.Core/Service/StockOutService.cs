@@ -31,6 +31,18 @@ namespace Phoebe.Core.Service
             {
                 db.Ado.BeginTran();
 
+                ContractBusiness contractBusiness = new ContractBusiness();
+                var contract = contractBusiness.FindById(stockOut.ContractId);
+
+                if (stockOut.Type == (int)StockOutType.Freeze && contract.Type != (int)ContractType.Freeze)
+                {
+                    return (false, "冷冻库出库请使用冷冻合同", null);
+                }
+                if (contract.Type == (int)ContractType.Freeze && stockOut.Type != (int)StockOutType.Freeze)
+                {
+                    return (false, "冷冻合同只能使用冷冻库出库", null);
+                }
+
                 StockOutBusiness stockOutBusiness = new StockOutBusiness();
                 var result = stockOutBusiness.Create(stockOut, db);
 

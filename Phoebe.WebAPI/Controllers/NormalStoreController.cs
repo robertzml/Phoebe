@@ -44,6 +44,19 @@ namespace Phoebe.WebAPI.Controllers
             NormalStoreViewBusiness normalStoreViewBusiness = new NormalStoreViewBusiness();
             return normalStoreViewBusiness.FindByContract(contractId);
         }
+
+        /// <summary>
+        /// 出库时查找库存记录
+        /// </summary>
+        /// <param name="contractId">合同ID</param>
+        /// <param name="cargoId">货品ID</param>
+        /// <returns></returns>
+        [HttpGet]
+        public List<NormalStoreView> FindForStockOut(int contractId, string cargoId)
+        {
+            NormalStoreViewBusiness normalStoreViewBusiness = new NormalStoreViewBusiness();
+            return normalStoreViewBusiness.FindForStockOut(contractId, cargoId);
+        }
         #endregion //Query
     }
 }

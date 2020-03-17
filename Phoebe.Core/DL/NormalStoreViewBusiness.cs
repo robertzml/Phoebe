@@ -23,10 +23,30 @@ namespace Phoebe.Core.DL
         /// </summary>
         /// <param name="contractId">合同ID</param>
         /// <returns></returns>
-        public List<NormalStoreView> FindByContract(int contractId)
+        public List<NormalStoreView> FindByContract(int contractId, SqlSugarClient db = null)
         {
-            var db = GetInstance();
+            if (db == null)
+                db = GetInstance();
+
             var data = db.Queryable<NormalStoreView>().Where(r => r.ContractId == contractId).ToList();
+            return data;
+        }
+
+        /// <summary>
+        /// 出库时查找库存记录
+        /// </summary>
+        /// <param name="contractId">合同ID</param>
+        /// <param name="cargoId">货品ID</param>
+        /// <returns></returns>
+        public List<NormalStoreView> FindForStockOut(int contractId, string cargoId, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            var data = db.Queryable<NormalStoreView>()
+                .Where(r => r.ContractId == contractId && r.CargoId == cargoId && r.Status == (int)EntityStatus.StoreIn)
+                .ToList();
+
             return data;
         }
         #endregion //Query
