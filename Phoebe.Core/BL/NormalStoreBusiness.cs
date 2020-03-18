@@ -59,6 +59,49 @@ namespace Phoebe.Core.BL
         }
 
         /// <summary>
+        /// 创建放回库存
+        /// </summary>
+        /// <param name="task">出库任务</param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        public (bool success, string errorMessage, NormalStore store) CreateByBack(StockOutTask task, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            var oldStore = db.Queryable<NormalStore>().Single(r => r.StockOutTaskId == task.Id);
+
+            NormalStore store = new NormalStore();
+            store.Id = Guid.NewGuid().ToString();
+            store.CustomerId = oldStore.CustomerId;
+            store.ContractId = oldStore.ContractId;
+            store.CargoId = oldStore.CargoId;
+
+            store.Place = oldStore.Place;
+            store.WarehouseId = oldStore.WarehouseId;
+
+            store.StoreCount = oldStore.StoreCount - task.OutCount;
+            store.StoreWeight = oldStore.StoreWeight - task.OutWeight;
+            store.UnitWeight = oldStore.UnitWeight;
+
+            store.Batch = oldStore.Batch;
+            store.OriginPlace = oldStore.OriginPlace;
+            store.Durability = oldStore.Durability;
+
+            store.InitialTime = oldStore.InTime;
+            store.InTime = oldStore.OutTime.Value;
+            store.StockInTaskId = oldStore.Id;
+
+            store.CreateTime = DateTime.Now;
+            store.Remark = "";
+            store.Status = (int)EntityStatus.StoreIn;
+
+            var t = db.Insertable(store).ExecuteReturnEntity();
+
+            return (true, "", store);
+        }
+
+        /// <summary>
         /// 删除入库任务对应库存记录
         /// </summary>
         /// <param name="stockInTaskId">入库任务ID</param>
@@ -136,6 +179,28 @@ namespace Phoebe.Core.BL
                 store.OutTime = null;
                 store.Status = (int)EntityStatus.StoreIn;
             }
+
+            db.Updateable(store).ExecuteCommand();
+            return (true, "");
+        }
+
+        /// <summary>
+        /// 确认出库
+        /// </summary>
+        /// <param name="store">库存记录</param>
+        /// <param name="outTime">出库时间</param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        public (bool success, string errorMessage) FinishOut(string stockOutTaskId, DateTime? outTime, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            var store = db.Queryable<NormalStore>().Single(r => r.StockOutTaskId == stockOutTaskId);
+
+            if (outTime.HasValue)
+                store.OutTime = outTime.Value;
+            store.Status = (int)EntityStatus.StoreOut;
 
             db.Updateable(store).ExecuteCommand();
             return (true, "");

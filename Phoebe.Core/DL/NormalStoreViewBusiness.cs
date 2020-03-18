@@ -33,6 +33,21 @@ namespace Phoebe.Core.DL
         }
 
         /// <summary>
+        /// 按出库任务获取库存
+        /// </summary>
+        /// <param name="stockOutTaskId">出库任务ID</param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        public NormalStoreView FindByStockOutTask(string stockOutTaskId, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            var store = db.Queryable<NormalStoreView>().Single(r => r.StockOutTaskId == stockOutTaskId);
+            return store;
+        }
+
+        /// <summary>
         /// 出库时查找库存记录
         /// </summary>
         /// <param name="contractId">合同ID</param>

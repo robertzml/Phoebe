@@ -221,10 +221,10 @@ namespace Phoebe.Core.Service
 
                 // 获取创建人
                 UserBusiness userBusiness = new UserBusiness();
-                var user = userBusiness.FindById(userId);
+                var user = userBusiness.FindById(userId, db);
 
                 // 获取出库单
-                var stockOut = stockOutBusiness.FindById(stockOutId);
+                var stockOut = stockOutBusiness.FindById(stockOutId, db);
                 if (stockOut.Type != (int)StockOutType.Normal)
                     return (false, "非普通库出库");
 
@@ -283,10 +283,10 @@ namespace Phoebe.Core.Service
 
                 // 获取创建人
                 UserBusiness userBusiness = new UserBusiness();
-                var user = userBusiness.FindById(userId);
+                var user = userBusiness.FindById(userId, db);
 
                 // 获取出库单
-                var stockOut = stockOutBusiness.FindById(stockOutId);
+                var stockOut = stockOutBusiness.FindById(stockOutId, db);
 
                 foreach (var carryOutTask in tasks)
                 {
@@ -303,7 +303,7 @@ namespace Phoebe.Core.Service
                     carryOutTask.StockOutTaskId = result.task.Id;
 
                     // 找出对应库存
-                    var store = storeViewBusiness.FindById(carryOutTask.StoreId);
+                    var store = storeViewBusiness.FindById(carryOutTask.StoreId, db);
 
                     // 添加搬运出库任务信息
                     carryOutTaskBusiness.CreateByStockOut(carryOutTask, store, db);
@@ -344,10 +344,10 @@ namespace Phoebe.Core.Service
 
                 // 获取清点人
                 UserBusiness userBusiness = new UserBusiness();
-                var user = userBusiness.FindById(userId);
+                var user = userBusiness.FindById(userId, db);
 
                 // 获取出库单
-                var stockOut = stockOutBusiness.FindById(stockOutId);
+                var stockOut = stockOutBusiness.FindById(stockOutId, db);
 
                 foreach (var carryOutTask in tasks)
                 {
@@ -446,25 +446,48 @@ namespace Phoebe.Core.Service
             {
                 db.Ado.BeginTran();
 
-                var task = db.Queryable<StockOutTask>().InSingle(stockOutTaskId);
-
-                var carryIn = db.Queryable<CarryInTask>().Where(r => r.StockOutTaskId == stockOutTaskId).ToList();
-                if (carryIn.Any(r => r.Status != (int)EntityStatus.StockInFinish))
-                {
-                    return (false, "有搬运入库任务未完成");
-                }
-
-                var carryOut = db.Queryable<CarryOutTask>().Where(r => r.StockOutTaskId == stockOutTaskId).ToList();
-                if (carryOut.Any(r => r.Status != (int)EntityStatus.StockOutFinish))
-                {
-                    return (false, "有搬运出库任务未完成");
-                }
-
-                int outCount = carryOut.Sum(r => r.MoveCount);
-                decimal outWeight = carryOut.Sum(r => r.MoveWeight);
-
+                StockOutBusiness stockOutBusiness = new StockOutBusiness();
                 StockOutTaskBusiness stockOutTaskBusiness = new StockOutTaskBusiness();
-                stockOutTaskBusiness.Finish(stockOutTaskId, outCount, outWeight, db);
+
+                var task = stockOutTaskBusiness.FindById(stockOutTaskId, db);
+
+                // 获取出库单
+                var stockOut = stockOutBusiness.FindById(task.StockOutId, db);
+
+                if (stockOut.Type == (int)StockOutType.Position) //仓位库出库
+                {
+                    var carryIn = db.Queryable<CarryInTask>().Where(r => r.StockOutTaskId == stockOutTaskId).ToList();
+                    if (carryIn.Any(r => r.Status != (int)EntityStatus.StockInFinish))
+                    {
+                        return (false, "有搬运入库任务未完成");
+                    }
+
+                    var carryOut = db.Queryable<CarryOutTask>().Where(r => r.StockOutTaskId == stockOutTaskId).ToList();
+                    if (carryOut.Any(r => r.Status != (int)EntityStatus.StockOutFinish))
+                    {
+                        return (false, "有搬运出库任务未完成");
+                    }
+
+                    int outCount = carryOut.Sum(r => r.MoveCount);
+                    decimal outWeight = carryOut.Sum(r => r.MoveWeight);
+
+                    stockOutTaskBusiness.Finish(stockOutTaskId, outCount, outWeight, db);
+                }
+                else if (stockOut.Type == (int)StockOutType.Normal) //普通库出库
+                {
+                    // 确认出库任务
+                    stockOutTaskBusiness.Finish(stockOutTaskId, task.OutCount, task.OutWeight, db);
+
+                    // 确认库存
+                    NormalStoreBusiness normalStoreBusiness = new NormalStoreBusiness();
+                    normalStoreBusiness.FinishOut(stockOutTaskId, stockOut.OutTime, db);
+
+                    // 创建放回库存
+                    if (task.StoreCount > task.OutCount)
+                    {
+                        normalStoreBusiness.CreateByBack(task, db);
+                    }
+                }
 
                 db.Ado.CommitTran();
                 return (true, "");
