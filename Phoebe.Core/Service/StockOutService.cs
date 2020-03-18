@@ -237,6 +237,11 @@ namespace Phoebe.Core.Service
                     if (store.Status != (int)EntityStatus.StoreIn)
                         continue;
 
+                    if (item.OutCount > store.StoreCount)
+                        return (false, "出库数量大于在库数量");
+                    if (item.OutWeight > store.StoreWeight)
+                        return (false, "出库重量大于在库重量");
+
                     // 创建出库任务
                     var result = stockOutTaskBusiness.CreateNormal(stockOutId, store, item.OutCount, item.OutWeight, user, db);
 
@@ -383,6 +388,40 @@ namespace Phoebe.Core.Service
                         carryInTaskBusiness.CreateBack(carryOutTask, user, db);
                     }
                 }
+
+                db.Ado.CommitTran();
+                return (true, "");
+            }
+            catch (Exception e)
+            {
+                db.Ado.RollbackTran();
+                return (false, e.Message);
+            }
+        }
+
+        /// <summary>
+        /// 编辑普通库出库任务
+        /// </summary>
+        /// <param name="task"></param>
+        /// <returns></returns>
+        /// <remarks>
+        /// 只修改出库数量、重量、备注
+        /// </remarks>
+        public (bool success, string errorMessage) EditTask(StockOutTask task)
+        {
+            var db = GetInstance();
+
+            try
+            {
+                db.Ado.BeginTran();
+
+                if (task.OutCount > task.StoreCount)
+                    return (false, "出库数量不能大于在库数量");
+
+                if (task.OutWeight > task.StoreWeight)
+                    return (false, "出库重量不能大于在库重量");
+
+                db.Updateable(task).UpdateColumns(r => new { r.OutCount, r.OutWeight, r.Remark }).ExecuteCommand();
 
                 db.Ado.CommitTran();
                 return (true, "");

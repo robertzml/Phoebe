@@ -319,7 +319,33 @@ namespace Phoebe.WebAPI.Controllers
                 ResponseData data = new ResponseData
                 {
                     Status = result.success ? 0 : 1,
-                    ErrorMessage = result.errorMessage                   
+                    ErrorMessage = result.errorMessage
+                };
+
+                return data;
+            });
+
+            return await task;
+        }
+
+        /// <summary>
+        /// 编辑普通库出库任务
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ActionResult<ResponseData>> EditTask(StockOutTask model)
+        {
+            StockOutService stockOutService = new StockOutService();
+
+            var task = Task.Run(() =>
+            {
+                var result = stockOutService.EditTask(model);
+
+                ResponseData data = new ResponseData
+                {
+                    Status = result.success ? 0 : 1,
+                    ErrorMessage = result.errorMessage
                 };
 
                 return data;

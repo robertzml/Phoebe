@@ -62,7 +62,6 @@ namespace Phoebe.Core.BL
                 stockOut.FlowNumber = recordBusiness.GetNextSequence(db, "StockOut", stockOut.OutTime);
             }
 
-            stockOut.Type = entity.Type;
             stockOut.VehicleNumber = entity.VehicleNumber;
             stockOut.Remark = entity.Remark;
 
