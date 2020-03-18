@@ -208,7 +208,7 @@ namespace Phoebe.Core.Service
         /// <param name="tasks">出库任务</param>
         /// <param name="userId">创建人</param>
         /// <returns></returns>
-        public (bool success, string errorMessage) AddNormalOut(string stockOutId, List<NormalStockOutTask> tasks,  int userId)
+        public (bool success, string errorMessage) AddNormalOut(string stockOutId, List<NormalStockOutTask> tasks, int userId)
         {
             var db = GetInstance();
             try
@@ -228,17 +228,20 @@ namespace Phoebe.Core.Service
                 if (stockOut.Type != (int)StockOutType.Normal)
                     return (false, "非普通库出库");
 
-                foreach(var item in tasks)
+                foreach (var item in tasks)
                 {
                     // 获取对应库存
                     var store = normalStoreBusiness.FindById(item.StoreId, db);
 
                     // 检查库存状态
+                    if (store.Status != (int)EntityStatus.StoreIn)
+                        continue;
 
                     // 创建出库任务
                     var result = stockOutTaskBusiness.CreateNormal(stockOutId, store, item.OutCount, item.OutWeight, user, db);
 
                     // 更新库存状态
+                    normalStoreBusiness.Out(store, result.task.Id, stockOut.OutTime, db);
                 }
 
                 db.Ado.CommitTran();

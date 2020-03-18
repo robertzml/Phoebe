@@ -95,6 +95,27 @@ namespace Phoebe.Core.BL
             db.Updateable(store).ExecuteCommand();
             return (true, "");
         }
+
+        /// <summary>
+        /// 库存出库
+        /// </summary>
+        /// <param name="store">库存记录</param>
+        /// <param name="stockOutTaskId">出库任务ID</param>
+        /// <param name="outTime">出库时间</param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        public (bool success, string errorMessage) Out(NormalStore store, string stockOutTaskId, DateTime outTime, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            store.StockOutTaskId = stockOutTaskId;
+            store.OutTime = outTime;
+            store.Status = (int)EntityStatus.StoreOutReady;
+
+            db.Updateable(store).ExecuteCommand();
+            return (true, "");
+        }
         #endregion //Method
     }
 }
