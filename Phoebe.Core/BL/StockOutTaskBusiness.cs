@@ -123,17 +123,13 @@ namespace Phoebe.Core.BL
 
             var now = DateTime.Now;
 
-            // 计算在库数量用
-            var stores = db.Queryable<Store>()
-              .Where(r => r.CargoId == store.CargoId && (r.Status == (int)EntityStatus.StoreIn || r.Status == (int)EntityStatus.StoreOutReady));
-
             StockOutTask task = new StockOutTask();
             task.Id = Guid.NewGuid().ToString();
             task.StockOutId = stockOutId;
             task.TaskCode = recordBusiness.GetNextSequence(db, "StockOutTask", now);
             task.CargoId = store.CargoId;
-            task.StoreCount = stores.Sum(r => r.StoreCount);
-            task.StoreWeight = stores.Sum(r => r.StoreWeight);
+            task.StoreCount = store.StoreCount;
+            task.StoreWeight = store.StoreWeight;
             task.OutCount = outCount;
             task.OutWeight = outWeight;
             task.UnitWeight = store.UnitWeight;

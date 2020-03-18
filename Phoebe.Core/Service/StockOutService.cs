@@ -470,6 +470,16 @@ namespace Phoebe.Core.Service
                     return (false, "仅能删除待出库状态的出库任务单");
                 }
 
+                StockOutBusiness stockOutBusiness = new StockOutBusiness();
+                var stockOut = stockOutBusiness.FindById(stockOutTask.StockOutId, db);
+
+                // 取消普通库库存出库
+                if (stockOut.Type == (int)StockOutType.Normal)
+                {
+                    NormalStoreBusiness normalStoreBusiness = new NormalStoreBusiness();
+                    normalStoreBusiness.RevertOut(stockOutTask.Id, db);
+                }
+
                 // 删除出库任务
                 var result = stockOutTaskBusiness.Delete(stockOutTask, db);
 
