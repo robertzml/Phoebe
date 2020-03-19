@@ -173,6 +173,25 @@ namespace Phoebe.Core.BL
         }
 
         /// <summary>
+        /// 撤回出库任务
+        /// </summary>
+        /// <param name="task">出库任务</param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        public (bool success, string errorMessage) Revert(StockOutTask task, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            task.FinishTime = null;
+            task.Status = (int)EntityStatus.StockOutReady;
+
+            db.Updateable(task).UpdateColumns(r => new { r.FinishTime, r.Status }).ExecuteCommand();
+
+            return (true, "");
+        }
+
+        /// <summary>
         /// 删除出库任务
         /// </summary>
         /// <param name="entity"></param>

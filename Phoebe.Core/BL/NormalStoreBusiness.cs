@@ -90,7 +90,8 @@ namespace Phoebe.Core.BL
 
             store.InitialTime = oldStore.InTime;
             store.InTime = oldStore.OutTime.Value;
-            store.StockInTaskId = oldStore.Id;
+            store.StockInTaskId = oldStore.StockInTaskId;
+            store.PrevStoreId = oldStore.Id;
 
             store.CreateTime = DateTime.Now;
             store.Remark = "";
@@ -166,7 +167,7 @@ namespace Phoebe.Core.BL
         /// <param name="stockOutTaskId">出库任务ID</param>
         /// <param name="db"></param>
         /// <returns></returns>
-        public (bool success, string errorMessage) RevertOut(string stockOutTaskId, SqlSugarClient db = null)
+        public (bool success, string errorMessage) CancelOut(string stockOutTaskId, SqlSugarClient db = null)
         {
             if (db == null)
                 db = GetInstance();
@@ -203,6 +204,23 @@ namespace Phoebe.Core.BL
             store.Status = (int)EntityStatus.StoreOut;
 
             db.Updateable(store).ExecuteCommand();
+            return (true, "");
+        }
+
+        /// <summary>
+        /// 撤回出库
+        /// </summary>
+        /// <param name="stockOutTaskId">出库任务ID</param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        public (bool success, string errorMessage) RevertOut(NormalStore store, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            store.Status = (int)EntityStatus.StoreOutReady;
+
+            db.Updateable(store).UpdateColumns(r => new { r.Status }).ExecuteCommand();
             return (true, "");
         }
         #endregion //Method

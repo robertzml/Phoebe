@@ -101,6 +101,22 @@ namespace Phoebe.Core.BL
             db.Deleteable<StockOut>().In(entity.Id).ExecuteCommand();
             return (true, "");
         }
+
+        /// <summary>
+        /// 撤回出库单
+        /// </summary>
+        /// <param name="stockOut"></param>
+        /// <returns></returns>
+        public (bool success, string errorMessage) Revert(StockOut stockOut, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            stockOut.Status = (int)EntityStatus.StockOutReady;
+            db.Updateable(stockOut).UpdateColumns(r => new { r.Status }).ExecuteCommand();
+
+            return (true, "");
+        }
         #endregion //Method
     }
 }

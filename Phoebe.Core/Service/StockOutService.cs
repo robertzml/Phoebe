@@ -159,6 +159,70 @@ namespace Phoebe.Core.Service
                 return (false, e.Message);
             }
         }
+
+        /// <summary>
+        /// 撤回出库单
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public (bool success, string errorMessage) RevertReceipt(string id)
+        {
+            var db = GetInstance();
+
+            try
+            {
+                db.Ado.BeginTran();
+
+                StockOutBusiness stockOutBusiness = new StockOutBusiness();
+                var stockOut = stockOutBusiness.FindById(id, db);
+
+                if (stockOut.Status != (int)EntityStatus.StockOutFinish)
+                {
+                    return (false, "仅已确认出库单能撤回");
+                }
+
+                StockOutTaskBusiness stockOutTaskBusiness = new StockOutTaskBusiness();
+
+                if (stockOut.Type == (int)StockOutType.Normal)
+                {
+                    NormalStoreBusiness normalStoreBusiness = new NormalStoreBusiness();
+
+                    // 获取相关出库任务
+                    var tasks = db.Queryable<StockOutTask>().Where(r => r.StockOutId == stockOut.Id).ToList();
+                    foreach (var task in tasks)
+                    {
+                        // 获取出库任务对应库存记录
+                        var store = db.Queryable<NormalStore>().Single(r => r.StockOutTaskId == task.Id);
+
+                        // 检查库存是否有后续库存
+                        var exist = db.Queryable<NormalStore>().Count(r => r.PrevStoreId == store.Id);
+                        if (exist > 0)
+                            return (false, "该库存后续有出库");
+
+                        // 撤回库存记录
+                        normalStoreBusiness.RevertOut(store, db);
+
+                        // 撤回出库任务
+                        stockOutTaskBusiness.Revert(task, db);
+                    }
+                }
+                else if (stockOut.Type == (int)StockOutType.Position)
+                {
+
+                }
+
+                // 撤回出库单
+                stockOutBusiness.Revert(stockOut, db);
+
+                db.Ado.CommitTran();
+                return (true, "");
+            }
+            catch (Exception e)
+            {
+                db.Ado.RollbackTran();
+                return (false, e.Message);
+            }
+        }
         #endregion //Stock Out Service
 
         #region Stock Out Task Service
@@ -539,7 +603,7 @@ namespace Phoebe.Core.Service
                 if (stockOut.Type == (int)StockOutType.Normal)
                 {
                     NormalStoreBusiness normalStoreBusiness = new NormalStoreBusiness();
-                    normalStoreBusiness.RevertOut(stockOutTask.Id, db);
+                    normalStoreBusiness.CancelOut(stockOutTask.Id, db);
                 }
 
                 // 删除出库任务

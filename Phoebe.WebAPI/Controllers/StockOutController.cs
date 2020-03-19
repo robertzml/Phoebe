@@ -206,6 +206,32 @@ namespace Phoebe.WebAPI.Controllers
 
             return await task;
         }
+
+        /// <summary>
+        /// 撤回出库单
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ActionResult<ResponseData>> Revert(string id)
+        {
+            StockOutService stockOutService = new StockOutService();
+
+            var task = Task.Run(() =>
+            {
+                var result = stockOutService.RevertReceipt(id);
+
+                ResponseData data = new ResponseData
+                {
+                    Status = result.success ? 0 : 1,
+                    ErrorMessage = result.errorMessage
+                };
+
+                return data;
+            });
+
+            return await task;
+        }
         #endregion //Stock Out Action
 
         #region Stock Out Task Query
