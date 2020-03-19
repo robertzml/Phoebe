@@ -65,5 +65,50 @@ namespace Phoebe.Core.DL
             return data;
         }
         #endregion //Query
+
+        #region Storage
+        /// <summary>
+        /// 获取库存记录链表
+        /// </summary>
+        /// <param name="id">库存ID</param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        public List<NormalStoreView> GetInOrder(string id, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            List<NormalStoreView> data = new List<NormalStoreView>();
+
+            // 获取当前库存记录
+            var store = db.Queryable<NormalStoreView>().InSingle(id);
+            data.Add(store);
+
+            // 查找前序记录
+            string prev = store.PrevStoreId;
+            while (!string.IsNullOrEmpty(prev))
+            {
+                var find = db.Queryable<NormalStoreView>().InSingle(prev);
+                prev = find.PrevStoreId;
+
+                data.Insert(0, find);
+            }
+
+            string next = store.Id;
+            while (!string.IsNullOrEmpty(next))
+            {
+                var find = db.Queryable<NormalStoreView>().Single(r => r.PrevStoreId == next);
+                if (find != null)
+                {
+                    next = find.Id;
+                    data.Add(find);
+                }
+                else
+                    next = "";
+            }
+
+            return data;
+        }
+        #endregion //Storage
     }
 }
