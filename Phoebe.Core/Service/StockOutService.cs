@@ -195,9 +195,19 @@ namespace Phoebe.Core.Service
                         var store = db.Queryable<NormalStore>().Single(r => r.StockOutTaskId == task.Id);
 
                         // 检查库存是否有后续库存
-                        var exist = db.Queryable<NormalStore>().Count(r => r.PrevStoreId == store.Id);
-                        if (exist > 0)
-                            return (false, "该库存后续有出库");
+                        var next = db.Queryable<NormalStore>().Single(r => r.PrevStoreId == store.Id);
+                        if (next != null)
+                        {
+                            if (next.Status != (int)EntityStatus.StoreIn)
+                            {
+                                return (false, "该库存后续有出库");
+                            }
+                            else
+                            {
+                                // 删除后续库存
+                                normalStoreBusiness.Delete(next.Id, db);
+                            }
+                        }
 
                         // 撤回库存记录
                         normalStoreBusiness.RevertOut(store, db);
