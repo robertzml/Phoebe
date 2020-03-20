@@ -189,6 +189,24 @@ namespace Phoebe.Core.View
         /// </summary>
         [Display(Name = "规格")]
         public string Specification { get; set; }
+
+        /// <summary>
+        /// 仓库名称
+        /// </summary>
+        [Display(Name = "仓库名称")]
+        public string WarehouseName { get; set; }
+
+        /// <summary>
+        /// 仓库编号
+        /// </summary>
+        [Display(Name = "仓库编号")]
+        public string WarehouseNumber { get; set; }
+
+        /// <summary>
+        /// 仓库类型
+        /// </summary>
+        [Display(Name = "仓库类型")]
+        public int WarehouseType { get; set; }
         #endregion //Property
     }
 }

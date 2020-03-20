@@ -133,6 +133,8 @@ namespace Phoebe.Core.BL
             task.OutCount = outCount;
             task.OutWeight = outWeight;
             task.UnitWeight = store.UnitWeight;
+            task.WarehouseId = store.WarehouseId;
+            task.Place = store.Place;
 
             task.CreateTime = now;
             task.UserId = user.Id;
