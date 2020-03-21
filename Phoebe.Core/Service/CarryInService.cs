@@ -114,8 +114,7 @@ namespace Phoebe.Core.Service
                 if (shelf.Type == (int)ShelfType.Position)
                     positionBusiness.UpdateStatus(position, EntityStatus.Occupy, db);
 
-                StoreBusiness storeBusiness = new StoreBusiness();
-                ColdFeeBusiness coldFeeBusiness = new ColdFeeBusiness();
+                StoreBusiness storeBusiness = new StoreBusiness();             
 
                 foreach (var carryTask in carryInTasks)
                 {

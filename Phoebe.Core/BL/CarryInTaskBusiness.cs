@@ -162,20 +162,6 @@ namespace Phoebe.Core.BL
         }
 
         /// <summary>
-        /// 删除搬运入库
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public (bool success, string errorMessage) Delete(CarryInTask entity, SqlSugarClient db = null)
-        {
-            if (db == null)
-                db = GetInstance();
-           
-            db.Deleteable<CarryInTask>().In(entity.Id).ExecuteCommand();
-            return (true, "");
-        }
-
-        /// <summary>
         /// 撤回搬运入库任务
         /// </summary>
         /// <param name="carryIn"></param>
@@ -186,9 +172,24 @@ namespace Phoebe.Core.BL
             if (db == null)
                 db = GetInstance();
 
+            carryIn.FinishTime = null;
             carryIn.Status = (int)EntityStatus.StockInEnter;
             db.Updateable(carryIn).ExecuteCommand();
 
+            return (true, "");
+        }
+
+        /// <summary>
+        /// 删除搬运入库
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public (bool success, string errorMessage) Delete(CarryInTask entity, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+           
+            db.Deleteable<CarryInTask>().In(entity.Id).ExecuteCommand();
             return (true, "");
         }
        

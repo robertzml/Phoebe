@@ -218,7 +218,49 @@ namespace Phoebe.Core.Service
                 }
                 else if (stockOut.Type == (int)StockOutType.Position)
                 {
+                    CarryInTaskBusiness carryInTaskBusiness = new CarryInTaskBusiness();
+                    CarryOutTaskBusiness carryOutTaskBusiness = new CarryOutTaskBusiness();
+                    StoreBusiness storeBusiness = new StoreBusiness();
 
+                    // 获取相关出库任务
+                    var tasks = db.Queryable<StockOutTask>().Where(r => r.StockOutId == stockOut.Id).ToList();
+                    foreach (var task in tasks)
+                    {
+                        // 找出放回任务
+                        var carryIns = db.Queryable<CarryInTask>().Where(r => r.StockOutTaskId == task.Id).ToList();
+                        foreach (var carryIn in carryIns)
+                        {
+                            var store = db.Queryable<Store>().Single(r => r.CarryInTaskId == carryIn.Id);
+
+                            var carryOut = db.Queryable<CarryOutTask>().Count(r => r.StoreId == store.Id);
+                            if (carryOut > 0)
+                            {
+                                return (false, "该出库单有库存记录后续已出库，无法撤回");
+                            }
+
+                            // 撤回库存记录
+                            storeBusiness.RevertIn(store, db);
+
+                            // 放回任务撤回
+                            carryInTaskBusiness.Revert(carryIn, db);
+                        }
+
+                        // 找出搬运出库任务
+                        var carryOuts = db.Queryable<CarryOutTask>().Where(r => r.StockOutTaskId == task.Id).ToList();
+                        foreach (var carryOut in carryOuts)
+                        {
+                            var store = db.Queryable<Store>().Single(r => r.CarryOutTaskId == carryOut.Id);
+
+                            // 撤回库存记录
+                            storeBusiness.RevertOut(store, db);
+
+                            // 撤回出库任务
+                            carryOutTaskBusiness.Revert(carryOut, db);
+                        }
+
+                        // 撤回出库任务
+                        stockOutTaskBusiness.Revert(task, db);
+                    }
                 }
 
                 // 撤回出库单

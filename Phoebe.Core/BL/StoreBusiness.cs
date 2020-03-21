@@ -141,12 +141,12 @@ namespace Phoebe.Core.BL
         }
 
         /// <summary>
-        /// 撤回库存记录
+        /// 撤回库存入库
         /// </summary>
         /// <param name="store"></param>
         /// <param name="db"></param>
         /// <returns></returns>
-        public (bool success, string errorMessage) Revert(Store store, SqlSugarClient db = null)
+        public (bool success, string errorMessage) RevertIn(Store store, SqlSugarClient db = null)
         {
             if (db == null)
                 db = GetInstance();
@@ -219,6 +219,23 @@ namespace Phoebe.Core.BL
             store.Status = (int)EntityStatus.StoreOut;
 
             db.Updateable(store).ExecuteCommand();
+            return (true, "");
+        }
+
+        /// <summary>
+        /// 撤回库存出库
+        /// </summary>
+        /// <param name="store"></param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        public (bool success, string errorMessage) RevertOut(Store store, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            store.Status = (int)EntityStatus.StoreOutReady;
+
+            db.Updateable(store).UpdateColumns(r => new { r.Status }).ExecuteCommand();
             return (true, "");
         }
 

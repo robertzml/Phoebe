@@ -216,7 +216,7 @@ namespace Phoebe.Core.Service
                         }
 
                         // 撤回库存记录
-                        storeBusiness.Revert(store, db);
+                        storeBusiness.RevertIn(store, db);
 
                         // 撤回搬运入库任务
                         carryInTaskBusiness.Revert(carryIn, db);
