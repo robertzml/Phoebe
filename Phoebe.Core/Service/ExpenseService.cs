@@ -43,6 +43,10 @@ namespace Phoebe.Core.Service
                 {
                     return (false, "该合同没有冷藏费", null);
                 }
+                if (startTime > endTime)
+                {
+                    return (false, "开始日期大于结束日期", null);
+                }
 
                 var contractBill = ContractFactory.Create((ContractType)contract.Type);
 
@@ -81,7 +85,7 @@ namespace Phoebe.Core.Service
                 var storeMeter = billingProcess.GetStoreMeter(store);
 
                 bool isOut = false; // 是否出库
-                if (store.OutTime < current)
+                if (store.OutTime <= current)
                 {
                     current = store.OutTime.Value;
                     isOut = true;
@@ -104,7 +108,7 @@ namespace Phoebe.Core.Service
                 var storeMeter = billingProcess.GetStoreMeter(store);
 
                 bool isOut = false; // 是否出库
-                if (store.OutTime < current)
+                if (store.OutTime <= current)
                 {
                     current = store.OutTime.Value;
                     isOut = true;

@@ -150,7 +150,7 @@ namespace Phoebe.Core.Billing
             settle.EndTime = end;
             settle.Days = end.Subtract(start).Days;
 
-            if (!isOut)
+            if (!isOut) //未出库则结束日计算冷藏费
                 settle.Days += 1;
             
             settle.UnitPrice = contract.UnitPrice;
