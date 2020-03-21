@@ -96,7 +96,6 @@ namespace Phoebe.Core.Service
                 var user = userBusiness.FindById(userId, db);
 
                 CarryOutTaskBusiness carryOutTaskBusiness = new CarryOutTaskBusiness();
-                ColdFeeBusiness coldFeeBusiness = new ColdFeeBusiness();
                 StoreBusiness storeBusiness = new StoreBusiness();
 
                 // 找出托盘对应库存
