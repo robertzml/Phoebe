@@ -44,6 +44,19 @@ namespace Phoebe.WebAPI.Controllers
 
             return await task;
         }
+
+        /// <summary>
+        /// 获取库存冷藏费
+        /// </summary>
+        /// <param name="storeId">库存ID</param>
+        /// <param name="current">当前日期</param>
+        /// <param name="storeType">库存类型</param>
+        /// <returns></returns>
+        public ActionResult<ColdSettlement> GetStoreColdFee(string storeId, DateTime current, int storeType)
+        {
+            ExpenseService expenseService = new ExpenseService();
+            return expenseService.GetStoreColdFee(storeId, current, storeType);
+        }
         #endregion //Action
     }
 }

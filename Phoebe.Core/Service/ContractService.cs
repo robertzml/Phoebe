@@ -48,14 +48,14 @@ namespace Phoebe.Core.Service
                 // 删除库存记录
                 db.Deleteable<Store>().Where(r => r.ContractId == id).ExecuteCommand();
 
+                // 删除普通库存记录
+                db.Deleteable<NormalStore>().Where(r => r.ContractId == id).ExecuteCommand();
+
                 // 删除搬运入库记录
                 db.Deleteable<CarryInTask>().Where(r => r.ContractId == id).ExecuteCommand();
 
                 // 删除搬运出库记录
                 db.Deleteable<CarryOutTask>().Where(r => r.ContractId == id).ExecuteCommand();
-
-                // 删除冷藏费记录
-                db.Deleteable<ColdFee>().Where(r => r.ContractId == id).ExecuteCommand();
 
                 // 找出入库单
                 var stockIns = db.Queryable<StockIn>().Where(r => r.ContractId == id).ToList();

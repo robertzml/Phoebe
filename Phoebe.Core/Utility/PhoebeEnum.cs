@@ -138,6 +138,24 @@ namespace Phoebe.Core.Utility
     }
 
     /// <summary>
+    /// 库存类型
+    /// </summary>
+    public enum StoreType
+    {
+        /// <summary>
+        /// 普通库存
+        /// </summary>
+        [Display(Name = "普通库存")]
+        Normal = 1,
+
+        /// <summary>
+        /// 仓位库存
+        /// </summary>
+        [Display(Name = "仓位库存")]
+        Position = 2,
+    }
+
+    /// <summary>
     /// 流水类型
     /// </summary>
     public enum StockFlowType

@@ -95,19 +95,6 @@ namespace Phoebe.Core.Billing
 
             return records;
         }
-
-        private decimal GetDailyColdFee(ContractView contract, DateTime date, IBillingProcess billingProcess, SqlSugarClient db)
-        {
-            // 获取每日库存记录
-            var stores = db.Queryable<StoreView>()
-               .Where(r => r.ContractId == contract.Id && r.InTime <= date && (r.OutTime == null || r.OutTime > date))
-               .ToList();
-
-            var totalMeter = billingProcess.GetTotalMeter(stores);
-            var dailyFee = billingProcess.CalculateDailyFee(totalMeter, contract.UnitPrice);
-
-            return dailyFee;
-        }
         #endregion //Function
 
         #region Override
@@ -143,30 +130,35 @@ namespace Phoebe.Core.Billing
         }
 
         /// <summary>
-        /// 获取冷藏费用
+        /// 获取库存冷藏费用
         /// </summary>
         /// <param name="contractId">合同ID</param>
+        /// <param name="storeMeter">库存计量</param>
         /// <param name="start">开始日期</param>
         /// <param name="end">结束日期</param>
+        /// <param name="isOut">是否出库</param>
         /// <returns></returns>
-        public ColdSettlement GetColdFee(int contractId, DateTime start, DateTime end, SqlSugarClient db)
+        public ColdSettlement GetStoreColdFee(int contractId, decimal storeMeter, DateTime start, DateTime end, bool isOut, SqlSugarClient db)
         {
             ColdSettlement settle = new ColdSettlement();
 
             var contract = db.Queryable<ContractView>().InSingle(contractId);
 
-            IBillingProcess billingProcess = BillingFactory.Create((BillingType)contract.BillingType);
-
-            settle.StartTime = start;
-            settle.EndTime = end;
             settle.ContractId = contract.Id;
             settle.ContractName = contract.Name;
-            settle.ColdFee = 0;
+            settle.StartTime = start;
+            settle.EndTime = end;
+            settle.Days = end.Subtract(start).Days;
 
-            for (DateTime step = start.Date; step <= end.Date; step = step.AddDays(1))
-            {
-                settle.ColdFee += GetDailyColdFee(contract, step, billingProcess, db);
-            }
+            if (!isOut)
+                settle.Days += 1;
+            
+            settle.UnitPrice = contract.UnitPrice;
+            settle.TotalMeter = storeMeter;
+
+            IBillingProcess billingProcess = BillingFactory.Create((BillingType)contract.BillingType);
+            settle.ColdFee = billingProcess.CalculatePeriodFee(storeMeter, settle.UnitPrice, settle.Days);
+            settle.ColdFee = Math.Round(settle.ColdFee, 3);
 
             return settle;
         }

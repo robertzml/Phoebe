@@ -31,6 +31,21 @@ namespace Phoebe.Core.Model
         public DateTime EndTime { get; set; }
 
         /// <summary>
+        /// 天数
+        /// </summary>
+        public int Days { get; set; }
+
+        /// <summary>
+        /// 冷藏费单价
+        /// </summary>
+        public decimal UnitPrice { get; set; }
+
+        /// <summary>
+        /// 总计量
+        /// </summary>
+        public decimal TotalMeter { get; set; }
+
+        /// <summary>
         /// 冷藏费用
         /// </summary>
         public decimal ColdFee { get; set; }
