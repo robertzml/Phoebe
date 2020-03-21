@@ -64,6 +64,16 @@ namespace Phoebe.Core.Billing
         }
 
         /// <summary>
+        /// 获取在库总计量
+        /// </summary>
+        /// <param name="normalStoreViews">普通库存列表</param>
+        /// <returns></returns>
+        public decimal GetTotalMeter(List<NormalStoreView> normalStoreViews)
+        {
+            return normalStoreViews.Sum(r => r.StoreWeight);
+        }
+
+        /// <summary>
         /// 计算库存的日冷藏费
         /// </summary>
         /// <param name="totalMeter">在库总计量</param>

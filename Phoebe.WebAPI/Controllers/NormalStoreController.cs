@@ -71,6 +71,19 @@ namespace Phoebe.WebAPI.Controllers
             NormalStoreViewBusiness normalStoreViewBusiness = new NormalStoreViewBusiness();
             return normalStoreViewBusiness.GetInOrder(id);
         }
+
+        /// <summary>
+        /// 获取指定日库存
+        /// </summary>
+        /// <param name="contractId">合同ID</param>
+        /// <param name="date">日期</param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult<List<NormalStoreView>> GetInDay(int contractId, DateTime date)
+        {
+            NormalStoreViewBusiness normalStoreViewBusiness = new NormalStoreViewBusiness();
+            return normalStoreViewBusiness.GetInDay(contractId, date);
+        }
         #endregion //Storage
     }
 }

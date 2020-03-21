@@ -77,9 +77,18 @@ namespace Phoebe.Core.Billing
             var stores = db.Queryable<StoreView>()
                .Where(r => r.ContractId == contract.Id && r.InTime <= date && (r.OutTime == null || r.OutTime > date))
                .ToList();
+            var totalMeter = billingProcess.GetTotalMeter(stores);
+            var dailyFee = billingProcess.CalculateDailyFee(totalMeter, contract.UnitPrice);
 
-            record.TotalMeter = billingProcess.GetTotalMeter(stores);
-            record.DailyFee = billingProcess.CalculateDailyFee(record.TotalMeter, contract.UnitPrice);
+            // 获取每日普通库存记录
+            var normalStores = db.Queryable<NormalStoreView>()
+                .Where(r => r.ContractId == contract.Id && r.InTime <= date && (r.OutTime == null || r.OutTime > date))
+                .ToList();
+            var totalNormalMeter = billingProcess.GetTotalMeter(normalStores);
+            var totalDailyFee = billingProcess.CalculateDailyFee(totalNormalMeter, contract.UnitPrice);
+
+            record.TotalMeter = totalMeter + totalNormalMeter;
+            record.DailyFee = dailyFee + totalDailyFee;
 
             if (records.Count == 0)
                 records.Add(record);
