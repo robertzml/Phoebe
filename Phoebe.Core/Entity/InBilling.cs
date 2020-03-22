@@ -55,6 +55,24 @@ namespace Phoebe.Core.Entity
         public decimal Amount { get; set; }
 
         /// <summary>
+        /// 参数1
+        /// </summary>
+        [Display(Name = "参数1")]
+        public string Parameter1 { get; set; }
+
+        /// <summary>
+        /// 参数2
+        /// </summary>
+        [Display(Name = "参数2")]
+        public string Parameter2 { get; set; }
+
+        /// <summary>
+        /// 参数3
+        /// </summary>
+        [Display(Name = "参数3")]
+        public string Parameter3 { get; set; }
+
+        /// <summary>
         /// 备注
         /// </summary>
         [Display(Name = "备注")]
