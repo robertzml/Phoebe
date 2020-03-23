@@ -158,9 +158,8 @@ namespace Phoebe.Core.Service
         /// <param name="trayCode"></param>
         /// <param name="moveCount"></param>
         /// <param name="moveWeight"></param>
-        /// <param name="remark"></param>
         /// <returns></returns>
-        public (bool success, string errorMessage) Finish(string taskId, int userId, string trayCode, int moveCount, decimal moveWeight, string remark)
+        public (bool success, string errorMessage) Finish(string taskId, int userId, string trayCode, int moveCount, decimal moveWeight)
         {
             var db = GetInstance();
 
@@ -199,7 +198,7 @@ namespace Phoebe.Core.Service
 
                 // 确认库存记录
                 StoreBusiness storeBusiness = new StoreBusiness();
-                storeBusiness.FinishIn(task.StoreId, trayCode, moveCount, moveWeight, remark, db);              
+                storeBusiness.FinishIn(task.StoreId, trayCode, moveCount, moveWeight, db);              
 
                 db.Ado.CommitTran();
                 return (true, "");

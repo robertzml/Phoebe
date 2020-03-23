@@ -173,7 +173,7 @@ namespace Phoebe.WebAPI.Controllers
             {
                 ResponseData data = new ResponseData();
 
-                var result = carryInService.Finish(model.TaskId, model.UserId, model.TrayCode, model.MoveCount, model.MoveWeight, model.Remark);
+                var result = carryInService.Finish(model.TaskId, model.UserId, model.TrayCode, model.MoveCount, model.MoveWeight);
 
                 data.Status = result.success ? 0 : 1;
                 data.ErrorMessage = result.errorMessage;

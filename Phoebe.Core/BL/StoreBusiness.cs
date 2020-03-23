@@ -54,6 +54,7 @@ namespace Phoebe.Core.BL
 
             store.CreateTime = DateTime.Now;
             store.Status = (int)EntityStatus.StoreInReady;
+            store.Remark = stockInTask.Remark;
 
             var t = db.Insertable(store).ExecuteReturnEntity();
             return (true, "", t);
@@ -103,6 +104,7 @@ namespace Phoebe.Core.BL
 
             store.CreateTime = DateTime.Now;
             store.Status = (int)EntityStatus.StoreInReady;
+            store.Remark = oldStore.Remark;
 
             var t = db.Insertable(store).ExecuteReturnEntity();
 
@@ -116,13 +118,12 @@ namespace Phoebe.Core.BL
         /// <param name="trayCode"></param>
         /// <param name="storeCount"></param>
         /// <param name="storeWeight"></param>
-        /// <param name="remark"></param>
         /// <param name="db"></param>
         /// <remarks>
         /// 可更新托盘码、库存数量、库存重量
         /// </remarks>
         /// <returns></returns>
-        public (bool success, string errorMessage) FinishIn(string id, string trayCode, int storeCount, decimal storeWeight, string remark, SqlSugarClient db = null)
+        public (bool success, string errorMessage) FinishIn(string id, string trayCode, int storeCount, decimal storeWeight, SqlSugarClient db = null)
         {
             if (db == null)
                 db = GetInstance();
@@ -133,7 +134,6 @@ namespace Phoebe.Core.BL
             store.StoreCount = storeCount;
             store.StoreWeight = storeWeight;
 
-            store.Remark = remark;
             store.Status = (int)EntityStatus.StoreIn;
 
             db.Updateable(store).ExecuteCommand();

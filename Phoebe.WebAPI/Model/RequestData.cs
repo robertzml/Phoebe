@@ -78,8 +78,6 @@ namespace Phoebe.WebAPI.Model
 
         [Required]
         public decimal MoveWeight;
-
-        public string Remark;
     }
 
     /// <summary>
