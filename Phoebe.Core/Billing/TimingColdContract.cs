@@ -152,7 +152,7 @@ namespace Phoebe.Core.Billing
 
             if (!isOut) //未出库则结束日计算冷藏费
                 settle.Days += 1;
-            
+
             settle.UnitPrice = contract.UnitPrice;
             settle.TotalMeter = storeMeter;
 
@@ -161,6 +161,33 @@ namespace Phoebe.Core.Billing
             settle.ColdFee = Math.Round(settle.ColdFee, 3);
 
             return settle;
+        }
+
+        /// <summary>
+        /// 获取冷藏费差价
+        /// </summary>
+        /// <param name="contract">合同</param>
+        /// <param name="store">库存记录</param>
+        /// <param name="start">开始日期</param>
+        /// <param name="end">结束日期</param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        public (int days, decimal count, decimal fee) CalculateDiffColdFee(Contract contract, NormalStoreView store, DateTime start, DateTime end, SqlSugarClient db)
+        {
+            int minDay = Convert.ToInt32(contract.Parameter1);
+
+            int diff = minDay - (end - start).Days;
+
+            if (diff > 0)
+            {
+                IBillingProcess billingProcess = BillingFactory.Create((BillingType)contract.BillingType);
+                var storeMeter = billingProcess.GetStoreMeter(store);
+                var fee = billingProcess.CalculatePeriodFee(storeMeter, contract.UnitPrice, diff);
+
+                return (diff, storeMeter, fee);
+            }
+            else
+                return (0, 0, 0);
         }
         #endregion //Override
     }

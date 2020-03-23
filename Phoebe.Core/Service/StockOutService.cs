@@ -7,6 +7,7 @@ namespace Phoebe.Core.Service
 {
     using Phoebe.Base.Framework;
     using Phoebe.Base.System;
+    using Phoebe.Core.Billing;
     using Phoebe.Core.Entity;
     using Phoebe.Core.BL;
     using Phoebe.Core.DL;
@@ -671,5 +672,99 @@ namespace Phoebe.Core.Service
             }
         }
         #endregion //Stock Out Task Service
+
+        #region Billing Service
+        /// <summary>
+        /// 设置出库计费
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public (bool success, string errorMessage) SetBilling(List<OutBilling> data)
+        {
+            var db = GetInstance();
+            try
+            {
+                db.Ado.BeginTran();
+
+                OutBillingBusiness outBillingBusiness = new OutBillingBusiness();
+                foreach (var item in data)
+                {
+                    if (item.Amount == 0)
+                        continue;
+
+                    outBillingBusiness.Save(item, db);
+                }
+
+                db.Ado.CommitTran();
+                return (true, "");
+            }
+            catch (Exception e)
+            {
+                db.Ado.RollbackTran();
+                return (false, e.Message);
+            }
+        }
+
+        public (bool success, string errorMessage) SetDiffColdFee(string stockOutId)
+        {
+            var db = GetInstance();
+            try
+            {
+                db.Ado.BeginTran();
+
+                // 获取出库单
+                StockOutBusiness stockOutBusiness = new StockOutBusiness();
+                var stockOut = stockOutBusiness.FindById(stockOutId, db);
+
+                // 获取合同
+                ContractBusiness contractBusiness = new ContractBusiness();
+                var contract = contractBusiness.FindById(stockOut.ContractId);
+
+                if (contract.Type != (int)ContractType.TimingCold)
+                    return (true, "非计时冷藏合同，不计算冷藏费差价");
+
+                OutBillingBusiness outBillingBusiness = new OutBillingBusiness();
+                IContract contractBill = ContractFactory.Create((ContractType)contract.Type);
+
+                // 获取出库任务
+                var stockOutTasks = db.Queryable<StockOutTask>().Where(r => r.StockOutId == stockOutId).ToList();
+
+                if (stockOut.Type == (int)StockOutType.Normal)
+                {
+                    NormalStoreViewBusiness normalStoreViewBusiness = new NormalStoreViewBusiness();
+                    foreach (var task in stockOutTasks)
+                    {
+                        // 获取对应库存
+                        var store = normalStoreViewBusiness.FindByStockOutTask(task.Id, db);
+                        var result = contractBill.CalculateDiffColdFee(contract, store, store.InTime, store.OutTime.Value, db);
+
+                        if (result.fee > 0)
+                        {
+                            OutBilling bill = new OutBilling();
+                            bill.StockOutId = stockOutId;
+                            bill.UnitPrice = contract.UnitPrice;
+                            bill.Count = result.count;
+                            bill.Amount = result.fee;
+                            bill.Parameter1 = result.days.ToString();
+
+                            outBillingBusiness.Save(bill, db);
+                        }
+                    }
+                }
+                else if (stockOut.Type == (int)StockOutType.Position)
+                {
+
+                }
+
+                db.Ado.CommitTran();
+                return (true, "");
+            }
+            catch (Exception e)
+            {
+                db.Ado.RollbackTran();
+                return (false, e.Message);
+            }
+        }
+        #endregion //Billing Service
     }
 }

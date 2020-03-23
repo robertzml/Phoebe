@@ -15,5 +15,30 @@ namespace Phoebe.Core.BL
     /// </summary>
     public class OutBillingBusiness : AbstractBusiness<OutBilling, string>, IBaseBL<OutBilling, string>
     {
+        #region Method
+        /// <summary>
+        /// 保存出库计费
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        public (bool success, string errorMessage) Save(OutBilling entity, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            if (string.IsNullOrEmpty(entity.Id))
+            {
+                entity.Id = Guid.NewGuid().ToString();
+                db.Insertable(entity).ExecuteCommand();
+            }
+            else
+            {
+                db.Updateable(entity).ExecuteCommand();
+            }
+
+            return (true, "");
+        }
+        #endregion //Method
     }
 }
