@@ -50,7 +50,7 @@ namespace Phoebe.Core.BL
             store.StockInTaskId = stockInTask.Id;
 
             store.CreateTime = DateTime.Now;
-            store.Remark = "";
+            store.Remark = stockInTask.Remark;
             store.Status = (int)EntityStatus.StoreInReady;
 
             var t = db.Insertable(store).ExecuteReturnEntity();
@@ -94,7 +94,7 @@ namespace Phoebe.Core.BL
             store.PrevStoreId = oldStore.Id;
 
             store.CreateTime = DateTime.Now;
-            store.Remark = "";
+            store.Remark = oldStore.Remark;
             store.Status = (int)EntityStatus.StoreIn;
 
             var t = db.Insertable(store).ExecuteReturnEntity();

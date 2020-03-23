@@ -380,12 +380,36 @@ namespace Phoebe.Core.Service
                     return (false, "无法编辑已确认入库任务单");
                 }
 
-                if (entity.CargoId != inTask.CargoId || entity.UnitWeight != inTask.UnitWeight)
-                {
-                    entity.UnitWeight = inTask.UnitWeight;
-                    entity.InWeight = entity.InCount * entity.UnitWeight / 1000;
-                    entity.CargoId = inTask.CargoId;
+                StockInBusiness stockInBusiness = new StockInBusiness();
+                var stockIn = stockInBusiness.FindById(entity.StockInId);
 
+                entity.UnitWeight = inTask.UnitWeight;
+                entity.InWeight = entity.InCount * entity.UnitWeight / 1000;
+                entity.CargoId = inTask.CargoId;
+                entity.Batch = inTask.Batch;
+                entity.OriginPlace = inTask.OriginPlace;
+                entity.Durability = inTask.Durability;
+                entity.Remark = inTask.Remark;
+
+                if (stockIn.Type == (int)StockInType.Normal)
+                {
+                    // 修改对应库存信息
+                    NormalStoreBusiness normalStoreBusiness = new NormalStoreBusiness();
+                    
+                    var store = db.Queryable<NormalStore>().Single(r => r.StockInTaskId == entity.Id);
+                    store.CargoId = entity.CargoId;
+                    store.UnitWeight = entity.UnitWeight;
+                    store.StoreCount = entity.InCount;
+                    store.StoreWeight = entity.InWeight;
+                    store.Batch = entity.Batch;
+                    store.OriginPlace = entity.OriginPlace;
+                    store.Durability = entity.Durability;
+                    store.Remark = entity.Remark;
+
+                    db.Updateable(store).ExecuteCommand();
+                }
+                else if (stockIn.Type == (int)StockInType.Position)
+                {
                     // 修改搬运入库任务对应信息
                     var carryIns = db.Queryable<CarryInTask>().Where(r => r.StockInTaskId == inTask.Id && r.Type == (int)CarryInTaskType.In).ToList();
 
@@ -402,15 +426,14 @@ namespace Phoebe.Core.Service
                             store.CargoId = carryIn.CargoId;
                             store.UnitWeight = carryIn.UnitWeight;
                             store.StoreWeight = carryIn.MoveWeight;
+                            store.Batch = entity.Batch;
+                            store.OriginPlace = entity.OriginPlace;
+                            store.Durability = entity.Durability;
+                            store.Remark = entity.Remark;
                             db.Updateable(store).ExecuteCommand();
                         }
                     }
                 }
-
-                entity.Batch = inTask.Batch;
-                entity.OriginPlace = inTask.OriginPlace;
-                entity.Durability = inTask.Durability;
-                entity.Remark = inTask.Remark;
 
                 db.Updateable(entity).ExecuteCommand();
 
