@@ -466,6 +466,7 @@ namespace Phoebe.Core.Service
                 // 获取出库单
                 var stockOut = stockOutBusiness.FindById(stockOutId, db);
 
+                // 状态检查
                 foreach (var carryOutTask in tasks)
                 {
                     if (carryOutTask.TrayCode != trayCode)
@@ -482,7 +483,35 @@ namespace Phoebe.Core.Service
                     {
                         if (carryOutTask.ContractId != stockOut.ContractId)
                             return (false, "出库货物非当前合同所有");
+                    }
 
+                    var store = db.Queryable<Store>().InSingle(carryOutTask.StoreId);
+                    var carryIn = db.Queryable<CarryInTask>().InSingle(store.CarryInTaskId);
+
+                    if (!string.IsNullOrEmpty(carryIn.StockInTaskId))
+                    {
+                        var stockInTask = db.Queryable<StockInTask>().InSingle(carryIn.StockInTaskId);
+                        var stockIn = db.Queryable<StockIn>().InSingle(stockInTask.StockInId);
+                        if (stockIn.Status != (int)EntityStatus.StockInFinish)
+                        {
+                            return (false, "货物对应入库单未确认");
+                        }
+                    }
+                    else if (!string.IsNullOrEmpty(carryIn.StockOutTaskId))
+                    {
+                        var stockOutTask = db.Queryable<StockOutTask>().InSingle(carryIn.StockOutTaskId);
+                        var so = db.Queryable<StockOut>().InSingle(stockOutTask.StockOutId);
+                        if (so.Status != (int)EntityStatus.StockOutFinish)
+                        {
+                            return (false, "货物对应出库单未确认");
+                        }
+                    }
+                }
+
+                foreach (var carryOutTask in tasks)
+                {
+                    if (carryOutTask.MoveCount > 0)
+                    {
                         // 创建出库任务
                         var result = stockOutTaskBusiness.Create(stockOutId, carryOutTask, user, db);
                         carryOutTask.StockOutTaskId = result.task.Id;

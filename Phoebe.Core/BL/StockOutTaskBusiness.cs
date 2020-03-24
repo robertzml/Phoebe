@@ -67,7 +67,7 @@ namespace Phoebe.Core.BL
             {
                 SequenceRecordBusiness recordBusiness = new SequenceRecordBusiness();
 
-                // 计算在库数量用
+                // 计算在库数量
                 var stores = db.Queryable<Store>()
                   .Where(r => r.CargoId == carryOutTask.CargoId && (r.Status == (int)EntityStatus.StoreIn || r.Status == (int)EntityStatus.StoreOutReady));
 
