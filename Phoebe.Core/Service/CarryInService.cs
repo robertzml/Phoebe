@@ -98,6 +98,12 @@ namespace Phoebe.Core.Service
 
                 foreach (var carryOutTask in carryOutTasks)
                 {
+                    if (carryOutTask.Type == (int)CarryOutTaskType.Out && carryOutTask.Status != (int)EntityStatus.StockOutCheck)
+                    {
+                        db.Ado.RollbackTran();
+                        return (false, "托盘还未扫码出库");
+                    }
+
                     // 先创建放回搬运任务
                     var result = carryInTaskBusiness.CreateBack(carryOutTask, user, db);
                     carryInTasks.Add(result.t);
@@ -107,7 +113,10 @@ namespace Phoebe.Core.Service
                 }
 
                 if (carryInTasks.Count == 0)
+                {
+                    db.Ado.RollbackTran();
                     return (false, "该托盘无入库任务");
+                }
 
                 // 更新仓位状态
                 var shelf = db.Queryable<Shelf>().Single(r => r.Id == position.ShelfId);

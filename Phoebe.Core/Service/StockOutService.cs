@@ -474,8 +474,7 @@ namespace Phoebe.Core.Service
 
                     // 检查是否已经扫过码
                     int exist = db.Queryable<CarryOutTask>()
-                        .Count(r => r.TrayCode == carryOutTask.TrayCode && r.CargoId == carryOutTask.CargoId && r.ContractId == carryOutTask.ContractId &&
-                        r.Status == (int)EntityStatus.StockOutCheck);
+                        .Count(r => r.TrayCode == carryOutTask.TrayCode && r.StoreId == carryOutTask.StoreId && r.Status == (int)EntityStatus.StockOutCheck);
                     if (exist > 0)
                         return (false, "托盘已经出库");
 

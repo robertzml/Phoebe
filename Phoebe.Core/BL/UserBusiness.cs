@@ -76,9 +76,18 @@ namespace Phoebe.Core.BL
         /// <returns></returns>
         public override (bool success, string errorMessage, User t) Create(User entity, SqlSugarClient db = null)
         {
+            if (db == null)
+                db = GetInstance();
+
             if (entity.UserGroupId == 1)
             {
                 return (false, "无法创建超级管理员", null);
+            }
+
+            var count = db.Queryable<User>().Count(r => r.UserName == entity.UserName);
+            if (count > 0)
+            {
+                return (false, "用户名重复", null);
             }
 
             entity.Password = Hasher.SHA1Encrypt(entity.Password);
