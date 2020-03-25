@@ -20,35 +20,6 @@ namespace Phoebe.Core.BL
     {
         #region Method
         /// <summary>
-        /// 添加出库任务
-        /// </summary>
-        /// <param name="entity">出库任务</param>
-        /// <param name="storeCount">在库数量</param>
-        /// <param name="storeWeight">在库重量</param>
-        /// <param name="outTime">出库时间</param>
-        /// <param name="db"></param>
-        /// <returns></returns>
-        public (bool success, string errorMessage, StockOutTask t) Create(StockOutTask entity, int storeCount, decimal storeWeight, DateTime outTime, SqlSugarClient db = null)
-        {
-            if (db == null)
-                db = GetInstance();
-
-            entity.Id = Guid.NewGuid().ToString();
-            entity.StoreCount = storeCount;
-            entity.StoreWeight = storeWeight;
-
-            SequenceRecordBusiness recordBusiness = new SequenceRecordBusiness();
-            entity.TaskCode = recordBusiness.GetNextSequence(db, "StockOutTask", outTime);
-
-            entity.CreateTime = DateTime.Now;
-            entity.Status = (int)EntityStatus.StockOutReady;
-
-            var t = db.Insertable(entity).ExecuteReturnEntity();
-
-            return (true, "", t);
-        }
-
-        /// <summary>
         /// 由搬运出库任务添加出库任务
         /// </summary>
         /// <param name="stockOutId">出库单ID</param>

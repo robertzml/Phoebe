@@ -19,46 +19,6 @@ namespace Phoebe.Core.BL
     {
         #region Method
         /// <summary>
-        /// 由出库任务创建搬运出库任务
-        /// </summary>
-        /// <param name="entity"></param>
-        /// <param name="stockOutTask"></param>
-        /// <param name="store"></param>
-        /// <param name="db"></param>
-        /// <returns></returns>
-        public (bool success, string errorMessage, CarryOutTask t) CreateByStockOut(CarryOutTask entity, StockOutTaskView stockOutTask, StoreView store, SqlSugarClient db = null)
-        {
-            if (db == null)
-                db = GetInstance();
-
-            SequenceRecordBusiness recordBusiness = new SequenceRecordBusiness();
-            var now = DateTime.Now;
-
-            entity.Id = Guid.NewGuid().ToString();
-            entity.Type = (int)CarryOutTaskType.Out;
-            entity.CustomerId = stockOutTask.CustomerId;
-            entity.ContractId = stockOutTask.ContractId;
-            entity.CargoId = stockOutTask.CargoId;
-            entity.StockOutTaskId = stockOutTask.Id;
-            entity.UnitWeight = stockOutTask.UnitWeight;
-            entity.CreateTime = now;
-            entity.TaskCode = recordBusiness.GetNextSequence(db, "CarryOutTask", now);
-            entity.Status = (int)EntityStatus.StockOutReady;
-
-            if (store.ShelfCode == entity.ShelfCode)
-            {
-                entity.PositionNumber = store.PositionNumber;
-            }
-            else
-            {
-                entity.PositionNumber = store.VicePositionNumber;
-            }
-
-            var t = db.Insertable(entity).ExecuteReturnEntity();
-            return (true, "", t);
-        }
-
-        /// <summary>
         /// 由出库库存创建搬运出库任务
         /// </summary>
         /// <param name="entity">搬运出库任务</param>

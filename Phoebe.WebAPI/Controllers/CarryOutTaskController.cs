@@ -130,32 +130,6 @@ namespace Phoebe.WebAPI.Controllers
 
         #region Action
         /// <summary>
-        /// 提交出库
-        /// </summary>
-        /// <param name="tasks"></param>
-        /// <returns></returns>
-        public async Task<ActionResult<ResponseData>> Create(List<CarryOutTask> tasks)
-        {
-            CarryOutService carryOutService = new CarryOutService();
-
-            var task = Task.Run(() =>
-            {
-                var result = carryOutService.AddTasks(tasks);
-
-                ResponseData data = new ResponseData
-                {
-                    Status = result.success ? 0 : 1,
-                    ErrorMessage = result.errorMessage,
-                    Entity = null
-                };
-
-                return data;
-            });
-
-            return await task;
-        }
-
-        /// <summary>
         /// 出库下架-叉车工直接下架
         /// </summary>
         /// <param name="model"></param>

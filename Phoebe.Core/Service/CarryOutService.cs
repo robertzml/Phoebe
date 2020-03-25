@@ -21,51 +21,6 @@ namespace Phoebe.Core.Service
     {
         #region Carry Out Service
         /// <summary>
-        /// 添加下架任务
-        /// </summary>
-        /// <param name="tasks">搬运出库任务</param>
-        /// <returns></returns>
-        public (bool success, string errorMessage) AddTasks(List<CarryOutTask> data)
-        {
-            var db = GetInstance();
-
-            try
-            {
-                db.Ado.BeginTran();
-
-                if (data.Count == 0)
-                {
-                    return (false, "无搬运任务");
-                }
-
-                CarryOutTaskBusiness carryOutTaskBusiness = new CarryOutTaskBusiness();
-                StoreViewBusiness storeViewBusiness = new StoreViewBusiness();
-                StoreBusiness storeBusiness = new StoreBusiness();
-                StockOutTaskViewBusiness stockOutTaskViewBusiness = new StockOutTaskViewBusiness();
-
-                var stockOutTask = stockOutTaskViewBusiness.FindById(data.First().StockOutTaskId);
-
-                // 添加搬运出库的任务
-                foreach (var task in data)
-                {
-                    // 找出对应库存
-                    var store = storeViewBusiness.FindById(task.StoreId);
-
-                    // 设置搬运出库任务信息
-                    carryOutTaskBusiness.CreateByStockOut(task, stockOutTask, store, db);
-                }
-
-                db.Ado.CommitTran();
-                return (true, "");
-            }
-            catch (Exception e)
-            {
-                db.Ado.RollbackTran();
-                return (false, e.Message);
-            }
-        }
-
-        /// <summary>
         /// 出库下架
         /// </summary>
         /// <param name="trayCode">托盘码</param>

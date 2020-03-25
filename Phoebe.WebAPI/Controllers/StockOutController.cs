@@ -275,34 +275,6 @@ namespace Phoebe.WebAPI.Controllers
 
         #region Stock Out Task Action
         /// <summary>
-        /// 添加出库任务
-        /// </summary>
-        /// <param name="stockOut"></param>
-        /// <param name="tasks"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public async Task<ActionResult<ResponseData>> AddTask(StockOutTask outTask)
-        {
-            StockOutService stockOutService = new StockOutService();
-
-            var task = Task.Run(() =>
-            {
-                var result = stockOutService.AddTask(outTask);
-
-                ResponseData data = new ResponseData
-                {
-                    Status = result.success ? 0 : 1,
-                    ErrorMessage = result.errorMessage,
-                    Entity = result.t
-                };
-
-                return data;
-            });
-
-            return await task;
-        }
-
-        /// <summary>
         /// 添加普通出库任务
         /// </summary>
         /// <param name="data"></param>
@@ -334,13 +306,13 @@ namespace Phoebe.WebAPI.Controllers
         /// <param name="data"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<ActionResult<ResponseData>> AddOutStore(StockOutAddPositionModel model)
+        public async Task<ActionResult<ResponseData>> AddPositionOut(StockOutAddPositionModel model)
         {
             StockOutService stockOutService = new StockOutService();
 
             var task = Task.Run(() =>
             {
-                var result = stockOutService.AddOutStore(model.StockOutId, model.Tasks, model.UserId);
+                var result = stockOutService.AddPositionStore(model.StockOutId, model.Tasks, model.UserId);
 
                 ResponseData data = new ResponseData
                 {
