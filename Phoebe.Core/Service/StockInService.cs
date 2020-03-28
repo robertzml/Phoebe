@@ -366,8 +366,7 @@ namespace Phoebe.Core.Service
                 StockInBusiness stockInBusiness = new StockInBusiness();
                 var stockIn = stockInBusiness.FindById(entity.StockInId);
 
-                entity.UnitWeight = inTask.UnitWeight;
-                entity.InWeight = entity.InCount * entity.UnitWeight / 1000;
+                entity.UnitWeight = inTask.UnitWeight;              
                 entity.CargoId = inTask.CargoId;
                 entity.Batch = inTask.Batch;
                 entity.OriginPlace = inTask.OriginPlace;
@@ -376,9 +375,10 @@ namespace Phoebe.Core.Service
 
                 if (stockIn.Type == (int)StockInType.Normal)
                 {
+                    entity.InCount = inTask.InCount;
+                    entity.InWeight = entity.InCount * entity.UnitWeight / 1000;
+
                     // 修改对应库存信息
-                    NormalStoreBusiness normalStoreBusiness = new NormalStoreBusiness();
-                    
                     var store = db.Queryable<NormalStore>().Single(r => r.StockInTaskId == entity.Id);
                     store.CargoId = entity.CargoId;
                     store.UnitWeight = entity.UnitWeight;
@@ -393,14 +393,16 @@ namespace Phoebe.Core.Service
                 }
                 else if (stockIn.Type == (int)StockInType.Position)
                 {
+                    entity.InWeight = entity.InCount * entity.UnitWeight / 1000;
+
                     // 修改搬运入库任务对应信息
                     var carryIns = db.Queryable<CarryInTask>().Where(r => r.StockInTaskId == inTask.Id && r.Type == (int)CarryInTaskType.In).ToList();
 
                     foreach (var carryIn in carryIns)
                     {
-                        carryIn.CargoId = inTask.CargoId;
-                        carryIn.UnitWeight = inTask.UnitWeight;
-                        carryIn.MoveWeight = inTask.UnitWeight * carryIn.MoveCount / 1000;
+                        carryIn.CargoId = entity.CargoId;
+                        carryIn.UnitWeight = entity.UnitWeight;
+                        carryIn.MoveWeight = entity.UnitWeight * carryIn.MoveCount / 1000;
                         db.Updateable(carryIn).ExecuteCommand();
 
                         var store = db.Queryable<Store>().Single(r => r.CarryInTaskId == carryIn.Id);
