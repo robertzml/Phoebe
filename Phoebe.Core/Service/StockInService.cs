@@ -194,37 +194,53 @@ namespace Phoebe.Core.Service
                 {
                     return (false, "仅已确认入库单能撤回");
                 }
-
-                StoreBusiness storeBusiness = new StoreBusiness();
-                CarryInTaskBusiness carryInTaskBusiness = new CarryInTaskBusiness();
+               
                 StockInTaskBusiness stockInTaskBusiness = new StockInTaskBusiness();
 
                 // 获取相关入库任务
                 var tasks = db.Queryable<StockInTask>().Where(r => r.StockInId == stockIn.Id).ToList();
-                foreach (var task in tasks)
+                if (stockIn.Type == (int)StockInType.Normal)
                 {
-                    // 撤回搬运入库任务和库存记录
-                    var carryIns = db.Queryable<CarryInTask>().Where(r => r.StockInTaskId == task.Id).ToList();
-                    foreach (var carryIn in carryIns)
+                    NormalStoreBusiness normalStoreBusiness = new NormalStoreBusiness();
+                    foreach (var task in tasks)
                     {
-                        var store = db.Queryable<Store>().Single(r => r.CarryInTaskId == carryIn.Id);
-
-                        var carryOut = db.Queryable<CarryOutTask>().Count(r => r.StoreId == store.Id);
-                        if (carryOut > 0)
-                        {
-                            return (false, "该入库单有库存记录已出库，无法撤回");
-                        }
-
                         // 撤回库存记录
-                        storeBusiness.RevertIn(store, db);
+                        normalStoreBusiness.RevertIn(task.Id, db);
 
-                        // 撤回搬运入库任务
-                        carryInTaskBusiness.Revert(carryIn, db);
+                        // 撤回入库任务
+                        stockInTaskBusiness.Revert(task, db);
                     }
-
-                    // 撤回入库任务
-                    stockInTaskBusiness.Revert(task, db);
                 }
+                else if (stockIn.Type == (int)StockInType.Position)
+                {
+                    StoreBusiness storeBusiness = new StoreBusiness();
+                    CarryInTaskBusiness carryInTaskBusiness = new CarryInTaskBusiness();
+
+                    foreach (var task in tasks)
+                    {
+                        // 撤回搬运入库任务和库存记录
+                        var carryIns = db.Queryable<CarryInTask>().Where(r => r.StockInTaskId == task.Id).ToList();
+                        foreach (var carryIn in carryIns)
+                        {
+                            var store = db.Queryable<Store>().Single(r => r.CarryInTaskId == carryIn.Id);
+
+                            var carryOut = db.Queryable<CarryOutTask>().Count(r => r.StoreId == store.Id);
+                            if (carryOut > 0)
+                            {
+                                db.Ado.RollbackTran();
+                                return (false, "该入库单有库存记录已出库，无法撤回");
+                            }
+
+                            // 撤回库存记录
+                            storeBusiness.RevertIn(store, db);
+
+                            // 撤回搬运入库任务
+                            carryInTaskBusiness.Revert(carryIn, db);
+                        }
+                        // 撤回入库任务
+                        stockInTaskBusiness.Revert(task, db);
+                    }
+                }                    
 
                 // 撤回入库单
                 stockInBusiness.Revert(stockIn, db);

@@ -141,6 +141,24 @@ namespace Phoebe.Core.BL
         }
 
         /// <summary>
+        /// 撤回库存入库确认
+        /// </summary>
+        /// <param name="stockInTaskId">入库任务ID</param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        public (bool success, string errorMessage) RevertIn(string stockInTaskId, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            var store = db.Queryable<NormalStore>().Single(r => r.StockInTaskId == stockInTaskId);
+            store.Status = (int)EntityStatus.StoreInReady;
+
+            db.Updateable(store).ExecuteCommand();
+            return (true, "");
+        }
+
+        /// <summary>
         /// 库存出库
         /// </summary>
         /// <param name="store">库存记录</param>
