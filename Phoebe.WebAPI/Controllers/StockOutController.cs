@@ -234,6 +234,48 @@ namespace Phoebe.WebAPI.Controllers
         }
         #endregion //Stock Out Action
 
+        #region Billing Query
+        /// <summary>
+        /// 获取入库计费
+        /// </summary>
+        /// <param name="stockInId">入库单ID</param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult<List<OutBillingView>> GetBillings(string stockOutId)
+        {
+            OutBillingViewBusiness outBillingViewBusiness = new OutBillingViewBusiness();
+            return outBillingViewBusiness.FindByStockOut(stockOutId);
+        }
+        #endregion //Billing Query
+
+        #region Billing Action
+        /// <summary>
+        /// 设置出库费用
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ActionResult<ResponseData>> SetBilling(List<OutBilling> entity)
+        {
+            StockOutService stockOutService = new StockOutService();
+
+            var task = Task.Run(() =>
+            {
+                var result = stockOutService.SetBilling(entity);
+
+                ResponseData data = new ResponseData
+                {
+                    Status = result.success ? 0 : 1,
+                    ErrorMessage = result.errorMessage
+                };
+
+                return data;
+            });
+
+            return await task;
+        }
+        #endregion //Billing Action
+
         #region Stock Out Task Query
         /// <summary>
         /// 获取出库任务列表

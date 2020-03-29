@@ -14,5 +14,20 @@ namespace Phoebe.Core.DL
     /// </summary>
     public class OutBillingViewBusiness : AbstractBusiness<OutBillingView, string>, IBaseBL<OutBillingView, string>
     {
+        #region Method
+        /// <summary>
+        /// 查找出库单对应计费
+        /// </summary>
+        /// <param name="stockOutId"></param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        public List<OutBillingView> FindByStockOut(string stockOutId, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            return db.Queryable<OutBillingView>().Where(r => r.StockOutId == stockOutId).ToList();
+        }
+        #endregion //Method
     }
 }
