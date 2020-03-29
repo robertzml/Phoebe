@@ -46,5 +46,18 @@ namespace Phoebe.Core.Billing
         /// 在出库确认时计算冷藏费差价
         /// </remarks>
         (int days, decimal meter, decimal fee) CalculateDiffColdFee(Contract contract, NormalStoreView store, NormalStoreView backStore, SqlSugarClient db);
+
+        /// <summary>
+        /// 计算冷藏费差价
+        /// </summary>
+        /// <param name="contract">合同</param>
+        /// <param name="store">出库库存记录</param>
+        /// <param name="backStore">放回的库存记录</param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        /// <remarks>
+        /// 在出库确认时计算冷藏费差价
+        /// </remarks>
+        (int days, decimal meter, decimal fee) CalculateDiffColdFee(Contract contract, StoreView store, StoreView backStore, SqlSugarClient db);
     }
 }

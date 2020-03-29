@@ -187,7 +187,41 @@ namespace Phoebe.Core.Billing
 
                 decimal backMeter = 0;
                 if (backStore != null)
-                 backMeter = billingProcess.GetStoreMeter(backStore);
+                    backMeter = billingProcess.GetStoreMeter(backStore);
+
+                var fee = billingProcess.CalculatePeriodFee(storeMeter - backMeter, contract.UnitPrice, diff);
+
+                return (diff, storeMeter - backMeter, fee);
+            }
+            else
+                return (0, 0, 0);
+        }
+
+        /// <summary>
+        /// 计算冷藏费差价
+        /// </summary>
+        /// <param name="contract">合同</param>
+        /// <param name="store">出库库存记录</param>
+        /// <param name="backStore">放回的库存记录</param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        /// <remarks>
+        /// 在出库确认时计算冷藏费差价
+        /// </remarks>
+        public (int days, decimal meter, decimal fee) CalculateDiffColdFee(Contract contract, StoreView store, StoreView backStore, SqlSugarClient db)
+        {
+            int minDay = Convert.ToInt32(contract.Parameter1);
+
+            int diff = minDay - (store.OutTime.Value - store.InitialTime).Days;
+
+            if (diff > 0)
+            {
+                IBillingProcess billingProcess = BillingFactory.Create((BillingType)contract.BillingType);
+                var storeMeter = billingProcess.GetStoreMeter(store);
+
+                decimal backMeter = 0;
+                if (backStore != null)
+                    backMeter = billingProcess.GetStoreMeter(backStore);
 
                 var fee = billingProcess.CalculatePeriodFee(storeMeter - backMeter, contract.UnitPrice, diff);
 

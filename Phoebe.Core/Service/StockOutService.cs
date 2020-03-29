@@ -757,7 +757,25 @@ namespace Phoebe.Core.Service
                 }
                 else if (stockOut.Type == (int)StockOutType.Position)
                 {
+                    StoreViewBusiness storeViewBusiness = new StoreViewBusiness();
+                    foreach (var task in stockOutTasks)
+                    {
+                        // 获取对应库存记录
+                        var stores = storeViewBusiness.FindByStockOutTask(task.Id, db);
 
+                        foreach(var store in stores)
+                        {
+                            var backStore = storeViewBusiness.FindNext(store.Id, db);
+
+                            var result = contractBill.CalculateDiffColdFee(contract, store, backStore, db);
+
+                            if (result.fee > 0)
+                            {
+                                bill.Count += result.meter;
+                                bill.Amount += result.fee;
+                            }
+                        }
+                    }
                 }
 
                 if (bill.Amount > 0)

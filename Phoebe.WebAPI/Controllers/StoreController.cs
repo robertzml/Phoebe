@@ -70,19 +70,6 @@ namespace Phoebe.WebAPI.Controllers
         }
 
         /// <summary>
-        /// 按出库单和货品查找
-        /// </summary>
-        /// <param name="stockOutId">出库单ID</param>
-        /// <param name="cargoId">货品ID</param>
-        /// <returns></returns>
-        [HttpGet]
-        public List<StoreView> FindByStockOut(string stockOutId, string cargoId)
-        {
-            StoreViewBusiness storeViewBusiness = new StoreViewBusiness();
-            return storeViewBusiness.FindByStockOut(stockOutId, cargoId);
-        }
-
-        /// <summary>
         /// 按托盘码查找库存
         /// </summary>
         /// <param name="trayCode">托盘码</param>

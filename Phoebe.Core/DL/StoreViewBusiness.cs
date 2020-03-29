@@ -125,37 +125,27 @@ namespace Phoebe.Core.DL
         }
 
         /// <summary>
-        /// 按出库单查找库存
-        /// 出库单规定了出库类型：普通库或者仓位库
+        /// 获取出库任务对应的库存记录
         /// </summary>
-        /// <param name="stockOutId">出库单ID</param>
-        /// <param name="cargoId">货品ID</param>
+        /// <param name="stockOutTaskId">出库任务ID</param>
+        /// <param name="db"></param>
         /// <returns></returns>
-        public List<StoreView> FindByStockOut(string stockOutId, string cargoId)
+        public List<StoreView> FindByStockOutTask(string stockOutTaskId, SqlSugarClient db = null)
         {
-            StockOutViewBusiness stockOutViewBusiness = new StockOutViewBusiness();
-            var stockOut = stockOutViewBusiness.FindById(stockOutId);
+            if (db == null)
+                db = GetInstance();
 
-            var db = GetInstance();
+            List<StoreView> data = new List<StoreView>();
+            var carryOuts = db.Queryable<CarryOutTask>().Where(r => r.StockOutTaskId == stockOutTaskId).ToList();
 
-            if (stockOut.Type == (int)StockOutType.Normal)
+            foreach(var carryOut in carryOuts)
             {
-                var data = db.Queryable<StoreView>().Where(r => r.WarehouseType == (int)WarehouseType.Normal
-                    && r.ContractId == stockOut.ContractId && r.CargoId == cargoId
-                    && r.Status == (int)EntityStatus.StoreIn).ToList();
-
-                return data;
+                var store = db.Queryable<StoreView>().Single(r => r.CarryOutTaskId == carryOut.Id);
+                if (store != null)
+                    data.Add(store);
             }
-            else if (stockOut.Type == (int)StockOutType.Position)
-            {
-                var data = db.Queryable<StoreView>().Where(r => r.WarehouseType == (int)WarehouseType.Position
-                   && r.ContractId == stockOut.ContractId && r.CargoId == cargoId
-                   && r.Status == (int)EntityStatus.StoreIn).ToList();
 
-                return data;
-            }
-            else
-                return new List<StoreView>();
+            return data;
         }
 
         /// <summary>
@@ -178,14 +168,30 @@ namespace Phoebe.Core.DL
 
             // 已经添加出库的托盘不能继续添加
             var carryOuts = db.Queryable<CarryOutTask>()
-                .Where(r => r.ContractId == contractId && r.CargoId == cargoId && 
-                    (r.Status == (int)EntityStatus.StockOutReady || r.Status == (int)EntityStatus.StockOutLeave || 
+                .Where(r => r.ContractId == contractId && r.CargoId == cargoId &&
+                    (r.Status == (int)EntityStatus.StockOutReady || r.Status == (int)EntityStatus.StockOutLeave ||
                     r.Status == (int)EntityStatus.StockOutCheck))
                 .ToList();
 
             var trayCodes = carryOuts.Select(r => r.TrayCode);
 
             data = data.Where(r => !trayCodes.Contains(r.TrayCode)).ToList();
+
+            return data;
+        }
+
+        /// <summary>
+        /// 找放回的库存记录
+        /// </summary>
+        /// <param name="prevStoreId">前序库存ID</param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        public StoreView FindNext(string prevStoreId, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            var data = db.Queryable<StoreView>().Single(r => r.PrevStoreId == prevStoreId);
 
             return data;
         }
