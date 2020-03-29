@@ -56,6 +56,20 @@ namespace Phoebe.Core.BL
 
             return base.Update(item, db);
         }
+
+        /// <summary>
+        /// 按代码查找
+        /// </summary>
+        /// <param name="code">费用代码</param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        public ExpenseItem FindByCode(string code, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            return db.Queryable<ExpenseItem>().Single(r => r.Code == code);
+        }
         #endregion //Method
     }
 }

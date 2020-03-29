@@ -560,6 +560,10 @@ namespace Phoebe.Core.Service
                 // 获取出库单
                 var stockOut = stockOutBusiness.FindById(task.StockOutId, db);
 
+                // 获取合同
+                ContractBusiness contractBusiness = new ContractBusiness();
+                var contract = contractBusiness.FindById(stockOut.ContractId);
+
                 if (stockOut.Type == (int)StockOutType.Position) //仓位库出库
                 {
                     var carryIn = db.Queryable<CarryInTask>().Where(r => r.StockOutTaskId == stockOutTaskId).ToList();
@@ -587,11 +591,40 @@ namespace Phoebe.Core.Service
                     // 确认库存
                     NormalStoreBusiness normalStoreBusiness = new NormalStoreBusiness();
                     normalStoreBusiness.FinishOut(stockOutTaskId, stockOut.OutTime, db);
-
+                  
                     // 创建放回库存
                     if (task.StoreCount > task.OutCount)
                     {
                         normalStoreBusiness.CreateByBack(task, db);
+                    }
+
+                    // 计算冷藏费差价
+                    if (contract.Type == (int)ContractType.TimingCold)
+                    {
+                        IContract contractBill = ContractFactory.Create((ContractType)contract.Type);
+                        OutBillingBusiness outBillingBusiness = new OutBillingBusiness();
+
+                        NormalStoreViewBusiness normalStoreViewBusiness = new NormalStoreViewBusiness();
+                        var store = normalStoreViewBusiness.FindByStockOutTask(task.Id, db);
+                        var backStore = normalStoreViewBusiness.FindNext(store.Id, db);
+
+                        var result = contractBill.CalculateDiffColdFee(contract, store, backStore, db);
+
+                        if (result.fee > 0)
+                        {
+                            ExpenseItemBusiness expenseItemBusiness = new ExpenseItemBusiness();
+                            var item = expenseItemBusiness.FindByCode("006", db);
+
+                            OutBilling bill = new OutBilling();
+                            bill.StockOutId = stockOut.Id;
+                            bill.ExpenseItemId = item.Id;
+                            bill.UnitPrice = contract.UnitPrice;
+                            bill.Count = result.meter;
+                            bill.Amount = result.fee;
+                            bill.Parameter1 = result.days.ToString();
+
+                            outBillingBusiness.Save(bill, db);
+                        }
                     }
                 }
 
@@ -724,20 +757,20 @@ namespace Phoebe.Core.Service
                     foreach (var task in stockOutTasks)
                     {
                         // 获取对应库存
-                        var store = normalStoreViewBusiness.FindByStockOutTask(task.Id, db);
-                        var result = contractBill.CalculateDiffColdFee(contract, store, store.InTime, store.OutTime.Value, db);
+                        //var store = normalStoreViewBusiness.FindByStockOutTask(task.Id, db);
+                        //var result = contractBill.CalculateDiffColdFee(contract, store, store.InTime, store.OutTime.Value, db);
 
-                        if (result.fee > 0)
-                        {
-                            OutBilling bill = new OutBilling();
-                            bill.StockOutId = stockOutId;
-                            bill.UnitPrice = contract.UnitPrice;
-                            bill.Count = result.count;
-                            bill.Amount = result.fee;
-                            bill.Parameter1 = result.days.ToString();
+                        //if (result.fee > 0)
+                        //{
+                        //    OutBilling bill = new OutBilling();
+                        //    bill.StockOutId = stockOutId;
+                        //    bill.UnitPrice = contract.UnitPrice;
+                        //    bill.Count = result.count;
+                        //    bill.Amount = result.fee;
+                        //    bill.Parameter1 = result.days.ToString();
 
-                            outBillingBusiness.Save(bill, db);
-                        }
+                        //    outBillingBusiness.Save(bill, db);
+                        //}
                     }
                 }
                 else if (stockOut.Type == (int)StockOutType.Position)

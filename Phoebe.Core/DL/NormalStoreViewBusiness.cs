@@ -64,6 +64,22 @@ namespace Phoebe.Core.DL
 
             return data;
         }
+
+        /// <summary>
+        /// 找放回的库存记录
+        /// </summary>
+        /// <param name="prevStoreId">前序库存ID</param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        public NormalStoreView FindNext(string prevStoreId, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            var data = db.Queryable<NormalStoreView>().Single(r => r.PrevStoreId == prevStoreId);
+
+            return data;
+        }
         #endregion //Query
 
         #region Storage

@@ -90,7 +90,6 @@ namespace Phoebe.Core.BL
 
             store.InitialTime = oldStore.InTime;
             store.InTime = oldStore.OutTime.Value;
-            store.StockInTaskId = oldStore.StockInTaskId;
             store.PrevStoreId = oldStore.Id;
 
             store.CreateTime = DateTime.Now;
@@ -99,7 +98,7 @@ namespace Phoebe.Core.BL
 
             var t = db.Insertable(store).ExecuteReturnEntity();
 
-            return (true, "", store);
+            return (true, "", t);
         }
 
         /// <summary>

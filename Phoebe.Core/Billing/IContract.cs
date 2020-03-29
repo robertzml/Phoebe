@@ -38,11 +38,13 @@ namespace Phoebe.Core.Billing
         /// 获取冷藏费差价
         /// </summary>
         /// <param name="contract">合同</param>
-        /// <param name="store">库存记录</param>
-        /// <param name="start">开始日期</param>
-        /// <param name="end">结束日期</param>
+        /// <param name="store">出库库存记录</param>
+        /// <param name="backStore">放回的库存记录</param>
         /// <param name="db"></param>
         /// <returns></returns>
-        (int days, decimal count, decimal fee) CalculateDiffColdFee(Contract contract, NormalStoreView store, DateTime start, DateTime end, SqlSugarClient db);
+        /// <remarks>
+        /// 在出库确认时计算冷藏费差价
+        /// </remarks>
+        (int days, decimal meter, decimal fee) CalculateDiffColdFee(Contract contract, NormalStoreView store, NormalStoreView backStore, SqlSugarClient db);
     }
 }
