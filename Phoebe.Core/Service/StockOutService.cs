@@ -152,6 +152,10 @@ namespace Phoebe.Core.Service
                 // 重新核对冷藏费结束时间
 
                 db.Ado.CommitTran();
+
+                // 核对冷藏费差价
+                this.SetDiffColdFee(id);
+
                 return (result.success, result.errorMessage);
             }
             catch (Exception e)
@@ -591,40 +595,11 @@ namespace Phoebe.Core.Service
                     // 确认库存
                     NormalStoreBusiness normalStoreBusiness = new NormalStoreBusiness();
                     normalStoreBusiness.FinishOut(stockOutTaskId, stockOut.OutTime, db);
-                  
+
                     // 创建放回库存
                     if (task.StoreCount > task.OutCount)
                     {
                         normalStoreBusiness.CreateByBack(task, db);
-                    }
-
-                    // 计算冷藏费差价
-                    if (contract.Type == (int)ContractType.TimingCold)
-                    {
-                        IContract contractBill = ContractFactory.Create((ContractType)contract.Type);
-                        OutBillingBusiness outBillingBusiness = new OutBillingBusiness();
-
-                        NormalStoreViewBusiness normalStoreViewBusiness = new NormalStoreViewBusiness();
-                        var store = normalStoreViewBusiness.FindByStockOutTask(task.Id, db);
-                        var backStore = normalStoreViewBusiness.FindNext(store.Id, db);
-
-                        var result = contractBill.CalculateDiffColdFee(contract, store, backStore, db);
-
-                        if (result.fee > 0)
-                        {
-                            ExpenseItemBusiness expenseItemBusiness = new ExpenseItemBusiness();
-                            var item = expenseItemBusiness.FindByCode("006", db);
-
-                            OutBilling bill = new OutBilling();
-                            bill.StockOutId = stockOut.Id;
-                            bill.ExpenseItemId = item.Id;
-                            bill.UnitPrice = contract.UnitPrice;
-                            bill.Count = result.meter;
-                            bill.Amount = result.fee;
-                            bill.Parameter1 = result.days.ToString();
-
-                            outBillingBusiness.Save(bill, db);
-                        }
                     }
                 }
 
@@ -727,6 +702,11 @@ namespace Phoebe.Core.Service
             }
         }
 
+        /// <summary>
+        /// 设置冷藏费差价
+        /// </summary>
+        /// <param name="stockOutId">出库单ID</param>
+        /// <returns></returns>
         public (bool success, string errorMessage) SetDiffColdFee(string stockOutId)
         {
             var db = GetInstance();
@@ -751,31 +731,43 @@ namespace Phoebe.Core.Service
                 // 获取出库任务
                 var stockOutTasks = db.Queryable<StockOutTask>().Where(r => r.StockOutId == stockOutId).ToList();
 
+                // 冷藏费差价项目
+                var bill = outBillingBusiness.GetDiffColdByStockOut(stockOut.Id, db);
+                bill.UnitPrice = contract.UnitPrice;
+                bill.Count = 0;
+                bill.Amount = 0;
+
                 if (stockOut.Type == (int)StockOutType.Normal)
                 {
                     NormalStoreViewBusiness normalStoreViewBusiness = new NormalStoreViewBusiness();
                     foreach (var task in stockOutTasks)
                     {
                         // 获取对应库存
-                        //var store = normalStoreViewBusiness.FindByStockOutTask(task.Id, db);
-                        //var result = contractBill.CalculateDiffColdFee(contract, store, store.InTime, store.OutTime.Value, db);
+                        var store = normalStoreViewBusiness.FindByStockOutTask(task.Id, db);
+                        var backStore = normalStoreViewBusiness.FindNext(store.Id, db);
 
-                        //if (result.fee > 0)
-                        //{
-                        //    OutBilling bill = new OutBilling();
-                        //    bill.StockOutId = stockOutId;
-                        //    bill.UnitPrice = contract.UnitPrice;
-                        //    bill.Count = result.count;
-                        //    bill.Amount = result.fee;
-                        //    bill.Parameter1 = result.days.ToString();
+                        var result = contractBill.CalculateDiffColdFee(contract, store, backStore, db);
 
-                        //    outBillingBusiness.Save(bill, db);
-                        //}
+                        if (result.fee > 0)
+                        {
+                            bill.Count += result.meter;
+                            bill.Amount += result.fee;
+                        }
                     }
                 }
                 else if (stockOut.Type == (int)StockOutType.Position)
                 {
 
+                }
+
+                if (bill.Amount > 0)
+                    outBillingBusiness.Save(bill, db);
+                else
+                {
+                    if (!string.IsNullOrEmpty(bill.Id))
+                    {
+                        outBillingBusiness.Delete(bill.Id, db);
+                    }
                 }
 
                 db.Ado.CommitTran();

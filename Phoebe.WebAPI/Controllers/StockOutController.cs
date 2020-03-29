@@ -274,6 +274,32 @@ namespace Phoebe.WebAPI.Controllers
 
             return await task;
         }
+
+        /// <summary>
+        /// 设置冷藏费差价
+        /// </summary>
+        /// <param name="stockOutId">出库单ID</param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ActionResult<ResponseData>> SetDiffCold(string stockOutId)
+        {
+            StockOutService stockOutService = new StockOutService();
+
+            var task = Task.Run(() =>
+            {
+                var result = stockOutService.SetDiffColdFee(stockOutId);
+
+                ResponseData data = new ResponseData
+                {
+                    Status = result.success ? 0 : 1,
+                    ErrorMessage = result.errorMessage
+                };
+
+                return data;
+            });
+
+            return await task;
+        }
         #endregion //Billing Action
 
         #region Stock Out Task Query

@@ -17,6 +17,30 @@ namespace Phoebe.Core.BL
     {
         #region Method
         /// <summary>
+        /// 获取出库单对应的冷藏费差价
+        /// </summary>
+        /// <param name="stockOutId">出库单ID</param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        public OutBilling GetDiffColdByStockOut(string stockOutId, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            var item = db.Queryable<ExpenseItem>().Single(r => r.Code == "006");
+
+            var bill = db.Queryable<OutBilling>().Single(r => r.StockOutId == stockOutId && r.ExpenseItemId == item.Id);
+            if (bill == null)            
+            {
+                bill = new OutBilling();
+                bill.StockOutId = stockOutId;
+                bill.ExpenseItemId = item.Id;
+            }
+
+            return bill;
+        }
+
+        /// <summary>
         /// 保存出库计费
         /// </summary>
         /// <param name="entity"></param>

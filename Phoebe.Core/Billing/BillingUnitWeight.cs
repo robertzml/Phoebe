@@ -114,7 +114,7 @@ namespace Phoebe.Core.Billing
         /// <returns></returns>
         public decimal CalculatePeriodFee(decimal totalMeter, decimal unitPrice, int days)
         {
-            return totalMeter * unitPrice * days;
+            return Math.Round(totalMeter * unitPrice * days, 3);
         }
         #endregion //Override
     }
