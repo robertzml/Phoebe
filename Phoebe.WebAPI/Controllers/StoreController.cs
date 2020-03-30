@@ -50,7 +50,7 @@ namespace Phoebe.WebAPI.Controllers
         /// <param name="contractId"></param>
         /// <returns></returns>
         [HttpGet]
-        public List<StoreView> FindByContract(int contractId)
+        public ActionResult<List<StoreView>> FindByContract(int contractId)
         {
             StoreViewBusiness storeViewBusiness = new StoreViewBusiness();
             return storeViewBusiness.FindByContract(contractId);
@@ -63,7 +63,7 @@ namespace Phoebe.WebAPI.Controllers
         /// <param name="cargoId">货品ID</param>
         /// <returns></returns>
         [HttpGet]
-        public List<StoreView> FindByCargo(int contractId, string cargoId)
+        public ActionResult<List<StoreView>> FindByCargo(int contractId, string cargoId)
         {
             StoreViewBusiness storeViewBusiness = new StoreViewBusiness();
             return storeViewBusiness.FindByCargo(contractId, cargoId, true);
@@ -75,7 +75,7 @@ namespace Phoebe.WebAPI.Controllers
         /// <param name="trayCode">托盘码</param>
         /// <returns></returns>
         [HttpGet]
-        public List<StoreView> FindByTray(string trayCode)
+        public ActionResult<List<StoreView>> FindByTray(string trayCode)
         {
             StoreViewBusiness storeViewBusiness = new StoreViewBusiness();
             return storeViewBusiness.FindByTray(trayCode);
@@ -87,7 +87,7 @@ namespace Phoebe.WebAPI.Controllers
         /// <param name="shelfCode"></param>
         /// <returns></returns>
         [HttpGet]
-        public List<StoreView> FindOutside(string shelfCode)
+        public ActionResult<List<StoreView>> FindOutside(string shelfCode)
         {
             StoreViewBusiness storeViewBusiness = new StoreViewBusiness();
             return storeViewBusiness.FindOutside(shelfCode);
@@ -100,7 +100,7 @@ namespace Phoebe.WebAPI.Controllers
         /// <param name="cargoId"></param>
         /// <returns></returns>
         [HttpGet]
-        public List<StoreView> FindForStockOut(int contractId, string cargoId)
+        public ActionResult<List<StoreView>> FindForStockOut(int contractId, string cargoId)
         {
             StoreViewBusiness storeViewBusiness = new StoreViewBusiness();
             return storeViewBusiness.FindForStockOut(contractId, cargoId);
@@ -126,7 +126,7 @@ namespace Phoebe.WebAPI.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
-        public List<StoreView> GetInOrder(string id)
+        public ActionResult<List<StoreView>> GetInOrder(string id)
         {
             StoreViewBusiness storeViewBusiness = new StoreViewBusiness();
             return storeViewBusiness.GetInOrder(id);
@@ -143,6 +143,33 @@ namespace Phoebe.WebAPI.Controllers
         {
             StoreViewBusiness storeViewBusiness = new StoreViewBusiness();
             return storeViewBusiness.GetInDay(contractId, date);
+        }
+
+        /// <summary>
+        /// 查找托盘
+        /// </summary>
+        /// <param name="trayCode">托盘码</param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ActionResult<ResponseData>> FindTray(string trayCode)
+        {
+            StoreViewBusiness storeViewBusiness = new StoreViewBusiness();
+
+            var task = Task.Run(() =>
+            {
+                var result = storeViewBusiness.FindTray(trayCode);
+
+                ResponseData data = new ResponseData
+                {
+                    Status = result.success ? 0 : 1,
+                    ErrorMessage = result.errorMessage,
+                    Entity = result.status
+                };
+
+                return data;
+            });
+
+            return await task;
         }
         #endregion //Storage
     }

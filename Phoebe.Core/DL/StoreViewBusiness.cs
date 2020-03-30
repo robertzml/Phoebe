@@ -260,6 +260,28 @@ namespace Phoebe.Core.DL
 
             return stores;
         }
+
+        /// <summary>
+        /// 查找托盘
+        /// </summary>
+        /// <param name="trayCode">托盘码</param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        public (bool success, string errorMessage, int status) FindTray(string trayCode, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            var stores = db.Queryable<StoreView>()
+                .Where(r => r.TrayCode == trayCode && r.Status != (int)EntityStatus.StoreOut)
+                .ToList();
+
+            if (stores.Count > 0)
+                return (true, "托盘在库", (int)TrayStatus.InStore);
+
+
+            return (true, "", (int)TrayStatus.OutStore);
+        }
         #endregion //Storage
     }
 }
