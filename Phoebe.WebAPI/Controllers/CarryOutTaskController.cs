@@ -98,7 +98,19 @@ namespace Phoebe.WebAPI.Controllers
         public ActionResult<List<CarryOutTaskView>> FindByTray(string trayCode)
         {
             CarryOutTaskViewBusiness carryOutTaskViewBusiness = new CarryOutTaskViewBusiness();
-            return carryOutTaskViewBusiness.FindByTray(trayCode);
+            return carryOutTaskViewBusiness.FindByTray(trayCode, EntityStatus.StockOutLeave);
+        }
+
+        /// <summary>
+        /// 根据托盘码获取当前未确认的搬运出库任务
+        /// </summary>
+        /// <param name="trayCode">托盘码</param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult<List<CarryOutTaskView>> ListByTray(string trayCode)
+        {
+            CarryOutTaskViewBusiness carryOutTaskViewBusiness = new CarryOutTaskViewBusiness();
+            return carryOutTaskViewBusiness.FindUseByTray(trayCode);
         }
 
         /// <summary>

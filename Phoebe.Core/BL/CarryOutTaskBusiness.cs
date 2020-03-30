@@ -38,7 +38,6 @@ namespace Phoebe.Core.BL
             entity.CustomerId = store.CustomerId;
             entity.ContractId = store.ContractId;
             entity.CargoId = store.CargoId;
-            //entity.StockOutTaskId = stockOutTask.Id;
             entity.UnitWeight = store.UnitWeight;
             entity.CreateTime = now;
             entity.TaskCode = recordBusiness.GetNextSequence(db, "CarryOutTask", now);

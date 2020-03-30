@@ -68,13 +68,32 @@ namespace Phoebe.Core.DL
         /// 根据托盘码获取当前搬运出库任务
         /// </summary>
         /// <param name="trayCode">托盘码</param>
+        /// <param name="status">状态</param>
         /// <returns></returns>
-        public List<CarryOutTaskView> FindByTray(string trayCode, SqlSugarClient db = null)
+        public List<CarryOutTaskView> FindByTray(string trayCode, EntityStatus status, SqlSugarClient db = null)
         {
             if (db == null)
                 db = GetInstance();
 
-            var data = db.Queryable<CarryOutTaskView>().Where(r => r.TrayCode == trayCode && r.Status == (int)EntityStatus.StockOutLeave);
+            var data = db.Queryable<CarryOutTaskView>().Where(r => r.TrayCode == trayCode && r.Status == (int)status);
+            return data.ToList();
+        }
+
+        /// <summary>
+        /// 根据托盘码获取当前搬运出库任务
+        /// </summary>
+        /// <param name="trayCode">托盘码</param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        /// <remarks>
+        /// 获取非确认的搬运出库任务
+        /// </remarks>
+        public List<CarryOutTaskView> FindUseByTray(string trayCode, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            var data = db.Queryable<CarryOutTaskView>().Where(r => r.TrayCode == trayCode && r.Status != (int)EntityStatus.StockOutFinish);
             return data.ToList();
         }
 

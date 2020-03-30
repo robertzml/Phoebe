@@ -138,7 +138,7 @@ namespace Phoebe.Core.DL
             List<StoreView> data = new List<StoreView>();
             var carryOuts = db.Queryable<CarryOutTask>().Where(r => r.StockOutTaskId == stockOutTaskId).ToList();
 
-            foreach(var carryOut in carryOuts)
+            foreach (var carryOut in carryOuts)
             {
                 var store = db.Queryable<StoreView>().Single(r => r.CarryOutTaskId == carryOut.Id);
                 if (store != null)
@@ -267,20 +267,41 @@ namespace Phoebe.Core.DL
         /// <param name="trayCode">托盘码</param>
         /// <param name="db"></param>
         /// <returns></returns>
-        public (bool success, string errorMessage, int status) FindTray(string trayCode, SqlSugarClient db = null)
+        public (int storeStatus, int carryStatus) FindTray(string trayCode, SqlSugarClient db = null)
         {
             if (db == null)
                 db = GetInstance();
 
             var stores = db.Queryable<StoreView>()
-                .Where(r => r.TrayCode == trayCode && r.Status != (int)EntityStatus.StoreOut)
+                .Count(r => r.TrayCode == trayCode && r.Status != (int)EntityStatus.StoreOut);
+
+            int storeStatus = 0;
+            int carryStatus = 0;
+
+            if (stores > 0)
+                storeStatus = (int)TrayStoreStatus.InStore;
+            else
+                storeStatus = (int)TrayStoreStatus.OutStore;
+
+            var carryIns = db.Queryable<CarryInTaskView>()
+                 .Count(r => r.TrayCode == trayCode && r.Status == (int)EntityStatus.StockInCheck);
+
+            var carryOuts = db.Queryable<CarryOutTaskView>()
+                .Where(r => r.TrayCode == trayCode && r.Status != (int)EntityStatus.StockOutFinish)
                 .ToList();
 
-            if (stores.Count > 0)
-                return (true, "托盘在库", (int)TrayStatus.InStore);
+            if (carryIns > 0 && carryOuts.Count == 0)
+                carryStatus = (int)TrayCarryStatus.CarryInReady;
+            else if (carryIns == 0 && carryOuts.Count == 0)
+                carryStatus = (int)TrayCarryStatus.NotUse;
+            else if (carryIns == 0 && carryOuts.All(r => r.Status == (int)EntityStatus.StockOutReady))
+                carryStatus = (int)TrayCarryStatus.CarryOutReady;
+            else if (carryIns == 0 && carryOuts.All(r => r.Status == (int)EntityStatus.StockOutLeave))
+                carryStatus = (int)TrayCarryStatus.CarryOutLeave;
+            else if (carryIns > 0 && carryOuts.All(r => r.Status == (int)EntityStatus.StockOutCheck))
+                carryStatus = (int)TrayCarryStatus.CarryInBack;
 
-
-            return (true, "", (int)TrayStatus.OutStore);
+            return (storeStatus, carryStatus);
         }
         #endregion //Storage
     }

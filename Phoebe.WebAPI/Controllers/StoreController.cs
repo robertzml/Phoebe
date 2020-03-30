@@ -161,9 +161,9 @@ namespace Phoebe.WebAPI.Controllers
 
                 ResponseData data = new ResponseData
                 {
-                    Status = result.success ? 0 : 1,
-                    ErrorMessage = result.errorMessage,
-                    Entity = result.status
+                    Status = 0,
+                    ErrorMessage = "",
+                    Entity = new { StoreStatus = result.storeStatus, CarryStatus = result.carryStatus }
                 };
 
                 return data;
