@@ -23,9 +23,9 @@ namespace Phoebe.Core.Utility
         InStore = 1,
 
         /// <summary>
-        /// 出库
+        /// 不在库
         /// </summary>
-        [Display(Name = "出库")]
+        [Display(Name = "不在库")]
         OutStore = 2,
     }
 
