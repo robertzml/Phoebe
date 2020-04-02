@@ -80,7 +80,7 @@ namespace Phoebe.Core.DL
         }
 
         /// <summary>
-        /// 根据托盘码获取当前搬运出库任务
+        /// 根据托盘码查找进行中的搬运任务
         /// </summary>
         /// <param name="trayCode">托盘码</param>
         /// <param name="db"></param>
@@ -88,7 +88,7 @@ namespace Phoebe.Core.DL
         /// <remarks>
         /// 获取非确认的搬运出库任务
         /// </remarks>
-        public List<CarryOutTaskView> FindUseByTray(string trayCode, SqlSugarClient db = null)
+        public List<CarryOutTaskView> FindWorking(string trayCode, SqlSugarClient db = null)
         {
             if (db == null)
                 db = GetInstance();

@@ -102,15 +102,15 @@ namespace Phoebe.WebAPI.Controllers
         }
 
         /// <summary>
-        /// 根据托盘码获取当前未确认的搬运出库任务
+        /// 根据托盘码查找进行中的搬运任务
         /// </summary>
         /// <param name="trayCode">托盘码</param>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult<List<CarryOutTaskView>> ListByTray(string trayCode)
+        public ActionResult<List<CarryOutTaskView>> FindWorking(string trayCode)
         {
             CarryOutTaskViewBusiness carryOutTaskViewBusiness = new CarryOutTaskViewBusiness();
-            return carryOutTaskViewBusiness.FindUseByTray(trayCode);
+            return carryOutTaskViewBusiness.FindWorking(trayCode);
         }
 
         /// <summary>

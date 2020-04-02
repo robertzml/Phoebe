@@ -113,18 +113,6 @@ namespace Phoebe.Base.System
         /// </summary>
         [Display(Name = "已入库")]
         StockInFinish = 75,
-
-        /// <summary>
-        /// 76:待上架
-        /// </summary>
-        [Display(Name = "待上架")]
-        CarryInReady = 76,
-
-        /// <summary>
-        /// 77:已上架
-        /// </summary>
-        [Display(Name = "已上架")]
-        CarryInEnter = 77,
         #endregion //Stock In
 
         #region Stock Out
@@ -157,18 +145,6 @@ namespace Phoebe.Base.System
         /// </summary>
         [Display(Name = "已出库")]
         StockOutFinish = 85,
-
-        /// <summary>
-        /// 86:待下架
-        /// </summary>
-        [Display(Name = "待下架")]
-        CarryOutReady = 86,
-
-        /// <summary>
-        /// 87:已下架
-        /// </summary>
-        [Display(Name = "已下架")]
-        CarryOutLeave = 87,
         #endregion //Stock Out
 
         #region Stock Move

@@ -144,33 +144,6 @@ namespace Phoebe.WebAPI.Controllers
             StoreViewBusiness storeViewBusiness = new StoreViewBusiness();
             return storeViewBusiness.GetInDay(contractId, date);
         }
-
-        /// <summary>
-        /// 查找托盘
-        /// </summary>
-        /// <param name="trayCode">托盘码</param>
-        /// <returns></returns>
-        [HttpPost]
-        public async Task<ActionResult<ResponseData>> FindTray(string trayCode)
-        {
-            StoreViewBusiness storeViewBusiness = new StoreViewBusiness();
-
-            var task = Task.Run(() =>
-            {
-                var result = storeViewBusiness.FindTray(trayCode);
-
-                ResponseData data = new ResponseData
-                {
-                    Status = 0,
-                    ErrorMessage = "",
-                    Entity = new { StoreStatus = result.storeStatus, CarryStatus = result.carryStatus }
-                };
-
-                return data;
-            });
-
-            return await task;
-        }
         #endregion //Storage
     }
 }

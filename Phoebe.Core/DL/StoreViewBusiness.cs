@@ -260,49 +260,6 @@ namespace Phoebe.Core.DL
 
             return stores;
         }
-
-        /// <summary>
-        /// 查找托盘
-        /// </summary>
-        /// <param name="trayCode">托盘码</param>
-        /// <param name="db"></param>
-        /// <returns></returns>
-        public (int storeStatus, int carryStatus) FindTray(string trayCode, SqlSugarClient db = null)
-        {
-            if (db == null)
-                db = GetInstance();
-
-            var stores = db.Queryable<StoreView>()
-                .Count(r => r.TrayCode == trayCode && r.Status != (int)EntityStatus.StoreOut);
-
-            int storeStatus = 0;
-            int carryStatus = 0;
-
-            if (stores > 0)
-                storeStatus = (int)TrayStoreStatus.InStore;
-            else
-                storeStatus = (int)TrayStoreStatus.OutStore;
-
-            var carryIns = db.Queryable<CarryInTaskView>()
-                 .Count(r => r.TrayCode == trayCode && r.Status == (int)EntityStatus.StockInCheck);
-
-            var carryOuts = db.Queryable<CarryOutTaskView>()
-                .Where(r => r.TrayCode == trayCode && r.Status != (int)EntityStatus.StockOutFinish)
-                .ToList();
-
-            if (carryIns > 0 && carryOuts.Count == 0)
-                carryStatus = (int)TrayCarryStatus.CarryInReady;
-            else if (carryIns == 0 && carryOuts.Count == 0)
-                carryStatus = (int)TrayCarryStatus.NotUse;
-            else if (carryIns == 0 && carryOuts.All(r => r.Status == (int)EntityStatus.StockOutReady))
-                carryStatus = (int)TrayCarryStatus.CarryOutReady;
-            else if (carryIns == 0 && carryOuts.All(r => r.Status == (int)EntityStatus.StockOutLeave))
-                carryStatus = (int)TrayCarryStatus.CarryOutLeave;
-            else if (carryIns > 0 && carryOuts.All(r => r.Status == (int)EntityStatus.StockOutCheck))
-                carryStatus = (int)TrayCarryStatus.CarryInBack;
-
-            return (storeStatus, carryStatus);
-        }
         #endregion //Storage
     }
 }

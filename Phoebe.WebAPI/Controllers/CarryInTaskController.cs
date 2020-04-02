@@ -69,15 +69,27 @@ namespace Phoebe.WebAPI.Controllers
         }
 
         /// <summary>
-        /// 根据托盘码查找入库任务
+        /// 查找已清点的入库任务
         /// </summary>
         /// <param name="trayCode"></param>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult<List<CarryInTaskView>> FindByTray(string trayCode)
+        public ActionResult<List<CarryInTaskView>> FindInCheck(string trayCode)
         {
             CarryInTaskViewBusiness carryInTaskViewBusiness = new CarryInTaskViewBusiness();
             return carryInTaskViewBusiness.FindByTray(trayCode, EntityStatus.StockInCheck);
+        }
+
+        /// <summary>
+        /// 根据托盘码查找进行中的搬运任务
+        /// </summary>
+        /// <param name="trayCode"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult<List<CarryInTaskView>> FindWorking(string trayCode)
+        {
+            CarryInTaskViewBusiness carryInTaskViewBusiness = new CarryInTaskViewBusiness();
+            return carryInTaskViewBusiness.FindWorking(trayCode);
         }
 
         /// <summary>
