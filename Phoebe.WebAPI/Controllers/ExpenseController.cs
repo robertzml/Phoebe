@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Phoebe.WebAPI.Controllers
 {
+    using Phoebe.Core.DL;
+    using Phoebe.Core.View;
     using Phoebe.Core.Model;
     using Phoebe.Core.Service;
     using Phoebe.WebAPI.Model;
@@ -52,10 +54,25 @@ namespace Phoebe.WebAPI.Controllers
         /// <param name="current">当前日期</param>
         /// <param name="storeType">库存类型</param>
         /// <returns></returns>
+        [HttpGet]
         public ActionResult<ColdSettlement> GetStoreColdFee(string storeId, DateTime current, int storeType)
         {
             ExpenseService expenseService = new ExpenseService();
             return expenseService.GetStoreColdFee(storeId, current, storeType);
+        }
+
+        /// <summary>
+        /// 获取入库费用
+        /// </summary>
+        /// <param name="contractId"></param>
+        /// <param name="startTime"></param>
+        /// <param name="endTime"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult<List<InBillingView>> GetPeriodInBilling(int contractId, DateTime startTime, DateTime endTime)
+        {
+            InBillingViewBusiness inBillingViewBusiness = new InBillingViewBusiness();
+            return inBillingViewBusiness.FindPeriod(contractId, startTime, endTime);
         }
         #endregion //Action
     }

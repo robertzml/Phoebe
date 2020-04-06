@@ -93,6 +93,60 @@ namespace Phoebe.Core.View
         /// </summary>
         [Display(Name = "计费方式")]
         public int Type { get; set; }
+
+        /// <summary>
+        /// 入库时间
+        /// </summary>
+        [Display(Name = "入库时间")]
+        public DateTime InTime { get; set; }
+
+        /// <summary>
+        /// 流水单号
+        /// </summary>
+        [Display(Name = "流水单号")]
+        public string FlowNumber { get; set; }
+
+        /// <summary>
+        /// 所属客户
+        /// </summary>
+        [Display(Name = "所属客户")]
+        public int CustomerId { get; set; }
+
+        /// <summary>
+        /// 所属合同
+        /// </summary>
+        [Display(Name = "所属合同")]
+        public int ContractId { get; set; }
+
+        /// <summary>
+        /// 状态
+        /// </summary>
+        [Display(Name = "状态")]
+        public int Status { get; set; }
+
+        /// <summary>
+        /// 客户代码
+        /// </summary>
+        [Display(Name = "客户代码")]
+        public string CustomerNumber { get; set; }
+
+        /// <summary>
+        /// 客户名称
+        /// </summary>
+        [Display(Name = "客户名称")]
+        public string CustomerName { get; set; }
+
+        /// <summary>
+        /// 合同编号
+        /// </summary>
+        [Display(Name = "合同编号")]
+        public string ContractNumber { get; set; }
+
+        /// <summary>
+        /// 合同名称
+        /// </summary>
+        [Display(Name = "合同名称")]
+        public string ContractName { get; set; }
         #endregion //Property
     }
 }
