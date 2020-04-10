@@ -74,6 +74,20 @@ namespace Phoebe.WebAPI.Controllers
             InBillingViewBusiness inBillingViewBusiness = new InBillingViewBusiness();
             return inBillingViewBusiness.FindPeriod(contractId, startTime, endTime);
         }
+
+        /// <summary>
+        /// 获取出库费用
+        /// </summary>
+        /// <param name="contractId"></param>
+        /// <param name="startTime"></param>
+        /// <param name="endTime"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult<List<OutBillingView>> GetPeriodOutBilling(int contractId, DateTime startTime, DateTime endTime)
+        {
+            OutBillingViewBusiness outBillingViewBusiness = new OutBillingViewBusiness();
+            return outBillingViewBusiness.FindPeriod(contractId, startTime, endTime);
+        }
         #endregion //Action
     }
 }

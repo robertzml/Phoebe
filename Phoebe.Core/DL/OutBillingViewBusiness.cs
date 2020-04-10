@@ -28,6 +28,26 @@ namespace Phoebe.Core.DL
 
             return db.Queryable<OutBillingView>().Where(r => r.StockOutId == stockOutId).ToList();
         }
+
+        /// <summary>
+        /// 获取一段时间内的出库费用
+        /// </summary>
+        /// <param name="contractId">合同ID</param>
+        /// <param name="startTime">开始日期</param>
+        /// <param name="endTime">结束日期</param>
+        /// <returns></returns>
+        public List<OutBillingView> FindPeriod(int contractId, DateTime startTime, DateTime endTime, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            var data = db.Queryable<OutBillingView>()
+                .Where(r => r.ContractId == contractId && r.OutTime >= startTime && r.OutTime <= endTime)
+                .OrderBy(r => r.OutTime)
+                .ToList();
+
+            return data;
+        }
         #endregion //Method
     }
 }
