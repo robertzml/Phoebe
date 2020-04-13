@@ -53,7 +53,7 @@ namespace Phoebe.Core.BL
             store.CarryInTaskId = task.Id;
 
             store.CreateTime = DateTime.Now;
-            store.Status = (int)EntityStatus.StoreInReady;
+            store.Status = (int)EntityStatus.StoreIn;
             store.Remark = stockInTask.Remark;
 
             var t = db.Insertable(store).ExecuteReturnEntity();

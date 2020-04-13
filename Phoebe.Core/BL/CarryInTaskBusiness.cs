@@ -126,7 +126,8 @@ namespace Phoebe.Core.BL
             task.ReceiveUserName = user.Name;
             task.ReceiveTime = now;
             task.MoveTime = now;
-            task.Status = (int)EntityStatus.StockInEnter;
+            task.FinishTime = now;
+            task.Status = (int)EntityStatus.StockInFinish;
 
             db.Updateable(task).ExecuteCommand();
 
