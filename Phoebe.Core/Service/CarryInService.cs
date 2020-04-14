@@ -168,7 +168,7 @@ namespace Phoebe.Core.Service
         /// <param name="moveCount"></param>
         /// <param name="moveWeight"></param>
         /// <returns></returns>
-        public (bool success, string errorMessage) Finish(string taskId, int userId, string trayCode, int moveCount, decimal moveWeight)
+        private (bool success, string errorMessage) Finish(string taskId, int userId, string trayCode, int moveCount, decimal moveWeight)
         {
             var db = GetInstance();
 

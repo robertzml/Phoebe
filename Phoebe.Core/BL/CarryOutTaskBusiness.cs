@@ -165,6 +165,8 @@ namespace Phoebe.Core.BL
 
             var task = db.Queryable<CarryOutTask>().InSingle(id);
 
+            var now = DateTime.Now;
+
             task.Type = (int)CarryOutTaskType.Out;
             task.StockOutTaskId = stockOutTaskId;
             task.MoveCount = moveCount;
@@ -172,9 +174,10 @@ namespace Phoebe.Core.BL
             task.Remark = remark;
             task.CheckUserId = user.Id;
             task.CheckUserName = user.Name;
-            task.CheckTime = DateTime.Now;
+            task.CheckTime = now;
+            task.FinishTime = now;
 
-            task.Status = (int)EntityStatus.StockOutCheck;
+            task.Status = (int)EntityStatus.StockOutFinish;
 
             db.Updateable(task).ExecuteCommand();
             return (true, "");
@@ -194,12 +197,15 @@ namespace Phoebe.Core.BL
 
             var task = db.Queryable<CarryOutTask>().InSingle(id);
 
+            var now = DateTime.Now;
+
             task.Type = (int)CarryOutTaskType.Temp;
             task.CheckUserId = user.Id;
             task.CheckUserName = user.Name;
-            task.CheckTime = DateTime.Now;
+            task.CheckTime = now;
+            task.FinishTime = now;
 
-            task.Status = (int)EntityStatus.StockOutCheck;
+            task.Status = (int)EntityStatus.StockOutFinish;
 
             db.Updateable(task).ExecuteCommand();
             return (true, "");

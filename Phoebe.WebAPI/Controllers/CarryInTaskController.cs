@@ -172,31 +172,6 @@ namespace Phoebe.WebAPI.Controllers
         }
 
         /// <summary>
-        /// 入库确认
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public async Task<ActionResult<ResponseData>> FinishTask(CarryInFinishModel model)
-        {
-            CarryInService carryInService = new CarryInService();
-
-            var task = Task.Run(() =>
-            {
-                ResponseData data = new ResponseData();
-
-                var result = carryInService.Finish(model.TaskId, model.UserId, model.TrayCode, model.MoveCount, model.MoveWeight);
-
-                data.Status = result.success ? 0 : 1;
-                data.ErrorMessage = result.errorMessage;
-
-                return data;
-            });
-
-            return await task;
-        }
-
-        /// <summary>
         /// 删除搬运入库任务
         /// </summary>
         /// <param name="id"></param>

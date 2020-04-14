@@ -412,7 +412,7 @@ namespace Phoebe.Core.Service
         /// 叉车工先下架，仓管再扫码选择出库数量
         /// 通过搬运出库任务创建出库任务
         /// </remarks>
-        public (bool success, string errorMessage) AddCarryOut(string stockOutId, string trayCode, int userId, List<CarryOutTask> tasks)
+        public (bool success, string errorMessage) ScanCarryOut(string stockOutId, string trayCode, int userId, List<CarryOutTask> tasks)
         {
             var db = GetInstance();
             try
@@ -439,7 +439,7 @@ namespace Phoebe.Core.Service
 
                     // 检查是否已经扫过码
                     int exist = db.Queryable<CarryOutTask>()
-                        .Count(r => r.TrayCode == carryOutTask.TrayCode && r.StoreId == carryOutTask.StoreId && r.Status == (int)EntityStatus.StockOutCheck);
+                        .Count(r => r.TrayCode == carryOutTask.TrayCode && r.StoreId == carryOutTask.StoreId && r.Status == (int)EntityStatus.StockOutFinish);
                     if (exist > 0)
                         return (false, "托盘已经出库");
 
@@ -477,11 +477,15 @@ namespace Phoebe.Core.Service
                     if (carryOutTask.MoveCount > 0)
                     {
                         // 创建出库任务
-                        var result = stockOutTaskBusiness.Create(stockOutId, carryOutTask, user, db);
-                        carryOutTask.StockOutTaskId = result.task.Id;
+                        var (success, errorMessage, task) = stockOutTaskBusiness.Create(stockOutId, carryOutTask, user, db);
+                        carryOutTask.StockOutTaskId = task.Id;
 
                         // 更新搬运出库任务
                         carryOutTaskBusiness.Check(carryOutTask.Id, carryOutTask.StockOutTaskId, carryOutTask.MoveCount, carryOutTask.MoveWeight, carryOutTask.Remark, user, db);
+
+                        // 确认库存记录已出库
+                        StoreBusiness storeBusiness = new StoreBusiness();
+                        storeBusiness.FinishOut(carryOutTask.StoreId, stockOut.OutTime, db);
 
                         if (carryOutTask.MoveCount < carryOutTask.StoreCount)
                         {
@@ -493,6 +497,10 @@ namespace Phoebe.Core.Service
                     {
                         // 更新搬运出库任务
                         carryOutTaskBusiness.CheckUnmove(carryOutTask.Id, user, db);
+
+                        // 确认库存记录已出库
+                        StoreBusiness storeBusiness = new StoreBusiness();
+                        storeBusiness.FinishOut(carryOutTask.StoreId, stockOut.OutTime, db);
 
                         // 创建放回任务
                         carryInTaskBusiness.CreateBack(carryOutTask, user, db);
