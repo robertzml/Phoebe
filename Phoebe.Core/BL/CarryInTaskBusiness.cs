@@ -32,7 +32,7 @@ namespace Phoebe.Core.BL
                 db = GetInstance();
 
             SequenceRecordBusiness recordBusiness = new SequenceRecordBusiness();
-            var now = DateTime.Now;           
+            var now = DateTime.Now;
 
             entity.Id = Guid.NewGuid().ToString();
             entity.Type = (int)CarryInTaskType.In;
@@ -75,7 +75,7 @@ namespace Phoebe.Core.BL
             task.Type = (int)CarryInTaskType.Temp;
             task.CustomerId = carryOutTask.CustomerId;
             task.ContractId = carryOutTask.ContractId;
-            task.CargoId = carryOutTask.CargoId;           
+            task.CargoId = carryOutTask.CargoId;
 
             task.StoreId = carryOutTask.StoreId; // 暂时保存原库存ID
             task.StockOutTaskId = carryOutTask.StockOutTaskId;
@@ -135,34 +135,6 @@ namespace Phoebe.Core.BL
         }
 
         /// <summary>
-        /// 入库完成
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="trayCode"></param>
-        /// <param name="moveCount"></param>
-        /// <param name="moveWeight"></param>
-        /// <param name="db"></param>
-        /// <returns></returns>
-        public (bool success, string errorMessage) Finish(CarryInTask task, string trayCode, int moveCount, decimal moveWeight, SqlSugarClient db = null)
-        {
-            if (db == null)
-                db = GetInstance();
-
-            if (task.Type != (int)CarryInTaskType.Temp)
-            {
-                task.TrayCode = trayCode;
-                task.MoveCount = moveCount;
-                task.MoveWeight = moveWeight;
-            }
-            task.FinishTime = DateTime.Now;
-            task.Status = (int)EntityStatus.StockInFinish;
-
-            db.Updateable(task).ExecuteCommand();
-
-            return (true, "");
-        }
-
-        /// <summary>
         /// 撤回搬运入库任务
         /// </summary>
         /// <param name="carryIn"></param>
@@ -189,24 +161,9 @@ namespace Phoebe.Core.BL
         {
             if (db == null)
                 db = GetInstance();
-           
+
             db.Deleteable<CarryInTask>().In(entity.Id).ExecuteCommand();
             return (true, "");
-        }
-       
-        /// <summary>
-        /// 检查临时出库任务是否创建放回任务
-        /// </summary>
-        /// <param name="task"></param>
-        /// <param name="db"></param>
-        /// <returns></returns>
-        public bool CheckHasBack(CarryOutTask task, SqlSugarClient db = null)
-        {
-            if (db == null)
-                db = GetInstance();
-
-            var count = db.Queryable<CarryInTask>().Count(r => r.TrayCode == task.TrayCode && r.Status != (int)EntityStatus.StockInFinish);
-            return count > 0;
         }
         #endregion //Method
     }

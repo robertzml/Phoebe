@@ -74,6 +74,9 @@ namespace Phoebe.Core.Service
                 var stockOuts = db.Queryable<StockOut>().Where(r => r.ContractId == id).ToList();
                 foreach (var item in stockOuts)
                 {
+                    // 删除出库计费
+                    db.Deleteable<OutBilling>().Where(r => r.StockOutId == item.Id).ExecuteCommand();
+
                     // 删除出库任务
                     db.Deleteable<StockOutTask>().Where(r => r.StockOutId == item.Id).ExecuteCommand();
                 }

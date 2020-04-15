@@ -86,6 +86,8 @@ namespace Phoebe.Core.Service
                     return (false, "无空仓位");
                 }
 
+                StoreBusiness storeBusiness = new StoreBusiness();
+
                 // 检查上架任务来源
                 CarryInTaskBusiness carryInTaskBusiness = new CarryInTaskBusiness();
 
@@ -110,6 +112,9 @@ namespace Phoebe.Core.Service
 
                     // 清点搬运出库
                     carryOutTaskBusiness.CheckUnmove(carryOutTask.Id, user, db);
+
+                    // 库存记录出库
+                    storeBusiness.FinishOut(carryOutTask.StoreId, null, db);
                 }
 
                 if (carryInTasks.Count == 0)
@@ -122,8 +127,6 @@ namespace Phoebe.Core.Service
                 var shelf = db.Queryable<Shelf>().Single(r => r.Id == position.ShelfId);
                 if (shelf.Type == (int)ShelfType.Position)
                     positionBusiness.UpdateStatus(position, EntityStatus.Occupy, db);
-
-                StoreBusiness storeBusiness = new StoreBusiness();             
 
                 foreach (var carryTask in carryInTasks)
                 {
@@ -148,66 +151,6 @@ namespace Phoebe.Core.Service
                     // 更新搬运入库任务
                     carryInTaskBusiness.Enter(carryTask, shelfCode, position.Id, store.Id, user, db);
                 }
-
-                db.Ado.CommitTran();
-                return (true, "");
-            }
-            catch (Exception e)
-            {
-                db.Ado.RollbackTran();
-                return (false, e.Message);
-            }
-        }
-
-        /// <summary>
-        /// 完成搬运入库任务
-        /// </summary>
-        /// <param name="taskId"></param>
-        /// <param name="userId"></param>
-        /// <param name="trayCode"></param>
-        /// <param name="moveCount"></param>
-        /// <param name="moveWeight"></param>
-        /// <returns></returns>
-        private (bool success, string errorMessage) Finish(string taskId, int userId, string trayCode, int moveCount, decimal moveWeight)
-        {
-            var db = GetInstance();
-
-            try
-            {
-                db.Ado.BeginTran();
-
-                // 检查搬运入库任务
-                CarryInTaskBusiness carryInTaskBusiness = new CarryInTaskBusiness();
-                var task = carryInTaskBusiness.FindById(taskId);
-
-                if (task.Status != (int)EntityStatus.StockInEnter)
-                {
-                    return (false, "该任务无法完成");
-                }
-
-                if (task.Type == (int)CarryInTaskType.Temp) // 临时搬运入库任务需先确认对应搬运出库任务
-                {
-                    var count = db.Queryable<CarryOutTask>().Count(r => r.TrayCode == trayCode && r.Status != (int)EntityStatus.StockOutFinish);
-                    if (count > 0)
-                        return (false, "临时搬运入库任务需先确认对应搬运出库任务");
-                }
-
-                if (trayCode != task.TrayCode)
-                {
-                    var exist = db.Queryable<Store>().Where(r => r.TrayCode == trayCode &&
-                        (r.Status == (int)EntityStatus.StoreIn || r.Status == (int)EntityStatus.StoreInReady));
-                    if (exist.Count() > 0)
-                    {
-                        return (false, "托盘已在库中");
-                    }
-                }
-
-                // 确认搬运入库任务
-                carryInTaskBusiness.Finish(task, trayCode, moveCount, moveWeight, db);
-
-                // 确认库存记录
-                StoreBusiness storeBusiness = new StoreBusiness();
-                storeBusiness.FinishIn(task.StoreId, trayCode, moveCount, moveWeight, db);              
 
                 db.Ado.CommitTran();
                 return (true, "");

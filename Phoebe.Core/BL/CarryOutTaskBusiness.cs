@@ -212,25 +212,6 @@ namespace Phoebe.Core.BL
         }
 
         /// <summary>
-        /// 搬运出库任务确认
-        /// </summary>
-        /// <param name="task"></param>
-        /// <param name="db"></param>
-        /// <returns></returns>
-        public (bool success, string errorMessage) Finish(CarryOutTask task, SqlSugarClient db = null)
-        {
-            if (db == null)
-                db = GetInstance();
-
-            task.FinishTime = DateTime.Now;
-            task.Status = (int)EntityStatus.StockOutFinish;
-
-            db.Updateable(task).ExecuteCommand();
-
-            return (true, "");
-        }
-
-        /// <summary>
         /// 撤回搬运出库任务
         /// </summary>
         /// <param name="task"></param>
