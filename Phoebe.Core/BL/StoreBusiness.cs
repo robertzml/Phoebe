@@ -129,6 +129,33 @@ namespace Phoebe.Core.BL
         }
 
         /// <summary>
+        /// 根据搬运入库任务修改库存记录
+        /// </summary>
+        /// <param name="id">库存ID</param>
+        /// <param name="trayCode"></param>
+        /// <param name="storeCount"></param>
+        /// <param name="storeWeight"></param>
+        /// <param name="db"></param>
+        /// <remarks>
+        /// 可更新托盘码、库存数量、库存重量
+        /// </remarks>
+        /// <returns></returns>
+        public (bool success, string errorMessage) UpdateIn(string id, string trayCode, int storeCount, decimal storeWeight, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            var store = db.Queryable<Store>().Single(r => r.Id == id);
+
+            store.TrayCode = trayCode;
+            store.StoreCount = storeCount;
+            store.StoreWeight = storeWeight;
+
+            db.Updateable(store).UpdateColumns(r => new { r.TrayCode, r.StoreCount, r.StoreWeight }).ExecuteCommand();
+            return (true, "");
+        }
+
+        /// <summary>
         /// 删除搬运入库对应库存记录
         /// </summary>
         /// <param name="carryInId"></param>

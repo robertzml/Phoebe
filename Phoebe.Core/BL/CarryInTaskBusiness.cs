@@ -135,6 +135,28 @@ namespace Phoebe.Core.BL
         }
 
         /// <summary>
+        /// 编辑搬运入库任务
+        /// </summary>
+        /// <param name="carryIn"></param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        public (bool success, string errorMessage) Edit(CarryInTask carryIn, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            var entity = db.Queryable<CarryInTask>().InSingle(carryIn.Id);
+
+            entity.TrayCode = carryIn.TrayCode;
+            entity.MoveCount = carryIn.MoveCount;
+            entity.MoveWeight = carryIn.MoveWeight;
+            entity.Remark = carryIn.Remark;
+
+            db.Updateable(entity).UpdateColumns(r => new { r.TrayCode, r.MoveCount, r.MoveWeight, r.Remark }).ExecuteCommand();
+            return (true, "");
+        }
+
+        /// <summary>
         /// 撤回搬运入库任务
         /// </summary>
         /// <param name="carryIn"></param>

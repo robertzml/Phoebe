@@ -125,6 +125,7 @@ namespace Phoebe.WebAPI.Controllers
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
+        [HttpPost]
         public async Task<ActionResult<ResponseData>> Create(CarryInTask model)
         {
             CarryInService carryInService = new CarryInService();
@@ -161,6 +162,31 @@ namespace Phoebe.WebAPI.Controllers
                 ResponseData data = new ResponseData();
 
                 var result = carryInService.Enter(model.TrayCode, model.ShelfCode, model.UserId);
+
+                data.Status = result.success ? 0 : 1;
+                data.ErrorMessage = result.errorMessage;
+
+                return data;
+            });
+
+            return await task;
+        }
+
+        /// <summary>
+        /// 编辑搬运入库
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ActionResult<ResponseData>> EditTask(CarryInTask model)
+        {
+            CarryInService carryInService = new CarryInService();
+
+            var task = Task.Run(() =>
+            {
+                ResponseData data = new ResponseData();
+
+                var result = carryInService.EditTask(model);
 
                 data.Status = result.success ? 0 : 1;
                 data.ErrorMessage = result.errorMessage;

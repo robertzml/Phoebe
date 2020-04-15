@@ -163,6 +163,40 @@ namespace Phoebe.Core.Service
         }
 
         /// <summary>
+        /// 编辑搬运入库任务
+        /// </summary>
+        /// <param name="task"></param>
+        /// <returns></returns>
+        public (bool success, string errorMessage) EditTask(CarryInTask task)
+        {
+            var db = GetInstance();
+
+            try
+            {
+                db.Ado.BeginTran();
+
+                // 编辑搬运入库任务
+                CarryInTaskBusiness carryInTaskBusiness = new CarryInTaskBusiness();
+                carryInTaskBusiness.Edit(task, db);
+
+                // 编辑库存记录
+                if (!string.IsNullOrEmpty(task.StoreId))
+                {
+                    StoreBusiness storeBusiness = new StoreBusiness();
+                    storeBusiness.UpdateIn(task.StoreId, task.TrayCode, task.MoveCount, task.MoveWeight, db);
+                }
+
+                db.Ado.CommitTran();
+                return (true, "");
+            }
+            catch (Exception e)
+            {
+                db.Ado.RollbackTran();
+                return (false, e.Message);
+            }
+        }
+
+        /// <summary>
         /// 删除搬运入库单
         /// </summary>
         /// <param name="id"></param>
