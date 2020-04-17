@@ -63,6 +63,19 @@ namespace Phoebe.Base.Framework
         /// <param name="expression">查询条件</param>
         /// <param name="db"></param>
         /// <returns></returns>
+        public virtual T Single(Expression<Func<T, bool>> expression, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+            return db.Queryable<T>().Single(expression);
+        }
+
+        /// <summary>
+        /// 按条件查找对象
+        /// </summary>
+        /// <param name="expression">查询条件</param>
+        /// <param name="db"></param>
+        /// <returns></returns>
         public virtual List<T> Query(Expression<Func<T, bool>> expression, SqlSugarClient db = null)
         {
             if (db == null)

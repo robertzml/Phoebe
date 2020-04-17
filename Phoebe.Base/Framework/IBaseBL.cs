@@ -34,6 +34,14 @@ namespace Phoebe.Base.Framework
         /// <param name="expression">查询条件</param>
         /// <param name="db"></param>
         /// <returns></returns>
+        T Single(Expression<Func<T, bool>> expression, SqlSugarClient db = null);
+
+        /// <summary>
+        /// 按条件查找对象
+        /// </summary>
+        /// <param name="expression">查询条件</param>
+        /// <param name="db"></param>
+        /// <returns></returns>
         List<T> Query(Expression<Func<T, bool>> expression, SqlSugarClient db = null);
 
         /// <summary>

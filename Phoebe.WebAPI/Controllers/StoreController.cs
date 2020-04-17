@@ -53,7 +53,7 @@ namespace Phoebe.WebAPI.Controllers
         public ActionResult<List<StoreView>> FindByContract(int contractId)
         {
             StoreViewBusiness storeViewBusiness = new StoreViewBusiness();
-            return storeViewBusiness.FindByContract(contractId);
+            return storeViewBusiness.Query(r => r.ContractId == contractId);
         }
 
         /// <summary>

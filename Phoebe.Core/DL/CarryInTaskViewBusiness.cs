@@ -28,21 +28,6 @@ namespace Phoebe.Core.DL
         }
 
         /// <summary>
-        /// 根据托盘码查找进行中的搬运任务
-        /// </summary>
-        /// <param name="trayCode">托盘码</param>
-        /// <param name="db"></param>
-        /// <returns></returns>
-        public List<CarryInTaskView> FindWorking(string trayCode, SqlSugarClient db = null)
-        {
-            if (db == null)
-                db = GetInstance();
-
-            var data = db.Queryable<CarryInTaskView>().Where(r => r.TrayCode == trayCode && r.Status != (int)EntityStatus.StockInFinish);
-            return data.ToList();
-        }
-
-        /// <summary>
         /// 根据入库任务查找
         /// </summary>
         /// <param name="stockInTaskId"></param>

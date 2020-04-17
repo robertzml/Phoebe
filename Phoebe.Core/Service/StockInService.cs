@@ -198,7 +198,8 @@ namespace Phoebe.Core.Service
                 StockInTaskBusiness stockInTaskBusiness = new StockInTaskBusiness();
 
                 // 获取相关入库任务
-                var tasks = db.Queryable<StockInTask>().Where(r => r.StockInId == stockIn.Id).ToList();
+                var tasks = stockInTaskBusiness.Query(r => r.StockInId == stockIn.Id);
+
                 if (stockIn.Type == (int)StockInType.Normal)
                 {
                     NormalStoreBusiness normalStoreBusiness = new NormalStoreBusiness();

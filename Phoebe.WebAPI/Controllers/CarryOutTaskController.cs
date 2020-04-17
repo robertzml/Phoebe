@@ -110,7 +110,7 @@ namespace Phoebe.WebAPI.Controllers
         public ActionResult<List<CarryOutTaskView>> FindWorking(string trayCode)
         {
             CarryOutTaskViewBusiness carryOutTaskViewBusiness = new CarryOutTaskViewBusiness();
-            return carryOutTaskViewBusiness.FindWorking(trayCode);
+            return carryOutTaskViewBusiness.Query(r => r.TrayCode == trayCode && r.Status != (int)EntityStatus.StockOutFinish);
         }
 
         /// <summary>

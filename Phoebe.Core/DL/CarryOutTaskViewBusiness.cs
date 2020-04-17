@@ -80,24 +80,6 @@ namespace Phoebe.Core.DL
         }
 
         /// <summary>
-        /// 根据托盘码查找进行中的搬运任务
-        /// </summary>
-        /// <param name="trayCode">托盘码</param>
-        /// <param name="db"></param>
-        /// <returns></returns>
-        /// <remarks>
-        /// 获取非确认的搬运出库任务
-        /// </remarks>
-        public List<CarryOutTaskView> FindWorking(string trayCode, SqlSugarClient db = null)
-        {
-            if (db == null)
-                db = GetInstance();
-
-            var data = db.Queryable<CarryOutTaskView>().Where(r => r.TrayCode == trayCode && r.Status != (int)EntityStatus.StockOutFinish);
-            return data.ToList();
-        }
-
-        /// <summary>
         /// 根据库存入库时间查找
         /// </summary>
         /// <param name="contractId">合同ID</param>

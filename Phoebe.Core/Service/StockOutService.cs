@@ -103,9 +103,6 @@ namespace Phoebe.Core.Service
                     return (false, "出库单含有出库任务，无法删除");
                 }
 
-                // 删除出库费用
-
-                // 删除出库单
                 StockOutBusiness stockOutBusiness = new StockOutBusiness();
 
                 var stockOut = stockOutBusiness.FindById(id, db);
@@ -114,6 +111,15 @@ namespace Phoebe.Core.Service
                     return (false, "仅能删除待出库状态的出库单");
                 }
 
+                // 删除出库费用
+                OutBillingBusiness outBillingBusiness = new OutBillingBusiness();
+                var billings = outBillingBusiness.Query(r => r.StockOutId == id, db);
+                foreach (var item in billings)
+                {
+                    outBillingBusiness.Delete(item.Id, db);
+                }
+
+                // 删除出库单
                 var result = stockOutBusiness.Delete(stockOut, db);
 
                 db.Ado.CommitTran();
@@ -193,14 +199,14 @@ namespace Phoebe.Core.Service
                     NormalStoreBusiness normalStoreBusiness = new NormalStoreBusiness();
 
                     // 获取相关出库任务
-                    var tasks = db.Queryable<StockOutTask>().Where(r => r.StockOutId == stockOut.Id).ToList();
+                    var tasks = stockOutTaskBusiness.Query(r => r.StockOutId == stockOut.Id, db);
                     foreach (var task in tasks)
                     {
                         // 获取出库任务对应库存记录
-                        var store = db.Queryable<NormalStore>().Single(r => r.StockOutTaskId == task.Id);
+                        var store = normalStoreBusiness.Single(r => r.StockOutTaskId == task.Id, db);
 
                         // 检查库存是否有后续库存
-                        var next = db.Queryable<NormalStore>().Single(r => r.PrevStoreId == store.Id);
+                        var next = normalStoreBusiness.Single(r => r.PrevStoreId == store.Id, db);
                         if (next != null)
                         {
                             if (next.Status != (int)EntityStatus.StoreIn)
@@ -228,39 +234,21 @@ namespace Phoebe.Core.Service
                     StoreBusiness storeBusiness = new StoreBusiness();
 
                     // 获取相关出库任务
-                    var tasks = db.Queryable<StockOutTask>().Where(r => r.StockOutId == stockOut.Id).ToList();
+                    var tasks = stockOutTaskBusiness.Query(r => r.StockOutId == stockOut.Id, db);
                     foreach (var task in tasks)
                     {
                         // 找出放回任务
-                        var carryIns = db.Queryable<CarryInTask>().Where(r => r.StockOutTaskId == task.Id).ToList();
+                        var carryIns = carryInTaskBusiness.Query(r => r.StockOutTaskId == task.Id, db);
                         foreach (var carryIn in carryIns)
                         {
-                            var store = db.Queryable<Store>().Single(r => r.CarryInTaskId == carryIn.Id);
+                            var store = storeBusiness.Single(r => r.CarryInTaskId == carryIn.Id, db);
 
-                            var carryOut = db.Queryable<CarryOutTask>().Count(r => r.StoreId == store.Id);
-                            if (carryOut > 0)
+                            var carryOuts = carryOutTaskBusiness.Query(r => r.StoreId == store.Id, db);
+                            if (carryOuts.Count > 0)
                             {
+                                db.Ado.RollbackTran();
                                 return (false, "该出库单有库存记录后续已出库，无法撤回");
                             }
-
-                            // 撤回库存记录
-                            storeBusiness.RevertIn(store, db);
-
-                            // 放回任务撤回
-                            carryInTaskBusiness.Revert(carryIn, db);
-                        }
-
-                        // 找出搬运出库任务
-                        var carryOuts = db.Queryable<CarryOutTask>().Where(r => r.StockOutTaskId == task.Id).ToList();
-                        foreach (var carryOut in carryOuts)
-                        {
-                            var store = db.Queryable<Store>().Single(r => r.CarryOutTaskId == carryOut.Id);
-
-                            // 撤回库存记录
-                            storeBusiness.RevertOut(store, db);
-
-                            // 撤回出库任务
-                            carryOutTaskBusiness.Revert(carryOut, db);
                         }
 
                         // 撤回出库任务

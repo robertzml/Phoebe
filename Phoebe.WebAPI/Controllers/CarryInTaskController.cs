@@ -89,7 +89,7 @@ namespace Phoebe.WebAPI.Controllers
         public ActionResult<List<CarryInTaskView>> FindWorking(string trayCode)
         {
             CarryInTaskViewBusiness carryInTaskViewBusiness = new CarryInTaskViewBusiness();
-            return carryInTaskViewBusiness.FindWorking(trayCode);
+            return carryInTaskViewBusiness.Query(r => r.TrayCode == trayCode && r.Status != (int)EntityStatus.StockInFinish);
         }
 
         /// <summary>

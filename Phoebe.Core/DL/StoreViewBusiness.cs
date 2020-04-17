@@ -21,18 +21,6 @@ namespace Phoebe.Core.DL
     {
         #region Query
         /// <summary>
-        /// 按合同获取库存记录
-        /// </summary>
-        /// <param name="contractId">合同ID</param>
-        /// <returns></returns>
-        public List<StoreView> FindByContract(int contractId)
-        {
-            var db = GetInstance();
-            var data = db.Queryable<StoreView>().Where(r => r.ContractId == contractId).ToList();
-            return data;
-        }
-
-        /// <summary>
         /// 按货品查找库存
         /// </summary>
         /// <param name="contractId">合同ID</param>
