@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace Phoebe.Base.Framework
@@ -21,28 +23,18 @@ namespace Phoebe.Base.Framework
         T FindById(Tkey id, SqlSugarClient db = null);
 
         /// <summary>
-        /// 根据某一字段查找对象
-        /// </summary>
-        /// <typeparam name="Tvalue">值类型</typeparam>
-        /// <param name="field">字段名称</param>
-        /// <param name="value">值</param>
-        /// <returns></returns>
-        T FindOneByField<Tvalue>(string field, Tvalue value, SqlSugarClient db = null);
-
-        /// <summary>
         /// 查找所有对象
         /// </summary>
         /// <returns></returns>
         List<T> FindAll(SqlSugarClient db = null);
 
         /// <summary>
-        /// 根据某一字段查找对象
+        /// 按条件查找对象
         /// </summary>
-        /// <typeparam name="Tvalue">值类型</typeparam>
-        /// <param name="field">字段名称</param>
-        /// <param name="value">值</param>
+        /// <param name="expression">查询条件</param>
+        /// <param name="db"></param>
         /// <returns></returns>
-        List<T> FindListByField<Tvalue>(string field, Tvalue value, SqlSugarClient db = null);
+        List<T> Query(Expression<Func<T, bool>> expression, SqlSugarClient db = null);
 
         /// <summary>
         /// 查找所有记录数量

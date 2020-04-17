@@ -102,7 +102,7 @@ namespace Phoebe.Core.BL
 
             // 撤回入库单
             stockIn.Status = (int)EntityStatus.StockInReady;
-            db.Updateable(stockIn).ExecuteCommand();
+            db.Updateable(stockIn).UpdateColumns(r => new { r.Status }).ExecuteCommand();
 
             return (true, "");
         }

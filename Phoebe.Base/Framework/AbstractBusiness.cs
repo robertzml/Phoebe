@@ -47,18 +47,6 @@ namespace Phoebe.Base.Framework
         }
 
         /// <summary>
-        /// 根据某一字段查找对象
-        /// </summary>
-        /// <typeparam name="Tvalue">值类型</typeparam>
-        /// <param name="field">字段名称</param>
-        /// <param name="value">值</param>
-        /// <returns></returns>
-        public virtual T FindOneByField<Tvalue>(string field, Tvalue value, SqlSugarClient db = null)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
         /// 查找所有对象
         /// </summary>
         /// <returns></returns>
@@ -70,15 +58,17 @@ namespace Phoebe.Base.Framework
         }
 
         /// <summary>
-        /// 根据某一字段查找对象
+        /// 按条件查找对象
         /// </summary>
-        /// <typeparam name="Tvalue">值类型</typeparam>
-        /// <param name="field">字段名称</param>
-        /// <param name="value">值</param>
+        /// <param name="expression">查询条件</param>
+        /// <param name="db"></param>
         /// <returns></returns>
-        public virtual List<T> FindListByField<Tvalue>(string field, Tvalue value, SqlSugarClient db = null)
+        public virtual List<T> Query(Expression<Func<T, bool>> expression, SqlSugarClient db = null)
         {
-            throw new NotImplementedException();
+            if (db == null)
+                db = GetInstance();
+
+            return db.Queryable<T>().Where(expression).ToList();
         }
 
         /// <summary>

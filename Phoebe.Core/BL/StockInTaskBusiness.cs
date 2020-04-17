@@ -91,7 +91,7 @@ namespace Phoebe.Core.BL
                 db = GetInstance();
 
             task.Status = (int)EntityStatus.StockInReady;
-            db.Updateable(task).ExecuteCommand();
+            db.Updateable(task).UpdateColumns(r => new { r.Status }).ExecuteCommand();
 
             return (true, "");
         }

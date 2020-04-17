@@ -213,30 +213,23 @@ namespace Phoebe.Core.Service
                 }
                 else if (stockIn.Type == (int)StockInType.Position)
                 {
-                    StoreBusiness storeBusiness = new StoreBusiness();
-                    CarryInTaskBusiness carryInTaskBusiness = new CarryInTaskBusiness();
+                    StoreViewBusiness storeViewBusiness = new StoreViewBusiness();
+                    CarryOutTaskViewBusiness carryOutTaskViewBusiness = new CarryOutTaskViewBusiness();
 
-                    foreach (var task in tasks)
+                    var stores = storeViewBusiness.Query(r => r.StockInId == stockIn.Id, db);
+
+                    foreach(var store in stores)
                     {
-                        // 撤回搬运入库任务和库存记录
-                        var carryIns = db.Queryable<CarryInTask>().Where(r => r.StockInTaskId == task.Id).ToList();
-                        foreach (var carryIn in carryIns)
+                        var carryOuts = carryOutTaskViewBusiness.Query(r => r.StoreId == store.Id, db);
+                        if (carryOuts.Count > 0)
                         {
-                            var store = db.Queryable<Store>().Single(r => r.CarryInTaskId == carryIn.Id);
-
-                            var carryOut = db.Queryable<CarryOutTask>().Count(r => r.StoreId == store.Id);
-                            if (carryOut > 0)
-                            {
-                                db.Ado.RollbackTran();
-                                return (false, "该入库单有库存记录已出库，无法撤回");
-                            }
-
-                            // 撤回库存记录
-                            storeBusiness.RevertIn(store, db);
-
-                            // 撤回搬运入库任务
-                            carryInTaskBusiness.Revert(carryIn, db);
+                            db.Ado.RollbackTran();
+                            return (false, "该入库单有库存记录已出库，无法撤回");
                         }
+                    }
+
+                    foreach(var task in tasks)
+                    {
                         // 撤回入库任务
                         stockInTaskBusiness.Revert(task, db);
                     }

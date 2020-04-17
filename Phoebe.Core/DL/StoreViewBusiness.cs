@@ -12,6 +12,7 @@ namespace Phoebe.Core.DL
     using Phoebe.Core.Entity;
     using Phoebe.Core.View;
     using Phoebe.Core.Utility;
+    using System.Linq.Expressions;
 
     /// <summary>
     /// 库存视图业务类
