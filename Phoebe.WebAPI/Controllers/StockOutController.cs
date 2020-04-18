@@ -312,7 +312,7 @@ namespace Phoebe.WebAPI.Controllers
         public ActionResult<List<StockOutTaskView>> TaskList(string stockOutId)
         {
             StockOutTaskViewBusiness taskViewBusiness = new StockOutTaskViewBusiness();
-            return taskViewBusiness.FindList(stockOutId);
+            return taskViewBusiness.Query(r => r.StockOutId == stockOutId);
         }
 
         /// <summary>

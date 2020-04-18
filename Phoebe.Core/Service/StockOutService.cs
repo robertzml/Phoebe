@@ -96,15 +96,13 @@ namespace Phoebe.Core.Service
                 db.Ado.BeginTran();
 
                 StockOutTaskViewBusiness stockOutTaskViewBusiness = new StockOutTaskViewBusiness();
-
-                var tasks = stockOutTaskViewBusiness.FindList(id, db);
+                var tasks = stockOutTaskViewBusiness.Query(r => r.StockOutId == id, db);
                 if (tasks.Count > 0)
                 {
                     return (false, "出库单含有出库任务，无法删除");
                 }
 
                 StockOutBusiness stockOutBusiness = new StockOutBusiness();
-
                 var stockOut = stockOutBusiness.FindById(id, db);
                 if (stockOut.Status != (int)EntityStatus.StockOutReady)
                 {
@@ -145,8 +143,7 @@ namespace Phoebe.Core.Service
                 db.Ado.BeginTran();
 
                 StockOutTaskViewBusiness stockOutTaskViewBusiness = new StockOutTaskViewBusiness();
-                var tasks = stockOutTaskViewBusiness.FindList(id, db);
-
+                var tasks = stockOutTaskViewBusiness.Query(r => r.StockOutId == id, db);
                 if (tasks.Any(r => r.Status != (int)EntityStatus.StockOutFinish))
                 {
                     return (false, "有出库货物未完成");

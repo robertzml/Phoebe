@@ -74,16 +74,16 @@ namespace Phoebe.Core.Billing
             }
 
             // 获取每日库存记录
-            var stores = db.Queryable<StoreView>()
-               .Where(r => r.ContractId == contract.Id && r.InTime <= date && (r.OutTime == null || r.OutTime > date))
-               .ToList();
+            StoreViewBusiness storeViewBusiness = new StoreViewBusiness();
+            var stores = storeViewBusiness
+                .Query(r => r.ContractId == contract.Id && r.InTime <= date && (r.OutTime == null || r.OutTime > date));
             var totalMeter = billingProcess.GetTotalMeter(stores);
             var dailyFee = billingProcess.CalculateDailyFee(totalMeter, contract.UnitPrice);
 
             // 获取每日普通库存记录
-            var normalStores = db.Queryable<NormalStoreView>()
-                .Where(r => r.ContractId == contract.Id && r.InTime <= date && (r.OutTime == null || r.OutTime > date))
-                .ToList();
+            NormalStoreViewBusiness normalStoreViewBusiness = new NormalStoreViewBusiness();
+            var normalStores = normalStoreViewBusiness
+                .Query(r => r.ContractId == contract.Id && r.InTime <= date && (r.OutTime == null || r.OutTime > date));
             var totalNormalMeter = billingProcess.GetTotalMeter(normalStores);
             var totalDailyFee = billingProcess.CalculateDailyFee(totalNormalMeter, contract.UnitPrice);
 

@@ -106,8 +106,7 @@ namespace Phoebe.Core.Service
                 db.Ado.BeginTran();
 
                 StockInTaskViewBusiness stockInTaskViewBusiness = new StockInTaskViewBusiness();
-
-                var tasks = stockInTaskViewBusiness.FindList(id, db);
+                var tasks = stockInTaskViewBusiness.Query(r => r.StockInId == id, db);
                 if (tasks.Count > 0)
                 {
                     return (false, "入库单含有入库任务，无法删除");
@@ -122,7 +121,7 @@ namespace Phoebe.Core.Service
 
                 // 删除入库费用
                 InBillingBusiness inBillingBusiness = new InBillingBusiness();
-                var billings = db.Queryable<InBilling>().Where(r => r.StockInId == id).ToList();
+                var billings = inBillingBusiness.Query(r => r.StockInId == id, db);
                 foreach (var item in billings)
                 {
                     inBillingBusiness.Delete(item.Id, db);
@@ -153,7 +152,7 @@ namespace Phoebe.Core.Service
                 db.Ado.BeginTran();
 
                 StockInTaskViewBusiness stockInTaskViewBusiness = new StockInTaskViewBusiness();
-                var tasks = stockInTaskViewBusiness.FindList(id, db);
+                var tasks = stockInTaskViewBusiness.Query(r => r.StockInId == id, db);
 
                 if (tasks.Any(r => r.Status != (int)EntityStatus.StockInFinish))
                 {
@@ -194,7 +193,7 @@ namespace Phoebe.Core.Service
                 {
                     return (false, "仅已确认入库单能撤回");
                 }
-               
+
                 StockInTaskBusiness stockInTaskBusiness = new StockInTaskBusiness();
 
                 // 获取相关入库任务
@@ -219,7 +218,7 @@ namespace Phoebe.Core.Service
 
                     var stores = storeViewBusiness.Query(r => r.StockInId == stockIn.Id, db);
 
-                    foreach(var store in stores)
+                    foreach (var store in stores)
                     {
                         var carryOuts = carryOutTaskViewBusiness.Query(r => r.StoreId == store.Id, db);
                         if (carryOuts.Count > 0)
@@ -229,12 +228,12 @@ namespace Phoebe.Core.Service
                         }
                     }
 
-                    foreach(var task in tasks)
+                    foreach (var task in tasks)
                     {
                         // 撤回入库任务
                         stockInTaskBusiness.Revert(task, db);
                     }
-                }                    
+                }
 
                 // 撤回入库单
                 stockInBusiness.Revert(stockIn, db);
@@ -360,7 +359,7 @@ namespace Phoebe.Core.Service
                 StockInBusiness stockInBusiness = new StockInBusiness();
                 var stockIn = stockInBusiness.FindById(entity.StockInId);
 
-                entity.UnitWeight = inTask.UnitWeight;              
+                entity.UnitWeight = inTask.UnitWeight;
                 entity.CargoId = inTask.CargoId;
                 entity.Batch = inTask.Batch;
                 entity.OriginPlace = inTask.OriginPlace;

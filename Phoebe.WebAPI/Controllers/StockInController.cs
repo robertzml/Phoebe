@@ -281,7 +281,7 @@ namespace Phoebe.WebAPI.Controllers
         public ActionResult<List<StockInTaskView>> TaskList(string stockInId)
         {
             StockInTaskViewBusiness taskViewBusiness = new StockInTaskViewBusiness();
-            return taskViewBusiness.FindList(stockInId);
+            return taskViewBusiness.Query(r => r.StockInId == stockInId);
         }
 
         /// <summary>

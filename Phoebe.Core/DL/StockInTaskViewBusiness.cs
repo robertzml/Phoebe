@@ -13,18 +13,6 @@ namespace Phoebe.Core.DL
     {
         #region Method
         /// <summary>
-        /// 获取入库任务列表
-        /// </summary>
-        /// <param name="stockInId">入库单ID</param>
-        /// <returns></returns>
-        public List<StockInTaskView> FindList(string stockInId, SqlSugarClient db = null)
-        {
-            if (db == null)
-                db = GetInstance();
-            return db.Queryable<StockInTaskView>().Where(r => r.StockInId == stockInId).ToList();
-        }
-
-        /// <summary>
         /// 按日期获取入库任务
         /// </summary>
         /// <param name="contractId">合同ID</param>
