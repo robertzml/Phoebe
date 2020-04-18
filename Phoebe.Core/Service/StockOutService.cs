@@ -682,9 +682,6 @@ namespace Phoebe.Core.Service
                 OutBillingBusiness outBillingBusiness = new OutBillingBusiness();
                 foreach (var item in data)
                 {
-                    if (item.Amount == 0)
-                        continue;
-
                     outBillingBusiness.Save(item, db);
                 }
 
@@ -716,7 +713,7 @@ namespace Phoebe.Core.Service
 
                 // 获取合同
                 ContractBusiness contractBusiness = new ContractBusiness();
-                var contract = contractBusiness.FindById(stockOut.ContractId);
+                var contract = contractBusiness.FindById(stockOut.ContractId, db);
 
                 if (contract.Type != (int)ContractType.TimingCold)
                     return (true, "非计时冷藏合同，不计算冷藏费差价");
@@ -725,7 +722,8 @@ namespace Phoebe.Core.Service
                 IContract contractBill = ContractFactory.Create((ContractType)contract.Type);
 
                 // 获取出库任务
-                var stockOutTasks = db.Queryable<StockOutTask>().Where(r => r.StockOutId == stockOutId).ToList();
+                StockOutTaskBusiness stockOutTaskBusiness = new StockOutTaskBusiness();
+                var stockOutTasks = stockOutTaskBusiness.Query(r => r.StockOutId == stockOutId, db);
 
                 // 冷藏费差价项目
                 var bill = outBillingBusiness.GetDiffColdByStockOut(stockOut.Id, db);
@@ -759,7 +757,7 @@ namespace Phoebe.Core.Service
                         // 获取对应库存记录
                         var stores = storeViewBusiness.FindByStockOutTask(task.Id, db);
 
-                        foreach(var store in stores)
+                        foreach (var store in stores)
                         {
                             var backStore = storeViewBusiness.FindNext(store.Id, db);
 

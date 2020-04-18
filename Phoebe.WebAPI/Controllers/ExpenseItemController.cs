@@ -29,7 +29,7 @@ namespace Phoebe.WebAPI.Controllers
         public ActionResult<List<ExpenseItem>> List()
         {
             ExpenseItemBusiness expenseItemBusiness = new ExpenseItemBusiness();
-            return expenseItemBusiness.FindAll();
+            return expenseItemBusiness.FindAll().OrderBy(r => r.Code).ToList();
         }
 
         /// <summary>

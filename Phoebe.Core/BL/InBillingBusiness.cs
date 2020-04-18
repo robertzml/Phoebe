@@ -29,12 +29,22 @@ namespace Phoebe.Core.BL
 
             if (string.IsNullOrEmpty(entity.Id))
             {
-                entity.Id = Guid.NewGuid().ToString();
-                db.Insertable(entity).ExecuteCommand();
+                if (entity.Amount != 0)
+                {
+                    entity.Id = Guid.NewGuid().ToString();
+                    db.Insertable(entity).ExecuteCommand();
+                }
             }
             else
             {
-                db.Updateable(entity).ExecuteCommand();
+                if (entity.Amount != 0)
+                {
+                    db.Updateable(entity).ExecuteCommand();
+                }
+                else
+                {
+                    db.Deleteable(entity).ExecuteCommand();
+                }
             }
 
             return (true, "");

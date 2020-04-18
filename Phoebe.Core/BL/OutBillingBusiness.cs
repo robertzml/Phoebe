@@ -30,7 +30,7 @@ namespace Phoebe.Core.BL
             var item = db.Queryable<ExpenseItem>().Single(r => r.Code == "006");
 
             var bill = db.Queryable<OutBilling>().Single(r => r.StockOutId == stockOutId && r.ExpenseItemId == item.Id);
-            if (bill == null)            
+            if (bill == null)
             {
                 bill = new OutBilling();
                 bill.StockOutId = stockOutId;
@@ -53,12 +53,22 @@ namespace Phoebe.Core.BL
 
             if (string.IsNullOrEmpty(entity.Id))
             {
-                entity.Id = Guid.NewGuid().ToString();
-                db.Insertable(entity).ExecuteCommand();
+                if (entity.Amount != 0)
+                {
+                    entity.Id = Guid.NewGuid().ToString();
+                    db.Insertable(entity).ExecuteCommand();
+                }
             }
             else
             {
-                db.Updateable(entity).ExecuteCommand();
+                if (entity.Amount != 0)
+                {
+                    db.Updateable(entity).ExecuteCommand();
+                }
+                else
+                {
+                    db.Deleteable(entity).ExecuteCommand();
+                }
             }
 
             return (true, "");

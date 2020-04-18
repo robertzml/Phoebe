@@ -499,9 +499,6 @@ namespace Phoebe.Core.Service
                 InBillingBusiness inBillingBusiness = new InBillingBusiness();
                 foreach (var item in data)
                 {
-                    if (item.Amount == 0)
-                        continue;
-
                     inBillingBusiness.Save(item, db);
                 }
 
