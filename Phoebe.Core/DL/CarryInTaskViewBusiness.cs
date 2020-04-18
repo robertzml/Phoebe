@@ -13,21 +13,6 @@ namespace Phoebe.Core.DL
     {
         #region Method
         /// <summary>
-        /// 根据托盘码查找任务
-        /// </summary>
-        /// <param name="trayCode">托盘码</param>
-        /// <param name="status">状态</param>
-        /// <returns></returns>
-        public List<CarryInTaskView> FindByTray(string trayCode, EntityStatus status, SqlSugarClient db = null)
-        {
-            if (db == null)
-                db = GetInstance();
-
-            var data = db.Queryable<CarryInTaskView>().Where(r => r.TrayCode == trayCode && r.Status == (int)status);
-            return data.ToList();
-        }
-
-        /// <summary>
         /// 根据入库任务查找
         /// </summary>
         /// <param name="stockInTaskId"></param>

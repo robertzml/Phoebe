@@ -35,7 +35,7 @@ namespace Phoebe.WebAPI.Controllers
                 if (customerId.Value == 0)
                     return cargoViewBusiness.FindAll();
                 else
-                    return cargoViewBusiness.FindByCustomer(customerId.Value);
+                    return cargoViewBusiness.Query(r => r.CustomerId == customerId.Value);
             }
             else
                 return cargoViewBusiness.FindAll();
@@ -53,7 +53,7 @@ namespace Phoebe.WebAPI.Controllers
             if (string.IsNullOrEmpty(customerNumber))
                 return cargoViewBusiness.FindAll();
             else
-                return cargoViewBusiness.FindByCustomerNumber(customerNumber);
+                return cargoViewBusiness.Query(r => r.CustomerNumber == customerNumber);
         }
 
         /// <summary>

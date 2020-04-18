@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Phoebe.WebAPI.Controllers
 {
+    using Phoebe.Base.System;
     using Phoebe.Core.BL;
     using Phoebe.Core.DL;
     using Phoebe.Core.Entity;
@@ -37,11 +38,15 @@ namespace Phoebe.WebAPI.Controllers
         /// </summary>
         /// <param name="positionId"></param>
         /// <returns></returns>
+        /// <remarks>
+        /// 库存状态为：在库，准备移入
+        /// </remarks>
         [HttpGet]
         public ActionResult<List<StoreView>> FindStoreIn(int positionId)
         {
             StoreViewBusiness storeViewBusiness = new StoreViewBusiness();
-            return storeViewBusiness.FindByPosition(positionId);
+            return storeViewBusiness
+                .Query(r => r.PositionId == positionId && (r.Status == (int)EntityStatus.StoreIn || r.Status == (int)EntityStatus.StoreInReady));
         }
 
         /// <summary>
@@ -66,7 +71,7 @@ namespace Phoebe.WebAPI.Controllers
         public ActionResult<List<StoreView>> FindByCargo(int contractId, string cargoId)
         {
             StoreViewBusiness storeViewBusiness = new StoreViewBusiness();
-            return storeViewBusiness.FindByCargo(contractId, cargoId, true);
+            return storeViewBusiness.Query(r => r.ContractId == contractId && r.CargoId == cargoId && r.Status == (int)EntityStatus.StoreIn);
         }
 
         /// <summary>

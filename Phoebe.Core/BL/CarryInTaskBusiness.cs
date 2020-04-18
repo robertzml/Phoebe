@@ -157,24 +157,6 @@ namespace Phoebe.Core.BL
         }
 
         /// <summary>
-        /// 撤回搬运入库任务
-        /// </summary>
-        /// <param name="carryIn"></param>
-        /// <param name="db"></param>
-        /// <returns></returns>
-        public (bool success, string errorMessage) Revert(CarryInTask carryIn, SqlSugarClient db = null)
-        {
-            if (db == null)
-                db = GetInstance();
-
-            carryIn.FinishTime = null;
-            carryIn.Status = (int)EntityStatus.StockInEnter;
-            db.Updateable(carryIn).ExecuteCommand();
-
-            return (true, "");
-        }
-
-        /// <summary>
         /// 删除搬运入库
         /// </summary>
         /// <param name="id"></param>

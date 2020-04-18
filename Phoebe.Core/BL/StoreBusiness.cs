@@ -112,23 +112,6 @@ namespace Phoebe.Core.BL
         }
 
         /// <summary>
-        /// 撤回库存入库
-        /// </summary>
-        /// <param name="store"></param>
-        /// <param name="db"></param>
-        /// <returns></returns>
-        public (bool success, string errorMessage) RevertIn(Store store, SqlSugarClient db = null)
-        {
-            if (db == null)
-                db = GetInstance();
-
-            store.Status = (int)EntityStatus.StoreInReady;
-            db.Updateable(store).ExecuteCommand();
-
-            return (true, "");
-        }
-
-        /// <summary>
         /// 根据搬运入库任务修改库存记录
         /// </summary>
         /// <param name="id">库存ID</param>
@@ -152,24 +135,6 @@ namespace Phoebe.Core.BL
             store.StoreWeight = storeWeight;
 
             db.Updateable(store).UpdateColumns(r => new { r.TrayCode, r.StoreCount, r.StoreWeight }).ExecuteCommand();
-            return (true, "");
-        }
-
-        /// <summary>
-        /// 删除搬运入库对应库存记录
-        /// </summary>
-        /// <param name="carryInId"></param>
-        /// <param name="db"></param>
-        /// <returns></returns>
-        public (bool success, string errorMessage) DeleteByCarryIn(string carryInId, SqlSugarClient db = null)
-        {
-            if (db == null)
-                db = GetInstance();
-
-            var store = db.Queryable<Store>().Single(r => r.CarryInTaskId == carryInId);
-            if (store != null)
-                db.Deleteable<Store>().In(store.Id).ExecuteCommand();
-
             return (true, "");
         }
 
@@ -217,42 +182,6 @@ namespace Phoebe.Core.BL
             store.Status = (int)EntityStatus.StoreOut;
 
             db.Updateable(store).ExecuteCommand();
-            return (true, "");
-        }
-
-        /// <summary>
-        /// 撤回库存出库
-        /// </summary>
-        /// <param name="store"></param>
-        /// <param name="db"></param>
-        /// <returns></returns>
-        public (bool success, string errorMessage) RevertOut(Store store, SqlSugarClient db = null)
-        {
-            if (db == null)
-                db = GetInstance();
-
-            store.Status = (int)EntityStatus.StoreOutReady;
-
-            db.Updateable(store).UpdateColumns(r => new { r.Status }).ExecuteCommand();
-            return (true, "");
-        }
-
-        /// <summary>
-        /// 修改库存状态
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="status"></param>
-        /// <param name="db"></param>
-        /// <returns></returns>
-        public (bool success, string errorMessage) UpdateStatus(string id, EntityStatus status, SqlSugarClient db = null)
-        {
-            if (db == null)
-                db = GetInstance();
-
-            var store = db.Queryable<Store>().InSingle(id);
-            store.Status = (int)status;
-
-            db.Updateable(store).UpdateColumns(r => new { r.Status }).ExecuteCommand();
             return (true, "");
         }
         #endregion //Method

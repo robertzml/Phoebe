@@ -36,7 +36,7 @@ namespace Phoebe.WebAPI.Controllers
                 if (customerId.Value == 0)
                     return contractViewBusiness.FindAll();
                 else
-                    return contractViewBusiness.FindByCustomer(customerId.Value);
+                    return contractViewBusiness.Query(r => r.CustomerId == customerId.Value);
             }
             else
                 return contractViewBusiness.FindAll();

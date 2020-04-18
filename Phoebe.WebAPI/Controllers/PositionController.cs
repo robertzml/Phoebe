@@ -70,7 +70,7 @@ namespace Phoebe.WebAPI.Controllers
         public ActionResult<PositionView> Find(int shelfId, int row, int layer, int depth)
         {
             PositionViewBusiness positionViewBusiness = new PositionViewBusiness();
-            return positionViewBusiness.Find(shelfId, row, layer, depth);
+            return positionViewBusiness.Single(r => r.ShelfId == shelfId && r.Row == row && r.Layer == layer && r.Depth == depth);
         }
 
         /// <summary>

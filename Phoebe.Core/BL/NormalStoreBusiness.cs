@@ -153,7 +153,7 @@ namespace Phoebe.Core.BL
             var store = db.Queryable<NormalStore>().Single(r => r.StockInTaskId == stockInTaskId);
             store.Status = (int)EntityStatus.StoreInReady;
 
-            db.Updateable(store).ExecuteCommand();
+            db.Updateable(store).UpdateColumns(r => new { r.Status }).ExecuteCommand();
             return (true, "");
         }
 
@@ -196,9 +196,8 @@ namespace Phoebe.Core.BL
                 store.StockOutTaskId = null;
                 store.OutTime = null;
                 store.Status = (int)EntityStatus.StoreIn;
+                db.Updateable(store).ExecuteCommand();
             }
-
-            db.Updateable(store).ExecuteCommand();
             return (true, "");
         }
 

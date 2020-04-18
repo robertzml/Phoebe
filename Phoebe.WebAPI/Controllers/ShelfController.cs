@@ -33,7 +33,7 @@ namespace Phoebe.WebAPI.Controllers
                 if (warehouseId.Value == 0)
                     return shelfBusiness.FindAll();
                 else
-                    return shelfBusiness.FindByWarehouse(warehouseId.Value);
+                    return shelfBusiness.Query(r => r.WarehouseId == warehouseId.Value);
             }
             else
             {

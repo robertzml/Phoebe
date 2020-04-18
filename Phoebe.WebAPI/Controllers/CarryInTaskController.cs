@@ -77,7 +77,7 @@ namespace Phoebe.WebAPI.Controllers
         public ActionResult<List<CarryInTaskView>> FindInCheck(string trayCode)
         {
             CarryInTaskViewBusiness carryInTaskViewBusiness = new CarryInTaskViewBusiness();
-            return carryInTaskViewBusiness.FindByTray(trayCode, EntityStatus.StockInCheck);
+            return carryInTaskViewBusiness.Query(r => r.TrayCode == trayCode && r.Status == (int)EntityStatus.StockInCheck);
         }
 
         /// <summary>
