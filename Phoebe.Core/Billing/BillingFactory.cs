@@ -25,9 +25,9 @@ namespace Phoebe.Core.Billing
                 case BillingType.UnitWeight:
                     billingProcess = new BillingUnitWeight();
                     break;
-                    //case BillingType.Count:
-                    //    billingProcess = new BillingCount();
-                    //    break;
+                case BillingType.Count:
+                    billingProcess = new BillingCount();
+                    break;
                     //case BillingType.VariousWeight:
                     //    billingProcess = new BillingVariousWeight();
                     //    break;
