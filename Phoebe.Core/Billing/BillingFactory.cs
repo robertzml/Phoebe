@@ -28,9 +28,9 @@ namespace Phoebe.Core.Billing
                 case BillingType.Count:
                     billingProcess = new BillingCount();
                     break;
-                    //case BillingType.VariousWeight:
-                    //    billingProcess = new BillingVariousWeight();
-                    //    break;
+                case BillingType.VariousWeight:
+                    billingProcess = new BillingVariousWeight();
+                    break;
             }
             return billingProcess;
         }
