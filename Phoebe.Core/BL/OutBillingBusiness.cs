@@ -27,7 +27,7 @@ namespace Phoebe.Core.BL
             if (db == null)
                 db = GetInstance();
 
-            var item = db.Queryable<ExpenseItem>().Single(r => r.Code == "006");
+            var item = db.Queryable<ExpenseItem>().Single(r => r.Code == PhoebeConstant.DiffColdFeeNumber);
 
             var bill = db.Queryable<OutBilling>().Single(r => r.StockOutId == stockOutId && r.ExpenseItemId == item.Id);
             if (bill == null)
