@@ -165,6 +165,7 @@ namespace Phoebe.WebAPI.Controllers
 
                 data.Status = result.success ? 0 : 1;
                 data.ErrorMessage = result.errorMessage;
+                data.Entity = result.position;
 
                 return data;
             });

@@ -67,7 +67,7 @@ namespace Phoebe.Core.Service
         /// <param name="shelfCode">货架码</param>
         /// <param name="userId"></param>
         /// <returns></returns>
-        public (bool success, string errorMessage) Enter(string trayCode, string shelfCode, int userId)
+        public (bool success, string errorMessage, Position position) Enter(string trayCode, string shelfCode, int userId)
         {
             var db = GetInstance();
 
@@ -83,7 +83,7 @@ namespace Phoebe.Core.Service
                 var position = positionBusiness.FindAvailable(shelfCode, db);
                 if (position == null)
                 {
-                    return (false, "无空仓位");
+                    return (false, "无空仓位", null);
                 }
 
                 StoreBusiness storeBusiness = new StoreBusiness();
@@ -103,7 +103,7 @@ namespace Phoebe.Core.Service
                     if (carryOutTask.Type == (int)CarryOutTaskType.Out && carryOutTask.Status != (int)EntityStatus.StockOutCheck)
                     {
                         db.Ado.RollbackTran();
-                        return (false, "托盘还未扫码出库");
+                        return (false, "托盘还未扫码出库", null);
                     }
 
                     // 先创建放回搬运任务
@@ -120,7 +120,7 @@ namespace Phoebe.Core.Service
                 if (carryInTasks.Count == 0)
                 {
                     db.Ado.RollbackTran();
-                    return (false, "该托盘无入库任务");
+                    return (false, "该托盘无入库任务", null);
                 }
 
                 // 更新仓位状态
@@ -153,12 +153,12 @@ namespace Phoebe.Core.Service
                 }
 
                 db.Ado.CommitTran();
-                return (true, "");
+                return (true, "", position);
             }
             catch (Exception e)
             {
                 db.Ado.RollbackTran();
-                return (false, e.Message);
+                return (false, e.Message, null);
             }
         }
 
