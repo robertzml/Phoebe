@@ -208,6 +208,7 @@ namespace Phoebe.Core.Service
                         {
                             if (next.Status != (int)EntityStatus.StoreIn)
                             {
+                                db.Ado.RollbackTran();
                                 return (false, "该库存后续有出库");
                             }
                             else
@@ -305,9 +306,15 @@ namespace Phoebe.Core.Service
                         continue;
 
                     if (item.OutCount > store.StoreCount)
+                    {
+                        db.Ado.RollbackTran();
                         return (false, "出库数量大于在库数量");
+                    }
                     if (item.OutWeight > store.StoreWeight)
+                    {
+                        db.Ado.RollbackTran();
                         return (false, "出库重量大于在库重量");
+                    }
 
                     // 创建出库任务
                     var result = stockOutTaskBusiness.CreateNormal(stockOutId, store, item.OutCount, item.OutWeight, user, db);

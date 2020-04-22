@@ -63,9 +63,15 @@ namespace Phoebe.Core.Service
                 foreach (var store in stores)
                 {
                     if (store.PositionId != position.Id)
+                    {
+                        db.Ado.RollbackTran();
                         return (false, "托盘码与当前货架托盘不一致", null);
+                    }
                     if (store.Status != (int)EntityStatus.StoreIn && store.Status != (int)EntityStatus.StoreInReady)
+                    {
+                        db.Ado.RollbackTran();
                         return (false, "托盘上无在库库存", null);
+                    }
 
                     var carryOut = db.Queryable<CarryOutTask>().Single(r => r.StoreId == store.Id);
                     if (carryOut == null)
