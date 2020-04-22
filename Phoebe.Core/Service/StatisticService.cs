@@ -14,6 +14,7 @@ namespace Phoebe.Core.Service
     using Phoebe.Core.View;
     using Phoebe.Core.Model;
     using Phoebe.Core.Utility;
+    using System.ComponentModel.DataAnnotations;
 
     /// <summary>
     /// 统计服务类
@@ -72,6 +73,27 @@ namespace Phoebe.Core.Service
             coldRecord.Amount = totalColdFee;
 
             data.Add(coldRecord);
+
+            // 获取其它费用
+            InBillingViewBusiness inBillingViewBusiness = new InBillingViewBusiness();
+            OutBillingViewBusiness outBillingViewBusiness = new OutBillingViewBusiness();
+
+            var inBillings = inBillingViewBusiness.FindPeriod(contractId, startTime, endTime, db);
+            var outBillings = outBillingViewBusiness.FindPeriod(contractId, startTime, endTime, db);
+
+            var expenseItems = expenseItemBusiness.Query(r => r.Code != PhoebeConstant.ColdFeeNumber, db).OrderBy(r => r.Code).ToList();
+            foreach (var expenseItem in expenseItems)
+            {
+                ExpenseRecord record = new ExpenseRecord();
+                record.Code = expenseItem.Code;
+                record.Name = expenseItem.Name;
+                record.Type = expenseItem.Type;
+
+                record.Amount = inBillings.Where(r => r.Code == expenseItem.Code).Sum(r => r.Amount)
+                    + outBillings.Where(r => r.Code == expenseItem.Code).Sum(r => r.Amount);
+
+                data.Add(record);
+            }
 
             return (true, "", data);
         }
