@@ -45,6 +45,28 @@ namespace Phoebe.Core.BL
         }
 
         /// <summary>
+        /// 根据仓位码获取仓位
+        /// </summary>
+        /// <param name="number">仓位码</param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        public Position FindByNumber(string number, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            var data = db.Queryable<Position>().Single(r => r.Number == number);
+            if (data != null)
+                return data;
+
+            data = db.Queryable<Position>().Single(r => r.ViceNumber == number);
+            if (data != null)
+                return data;
+
+            return null;
+        }
+
+        /// <summary>
         /// 根据货架码查找空仓位
         /// </summary>
         /// <param name="shelfCode">货架码</param>

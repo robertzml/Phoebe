@@ -11,6 +11,7 @@ namespace Phoebe.WebAPI.Controllers
     using Phoebe.Core.BL;
     using Phoebe.Core.DL;
     using Phoebe.Core.Entity;
+    using Phoebe.Core.Service;
     using Phoebe.Core.View;
     using Phoebe.WebAPI.Model;
 
@@ -122,7 +123,48 @@ namespace Phoebe.WebAPI.Controllers
             StoreViewBusiness storeViewBusiness = new StoreViewBusiness();
             return storeViewBusiness.FindById(id);
         }
+
+        /// <summary>
+        /// 获取指定仓位托盘码
+        /// </summary>
+        /// <param name="positionId">仓位ID</param>
+        /// <returns></returns>
+        [HttpGet]
+        public string GetPositionTray(int positionId)
+        {
+            StoreViewBusiness storeViewBusiness = new StoreViewBusiness();
+            return storeViewBusiness.GetPositionTray(positionId);
+        }
         #endregion //Query
+
+        #region Action
+        /// <summary>
+        /// 添加搬运入库
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ActionResult<ResponseData>> MoveTray(MoveTrayModel model)
+        {
+            StoreService storeService = new StoreService();
+
+            var task = Task.Run(() =>
+            {
+                var result = storeService.MoveTray(model.PositionId, model.TargetPosition, model.UserId);
+
+                ResponseData data = new ResponseData
+                {
+                    Status = result.success ? 0 : 1,
+                    ErrorMessage = result.errorMessage,
+                    Entity = null
+                };
+
+                return data;
+            });
+
+            return await task;
+        }
+        #endregion //Action
 
         #region Storage
         /// <summary>

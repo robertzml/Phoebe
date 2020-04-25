@@ -7,6 +7,7 @@ namespace Phoebe.Core.DL
     using Phoebe.Base.Framework;
     using Phoebe.Base.System;
     using Phoebe.Core.View;
+    using SqlSugar;
 
     public class PositionViewBusiness : AbstractBusiness<PositionView, int>, IBaseBL<PositionView, int>
     {

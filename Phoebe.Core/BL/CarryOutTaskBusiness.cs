@@ -11,6 +11,7 @@ namespace Phoebe.Core.BL
     using Phoebe.Core.Entity;
     using Phoebe.Core.View;
     using Phoebe.Core.Utility;
+    using System.Reflection.PortableExecutable;
 
     /// <summary>
     /// 搬运出库任务业务类
@@ -104,6 +105,61 @@ namespace Phoebe.Core.BL
             entity.MoveTime = now;
             entity.Remark = "";
             entity.Status = (int)EntityStatus.StockOutLeave;
+
+            var t = db.Insertable(entity).ExecuteReturnEntity();
+            return (true, "", t);
+        }
+
+        /// <summary>
+        /// 系统搬运创建的下架任务
+        /// </summary>
+        /// <param name="store">原库存记录</param>
+        /// <param name="position">原仓位</param>
+        /// <param name="user"></param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        /// <remarks>
+        /// 系统调整托盘位置创建的下架任务，任务直接完成
+        /// </remarks>
+        public (bool success, string errorMessage, CarryOutTask t) CreateByMove(Store store, Position position, User user, SqlSugarClient db)
+        {
+            SequenceRecordBusiness recordBusiness = new SequenceRecordBusiness();
+            var now = DateTime.Now;
+
+            CarryOutTask entity = new CarryOutTask();
+            entity.Id = Guid.NewGuid().ToString();
+            entity.Type = (int)CarryOutTaskType.System;
+
+            entity.CustomerId = store.CustomerId;
+            entity.ContractId = store.ContractId;
+            entity.CargoId = store.CargoId;
+            entity.StoreId = store.Id;
+
+            entity.StoreCount = store.StoreCount;
+            entity.MoveCount = 0;
+            entity.StoreWeight = store.StoreWeight;
+            entity.MoveWeight = 0;
+            entity.UnitWeight = store.UnitWeight;
+
+            entity.TaskCode = recordBusiness.GetNextSequence(db, "CarryOutTask", now);
+            entity.ShelfCode = position.ShelfCode;
+            entity.TrayCode = store.TrayCode;
+            entity.PositionId = position.Id;
+            entity.PositionNumber = position.Number;
+
+            entity.ReceiveUserId = user.Id;
+            entity.ReceiveUserName = user.Name;
+            entity.CheckUserId = user.Id;
+            entity.CheckUserName = user.Name;
+
+            entity.CreateTime = now;
+            entity.ReceiveTime = now;
+            entity.MoveTime = now;
+            entity.CheckTime = now;
+            entity.FinishTime = now;
+
+            entity.Remark = "";
+            entity.Status = (int)EntityStatus.StockOutFinish;
 
             var t = db.Insertable(entity).ExecuteReturnEntity();
             return (true, "", t);

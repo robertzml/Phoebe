@@ -11,58 +11,24 @@ namespace Phoebe.Core.Service
     using Phoebe.Core.View;
     using Phoebe.Core.Model;
     using Phoebe.Core.Utility;
+    using Phoebe.Core.BL;
+    using System.Runtime.InteropServices;
+    using Phoebe.Core.DL;
 
     /// <summary>
     /// 库存服务类
     /// </summary>
     public class StoreService : AbstractService
     {
-        #region Function
+        #region Method
         /// <summary>
-        /// 设置库存流水
+        /// 系统移动托盘
         /// </summary>
-        /// <param name="stockInTask">入库任务</param>
-        /// <param name="date">流水日期</param>
-        /// <param name="flowType">流水类型</param>
+        /// <param name="positionId">原仓位ID</param>
+        /// <param name="targetPositionNumber">目标仓位码</param>
+        /// <param name="userId">操作用户</param>
         /// <returns></returns>
-        private StockFlow SetStockFlow(StockInTaskView stockInTask, DateTime date, StockFlowType flowType)
-        {
-            StockFlow stockFlow = new StockFlow();
-            stockFlow.StockId = stockInTask.Id;
-            stockFlow.FlowNumber = stockInTask.FlowNumber;
-
-            stockFlow.CustomerId = stockInTask.CustomerId;
-            stockFlow.CustomerNumber = stockInTask.CustomerNumber;
-            stockFlow.CustomerName = stockInTask.CustomerName;
-
-            stockFlow.ContractId = stockInTask.ContractId;
-            stockFlow.ContractName = stockInTask.ContractName;
-
-            stockFlow.CargoId = stockInTask.CargoId;
-            stockFlow.CategoryNumber = stockInTask.CategoryNumber;
-            stockFlow.CategoryName = stockInTask.CategoryName;
-            stockFlow.Specification = stockInTask.Specification;
-
-            stockFlow.FlowCount = stockInTask.InCount;
-            stockFlow.UnitWeight = stockInTask.UnitWeight;
-            stockFlow.FlowWeight = stockInTask.InWeight;
-
-            stockFlow.FlowDate = date;
-            stockFlow.Type = flowType;
-
-            return stockFlow;
-        }
-        #endregion //Function
-
-        #region Flow
-        /// <summary>
-        /// 获取合同库存流水
-        /// </summary>
-        /// <param name="contractId">合同ID</param>
-        /// <param name="date">日期</param>
-        /// <param name="includeMove">是否包含移库</param>
-        /// <returns></returns>
-        public (bool success, string errorMessage, List<StockFlow> data) GetDayFlow(int contractId, DateTime date, bool includeMove = true)
+        public (bool success, string errorMessage) MoveTray(int positionId, string targetPositionNumber, int userId)
         {
             var db = GetInstance();
 
@@ -70,28 +36,71 @@ namespace Phoebe.Core.Service
             {
                 db.Ado.BeginTran();
 
-                date = date.Date;
+                // 操作用户
+                var user = db.Queryable<User>().InSingle(userId);
 
-                List<StockFlow> data = new List<StockFlow>();
+                PositionBusiness positionBusiness = new PositionBusiness();
+                StoreBusiness storeBusiness = new StoreBusiness();
+                StoreViewBusiness storeViewBusiness = new StoreViewBusiness();
 
-                // 获取入库记录
-                var stockInTasks = db.Queryable<StockInTaskView>()
-                    .Where(r => r.ContractId == contractId && r.InTime == date && r.Status == (int)EntityStatus.StockInFinish)
-                    .ToList();
-                foreach (var item in stockInTasks)
+                // 获取新仓位信息
+                var targetPosition = positionBusiness.FindByNumber(targetPositionNumber, db);
+                if (targetPosition == null)
+                    return (false, "目标仓位码错误");
+
+                if (targetPosition.Status != (int)EntityStatus.Available)
+                    return (false, "目标仓位已占用");
+
+                var testStores = storeViewBusiness.Query(r => r.PositionId == targetPosition.Id && r.Status == (int)EntityStatus.StoreIn, db);
+                if (testStores.Count > 0)
+                    return (false, "目标仓位有库存");
+
+                // 获取原仓位
+                var sourcePosition = positionBusiness.FindById(positionId, db);
+
+                // 获取原仓位库存记录
+                var oldStores = storeBusiness.Query(r => r.PositionId == positionId && r.Status == (int)EntityStatus.StoreIn, db);
+                if (oldStores.Count == 0)
+                    return (false, "仓位无库存记录");
+
+                CarryInTaskBusiness carryInTaskBusiness = new CarryInTaskBusiness();
+                CarryOutTaskBusiness carryOutTaskBusiness = new CarryOutTaskBusiness();
+
+                foreach (var oldStore in oldStores)
                 {
-                    //var flow = SetStockFlow(item.Store, item.Id, item.StockIn.FlowNumber, 0, item.Count, item.InWeight, item.InVolume, item.StockIn.InTime, StockFlowType.StockIn);
-                    //data.Add(flow);
+                    // 创建下架任务
+                    var carryOutResult = carryOutTaskBusiness.CreateByMove(oldStore, sourcePosition, user, db);
+
+                    // 库存记录出库
+                    storeBusiness.FinishOut(oldStore, carryOutResult.t, db);
+
+                    // 修改原仓位状态
+                    positionBusiness.UpdateStatus(sourcePosition, EntityStatus.Available, db);
+
+                    // 创建上架任务
+                    var carryInResult = carryInTaskBusiness.CreateByMove(oldStore, targetPosition, user, db);
+
+                    // 创建新库存记录
+                    var storeResult = storeBusiness.CreateByMove(oldStore, carryInResult.t, targetPosition.Id, db);
+
+                    // 确认上架任务
+                    carryInTaskBusiness.FinishMove(carryInResult.t, storeResult.t.Id, db);
+
+                    // 修改新仓位状态
+                    var shelf = db.Queryable<Shelf>().Single(r => r.Id == targetPosition.ShelfId);
+                    if (shelf.Type == (int)ShelfType.Position)
+                        positionBusiness.UpdateStatus(targetPosition, EntityStatus.Occupy, db);
                 }
 
                 db.Ado.CommitTran();
-                return (true, "", null);
+                return (true, "");
             }
             catch (Exception e)
             {
-                return (false, e.Message, null);
+                db.Ado.RollbackTran();
+                return (false, e.Message);
             }
         }
-        #endregion //Flow
+        #endregion //Method
     }
 }

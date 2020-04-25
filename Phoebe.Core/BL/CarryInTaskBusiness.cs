@@ -102,6 +102,58 @@ namespace Phoebe.Core.BL
         }
 
         /// <summary>
+        /// 系统搬运创建的上架任务
+        /// </summary>
+        /// <param name="store">原库存记录</param>
+        /// <param name="position">目标仓位</param>
+        /// <param name="user">清点人</param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        /// <remarks>
+        /// 系统调整托盘位置创建的上架任务，任务直接完成
+        /// </remarks>
+        public (bool success, string errorMessage, CarryInTask t) CreateByMove(Store store, Position position, User user, SqlSugarClient db)
+        {
+            var now = DateTime.Now;
+
+            CarryInTask task = new CarryInTask();
+            task.Id = Guid.NewGuid().ToString();
+            task.Type = (int)CarryInTaskType.System;
+
+            task.CustomerId = store.CustomerId;
+            task.ContractId = store.ContractId;
+            task.CargoId = store.CargoId;       
+
+            task.MoveCount = store.StoreCount;
+            task.MoveWeight = store.StoreWeight;
+            task.UnitWeight = store.UnitWeight;
+
+            SequenceRecordBusiness recordBusiness = new SequenceRecordBusiness();
+            task.TaskCode = recordBusiness.GetNextSequence(db, "CarryInTask", now);
+            task.TrayCode = store.TrayCode;
+            task.ShelfCode = position.ShelfCode;
+            task.PositionId = position.Id;
+
+            task.CheckUserId = user.Id;
+            task.CheckUserName = user.Name;
+            task.ReceiveUserId = user.Id;
+            task.ReceiveUserName = user.Name;
+
+            task.CreateTime = now;
+            task.CheckTime = now;
+            task.ReceiveTime = now;
+            task.MoveTime = now;
+            task.FinishTime = now;
+
+            task.Status = (int)EntityStatus.StockInFinish;
+            task.Remark = "";
+
+            var t = db.Insertable(task).ExecuteReturnEntity();
+
+            return (true, "", t);
+        }
+
+        /// <summary>
         /// 上架
         /// </summary>
         /// <param name="task">入库任务</param>
@@ -131,6 +183,24 @@ namespace Phoebe.Core.BL
 
             db.Updateable(task).ExecuteCommand();
 
+            return (true, "");
+        }
+
+        /// <summary>
+        /// 完成系统移动上架
+        /// </summary>
+        /// <param name="task">搬运入库任务</param>
+        /// <param name="storeId">新库存ID</param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        public (bool success, string errorMessage) FinishMove(CarryInTask task, string storeId, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            task.StoreId = storeId;
+
+            db.Updateable(task).UpdateColumns(r => new { r.StoreId }).ExecuteCommand();
             return (true, "");
         }
 

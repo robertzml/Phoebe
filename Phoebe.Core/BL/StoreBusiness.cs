@@ -112,6 +112,50 @@ namespace Phoebe.Core.BL
         }
 
         /// <summary>
+        /// 系统搬运创建的新库存记录
+        /// </summary>
+        /// <param name="oldStore">原库存记录</param>
+        /// <param name="carryInTask">搬运入库任务</param>
+        /// <param name="positionId">新仓位ID</param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        public (bool success, string errorMessage, Store t) CreateByMove(Store oldStore, CarryInTask carryInTask, int positionId, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            Store store = new Store();
+            store.Id = Guid.NewGuid().ToString();
+            store.CustomerId = oldStore.CustomerId;
+            store.ContractId = oldStore.ContractId;
+            store.CargoId = oldStore.CargoId;
+
+            store.PositionId = positionId;
+            store.TrayCode = oldStore.TrayCode;
+
+            store.StoreCount = oldStore.StoreCount;
+            store.StoreWeight = oldStore.StoreWeight;
+            store.UnitWeight = oldStore.UnitWeight;
+
+            store.Batch = oldStore.Batch;
+            store.OriginPlace = oldStore.OriginPlace;
+            store.Durability = oldStore.Durability;
+
+            store.InitialTime = oldStore.InitialTime;
+            store.InTime = oldStore.OutTime.Value;
+            store.StockInId = oldStore.StockInId;
+            store.PrevStoreId = oldStore.Id;
+            store.CarryInTaskId = carryInTask.Id;
+
+            store.CreateTime = DateTime.Now;
+            store.Status = (int)EntityStatus.StoreIn;
+            store.Remark = oldStore.Remark;
+
+            var t = db.Insertable(store).ExecuteReturnEntity();
+            return (true, "", t);
+        }
+
+        /// <summary>
         /// 根据搬运入库任务修改库存记录
         /// </summary>
         /// <param name="id">库存ID</param>
@@ -179,6 +223,29 @@ namespace Phoebe.Core.BL
             var store = db.Queryable<Store>().InSingle(id);
             if (outTime.HasValue)
                 store.OutTime = outTime.Value;
+            store.Status = (int)EntityStatus.StoreOut;
+
+            db.Updateable(store).ExecuteCommand();
+            return (true, "");
+        }
+
+        /// <summary>
+        /// 确认库存出库
+        /// </summary>
+        /// <param name="store">库存记录</param>
+        /// <param name="carryOutTask">搬运出库任务</param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        /// <remarks>
+        /// 确认库存出库，直接结束
+        /// </remarks>
+        public (bool success, string errorMessage) FinishOut(Store store, CarryOutTask carryOutTask, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            store.CarryOutTaskId = carryOutTask.Id;
+            store.OutTime = carryOutTask.MoveTime.Value.Date;
             store.Status = (int)EntityStatus.StoreOut;
 
             db.Updateable(store).ExecuteCommand();

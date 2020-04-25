@@ -116,7 +116,13 @@ namespace Phoebe.Core.Utility
         /// 临时搬运
         /// </summary>
         [Display(Name = "临时搬运")]
-        Temp = 2
+        Temp = 2,
+
+        /// <summary>
+        /// 系统搬运
+        /// </summary>
+        [Display(Name = "系统搬运")]
+        System = 3
     }
 
     /// <summary>
@@ -134,7 +140,13 @@ namespace Phoebe.Core.Utility
         /// 临时搬运
         /// </summary>
         [Display(Name = "临时搬运")]
-        Temp = 2
+        Temp = 2,
+
+        /// <summary>
+        /// 系统搬运
+        /// </summary>
+        [Display(Name = "系统搬运")]
+        System = 3
     }
 
     /// <summary>

@@ -142,6 +142,24 @@ namespace Phoebe.Core.DL
 
             return data;
         }
+
+        /// <summary>
+        /// 获取指定仓位托盘码
+        /// </summary>
+        /// <param name="positionId">仓位ID</param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        public string GetPositionTray(int positionId, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            var data = db.Queryable<StoreView>().Single(r => r.PositionId == positionId && r.Status == (int)EntityStatus.StoreIn);
+            if (data == null)
+                return "";
+            else
+                return data.TrayCode;
+        }
         #endregion //Query
 
         #region Storage

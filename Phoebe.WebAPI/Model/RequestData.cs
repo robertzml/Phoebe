@@ -202,4 +202,25 @@ namespace Phoebe.WebAPI.Model
         [Required]
         public DateTime EndTime;
     }
+
+    /// <summary>
+    /// 托盘移动模型
+    /// </summary>
+    public class MoveTrayModel
+    {
+        /// <summary>
+        /// 原仓位ID
+        /// </summary>
+        [Required]
+        public int PositionId;
+
+        /// <summary>
+        /// 目标仓位码
+        /// </summary>
+        [Required]
+        public string TargetPosition;
+
+        [Required]
+        public int UserId;
+    }
 }
