@@ -47,6 +47,7 @@ namespace Phoebe.Core.Service
             }
 
             StoreViewBusiness storeViewBusiness = new StoreViewBusiness();
+            NormalStoreViewBusiness normalStoreViewBusiness = new NormalStoreViewBusiness();
             ExpenseItemBusiness expenseItemBusiness = new ExpenseItemBusiness();
 
             IContract contractBill = ContractFactory.Create((ContractType)contract.Type);
@@ -63,6 +64,12 @@ namespace Phoebe.Core.Service
                 var dailyFee = billingProcess.CalculateDailyFee(totalMeter, contract.UnitPrice);
 
                 totalColdFee += dailyFee;
+
+                var normalStores = normalStoreViewBusiness.GetInDay(contractId, step, db);
+                var totalNormalMeter = billingProcess.GetTotalMeter(normalStores);
+                var normalDailyFee = billingProcess.CalculateDailyFee(totalNormalMeter, contract.UnitPrice);
+
+                totalColdFee += normalDailyFee;
             }
 
             ExpenseRecord coldRecord = new ExpenseRecord();
