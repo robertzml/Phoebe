@@ -47,6 +47,7 @@ namespace Phoebe.Core.BL
 
             store.InitialTime = stockIn.InTime;
             store.InTime = stockIn.InTime;
+            store.StockInId = stockIn.Id;
             store.StockInTaskId = stockInTask.Id;
 
             store.CreateTime = DateTime.Now;
@@ -90,6 +91,7 @@ namespace Phoebe.Core.BL
 
             store.InitialTime = oldStore.InitialTime;
             store.InTime = oldStore.OutTime.Value;
+            store.StockInId = oldStore.StockInId;
             store.PrevStoreId = oldStore.Id;
 
             store.CreateTime = DateTime.Now;

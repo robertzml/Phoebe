@@ -107,6 +107,12 @@ namespace Phoebe.Core.Entity
         public DateTime? OutTime { get; set; }
 
         /// <summary>
+        /// 初始入库单ID
+        /// </summary>
+        [Display(Name = "初始入库单ID")]
+        public string StockInId { get; set; }
+
+        /// <summary>
         /// 入库任务单ID
         /// </summary>
         [Display(Name = "入库任务单ID")]
