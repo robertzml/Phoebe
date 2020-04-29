@@ -88,7 +88,7 @@ namespace Phoebe.Core.BL
             store.OriginPlace = oldStore.OriginPlace;
             store.Durability = oldStore.Durability;
 
-            store.InitialTime = oldStore.InTime;
+            store.InitialTime = oldStore.InitialTime;
             store.InTime = oldStore.OutTime.Value;
             store.PrevStoreId = oldStore.Id;
 

@@ -334,7 +334,7 @@ namespace Phoebe.Core.Service
         }
 
         /// <summary>
-        /// 添加出库货物
+        /// 添加仓位库出库货物
         /// </summary>
         /// <param name="stockOutId">出库单ID</param>
         /// <param name="tasks">搬运出库任务</param>
