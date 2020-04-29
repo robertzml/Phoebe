@@ -204,8 +204,23 @@ namespace Phoebe.Core.Service
                     NormalStoreBusiness normalStoreBusiness = new NormalStoreBusiness();
                     foreach (var task in tasks)
                     {
+                        var store = normalStoreBusiness.Single(r => r.StockInTaskId == task.Id, db);
+
+                        if (store.Status != (int)EntityStatus.StoreIn)
+                        {
+                            db.Ado.RollbackTran();
+                            return (false, "该入库单有库存记录准备出库，无法撤回");
+                        }
+
+                        var nexts = normalStoreBusiness.Query(r => r.PrevStoreId == store.Id, db);
+                        if (nexts.Count > 0)
+                        {
+                            db.Ado.RollbackTran();
+                            return (false, "该入库单有库存记录已出库，无法撤回");
+                        }
+
                         // 撤回库存记录
-                        normalStoreBusiness.RevertIn(task.Id, db);
+                        normalStoreBusiness.RevertIn(store, db);
 
                         // 撤回入库任务
                         stockInTaskBusiness.Revert(task, db);
