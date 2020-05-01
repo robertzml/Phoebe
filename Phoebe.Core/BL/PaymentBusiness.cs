@@ -15,5 +15,20 @@ namespace Phoebe.Core.BL
     /// </summary>
     public class PaymentBusiness : AbstractBusiness<Payment, string>, IBaseBL<Payment, string>
     {
+        #region Method
+        public override (bool success, string errorMessage, Payment t) Create(Payment entity, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            entity.Id = Guid.NewGuid().ToString();
+            entity.CreateTime = DateTime.Now;
+            entity.Status = 0;
+
+            var t = db.Insertable(entity).ExecuteReturnEntity();
+
+            return (true, "", t);
+        }
+        #endregion //Method
     }
 }

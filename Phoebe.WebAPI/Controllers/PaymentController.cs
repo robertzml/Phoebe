@@ -22,12 +22,37 @@ namespace Phoebe.WebAPI.Controllers
     public class PaymentController : ControllerBase
     {
         #region Action
+        /// <summary>
+        /// 添加缴费
+        /// </summary>
+        /// <param name="payment"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ActionResult<ResponseData>> Create(Payment payment)
+        {
+            PaymentBusiness paymentBusiness = new PaymentBusiness();
 
+            var task = Task.Run(() =>
+            {
+                var result = paymentBusiness.Create(payment);
+
+                ResponseData data = new ResponseData
+                {
+                    Status = result.success ? 0 : 1,
+                    ErrorMessage = result.errorMessage,
+                    Entity = result.t
+                };
+
+                return data;
+            });
+
+            return await task;
+        }
         #endregion //Action
 
         #region Query
         /// <summary>
-        /// 合同列表
+        /// 缴费列表
         /// </summary>
         /// <returns></returns>
         [HttpGet]
