@@ -69,6 +69,18 @@ namespace Phoebe.WebAPI.Controllers
             else
                 return paymentViewBusiness.FindAll();
         }
+
+        /// <summary>
+        /// 缴费信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult<PaymentView> Get(string id)
+        {
+            PaymentViewBusiness paymentViewBusiness = new PaymentViewBusiness();
+            return paymentViewBusiness.FindById(id);
+        }
         #endregion //Query
     }
 }
