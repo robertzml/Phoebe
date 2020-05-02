@@ -5,8 +5,7 @@ using System.Text;
 namespace Phoebe.Core.BL
 {
     using SqlSugar;
-    using Phoebe.Base.Framework;
-    using Phoebe.Base.System;
+    using Phoebe.Base.Framework;    
     using Phoebe.Core.Entity;
     using Phoebe.Core.Utility;
 

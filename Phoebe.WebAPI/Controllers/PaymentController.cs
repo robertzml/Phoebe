@@ -81,6 +81,32 @@ namespace Phoebe.WebAPI.Controllers
             PaymentViewBusiness paymentViewBusiness = new PaymentViewBusiness();
             return paymentViewBusiness.FindById(id);
         }
+
+        /// <summary>
+        /// 删除缴费
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ActionResult<ResponseData>> Delete(string id)
+        {
+            PaymentBusiness paymentBusiness = new PaymentBusiness();
+
+            var task = Task.Run(() =>
+            {
+                var result = paymentBusiness.Delete(id);
+
+                ResponseData data = new ResponseData
+                {
+                    Status = result.success ? 0 : 1,
+                    ErrorMessage = result.errorMessage
+                };
+
+                return data;
+            });
+
+            return await task;
+        }
         #endregion //Query
     }
 }
