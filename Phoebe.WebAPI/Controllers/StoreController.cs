@@ -164,6 +164,33 @@ namespace Phoebe.WebAPI.Controllers
 
             return await task;
         }
+
+        /// <summary>
+        /// 删除库存记录
+        /// </summary>
+        /// <param name="id">库存ID</param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ActionResult<ResponseData>> ForceDelete(string id)
+        {
+            StoreService storeService = new StoreService();
+
+            var task = Task.Run(() =>
+            {
+                var result = storeService.DeleteStore(id);
+
+                ResponseData data = new ResponseData
+                {
+                    Status = result.success ? 0 : 1,
+                    ErrorMessage = result.errorMessage,
+                    Entity = null
+                };
+
+                return data;
+            });
+
+            return await task;
+        }
         #endregion //Action
 
         #region Storage

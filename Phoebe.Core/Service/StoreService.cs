@@ -161,7 +161,7 @@ namespace Phoebe.Core.Service
                 }
 
                 // 更新最初入库任务
-                var carryIn = carryInTaskBusiness.Query(r => r.StockInTaskId == stockInTask.Id);
+                var carryIn = carryInTaskBusiness.Query(r => r.StockInTaskId == stockInTask.Id, db);
                 if (carryIn.Count == 0)
                 {
                     stockInTaskBusiness.Delete(stockInTask, db);
