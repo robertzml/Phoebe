@@ -14,6 +14,7 @@ namespace Phoebe.Core.Service
     using Phoebe.Core.BL;
     using System.Runtime.InteropServices;
     using Phoebe.Core.DL;
+    using System.Linq;
 
     /// <summary>
     /// 库存服务类
@@ -101,6 +102,88 @@ namespace Phoebe.Core.Service
                 return (false, e.Message);
             }
         }
+
+        /// <summary>
+        /// 删除库存记录
+        /// </summary>
+        /// <param name="id">库存ID</param>
+        /// <returns></returns>
+        /// <remarks>
+        /// 强行删除已入库的库存，包括前序、后序，及相关搬运任务。
+        /// 仅该库存未出库才能删除，且不会修改对应仓位状态。
+        /// </remarks>
+        public (bool success, string errorMessage) DeleteStore(string id)
+        {
+            var db = GetInstance();
+
+            try
+            {
+                db.Ado.BeginTran();
+
+                // 获取库存链表
+                StoreViewBusiness storeViewBusiness = new StoreViewBusiness();
+                var storeList = storeViewBusiness.GetInOrder(id, db);
+
+                var first = storeList.First();
+                var last = storeList.Last();
+                if (first.StoreCount != last.StoreCount)
+                {
+                    return (false, "该库存记录已出库，无法删除");
+                }
+
+                // 找到最初入库任务
+                CarryInTaskBusiness carryInTaskBusiness = new CarryInTaskBusiness();
+                var carryInTask = carryInTaskBusiness.FindById(first.CarryInTaskId, db);
+                if (string.IsNullOrEmpty(carryInTask.StockInTaskId))
+                {
+                    return (false, "未找到初始入库任务，无法删除");
+                }
+
+                StockInTaskBusiness stockInTaskBusiness = new StockInTaskBusiness();
+                var stockInTask = stockInTaskBusiness.FindById(carryInTask.StockInTaskId, db);
+
+                foreach (var store in storeList)
+                {
+                    // 删除搬运入库
+                    if (!string.IsNullOrEmpty(store.CarryInTaskId))
+                    {
+                        db.Deleteable<CarryInTask>().In(store.CarryInTaskId).ExecuteCommand();
+                    }
+
+                    // 删除搬运出库
+                    if (!string.IsNullOrEmpty(store.CarryOutTaskId))
+                    {
+                        db.Deleteable<CarryOutTask>().In(store.CarryOutTaskId).ExecuteCommand();
+                    }
+
+                    // 删除库存
+                    db.Deleteable<Store>().In(store.Id).ExecuteCommand();
+                }
+
+                // 更新最初入库任务
+                var carryIn = carryInTaskBusiness.Query(r => r.StockInTaskId == stockInTask.Id);
+                if (carryIn.Count == 0)
+                {
+                    stockInTaskBusiness.Delete(stockInTask, db);
+                }
+                else
+                {
+                    stockInTask.InCount = carryIn.Sum(r => r.MoveCount);
+                    stockInTask.InWeight = carryIn.Sum(r => r.MoveWeight);
+
+                    stockInTaskBusiness.Update(stockInTask, db);
+                }
+
+                db.Ado.CommitTran();
+                return (true, "");
+            }
+            catch (Exception e)
+            {
+                db.Ado.RollbackTran();
+                return (false, e.Message);
+            }
+        }
+
         #endregion //Method
     }
 }
