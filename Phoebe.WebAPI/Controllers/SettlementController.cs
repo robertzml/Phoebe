@@ -69,6 +69,20 @@ namespace Phoebe.WebAPI.Controllers
             else
                 return settlementViewBusiness.FindAll();
         }
+
+        /// <summary>
+        /// 获取入库费用
+        /// </summary>
+        /// <param name="customerId">客户ID</param>
+        /// <param name="startTime"></param>
+        /// <param name="endTime"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult<List<InBillingView>> GetPeriodInBilling(int customerId, DateTime startTime, DateTime endTime)
+        {
+            SettlementService settlementService = new SettlementService();
+            return settlementService.GetPeriodInBilling(customerId, startTime, endTime);
+        }
         #endregion //Query
     }
 }
