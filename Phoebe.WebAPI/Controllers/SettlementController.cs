@@ -48,6 +48,32 @@ namespace Phoebe.WebAPI.Controllers
 
             return await task;
         }
+
+        /// <summary>
+        /// 删除结算
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ActionResult<ResponseData>> Delete(string id)
+        {
+            SettlementBusiness settlementBusiness = new SettlementBusiness();
+
+            var task = Task.Run(() =>
+            {
+                var result = settlementBusiness.Delete(id);
+
+                ResponseData data = new ResponseData
+                {
+                    Status = result.success ? 0 : 1,
+                    ErrorMessage = result.errorMessage
+                };
+
+                return data;
+            });
+
+            return await task;
+        }
         #endregion //Action
 
         #region Query
@@ -69,7 +95,6 @@ namespace Phoebe.WebAPI.Controllers
             else
                 return settlementViewBusiness.FindAll();
         }
-
 
         /// <summary>
         /// 结算信息

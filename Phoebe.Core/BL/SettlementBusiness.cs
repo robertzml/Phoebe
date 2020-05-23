@@ -37,6 +37,7 @@ namespace Phoebe.Core.BL
             entity.Id = Guid.NewGuid().ToString();
             entity.Number = recordBusiness.GetNextSequence(db, "Settlement", entity.SettleTime);
             entity.DueFee = Math.Round(entity.SumFee * entity.Discount / 100 - entity.Remission, 3);
+            entity.CreateTime = DateTime.Now;
 
             return base.Create(entity, db);
         }
