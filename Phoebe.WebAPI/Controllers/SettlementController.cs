@@ -70,6 +70,19 @@ namespace Phoebe.WebAPI.Controllers
                 return settlementViewBusiness.FindAll();
         }
 
+
+        /// <summary>
+        /// 结算信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult<SettlementView> Get(string id)
+        {
+            SettlementViewBusiness settlementViewBusiness = new SettlementViewBusiness();
+            return settlementViewBusiness.FindById(id);
+        }
+
         /// <summary>
         /// 获取入库费用
         /// </summary>
