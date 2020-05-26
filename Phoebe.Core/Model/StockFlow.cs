@@ -53,9 +53,9 @@ namespace Phoebe.Core.Model
         public string CargoId { get; set; }
 
         /// <summary>
-        /// 类别ID
+        /// 货品名称
         /// </summary>
-        public int CategoryId { get; set; }
+        public string CargoName { get; set; }      
 
         /// <summary>
         /// 类别编码
@@ -71,6 +71,11 @@ namespace Phoebe.Core.Model
         /// 规格
         /// </summary>
         public string Specification { get; set; }
+
+        /// <summary>
+        /// 批次
+        /// </summary>
+        public string Batch { get; set; }
 
         /// <summary>
         /// 在库数量

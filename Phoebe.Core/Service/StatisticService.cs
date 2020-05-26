@@ -21,6 +21,45 @@ namespace Phoebe.Core.Service
     /// </summary>
     public class StatisticService : AbstractService
     {
+        #region Function
+        /// <summary>
+        /// 入库任务转流水记录
+        /// </summary>
+        /// <param name="task"></param>
+        /// <returns></returns>
+        private StockFlow StockInToStockFlow(StockInTaskView task)
+        {
+            StockFlow flow = new StockFlow();
+            flow.StockId = task.Id;
+            flow.FlowNumber = task.FlowNumber;
+
+            flow.CustomerId = task.CustomerId;
+            flow.CustomerName = task.CustomerName;
+            flow.CustomerNumber = task.CustomerNumber;
+            flow.ContractId = task.ContractId;
+            flow.ContractName = task.ContractName;
+
+            flow.CargoId = task.CargoId;
+            flow.CargoName = task.CargoName;
+            flow.CategoryName = task.CategoryName;
+            flow.CategoryNumber = task.CategoryNumber;
+
+            flow.Specification = task.Specification;
+            flow.Batch = task.Batch;
+
+            flow.StoreCount = 0;
+            flow.FlowCount = task.InCount;
+            flow.UnitWeight = task.UnitWeight;
+            flow.FlowWeight = task.InWeight;
+
+            flow.FlowDate = task.InTime;
+
+            flow.Type = StockFlowType.StockIn;
+
+            return flow;
+        }
+        #endregion //Function
+
         #region Method
         /// <summary>
         /// 获取合同一段时间内所有费用记录
@@ -103,6 +142,27 @@ namespace Phoebe.Core.Service
             }
 
             return (true, "", data);
+        }
+
+        /// <summary>
+        /// 获取客户出入库流水
+        /// </summary>
+        /// <param name="customerId">客户ID</param>
+        /// <param name="startTime">开始日期</param>
+        /// <param name="endTime">结束日期</param>
+        /// <returns></returns>
+        public List<StockFlow> GetCustomerStockFlow(int customerId, DateTime startTime, DateTime endTime)
+        {
+            var db = GetInstance();
+
+            List<StockFlow> data = new List<StockFlow>();
+
+            StockInTaskViewBusiness stockInTaskViewBusiness = new StockInTaskViewBusiness();
+            var stockInTasks = stockInTaskViewBusiness.Query(r => r.CustomerId == customerId && r.InTime >= startTime && r.InTime <= endTime, db);
+
+
+
+            return data;
         }
         #endregion //Method
     }
