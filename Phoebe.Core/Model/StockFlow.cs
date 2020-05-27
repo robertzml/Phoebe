@@ -83,6 +83,11 @@ namespace Phoebe.Core.Model
         public int StoreCount { get; set; }
 
         /// <summary>
+        /// 在库重量
+        /// </summary>
+        public decimal StoreWeight { get; set; }
+
+        /// <summary>
         /// 流水数量
         /// </summary>
         /// <remarks>
