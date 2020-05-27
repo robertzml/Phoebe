@@ -46,6 +46,20 @@ namespace Phoebe.WebAPI.Controllers
 
             return await task;
         }
+
+        /// <summary>
+        /// 获取客户出入库流水
+        /// </summary>
+        /// <param name="customerId"></param>
+        /// <param name="startTime"></param>
+        /// <param name="endTime"></param>
+        /// <returns></returns>
+        public ActionResult<List<StockFlow>> GetCustomerStockFlow(int customerId, DateTime startTime, DateTime endTime)
+        {
+            StatisticService statisticService = new StatisticService();
+
+            return statisticService.GetCustomerStockFlow(customerId, startTime, endTime);
+        }
         #endregion //Action
     }
 }

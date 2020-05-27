@@ -43,9 +43,7 @@ namespace Phoebe.Core.Service
             flow.CargoName = task.CargoName;
             flow.CategoryName = task.CategoryName;
             flow.CategoryNumber = task.CategoryNumber;
-
             flow.Specification = task.Specification;
-            flow.Batch = task.Batch;
 
             flow.StoreCount = 0;
             flow.StoreWeight = 0;
@@ -56,6 +54,7 @@ namespace Phoebe.Core.Service
             flow.FlowDate = task.InTime;
 
             flow.Type = StockFlowType.StockIn;
+            flow.WarehouseType = task.WarehouseType;
 
             return flow;
         }
@@ -81,19 +80,18 @@ namespace Phoebe.Core.Service
             flow.CargoName = task.CargoName;
             flow.CategoryName = task.CategoryName;
             flow.CategoryNumber = task.CategoryNumber;
-
             flow.Specification = task.Specification;
-            flow.Batch = "";
 
             flow.StoreCount = task.StoreCount;
             flow.StoreWeight = task.StoreWeight;
             flow.FlowCount = task.OutCount;
-            flow.UnitWeight = task.UnitWeight;            
+            flow.UnitWeight = task.UnitWeight;
             flow.FlowWeight = task.OutWeight;
 
             flow.FlowDate = task.OutTime;
 
             flow.Type = StockFlowType.StockOut;
+            flow.WarehouseType = task.WarehouseType;
 
             return flow;
         }
@@ -199,7 +197,7 @@ namespace Phoebe.Core.Service
             StockInTaskViewBusiness stockInTaskViewBusiness = new StockInTaskViewBusiness();
             var stockInTasks = stockInTaskViewBusiness.Query(r => r.CustomerId == customerId && r.InTime >= startTime && r.InTime <= endTime, db);
 
-            foreach(var item in stockInTasks)
+            foreach (var item in stockInTasks)
             {
                 var flow = StockInToStockFlow(item);
                 data.Add(flow);
@@ -208,13 +206,13 @@ namespace Phoebe.Core.Service
             StockOutTaskViewBusiness stockOutTaskViewBusiness = new StockOutTaskViewBusiness();
             var stockOutTasks = stockOutTaskViewBusiness.Query(r => r.CustomerId == customerId && r.OutTime >= startTime && r.OutTime <= endTime, db);
 
-            foreach(var item in stockOutTasks)
+            foreach (var item in stockOutTasks)
             {
                 var flow = StockOutToStockFlow(item);
                 data.Add(flow);
             }
 
-            return data;
+            return data.OrderBy(r => r.FlowDate).ToList();
         }
         #endregion //Method
     }

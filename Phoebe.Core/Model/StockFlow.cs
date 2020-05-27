@@ -55,7 +55,7 @@ namespace Phoebe.Core.Model
         /// <summary>
         /// 货品名称
         /// </summary>
-        public string CargoName { get; set; }      
+        public string CargoName { get; set; }
 
         /// <summary>
         /// 类别编码
@@ -71,11 +71,6 @@ namespace Phoebe.Core.Model
         /// 规格
         /// </summary>
         public string Specification { get; set; }
-
-        /// <summary>
-        /// 批次
-        /// </summary>
-        public string Batch { get; set; }
 
         /// <summary>
         /// 在库数量
@@ -114,6 +109,11 @@ namespace Phoebe.Core.Model
         /// 流水类型
         /// </summary>
         public StockFlowType Type { get; set; }
+
+        /// <summary>
+        /// 仓库类型
+        /// </summary>
+        public int WarehouseType { get; set; }
         #endregion //Property
     }
 }

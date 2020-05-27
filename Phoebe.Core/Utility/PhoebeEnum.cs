@@ -188,25 +188,7 @@ namespace Phoebe.Core.Utility
         /// 出库
         /// </summary>
         [Display(Name = "出库")]
-        StockOut = 2,
-
-        /// <summary>
-        /// 移库
-        /// </summary>
-        [Display(Name = "移库")]
-        StockMove = 3,
-
-        /// <summary>
-        /// 移入
-        /// </summary>
-        [Display(Name = "移入")]
-        StockMoveIn = 4,
-
-        /// <summary>
-        /// 移出
-        /// </summary>
-        [Display(Name = "移出")]
-        StockMoveOut = 5
+        StockOut = 2
     }
 
     /// <summary>
@@ -236,7 +218,7 @@ namespace Phoebe.Core.Utility
         /// 冰块合同
         /// </summary>
         [Display(Name = "冰块合同")]
-        Ice = 4        
+        Ice = 4
     }
 
     /// <summary>
