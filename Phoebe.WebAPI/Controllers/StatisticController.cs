@@ -22,7 +22,7 @@ namespace Phoebe.WebAPI.Controllers
     {
         #region Action
         /// <summary>
-        /// 获取日冷藏费记录
+        /// 获取合同一段时间内所有费用记录
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>

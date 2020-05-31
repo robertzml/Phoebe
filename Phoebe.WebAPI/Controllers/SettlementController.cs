@@ -13,6 +13,7 @@ namespace Phoebe.WebAPI.Controllers
     using Phoebe.Core.Entity;
     using Phoebe.Core.View;
     using Phoebe.WebAPI.Model;
+    using Phoebe.Core.Model;
 
     /// <summary>
     /// 结算控制器
@@ -118,8 +119,8 @@ namespace Phoebe.WebAPI.Controllers
         [HttpGet]
         public ActionResult<List<InBillingView>> GetPeriodInBilling(int customerId, DateTime startTime, DateTime endTime)
         {
-            SettlementService settlementService = new SettlementService();
-            return settlementService.GetPeriodInBilling(customerId, startTime, endTime);
+            ExpenseService expenseService = new ExpenseService();
+            return expenseService.GetPeriodInBilling(customerId, startTime, endTime);
         }
 
         /// <summary>
@@ -132,8 +133,33 @@ namespace Phoebe.WebAPI.Controllers
         [HttpGet]
         public ActionResult<List<OutBillingView>> GetPeriodOutBilling(int customerId, DateTime startTime, DateTime endTime)
         {
-            SettlementService settlementService = new SettlementService();
-            return settlementService.GetPeriodOutBilling(customerId, startTime, endTime);
+            ExpenseService expenseService = new ExpenseService();
+            return expenseService.GetPeriodOutBilling(customerId, startTime, endTime);
+        }
+
+        /// <summary>
+        /// 获取冷藏费用
+        /// </summary>
+        /// <param name="customerId"></param>
+        /// <param name="startTime"></param>
+        /// <param name="endTime"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult<List<ColdSettlement>> GetPeriodColdFee(int customerId, DateTime startTime, DateTime endTime)
+        {
+            ContractViewBusiness contractViewBusiness = new ContractViewBusiness();
+            var contracts = contractViewBusiness.Query(r => r.CustomerId == customerId);
+
+            ExpenseService expenseService = new ExpenseService();
+            List<ColdSettlement> data = new List<ColdSettlement>();
+
+            foreach (var contract in contracts)
+            {
+                var settle = expenseService.GetPeriodColdFee(contract, startTime, endTime);
+                data.Add(settle);
+            }
+
+            return data;
         }
         #endregion //Query
     }

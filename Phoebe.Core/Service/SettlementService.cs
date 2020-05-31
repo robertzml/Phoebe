@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Phoebe.Core.Service
@@ -21,66 +22,48 @@ namespace Phoebe.Core.Service
     {
         #region Method
         /// <summary>
-        /// 获取客户一段时间内入库费用
+        /// 获取客户欠款信息
         /// </summary>
         /// <param name="customerId">客户ID</param>
-        /// <param name="startTime">开始日期</param>
-        /// <param name="endTime">结束日期</param>
+        /// <param name="start">开始日期</param>
+        /// <param name="end">结束日期</param>
         /// <returns></returns>
-        public List<InBillingView> GetPeriodInBilling(int customerId, DateTime startTime, DateTime endTime)
+        public Debt GetDebt(int customerId, DateTime start, DateTime end)
         {
             try
             {
                 var db = GetInstance();
 
+                CustomerBusiness customerBusiness = new CustomerBusiness();
+                var customer = customerBusiness.FindById(customerId, db);
+
+                Debt debt = new Debt();
+                debt.CustomerId = customerId;
+                debt.CustomerNumber = customer.Number;
+                debt.CustomerName = customer.Name;
+                debt.StartTime = start;
+                debt.EndTime = end;
+                debt.SettleFee = 0;
+                debt.UnSettleFee = 0;
+
+                // 获取已结算记录
+                SettlementBusiness settlementBusiness = new SettlementBusiness();
+                var settles = settlementBusiness.Query(r => r.CustomerId == customerId && r.EndTime <= end, db).OrderByDescending(r => r.EndTime);
+                if (settles.Count() != 0)
+                {
+                    debt.SettleFee = settles.Sum(r => r.DueFee);
+
+                    var last = settles.First();
+                    start = last.EndTime.AddDays(1);
+                }
+
+                // 获取合同信息
                 ContractViewBusiness contractViewBusiness = new ContractViewBusiness();
                 var contracts = contractViewBusiness.Query(r => r.CustomerId == customerId, db);
 
-                List<InBillingView> data = new List<InBillingView>();
-
-                InBillingViewBusiness inBillingViewBusiness = new InBillingViewBusiness();
-                foreach (var contract in contracts)
-                {
-                    var billings = inBillingViewBusiness.FindPeriod(contract.Id, startTime, endTime);
-                    data.AddRange(billings);
-                }
-
-                return data;
+                return debt;
             }
-            catch (Exception e)
-            {               
-                return null;
-            }
-        }
-
-        /// <summary>
-        /// 获取客户一段时间内出库费用
-        /// </summary>
-        /// <param name="customerId">客户ID</param>
-        /// <param name="startTime">开始日期</param>
-        /// <param name="endTime">结束日期</param>
-        /// <returns></returns>
-        public List<OutBillingView> GetPeriodOutBilling(int customerId, DateTime startTime, DateTime endTime)
-        {
-            try
-            {
-                var db = GetInstance();
-
-                ContractViewBusiness contractViewBusiness = new ContractViewBusiness();
-                var contracts = contractViewBusiness.Query(r => r.CustomerId == customerId, db);
-
-                List<OutBillingView> data = new List<OutBillingView>();
-
-                OutBillingViewBusiness outBillingViewBusiness = new OutBillingViewBusiness();
-                foreach (var contract in contracts)
-                {
-                    var billings = outBillingViewBusiness.FindPeriod(contract.Id, startTime, endTime);
-                    data.AddRange(billings);
-                }
-
-                return data;
-            }
-            catch (Exception e)
+            catch (Exception)
             {
                 return null;
             }
