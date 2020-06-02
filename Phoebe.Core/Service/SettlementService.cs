@@ -61,6 +61,35 @@ namespace Phoebe.Core.Service
                 ContractViewBusiness contractViewBusiness = new ContractViewBusiness();
                 var contracts = contractViewBusiness.Query(r => r.CustomerId == customerId, db);
 
+                ExpenseService expenseService = new ExpenseService();
+
+                if (start < end)
+                {
+                    // 获取冷藏费用
+                    foreach (var contract in contracts)
+                    {
+                        var cold = expenseService.GetPeriodColdFee(contract, start, end);
+                        debt.UnSettleFee += cold.ColdFee;
+                    }
+
+                    // 获取入库费用
+                    var inBillings = expenseService.GetPeriodInBilling(customerId, start, end);
+                    debt.UnSettleFee += inBillings.Sum(r => r.Amount);
+
+                    // 获取出库费用
+                    var outBillings = expenseService.GetPeriodOutBilling(customerId, start, end);
+                    debt.UnSettleFee += outBillings.Sum(r => r.Amount);
+                }
+
+                // 获取付款数据
+                PaymentBusiness paymentBusiness = new PaymentBusiness();
+                var payments = paymentBusiness.Query(r => r.CustomerId == customerId && r.PaidTime <= end);
+                if (payments.Count() != 0)
+                    debt.PaidFee = payments.Sum(r => r.PaidFee);
+
+                debt.SumFee = debt.SettleFee + debt.UnSettleFee;
+                debt.DebtFee = debt.SumFee - debt.PaidFee;
+
                 return debt;
             }
             catch (Exception)
@@ -70,5 +99,4 @@ namespace Phoebe.Core.Service
         }
         #endregion //Method
     }
-}
- 
+} 

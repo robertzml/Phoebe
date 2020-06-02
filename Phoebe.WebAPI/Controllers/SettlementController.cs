@@ -161,6 +161,20 @@ namespace Phoebe.WebAPI.Controllers
 
             return data;
         }
+
+        /// <summary>
+        /// 获取客户欠费
+        /// </summary>
+        /// <param name="customerId"></param>
+        /// <param name="startTime"></param>
+        /// <param name="endTime"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult<Debt> GetDebt(int customerId, DateTime startTime, DateTime endTime)
+        {
+            SettlementService settlementService = new SettlementService();
+            return settlementService.GetDebt(customerId, startTime, endTime);
+        }
         #endregion //Query
     }
 }
