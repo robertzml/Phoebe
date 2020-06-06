@@ -54,11 +54,31 @@ namespace Phoebe.WebAPI.Controllers
         /// <param name="startTime"></param>
         /// <param name="endTime"></param>
         /// <returns></returns>
+        [HttpGet]
         public ActionResult<List<StockFlow>> GetCustomerStockFlow(int customerId, DateTime startTime, DateTime endTime)
         {
             StatisticService statisticService = new StatisticService();
 
             return statisticService.GetCustomerStockFlow(customerId, startTime, endTime);
+        }
+
+        /// <summary>
+        /// 获取客户费用报表
+        /// </summary>
+        /// <param name="customerId"></param>
+        /// <param name="startTime"></param>
+        /// <param name="endTime"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult<List<CustomerFee>> GetCustomerFee(int customerId, DateTime startTime, DateTime endTime)
+        {
+            SettlementService settlementService = new SettlementService();
+            var fee = settlementService.GetCustomerFee(customerId, startTime, endTime);
+
+            List<CustomerFee> data = new List<CustomerFee>();
+            data.Add(fee);
+
+            return data;
         }
         #endregion //Action
     }

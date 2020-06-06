@@ -97,6 +97,90 @@ namespace Phoebe.Core.Service
                 return null;
             }
         }
+
+        /// <summary>
+        /// 获取客户费用情况
+        /// </summary>
+        /// <param name="customerId">客户ID</param>
+        /// <param name="start">开始日期</param>
+        /// <param name="end">结束日期</param>
+        /// <returns></returns>
+        public CustomerFee GetCustomerFee(int customerId, DateTime start, DateTime end)
+        {
+            try
+            {
+                var db = GetInstance();
+
+                var customerFee = new CustomerFee();
+
+                CustomerBusiness customerBusiness = new CustomerBusiness();
+                var customer = customerBusiness.FindById(customerId, db);
+
+                customerFee.CustomerId = customer.Id;
+                customerFee.CustomerNumber = customer.Number;
+                customerFee.CustomerName = customer.Name;
+                customerFee.StartTime = start;
+                customerFee.EndTime = end;
+                customerFee.BaseFee = 0;
+
+                // 获取合同信息
+                ContractViewBusiness contractViewBusiness = new ContractViewBusiness();
+                var contracts = contractViewBusiness.Query(r => r.CustomerId == customerId, db);
+
+                if (contracts.Count == 0)
+                    return customerFee;
+
+                DateTime beginTime = contracts.Min(r => r.SignDate);
+                DateTime lastTime = start.AddDays(-1);
+
+                // 获取以前欠款
+                var debt = GetDebt(customer.Id, beginTime, lastTime);
+                customerFee.StartDebt = debt.DebtFee;
+
+                // 获取当前费用
+                ExpenseService expenseService = new ExpenseService();
+
+                // 获取冷藏费用
+                foreach (var contract in contracts)
+                {
+                    var cold = expenseService.GetPeriodColdFee(contract, start, end);
+                    customerFee.ColdFee = cold.ColdFee;
+                }
+
+                // 获取入库费用
+                var inBillings = expenseService.GetPeriodInBilling(customerId, start, end);
+                customerFee.BaseFee += inBillings.Sum(r => r.Amount);
+
+                // 获取出库费用
+                var outBillings = expenseService.GetPeriodOutBilling(customerId, start, end);
+                customerFee.BaseFee += outBillings.Sum(r => r.Amount);
+
+                customerFee.TotalFee = customerFee.StartDebt + customerFee.BaseFee + customerFee.ColdFee + customerFee.MiscFee;
+
+                // 获取缴费
+                PaymentBusiness paymentBusiness = new PaymentBusiness();
+                var payments = paymentBusiness.Query(r => r.CustomerId == customerId && r.PaidTime >= start && r.PaidTime <= end, db);
+                if (payments.Count() != 0)
+                    customerFee.ReceiveFee = payments.Sum(r => r.PaidFee);
+
+                // 获取当前结算
+                SettlementBusiness settlementBusiness = new SettlementBusiness();
+
+                var currSettle = settlementBusiness.Query(r => r.CustomerId == customerId && r.EndTime >= start && r.EndTime <= end, db);
+                if (currSettle.Count() != 0)
+                {
+                    customerFee.Discount = currSettle.Sum(r => r.Remission);
+                }
+
+                customerFee.EndDebt = customerFee.TotalFee - customerFee.ReceiveFee - customerFee.Discount;
+
+                return customerFee;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
         #endregion //Method
     }
-} 
+}
