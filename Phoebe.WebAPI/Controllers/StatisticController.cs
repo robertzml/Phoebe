@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Phoebe.WebAPI.Controllers
 {
+    using Phoebe.Core.BL;
     using Phoebe.Core.DL;
     using Phoebe.Core.View;
     using Phoebe.Core.Model;
@@ -73,12 +74,32 @@ namespace Phoebe.WebAPI.Controllers
         public ActionResult<List<CustomerFee>> GetCustomerFee(int customerId, DateTime startTime, DateTime endTime)
         {
             SettlementService settlementService = new SettlementService();
-            var fee = settlementService.GetCustomerFee(customerId, startTime, endTime);
 
-            List<CustomerFee> data = new List<CustomerFee>();
-            data.Add(fee);
+            if (customerId == 0)
+            {
+                CustomerBusiness customerBusiness = new CustomerBusiness();
+                var customers = customerBusiness.FindAll();
 
-            return data;
+                List<CustomerFee> data = new List<CustomerFee>();
+
+                foreach (var customer in customers)
+                {
+                    var fee = settlementService.GetCustomerFee(customer.Id, startTime, endTime);
+                    if (fee.StartDebt != 0 || fee.EndDebt != 0)
+                        data.Add(fee);
+                }
+
+                return data;
+            }
+            else
+            {
+                var fee = settlementService.GetCustomerFee(customerId, startTime, endTime);
+
+                List<CustomerFee> data = new List<CustomerFee>();
+                data.Add(fee);
+
+                return data;
+            }
         }
         #endregion //Action
     }

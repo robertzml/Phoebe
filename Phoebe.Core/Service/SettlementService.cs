@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Phoebe.Core.Service
 {
+    using SqlSugar;
     using Phoebe.Base.Framework;
     using Phoebe.Base.System;
     using Phoebe.Core.Billing;
@@ -28,11 +29,12 @@ namespace Phoebe.Core.Service
         /// <param name="start">开始日期</param>
         /// <param name="end">结束日期</param>
         /// <returns></returns>
-        public Debt GetDebt(int customerId, DateTime start, DateTime end)
+        public Debt GetDebt(int customerId, DateTime start, DateTime end, SqlSugarClient db = null)
         {
             try
             {
-                var db = GetInstance();
+                if (db == null)
+                    db = GetInstance();
 
                 CustomerBusiness customerBusiness = new CustomerBusiness();
                 var customer = customerBusiness.FindById(customerId, db);
@@ -68,7 +70,7 @@ namespace Phoebe.Core.Service
                     // 获取冷藏费用
                     foreach (var contract in contracts)
                     {
-                        var cold = expenseService.GetPeriodColdFee(contract, start, end);
+                        var cold = expenseService.GetPeriodColdFee(contract, start, end, db);
                         debt.UnSettleFee += cold.ColdFee;
                     }
 
@@ -92,7 +94,7 @@ namespace Phoebe.Core.Service
 
                 return debt;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return null;
             }
@@ -134,7 +136,7 @@ namespace Phoebe.Core.Service
                 DateTime lastTime = start.AddDays(-1);
 
                 // 获取以前欠款
-                var debt = GetDebt(customer.Id, beginTime, lastTime);
+                var debt = GetDebt(customer.Id, beginTime, lastTime, db);
                 customerFee.StartDebt = debt.DebtFee;
 
                 // 获取当前费用
@@ -176,7 +178,7 @@ namespace Phoebe.Core.Service
 
                 return customerFee;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return null;
             }
