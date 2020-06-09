@@ -20,7 +20,10 @@ namespace Phoebe.Core.BL
             if (db == null)
                 db = GetInstance();
 
+            SequenceRecordBusiness recordBusiness = new SequenceRecordBusiness();
+
             entity.Id = Guid.NewGuid().ToString();
+            entity.TicketNumber = recordBusiness.GetNextSequence(db, "Payment", entity.PaidTime);
             entity.CreateTime = DateTime.Now;
             entity.Status = 0;
 
