@@ -23,6 +23,40 @@ namespace Phoebe.Core.Service
     {
         #region Method
         /// <summary>
+        /// 获取客户实时欠费
+        /// </summary>
+        /// <param name="customerId">客户ID</param>
+        /// <returns></returns>
+        public Debt GetDebt(int customerId)
+        {
+            var db = GetInstance();
+
+            // 获取合同信息
+            ContractViewBusiness contractViewBusiness = new ContractViewBusiness();
+            var contracts = contractViewBusiness.Query(r => r.CustomerId == customerId, db);
+            if (contracts.Count == 0)
+            {
+                Debt debt = new Debt();
+
+                // 获取客户信息
+                CustomerBusiness customerBusiness = new CustomerBusiness();
+                var customer = customerBusiness.FindById(customerId, db);
+
+                debt.CustomerId = customerId;
+                debt.CustomerNumber = customer.Number;
+                debt.CustomerName = customer.Name;
+
+                return debt;
+            }
+
+            DateTime start = contracts.Min(r => r.SignDate);
+            DateTime end = DateTime.Now.Date;
+
+            var deb = this.GetDebt(customerId, start, end, db);
+            return deb;
+        }
+
+        /// <summary>
         /// 获取客户欠款信息
         /// </summary>
         /// <param name="customerId">客户ID</param>
@@ -59,28 +93,30 @@ namespace Phoebe.Core.Service
                     start = last.EndTime.AddDays(1);
                 }
 
-                // 获取合同信息
-                ContractViewBusiness contractViewBusiness = new ContractViewBusiness();
-                var contracts = contractViewBusiness.Query(r => r.CustomerId == customerId, db);
-
-                ExpenseService expenseService = new ExpenseService();
-
                 if (start < end)
                 {
+                    // 获取入库费用
+                    InBillingViewBusiness inBillingViewBusiness = new InBillingViewBusiness();
+                    var inBillings = inBillingViewBusiness.FindPeriodByCustomer(customerId, start, end, db);
+                    debt.UnSettleFee += inBillings.Sum(r => r.Amount);
+
+                    // 获取出库费用
+                    OutBillingViewBusiness outBillingViewBusiness = new OutBillingViewBusiness();
+                    var outBillings = outBillingViewBusiness.FindPeriodByCustomer(customerId, start, end, db);
+                    debt.UnSettleFee += outBillings.Sum(r => r.Amount);
+
+                    // 获取合同信息
+                    ContractViewBusiness contractViewBusiness = new ContractViewBusiness();
+                    var contracts = contractViewBusiness.Query(r => r.CustomerId == customerId, db);
+
+                    ExpenseService expenseService = new ExpenseService();
+
                     // 获取冷藏费用
                     foreach (var contract in contracts)
                     {
                         var cold = expenseService.GetPeriodColdFee(contract, start, end, db);
                         debt.UnSettleFee += cold.ColdFee;
                     }
-
-                    // 获取入库费用
-                    var inBillings = expenseService.GetPeriodInBilling(customerId, start, end);
-                    debt.UnSettleFee += inBillings.Sum(r => r.Amount);
-
-                    // 获取出库费用
-                    var outBillings = expenseService.GetPeriodOutBilling(customerId, start, end);
-                    debt.UnSettleFee += outBillings.Sum(r => r.Amount);
                 }
 
                 // 获取付款数据

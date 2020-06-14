@@ -119,8 +119,8 @@ namespace Phoebe.WebAPI.Controllers
         [HttpGet]
         public ActionResult<List<InBillingView>> GetPeriodInBilling(int customerId, DateTime startTime, DateTime endTime)
         {
-            ExpenseService expenseService = new ExpenseService();
-            return expenseService.GetPeriodInBilling(customerId, startTime, endTime);
+            InBillingViewBusiness inBillingViewBusiness = new InBillingViewBusiness();
+            return inBillingViewBusiness.FindPeriodByCustomer(customerId, startTime, endTime);
         }
 
         /// <summary>
@@ -133,8 +133,8 @@ namespace Phoebe.WebAPI.Controllers
         [HttpGet]
         public ActionResult<List<OutBillingView>> GetPeriodOutBilling(int customerId, DateTime startTime, DateTime endTime)
         {
-            ExpenseService expenseService = new ExpenseService();
-            return expenseService.GetPeriodOutBilling(customerId, startTime, endTime);
+            OutBillingViewBusiness outBillingViewBusiness = new OutBillingViewBusiness();
+            return outBillingViewBusiness.FindPeriodByCustomer(customerId, startTime, endTime);
         }
 
         /// <summary>
@@ -163,17 +163,15 @@ namespace Phoebe.WebAPI.Controllers
         }
 
         /// <summary>
-        /// 获取客户欠费
+        /// 获取客户实时欠费
         /// </summary>
         /// <param name="customerId"></param>
-        /// <param name="startTime"></param>
-        /// <param name="endTime"></param>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult<Debt> GetDebt(int customerId, DateTime startTime, DateTime endTime)
+        public ActionResult<Debt> GetDebt(int customerId)
         {
             SettlementService settlementService = new SettlementService();
-            return settlementService.GetDebt(customerId, startTime, endTime);
+            return settlementService.GetDebt(customerId);
         }
         #endregion //Query
     }
