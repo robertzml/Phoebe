@@ -116,6 +116,22 @@ namespace Phoebe.Core.Billing
         {
             return Math.Round(totalMeter * unitPrice * days, 3);
         }
+
+        /// <summary>
+        /// 计算库存周期冷藏费
+        /// </summary>
+        /// <param name="storeView">仓位库库存</param>
+        /// <param name="unitPrice">单价</param>
+        /// <param name="startTime">开始日期</param>
+        /// <param name="endTime">结束日期</param>
+        /// <returns></returns>
+        public decimal CalculatePeriodFee(StoreView storeView, decimal unitPrice, DateTime startTime, DateTime endTime)
+        {
+            var start = storeView.InTime > startTime ? storeView.InTime : startTime;
+            var end = storeView.OutTime < endTime ? storeView.OutTime.Value : endTime;
+         
+            return Math.Round(storeView.StoreWeight * unitPrice * end.Subtract(start).Days, 3);
+        }
         #endregion //Override
     }
 }

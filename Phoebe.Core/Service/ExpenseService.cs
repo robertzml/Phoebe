@@ -169,74 +169,40 @@ namespace Phoebe.Core.Service
 
             return settle;
         }
+
+        public ColdSettlement GetPeriodColdFee(int contractId, DateTime startTime, DateTime endTime, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            ContractViewBusiness contractViewBusiness = new ContractViewBusiness();
+            var contract = contractViewBusiness.FindById(contractId, db);
+
+            StoreViewBusiness storeViewBusiness = new StoreViewBusiness();
+            NormalStoreViewBusiness normalStoreViewBusiness = new NormalStoreViewBusiness();
+
+            IContract contractBill = ContractFactory.Create((ContractType)contract.Type);
+            IBillingProcess billingProcess = BillingFactory.Create((BillingType)contract.BillingType);
+
+            var totalColdFee = 0m;
+
+            // 获取仓位库库存
+            var stores = storeViewBusiness.Query(r => r.ContractId == contractId && r.OutTime > startTime && r.InTime <= endTime, db);
+            var totalMeter = billingProcess.GetTotalMeter(stores);
+            var dailyFee = billingProcess.CalculateDailyFee(totalMeter, contract.UnitPrice);
+
+            totalColdFee += dailyFee;
+
+            ColdSettlement settle = new ColdSettlement();
+            settle.ContractId = contract.Id;
+            settle.ContractName = contract.Name;
+            settle.StartTime = startTime;
+            settle.EndTime = endTime;
+            settle.UnitPrice = contract.UnitPrice;
+            settle.ColdFee = totalColdFee;
+
+            return settle;
+        }
         #endregion // Cold Fee
-
-        #region Billings
-        /// <summary>
-        /// 获取客户一段时间内入库费用
-        /// </summary>
-        /// <param name="customerId">客户ID</param>
-        /// <param name="startTime">开始日期</param>
-        /// <param name="endTime">结束日期</param>
-        /// <returns></returns>
-        public List<InBillingView> GetPeriodInBilling(int customerId, DateTime startTime, DateTime endTime)
-        {
-            try
-            {
-                var db = GetInstance();
-
-                ContractViewBusiness contractViewBusiness = new ContractViewBusiness();
-                var contracts = contractViewBusiness.Query(r => r.CustomerId == customerId, db);
-
-                List<InBillingView> data = new List<InBillingView>();
-
-                InBillingViewBusiness inBillingViewBusiness = new InBillingViewBusiness();
-                foreach (var contract in contracts)
-                {
-                    var billings = inBillingViewBusiness.FindPeriod(contract.Id, startTime, endTime);
-                    data.AddRange(billings);
-                }
-
-                return data;
-            }
-            catch (Exception e)
-            {
-                return null;
-            }
-        }
-
-        /// <summary>
-        /// 获取客户一段时间内出库费用
-        /// </summary>
-        /// <param name="customerId">客户ID</param>
-        /// <param name="startTime">开始日期</param>
-        /// <param name="endTime">结束日期</param>
-        /// <returns></returns>
-        public List<OutBillingView> GetPeriodOutBilling(int customerId, DateTime startTime, DateTime endTime)
-        {
-            try
-            {
-                var db = GetInstance();
-
-                ContractViewBusiness contractViewBusiness = new ContractViewBusiness();
-                var contracts = contractViewBusiness.Query(r => r.CustomerId == customerId, db);
-
-                List<OutBillingView> data = new List<OutBillingView>();
-
-                OutBillingViewBusiness outBillingViewBusiness = new OutBillingViewBusiness();
-                foreach (var contract in contracts)
-                {
-                    var billings = outBillingViewBusiness.FindPeriod(contract.Id, startTime, endTime);
-                    data.AddRange(billings);
-                }
-
-                return data;
-            }
-            catch (Exception e)
-            {
-                return null;
-            }
-        }
-        #endregion //Billings
     }
 }

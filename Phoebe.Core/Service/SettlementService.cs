@@ -186,11 +186,13 @@ namespace Phoebe.Core.Service
                 }
 
                 // 获取入库费用
-                var inBillings = expenseService.GetPeriodInBilling(customerId, start, end);
+                InBillingViewBusiness inBillingViewBusiness = new InBillingViewBusiness();
+                var inBillings = inBillingViewBusiness.FindPeriodByCustomer(customerId, start, end, db);
                 customerFee.BaseFee += inBillings.Sum(r => r.Amount);
 
                 // 获取出库费用
-                var outBillings = expenseService.GetPeriodOutBilling(customerId, start, end);
+                OutBillingViewBusiness outBillingViewBusiness = new OutBillingViewBusiness();
+                var outBillings = outBillingViewBusiness.FindPeriodByCustomer(customerId, start, end, db);
                 customerFee.BaseFee += outBillings.Sum(r => r.Amount);
 
                 customerFee.TotalFee = customerFee.StartDebt + customerFee.BaseFee + customerFee.ColdFee + customerFee.MiscFee;
