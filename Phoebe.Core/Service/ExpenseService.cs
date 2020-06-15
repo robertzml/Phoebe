@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Phoebe.Core.Service
@@ -14,6 +15,7 @@ namespace Phoebe.Core.Service
     using Phoebe.Core.View;
     using Phoebe.Core.Model;
     using Phoebe.Core.Utility;
+    using System.Runtime.InteropServices.WindowsRuntime;
 
     /// <summary>
     /// 计费服务类
@@ -203,6 +205,231 @@ namespace Phoebe.Core.Service
 
             return settle;
         }
+
+        /// <summary>
+        /// 获取客户一段时间冷藏费
+        /// </summary>
+        /// <param name="customerId">客户ID</param>
+        /// <param name="startTime">开始日期</param>
+        /// <param name="endTime">结束日期</param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        public List<ColdSettlement> GetPeriodColdFeeByCustomer(int customerId, DateTime startTime, DateTime endTime, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            List<ColdSettlement> data = new List<ColdSettlement>();
+
+            try
+            {
+                ContractViewBusiness contractViewBusiness = new ContractViewBusiness();
+                var contracts = contractViewBusiness.Query(r => r.CustomerId == customerId, db);
+
+                foreach (var contract in contracts)
+                {
+                    var settle = GetPeriodColdFee(contract, startTime, endTime, db);
+                    data.Add(settle);
+                }
+
+                return data;
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
         #endregion // Cold Fee
+
+        #region Debt
+        /// <summary>
+        /// 获取客户欠款信息
+        /// </summary>
+        /// <param name="customer">客户</param>
+        /// <param name="start">开始日期</param>
+        /// <param name="end">结束日期</param>
+        /// <returns></returns>
+        public Debt GetDebt(Customer customer, DateTime start, DateTime end, SqlSugarClient db = null)
+        {
+            try
+            {
+                if (db == null)
+                    db = GetInstance();
+
+                Debt debt = new Debt();
+                debt.CustomerId = customer.Id;
+                debt.CustomerNumber = customer.Number;
+                debt.CustomerName = customer.Name;
+                debt.StartTime = start;
+                debt.EndTime = end;
+                debt.SettleFee = 0;
+                debt.UnSettleFee = 0;
+
+                // 获取已结算记录
+                SettlementBusiness settlementBusiness = new SettlementBusiness();
+                var settles = settlementBusiness.Query(r => r.CustomerId == customer.Id && r.EndTime <= end, db)
+                    .OrderByDescending(r => r.EndTime);
+                if (settles.Count() != 0)
+                {
+                    debt.SettleFee = settles.Sum(r => r.DueFee);
+
+                    var last = settles.First();
+                    start = last.EndTime.AddDays(1);
+                }
+
+                if (start < end)
+                {
+                    // 获取入库费用
+                    InBillingViewBusiness inBillingViewBusiness = new InBillingViewBusiness();
+                    var inBillings = inBillingViewBusiness.FindPeriodByCustomer(customer.Id, start, end, db);
+                    debt.UnSettleFee += inBillings.Sum(r => r.Amount);
+
+                    // 获取出库费用
+                    OutBillingViewBusiness outBillingViewBusiness = new OutBillingViewBusiness();
+                    var outBillings = outBillingViewBusiness.FindPeriodByCustomer(customer.Id, start, end, db);
+                    debt.UnSettleFee += outBillings.Sum(r => r.Amount);
+
+                    // 获取冷藏费用
+                    var coldSettlement = GetPeriodColdFeeByCustomer(customer.Id, start, end, db);
+                    debt.UnSettleFee += coldSettlement.Sum(r => r.ColdFee);
+                }
+
+                // 获取付款数据
+                PaymentBusiness paymentBusiness = new PaymentBusiness();
+                var payments = paymentBusiness.Query(r => r.CustomerId == customer.Id && r.PaidTime <= end);
+                if (payments.Count() != 0)
+                    debt.PaidFee = payments.Sum(r => r.PaidFee);
+
+                debt.SumFee = debt.SettleFee + debt.UnSettleFee;
+                debt.DebtFee = debt.SumFee - debt.PaidFee;
+
+                return debt;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// 获取客户实时欠费
+        /// </summary>
+        /// <param name="customerId">客户ID</param>
+        /// <returns></returns>
+        public Debt GetDebt(int customerId)
+        {
+            var db = GetInstance();
+
+            // 获取客户信息
+            CustomerBusiness customerBusiness = new CustomerBusiness();
+            var customer = customerBusiness.FindById(customerId, db);
+
+            // 获取合同信息
+            ContractViewBusiness contractViewBusiness = new ContractViewBusiness();
+            var contracts = contractViewBusiness.Query(r => r.CustomerId == customerId, db);
+            if (contracts.Count == 0)
+            {
+                Debt debt = new Debt();
+
+                debt.CustomerId = customerId;
+                debt.CustomerNumber = customer.Number;
+                debt.CustomerName = customer.Name;
+
+                return debt;
+            }
+
+            DateTime start = contracts.Min(r => r.SignDate);
+            DateTime end = DateTime.Now.Date;
+
+            var deb = this.GetDebt(customer, start, end, db);
+            return deb;
+        }
+        #endregion //Debt
+
+        #region Customer Fee
+        /// <summary>
+        /// 获取客户费用情况
+        /// </summary>
+        /// <param name="customerId">客户ID</param>
+        /// <param name="start">开始日期</param>
+        /// <param name="end">结束日期</param>
+        /// <returns></returns>
+        public CustomerFee GetCustomerFee(int customerId, DateTime start, DateTime end, SqlSugarClient db = null)
+        {
+            try
+            {
+                if (db == null)
+                    db = GetInstance();
+
+                var customerFee = new CustomerFee();
+
+                CustomerBusiness customerBusiness = new CustomerBusiness();
+                var customer = customerBusiness.FindById(customerId, db);
+
+                customerFee.CustomerId = customer.Id;
+                customerFee.CustomerNumber = customer.Number;
+                customerFee.CustomerName = customer.Name;
+                customerFee.StartTime = start;
+                customerFee.EndTime = end;
+                customerFee.BaseFee = 0;
+
+                // 获取合同信息
+                ContractViewBusiness contractViewBusiness = new ContractViewBusiness();
+                var contracts = contractViewBusiness.Query(r => r.CustomerId == customerId, db);
+
+                if (contracts.Count == 0)
+                    return customerFee;
+
+                DateTime beginTime = contracts.Min(r => r.SignDate);
+                DateTime lastTime = start.AddDays(-1);
+
+                // 获取以前欠款
+                var debt = GetDebt(customer, beginTime, lastTime, db);
+                customerFee.StartDebt = debt.DebtFee;
+
+                // 获取当前费用             
+
+                // 获取冷藏费用
+                var coldSettlement = GetPeriodColdFeeByCustomer(customer.Id, start, end, db);
+                customerFee.ColdFee = coldSettlement.Sum(r => r.ColdFee);                
+
+                // 获取入库费用
+                InBillingViewBusiness inBillingViewBusiness = new InBillingViewBusiness();
+                var inBillings = inBillingViewBusiness.FindPeriodByCustomer(customerId, start, end, db);
+                customerFee.BaseFee += inBillings.Sum(r => r.Amount);
+
+                // 获取出库费用
+                OutBillingViewBusiness outBillingViewBusiness = new OutBillingViewBusiness();
+                var outBillings = outBillingViewBusiness.FindPeriodByCustomer(customerId, start, end, db);
+                customerFee.BaseFee += outBillings.Sum(r => r.Amount);
+
+                customerFee.TotalFee = customerFee.StartDebt + customerFee.BaseFee + customerFee.ColdFee + customerFee.MiscFee;
+
+                // 获取缴费
+                PaymentBusiness paymentBusiness = new PaymentBusiness();
+                var payments = paymentBusiness.Query(r => r.CustomerId == customerId && r.PaidTime >= start && r.PaidTime <= end, db);
+                if (payments.Count() != 0)
+                    customerFee.ReceiveFee = payments.Sum(r => r.PaidFee);
+
+                // 获取当前结算
+                SettlementBusiness settlementBusiness = new SettlementBusiness();
+
+                var currSettle = settlementBusiness.Query(r => r.CustomerId == customerId && r.EndTime >= start && r.EndTime <= end, db);
+                if (currSettle.Count() != 0)
+                {
+                    customerFee.Discount = currSettle.Sum(r => r.Remission);
+                }
+
+                customerFee.EndDebt = customerFee.TotalFee - customerFee.ReceiveFee - customerFee.Discount;
+
+                return customerFee;
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
+        #endregion //Customer Fee
     }
 }

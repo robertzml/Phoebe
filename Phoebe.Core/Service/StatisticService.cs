@@ -99,14 +99,14 @@ namespace Phoebe.Core.Service
 
         #region Method
         /// <summary>
-        /// 获取合同一段时间内所有费用记录
+        /// 获取合同一段时间内所有费用项目
         /// </summary>
         /// <param name="customerId">客户ID</param>
         /// <param name="contractId">合同ID</param>
         /// <param name="startTime">开始日期</param>
         /// <param name="endTime">结束日期</param>
         /// <returns></returns>
-        public (bool success, string errorMessage, List<ExpenseRecord> data) GetPeriodExpense(int customerId, int contractId, DateTime startTime, DateTime endTime)
+        public (bool success, string errorMessage, List<ExpenseRecord> data) GetExpenseRecord(int customerId, int contractId, DateTime startTime, DateTime endTime)
         {
             var db = GetInstance();
 

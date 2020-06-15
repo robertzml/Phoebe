@@ -28,12 +28,12 @@ namespace Phoebe.WebAPI.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<ActionResult<ResponseData>> GetPeriodExpense(DailyColdFeeModel model)
+        public async Task<ActionResult<ResponseData>> GetExpenseRecord(DailyColdFeeModel model)
         {
             StatisticService statisticService = new StatisticService();
             var task = Task.Run(() =>
             {
-                var result = statisticService.GetPeriodExpense(model.CustomerId, model.ContractId, model.StartTime, model.EndTime);
+                var result = statisticService.GetExpenseRecord(model.CustomerId, model.ContractId, model.StartTime, model.EndTime);
 
                 ResponseData data = new ResponseData
                 {
@@ -64,6 +64,18 @@ namespace Phoebe.WebAPI.Controllers
         }
 
         /// <summary>
+        /// 获取客户实时欠费
+        /// </summary>
+        /// <param name="customerId">客户ID</param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult<Debt> GetDebt(int customerId)
+        {
+            ExpenseService expenseService = new ExpenseService();
+            return expenseService.GetDebt(customerId);
+        }
+
+        /// <summary>
         /// 获取客户费用报表
         /// </summary>
         /// <param name="customerId"></param>
@@ -73,7 +85,7 @@ namespace Phoebe.WebAPI.Controllers
         [HttpGet]
         public ActionResult<List<CustomerFee>> GetCustomerFee(int customerId, DateTime startTime, DateTime endTime)
         {
-            SettlementService settlementService = new SettlementService();
+            ExpenseService expenseService = new ExpenseService();
 
             if (customerId == 0)
             {
@@ -84,7 +96,7 @@ namespace Phoebe.WebAPI.Controllers
 
                 foreach (var customer in customers)
                 {
-                    var fee = settlementService.GetCustomerFee(customer.Id, startTime, endTime);
+                    var fee = expenseService.GetCustomerFee(customer.Id, startTime, endTime);
                     if (fee.StartDebt != 0 || fee.EndDebt != 0)
                         data.Add(fee);
                 }
@@ -93,7 +105,7 @@ namespace Phoebe.WebAPI.Controllers
             }
             else
             {
-                var fee = settlementService.GetCustomerFee(customerId, startTime, endTime);
+                var fee = expenseService.GetCustomerFee(customerId, startTime, endTime);
 
                 List<CustomerFee> data = new List<CustomerFee>();
                 data.Add(fee);

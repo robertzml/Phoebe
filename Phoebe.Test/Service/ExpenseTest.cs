@@ -46,5 +46,19 @@ namespace Phoebe.Test.Service
             var data = expenseService.GetPeriodColdFee(contractView, startTime, endTime);
             Assert.IsTrue(data.ColdFee > 0);
         }
+
+        [Test]
+        public void TestGetPeriodColdFeeByCustomer()
+        {
+            var data = expenseService.GetPeriodColdFeeByCustomer(customerId, startTime, endTime);
+            Assert.IsTrue(data.Count > 0);
+        }
+
+        [Test]
+        public void TestGetDebt()
+        {
+            var data = expenseService.GetDebt(customerId);
+            Assert.IsTrue(data.DebtFee > 0);
+        }
     }
 }

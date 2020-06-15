@@ -147,31 +147,8 @@ namespace Phoebe.WebAPI.Controllers
         [HttpGet]
         public ActionResult<List<ColdSettlement>> GetPeriodColdFee(int customerId, DateTime startTime, DateTime endTime)
         {
-            ContractViewBusiness contractViewBusiness = new ContractViewBusiness();
-            var contracts = contractViewBusiness.Query(r => r.CustomerId == customerId);
-
             ExpenseService expenseService = new ExpenseService();
-            List<ColdSettlement> data = new List<ColdSettlement>();
-
-            foreach (var contract in contracts)
-            {
-                var settle = expenseService.GetPeriodColdFee(contract, startTime, endTime);
-                data.Add(settle);
-            }
-
-            return data;
-        }
-
-        /// <summary>
-        /// 获取客户实时欠费
-        /// </summary>
-        /// <param name="customerId"></param>
-        /// <returns></returns>
-        [HttpGet]
-        public ActionResult<Debt> GetDebt(int customerId)
-        {
-            SettlementService settlementService = new SettlementService();
-            return settlementService.GetDebt(customerId);
+            return expenseService.GetPeriodColdFeeByCustomer(customerId, startTime, endTime);
         }
         #endregion //Query
     }
