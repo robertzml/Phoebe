@@ -84,5 +84,25 @@ namespace Phoebe.Core.Billing
         /// <param name="days">天数</param>
         /// <returns></returns>
         decimal CalculatePeriodFee(decimal totalMeter, decimal unitPrice, int days);
+
+        /// <summary>
+        /// 计算库存周期冷藏费
+        /// </summary>
+        /// <param name="storeView">仓位库库存</param>
+        /// <param name="unitPrice">单价</param>
+        /// <param name="startTime">开始日期</param>
+        /// <param name="endTime">结束日期</param>
+        /// <returns></returns>
+        decimal CalculatePeriodColdFee(StoreView storeView, decimal unitPrice, DateTime startTime, DateTime endTime);
+
+        /// <summary>
+        /// 计算库存周期冷藏费
+        /// </summary>
+        /// <param name="storeView">普通库库存</param>
+        /// <param name="unitPrice">单价</param>
+        /// <param name="startTime">开始日期</param>
+        /// <param name="endTime">结束日期</param>
+        /// <returns></returns>
+        decimal CalculatePeriodColdFee(NormalStoreView storeView, decimal unitPrice, DateTime startTime, DateTime endTime);
     }
 }

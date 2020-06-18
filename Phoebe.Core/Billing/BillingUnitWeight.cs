@@ -139,7 +139,7 @@ namespace Phoebe.Core.Billing
 
             int days = end.Subtract(start).Days;
 
-            if (storeView.OutTime <= endTime)  //未出库则计算当天冷藏费
+            if (storeView.OutTime == null || storeView.OutTime > endTime)  //未出库则计算当天冷藏费
                 days += 1;
 
             return Math.Round(storeView.StoreWeight * unitPrice * days, 3);

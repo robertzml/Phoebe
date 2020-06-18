@@ -133,6 +133,9 @@ namespace Phoebe.Core.Service
         /// <param name="startTime"></param>
         /// <param name="endTime"></param>
         /// <returns></returns>
+        /// <remarks>
+        /// 老算法，每日取库存记录
+        /// </remarks>
         public ColdSettlement GetPeriodColdFee(ContractView contract, DateTime startTime, DateTime endTime, SqlSugarClient db = null)
         {
             if (db == null)
@@ -172,13 +175,21 @@ namespace Phoebe.Core.Service
             return settle;
         }
 
-        public ColdSettlement GetPeriodColdFee(int contractId, DateTime startTime, DateTime endTime, SqlSugarClient db = null)
+        /// <summary>
+        /// 获取合同一段时间冷藏费
+        /// </summary>
+        /// <param name="contract"></param>
+        /// <param name="startTime"></param>
+        /// <param name="endTime"></param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        /// <remarks>
+        /// 新算法，先取出时间段内所有库存，再用乘法计算
+        /// </remarks>
+        public ColdSettlement GetPeriodColdFeeMulti(ContractView contract, DateTime startTime, DateTime endTime, SqlSugarClient db = null)
         {
             if (db == null)
                 db = GetInstance();
-
-            ContractViewBusiness contractViewBusiness = new ContractViewBusiness();
-            var contract = contractViewBusiness.FindById(contractId, db);
 
             StoreViewBusiness storeViewBusiness = new StoreViewBusiness();
             NormalStoreViewBusiness normalStoreViewBusiness = new NormalStoreViewBusiness();
@@ -188,12 +199,23 @@ namespace Phoebe.Core.Service
 
             var totalColdFee = 0m;
 
-            // 获取仓位库库存
-            var stores = storeViewBusiness.Query(r => r.ContractId == contractId && r.OutTime > startTime && r.InTime <= endTime, db);
-            var totalMeter = billingProcess.GetTotalMeter(stores);
-            var dailyFee = billingProcess.CalculateDailyFee(totalMeter, contract.UnitPrice);
+            // 计算仓位库库存
+            var stores = storeViewBusiness
+                .Query(r => r.ContractId == contract.Id && (r.OutTime == null || r.OutTime > startTime) && r.InTime <= endTime, db);
+            foreach (var store in stores)
+            {
+                var coldFee = billingProcess.CalculatePeriodColdFee(store, contract.UnitPrice, startTime, endTime);
+                totalColdFee += coldFee;
+            }
 
-            totalColdFee += dailyFee;
+            // 计算普通库库存
+            var normalStores = normalStoreViewBusiness
+                .Query(r => r.ContractId == contract.Id && (r.OutTime == null || r.OutTime > startTime) && r.InTime <= endTime, db);
+            foreach (var store in normalStores)
+            {
+                var coldFee = billingProcess.CalculatePeriodColdFee(store, contract.UnitPrice, startTime, endTime);
+                totalColdFee += coldFee;
+            }
 
             ColdSettlement settle = new ColdSettlement();
             settle.ContractId = contract.Id;
@@ -229,6 +251,40 @@ namespace Phoebe.Core.Service
                 foreach (var contract in contracts)
                 {
                     var settle = GetPeriodColdFee(contract, startTime, endTime, db);
+                    data.Add(settle);
+                }
+
+                return data;
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// 获取客户一段时间冷藏费
+        /// </summary>
+        /// <param name="customerId">客户ID</param>
+        /// <param name="startTime">开始日期</param>
+        /// <param name="endTime">结束日期</param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        public List<ColdSettlement> GetPeriodColdFeeMultiByCustomer(int customerId, DateTime startTime, DateTime endTime, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            List<ColdSettlement> data = new List<ColdSettlement>();
+
+            try
+            {
+                ContractViewBusiness contractViewBusiness = new ContractViewBusiness();
+                var contracts = contractViewBusiness.Query(r => r.CustomerId == customerId, db);
+
+                foreach (var contract in contracts)
+                {
+                    var settle = GetPeriodColdFeeMulti(contract, startTime, endTime, db);
                     data.Add(settle);
                 }
 

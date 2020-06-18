@@ -6,6 +6,7 @@ using Phoebe.Core.DL;
 using Phoebe.Core.Service;
 using Phoebe.Core.Entity;
 using Phoebe.Common;
+using System.Linq;
 
 namespace Phoebe.Test.Service
 {
@@ -25,7 +26,7 @@ namespace Phoebe.Test.Service
             this.customerId = 37;
             this.contractId = 1;
             this.startTime = new DateTime(2020, 5, 1);
-            this.endTime = new DateTime(2020, 6, 15);
+            this.endTime = new DateTime(2020, 6, 18);
 
             this.expenseService = new ExpenseService();
         }
@@ -36,12 +37,12 @@ namespace Phoebe.Test.Service
         [Test(Description = "测试库存冷藏费")]
         public void TestGetStoreColdFee()
         {
-            string storeId = "e07fda3d-7de8-49f3-a7bc-20486356528b";
+            string storeId = "e6c4c081-9a40-4bae-a92a-0036d84f2971";
             DateTime current = new DateTime(2020, 6, 18);
             int storeType = 2;
 
             var cold = this.expenseService.GetStoreColdFee(storeId, current, storeType);
-            Assert.AreEqual(0, cold.ColdFee);
+            Assert.AreEqual(560, cold.ColdFee);
         }
 
         [Test]
@@ -51,21 +52,31 @@ namespace Phoebe.Test.Service
             Assert.IsTrue(result.success);
         }
 
-        [Test]
+        [Test(Description = "测试计算周期冷藏费")]
         public void TestGetPeriodColdFee()
         {
             ContractViewBusiness contractViewBusiness = new ContractViewBusiness();
-            var contractView = contractViewBusiness.FindById(contractId);
+            var contractView = contractViewBusiness.FindById(2110);
 
-            var data = expenseService.GetPeriodColdFee(contractView, startTime, endTime);
-            Assert.IsTrue(data.ColdFee > 0);
+            var data1 = expenseService.GetPeriodColdFee(contractView, startTime, endTime);
+
+            Console.WriteLine(data1.ColdFee);
+
+            var data2 = expenseService.GetPeriodColdFeeMulti(contractView, startTime, endTime);
+
+            Assert.AreEqual(data1.ColdFee, data2.ColdFee);
         }
 
-        [Test]
+        [Test(Description = "测试计算客户周期冷藏费")]
         public void TestGetPeriodColdFeeByCustomer()
         {
-            var data = expenseService.GetPeriodColdFeeByCustomer(customerId, startTime, endTime);
-            Assert.IsTrue(data.Count > 0);
+            var data1 = expenseService.GetPeriodColdFeeByCustomer(customerId, startTime, endTime);
+
+            Console.WriteLine(data1.Sum(r => r.ColdFee));
+
+            var data2 = expenseService.GetPeriodColdFeeMultiByCustomer(customerId, startTime, endTime);
+
+            Assert.AreEqual(data1.Sum(r => r.ColdFee), data2.Sum(r => r.ColdFee));
         }
 
         [Test]

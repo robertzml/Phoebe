@@ -116,6 +116,16 @@ namespace Phoebe.Core.Billing
         {
             return Math.Round(totalMeter * unitPrice * days, 3);
         }
+
+        public decimal CalculatePeriodColdFee(StoreView storeView, decimal unitPrice, DateTime startTime, DateTime endTime)
+        {
+            throw new NotImplementedException();
+        }
+
+        public decimal CalculatePeriodColdFee(NormalStoreView storeView, decimal unitPrice, DateTime startTime, DateTime endTime)
+        {
+            throw new NotImplementedException();
+        }
         #endregion //Override
     }
 }
