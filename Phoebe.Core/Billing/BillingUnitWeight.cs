@@ -125,12 +125,52 @@ namespace Phoebe.Core.Billing
         /// <param name="startTime">开始日期</param>
         /// <param name="endTime">结束日期</param>
         /// <returns></returns>
-        public decimal CalculatePeriodFee(StoreView storeView, decimal unitPrice, DateTime startTime, DateTime endTime)
+        public decimal CalculatePeriodColdFee(StoreView storeView, decimal unitPrice, DateTime startTime, DateTime endTime)
         {
             var start = storeView.InTime > startTime ? storeView.InTime : startTime;
-            var end = storeView.OutTime < endTime ? storeView.OutTime.Value : endTime;
-         
-            return Math.Round(storeView.StoreWeight * unitPrice * end.Subtract(start).Days, 3);
+
+            DateTime end;
+            if (storeView.OutTime.HasValue)
+            {
+                end = storeView.OutTime.Value > endTime ? endTime : storeView.OutTime.Value;
+            }
+            else
+                end = endTime;
+
+            int days = end.Subtract(start).Days;
+
+            if (storeView.OutTime <= endTime)  //未出库则计算当天冷藏费
+                days += 1;
+
+            return Math.Round(storeView.StoreWeight * unitPrice * days, 3);
+        }
+
+        /// <summary>
+        /// 计算库存周期冷藏费
+        /// </summary>
+        /// <param name="storeView">普通库库存</param>
+        /// <param name="unitPrice">单价</param>
+        /// <param name="startTime">开始日期</param>
+        /// <param name="endTime">结束日期</param>
+        /// <returns></returns>
+        public decimal CalculatePeriodColdFee(NormalStoreView storeView, decimal unitPrice, DateTime startTime, DateTime endTime)
+        {
+            var start = storeView.InTime > startTime ? storeView.InTime : startTime;
+
+            DateTime end;
+            if (storeView.OutTime.HasValue)
+            {
+                end = storeView.OutTime.Value > endTime ? endTime : storeView.OutTime.Value;
+            }
+            else
+                end = endTime;
+
+            int days = end.Subtract(start).Days;
+
+            if (storeView.OutTime <= endTime)  //未出库则计算当天冷藏费
+                days += 1;
+
+            return Math.Round(storeView.StoreWeight * unitPrice * days, 3);
         }
         #endregion //Override
     }

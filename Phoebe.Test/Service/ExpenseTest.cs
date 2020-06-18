@@ -30,6 +30,20 @@ namespace Phoebe.Test.Service
             this.expenseService = new ExpenseService();
         }
 
+        /// <summary>
+        /// 测试库存冷藏费
+        /// </summary>
+        [Test(Description = "测试库存冷藏费")]
+        public void TestGetStoreColdFee()
+        {
+            string storeId = "e07fda3d-7de8-49f3-a7bc-20486356528b";
+            DateTime current = new DateTime(2020, 6, 18);
+            int storeType = 2;
+
+            var cold = this.expenseService.GetStoreColdFee(storeId, current, storeType);
+            Assert.AreEqual(0, cold.ColdFee);
+        }
+
         [Test]
         public void TestGetDailyColdFee()
         {

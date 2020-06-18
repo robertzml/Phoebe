@@ -14,7 +14,6 @@ namespace Phoebe.Core.Service
     using Phoebe.Core.View;
     using Phoebe.Core.Model;
     using Phoebe.Core.Utility;
-    using System.ComponentModel.DataAnnotations;
 
     /// <summary>
     /// 统计服务类
