@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using NUnit.Framework;
+using Phoebe.Core.BL;
 using Phoebe.Core.DL;
 using Phoebe.Core.Service;
 using Phoebe.Core.Entity;
@@ -25,8 +26,8 @@ namespace Phoebe.Test.Service
 
             this.customerId = 37;
             this.contractId = 1;
-            this.startTime = new DateTime(2020, 5, 1);
-            this.endTime = new DateTime(2020, 6, 18);
+            this.startTime = new DateTime(2019, 6, 1);
+            this.endTime = new DateTime(2020, 6, 22);
 
             this.expenseService = new ExpenseService();
         }
@@ -70,13 +71,50 @@ namespace Phoebe.Test.Service
         [Test(Description = "测试计算客户周期冷藏费")]
         public void TestGetPeriodColdFeeByCustomer()
         {
+            int customerId = 37;
+            var startTime = new DateTime(2020, 6, 1);
+            var endTime = new DateTime(2020, 6, 20);
+
             var data1 = expenseService.GetPeriodColdFeeByCustomer(customerId, startTime, endTime);
 
             Console.WriteLine(data1.Sum(r => r.ColdFee));
 
             var data2 = expenseService.GetPeriodColdFeeMultiByCustomer(customerId, startTime, endTime);
+            Console.WriteLine(data1.Sum(r => r.ColdFee));
 
             Assert.AreEqual(data1.Sum(r => r.ColdFee), data2.Sum(r => r.ColdFee));
+        }
+
+        [Test(Description = "测试计算客户周期冷藏费，测算耗时")]
+        public void TestGetPeriodColdFeeByCustomerForTime()
+        {
+            var data2 = expenseService.GetPeriodColdFeeByCustomer(customerId, startTime, endTime);
+            Console.WriteLine(data2.Sum(r => r.ColdFee));
+
+            Assert.Pass();
+        }
+
+        [Test(Description = "测试计算客户周期冷藏费，测算耗时")]
+        public void TestGetPeriodColdFeeByCustomerMultiForTime()
+        {
+            var data2 = expenseService.GetPeriodColdFeeMultiByCustomer(customerId, startTime, endTime);
+            Console.WriteLine(data2.Sum(r => r.ColdFee));
+
+            Assert.Pass();
+        }
+
+        [Test(Description = "测试所有客户周期冷藏费")]
+        public void TestGetAllColdFee()
+        {
+            CustomerBusiness customerBusiness = new CustomerBusiness();
+            var customers = customerBusiness.FindAll();        
+
+            foreach(var customer in customers)
+            {
+                var data = expenseService.GetPeriodColdFeeMultiByCustomer(customer.Id, startTime, endTime);
+            }
+
+            Assert.Pass();
         }
 
         [Test]
