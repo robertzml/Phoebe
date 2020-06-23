@@ -297,6 +297,70 @@ namespace Phoebe.Core.Service
         }
         #endregion // Cold Fee
 
+        #region Expense Record
+        /// <summary>
+        /// 获取合同一段时间内所有费用项目
+        /// </summary>
+        /// <param name="customerId">客户ID</param>
+        /// <param name="contractId">合同ID</param>
+        /// <param name="startTime">开始日期</param>
+        /// <param name="endTime">结束日期</param>
+        /// <returns></returns>
+        public (bool success, string errorMessage, List<ExpenseRecord> data) GetExpenseRecord(int customerId, int contractId, DateTime startTime, DateTime endTime)
+        {
+            var db = GetInstance();
+
+            var contractViewBusiness = new ContractViewBusiness();
+            var contract = contractViewBusiness.FindById(contractId, db);
+
+            if (contract.CustomerId != customerId)
+            {
+                return (false, "合同不属于该客户", null);
+            }
+            if (startTime > endTime)
+            {
+                return (false, "开始日期大于结束日期", null);
+            }
+
+            List<ExpenseRecord> data = new List<ExpenseRecord>();
+
+            // 计算冷藏费
+            var coldSettlement = GetPeriodColdFeeMulti(contract, startTime, endTime, db);
+
+            ExpenseItemBusiness expenseItemBusiness = new ExpenseItemBusiness();
+            ExpenseRecord coldRecord = new ExpenseRecord();
+            var coldItem = expenseItemBusiness.Single(r => r.Code == PhoebeConstant.ColdFeeNumber, db);
+            coldRecord.Code = coldItem.Code;
+            coldRecord.Name = coldItem.Name;
+            coldRecord.Type = coldItem.Type;
+            coldRecord.Amount = coldSettlement.ColdFee;
+            data.Add(coldRecord);
+
+            // 获取其它费用
+            InBillingViewBusiness inBillingViewBusiness = new InBillingViewBusiness();
+            OutBillingViewBusiness outBillingViewBusiness = new OutBillingViewBusiness();
+
+            var inBillings = inBillingViewBusiness.FindPeriod(contractId, startTime, endTime, db);
+            var outBillings = outBillingViewBusiness.FindPeriod(contractId, startTime, endTime, db);
+
+            var expenseItems = expenseItemBusiness.Query(r => r.Code != PhoebeConstant.ColdFeeNumber, db).OrderBy(r => r.Code).ToList();
+            foreach (var expenseItem in expenseItems)
+            {
+                ExpenseRecord record = new ExpenseRecord();
+                record.Code = expenseItem.Code;
+                record.Name = expenseItem.Name;
+                record.Type = expenseItem.Type;
+
+                record.Amount = inBillings.Where(r => r.Code == expenseItem.Code).Sum(r => r.Amount)
+                    + outBillings.Where(r => r.Code == expenseItem.Code).Sum(r => r.Amount);
+
+                data.Add(record);
+            }
+
+            return (true, "", data);
+        }
+        #endregion  // Expense Record
+
         #region Debt
         /// <summary>
         /// 获取客户欠款信息
@@ -346,7 +410,7 @@ namespace Phoebe.Core.Service
                     debt.UnSettleFee += outBillings.Sum(r => r.Amount);
 
                     // 获取冷藏费用
-                    var coldSettlement = GetPeriodColdFeeByCustomer(customer.Id, start, end, db);
+                    var coldSettlement = GetPeriodColdFeeMultiByCustomer(customer.Id, start, end, db);
                     debt.UnSettleFee += coldSettlement.Sum(r => r.ColdFee);
                 }
 
@@ -384,7 +448,7 @@ namespace Phoebe.Core.Service
             // 获取合同信息
             ContractViewBusiness contractViewBusiness = new ContractViewBusiness();
             var contracts = contractViewBusiness.Query(r => r.CustomerId == customerId, db);
-            if (contracts.Count == 0)
+            if (contracts.Count == 0)   // 没有合同
             {
                 Debt debt = new Debt();
 
@@ -444,18 +508,16 @@ namespace Phoebe.Core.Service
                 var debt = GetDebt(customer, beginTime, lastTime, db);
                 customerFee.StartDebt = debt.DebtFee;
 
-                // 获取当前费用             
+                // 获取当前冷藏费用
+                var coldSettlement = GetPeriodColdFeeMultiByCustomer(customer.Id, start, end, db);
+                customerFee.ColdFee = coldSettlement.Sum(r => r.ColdFee);
 
-                // 获取冷藏费用
-                var coldSettlement = GetPeriodColdFeeByCustomer(customer.Id, start, end, db);
-                customerFee.ColdFee = coldSettlement.Sum(r => r.ColdFee);                
-
-                // 获取入库费用
+                // 获取当前入库费用
                 InBillingViewBusiness inBillingViewBusiness = new InBillingViewBusiness();
                 var inBillings = inBillingViewBusiness.FindPeriodByCustomer(customerId, start, end, db);
                 customerFee.BaseFee += inBillings.Sum(r => r.Amount);
 
-                // 获取出库费用
+                // 获取当前出库费用
                 OutBillingViewBusiness outBillingViewBusiness = new OutBillingViewBusiness();
                 var outBillings = outBillingViewBusiness.FindPeriodByCustomer(customerId, start, end, db);
                 customerFee.BaseFee += outBillings.Sum(r => r.Amount);

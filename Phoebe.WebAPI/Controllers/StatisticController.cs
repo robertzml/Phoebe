@@ -30,10 +30,10 @@ namespace Phoebe.WebAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<ResponseData>> GetExpenseRecord(DailyColdFeeModel model)
         {
-            StatisticService statisticService = new StatisticService();
+            ExpenseService expenseService = new ExpenseService();
             var task = Task.Run(() =>
             {
-                var result = statisticService.GetExpenseRecord(model.CustomerId, model.ContractId, model.StartTime, model.EndTime);
+                var result = expenseService.GetExpenseRecord(model.CustomerId, model.ContractId, model.StartTime, model.EndTime);
 
                 ResponseData data = new ResponseData
                 {
@@ -97,7 +97,7 @@ namespace Phoebe.WebAPI.Controllers
                 foreach (var customer in customers)
                 {
                     var fee = expenseService.GetCustomerFee(customer.Id, startTime, endTime);
-                    if (fee.StartDebt != 0 || fee.EndDebt != 0)
+                    if (fee.TotalFee != 0 || fee.StartDebt != 0 || fee.EndDebt != 0)
                         data.Add(fee);
                 }
 
