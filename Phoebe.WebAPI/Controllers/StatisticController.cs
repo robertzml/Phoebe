@@ -113,6 +113,19 @@ namespace Phoebe.WebAPI.Controllers
                 return data;
             }
         }
+
+        /// <summary>
+        /// 获取客户货品库存
+        /// </summary>
+        /// <param name="contractId"></param>
+        /// <param name="date"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult<List<CustomerCargoStore>> GetCustomerCargoStore(int contractId, DateTime date)
+        {
+            StatisticService statisticService = new StatisticService();
+            return statisticService.GetCustomerCargoStore(contractId, date);
+        }
         #endregion //Action
     }
 }

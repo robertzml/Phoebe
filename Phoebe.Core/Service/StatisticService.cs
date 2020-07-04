@@ -130,6 +130,101 @@ namespace Phoebe.Core.Service
 
             return data.OrderBy(r => r.FlowDate).ToList();
         }
+
+        /// <summary>
+        /// 获取客户货品库存
+        /// </summary>
+        /// <param name="contractId">合同ID</param>
+        /// <param name="date">日期</param>
+        /// <returns></returns>
+        public List<CustomerCargoStore> GetCustomerCargoStore(int contractId, DateTime date)
+        {
+            var db = GetInstance();
+
+            List<CustomerCargoStore> data = new List<CustomerCargoStore>();
+
+            // 获取仓位库存
+            StoreViewBusiness storeViewBusiness = new StoreViewBusiness();
+            var positionStores = storeViewBusiness.GetInDay(contractId, date, db);
+
+            foreach (var store in positionStores)
+            {
+                if (data.Any(r => r.CargoId == store.CargoId && r.Batch == store.Batch))
+                {
+                    // 累加货品库存
+                    var s = data.Single(r => r.CargoId == store.CargoId && r.Batch == store.Batch);
+                    s.StoreCount += store.StoreCount;
+                    s.StoreWeight += store.StoreWeight;
+                }
+                else
+                {
+                    // 生成新货品库存
+                    CustomerCargoStore cs = new CustomerCargoStore
+                    {
+                        StorageDate = date,
+                        CustomerId = store.CustomerId,
+                        CustomerNumber = store.CustomerNumber,
+                        CustomerName = store.CustomerName,
+                        ContractId = store.ContractId,
+                        ContractName = store.ContractName,
+                        ContractNumber = store.ContractNumber,
+                        CargoId = store.CargoId,
+                        CargoName = store.CargoName,
+                        CategoryNumber = store.CategoryNumber,
+                        CategoryName = store.CategoryName,
+                        Specification = store.Specification,
+                        Batch = store.Batch,
+                        StoreCount = store.StoreCount,
+                        UnitWeight = store.UnitWeight,
+                        StoreWeight = store.StoreWeight
+                    };
+
+                    data.Add(cs);
+                }
+            }
+
+            // 获取普通库存
+            NormalStoreViewBusiness normalStoreViewBusiness = new NormalStoreViewBusiness();
+            var normalStores = normalStoreViewBusiness.GetInDay(contractId, date, db);
+
+            foreach (var store in normalStores)
+            {
+                if (data.Any(r => r.CargoId == store.CargoId && r.Batch == store.Batch))
+                {
+                    // 累加货品库存
+                    var s = data.Single(r => r.CargoId == store.CargoId && r.Batch == store.Batch);
+                    s.StoreCount += store.StoreCount;
+                    s.StoreWeight += store.StoreWeight;
+                }
+                else
+                {
+                    // 生成新货品库存
+                    CustomerCargoStore cs = new CustomerCargoStore
+                    {
+                        StorageDate = date,
+                        CustomerId = store.CustomerId,
+                        CustomerNumber = store.CustomerNumber,
+                        CustomerName = store.CustomerName,
+                        ContractId = store.ContractId,
+                        ContractName = store.ContractName,
+                        ContractNumber = store.ContractNumber,
+                        CargoId = store.CargoId,
+                        CargoName = store.CargoName,
+                        CategoryNumber = store.CategoryNumber,
+                        CategoryName = store.CategoryName,
+                        Specification = store.Specification,
+                        Batch = store.Batch,
+                        StoreCount = store.StoreCount,
+                        UnitWeight = store.UnitWeight,
+                        StoreWeight = store.StoreWeight
+                    };
+
+                    data.Add(cs);
+                }
+            }
+
+            return data;
+        }
         #endregion //Method
     }
 }
