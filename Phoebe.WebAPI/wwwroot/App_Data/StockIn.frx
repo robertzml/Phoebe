@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="07/19/2020 16:21:27" ReportInfo.Modified="07/19/2020 16:42:40" ReportInfo.CreatorVersion="2020.3.0.0">
+  <Dictionary>
+    <BusinessObjectDataSource Name="StockInTasks" ReferenceName="StockInTasks" DataType="null" Enabled="true">
+      <Column Name="TaskCode" DataType="System.String"/>
+      <Column Name="InCount" DataType="System.Int32"/>
+    </BusinessObjectDataSource>
+  </Dictionary>
+  <ReportPage Name="Page1" Watermark.Font="宋体, 60pt">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="37.8">
+      <TextObject Name="Text1" Left="170.1" Top="9.45" Width="378" Height="28.35" Text="海安润思达食品有限公司入库单" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold"/>
+    </ReportTitleBand>
+    <PageHeaderBand Name="PageHeader1" Top="41.8" Width="718.2" Height="75.6"/>
+    <DataBand Name="Data1" Top="121.4" Width="718.2" Height="122.84" DataSource="StockInTasks">
+      <TableObject Name="Table1" Left="56.7" Top="28.35" Width="670.95" Height="47.24">
+        <TableColumn Name="Column1" Width="134.19"/>
+        <TableColumn Name="Column2" Width="134.19"/>
+        <TableColumn Name="Column3" Width="134.19"/>
+        <TableColumn Name="Column4" Width="134.19"/>
+        <TableColumn Name="Column5" Width="134.19"/>
+        <TableRow Name="Row1" Height="23.62">
+          <TableCell Name="Cell1" Text="入库码" Font="宋体, 9pt"/>
+          <TableCell Name="Cell2" Text="入库数量" Font="宋体, 9pt"/>
+          <TableCell Name="Cell3" Font="宋体, 9pt"/>
+          <TableCell Name="Cell4" Font="宋体, 9pt"/>
+          <TableCell Name="Cell5" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row2" Height="23.62">
+          <TableCell Name="Cell6" Text="[StockInTasks.TaskCode]" Font="宋体, 9pt"/>
+          <TableCell Name="Cell7" Text="[StockInTasks.InCount]" Font="宋体, 9pt"/>
+          <TableCell Name="Cell8" Font="宋体, 9pt"/>
+          <TableCell Name="Cell9" Font="宋体, 9pt"/>
+          <TableCell Name="Cell10" Font="宋体, 9pt"/>
+        </TableRow>
+      </TableObject>
+    </DataBand>
+    <PageFooterBand Name="PageFooter1" Top="248.24" Width="718.2" Height="18.9"/>
+  </ReportPage>
+</Report>
