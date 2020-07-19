@@ -5,10 +5,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using FastReport;
 using FastReport.Export.Html;
+using FastReport.Export.PdfSimple;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Phoebe.Core.BL;
+using Phoebe.Core.DL;
 
 namespace Phoebe.WebAPI.Controllers
 {
@@ -47,7 +49,8 @@ namespace Phoebe.WebAPI.Controllers
                 try
                 {
                     // 获取入库单
-
+                    StockInViewBusiness stockInViewBusiness = new StockInViewBusiness();
+                    var stockIn = stockInViewBusiness.FindById(id);
 
                     // 获取入库任务
                     StockInTaskBusiness stockInTaskBusiness = new StockInTaskBusiness();
@@ -56,24 +59,30 @@ namespace Phoebe.WebAPI.Controllers
                     // create report instance
                     Report report = new Report();
 
-                    report.Load(reportPath); //Load the report
+                    // 载入报表
+                    report.Load(reportPath);
 
-                    // register the array
+                    // 配置数据
+                    report.SetParameterValue("CustomerName", stockIn.CustomerName);
                     report.RegisterData(stockInTasks, "StockInTasks");
 
                     // prepare the report
                     report.Prepare();
 
                     //report export to HTML
-                    HTMLExport html = new HTMLExport();
-                    html.SinglePage = true; //report on the one page
-                    html.Navigator = false; //navigation panel on top
-                    html.EmbedPictures = true; //build in images to the document
-                    report.Export(html, stream);
-                    var mime = "text/html"; //redefine mime for html
+                    //HTMLExport html = new HTMLExport();
+                    //html.SinglePage = true; //report on the one page
+                    //html.Navigator = false; //navigation panel on top
+                    //html.EmbedPictures = true; //build in images to the document
+                    //report.Export(html, stream);
+                    //var mime = "text/html"; //redefine mime for html
+
+                    PDFSimpleExport pdf = new PDFSimpleExport();                   
+                    report.Export(pdf, stream);
+                    var mime = "application/pdf";
 
                     //Get the name of resulting report file with needed extension
-                    var file = String.Concat(Path.GetFileNameWithoutExtension(reportPath), ".", "html");
+                    var file = String.Concat(Path.GetFileNameWithoutExtension(reportPath), ".", "pdf");
                     return File(stream.ToArray(), mime);
                 }
                 catch
