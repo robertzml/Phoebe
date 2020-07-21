@@ -53,8 +53,8 @@ namespace Phoebe.WebAPI.Controllers
                     var stockIn = stockInViewBusiness.FindById(id);
 
                     // 获取入库任务
-                    StockInTaskBusiness stockInTaskBusiness = new StockInTaskBusiness();
-                    var stockInTasks = stockInTaskBusiness.Query(r => r.StockInId == id);
+                    StockInTaskViewBusiness stockInTaskViewBusiness = new StockInTaskViewBusiness();
+                    var stockInTasks = stockInTaskViewBusiness.Query(r => r.StockInId == id);
 
                     // create report instance
                     Report report = new Report();
@@ -64,6 +64,8 @@ namespace Phoebe.WebAPI.Controllers
 
                     // 配置数据
                     report.SetParameterValue("CustomerName", stockIn.CustomerName);
+                    report.SetParameterValue("StockInTime", stockIn.InTime.ToString("yyyy-MM-dd"));
+                    report.SetParameterValue("FlowNumber", stockIn.FlowNumber);
                     report.RegisterData(stockInTasks, "StockInTasks");
 
                     // prepare the report
@@ -77,6 +79,7 @@ namespace Phoebe.WebAPI.Controllers
                     //report.Export(html, stream);
                     //var mime = "text/html"; //redefine mime for html
 
+                    // 导出PDF
                     PDFSimpleExport pdf = new PDFSimpleExport();                   
                     report.Export(pdf, stream);
                     var mime = "application/pdf";
@@ -85,7 +88,7 @@ namespace Phoebe.WebAPI.Controllers
                     var file = String.Concat(Path.GetFileNameWithoutExtension(reportPath), ".", "pdf");
                     return File(stream.ToArray(), mime);
                 }
-                catch
+                catch(Exception e)
                 {
                     return new NoContentResult();
                 }
