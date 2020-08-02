@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="07/19/2020 16:21:27" ReportInfo.Modified="07/22/2020 00:57:41" ReportInfo.CreatorVersion="2020.3.0.0">
+<Report ScriptLanguage="CSharp" TextQuality="ClearType" ReportInfo.Created="07/19/2020 16:21:27" ReportInfo.Modified="08/01/2020 13:55:55" ReportInfo.CreatorVersion="2020.3.0.0" PrintSettings.PrintOnSheetWidth="220" PrintSettings.PrintOnSheetHeight="93">
   <Dictionary>
     <BusinessObjectDataSource Name="StockInTasks" ReferenceName="StockInTasks" DataType="null" Enabled="true">
       <Column Name="TaskCode" DataType="System.String"/>
@@ -24,47 +24,56 @@
     <Parameter Name="FlowNumber" DataType="System.String" Description="入库流水号"/>
     <Total Name="TotalInCount" Expression="[StockInTasks.InCount]" Evaluator="Data1"/>
   </Dictionary>
-  <ReportPage Name="Page1" Landscape="true" PaperWidth="235" PaperHeight="93.5" Watermark.Font="宋体, 60pt">
-    <ReportTitleBand Name="ReportTitle1" Width="812.7" Height="22.68">
-      <TextObject Name="Text1" Width="812.7" Height="22.68" Dock="Fill" CanShrink="true" Text="海安润思达食品有限公司冷链入库单" AutoWidth="true" HorzAlign="Center" VertAlign="Center" WordWrap="false" Font="宋体, 12pt, style=Bold"/>
+  <ReportPage Name="Page1" Landscape="true" PaperWidth="220" PaperHeight="93.5" LeftMargin="0" TopMargin="0" Watermark.Font="宋体, 60pt">
+    <ReportTitleBand Name="ReportTitle1" Width="793.8" Height="22.68">
+      <TextObject Name="Text1" Width="793.8" Height="22.68" Dock="Fill" CanShrink="true" Text="海安润思达食品有限公司冷链入库单" AutoWidth="true" HorzAlign="Center" VertAlign="Center" WordWrap="false" Font="微软雅黑, 14.25pt, style=Bold"/>
     </ReportTitleBand>
-    <PageHeaderBand Name="PageHeader1" Top="26.68" Width="812.7" Height="75.6">
-      <TextObject Name="Text5" Left="9.45" Top="37.8" Width="85.05" Height="18.9" Text="客户名称：" Font="宋体, 10pt, style=Bold"/>
-      <TextObject Name="Text6" Left="9.45" Top="9.45" Width="160.65" Height="18.9" Text="车牌号：" Font="宋体, 10pt, style=Bold"/>
-      <TextObject Name="Text7" Left="245.7" Top="9.45" Width="302.4" Height="18.9" Text="地址：海安开发区黄河东路18号（211省道）" Font="宋体, 10pt, style=Bold"/>
-      <TextObject Name="Text8" Left="604.8" Top="9.45" Width="151.2" Height="18.9" Text="电话：0513-88850502" Font="宋体, 10pt, style=Bold"/>
-      <TextObject Name="Text9" Left="75.6" Top="37.8" Width="245.7" Height="18.9" Text="[CustomerName]" Font="宋体, 10pt"/>
-      <TextObject Name="Text10" Left="349.65" Top="37.8" Width="85.05" Height="18.9" Text="入库日期：" AutoWidth="true" Font="宋体, 10pt, style=Bold"/>
-      <TextObject Name="Text11" Left="415.8" Top="37.8" Width="103.95" Height="18.9" Text="[StockInTime]" Font="宋体, 10pt"/>
-      <TextObject Name="Text12" Left="557.55" Top="37.8" Width="94.5" Height="18.9" Text="入库流水号：" Font="宋体, 10pt, style=Bold"/>
-      <TextObject Name="Text13" Left="642.6" Top="37.8" Width="160.65" Height="18.9" Text="[FlowNumber]" Font="宋体, 10pt"/>
+    <PageHeaderBand Name="PageHeader1" Top="26.68" Width="793.8" Height="94.5">
+      <TextObject Name="Text5" Top="37.8" Width="94.5" Height="18.9" Text="客户名称：" Font="微软雅黑, 10pt"/>
+      <TextObject Name="Text6" Top="9.45" Width="170.1" Height="18.9" Text="车牌号：" Font="宋体, 11.25pt, style=Bold"/>
+      <TextObject Name="Text7" Left="226.8" Top="9.45" Width="330.75" Height="18.9" Text="地址：海安开发区黄河东路18号（211省道）" Font="微软雅黑, 10pt"/>
+      <TextObject Name="Text8" Left="576.45" Top="9.45" Width="179.55" Height="18.9" Text="电话：0513-88850502" Font="微软雅黑, 10pt"/>
+      <TextObject Name="Text9" Left="151.2" Top="37.8" Width="255.15" Height="18.9" Text="[CustomerName]" Font="微软雅黑, 10pt"/>
+      <TextObject Name="Text10" Left="349.65" Top="37.8" Width="94.5" Height="18.9" Text="入库日期：" AutoWidth="true" Font="微软雅黑, 10pt"/>
+      <TextObject Name="Text11" Left="425.25" Top="37.8" Width="113.4" Height="18.9" Text="[StockInTime]" Font="微软雅黑, 10pt"/>
+      <TextObject Name="Text12" Left="538.65" Top="37.8" Width="103.95" Height="18.9" Text="入库流水号：" Font="微软雅黑, 10pt, style=Bold"/>
+      <TextObject Name="Text13" Left="633.15" Top="37.8" Width="160.65" Height="18.9" Text="[FlowNumber]" Font="宋体, 11.25pt"/>
+      <TextObject Name="Text16" Left="94.5" Top="37.8" Width="56.7" Height="18.9" Text="12345" Font="微软雅黑, 9.75pt"/>
+      <TextObject Name="Text2" Top="66.15" Width="94.5" Height="18.9" Text="货品名称" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text3" Left="274.05" Top="66.15" Width="94.5" Height="18.9" Text="入库数量" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text4" Left="378" Top="66.15" Width="94.5" Height="18.9" Text="单位重量(kg)" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text14" Left="151.2" Top="66.15" Width="94.5" Height="18.9" Text="规格" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text15" Left="491.4" Top="66.15" Width="94.5" Height="18.9" Text="入库重量(t)" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text17" Left="604.8" Top="66.15" Width="94.5" Height="18.9" Text="备注" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <LineObject Name="Line1" Left="18.9" Top="90.72" Width="756" Border.Style="Dash"/>
     </PageHeaderBand>
-    <DataBand Name="Data1" Top="134.09" Width="812.7" Height="28.34" DataSource="StockInTasks">
-      <TableObject Name="Table1" Left="37.8" Width="727.65" Height="23.62" Border.Lines="All">
+    <DataBand Name="Data1" Top="125.18" Width="793.8" Height="28.34" DataSource="StockInTasks">
+      <TableObject Name="Table1" Left="9.45" Width="708.75" Height="23.62">
         <TableColumn Name="Column1" Width="124.74"/>
         <TableColumn Name="Column2" Width="134.19"/>
-        <TableColumn Name="Column3" Width="134.19"/>
-        <TableColumn Name="Column4" Width="134.19"/>
-        <TableColumn Name="Column5" Width="134.19"/>
-        <TableColumn Name="Column6"/>
+        <TableColumn Name="Column3" Width="105.84"/>
+        <TableColumn Name="Column4" Width="105.84"/>
+        <TableColumn Name="Column5" Width="105.84"/>
+        <TableColumn Name="Column6" Width="132.3"/>
         <TableRow Name="Row1" Height="23.62">
-          <TableCell Name="Cell6" Border.Lines="All" Text="[StockInTasks.CategoryName]" Font="宋体, 9pt"/>
-          <TableCell Name="Cell7" Border.Lines="All" Text="[StockInTasks.CargoName]" Font="宋体, 9pt"/>
-          <TableCell Name="Cell8" Border.Lines="All" Text="[StockInTasks.InCount]" Font="宋体, 9pt"/>
-          <TableCell Name="Cell9" Border.Lines="All" Text="[StockInTasks.UnitWeight]" Font="宋体, 9pt"/>
-          <TableCell Name="Cell10" Border.Lines="All" Text="[StockInTasks.InWeight]" Font="宋体, 9pt"/>
-          <TableCell Name="Cell11" Font="宋体, 9pt"/>
+          <TableCell Name="Cell6" Text="[StockInTasks.CargoName]" HorzAlign="Center" Font="微软雅黑, 9pt"/>
+          <TableCell Name="Cell7" Text="[StockInTasks.Specification]" HorzAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell8" Text="[StockInTasks.InCount]" HorzAlign="Center" Font="微软雅黑, 10pt"/>
+          <TableCell Name="Cell9" Text="[StockInTasks.UnitWeight]" HorzAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell10" Text="[StockInTasks.InWeight]" HorzAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell11" Text="[StockInTasks.Remark]" HorzAlign="Center" Font="宋体, 9pt"/>
         </TableRow>
       </TableObject>
-      <DataHeaderBand Name="DataHeader1" Top="106.28" Width="812.7" Height="23.81">
-        <TextObject Name="Text2" Left="47.25" Width="94.5" Height="18.9" Text=" 类别" Font="宋体, 9pt"/>
-        <TextObject Name="Text3" Left="321.3" Width="94.5" Height="18.9" Text="入库数量" Font="宋体, 9pt"/>
-        <TextObject Name="Text4" Left="453.6" Width="94.5" Height="18.9" Text="单位重量" Font="宋体, 9pt"/>
-        <TextObject Name="Text14" Left="179.55" Width="94.5" Height="18.9" Text="货品名称" Font="宋体, 9pt"/>
-        <TextObject Name="Text15" Left="595.35" Width="94.5" Height="18.9" Text="入库重量" Font="宋体, 9pt"/>
-      </DataHeaderBand>
-      <DataFooterBand Name="DataFooter1" Top="166.43" Width="812.7" Height="18.9"/>
+      <DataFooterBand Name="DataFooter1" Top="157.52" Width="793.8" Height="18.9">
+        <LineObject Name="Line2" Left="18.9" Width="756" Border.Style="Dash"/>
+        <TextObject Name="Text18" Left="18.9" Width="94.5" Height="18.9" Text="合计" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+        <TextObject Name="Text22" Left="283.5" Width="103.95" Height="18.9" Text="[TotalInCount]" HorzAlign="Center" VertAlign="Center" Font="微软雅黑, 10pt"/>
+      </DataFooterBand>
     </DataBand>
-    <PageFooterBand Name="PageFooter1" Top="189.33" Width="812.7" Height="18.9"/>
+    <PageFooterBand Name="PageFooter1" Top="180.42" Width="793.8" Height="18.9">
+      <TextObject Name="Text19" Left="18.9" Width="94.5" Height="18.9" Text="制单人:" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold"/>
+      <TextObject Name="Text20" Left="330.75" Width="94.5" Height="18.9" Text="经手人:" HorzAlign="Center" VertAlign="Center" Font="宋体, 11pt, style=Bold"/>
+      <TextObject Name="Text21" Left="557.55" Width="94.5" Height="18.9" Text="客户签字:" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold"/>
+    </PageFooterBand>
   </ReportPage>
 </Report>
