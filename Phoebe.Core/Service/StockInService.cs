@@ -316,6 +316,11 @@ namespace Phoebe.Core.Service
                 int inCount = task.InCount;
                 decimal inWeight = task.InWeight;
 
+                if (task.Status == (int)EntityStatus.StockInFinish)
+                {
+                    return (false, "入库任务已确认");
+                }
+
                 if (task.StockInType == (int)StockInType.Position)   // 仓位库入库检查搬运任务
                 {
                     var carryIn = db.Queryable<CarryInTask>().Where(r => r.StockInTaskId == stockInTaskId).ToList();
