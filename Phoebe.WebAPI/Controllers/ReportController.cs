@@ -39,7 +39,7 @@ namespace Phoebe.WebAPI.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
-        public IActionResult StockIn(string id)
+        public IActionResult StockIn(string id, int uid)
         {
             string webRootPath = _hostingEnvironment.WebRootPath; //Define the path to the wwwroot folder
             string reportPath = (webRootPath + "/App_Data/StockIn.frx"); //Define the path to the report
@@ -48,6 +48,10 @@ namespace Phoebe.WebAPI.Controllers
             {
                 try
                 {
+                    // 获取用户
+                    UserBusiness userBusiness = new UserBusiness();
+                    var user = userBusiness.FindById(uid);
+
                     // 获取入库单
                     StockInViewBusiness stockInViewBusiness = new StockInViewBusiness();
                     var stockIn = stockInViewBusiness.FindById(id);
@@ -63,24 +67,19 @@ namespace Phoebe.WebAPI.Controllers
                     report.Load(reportPath);
 
                     // 配置数据
+                    report.SetParameterValue("VehicleNumber", stockIn.VehicleNumber);
                     report.SetParameterValue("CustomerName", stockIn.CustomerName);
+                    report.SetParameterValue("CustomerNumber", stockIn.CustomerNumber);
                     report.SetParameterValue("StockInTime", stockIn.InTime.ToString("yyyy-MM-dd"));
                     report.SetParameterValue("FlowNumber", stockIn.FlowNumber);
+                    report.SetParameterValue("UserName", user.Name);
                     report.RegisterData(stockInTasks, "StockInTasks");
 
                     // prepare the report
                     report.Prepare();
 
-                    //report export to HTML
-                    //HTMLExport html = new HTMLExport();
-                    //html.SinglePage = true; //report on the one page
-                    //html.Navigator = false; //navigation panel on top
-                    //html.EmbedPictures = true; //build in images to the document
-                    //report.Export(html, stream);
-                    //var mime = "text/html"; //redefine mime for html
-
                     // 导出PDF
-                    PDFSimpleExport pdf = new PDFSimpleExport();                   
+                    PDFSimpleExport pdf = new PDFSimpleExport();
                     report.Export(pdf, stream);
                     var mime = "application/pdf";
 
@@ -88,7 +87,7 @@ namespace Phoebe.WebAPI.Controllers
                     var file = String.Concat(Path.GetFileNameWithoutExtension(reportPath), ".", "pdf");
                     return File(stream.ToArray(), mime);
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     return new NoContentResult();
                 }
