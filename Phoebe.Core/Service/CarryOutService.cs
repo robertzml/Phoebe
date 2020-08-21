@@ -103,6 +103,122 @@ namespace Phoebe.Core.Service
         }
 
         /// <summary>
+        /// 编辑搬运出库任务
+        /// </summary>
+        /// <param name="task"></param>
+        /// <returns></returns>
+        public (bool success, string errorMessage) EditTask(CarryOutTask task)
+        {
+            var db = GetInstance();
+
+            try
+            {
+                db.Ado.BeginTran();
+
+                CarryOutTaskBusiness carryOutTaskBusiness = new CarryOutTaskBusiness();
+                var oldTask = carryOutTaskBusiness.FindById(task.Id, db);
+
+                if (task.MoveCount > oldTask.StoreCount)
+                {
+                    return (false, "搬运数量操作库存数量");
+                }
+
+                if (oldTask.Status == (int)EntityStatus.StockOutReady)  // 搬运出库任务还未出库
+                {
+                    // 更新搬运出库任务
+                    oldTask.MoveCount = task.MoveCount;
+                    oldTask.MoveWeight = task.MoveWeight;
+                    oldTask.Remark = task.Remark;
+                    carryOutTaskBusiness.Update(oldTask, db);
+                }
+                else // 搬运出库任务已出库
+                {
+                    // 获取清点人
+                    UserBusiness userBusiness = new UserBusiness();
+                    var user = userBusiness.FindById(task.CheckUserId, db);
+
+                    CarryInTaskBusiness carryInTaskBusiness = new CarryInTaskBusiness();
+
+                    if (oldTask.StoreCount == oldTask.MoveCount) //原来没有放回任务
+                    {
+                        // 更新搬运出库任务
+                        oldTask.MoveCount = task.MoveCount;
+                        oldTask.MoveWeight = task.MoveWeight;
+                        oldTask.Remark = task.Remark;
+                        carryOutTaskBusiness.Update(oldTask, db);
+
+                        if (oldTask.StoreCount > oldTask.MoveCount)
+                        {
+                            // 创建放回任务
+                            carryInTaskBusiness.CreateBack(oldTask, user, db);
+                        }
+                    }
+                    else // 原来有放回任务
+                    {
+                        // 找到放回任务
+                        // 放回任务未上架
+                        var carryIn = carryInTaskBusiness.Single(r => r.TrayCode == oldTask.TrayCode && r.StoreId == oldTask.StoreId && r.Status == (int)EntityStatus.StockInCheck, db);
+
+                        if (carryIn == null) // 放回任务已上架
+                        {
+                            StoreViewBusiness storeViewBusiness = new StoreViewBusiness();
+                            var newStore = storeViewBusiness.Single(r => r.PrevStoreId == oldTask.StoreId, db);
+
+                            if (newStore.Status != (int)EntityStatus.StoreIn)
+                                return (false, "放回库存已出库，无法修改");
+
+                            carryIn = carryInTaskBusiness.Single(r => r.StoreId == newStore.Id, db);
+                        }
+
+                        // 更新搬运出库任务
+                        oldTask.MoveCount = task.MoveCount;
+                        oldTask.MoveWeight = task.MoveWeight;
+                        oldTask.Remark = task.Remark;
+                        carryOutTaskBusiness.Update(oldTask, db);
+
+                        carryIn.MoveCount = oldTask.StoreCount - oldTask.MoveCount;
+                        carryIn.MoveWeight = oldTask.StoreWeight - oldTask.MoveWeight;
+
+                        if (carryIn.MoveCount > 0)
+                        {
+                            // 更新搬运入库任务和库存记录
+                            carryInTaskBusiness.Update(carryIn, db);
+
+                            StoreBusiness storeBusiness = new StoreBusiness();
+                            var store = storeBusiness.FindById(carryIn.StoreId, db);
+                            store.StoreCount = carryIn.MoveCount;
+                            store.StoreWeight = carryIn.MoveWeight;
+
+                            storeBusiness.Update(store, db);
+                        }
+                        else // 需要删除搬运入库任务和库存记录
+                        {
+                            if (carryIn.Status == (int)EntityStatus.StockInFinish)
+                            {
+                                StoreBusiness storeBusiness = new StoreBusiness();
+                                storeBusiness.Delete(carryIn.StoreId, db);
+
+                                // 更新仓位状态
+                                PositionBusiness positionBusiness = new PositionBusiness();
+                                var position = positionBusiness.FindById(carryIn.PositionId, db);
+                                positionBusiness.UpdateStatus(position, EntityStatus.Available, db);
+                            }
+                            carryInTaskBusiness.Delete(carryIn.Id, db);
+                        }
+                    }
+                }
+
+                db.Ado.CommitTran();
+                return (true, "");
+            }
+            catch (Exception e)
+            {
+                db.Ado.RollbackTran();
+                return (false, e.Message);
+            }
+        }
+
+        /// <summary>
         /// 删除搬运出库任务
         /// </summary>
         /// <param name="id"></param>
