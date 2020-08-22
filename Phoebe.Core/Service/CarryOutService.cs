@@ -141,6 +141,11 @@ namespace Phoebe.Core.Service
 
                     if (oldTask.StoreCount == oldTask.MoveCount) //原来没有放回任务
                     {
+                        StoreViewBusiness storeViewBusiness = new StoreViewBusiness();
+                        var others = storeViewBusiness.Query(r => r.TrayCode == oldTask.TrayCode && r.Status == (int)EntityStatus.StoreIn, db);
+                        if (others.Count > 0)
+                            return (false, "该托盘有其它货物已经上架，无法修改出库数量");
+
                         // 更新搬运出库任务
                         oldTask.MoveCount = task.MoveCount;
                         oldTask.MoveWeight = task.MoveWeight;
@@ -201,7 +206,10 @@ namespace Phoebe.Core.Service
                                 // 更新仓位状态
                                 PositionBusiness positionBusiness = new PositionBusiness();
                                 var position = positionBusiness.FindById(carryIn.PositionId, db);
-                                positionBusiness.UpdateStatus(position, EntityStatus.Available, db);
+
+                                var stores = storeBusiness.Query(r => r.Status == (int)EntityStatus.StoreIn && r.PositionId == position.Id, db);
+                                if (stores.Count == 0)
+                                    positionBusiness.UpdateStatus(position, EntityStatus.Available, db);
                             }
                             carryInTaskBusiness.Delete(carryIn.Id, db);
                         }
