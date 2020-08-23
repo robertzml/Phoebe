@@ -97,6 +97,72 @@ namespace Phoebe.WebAPI.Controllers
                 }
             }
         }
+
+        /// <summary>
+        /// 出库单报表
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="uid"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult StockOut(string id, int uid)
+        {
+            string webRootPath = _hostingEnvironment.WebRootPath; //Define the path to the wwwroot folder
+            string reportPath = (webRootPath + "/App_Data/StockOut.frx"); //Define the path to the repor
+
+            using (MemoryStream stream = new MemoryStream()) //Create the stream for the report
+            {
+                try
+                {
+                    // 获取用户
+                    UserBusiness userBusiness = new UserBusiness();
+                    var user = userBusiness.FindById(uid);
+
+                    // 获取出库单
+                    StockOutViewBusiness stockOutViewBusiness = new StockOutViewBusiness();
+                    var stockOut = stockOutViewBusiness.FindById(id);
+
+                    // 获取出库任务
+                    StockOutTaskViewBusiness stockOutTaskViewBusiness = new StockOutTaskViewBusiness();
+                    var stockOutTasks = stockOutTaskViewBusiness.Query(r => r.StockOutId == id);
+
+                    // create report instance
+                    Report report = new Report();
+
+                    // 载入报表
+                    report.Load(reportPath);
+
+                    // 配置数据
+                    report.SetParameterValue("VehicleNumber", stockOut.VehicleNumber);
+                    report.SetParameterValue("CustomerName", stockOut.CustomerName);
+                    report.SetParameterValue("CustomerNumber", stockOut.CustomerNumber);
+                    report.SetParameterValue("StockOutTime", stockOut.OutTime.ToString("yyyy-MM-dd"));
+                    report.SetParameterValue("FlowNumber", stockOut.FlowNumber);
+                    report.SetParameterValue("UserName", user.Name);
+                    report.RegisterData(stockOutTasks, "StockOutTasks");
+
+                    // prepare the report
+                    report.Prepare();
+
+                    // 导出PDF
+                    PDFSimpleExport pdf = new PDFSimpleExport();
+                    report.Export(pdf, stream);
+                    var mime = "application/pdf";
+
+                    //Get the name of resulting report file with needed extension
+                    var file = String.Concat(Path.GetFileNameWithoutExtension(reportPath), ".", "pdf");
+                    return File(stream.ToArray(), mime);
+                }
+                catch (Exception e)
+                {
+                    return new NoContentResult();
+                }
+                finally
+                {
+                    stream.Dispose();
+                }
+            }
+        }
         #endregion //Action
     }
 }
