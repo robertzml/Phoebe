@@ -121,10 +121,10 @@ namespace Phoebe.WebAPI.Controllers
         /// <param name="date"></param>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult<List<CustomerCargoStore>> GetCustomerCargoStore(int contractId, DateTime date)
+        public ActionResult<List<CustomerCargoStore>> GetCustomerCargoStore(int contractId, DateTime date, bool groupByBatch)
         {
             StatisticService statisticService = new StatisticService();
-            return statisticService.GetCustomerCargoStore(contractId, date);
+            return statisticService.GetCustomerCargoStore(contractId, date, groupByBatch);
         }
         #endregion //Action
     }
