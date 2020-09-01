@@ -126,6 +126,18 @@ namespace Phoebe.WebAPI.Controllers
             StatisticService statisticService = new StatisticService();
             return statisticService.GetCustomerCargoStore(contractId, date, groupByBatch);
         }
+
+        /// <summary>
+        /// 获取客户库存日报表
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult<List<CustomerTotalStore>> GetCustomerTotalStore(DateTime date)
+        {
+            StatisticService statisticService = new StatisticService();
+            return statisticService.GetCustomerTotalStore(date);
+        }
         #endregion //Action
     }
 }

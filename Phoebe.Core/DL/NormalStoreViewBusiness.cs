@@ -145,6 +145,27 @@ namespace Phoebe.Core.DL
 
             return stores;
         }
+
+        /// <summary>
+        /// 获取客户指定日库存
+        /// </summary>
+        /// <param name="customerId">客户ID</param>
+        /// <param name="date">日期</param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        public List<NormalStoreView> GetInDayByCustomer(int customerId, DateTime date, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            date = date.Date;
+
+            var stores = db.Queryable<NormalStoreView>()
+                .Where(r => r.CustomerId == customerId && r.InTime <= date && (r.OutTime == null || r.OutTime > date))
+                .ToList();
+
+            return stores;
+        }
         #endregion //Storage
     }
 }

@@ -255,6 +255,47 @@ namespace Phoebe.Core.Service
 
             return data;
         }
+
+        /// <summary>
+        /// 获取客户总库存
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
+        public List<CustomerTotalStore> GetCustomerTotalStore(DateTime date)
+        {
+            var db = GetInstance();
+
+            List<CustomerTotalStore> data = new List<CustomerTotalStore>();
+
+            // 获取所有客户
+            CustomerBusiness customerBusiness = new CustomerBusiness();
+            var customers = customerBusiness.FindAll(db);
+
+            StoreViewBusiness storeViewBusiness = new StoreViewBusiness();
+            NormalStoreViewBusiness normalStoreViewBusiness = new NormalStoreViewBusiness();
+
+            foreach (var customer in customers)
+            {
+                // 获取仓位库存               
+                var positionStores = storeViewBusiness.GetInDayByCustomer(customer.Id, date, db);
+
+                // 获取普通库存
+                var normalStores = normalStoreViewBusiness.GetInDayByCustomer(customer.Id, date, db);
+
+                CustomerTotalStore item = new CustomerTotalStore();
+                item.StorageDate = date;
+                item.CustomerId = customer.Id;
+                item.CustomerName = customer.Name;
+                item.CustomerNumber = customer.Number;
+                item.TotalCount = positionStores.Sum(r => r.StoreCount) + normalStores.Sum(r => r.StoreCount);
+                item.TotalWeight = positionStores.Sum(r => r.StoreWeight) + normalStores.Sum(r => r.StoreWeight);
+
+                if (item.TotalCount > 0 || item.TotalWeight > 0)
+                    data.Add(item);
+            }
+
+            return data;
+        }
         #endregion //Method
     }
 }
