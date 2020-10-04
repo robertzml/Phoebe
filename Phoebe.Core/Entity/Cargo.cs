@@ -49,6 +49,12 @@ namespace Phoebe.Core.Entity
         public string Specification { get; set; }
 
         /// <summary>
+        /// 资产单价
+        /// </summary>
+        [Display(Name = "资产单价")]
+        public decimal AssetUnit { get; set; }
+
+        /// <summary>
         /// 登记时间
         /// </summary>
         [Display(Name = "登记时间")]

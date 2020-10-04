@@ -161,6 +161,18 @@ namespace Phoebe.Core.View
         public string Specification { get; set; }
 
         /// <summary>
+        /// 资产单价
+        /// </summary>
+        [Display(Name = "资产单价")]
+        public decimal AssetUnit { get; set; }
+
+        /// <summary>
+        /// 资产价格
+        /// </summary>
+        [Display(Name = "资产价格")]
+        public decimal AssetAmount { get; set; }
+
+        /// <summary>
         /// 类别名称
         /// </summary>
         [Display(Name = "类别名称")]
