@@ -62,6 +62,7 @@ namespace Phoebe.Core.BL
                 var cargo = db.Queryable<Cargo>().InSingle(entity.Id);
                 cargo.Name = entity.Name;
                 cargo.Specification = entity.Specification;
+                cargo.AssetUnit = entity.AssetUnit;
                 cargo.Remark = entity.Remark;
 
                 db.Updateable(cargo).ExecuteCommand();

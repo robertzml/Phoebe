@@ -89,6 +89,11 @@ namespace Phoebe.Core.Model
         /// 在库重量(吨)
         /// </summary>
         public decimal StoreWeight { get; set; }
+
+        /// <summary>
+        /// 资产价格(元)
+        /// </summary>
+        public decimal AssetAmount { get; set; }
         #endregion //Property
     }
 }

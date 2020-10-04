@@ -157,6 +157,7 @@ namespace Phoebe.Core.Service
                         var s = data.Single(r => r.CargoId == store.CargoId && r.Batch == store.Batch);
                         s.StoreCount += store.StoreCount;
                         s.StoreWeight += store.StoreWeight;
+                        s.AssetAmount += store.AssetAmount;
 
                         continue;
                     }
@@ -169,6 +170,7 @@ namespace Phoebe.Core.Service
                         var s = data.Single(r => r.CargoId == store.CargoId);
                         s.StoreCount += store.StoreCount;
                         s.StoreWeight += store.StoreWeight;
+                        s.AssetAmount += store.AssetAmount;
 
                         continue;
                     }
@@ -192,7 +194,8 @@ namespace Phoebe.Core.Service
                     Batch = groupByBatch ? store.Batch : "",
                     StoreCount = store.StoreCount,
                     UnitWeight = store.UnitWeight,
-                    StoreWeight = store.StoreWeight
+                    StoreWeight = store.StoreWeight,
+                    AssetAmount = store.AssetAmount
                 };
 
                 data.Add(cs);
@@ -212,6 +215,7 @@ namespace Phoebe.Core.Service
                         var s = data.Single(r => r.CargoId == store.CargoId && r.Batch == store.Batch);
                         s.StoreCount += store.StoreCount;
                         s.StoreWeight += store.StoreWeight;
+                        s.AssetAmount += store.AssetAmount;
 
                         continue;
                     }
@@ -224,6 +228,7 @@ namespace Phoebe.Core.Service
                         var s = data.Single(r => r.CargoId == store.CargoId);
                         s.StoreCount += store.StoreCount;
                         s.StoreWeight += store.StoreWeight;
+                        s.AssetAmount += store.AssetAmount;
 
                         continue;
                     }
@@ -247,7 +252,8 @@ namespace Phoebe.Core.Service
                     Batch = groupByBatch ? store.Batch : "",
                     StoreCount = store.StoreCount,
                     UnitWeight = store.UnitWeight,
-                    StoreWeight = store.StoreWeight
+                    StoreWeight = store.StoreWeight,
+                    AssetAmount = store.AssetAmount
                 };
 
                 data.Add(cs);
