@@ -159,6 +159,56 @@ namespace Phoebe.Core.DL
         }
 
         /// <summary>
+        /// 出库时查找库存记录
+        /// </summary>
+        /// <param name="contractId"></param>
+        /// <param name="cargoId"></param>
+        /// <param name="initialTime"></param>
+        /// <param name="remark"></param>
+        /// <param name="db"></param>
+        /// <returns>
+        /// 去除已经添加的待出库库存记录
+        /// </returns>
+        public List<StoreView> FindForStockOut(int contractId, string cargoId, DateTime? initialTime, string remark, SqlSugarClient db= null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            List<IConditionalModel> conditions = new List<IConditionalModel>();
+            conditions.Add(new ConditionalModel { FieldName = "ContractId", ConditionalType = ConditionalType.Equal, FieldValue = contractId.ToString() });
+
+            if (!string.IsNullOrEmpty(cargoId))
+            {
+                conditions.Add(new ConditionalModel { FieldName = "CargoId", ConditionalType = ConditionalType.Equal, FieldValue = cargoId });
+            }
+
+            if (initialTime != null)
+            {
+                conditions.Add(new ConditionalModel { FieldName = "InitialTime", ConditionalType = ConditionalType.Equal, FieldValue = initialTime.Value.ToString() });
+            }
+
+            if (!string.IsNullOrEmpty(remark))
+            {
+                conditions.Add(new ConditionalModel { FieldName = "Remark", ConditionalType = ConditionalType.Like, FieldValue = remark });
+            }
+
+            var data = db.Queryable<StoreView>().Where(conditions).ToList();
+
+            // 已经添加出库的托盘不能继续添加
+            var carryOuts = db.Queryable<CarryOutTask>()
+                .Where(r => r.ContractId == contractId &&
+                    (r.Status == (int)EntityStatus.StockOutReady || r.Status == (int)EntityStatus.StockOutLeave ||
+                    r.Status == (int)EntityStatus.StockOutCheck))
+                .ToList();
+
+            var trayCodes = carryOuts.Select(r => r.TrayCode);
+
+            data = data.Where(r => !trayCodes.Contains(r.TrayCode)).ToList();
+
+            return data;
+        }
+
+        /// <summary>
         /// 找放回的库存记录
         /// </summary>
         /// <param name="prevStoreId">前序库存ID</param>

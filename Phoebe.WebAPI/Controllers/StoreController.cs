@@ -106,18 +106,10 @@ namespace Phoebe.WebAPI.Controllers
         /// <param name="cargoId"></param>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult<List<StoreView>> FindForStockOut(int contractId, string cargoId)
+        public ActionResult<List<StoreView>> FindForStockOut(int contractId, string cargoId, DateTime? initialTime, string remark)
         {
             StoreViewBusiness storeViewBusiness = new StoreViewBusiness();
-
-            if (string.IsNullOrEmpty(cargoId))
-            {
-                return storeViewBusiness.FindForStockOut(contractId);
-            }
-            else
-            {
-                return storeViewBusiness.FindForStockOut(contractId, cargoId);
-            }
+            return storeViewBusiness.FindForStockOut(contractId, cargoId, initialTime, remark);
         }
 
         /// <summary>
