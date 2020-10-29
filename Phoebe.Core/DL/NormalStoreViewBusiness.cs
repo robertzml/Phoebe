@@ -58,9 +58,19 @@ namespace Phoebe.Core.DL
             if (db == null)
                 db = GetInstance();
 
-            var data = db.Queryable<NormalStoreView>()
-                .Where(r => r.ContractId == contractId && r.CargoId == cargoId && r.Status == (int)EntityStatus.StoreIn)
-                .ToList();
+            List<IConditionalModel> conditions = new List<IConditionalModel>();
+            conditions.Add(new ConditionalModel { FieldName = "ContractId", ConditionalType = ConditionalType.Equal, FieldValue = contractId.ToString() });
+            conditions.Add(new ConditionalModel { FieldName = "Status", ConditionalType = ConditionalType.Equal, FieldValue = ((int)EntityStatus.StoreIn).ToString() });
+
+            if (!string.IsNullOrEmpty(cargoId))
+            {
+                conditions.Add(new ConditionalModel { FieldName = "CargoId", ConditionalType = ConditionalType.Equal, FieldValue = cargoId });
+            }
+
+            //var data = db.Queryable<NormalStoreView>()
+            //    .Where(r => r.ContractId == contractId && r.CargoId == cargoId && r.Status == (int)EntityStatus.StoreIn)
+            //    .ToList();
+            var data = db.Queryable<NormalStoreView>().Where(conditions).ToList();
 
             return data;
         }

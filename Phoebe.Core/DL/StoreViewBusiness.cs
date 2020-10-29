@@ -130,37 +130,6 @@ namespace Phoebe.Core.DL
         /// <summary>
         /// 出库时查找库存记录
         /// </summary>
-        /// <param name="contractId">合同ID</param>
-        /// <returns></returns>
-        /// <remarks>
-        /// 去除已经添加的待出库库存记录
-        /// </remarks>
-        public List<StoreView> FindForStockOut(int contractId, SqlSugarClient db = null)
-        {
-            if (db == null)
-                db = GetInstance();
-
-            var data = db.Queryable<StoreView>()
-                .Where(r => r.ContractId == contractId && r.Status == (int)EntityStatus.StoreIn)
-                .ToList();
-
-            // 已经添加出库的托盘不能继续添加
-            var carryOuts = db.Queryable<CarryOutTask>()
-                .Where(r => r.ContractId == contractId &&
-                    (r.Status == (int)EntityStatus.StockOutReady || r.Status == (int)EntityStatus.StockOutLeave ||
-                    r.Status == (int)EntityStatus.StockOutCheck))
-                .ToList();
-
-            var trayCodes = carryOuts.Select(r => r.TrayCode);
-
-            data = data.Where(r => !trayCodes.Contains(r.TrayCode)).ToList();
-
-            return data;
-        }
-
-        /// <summary>
-        /// 出库时查找库存记录
-        /// </summary>
         /// <param name="contractId"></param>
         /// <param name="cargoId"></param>
         /// <param name="initialTime"></param>
@@ -176,6 +145,7 @@ namespace Phoebe.Core.DL
 
             List<IConditionalModel> conditions = new List<IConditionalModel>();
             conditions.Add(new ConditionalModel { FieldName = "ContractId", ConditionalType = ConditionalType.Equal, FieldValue = contractId.ToString() });
+            conditions.Add(new ConditionalModel { FieldName = "Status", ConditionalType = ConditionalType.Equal, FieldValue = ((int)EntityStatus.StoreIn).ToString() });
 
             if (!string.IsNullOrEmpty(cargoId))
             {
