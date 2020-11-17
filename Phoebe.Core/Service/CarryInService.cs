@@ -182,8 +182,24 @@ namespace Phoebe.Core.Service
                 // 编辑库存记录
                 if (!string.IsNullOrEmpty(task.StoreId))
                 {
-                    StoreBusiness storeBusiness = new StoreBusiness();
-                    storeBusiness.UpdateIn(task.StoreId, task.TrayCode, task.MoveCount, task.MoveWeight, db);
+                    StoreViewBusiness storeViewBusiness = new StoreViewBusiness();
+                    var storeList = storeViewBusiness.GetInOrder(task.StoreId, db);
+
+                    if (storeList.Last().Status == (int)EntityStatus.StoreOut)
+                    {
+                        return (false, "库存已出库，无法修改数量");
+                    }
+
+                    if (storeList.Last().StoreCount != storeList.First().StoreCount)
+                    {
+                        return (false, "库存已出库，无法修改数量");
+                    }
+
+                    foreach (var item in storeList)
+                    {
+                        StoreBusiness storeBusiness = new StoreBusiness();
+                        storeBusiness.UpdateIn(item.Id, task.TrayCode, task.MoveCount, task.MoveWeight, db);
+                    }
                 }
 
                 db.Ado.CommitTran();
