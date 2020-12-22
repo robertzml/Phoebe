@@ -142,14 +142,44 @@ namespace Phoebe.Core.Service
             {
                 db.Ado.BeginTran();
 
-                StockOutTaskViewBusiness stockOutTaskViewBusiness = new StockOutTaskViewBusiness();
-                var tasks = stockOutTaskViewBusiness.Query(r => r.StockOutId == id, db);
-                if (tasks.Any(r => r.Status != (int)EntityStatus.StockOutFinish))
+                StockOutBusiness stockOutBusiness = new StockOutBusiness();
+                var stockOut = stockOutBusiness.FindById(id, db);
+                if (stockOut.Type == (int)StockOutType.Normal)
                 {
-                    return (false, "有出库货物未完成");
+                    // 普通库出库允许直接确认
+                    StockOutTaskBusiness stockOutTaskBusiness = new StockOutTaskBusiness();
+                    var tasks = stockOutTaskBusiness.Query(r => r.StockOutId == id, db);
+
+                    foreach(var task in tasks) // 确认每个出库任务
+                    {
+                        if (task.Status != (int)EntityStatus.StockOutFinish)
+                        {
+                            // 确认出库任务
+                            stockOutTaskBusiness.Finish(task.Id, task.OutCount, task.OutWeight, db);
+
+                            // 确认库存
+                            NormalStoreBusiness normalStoreBusiness = new NormalStoreBusiness();
+                            normalStoreBusiness.FinishOut(task.Id, stockOut.OutTime, db);
+
+                            // 创建放回库存
+                            if (task.StoreCount > task.OutCount)
+                            {
+                                normalStoreBusiness.CreateByBack(task, db);
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    StockOutTaskViewBusiness stockOutTaskViewBusiness = new StockOutTaskViewBusiness();
+                    var tasks = stockOutTaskViewBusiness.Query(r => r.StockOutId == id, db);
+                    if (tasks.Any(r => r.Status != (int)EntityStatus.StockOutFinish))
+                    {
+                        return (false, "有出库货物未完成");
+                    }
                 }
 
-                StockOutBusiness stockOutBusiness = new StockOutBusiness();
+                // 确认出库单
                 var result = stockOutBusiness.Confirm(id, db);
 
                 // 重新核对冷藏费结束时间
@@ -560,6 +590,10 @@ namespace Phoebe.Core.Service
                 StockOutTaskBusiness stockOutTaskBusiness = new StockOutTaskBusiness();
 
                 var task = stockOutTaskBusiness.FindById(stockOutTaskId, db);
+                if (task.Status == (int)EntityStatus.StockOutFinish)
+                {
+                    return (false, "出库任务已确认");
+                }
 
                 // 获取出库单
                 var stockOut = stockOutBusiness.FindById(task.StockOutId, db);

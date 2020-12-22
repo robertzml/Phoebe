@@ -41,9 +41,9 @@ namespace Phoebe.Core.Entity
         public string FlowNumber { get; set; }
 
         /// <summary>
-        /// 入库类型
+        /// 出库类型
         /// </summary>
-        [Display(Name = "入库类型")]
+        [Display(Name = "出库类型")]
         public int Type { get; set; }
 
         /// <summary>
