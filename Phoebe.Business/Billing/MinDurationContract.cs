@@ -218,6 +218,9 @@ namespace Phoebe.Business
 
                 var siDetail = RepositoryFactory<StockInDetailsRepository>.Instance.FindOne(r => r.StoreId == store.Id);
 
+                if (siDetail == null)
+                    continue;
+
                 int days = item.StockOut.OutTime.Subtract(siDetail.StockIn.InTime).Days;
 
                 if (days < minDays)
