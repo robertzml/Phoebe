@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Phoebe.WebAPI.Controllers
 {
     using Phoebe.Core.BL;
+    using Phoebe.Core.Service;
     using Phoebe.Core.Entity;
     using Phoebe.WebAPI.Model;
 
@@ -83,6 +84,32 @@ namespace Phoebe.WebAPI.Controllers
             var task = Task.Run(() =>
             {
                 var result = customerBusiness.Update(customer);
+
+                ResponseData data = new ResponseData
+                {
+                    Status = result.success ? 0 : 1,
+                    ErrorMessage = result.errorMessage
+                };
+
+                return data;
+            });
+
+            return await task;
+        }
+
+        /// <summary>
+        /// 强制删除客户
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ActionResult<ResponseData>> ForceDelete(int id)
+        {
+            CustomerService customerService = new CustomerService();
+
+            var task = Task.Run(() =>
+            {
+                var result = customerService.ForceDelete(id);
 
                 ResponseData data = new ResponseData
                 {
