@@ -50,6 +50,33 @@ namespace Phoebe.WebAPI.Controllers
         }
 
         /// <summary>
+        /// 编辑缴费
+        /// </summary>
+        /// <param name="payment"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ActionResult<ResponseData>> Update(Payment payment)
+        {
+            PaymentBusiness paymentBusiness = new PaymentBusiness();
+
+            var task = Task.Run(() =>
+            {
+                var result = paymentBusiness.Update(payment);
+
+                ResponseData data = new ResponseData
+                {
+                    Status = result.success ? 0 : 1,
+                    ErrorMessage = result.errorMessage,
+                    Entity = null
+                };
+
+                return data;
+            });
+
+            return await task;
+        }
+
+        /// <summary>
         /// 删除缴费
         /// </summary>
         /// <param name="id"></param>
