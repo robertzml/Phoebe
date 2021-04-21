@@ -60,6 +60,29 @@ namespace Phoebe.Core.BL
                 stockIn.InTime = entity.InTime;
                 stockIn.MonthTime = stockIn.InTime.Year.ToString() + stockIn.InTime.Month.ToString().PadLeft(2, '0');
                 stockIn.FlowNumber = recordBusiness.GetNextSequence(db, "StockIn", stockIn.InTime);
+
+                StockInTaskBusiness stockInTaskBusiness = new StockInTaskBusiness();
+
+                // 获取相关入库任务
+                var tasks = stockInTaskBusiness.Query(r => r.StockInId == stockIn.Id);
+
+                if (stockIn.Type == (int)StockInType.Normal)
+                {
+                    NormalStoreBusiness normalStoreBusiness = new NormalStoreBusiness();
+                    foreach (var task in tasks)
+                    {
+                        // 修改入库任务流水号
+                        task.TaskCode = recordBusiness.GetNextSequence(db, "StockInTask", stockIn.InTime);
+                        stockInTaskBusiness.Update(task, db);
+
+                        // 修改库存入库时间
+                        var store = normalStoreBusiness.Single(r => r.StockInTaskId == task.Id, db);
+                        store.InitialTime = stockIn.InTime;
+                        store.InTime = stockIn.InTime;
+
+                        normalStoreBusiness.Update(store, db);
+                    }
+                }
             }
 
             stockIn.Type = entity.Type;
