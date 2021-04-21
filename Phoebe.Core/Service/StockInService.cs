@@ -391,6 +391,9 @@ namespace Phoebe.Core.Service
                     entity.InCount = inTask.InCount;
                     entity.InWeight = entity.InCount * entity.UnitWeight / 1000;
 
+                    entity.WarehouseId = inTask.WarehouseId;
+                    entity.Place = inTask.Place;
+
                     // 修改对应库存信息
                     var store = db.Queryable<NormalStore>().Single(r => r.StockInTaskId == entity.Id);
                     store.CargoId = entity.CargoId;
@@ -400,6 +403,8 @@ namespace Phoebe.Core.Service
                     store.Batch = entity.Batch;
                     store.OriginPlace = entity.OriginPlace;
                     store.Durability = entity.Durability;
+                    store.WarehouseId = entity.WarehouseId;
+                    store.Place = entity.Place;
                     store.Remark = entity.Remark;
 
                     db.Updateable(store).ExecuteCommand();
