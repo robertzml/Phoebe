@@ -256,4 +256,22 @@ namespace Phoebe.Core.Utility
         [Display(Name = "板位", Description = "单价:元/板位")]
         Board = 5
     }
+
+    /// <summary>
+    /// 冰块类型
+    /// </summary>
+    public enum IceType
+    {
+        /// <summary>
+        /// 整冰
+        /// </summary>
+        [Display(Name = "整冰")]
+        Complete = 1,
+
+        /// <summary>
+        /// 碎冰
+        /// </summary>
+        [Display(Name = "碎冰")]
+        Fragment = 2
+    }
 }
