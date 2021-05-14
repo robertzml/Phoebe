@@ -15,5 +15,40 @@ namespace Phoebe.Core.BL
     /// </summary>
     public class IceStockBusiness : AbstractBusiness<IceStock, string>, IBaseBL<IceStock, string>
     {
+        #region Method
+        /// <summary>
+        /// 冰块入库
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        public override (bool success, string errorMessage, IceStock t) Create(IceStock entity, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            try
+            {
+                db.Ado.BeginTran();
+
+                SequenceRecordBusiness sequenceBusiness = new SequenceRecordBusiness();
+                entity.FlowNumber = sequenceBusiness.GetNextSequence(db, "IceStock", entity.StockTime);
+
+                entity.Id = Guid.NewGuid().ToString();
+                entity.CreateTime = DateTime.Now;
+                entity.Status = 0;
+
+                var t = db.Insertable(entity).ExecuteReturnEntity();
+
+                db.Ado.CommitTran();
+                return (true, "", t);
+            }
+            catch (Exception e)
+            {
+                db.Ado.RollbackTran();
+                return (false, e.Message, null);
+            }
+        }
+        #endregion //Method
     }
 }
