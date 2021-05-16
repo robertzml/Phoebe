@@ -17,6 +17,21 @@ namespace Phoebe.Core.BL
     {
         #region Method
         /// <summary>
+        /// 按年度搜索入库记录
+        /// </summary>
+        /// <param name="year">入库年份</param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        public List<IceStock> FindByYear(int year, SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            var data = db.Queryable<IceStock>().Where(r => r.StockTime.Year == year);
+            return data.ToList();
+        }
+
+        /// <summary>
         /// 冰块入库
         /// </summary>
         /// <param name="entity"></param>

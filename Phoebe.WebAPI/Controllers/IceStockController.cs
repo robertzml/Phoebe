@@ -24,10 +24,10 @@ namespace Phoebe.WebAPI.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult<List<IceStock>> List()
+        public ActionResult<List<IceStock>> List(int year)
         {
             IceStockBusiness iceStockBusiness = new IceStockBusiness();
-            return iceStockBusiness.FindAll();
+            return iceStockBusiness.FindByYear(year);
         }
 
         /// <summary>
@@ -63,6 +63,31 @@ namespace Phoebe.WebAPI.Controllers
                     Status = result.success ? 0 : 1,
                     ErrorMessage = result.errorMessage,
                     Entity = result.t
+                };
+
+                return data;
+            });
+
+            return await task;
+        }
+
+        /// <summary>
+        /// 删除入库记录
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ActionResult<ResponseData>> Delete(string id)
+        {
+            IceStockBusiness iceStockBusiness = new IceStockBusiness();
+            var task = Task.Run(() =>
+            {
+                var result = iceStockBusiness.Delete(id);
+
+                ResponseData data = new ResponseData
+                {
+                    Status = result.success ? 0 : 1,
+                    ErrorMessage = result.errorMessage
                 };
 
                 return data;
