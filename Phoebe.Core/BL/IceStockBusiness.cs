@@ -32,6 +32,48 @@ namespace Phoebe.Core.BL
         }
 
         /// <summary>
+        /// 获取整冰入库总数量
+        /// </summary>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        public int GetCompleteInCount(SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            var data = db.Queryable<IceStock>().Where(r => r.IceType == (int)IceType.Complete && r.StockType == (int)IceStockType.CompleteIn).Sum(r => r.FlowCount);
+            return data;
+        }
+
+        /// <summary>
+        /// 获取整冰制冰出库总数量
+        /// </summary>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        public int GetCompleteOutCount(SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            var data = db.Queryable<IceStock>().Where(r => r.IceType == (int)IceType.Complete && r.StockType == (int)IceStockType.CompleteOut).Sum(r => r.FlowCount);
+            return data;
+        }
+
+        /// <summary>
+        /// 获取碎冰入库总数量
+        /// </summary>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        public int GetFragmentInCount(SqlSugarClient db = null)
+        {
+            if (db == null)
+                db = GetInstance();
+
+            var data = db.Queryable<IceStock>().Where(r => r.IceType == (int)IceType.Fragment).Sum(r => r.FlowCount);
+            return data;
+        }
+
+        /// <summary>
         /// 冰块入库
         /// </summary>
         /// <param name="entity"></param>

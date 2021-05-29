@@ -41,6 +41,31 @@ namespace Phoebe.WebAPI.Controllers
             IceStockBusiness iceStockBusiness = new IceStockBusiness();
             return iceStockBusiness.FindById(id);
         }
+
+        /// <summary>
+        /// 获取整冰入库数量
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult<int> GetCompleteIn()
+        {
+            IceStockBusiness iceStockBusiness = new IceStockBusiness();
+            return iceStockBusiness.GetCompleteInCount();
+        }
+
+        [HttpGet]
+        public ActionResult<int> GetCompleteOut()
+        {
+            IceStockBusiness iceStockBusiness = new IceStockBusiness();
+            return iceStockBusiness.GetCompleteOutCount();
+        }
+
+        [HttpGet]
+        public ActionResult<int> GetFragmentIn()
+        {
+            IceStockBusiness iceStockBusiness = new IceStockBusiness();
+            return iceStockBusiness.GetFragmentInCount();
+        }
         #endregion //Query
 
         #region Action
