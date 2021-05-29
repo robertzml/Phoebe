@@ -97,6 +97,33 @@ namespace Phoebe.WebAPI.Controllers
         }
 
         /// <summary>
+        /// 冰块出库
+        /// </summary>
+        /// <param name="iceStock"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ActionResult<ResponseData>> StockOut(IceStock iceStock)
+        {
+            IceStockBusiness iceStockBusiness = new IceStockBusiness();
+
+            var task = Task.Run(() =>
+            {
+                var result = iceStockBusiness.StockOut(iceStock);
+
+                ResponseData data = new ResponseData
+                {
+                    Status = result.success ? 0 : 1,
+                    ErrorMessage = result.errorMessage,
+                    Entity = result.t
+                };
+
+                return data;
+            });
+
+            return await task;
+        }
+
+        /// <summary>
         /// 删除入库记录
         /// </summary>
         /// <param name="id"></param>
