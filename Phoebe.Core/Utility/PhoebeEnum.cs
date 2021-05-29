@@ -274,4 +274,28 @@ namespace Phoebe.Core.Utility
         [Display(Name = "碎冰")]
         Fragment = 2
     }
+
+    /// <summary>
+    /// 冰块出入库类型
+    /// </summary>
+    public enum IceStockType
+    {
+        /// <summary>
+        /// 整冰入库
+        /// </summary>
+        [Display(Name = "整冰入库")]
+        CompleteIn = 1,
+
+        /// <summary>
+        /// 碎冰入库
+        /// </summary>
+        [Display(Name = "碎冰入库")]
+        FragmentIn = 2,
+
+        /// <summary>
+        /// 整冰制冰出库
+        /// </summary>
+        [Display(Name = "整冰制冰出库")]
+        CompleteOut = 3
+    }
 }

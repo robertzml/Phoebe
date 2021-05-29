@@ -9,7 +9,7 @@ namespace Phoebe.Core.Entity
     using SqlSugar;
 
     /// <summary>
-    /// 冰块入库类
+    /// 冰块出入库类
     /// </summary>
     [SugarTable("IceStock")]
     public class IceStock : IBaseEntity<string>
@@ -41,6 +41,12 @@ namespace Phoebe.Core.Entity
         [Required]
         [Display(Name = "冰块类型")]
         public int IceType { get; set; }
+
+        /// <summary>
+        /// 出入库类型
+        /// </summary>
+        [Display(Name = "出入库类型")]
+        public int StockType { get; set; }
 
         /// <summary>
         /// 流水数量

@@ -50,13 +50,13 @@ namespace Phoebe.WebAPI.Controllers
         /// <param name="iceStock"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<ActionResult<ResponseData>> Create(IceStock iceStock)
+        public async Task<ActionResult<ResponseData>> StockIn(IceStock iceStock)
         {
             IceStockBusiness iceStockBusiness = new IceStockBusiness();
 
             var task = Task.Run(() =>
             {
-                var result = iceStockBusiness.Create(iceStock);
+                var result = iceStockBusiness.StockIn(iceStock);
 
                 ResponseData data = new ResponseData
                 {

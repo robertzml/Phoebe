@@ -37,7 +37,7 @@ namespace Phoebe.Core.BL
         /// <param name="entity"></param>
         /// <param name="db"></param>
         /// <returns></returns>
-        public override (bool success, string errorMessage, IceStock t) Create(IceStock entity, SqlSugarClient db = null)
+        public (bool success, string errorMessage, IceStock t) StockIn(IceStock entity, SqlSugarClient db = null)
         {
             if (db == null)
                 db = GetInstance();
@@ -52,6 +52,15 @@ namespace Phoebe.Core.BL
                 entity.Id = Guid.NewGuid().ToString();
                 entity.CreateTime = DateTime.Now;
                 entity.Status = 0;
+
+                if (entity.IceType == (int)IceType.Complete)
+                {
+                    entity.StockType = (int)IceStockType.CompleteIn;
+                }
+                else if (entity.IceType == (int)IceType.Fragment)
+                {
+                    entity.StockType = (int)IceStockType.FragmentIn;
+                }
 
                 var t = db.Insertable(entity).ExecuteReturnEntity();
 
