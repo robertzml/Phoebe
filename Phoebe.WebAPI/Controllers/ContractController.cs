@@ -43,6 +43,19 @@ namespace Phoebe.WebAPI.Controllers
         }
 
         /// <summary>
+        /// 合同列表
+        /// </summary>
+        /// <param name="customerId"></param>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult<List<ContractView>> ListByType(int customerId, int type)
+        {
+            ContractViewBusiness contractViewBusiness = new ContractViewBusiness();
+            return contractViewBusiness.Query(r => r.CustomerId == customerId && r.Type == type);
+        }
+
+        /// <summary>
         /// 合同信息
         /// </summary>
         /// <param name="id"></param>
