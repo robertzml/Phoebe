@@ -60,6 +60,31 @@ namespace Phoebe.WebAPI.Controllers
 
             return await task;
         }
+
+        /// <summary>
+        /// 删除销售记录
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ActionResult<ResponseData>> Delete(string id)
+        {
+            IceSaleBusiness iceSaleBusiness = new IceSaleBusiness();
+            var task = Task.Run(() =>
+            {
+                var result = iceSaleBusiness.Delete(id);
+
+                ResponseData data = new ResponseData
+                {
+                    Status = result.success ? 0 : 1,
+                    ErrorMessage = result.errorMessage
+                };
+
+                return data;
+            });
+
+            return await task;
+        }
         #endregion //Action
     }
 }
