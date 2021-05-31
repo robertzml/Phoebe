@@ -31,6 +31,50 @@ namespace Phoebe.WebAPI.Controllers
             IceSaleViewBusiness iceSaleViewBusiness = new IceSaleViewBusiness();
             return iceSaleViewBusiness.FindByYear(year);
         }
+
+        /// <summary>
+        /// 整冰销售数量
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult<int> GetCompleteSale()
+        {
+            IceSaleViewBusiness iceSaleViewBusiness = new IceSaleViewBusiness();
+            return iceSaleViewBusiness.GetCompleteSaleCount();
+        }
+
+        /// <summary>
+        /// 碎冰销售数量
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult<int> GetFragmentSale()
+        {
+            IceSaleViewBusiness iceSaleViewBusiness = new IceSaleViewBusiness();
+            return iceSaleViewBusiness.GetFragmentSaleCount();
+        }
+
+        /// <summary>
+        /// 整冰在库数量
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult<int> GetCompleteStore()
+        {
+            IceSaleViewBusiness iceSaleViewBusiness = new IceSaleViewBusiness();
+            return iceSaleViewBusiness.GetCompleteStoreCount();
+        }
+
+        /// <summary>
+        /// 碎冰销售数量
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult<int> GetFragmentStore()
+        {
+            IceSaleViewBusiness iceSaleViewBusiness = new IceSaleViewBusiness();
+            return iceSaleViewBusiness.GetFragmentStoreCount();
+        }
         #endregion //Method
 
         #region Action
